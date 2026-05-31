@@ -21,6 +21,8 @@ internal sealed class ProblemDetailsJsonOptionsSetup : IConfigureOptions<JsonOpt
         // and before any other resolvers currently added.
         // If apps need to customize ProblemDetails serialization, they can prepend a custom ProblemDetails resolver
         // to the chain in an IConfigureOptions<JsonOptions> registered after the call to AddProblemDetails().
-        options.SerializerOptions.TypeInfoResolverChain.Insert(0, new ProblemDetailsJsonContext());
+        options.SerializerOptions
+            .TypeInfoResolverChain
+            .Insert(0, new ProblemDetailsJsonContext());
     }
 }

@@ -485,7 +485,8 @@ public class DatabaseErrorPageMiddlewareTest
 #pragma warning restore CS0618 // Type or member is obsolete
                         app.UseMiddleware<ContextNotRegisteredInServicesMiddleware>();
 #pragma warning disable CS0618 // Type or member is obsolete
-                        app.ApplicationServices.GetService<ILoggerFactory>()
+                        app.ApplicationServices
+                            .GetService<ILoggerFactory>()
                             .AddProvider(logProvider);
 #pragma warning restore CS0618 // Type or member is obsolete
                     });
@@ -663,7 +664,8 @@ public class DatabaseErrorPageMiddlewareTest
                         if (logProvider != null)
                         {
 #pragma warning disable CS0618 // Type or member is obsolete
-                            app.ApplicationServices.GetService<ILoggerFactory>()
+                            app.ApplicationServices
+                                .GetService<ILoggerFactory>()
                                 .AddProvider(logProvider);
 #pragma warning restore CS0618 // Type or member is obsolete
                         }

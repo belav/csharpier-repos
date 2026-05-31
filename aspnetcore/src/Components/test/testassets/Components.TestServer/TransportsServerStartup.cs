@@ -46,8 +46,7 @@ public class TransportsServerStartup : ServerStartup
                 {
                     endpoints.MapBlazorHub(configureOptions: options =>
                     {
-                        options.Transports = Microsoft
-                            .AspNetCore
+                        options.Transports = Microsoft.AspNetCore
                             .Http
                             .Connections
                             .HttpTransportType
@@ -69,8 +68,7 @@ public class TransportsServerStartup : ServerStartup
                 {
                     endpoints.MapBlazorHub(configureOptions: options =>
                     {
-                        options.Transports = Microsoft
-                            .AspNetCore
+                        options.Transports = Microsoft.AspNetCore
                             .Http
                             .Connections
                             .HttpTransportType

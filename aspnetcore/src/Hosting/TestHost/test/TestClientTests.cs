@@ -109,9 +109,10 @@ public class TestClientTests
     {
         // Arrange
         RequestDelegate appDelegate = async ctx =>
-            await ctx.Response.WriteAsync(
-                await new StreamReader(ctx.Request.Body).ReadToEndAsync() + " POST Response"
-            );
+            await ctx.Response
+                .WriteAsync(
+                    await new StreamReader(ctx.Request.Body).ReadToEndAsync() + " POST Response"
+                );
         var builder = new WebHostBuilder().Configure(app => app.Run(appDelegate));
         var server = new TestServer(builder);
         var client = server.CreateClient();

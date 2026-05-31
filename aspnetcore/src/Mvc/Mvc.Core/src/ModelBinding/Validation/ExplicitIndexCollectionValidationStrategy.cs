@@ -52,10 +52,8 @@ internal sealed class ExplicitIndexCollectionValidationStrategy : IValidationStr
         object model
     )
     {
-        var enumerator = DefaultCollectionValidationStrategy.Instance.GetEnumeratorForElementType(
-            metadata,
-            model
-        );
+        var enumerator = DefaultCollectionValidationStrategy.Instance
+            .GetEnumeratorForElementType(metadata, model);
         return new Enumerator(metadata.ElementMetadata!, key, ElementKeys, enumerator);
     }
 

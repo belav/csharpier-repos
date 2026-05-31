@@ -272,11 +272,8 @@ public class HtmlHelperDisplayTextTest
         viewData["FieldPrefix.Name"] = "View data dictionary value";
         viewData.TemplateInfo.HtmlFieldPrefix = "FieldPrefix";
 
-        viewData.ModelState.SetModelValue(
-            "FieldPrefix.Name",
-            "Attempted name value",
-            "Attempted name value"
-        );
+        viewData.ModelState
+            .SetModelValue("FieldPrefix.Name", "Attempted name value", "Attempted name value");
 
         // Act
         var result = helper.DisplayText("Name");
@@ -295,11 +292,8 @@ public class HtmlHelperDisplayTextTest
         viewData["Name"] = "View data dictionary value";
         viewData.TemplateInfo.HtmlFieldPrefix = "FieldPrefix";
 
-        viewData.ModelState.SetModelValue(
-            "FieldPrefix.Name",
-            "Attempted name value",
-            "Attempted name value"
-        );
+        viewData.ModelState
+            .SetModelValue("FieldPrefix.Name", "Attempted name value", "Attempted name value");
 
         // Act
         var result = helper.DisplayTextFor(m => m.Name);

@@ -153,8 +153,8 @@ public class HeartbeatTests : LoggedTest
 
         heartbeatHandler.Verify(h => h.OnHeartbeat(), Times.Once());
 
-        var warningMessage = TestSink
-            .Writes.Single(message => message.LogLevel == LogLevel.Warning)
+        var warningMessage = TestSink.Writes
+            .Single(message => message.LogLevel == LogLevel.Warning)
             .Message;
         Assert.Equal(
             $"As of \"{timeProvider.GetUtcNow().ToString(CultureInfo.InvariantCulture)}\", the heartbeat has been running for "

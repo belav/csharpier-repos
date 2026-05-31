@@ -175,10 +175,9 @@ internal static class SpaProxy
                 && requestMessage.Content != null
             )
             {
-                requestMessage.Content?.Headers.TryAddWithoutValidation(
-                    header.Key,
-                    header.Value.ToArray()
-                );
+                requestMessage.Content
+                    ?.Headers
+                    .TryAddWithoutValidation(header.Key, header.Value.ToArray());
             }
         }
 

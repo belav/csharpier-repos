@@ -1014,9 +1014,8 @@ public class DefaultLinkGeneratorTest : LinkGeneratorTestBase
 
         public IEnumerable<Endpoint> FindEndpoints(int address)
         {
-            return _dataSource.Endpoints.Where(e =>
-                e.Metadata.GetMetadata<IntMetadata>().Value == address
-            );
+            return _dataSource.Endpoints
+                .Where(e => e.Metadata.GetMetadata<IntMetadata>().Value == address);
         }
     }
 

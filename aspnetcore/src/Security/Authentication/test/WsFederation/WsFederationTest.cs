@@ -322,10 +322,11 @@ public class WsFederationTest
         {
             if (cookie.Value.HasValue)
             {
-                request.Headers.Add(
-                    HeaderNames.Cookie,
-                    new CookieHeaderValue(cookie.Name, cookie.Value).ToString()
-                );
+                request.Headers
+                    .Add(
+                        HeaderNames.Cookie,
+                        new CookieHeaderValue(cookie.Name, cookie.Value).ToString()
+                    );
             }
         }
     }
@@ -371,10 +372,9 @@ public class WsFederationTest
                                     OnMessageReceived = context =>
                                     {
                                         if (
-                                            !context.ProtocolMessage.Parameters.TryGetValue(
-                                                "suppressWctx",
-                                                out var suppress
-                                            )
+                                            !context.ProtocolMessage
+                                                .Parameters
+                                                .TryGetValue("suppressWctx", out var suppress)
                                         )
                                         {
                                             Assert.True(

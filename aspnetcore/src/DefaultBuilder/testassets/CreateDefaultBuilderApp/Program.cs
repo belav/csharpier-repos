@@ -45,11 +45,10 @@ public class Program
             .Configure(app =>
                 app.Run(context =>
                 {
-                    var hostingEnvironment =
-                        app.ApplicationServices.GetRequiredService<IWebHostEnvironment>();
-                    return context.Response.WriteAsync(
-                        responseMessage ?? hostingEnvironment.ApplicationName
-                    );
+                    var hostingEnvironment = app.ApplicationServices
+                        .GetRequiredService<IWebHostEnvironment>();
+                    return context.Response
+                        .WriteAsync(responseMessage ?? hostingEnvironment.ApplicationName);
                 })
             )
             .Build()

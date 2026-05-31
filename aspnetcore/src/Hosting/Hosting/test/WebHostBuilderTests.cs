@@ -329,9 +329,9 @@ public class WebHostBuilderTests
         using (var host = builder.Build())
         {
             await host.StartAsync();
-            var context = provider.Sink.Writes.Where(s =>
-                s.EventId.Id == LoggerEventIds.HostingStartupAssemblyException
-            );
+            var context = provider.Sink
+                .Writes
+                .Where(s => s.EventId.Id == LoggerEventIds.HostingStartupAssemblyException);
             Assert.NotNull(context);
             Assert.Single(context);
         }
@@ -718,8 +718,8 @@ public class WebHostBuilderTests
         {
             var basePath = host.Services.GetRequiredService<IHostEnvironment>().ContentRootPath;
 #pragma warning disable CS0618 // Type or member is obsolete
-            var basePath2 = host
-                .Services.GetService<AspNetCore.Hosting.IHostingEnvironment>()
+            var basePath2 = host.Services
+                .GetService<AspNetCore.Hosting.IHostingEnvironment>()
                 .ContentRootPath;
 #pragma warning restore CS0618 // Type or member is obsolete
 
@@ -1310,9 +1310,11 @@ public class WebHostBuilderTests
         using (var host = builder.Build())
         {
             await host.StartAsync();
-            var context = provider.Sink.Writes.FirstOrDefault(s =>
-                s.EventId.Id == LoggerEventIds.HostingStartupAssemblyException
-            );
+            var context = provider.Sink
+                .Writes
+                .FirstOrDefault(s =>
+                    s.EventId.Id == LoggerEventIds.HostingStartupAssemblyException
+                );
             Assert.NotNull(context);
         }
     }
@@ -1405,8 +1407,8 @@ public class WebHostBuilderTests
             using var host = hostBuilder.Build();
 
             var filter = (MyStartupFilter)
-                host
-                    .Services.GetServices<IStartupFilter>()
+                host.Services
+                    .GetServices<IStartupFilter>()
                     .FirstOrDefault(s => s is MyStartupFilter);
             Assert.NotNull(filter);
             try
@@ -1493,8 +1495,8 @@ public class WebHostBuilderTests
             .UseServer(new TestServer());
 
         using var host = builder.Build();
-        var service = host
-            .Services.GetServices<IHostedService>()
+        var service = host.Services
+            .GetServices<IHostedService>()
             .OfType<NonThrowingHostedService>()
             .First();
         var startEx = await Assert.ThrowsAsync<InvalidOperationException>(() => host.StartAsync());

@@ -44,22 +44,20 @@ public class OpenIdConnectPostConfigureOptions : IPostConfigureOptions<OpenIdCon
 
         if (options.StateDataFormat == null)
         {
-            var dataProtector = options.DataProtectionProvider.CreateProtector(
-                typeof(OpenIdConnectHandler).FullName!,
-                name,
-                "v1"
-            );
+            var dataProtector = options.DataProtectionProvider
+                .CreateProtector(typeof(OpenIdConnectHandler).FullName!, name, "v1");
             options.StateDataFormat = new PropertiesDataFormat(dataProtector);
         }
 
         if (options.StringDataFormat == null)
         {
-            var dataProtector = options.DataProtectionProvider.CreateProtector(
-                typeof(OpenIdConnectHandler).FullName!,
-                typeof(string).FullName!,
-                name,
-                "v1"
-            );
+            var dataProtector = options.DataProtectionProvider
+                .CreateProtector(
+                    typeof(OpenIdConnectHandler).FullName!,
+                    typeof(string).FullName!,
+                    name,
+                    "v1"
+                );
 
             options.StringDataFormat = new SecureDataFormat<string>(
                 new StringSerializer(),
@@ -80,9 +78,10 @@ public class OpenIdConnectPostConfigureOptions : IPostConfigureOptions<OpenIdCon
             options.Backchannel = new HttpClient(
                 options.BackchannelHttpHandler ?? new HttpClientHandler()
             );
-            options.Backchannel.DefaultRequestHeaders.UserAgent.ParseAdd(
-                "Microsoft ASP.NET Core OpenIdConnect handler"
-            );
+            options.Backchannel
+                .DefaultRequestHeaders
+                .UserAgent
+                .ParseAdd("Microsoft ASP.NET Core OpenIdConnect handler");
             options.Backchannel.Timeout = options.BackchannelTimeout;
             options.Backchannel.MaxResponseContentBufferSize = 1024 * 1024 * 10; // 10 MB
         }
@@ -120,10 +119,8 @@ public class OpenIdConnectPostConfigureOptions : IPostConfigureOptions<OpenIdCon
                 if (
                     options.RequireHttpsMetadata
                     && !(
-                        options.MetadataAddress?.StartsWith(
-                            "https://",
-                            StringComparison.OrdinalIgnoreCase
-                        ) ?? false
+                        options.MetadataAddress
+                            ?.StartsWith("https://", StringComparison.OrdinalIgnoreCase) ?? false
                     )
                 )
                 {

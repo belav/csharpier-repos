@@ -487,7 +487,8 @@ public class DfaMatcherTest
         // We expect 2 candidates, since the path on the tree (aa -> b -> c = ({param:length(2)}/b/c)) meets the length(2) constraint.
         Assert.Equal(
             endpoints.ToArray(),
-            set.candidates.Select(e => e.Endpoint)
+            set.candidates
+                .Select(e => e.Endpoint)
                 .OrderBy(e => ((RouteEndpoint)e).RoutePattern.RawText)
                 .ToArray()
         );
@@ -581,7 +582,8 @@ public class DfaMatcherTest
         // We expect 2 candidates, since the path on the tree (aa -> b -> c = ({param:length(2)}/b/c)) meets the length(2) constraint.
         Assert.Equal(
             endpoints.ToArray(),
-            set.candidates.Select(e => e.Endpoint)
+            set.candidates
+                .Select(e => e.Endpoint)
                 .OrderBy(e => ((RouteEndpoint)e).RoutePattern.RawText)
                 .ToArray()
         );

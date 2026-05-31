@@ -92,7 +92,8 @@ public class ServerReconnectionTest : ServerTestBase<BasicTestAppServerSiteFixtu
         Browser.True(() =>
             Browser
                 .Manage()
-                .Logs.GetLog(LogType.Browser)
+                .Logs
+                .GetLog(LogType.Browser)
                 .Any(l =>
                     l.Level == LogLevel.Info && l.Message.Contains("Connection disconnected.")
                 )

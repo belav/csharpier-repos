@@ -34,8 +34,8 @@ public class VersionTwoSchemaTest : IClassFixture<ScratchDatabaseFixture>
         services.AddLogging();
 
         _builder = new ApplicationBuilder(services.BuildServiceProvider());
-        var scope = _builder
-            .ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+        var scope = _builder.ApplicationServices
+            .GetRequiredService<IServiceScopeFactory>()
             .CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<VersionTwoDbContext>();
         db.Database.EnsureCreated();
@@ -44,8 +44,8 @@ public class VersionTwoSchemaTest : IClassFixture<ScratchDatabaseFixture>
     [Fact]
     public void EnsureDefaultSchema()
     {
-        using var scope = _builder
-            .ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+        using var scope = _builder.ApplicationServices
+            .GetRequiredService<IServiceScopeFactory>()
             .CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<VersionTwoDbContext>();
         VerifyVersion2Schema(db);

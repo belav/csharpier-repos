@@ -34,7 +34,8 @@ public class TemplateRouteParserTests
         expected.Segments.Add(new TemplateSegment());
         expected
             .Segments[0]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p",
                     false,
@@ -62,7 +63,8 @@ public class TemplateRouteParserTests
         expected.Segments.Add(new TemplateSegment());
         expected
             .Segments[0]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p",
                     false,
@@ -112,7 +114,8 @@ public class TemplateRouteParserTests
         expected.Segments.Add(new TemplateSegment());
         expected
             .Segments[0]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p1",
                     false,
@@ -126,7 +129,8 @@ public class TemplateRouteParserTests
         expected.Segments.Add(new TemplateSegment());
         expected
             .Segments[1]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p2",
                     false,
@@ -140,7 +144,8 @@ public class TemplateRouteParserTests
         expected.Segments.Add(new TemplateSegment());
         expected
             .Segments[2]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p3",
                     true,
@@ -169,7 +174,8 @@ public class TemplateRouteParserTests
         expected.Segments[0].Parts.Add(TemplatePart.CreateLiteral("cool-"));
         expected
             .Segments[0]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p1",
                     false,
@@ -197,7 +203,8 @@ public class TemplateRouteParserTests
         expected.Segments.Add(new TemplateSegment());
         expected
             .Segments[0]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p1",
                     false,
@@ -226,7 +233,8 @@ public class TemplateRouteParserTests
         expected.Segments.Add(new TemplateSegment());
         expected
             .Segments[0]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p1",
                     false,
@@ -239,7 +247,8 @@ public class TemplateRouteParserTests
         expected.Segments[0].Parts.Add(TemplatePart.CreateLiteral("cool-"));
         expected
             .Segments[0]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p2",
                     false,
@@ -268,7 +277,8 @@ public class TemplateRouteParserTests
         expected.Segments[0].Parts.Add(TemplatePart.CreateLiteral("cool-"));
         expected
             .Segments[0]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p1",
                     false,
@@ -297,7 +307,8 @@ public class TemplateRouteParserTests
         expected.Segments.Add(new TemplateSegment());
         expected
             .Segments[0]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p1",
                     false,
@@ -309,7 +320,8 @@ public class TemplateRouteParserTests
         expected.Segments[0].Parts.Add(TemplatePart.CreateLiteral("."));
         expected
             .Segments[0]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p2",
                     false,
@@ -339,7 +351,8 @@ public class TemplateRouteParserTests
         expected.Segments.Add(new TemplateSegment());
         expected
             .Segments[0]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p1",
                     false,
@@ -351,7 +364,8 @@ public class TemplateRouteParserTests
         expected.Segments[0].Parts.Add(TemplatePart.CreateLiteral("."));
         expected
             .Segments[0]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p2",
                     false,
@@ -381,7 +395,8 @@ public class TemplateRouteParserTests
         expected.Segments.Add(new TemplateSegment());
         expected
             .Segments[0]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p1",
                     false,
@@ -393,7 +408,8 @@ public class TemplateRouteParserTests
         expected.Segments[0].Parts.Add(TemplatePart.CreateLiteral("."));
         expected
             .Segments[0]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p2",
                     false,
@@ -406,7 +422,8 @@ public class TemplateRouteParserTests
         expected.Segments[0].Parts.Add(TemplatePart.CreateLiteral("."));
         expected
             .Segments[0]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p3",
                     false,
@@ -437,7 +454,8 @@ public class TemplateRouteParserTests
         expected.Segments.Add(new TemplateSegment());
         expected
             .Segments[0]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p1",
                     false,
@@ -449,7 +467,8 @@ public class TemplateRouteParserTests
         expected.Segments[0].Parts.Add(TemplatePart.CreateLiteral("."));
         expected
             .Segments[0]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p2",
                     false,
@@ -462,7 +481,8 @@ public class TemplateRouteParserTests
         expected.Segments[0].Parts.Add(TemplatePart.CreateLiteral("."));
         expected
             .Segments[0]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p3",
                     false,
@@ -493,7 +513,8 @@ public class TemplateRouteParserTests
         expected.Segments.Add(new TemplateSegment());
         expected
             .Segments[0]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p1",
                     false,
@@ -505,7 +526,8 @@ public class TemplateRouteParserTests
         expected.Segments[0].Parts.Add(TemplatePart.CreateLiteral("."));
         expected
             .Segments[0]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p2",
                     false,
@@ -521,7 +543,8 @@ public class TemplateRouteParserTests
         expected.Segments.Add(new TemplateSegment());
         expected
             .Segments[1]
-            .Parts.Add(TemplatePart.CreateParameter("p3", false, false, null, null));
+            .Parts
+            .Add(TemplatePart.CreateParameter("p3", false, false, null, null));
         expected.Parameters.Add(expected.Segments[1].Parts[0]);
         // Act
         var actual = TemplateParser.Parse(template);
@@ -540,7 +563,8 @@ public class TemplateRouteParserTests
         expected.Segments.Add(new TemplateSegment());
         expected
             .Segments[0]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p1",
                     false,
@@ -553,7 +577,8 @@ public class TemplateRouteParserTests
         expected.Segments.Add(new TemplateSegment());
         expected
             .Segments[1]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p2",
                     false,
@@ -585,7 +610,8 @@ public class TemplateRouteParserTests
         expected.Segments.Add(new TemplateSegment());
         expected
             .Segments[0]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p2",
                     false,
@@ -625,7 +651,8 @@ public class TemplateRouteParserTests
         var c = new InlineConstraint(constraint);
         expected
             .Segments[0]
-            .Parts.Add(
+            .Parts
+            .Add(
                 TemplatePart.CreateParameter(
                     "p1",
                     false,
@@ -1090,13 +1117,14 @@ public class TemplateRouteParserTests
             foreach (var xconstraint in x.InlineConstraints)
             {
                 if (
-                    !y.InlineConstraints.Any<InlineConstraint>(c =>
-                        string.Equals(
-                            c.Constraint,
-                            xconstraint.Constraint,
-                            StringComparison.Ordinal
+                    !y.InlineConstraints
+                        .Any<InlineConstraint>(c =>
+                            string.Equals(
+                                c.Constraint,
+                                xconstraint.Constraint,
+                                StringComparison.Ordinal
+                            )
                         )
-                    )
                 )
                 {
                     return false;

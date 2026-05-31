@@ -199,9 +199,9 @@ public class ResponseCachingTests
 
                 // assert cached response no longer served
                 client.DefaultRequestHeaders.Pragma.Clear();
-                client.DefaultRequestHeaders.Pragma.Add(
-                    new System.Net.Http.Headers.NameValueHeaderValue("no-cache")
-                );
+                client.DefaultRequestHeaders
+                    .Pragma
+                    .Add(new System.Net.Http.Headers.NameValueHeaderValue("no-cache"));
                 var subsequentResponse = await client.SendAsync(
                     TestUtils.CreateRequest(method, "")
                 );
@@ -774,9 +774,9 @@ public class ResponseCachingTests
             {
                 var client = server.CreateClient();
                 var initialResponse = await client.GetAsync("?Expires=90");
-                client.DefaultRequestHeaders.IfNoneMatch.Add(
-                    new System.Net.Http.Headers.EntityTagHeaderValue("\"E1\"")
-                );
+                client.DefaultRequestHeaders
+                    .IfNoneMatch
+                    .Add(new System.Net.Http.Headers.EntityTagHeaderValue("\"E1\""));
                 var subsequentResponse = await client.GetAsync("");
 
                 initialResponse.EnsureSuccessStatusCode();
@@ -803,9 +803,9 @@ public class ResponseCachingTests
             {
                 var client = server.CreateClient();
                 var initialResponse = await client.GetAsync("");
-                client.DefaultRequestHeaders.IfNoneMatch.Add(
-                    new System.Net.Http.Headers.EntityTagHeaderValue("\"E2\"")
-                );
+                client.DefaultRequestHeaders
+                    .IfNoneMatch
+                    .Add(new System.Net.Http.Headers.EntityTagHeaderValue("\"E2\""));
                 var subsequentResponse = await client.GetAsync("");
 
                 await AssertCachedResponseAsync(initialResponse, subsequentResponse);
@@ -931,23 +931,23 @@ public class ResponseCachingTests
                 var client = server.CreateClient();
                 client.DefaultRequestHeaders.From = "user@example.com";
                 client.DefaultRequestHeaders.Pragma.Clear();
-                client.DefaultRequestHeaders.Pragma.Add(
-                    new System.Net.Http.Headers.NameValueHeaderValue("From")
-                );
+                client.DefaultRequestHeaders
+                    .Pragma
+                    .Add(new System.Net.Http.Headers.NameValueHeaderValue("From"));
                 client.DefaultRequestHeaders.MaxForwards = 1;
                 var initialResponse = await client.GetAsync("");
                 client.DefaultRequestHeaders.From = "user2@example.com";
                 client.DefaultRequestHeaders.Pragma.Clear();
-                client.DefaultRequestHeaders.Pragma.Add(
-                    new System.Net.Http.Headers.NameValueHeaderValue("Max-Forwards")
-                );
+                client.DefaultRequestHeaders
+                    .Pragma
+                    .Add(new System.Net.Http.Headers.NameValueHeaderValue("Max-Forwards"));
                 client.DefaultRequestHeaders.MaxForwards = 2;
                 var otherResponse = await client.GetAsync("");
                 client.DefaultRequestHeaders.From = "user@example.com";
                 client.DefaultRequestHeaders.Pragma.Clear();
-                client.DefaultRequestHeaders.Pragma.Add(
-                    new System.Net.Http.Headers.NameValueHeaderValue("From")
-                );
+                client.DefaultRequestHeaders
+                    .Pragma
+                    .Add(new System.Net.Http.Headers.NameValueHeaderValue("From"));
                 client.DefaultRequestHeaders.MaxForwards = 1;
                 var subsequentResponse = await client.GetAsync("");
 
@@ -974,23 +974,23 @@ public class ResponseCachingTests
                 var client = server.CreateClient();
                 client.DefaultRequestHeaders.From = "user@example.com";
                 client.DefaultRequestHeaders.Pragma.Clear();
-                client.DefaultRequestHeaders.Pragma.Add(
-                    new System.Net.Http.Headers.NameValueHeaderValue("From")
-                );
+                client.DefaultRequestHeaders
+                    .Pragma
+                    .Add(new System.Net.Http.Headers.NameValueHeaderValue("From"));
                 client.DefaultRequestHeaders.MaxForwards = 1;
                 var initialResponse = await client.GetAsync("");
                 client.DefaultRequestHeaders.From = "user2@example.com";
                 client.DefaultRequestHeaders.Pragma.Clear();
-                client.DefaultRequestHeaders.Pragma.Add(
-                    new System.Net.Http.Headers.NameValueHeaderValue("From")
-                );
+                client.DefaultRequestHeaders
+                    .Pragma
+                    .Add(new System.Net.Http.Headers.NameValueHeaderValue("From"));
                 client.DefaultRequestHeaders.MaxForwards = 2;
                 var otherResponse = await client.GetAsync("");
                 client.DefaultRequestHeaders.From = "user@example.com";
                 client.DefaultRequestHeaders.Pragma.Clear();
-                client.DefaultRequestHeaders.Pragma.Add(
-                    new System.Net.Http.Headers.NameValueHeaderValue("From")
-                );
+                client.DefaultRequestHeaders
+                    .Pragma
+                    .Add(new System.Net.Http.Headers.NameValueHeaderValue("From"));
                 client.DefaultRequestHeaders.MaxForwards = 1;
                 var subsequentResponse = await client.GetAsync("");
 

@@ -97,12 +97,13 @@ internal partial class RedisOutputCacheStore
         _tagMasterKey = (RedisKey)Encoding.UTF8.GetBytes(_options.InstanceName + "__MSOCT");
         _tagMasterKeyArray = new[] { _tagMasterKey };
 
-        _ = Task.Factory.StartNew(
-            RunGarbageCollectionLoopAsync,
-            default,
-            TaskCreationOptions.LongRunning,
-            TaskScheduler.Current
-        );
+        _ = Task.Factory
+            .StartNew(
+                RunGarbageCollectionLoopAsync,
+                default,
+                TaskCreationOptions.LongRunning,
+                TaskScheduler.Current
+            );
     }
 
     private async Task RunGarbageCollectionLoopAsync()

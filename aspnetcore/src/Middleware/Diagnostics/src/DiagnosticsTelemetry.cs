@@ -15,9 +15,8 @@ internal static class DiagnosticsTelemetry
 
         if (context.Features.Get<IHttpMetricsTagsFeature>() is { } tagsFeature)
         {
-            tagsFeature.Tags.Add(
-                new KeyValuePair<string, object?>("error.type", ex.GetType().FullName)
-            );
+            tagsFeature.Tags
+                .Add(new KeyValuePair<string, object?>("error.type", ex.GetType().FullName));
         }
     }
 }

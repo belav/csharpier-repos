@@ -92,11 +92,8 @@ internal sealed class WindowsCertificateManager : CertificateManager
         using var store = new X509Store(StoreName.Root, StoreLocation.CurrentUser);
 
         store.Open(OpenFlags.ReadWrite);
-        var existing = store.Certificates.Find(
-            X509FindType.FindByThumbprint,
-            publicCertificate.Thumbprint,
-            validOnly: false
-        );
+        var existing = store.Certificates
+            .Find(X509FindType.FindByThumbprint, publicCertificate.Thumbprint, validOnly: false);
         if (existing.Count > 0)
         {
             Log.WindowsCertificateAlreadyTrusted();
@@ -123,8 +120,8 @@ internal sealed class WindowsCertificateManager : CertificateManager
         using var store = new X509Store(StoreName.Root, StoreLocation.CurrentUser);
 
         store.Open(OpenFlags.ReadWrite);
-        var matching = store
-            .Certificates.OfType<X509Certificate2>()
+        var matching = store.Certificates
+            .OfType<X509Certificate2>()
             .SingleOrDefault(c => c.SerialNumber == certificate.SerialNumber);
 
         if (matching != null)

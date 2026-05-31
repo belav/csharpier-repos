@@ -185,14 +185,15 @@ public class InMemoryStore<TUser, TRole>
         CancellationToken cancellationToken = default(CancellationToken)
     )
     {
-        role.Claims.Add(
-            new PocoRoleClaim<string>
-            {
-                ClaimType = claim.Type,
-                ClaimValue = claim.Value,
-                RoleId = role.Id,
-            }
-        );
+        role.Claims
+            .Add(
+                new PocoRoleClaim<string>
+                {
+                    ClaimType = claim.Type,
+                    ClaimValue = claim.Value,
+                    RoleId = role.Id,
+                }
+            );
         return Task.FromResult(0);
     }
 
@@ -202,9 +203,10 @@ public class InMemoryStore<TUser, TRole>
         CancellationToken cancellationToken = default(CancellationToken)
     )
     {
-        var entity = role.Claims.FirstOrDefault(ur =>
-            ur.RoleId == role.Id && ur.ClaimType == claim.Type && ur.ClaimValue == claim.Value
-        );
+        var entity = role.Claims
+            .FirstOrDefault(ur =>
+                ur.RoleId == role.Id && ur.ClaimType == claim.Type && ur.ClaimValue == claim.Value
+            );
         if (entity != null)
         {
             role.Claims.Remove(entity);

@@ -122,18 +122,12 @@ public sealed partial class JsonHttpResult<TValue>
             if (JsonTypeInfo is JsonTypeInfo<TValue> typedJsonTypeInfo)
             {
                 // We don't need to box here.
-                return httpContext.Response.WriteAsJsonAsync(
-                    Value,
-                    typedJsonTypeInfo,
-                    contentType: ContentType
-                );
+                return httpContext.Response
+                    .WriteAsJsonAsync(Value, typedJsonTypeInfo, contentType: ContentType);
             }
 
-            return httpContext.Response.WriteAsJsonAsync(
-                Value,
-                JsonTypeInfo,
-                contentType: ContentType
-            );
+            return httpContext.Response
+                .WriteAsJsonAsync(Value, JsonTypeInfo, contentType: ContentType);
         }
 
         return HttpResultsHelper.WriteResultAsJsonAsync(

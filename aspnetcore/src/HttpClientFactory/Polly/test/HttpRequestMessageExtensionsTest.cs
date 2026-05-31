@@ -18,12 +18,13 @@ public class HttpRequestMessageExtensionsTest
 #if USE_OBSOLETED
         request.Properties[HttpRequestMessageExtensions.PolicyExecutionContextKey] = expected;
 #else
-        request.Options.Set(
-            new HttpRequestOptionsKey<Context>(
-                HttpRequestMessageExtensions.PolicyExecutionContextKey
-            ),
-            expected
-        );
+        request.Options
+            .Set(
+                new HttpRequestOptionsKey<Context>(
+                    HttpRequestMessageExtensions.PolicyExecutionContextKey
+                ),
+                expected
+            );
 #endif
 
         // Act
@@ -54,12 +55,13 @@ public class HttpRequestMessageExtensionsTest
 #if USE_OBSOLETED
         request.Properties[HttpRequestMessageExtensions.PolicyExecutionContextKey] = null;
 #else
-        request.Options.Set(
-            new HttpRequestOptionsKey<Context>(
-                HttpRequestMessageExtensions.PolicyExecutionContextKey
-            ),
-            null
-        );
+        request.Options
+            .Set(
+                new HttpRequestOptionsKey<Context>(
+                    HttpRequestMessageExtensions.PolicyExecutionContextKey
+                ),
+                null
+            );
 #endif
 
         // Act
@@ -83,12 +85,13 @@ public class HttpRequestMessageExtensionsTest
 #if USE_OBSOLETED
         var actual = request.Properties[HttpRequestMessageExtensions.PolicyExecutionContextKey];
 #else
-        request.Options.TryGetValue(
-            new HttpRequestOptionsKey<Context>(
-                HttpRequestMessageExtensions.PolicyExecutionContextKey
-            ),
-            out Context actual
-        );
+        request.Options
+            .TryGetValue(
+                new HttpRequestOptionsKey<Context>(
+                    HttpRequestMessageExtensions.PolicyExecutionContextKey
+                ),
+                out Context actual
+            );
 #endif
         Assert.Same(expected, actual);
     }
@@ -103,12 +106,13 @@ public class HttpRequestMessageExtensionsTest
             Guid.NewGuid().ToString()
         );
 #else
-        request.Options.Set(
-            new HttpRequestOptionsKey<Context>(
-                HttpRequestMessageExtensions.PolicyExecutionContextKey
-            ),
-            new Context(Guid.NewGuid().ToString())
-        );
+        request.Options
+            .Set(
+                new HttpRequestOptionsKey<Context>(
+                    HttpRequestMessageExtensions.PolicyExecutionContextKey
+                ),
+                new Context(Guid.NewGuid().ToString())
+            );
 #endif
 
         // Act
@@ -118,12 +122,13 @@ public class HttpRequestMessageExtensionsTest
 #if USE_OBSOLETED
         var actual = request.Properties[HttpRequestMessageExtensions.PolicyExecutionContextKey];
 #else
-        request.Options.TryGetValue(
-            new HttpRequestOptionsKey<Context>(
-                HttpRequestMessageExtensions.PolicyExecutionContextKey
-            ),
-            out Context actual
-        );
+        request.Options
+            .TryGetValue(
+                new HttpRequestOptionsKey<Context>(
+                    HttpRequestMessageExtensions.PolicyExecutionContextKey
+                ),
+                out Context actual
+            );
 #endif
         Assert.Null(actual);
     }

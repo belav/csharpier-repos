@@ -140,9 +140,8 @@ internal ref struct FormatterBinaryReader
         {
             return "";
         }
-        var s = Encoding.UTF8.GetString(
-            MemoryMarshal.CreateReadOnlySpan(ref Unsafe.Add(ref _root, _offset), bytes)
-        );
+        var s = Encoding.UTF8
+            .GetString(MemoryMarshal.CreateReadOnlySpan(ref Unsafe.Add(ref _root, _offset), bytes));
         _offset += bytes;
         return s;
     }

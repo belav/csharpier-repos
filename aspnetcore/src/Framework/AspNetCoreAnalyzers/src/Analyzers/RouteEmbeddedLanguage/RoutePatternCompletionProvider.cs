@@ -135,8 +135,8 @@ public class RoutePatternCompletionProvider : CompletionProvider
             return;
         }
 
-        var root = await context
-            .Document.GetSyntaxRootAsync(context.CancellationToken)
+        var root = await context.Document
+            .GetSyntaxRootAsync(context.CancellationToken)
             .ConfigureAwait(false);
         if (root == null)
         {
@@ -149,8 +149,8 @@ public class RoutePatternCompletionProvider : CompletionProvider
             return;
         }
 
-        var semanticModel = await context
-            .Document.GetSemanticModelAsync(context.CancellationToken)
+        var semanticModel = await context.Document
+            .GetSemanticModelAsync(context.CancellationToken)
             .ConfigureAwait(false);
         if (semanticModel is null)
         {
@@ -199,10 +199,9 @@ public class RoutePatternCompletionProvider : CompletionProvider
             }
 
             // Keep everything sorted in the order we just produced the items in.
-            var sortText = routePatternCompletionContext.Items.Count.ToString(
-                "0000",
-                CultureInfo.InvariantCulture
-            );
+            var sortText = routePatternCompletionContext.Items
+                .Count
+                .ToString("0000", CultureInfo.InvariantCulture);
             context.AddItem(
                 CompletionItem.Create(
                     displayText: embeddedItem.DisplayText,
@@ -217,8 +216,7 @@ public class RoutePatternCompletionProvider : CompletionProvider
 
         if (routePatternCompletionContext.CompletionListSpan.Value != null)
         {
-            context.CompletionListSpan = routePatternCompletionContext
-                .CompletionListSpan
+            context.CompletionListSpan = routePatternCompletionContext.CompletionListSpan
                 .Value
                 .Value;
         }
@@ -282,9 +280,10 @@ public class RoutePatternCompletionProvider : CompletionProvider
         EmbeddedCompletionContext context
     )
     {
-        var previousVirtualCharOpt = context.RouteUsage.RoutePattern.Text.Find(
-            context.Position - 1
-        );
+        var previousVirtualCharOpt = context.RouteUsage
+            .RoutePattern
+            .Text
+            .Find(context.Position - 1);
         if (previousVirtualCharOpt == null)
         {
             // We didn't have a previous character.  Can't determine the set of
@@ -307,10 +306,9 @@ public class RoutePatternCompletionProvider : CompletionProvider
             {
                 // Don't suggest parameter name if it already exists in the route.
                 if (
-                    !context.RouteUsage.RoutePattern.TryGetRouteParameter(
-                        parameterSymbol.RouteParameterName,
-                        out _
-                    )
+                    !context.RouteUsage
+                        .RoutePattern
+                        .TryGetRouteParameter(parameterSymbol.RouteParameterName, out _)
                 )
                 {
                     context.AddIfMissing(

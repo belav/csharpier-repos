@@ -830,8 +830,8 @@ public class MapIdentityApiTests : LoggedTest
             "/identity/manage/2fa",
             new object()
         );
-        var twoFactorKeyContent =
-            await twoFactorKeyResponse.Content.ReadFromJsonAsync<JsonElement>();
+        var twoFactorKeyContent = await twoFactorKeyResponse.Content
+            .ReadFromJsonAsync<JsonElement>();
         Assert.False(twoFactorKeyContent.GetProperty("isTwoFactorEnabled").GetBoolean());
         Assert.False(twoFactorKeyContent.GetProperty("isMachineRemembered").GetBoolean());
 
@@ -900,8 +900,8 @@ public class MapIdentityApiTests : LoggedTest
             "/identity/manage/2fa",
             new object()
         );
-        var twoFactorKeyContent =
-            await twoFactorKeyResponse.Content.ReadFromJsonAsync<JsonElement>();
+        var twoFactorKeyContent = await twoFactorKeyResponse.Content
+            .ReadFromJsonAsync<JsonElement>();
         var sharedKey = twoFactorKeyContent.GetProperty("sharedKey").GetString();
 
         var keyBytes = Base32.FromBase32(sharedKey);
@@ -942,8 +942,8 @@ public class MapIdentityApiTests : LoggedTest
             }
         );
 
-        var recoveryLoginContent =
-            await recoveryLoginResponse.Content.ReadFromJsonAsync<JsonElement>();
+        var recoveryLoginContent = await recoveryLoginResponse.Content
+            .ReadFromJsonAsync<JsonElement>();
         var recoveryAccessToken = recoveryLoginContent.GetProperty("accessToken").GetString();
         Assert.NotEqual(accessToken, recoveryAccessToken);
 
@@ -981,8 +981,8 @@ public class MapIdentityApiTests : LoggedTest
             "/identity/manage/2fa",
             new object()
         );
-        var twoFactorKeyContent =
-            await twoFactorKeyResponse.Content.ReadFromJsonAsync<JsonElement>();
+        var twoFactorKeyContent = await twoFactorKeyResponse.Content
+            .ReadFromJsonAsync<JsonElement>();
         var sharedKey = twoFactorKeyContent.GetProperty("sharedKey").GetString();
 
         var keyBytes = Base32.FromBase32(sharedKey);
@@ -1063,8 +1063,8 @@ public class MapIdentityApiTests : LoggedTest
             "/identity/manage/2fa",
             new object()
         );
-        var twoFactorKeyContent =
-            await twoFactorKeyResponse.Content.ReadFromJsonAsync<JsonElement>();
+        var twoFactorKeyContent = await twoFactorKeyResponse.Content
+            .ReadFromJsonAsync<JsonElement>();
         var sharedKey = twoFactorKeyContent.GetProperty("sharedKey").GetString();
 
         var keyBytes = Base32.FromBase32(sharedKey);
@@ -1128,8 +1128,8 @@ public class MapIdentityApiTests : LoggedTest
                 TwoFactorRecoveryCode = recoveryCodes[1],
             }
         );
-        var recoveryLoginContent =
-            await recoveryLoginResponse.Content.ReadFromJsonAsync<JsonElement>();
+        var recoveryLoginContent = await recoveryLoginResponse.Content
+            .ReadFromJsonAsync<JsonElement>();
         var recoveryAccessToken = recoveryLoginContent.GetProperty("accessToken").GetString();
         Assert.NotEqual(accessToken, recoveryAccessToken);
 
@@ -1157,8 +1157,8 @@ public class MapIdentityApiTests : LoggedTest
             "/identity/manage/2fa",
             new { ResetRecoveryCodes = true }
         );
-        var resetRecoveryContent =
-            await resetRecoveryResponse.Content.ReadFromJsonAsync<JsonElement>();
+        var resetRecoveryContent = await resetRecoveryResponse.Content
+            .ReadFromJsonAsync<JsonElement>();
         var resetRecoveryCodes = resetRecoveryContent
             .GetProperty("recoveryCodes")
             .EnumerateArray()
@@ -1214,8 +1214,8 @@ public class MapIdentityApiTests : LoggedTest
             "/identity/manage/2fa",
             new object()
         );
-        var twoFactorKeyContent =
-            await twoFactorKeyResponse.Content.ReadFromJsonAsync<JsonElement>();
+        var twoFactorKeyContent = await twoFactorKeyResponse.Content
+            .ReadFromJsonAsync<JsonElement>();
         Assert.False(twoFactorKeyContent.GetProperty("isTwoFactorEnabled").GetBoolean());
         Assert.False(twoFactorKeyContent.GetProperty("isMachineRemembered").GetBoolean());
 
@@ -1294,8 +1294,8 @@ public class MapIdentityApiTests : LoggedTest
             "/identity/manage/2fa",
             new object()
         );
-        var persistent2faContent =
-            await persistent2faResponse.Content.ReadFromJsonAsync<JsonElement>();
+        var persistent2faContent = await persistent2faResponse.Content
+            .ReadFromJsonAsync<JsonElement>();
         Assert.True(persistent2faContent.GetProperty("isTwoFactorEnabled").GetBoolean());
         Assert.True(persistent2faContent.GetProperty("isMachineRemembered").GetBoolean());
     }
@@ -1821,10 +1821,11 @@ public class MapIdentityApiTests : LoggedTest
         where TContext : DbContext
     {
         var builder = WebApplication.CreateSlimBuilder();
-        builder.WebHost.UseTestServer(options =>
-        {
-            options.BaseAddress = BaseAddress;
-        });
+        builder.WebHost
+            .UseTestServer(options =>
+            {
+                options.BaseAddress = BaseAddress;
+            });
         builder.Services.AddSingleton(LoggerFactory);
         builder.Services.AddAuthorization();
 

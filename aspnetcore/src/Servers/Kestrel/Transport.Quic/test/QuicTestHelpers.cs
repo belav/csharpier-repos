@@ -191,8 +191,9 @@ internal static class QuicTestHelpers
         var serverStream = await serverConnection.AcceptAsync().DefaultTimeout();
 
         logger.LogInformation("Server reading data.");
-        var readResult = await serverStream
-            .Transport.Input.ReadAtLeastAsync(TestData.Length)
+        var readResult = await serverStream.Transport
+            .Input
+            .ReadAtLeastAsync(TestData.Length)
             .DefaultTimeout();
         serverStream.Transport.Input.AdvanceTo(readResult.Buffer.End);
 

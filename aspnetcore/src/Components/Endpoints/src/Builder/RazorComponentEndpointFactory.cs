@@ -73,8 +73,8 @@ internal class RazorComponentEndpointFactory
 
         builder.RequestDelegate = httpContext =>
         {
-            var invoker =
-                httpContext.RequestServices.GetRequiredService<IRazorComponentEndpointInvoker>();
+            var invoker = httpContext.RequestServices
+                .GetRequiredService<IRazorComponentEndpointInvoker>();
             return invoker.Render(httpContext);
         };
 

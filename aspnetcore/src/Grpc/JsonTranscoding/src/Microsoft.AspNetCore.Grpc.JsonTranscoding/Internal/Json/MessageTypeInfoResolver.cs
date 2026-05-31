@@ -156,9 +156,9 @@ internal sealed class MessageTypeInfoResolver : IJsonTypeInfoResolver
         {
             return (o, v) =>
             {
-                var caseField = field.RealContainingOneof.Accessor.GetCaseFieldDescriptor(
-                    (IMessage)o
-                );
+                var caseField = field.RealContainingOneof
+                    .Accessor
+                    .GetCaseFieldDescriptor((IMessage)o);
                 if (caseField != null)
                 {
                     throw new InvalidOperationException(

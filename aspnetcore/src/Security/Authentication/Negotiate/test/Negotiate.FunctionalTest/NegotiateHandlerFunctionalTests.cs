@@ -115,10 +115,12 @@ public class NegotiateHandlerFunctionalTests : LoggedTest
     {
         using var host = await CreateHostAsync();
 
-        var address = host
-            .Services.GetRequiredService<IServer>()
-            .Features.Get<IServerAddressesFeature>()
-            .Addresses.First()
+        var address = host.Services
+            .GetRequiredService<IServer>()
+            .Features
+            .Get<IServerAddressesFeature>()
+            .Addresses
+            .First()
             .Replace("https://", "wss://");
 
         using var webSocket = new ClientWebSocket
@@ -417,10 +419,12 @@ public class NegotiateHandlerFunctionalTests : LoggedTest
     // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade. WinHttpHandler does.
     private static HttpClient CreateWinHttpClient(IHost host)
     {
-        var address = host
-            .Services.GetRequiredService<IServer>()
-            .Features.Get<IServerAddressesFeature>()
-            .Addresses.First();
+        var address = host.Services
+            .GetRequiredService<IServer>()
+            .Features
+            .Get<IServerAddressesFeature>()
+            .Addresses
+            .First();
 
         // WinHttpHandler always uses default credentials on localhost
         return new HttpClient(
@@ -438,10 +442,12 @@ public class NegotiateHandlerFunctionalTests : LoggedTest
     // https://github.com/dotnet/corefx/issues/35195 SocketHttpHandler won't downgrade. WinHttpHandler does.
     private static HttpClient CreateSocketHttpClient(IHost host, bool useDefaultCredentials = false)
     {
-        var address = host
-            .Services.GetRequiredService<IServer>()
-            .Features.Get<IServerAddressesFeature>()
-            .Addresses.First();
+        var address = host.Services
+            .GetRequiredService<IServer>()
+            .Features
+            .Get<IServerAddressesFeature>()
+            .Addresses
+            .First();
 
         return new HttpClient(
             new HttpClientHandler()

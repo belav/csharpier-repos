@@ -69,11 +69,12 @@ public class ComponentStatePersistenceManagerTest
         var renderer = new TestRenderer();
         var data = new byte[] { 1, 2, 3, 4 };
 
-        lifetime.State.RegisterOnPersisting(() =>
-        {
-            lifetime.State.PersistAsJson("MyState", new byte[] { 1, 2, 3, 4 });
-            return Task.CompletedTask;
-        });
+        lifetime.State
+            .RegisterOnPersisting(() =>
+            {
+                lifetime.State.PersistAsJson("MyState", new byte[] { 1, 2, 3, 4 });
+                return Task.CompletedTask;
+            });
 
         // Act
         // Assert
@@ -95,14 +96,15 @@ public class ComponentStatePersistenceManagerTest
         var renderer = new TestRenderer();
         var data = new byte[] { 1, 2, 3, 4 };
 
-        lifetime.State.RegisterOnPersisting(
-            () =>
-            {
-                lifetime.State.PersistAsJson("MyState", new byte[] { 1, 2, 3, 4 });
-                return Task.CompletedTask;
-            },
-            new TestRenderMode()
-        );
+        lifetime.State
+            .RegisterOnPersisting(
+                () =>
+                {
+                    lifetime.State.PersistAsJson("MyState", new byte[] { 1, 2, 3, 4 });
+                    return Task.CompletedTask;
+                },
+                new TestRenderMode()
+            );
 
         // Act
         await lifetime.PersistStateAsync(store, renderer);
@@ -125,14 +127,15 @@ public class ComponentStatePersistenceManagerTest
         var data = new byte[] { 1, 2, 3, 4 };
         var invoked = false;
 
-        lifetime.State.RegisterOnPersisting(
-            () =>
-            {
-                invoked = true;
-                return default;
-            },
-            new TestRenderMode()
-        );
+        lifetime.State
+            .RegisterOnPersisting(
+                () =>
+                {
+                    invoked = true;
+                    return default;
+                },
+                new TestRenderMode()
+            );
 
         // Act
         await lifetime.PersistStateAsync(store, renderer);
@@ -157,24 +160,26 @@ public class ComponentStatePersistenceManagerTest
         var tcs = new TaskCompletionSource();
         var tcs2 = new TaskCompletionSource();
 
-        lifetime.State.RegisterOnPersisting(
-            async () =>
-            {
-                sequence.Add(1);
-                await tcs.Task;
-                sequence.Add(3);
-            },
-            new TestRenderMode()
-        );
-        lifetime.State.RegisterOnPersisting(
-            async () =>
-            {
-                sequence.Add(2);
-                await tcs2.Task;
-                sequence.Add(4);
-            },
-            new TestRenderMode()
-        );
+        lifetime.State
+            .RegisterOnPersisting(
+                async () =>
+                {
+                    sequence.Add(1);
+                    await tcs.Task;
+                    sequence.Add(3);
+                },
+                new TestRenderMode()
+            );
+        lifetime.State
+            .RegisterOnPersisting(
+                async () =>
+                {
+                    sequence.Add(2);
+                    await tcs2.Task;
+                    sequence.Add(4);
+                },
+                new TestRenderMode()
+            );
 
         // Act
         var persistTask = lifetime.PersistStateAsync(store, renderer);
@@ -203,18 +208,20 @@ public class ComponentStatePersistenceManagerTest
         var tcs = new TaskCompletionSource();
         var tcs2 = new TaskCompletionSource();
 
-        var subscription1 = lifetime.State.RegisterOnPersisting(async () =>
-        {
-            sequence.Add(1);
-            await tcs.Task;
-            sequence.Add(3);
-        });
-        var subscription2 = lifetime.State.RegisterOnPersisting(async () =>
-        {
-            sequence.Add(2);
-            await tcs2.Task;
-            sequence.Add(4);
-        });
+        var subscription1 = lifetime.State
+            .RegisterOnPersisting(async () =>
+            {
+                sequence.Add(1);
+                await tcs.Task;
+                sequence.Add(3);
+            });
+        var subscription2 = lifetime.State
+            .RegisterOnPersisting(async () =>
+            {
+                sequence.Add(2);
+                await tcs2.Task;
+                sequence.Add(4);
+            });
 
         // Act
         subscription1.Dispose();
@@ -244,18 +251,20 @@ public class ComponentStatePersistenceManagerTest
         var data = new byte[] { 1, 2, 3, 4 };
         var invoked = false;
 
-        lifetime.State.RegisterOnPersisting(
-            () => throw new InvalidOperationException(),
-            new TestRenderMode()
-        );
-        lifetime.State.RegisterOnPersisting(
-            () =>
-            {
-                invoked = true;
-                return Task.CompletedTask;
-            },
-            new TestRenderMode()
-        );
+        lifetime.State
+            .RegisterOnPersisting(
+                () => throw new InvalidOperationException(),
+                new TestRenderMode()
+            );
+        lifetime.State
+            .RegisterOnPersisting(
+                () =>
+                {
+                    invoked = true;
+                    return Task.CompletedTask;
+                },
+                new TestRenderMode()
+            );
 
         // Act
         await lifetime.PersistStateAsync(store, renderer);
@@ -280,22 +289,24 @@ public class ComponentStatePersistenceManagerTest
         var invoked = false;
         var tcs = new TaskCompletionSource();
 
-        lifetime.State.RegisterOnPersisting(
-            async () =>
-            {
-                await tcs.Task;
-                throw new InvalidOperationException();
-            },
-            new TestRenderMode()
-        );
-        lifetime.State.RegisterOnPersisting(
-            () =>
-            {
-                invoked = true;
-                return Task.CompletedTask;
-            },
-            new TestRenderMode()
-        );
+        lifetime.State
+            .RegisterOnPersisting(
+                async () =>
+                {
+                    await tcs.Task;
+                    throw new InvalidOperationException();
+                },
+                new TestRenderMode()
+            );
+        lifetime.State
+            .RegisterOnPersisting(
+                () =>
+                {
+                    invoked = true;
+                    return Task.CompletedTask;
+                },
+                new TestRenderMode()
+            );
 
         // Act
         var persistTask = lifetime.PersistStateAsync(store, renderer);

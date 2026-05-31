@@ -53,8 +53,8 @@ public class SchemaGeneratorIntegrationTests
         Assert.Equal("string", enumSchema.Type);
         Assert.Equal(5, enumSchema.Enum.Count);
 
-        var enumValues = enumSchema
-            .Enum.Select(e => ((OpenApiString)e).Value)
+        var enumValues = enumSchema.Enum
+            .Select(e => ((OpenApiString)e).Value)
             .OrderBy(s => s)
             .ToList();
         Assert.Collection(

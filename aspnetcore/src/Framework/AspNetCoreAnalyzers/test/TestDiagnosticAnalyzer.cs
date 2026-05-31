@@ -214,13 +214,14 @@ internal class TestDiagnosticAnalyzerRunner : DiagnosticAnalyzerRunner
         foreach (var assembly in Directory.EnumerateFiles(AppContext.BaseDirectory, "*.dll"))
         {
             if (
-                !project.MetadataReferences.Any(c =>
-                    string.Equals(
-                        Path.GetFileNameWithoutExtension(c.Display),
-                        Path.GetFileNameWithoutExtension(assembly),
-                        StringComparison.OrdinalIgnoreCase
+                !project.MetadataReferences
+                    .Any(c =>
+                        string.Equals(
+                            Path.GetFileNameWithoutExtension(c.Display),
+                            Path.GetFileNameWithoutExtension(assembly),
+                            StringComparison.OrdinalIgnoreCase
+                        )
                     )
-                )
             )
             {
                 project = project.AddMetadataReference(MetadataReference.CreateFromFile(assembly));

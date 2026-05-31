@@ -5,22 +5,23 @@ using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder
-    .Services.AddAuthentication()
+builder.Services
+    .AddAuthentication()
     .AddJwtBearer()
     .AddJwtBearer("ClaimedDetails")
     .AddJwtBearer("InvalidScheme");
 
-builder.Services.AddAuthorization(options =>
-    options.AddPolicy(
-        "is_admin",
-        policy =>
-        {
-            policy.RequireAuthenticatedUser();
-            policy.RequireClaim("is_admin", "true");
-        }
-    )
-);
+builder.Services
+    .AddAuthorization(options =>
+        options.AddPolicy(
+            "is_admin",
+            policy =>
+            {
+                policy.RequireAuthenticatedUser();
+                policy.RequireClaim("is_admin", "true");
+            }
+        )
+    );
 
 var app = builder.Build();
 

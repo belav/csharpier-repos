@@ -56,10 +56,8 @@ public static class StackExchangeRedisDependencyInjectionExtensions
     )
     {
         signalrBuilder.Services.Configure(configure);
-        signalrBuilder.Services.AddSingleton(
-            typeof(HubLifetimeManager<>),
-            typeof(RedisHubLifetimeManager<>)
-        );
+        signalrBuilder.Services
+            .AddSingleton(typeof(HubLifetimeManager<>), typeof(RedisHubLifetimeManager<>));
         return signalrBuilder;
     }
 

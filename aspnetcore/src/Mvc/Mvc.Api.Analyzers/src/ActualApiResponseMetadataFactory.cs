@@ -98,8 +98,8 @@ public static class ActualApiResponseMetadataFactory
             && returnedValue is IInvocationOperation invocationOperation
         )
         {
-            defaultStatusCodeAttribute = invocationOperation
-                .TargetMethod.GetAttributes(defaultStatusCodeAttributeSymbol)
+            defaultStatusCodeAttribute = invocationOperation.TargetMethod
+                .GetAttributes(defaultStatusCodeAttributeSymbol)
                 .FirstOrDefault();
         }
 
@@ -285,19 +285,19 @@ public static class ActualApiResponseMetadataFactory
         for (var i = 0; i < property.ExplicitInterfaceImplementations.Length; i++)
         {
             if (
-                SymbolEqualityComparer.Default.Equals(
-                    property.ExplicitInterfaceImplementations[i],
-                    statusCodeActionResultStatusProperty
-                )
+                SymbolEqualityComparer.Default
+                    .Equals(
+                        property.ExplicitInterfaceImplementations[i],
+                        statusCodeActionResultStatusProperty
+                    )
             )
             {
                 return true;
             }
         }
 
-        var implementedProperty = property.ContainingType.FindImplementationForInterfaceMember(
-            statusCodeActionResultStatusProperty
-        );
+        var implementedProperty = property.ContainingType
+            .FindImplementationForInterfaceMember(statusCodeActionResultStatusProperty);
         return SymbolEqualityComparer.Default.Equals(implementedProperty, property);
     }
 

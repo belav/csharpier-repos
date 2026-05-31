@@ -111,12 +111,12 @@ internal sealed class AmbiguousRoutePatternComparer : IEqualityComparer<RoutePat
         }
 
         // Only parameter policies differentiate between parameters.
-        var xParameterPolicies = x
-            .ParameterParts.Where(p => p.Kind == RoutePatternKind.ParameterPolicy)
+        var xParameterPolicies = x.ParameterParts
+            .Where(p => p.Kind == RoutePatternKind.ParameterPolicy)
             .OfType<RoutePatternPolicyParameterPartNode>()
             .ToList();
-        var yParameterPolicies = y
-            .ParameterParts.Where(p => p.Kind == RoutePatternKind.ParameterPolicy)
+        var yParameterPolicies = y.ParameterParts
+            .Where(p => p.Kind == RoutePatternKind.ParameterPolicy)
             .OfType<RoutePatternPolicyParameterPartNode>()
             .ToList();
 

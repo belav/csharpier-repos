@@ -162,8 +162,8 @@ public partial class WebHostTests
         {
             var lifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
 #pragma warning disable CS0618 // Type or member is obsolete
-            var lifetime2 =
-                host.Services.GetRequiredService<AspNetCore.Hosting.IApplicationLifetime>();
+            var lifetime2 = host.Services
+                .GetRequiredService<AspNetCore.Hosting.IApplicationLifetime>();
 #pragma warning restore CS0618 // Type or member is obsolete
             var server = (FakeServer)host.Services.GetRequiredService<IServer>();
 
@@ -323,30 +323,33 @@ public partial class WebHostTests
             var applicationStoppingCompletedBeforeApplicationStopped = false;
             var applicationStoppedCompletedBeforeRunCompleted = false;
 
-            lifetime.ApplicationStarted.Register(() =>
-            {
-                applicationStartedEvent.Set();
-            });
+            lifetime.ApplicationStarted
+                .Register(() =>
+                {
+                    applicationStartedEvent.Set();
+                });
 
-            lifetime.ApplicationStopping.Register(() =>
-            {
-                // Check whether the applicationStartedEvent has been set
-                applicationStartedCompletedBeforeApplicationStopping =
-                    applicationStartedEvent.IsSet;
+            lifetime.ApplicationStopping
+                .Register(() =>
+                {
+                    // Check whether the applicationStartedEvent has been set
+                    applicationStartedCompletedBeforeApplicationStopping =
+                        applicationStartedEvent.IsSet;
 
-                // Simulate work.
-                Thread.Sleep(1000);
+                    // Simulate work.
+                    Thread.Sleep(1000);
 
-                applicationStoppingEvent.Set();
-            });
+                    applicationStoppingEvent.Set();
+                });
 
-            lifetime.ApplicationStopped.Register(() =>
-            {
-                // Check whether the applicationStoppingEvent has been set
-                applicationStoppingCompletedBeforeApplicationStopped =
-                    applicationStoppingEvent.IsSet;
-                applicationStoppedEvent.Set();
-            });
+            lifetime.ApplicationStopped
+                .Register(() =>
+                {
+                    // Check whether the applicationStoppingEvent has been set
+                    applicationStoppingCompletedBeforeApplicationStopped =
+                        applicationStoppingEvent.IsSet;
+                    applicationStoppedEvent.Set();
+                });
 
             var runHostAndVerifyApplicationStopped = Task.Run(async () =>
             {
@@ -413,8 +416,8 @@ public partial class WebHostTests
         {
             var applicationLifetime = host.Services.GetService<IHostApplicationLifetime>();
 #pragma warning disable CS0618 // Type or member is obsolete
-            var applicationLifetime2 =
-                host.Services.GetService<AspNetCore.Hosting.IApplicationLifetime>();
+            var applicationLifetime2 = host.Services
+                .GetService<AspNetCore.Hosting.IApplicationLifetime>();
 #pragma warning restore CS0618 // Type or member is obsolete
 
             Assert.False(applicationLifetime.ApplicationStarted.IsCancellationRequested);
@@ -433,8 +436,8 @@ public partial class WebHostTests
         {
             var applicationLifetime = host.Services.GetService<IHostApplicationLifetime>();
 #pragma warning disable CS0618 // Type or member is obsolete
-            var applicationLifetime2 =
-                host.Services.GetService<AspNetCore.Hosting.IApplicationLifetime>();
+            var applicationLifetime2 = host.Services
+                .GetService<AspNetCore.Hosting.IApplicationLifetime>();
 #pragma warning restore CS0618 // Type or member is obsolete
 
             var started = RegisterCallbacksThatThrow(applicationLifetime.ApplicationStarted);
@@ -708,8 +711,8 @@ public partial class WebHostTests
         {
             var applicationLifetime = host.Services.GetService<IHostApplicationLifetime>();
 #pragma warning disable CS0618 // Type or member is obsolete
-            var applicationLifetime2 =
-                host.Services.GetService<AspNetCore.Hosting.IApplicationLifetime>();
+            var applicationLifetime2 = host.Services
+                .GetService<AspNetCore.Hosting.IApplicationLifetime>();
 #pragma warning restore CS0618 // Type or member is obsolete
 
             var started = RegisterCallbacksThatThrow(applicationLifetime.ApplicationStarted);
@@ -913,8 +916,8 @@ public partial class WebHostTests
         {
             // Assert
             Assert.NotNull(httpContext);
-            var featuresTraceIdentifier = httpContext
-                .Features.Get<IHttpRequestIdentifierFeature>()
+            var featuresTraceIdentifier = httpContext.Features
+                .Get<IHttpRequestIdentifierFeature>()
                 .TraceIdentifier;
             Assert.False(string.IsNullOrWhiteSpace(httpContext.TraceIdentifier));
             Assert.Same(httpContext.TraceIdentifier, featuresTraceIdentifier);

@@ -9,22 +9,23 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.WebHost.ConfigureKestrel(
-    (context, options) =>
-    {
-        // Port configured for WebTransport
-        options.Listen(
-            IPAddress.Any,
-            5007,
-            listenOptions =>
-            {
-                listenOptions.UseHttps(GenerateManualCertificate());
-                listenOptions.UseConnectionLogging();
-                listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
-            }
-        );
-    }
-);
+builder.WebHost
+    .ConfigureKestrel(
+        (context, options) =>
+        {
+            // Port configured for WebTransport
+            options.Listen(
+                IPAddress.Any,
+                5007,
+                listenOptions =>
+                {
+                    listenOptions.UseHttps(GenerateManualCertificate());
+                    listenOptions.UseConnectionLogging();
+                    listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
+                }
+            );
+        }
+    );
 var host = builder.Build();
 
 host.Run(
@@ -42,8 +43,9 @@ host.Run(
 
         //// READ FROM A STREAM:
         var memory = new Memory<byte>(new byte[4096]);
-        var test = await stream
-            .Transport.Input.AsStream()
+        var test = await stream.Transport
+            .Input
+            .AsStream()
             .ReadAsync(memory, CancellationToken.None);
         Console.WriteLine(System.Text.Encoding.Default.GetString(memory.Span));
     }
@@ -78,19 +80,19 @@ static X509Certificate2 GenerateManualCertificate()
         using var ec = ECDsa.Create(ECCurve.NamedCurves.nistP256);
         CertificateRequest req = new("CN=localhost", ec, HashAlgorithmName.SHA256);
         // Adds purpose
-        req.CertificateExtensions.Add(
-            new X509EnhancedKeyUsageExtension(
-                new OidCollection
-                {
-                    new("1.3.6.1.5.5.7.3.1"), // serverAuth
-                },
-                false
-            )
-        );
+        req.CertificateExtensions
+            .Add(
+                new X509EnhancedKeyUsageExtension(
+                    new OidCollection
+                    {
+                        new("1.3.6.1.5.5.7.3.1"), // serverAuth
+                    },
+                    false
+                )
+            );
         // Adds usage
-        req.CertificateExtensions.Add(
-            new X509KeyUsageExtension(X509KeyUsageFlags.DigitalSignature, false)
-        );
+        req.CertificateExtensions
+            .Add(new X509KeyUsageExtension(X509KeyUsageFlags.DigitalSignature, false));
         // Adds subject alternate names
         req.CertificateExtensions.Add(sanBuilder.Build());
         // Sign

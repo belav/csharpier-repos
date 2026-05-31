@@ -34,8 +34,8 @@ public class FallbackStaticFileTest : LoggedTest
                     .UseWebRoot(AppContext.BaseDirectory)
                     .Configure(app =>
                     {
-                        var environment =
-                            app.ApplicationServices.GetRequiredService<IWebHostEnvironment>();
+                        var environment = app.ApplicationServices
+                            .GetRequiredService<IWebHostEnvironment>();
                         app.UseRouting();
                         app.UseEndpoints(endpoints =>
                         {

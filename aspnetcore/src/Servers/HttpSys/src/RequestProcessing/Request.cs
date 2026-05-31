@@ -60,9 +60,10 @@ internal sealed partial class Request
 
         PathBase = string.Empty;
         Path = originalPath;
-        var prefix = requestContext.Server.Options.UrlPrefixes.GetPrefix(
-            (int)requestContext.UrlContext
-        );
+        var prefix = requestContext.Server
+            .Options
+            .UrlPrefixes
+            .GetPrefix((int)requestContext.UrlContext);
 
         // 'OPTIONS * HTTP/1.1'
         if (
@@ -176,13 +177,16 @@ internal sealed partial class Request
             }
         }
         else if (
-            requestContext.Server.Options.UrlPrefixes.TryMatchLongestPrefix(
-                IsHttps,
-                cookedUrl.GetHost()!,
-                originalPath,
-                out var pathBase,
-                out var path
-            )
+            requestContext.Server
+                .Options
+                .UrlPrefixes
+                .TryMatchLongestPrefix(
+                    IsHttps,
+                    cookedUrl.GetHost()!,
+                    originalPath,
+                    out var pathBase,
+                    out var path
+                )
         )
         {
             PathBase = pathBase;

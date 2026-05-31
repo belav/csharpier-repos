@@ -263,13 +263,14 @@ public class MvcAreaRouteBuilderExtensionsTest
                 Assert.IsType<StringRouteConstraint>(kvp.Value);
 
                 var values = new RouteValueDictionary(new { area = areaName });
-                var match = kvp.Value.Match(
-                    new DefaultHttpContext(),
-                    route: new Mock<IRouter>().Object,
-                    routeKey: kvp.Key,
-                    values: values,
-                    routeDirection: RouteDirection.UrlGeneration
-                );
+                var match = kvp.Value
+                    .Match(
+                        new DefaultHttpContext(),
+                        route: new Mock<IRouter>().Object,
+                        routeKey: kvp.Key,
+                        values: values,
+                        routeDirection: RouteDirection.UrlGeneration
+                    );
 
                 Assert.True(match);
             }

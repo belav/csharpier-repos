@@ -80,9 +80,8 @@ public class SessionStateTempDataProviderTest
         var httpContext = new DefaultHttpContext();
         if (sessionEnabled)
         {
-            httpContext.Features.Set<ISessionFeature>(
-                new SessionFeature() { Session = new TestSession() }
-            );
+            httpContext.Features
+                .Set<ISessionFeature>(new SessionFeature() { Session = new TestSession() });
         }
         return httpContext;
     }

@@ -447,10 +447,11 @@ public class TwitterTests : RemoteAuthenticationTests<TwitterOptions>
                     Sender = req =>
                     {
                         if (
-                            req.RequestUri.GetComponents(
-                                UriComponents.SchemeAndServer | UriComponents.Path,
-                                UriFormat.UriEscaped
-                            ) == "https://api.twitter.com/oauth/access_token"
+                            req.RequestUri
+                                .GetComponents(
+                                    UriComponents.SchemeAndServer | UriComponents.Path,
+                                    UriFormat.UriEscaped
+                                ) == "https://api.twitter.com/oauth/access_token"
                         )
                         {
                             var res = new HttpResponseMessage(HttpStatusCode.OK);
@@ -536,10 +537,11 @@ public class TwitterTests : RemoteAuthenticationTests<TwitterOptions>
                     Sender = req =>
                     {
                         if (
-                            req.RequestUri.GetComponents(
-                                UriComponents.SchemeAndServer | UriComponents.Path,
-                                UriFormat.UriEscaped
-                            ) == "https://api.twitter.com/oauth/access_token"
+                            req.RequestUri
+                                .GetComponents(
+                                    UriComponents.SchemeAndServer | UriComponents.Path,
+                                    UriFormat.UriEscaped
+                                ) == "https://api.twitter.com/oauth/access_token"
                         )
                         {
                             var res = new HttpResponseMessage(HttpStatusCode.OK);
@@ -554,10 +556,11 @@ public class TwitterTests : RemoteAuthenticationTests<TwitterOptions>
                             return res;
                         }
                         if (
-                            req.RequestUri.GetComponents(
-                                UriComponents.SchemeAndServer | UriComponents.Path,
-                                UriFormat.UriEscaped
-                            )
+                            req.RequestUri
+                                .GetComponents(
+                                    UriComponents.SchemeAndServer | UriComponents.Path,
+                                    UriFormat.UriEscaped
+                                )
                             == new Uri(verifyCredentialsEndpoint).GetComponents(
                                 UriComponents.SchemeAndServer | UriComponents.Path,
                                 UriFormat.UriEscaped

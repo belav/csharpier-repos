@@ -276,10 +276,9 @@ public class HtmlHelperValidationSummaryTest
         var html = DefaultTemplatesUtilities.GetHtmlHelper(model);
         html.ViewContext.ClientValidationEnabled = clientValidationEnabled;
         html.ViewData.TemplateInfo.HtmlFieldPrefix = "this.is.my.prefix";
-        html.ViewData.ModelState.AddModelError(
-            "this.is.my.prefix",
-            "This is my validation message"
-        );
+        html.ViewData
+            .ModelState
+            .AddModelError("this.is.my.prefix", "This is my validation message");
 
         // Act
         var result = html.ValidationSummary(
@@ -453,22 +452,18 @@ public class HtmlHelperValidationSummaryTest
         var model = new ModelWithCollection();
         var html = DefaultTemplatesUtilities.GetHtmlHelper(model);
         html.ViewData.ModelState.AddModelError("Property1", "Property1 error");
-        html.ViewData.ModelState.AddModelError(
-            "Property2[0].OrderedProperty1",
-            "Property2[0].OrderedProperty1 error"
-        );
-        html.ViewData.ModelState.AddModelError(
-            "Property2[10].Property2",
-            "Property2[10].Property2 error"
-        );
-        html.ViewData.ModelState.AddModelError(
-            "Property2[2].Property3",
-            "Property2[2].Property3 error"
-        );
-        html.ViewData.ModelState.AddModelError(
-            "Property2[0].Property1",
-            "Property2[0].Property1 error"
-        );
+        html.ViewData
+            .ModelState
+            .AddModelError("Property2[0].OrderedProperty1", "Property2[0].OrderedProperty1 error");
+        html.ViewData
+            .ModelState
+            .AddModelError("Property2[10].Property2", "Property2[10].Property2 error");
+        html.ViewData
+            .ModelState
+            .AddModelError("Property2[2].Property3", "Property2[2].Property3 error");
+        html.ViewData
+            .ModelState
+            .AddModelError("Property2[0].Property1", "Property2[0].Property1 error");
 
         // Act
         var result = html.ValidationSummary(
@@ -501,20 +496,17 @@ public class HtmlHelperValidationSummaryTest
             + "</ul></div>";
         var model = new OrderedModel[5];
         var html = DefaultTemplatesUtilities.GetHtmlHelper(model);
-        html.ViewData.ModelState.AddModelError(
-            "[0].OrderedProperty2",
-            "[0].OrderedProperty2 error"
-        );
+        html.ViewData
+            .ModelState
+            .AddModelError("[0].OrderedProperty2", "[0].OrderedProperty2 error");
         html.ViewData.ModelState.AddModelError("[0].Property1", "[0].Property1 error");
-        html.ViewData.ModelState.AddModelError(
-            "[0].OrderedProperty1",
-            "[0].OrderedProperty1 error"
-        );
+        html.ViewData
+            .ModelState
+            .AddModelError("[0].OrderedProperty1", "[0].OrderedProperty1 error");
         html.ViewData.ModelState.AddModelError("[2].Property3", "[2].Property3 error");
-        html.ViewData.ModelState.AddModelError(
-            "[2].OrderedProperty3",
-            "[2].OrderedProperty3 error"
-        );
+        html.ViewData
+            .ModelState
+            .AddModelError("[2].OrderedProperty3", "[2].OrderedProperty3 error");
 
         // Act
         var result = html.ValidationSummary(
@@ -551,20 +543,17 @@ public class HtmlHelperValidationSummaryTest
             + "</ul></div>";
         var model = new OrderedModel[5];
         var html = DefaultTemplatesUtilities.GetHtmlHelper(model);
-        html.ViewData.ModelState.AddModelError(
-            "[0].OrderedProperty2",
-            "[0].OrderedProperty2 error"
-        );
+        html.ViewData
+            .ModelState
+            .AddModelError("[0].OrderedProperty2", "[0].OrderedProperty2 error");
         html.ViewData.ModelState.AddModelError("[0].Property1", "[0].Property1 error");
-        html.ViewData.ModelState.AddModelError(
-            "[0].OrderedProperty1",
-            "[0].OrderedProperty1 error"
-        );
+        html.ViewData
+            .ModelState
+            .AddModelError("[0].OrderedProperty1", "[0].OrderedProperty1 error");
         html.ViewData.ModelState.AddModelError("[2].Property3", "[2].Property3 error");
-        html.ViewData.ModelState.AddModelError(
-            "[2].OrderedProperty3",
-            "[2].OrderedProperty3 error"
-        );
+        html.ViewData
+            .ModelState
+            .AddModelError("[2].OrderedProperty3", "[2].OrderedProperty3 error");
         html.ViewData.ModelState.AddModelError("OrderedProperty1", "OrderedProperty1 error");
         html.ViewData.ModelState.AddModelError("OrderedProperty2", "OrderedProperty2 error");
 

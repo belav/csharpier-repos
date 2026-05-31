@@ -168,12 +168,13 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
         dataSource.AddRoute("1", "/1/{controller}/{action}/{id?}", null, null, null);
         dataSource.AddRoute("2", "/2/{controller}/{action}/{id?}", null, null, null);
 
-        dataSource.DefaultBuilder.Add(
-            (b) =>
-            {
-                b.Metadata.Add("Hi there");
-            }
-        );
+        dataSource.DefaultBuilder
+            .Add(
+                (b) =>
+                {
+                    b.Metadata.Add("Hi there");
+                }
+            );
 
         // Act
         var endpoints = dataSource.Endpoints;
@@ -260,13 +261,17 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
         dataSource.AddRoute("1", "/1/{controller}/{action}/{id?}", null, null, null);
         dataSource.AddRoute("2", "/2/{controller}/{action}/{id?}", null, null, null);
 
-        dataSource.DefaultBuilder.Add(b =>
-        {
-            if (b.Metadata.OfType<ActionDescriptor>().FirstOrDefault()?.AttributeRouteInfo != null)
+        dataSource.DefaultBuilder
+            .Add(b =>
             {
-                b.Metadata.Add(new EndpointNameMetadata("NewName"));
-            }
-        });
+                if (
+                    b.Metadata.OfType<ActionDescriptor>().FirstOrDefault()?.AttributeRouteInfo
+                    != null
+                )
+                {
+                    b.Metadata.Add(new EndpointNameMetadata("NewName"));
+                }
+            });
 
         // Act
         var endpoints = dataSource.Endpoints;
@@ -361,12 +366,13 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
             .AddRoute("2", "/2/{controller}/{action}/{id?}", null, null, null)
             .Add(b => b.Metadata.Add("B"));
 
-        dataSource.DefaultBuilder.Add(
-            (b) =>
-            {
-                b.Metadata.Add("Hi there");
-            }
-        );
+        dataSource.DefaultBuilder
+            .Add(
+                (b) =>
+                {
+                    b.Metadata.Add("Hi there");
+                }
+            );
 
         // Act
         var endpoints = dataSource.Endpoints;
@@ -458,12 +464,13 @@ public class ControllerActionEndpointDataSourceTest : ActionEndpointDataSourceBa
             .AddRoute("2", "/2/{controller}/{action}/{id?}", null, null, null)
             .Add(b => b.Metadata.Add("B"));
 
-        dataSource.DefaultBuilder.Add(
-            (b) =>
-            {
-                b.Metadata.Add("Hi there");
-            }
-        );
+        dataSource.DefaultBuilder
+            .Add(
+                (b) =>
+                {
+                    b.Metadata.Add("Hi there");
+                }
+            );
 
         // Act
         var groupConventions = new List<Action<EndpointBuilder>>()

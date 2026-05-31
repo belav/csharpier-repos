@@ -14,10 +14,8 @@ public class JsonOptionsTest
     public void DefaultSerializerOptions_SetsTypeInfoResolverNull_WhenJsonIsReflectionEnabledByDefaultFalse()
     {
         var options = new RemoteInvokeOptions();
-        options.RuntimeConfigurationOptions.Add(
-            "System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault",
-            false.ToString()
-        );
+        options.RuntimeConfigurationOptions
+            .Add("System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault", false.ToString());
 
         using var remoteHandle = RemoteExecutor.Invoke(
             static () =>
@@ -38,10 +36,8 @@ public class JsonOptionsTest
     public void DefaultSerializerOptions_SetsTypeInfoResolverToDefault_WhenJsonIsReflectionEnabledByDefaultTrue()
     {
         var options = new RemoteInvokeOptions();
-        options.RuntimeConfigurationOptions.Add(
-            "System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault",
-            true.ToString()
-        );
+        options.RuntimeConfigurationOptions
+            .Add("System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault", true.ToString());
 
         using var remoteHandle = RemoteExecutor.Invoke(
             static () =>

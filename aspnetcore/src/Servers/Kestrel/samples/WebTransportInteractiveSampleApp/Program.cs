@@ -19,32 +19,33 @@ var hash = SHA256.HashData(certificate.RawData);
 var certStr = Convert.ToBase64String(hash);
 
 // configure the ports
-builder.WebHost.ConfigureKestrel(
-    (context, options) =>
-    {
-        // website configured port
-        options.Listen(
-            IPAddress.Any,
-            5001,
-            listenOptions =>
-            {
-                listenOptions.UseHttps();
-                listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
-            }
-        );
-        // webtransport configured port
-        options.Listen(
-            IPAddress.Any,
-            5002,
-            listenOptions =>
-            {
-                listenOptions.UseHttps(certificate);
-                listenOptions.UseConnectionLogging();
-                listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
-            }
-        );
-    }
-);
+builder.WebHost
+    .ConfigureKestrel(
+        (context, options) =>
+        {
+            // website configured port
+            options.Listen(
+                IPAddress.Any,
+                5001,
+                listenOptions =>
+                {
+                    listenOptions.UseHttps();
+                    listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
+                }
+            );
+            // webtransport configured port
+            options.Listen(
+                IPAddress.Any,
+                5002,
+                listenOptions =>
+                {
+                    listenOptions.UseHttps(certificate);
+                    listenOptions.UseConnectionLogging();
+                    listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
+                }
+            );
+        }
+    );
 
 var app = builder.Build();
 
@@ -155,11 +156,13 @@ static async Task ApplySpecialCommands(IWebTransportSession session, string mess
             var stream = await session.OpenUnidirectionalStreamAsync();
             if (stream is not null)
             {
-                await stream.Transport.Output.WriteAsync(
-                    new(
-                        "Created a new stream from the client and sent this message then closing the stream."u8.ToArray()
-                    )
-                );
+                await stream.Transport
+                    .Output
+                    .WriteAsync(
+                        new(
+                            "Created a new stream from the client and sent this message then closing the stream."u8.ToArray()
+                        )
+                    );
             }
             break;
         case "Abort":
@@ -198,19 +201,19 @@ static X509Certificate2 GenerateManualCertificate()
     using var ec = ECDsa.Create(ECCurve.NamedCurves.nistP256);
     CertificateRequest req = new("CN=localhost", ec, HashAlgorithmName.SHA256);
     // Adds purpose
-    req.CertificateExtensions.Add(
-        new X509EnhancedKeyUsageExtension(
-            new OidCollection
-            {
-                new("1.3.6.1.5.5.7.3.1"), // serverAuth
-            },
-            false
-        )
-    );
+    req.CertificateExtensions
+        .Add(
+            new X509EnhancedKeyUsageExtension(
+                new OidCollection
+                {
+                    new("1.3.6.1.5.5.7.3.1"), // serverAuth
+                },
+                false
+            )
+        );
     // Adds usage
-    req.CertificateExtensions.Add(
-        new X509KeyUsageExtension(X509KeyUsageFlags.DigitalSignature, false)
-    );
+    req.CertificateExtensions
+        .Add(new X509KeyUsageExtension(X509KeyUsageFlags.DigitalSignature, false));
     // Adds subject alternate names
     req.CertificateExtensions.Add(sanBuilder.Build());
     // Sign

@@ -35,11 +35,8 @@ public class LoggingConnectionMiddlewareTests : LoggedTest
         )
         {
             {
-                var response = await server
-                    .HttpClientSlim.GetStringAsync(
-                        $"https://localhost:{server.Port}/",
-                        validateCertificate: false
-                    )
+                var response = await server.HttpClientSlim
+                    .GetStringAsync($"https://localhost:{server.Port}/", validateCertificate: false)
                     .DefaultTimeout();
                 Assert.Equal("Hello World!", response);
             }

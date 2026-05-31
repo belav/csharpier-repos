@@ -182,9 +182,13 @@ internal sealed class ControllerActionEndpointDataSource : ActionEndpointDataSou
                 .Add(b =>
                 {
                     ((RouteEndpointBuilder)b).Order = order.Value;
-                    b.Metadata.Add(
-                        new DynamicControllerRouteValueTransformerMetadata(transformerType, state)
-                    );
+                    b.Metadata
+                        .Add(
+                            new DynamicControllerRouteValueTransformerMetadata(
+                                transformerType,
+                                state
+                            )
+                        );
                     b.Metadata.Add(new ControllerEndpointDataSourceIdMetadata(DataSourceId));
                 });
         }

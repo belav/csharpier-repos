@@ -245,9 +245,12 @@ internal sealed class Sequence<T> : IBufferWriter<T>, IDisposable
             if (this.arrayPool != null)
             {
                 segment.Assign(
-                    this.arrayPool.Rent(
-                        minBufferSize.Value == -1 ? DefaultLengthFromArrayPool : minBufferSize.Value
-                    )
+                    this.arrayPool
+                        .Rent(
+                            minBufferSize.Value == -1
+                                ? DefaultLengthFromArrayPool
+                                : minBufferSize.Value
+                        )
                 );
             }
             else

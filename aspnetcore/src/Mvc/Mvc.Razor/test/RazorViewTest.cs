@@ -1484,9 +1484,8 @@ public class RazorViewTest
                 "foo",
                 async () =>
                 {
-                    await v.Output.WriteLineAsync(
-                        htmlEncoder.Encode(v.RenderSection("foo").ToString())
-                    );
+                    await v.Output
+                        .WriteLineAsync(htmlEncoder.Encode(v.RenderSection("foo").ToString()));
                 }
             );
         });

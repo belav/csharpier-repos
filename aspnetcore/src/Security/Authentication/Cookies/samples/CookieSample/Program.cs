@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder
-    .Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+builder.Services
+    .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
         options.ExpireTimeSpan = TimeSpan.FromSeconds(20);
@@ -21,9 +21,10 @@ builder
                 context.ShouldRenew = context.ElapsedTime > (context.Options.ExpireTimeSpan / 4);
 
                 // Don't renew on API endpoints that use JWT.
-                var authData = context
-                    .HttpContext.GetEndpoint()
-                    ?.Metadata.GetMetadata<IAuthorizeData>();
+                var authData = context.HttpContext
+                    .GetEndpoint()
+                    ?.Metadata
+                    .GetMetadata<IAuthorizeData>();
                 if (
                     authData != null
                     && string.Equals(
