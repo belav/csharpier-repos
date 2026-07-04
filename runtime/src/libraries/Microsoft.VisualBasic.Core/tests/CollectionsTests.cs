@@ -144,9 +144,8 @@ namespace Microsoft.VisualBasic.Tests
         {
             IList coll = CreateCollection(10);
             Assert.Throws<ArgumentOutOfRangeException>("Index", () => coll.Insert(-1, new Foo())); // Index < 0
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "Index",
-                () => coll.Insert(coll.Count + 1, new Foo())
+            Assert.Throws<ArgumentOutOfRangeException>("Index", () =>
+                coll.Insert(coll.Count + 1, new Foo())
             ); // Index > coll.Count
 
             Assert.Equal(10, coll.Count);
@@ -322,9 +321,8 @@ namespace Microsoft.VisualBasic.Tests
             IList coll = new Collection();
 
             Assert.Throws<ArgumentOutOfRangeException>("Index", () => coll[-1] = new Foo()); // Index < 0
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "Index",
-                () => coll[coll.Count + 1] = new Foo()
+            Assert.Throws<ArgumentOutOfRangeException>("Index", () =>
+                coll[coll.Count + 1] = new Foo()
             ); // Index >= InnerList.Count
         }
 

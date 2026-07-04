@@ -55,9 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            var name = NameGenerator.GenerateUniqueName(
-                "MyStruct",
-                name => semanticModel.LookupSymbols(position, name: name).IsEmpty
+            var name = NameGenerator.GenerateUniqueName("MyStruct", name =>
+                semanticModel.LookupSymbols(position, name: name).IsEmpty
             );
             return generator.StructDeclaration(name);
         }

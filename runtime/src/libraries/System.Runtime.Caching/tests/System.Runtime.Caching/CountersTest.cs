@@ -90,9 +90,8 @@ namespace MonoTests.System.Runtime.Caching
             {
                 // Following the example from System.Net.Http's telemetry test where they are also
                 // trying to "poll" some PollingCounters.
-                await listener.RunWithCallbackAsync(
-                    events.Enqueue,
-                    async () => await WaitForEventCountersAsync(events)
+                await listener.RunWithCallbackAsync(events.Enqueue, async () =>
+                    await WaitForEventCountersAsync(events)
                 );
             }
 

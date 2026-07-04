@@ -32,10 +32,8 @@ namespace System.Timers.Tests
         public void Description_GetWithNullDescription_ThrowsArgumentNullException()
         {
             var attribute = new TimersDescriptionAttribute(null);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                "name",
-                () => attribute.Description
+            AssertExtensions.Throws<ArgumentNullException>("format", "name", () =>
+                attribute.Description
             );
 
             // Only the first call fails.

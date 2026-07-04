@@ -58,9 +58,8 @@ namespace System.Text.Tests
         [InlineData(int.MaxValue)]
         public void GetMaxByteCount_WithDefaultEncoder_InvalidArg(int charCount)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "charCount",
-                () => Encoding.ASCII.GetMaxByteCount(charCount)
+            Assert.Throws<ArgumentOutOfRangeException>("charCount", () =>
+                Encoding.ASCII.GetMaxByteCount(charCount)
             );
         }
 
@@ -72,9 +71,8 @@ namespace System.Text.Tests
                 new CustomLengthEncoderFallback(1_000_000),
                 DecoderFallback.ExceptionFallback
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "charCount",
-                () => asciiEncoding.GetMaxByteCount(5_000_000)
+            Assert.Throws<ArgumentOutOfRangeException>("charCount", () =>
+                asciiEncoding.GetMaxByteCount(5_000_000)
             );
         }
 

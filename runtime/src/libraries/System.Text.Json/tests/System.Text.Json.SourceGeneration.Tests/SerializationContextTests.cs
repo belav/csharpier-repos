@@ -981,9 +981,8 @@ namespace System.Text.Json.SourceGeneration.Tests
     public sealed class SerializationWithPerTypeAttributeContextTests : SerializationContextTests
     {
         public SerializationWithPerTypeAttributeContextTests()
-            : base(
-                SerializationWithPerTypeAttributeContext.Default,
-                (options) => new SerializationContext(options)
+            : base(SerializationWithPerTypeAttributeContext.Default, (options) =>
+                new SerializationContext(options)
             ) { }
 
         [Fact]

@@ -49,18 +49,11 @@ public class IISExpressShutdownTests : IISFunctionalTestBase
         var parameters = Fixture.GetBaseDeploymentParameters();
         var deploymentResult = await StartAsync(parameters);
 
-        var load = Helpers.StressLoad(
-            deploymentResult.HttpClient,
-            "/HelloWorld",
-            response =>
-            {
-                var statusCode = (int)response.StatusCode;
-                Assert.True(
-                    statusCode == 200 || statusCode == 503,
-                    "Status code was " + statusCode
-                );
-            }
-        );
+        var load = Helpers.StressLoad(deploymentResult.HttpClient, "/HelloWorld", response =>
+        {
+            var statusCode = (int)response.StatusCode;
+            Assert.True(statusCode == 200 || statusCode == 503, "Status code was " + statusCode);
+        });
 
         try
         {

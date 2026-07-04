@@ -56,32 +56,24 @@ namespace Microsoft.CodeAnalysis.Debugging
         {
             Debug.Assert(typeName != null);
 
-            AddRecord(
-                CustomDebugInfoKind.StateMachineTypeName,
-                typeName,
-                (name, builder) =>
-                {
-                    builder.WriteUTF16(name);
-                    builder.WriteInt16(0);
-                }
-            );
+            AddRecord(CustomDebugInfoKind.StateMachineTypeName, typeName, (name, builder) =>
+            {
+                builder.WriteUTF16(name);
+                builder.WriteInt16(0);
+            });
         }
 
         public void AddForwardMethodInfo(MethodDefinitionHandle methodHandle)
         {
-            AddRecord(
-                CustomDebugInfoKind.ForwardMethodInfo,
-                methodHandle,
-                (mh, builder) => builder.WriteInt32(MetadataTokens.GetToken(mh))
+            AddRecord(CustomDebugInfoKind.ForwardMethodInfo, methodHandle, (mh, builder) =>
+                builder.WriteInt32(MetadataTokens.GetToken(mh))
             );
         }
 
         public void AddForwardModuleInfo(MethodDefinitionHandle methodHandle)
         {
-            AddRecord(
-                CustomDebugInfoKind.ForwardModuleInfo,
-                methodHandle,
-                (mh, builder) => builder.WriteInt32(MetadataTokens.GetToken(mh))
+            AddRecord(CustomDebugInfoKind.ForwardModuleInfo, methodHandle, (mh, builder) =>
+                builder.WriteInt32(MetadataTokens.GetToken(mh))
             );
         }
 
@@ -96,19 +88,15 @@ namespace Microsoft.CodeAnalysis.Debugging
                 return;
             }
 
-            AddRecord(
-                CustomDebugInfoKind.UsingGroups,
-                groupSizes,
-                (uc, builder) =>
+            AddRecord(CustomDebugInfoKind.UsingGroups, groupSizes, (uc, builder) =>
+            {
+                builder.WriteUInt16((ushort)uc.Count);
+                foreach (var usingCount in uc)
                 {
-                    builder.WriteUInt16((ushort)uc.Count);
-                    foreach (var usingCount in uc)
-                    {
-                        Debug.Assert(usingCount <= ushort.MaxValue);
-                        builder.WriteUInt16((ushort)usingCount);
-                    }
+                    Debug.Assert(usingCount <= ushort.MaxValue);
+                    builder.WriteUInt16((ushort)usingCount);
                 }
-            );
+            });
         }
 
         public void AddStateMachineHoistedLocalScopes(
@@ -120,28 +108,24 @@ namespace Microsoft.CodeAnalysis.Debugging
                 return;
             }
 
-            AddRecord(
-                CustomDebugInfoKind.StateMachineHoistedLocalScopes,
-                scopes,
-                (s, builder) =>
+            AddRecord(CustomDebugInfoKind.StateMachineHoistedLocalScopes, scopes, (s, builder) =>
+            {
+                builder.WriteInt32(s.Length);
+                foreach (var scope in s)
                 {
-                    builder.WriteInt32(s.Length);
-                    foreach (var scope in s)
+                    if (scope.IsDefault)
                     {
-                        if (scope.IsDefault)
-                        {
-                            builder.WriteInt32(0);
-                            builder.WriteInt32(0);
-                        }
-                        else
-                        {
-                            // Dev12 C# emits end-inclusive range
-                            builder.WriteInt32(scope.StartOffset);
-                            builder.WriteInt32(scope.EndOffset - 1);
-                        }
+                        builder.WriteInt32(0);
+                        builder.WriteInt32(0);
+                    }
+                    else
+                    {
+                        // Dev12 C# emits end-inclusive range
+                        builder.WriteInt32(scope.StartOffset);
+                        builder.WriteInt32(scope.EndOffset - 1);
                     }
                 }
-            );
+            });
         }
 
         internal const int DynamicAttributeSize = 64;
@@ -158,33 +142,26 @@ namespace Microsoft.CodeAnalysis.Debugging
         {
             Debug.Assert(dynamicLocals != null);
 
-            AddRecord(
-                CustomDebugInfoKind.DynamicLocals,
-                dynamicLocals,
-                (infos, builder) =>
+            AddRecord(CustomDebugInfoKind.DynamicLocals, dynamicLocals, (infos, builder) =>
+            {
+                builder.WriteInt32(infos.Count);
+
+                foreach (var info in infos)
                 {
-                    builder.WriteInt32(infos.Count);
+                    Debug.Assert(info.Flags.Length <= DynamicAttributeSize);
+                    Debug.Assert(info.LocalName.Length <= IdentifierSize);
 
-                    foreach (var info in infos)
-                    {
-                        Debug.Assert(info.Flags.Length <= DynamicAttributeSize);
-                        Debug.Assert(info.LocalName.Length <= IdentifierSize);
-
-                        builder.WriteBytes(info.Flags);
-                        builder.WriteBytes(
-                            0,
-                            sizeof(byte) * (DynamicAttributeSize - info.Flags.Length)
-                        );
-                        builder.WriteInt32(info.Count);
-                        builder.WriteInt32(info.SlotIndex);
-                        builder.WriteUTF16(info.LocalName);
-                        builder.WriteBytes(
-                            0,
-                            sizeof(char) * (IdentifierSize - info.LocalName.Length)
-                        );
-                    }
+                    builder.WriteBytes(info.Flags);
+                    builder.WriteBytes(
+                        0,
+                        sizeof(byte) * (DynamicAttributeSize - info.Flags.Length)
+                    );
+                    builder.WriteInt32(info.Count);
+                    builder.WriteInt32(info.SlotIndex);
+                    builder.WriteUTF16(info.LocalName);
+                    builder.WriteBytes(0, sizeof(char) * (IdentifierSize - info.LocalName.Length));
                 }
-            );
+            });
         }
 
         public void AddTupleElementNames(
@@ -199,45 +176,41 @@ namespace Microsoft.CodeAnalysis.Debugging
         {
             Debug.Assert(tupleLocals != null);
 
-            AddRecord(
-                CustomDebugInfoKind.TupleElementNames,
-                tupleLocals,
-                (infos, builder) =>
+            AddRecord(CustomDebugInfoKind.TupleElementNames, tupleLocals, (infos, builder) =>
+            {
+                Debug.Assert(infos.Count > 0);
+
+                builder.WriteInt32(infos.Count);
+                foreach (var info in infos)
                 {
-                    Debug.Assert(infos.Count > 0);
+                    // Constants have slot index -1 and scope specified,
+                    // variables have a slot index specified and no scope.
+                    Debug.Assert(
+                        (info.SlotIndex == -1) ^ (info.ScopeStart == 0 && info.ScopeEnd == 0)
+                    );
 
-                    builder.WriteInt32(infos.Count);
-                    foreach (var info in infos)
+                    builder.WriteInt32(info.Names.Length);
+                    foreach (var name in info.Names)
                     {
-                        // Constants have slot index -1 and scope specified,
-                        // variables have a slot index specified and no scope.
-                        Debug.Assert(
-                            (info.SlotIndex == -1) ^ (info.ScopeStart == 0 && info.ScopeEnd == 0)
-                        );
-
-                        builder.WriteInt32(info.Names.Length);
-                        foreach (var name in info.Names)
+                        if (name != null)
                         {
-                            if (name != null)
-                            {
-                                builder.WriteUTF8(name);
-                            }
-
-                            builder.WriteByte(0);
-                        }
-
-                        builder.WriteInt32(info.SlotIndex);
-                        builder.WriteInt32(info.ScopeStart);
-                        builder.WriteInt32(info.ScopeEnd);
-                        if (info.LocalName != null)
-                        {
-                            builder.WriteUTF8(info.LocalName);
+                            builder.WriteUTF8(name);
                         }
 
                         builder.WriteByte(0);
                     }
+
+                    builder.WriteInt32(info.SlotIndex);
+                    builder.WriteInt32(info.ScopeStart);
+                    builder.WriteInt32(info.ScopeEnd);
+                    if (info.LocalName != null)
+                    {
+                        builder.WriteUTF8(info.LocalName);
+                    }
+
+                    builder.WriteByte(0);
                 }
-            );
+            });
         }
 
         public void AddRecord<T>(

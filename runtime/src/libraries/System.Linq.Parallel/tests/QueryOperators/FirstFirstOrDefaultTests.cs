@@ -313,22 +313,18 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void First_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<bool>)null).First()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<bool>)null).First()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<bool>)null).FirstOrDefault()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<bool>)null).FirstOrDefault()
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ParallelEnumerable.Empty<int>().First(null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ParallelEnumerable.Empty<int>().First(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ParallelEnumerable.Empty<int>().FirstOrDefault(null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ParallelEnumerable.Empty<int>().FirstOrDefault(null)
             );
         }
     }

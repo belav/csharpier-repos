@@ -43,9 +43,8 @@ namespace System.Linq.Tests
             IQueryable<string> first = null;
             string[] second = { "bBo", "shriC" };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source1",
-                () => first.Except(second.AsQueryable(), new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("source1", () =>
+                first.Except(second.AsQueryable(), new AnagramEqualityComparer())
             );
         }
 
@@ -55,9 +54,8 @@ namespace System.Linq.Tests
             string[] first = { "Bob", "Tim", "Robert", "Chris" };
             IQueryable<string> second = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source2",
-                () => first.AsQueryable().Except(second, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("source2", () =>
+                first.AsQueryable().Except(second, new AnagramEqualityComparer())
             );
         }
 
@@ -67,9 +65,8 @@ namespace System.Linq.Tests
             IQueryable<string> first = null;
             string[] second = { "bBo", "shriC" };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source1",
-                () => first.Except(second.AsQueryable())
+            AssertExtensions.Throws<ArgumentNullException>("source1", () =>
+                first.Except(second.AsQueryable())
             );
         }
 
@@ -79,9 +76,8 @@ namespace System.Linq.Tests
             string[] first = { "Bob", "Tim", "Robert", "Chris" };
             IQueryable<string> second = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source2",
-                () => first.AsQueryable().Except(second)
+            AssertExtensions.Throws<ArgumentNullException>("source2", () =>
+                first.AsQueryable().Except(second)
             );
         }
 
@@ -110,14 +106,11 @@ namespace System.Linq.Tests
         {
             IQueryable<int> source1 = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source1",
-                () => source1.ExceptBy(Enumerable.Empty<int>(), x => x)
+            AssertExtensions.Throws<ArgumentNullException>("source1", () =>
+                source1.ExceptBy(Enumerable.Empty<int>(), x => x)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source1",
-                () =>
-                    source1.ExceptBy(Enumerable.Empty<int>(), x => x, EqualityComparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("source1", () =>
+                source1.ExceptBy(Enumerable.Empty<int>(), x => x, EqualityComparer<int>.Default)
             );
         }
 
@@ -127,13 +120,11 @@ namespace System.Linq.Tests
             IQueryable<int> source1 = Enumerable.Empty<int>().AsQueryable();
             IQueryable<int> source2 = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source2",
-                () => source1.ExceptBy(source2, x => x)
+            AssertExtensions.Throws<ArgumentNullException>("source2", () =>
+                source1.ExceptBy(source2, x => x)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source2",
-                () => source1.ExceptBy(source2, x => x, EqualityComparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("source2", () =>
+                source1.ExceptBy(source2, x => x, EqualityComparer<int>.Default)
             );
         }
 
@@ -143,13 +134,11 @@ namespace System.Linq.Tests
             IQueryable<int> source = Enumerable.Empty<int>().AsQueryable();
             Expression<Func<int, int>> keySelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.ExceptBy(source, keySelector)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.ExceptBy(source, keySelector)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.ExceptBy(source, keySelector, EqualityComparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.ExceptBy(source, keySelector, EqualityComparer<int>.Default)
             );
         }
 

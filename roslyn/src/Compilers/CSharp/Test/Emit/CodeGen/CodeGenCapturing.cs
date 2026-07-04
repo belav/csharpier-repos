@@ -475,28 +475,25 @@ public class C
                     )
                 );
 
-            Parallel.ForEach(
-                Partitioner.Create(0, methods.Count, PartitionSize),
-                (range, state) =>
+            Parallel.ForEach(Partitioner.Create(0, methods.Count, PartitionSize), (range, state) =>
+            {
+                var methodsText = GetClassStart();
+
+                for (int methodIndex = range.Item1; methodIndex < range.Item2; methodIndex++)
                 {
-                    var methodsText = GetClassStart();
+                    var methodInfo = methods[methodIndex];
 
-                    for (int methodIndex = range.Item1; methodIndex < range.Item2; methodIndex++)
+                    if (methodInfo.TotalLocalFuncs == 0)
                     {
-                        var methodInfo = methods[methodIndex];
-
-                        if (methodInfo.TotalLocalFuncs == 0)
-                        {
-                            continue;
-                        }
-
-                        SerializeMethod(methodInfo, methodsText, methodIndex);
+                        continue;
                     }
 
-                    methodsText.AppendLine("\r\n}");
-                    CreateCompilation(methodsText.ToString()).VerifyEmitDiagnostics();
+                    SerializeMethod(methodInfo, methodsText, methodIndex);
                 }
-            );
+
+                methodsText.AppendLine("\r\n}");
+                CreateCompilation(methodsText.ToString()).VerifyEmitDiagnostics();
+            });
         }
     }
 }

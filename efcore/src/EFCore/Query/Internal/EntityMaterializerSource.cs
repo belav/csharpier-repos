@@ -628,9 +628,8 @@ public class EntityMaterializerSource : IEntityMaterializerSource
     }
 
     private ConcurrentDictionary<IEntityType, Func<MaterializationContext, object>> Materializers =>
-        LazyInitializer.EnsureInitialized(
-            ref _materializers,
-            () => new ConcurrentDictionary<IEntityType, Func<MaterializationContext, object>>()
+        LazyInitializer.EnsureInitialized(ref _materializers, () =>
+            new ConcurrentDictionary<IEntityType, Func<MaterializationContext, object>>()
         );
 
     /// <summary>
@@ -661,9 +660,8 @@ public class EntityMaterializerSource : IEntityMaterializerSource
         IEntityType,
         Func<MaterializationContext, object>
     > EmptyMaterializers =>
-        LazyInitializer.EnsureInitialized(
-            ref _emptyMaterializers,
-            () => new ConcurrentDictionary<IEntityType, Func<MaterializationContext, object>>()
+        LazyInitializer.EnsureInitialized(ref _emptyMaterializers, () =>
+            new ConcurrentDictionary<IEntityType, Func<MaterializationContext, object>>()
         );
 
     /// <summary>

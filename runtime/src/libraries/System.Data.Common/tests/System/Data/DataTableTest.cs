@@ -1836,15 +1836,12 @@ Assert.Fail();
         [Fact]
         public void ColumnObjectTypeTest()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    DataTable dt = new DataTable();
-                    dt.Columns.Add("Series Label", typeof(SqlInt32));
-                    dt.Rows.Add(new object[] { "sss" });
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                DataTable dt = new DataTable();
+                dt.Columns.Add("Series Label", typeof(SqlInt32));
+                dt.Rows.Add(new object[] { "sss" });
+            });
         }
 
         private bool _tableInitialized;
@@ -3786,15 +3783,12 @@ Assert.Fail();
                   <xs:schema id='NewDataSet' xmlns='' xmlns:xs='http://www.w3.org/2001/BAD' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'>
                   </xs:schema>
                 </CustomElement>";
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    using var s = new StringReader(xml);
-                    DataTable dt = new DataTable();
-                    dt.ReadXmlSchema(s);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                using var s = new StringReader(xml);
+                DataTable dt = new DataTable();
+                dt.ReadXmlSchema(s);
+            });
         }
 
         #endregion // Read/Write XML Tests

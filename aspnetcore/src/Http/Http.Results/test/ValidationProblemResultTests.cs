@@ -54,15 +54,13 @@ public class ValidationProblemResultTests
     [Fact]
     public void ExecuteAsync_ThrowsArgumentException_ForNon400StatusCodeFromProblemDetails()
     {
-        Assert.Throws<ArgumentException>(
-            "problemDetails",
-            () =>
-                new ValidationProblem(
-                    new HttpValidationProblemDetails
-                    {
-                        Status = StatusCodes.Status413RequestEntityTooLarge,
-                    }
-                )
+        Assert.Throws<ArgumentException>("problemDetails", () =>
+            new ValidationProblem(
+                new HttpValidationProblemDetails
+                {
+                    Status = StatusCodes.Status413RequestEntityTooLarge,
+                }
+            )
         );
     }
 
@@ -101,9 +99,8 @@ public class ValidationProblemResultTests
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>(
-            "httpContext",
-            () => result.ExecuteAsync(httpContext)
+        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () =>
+            result.ExecuteAsync(httpContext)
         );
     }
 
@@ -111,27 +108,23 @@ public class ValidationProblemResultTests
     public void PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull()
     {
         // Act & Assert
-        Assert.Throws<ArgumentNullException>(
-            "method",
-            () =>
-                PopulateMetadata<ValidationProblem>(
-                    null,
-                    new RouteEndpointBuilder(
-                        requestDelegate: null,
-                        RoutePatternFactory.Parse("/"),
-                        order: 0
-                    )
+        Assert.Throws<ArgumentNullException>("method", () =>
+            PopulateMetadata<ValidationProblem>(
+                null,
+                new RouteEndpointBuilder(
+                    requestDelegate: null,
+                    RoutePatternFactory.Parse("/"),
+                    order: 0
                 )
+            )
         );
-        Assert.Throws<ArgumentNullException>(
-            "builder",
-            () =>
-                PopulateMetadata<ValidationProblem>(
-                    (
-                        (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
-                    ).GetMethodInfo(),
-                    null
-                )
+        Assert.Throws<ArgumentNullException>("builder", () =>
+            PopulateMetadata<ValidationProblem>(
+                (
+                    (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
+                ).GetMethodInfo(),
+                null
+            )
         );
     }
 

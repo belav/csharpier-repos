@@ -16,14 +16,11 @@ namespace System.Linq.Parallel.Tests
         public static void ToDictionary(int count)
         {
             IntegerRangeSet seen = new IntegerRangeSet(0, count);
-            Assert.All(
-                UnorderedSources.Default(count).ToDictionary(x => x * 2),
-                p =>
-                {
-                    seen.Add(p.Key / 2);
-                    Assert.Equal(p.Key, p.Value * 2);
-                }
-            );
+            Assert.All(UnorderedSources.Default(count).ToDictionary(x => x * 2), p =>
+            {
+                seen.Add(p.Key / 2);
+                Assert.Equal(p.Key, p.Value * 2);
+            });
             seen.AssertComplete();
         }
 
@@ -42,14 +39,11 @@ namespace System.Linq.Parallel.Tests
         public static void ToDictionary_ElementSelector(int count)
         {
             IntegerRangeSet seen = new IntegerRangeSet(0, count);
-            Assert.All(
-                UnorderedSources.Default(count).ToDictionary(x => x, y => y * 2),
-                p =>
-                {
-                    seen.Add(p.Key);
-                    Assert.Equal(p.Key * 2, p.Value);
-                }
-            );
+            Assert.All(UnorderedSources.Default(count).ToDictionary(x => x, y => y * 2), p =>
+            {
+                seen.Add(p.Key);
+                Assert.Equal(p.Key * 2, p.Value);
+            });
             seen.AssertComplete();
         }
 
@@ -396,59 +390,45 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void ToDictionary_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int>)null).ToDictionary(x => x)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).ToDictionary(x => x)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int>)null).ToDictionary(x => x, EqualityComparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).ToDictionary(x => x, EqualityComparer<int>.Default)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int>)null).ToDictionary(x => x, y => y)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).ToDictionary(x => x, y => y)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () =>
-                    ((ParallelQuery<int>)null).ToDictionary(
-                        x => x,
-                        y => y,
-                        EqualityComparer<int>.Default
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).ToDictionary(
+                    x => x,
+                    y => y,
+                    EqualityComparer<int>.Default
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => ParallelEnumerable.Empty<int>().ToDictionary((Func<int, int>)null)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                ParallelEnumerable.Empty<int>().ToDictionary((Func<int, int>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    ParallelEnumerable
-                        .Empty<int>()
-                        .ToDictionary((Func<int, int>)null, EqualityComparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                ParallelEnumerable
+                    .Empty<int>()
+                    .ToDictionary((Func<int, int>)null, EqualityComparer<int>.Default)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => ParallelEnumerable.Empty<int>().ToDictionary((Func<int, int>)null, y => y)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                ParallelEnumerable.Empty<int>().ToDictionary((Func<int, int>)null, y => y)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    ParallelEnumerable
-                        .Empty<int>()
-                        .ToDictionary((Func<int, int>)null, y => y, EqualityComparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                ParallelEnumerable
+                    .Empty<int>()
+                    .ToDictionary((Func<int, int>)null, y => y, EqualityComparer<int>.Default)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "elementSelector",
-                () => ParallelEnumerable.Empty<int>().ToDictionary(x => x, (Func<int, int>)null)
+            AssertExtensions.Throws<ArgumentNullException>("elementSelector", () =>
+                ParallelEnumerable.Empty<int>().ToDictionary(x => x, (Func<int, int>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "elementSelector",
-                () =>
-                    ParallelEnumerable
-                        .Empty<int>()
-                        .ToDictionary(x => x, (Func<int, int>)null, EqualityComparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("elementSelector", () =>
+                ParallelEnumerable
+                    .Empty<int>()
+                    .ToDictionary(x => x, (Func<int, int>)null, EqualityComparer<int>.Default)
             );
         }
     }

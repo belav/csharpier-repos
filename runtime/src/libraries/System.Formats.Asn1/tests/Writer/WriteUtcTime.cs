@@ -108,9 +108,8 @@ namespace System.Formats.Asn1.Tests.Writer
         {
             AsnWriter writer = new AsnWriter(ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "tag",
-                () => writer.WriteUtcTime(DateTimeOffset.Now, Asn1Tag.Null)
+            AssertExtensions.Throws<ArgumentException>("tag", () =>
+                writer.WriteUtcTime(DateTimeOffset.Now, Asn1Tag.Null)
             );
         }
 
@@ -138,9 +137,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
             Assert.Equal(0, writer.GetEncodedLength());
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => writer.WriteUtcTime(input, input.Year - 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                writer.WriteUtcTime(input, input.Year - 1)
             );
 
             Assert.Equal(0, writer.GetEncodedLength());
@@ -154,9 +152,8 @@ namespace System.Formats.Asn1.Tests.Writer
             writer.Reset();
 
             _ = expectedHexPayload;
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => writer.WriteUtcTime(input, input.Year + 100)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                writer.WriteUtcTime(input, input.Year + 100)
             );
 
             Assert.Equal(0, writer.GetEncodedLength());
@@ -178,27 +175,23 @@ namespace System.Formats.Asn1.Tests.Writer
             Assert.Equal(15, writer.GetEncodedLength());
 
             // 1949 after ToUniversal
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () =>
-                    writer.WriteUtcTime(
-                        new DateTimeOffset(1950, 1, 1, 3, 11, 19, TimeSpan.FromHours(8)),
-                        2049,
-                        tag
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                writer.WriteUtcTime(
+                    new DateTimeOffset(1950, 1, 1, 3, 11, 19, TimeSpan.FromHours(8)),
+                    2049,
+                    tag
+                )
             );
 
             Assert.Equal(15, writer.GetEncodedLength());
 
             // 2050 after ToUniversal
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () =>
-                    writer.WriteUtcTime(
-                        new DateTimeOffset(2049, 12, 31, 23, 11, 19, TimeSpan.FromHours(-8)),
-                        2049,
-                        tag
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                writer.WriteUtcTime(
+                    new DateTimeOffset(2049, 12, 31, 23, 11, 19, TimeSpan.FromHours(-8)),
+                    2049,
+                    tag
+                )
             );
 
             Assert.Equal(15, writer.GetEncodedLength());

@@ -95,22 +95,19 @@ namespace System.Linq.Tests
         [Fact]
         public void SkipThrowsOnNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<DateTime>)null).Skip(3)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<DateTime>)null).Skip(3)
             );
         }
 
         [Fact]
         public void SkipThrowsOnNullIList()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((List<DateTime>)null).Skip(3)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((List<DateTime>)null).Skip(3)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IList<DateTime>)null).Skip(3)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IList<DateTime>)null).Skip(3)
             );
         }
 
@@ -338,13 +335,11 @@ namespace System.Linq.Tests
             Assert.Equal(3, remaining.ElementAt(0));
             Assert.Equal(4, remaining.ElementAt(1));
             Assert.Equal(6, remaining.ElementAt(3));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => remaining.ElementAt(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                remaining.ElementAt(-1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => remaining.ElementAt(4)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                remaining.ElementAt(4)
             );
         }
 
@@ -356,13 +351,11 @@ namespace System.Linq.Tests
             Assert.Equal(3, remaining.ElementAt(0));
             Assert.Equal(4, remaining.ElementAt(1));
             Assert.Equal(6, remaining.ElementAt(3));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => remaining.ElementAt(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                remaining.ElementAt(-1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => remaining.ElementAt(4)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                remaining.ElementAt(4)
             );
         }
 

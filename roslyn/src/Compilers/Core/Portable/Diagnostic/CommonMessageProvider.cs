@@ -127,9 +127,8 @@ namespace Microsoft.CodeAnalysis
         )]
         public string GetIdForErrorCode(int errorCode)
         {
-            return s_errorIdCache.GetOrAdd(
-                (CodePrefix, errorCode),
-                key => key.prefix + key.code.ToString("0000")
+            return s_errorIdCache.GetOrAdd((CodePrefix, errorCode), key =>
+                key.prefix + key.code.ToString("0000")
             );
         }
 

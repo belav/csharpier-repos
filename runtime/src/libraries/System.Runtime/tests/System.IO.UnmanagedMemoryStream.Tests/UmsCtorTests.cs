@@ -33,22 +33,18 @@ namespace System.IO.Tests
                 new UnmanagedMemoryStream(fakeBuffer, 1, 2, (FileAccess)42)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new UnmanagedMemoryStream(fakeBuffer, 2, 999)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new UnmanagedMemoryStream(fakeBuffer, 2, 999)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new UnmanagedMemoryStream(fakeBuffer, 999, 9)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new UnmanagedMemoryStream(fakeBuffer, 999, 9)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new UnmanagedMemoryStream(fakeBuffer, 1, 100)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new UnmanagedMemoryStream(fakeBuffer, 1, 100)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new UnmanagedMemoryStream(fakeBuffer, int.MaxValue, 1)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new UnmanagedMemoryStream(fakeBuffer, int.MaxValue, 1)
             );
         }
 

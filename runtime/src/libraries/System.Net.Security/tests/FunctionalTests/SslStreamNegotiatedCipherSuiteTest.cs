@@ -178,10 +178,8 @@ namespace System.Net.Security.Tests
         public void CipherSuitesPolicy_AllowOneOnOneSideTls13_Success()
         {
             bool hasSucceededAtLeastOnce = false;
-            AllowOneOnOneSide(
-                GetTls13CipherSuites(),
-                RequiredByTls13Spec,
-                (cs) => hasSucceededAtLeastOnce = true
+            AllowOneOnOneSide(GetTls13CipherSuites(), RequiredByTls13Spec, (cs) =>
+                hasSucceededAtLeastOnce = true
             );
             Assert.True(hasSucceededAtLeastOnce);
         }

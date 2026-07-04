@@ -89,9 +89,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.SimplifyTyp
 
                     // Disable RS0005 as this is test code and we don't need telemetry for created code action.
 #pragma warning disable RS0005 // Do not use generic CodeAction.Create to create CodeAction
-                    var fix = CodeAction.Create(
-                        "QualifyWithThisFix",
-                        _ => Task.FromResult(newDocument)
+                    var fix = CodeAction.Create("QualifyWithThisFix", _ =>
+                        Task.FromResult(newDocument)
                     );
 #pragma warning restore RS0005 // Do not use generic CodeAction.Create to create CodeAction
 

@@ -75,10 +75,8 @@ public class ComponentTagHelperTest
 
     private static TagHelperOutput GetTagHelperOutput()
     {
-        return new TagHelperOutput(
-            "component",
-            new TagHelperAttributeList(),
-            (_, __) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        return new TagHelperOutput("component", new TagHelperAttributeList(), (_, __) =>
+            Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
         );
     }
 

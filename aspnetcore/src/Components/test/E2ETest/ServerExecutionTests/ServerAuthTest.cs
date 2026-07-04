@@ -43,19 +43,14 @@ public class ServerAuthTest : AuthTest
         {
             if (username == null)
             {
-                Browser.Equal(
-                    "You're not authorized, anonymous",
-                    () =>
-                        appElement
-                            .FindElement(By.CssSelector("#authorize-role .not-authorized"))
-                            .Text
+                Browser.Equal("You're not authorized, anonymous", () =>
+                    appElement.FindElement(By.CssSelector("#authorize-role .not-authorized")).Text
                 );
             }
             else
             {
-                Browser.Equal(
-                    $"Welcome, {username}!",
-                    () => appElement.FindElement(By.CssSelector("#authorize-role .authorized")).Text
+                Browser.Equal($"Welcome, {username}!", () =>
+                    appElement.FindElement(By.CssSelector("#authorize-role .authorized")).Text
                 );
             }
         }

@@ -24,54 +24,30 @@ namespace MonoTests.System.Diagnostics.Contracts
         {
             foreach (Exception ex in new[] { null, new ArgumentNullException() })
             {
-                fnAssert(
-                    messageStart + ".",
-                    ex,
-                    null,
-                    kind,
-                    () =>
-                    {
-                        return ContractHelper.RaiseContractFailedEvent(kind, null, null, ex);
-                    }
-                );
+                fnAssert(messageStart + ".", ex, null, kind, () =>
+                {
+                    return ContractHelper.RaiseContractFailedEvent(kind, null, null, ex);
+                });
 
-                fnAssert(
-                    messageStart + ".  Message",
-                    ex,
-                    null,
-                    kind,
-                    () =>
-                    {
-                        return ContractHelper.RaiseContractFailedEvent(kind, "Message", null, ex);
-                    }
-                );
+                fnAssert(messageStart + ".  Message", ex, null, kind, () =>
+                {
+                    return ContractHelper.RaiseContractFailedEvent(kind, "Message", null, ex);
+                });
 
-                fnAssert(
-                    messageStart + ": Condition",
-                    ex,
-                    "Condition",
-                    kind,
-                    () =>
-                    {
-                        return ContractHelper.RaiseContractFailedEvent(kind, null, "Condition", ex);
-                    }
-                );
+                fnAssert(messageStart + ": Condition", ex, "Condition", kind, () =>
+                {
+                    return ContractHelper.RaiseContractFailedEvent(kind, null, "Condition", ex);
+                });
 
-                fnAssert(
-                    messageStart + ": Condition  Message",
-                    ex,
-                    "Condition",
-                    kind,
-                    () =>
-                    {
-                        return ContractHelper.RaiseContractFailedEvent(
-                            kind,
-                            "Message",
-                            "Condition",
-                            ex
-                        );
-                    }
-                );
+                fnAssert(messageStart + ": Condition  Message", ex, "Condition", kind, () =>
+                {
+                    return ContractHelper.RaiseContractFailedEvent(
+                        kind,
+                        "Message",
+                        "Condition",
+                        ex
+                    );
+                });
             }
         }
 

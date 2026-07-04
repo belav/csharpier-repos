@@ -409,12 +409,8 @@ namespace System.Net.Http
             string messageDetail
         )
         {
-            return request.CreateErrorResponse(
-                statusCode,
-                includeErrorDetail =>
-                    includeErrorDetail
-                        ? new HttpError(message, messageDetail)
-                        : new HttpError(message)
+            return request.CreateErrorResponse(statusCode, includeErrorDetail =>
+                includeErrorDetail ? new HttpError(message, messageDetail) : new HttpError(message)
             );
         }
 
@@ -445,13 +441,13 @@ namespace System.Net.Http
                 throw Error.ArgumentNull("request");
             }
 
-            return request.CreateErrorResponse(
-                statusCode,
-                includeErrorDetail => new HttpError(exception, includeErrorDetail)
-                {
-                    Message = message,
-                }
-            );
+            return request.CreateErrorResponse(statusCode, includeErrorDetail => new HttpError(
+                exception,
+                includeErrorDetail
+            )
+            {
+                Message = message,
+            });
         }
 
         /// <summary>
@@ -478,10 +474,10 @@ namespace System.Net.Http
                 throw Error.ArgumentNull("request");
             }
 
-            return request.CreateErrorResponse(
-                statusCode,
-                includeErrorDetail => new HttpError(exception, includeErrorDetail)
-            );
+            return request.CreateErrorResponse(statusCode, includeErrorDetail => new HttpError(
+                exception,
+                includeErrorDetail
+            ));
         }
 
         /// <summary>
@@ -508,10 +504,10 @@ namespace System.Net.Http
                 throw Error.ArgumentNull("request");
             }
 
-            return request.CreateErrorResponse(
-                statusCode,
-                includeErrorDetail => new HttpError(modelState, includeErrorDetail)
-            );
+            return request.CreateErrorResponse(statusCode, includeErrorDetail => new HttpError(
+                modelState,
+                includeErrorDetail
+            ));
         }
 
         /// <summary>

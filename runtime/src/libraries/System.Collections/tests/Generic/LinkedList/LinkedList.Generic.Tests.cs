@@ -634,9 +634,8 @@ namespace System.Collections.Tests
         [Fact]
         public void LinkedList_Generic_Constructor_IEnumerable_Null_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "collection",
-                () => new LinkedList<T>(null)
+            AssertExtensions.Throws<ArgumentNullException>("collection", () =>
+                new LinkedList<T>(null)
             );
         }
 

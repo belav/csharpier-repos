@@ -40,9 +40,8 @@ namespace Mono.Rocks
     {
         public static int Main()
         {
-            IEnumerable<int> x = Sequence.Unfoldr(
-                10,
-                b => b == 0 ? null : KeyValuePair.Just(b, b - 1)
+            IEnumerable<int> x = Sequence.Unfoldr(10, b =>
+                b == 0 ? null : KeyValuePair.Just(b, b - 1)
             );
 
             int i = 10;

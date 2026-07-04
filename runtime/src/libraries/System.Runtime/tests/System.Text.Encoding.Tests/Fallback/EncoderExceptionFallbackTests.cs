@@ -61,13 +61,11 @@ namespace System.Text.Tests
         {
             EncoderFallbackBuffer buffer = new EncoderExceptionFallback().CreateFallbackBuffer();
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "charUnknownHigh",
-                () => buffer.Fallback('a', '\uDC00', 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("charUnknownHigh", () =>
+                buffer.Fallback('a', '\uDC00', 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "charUnknownLow",
-                () => buffer.Fallback('\uD800', 'a', 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("charUnknownLow", () =>
+                buffer.Fallback('\uD800', 'a', 0)
             );
         }
     }

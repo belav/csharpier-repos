@@ -240,9 +240,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 .Add("A", "2")
                 .Add("b", "3")
                 .ToBuilder();
-            Assert.Throws<ArgumentException>(
-                null,
-                () => builder.KeyComparer = StringComparer.OrdinalIgnoreCase
+            Assert.Throws<ArgumentException>(null, () =>
+                builder.KeyComparer = StringComparer.OrdinalIgnoreCase
             );
         }
 
@@ -332,9 +331,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.False(dictionary.IsEmpty);
 
             ImmutableSegmentedDictionary<int, int>.Builder? nullBuilder = null;
-            Assert.Throws<ArgumentNullException>(
-                "builder",
-                () => nullBuilder!.ToImmutableSegmentedDictionary()
+            Assert.Throws<ArgumentNullException>("builder", () =>
+                nullBuilder!.ToImmutableSegmentedDictionary()
             );
         }
 

@@ -20,13 +20,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
             Assert.Equal(0, f.m_objectQueue.Count);
 
             bool firstTime;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "obj",
-                () => f.m_idGenerator.GetId(null, out firstTime)
+            AssertExtensions.Throws<ArgumentNullException>("obj", () =>
+                f.m_idGenerator.GetId(null, out firstTime)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "obj",
-                () => f.m_idGenerator.HasId(null, out firstTime)
+            AssertExtensions.Throws<ArgumentNullException>("obj", () =>
+                f.m_idGenerator.HasId(null, out firstTime)
             );
         }
 

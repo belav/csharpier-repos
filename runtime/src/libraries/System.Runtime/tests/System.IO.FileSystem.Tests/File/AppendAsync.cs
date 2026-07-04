@@ -39,9 +39,8 @@ namespace System.IO.Tests
 
         [Fact]
         public Task NullEncodingAsync() =>
-            Assert.ThrowsAsync<ArgumentNullException>(
-                "encoding",
-                async () => await File.AppendAllTextAsync(GetTestFilePath(), "Text", null)
+            Assert.ThrowsAsync<ArgumentNullException>("encoding", async () =>
+                await File.AppendAllTextAsync(GetTestFilePath(), "Text", null)
             );
 
         [Fact]
@@ -86,10 +85,8 @@ namespace System.IO.Tests
 
         [Fact]
         public Task NullEncodingAsync() =>
-            Assert.ThrowsAsync<ArgumentNullException>(
-                "encoding",
-                async () =>
-                    await File.AppendAllLinesAsync(GetTestFilePath(), new string[] { "Text" }, null)
+            Assert.ThrowsAsync<ArgumentNullException>("encoding", async () =>
+                await File.AppendAllLinesAsync(GetTestFilePath(), new string[] { "Text" }, null)
             );
 
         [Fact]

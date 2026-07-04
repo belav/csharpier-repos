@@ -12,9 +12,8 @@ namespace System.Reflection.Tests
         [Fact]
         public static void Test_CustomAttributeNamedTypedArgument_Constructor()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "memberInfo",
-                () => new CustomAttributeNamedArgument(null, null)
+            AssertExtensions.Throws<ArgumentNullException>("memberInfo", () =>
+                new CustomAttributeNamedArgument(null, null)
             );
 
             MethodInfo m = typeof(CustomAttribute_Named_Typed_ArgumentTests).GetMethod(

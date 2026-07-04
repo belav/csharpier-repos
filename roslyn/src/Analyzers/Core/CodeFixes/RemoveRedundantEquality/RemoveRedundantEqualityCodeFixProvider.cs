@@ -77,35 +77,32 @@ namespace Microsoft.CodeAnalysis.RemoveRedundantEquality
                     getInnermostNodeForTie: true
                 );
 
-                editor.ReplaceNode(
-                    node,
-                    (n, _) =>
+                editor.ReplaceNode(node, (n, _) =>
+                {
+                    if (!syntaxFacts.IsBinaryExpression(n))
                     {
-                        if (!syntaxFacts.IsBinaryExpression(n))
-                        {
-                            // This should happen only in error cases.
-                            return n;
-                        }
-
-                        syntaxFacts.GetPartsOfBinaryExpression(n, out var left, out var right);
-                        if (
-                            diagnostic.Properties[RedundantEqualityConstants.RedundantSide]
-                            == RedundantEqualityConstants.Right
-                        )
-                        {
-                            return WithElasticTrailingTrivia(left);
-                        }
-                        else if (
-                            diagnostic.Properties[RedundantEqualityConstants.RedundantSide]
-                            == RedundantEqualityConstants.Left
-                        )
-                        {
-                            return WithElasticTrailingTrivia(right);
-                        }
-
+                        // This should happen only in error cases.
                         return n;
                     }
-                );
+
+                    syntaxFacts.GetPartsOfBinaryExpression(n, out var left, out var right);
+                    if (
+                        diagnostic.Properties[RedundantEqualityConstants.RedundantSide]
+                        == RedundantEqualityConstants.Right
+                    )
+                    {
+                        return WithElasticTrailingTrivia(left);
+                    }
+                    else if (
+                        diagnostic.Properties[RedundantEqualityConstants.RedundantSide]
+                        == RedundantEqualityConstants.Left
+                    )
+                    {
+                        return WithElasticTrailingTrivia(right);
+                    }
+
+                    return n;
+                });
             }
 
             return;

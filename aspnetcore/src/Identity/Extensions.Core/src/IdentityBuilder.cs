@@ -253,9 +253,8 @@ public class IdentityBuilder
         }
         if (userManagerType != customType)
         {
-            Services.AddScoped(
-                customType,
-                services => services.GetRequiredService(userManagerType)
+            Services.AddScoped(customType, services =>
+                services.GetRequiredService(userManagerType)
             );
         }
         return AddScoped(userManagerType, customType);
@@ -378,9 +377,8 @@ public class IdentityBuilder
         }
         if (managerType != customType)
         {
-            Services.AddScoped(
-                typeof(TRoleManager),
-                services => services.GetRequiredService(managerType)
+            Services.AddScoped(typeof(TRoleManager), services =>
+                services.GetRequiredService(managerType)
             );
         }
         return AddScoped(managerType, typeof(TRoleManager));

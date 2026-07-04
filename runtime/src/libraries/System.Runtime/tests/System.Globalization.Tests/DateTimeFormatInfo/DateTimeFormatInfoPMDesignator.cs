@@ -233,9 +233,8 @@ namespace System.Globalization.Tests
         public void PMDesignator_SetNullValue_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => format.PMDesignator = null
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                format.PMDesignator = null
             );
         }
 

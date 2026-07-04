@@ -16,13 +16,10 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
         {
             OptionsBuilder<FakeOptions> optionsBuilder = null!;
 
-            Assert.Throws<ArgumentNullException>(
-                "optionsBuilder",
-                () =>
-                {
-                    optionsBuilder.BindConfiguration("test");
-                }
-            );
+            Assert.Throws<ArgumentNullException>("optionsBuilder", () =>
+            {
+                optionsBuilder.BindConfiguration("test");
+            });
         }
 
         [Fact]
@@ -32,13 +29,10 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
             OptionsBuilder<FakeOptions> optionsBuilder = new(services, Options.DefaultName);
             string configSectionPath = null!;
 
-            Assert.Throws<ArgumentNullException>(
-                "configSectionPath",
-                () =>
-                {
-                    optionsBuilder.BindConfiguration(configSectionPath);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("configSectionPath", () =>
+            {
+                optionsBuilder.BindConfiguration(configSectionPath);
+            });
         }
 
         [Fact]

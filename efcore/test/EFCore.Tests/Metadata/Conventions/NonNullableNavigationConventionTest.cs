@@ -37,13 +37,11 @@ public class NonNullableNavigationConventionTest
         RunConvention(relationshipBuilder, navigation);
 
         Assert.False(relationshipBuilder.Metadata.IsRequired);
-        Assert.Contains(
-            principalEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Blog.Posts)
+        Assert.Contains(principalEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Blog.Posts)
         );
-        Assert.Contains(
-            dependentEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Post.Blog)
+        Assert.Contains(dependentEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Post.Blog)
         );
     }
 
@@ -72,13 +70,11 @@ public class NonNullableNavigationConventionTest
         RunConvention(relationshipBuilder, navigation);
 
         Assert.False(relationshipBuilder.Metadata.IsRequired);
-        Assert.Contains(
-            principalEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Blog.Posts)
+        Assert.Contains(principalEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Blog.Posts)
         );
-        Assert.Contains(
-            dependentEntityTypeBuilder.Metadata.GetNavigations(),
-            nav => nav.Name == nameof(Post.Blog)
+        Assert.Contains(dependentEntityTypeBuilder.Metadata.GetNavigations(), nav =>
+            nav.Name == nameof(Post.Blog)
         );
     }
 

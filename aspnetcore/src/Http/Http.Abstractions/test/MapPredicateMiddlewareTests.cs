@@ -102,18 +102,14 @@ public class MapPredicateMiddlewareTests
     public async Task ChainedPredicates_Success()
     {
         var builder = new ApplicationBuilder(serviceProvider: null!);
-        builder.MapWhen(
-            TruePredicate,
-            map1 =>
-            {
-                map1.MapWhen((Predicate)FalsePredicate, UseNotImplemented);
-                map1.MapWhen(
-                    (Predicate)TruePredicate,
-                    map2 => map2.MapWhen((Predicate)TruePredicate, UseSuccess)
-                );
-                map1.Run(NotImplemented);
-            }
-        );
+        builder.MapWhen(TruePredicate, map1 =>
+        {
+            map1.MapWhen((Predicate)FalsePredicate, UseNotImplemented);
+            map1.MapWhen((Predicate)TruePredicate, map2 =>
+                map2.MapWhen((Predicate)TruePredicate, UseSuccess)
+            );
+            map1.Run(NotImplemented);
+        });
         var app = builder.Build();
 
         HttpContext context = CreateRequest();

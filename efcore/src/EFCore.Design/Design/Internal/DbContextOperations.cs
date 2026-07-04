@@ -297,9 +297,8 @@ public class DbContextOperations
                     _reporter.WriteVerbose(
                         DesignStrings.FoundDbContext(context.ShortDisplayName())
                     );
-                    contexts.Add(
-                        context,
-                        () => CreateContextFromFactory(factory.AsType(), context)
+                    contexts.Add(context, () =>
+                        CreateContextFromFactory(factory.AsType(), context)
                     );
                 }
             }

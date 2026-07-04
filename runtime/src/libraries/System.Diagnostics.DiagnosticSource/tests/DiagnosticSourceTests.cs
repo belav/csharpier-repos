@@ -606,9 +606,8 @@ namespace System.Diagnostics.Tests
 
                                 // None should be left in the list
                                 list = GetActiveListenersWithPrefix(nameof(AllSubscriberStress));
-                                Assert.All(
-                                    listeners,
-                                    listener => Assert.DoesNotContain(listener, list)
+                                Assert.All(listeners, listener =>
+                                    Assert.DoesNotContain(listener, list)
                                 );
                             },
                             CancellationToken.None,

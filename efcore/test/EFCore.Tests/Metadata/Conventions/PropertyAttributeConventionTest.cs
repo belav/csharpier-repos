@@ -440,9 +440,8 @@ public class PropertyAttributeConventionTest
 
         RunConvention(entityTypeBuilder);
 
-        Assert.DoesNotContain(
-            entityTypeBuilder.Metadata.GetProperties(),
-            p => p.Name == "IgnoredProperty"
+        Assert.DoesNotContain(entityTypeBuilder.Metadata.GetProperties(), p =>
+            p.Name == "IgnoredProperty"
         );
     }
 
@@ -454,9 +453,8 @@ public class PropertyAttributeConventionTest
 
         RunConvention(entityTypeBuilder);
 
-        Assert.Contains(
-            entityTypeBuilder.Metadata.GetProperties(),
-            p => p.Name == "IgnoredProperty"
+        Assert.Contains(entityTypeBuilder.Metadata.GetProperties(), p =>
+            p.Name == "IgnoredProperty"
         );
     }
 
@@ -466,9 +464,8 @@ public class PropertyAttributeConventionTest
         var modelBuilder = CreateModelBuilder();
         var entityTypeBuilder = modelBuilder.Entity<A>();
 
-        Assert.DoesNotContain(
-            entityTypeBuilder.Metadata.GetProperties(),
-            p => p.Name == "IgnoredProperty"
+        Assert.DoesNotContain(entityTypeBuilder.Metadata.GetProperties(), p =>
+            p.Name == "IgnoredProperty"
         );
     }
 
@@ -480,9 +477,8 @@ public class PropertyAttributeConventionTest
         entityTypeBuilder.Property<string>(nameof(F.IgnoredProperty));
 
         // Because bringing the property in by the fluent API overrides the annotation it has no effect
-        Assert.Contains(
-            entityTypeBuilder.Metadata.GetProperties(),
-            p => p.Name == "IgnoredProperty"
+        Assert.Contains(entityTypeBuilder.Metadata.GetProperties(), p =>
+            p.Name == "IgnoredProperty"
         );
     }
 
@@ -498,9 +494,8 @@ public class PropertyAttributeConventionTest
 
         RunConvention(entityTypeBuilder);
 
-        Assert.DoesNotContain(
-            entityTypeBuilder.Metadata.GetProperties(),
-            p => p.Name == "IgnoredProperty"
+        Assert.DoesNotContain(entityTypeBuilder.Metadata.GetProperties(), p =>
+            p.Name == "IgnoredProperty"
         );
     }
 

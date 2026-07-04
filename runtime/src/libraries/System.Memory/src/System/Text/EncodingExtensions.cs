@@ -469,21 +469,17 @@ namespace System.Text
                 // Now build up the string to return, then release all of our scratch buffers
                 // back to the shared pool.
 
-                return string.Create(
-                    totalCharCount,
-                    listOfSegments,
-                    (span, listOfSegments) =>
+                return string.Create(totalCharCount, listOfSegments, (span, listOfSegments) =>
+                {
+                    foreach ((char[] array, int length) in listOfSegments)
                     {
-                        foreach ((char[] array, int length) in listOfSegments)
-                        {
-                            array.AsSpan(0, length).CopyTo(span);
-                            ArrayPool<char>.Shared.Return(array);
-                            span = span.Slice(length);
-                        }
-
-                        Debug.Assert(span.IsEmpty, "Over-allocated the string instance?");
+                        array.AsSpan(0, length).CopyTo(span);
+                        ArrayPool<char>.Shared.Return(array);
+                        span = span.Slice(length);
                     }
-                );
+
+                    Debug.Assert(span.IsEmpty, "Over-allocated the string instance?");
+                });
             }
         }
 

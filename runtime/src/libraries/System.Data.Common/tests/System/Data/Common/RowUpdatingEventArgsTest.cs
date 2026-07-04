@@ -11,33 +11,27 @@ namespace System.Data.Common
         public void Ctor_InvalidArgument_ThrowsArgumentException()
         {
             var table = new DataTable();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "dataRow",
-                () => new RowUpdatingEventArgs(null, null, StatementType.Select, null)
+            AssertExtensions.Throws<ArgumentNullException>("dataRow", () =>
+                new RowUpdatingEventArgs(null, null, StatementType.Select, null)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                nameof(StatementType),
-                () =>
-                    new RowUpdatingEventArgs(
-                        table.NewRow(),
-                        null,
-                        StatementType.Batch,
-                        new DataTableMapping()
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(StatementType), () =>
+                new RowUpdatingEventArgs(
+                    table.NewRow(),
+                    null,
+                    StatementType.Batch,
+                    new DataTableMapping()
+                )
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                nameof(StatementType),
-                () =>
-                    new RowUpdatingEventArgs(
-                        table.NewRow(),
-                        null,
-                        (StatementType)100,
-                        new DataTableMapping()
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(StatementType), () =>
+                new RowUpdatingEventArgs(
+                    table.NewRow(),
+                    null,
+                    (StatementType)100,
+                    new DataTableMapping()
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "tableMapping",
-                () => new RowUpdatingEventArgs(table.NewRow(), null, StatementType.Select, null)
+            AssertExtensions.Throws<ArgumentNullException>("tableMapping", () =>
+                new RowUpdatingEventArgs(table.NewRow(), null, StatementType.Select, null)
             );
         }
 
@@ -69,9 +63,8 @@ namespace System.Data.Common
                 StatementType.Select,
                 new DataTableMapping()
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                nameof(UpdateStatus),
-                () => args.Status = (UpdateStatus)100
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(UpdateStatus), () =>
+                args.Status = (UpdateStatus)100
             );
         }
     }

@@ -2438,15 +2438,11 @@ public class EntityType : TypeBase, IMutableEntityType, IConventionEntityType, I
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual PropertyCounts Counts =>
-        NonCapturingLazyInitializer.EnsureInitialized(
-            ref _counts,
-            this,
-            static entityType =>
-            {
-                entityType.EnsureReadOnly();
-                return entityType.CalculateCounts();
-            }
-        );
+        NonCapturingLazyInitializer.EnsureInitialized(ref _counts, this, static entityType =>
+        {
+            entityType.EnsureReadOnly();
+            return entityType.CalculateCounts();
+        });
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -101,9 +101,8 @@ namespace System.ComponentModel.Tests
             catch (CultureNotFoundException)
             {
                 // If we cannot create the cultures we should get exception from the Converter too.
-                AssertExtensions.Throws<ArgumentException>(
-                    "value",
-                    () => Converter.ConvertFrom(null, CultureInfo.InvariantCulture, cultureName)
+                AssertExtensions.Throws<ArgumentException>("value", () =>
+                    Converter.ConvertFrom(null, CultureInfo.InvariantCulture, cultureName)
                 );
             }
         }

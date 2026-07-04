@@ -113,9 +113,8 @@ namespace System.Reflection.Emit.Tests
                 EventAttributes.None,
                 typeof(TestEventHandler)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "mdBuilder",
-                () => eventBuilder.SetRaiseMethod(null)
+            AssertExtensions.Throws<ArgumentNullException>("mdBuilder", () =>
+                eventBuilder.SetRaiseMethod(null)
             );
         }
 

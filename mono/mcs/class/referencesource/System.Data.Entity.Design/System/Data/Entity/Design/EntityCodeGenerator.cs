@@ -898,12 +898,10 @@ namespace System.Data.Entity.Design
             {
                 string message = results
                     .Errors.OfType<CompilerError>()
-                    .Aggregate(
-                        string.Empty,
-                        (accumulated, input) =>
-                            accumulated == string.Empty
-                                ? input.ToString()
-                                : accumulated + Environment.NewLine + input.ToString()
+                    .Aggregate(string.Empty, (accumulated, input) =>
+                        accumulated == string.Empty
+                            ? input.ToString()
+                            : accumulated + Environment.NewLine + input.ToString()
                     );
                 throw EDesignUtil.InvalidOperation(message);
             }

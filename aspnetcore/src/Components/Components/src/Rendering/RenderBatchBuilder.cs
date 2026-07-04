@@ -42,9 +42,8 @@ internal sealed class RenderBatchBuilder : IDisposable
     internal StackObjectPool<
         Dictionary<object, KeyedItemInfo>
     > KeyedItemInfoDictionaryPool { get; } =
-        new StackObjectPool<Dictionary<object, KeyedItemInfo>>(
-            maxPreservedItems: 10,
-            () => new Dictionary<object, KeyedItemInfo>()
+        new StackObjectPool<Dictionary<object, KeyedItemInfo>>(maxPreservedItems: 10, () =>
+            new Dictionary<object, KeyedItemInfo>()
         );
 
     public void ClearStateForCurrentBatch()

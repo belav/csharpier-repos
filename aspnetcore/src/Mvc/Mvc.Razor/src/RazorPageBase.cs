@@ -383,12 +383,10 @@ public abstract class RazorPageBase : IRazorPage
     /// <remarks>This is a temporary placeholder method to support ASP.NET Core 2.0.0 editor code generation.</remarks>
     [EditorBrowsable(EditorBrowsableState.Never)]
     protected void DefineSection(string name, Func<object?, Task> section) =>
-        DefineSection(
-            name,
-            () =>
-                section(
-                    null /* writer */
-                )
+        DefineSection(name, () =>
+            section(
+                null /* writer */
+            )
         );
 
     /// <summary>

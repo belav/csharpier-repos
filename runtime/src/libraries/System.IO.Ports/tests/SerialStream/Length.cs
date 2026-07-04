@@ -78,13 +78,10 @@ namespace System.IO.Ports.Tests
         #region Verification for Test Cases
         private void VerifyLengthException(Stream serialStream, Type expectedException)
         {
-            Assert.Throws(
-                expectedException,
-                () =>
-                {
-                    _ = serialStream.Length;
-                }
-            );
+            Assert.Throws(expectedException, () =>
+            {
+                _ = serialStream.Length;
+            });
         }
         #endregion
     }

@@ -288,9 +288,8 @@ public class SequenceEndToEndTest : IDisposable
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder
                 .UseInternalServiceProvider(_serviceProvider)
-                .UseSqlServer(
-                    SqlServerTestStore.CreateConnectionString(_databaseName),
-                    b => b.ApplyConfiguration()
+                .UseSqlServer(SqlServerTestStore.CreateConnectionString(_databaseName), b =>
+                    b.ApplyConfiguration()
                 );
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
@@ -402,9 +401,8 @@ public class SequenceEndToEndTest : IDisposable
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder
                 .UseInternalServiceProvider(_serviceProvider)
-                .UseSqlServer(
-                    SqlServerTestStore.CreateConnectionString(_databaseName),
-                    b => b.ApplyConfiguration()
+                .UseSqlServer(SqlServerTestStore.CreateConnectionString(_databaseName), b =>
+                    b.ApplyConfiguration()
                 );
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>

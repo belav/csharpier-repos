@@ -3560,13 +3560,11 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var result = RequestDelegateFactory.Create(@delegate);
 
         // Assert
-        Assert.Contains(
-            result.EndpointMetadata,
-            m => m is ParameterNameMetadata { Name: "param1" }
+        Assert.Contains(result.EndpointMetadata, m =>
+            m is ParameterNameMetadata { Name: "param1" }
         );
-        Assert.Contains(
-            result.EndpointMetadata,
-            m => m is ParameterNameMetadata { Name: "param2" }
+        Assert.Contains(result.EndpointMetadata, m =>
+            m is ParameterNameMetadata { Name: "param2" }
         );
     }
 
@@ -3580,9 +3578,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var result = RequestDelegateFactory.Create(@delegate);
 
         // Assert
-        Assert.Contains(
-            result.EndpointMetadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
+        Assert.Contains(result.EndpointMetadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
         );
     }
 
@@ -3596,9 +3593,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var result = RequestDelegateFactory.Create(@delegate);
 
         // Assert
-        Assert.Contains(
-            result.EndpointMetadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
+        Assert.Contains(result.EndpointMetadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
         );
     }
 
@@ -3612,9 +3608,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var result = RequestDelegateFactory.Create(@delegate);
 
         // Assert
-        Assert.Contains(
-            result.EndpointMetadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
+        Assert.Contains(result.EndpointMetadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
         );
     }
 
@@ -3628,9 +3623,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var result = RequestDelegateFactory.Create(@delegate);
 
         // Assert
-        Assert.Contains(
-            result.EndpointMetadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
+        Assert.Contains(result.EndpointMetadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
         );
     }
 
@@ -3647,9 +3641,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var result = RequestDelegateFactory.Create(@delegate);
 
         // Assert
-        Assert.Contains(
-            result.EndpointMetadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
+        Assert.Contains(result.EndpointMetadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
         );
     }
 
@@ -3669,9 +3662,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var result = RequestDelegateFactory.Create(@delegate, options);
 
         // Assert
-        Assert.Contains(
-            result.EndpointMetadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
+        Assert.Contains(result.EndpointMetadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.Caller }
         );
         // Expecting '1' because only initial metadata will be in the metadata list when this metadata item is added
         Assert.Contains(result.EndpointMetadata, m => m is MetadataCountMetadata { Count: 1 });
@@ -3693,9 +3685,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var result = RequestDelegateFactory.Create(@delegate, options);
 
         // Assert
-        Assert.Contains(
-            result.EndpointMetadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
+        Assert.Contains(result.EndpointMetadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.Caller }
         );
         // Expecting '1' because only initial metadata will be in the metadata list when this metadata item is added
         Assert.Contains(result.EndpointMetadata, m => m is MetadataCountMetadata { Count: 1 });
@@ -3717,9 +3708,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var result = RequestDelegateFactory.Create(@delegate, options);
 
         // Assert
-        Assert.Contains(
-            result.EndpointMetadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
+        Assert.Contains(result.EndpointMetadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.Caller }
         );
         // Expecting '1' because only initial metadata will be in the metadata list when this metadata item is added
         Assert.Contains(result.EndpointMetadata, m => m is MetadataCountMetadata { Count: 1 });
@@ -3744,9 +3734,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var result = RequestDelegateFactory.Create(@delegate, options);
 
         // Assert
-        Assert.Contains(
-            result.EndpointMetadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
+        Assert.Contains(result.EndpointMetadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.Caller }
         );
         // Expecting '1' because only initial metadata will be in the metadata list when this metadata item is added
         Assert.Contains(result.EndpointMetadata, m => m is MetadataCountMetadata { Count: 1 });
@@ -3768,13 +3757,11 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var result = RequestDelegateFactory.Create(@delegate, options);
 
         // Assert
-        Assert.Contains(
-            result.EndpointMetadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
+        Assert.Contains(result.EndpointMetadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.Caller }
         );
-        Assert.Contains(
-            result.EndpointMetadata,
-            m => m is ParameterNameMetadata { Name: "param1" }
+        Assert.Contains(result.EndpointMetadata, m =>
+            m is ParameterNameMetadata { Name: "param1" }
         );
     }
 
@@ -3794,13 +3781,11 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var result = RequestDelegateFactory.Create(@delegate, options);
 
         // Assert
-        Assert.Contains(
-            result.EndpointMetadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
+        Assert.Contains(result.EndpointMetadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.Caller }
         );
-        Assert.Contains(
-            result.EndpointMetadata,
-            m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
+        Assert.Contains(result.EndpointMetadata, m =>
+            m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
         );
     }
 
@@ -3863,9 +3848,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var result = RequestDelegateFactory.Create(@delegate, options);
 
         // Assert
-        Assert.Contains(
-            result.EndpointMetadata,
-            m => m is RoutePatternMetadata { RoutePattern: "/test/pattern" }
+        Assert.Contains(result.EndpointMetadata, m =>
+            m is RoutePatternMetadata { RoutePattern: "/test/pattern" }
         );
     }
 

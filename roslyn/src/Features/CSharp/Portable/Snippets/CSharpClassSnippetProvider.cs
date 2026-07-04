@@ -57,9 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            var name = NameGenerator.GenerateUniqueName(
-                "MyClass",
-                name => semanticModel.LookupSymbols(position, name: name).IsEmpty
+            var name = NameGenerator.GenerateUniqueName("MyClass", name =>
+                semanticModel.LookupSymbols(position, name: name).IsEmpty
             );
             return generator.ClassDeclaration(name);
         }

@@ -269,9 +269,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         public void ResolveKeyedServiceSingletonFactoryWithAnyKey()
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddKeyedSingleton<IService>(
-                KeyedService.AnyKey,
-                (sp, key) => new Service((string)key)
+            serviceCollection.AddKeyedSingleton<IService>(KeyedService.AnyKey, (sp, key) =>
+                new Service((string)key)
             );
 
             var provider = CreateServiceProvider(serviceCollection);
@@ -322,9 +321,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         public void ResolveKeyedServiceTransientFactory()
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddKeyedTransient<IService>(
-                "service1",
-                (sp, key) => new Service(key as string)
+            serviceCollection.AddKeyedTransient<IService>("service1", (sp, key) =>
+                new Service(key as string)
             );
 
             var provider = CreateServiceProvider(serviceCollection);

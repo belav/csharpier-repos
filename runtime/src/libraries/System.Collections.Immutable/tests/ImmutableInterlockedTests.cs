@@ -21,16 +21,11 @@ namespace System.Collections.Immutable.Tests
             UpdateHelper<ImmutableList<int>>(func =>
             {
                 ImmutableList<int> list = null;
-                Assert.True(
-                    func(
-                        ref list,
-                        l =>
-                        {
-                            Assert.Null(l);
-                            return ImmutableList.Create(1);
-                        }
-                    )
-                );
+                Assert.True(func(ref list, l =>
+                    {
+                        Assert.Null(l);
+                        return ImmutableList.Create(1);
+                    }));
                 Assert.Equal(1, list.Count);
                 Assert.Equal(1, list[0]);
             });
@@ -42,16 +37,11 @@ namespace System.Collections.Immutable.Tests
             UpdateArrayHelper<int>(func =>
             {
                 ImmutableArray<int> array = default;
-                Assert.True(
-                    func(
-                        ref array,
-                        l =>
-                        {
-                            Assert.True(l.IsDefault);
-                            return ImmutableArray.Create(1);
-                        }
-                    )
-                );
+                Assert.True(func(ref array, l =>
+                    {
+                        Assert.True(l.IsDefault);
+                        return ImmutableArray.Create(1);
+                    }));
                 Assert.Equal(1, array.Length);
                 Assert.Equal(1, array[0]);
             });
@@ -63,16 +53,11 @@ namespace System.Collections.Immutable.Tests
             UpdateArrayHelper<int>(func =>
             {
                 ImmutableArray<int> array = ImmutableArray<int>.Empty;
-                Assert.True(
-                    func(
-                        ref array,
-                        l =>
-                        {
-                            Assert.Equal(0, l.Length);
-                            return ImmutableArray.Create(1);
-                        }
-                    )
-                );
+                Assert.True(func(ref array, l =>
+                    {
+                        Assert.Equal(0, l.Length);
+                        return ImmutableArray.Create(1);
+                    }));
                 Assert.Equal(1, array.Length);
                 Assert.Equal(1, array[0]);
             });
@@ -110,15 +95,10 @@ namespace System.Collections.Immutable.Tests
             UpdateHelper<ImmutableList<int>>(func =>
             {
                 ImmutableList<int> list = ImmutableList.Create(1);
-                Assert.Throws<InvalidOperationException>(() =>
-                    func(
-                        ref list,
-                        l =>
-                        {
-                            throw new InvalidOperationException();
-                        }
-                    )
-                );
+                Assert.Throws<InvalidOperationException>(() => func(ref list, l =>
+                    {
+                        throw new InvalidOperationException();
+                    }));
             });
         }
 
@@ -243,15 +223,12 @@ namespace System.Collections.Immutable.Tests
                     delegate
                     {
                         int transform1ExecutionCounter = 0;
-                        func(
-                            ref set,
-                            s =>
-                            {
-                                Assert.Equal(1, ++transform1ExecutionCounter);
-                                task2TransformEntered.WaitOne();
-                                return s.Add(1);
-                            }
-                        );
+                        func(ref set, s =>
+                        {
+                            Assert.Equal(1, ++transform1ExecutionCounter);
+                            task2TransformEntered.WaitOne();
+                            return s.Add(1);
+                        });
                         task1TransformExited.Set();
                         Assert.Equal(1, transform1ExecutionCounter);
                     }
@@ -261,26 +238,23 @@ namespace System.Collections.Immutable.Tests
                     delegate
                     {
                         int transform2ExecutionCounter = 0;
-                        func(
-                            ref set,
-                            s =>
+                        func(ref set, s =>
+                        {
+                            switch (++transform2ExecutionCounter)
                             {
-                                switch (++transform2ExecutionCounter)
-                                {
-                                    case 1:
-                                        task2TransformEntered.Set();
-                                        task1TransformExited.WaitOne();
-                                        Assert.True(s.IsEmpty);
-                                        break;
-                                    case 2:
-                                        Assert.True(s.Contains(1));
-                                        Assert.Equal(1, s.Count);
-                                        break;
-                                }
-
-                                return s.Add(2);
+                                case 1:
+                                    task2TransformEntered.Set();
+                                    task1TransformExited.WaitOne();
+                                    Assert.True(s.IsEmpty);
+                                    break;
+                                case 2:
+                                    Assert.True(s.Contains(1));
+                                    Assert.Equal(1, s.Count);
+                                    break;
                             }
-                        );
+
+                            return s.Add(2);
+                        });
 
                         // Verify that this transform had to execute twice.
                         Assert.Equal(2, transform2ExecutionCounter);
@@ -308,15 +282,12 @@ namespace System.Collections.Immutable.Tests
                     delegate
                     {
                         int transform1ExecutionCounter = 0;
-                        func(
-                            ref array,
-                            s =>
-                            {
-                                Assert.Equal(1, ++transform1ExecutionCounter);
-                                task2TransformEntered.WaitOne();
-                                return s.Add(1);
-                            }
-                        );
+                        func(ref array, s =>
+                        {
+                            Assert.Equal(1, ++transform1ExecutionCounter);
+                            task2TransformEntered.WaitOne();
+                            return s.Add(1);
+                        });
                         task1TransformExited.Set();
                         Assert.Equal(1, transform1ExecutionCounter);
                     }
@@ -326,26 +297,23 @@ namespace System.Collections.Immutable.Tests
                     delegate
                     {
                         int transform2ExecutionCounter = 0;
-                        func(
-                            ref array,
-                            s =>
+                        func(ref array, s =>
+                        {
+                            switch (++transform2ExecutionCounter)
                             {
-                                switch (++transform2ExecutionCounter)
-                                {
-                                    case 1:
-                                        task2TransformEntered.Set();
-                                        task1TransformExited.WaitOne();
-                                        Assert.True(s.IsEmpty);
-                                        break;
-                                    case 2:
-                                        Assert.True(s.Contains(1));
-                                        Assert.Equal(1, s.Length);
-                                        break;
-                                }
-
-                                return s.Add(2);
+                                case 1:
+                                    task2TransformEntered.Set();
+                                    task1TransformExited.WaitOne();
+                                    Assert.True(s.IsEmpty);
+                                    break;
+                                case 2:
+                                    Assert.True(s.Contains(1));
+                                    Assert.Equal(1, s.Length);
+                                    break;
                             }
-                        );
+
+                            return s.Add(2);
+                        });
 
                         // Verify that this transform had to execute twice.
                         Assert.Equal(2, transform2ExecutionCounter);
@@ -493,24 +461,16 @@ namespace System.Collections.Immutable.Tests
         public void GetOrAddDictionaryValueFactory()
         {
             ImmutableDictionary<int, string> dictionary = ImmutableDictionary.Create<int, string>();
-            string value = ImmutableInterlocked.GetOrAdd(
-                ref dictionary,
-                1,
-                key =>
-                {
-                    Assert.Equal(1, key);
-                    return "a";
-                }
-            );
+            string value = ImmutableInterlocked.GetOrAdd(ref dictionary, 1, key =>
+            {
+                Assert.Equal(1, key);
+                return "a";
+            });
             Assert.Equal("a", value);
-            value = ImmutableInterlocked.GetOrAdd(
-                ref dictionary,
-                1,
-                key =>
-                {
-                    throw new ShouldNotBeInvokedException();
-                }
-            );
+            value = ImmutableInterlocked.GetOrAdd(ref dictionary, 1, key =>
+            {
+                throw new ShouldNotBeInvokedException();
+            });
             Assert.Equal("a", value);
         }
 
@@ -546,28 +506,18 @@ namespace System.Collections.Immutable.Tests
         public void AddOrUpdateDictionaryAddValue()
         {
             ImmutableDictionary<int, string> dictionary = ImmutableDictionary.Create<int, string>();
-            string value = ImmutableInterlocked.AddOrUpdate(
-                ref dictionary,
-                1,
-                "a",
-                (k, v) =>
-                {
-                    throw new ShouldNotBeInvokedException();
-                }
-            );
+            string value = ImmutableInterlocked.AddOrUpdate(ref dictionary, 1, "a", (k, v) =>
+            {
+                throw new ShouldNotBeInvokedException();
+            });
             Assert.Equal("a", value);
             Assert.Equal("a", dictionary[1]);
 
-            value = ImmutableInterlocked.AddOrUpdate(
-                ref dictionary,
-                1,
-                "c",
-                (k, v) =>
-                {
-                    Assert.Equal("a", v);
-                    return "b";
-                }
-            );
+            value = ImmutableInterlocked.AddOrUpdate(ref dictionary, 1, "c", (k, v) =>
+            {
+                Assert.Equal("a", v);
+                return "b";
+            });
             Assert.Equal("b", value);
             Assert.Equal("b", dictionary[1]);
         }

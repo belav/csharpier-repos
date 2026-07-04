@@ -544,9 +544,8 @@ namespace System.Net.Tests
         public void ContentLength_SetNegativeOne_ThrowsArgumentOutOfRangeException(Uri remoteServer)
         {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => request.ContentLength = -1
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                request.ContentLength = -1
             );
         }
 
@@ -640,9 +639,8 @@ namespace System.Net.Tests
         )
         {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => request.MaximumResponseHeadersLength = -2
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                request.MaximumResponseHeadersLength = -2
             );
         }
 
@@ -661,13 +659,11 @@ namespace System.Net.Tests
         )
         {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => request.MaximumAutomaticRedirections = 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                request.MaximumAutomaticRedirections = 0
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => request.MaximumAutomaticRedirections = -1
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                request.MaximumAutomaticRedirections = -1
             );
         }
 
@@ -701,9 +697,8 @@ namespace System.Net.Tests
         )
         {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => request.ContinueTimeout = -2
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                request.ContinueTimeout = -2
             );
         }
 
@@ -727,9 +722,8 @@ namespace System.Net.Tests
         public void Timeout_SetNegativeTwo_ThrowsArgumentOutOfRangeException(Uri remoteServer)
         {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => request.Timeout = -2
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                request.Timeout = -2
             );
         }
 
@@ -794,10 +788,8 @@ namespace System.Net.Tests
         public void Host_SetNullValue_ThrowsArgumentNullException(Uri remoteServer)
         {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                null,
-                () => request.Host = null
+            AssertExtensions.Throws<ArgumentNullException>("value", null, () =>
+                request.Host = null
             );
         }
 
@@ -805,10 +797,8 @@ namespace System.Net.Tests
         public void Host_SetSlash_ThrowsArgumentException(Uri remoteServer)
         {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => request.Host = "/localhost"
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                request.Host = "/localhost"
             );
         }
 
@@ -816,10 +806,8 @@ namespace System.Net.Tests
         public void Host_SetInvalidUri_ThrowsArgumentException(Uri remoteServer)
         {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => request.Host = "NoUri+-*"
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                request.Host = "NoUri+-*"
             );
         }
 
@@ -892,9 +880,8 @@ namespace System.Net.Tests
         public void TransferEncoding_SetChunked_ThrowsArgumentException(Uri remoteServer)
         {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => request.TransferEncoding = "chunked"
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                request.TransferEncoding = "chunked"
             );
         }
 
@@ -1033,9 +1020,8 @@ namespace System.Net.Tests
         public void Connection_SetKeepAliveAndClose_ThrowsArgumentException(Uri remoteServer)
         {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => request.Connection = "keep-alive"
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                request.Connection = "keep-alive"
             );
             AssertExtensions.Throws<ArgumentException>("value", () => request.Connection = "close");
         }
@@ -1055,9 +1041,8 @@ namespace System.Net.Tests
         public void Expect_Set100Continue_ThrowsArgumentException(Uri remoteServer)
         {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => request.Expect = "100-continue"
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                request.Expect = "100-continue"
             );
         }
 
@@ -1280,9 +1265,8 @@ namespace System.Net.Tests
         public void ClientCertificates_SetNullX509_ThrowsArgumentNullException(Uri remoteServer)
         {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => request.ClientCertificates = null
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                request.ClientCertificates = null
             );
         }
 
@@ -1300,9 +1284,8 @@ namespace System.Net.Tests
         public void ProtocolVersion_SetInvalidHttpVersion_ThrowsArgumentException(Uri remoteServer)
         {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => request.ProtocolVersion = new Version()
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                request.ProtocolVersion = new Version()
             );
         }
 
@@ -1719,9 +1702,8 @@ namespace System.Net.Tests
                     using (Stream requestStream = await request.GetRequestStreamAsync())
                     {
                         requestStream.Write(_requestBodyBytes, 0, _requestBodyBytes.Length);
-                        AssertExtensions.Throws<ArgumentException>(
-                            null,
-                            () => new StreamReader(requestStream)
+                        AssertExtensions.Throws<ArgumentException>(null, () =>
+                            new StreamReader(requestStream)
                         );
                     }
                 }
@@ -2010,9 +1992,8 @@ namespace System.Net.Tests
         {
             HttpWebRequest request = WebRequest.CreateHttp(remoteServer);
             AssertExtensions.Throws<ArgumentNullException>("value", () => request.Method = null);
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => request.Method = string.Empty
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                request.Method = string.Empty
             );
             AssertExtensions.Throws<ArgumentException>("value", () => request.Method = "Method(2");
         }

@@ -470,13 +470,10 @@ namespace System.Net.Http.Functional.Tests
                         Version = UseVersion,
                     };
 
-                    HttpMetricsEnrichmentContext.AddCallback(
-                        request,
-                        static ctx =>
-                        {
-                            ctx.AddCustomTag("route", "/test");
-                        }
-                    );
+                    HttpMetricsEnrichmentContext.AddCallback(request, static ctx =>
+                    {
+                        ctx.AddCustomTag("route", "/test");
+                    });
 
                     using HttpResponseMessage response = await SendAsync(client, request);
 
@@ -528,14 +525,11 @@ namespace System.Net.Http.Functional.Tests
                         kv.Value,
                         "Request"
                     );
-                    HttpMetricsEnrichmentContext.AddCallback(
-                        request,
-                        static ctx =>
-                        {
-                            ctx.AddCustomTag("observed?", "observed!");
-                            Assert.NotNull(ctx.Response);
-                        }
-                    );
+                    HttpMetricsEnrichmentContext.AddCallback(request, static ctx =>
+                    {
+                        ctx.AddCustomTag("observed?", "observed!");
+                        Assert.NotNull(ctx.Response);
+                    });
                 }
             });
 
@@ -555,13 +549,10 @@ namespace System.Net.Http.Functional.Tests
                     {
                         Version = UseVersion,
                     };
-                    HttpMetricsEnrichmentContext.AddCallback(
-                        request,
-                        static ctx =>
-                        {
-                            ctx.AddCustomTag("route", "/test");
-                        }
-                    );
+                    HttpMetricsEnrichmentContext.AddCallback(request, static ctx =>
+                    {
+                        ctx.AddCustomTag("route", "/test");
+                    });
 
                     using HttpResponseMessage response = await SendAsync(client, request);
 
@@ -792,17 +783,14 @@ namespace System.Net.Http.Functional.Tests
 
                     using HttpResponseMessage response = await client.SendAsync(TestAsync, request);
 
-                    Assert.All(
-                        requestDuration.GetMeasurements(),
-                        m => VerifyTag(m.Tags.ToArray(), "http.request.method", expectedMethodTag)
+                    Assert.All(requestDuration.GetMeasurements(), m =>
+                        VerifyTag(m.Tags.ToArray(), "http.request.method", expectedMethodTag)
                     );
-                    Assert.All(
-                        activeRequests.GetMeasurements(),
-                        m => VerifyTag(m.Tags.ToArray(), "http.request.method", expectedMethodTag)
+                    Assert.All(activeRequests.GetMeasurements(), m =>
+                        VerifyTag(m.Tags.ToArray(), "http.request.method", expectedMethodTag)
                     );
-                    Assert.All(
-                        timeInQueue.GetMeasurements(),
-                        m => VerifyTag(m.Tags.ToArray(), "http.request.method", expectedMethodTag)
+                    Assert.All(timeInQueue.GetMeasurements(), m =>
+                        VerifyTag(m.Tags.ToArray(), "http.request.method", expectedMethodTag)
                     );
                 },
                 async server =>

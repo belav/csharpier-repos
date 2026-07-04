@@ -28,9 +28,8 @@ namespace System.Data.Tests
         [Fact]
         public void AsDataView_NullTable_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "table",
-                () => DataTableExtensions.AsDataView(null)
+            AssertExtensions.Throws<ArgumentNullException>("table", () =>
+                DataTableExtensions.AsDataView(null)
             );
         }
 
@@ -51,9 +50,8 @@ namespace System.Data.Tests
         [Fact]
         public void AsDataView_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => DataTableExtensions.AsDataView<DataRow>(null)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                DataTableExtensions.AsDataView<DataRow>(null)
             );
         }
 

@@ -1023,10 +1023,8 @@ public class PartialTagHelperTest
 
     private static TagHelperOutput GetTagHelperOutput()
     {
-        return new TagHelperOutput(
-            "partial",
-            new TagHelperAttributeList(),
-            (_, __) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        return new TagHelperOutput("partial", new TagHelperAttributeList(), (_, __) =>
+            Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
         );
     }
 

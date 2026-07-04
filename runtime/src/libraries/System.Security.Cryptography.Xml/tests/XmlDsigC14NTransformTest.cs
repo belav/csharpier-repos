@@ -154,9 +154,8 @@ namespace System.Security.Cryptography.Xml.Tests
         {
             XmlDsigC14NTransform transform = new XmlDsigC14NTransform();
             XmlDocument doc = new XmlDocument();
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => transform.GetOutput(doc.GetType())
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                transform.GetOutput(doc.GetType())
             );
         }
 

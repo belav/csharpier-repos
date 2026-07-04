@@ -504,13 +504,11 @@ namespace System.Collections.Tests
         [Fact]
         public void HashSet_Generic_Constructor_int_Negative_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => new HashSet<T>(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new HashSet<T>(-1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => new HashSet<T>(int.MinValue)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new HashSet<T>(int.MinValue)
             );
         }
 
@@ -547,13 +545,11 @@ namespace System.Collections.Tests
         public void HashSet_Generic_Constructor_int_IEqualityComparer_Negative_ThrowsArgumentOutOfRangeException()
         {
             IEqualityComparer<T> comparer = GetIEqualityComparer();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => new HashSet<T>(-1, comparer)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new HashSet<T>(-1, comparer)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => new HashSet<T>(int.MinValue, comparer)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new HashSet<T>(int.MinValue, comparer)
             );
         }
 
@@ -643,9 +639,8 @@ namespace System.Collections.Tests
         public void EnsureCapacity_Generic_NegativeCapacityRequested_Throws()
         {
             var set = new HashSet<T>();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => set.EnsureCapacity(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                set.EnsureCapacity(-1)
             );
         }
 

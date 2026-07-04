@@ -19,10 +19,8 @@ namespace System.ComponentModel.DataAnnotations.Schema.Tests
         [InlineData(null)]
         public static void Ctor_String_NullName_ThrowsArgumentException(string name)
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                null,
-                () => new ForeignKeyAttribute(name)
+            AssertExtensions.Throws<ArgumentNullException>("name", null, () =>
+                new ForeignKeyAttribute(name)
             );
         }
 
@@ -31,10 +29,8 @@ namespace System.ComponentModel.DataAnnotations.Schema.Tests
         [InlineData(" \t\r\n")]
         public static void Ctor_String_WhitespaceName_ThrowsArgumentException(string name)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                null,
-                () => new ForeignKeyAttribute(name)
+            AssertExtensions.Throws<ArgumentException>("name", null, () =>
+                new ForeignKeyAttribute(name)
             );
         }
     }

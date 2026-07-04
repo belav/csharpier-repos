@@ -44,10 +44,8 @@ public class DbContextLoggerTests
     public async Task Log_with_minimum_level(bool async)
     {
         var stream = new StringWriter();
-        var actual = await LogTest(
-            async,
-            stream,
-            b => b.LogTo(stream.WriteLine, LogLevel.Information)
+        var actual = await LogTest(async, stream, b =>
+            b.LogTo(stream.WriteLine, LogLevel.Information)
         );
 
         AssertLog(actual, ContextInitialized);
@@ -59,14 +57,11 @@ public class DbContextLoggerTests
     public async Task Log_for_multiple_categories(bool async)
     {
         var stream = new StringWriter();
-        var actual = await LogTest(
-            async,
-            stream,
-            b =>
-                b.LogTo(
-                    stream.WriteLine,
-                    new[] { DbLoggerCategory.Infrastructure.Name, DbLoggerCategory.Update.Name }
-                )
+        var actual = await LogTest(async, stream, b =>
+            b.LogTo(
+                stream.WriteLine,
+                new[] { DbLoggerCategory.Infrastructure.Name, DbLoggerCategory.Update.Name }
+            )
         );
 
         AssertLog(
@@ -84,10 +79,8 @@ public class DbContextLoggerTests
     public async Task Log_for_single_category(bool async)
     {
         var stream = new StringWriter();
-        var actual = await LogTest(
-            async,
-            stream,
-            b => b.LogTo(stream.WriteLine, new[] { DbLoggerCategory.Infrastructure.Name })
+        var actual = await LogTest(async, stream, b =>
+            b.LogTo(stream.WriteLine, new[] { DbLoggerCategory.Infrastructure.Name })
         );
 
         AssertLog(actual, ContextInitialized, ContextDisposed);
@@ -99,29 +92,19 @@ public class DbContextLoggerTests
     public async Task Log_for_single_category_and_minimum_level(bool async)
     {
         var stream = new StringWriter();
-        var actual = await LogTest(
-            async,
-            stream,
-            b =>
-                b.LogTo(
-                    stream.WriteLine,
-                    new[] { DbLoggerCategory.Infrastructure.Name },
-                    LogLevel.Information
-                )
+        var actual = await LogTest(async, stream, b =>
+            b.LogTo(
+                stream.WriteLine,
+                new[] { DbLoggerCategory.Infrastructure.Name },
+                LogLevel.Information
+            )
         );
 
         AssertLog(actual, ContextInitialized);
 
         stream = new StringWriter();
-        actual = await LogTest(
-            async,
-            stream,
-            b =>
-                b.LogTo(
-                    stream.WriteLine,
-                    new[] { DbLoggerCategory.Update.Name },
-                    LogLevel.Information
-                )
+        actual = await LogTest(async, stream, b =>
+            b.LogTo(stream.WriteLine, new[] { DbLoggerCategory.Update.Name }, LogLevel.Information)
         );
 
         Assert.Equal("", actual);
@@ -133,10 +116,8 @@ public class DbContextLoggerTests
     public async Task Log_for_single_event(bool async)
     {
         var stream = new StringWriter();
-        var actual = await LogTest(
-            async,
-            stream,
-            b => b.LogTo(stream.WriteLine, new[] { CoreEventId.ContextInitialized })
+        var actual = await LogTest(async, stream, b =>
+            b.LogTo(stream.WriteLine, new[] { CoreEventId.ContextInitialized })
         );
 
         AssertLog(actual, ContextInitialized);
@@ -148,14 +129,11 @@ public class DbContextLoggerTests
     public async Task Log_for_multiple_events(bool async)
     {
         var stream = new StringWriter();
-        var actual = await LogTest(
-            async,
-            stream,
-            b =>
-                b.LogTo(
-                    stream.WriteLine,
-                    new[] { CoreEventId.ContextInitialized, CoreEventId.ContextDisposed }
-                )
+        var actual = await LogTest(async, stream, b =>
+            b.LogTo(
+                stream.WriteLine,
+                new[] { CoreEventId.ContextInitialized, CoreEventId.ContextDisposed }
+            )
         );
 
         AssertLog(actual, ContextInitialized, ContextDisposed);
@@ -167,22 +145,19 @@ public class DbContextLoggerTests
     public async Task Log_for_many_events(bool async) // Hits HashCode usage
     {
         var stream = new StringWriter();
-        var actual = await LogTest(
-            async,
-            stream,
-            b =>
-                b.LogTo(
-                    stream.WriteLine,
-                    new[]
-                    {
-                        CoreEventId.ContextInitialized,
-                        CoreEventId.ContextDisposed,
-                        CoreEventId.StartedTracking,
-                        CoreEventId.StateChanged,
-                        CoreEventId.ValueGenerated,
-                        CoreEventId.CascadeDelete,
-                    }
-                )
+        var actual = await LogTest(async, stream, b =>
+            b.LogTo(
+                stream.WriteLine,
+                new[]
+                {
+                    CoreEventId.ContextInitialized,
+                    CoreEventId.ContextDisposed,
+                    CoreEventId.StartedTracking,
+                    CoreEventId.StateChanged,
+                    CoreEventId.ValueGenerated,
+                    CoreEventId.CascadeDelete,
+                }
+            )
         );
 
         AssertLog(actual, ContextInitialized, ContextDisposed);
@@ -194,29 +169,19 @@ public class DbContextLoggerTests
     public async Task Log_for_single_event_and_minimum_level(bool async)
     {
         var stream = new StringWriter();
-        var actual = await LogTest(
-            async,
-            stream,
-            b =>
-                b.LogTo(
-                    stream.WriteLine,
-                    new[] { CoreEventId.ContextInitialized },
-                    LogLevel.Information
-                )
+        var actual = await LogTest(async, stream, b =>
+            b.LogTo(
+                stream.WriteLine,
+                new[] { CoreEventId.ContextInitialized },
+                LogLevel.Information
+            )
         );
 
         AssertLog(actual, ContextInitialized);
 
         stream = new StringWriter();
-        actual = await LogTest(
-            async,
-            stream,
-            b =>
-                b.LogTo(
-                    stream.WriteLine,
-                    new[] { CoreEventId.ContextDisposed },
-                    LogLevel.Information
-                )
+        actual = await LogTest(async, stream, b =>
+            b.LogTo(stream.WriteLine, new[] { CoreEventId.ContextDisposed }, LogLevel.Information)
         );
 
         Assert.Equal("", actual);
@@ -228,10 +193,8 @@ public class DbContextLoggerTests
     public async Task Log_with_custom_filter(bool async)
     {
         var stream = new StringWriter();
-        var actual = await LogTest(
-            async,
-            stream,
-            b => b.LogTo(stream.WriteLine, (e, l) => e == CoreEventId.SaveChangesCompleted)
+        var actual = await LogTest(async, stream, b =>
+            b.LogTo(stream.WriteLine, (e, l) => e == CoreEventId.SaveChangesCompleted)
         );
 
         AssertLog(actual, SaveChangesCompleted);
@@ -243,18 +206,15 @@ public class DbContextLoggerTests
     public async Task Log_with_custom_logger(bool async)
     {
         var stream = new StringWriter();
-        var actual = await LogTest(
-            async,
-            stream,
-            b =>
-                b.LogTo(
-                    (eventId, logLevel) => eventId == CoreEventId.ContextInitialized,
-                    eventData =>
-                        stream.Write(
-                            "Initialized "
-                                + ((ContextInitializedEventData)eventData).Context.GetType().Name
-                        )
-                )
+        var actual = await LogTest(async, stream, b =>
+            b.LogTo(
+                (eventId, logLevel) => eventId == CoreEventId.ContextInitialized,
+                eventData =>
+                    stream.Write(
+                        "Initialized "
+                            + ((ContextInitializedEventData)eventData).Context.GetType().Name
+                    )
+            )
         );
 
         Assert.Equal(@"Initialized LoggingContext" + Environment.NewLine, actual);
@@ -266,10 +226,8 @@ public class DbContextLoggerTests
     public async Task Log_with_raw_message(bool async)
     {
         var stream = new StringWriter();
-        var actual = await LogTest(
-            async,
-            stream,
-            b => b.LogTo(stream.WriteLine, LogLevel.Information, DbContextLoggerOptions.None)
+        var actual = await LogTest(async, stream, b =>
+            b.LogTo(stream.WriteLine, LogLevel.Information, DbContextLoggerOptions.None)
         );
 
         AssertLog(
@@ -284,10 +242,8 @@ public class DbContextLoggerTests
     public async Task Log_raw_single_line(bool async)
     {
         var stream = new StringWriter();
-        var actual = await LogTest(
-            async,
-            stream,
-            b => b.LogTo(stream.WriteLine, LogLevel.Information, DbContextLoggerOptions.SingleLine)
+        var actual = await LogTest(async, stream, b =>
+            b.LogTo(stream.WriteLine, LogLevel.Information, DbContextLoggerOptions.SingleLine)
         );
 
         AssertLog(
@@ -302,15 +258,12 @@ public class DbContextLoggerTests
     public async Task Log_default_single_line(bool async)
     {
         var stream = new StringWriter();
-        var actual = await LogTest(
-            async,
-            stream,
-            b =>
-                b.LogTo(
-                    stream.WriteLine,
-                    LogLevel.Information,
-                    DbContextLoggerOptions.SingleLine | DbContextLoggerOptions.DefaultWithLocalTime
-                )
+        var actual = await LogTest(async, stream, b =>
+            b.LogTo(
+                stream.WriteLine,
+                LogLevel.Information,
+                DbContextLoggerOptions.SingleLine | DbContextLoggerOptions.DefaultWithLocalTime
+            )
         );
 
         AssertLog(
@@ -325,10 +278,8 @@ public class DbContextLoggerTests
     public async Task Log_only_level(bool async)
     {
         var stream = new StringWriter();
-        var actual = await LogTest(
-            async,
-            stream,
-            b => b.LogTo(stream.WriteLine, LogLevel.Information, DbContextLoggerOptions.Level)
+        var actual = await LogTest(async, stream, b =>
+            b.LogTo(stream.WriteLine, LogLevel.Information, DbContextLoggerOptions.Level)
         );
 
         AssertLog(
@@ -385,10 +336,8 @@ public class DbContextLoggerTests
     public async Task Log_only_ID(bool async)
     {
         var stream = new StringWriter();
-        var actual = await LogTest(
-            async,
-            stream,
-            b => b.LogTo(stream.WriteLine, LogLevel.Information, DbContextLoggerOptions.Id)
+        var actual = await LogTest(async, stream, b =>
+            b.LogTo(stream.WriteLine, LogLevel.Information, DbContextLoggerOptions.Id)
         );
 
         AssertLog(
@@ -404,10 +353,8 @@ public class DbContextLoggerTests
     public async Task Log_only_category(bool async)
     {
         var stream = new StringWriter();
-        var actual = await LogTest(
-            async,
-            stream,
-            b => b.LogTo(stream.WriteLine, LogLevel.Information, DbContextLoggerOptions.Category)
+        var actual = await LogTest(async, stream, b =>
+            b.LogTo(stream.WriteLine, LogLevel.Information, DbContextLoggerOptions.Category)
         );
 
         AssertLog(
@@ -423,15 +370,12 @@ public class DbContextLoggerTests
     public async Task Log_level_and_ID(bool async)
     {
         var stream = new StringWriter();
-        var actual = await LogTest(
-            async,
-            stream,
-            b =>
-                b.LogTo(
-                    stream.WriteLine,
-                    LogLevel.Information,
-                    DbContextLoggerOptions.Id | DbContextLoggerOptions.Level
-                )
+        var actual = await LogTest(async, stream, b =>
+            b.LogTo(
+                stream.WriteLine,
+                LogLevel.Information,
+                DbContextLoggerOptions.Id | DbContextLoggerOptions.Level
+            )
         );
 
         AssertLog(

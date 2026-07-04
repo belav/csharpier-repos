@@ -554,36 +554,27 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                         .Dispose(); //);
 
                     // The notBefore value a whole second earlier:
-                    AssertExtensions.Throws<ArgumentException>(
-                        "notBefore",
-                        () =>
-                        {
-                            request
-                                .Create(issuer, notBefore.AddSeconds(-1), notAfter, serial)
-                                .Dispose();
-                        }
-                    );
+                    AssertExtensions.Throws<ArgumentException>("notBefore", () =>
+                    {
+                        request
+                            .Create(issuer, notBefore.AddSeconds(-1), notAfter, serial)
+                            .Dispose();
+                    });
 
                     // The notAfter value bumped past the second mark:
                     DateTimeOffset tooLate = notAfter.AddMilliseconds(1000 - notAfter.Millisecond);
-                    AssertExtensions.Throws<ArgumentException>(
-                        "notAfter",
-                        () =>
-                        {
-                            request.Create(issuer, notBefore, tooLate, serial).Dispose();
-                        }
-                    );
+                    AssertExtensions.Throws<ArgumentException>("notAfter", () =>
+                    {
+                        request.Create(issuer, notBefore, tooLate, serial).Dispose();
+                    });
 
                     // And ensure that both out of range isn't magically valid again
-                    AssertExtensions.Throws<ArgumentException>(
-                        "notBefore",
-                        () =>
-                        {
-                            request
-                                .Create(issuer, notBefore.AddDays(-1), notAfter.AddDays(1), serial)
-                                .Dispose();
-                        }
-                    );
+                    AssertExtensions.Throws<ArgumentException>("notBefore", () =>
+                    {
+                        request
+                            .Create(issuer, notBefore.AddDays(-1), notAfter.AddDays(1), serial)
+                            .Dispose();
+                    });
                 }
             }
         }
@@ -897,9 +888,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
                     byte[] serialNumber = { 1, 1, 2, 3, 5, 8, 13 };
 
-                    AssertExtensions.Throws<ArgumentException>(
-                        "issuerCertificate",
-                        () => request.Create(cert, now, now.AddHours(3), serialNumber)
+                    AssertExtensions.Throws<ArgumentException>("issuerCertificate", () =>
+                        request.Create(cert, now, now.AddHours(3), serialNumber)
                     );
 
                     // Passes with the generator
@@ -949,9 +939,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
                     byte[] serialNumber = { 1, 1, 2, 3, 5, 8, 13 };
 
-                    AssertExtensions.Throws<ArgumentException>(
-                        "issuerCertificate",
-                        () => request.Create(cert, now, now.AddHours(3), serialNumber)
+                    AssertExtensions.Throws<ArgumentException>("issuerCertificate", () =>
+                        request.Create(cert, now, now.AddHours(3), serialNumber)
                     );
 
                     X509SignatureGenerator ecdsaGenerator = X509SignatureGenerator.CreateForECDsa(
@@ -1001,9 +990,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
 
                     byte[] serialNumber = { 1, 1, 2, 3, 5, 8, 13 };
 
-                    AssertExtensions.Throws<ArgumentException>(
-                        "issuerCertificate",
-                        () => request.Create(cert, now, now.AddHours(3), serialNumber)
+                    AssertExtensions.Throws<ArgumentException>("issuerCertificate", () =>
+                        request.Create(cert, now, now.AddHours(3), serialNumber)
                     );
 
                     X509SignatureGenerator generator = X509SignatureGenerator.CreateForRSA(

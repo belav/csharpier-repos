@@ -222,42 +222,33 @@ namespace System.DirectoryServices.AccountManagement.Tests
             ContextType contextType
         )
         {
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "contextType",
-                () => new PrincipalContext(contextType)
+            AssertExtensions.Throws<InvalidEnumArgumentException>("contextType", () =>
+                new PrincipalContext(contextType)
             );
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "contextType",
-                () => new PrincipalContext(contextType, "name")
+            AssertExtensions.Throws<InvalidEnumArgumentException>("contextType", () =>
+                new PrincipalContext(contextType, "name")
             );
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "contextType",
-                () => new PrincipalContext(contextType, "name", "container")
+            AssertExtensions.Throws<InvalidEnumArgumentException>("contextType", () =>
+                new PrincipalContext(contextType, "name", "container")
             );
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "contextType",
-                () =>
-                    new PrincipalContext(contextType, "name", "container", ContextOptions.Negotiate)
+            AssertExtensions.Throws<InvalidEnumArgumentException>("contextType", () =>
+                new PrincipalContext(contextType, "name", "container", ContextOptions.Negotiate)
             );
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "contextType",
-                () => new PrincipalContext(contextType, "name", "userName", "password")
+            AssertExtensions.Throws<InvalidEnumArgumentException>("contextType", () =>
+                new PrincipalContext(contextType, "name", "userName", "password")
             );
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "contextType",
-                () => new PrincipalContext(contextType, "name", "container", "userName", "password")
+            AssertExtensions.Throws<InvalidEnumArgumentException>("contextType", () =>
+                new PrincipalContext(contextType, "name", "container", "userName", "password")
             );
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "contextType",
-                () =>
-                    new PrincipalContext(
-                        contextType,
-                        "name",
-                        "container",
-                        ContextOptions.Negotiate,
-                        "userName",
-                        "password"
-                    )
+            AssertExtensions.Throws<InvalidEnumArgumentException>("contextType", () =>
+                new PrincipalContext(
+                    contextType,
+                    "name",
+                    "container",
+                    ContextOptions.Negotiate,
+                    "userName",
+                    "password"
+                )
             );
         }
 
@@ -276,53 +267,43 @@ namespace System.DirectoryServices.AccountManagement.Tests
         [Fact]
         public void Ctor_ActiveDirectoryContextTypeWithoutNameAndContainer_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new PrincipalContext(ContextType.ApplicationDirectory)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new PrincipalContext(ContextType.ApplicationDirectory)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new PrincipalContext(ContextType.ApplicationDirectory, "name", "")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new PrincipalContext(ContextType.ApplicationDirectory, "name", "")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new PrincipalContext(ContextType.ApplicationDirectory, "name", null)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new PrincipalContext(ContextType.ApplicationDirectory, "name", null)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new PrincipalContext(ContextType.ApplicationDirectory, "name")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new PrincipalContext(ContextType.ApplicationDirectory, "name")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new PrincipalContext(
-                        ContextType.ApplicationDirectory,
-                        "name",
-                        "userName",
-                        "password"
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new PrincipalContext(
+                    ContextType.ApplicationDirectory,
+                    "name",
+                    "userName",
+                    "password"
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new PrincipalContext(
-                        ContextType.ApplicationDirectory,
-                        "name",
-                        "",
-                        "userName",
-                        "password"
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new PrincipalContext(
+                    ContextType.ApplicationDirectory,
+                    "name",
+                    "",
+                    "userName",
+                    "password"
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new PrincipalContext(
-                        ContextType.ApplicationDirectory,
-                        "name",
-                        null,
-                        "userName",
-                        "password"
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new PrincipalContext(
+                    ContextType.ApplicationDirectory,
+                    "name",
+                    null,
+                    "userName",
+                    "password"
+                )
             );
         }
 
@@ -331,59 +312,44 @@ namespace System.DirectoryServices.AccountManagement.Tests
         [InlineData((ContextOptions)int.MaxValue)]
         public void Ctor_InvalidOptions_ThrowsInvalidEnumArgumentException(ContextOptions options)
         {
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "options",
-                () => new PrincipalContext(ContextType.Machine, "name", null, options)
+            AssertExtensions.Throws<InvalidEnumArgumentException>("options", () =>
+                new PrincipalContext(ContextType.Machine, "name", null, options)
             );
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "options",
-                () => new PrincipalContext(ContextType.Domain, "name", null, options)
+            AssertExtensions.Throws<InvalidEnumArgumentException>("options", () =>
+                new PrincipalContext(ContextType.Domain, "name", null, options)
             );
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "options",
-                () =>
-                    new PrincipalContext(
-                        ContextType.ApplicationDirectory,
-                        "name",
-                        "container",
-                        options
-                    )
+            AssertExtensions.Throws<InvalidEnumArgumentException>("options", () =>
+                new PrincipalContext(ContextType.ApplicationDirectory, "name", "container", options)
             );
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "options",
-                () =>
-                    new PrincipalContext(
-                        ContextType.Machine,
-                        "name",
-                        null,
-                        options,
-                        "userName",
-                        "password"
-                    )
+            AssertExtensions.Throws<InvalidEnumArgumentException>("options", () =>
+                new PrincipalContext(
+                    ContextType.Machine,
+                    "name",
+                    null,
+                    options,
+                    "userName",
+                    "password"
+                )
             );
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "options",
-                () =>
-                    new PrincipalContext(
-                        ContextType.Domain,
-                        "name",
-                        null,
-                        options,
-                        "userName",
-                        "password"
-                    )
+            AssertExtensions.Throws<InvalidEnumArgumentException>("options", () =>
+                new PrincipalContext(
+                    ContextType.Domain,
+                    "name",
+                    null,
+                    options,
+                    "userName",
+                    "password"
+                )
             );
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "options",
-                () =>
-                    new PrincipalContext(
-                        ContextType.ApplicationDirectory,
-                        "name",
-                        "container",
-                        options,
-                        "userName",
-                        "password"
-                    )
+            AssertExtensions.Throws<InvalidEnumArgumentException>("options", () =>
+                new PrincipalContext(
+                    ContextType.ApplicationDirectory,
+                    "name",
+                    "container",
+                    options,
+                    "userName",
+                    "password"
+                )
             );
         }
 
@@ -403,46 +369,38 @@ namespace System.DirectoryServices.AccountManagement.Tests
             ContextOptions options
         )
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new PrincipalContext(contextType, "name", null, options)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new PrincipalContext(contextType, "name", null, options)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new PrincipalContext(contextType, "name", null, options, "userName", "password")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new PrincipalContext(contextType, "name", null, options, "userName", "password")
             );
         }
 
         [Fact]
         public void Ctor_MachineContextTypeWithContainer_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new PrincipalContext(ContextType.Machine, "name", "container")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new PrincipalContext(ContextType.Machine, "name", "container")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new PrincipalContext(
-                        ContextType.Machine,
-                        "name",
-                        "container",
-                        "userName",
-                        "password"
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new PrincipalContext(
+                    ContextType.Machine,
+                    "name",
+                    "container",
+                    "userName",
+                    "password"
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new PrincipalContext(
-                        ContextType.Machine,
-                        "name",
-                        "container",
-                        ContextOptions.Negotiate,
-                        "userName",
-                        "password"
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new PrincipalContext(
+                    ContextType.Machine,
+                    "name",
+                    "container",
+                    ContextOptions.Negotiate,
+                    "userName",
+                    "password"
+                )
             );
         }
 
@@ -454,25 +412,21 @@ namespace System.DirectoryServices.AccountManagement.Tests
             string password
         )
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new PrincipalContext(ContextType.Machine, "name", userName, password)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new PrincipalContext(ContextType.Machine, "name", userName, password)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new PrincipalContext(ContextType.Machine, "name", null, userName, password)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new PrincipalContext(ContextType.Machine, "name", null, userName, password)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new PrincipalContext(
-                        ContextType.Machine,
-                        "name",
-                        null,
-                        ContextOptions.Negotiate,
-                        userName,
-                        password
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new PrincipalContext(
+                    ContextType.Machine,
+                    "name",
+                    null,
+                    ContextOptions.Negotiate,
+                    userName,
+                    password
+                )
             );
         }
 
@@ -590,13 +544,11 @@ namespace System.DirectoryServices.AccountManagement.Tests
         )
         {
             var context = new PrincipalContext(ContextType.Machine);
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => context.ValidateCredentials(userName, password)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                context.ValidateCredentials(userName, password)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => context.ValidateCredentials(userName, password, ContextOptions.Negotiate)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                context.ValidateCredentials(userName, password, ContextOptions.Negotiate)
             );
         }
 
@@ -611,9 +563,8 @@ namespace System.DirectoryServices.AccountManagement.Tests
         )
         {
             var context = new PrincipalContext(ContextType.Machine);
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => context.ValidateCredentials("userName", "password", options)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                context.ValidateCredentials("userName", "password", options)
             );
         }
 

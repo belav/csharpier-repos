@@ -61,9 +61,8 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] inputData = { 5, 0 };
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "expectedTag",
-                () => reader.ReadNull(new Asn1Tag(UniversalTagNumber.Integer))
+            AssertExtensions.Throws<ArgumentException>("expectedTag", () =>
+                reader.ReadNull(new Asn1Tag(UniversalTagNumber.Integer))
             );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
@@ -87,9 +86,8 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] inputData = { 0x87, 0 };
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "expectedTag",
-                () => reader.ReadNull(new Asn1Tag(UniversalTagNumber.Integer))
+            AssertExtensions.Throws<ArgumentException>("expectedTag", () =>
+                reader.ReadNull(new Asn1Tag(UniversalTagNumber.Integer))
             );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");

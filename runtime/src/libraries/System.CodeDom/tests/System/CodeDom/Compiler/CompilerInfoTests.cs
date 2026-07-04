@@ -60,9 +60,8 @@ namespace System.CodeDom.Compiler.Tests
         public void CreateProvider_NullProviderOptions_ThrowsArgumentNullException()
         {
             CompilerInfo compilerInfo = CodeDomProvider.GetCompilerInfo("cs");
-            AssertExtensions.Throws<ArgumentNullException>(
-                "providerOptions",
-                () => compilerInfo.CreateProvider(null)
+            AssertExtensions.Throws<ArgumentNullException>("providerOptions", () =>
+                compilerInfo.CreateProvider(null)
             );
         }
 

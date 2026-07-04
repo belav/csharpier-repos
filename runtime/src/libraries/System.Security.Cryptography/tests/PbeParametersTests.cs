@@ -13,14 +13,12 @@ namespace System.Security.Cryptography.Tests
         [InlineData(-1000)]
         public static void PositiveIterationsRequired(int iterationCount)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                nameof(iterationCount),
-                () =>
-                    new PbeParameters(
-                        PbeEncryptionAlgorithm.Aes128Cbc,
-                        HashAlgorithmName.SHA256,
-                        iterationCount
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(iterationCount), () =>
+                new PbeParameters(
+                    PbeEncryptionAlgorithm.Aes128Cbc,
+                    HashAlgorithmName.SHA256,
+                    iterationCount
+                )
             );
         }
 

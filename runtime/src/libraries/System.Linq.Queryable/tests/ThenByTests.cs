@@ -96,9 +96,8 @@ namespace System.Linq.Tests.LegacyTests
         public void NullKeySelector()
         {
             Expression<Func<DateTime, int>> keySelector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => Enumerable.Empty<DateTime>().AsQueryable().OrderBy(e => e).ThenBy(keySelector)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                Enumerable.Empty<DateTime>().AsQueryable().OrderBy(e => e).ThenBy(keySelector)
             );
         }
 
@@ -106,9 +105,8 @@ namespace System.Linq.Tests.LegacyTests
         public void NullSourceComparer()
         {
             IOrderedQueryable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.ThenBy(i => i, null)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.ThenBy(i => i, null)
             );
         }
 
@@ -116,14 +114,8 @@ namespace System.Linq.Tests.LegacyTests
         public void NullKeySelectorComparer()
         {
             Expression<Func<DateTime, int>> keySelector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    Enumerable
-                        .Empty<DateTime>()
-                        .AsQueryable()
-                        .OrderBy(e => e)
-                        .ThenBy(keySelector, null)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                Enumerable.Empty<DateTime>().AsQueryable().OrderBy(e => e).ThenBy(keySelector, null)
             );
         }
 

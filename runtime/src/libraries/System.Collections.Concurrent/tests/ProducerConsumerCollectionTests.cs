@@ -67,9 +67,8 @@ namespace System.Collections.Concurrent.Tests
         [Fact]
         public void Ctor_InvalidArgs_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "collection",
-                () => CreateProducerConsumerCollection(null)
+            AssertExtensions.Throws<ArgumentNullException>("collection", () =>
+                CreateProducerConsumerCollection(null)
             );
         }
 
@@ -526,15 +525,11 @@ namespace System.Collections.Concurrent.Tests
 
             AssertExtensions.Throws<ArgumentNullException>("array", () => c.CopyTo(null, 0));
             Assert.Throws<ArgumentOutOfRangeException>(() => c.CopyTo(dest, -1));
-            AssertExtensions.Throws<ArgumentException>(
-                CopyToNoLengthParamName,
-                "",
-                () => c.CopyTo(dest, dest.Length)
+            AssertExtensions.Throws<ArgumentException>(CopyToNoLengthParamName, "", () =>
+                c.CopyTo(dest, dest.Length)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                CopyToNoLengthParamName,
-                "",
-                () => c.CopyTo(dest, dest.Length - 2)
+            AssertExtensions.Throws<ArgumentException>(CopyToNoLengthParamName, "", () =>
+                c.CopyTo(dest, dest.Length - 2)
             );
 
             AssertExtensions.Throws<ArgumentException>(null, () => c.CopyTo(new int[7, 7], 0));
@@ -548,15 +543,11 @@ namespace System.Collections.Concurrent.Tests
 
             AssertExtensions.Throws<ArgumentNullException>("array", () => c.CopyTo(null, 0));
             Assert.Throws<ArgumentOutOfRangeException>(() => c.CopyTo(dest, -1));
-            AssertExtensions.Throws<ArgumentException>(
-                CopyToNoLengthParamName,
-                "",
-                () => c.CopyTo(dest, dest.Length)
+            AssertExtensions.Throws<ArgumentException>(CopyToNoLengthParamName, "", () =>
+                c.CopyTo(dest, dest.Length)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                CopyToNoLengthParamName,
-                "",
-                () => c.CopyTo(dest, dest.Length - 2)
+            AssertExtensions.Throws<ArgumentException>(CopyToNoLengthParamName, "", () =>
+                c.CopyTo(dest, dest.Length - 2)
             );
         }
 
@@ -760,15 +751,11 @@ namespace System.Collections.Concurrent.Tests
             Parallel.For(0, NumItems, i => Assert.True(c.TryAdd(i)));
             Assert.Equal(NumItems, c.Count);
 
-            Parallel.For(
-                0,
-                10,
-                i =>
-                {
-                    var hs = new HashSet<int>(c.ToArray());
-                    Assert.Equal(NumItems, hs.Count);
-                }
-            );
+            Parallel.For(0, 10, i =>
+            {
+                var hs = new HashSet<int>(c.ToArray());
+                Assert.Equal(NumItems, hs.Count);
+            });
         }
 
         [Fact]
@@ -807,15 +794,11 @@ namespace System.Collections.Concurrent.Tests
             Parallel.For(0, NumItems, i => Assert.True(c.TryAdd(i)));
             Assert.Equal(NumItems, c.Count);
 
-            Parallel.For(
-                0,
-                10,
-                i =>
-                {
-                    var hs = new HashSet<int>(c);
-                    Assert.Equal(NumItems, hs.Count);
-                }
-            );
+            Parallel.For(0, 10, i =>
+            {
+                var hs = new HashSet<int>(c);
+                Assert.Equal(NumItems, hs.Count);
+            });
         }
 
         [ConditionalTheory(
@@ -833,9 +816,8 @@ namespace System.Collections.Concurrent.Tests
 
             DateTime end = default(DateTime);
             using (
-                var b = new Barrier(
-                    Environment.ProcessorCount * threadsPerProc,
-                    _ => end = DateTime.UtcNow + TimeSpan.FromSeconds(seconds)
+                var b = new Barrier(Environment.ProcessorCount * threadsPerProc, _ =>
+                    end = DateTime.UtcNow + TimeSpan.FromSeconds(seconds)
                 )
             )
             {

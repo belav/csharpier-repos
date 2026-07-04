@@ -184,120 +184,117 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
 
         await c
             .Database.CreateExecutionStrategy()
-            .ExecuteAsync(
-                c,
-                async context =>
+            .ExecuteAsync(c, async context =>
+            {
+                var synthesizedPropertyName =
+                    $"_TableSharingConcurrencyTokenConvention_{propertyName}";
+
+                await using var transaction = BeginTransaction(context.Database);
+
+                var fan = context.Set<TEntity>().Single(e => e.Name == "Alice");
+
+                var fanEntry = c.Entry(fan);
+                var swagEntry = fanEntry.Reference(s => s.Swag).TargetEntry!;
+                var fanVersion1 = fanEntry.Property<TVersion>(propertyName).CurrentValue;
+                var swagVersion1 = default(TVersion);
+
+                if (mapping != Mapping.Tpt) // Issue #22060
                 {
-                    var synthesizedPropertyName =
-                        $"_TableSharingConcurrencyTokenConvention_{propertyName}";
+                    swagVersion1 = swagEntry
+                        .Property<TVersion>(synthesizedPropertyName)
+                        .CurrentValue;
 
-                    await using var transaction = BeginTransaction(context.Database);
-
-                    var fan = context.Set<TEntity>().Single(e => e.Name == "Alice");
-
-                    var fanEntry = c.Entry(fan);
-                    var swagEntry = fanEntry.Reference(s => s.Swag).TargetEntry!;
-                    var fanVersion1 = fanEntry.Property<TVersion>(propertyName).CurrentValue;
-                    var swagVersion1 = default(TVersion);
-
-                    if (mapping != Mapping.Tpt) // Issue #22060
-                    {
-                        swagVersion1 = swagEntry
-                            .Property<TVersion>(synthesizedPropertyName)
-                            .CurrentValue;
-
-                        Assert.Equal(fanVersion1, swagVersion1);
-                    }
-
-                    await using var innerContext = CreateF1Context();
-                    UseTransaction(innerContext.Database, transaction);
-                    var fanInner = innerContext.Set<TEntity>().Single(e => e.Name == "Alice");
-
-                    if (updateOwnedFirst)
-                    {
-                        fan.Swag.Stuff += "+";
-                        fanInner.Swag.Stuff += "-";
-                    }
-                    else
-                    {
-                        fanInner.Name += "-";
-                        fan.Name += "+";
-                    }
-
-                    await innerContext.SaveChangesAsync();
-
-                    if (updateOwnedFirst && mapping == Mapping.Tpt) // Issue #22060
-                    {
-                        await context.SaveChangesAsync();
-                        return;
-                    }
-
-                    await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(() =>
-                        context.SaveChangesAsync()
-                    );
-
-                    await fanEntry.ReloadAsync();
-                    await swagEntry.ReloadAsync();
-
-                    await context.SaveChangesAsync();
-
-                    var fanVersion2 = fanEntry.Property<TVersion>(propertyName).CurrentValue;
-                    Assert.NotEqual(fanVersion1, fanVersion2);
-
-                    var swagVersion2 = default(TVersion);
-                    if (mapping != Mapping.Tpt) // Issue #22060
-                    {
-                        swagVersion2 = swagEntry
-                            .Property<TVersion>(synthesizedPropertyName)
-                            .CurrentValue;
-                        Assert.Equal(fanVersion2, swagVersion2);
-                        Assert.NotEqual(swagVersion1, swagVersion2);
-                    }
-
-                    await innerContext.Entry(fanInner).ReloadAsync();
-                    await innerContext.Entry(fanInner.Swag).ReloadAsync();
-
-                    if (updateOwnedFirst)
-                    {
-                        fanInner.Name += "-";
-                        fan.Name += "+";
-                    }
-                    else
-                    {
-                        fan.Swag.Stuff += "+";
-                        fanInner.Swag.Stuff += "-";
-                    }
-
-                    await innerContext.SaveChangesAsync();
-
-                    if (!updateOwnedFirst && mapping == Mapping.Tpt) // Issue #22060
-                    {
-                        await context.SaveChangesAsync();
-                        return;
-                    }
-
-                    await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(() =>
-                        context.SaveChangesAsync()
-                    );
-
-                    await fanEntry.ReloadAsync();
-                    await swagEntry.ReloadAsync();
-
-                    await context.SaveChangesAsync();
-
-                    var fanVersion3 = fanEntry.Property<TVersion>(propertyName).CurrentValue;
-                    Assert.NotEqual(fanVersion2, fanVersion3);
-
-                    if (mapping != Mapping.Tpt) // Issue #22060
-                    {
-                        var swagVersion3 = swagEntry
-                            .Property<TVersion>(synthesizedPropertyName)
-                            .CurrentValue;
-                        Assert.Equal(fanVersion3, swagVersion3);
-                        Assert.NotEqual(swagVersion2, swagVersion3);
-                    }
+                    Assert.Equal(fanVersion1, swagVersion1);
                 }
-            );
+
+                await using var innerContext = CreateF1Context();
+                UseTransaction(innerContext.Database, transaction);
+                var fanInner = innerContext.Set<TEntity>().Single(e => e.Name == "Alice");
+
+                if (updateOwnedFirst)
+                {
+                    fan.Swag.Stuff += "+";
+                    fanInner.Swag.Stuff += "-";
+                }
+                else
+                {
+                    fanInner.Name += "-";
+                    fan.Name += "+";
+                }
+
+                await innerContext.SaveChangesAsync();
+
+                if (updateOwnedFirst && mapping == Mapping.Tpt) // Issue #22060
+                {
+                    await context.SaveChangesAsync();
+                    return;
+                }
+
+                await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(() =>
+                    context.SaveChangesAsync()
+                );
+
+                await fanEntry.ReloadAsync();
+                await swagEntry.ReloadAsync();
+
+                await context.SaveChangesAsync();
+
+                var fanVersion2 = fanEntry.Property<TVersion>(propertyName).CurrentValue;
+                Assert.NotEqual(fanVersion1, fanVersion2);
+
+                var swagVersion2 = default(TVersion);
+                if (mapping != Mapping.Tpt) // Issue #22060
+                {
+                    swagVersion2 = swagEntry
+                        .Property<TVersion>(synthesizedPropertyName)
+                        .CurrentValue;
+                    Assert.Equal(fanVersion2, swagVersion2);
+                    Assert.NotEqual(swagVersion1, swagVersion2);
+                }
+
+                await innerContext.Entry(fanInner).ReloadAsync();
+                await innerContext.Entry(fanInner.Swag).ReloadAsync();
+
+                if (updateOwnedFirst)
+                {
+                    fanInner.Name += "-";
+                    fan.Name += "+";
+                }
+                else
+                {
+                    fan.Swag.Stuff += "+";
+                    fanInner.Swag.Stuff += "-";
+                }
+
+                await innerContext.SaveChangesAsync();
+
+                if (!updateOwnedFirst && mapping == Mapping.Tpt) // Issue #22060
+                {
+                    await context.SaveChangesAsync();
+                    return;
+                }
+
+                await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(() =>
+                    context.SaveChangesAsync()
+                );
+
+                await fanEntry.ReloadAsync();
+                await swagEntry.ReloadAsync();
+
+                await context.SaveChangesAsync();
+
+                var fanVersion3 = fanEntry.Property<TVersion>(propertyName).CurrentValue;
+                Assert.NotEqual(fanVersion2, fanVersion3);
+
+                if (mapping != Mapping.Tpt) // Issue #22060
+                {
+                    var swagVersion3 = swagEntry
+                        .Property<TVersion>(synthesizedPropertyName)
+                        .CurrentValue;
+                    Assert.Equal(fanVersion3, swagVersion3);
+                    Assert.NotEqual(swagVersion2, swagVersion3);
+                }
+            });
     }
 
     protected async Task Row_version_with_table_splitting<TEntity, TCity, TVersion>(
@@ -312,132 +309,123 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
 
         await c
             .Database.CreateExecutionStrategy()
-            .ExecuteAsync(
-                c,
-                async context =>
+            .ExecuteAsync(c, async context =>
+            {
+                var synthesizedPropertyName =
+                    $"_TableSharingConcurrencyTokenConvention_{propertyName}";
+
+                await using var transaction = BeginTransaction(context.Database);
+
+                var circuit = context
+                    .Set<TEntity>()
+                    .Include(e => e.City)
+                    .Single(e => e.Name == "Monaco");
+
+                var circuitEntry = c.Entry(circuit);
+                var cityEntry = circuitEntry.Reference(s => s.City).TargetEntry!;
+                var circuitVersion1 = circuitEntry.Property<TVersion>(propertyName).CurrentValue;
+                var cityVersion1 = default(TVersion);
+
+                if (mapping != Mapping.Tpt) // Issue #22060
                 {
-                    var synthesizedPropertyName =
-                        $"_TableSharingConcurrencyTokenConvention_{propertyName}";
-
-                    await using var transaction = BeginTransaction(context.Database);
-
-                    var circuit = context
-                        .Set<TEntity>()
-                        .Include(e => e.City)
-                        .Single(e => e.Name == "Monaco");
-
-                    var circuitEntry = c.Entry(circuit);
-                    var cityEntry = circuitEntry.Reference(s => s.City).TargetEntry!;
-                    var circuitVersion1 = circuitEntry
-                        .Property<TVersion>(propertyName)
+                    cityVersion1 = cityEntry
+                        .Property<TVersion>(synthesizedPropertyName)
                         .CurrentValue;
-                    var cityVersion1 = default(TVersion);
 
-                    if (mapping != Mapping.Tpt) // Issue #22060
-                    {
-                        cityVersion1 = cityEntry
-                            .Property<TVersion>(synthesizedPropertyName)
-                            .CurrentValue;
-
-                        Assert.Equal(circuitVersion1, cityVersion1);
-                    }
-
-                    await using var innerContext = CreateF1Context();
-                    UseTransaction(innerContext.Database, transaction);
-                    var circuitInner = innerContext
-                        .Set<TEntity>()
-                        .Include(e => e.City)
-                        .Single(e => e.Name == "Monaco");
-
-                    if (updateDependentFirst)
-                    {
-                        circuit.City.Name += "+";
-                        circuitInner.City.Name += "-";
-                    }
-                    else
-                    {
-                        circuit.Name += "+";
-                        circuitInner.Name += "-";
-                    }
-
-                    await innerContext.SaveChangesAsync();
-
-                    if (updateDependentFirst && mapping == Mapping.Tpt) // Issue #22060
-                    {
-                        await context.SaveChangesAsync();
-                        return;
-                    }
-
-                    await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(() =>
-                        context.SaveChangesAsync()
-                    );
-
-                    await circuitEntry.ReloadAsync();
-                    await cityEntry.ReloadAsync();
-
-                    await context.SaveChangesAsync();
-
-                    var circuitVersion2 = circuitEntry
-                        .Property<TVersion>(propertyName)
-                        .CurrentValue;
-                    Assert.NotEqual(circuitVersion1, circuitVersion2);
-
-                    var cityVersion2 = default(TVersion);
-                    if (mapping != Mapping.Tpt) // Issue #22060
-                    {
-                        cityVersion2 = cityEntry
-                            .Property<TVersion>(synthesizedPropertyName)
-                            .CurrentValue;
-                        Assert.Equal(circuitVersion2, cityVersion2);
-                        Assert.NotEqual(cityVersion1, cityVersion2);
-                    }
-
-                    await innerContext.Entry(circuitInner).ReloadAsync();
-                    await innerContext.Entry(circuitInner.City).ReloadAsync();
-
-                    if (updateDependentFirst)
-                    {
-                        circuit.Name += "+";
-                        circuitInner.Name += "-";
-                    }
-                    else
-                    {
-                        circuit.City.Name += "+";
-                        circuitInner.City.Name += "-";
-                    }
-
-                    await innerContext.SaveChangesAsync();
-
-                    if (!updateDependentFirst && mapping == Mapping.Tpt) // Issue #22060
-                    {
-                        await context.SaveChangesAsync();
-                        return;
-                    }
-
-                    await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(() =>
-                        context.SaveChangesAsync()
-                    );
-
-                    await circuitEntry.ReloadAsync();
-                    await cityEntry.ReloadAsync();
-
-                    await context.SaveChangesAsync();
-
-                    var circuitVersion3 = circuitEntry
-                        .Property<TVersion>(propertyName)
-                        .CurrentValue;
-                    Assert.NotEqual(circuitVersion2, circuitVersion3);
-
-                    if (mapping != Mapping.Tpt) // Issue #22060
-                    {
-                        var cityVersion3 = cityEntry
-                            .Property<TVersion>(synthesizedPropertyName)
-                            .CurrentValue;
-                        Assert.Equal(circuitVersion3, cityVersion3);
-                        Assert.NotEqual(cityVersion2, cityVersion3);
-                    }
+                    Assert.Equal(circuitVersion1, cityVersion1);
                 }
-            );
+
+                await using var innerContext = CreateF1Context();
+                UseTransaction(innerContext.Database, transaction);
+                var circuitInner = innerContext
+                    .Set<TEntity>()
+                    .Include(e => e.City)
+                    .Single(e => e.Name == "Monaco");
+
+                if (updateDependentFirst)
+                {
+                    circuit.City.Name += "+";
+                    circuitInner.City.Name += "-";
+                }
+                else
+                {
+                    circuit.Name += "+";
+                    circuitInner.Name += "-";
+                }
+
+                await innerContext.SaveChangesAsync();
+
+                if (updateDependentFirst && mapping == Mapping.Tpt) // Issue #22060
+                {
+                    await context.SaveChangesAsync();
+                    return;
+                }
+
+                await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(() =>
+                    context.SaveChangesAsync()
+                );
+
+                await circuitEntry.ReloadAsync();
+                await cityEntry.ReloadAsync();
+
+                await context.SaveChangesAsync();
+
+                var circuitVersion2 = circuitEntry.Property<TVersion>(propertyName).CurrentValue;
+                Assert.NotEqual(circuitVersion1, circuitVersion2);
+
+                var cityVersion2 = default(TVersion);
+                if (mapping != Mapping.Tpt) // Issue #22060
+                {
+                    cityVersion2 = cityEntry
+                        .Property<TVersion>(synthesizedPropertyName)
+                        .CurrentValue;
+                    Assert.Equal(circuitVersion2, cityVersion2);
+                    Assert.NotEqual(cityVersion1, cityVersion2);
+                }
+
+                await innerContext.Entry(circuitInner).ReloadAsync();
+                await innerContext.Entry(circuitInner.City).ReloadAsync();
+
+                if (updateDependentFirst)
+                {
+                    circuit.Name += "+";
+                    circuitInner.Name += "-";
+                }
+                else
+                {
+                    circuit.City.Name += "+";
+                    circuitInner.City.Name += "-";
+                }
+
+                await innerContext.SaveChangesAsync();
+
+                if (!updateDependentFirst && mapping == Mapping.Tpt) // Issue #22060
+                {
+                    await context.SaveChangesAsync();
+                    return;
+                }
+
+                await Assert.ThrowsAnyAsync<DbUpdateConcurrencyException>(() =>
+                    context.SaveChangesAsync()
+                );
+
+                await circuitEntry.ReloadAsync();
+                await cityEntry.ReloadAsync();
+
+                await context.SaveChangesAsync();
+
+                var circuitVersion3 = circuitEntry.Property<TVersion>(propertyName).CurrentValue;
+                Assert.NotEqual(circuitVersion2, circuitVersion3);
+
+                if (mapping != Mapping.Tpt) // Issue #22060
+                {
+                    var cityVersion3 = cityEntry
+                        .Property<TVersion>(synthesizedPropertyName)
+                        .CurrentValue;
+                    Assert.Equal(circuitVersion3, cityVersion3);
+                    Assert.NotEqual(cityVersion2, cityVersion3);
+                }
+            });
     }
 
     [ConditionalFact]
@@ -446,48 +434,42 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
         using var c = CreateF1Context();
         await c
             .Database.CreateExecutionStrategy()
-            .ExecuteAsync(
-                c,
-                async context =>
-                {
-                    using var transaction = context.Database.BeginTransaction();
-                    var driver = context.Drivers.Single(d => d.CarNumber == 1);
-                    driver.Podiums = StorePodiums;
-                    var firstVersion = context
-                        .Entry(driver)
-                        .Property<TRowVersion>("Version")
-                        .CurrentValue;
-                    await context.SaveChangesAsync();
+            .ExecuteAsync(c, async context =>
+            {
+                using var transaction = context.Database.BeginTransaction();
+                var driver = context.Drivers.Single(d => d.CarNumber == 1);
+                driver.Podiums = StorePodiums;
+                var firstVersion = context
+                    .Entry(driver)
+                    .Property<TRowVersion>("Version")
+                    .CurrentValue;
+                await context.SaveChangesAsync();
 
-                    using var innerContext = CreateF1Context();
-                    innerContext.Database.UseTransaction(transaction.GetDbTransaction());
-                    driver = innerContext.Drivers.Single(d => d.CarNumber == 1);
-                    Assert.NotEqual(
-                        firstVersion,
-                        innerContext.Entry(driver).Property<TRowVersion>("Version").CurrentValue
-                    );
-                    Assert.Equal(StorePodiums, driver.Podiums);
+                using var innerContext = CreateF1Context();
+                innerContext.Database.UseTransaction(transaction.GetDbTransaction());
+                driver = innerContext.Drivers.Single(d => d.CarNumber == 1);
+                Assert.NotEqual(
+                    firstVersion,
+                    innerContext.Entry(driver).Property<TRowVersion>("Version").CurrentValue
+                );
+                Assert.Equal(StorePodiums, driver.Podiums);
 
-                    var secondVersion = innerContext
-                        .Entry(driver)
-                        .Property<TRowVersion>("Version")
-                        .CurrentValue;
-                    innerContext.Entry(driver).Property<TRowVersion>("Version").CurrentValue =
-                        firstVersion;
-                    await innerContext.SaveChangesAsync();
-                    using var validationContext = CreateF1Context();
-                    validationContext.Database.UseTransaction(transaction.GetDbTransaction());
-                    driver = validationContext.Drivers.Single(d => d.CarNumber == 1);
-                    Assert.Equal(
-                        secondVersion,
-                        validationContext
-                            .Entry(driver)
-                            .Property<TRowVersion>("Version")
-                            .CurrentValue
-                    );
-                    Assert.Equal(StorePodiums, driver.Podiums);
-                }
-            );
+                var secondVersion = innerContext
+                    .Entry(driver)
+                    .Property<TRowVersion>("Version")
+                    .CurrentValue;
+                innerContext.Entry(driver).Property<TRowVersion>("Version").CurrentValue =
+                    firstVersion;
+                await innerContext.SaveChangesAsync();
+                using var validationContext = CreateF1Context();
+                validationContext.Database.UseTransaction(transaction.GetDbTransaction());
+                driver = validationContext.Drivers.Single(d => d.CarNumber == 1);
+                Assert.Equal(
+                    secondVersion,
+                    validationContext.Entry(driver).Property<TRowVersion>("Version").CurrentValue
+                );
+                Assert.Equal(StorePodiums, driver.Podiums);
+            });
     }
 
     [ConditionalFact]
@@ -496,48 +478,41 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
         using var c = CreateF1Context();
         await c
             .Database.CreateExecutionStrategy()
-            .ExecuteAsync(
-                c,
-                async context =>
-                {
-                    using var transaction = context.Database.BeginTransaction();
-                    var sponsor = context.Set<TitleSponsor>().Single();
-                    var sponsorEntry = c.Entry(sponsor);
-                    var detailsEntry = sponsorEntry.Reference(s => s.Details).TargetEntry;
-                    var sponsorVersion = sponsorEntry.Property<TRowVersion>("Version").CurrentValue;
-                    var detailsVersion = detailsEntry.Property<TRowVersion>("Version").CurrentValue;
+            .ExecuteAsync(c, async context =>
+            {
+                using var transaction = context.Database.BeginTransaction();
+                var sponsor = context.Set<TitleSponsor>().Single();
+                var sponsorEntry = c.Entry(sponsor);
+                var detailsEntry = sponsorEntry.Reference(s => s.Details).TargetEntry;
+                var sponsorVersion = sponsorEntry.Property<TRowVersion>("Version").CurrentValue;
+                var detailsVersion = detailsEntry.Property<TRowVersion>("Version").CurrentValue;
 
-                    Assert.Null(
-                        sponsorEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue
-                    );
-                    sponsorEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue = 1;
+                Assert.Null(
+                    sponsorEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue
+                );
+                sponsorEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue = 1;
 
-                    sponsor.Name = "Telecom";
+                sponsor.Name = "Telecom";
 
-                    Assert.Equal(sponsorVersion, detailsVersion);
+                Assert.Equal(sponsorVersion, detailsVersion);
 
-                    await context.SaveChangesAsync();
+                await context.SaveChangesAsync();
 
-                    var newSponsorVersion = sponsorEntry
-                        .Property<TRowVersion>("Version")
-                        .CurrentValue;
-                    var newDetailsVersion = detailsEntry
-                        .Property<TRowVersion>("Version")
-                        .CurrentValue;
+                var newSponsorVersion = sponsorEntry.Property<TRowVersion>("Version").CurrentValue;
+                var newDetailsVersion = detailsEntry.Property<TRowVersion>("Version").CurrentValue;
 
-                    Assert.Equal(newSponsorVersion, newDetailsVersion);
-                    Assert.NotEqual(sponsorVersion, newSponsorVersion);
+                Assert.Equal(newSponsorVersion, newDetailsVersion);
+                Assert.NotEqual(sponsorVersion, newSponsorVersion);
 
-                    Assert.Equal(
-                        1,
-                        sponsorEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue
-                    );
-                    Assert.Equal(
-                        1,
-                        detailsEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue
-                    );
-                }
-            );
+                Assert.Equal(
+                    1,
+                    sponsorEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue
+                );
+                Assert.Equal(
+                    1,
+                    detailsEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue
+                );
+            });
     }
 
     [ConditionalFact]
@@ -546,49 +521,42 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
         using var c = CreateF1Context();
         await c
             .Database.CreateExecutionStrategy()
-            .ExecuteAsync(
-                c,
-                async context =>
-                {
-                    using var transaction = context.Database.BeginTransaction();
-                    var sponsor = context.Set<TitleSponsor>().Single();
-                    var sponsorEntry = c.Entry(sponsor);
-                    var sponsorVersion = sponsorEntry.Property<TRowVersion>("Version").CurrentValue;
+            .ExecuteAsync(c, async context =>
+            {
+                using var transaction = context.Database.BeginTransaction();
+                var sponsor = context.Set<TitleSponsor>().Single();
+                var sponsorEntry = c.Entry(sponsor);
+                var sponsorVersion = sponsorEntry.Property<TRowVersion>("Version").CurrentValue;
 
-                    Assert.Null(
-                        sponsorEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue
-                    );
-                    sponsorEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue = 1;
+                Assert.Null(
+                    sponsorEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue
+                );
+                sponsorEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue = 1;
 
-                    sponsor.Details = new SponsorDetails { Days = 11, Space = 51m };
+                sponsor.Details = new SponsorDetails { Days = 11, Space = 51m };
 
-                    context.ChangeTracker.DetectChanges();
+                context.ChangeTracker.DetectChanges();
 
-                    var detailsEntry = sponsorEntry.Reference(s => s.Details).TargetEntry;
-                    detailsEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue = 1;
+                var detailsEntry = sponsorEntry.Reference(s => s.Details).TargetEntry;
+                detailsEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue = 1;
 
-                    await context.SaveChangesAsync();
+                await context.SaveChangesAsync();
 
-                    var newSponsorVersion = sponsorEntry
-                        .Property<TRowVersion>("Version")
-                        .CurrentValue;
-                    var newDetailsVersion = detailsEntry
-                        .Property<TRowVersion>("Version")
-                        .CurrentValue;
+                var newSponsorVersion = sponsorEntry.Property<TRowVersion>("Version").CurrentValue;
+                var newDetailsVersion = detailsEntry.Property<TRowVersion>("Version").CurrentValue;
 
-                    Assert.Equal(newSponsorVersion, newDetailsVersion);
-                    Assert.NotEqual(sponsorVersion, newSponsorVersion);
+                Assert.Equal(newSponsorVersion, newDetailsVersion);
+                Assert.NotEqual(sponsorVersion, newSponsorVersion);
 
-                    Assert.Equal(
-                        1,
-                        sponsorEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue
-                    );
-                    Assert.Equal(
-                        1,
-                        detailsEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue
-                    );
-                }
-            );
+                Assert.Equal(
+                    1,
+                    sponsorEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue
+                );
+                Assert.Equal(
+                    1,
+                    detailsEntry.Property<int?>(Sponsor.ClientTokenPropertyName).CurrentValue
+                );
+            });
     }
 
     public override void Property_entry_original_value_is_set()

@@ -417,22 +417,16 @@ public class ReverseMapConventions : AutoMapperSpecBase
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>
         {
-            cfg.CreateProfile(
-                "MyMapperProfile",
-                prf =>
-                {
-                    prf.SourceMemberNamingConvention = new UnderscoreNamingConvention();
-                    prf.CreateMap<Rotator_Ad_Run, RotatorAdRunViewModel>();
-                }
-            );
-            cfg.CreateProfile(
-                "MyMapperProfile2",
-                prf =>
-                {
-                    prf.DestinationMemberNamingConvention = new UnderscoreNamingConvention();
-                    prf.CreateMap<RotatorAdRunViewModel, Rotator_Ad_Run>();
-                }
-            );
+            cfg.CreateProfile("MyMapperProfile", prf =>
+            {
+                prf.SourceMemberNamingConvention = new UnderscoreNamingConvention();
+                prf.CreateMap<Rotator_Ad_Run, RotatorAdRunViewModel>();
+            });
+            cfg.CreateProfile("MyMapperProfile2", prf =>
+            {
+                prf.DestinationMemberNamingConvention = new UnderscoreNamingConvention();
+                prf.CreateMap<RotatorAdRunViewModel, Rotator_Ad_Run>();
+            });
         });
 
     protected override void Because_of()

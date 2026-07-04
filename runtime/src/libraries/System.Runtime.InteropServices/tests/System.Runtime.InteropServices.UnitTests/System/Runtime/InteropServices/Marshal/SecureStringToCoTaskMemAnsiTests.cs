@@ -64,9 +64,8 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void SecureStringToCoTaskMemAnsi_NullString_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "s",
-                () => Marshal.SecureStringToCoTaskMemAnsi(null)
+            AssertExtensions.Throws<ArgumentNullException>("s", () =>
+                Marshal.SecureStringToCoTaskMemAnsi(null)
             );
         }
 

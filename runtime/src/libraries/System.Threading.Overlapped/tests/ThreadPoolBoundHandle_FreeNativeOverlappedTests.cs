@@ -13,13 +13,10 @@ public partial class ThreadPoolBoundHandleTests
     {
         using (ThreadPoolBoundHandle handle = CreateThreadPoolBoundHandle())
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "overlapped",
-                () =>
-                {
-                    handle.FreeNativeOverlapped((NativeOverlapped*)null);
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("overlapped", () =>
+            {
+                handle.FreeNativeOverlapped((NativeOverlapped*)null);
+            });
         }
     }
 
@@ -51,13 +48,10 @@ public partial class ThreadPoolBoundHandleTests
 
             using (ThreadPoolBoundHandle handle2 = CreateThreadPoolBoundHandle())
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "overlapped",
-                    () =>
-                    {
-                        handle2.FreeNativeOverlapped(overlapped);
-                    }
-                );
+                AssertExtensions.Throws<ArgumentException>("overlapped", () =>
+                {
+                    handle2.FreeNativeOverlapped(overlapped);
+                });
             }
 
             handle.FreeNativeOverlapped(overlapped);

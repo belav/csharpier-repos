@@ -24,14 +24,11 @@ namespace System.Web.Helpers.Test
         public void BuildChartAddsDefaultArea()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100);
-            AssertBuiltChartAction(
-                chart,
-                c =>
-                {
-                    ChartArea chartArea = Assert.Single(c.ChartAreas);
-                    Assert.Equal("Default", chartArea.Name);
-                }
-            );
+            AssertBuiltChartAction(chart, c =>
+            {
+                ChartArea chartArea = Assert.Single(c.ChartAreas);
+                Assert.Equal("Default", chartArea.Name);
+            });
         }
 
         [Fact]
@@ -42,16 +39,13 @@ namespace System.Web.Helpers.Test
                 1,
                 100
             );
-            AssertBuiltChartAction(
-                chart,
-                c =>
-                {
-                    ChartArea chartArea = Assert.Single(c.ChartAreas);
-                    Assert.Equal("AxisX", chartArea.AxisX.Title);
-                    Assert.Equal(1, chartArea.AxisX.Minimum);
-                    Assert.Equal(100, chartArea.AxisX.Maximum);
-                }
-            );
+            AssertBuiltChartAction(chart, c =>
+            {
+                ChartArea chartArea = Assert.Single(c.ChartAreas);
+                Assert.Equal("AxisX", chartArea.AxisX.Title);
+                Assert.Equal(1, chartArea.AxisX.Minimum);
+                Assert.Equal(100, chartArea.AxisX.Maximum);
+            });
         }
 
         [Fact]
@@ -62,16 +56,13 @@ namespace System.Web.Helpers.Test
                 1,
                 100
             );
-            AssertBuiltChartAction(
-                chart,
-                c =>
-                {
-                    ChartArea chartArea = Assert.Single(c.ChartAreas);
-                    Assert.Equal("AxisY", chartArea.AxisY.Title);
-                    Assert.Equal(1, chartArea.AxisY.Minimum);
-                    Assert.Equal(100, chartArea.AxisY.Maximum);
-                }
-            );
+            AssertBuiltChartAction(chart, c =>
+            {
+                ChartArea chartArea = Assert.Single(c.ChartAreas);
+                Assert.Equal("AxisY", chartArea.AxisY.Title);
+                Assert.Equal(1, chartArea.AxisY.Minimum);
+                Assert.Equal(100, chartArea.AxisY.Maximum);
+            });
         }
 
         [Fact]
@@ -85,13 +76,10 @@ namespace System.Web.Helpers.Test
                 100,
                 themePath: template
             );
-            AssertBuiltChartAction(
-                chart,
-                c =>
-                {
-                    Assert.Equal(2, c.BorderWidth);
-                }
-            );
+            AssertBuiltChartAction(chart, c =>
+            {
+                Assert.Equal(2, c.BorderWidth);
+            });
         }
 
         [Fact]
@@ -121,17 +109,14 @@ namespace System.Web.Helpers.Test
                 100,
                 theme: ChartTheme.Vanilla
             );
-            AssertBuiltChartAction(
-                chart,
-                c =>
-                {
-                    Assert.Equal(ChartColorPalette.SemiTransparent, c.Palette);
-                    Assert.Equal(c.BorderColor, Color.FromArgb(0, Color.Black));
-                    ChartArea chartArea = Assert.Single(c.ChartAreas);
-                    Assert.False(chartArea.AxisX.MajorGrid.Enabled);
-                    Assert.False(chartArea.AxisY.MinorGrid.Enabled);
-                }
-            );
+            AssertBuiltChartAction(chart, c =>
+            {
+                Assert.Equal(ChartColorPalette.SemiTransparent, c.Palette);
+                Assert.Equal(c.BorderColor, Color.FromArgb(0, Color.Black));
+                ChartArea chartArea = Assert.Single(c.ChartAreas);
+                Assert.False(chartArea.AxisX.MajorGrid.Enabled);
+                Assert.False(chartArea.AxisY.MinorGrid.Enabled);
+            });
         }
 
         [Fact]
@@ -165,20 +150,17 @@ namespace System.Web.Helpers.Test
                 theme: ChartTheme.Vanilla,
                 themePath: template
             );
-            AssertBuiltChartAction(
-                chart,
-                c =>
-                {
-                    Assert.Equal(ChartColorPalette.SemiTransparent, c.Palette);
-                    Assert.Equal(c.BorderColor, Color.FromArgb(0, Color.Black));
-                    Assert.Equal(ChartDashStyle.DashDot, c.BorderlineDashStyle);
-                    Legend legend = Assert.Single(c.Legends);
-                    Assert.Equal(legend.BackColor, Color.Red);
-                    ChartArea chartArea = Assert.Single(c.ChartAreas);
-                    Assert.False(chartArea.AxisX.MajorGrid.Enabled);
-                    Assert.False(chartArea.AxisY.MinorGrid.Enabled);
-                }
-            );
+            AssertBuiltChartAction(chart, c =>
+            {
+                Assert.Equal(ChartColorPalette.SemiTransparent, c.Palette);
+                Assert.Equal(c.BorderColor, Color.FromArgb(0, Color.Black));
+                Assert.Equal(ChartDashStyle.DashDot, c.BorderlineDashStyle);
+                Legend legend = Assert.Single(c.Legends);
+                Assert.Equal(legend.BackColor, Color.Red);
+                ChartArea chartArea = Assert.Single(c.ChartAreas);
+                Assert.False(chartArea.AxisX.MajorGrid.Enabled);
+                Assert.False(chartArea.AxisY.MinorGrid.Enabled);
+            });
         }
 
         [Fact]
@@ -213,20 +195,17 @@ namespace System.Web.Helpers.Test
             provider = provider2;
 
             // Assert
-            AssertBuiltChartAction(
-                chart,
-                c =>
-                {
-                    Assert.Equal(ChartColorPalette.SemiTransparent, c.Palette);
-                    Assert.Equal(c.BorderColor, Color.FromArgb(0, Color.Black));
-                    Assert.Equal(ChartDashStyle.DashDot, c.BorderlineDashStyle);
-                    Legend legend = Assert.Single(c.Legends);
-                    Assert.Equal(legend.BackColor, Color.Red);
-                    ChartArea chartArea = Assert.Single(c.ChartAreas);
-                    Assert.False(chartArea.AxisX.MajorGrid.Enabled);
-                    Assert.False(chartArea.AxisY.MinorGrid.Enabled);
-                }
-            );
+            AssertBuiltChartAction(chart, c =>
+            {
+                Assert.Equal(ChartColorPalette.SemiTransparent, c.Palette);
+                Assert.Equal(c.BorderColor, Color.FromArgb(0, Color.Black));
+                Assert.Equal(ChartDashStyle.DashDot, c.BorderlineDashStyle);
+                Legend legend = Assert.Single(c.Legends);
+                Assert.Equal(legend.BackColor, Color.Red);
+                ChartArea chartArea = Assert.Single(c.ChartAreas);
+                Assert.False(chartArea.AxisX.MajorGrid.Enabled);
+                Assert.False(chartArea.AxisY.MinorGrid.Enabled);
+            });
 
             Assert.Equal(1, provider1.FileExistsCalls);
             Assert.Equal(0, provider1.GetFileCalls);
@@ -240,14 +219,11 @@ namespace System.Web.Helpers.Test
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 101, 102);
             Assert.Equal(101, chart.Width);
             Assert.Equal(102, chart.Height);
-            AssertBuiltChartAction(
-                chart,
-                c =>
-                {
-                    Assert.Equal(101, c.Width);
-                    Assert.Equal(102, c.Height);
-                }
-            );
+            AssertBuiltChartAction(chart, c =>
+            {
+                Assert.Equal(101, c.Width);
+                Assert.Equal(102, c.Height);
+            });
         }
 
         [Fact]
@@ -318,15 +294,12 @@ namespace System.Web.Helpers.Test
                 100
             ).DataBindCrossTable(data, "GroupBy", xField: null, yFields: "YValue");
             // todo - anything else to verify here?
-            AssertBuiltChartAction(
-                chart,
-                c =>
-                {
-                    Assert.Equal(2, c.Series.Count);
-                    Assert.Equal(2, c.Series[0].Points.Count);
-                    Assert.Single(c.Series[1].Points);
-                }
-            );
+            AssertBuiltChartAction(chart, c =>
+            {
+                Assert.Equal(2, c.Series.Count);
+                Assert.Equal(2, c.Series[0].Points.Count);
+                Assert.Single(c.Series[1].Points);
+            });
         }
 
         [Fact]
@@ -427,14 +400,11 @@ namespace System.Web.Helpers.Test
                 xField: "XValue"
             );
             // todo - anything else to verify here?
-            AssertBuiltChartAction(
-                chart,
-                c =>
-                {
-                    var series = Assert.Single(c.Series);
-                    Assert.Equal(3, series.Points.Count);
-                }
-            );
+            AssertBuiltChartAction(chart, c =>
+            {
+                var series = Assert.Single(c.Series);
+                Assert.Equal(3, series.Points.Count);
+            });
         }
 
         [Fact]
@@ -446,14 +416,11 @@ namespace System.Web.Helpers.Test
                 xField: null
             );
             // todo - anything else to verify here?
-            AssertBuiltChartAction(
-                chart,
-                c =>
-                {
-                    var series = Assert.Single(c.Series);
-                    Assert.Equal(3, series.Points.Count);
-                }
-            );
+            AssertBuiltChartAction(chart, c =>
+            {
+                var series = Assert.Single(c.Series);
+                Assert.Equal(3, series.Points.Count);
+            });
         }
 
         [Fact]
@@ -534,16 +501,13 @@ namespace System.Web.Helpers.Test
         public void LegendDefaults()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100).AddLegend();
-            AssertBuiltChartAction(
-                chart,
-                c =>
-                {
-                    Legend legend = Assert.Single(c.Legends);
-                    // NOTE: Chart.Legends.Add will create default name
-                    Assert.Equal("Legend1", legend.Name);
-                    Assert.Equal(1, legend.BorderWidth);
-                }
-            );
+            AssertBuiltChartAction(chart, c =>
+            {
+                Legend legend = Assert.Single(c.Legends);
+                // NOTE: Chart.Legends.Add will create default name
+                Assert.Equal("Legend1", legend.Name);
+                Assert.Equal(1, legend.BorderWidth);
+            });
         }
 
         [Fact]
@@ -552,16 +516,13 @@ namespace System.Web.Helpers.Test
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100)
                 .AddLegend("Legend1")
                 .AddLegend("Legend2", "Legend2Name");
-            AssertBuiltChartAction(
-                chart,
-                c =>
-                {
-                    Assert.Equal(2, c.Legends.Count);
-                    Assert.Equal("Legend1", c.Legends[0].Name);
-                    Assert.Equal("Legend2", c.Legends[1].Title);
-                    Assert.Equal("Legend2Name", c.Legends[1].Name);
-                }
-            );
+            AssertBuiltChartAction(chart, c =>
+            {
+                Assert.Equal(2, c.Legends.Count);
+                Assert.Equal("Legend1", c.Legends[0].Name);
+                Assert.Equal("Legend2", c.Legends[1].Title);
+                Assert.Equal("Legend2Name", c.Legends[1].Name);
+            });
         }
 
         [Fact]
@@ -788,14 +749,11 @@ namespace System.Web.Helpers.Test
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100).AddSeries(
                 chartType: "Bar"
             );
-            AssertBuiltChartAction(
-                chart,
-                c =>
-                {
-                    var series = Assert.Single(c.Series);
-                    Assert.Equal(SeriesChartType.Bar, series.ChartType);
-                }
-            );
+            AssertBuiltChartAction(chart, c =>
+            {
+                var series = Assert.Single(c.Series);
+                Assert.Equal(SeriesChartType.Bar, series.ChartType);
+            });
         }
 
         [Fact]
@@ -828,17 +786,14 @@ namespace System.Web.Helpers.Test
         public void TitleDefaults()
         {
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100).AddTitle();
-            AssertBuiltChartAction(
-                chart,
-                c =>
-                {
-                    var title = Assert.Single(c.Titles);
-                    // NOTE: Chart.Titles.Add will create default name
-                    Assert.Equal("Title1", title.Name);
-                    Assert.Equal(String.Empty, title.Text);
-                    Assert.Equal(1, title.BorderWidth);
-                }
-            );
+            AssertBuiltChartAction(chart, c =>
+            {
+                var title = Assert.Single(c.Titles);
+                // NOTE: Chart.Titles.Add will create default name
+                Assert.Equal("Title1", title.Name);
+                Assert.Equal(String.Empty, title.Text);
+                Assert.Equal(1, title.BorderWidth);
+            });
         }
 
         [Fact]
@@ -847,16 +802,13 @@ namespace System.Web.Helpers.Test
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100)
                 .AddTitle(name: "Title1")
                 .AddTitle("Title2Text", name: "Title2");
-            AssertBuiltChartAction(
-                chart,
-                c =>
-                {
-                    Assert.Equal(2, c.Titles.Count);
-                    Assert.Equal("Title1", c.Titles[0].Name);
-                    Assert.Equal("Title2", c.Titles[1].Name);
-                    Assert.Equal("Title2Text", c.Titles[1].Text);
-                }
-            );
+            AssertBuiltChartAction(chart, c =>
+            {
+                Assert.Equal(2, c.Titles.Count);
+                Assert.Equal("Title1", c.Titles[0].Name);
+                Assert.Equal("Title2", c.Titles[1].Name);
+                Assert.Equal("Title2Text", c.Titles[1].Text);
+            });
         }
 
         [Fact]

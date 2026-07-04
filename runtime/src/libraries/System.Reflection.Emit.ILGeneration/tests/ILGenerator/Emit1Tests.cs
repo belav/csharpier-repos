@@ -257,9 +257,8 @@ namespace System.Reflection.Emit.Tests
             );
 
             ILGenerator ilGenerator = method.GetILGenerator();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "meth",
-                () => ilGenerator.Emit(OpCodes.Call, (MethodInfo)null)
+            AssertExtensions.Throws<ArgumentNullException>("meth", () =>
+                ilGenerator.Emit(OpCodes.Call, (MethodInfo)null)
             );
         }
     }

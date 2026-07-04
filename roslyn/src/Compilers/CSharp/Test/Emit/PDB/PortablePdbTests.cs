@@ -459,13 +459,10 @@ class C
     }
 }
 ";
-            var sourceLinkStream = new TestStream(
-                canRead: true,
-                readFunc: (_, __, ___) =>
-                {
-                    throw new Exception("Error!");
-                }
-            );
+            var sourceLinkStream = new TestStream(canRead: true, readFunc: (_, __, ___) =>
+            {
+                throw new Exception("Error!");
+            });
 
             var c = CreateCompilation(
                 Parse(source, "f:/build/goo.cs"),

@@ -12,9 +12,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         [Fact]
         public void GetDomainController_NullContext_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "context",
-                () => DomainController.GetDomainController(null)
+            AssertExtensions.Throws<ArgumentNullException>("context", () =>
+                DomainController.GetDomainController(null)
             );
         }
 
@@ -28,9 +27,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         )
         {
             var context = new DirectoryContext(contextType, "name");
-            AssertExtensions.Throws<ArgumentException>(
-                "context",
-                () => DomainController.GetDomainController(context)
+            AssertExtensions.Throws<ArgumentException>("context", () =>
+                DomainController.GetDomainController(context)
             );
         }
 
@@ -89,21 +87,17 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         [Fact]
         public void FindOne_NullContext_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "context",
-                () => DomainController.FindOne(null)
+            AssertExtensions.Throws<ArgumentNullException>("context", () =>
+                DomainController.FindOne(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "context",
-                () => DomainController.FindOne(null, "siteName")
+            AssertExtensions.Throws<ArgumentNullException>("context", () =>
+                DomainController.FindOne(null, "siteName")
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "context",
-                () => DomainController.FindOne(null, LocatorOptions.AvoidSelf)
+            AssertExtensions.Throws<ArgumentNullException>("context", () =>
+                DomainController.FindOne(null, LocatorOptions.AvoidSelf)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "context",
-                () => DomainController.FindOne(null, "siteName", LocatorOptions.AvoidSelf)
+            AssertExtensions.Throws<ArgumentNullException>("context", () =>
+                DomainController.FindOne(null, "siteName", LocatorOptions.AvoidSelf)
             );
         }
 
@@ -117,21 +111,17 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         )
         {
             var context = new DirectoryContext(contextType, "name");
-            AssertExtensions.Throws<ArgumentException>(
-                "context",
-                () => DomainController.FindOne(context)
+            AssertExtensions.Throws<ArgumentException>("context", () =>
+                DomainController.FindOne(context)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "context",
-                () => DomainController.FindOne(context, "siteName")
+            AssertExtensions.Throws<ArgumentException>("context", () =>
+                DomainController.FindOne(context, "siteName")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "context",
-                () => DomainController.FindOne(context, LocatorOptions.AvoidSelf)
+            AssertExtensions.Throws<ArgumentException>("context", () =>
+                DomainController.FindOne(context, LocatorOptions.AvoidSelf)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "context",
-                () => DomainController.FindOne(context, "siteName", LocatorOptions.AvoidSelf)
+            AssertExtensions.Throws<ArgumentException>("context", () =>
+                DomainController.FindOne(context, "siteName", LocatorOptions.AvoidSelf)
             );
         }
 
@@ -139,13 +129,11 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void FindOne_NullSiteName_ThrowsArgumentNullException()
         {
             var context = new DirectoryContext(DirectoryContextType.Domain);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "siteName",
-                () => DomainController.FindOne(context, null)
+            AssertExtensions.Throws<ArgumentNullException>("siteName", () =>
+                DomainController.FindOne(context, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "siteName",
-                () => DomainController.FindOne(context, null, LocatorOptions.AvoidSelf)
+            AssertExtensions.Throws<ArgumentNullException>("siteName", () =>
+                DomainController.FindOne(context, null, LocatorOptions.AvoidSelf)
             );
         }
 
@@ -153,13 +141,11 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void FindOne_EmptySiteName_ThrowsArgumentException()
         {
             var context = new DirectoryContext(DirectoryContextType.Domain);
-            AssertExtensions.Throws<ArgumentException>(
-                "siteName",
-                () => DomainController.FindOne(context, string.Empty)
+            AssertExtensions.Throws<ArgumentException>("siteName", () =>
+                DomainController.FindOne(context, string.Empty)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "siteName",
-                () => DomainController.FindOne(context, string.Empty, LocatorOptions.AvoidSelf)
+            AssertExtensions.Throws<ArgumentException>("siteName", () =>
+                DomainController.FindOne(context, string.Empty, LocatorOptions.AvoidSelf)
             );
         }
 
@@ -169,13 +155,11 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void FindOne_InvalidFlag_ThrowsArgumentException(LocatorOptions flag)
         {
             var context = new DirectoryContext(DirectoryContextType.Domain);
-            AssertExtensions.Throws<ArgumentException>(
-                "flag",
-                () => DomainController.FindOne(context, flag)
+            AssertExtensions.Throws<ArgumentException>("flag", () =>
+                DomainController.FindOne(context, flag)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "flag",
-                () => DomainController.FindOne(context, "siteName", flag)
+            AssertExtensions.Throws<ArgumentException>("flag", () =>
+                DomainController.FindOne(context, "siteName", flag)
             );
         }
 
@@ -186,9 +170,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         {
             var context = new DirectoryContext(DirectoryContextType.Domain, name);
             Assert.Throws(exceptionType, () => DomainController.FindOne(context, "siteName"));
-            Assert.Throws(
-                exceptionType,
-                () => DomainController.FindOne(context, "siteName", LocatorOptions.AvoidSelf)
+            Assert.Throws(exceptionType, () =>
+                DomainController.FindOne(context, "siteName", LocatorOptions.AvoidSelf)
             );
         }
 
@@ -220,13 +203,11 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         [Fact]
         public void FindAll_NullContext_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "context",
-                () => DomainController.FindAll(null)
+            AssertExtensions.Throws<ArgumentNullException>("context", () =>
+                DomainController.FindAll(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "context",
-                () => DomainController.FindAll(null, "siteName")
+            AssertExtensions.Throws<ArgumentNullException>("context", () =>
+                DomainController.FindAll(null, "siteName")
             );
         }
 
@@ -240,13 +221,11 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         )
         {
             var context = new DirectoryContext(contextType, "name");
-            AssertExtensions.Throws<ArgumentException>(
-                "context",
-                () => DomainController.FindAll(context)
+            AssertExtensions.Throws<ArgumentException>("context", () =>
+                DomainController.FindAll(context)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "context",
-                () => DomainController.FindAll(context, "siteName")
+            AssertExtensions.Throws<ArgumentException>("context", () =>
+                DomainController.FindAll(context, "siteName")
             );
         }
 
@@ -254,9 +233,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void FindAll_NullSiteName_ThrowsArgumentNullException()
         {
             var context = new DirectoryContext(DirectoryContextType.Domain);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "siteName",
-                () => DomainController.FindAll(context, null)
+            AssertExtensions.Throws<ArgumentNullException>("siteName", () =>
+                DomainController.FindAll(context, null)
             );
         }
 
@@ -264,9 +242,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void FindAll_EmptySiteName_ThrowsArgumentException()
         {
             var context = new DirectoryContext(DirectoryContextType.Domain);
-            AssertExtensions.Throws<ArgumentException>(
-                "siteName",
-                () => DomainController.FindAll(context, string.Empty)
+            AssertExtensions.Throws<ArgumentException>("siteName", () =>
+                DomainController.FindAll(context, string.Empty)
             );
         }
 
@@ -395,9 +372,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void GetReplicationCursors_NullPartition_ThrowsArgumentNullException()
         {
             var controller = new SubController();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "partition",
-                () => controller.GetReplicationCursors(null)
+            AssertExtensions.Throws<ArgumentNullException>("partition", () =>
+                controller.GetReplicationCursors(null)
             );
         }
 
@@ -405,9 +381,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void GetReplicationCursors_EmptyPartition_ThrowsArgumentException()
         {
             var controller = new SubController();
-            AssertExtensions.Throws<ArgumentException>(
-                "partition",
-                () => controller.GetReplicationCursors(string.Empty)
+            AssertExtensions.Throws<ArgumentException>("partition", () =>
+                controller.GetReplicationCursors(string.Empty)
             );
         }
 
@@ -435,9 +410,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void GetReplicationMetadata_NullObjectPath_ThrowsArgumentNullException()
         {
             var controller = new SubController();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "objectPath",
-                () => controller.GetReplicationMetadata(null)
+            AssertExtensions.Throws<ArgumentNullException>("objectPath", () =>
+                controller.GetReplicationMetadata(null)
             );
         }
 
@@ -445,9 +419,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void GetReplicationMetadata_EmptyObjectPath_ThrowsArgumentException()
         {
             var controller = new SubController();
-            AssertExtensions.Throws<ArgumentException>(
-                "objectPath",
-                () => controller.GetReplicationMetadata(string.Empty)
+            AssertExtensions.Throws<ArgumentException>("objectPath", () =>
+                controller.GetReplicationMetadata(string.Empty)
             );
         }
 
@@ -475,9 +448,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void GetReplicationNeighbors_NullPartition_ThrowsArgumentNullException()
         {
             var controller = new SubController();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "partition",
-                () => controller.GetReplicationNeighbors(null)
+            AssertExtensions.Throws<ArgumentNullException>("partition", () =>
+                controller.GetReplicationNeighbors(null)
             );
         }
 
@@ -485,9 +457,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void GetReplicationNeighbors_EmptyPartition_ThrowsArgumentException()
         {
             var controller = new SubController();
-            AssertExtensions.Throws<ArgumentException>(
-                "partition",
-                () => controller.GetReplicationNeighbors(string.Empty)
+            AssertExtensions.Throws<ArgumentException>("partition", () =>
+                controller.GetReplicationNeighbors(string.Empty)
             );
         }
 
@@ -558,9 +529,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void IPAddress_GetWithNoContext_ThrowsArgumentNullException()
         {
             var controller = new SubController();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "hostNameOrAddress",
-                () => controller.IPAddress
+            AssertExtensions.Throws<ArgumentNullException>("hostNameOrAddress", () =>
+                controller.IPAddress
             );
         }
 
@@ -584,9 +554,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void MoveToAnotherSite_NullSiteName_ThrowsArgumentNullException()
         {
             var controller = new SubController();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "siteName",
-                () => controller.MoveToAnotherSite(null)
+            AssertExtensions.Throws<ArgumentNullException>("siteName", () =>
+                controller.MoveToAnotherSite(null)
             );
         }
 
@@ -594,9 +563,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void MoveToAnotherSite_EmptySiteName_ThrowsArgumentException()
         {
             var controller = new SubController();
-            AssertExtensions.Throws<ArgumentException>(
-                "siteName",
-                () => controller.MoveToAnotherSite(string.Empty)
+            AssertExtensions.Throws<ArgumentException>("siteName", () =>
+                controller.MoveToAnotherSite(string.Empty)
             );
         }
 
@@ -708,9 +676,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         )
         {
             var controller = new SubController();
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "role",
-                () => controller.SeizeRoleOwnership(role)
+            AssertExtensions.Throws<InvalidEnumArgumentException>("role", () =>
+                controller.SeizeRoleOwnership(role)
             );
         }
 
@@ -771,9 +738,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void SyncReplicaFromServer_NullPartition_ThrowsArgumentNullException()
         {
             var controller = new SubController();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "partition",
-                () => controller.SyncReplicaFromServer(null, "sourceServer")
+            AssertExtensions.Throws<ArgumentNullException>("partition", () =>
+                controller.SyncReplicaFromServer(null, "sourceServer")
             );
         }
 
@@ -781,9 +747,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void SyncReplicaFromServer_EmptyPartition_ThrowsArgumentException()
         {
             var controller = new SubController();
-            AssertExtensions.Throws<ArgumentException>(
-                "partition",
-                () => controller.SyncReplicaFromServer(string.Empty, "sourceServer")
+            AssertExtensions.Throws<ArgumentException>("partition", () =>
+                controller.SyncReplicaFromServer(string.Empty, "sourceServer")
             );
         }
 
@@ -791,9 +756,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void SyncReplicaFromServer_NullSourceServer_ThrowsArgumentNullException()
         {
             var controller = new SubController();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "sourceServer",
-                () => controller.SyncReplicaFromServer("partition", null)
+            AssertExtensions.Throws<ArgumentNullException>("sourceServer", () =>
+                controller.SyncReplicaFromServer("partition", null)
             );
         }
 
@@ -801,9 +765,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void SyncReplicaFromServer_EmptySourceServer_ThrowsArgumentException()
         {
             var controller = new SubController();
-            AssertExtensions.Throws<ArgumentException>(
-                "sourceServer",
-                () => controller.SyncReplicaFromServer("partition", string.Empty)
+            AssertExtensions.Throws<ArgumentException>("sourceServer", () =>
+                controller.SyncReplicaFromServer("partition", string.Empty)
             );
         }
 
@@ -831,13 +794,11 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void SyncReplicaFromAllServers_NullPartition_ThrowsArgumentNullException()
         {
             var controller = new SubController();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "partition",
-                () =>
-                    controller.SyncReplicaFromAllServers(
-                        null,
-                        SyncFromAllServersOptions.AbortIfServerUnavailable
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("partition", () =>
+                controller.SyncReplicaFromAllServers(
+                    null,
+                    SyncFromAllServersOptions.AbortIfServerUnavailable
+                )
             );
         }
 
@@ -845,13 +806,11 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void SyncReplicaFromAllServers_EmptyPartition_ThrowsArgumentException()
         {
             var controller = new SubController();
-            AssertExtensions.Throws<ArgumentException>(
-                "partition",
-                () =>
-                    controller.SyncReplicaFromAllServers(
-                        string.Empty,
-                        SyncFromAllServersOptions.AbortIfServerUnavailable
-                    )
+            AssertExtensions.Throws<ArgumentException>("partition", () =>
+                controller.SyncReplicaFromAllServers(
+                    string.Empty,
+                    SyncFromAllServersOptions.AbortIfServerUnavailable
+                )
             );
         }
 
@@ -898,9 +857,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         )
         {
             var controller = new SubController();
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "role",
-                () => controller.TransferRoleOwnership(role)
+            AssertExtensions.Throws<InvalidEnumArgumentException>("role", () =>
+                controller.TransferRoleOwnership(role)
             );
         }
 
@@ -908,9 +866,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void TriggerSyncReplicaFromNeighbors_NullPartition_ThrowsArgumentNullException()
         {
             var controller = new SubController();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "partition",
-                () => controller.TriggerSyncReplicaFromNeighbors(null)
+            AssertExtensions.Throws<ArgumentNullException>("partition", () =>
+                controller.TriggerSyncReplicaFromNeighbors(null)
             );
         }
 
@@ -918,9 +875,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void TriggerSyncReplicaFromNeighbors_EmptyPartition_ThrowsArgumentException()
         {
             var controller = new SubController();
-            AssertExtensions.Throws<ArgumentException>(
-                "partition",
-                () => controller.TriggerSyncReplicaFromNeighbors(string.Empty)
+            AssertExtensions.Throws<ArgumentException>("partition", () =>
+                controller.TriggerSyncReplicaFromNeighbors(string.Empty)
             );
         }
 

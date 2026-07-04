@@ -63,30 +63,25 @@ namespace System.Linq.Tests
         [Fact]
         public void Range_ThrowExceptionOnNegativeCount()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => Enumerable.Range(1, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                Enumerable.Range(1, -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => Enumerable.Range(1, int.MinValue)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                Enumerable.Range(1, int.MinValue)
             );
         }
 
         [Fact]
         public void Range_ThrowExceptionOnOverflow()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => Enumerable.Range(1000, int.MaxValue)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                Enumerable.Range(1000, int.MaxValue)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => Enumerable.Range(int.MaxValue, 1000)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                Enumerable.Range(int.MaxValue, 1000)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => Enumerable.Range(int.MaxValue - 10, 20)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                Enumerable.Range(int.MaxValue - 10, 20)
             );
         }
 
@@ -204,9 +199,8 @@ namespace System.Linq.Tests
         [Fact]
         public void ElementAtExcessiveThrows()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => Enumerable.Range(0, 10).ElementAt(100)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                Enumerable.Range(0, 10).ElementAt(100)
             );
         }
 
@@ -263,14 +257,12 @@ namespace System.Linq.Tests
                 Assert.Throws<NotSupportedException>(() => list.Remove(42));
                 Assert.Throws<NotSupportedException>(() => list[0] = 42);
                 AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => list[-1]);
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "index",
-                    () => list[expected.Length]
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    list[expected.Length]
                 );
                 AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => roList[-1]);
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "index",
-                    () => roList[expected.Length]
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    roList[expected.Length]
                 );
 
                 Assert.True(list.IsReadOnly);
@@ -280,9 +272,8 @@ namespace System.Linq.Tests
                 Assert.False(list.Contains(expected[0] - 1));
                 Assert.False(list.Contains(expected[^1] + 1));
                 Assert.All(expected, i => Assert.True(list.Contains(i)));
-                Assert.All(
-                    expected,
-                    i => Assert.Equal(Array.IndexOf(expected, i), list.IndexOf(i))
+                Assert.All(expected, i =>
+                    Assert.Equal(Array.IndexOf(expected, i), list.IndexOf(i))
                 );
                 for (int i = 0; i < expected.Length; i++)
                 {

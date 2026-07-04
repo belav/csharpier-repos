@@ -47,11 +47,8 @@ public abstract class InheritanceQueryTestBase<TFixture> : QueryTestBase<TFixtur
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Can_use_is_kiwi_with_cast(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Animal>()
-                    .Select(a => new { Value = a is Kiwi ? ((Kiwi)a).FoundOn : default })
+        AssertQuery(async, ss =>
+            ss.Set<Animal>().Select(a => new { Value = a is Kiwi ? ((Kiwi)a).FoundOn : default })
         );
 
     [ConditionalTheory]
@@ -144,19 +141,16 @@ public abstract class InheritanceQueryTestBase<TFixture> : QueryTestBase<TFixtur
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Filter_on_property_inside_complex_type_on_derived_type(bool async) =>
         Fixture.EnableComplexTypes
-            ? AssertQuery(
-                async,
-                ss => ss.Set<Daisy>().Where(d => d.AdditionalInfo.LeafStructure.AreLeavesBig)
+            ? AssertQuery(async, ss =>
+                ss.Set<Daisy>().Where(d => d.AdditionalInfo.LeafStructure.AreLeavesBig)
             )
             : Task.CompletedTask;
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Can_filter_all_animals(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Animal>().OrderBy(a => a.Species).Where(a => a.Name == "Great spotted kiwi")
+        AssertQuery(async, ss =>
+            ss.Set<Animal>().OrderBy(a => a.Species).Where(a => a.Name == "Great spotted kiwi")
         );
 
     [ConditionalTheory]
@@ -201,9 +195,8 @@ public abstract class InheritanceQueryTestBase<TFixture> : QueryTestBase<TFixtur
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Can_use_of_type_kiwi_where_south_on_derived_property(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Animal>().OfType<Kiwi>().Where(x => x.FoundOn == Island.South)
+        AssertQuery(async, ss =>
+            ss.Set<Animal>().OfType<Kiwi>().Where(x => x.FoundOn == Island.South)
         );
 
     [ConditionalTheory]
@@ -319,45 +312,39 @@ public abstract class InheritanceQueryTestBase<TFixture> : QueryTestBase<TFixtur
         // Coke and Tea both have CaffeineGrams, which both need to be projected out on each side and so
         // requiring alias uniquification. They also have a different number of properties.
         =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Coke>().Cast<Drink>().Union(ss.Set<Tea>()).Where(d => d.SortIndex > 0)
+        AssertQuery(async, ss =>
+            ss.Set<Coke>().Cast<Drink>().Union(ss.Set<Tea>()).Where(d => d.SortIndex > 0)
         );
 
     [ConditionalTheory(Skip = "Issue#16298")]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task OfType_Union_subquery(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Animal>()
-                    .OfType<Kiwi>()
-                    .Union(ss.Set<Animal>().OfType<Kiwi>())
-                    .Where(o => o.FoundOn == Island.North)
+        AssertQuery(async, ss =>
+            ss.Set<Animal>()
+                .OfType<Kiwi>()
+                .Union(ss.Set<Animal>().OfType<Kiwi>())
+                .Where(o => o.FoundOn == Island.North)
         );
 
     [ConditionalTheory(Skip = "Issue#16298")]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task OfType_Union_OfType(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Bird>().OfType<Kiwi>().Union(ss.Set<Bird>()).OfType<Kiwi>()
+        AssertQuery(async, ss =>
+            ss.Set<Bird>().OfType<Kiwi>().Union(ss.Set<Bird>()).OfType<Kiwi>()
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Subquery_OfType(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Bird>().OrderBy(b => b.Species).Take(5).Distinct().OfType<Kiwi>()
+        AssertQuery(async, ss =>
+            ss.Set<Bird>().OrderBy(b => b.Species).Take(5).Distinct().OfType<Kiwi>()
         );
 
     [ConditionalTheory(Skip = "Issue#16298")]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Union_entity_equality(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Kiwi>().Union(ss.Set<Eagle>().Cast<Bird>()).Where(b => b == null)
+        AssertQuery(async, ss =>
+            ss.Set<Kiwi>().Union(ss.Set<Eagle>().Cast<Bird>()).Where(b => b == null)
         );
 
     [ConditionalFact]
@@ -389,9 +376,8 @@ public abstract class InheritanceQueryTestBase<TFixture> : QueryTestBase<TFixtur
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Byte_enum_value_constant_used_in_projection(bool async) =>
-        AssertQueryScalar(
-            async,
-            ss => ss.Set<Kiwi>().Select(k => k.IsFlightless ? Island.North : Island.South)
+        AssertQueryScalar(async, ss =>
+            ss.Set<Kiwi>().Select(k => k.IsFlightless ? Island.North : Island.South)
         );
 
     [ConditionalFact]

@@ -20,9 +20,8 @@ namespace System.Collections.ObjectModel.Tests
         [Fact]
         public static void Ctor_NullList_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "list",
-                () => new ReadOnlyCollection<int>(null)
+            AssertExtensions.Throws<ArgumentNullException>("list", () =>
+                new ReadOnlyCollection<int>(null)
             );
         }
 
@@ -63,13 +62,11 @@ namespace System.Collections.ObjectModel.Tests
         {
             var collection = new Collection<int>(s_intArray);
             AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection[-1]);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => collection[s_intArray.Length]
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                collection[s_intArray.Length]
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => ReadOnlyCollection<int>.Empty[0]
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                ReadOnlyCollection<int>.Empty[0]
             );
         }
 
@@ -106,19 +103,12 @@ namespace System.Collections.ObjectModel.Tests
             int[] intArray = new int[s_intArray.Length + targetIndex];
 
             Assert.Throws<ArgumentNullException>(() => collection.CopyTo(null, 0));
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    ((ICollection)collection).CopyTo(
-                        new int[s_intArray.Length, s_intArray.Length],
-                        0
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                ((ICollection)collection).CopyTo(new int[s_intArray.Length, s_intArray.Length], 0)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() => collection.CopyTo(intArray, -1));
-            AssertExtensions.Throws<ArgumentException>(
-                "destinationArray",
-                "",
-                () => collection.CopyTo(intArray, s_intArray.Length - 1)
+            AssertExtensions.Throws<ArgumentException>("destinationArray", "", () =>
+                collection.CopyTo(intArray, s_intArray.Length - 1)
             );
 
             collection.CopyTo(intArray, targetIndex);

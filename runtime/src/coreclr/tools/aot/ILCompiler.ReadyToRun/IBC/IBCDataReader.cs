@@ -699,15 +699,11 @@ namespace ILCompiler.IBC
 
             var sectionTable = ReadSectionTable(out highestValidOffset);
 
-            IfPresent(
-                sectionTable,
-                SectionFormat.ScenarioInfo,
-                () => result.Scenarios = ReadScenarioSection(ref result.TotalNumberOfRuns)
+            IfPresent(sectionTable, SectionFormat.ScenarioInfo, () =>
+                result.Scenarios = ReadScenarioSection(ref result.TotalNumberOfRuns)
             );
-            IfPresent(
-                sectionTable,
-                SectionFormat.BasicBlockInfo,
-                () => result.Methods = ReadBasicBlockSection(ref result.TotalNumberOfRuns)
+            IfPresent(sectionTable, SectionFormat.BasicBlockInfo, () =>
+                result.Methods = ReadBasicBlockSection(ref result.TotalNumberOfRuns)
             );
             foreach (
                 SectionFormat section in IBCData.SectionIterator(
@@ -715,16 +711,12 @@ namespace ILCompiler.IBC
                 )
             )
             {
-                IfPresent(
-                    sectionTable,
-                    section,
-                    () => result.Tokens[section] = ReadTokenSection(section)
+                IfPresent(sectionTable, section, () =>
+                    result.Tokens[section] = ReadTokenSection(section)
                 );
             }
-            IfPresent(
-                sectionTable,
-                SectionFormat.BlobStream,
-                () => result.BlobStream = ReadBlobStreamSection()
+            IfPresent(sectionTable, SectionFormat.BlobStream, () =>
+                result.BlobStream = ReadBlobStreamSection()
             );
 
             SeekTo(highestValidOffset);

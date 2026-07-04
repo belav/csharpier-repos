@@ -97,14 +97,11 @@ public partial class HubConnectionTests : VerifiableLoggedTest
         var hubConnection = CreateHubConnection(connection, loggerFactory: LoggerFactory);
 
         var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        hubConnection.On(
-            "method",
-            async () =>
-            {
-                await hubConnection.StopAsync().DefaultTimeout();
-                tcs.SetResult();
-            }
-        );
+        hubConnection.On("method", async () =>
+        {
+            await hubConnection.StopAsync().DefaultTimeout();
+            tcs.SetResult();
+        });
 
         await hubConnection.StartAsync().DefaultTimeout();
 
@@ -132,14 +129,11 @@ public partial class HubConnectionTests : VerifiableLoggedTest
         var methodCalledTcs = new TaskCompletionSource(
             TaskCreationOptions.RunContinuationsAsynchronously
         );
-        hubConnection.On(
-            "method",
-            async () =>
-            {
-                methodCalledTcs.SetResult();
-                await tcs.Task;
-            }
-        );
+        hubConnection.On("method", async () =>
+        {
+            methodCalledTcs.SetResult();
+            await tcs.Task;
+        });
 
         await hubConnection.StartAsync().DefaultTimeout();
 
@@ -873,24 +867,21 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             await hubConnection.StartAsync().DefaultTimeout();
 
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            hubConnection.On<string>(
-                "Echo",
-                async msg =>
+            hubConnection.On<string>("Echo", async msg =>
+            {
+                try
                 {
-                    try
-                    {
-                        // This should be canceled when the connection is closed
-                        await hubConnection.InvokeAsync<string>("Echo", msg).DefaultTimeout();
-                    }
-                    catch (Exception ex)
-                    {
-                        tcs.SetException(ex);
-                        return;
-                    }
-
-                    tcs.SetResult();
+                    // This should be canceled when the connection is closed
+                    await hubConnection.InvokeAsync<string>("Echo", msg).DefaultTimeout();
                 }
-            );
+                catch (Exception ex)
+                {
+                    tcs.SetException(ex);
+                    return;
+                }
+
+                tcs.SetResult();
+            });
 
             var closedTcs = new TaskCompletionSource(
                 TaskCreationOptions.RunContinuationsAsynchronously
@@ -1010,14 +1001,11 @@ public partial class HubConnectionTests : VerifiableLoggedTest
             var resultTcs = new TaskCompletionSource(
                 TaskCreationOptions.RunContinuationsAsynchronously
             );
-            hubConnection.On(
-                "Result",
-                async () =>
-                {
-                    await resultTcs.Task;
-                    return 1;
-                }
-            );
+            hubConnection.On("Result", async () =>
+            {
+                await resultTcs.Task;
+                return 1;
+            });
 
             await connection
                 .ReceiveTextAsync(

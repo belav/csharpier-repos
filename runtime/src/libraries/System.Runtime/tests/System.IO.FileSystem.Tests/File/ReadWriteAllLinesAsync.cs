@@ -28,21 +28,17 @@ namespace System.IO.Tests
         [Fact]
         public async Task InvalidPathAsync()
         {
-            await Assert.ThrowsAsync<ArgumentNullException>(
-                "path",
-                async () => await WriteAsync(null, new string[] { "Text" })
+            await Assert.ThrowsAsync<ArgumentNullException>("path", async () =>
+                await WriteAsync(null, new string[] { "Text" })
             );
-            await Assert.ThrowsAsync<ArgumentException>(
-                "path",
-                async () => await WriteAsync(string.Empty, new string[] { "Text" })
+            await Assert.ThrowsAsync<ArgumentException>("path", async () =>
+                await WriteAsync(string.Empty, new string[] { "Text" })
             );
-            await Assert.ThrowsAsync<ArgumentNullException>(
-                "path",
-                async () => await ReadAsync(null)
+            await Assert.ThrowsAsync<ArgumentNullException>("path", async () =>
+                await ReadAsync(null)
             );
-            await Assert.ThrowsAsync<ArgumentException>(
-                "path",
-                async () => await ReadAsync(string.Empty)
+            await Assert.ThrowsAsync<ArgumentException>("path", async () =>
+                await ReadAsync(string.Empty)
             );
         }
 
@@ -50,9 +46,8 @@ namespace System.IO.Tests
         public async Task NullLinesAsync()
         {
             string path = GetTestFilePath();
-            await Assert.ThrowsAsync<ArgumentNullException>(
-                "contents",
-                async () => await WriteAsync(path, null)
+            await Assert.ThrowsAsync<ArgumentNullException>("contents", async () =>
+                await WriteAsync(path, null)
             );
 
             await WriteAsync(path, new string[] { null });
@@ -202,13 +197,11 @@ namespace System.IO.Tests
         public async Task NullEncodingAsync()
         {
             string path = GetTestFilePath();
-            await Assert.ThrowsAsync<ArgumentNullException>(
-                "encoding",
-                async () => await File.WriteAllLinesAsync(path, new string[] { "Text" }, null)
+            await Assert.ThrowsAsync<ArgumentNullException>("encoding", async () =>
+                await File.WriteAllLinesAsync(path, new string[] { "Text" }, null)
             );
-            await Assert.ThrowsAsync<ArgumentNullException>(
-                "encoding",
-                async () => await File.ReadAllLinesAsync(path, null)
+            await Assert.ThrowsAsync<ArgumentNullException>("encoding", async () =>
+                await File.ReadAllLinesAsync(path, null)
             );
         }
 
@@ -303,9 +296,8 @@ namespace System.IO.Tests
         [Fact]
         public void InvalidArgumentsThrownForNullEncoding()
         {
-            Assert.Throws<ArgumentNullException>(
-                "encoding",
-                () => File.ReadLinesAsync("path", null)
+            Assert.Throws<ArgumentNullException>("encoding", () =>
+                File.ReadLinesAsync("path", null)
             );
         }
     }

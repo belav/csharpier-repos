@@ -21,19 +21,16 @@ namespace System.Tests
         [Fact]
         public void CurrentDirectory_Null_Path_Throws_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => Environment.CurrentDirectory = null
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                Environment.CurrentDirectory = null
             );
         }
 
         [Fact]
         public void CurrentDirectory_Empty_Path_Throws_ArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => Environment.CurrentDirectory = string.Empty
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                Environment.CurrentDirectory = string.Empty
             );
         }
 

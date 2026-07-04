@@ -189,9 +189,8 @@ namespace System.Linq.Expressions.Tests
         public void CannotUnboxToNonInterfaceExceptObject()
         {
             Expression value = Expression.Constant(0);
-            AssertExtensions.Throws<ArgumentException>(
-                "expression",
-                () => Expression.Unbox(value, typeof(int))
+            AssertExtensions.Throws<ArgumentException>("expression", () =>
+                Expression.Unbox(value, typeof(int))
             );
         }
 
@@ -199,9 +198,8 @@ namespace System.Linq.Expressions.Tests
         public void CannotUnboxReferenceType()
         {
             Expression value = Expression.Constant("", typeof(IComparable<string>));
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Unbox(value, typeof(string))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Unbox(value, typeof(string))
             );
         }
 
@@ -217,18 +215,16 @@ namespace System.Linq.Expressions.Tests
         public void CannotUnboxUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>(
-                "expression",
-                () => Expression.Unbox(value, typeof(int))
+            AssertExtensions.Throws<ArgumentException>("expression", () =>
+                Expression.Unbox(value, typeof(int))
             );
         }
 
         [Fact]
         public void ExpressionNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "expression",
-                () => Expression.Unbox(null, typeof(int))
+            AssertExtensions.Throws<ArgumentNullException>("expression", () =>
+                Expression.Unbox(null, typeof(int))
             );
         }
 
@@ -236,9 +232,8 @@ namespace System.Linq.Expressions.Tests
         public void TypeNull()
         {
             Expression value = Expression.Constant(0, typeof(object));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => Expression.Unbox(value, null)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                Expression.Unbox(value, null)
             );
         }
 
@@ -270,9 +265,8 @@ namespace System.Linq.Expressions.Tests
         public static void PointerType()
         {
             Type pointerType = typeof(int).MakePointerType();
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Unbox(Expression.Constant(new object()), pointerType)
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Unbox(Expression.Constant(new object()), pointerType)
             );
         }
 
@@ -280,9 +274,8 @@ namespace System.Linq.Expressions.Tests
         public static void ByRefType()
         {
             Type byRefType = typeof(int).MakeByRefType();
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Unbox(Expression.Constant(new object()), byRefType)
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Unbox(Expression.Constant(new object()), byRefType)
             );
         }
 
@@ -295,9 +288,8 @@ namespace System.Linq.Expressions.Tests
         public static void GenericType()
         {
             Type genType = typeof(GenericValueType<>);
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Unbox(Expression.Constant(new object()), genType)
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Unbox(Expression.Constant(new object()), genType)
             );
         }
 
@@ -305,13 +297,11 @@ namespace System.Linq.Expressions.Tests
         public static void GenericTypeParameters()
         {
             Type genType = typeof(GenericValueType<>);
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () =>
-                    Expression.Unbox(
-                        Expression.Constant(new object()),
-                        genType.MakeGenericType(genType)
-                    )
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Unbox(
+                    Expression.Constant(new object()),
+                    genType.MakeGenericType(genType)
+                )
             );
         }
     }

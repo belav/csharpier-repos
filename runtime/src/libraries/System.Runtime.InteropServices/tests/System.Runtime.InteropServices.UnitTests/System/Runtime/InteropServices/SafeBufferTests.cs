@@ -20,9 +20,8 @@ namespace System.Runtime.InteropServices.Tests
         public void Initialize_InvalidNumBytes_ThrowsArgumentOutOfRangeException()
         {
             var buffer = new SubBuffer(true);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "numBytes",
-                () => buffer.Initialize(ulong.MaxValue)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("numBytes", () =>
+                buffer.Initialize(ulong.MaxValue)
             );
         }
 
@@ -86,9 +85,8 @@ namespace System.Runtime.InteropServices.Tests
             buffer.Initialize(4);
 
             AssertExtensions.Throws<ArgumentException>(null, () => buffer.Read<int>(byteOffset));
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => buffer.Write<int>(byteOffset, 2)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                buffer.Write<int>(byteOffset, 2)
             );
         }
 
@@ -96,13 +94,11 @@ namespace System.Runtime.InteropServices.Tests
         public void ReadArray_NullArray_ThrowsArgumentNullException()
         {
             var wrapper = new SubBuffer(true);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "array",
-                () => wrapper.ReadArray<int>(0, null, 0, 0)
+            AssertExtensions.Throws<ArgumentNullException>("array", () =>
+                wrapper.ReadArray<int>(0, null, 0, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "array",
-                () => wrapper.WriteArray<int>(0, null, 0, 0)
+            AssertExtensions.Throws<ArgumentNullException>("array", () =>
+                wrapper.WriteArray<int>(0, null, 0, 0)
             );
         }
 
@@ -120,13 +116,11 @@ namespace System.Runtime.InteropServices.Tests
         public void ReadArray_NegativeIndex_ThrowsArgumentOutOfRangeException()
         {
             var wrapper = new SubBuffer(true);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => wrapper.ReadArray(0, new int[0], -1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                wrapper.ReadArray(0, new int[0], -1, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => wrapper.WriteArray(0, new int[0], -1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                wrapper.WriteArray(0, new int[0], -1, 0)
             );
         }
 
@@ -134,13 +128,11 @@ namespace System.Runtime.InteropServices.Tests
         public void ReadWriteArray_NegativeCount_ThrowsArgumentOutOfRangeException()
         {
             var wrapper = new SubBuffer(true);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => wrapper.ReadArray(0, new int[0], 0, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                wrapper.ReadArray(0, new int[0], 0, -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => wrapper.WriteArray(0, new int[0], 0, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                wrapper.WriteArray(0, new int[0], 0, -1)
             );
         }
 
@@ -158,13 +150,11 @@ namespace System.Runtime.InteropServices.Tests
         )
         {
             var wrapper = new SubBuffer(true);
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => wrapper.ReadArray(0, new int[arrayLength], index, count)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                wrapper.ReadArray(0, new int[arrayLength], index, count)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => wrapper.WriteArray(0, new int[arrayLength], index, count)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                wrapper.WriteArray(0, new int[arrayLength], index, count)
             );
         }
 

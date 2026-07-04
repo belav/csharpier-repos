@@ -144,83 +144,62 @@ namespace Microsoft.DotNet.CoreSetup.Test
                     {
                         // All product components
                         var (assemblies, nativeLibraries) = Binaries.GetRuntimeFiles();
-                        l.WithAssemblyGroup(
-                            string.Empty,
-                            g =>
+                        l.WithAssemblyGroup(string.Empty, g =>
+                        {
+                            foreach (var file in assemblies)
                             {
-                                foreach (var file in assemblies)
-                                {
-                                    var fileVersion = FileVersionInfo
-                                        .GetVersionInfo(file)
-                                        .FileVersion;
-                                    var asmVersion = System
-                                        .Reflection.AssemblyName.GetAssemblyName(file)
-                                        .Version!.ToString();
-                                    g.WithAsset(
-                                        Path.GetFileName(file),
-                                        f =>
-                                            f.WithVersion(asmVersion, fileVersion!)
-                                                .CopyFromFile(file)
-                                    );
-                                }
-                            }
-                        );
-                        l.WithNativeLibraryGroup(
-                            string.Empty,
-                            g =>
-                            {
-                                // ./hostfxr - real component and will load hostpolicy
-                                g.WithAsset(
-                                    Binaries.HostFxr.FileName,
-                                    f => f.CopyFromFile(Binaries.HostFxr.FilePath)
+                                var fileVersion = FileVersionInfo.GetVersionInfo(file).FileVersion;
+                                var asmVersion = System
+                                    .Reflection.AssemblyName.GetAssemblyName(file)
+                                    .Version!.ToString();
+                                g.WithAsset(Path.GetFileName(file), f =>
+                                    f.WithVersion(asmVersion, fileVersion!).CopyFromFile(file)
                                 );
-
-                                foreach (var file in nativeLibraries)
-                                {
-                                    g.WithAsset(Path.GetFileName(file), f => f.CopyFromFile(file));
-                                }
                             }
-                        );
+                        });
+                        l.WithNativeLibraryGroup(string.Empty, g =>
+                        {
+                            // ./hostfxr - real component and will load hostpolicy
+                            g.WithAsset(Binaries.HostFxr.FileName, f =>
+                                f.CopyFromFile(Binaries.HostFxr.FilePath)
+                            );
+
+                            foreach (var file in nativeLibraries)
+                            {
+                                g.WithAsset(Path.GetFileName(file), f => f.CopyFromFile(file));
+                            }
+                        });
                     }
                     else if (mock == MockedComponent.CoreClr)
                     {
-                        l.WithNativeLibraryGroup(
-                            string.Empty,
-                            g =>
-                                g
-                                // ./hostfxr - real component and will load hostpolicy
-                                .WithAsset(
-                                        Binaries.HostFxr.FileName,
-                                        f => f.CopyFromFile(Binaries.HostFxr.FilePath)
-                                    )
-                                    // ./hostpolicy - real component and will load coreclr
-                                    .WithAsset(
-                                        Binaries.HostPolicy.FileName,
-                                        f => f.CopyFromFile(Binaries.HostPolicy.FilePath)
-                                    )
-                                    // ./coreclr - mocked component
-                                    .WithAsset(
-                                        Binaries.CoreClr.FileName,
-                                        f => f.CopyFromFile(Binaries.CoreClr.MockPath)
-                                    )
+                        l.WithNativeLibraryGroup(string.Empty, g =>
+                            g
+                            // ./hostfxr - real component and will load hostpolicy
+                            .WithAsset(Binaries.HostFxr.FileName, f =>
+                                    f.CopyFromFile(Binaries.HostFxr.FilePath)
+                                )
+                                // ./hostpolicy - real component and will load coreclr
+                                .WithAsset(Binaries.HostPolicy.FileName, f =>
+                                    f.CopyFromFile(Binaries.HostPolicy.FilePath)
+                                )
+                                // ./coreclr - mocked component
+                                .WithAsset(Binaries.CoreClr.FileName, f =>
+                                    f.CopyFromFile(Binaries.CoreClr.MockPath)
+                                )
                         );
                     }
                     else if (mock == MockedComponent.HostPolicy)
                     {
-                        l.WithNativeLibraryGroup(
-                            string.Empty,
-                            g =>
-                                g
-                                // ./hostfxr - real component and will load hostpolicy
-                                .WithAsset(
-                                        Binaries.HostFxr.FileName,
-                                        f => f.CopyFromFile(Binaries.HostFxr.FilePath)
-                                    )
-                                    // ./hostpolicy - mocked component
-                                    .WithAsset(
-                                        Binaries.HostPolicy.FileName,
-                                        f => f.CopyFromFile(Binaries.HostPolicy.MockPath)
-                                    )
+                        l.WithNativeLibraryGroup(string.Empty, g =>
+                            g
+                            // ./hostfxr - real component and will load hostpolicy
+                            .WithAsset(Binaries.HostFxr.FileName, f =>
+                                    f.CopyFromFile(Binaries.HostFxr.FilePath)
+                                )
+                                // ./hostpolicy - mocked component
+                                .WithAsset(Binaries.HostPolicy.FileName, f =>
+                                    f.CopyFromFile(Binaries.HostPolicy.MockPath)
+                                )
                         );
                     }
                 }

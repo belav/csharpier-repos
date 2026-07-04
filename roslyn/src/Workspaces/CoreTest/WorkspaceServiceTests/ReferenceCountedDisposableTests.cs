@@ -17,9 +17,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
     {
         [Fact]
         public void TestArgumentValidation() =>
-            Assert.Throws<ArgumentNullException>(
-                "instance",
-                () => new ReferenceCountedDisposable<IDisposable>(null)
+            Assert.Throws<ArgumentNullException>("instance", () =>
+                new ReferenceCountedDisposable<IDisposable>(null)
             );
 
         [Theory]
@@ -127,9 +126,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
         [Fact]
         public void TestWeakReferenceArgumentValidation() =>
-            Assert.Throws<ArgumentNullException>(
-                "reference",
-                () => new ReferenceCountedDisposable<IDisposable>.WeakReference(null)
+            Assert.Throws<ArgumentNullException>("reference", () =>
+                new ReferenceCountedDisposable<IDisposable>.WeakReference(null)
             );
 
         [Fact]

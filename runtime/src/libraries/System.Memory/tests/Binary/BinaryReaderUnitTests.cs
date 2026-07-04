@@ -393,86 +393,67 @@ namespace System.Buffers.Binary.Tests
             Assert.True(MemoryMarshal.TryRead(span, out byte byteValue));
             Assert.Equal(1, byteValue);
 
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<short>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<short>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out short shortValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<int>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<int>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out int intValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<long>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<long>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out long longValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<nint>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<nint>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out nint nintValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<Int128>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<Int128>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out Int128 int128Value));
 
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<ushort>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<ushort>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out ushort ushortValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<uint>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<uint>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out uint uintValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<ulong>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<ulong>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out ulong ulongValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<nuint>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<nuint>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out nuint nuintValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<UInt128>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<UInt128>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out UInt128 uint128Value));
 
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<Half>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<Half>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out Half halfValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<float>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<float>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out float floatValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<double>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<double>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out double doubleValue));
 
             Span<byte> largeSpan = new byte[100];
-            TestHelpers.AssertThrows<ArgumentException, byte>(
-                largeSpan,
-                (_span) => MemoryMarshal.Read<TestHelpers.TestValueTypeWithReference>(_span)
+            TestHelpers.AssertThrows<ArgumentException, byte>(largeSpan, (_span) =>
+                MemoryMarshal.Read<TestHelpers.TestValueTypeWithReference>(_span)
             );
-            TestHelpers.AssertThrows<ArgumentException, byte>(
-                largeSpan,
-                (_span) =>
-                    MemoryMarshal.TryRead(
-                        _span,
-                        out TestHelpers.TestValueTypeWithReference stringValue
-                    )
+            TestHelpers.AssertThrows<ArgumentException, byte>(largeSpan, (_span) =>
+                MemoryMarshal.TryRead(_span, out TestHelpers.TestValueTypeWithReference stringValue)
             );
         }
 
@@ -485,86 +466,67 @@ namespace System.Buffers.Binary.Tests
             Assert.True(MemoryMarshal.TryRead(span, out byte byteValue));
             Assert.Equal(1, byteValue);
 
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<short>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<short>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out short shortValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<int>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<int>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out int intValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<long>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<long>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out long longValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<nint>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<nint>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out nint nintValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<Int128>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<Int128>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out Int128 int128Value));
 
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<ushort>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<ushort>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out ushort ushortValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<uint>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<uint>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out uint uintValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<ulong>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<ulong>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out ulong ulongValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<nuint>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<nuint>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out nuint nuintValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<UInt128>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<UInt128>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out UInt128 uint128Value));
 
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<Half>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<Half>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out Half halfValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<float>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<float>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out float floatValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
-                span,
-                (_span) => MemoryMarshal.Read<double>(_span)
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) =>
+                MemoryMarshal.Read<double>(_span)
             );
             Assert.False(MemoryMarshal.TryRead(span, out double doubleValue));
 
             ReadOnlySpan<byte> largeSpan = new byte[100];
-            TestHelpers.AssertThrows<ArgumentException, byte>(
-                largeSpan,
-                (_span) => MemoryMarshal.Read<TestHelpers.TestValueTypeWithReference>(_span)
+            TestHelpers.AssertThrows<ArgumentException, byte>(largeSpan, (_span) =>
+                MemoryMarshal.Read<TestHelpers.TestValueTypeWithReference>(_span)
             );
-            TestHelpers.AssertThrows<ArgumentException, byte>(
-                largeSpan,
-                (_span) =>
-                    MemoryMarshal.TryRead(
-                        _span,
-                        out TestHelpers.TestValueTypeWithReference stringValue
-                    )
+            TestHelpers.AssertThrows<ArgumentException, byte>(largeSpan, (_span) =>
+                MemoryMarshal.TryRead(_span, out TestHelpers.TestValueTypeWithReference stringValue)
             );
         }
 

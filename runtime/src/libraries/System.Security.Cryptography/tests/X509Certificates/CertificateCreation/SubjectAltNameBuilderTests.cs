@@ -16,34 +16,27 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
         {
             SubjectAlternativeNameBuilder builder = new SubjectAlternativeNameBuilder();
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "dnsName",
-                () => builder.AddDnsName(null)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("dnsName", () =>
+                builder.AddDnsName(null)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "dnsName",
-                () => builder.AddDnsName(string.Empty)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("dnsName", () =>
+                builder.AddDnsName(string.Empty)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "emailAddress",
-                () => builder.AddEmailAddress(null)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("emailAddress", () =>
+                builder.AddEmailAddress(null)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "emailAddress",
-                () => builder.AddEmailAddress(string.Empty)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("emailAddress", () =>
+                builder.AddEmailAddress(string.Empty)
             );
             AssertExtensions.Throws<ArgumentNullException>("uri", () => builder.AddUri(null));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "ipAddress",
-                () => builder.AddIpAddress(null)
+            AssertExtensions.Throws<ArgumentNullException>("ipAddress", () =>
+                builder.AddIpAddress(null)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "upn",
-                () => builder.AddUserPrincipalName(null)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("upn", () =>
+                builder.AddUserPrincipalName(null)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "upn",
-                () => builder.AddUserPrincipalName(string.Empty)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("upn", () =>
+                builder.AddUserPrincipalName(string.Empty)
             );
         }
 

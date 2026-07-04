@@ -164,24 +164,15 @@ namespace Microsoft.Extensions.SourceGeneration.Configuration.Binder.Tests
             IncrementalStepRunReason outputReason
         )
         {
-            Assert.Collection(
-                result.TrackedSteps,
-                step =>
-                {
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                            Assert.Equal(
-                                inputReason,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            )
-                    );
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(outputReason, output.Reason)
-                    );
-                }
-            );
+            Assert.Collection(result.TrackedSteps, step =>
+            {
+                Assert.Collection(step.Inputs, source =>
+                    Assert.Equal(inputReason, source.Source.Outputs[source.OutputIndex].Reason)
+                );
+                Assert.Collection(step.Outputs, output =>
+                    Assert.Equal(outputReason, output.Reason)
+                );
+            });
         }
 
         public static void ValidateDiagnostics(

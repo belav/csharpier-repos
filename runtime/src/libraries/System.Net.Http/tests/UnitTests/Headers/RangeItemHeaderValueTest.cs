@@ -12,13 +12,10 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_BothValuesNull_Throw()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    new RangeItemHeaderValue(null, null);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                new RangeItemHeaderValue(null, null);
+            });
         }
 
         [Fact]

@@ -99,9 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         #region "Flow Analysis Utilities"
         protected ControlFlowAnalysis CompileAndAnalyzeControlFlowStatements(string program)
         {
-            return CompileAndGetModelAndStatements(
-                program,
-                (model, stmt1, stmt2) => model.AnalyzeControlFlow(stmt1, stmt2)
+            return CompileAndGetModelAndStatements(program, (model, stmt1, stmt2) =>
+                model.AnalyzeControlFlow(stmt1, stmt2)
             );
         }
 
@@ -159,9 +158,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         protected DataFlowAnalysis CompileAndAnalyzeDataFlowStatements(string program)
         {
-            return CompileAndGetModelAndStatements(
-                program,
-                (model, stmt1, stmt2) => model.AnalyzeDataFlow(stmt1, stmt2)
+            return CompileAndGetModelAndStatements(program, (model, stmt1, stmt2) =>
+                model.AnalyzeDataFlow(stmt1, stmt2)
             );
         }
 
@@ -170,10 +168,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             DataFlowAnalysis dataFlowAnalysis
         ) CompileAndAnalyzeControlAndDataFlowStatements(string program)
         {
-            return CompileAndGetModelAndStatements(
-                program,
-                (model, stmt1, stmt2) =>
-                    (model.AnalyzeControlFlow(stmt1, stmt2), model.AnalyzeDataFlow(stmt1, stmt2))
+            return CompileAndGetModelAndStatements(program, (model, stmt1, stmt2) =>
+                (model.AnalyzeControlFlow(stmt1, stmt2), model.AnalyzeDataFlow(stmt1, stmt2))
             );
         }
 

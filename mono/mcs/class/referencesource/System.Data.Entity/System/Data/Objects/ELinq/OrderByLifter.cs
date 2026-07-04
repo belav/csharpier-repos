@@ -292,10 +292,8 @@ namespace System.Data.Objects.ELinq
                     DbExpression minusK
                 )
                 {
-                    DbExpression newCount = CombineIntegers(
-                        limit.Limit,
-                        minusK,
-                        (l, r) => r > l ? 0 : l - r
+                    DbExpression newCount = CombineIntegers(limit.Limit, minusK, (l, r) =>
+                        r > l ? 0 : l - r
                     ); // can't limit to less than zero rows)
                     return DbExpressionBuilder.Limit(input, newCount);
                 }

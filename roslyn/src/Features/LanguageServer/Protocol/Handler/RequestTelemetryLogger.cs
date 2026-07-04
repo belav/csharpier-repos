@@ -132,85 +132,58 @@ internal sealed class RequestTelemetryLogger : IDisposable, ILspService
         }
 
         var queuedDurationCounter = _queuedDurationLogAggregator.GetValue(QueuedDurationKey);
-        Logger.Log(
-            FunctionId.LSP_TimeInQueue,
-            KeyValueLogMessage.Create(
-                LogType.Trace,
-                m =>
-                {
-                    m["server"] = _serverTypeName;
-                    m["bucketsize_ms"] = queuedDurationCounter?.BucketSize;
-                    m["maxbucketvalue_ms"] = queuedDurationCounter?.MaxBucketValue;
-                    m["buckets"] = queuedDurationCounter?.GetBucketsAsString();
-                }
-            )
-        );
+        Logger.Log(FunctionId.LSP_TimeInQueue, KeyValueLogMessage.Create(LogType.Trace, m =>
+            {
+                m["server"] = _serverTypeName;
+                m["bucketsize_ms"] = queuedDurationCounter?.BucketSize;
+                m["maxbucketvalue_ms"] = queuedDurationCounter?.MaxBucketValue;
+                m["buckets"] = queuedDurationCounter?.GetBucketsAsString();
+            }));
 
         foreach (var kvp in _requestCounters)
         {
-            Logger.Log(
-                FunctionId.LSP_RequestCounter,
-                KeyValueLogMessage.Create(
-                    LogType.Trace,
-                    m =>
-                    {
-                        m["server"] = _serverTypeName;
-                        m["method"] = kvp.Key;
-                        m["successful"] = kvp.Value.SucceededCount;
-                        m["failed"] = kvp.Value.FailedCount;
-                        m["cancelled"] = kvp.Value.CancelledCount;
-                    }
-                )
-            );
+            Logger.Log(FunctionId.LSP_RequestCounter, KeyValueLogMessage.Create(LogType.Trace, m =>
+                {
+                    m["server"] = _serverTypeName;
+                    m["method"] = kvp.Key;
+                    m["successful"] = kvp.Value.SucceededCount;
+                    m["failed"] = kvp.Value.FailedCount;
+                    m["cancelled"] = kvp.Value.CancelledCount;
+                }));
 
             var requestExecutionDuration = _requestDurationLogAggregator.GetValue(kvp.Key);
-            Logger.Log(
-                FunctionId.LSP_RequestDuration,
-                KeyValueLogMessage.Create(
-                    LogType.Trace,
-                    m =>
-                    {
-                        m["server"] = _serverTypeName;
-                        m["method"] = kvp.Key;
-                        m["bucketsize_logms"] = requestExecutionDuration?.BucketSize;
-                        m["maxbucketvalue_logms"] = requestExecutionDuration?.MaxBucketValue;
-                        m["bucketdata_logms"] = requestExecutionDuration?.GetBucketsAsString();
-                    }
-                )
-            );
+            Logger.Log(FunctionId.LSP_RequestDuration, KeyValueLogMessage.Create(LogType.Trace, m =>
+                {
+                    m["server"] = _serverTypeName;
+                    m["method"] = kvp.Key;
+                    m["bucketsize_logms"] = requestExecutionDuration?.BucketSize;
+                    m["maxbucketvalue_logms"] = requestExecutionDuration?.MaxBucketValue;
+                    m["bucketdata_logms"] = requestExecutionDuration?.GetBucketsAsString();
+                }));
         }
 
         Logger.Log(
             FunctionId.LSP_FindDocumentInWorkspace,
-            KeyValueLogMessage.Create(
-                LogType.Trace,
-                m =>
+            KeyValueLogMessage.Create(LogType.Trace, m =>
+            {
+                m["server"] = _serverTypeName;
+                foreach (var kvp in _findDocumentResults)
                 {
-                    m["server"] = _serverTypeName;
-                    foreach (var kvp in _findDocumentResults)
-                    {
-                        var info = kvp.Key.ToString()!;
-                        m[info] = kvp.Value.GetCount();
-                    }
+                    var info = kvp.Key.ToString()!;
+                    m[info] = kvp.Value.GetCount();
                 }
-            )
+            })
         );
 
-        Logger.Log(
-            FunctionId.LSP_UsedForkedSolution,
-            KeyValueLogMessage.Create(
-                LogType.Trace,
-                m =>
+        Logger.Log(FunctionId.LSP_UsedForkedSolution, KeyValueLogMessage.Create(LogType.Trace, m =>
+            {
+                m["server"] = _serverTypeName;
+                foreach (var kvp in _usedForkedSolutionCounter)
                 {
-                    m["server"] = _serverTypeName;
-                    foreach (var kvp in _usedForkedSolutionCounter)
-                    {
-                        var info = kvp.Key.ToString()!;
-                        m[info] = kvp.Value.GetCount();
-                    }
+                    var info = kvp.Key.ToString()!;
+                    m[info] = kvp.Value.GetCount();
                 }
-            )
-        );
+            }));
 
         _requestCounters.Clear();
     }

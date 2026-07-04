@@ -65,9 +65,8 @@ namespace System.Composition.Hosting.Core.Tests
         [Fact]
         public void Run_NullOutmostContext_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "outermostLifetimeContext",
-                () => CompositionOperation.Run(null, Activator)
+            AssertExtensions.Throws<ArgumentNullException>("outermostLifetimeContext", () =>
+                CompositionOperation.Run(null, Activator)
             );
         }
 
@@ -88,9 +87,8 @@ namespace System.Composition.Hosting.Core.Tests
                 );
                 LifetimeContext context = Assert.IsType<LifetimeContext>(export);
 
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "compositionRootActivator",
-                    () => CompositionOperation.Run(context, null)
+                AssertExtensions.Throws<ArgumentNullException>("compositionRootActivator", () =>
+                    CompositionOperation.Run(context, null)
                 );
             }
         }
@@ -100,9 +98,8 @@ namespace System.Composition.Hosting.Core.Tests
         {
             object Activator(LifetimeContext context, CompositionOperation operation)
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "action",
-                    () => operation.AddNonPrerequisiteAction(null)
+                AssertExtensions.Throws<ArgumentNullException>("action", () =>
+                    operation.AddNonPrerequisiteAction(null)
                 );
                 return null;
             }
@@ -130,9 +127,8 @@ namespace System.Composition.Hosting.Core.Tests
         {
             object Activator(LifetimeContext context, CompositionOperation operation)
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "action",
-                    () => operation.AddPostCompositionAction(null)
+                AssertExtensions.Throws<ArgumentNullException>("action", () =>
+                    operation.AddPostCompositionAction(null)
                 );
                 return null;
             }

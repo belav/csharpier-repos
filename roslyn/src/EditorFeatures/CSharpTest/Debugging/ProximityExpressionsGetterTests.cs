@@ -121,19 +121,16 @@ namespace ConsoleApplication1
 
         private static async Task TestTryDoAsync(string input, params string[] expectedTerms)
         {
-            await TestProximityExpressionGetterAsync(
-                input,
-                async (getter, document, position) =>
-                {
-                    var actualTerms = await getter.GetProximityExpressionsAsync(
-                        document,
-                        position,
-                        CancellationToken.None
-                    );
-                    Assert.True(actualTerms is null or { Count: > 0 });
-                    AssertEx.Equal(expectedTerms, actualTerms ?? Array.Empty<string>());
-                }
-            );
+            await TestProximityExpressionGetterAsync(input, async (getter, document, position) =>
+            {
+                var actualTerms = await getter.GetProximityExpressionsAsync(
+                    document,
+                    position,
+                    CancellationToken.None
+                );
+                Assert.True(actualTerms is null or { Count: > 0 });
+                AssertEx.Equal(expectedTerms, actualTerms ?? Array.Empty<string>());
+            });
         }
 
         private static async Task TestIsValidAsync(

@@ -205,9 +205,8 @@ public class ILChecker
             result.Result.Code,
             result.TypeFullName,
             result.MethodSignature,
-            result.Result.ErrorArguments.Aggregate(
-                string.Empty,
-                (accum, error) => $"{accum}, {KeyForArgument(error)}"
+            result.Result.ErrorArguments.Aggregate(string.Empty, (accum, error) =>
+                $"{accum}, {KeyForArgument(error)}"
             )
         );
 

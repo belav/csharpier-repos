@@ -380,23 +380,20 @@ namespace System.Linq.Expressions.Tests
         public void ConfirmCannotRead(Expression unreadableExpression)
         {
             if (unreadableExpression == null)
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "expression",
-                    () => Expression.Increment(unreadableExpression)
+                AssertExtensions.Throws<ArgumentNullException>("expression", () =>
+                    Expression.Increment(unreadableExpression)
                 );
             else
-                AssertExtensions.Throws<ArgumentException>(
-                    "expression",
-                    () => Expression.Increment(unreadableExpression)
+                AssertExtensions.Throws<ArgumentException>("expression", () =>
+                    Expression.Increment(unreadableExpression)
                 );
         }
 
         [Fact]
         public void ConfirmCannotReadSequence()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "expressions[0]",
-                () => Expression.Block(typeof(void), UnreadableExpressions)
+            AssertExtensions.Throws<ArgumentException>("expressions[0]", () =>
+                Expression.Block(typeof(void), UnreadableExpressions)
             );
         }
 
@@ -404,14 +401,12 @@ namespace System.Linq.Expressions.Tests
         public void ConfirmCannotWrite(Expression unwritableExpression)
         {
             if (unwritableExpression == null)
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "left",
-                    () => Expression.Assign(unwritableExpression, Expression.Constant(0))
+                AssertExtensions.Throws<ArgumentNullException>("left", () =>
+                    Expression.Assign(unwritableExpression, Expression.Constant(0))
                 );
             else
-                AssertExtensions.Throws<ArgumentException>(
-                    "left",
-                    () => Expression.Assign(unwritableExpression, Expression.Constant(0))
+                AssertExtensions.Throws<ArgumentException>("left", () =>
+                    Expression.Assign(unwritableExpression, Expression.Constant(0))
                 );
         }
 

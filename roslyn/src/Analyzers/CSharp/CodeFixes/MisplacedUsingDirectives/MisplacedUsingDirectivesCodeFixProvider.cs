@@ -247,9 +247,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             await Task.WhenAll(expandUsingDirectiveTasks.Values).ConfigureAwait(false);
 
             // Replace using directives with their expanded version.
-            return compilationUnit.ReplaceNodes(
-                expandUsingDirectiveTasks.Keys,
-                (node, _) => expandUsingDirectiveTasks[node].Result
+            return compilationUnit.ReplaceNodes(expandUsingDirectiveTasks.Keys, (node, _) =>
+                expandUsingDirectiveTasks[node].Result
             );
         }
 

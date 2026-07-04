@@ -169,17 +169,14 @@ namespace System.Collections.Tests
         {
             if (!IsReadOnly && !AddRemoveClear_ThrowsNotSupported)
             {
-                Assert.All(
-                    InvalidValues,
-                    invalidValue =>
-                    {
-                        ICollection<T> collection = GenericICollectionFactory(count);
-                        collection.Add(invalidValue);
-                        for (int i = 0; i < count; i++)
-                            collection.Add(CreateT(i));
-                        Assert.Equal(count * 2, collection.Count);
-                    }
-                );
+                Assert.All(InvalidValues, invalidValue =>
+                {
+                    ICollection<T> collection = GenericICollectionFactory(count);
+                    collection.Add(invalidValue);
+                    for (int i = 0; i < count; i++)
+                        collection.Add(CreateT(i));
+                    Assert.Equal(count * 2, collection.Count);
+                });
             }
         }
 
@@ -189,17 +186,14 @@ namespace System.Collections.Tests
         {
             if (!IsReadOnly && !AddRemoveClear_ThrowsNotSupported)
             {
-                Assert.All(
-                    InvalidValues,
-                    invalidValue =>
-                    {
-                        ICollection<T> collection = GenericICollectionFactory(0);
-                        collection.Add(invalidValue);
-                        for (int i = 0; i < count; i++)
-                            collection.Add(CreateT(i));
-                        Assert.Equal(count, collection.Count);
-                    }
-                );
+                Assert.All(InvalidValues, invalidValue =>
+                {
+                    ICollection<T> collection = GenericICollectionFactory(0);
+                    collection.Add(invalidValue);
+                    for (int i = 0; i < count; i++)
+                        collection.Add(CreateT(i));
+                    Assert.Equal(count, collection.Count);
+                });
             }
         }
 
@@ -209,15 +203,12 @@ namespace System.Collections.Tests
         {
             if (!IsReadOnly && !AddRemoveClear_ThrowsNotSupported)
             {
-                Assert.All(
-                    InvalidValues,
-                    invalidValue =>
-                    {
-                        ICollection<T> collection = GenericICollectionFactory(count);
-                        collection.Add(invalidValue);
-                        Assert.Equal(count, collection.Count);
-                    }
-                );
+                Assert.All(InvalidValues, invalidValue =>
+                {
+                    ICollection<T> collection = GenericICollectionFactory(count);
+                    collection.Add(invalidValue);
+                    Assert.Equal(count, collection.Count);
+                });
             }
         }
 
@@ -482,10 +473,8 @@ namespace System.Collections.Tests
         public void ICollection_Generic_Contains_InvalidValue_ThrowsArgumentException(int count)
         {
             ICollection<T> collection = GenericICollectionFactory(count);
-            Assert.All(
-                InvalidValues,
-                invalidValue =>
-                    Assert.Throws<ArgumentException>(() => collection.Contains(invalidValue))
+            Assert.All(InvalidValues, invalidValue =>
+                Assert.Throws<ArgumentException>(() => collection.Contains(invalidValue))
             );
         }
 
@@ -497,9 +486,8 @@ namespace System.Collections.Tests
             {
                 ICollection<T> collection = GenericICollectionFactory(count);
                 if (DefaultValueWhenNotAllowed_Throws)
-                    AssertExtensions.Throws<ArgumentNullException>(
-                        "item",
-                        () => collection.Contains(default(T))
+                    AssertExtensions.Throws<ArgumentNullException>("item", () =>
+                        collection.Contains(default(T))
                     );
                 else
                     Assert.False(collection.Contains(default(T)));
@@ -554,9 +542,8 @@ namespace System.Collections.Tests
         {
             ICollection<T> collection = GenericICollectionFactory(count);
             T[] array = new T[count];
-            Assert.Throws(
-                ICollection_Generic_CopyTo_IndexLargerThanArrayCount_ThrowType,
-                () => collection.CopyTo(array, count + 1)
+            Assert.Throws(ICollection_Generic_CopyTo_IndexLargerThanArrayCount_ThrowType, () =>
+                collection.CopyTo(array, count + 1)
             );
         }
 
@@ -719,13 +706,10 @@ namespace System.Collections.Tests
             if (!IsReadOnly && !AddRemoveClear_ThrowsNotSupported)
             {
                 ICollection<T> collection = GenericICollectionFactory(count);
-                Assert.All(
-                    collection.ToList(),
-                    value =>
-                    {
-                        Assert.True(collection.Remove(value));
-                    }
-                );
+                Assert.All(collection.ToList(), value =>
+                {
+                    Assert.True(collection.Remove(value));
+                });
                 Assert.Empty(collection);
             }
         }
@@ -735,13 +719,10 @@ namespace System.Collections.Tests
         public void ICollection_Generic_Remove_InvalidValue_ThrowsArgumentException(int count)
         {
             ICollection<T> collection = GenericICollectionFactory(count);
-            Assert.All(
-                InvalidValues,
-                value =>
-                {
-                    Assert.Throws<ArgumentException>(() => collection.Remove(value));
-                }
-            );
+            Assert.All(InvalidValues, value =>
+            {
+                Assert.Throws<ArgumentException>(() => collection.Remove(value));
+            });
             Assert.Equal(count, collection.Count);
         }
 

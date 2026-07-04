@@ -41,9 +41,8 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void ClassProxy_base()
         {
-            var ex = Assert.Throws(
-                typeof(ArgumentException),
-                () => generator.CreateClassProxy<ImplementsProxyTargetAccessor>()
+            var ex = Assert.Throws(typeof(ArgumentException), () =>
+                generator.CreateClassProxy<ImplementsProxyTargetAccessor>()
             );
             StringAssert.Contains("IProxyTargetAccessor", ex.Message);
         }

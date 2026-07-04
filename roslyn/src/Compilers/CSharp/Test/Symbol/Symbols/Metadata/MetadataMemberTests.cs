@@ -502,9 +502,8 @@ class B {
             comp.VerifyDiagnostics();
 
             var type = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("Class");
-            AssertEx.None(
-                type.GetMembersUnordered(),
-                symbol => symbol.Name.StartsWith("_VtblGap", StringComparison.Ordinal)
+            AssertEx.None(type.GetMembersUnordered(), symbol =>
+                symbol.Name.StartsWith("_VtblGap", StringComparison.Ordinal)
             );
 
             // Dropped entirely.

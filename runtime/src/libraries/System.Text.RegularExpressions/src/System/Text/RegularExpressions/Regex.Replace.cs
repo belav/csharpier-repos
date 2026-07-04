@@ -322,20 +322,16 @@ namespace System.Text.RegularExpressions
             }
 
             ReadOnlySpan<ReadOnlyMemory<char>> tmpSpan = span; // avoid address exposing the span and impacting the other code in the method that uses it
-            string result = string.Create(
-                length,
-                (IntPtr)(&tmpSpan),
-                static (dest, spanPtr) =>
+            string result = string.Create(length, (IntPtr)(&tmpSpan), static (dest, spanPtr) =>
+            {
+                Span<ReadOnlyMemory<char>> span = *(Span<ReadOnlyMemory<char>>*)spanPtr;
+                for (int i = 0; i < span.Length; i++)
                 {
-                    Span<ReadOnlyMemory<char>> span = *(Span<ReadOnlyMemory<char>>*)spanPtr;
-                    for (int i = 0; i < span.Length; i++)
-                    {
-                        ReadOnlySpan<char> segment = span[i].Span;
-                        segment.CopyTo(dest);
-                        dest = dest.Slice(segment.Length);
-                    }
+                    ReadOnlySpan<char> segment = span[i].Span;
+                    segment.CopyTo(dest);
+                    dest = dest.Slice(segment.Length);
                 }
-            );
+            });
 
             segments.Dispose();
 

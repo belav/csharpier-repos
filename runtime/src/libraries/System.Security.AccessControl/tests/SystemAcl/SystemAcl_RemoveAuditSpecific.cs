@@ -365,57 +365,51 @@ namespace System.Security.AccessControl.Tests
 
             //Case 3, accessMask = 0
 
-            AssertExtensions.Throws<ArgumentException>(
-                "accessMask",
-                () =>
-                {
-                    isContainer = true;
-                    isDS = false;
-                    auditFlags = 1;
-                    sid = "BA";
-                    accessMask = 0;
-                    inheritanceFlags = 3;
-                    propagationFlags = 3;
-                    rawAcl = new RawAcl(0, 1);
-                    systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
-                    systemAcl.RemoveAuditSpecific(
-                        (AuditFlags)auditFlags,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
-                        ),
-                        accessMask,
-                        (InheritanceFlags)inheritanceFlags,
-                        (PropagationFlags)propagationFlags
-                    );
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("accessMask", () =>
+            {
+                isContainer = true;
+                isDS = false;
+                auditFlags = 1;
+                sid = "BA";
+                accessMask = 0;
+                inheritanceFlags = 3;
+                propagationFlags = 3;
+                rawAcl = new RawAcl(0, 1);
+                systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
+                systemAcl.RemoveAuditSpecific(
+                    (AuditFlags)auditFlags,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
+                    ),
+                    accessMask,
+                    (InheritanceFlags)inheritanceFlags,
+                    (PropagationFlags)propagationFlags
+                );
+            });
 
             //Case 4, Audit Qualifier None
 
-            AssertExtensions.Throws<ArgumentException>(
-                "auditFlags",
-                () =>
-                {
-                    isContainer = true;
-                    isDS = false;
-                    auditFlags = 0;
-                    sid = "BA";
-                    accessMask = 1;
-                    inheritanceFlags = 3;
-                    propagationFlags = 3;
-                    rawAcl = new RawAcl(0, 1);
-                    systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
-                    systemAcl.RemoveAuditSpecific(
-                        (AuditFlags)auditFlags,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
-                        ),
-                        accessMask,
-                        (InheritanceFlags)inheritanceFlags,
-                        (PropagationFlags)propagationFlags
-                    );
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("auditFlags", () =>
+            {
+                isContainer = true;
+                isDS = false;
+                auditFlags = 0;
+                sid = "BA";
+                accessMask = 1;
+                inheritanceFlags = 3;
+                propagationFlags = 3;
+                rawAcl = new RawAcl(0, 1);
+                systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
+                systemAcl.RemoveAuditSpecific(
+                    (AuditFlags)auditFlags,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
+                    ),
+                    accessMask,
+                    (InheritanceFlags)inheritanceFlags,
+                    (PropagationFlags)propagationFlags
+                );
+            });
             //Case 5, null sid
 
             Assert.Throws<ArgumentNullException>(() =>

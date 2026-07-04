@@ -133,23 +133,20 @@ namespace System.Threading.Tasks.Tests
             int numLess = 0;
             int numMore = 0;
 
-            Parallel.ForEach(
-                Partitioner.Create(from, to, rangeSize),
-                tuple =>
+            Parallel.ForEach(Partitioner.Create(from, to, rangeSize), tuple =>
+            {
+                int range = tuple.Item2 - tuple.Item1;
+                if (range > rangeSize)
                 {
-                    int range = tuple.Item2 - tuple.Item1;
-                    if (range > rangeSize)
-                    {
-                        Assert.False(
-                            range > rangeSize,
-                            string.Format("    > FAILED.  Observed chunk size of {0}", range)
-                        );
-                        Interlocked.Increment(ref numMore);
-                    }
-                    else if (range < rangeSize)
-                        Interlocked.Increment(ref numLess);
+                    Assert.False(
+                        range > rangeSize,
+                        string.Format("    > FAILED.  Observed chunk size of {0}", range)
+                    );
+                    Interlocked.Increment(ref numMore);
                 }
-            );
+                else if (range < rangeSize)
+                    Interlocked.Increment(ref numLess);
+            });
 
             Assert.False(
                 numMore > 0,
@@ -170,23 +167,20 @@ namespace System.Threading.Tasks.Tests
             int numLess = 0;
             int numMore = 0;
 
-            Parallel.ForEach(
-                Partitioner.Create(from, to, rangeSize),
-                tuple =>
+            Parallel.ForEach(Partitioner.Create(from, to, rangeSize), tuple =>
+            {
+                long range = tuple.Item2 - tuple.Item1;
+                if (range > rangeSize)
                 {
-                    long range = tuple.Item2 - tuple.Item1;
-                    if (range > rangeSize)
-                    {
-                        Assert.False(
-                            range > rangeSize,
-                            string.Format("    > FAILED.  Observed chunk size of {0}", range)
-                        );
-                        Interlocked.Increment(ref numMore);
-                    }
-                    else if (range < rangeSize)
-                        Interlocked.Increment(ref numLess);
+                    Assert.False(
+                        range > rangeSize,
+                        string.Format("    > FAILED.  Observed chunk size of {0}", range)
+                    );
+                    Interlocked.Increment(ref numMore);
                 }
-            );
+                else if (range < rangeSize)
+                    Interlocked.Increment(ref numLess);
+            });
 
             Assert.False(
                 numMore > 0,

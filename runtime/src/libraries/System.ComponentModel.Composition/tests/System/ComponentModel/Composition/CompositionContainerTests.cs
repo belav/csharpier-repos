@@ -18,13 +18,10 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor2_ArrayWithNullElementAsProvidersArgument_ShouldThrowArgumentException()
         {
-            Assert.Throws<ArgumentException>(
-                "providers",
-                () =>
-                {
-                    new CompositionContainer(new ExportProvider[] { null });
-                }
-            );
+            Assert.Throws<ArgumentException>("providers", () =>
+            {
+                new CompositionContainer(new ExportProvider[] { null });
+            });
         }
 
         [Fact]
@@ -32,13 +29,10 @@ namespace System.ComponentModel.Composition
         {
             var catalog = CatalogFactory.Create();
 
-            Assert.Throws<ArgumentException>(
-                "providers",
-                () =>
-                {
-                    new CompositionContainer(catalog, new ExportProvider[] { null });
-                }
-            );
+            Assert.Throws<ArgumentException>("providers", () =>
+            {
+                new CompositionContainer(catalog, new ExportProvider[] { null });
+            });
         }
 
         [Fact]
@@ -136,13 +130,10 @@ namespace System.ComponentModel.Composition
             var container = CreateCompositionContainer();
             container.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                container,
-                () =>
-                {
-                    var catalog = container.Catalog;
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(container, () =>
+            {
+                var catalog = container.Catalog;
+            });
         }
 
         [Fact]
@@ -151,13 +142,10 @@ namespace System.ComponentModel.Composition
             var container = CreateCompositionContainer();
             container.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                container,
-                () =>
-                {
-                    var providers = container.Providers;
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(container, () =>
+            {
+                var providers = container.Providers;
+            });
         }
 
         [Fact]
@@ -189,13 +177,10 @@ namespace System.ComponentModel.Composition
             container.Dispose();
 
             CompositionBatch batch = new CompositionBatch();
-            ExceptionAssert.ThrowsDisposed(
-                container,
-                () =>
-                {
-                    container.Compose(batch);
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(container, () =>
+            {
+                container.Compose(batch);
+            });
         }
 
         [Fact]
@@ -204,13 +189,10 @@ namespace System.ComponentModel.Composition
             var container = CreateCompositionContainer();
             container.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                container,
-                () =>
-                {
-                    container.GetExport<string>();
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(container, () =>
+            {
+                container.GetExport<string>();
+            });
         }
 
         [Fact]
@@ -219,13 +201,10 @@ namespace System.ComponentModel.Composition
             var container = CreateCompositionContainer();
             container.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                container,
-                () =>
-                {
-                    container.GetExport<string>("Contract");
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(container, () =>
+            {
+                container.GetExport<string>("Contract");
+            });
         }
 
         [Fact]
@@ -234,13 +213,10 @@ namespace System.ComponentModel.Composition
             var container = CreateCompositionContainer();
             container.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                container,
-                () =>
-                {
-                    container.GetExport<string, object>();
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(container, () =>
+            {
+                container.GetExport<string, object>();
+            });
         }
 
         [Fact]
@@ -249,13 +225,10 @@ namespace System.ComponentModel.Composition
             var container = CreateCompositionContainer();
             container.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                container,
-                () =>
-                {
-                    container.GetExport<string, object>("Contract");
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(container, () =>
+            {
+                container.GetExport<string, object>("Contract");
+            });
         }
 
         [Fact]
@@ -265,13 +238,10 @@ namespace System.ComponentModel.Composition
             container.Dispose();
 
             var definition = ImportDefinitionFactory.Create();
-            ExceptionAssert.ThrowsDisposed(
-                container,
-                () =>
-                {
-                    container.GetExports(definition);
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(container, () =>
+            {
+                container.GetExports(definition);
+            });
         }
 
         [Fact]
@@ -280,13 +250,10 @@ namespace System.ComponentModel.Composition
             var container = CreateCompositionContainer();
             container.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                container,
-                () =>
-                {
-                    container.GetExports(typeof(string), typeof(object), "Contract");
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(container, () =>
+            {
+                container.GetExports(typeof(string), typeof(object), "Contract");
+            });
         }
 
         [Fact]
@@ -295,13 +262,10 @@ namespace System.ComponentModel.Composition
             var container = CreateCompositionContainer();
             container.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                container,
-                () =>
-                {
-                    container.GetExports<string>();
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(container, () =>
+            {
+                container.GetExports<string>();
+            });
         }
 
         [Fact]
@@ -310,13 +274,10 @@ namespace System.ComponentModel.Composition
             var container = CreateCompositionContainer();
             container.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                container,
-                () =>
-                {
-                    container.GetExports<string>("Contract");
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(container, () =>
+            {
+                container.GetExports<string>("Contract");
+            });
         }
 
         [Fact]
@@ -325,13 +286,10 @@ namespace System.ComponentModel.Composition
             var container = CreateCompositionContainer();
             container.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                container,
-                () =>
-                {
-                    container.GetExports<string, object>();
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(container, () =>
+            {
+                container.GetExports<string, object>();
+            });
         }
 
         [Fact]
@@ -340,13 +298,10 @@ namespace System.ComponentModel.Composition
             var container = CreateCompositionContainer();
             container.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                container,
-                () =>
-                {
-                    container.GetExports<string, object>("Contract");
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(container, () =>
+            {
+                container.GetExports<string, object>("Contract");
+            });
         }
 
         [Fact]
@@ -355,13 +310,10 @@ namespace System.ComponentModel.Composition
             var container = CreateCompositionContainer();
             container.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                container,
-                () =>
-                {
-                    container.GetExportedValue<string>();
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(container, () =>
+            {
+                container.GetExportedValue<string>();
+            });
         }
 
         [Fact]
@@ -370,13 +322,10 @@ namespace System.ComponentModel.Composition
             var container = CreateCompositionContainer();
             container.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                container,
-                () =>
-                {
-                    container.GetExportedValue<string>("Contract");
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(container, () =>
+            {
+                container.GetExportedValue<string>("Contract");
+            });
         }
 
         [Fact]
@@ -385,13 +334,10 @@ namespace System.ComponentModel.Composition
             var container = CreateCompositionContainer();
             container.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                container,
-                () =>
-                {
-                    container.GetExportedValueOrDefault<string>();
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(container, () =>
+            {
+                container.GetExportedValueOrDefault<string>();
+            });
         }
 
         [Fact]
@@ -400,13 +346,10 @@ namespace System.ComponentModel.Composition
             var container = CreateCompositionContainer();
             container.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                container,
-                () =>
-                {
-                    container.GetExportedValueOrDefault<string>("Contract");
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(container, () =>
+            {
+                container.GetExportedValueOrDefault<string>("Contract");
+            });
         }
 
         [Fact]
@@ -415,13 +358,10 @@ namespace System.ComponentModel.Composition
             var container = CreateCompositionContainer();
             container.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                container,
-                () =>
-                {
-                    container.GetExportedValues<string>();
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(container, () =>
+            {
+                container.GetExportedValues<string>();
+            });
         }
 
         [Fact]
@@ -430,13 +370,10 @@ namespace System.ComponentModel.Composition
             var container = CreateCompositionContainer();
             container.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                container,
-                () =>
-                {
-                    container.GetExportedValues<string>("Contract");
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(container, () =>
+            {
+                container.GetExportedValues<string>("Contract");
+            });
         }
 
         [Fact]
@@ -444,13 +381,10 @@ namespace System.ComponentModel.Composition
         {
             var container = CreateCompositionContainer();
 
-            Assert.Throws<ArgumentNullException>(
-                "definition",
-                () =>
-                {
-                    container.GetExports((ImportDefinition)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("definition", () =>
+            {
+                container.GetExports((ImportDefinition)null);
+            });
         }
 
         [Fact]
@@ -458,13 +392,10 @@ namespace System.ComponentModel.Composition
         {
             var container = CreateCompositionContainer();
 
-            Assert.Throws<ArgumentNullException>(
-                "type",
-                () =>
-                {
-                    container.GetExports((Type)null, typeof(string), "ContractName");
-                }
-            );
+            Assert.Throws<ArgumentNullException>("type", () =>
+            {
+                container.GetExports((Type)null, typeof(string), "ContractName");
+            });
         }
 
         [Fact]
@@ -2586,9 +2517,8 @@ namespace System.ComponentModel.Composition
         {
             var container = CreateCompositionContainer();
 
-            Assert.Throws<ArgumentException>(
-                "exports",
-                () => container.ReleaseExports(new Export[] { null })
+            Assert.Throws<ArgumentException>("exports", () =>
+                container.ReleaseExports(new Export[] { null })
             );
         }
 
@@ -2620,13 +2550,10 @@ namespace System.ComponentModel.Composition
             var cat = CatalogFactory.CreateDefaultAttributed();
             var container = new CompositionContainer(cat);
 
-            CompositionAssert.ThrowsError(
-                ErrorId.ImportEngine_PartCannotGetExportedValue,
-                () =>
-                {
-                    container.GetExportedValue<int>("SimpleInt");
-                }
-            );
+            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotGetExportedValue, () =>
+            {
+                container.GetExportedValue<int>("SimpleInt");
+            });
         }
 
         [Fact]
@@ -2955,9 +2882,8 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void CompositionOptionsInvalidValue()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "compositionOptions",
-                () => new CompositionContainer((CompositionOptions)0x0400)
+            Assert.Throws<ArgumentOutOfRangeException>("compositionOptions", () =>
+                new CompositionContainer((CompositionOptions)0x0400)
             );
         }
 
@@ -3136,9 +3062,8 @@ namespace System.ComponentModel.Composition
         public void ComposeExportedValueOfT_NullAsContractName_ThrowsArgumentNullException()
         {
             var container = CreateCompositionContainer();
-            Assert.Throws<ArgumentNullException>(
-                "contractName",
-                () => container.ComposeExportedValue<string>((string)null, "Value")
+            Assert.Throws<ArgumentNullException>("contractName", () =>
+                container.ComposeExportedValue<string>((string)null, "Value")
             );
         }
 
@@ -3146,9 +3071,8 @@ namespace System.ComponentModel.Composition
         public void ComposeExportedValueOfT_EmptyStringAsContractName_ThrowsArgumentException()
         {
             var container = CreateCompositionContainer();
-            Assert.Throws<ArgumentException>(
-                "contractName",
-                () => container.ComposeExportedValue<string>(string.Empty, "Value")
+            Assert.Throws<ArgumentException>("contractName", () =>
+                container.ComposeExportedValue<string>(string.Empty, "Value")
             );
         }
 

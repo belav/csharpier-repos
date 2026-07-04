@@ -63,14 +63,12 @@ public class AppendIncludeToExistingExpressionMutator : ExpressionMutator
                             navigation.ClrType
                         );
 
-                var injector = new ExpressionInjector(
-                    _expressionFinder.FoundExpressions[i],
-                    e =>
-                        Expression.Call(
-                            thenIncludeMethod,
-                            e,
-                            Expression.Lambda(Expression.Property(prm, navigation.Name), prm)
-                        )
+                var injector = new ExpressionInjector(_expressionFinder.FoundExpressions[i], e =>
+                    Expression.Call(
+                        thenIncludeMethod,
+                        e,
+                        Expression.Lambda(Expression.Property(prm, navigation.Name), prm)
+                    )
                 );
 
                 return injector.Visit(expression);
@@ -82,14 +80,12 @@ public class AppendIncludeToExistingExpressionMutator : ExpressionMutator
                     navigation.ClrType
                 );
 
-                var injector = new ExpressionInjector(
-                    _expressionFinder.FoundExpressions[i],
-                    e =>
-                        Expression.Call(
-                            includeMethod,
-                            e,
-                            Expression.Lambda(Expression.Property(prm, navigation.Name), prm)
-                        )
+                var injector = new ExpressionInjector(_expressionFinder.FoundExpressions[i], e =>
+                    Expression.Call(
+                        includeMethod,
+                        e,
+                        Expression.Lambda(Expression.Property(prm, navigation.Name), prm)
+                    )
                 );
 
                 return injector.Visit(expression);

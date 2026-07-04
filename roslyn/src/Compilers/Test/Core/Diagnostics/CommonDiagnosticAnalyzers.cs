@@ -1935,13 +1935,11 @@ namespace Microsoft.CodeAnalysis
                             blockStartContext.RegisterOperationBlockEndAction(c =>
                                 ReportDiagnostic(c.ReportDiagnostic, c.OwningSymbol.Locations[0])
                             );
-                            CacheAndVerifyControlFlowGraph(
-                                blockStartContext.OperationBlocks,
-                                op =>
-                                    (
-                                        blockStartContext.GetControlFlowGraph(op),
-                                        blockStartContext.OwningSymbol
-                                    )
+                            CacheAndVerifyControlFlowGraph(blockStartContext.OperationBlocks, op =>
+                                (
+                                    blockStartContext.GetControlFlowGraph(op),
+                                    blockStartContext.OwningSymbol
+                                )
                             );
                         });
 
@@ -1954,13 +1952,8 @@ namespace Microsoft.CodeAnalysis
                                 blockContext.ReportDiagnostic,
                                 blockContext.OwningSymbol.Locations[0]
                             );
-                            CacheAndVerifyControlFlowGraph(
-                                blockContext.OperationBlocks,
-                                op =>
-                                    (
-                                        blockContext.GetControlFlowGraph(op),
-                                        blockContext.OwningSymbol
-                                    )
+                            CacheAndVerifyControlFlowGraph(blockContext.OperationBlocks, op =>
+                                (blockContext.GetControlFlowGraph(op), blockContext.OwningSymbol)
                             );
                         });
 
@@ -1987,13 +1980,8 @@ namespace Microsoft.CodeAnalysis
                     case ActionKind.OperationInOperationBlockStart:
                         context.RegisterOperationBlockStartAction(blockContext =>
                         {
-                            CacheAndVerifyControlFlowGraph(
-                                blockContext.OperationBlocks,
-                                op =>
-                                    (
-                                        blockContext.GetControlFlowGraph(op),
-                                        blockContext.OwningSymbol
-                                    )
+                            CacheAndVerifyControlFlowGraph(blockContext.OperationBlocks, op =>
+                                (blockContext.GetControlFlowGraph(op), blockContext.OwningSymbol)
                             );
                             blockContext.RegisterOperationAction(
                                 operationContext =>

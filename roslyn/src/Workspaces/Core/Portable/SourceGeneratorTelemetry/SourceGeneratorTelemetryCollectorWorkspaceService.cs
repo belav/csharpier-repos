@@ -57,10 +57,10 @@ internal sealed class SourceGeneratorTelemetryCollectorWorkspaceService
         ISourceGenerator generator,
         ProjectState project
     ) =>
-        _generatorTelemetryKeys.GetValue(
-            generator,
-            g => new GeneratorTelemetryKey(g, project.GetAnalyzerReferenceForGenerator(g))
-        );
+        _generatorTelemetryKeys.GetValue(generator, g => new GeneratorTelemetryKey(
+            g,
+            project.GetAnalyzerReferenceForGenerator(g)
+        ));
 
     public void CollectRunResult(
         GeneratorDriverRunResult driverRunResult,

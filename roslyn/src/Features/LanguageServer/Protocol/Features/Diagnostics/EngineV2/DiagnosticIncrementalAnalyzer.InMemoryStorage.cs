@@ -47,13 +47,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 AssertKey(key);
 
                 // add new cache entry
-                var analyzerMap = s_map.GetOrAdd(
-                    analyzer,
-                    _ => new ConcurrentDictionary<(object key, string stateKey), CacheEntry>(
-                        concurrencyLevel: 2,
-                        capacity: 10
-                    )
-                );
+                var analyzerMap = s_map.GetOrAdd(analyzer, _ => new ConcurrentDictionary<
+                    (object key, string stateKey),
+                    CacheEntry
+                >(concurrencyLevel: 2, capacity: 10));
                 analyzerMap[key] = entry;
             }
 

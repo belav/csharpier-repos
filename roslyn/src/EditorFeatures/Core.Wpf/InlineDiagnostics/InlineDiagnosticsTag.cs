@@ -126,18 +126,15 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
             border.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
             view.LayoutChanged += View_LayoutChanged;
 
-            return new GraphicsResult(
-                border,
-                dispose: () =>
+            return new GraphicsResult(border, dispose: () =>
+            {
+                if (hyperlink is not null)
                 {
-                    if (hyperlink is not null)
-                    {
-                        hyperlink.RequestNavigate -= HandleRequestNavigate;
-                    }
-
-                    view.LayoutChanged -= View_LayoutChanged;
+                    hyperlink.RequestNavigate -= HandleRequestNavigate;
                 }
-            );
+
+                view.LayoutChanged -= View_LayoutChanged;
+            });
 
             void View_LayoutChanged(object sender, TextViewLayoutChangedEventArgs e)
             {

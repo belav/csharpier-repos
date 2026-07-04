@@ -71,14 +71,11 @@ namespace System.Runtime.Caching
                 // This two-step dance with hit-ratio was an old perf-counter artifact. There only needs
                 // to be one polling counter here, rather than the two-part perf counter. Still keeping array
                 // indexes and raw counter values consistent between NetFx and Core code though.
-                _counters[(int)CounterName.HitRatio] = new PollingCounter(
-                    "hit-ratio",
-                    this,
-                    () =>
-                        (
-                            (double)_counterValues[(int)CounterName.HitRatio]
-                            / (double)_counterValues[(int)CounterName.HitRatioBase]
-                        ) * 100d
+                _counters[(int)CounterName.HitRatio] = new PollingCounter("hit-ratio", this, () =>
+                    (
+                        (double)_counterValues[(int)CounterName.HitRatio]
+                        / (double)_counterValues[(int)CounterName.HitRatioBase]
+                    ) * 100d
                 )
                 {
                     DisplayName = "Cache Hit Ratio",

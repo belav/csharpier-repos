@@ -68,9 +68,8 @@ namespace System.Collections.Tests
             if (!IsReadOnly)
             {
                 IDictionary dictionary = new Dictionary<string, string>();
-                AssertExtensions.Throws<ArgumentException>(
-                    "key",
-                    () => dictionary[23] = CreateTValue(12345)
+                AssertExtensions.Throws<ArgumentException>("key", () =>
+                    dictionary[23] = CreateTValue(12345)
                 );
                 Assert.Empty(dictionary);
             }
@@ -83,9 +82,8 @@ namespace System.Collections.Tests
             {
                 IDictionary dictionary = new Dictionary<string, string>();
                 object missingKey = GetNewKey(dictionary);
-                AssertExtensions.Throws<ArgumentException>(
-                    "value",
-                    () => dictionary[missingKey] = 324
+                AssertExtensions.Throws<ArgumentException>("value", () =>
+                    dictionary[missingKey] = 324
                 );
                 Assert.Empty(dictionary);
             }
@@ -98,9 +96,8 @@ namespace System.Collections.Tests
             {
                 IDictionary dictionary = new Dictionary<string, string>();
                 object missingKey = 23;
-                AssertExtensions.Throws<ArgumentException>(
-                    "key",
-                    () => dictionary.Add(missingKey, CreateTValue(12345))
+                AssertExtensions.Throws<ArgumentException>("key", () =>
+                    dictionary.Add(missingKey, CreateTValue(12345))
                 );
                 Assert.Empty(dictionary);
             }
@@ -113,9 +110,8 @@ namespace System.Collections.Tests
             {
                 IDictionary dictionary = new Dictionary<string, string>();
                 object missingKey = GetNewKey(dictionary);
-                AssertExtensions.Throws<ArgumentException>(
-                    "value",
-                    () => dictionary.Add(missingKey, 324)
+                AssertExtensions.Throws<ArgumentException>("value", () =>
+                    dictionary.Add(missingKey, 324)
                 );
                 Assert.Empty(dictionary);
             }
@@ -190,38 +186,27 @@ namespace System.Collections.Tests
         [Fact]
         public void CopyConstructorExceptions()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "dictionary",
-                () => new Dictionary<int, int>((IDictionary<int, int>)null)
+            AssertExtensions.Throws<ArgumentNullException>("dictionary", () =>
+                new Dictionary<int, int>((IDictionary<int, int>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "dictionary",
-                () => new Dictionary<int, int>((IDictionary<int, int>)null, null)
+            AssertExtensions.Throws<ArgumentNullException>("dictionary", () =>
+                new Dictionary<int, int>((IDictionary<int, int>)null, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "dictionary",
-                () =>
-                    new Dictionary<int, int>(
-                        (IDictionary<int, int>)null,
-                        EqualityComparer<int>.Default
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("dictionary", () =>
+                new Dictionary<int, int>((IDictionary<int, int>)null, EqualityComparer<int>.Default)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => new Dictionary<int, int>(new NegativeCountDictionary<int, int>())
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new Dictionary<int, int>(new NegativeCountDictionary<int, int>())
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => new Dictionary<int, int>(new NegativeCountDictionary<int, int>(), null)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new Dictionary<int, int>(new NegativeCountDictionary<int, int>(), null)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () =>
-                    new Dictionary<int, int>(
-                        new NegativeCountDictionary<int, int>(),
-                        EqualityComparer<int>.Default
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new Dictionary<int, int>(
+                    new NegativeCountDictionary<int, int>(),
+                    EqualityComparer<int>.Default
+                )
             );
         }
 
@@ -245,9 +230,8 @@ namespace System.Collections.Tests
         [InlineData(101)]
         public void ICollection_Generic_CopyTo_NonContiguousDictionary(int count)
         {
-            ICollection<KeyValuePair<string, string>> collection = CreateDictionary(
-                count,
-                k => k.ToString()
+            ICollection<KeyValuePair<string, string>> collection = CreateDictionary(count, k =>
+                k.ToString()
             );
             KeyValuePair<string, string>[] array = new KeyValuePair<string, string>[count];
             collection.CopyTo(array, 0);
@@ -409,9 +393,8 @@ namespace System.Collections.Tests
         public void CantAcceptDuplicateKeysFromSourceDictionary()
         {
             Dictionary<string, int> source = new Dictionary<string, int> { { "a", 1 }, { "A", 1 } };
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new Dictionary<string, int>(source, StringComparer.OrdinalIgnoreCase)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new Dictionary<string, int>(source, StringComparer.OrdinalIgnoreCase)
             );
         }
 

@@ -59,13 +59,10 @@ public class TestServerTests : VerifiableLoggedTest
             var connection = connectionBuilder.Build();
 
             var originalMessage = "message";
-            connection.On<string>(
-                "Echo",
-                (receivedMessage) =>
-                {
-                    Assert.Equal(originalMessage, receivedMessage);
-                }
-            );
+            connection.On<string>("Echo", (receivedMessage) =>
+            {
+                Assert.Equal(originalMessage, receivedMessage);
+            });
 
             await connection.StartAsync();
             await connection.InvokeAsync("Echo", originalMessage);
@@ -111,13 +108,10 @@ public class TestServerTests : VerifiableLoggedTest
             var connection = connectionBuilder.Build();
 
             var originalMessage = "message";
-            connection.On<string>(
-                "Echo",
-                (receivedMessage) =>
-                {
-                    Assert.Equal(originalMessage, receivedMessage);
-                }
-            );
+            connection.On<string>("Echo", (receivedMessage) =>
+            {
+                Assert.Equal(originalMessage, receivedMessage);
+            });
 
             await connection.StartAsync();
             await connection.InvokeAsync("Echo", originalMessage);

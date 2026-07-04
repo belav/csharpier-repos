@@ -301,14 +301,11 @@ file class Wrapper<T> { }
         // Emits diagnostic but generates no source
         var result = Assert.IsType<GeneratorRunResult>(Assert.Single(generatorRunResult.Results));
         Assert.Empty(result.GeneratedSources);
-        Assert.All(
-            result.Diagnostics,
-            diagnostic =>
-            {
-                Assert.Equal(DiagnosticDescriptors.TypeParametersNotSupported.Id, diagnostic.Id);
-                Assert.Equal(DiagnosticSeverity.Warning, diagnostic.Severity);
-            }
-        );
+        Assert.All(result.Diagnostics, diagnostic =>
+        {
+            Assert.Equal(DiagnosticDescriptors.TypeParametersNotSupported.Id, diagnostic.Id);
+            Assert.Equal(DiagnosticSeverity.Warning, diagnostic.Severity);
+        });
     }
 
     [Theory]
@@ -365,14 +362,11 @@ public class Wrapper<T> { }
         // Emits diagnostic but generates no source
         var result = Assert.IsType<GeneratorRunResult>(Assert.Single(generatorRunResult.Results));
         Assert.Empty(result.GeneratedSources);
-        Assert.All(
-            result.Diagnostics,
-            diagnostic =>
-            {
-                Assert.Equal(DiagnosticDescriptors.InaccessibleTypesNotSupported.Id, diagnostic.Id);
-                Assert.Equal(DiagnosticSeverity.Warning, diagnostic.Severity);
-            }
-        );
+        Assert.All(result.Diagnostics, diagnostic =>
+        {
+            Assert.Equal(DiagnosticDescriptors.InaccessibleTypesNotSupported.Id, diagnostic.Id);
+            Assert.Equal(DiagnosticSeverity.Warning, diagnostic.Severity);
+        });
     }
 
     [Fact]
@@ -421,14 +415,11 @@ public class Wrapper<T> { }
 
         // Emits diagnostic and generates source for all endpoints
         var result = Assert.IsType<GeneratorRunResult>(Assert.Single(generatorRunResult.Results));
-        Assert.All(
-            result.Diagnostics,
-            diagnostic =>
-            {
-                Assert.Equal(DiagnosticDescriptors.InaccessibleTypesNotSupported.Id, diagnostic.Id);
-                Assert.Equal(DiagnosticSeverity.Warning, diagnostic.Severity);
-            }
-        );
+        Assert.All(result.Diagnostics, diagnostic =>
+        {
+            Assert.Equal(DiagnosticDescriptors.InaccessibleTypesNotSupported.Id, diagnostic.Id);
+            Assert.Equal(DiagnosticSeverity.Warning, diagnostic.Severity);
+        });
 
         // All endpoints can be invoked
         var endpoints = GetEndpointsFromCompilation(
@@ -467,9 +458,8 @@ app.MapGet("/null-struct-with-filter", (BindableStructWithNullReturn param) => "
             Assert.Equal(400, httpContext.Response.StatusCode);
         }
 
-        Assert.All(
-            TestSink.Writes,
-            context => Assert.Equal("RequiredParameterNotProvided", context.EventId.Name)
+        Assert.All(TestSink.Writes, context =>
+            Assert.Equal("RequiredParameterNotProvided", context.EventId.Name)
         );
         await VerifyAgainstBaselineUsingFile(compilation);
     }
@@ -705,14 +695,11 @@ app.MapPost("/todo1", (Todo todo1) => todo1.Id.ToString());
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            result,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-                Assert.False(endpointModel.Response.IsAwaitable);
-            }
-        );
+        VerifyStaticEndpointModel(result, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+            Assert.False(endpointModel.Response.IsAwaitable);
+        });
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
@@ -733,14 +720,11 @@ app.MapPost("/todo1", (Todo todo1) => todo1.Id.ToString());
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            result,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-                Assert.True(endpointModel.Response.IsAwaitable);
-            }
-        );
+        VerifyStaticEndpointModel(result, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+            Assert.True(endpointModel.Response.IsAwaitable);
+        });
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);

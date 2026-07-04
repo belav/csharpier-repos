@@ -967,9 +967,8 @@ public class RenderTreeBuilderTest
         builder.CloseElement();
 
         // Assert
-        Assert.Collection(
-            builder.GetFrames().AsEnumerable(),
-            frame => AssertFrame.Element(frame, "elem", 1, 0)
+        Assert.Collection(builder.GetFrames().AsEnumerable(), frame =>
+            AssertFrame.Element(frame, "elem", 1, 0)
         );
     }
 
@@ -1046,9 +1045,8 @@ public class RenderTreeBuilderTest
         builder.CloseElement();
 
         // Assert
-        Assert.Collection(
-            builder.GetFrames().AsEnumerable(),
-            frame => AssertFrame.Element(frame, "elem", 1, 0)
+        Assert.Collection(builder.GetFrames().AsEnumerable(), frame =>
+            AssertFrame.Element(frame, "elem", 1, 0)
         );
     }
 
@@ -1127,9 +1125,8 @@ public class RenderTreeBuilderTest
         builder.CloseElement();
 
         // Assert
-        Assert.Collection(
-            builder.GetFrames().AsEnumerable(),
-            frame => AssertFrame.Element(frame, "elem", 1, 0)
+        Assert.Collection(builder.GetFrames().AsEnumerable(), frame =>
+            AssertFrame.Element(frame, "elem", 1, 0)
         );
     }
 
@@ -1166,9 +1163,8 @@ public class RenderTreeBuilderTest
         builder.CloseElement();
 
         // Assert
-        Assert.Collection(
-            builder.GetFrames().AsEnumerable(),
-            frame => AssertFrame.Element(frame, "elem", 1, 0)
+        Assert.Collection(builder.GetFrames().AsEnumerable(), frame =>
+            AssertFrame.Element(frame, "elem", 1, 0)
         );
     }
 
@@ -1250,9 +1246,8 @@ public class RenderTreeBuilderTest
         builder.CloseElement();
 
         // Assert
-        Assert.Collection(
-            builder.GetFrames().AsEnumerable(),
-            frame => AssertFrame.Element(frame, "elem", 1, 0)
+        Assert.Collection(builder.GetFrames().AsEnumerable(), frame =>
+            AssertFrame.Element(frame, "elem", 1, 0)
         );
     }
 
@@ -1352,9 +1347,8 @@ public class RenderTreeBuilderTest
         builder.CloseElement();
 
         // Assert
-        Assert.Collection(
-            builder.GetFrames().AsEnumerable(),
-            frame => AssertFrame.Element(frame, "elem", 1, 0)
+        Assert.Collection(builder.GetFrames().AsEnumerable(), frame =>
+            AssertFrame.Element(frame, "elem", 1, 0)
         );
     }
 
@@ -1458,9 +1452,8 @@ public class RenderTreeBuilderTest
         builder.CloseElement();
 
         // Assert
-        Assert.Collection(
-            builder.GetFrames().AsEnumerable(),
-            frame => AssertFrame.Element(frame, "elem", 1, 0)
+        Assert.Collection(builder.GetFrames().AsEnumerable(), frame =>
+            AssertFrame.Element(frame, "elem", 1, 0)
         );
     }
 
@@ -1640,9 +1633,8 @@ public class RenderTreeBuilderTest
         builder.CloseElement();
 
         // Assert
-        Assert.Collection(
-            builder.GetFrames().AsEnumerable(),
-            frame => AssertFrame.Element(frame, "elem", 1, 0)
+        Assert.Collection(builder.GetFrames().AsEnumerable(), frame =>
+            AssertFrame.Element(frame, "elem", 1, 0)
         );
     }
 
@@ -1721,9 +1713,8 @@ public class RenderTreeBuilderTest
         builder.CloseElement();
 
         // Assert
-        Assert.Collection(
-            builder.GetFrames().AsEnumerable(),
-            frame => AssertFrame.Element(frame, "elem", 1, 0)
+        Assert.Collection(builder.GetFrames().AsEnumerable(), frame =>
+            AssertFrame.Element(frame, "elem", 1, 0)
         );
     }
 
@@ -1766,9 +1757,8 @@ public class RenderTreeBuilderTest
         builder.CloseElement();
 
         // Assert
-        Assert.Collection(
-            builder.GetFrames().AsEnumerable(),
-            frame => AssertFrame.Element(frame, "elem", 1, 0)
+        Assert.Collection(builder.GetFrames().AsEnumerable(), frame =>
+            AssertFrame.Element(frame, "elem", 1, 0)
         );
     }
 
@@ -1871,14 +1861,11 @@ public class RenderTreeBuilderTest
         builder.CloseElement();
 
         // Assert
-        Assert.Collection(
-            builder.GetFrames().AsEnumerable(),
-            frame =>
-            {
-                AssertFrame.Element(frame, "elem", 1, 0);
-                Assert.Null(frame.ElementKey);
-            }
-        );
+        Assert.Collection(builder.GetFrames().AsEnumerable(), frame =>
+        {
+            AssertFrame.Element(frame, "elem", 1, 0);
+            Assert.Null(frame.ElementKey);
+        });
     }
 
     [Fact]
@@ -1893,14 +1880,11 @@ public class RenderTreeBuilderTest
         builder.CloseComponent();
 
         // Assert
-        Assert.Collection(
-            builder.GetFrames().AsEnumerable(),
-            frame =>
-            {
-                AssertFrame.Component<TestComponent>(frame, 1, 0);
-                Assert.Null(frame.ComponentKey);
-            }
-        );
+        Assert.Collection(builder.GetFrames().AsEnumerable(), frame =>
+        {
+            AssertFrame.Component<TestComponent>(frame, 1, 0);
+            Assert.Null(frame.ComponentKey);
+        });
     }
 
     [Fact]
@@ -2214,14 +2198,11 @@ public class RenderTreeBuilderTest
         builder.CloseComponent();
 
         // Assert
-        Assert.Collection(
-            builder.GetFrames().AsEnumerable(),
-            frame =>
-            {
-                AssertFrame.Component<TestComponent>(frame, 1, 0);
-                Assert.Equal(default, frame.ComponentFrameFlags);
-            }
-        );
+        Assert.Collection(builder.GetFrames().AsEnumerable(), frame =>
+        {
+            AssertFrame.Component<TestComponent>(frame, 1, 0);
+            Assert.Equal(default, frame.ComponentFrameFlags);
+        });
     }
 
     [Fact]

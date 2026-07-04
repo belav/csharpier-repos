@@ -24,14 +24,12 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Sealed_class_as_base_type()
         {
-            var exception = Assert.Throws(
-                typeof(ArgumentException),
-                () =>
-                    generator.CreateInterfaceProxyWithoutTarget(
-                        typeof(ISimpleInterface),
-                        Type.EmptyTypes,
-                        WithBase<Sealed>()
-                    )
+            var exception = Assert.Throws(typeof(ArgumentException), () =>
+                generator.CreateInterfaceProxyWithoutTarget(
+                    typeof(ISimpleInterface),
+                    Type.EmptyTypes,
+                    WithBase<Sealed>()
+                )
             );
             Assert.AreEqual(
                 string.Format(
@@ -47,14 +45,12 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Interface_as_base_type()
         {
-            var exception = Assert.Throws(
-                typeof(ArgumentException),
-                () =>
-                    generator.CreateInterfaceProxyWithoutTarget(
-                        typeof(ISimpleInterface),
-                        Type.EmptyTypes,
-                        WithBase<ISomething>()
-                    )
+            var exception = Assert.Throws(typeof(ArgumentException), () =>
+                generator.CreateInterfaceProxyWithoutTarget(
+                    typeof(ISimpleInterface),
+                    Type.EmptyTypes,
+                    WithBase<ISomething>()
+                )
             );
             Assert.AreEqual(
                 string.Format(
@@ -70,14 +66,12 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Class_with_no_default_ctor_as_base_type()
         {
-            var exception = Assert.Throws(
-                typeof(ArgumentException),
-                () =>
-                    generator.CreateInterfaceProxyWithoutTarget(
-                        typeof(ISimpleInterface),
-                        Type.EmptyTypes,
-                        WithBase<NoDefaultCtor>()
-                    )
+            var exception = Assert.Throws(typeof(ArgumentException), () =>
+                generator.CreateInterfaceProxyWithoutTarget(
+                    typeof(ISimpleInterface),
+                    Type.EmptyTypes,
+                    WithBase<NoDefaultCtor>()
+                )
             );
             Assert.AreEqual(
                 string.Format(
@@ -93,14 +87,12 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void Class_with_private_default_ctor_as_base_type()
         {
-            var exception = Assert.Throws(
-                typeof(ArgumentException),
-                () =>
-                    generator.CreateInterfaceProxyWithoutTarget(
-                        typeof(ISimpleInterface),
-                        Type.EmptyTypes,
-                        WithBase<DefaultPrivateCtor>()
-                    )
+            var exception = Assert.Throws(typeof(ArgumentException), () =>
+                generator.CreateInterfaceProxyWithoutTarget(
+                    typeof(ISimpleInterface),
+                    Type.EmptyTypes,
+                    WithBase<DefaultPrivateCtor>()
+                )
             );
             Assert.AreEqual(
                 string.Format(

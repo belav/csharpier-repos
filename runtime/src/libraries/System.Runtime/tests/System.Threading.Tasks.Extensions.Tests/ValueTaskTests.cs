@@ -325,31 +325,26 @@ namespace System.Threading.Tasks.Tests
         public void NonGeneric_CreateFromNullTask_Throws()
         {
             AssertExtensions.Throws<ArgumentNullException>("task", () => new ValueTask((Task)null));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => new ValueTask((IValueTaskSource)null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                new ValueTask((IValueTaskSource)null, 0)
             );
         }
 
         [Fact]
         public void Generic_CreateFromNullTask_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "task",
-                () => new ValueTask<int>((Task<int>)null)
+            AssertExtensions.Throws<ArgumentNullException>("task", () =>
+                new ValueTask<int>((Task<int>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "task",
-                () => new ValueTask<string>((Task<string>)null)
+            AssertExtensions.Throws<ArgumentNullException>("task", () =>
+                new ValueTask<string>((Task<string>)null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => new ValueTask<int>((IValueTaskSource<int>)null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                new ValueTask<int>((IValueTaskSource<int>)null, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => new ValueTask<string>((IValueTaskSource<string>)null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                new ValueTask<string>((IValueTaskSource<string>)null, 0)
             );
         }
 
@@ -1784,13 +1779,11 @@ namespace System.Threading.Tasks.Tests
         [Fact]
         public async Task FromCanceled_CreatesCanceledTask()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "cancellationToken",
-                () => ValueTask.FromCanceled(default)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("cancellationToken", () =>
+                ValueTask.FromCanceled(default)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "cancellationToken",
-                () => ValueTask.FromCanceled<int>(default)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("cancellationToken", () =>
+                ValueTask.FromCanceled<int>(default)
             );
 
             var cts = new CancellationTokenSource();
@@ -1820,13 +1813,11 @@ namespace System.Threading.Tasks.Tests
         [Fact]
         public async Task FromException_CreatesFaultedTask()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "exception",
-                () => ValueTask.FromException(null)
+            AssertExtensions.Throws<ArgumentNullException>("exception", () =>
+                ValueTask.FromException(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "exception",
-                () => ValueTask.FromException<int>(null)
+            AssertExtensions.Throws<ArgumentNullException>("exception", () =>
+                ValueTask.FromException<int>(null)
             );
 
             Exception e = new FormatException("test");

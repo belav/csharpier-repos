@@ -62,9 +62,8 @@ namespace System.Linq.Tests
         public void NullSourceCustomComparer()
         {
             IQueryable<string> source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.Distinct(StringComparer.Ordinal)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.Distinct(StringComparer.Ordinal)
             );
         }
 
@@ -90,13 +89,11 @@ namespace System.Linq.Tests
         {
             IQueryable<int> source = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.DistinctBy(x => x)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.DistinctBy(x => x)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.DistinctBy(x => x, EqualityComparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.DistinctBy(x => x, EqualityComparer<int>.Default)
             );
         }
 
@@ -106,13 +103,11 @@ namespace System.Linq.Tests
             IQueryable<int> source = Enumerable.Empty<int>().AsQueryable();
             Expression<Func<int, int>> keySelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.DistinctBy(keySelector)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.DistinctBy(keySelector)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.DistinctBy(keySelector, EqualityComparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.DistinctBy(keySelector, EqualityComparer<int>.Default)
             );
         }
 

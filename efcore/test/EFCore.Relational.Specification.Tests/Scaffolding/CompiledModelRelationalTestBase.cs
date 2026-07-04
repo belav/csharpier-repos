@@ -83,21 +83,17 @@ public abstract class CompiledModelRelationalTestBase : CompiledModelTestBase
 
         modelBuilder.Entity<PrincipalDerived<DependentBase<byte?>>>(eb =>
         {
-            eb.OwnsMany(
-                typeof(OwnedType).FullName!,
-                "ManyOwned",
-                ob =>
+            eb.OwnsMany(typeof(OwnedType).FullName!, "ManyOwned", ob =>
+            {
+                if (jsonColumns)
                 {
-                    if (jsonColumns)
-                    {
-                        ob.ToJson();
-                    }
-                    else
-                    {
-                        ob.ToTable("ManyOwned", t => t.ExcludeFromMigrations());
-                    }
+                    ob.ToJson();
                 }
-            );
+                else
+                {
+                    ob.ToTable("ManyOwned", t => t.ExcludeFromMigrations());
+                }
+            });
 
             eb.HasMany(e => e.Principals)
                 .WithMany(e => (ICollection<PrincipalDerived<DependentBase<byte?>>>)e.Deriveds)
@@ -524,9 +520,8 @@ public abstract class CompiledModelRelationalTestBase : CompiledModelTestBase
             eb.UseTpcMappingStrategy();
 
             eb.ToTable("PrincipalBase");
-            eb.ToView(
-                "PrincipalBaseView",
-                tb => tb.Property(e => e.Id).HasAnnotation("foo", "bar2")
+            eb.ToView("PrincipalBaseView", tb =>
+                tb.Property(e => e.Id).HasAnnotation("foo", "bar2")
             );
 
             eb.Property(p => p.Id).ValueGeneratedNever();
@@ -593,51 +588,45 @@ public abstract class CompiledModelRelationalTestBase : CompiledModelTestBase
 
             eb.Property(p => p.Id).ValueGeneratedNever();
             eb.Property(p => p.Enum1).HasDefaultValue(AnEnum.A).HasSentinel(AnEnum.A);
-            eb.InsertUsingStoredProcedure(
-                "Derived_Insert",
-                s =>
-                    s.HasParameter(p => p.Id)
-                        .HasParameter("PrincipalBaseId")
-                        .HasParameter("PrincipalDerivedId")
-                        .HasParameter("Enum2")
-                        .HasParameter("FlagsEnum1")
-                        .HasParameter("FlagsEnum2")
-                        .HasParameter("ValueTypeList")
-                        .HasParameter("ValueTypeIList")
-                        .HasParameter("ValueTypeArray")
-                        .HasParameter("ValueTypeEnumerable")
-                        .HasParameter("RefTypeList")
-                        .HasParameter("RefTypeIList")
-                        .HasParameter("RefTypeArray")
-                        .HasParameter("RefTypeEnumerable")
-                        .HasResultColumn(
-                            p => p.Enum1,
-                            pb => pb.HasName("DerivedEnum").HasAnnotation("foo", "bar3")
-                        )
+            eb.InsertUsingStoredProcedure("Derived_Insert", s =>
+                s.HasParameter(p => p.Id)
+                    .HasParameter("PrincipalBaseId")
+                    .HasParameter("PrincipalDerivedId")
+                    .HasParameter("Enum2")
+                    .HasParameter("FlagsEnum1")
+                    .HasParameter("FlagsEnum2")
+                    .HasParameter("ValueTypeList")
+                    .HasParameter("ValueTypeIList")
+                    .HasParameter("ValueTypeArray")
+                    .HasParameter("ValueTypeEnumerable")
+                    .HasParameter("RefTypeList")
+                    .HasParameter("RefTypeIList")
+                    .HasParameter("RefTypeArray")
+                    .HasParameter("RefTypeEnumerable")
+                    .HasResultColumn(
+                        p => p.Enum1,
+                        pb => pb.HasName("DerivedEnum").HasAnnotation("foo", "bar3")
+                    )
             );
-            eb.UpdateUsingStoredProcedure(
-                "Derived_Update",
-                "Derived",
-                s =>
-                    s.HasParameter("PrincipalBaseId")
-                        .HasParameter("PrincipalDerivedId")
-                        .HasParameter("Enum1")
-                        .HasParameter("Enum2")
-                        .HasParameter("FlagsEnum1")
-                        .HasParameter("FlagsEnum2")
-                        .HasParameter("ValueTypeList")
-                        .HasParameter("ValueTypeIList")
-                        .HasParameter("ValueTypeArray")
-                        .HasParameter("ValueTypeEnumerable")
-                        .HasParameter("RefTypeList")
-                        .HasParameter("RefTypeIList")
-                        .HasParameter("RefTypeArray")
-                        .HasParameter("RefTypeEnumerable")
-                        .HasOriginalValueParameter(p => p.Id)
+            eb.UpdateUsingStoredProcedure("Derived_Update", "Derived", s =>
+                s.HasParameter("PrincipalBaseId")
+                    .HasParameter("PrincipalDerivedId")
+                    .HasParameter("Enum1")
+                    .HasParameter("Enum2")
+                    .HasParameter("FlagsEnum1")
+                    .HasParameter("FlagsEnum2")
+                    .HasParameter("ValueTypeList")
+                    .HasParameter("ValueTypeIList")
+                    .HasParameter("ValueTypeArray")
+                    .HasParameter("ValueTypeEnumerable")
+                    .HasParameter("RefTypeList")
+                    .HasParameter("RefTypeIList")
+                    .HasParameter("RefTypeArray")
+                    .HasParameter("RefTypeEnumerable")
+                    .HasOriginalValueParameter(p => p.Id)
             );
-            eb.DeleteUsingStoredProcedure(
-                "Derived_Delete",
-                s => s.HasOriginalValueParameter(p => p.Id)
+            eb.DeleteUsingStoredProcedure("Derived_Delete", s =>
+                s.HasOriginalValueParameter(p => p.Id)
             );
         });
 
@@ -1312,9 +1301,8 @@ public abstract class CompiledModelRelationalTestBase : CompiledModelTestBase
 
             modelBuilder
                 .Entity<Data>()
-                .ToFunction(
-                    typeof(DbFunctionContext).FullName + ".GetData()",
-                    f => f.HasName("GetAllData")
+                .ToFunction(typeof(DbFunctionContext).FullName + ".GetData()", f =>
+                    f.HasName("GetAllData")
                 )
                 .HasNoKey();
 

@@ -22,9 +22,8 @@ namespace System.Data.Entity.Design
         private class LoadMethodSessionState
         {
             public List<AssociationType> AssociationTypes = new List<AssociationType>();
-            public UniqueIdentifierService UsedTypeNames = new UniqueIdentifierService(
-                false,
-                s => s.Replace(".", "_")
+            public UniqueIdentifierService UsedTypeNames = new UniqueIdentifierService(false, s =>
+                s.Replace(".", "_")
             );
             public IEnumerable<EntityStoreSchemaFilterEntry> Filters;
             public Dictionary<EntityType, EntitySet> EntityTypeToSet =

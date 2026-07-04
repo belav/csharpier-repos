@@ -153,14 +153,11 @@ namespace DebuggerTests
         public Task<JObject> WaitForEvent(string evtName)
         {
             var eventReceived = new TaskCompletionSource<JObject>();
-            On(
-                evtName,
-                async (args, token) =>
-                {
-                    eventReceived.SetResult(args);
-                    return await Task.FromResult(ProtocolEventHandlerReturn.RemoveHandler);
-                }
-            );
+            On(evtName, async (args, token) =>
+            {
+                eventReceived.SetResult(args);
+                return await Task.FromResult(ProtocolEventHandlerReturn.RemoveHandler);
+            });
 
             return eventReceived.Task.WaitAsync(Token);
         }
@@ -407,20 +404,14 @@ namespace DebuggerTests
                 ;
             };
 
-            TestHarnessProxy.RegisterExitHandler(
-                Id.ToString(),
-                state =>
+            TestHarnessProxy.RegisterExitHandler(Id.ToString(), state =>
+            {
+                if (_isFailingWithException is null && state.reason == RunLoopStopReason.Exception)
                 {
-                    if (
-                        _isFailingWithException is null
-                        && state.reason == RunLoopStopReason.Exception
-                    )
-                    {
-                        Client.Fail(state.exception);
-                        FailAllWaiters(state.exception);
-                    }
+                    Client.Fail(state.exception);
+                    FailAllWaiters(state.exception);
                 }
-            );
+            });
         }
 
         public async Task OpenSessionAsync(

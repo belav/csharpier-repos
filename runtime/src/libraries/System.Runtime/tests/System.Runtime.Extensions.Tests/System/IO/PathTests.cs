@@ -287,10 +287,8 @@ namespace System.IO.Tests
         public void GetFullPath_InvalidArgs()
         {
             Assert.Throws<ArgumentNullException>(() => Path.GetFullPath(null));
-            AssertExtensions.Throws<ArgumentException>(
-                "path",
-                null,
-                () => Path.GetFullPath(string.Empty)
+            AssertExtensions.Throws<ArgumentException>("path", null, () =>
+                Path.GetFullPath(string.Empty)
             );
         }
 
@@ -518,78 +516,68 @@ namespace System.IO.Tests
         [Fact]
         public void GetInvalidPathChars()
         {
-            Assert.All(
-                Path.GetInvalidPathChars(),
-                c =>
+            Assert.All(Path.GetInvalidPathChars(), c =>
+            {
+                string bad = c.ToString();
+                Assert.Equal(bad + ".ok", Path.ChangeExtension(bad, "ok"));
+                Assert.Equal(bad + Path.DirectorySeparatorChar + "ok", Path.Combine(bad, "ok"));
+                Assert.Equal(
+                    "ok" + Path.DirectorySeparatorChar + "ok" + Path.DirectorySeparatorChar + bad,
+                    Path.Combine("ok", "ok", bad)
+                );
+                Assert.Equal(
+                    "ok"
+                        + Path.DirectorySeparatorChar
+                        + "ok"
+                        + Path.DirectorySeparatorChar
+                        + bad
+                        + Path.DirectorySeparatorChar
+                        + "ok",
+                    Path.Combine("ok", "ok", bad, "ok")
+                );
+                Assert.Equal(
+                    bad
+                        + Path.DirectorySeparatorChar
+                        + bad
+                        + Path.DirectorySeparatorChar
+                        + bad
+                        + Path.DirectorySeparatorChar
+                        + bad
+                        + Path.DirectorySeparatorChar
+                        + bad,
+                    Path.Combine(bad, bad, bad, bad, bad)
+                );
+                Assert.Equal("", Path.GetDirectoryName(bad));
+                Assert.Equal(string.Empty, Path.GetExtension(bad));
+                Assert.Equal(bad, Path.GetFileName(bad));
+                Assert.Equal(bad, Path.GetFileNameWithoutExtension(bad));
+                if (bad[0] == '\0')
                 {
-                    string bad = c.ToString();
-                    Assert.Equal(bad + ".ok", Path.ChangeExtension(bad, "ok"));
-                    Assert.Equal(bad + Path.DirectorySeparatorChar + "ok", Path.Combine(bad, "ok"));
-                    Assert.Equal(
-                        "ok"
-                            + Path.DirectorySeparatorChar
-                            + "ok"
-                            + Path.DirectorySeparatorChar
-                            + bad,
-                        Path.Combine("ok", "ok", bad)
-                    );
-                    Assert.Equal(
-                        "ok"
-                            + Path.DirectorySeparatorChar
-                            + "ok"
-                            + Path.DirectorySeparatorChar
-                            + bad
-                            + Path.DirectorySeparatorChar
-                            + "ok",
-                        Path.Combine("ok", "ok", bad, "ok")
-                    );
-                    Assert.Equal(
-                        bad
-                            + Path.DirectorySeparatorChar
-                            + bad
-                            + Path.DirectorySeparatorChar
-                            + bad
-                            + Path.DirectorySeparatorChar
-                            + bad
-                            + Path.DirectorySeparatorChar
-                            + bad,
-                        Path.Combine(bad, bad, bad, bad, bad)
-                    );
-                    Assert.Equal("", Path.GetDirectoryName(bad));
-                    Assert.Equal(string.Empty, Path.GetExtension(bad));
-                    Assert.Equal(bad, Path.GetFileName(bad));
-                    Assert.Equal(bad, Path.GetFileNameWithoutExtension(bad));
-                    if (bad[0] == '\0')
-                    {
-                        Assert.Throws<ArgumentException>("path", () => Path.GetFullPath(bad));
-                    }
-                    else
-                    {
-                        Assert.EndsWith(bad, Path.GetFullPath(bad));
-                    }
-                    Assert.Equal(string.Empty, Path.GetPathRoot(bad));
-                    Assert.True(Path.GetPathRoot(bad.AsSpan()).IsEmpty);
-                    Assert.False(Path.IsPathRooted(bad));
+                    Assert.Throws<ArgumentException>("path", () => Path.GetFullPath(bad));
                 }
-            );
+                else
+                {
+                    Assert.EndsWith(bad, Path.GetFullPath(bad));
+                }
+                Assert.Equal(string.Empty, Path.GetPathRoot(bad));
+                Assert.True(Path.GetPathRoot(bad.AsSpan()).IsEmpty);
+                Assert.False(Path.IsPathRooted(bad));
+            });
         }
 
         [Fact]
         public void GetInvalidPathChars_Span()
         {
-            Assert.All(
-                Path.GetInvalidPathChars(),
-                c =>
-                {
-                    string bad = c.ToString();
-                    Assert.Equal(string.Empty, new string(Path.GetDirectoryName(bad.AsSpan())));
-                    Assert.Equal(string.Empty, new string(Path.GetExtension(bad.AsSpan())));
-                    Assert.Equal(bad, new string(Path.GetFileName(bad.AsSpan())));
-                    Assert.Equal(bad, new string(Path.GetFileNameWithoutExtension(bad.AsSpan())));
-                    Assert.True(Path.GetPathRoot(bad.AsSpan()).IsEmpty);
-                    Assert.False(Path.IsPathRooted(bad.AsSpan()));
-                }
-            );
+            Assert.All(Path.GetInvalidPathChars(), c =>
+            {
+                string bad = c.ToString();
+                Assert.Equal(string.Empty, new string(Path.GetDirectoryName(bad.AsSpan())));
+                Assert.Equal(string.Empty, new string(Path.GetExtension(bad.AsSpan())));
+                Assert.Equal(bad, new string(Path.GetFileName(bad.AsSpan())));
+                Assert.Equal(bad, new string(Path.GetFileNameWithoutExtension(bad.AsSpan())));
+                Assert.True(Path.GetPathRoot(bad.AsSpan()).IsEmpty);
+                Assert.False(Path.IsPathRooted(bad.AsSpan()));
+            });
         }
 
         [Theory, InlineData("http://www.microsoft.com"), InlineData("file://somefile")]

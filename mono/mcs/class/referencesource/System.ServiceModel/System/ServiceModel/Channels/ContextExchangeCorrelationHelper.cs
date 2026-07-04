@@ -13,10 +13,8 @@ namespace System.ServiceModel.Channels
 
         public static void AddIncomingContextCorrelationData(Message message)
         {
-            CorrelationDataMessageProperty.AddData(
-                message,
-                CorrelationName,
-                () => GetContextCorrelationData(message)
+            CorrelationDataMessageProperty.AddData(message, CorrelationName, () =>
+                GetContextCorrelationData(message)
             );
         }
 

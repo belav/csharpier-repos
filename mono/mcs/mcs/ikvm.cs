@@ -441,51 +441,45 @@ namespace Mono.CSharp
 
                 if (v1 > v2)
                 {
-                    messageInfo = new AssemblyReferenceMessageInfo(
-                        ref_an,
-                        report =>
-                        {
-                            report.SymbolRelatedToPreviousError(args.RequestingAssembly.Location);
-                            report.Error(
-                                1705,
-                                string.Format(
-                                    "Assembly `{0}' depends on `{1}' which has a higher version number than referenced assembly `{2}'",
-                                    args.RequestingAssembly.FullName,
-                                    refname,
-                                    version_mismatch.GetName().FullName
-                                )
-                            );
-                        }
-                    );
+                    messageInfo = new AssemblyReferenceMessageInfo(ref_an, report =>
+                    {
+                        report.SymbolRelatedToPreviousError(args.RequestingAssembly.Location);
+                        report.Error(
+                            1705,
+                            string.Format(
+                                "Assembly `{0}' depends on `{1}' which has a higher version number than referenced assembly `{2}'",
+                                args.RequestingAssembly.FullName,
+                                refname,
+                                version_mismatch.GetName().FullName
+                            )
+                        );
+                    });
                 }
                 else
                 {
-                    messageInfo = new AssemblyReferenceMessageInfo(
-                        ref_an,
-                        report =>
+                    messageInfo = new AssemblyReferenceMessageInfo(ref_an, report =>
+                    {
+                        if (v1.Major != v2.Major || v1.Minor != v2.Minor)
                         {
-                            if (v1.Major != v2.Major || v1.Minor != v2.Minor)
-                            {
-                                report.Warning(
-                                    1701,
-                                    2,
-                                    "Assuming assembly reference `{0}' matches assembly `{1}'. You may need to supply runtime policy",
-                                    refname,
-                                    version_mismatch.GetName().FullName
-                                );
-                            }
-                            else
-                            {
-                                report.Warning(
-                                    1702,
-                                    3,
-                                    "Assuming assembly reference `{0}' matches assembly `{1}'. You may need to supply runtime policy",
-                                    refname,
-                                    version_mismatch.GetName().FullName
-                                );
-                            }
+                            report.Warning(
+                                1701,
+                                2,
+                                "Assuming assembly reference `{0}' matches assembly `{1}'. You may need to supply runtime policy",
+                                refname,
+                                version_mismatch.GetName().FullName
+                            );
                         }
-                    );
+                        else
+                        {
+                            report.Warning(
+                                1702,
+                                3,
+                                "Assuming assembly reference `{0}' matches assembly `{1}'. You may need to supply runtime policy",
+                                refname,
+                                version_mismatch.GetName().FullName
+                            );
+                        }
+                    });
                 }
 
                 AddReferenceVersionMismatch(args.RequestingAssembly.GetName(), messageInfo);

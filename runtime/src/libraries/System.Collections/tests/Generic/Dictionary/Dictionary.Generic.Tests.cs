@@ -348,9 +348,8 @@ namespace System.Collections.Tests
         public void EnsureCapacity_Generic_NegativeCapacityRequested_Throws()
         {
             var dictionary = new Dictionary<TKey, TValue>();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => dictionary.EnsureCapacity(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                dictionary.EnsureCapacity(-1)
             );
         }
 
@@ -475,9 +474,8 @@ namespace System.Collections.Tests
         public void TrimExcess_Generic_NegativeCapacity_Throw()
         {
             var dictionary = new Dictionary<TKey, TValue>();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => dictionary.TrimExcess(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                dictionary.TrimExcess(-1)
             );
         }
 
@@ -488,16 +486,14 @@ namespace System.Collections.Tests
         {
             var dictionary = new Dictionary<TKey, TValue>();
             dictionary.Add(GetNewKey(dictionary), CreateTValue(0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => dictionary.TrimExcess(0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                dictionary.TrimExcess(0)
             );
 
             dictionary = new Dictionary<TKey, TValue>(suggestedCapacity);
             dictionary.Add(GetNewKey(dictionary), CreateTValue(0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => dictionary.TrimExcess(0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                dictionary.TrimExcess(0)
             );
         }
 

@@ -124,10 +124,8 @@ internal partial class CSharpUseCollectionExpressionForFluentCodeFixProvider
             newSemanticDocument.Root.GetAnnotatedNodes(dummyObjectAnnotation).Single();
         var expressions = dummyObjectCreation.ArgumentList.Arguments.Select(a => a.Expression);
         var matches = expressions
-            .Zip(
-                analysisResult.Matches,
-                static (expression, match) =>
-                    new CollectionExpressionMatch<ExpressionSyntax>(expression, match.UseSpread)
+            .Zip(analysisResult.Matches, static (expression, match) =>
+                new CollectionExpressionMatch<ExpressionSyntax>(expression, match.UseSpread)
             )
             .ToImmutableArray();
 

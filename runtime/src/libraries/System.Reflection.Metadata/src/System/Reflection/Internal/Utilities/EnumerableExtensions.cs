@@ -34,21 +34,18 @@ namespace System.Reflection.Internal
             for (int i = 0; i < map.Length; i++)
                 map[i] = i;
 
-            Array.Sort(
-                map,
-                (int left, int right) =>
-                {
-                    if (left == right)
-                        return 0;
+            Array.Sort(map, (int left, int right) =>
+            {
+                if (left == right)
+                    return 0;
 
-                    int result = comparison(source[left], source[right]);
-                    if (result == 0)
-                    {
-                        return left - right;
-                    }
-                    return result;
+                int result = comparison(source[left], source[right]);
+                if (result == 0)
+                {
+                    return left - right;
                 }
-            );
+                return result;
+            });
 
             foreach (int index in map)
             {

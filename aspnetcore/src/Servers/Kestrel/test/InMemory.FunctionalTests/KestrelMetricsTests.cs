@@ -79,9 +79,8 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
             await sync.WaitForSyncPoint().DefaultTimeout();
 
             Assert.Empty(connectionDuration.GetMeasurementSnapshot());
-            Assert.Collection(
-                activeConnections.GetMeasurementSnapshot(),
-                m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4")
+            Assert.Collection(activeConnections.GetMeasurementSnapshot(), m =>
+                AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4")
             );
 
             // Signal that connection can continue.
@@ -100,14 +99,11 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
             await connection.WaitForConnectionClose().DefaultTimeout();
         }
 
-        Assert.Collection(
-            connectionDuration.GetMeasurementSnapshot(),
-            m =>
-            {
-                AssertDuration(m, "127.0.0.1", localPort: 0, "tcp", "ipv4", KestrelMetrics.Http11);
-                Assert.Equal("value!", (string)m.Tags["custom"]);
-            }
-        );
+        Assert.Collection(connectionDuration.GetMeasurementSnapshot(), m =>
+        {
+            AssertDuration(m, "127.0.0.1", localPort: 0, "tcp", "ipv4", KestrelMetrics.Http11);
+            Assert.Equal("value!", (string)m.Tags["custom"]);
+        });
         Assert.Collection(
             activeConnections.GetMeasurementSnapshot(),
             m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4"),
@@ -267,9 +263,8 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
             );
 
             Assert.Empty(connectionDuration.GetMeasurementSnapshot());
-            Assert.Collection(
-                activeConnections.GetMeasurementSnapshot(),
-                m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4")
+            Assert.Collection(activeConnections.GetMeasurementSnapshot(), m =>
+                AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4")
             );
 
             // Signal that connection can continue.
@@ -286,15 +281,12 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
             await connection.WaitForConnectionClose();
         }
 
-        Assert.Collection(
-            connectionDuration.GetMeasurementSnapshot(),
-            m =>
-            {
-                AssertDuration(m, "127.0.0.1", localPort: 0, "tcp", "ipv4", KestrelMetrics.Http11);
-                Assert.Equal("value!", (string)m.Tags["custom"]);
-                Assert.False(m.Tags.ContainsKey("test"));
-            }
-        );
+        Assert.Collection(connectionDuration.GetMeasurementSnapshot(), m =>
+        {
+            AssertDuration(m, "127.0.0.1", localPort: 0, "tcp", "ipv4", KestrelMetrics.Http11);
+            Assert.Equal("value!", (string)m.Tags["custom"]);
+            Assert.False(m.Tags.ContainsKey("test"));
+        });
         Assert.Collection(
             activeConnections.GetMeasurementSnapshot(),
             m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4"),
@@ -364,9 +356,8 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
             await sync.WaitForSyncPoint();
 
             Assert.Empty(connectionDuration.GetMeasurementSnapshot());
-            Assert.Collection(
-                activeConnections.GetMeasurementSnapshot(),
-                m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4")
+            Assert.Collection(activeConnections.GetMeasurementSnapshot(), m =>
+                AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4")
             );
 
             // Signal that connection can continue.
@@ -377,14 +368,11 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
             await connection.WaitForConnectionClose();
         }
 
-        Assert.Collection(
-            connectionDuration.GetMeasurementSnapshot(),
-            m =>
-            {
-                AssertDuration(m, "127.0.0.1", localPort: 0, "tcp", "ipv4", httpVersion: null);
-                Assert.Equal("System.InvalidOperationException", (string)m.Tags["error.type"]);
-            }
-        );
+        Assert.Collection(connectionDuration.GetMeasurementSnapshot(), m =>
+        {
+            AssertDuration(m, "127.0.0.1", localPort: 0, "tcp", "ipv4", httpVersion: null);
+            Assert.Equal("System.InvalidOperationException", (string)m.Tags["error.type"]);
+        });
         Assert.Collection(
             activeConnections.GetMeasurementSnapshot(),
             m => AssertCount(m, 1, "127.0.0.1", localPort: 0, "tcp", "ipv4"),
@@ -438,9 +426,8 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
             );
         }
 
-        Assert.Collection(
-            connectionDuration.GetMeasurementSnapshot(),
-            m => AssertDuration(m, "127.0.0.1", localPort: 0, "tcp", "ipv4", KestrelMetrics.Http11)
+        Assert.Collection(connectionDuration.GetMeasurementSnapshot(), m =>
+            AssertDuration(m, "127.0.0.1", localPort: 0, "tcp", "ipv4", KestrelMetrics.Http11)
         );
         Assert.Collection(
             activeConnections.GetMeasurementSnapshot(),
@@ -520,13 +507,10 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
                 ),
                 listenOptions =>
                 {
-                    listenOptions.UseHttps(
-                        _x509Certificate2,
-                        options =>
-                        {
-                            options.SslProtocols = SslProtocols.Tls12;
-                        }
-                    );
+                    listenOptions.UseHttps(_x509Certificate2, options =>
+                    {
+                        options.SslProtocols = SslProtocols.Tls12;
+                    });
                     listenOptions.Protocols = HttpProtocols.Http2;
                 }
             )
@@ -571,18 +555,8 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
         Assert.NotNull(connectionId);
         Assert.Equal(2, requestsReceived);
 
-        Assert.Collection(
-            connectionDuration.GetMeasurementSnapshot(),
-            m =>
-                AssertDuration(
-                    m,
-                    "127.0.0.1",
-                    localPort: 0,
-                    "tcp",
-                    "ipv4",
-                    KestrelMetrics.Http2,
-                    "1.2"
-                )
+        Assert.Collection(connectionDuration.GetMeasurementSnapshot(), m =>
+            AssertDuration(m, "127.0.0.1", localPort: 0, "tcp", "ipv4", KestrelMetrics.Http2, "1.2")
         );
         Assert.Collection(
             activeConnections.GetMeasurementSnapshot(),
@@ -603,14 +577,11 @@ public class KestrelMetricsTests : TestApplicationErrorLoggerLoggedTest
             m => AssertRequestCount(m, -1, KestrelMetrics.Http2)
         );
 
-        Assert.Collection(
-            tlsHandshakeDuration.GetMeasurementSnapshot(),
-            m =>
-            {
-                Assert.True(m.Value > 0);
-                Assert.Equal("1.2", (string)m.Tags["tls.protocol.version"]);
-            }
-        );
+        Assert.Collection(tlsHandshakeDuration.GetMeasurementSnapshot(), m =>
+        {
+            Assert.True(m.Value > 0);
+            Assert.Equal("1.2", (string)m.Tags["tls.protocol.version"]);
+        });
         Assert.Collection(
             activeTlsHandshakes.GetMeasurementSnapshot(),
             m => Assert.Equal(1, m.Value),

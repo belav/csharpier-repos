@@ -20,9 +20,8 @@ public class HtmlContentBuilderExtensionsTest
         builder.AppendLine();
 
         // Assert
-        Assert.Collection(
-            builder.Entries,
-            entry => Assert.Equal(Environment.NewLine, HtmlContentToString(entry))
+        Assert.Collection(builder.Entries, entry =>
+            Assert.Equal(Environment.NewLine, HtmlContentToString(entry))
         );
     }
 
@@ -89,9 +88,8 @@ public class HtmlContentBuilderExtensionsTest
         builder.SetContent("Hi");
 
         // Assert
-        Assert.Collection(
-            builder.Entries,
-            entry => Assert.Equal("Hi", Assert.IsType<UnencodedString>(entry).Value)
+        Assert.Collection(builder.Entries, entry =>
+            Assert.Equal("Hi", Assert.IsType<UnencodedString>(entry).Value)
         );
     }
 
@@ -122,9 +120,8 @@ public class HtmlContentBuilderExtensionsTest
         builder.SetHtmlContent("Hi");
 
         // Assert
-        Assert.Collection(
-            builder.Entries,
-            entry => Assert.Equal("Hi", Assert.IsType<EncodedString>(entry).Value)
+        Assert.Collection(builder.Entries, entry =>
+            Assert.Equal("Hi", Assert.IsType<EncodedString>(entry).Value)
         );
     }
 

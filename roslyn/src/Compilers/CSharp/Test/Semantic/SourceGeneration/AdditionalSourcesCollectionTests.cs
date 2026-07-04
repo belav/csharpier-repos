@@ -106,9 +106,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
         public void HintName_InvalidValues(string hintName)
         {
             AdditionalSourcesCollection asc = new AdditionalSourcesCollection(".cs");
-            var exception = Assert.Throws<ArgumentException>(
-                nameof(hintName),
-                () => asc.Add(hintName, SourceText.From("public class D{}", Encoding.UTF8))
+            var exception = Assert.Throws<ArgumentException>(nameof(hintName), () =>
+                asc.Add(hintName, SourceText.From("public class D{}", Encoding.UTF8))
             );
 
             Assert.Contains(hintName.Replace('\\', '/'), exception.Message);
@@ -162,9 +161,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
         {
             AdditionalSourcesCollection asc = new AdditionalSourcesCollection(".cs");
             asc.Add(hintName1, SourceText.From("", Encoding.UTF8));
-            var exception = Assert.Throws<ArgumentException>(
-                "hintName",
-                () => asc.Add(hintName2, SourceText.From("", Encoding.UTF8))
+            var exception = Assert.Throws<ArgumentException>("hintName", () =>
+                asc.Add(hintName2, SourceText.From("", Encoding.UTF8))
             );
 
             Assert.Contains(hintName2, exception.Message);

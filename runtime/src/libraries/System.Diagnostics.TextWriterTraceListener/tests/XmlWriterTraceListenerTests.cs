@@ -82,21 +82,17 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
         [Fact]
         public void ConstructorThrows_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "stream",
-                () => new XmlWriterTraceListener((Stream)null)
+            AssertExtensions.Throws<ArgumentNullException>("stream", () =>
+                new XmlWriterTraceListener((Stream)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "writer",
-                () => new XmlWriterTraceListener((TextWriter)null)
+            AssertExtensions.Throws<ArgumentNullException>("writer", () =>
+                new XmlWriterTraceListener((TextWriter)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "stream",
-                () => new XmlWriterTraceListener((Stream)null, "trace listener name")
+            AssertExtensions.Throws<ArgumentNullException>("stream", () =>
+                new XmlWriterTraceListener((Stream)null, "trace listener name")
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "writer",
-                () => new XmlWriterTraceListener((TextWriter)null, "trace listener name")
+            AssertExtensions.Throws<ArgumentNullException>("writer", () =>
+                new XmlWriterTraceListener((TextWriter)null, "trace listener name")
             );
         }
 

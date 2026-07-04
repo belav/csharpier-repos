@@ -143,24 +143,20 @@ namespace System.Globalization.Tests
             );
 
             int eraNameIndex = 1;
-            Assert.All(
-                GetCalendarInfo(ci, calId, CAL_SERASTRING),
-                eraName =>
-                    Assert.Equal(
-                        dtfi.GetEraName(eraNameIndex++),
-                        eraName,
-                        StringComparer.OrdinalIgnoreCase
-                    )
+            Assert.All(GetCalendarInfo(ci, calId, CAL_SERASTRING), eraName =>
+                Assert.Equal(
+                    dtfi.GetEraName(eraNameIndex++),
+                    eraName,
+                    StringComparer.OrdinalIgnoreCase
+                )
             );
             eraNameIndex = 1;
-            Assert.All(
-                GetCalendarInfo(ci, calId, CAL_SABBREVERASTRING),
-                eraName =>
-                    Assert.Equal(
-                        dtfi.GetAbbreviatedEraName(eraNameIndex++),
-                        eraName,
-                        StringComparer.OrdinalIgnoreCase
-                    )
+            Assert.All(GetCalendarInfo(ci, calId, CAL_SABBREVERASTRING), eraName =>
+                Assert.Equal(
+                    dtfi.GetAbbreviatedEraName(eraNameIndex++),
+                    eraName,
+                    StringComparer.OrdinalIgnoreCase
+                )
             );
         }
 
@@ -2200,15 +2196,11 @@ namespace System.Globalization.Tests
             _ = consoleUICultureName;
 
             bool found = false;
-            Assert.All(
-                CultureInfo.GetCultures(CultureTypes.NeutralCultures),
-                c =>
-                    Assert.True(
-                        (
-                            c.IsNeutralCulture
-                            && ((c.CultureTypes & CultureTypes.NeutralCultures) != 0)
-                        ) || c.Equals(CultureInfo.InvariantCulture)
-                    )
+            Assert.All(CultureInfo.GetCultures(CultureTypes.NeutralCultures), c =>
+                Assert.True(
+                    (c.IsNeutralCulture && ((c.CultureTypes & CultureTypes.NeutralCultures) != 0))
+                        || c.Equals(CultureInfo.InvariantCulture)
+                )
             );
             found = CultureInfo
                 .GetCultures(CultureTypes.NeutralCultures)
@@ -2216,13 +2208,10 @@ namespace System.Globalization.Tests
                     cultureNames.Contains(c.Name, StringComparer.OrdinalIgnoreCase)
                     || c.Name.Equals(alternativeCultureName, StringComparison.OrdinalIgnoreCase)
                 );
-            Assert.All(
-                CultureInfo.GetCultures(CultureTypes.SpecificCultures),
-                c =>
-                    Assert.True(
-                        !c.IsNeutralCulture
-                            && ((c.CultureTypes & CultureTypes.SpecificCultures) != 0)
-                    )
+            Assert.All(CultureInfo.GetCultures(CultureTypes.SpecificCultures), c =>
+                Assert.True(
+                    !c.IsNeutralCulture && ((c.CultureTypes & CultureTypes.SpecificCultures) != 0)
+                )
             );
             if (!found)
             {
@@ -2263,21 +2252,17 @@ namespace System.Globalization.Tests
         [Fact]
         public void CultureNotFoundExceptionTest()
         {
-            AssertExtensions.Throws<CultureNotFoundException>(
-                "name",
-                () => new CultureInfo("!@#$%^&*()")
+            AssertExtensions.Throws<CultureNotFoundException>("name", () =>
+                new CultureInfo("!@#$%^&*()")
             );
-            AssertExtensions.Throws<CultureNotFoundException>(
-                "name",
-                () => new CultureInfo("This is invalid culture")
+            AssertExtensions.Throws<CultureNotFoundException>("name", () =>
+                new CultureInfo("This is invalid culture")
             );
-            AssertExtensions.Throws<CultureNotFoundException>(
-                "name",
-                () => new CultureInfo("longCulture" + new string('a', 100))
+            AssertExtensions.Throws<CultureNotFoundException>("name", () =>
+                new CultureInfo("longCulture" + new string('a', 100))
             );
-            AssertExtensions.Throws<CultureNotFoundException>(
-                "culture",
-                () => new CultureInfo(0x1000)
+            AssertExtensions.Throws<CultureNotFoundException>("culture", () =>
+                new CultureInfo(0x1000)
             );
 
             CultureNotFoundException e = AssertExtensions.Throws<CultureNotFoundException>(
@@ -2286,9 +2271,8 @@ namespace System.Globalization.Tests
             );
             Assert.Equal("This is invalid culture", e.InvalidCultureName);
 
-            e = AssertExtensions.Throws<CultureNotFoundException>(
-                "culture",
-                () => new CultureInfo(0x1000)
+            e = AssertExtensions.Throws<CultureNotFoundException>("culture", () =>
+                new CultureInfo(0x1000)
             );
             Assert.Equal(0x1000, e.InvalidCultureId);
         }

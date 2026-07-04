@@ -98,9 +98,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal
             {
                 if (entity is FileInfoBase fileInfo)
                 {
-                    PatternTestResult result = MatchPatternContexts(
-                        fileInfo,
-                        (pattern, file) => pattern.Test(file)
+                    PatternTestResult result = MatchPatternContexts(fileInfo, (pattern, file) =>
+                        pattern.Test(file)
                     );
                     if (result.IsSuccessful)
                     {
@@ -191,20 +190,17 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Internal
             Func<IPatternContext, TFileInfoBase, bool> test
         )
         {
-            return MatchPatternContexts(
-                fileinfo,
-                (ctx, file) =>
+            return MatchPatternContexts(fileinfo, (ctx, file) =>
+            {
+                if (test(ctx, file))
                 {
-                    if (test(ctx, file))
-                    {
-                        return PatternTestResult.Success(stem: string.Empty);
-                    }
-                    else
-                    {
-                        return PatternTestResult.Failed;
-                    }
+                    return PatternTestResult.Success(stem: string.Empty);
                 }
-            ).IsSuccessful;
+                else
+                {
+                    return PatternTestResult.Failed;
+                }
+            }).IsSuccessful;
         }
 
         private PatternTestResult MatchPatternContexts<TFileInfoBase>(

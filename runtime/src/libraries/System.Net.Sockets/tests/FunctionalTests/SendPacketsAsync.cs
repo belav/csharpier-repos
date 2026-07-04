@@ -97,9 +97,8 @@ namespace System.Net.Sockets.Tests
                 {
                     sock.Connect(new IPEndPoint(_serverAddress, port));
 
-                    AssertExtensions.Throws<ArgumentNullException>(
-                        "e",
-                        () => sock.SendPacketsAsync(null)
+                    AssertExtensions.Throws<ArgumentNullException>("e", () =>
+                        sock.SendPacketsAsync(null)
                     );
                 }
             }
@@ -126,9 +125,8 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void NullList_Throws()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "e",
-                () => SendPackets((SendPacketsElement[])null, SocketError.Success, 0)
+            AssertExtensions.Throws<ArgumentException>("e", () =>
+                SendPackets((SendPacketsElement[])null, SocketError.Success, 0)
             );
         }
 
@@ -311,29 +309,21 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SendPacketsElement_EmptyFileName_Throws()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "path",
-                null,
-                () =>
-                {
-                    SendPackets(new SendPacketsElement(string.Empty), 0);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("path", null, () =>
+            {
+                SendPackets(new SendPacketsElement(string.Empty), 0);
+            });
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)] // whitespace-only is a valid name on Unix
         public void SendPacketsElement_BlankFileName_Throws()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "path",
-                null,
-                () =>
-                {
-                    // Existence is validated on send
-                    SendPackets(new SendPacketsElement("   "), 0);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("path", null, () =>
+            {
+                // Existence is validated on send
+                SendPackets(new SendPacketsElement("   "), 0);
+            });
         }
 
         [Fact]
@@ -341,15 +331,11 @@ namespace System.Net.Sockets.Tests
         [PlatformSpecific(TestPlatforms.Windows)] // valid filename chars on Unix
         public void SendPacketsElement_BadCharactersFileName_Throws()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "path",
-                null,
-                () =>
-                {
-                    // Existence is validated on send
-                    SendPackets(new SendPacketsElement("blarkd@dfa?/sqersf"), 0);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("path", null, () =>
+            {
+                // Existence is validated on send
+                SendPackets(new SendPacketsElement("blarkd@dfa?/sqersf"), 0);
+            });
         }
 
         [Fact]

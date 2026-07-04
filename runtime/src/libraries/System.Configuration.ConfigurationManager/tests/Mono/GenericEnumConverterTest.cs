@@ -88,9 +88,8 @@ namespace MonoTests.System.Configuration
         public void ConvertFrom_Case()
         {
             GenericEnumConverter cv = new GenericEnumConverter(typeof(FooEnum));
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => cv.ConvertFrom(null, null, "foo")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                cv.ConvertFrom(null, null, "foo")
             );
         }
 
@@ -100,9 +99,8 @@ namespace MonoTests.System.Configuration
             GenericEnumConverter cv = new GenericEnumConverter(typeof(FooEnum));
             object o = null;
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => o = cv.ConvertFrom(null, null, "baz")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                o = cv.ConvertFrom(null, null, "baz")
             );
             Assert.Null(o);
         }
@@ -113,9 +111,8 @@ namespace MonoTests.System.Configuration
             GenericEnumConverter cv = new GenericEnumConverter(typeof(FooEnum));
             object o = null;
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => o = cv.ConvertFrom(null, null, " Foo")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                o = cv.ConvertFrom(null, null, " Foo")
             );
             Assert.Null(o);
         }
@@ -126,9 +123,8 @@ namespace MonoTests.System.Configuration
             GenericEnumConverter cv = new GenericEnumConverter(typeof(FooEnum));
             object o = null;
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => o = cv.ConvertFrom(null, null, "Foo ")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                o = cv.ConvertFrom(null, null, "Foo ")
             );
             Assert.Null(o);
         }
@@ -139,9 +135,8 @@ namespace MonoTests.System.Configuration
             GenericEnumConverter cv = new GenericEnumConverter(typeof(FooEnum));
             object o = null;
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => o = cv.ConvertFrom(null, null, "1Foo")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                o = cv.ConvertFrom(null, null, "1Foo")
             );
             Assert.Null(o);
         }
@@ -152,9 +147,8 @@ namespace MonoTests.System.Configuration
             GenericEnumConverter cv = new GenericEnumConverter(typeof(FooEnum));
             object o = null;
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => o = cv.ConvertFrom(null, null, "+Foo")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                o = cv.ConvertFrom(null, null, "+Foo")
             );
             Assert.Null(o);
         }
@@ -165,9 +159,8 @@ namespace MonoTests.System.Configuration
             GenericEnumConverter cv = new GenericEnumConverter(typeof(FooEnum));
             object o = null;
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => o = cv.ConvertFrom(null, null, "-Foo")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                o = cv.ConvertFrom(null, null, "-Foo")
             );
             Assert.Null(o);
         }
@@ -178,9 +171,8 @@ namespace MonoTests.System.Configuration
             GenericEnumConverter cv = new GenericEnumConverter(typeof(FooEnum));
             object o = null;
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => o = cv.ConvertFrom(null, null, null)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                o = cv.ConvertFrom(null, null, null)
             );
             Assert.Null(o);
         }
@@ -191,9 +183,8 @@ namespace MonoTests.System.Configuration
             GenericEnumConverter cv = new GenericEnumConverter(typeof(FooEnum));
             object o = null;
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => o = cv.ConvertFrom(null, null, string.Empty)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                o = cv.ConvertFrom(null, null, string.Empty)
             );
             Assert.Null(o);
         }

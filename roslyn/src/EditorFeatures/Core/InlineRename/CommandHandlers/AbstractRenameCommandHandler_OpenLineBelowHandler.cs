@@ -22,15 +22,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             CommandExecutionContext context
         )
         {
-            HandlePossibleTypingCommand(
-                args,
-                nextHandler,
-                (activeSession, span) =>
-                {
-                    activeSession.Commit();
-                    nextHandler();
-                }
-            );
+            HandlePossibleTypingCommand(args, nextHandler, (activeSession, span) =>
+            {
+                activeSession.Commit();
+                nextHandler();
+            });
         }
     }
 }

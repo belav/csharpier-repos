@@ -130,9 +130,8 @@ public abstract class NonSharedModelTestBase : IDisposable, IAsyncLifetime
         addServices?.Invoke(services);
 
         services = usePooling
-            ? services.AddDbContextPool(
-                typeof(TContext),
-                (s, b) => ConfigureOptions(s, b, onConfiguring)
+            ? services.AddDbContextPool(typeof(TContext), (s, b) =>
+                ConfigureOptions(s, b, onConfiguring)
             )
             : services.AddDbContext(
                 typeof(TContext),

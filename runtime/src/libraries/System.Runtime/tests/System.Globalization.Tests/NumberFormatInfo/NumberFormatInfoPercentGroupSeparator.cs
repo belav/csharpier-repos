@@ -28,10 +28,8 @@ namespace System.Globalization.Tests
         public void PercentGroupSeparator_SetNull_ThrowsArgumentNullException()
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                "PercentGroupSeparator",
-                () => format.PercentGroupSeparator = null
+            AssertExtensions.Throws<ArgumentNullException>("value", "PercentGroupSeparator", () =>
+                format.PercentGroupSeparator = null
             );
         }
 

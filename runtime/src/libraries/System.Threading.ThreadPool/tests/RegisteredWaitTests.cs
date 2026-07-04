@@ -70,13 +70,10 @@ namespace System.Threading.ThreadPools.Tests
             ThreadPool.QueueUserWorkItem(
                 state =>
                 {
-                    commonBackgroundTest(
-                        false,
-                        () =>
-                        {
-                            Assert.Same(obj, state);
-                        }
-                    );
+                    commonBackgroundTest(false, () =>
+                    {
+                        Assert.Same(obj, state);
+                    });
                 },
                 obj
             );
@@ -86,13 +83,10 @@ namespace System.Threading.ThreadPools.Tests
             ThreadPool.UnsafeQueueUserWorkItem(
                 state =>
                 {
-                    commonBackgroundTest(
-                        false,
-                        () =>
-                        {
-                            Assert.Same(obj, state);
-                        }
-                    );
+                    commonBackgroundTest(false, () =>
+                    {
+                        Assert.Same(obj, state);
+                    });
                 },
                 obj
             );
@@ -103,14 +97,11 @@ namespace System.Threading.ThreadPools.Tests
                 registerWaitEvent,
                 (state, timedOut) =>
                 {
-                    commonBackgroundTest(
-                        true,
-                        () =>
-                        {
-                            Assert.Same(obj, state);
-                            Assert.False(timedOut);
-                        }
-                    );
+                    commonBackgroundTest(true, () =>
+                    {
+                        Assert.Same(obj, state);
+                        Assert.False(timedOut);
+                    });
                 },
                 obj,
                 UnexpectedTimeoutMilliseconds,
@@ -123,14 +114,11 @@ namespace System.Threading.ThreadPools.Tests
                 registerWaitEvent,
                 (state, timedOut) =>
                 {
-                    commonBackgroundTest(
-                        true,
-                        () =>
-                        {
-                            Assert.Same(obj, state);
-                            Assert.False(timedOut);
-                        }
-                    );
+                    commonBackgroundTest(true, () =>
+                    {
+                        Assert.Same(obj, state);
+                        Assert.False(timedOut);
+                    });
                 },
                 obj,
                 UnexpectedTimeoutMilliseconds,
@@ -144,14 +132,11 @@ namespace System.Threading.ThreadPools.Tests
                 registerWaitEvent,
                 (state, timedOut) =>
                 {
-                    commonBackgroundTest(
-                        true,
-                        () =>
-                        {
-                            Assert.Same(obj, state);
-                            Assert.False(timedOut);
-                        }
-                    );
+                    commonBackgroundTest(true, () =>
+                    {
+                        Assert.Same(obj, state);
+                        Assert.False(timedOut);
+                    });
                 },
                 obj,
                 -1, // Infinite
@@ -206,27 +191,23 @@ namespace System.Threading.ThreadPools.Tests
                         )
                 );
             }
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "timeout",
-                () =>
-                    ThreadPool.RegisterWaitForSingleObject(
-                        waitHandle,
-                        callback,
-                        null,
-                        TimeSpan.FromMilliseconds(-2),
-                        true
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                ThreadPool.RegisterWaitForSingleObject(
+                    waitHandle,
+                    callback,
+                    null,
+                    TimeSpan.FromMilliseconds(-2),
+                    true
+                )
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "timeout",
-                () =>
-                    ThreadPool.RegisterWaitForSingleObject(
-                        waitHandle,
-                        callback,
-                        null,
-                        TimeSpan.FromMilliseconds((double)int.MaxValue + 1),
-                        true
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                ThreadPool.RegisterWaitForSingleObject(
+                    waitHandle,
+                    callback,
+                    null,
+                    TimeSpan.FromMilliseconds((double)int.MaxValue + 1),
+                    true
+                )
             );
 
             Assert.Throws<ArgumentNullException>(() =>
@@ -271,27 +252,23 @@ namespace System.Threading.ThreadPools.Tests
                         )
                 );
             }
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "timeout",
-                () =>
-                    ThreadPool.UnsafeRegisterWaitForSingleObject(
-                        waitHandle,
-                        callback,
-                        null,
-                        TimeSpan.FromMilliseconds(-2),
-                        true
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                ThreadPool.UnsafeRegisterWaitForSingleObject(
+                    waitHandle,
+                    callback,
+                    null,
+                    TimeSpan.FromMilliseconds(-2),
+                    true
+                )
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "timeout",
-                () =>
-                    ThreadPool.UnsafeRegisterWaitForSingleObject(
-                        waitHandle,
-                        callback,
-                        null,
-                        TimeSpan.FromMilliseconds((double)int.MaxValue + 1),
-                        true
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                ThreadPool.UnsafeRegisterWaitForSingleObject(
+                    waitHandle,
+                    callback,
+                    null,
+                    TimeSpan.FromMilliseconds((double)int.MaxValue + 1),
+                    true
+                )
             );
         }
 
@@ -609,9 +586,8 @@ namespace System.Threading.ThreadPools.Tests
             waitEvent.Set();
             waitCallbackProgressMade.CheckedWait(); // two callbacks running
 
-            Thread t = ThreadTestHelpers.CreateGuardedThread(
-                out Action waitForThread,
-                () => Assert.True(registeredWaitHandle.Unregister(new InvalidWaitHandle()))
+            Thread t = ThreadTestHelpers.CreateGuardedThread(out Action waitForThread, () =>
+                Assert.True(registeredWaitHandle.Unregister(new InvalidWaitHandle()))
             );
             t.IsBackground = true;
             t.Start();

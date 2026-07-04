@@ -17,14 +17,11 @@ public class SqlServerAnnotationCodeGeneratorTest
         var generator = CreateGenerator();
 
         var modelBuilder = SqlServerConventionSetBuilder.CreateModelBuilder();
-        modelBuilder.Entity(
-            "Post",
-            x =>
-            {
-                x.Property<int>("Id");
-                x.HasKey("Id").IsClustered();
-            }
-        );
+        modelBuilder.Entity("Post", x =>
+        {
+            x.Property<int>("Id");
+            x.HasKey("Id").IsClustered();
+        });
         var key = (IKey)modelBuilder.Model.FindEntityType("Post")!.GetKeys().Single();
 
         var result = generator
@@ -41,14 +38,11 @@ public class SqlServerAnnotationCodeGeneratorTest
     {
         var generator = CreateGenerator();
         var modelBuilder = SqlServerConventionSetBuilder.CreateModelBuilder();
-        modelBuilder.Entity(
-            "Post",
-            x =>
-            {
-                x.Property<int>("Id");
-                x.HasKey("Id").IsClustered(false);
-            }
-        );
+        modelBuilder.Entity("Post", x =>
+        {
+            x.Property<int>("Id");
+            x.HasKey("Id").IsClustered(false);
+        });
         var key = (IKey)modelBuilder.Model.FindEntityType("Post")!.GetKeys().Single();
 
         var result = generator
@@ -66,15 +60,12 @@ public class SqlServerAnnotationCodeGeneratorTest
     {
         var generator = CreateGenerator();
         var modelBuilder = SqlServerConventionSetBuilder.CreateModelBuilder();
-        modelBuilder.Entity(
-            "Post",
-            x =>
-            {
-                x.Property<int>("Id");
-                x.Property<string>("Name");
-                x.HasIndex("Name").IsClustered();
-            }
-        );
+        modelBuilder.Entity("Post", x =>
+        {
+            x.Property<int>("Id");
+            x.Property<string>("Name");
+            x.HasIndex("Name").IsClustered();
+        });
         var index = (IIndex)modelBuilder.Model.FindEntityType("Post")!.GetIndexes().Single();
 
         var result = generator
@@ -91,15 +82,12 @@ public class SqlServerAnnotationCodeGeneratorTest
     {
         var generator = CreateGenerator();
         var modelBuilder = SqlServerConventionSetBuilder.CreateModelBuilder();
-        modelBuilder.Entity(
-            "Post",
-            x =>
-            {
-                x.Property<int>("Id");
-                x.Property<string>("Name");
-                x.HasIndex("Name").IsClustered(false);
-            }
-        );
+        modelBuilder.Entity("Post", x =>
+        {
+            x.Property<int>("Id");
+            x.Property<string>("Name");
+            x.HasIndex("Name").IsClustered(false);
+        });
         var index = (IIndex)modelBuilder.Model.FindEntityType("Post")!.GetIndexes().Single();
 
         var result = generator
@@ -117,15 +105,12 @@ public class SqlServerAnnotationCodeGeneratorTest
     {
         var generator = CreateGenerator();
         var modelBuilder = SqlServerConventionSetBuilder.CreateModelBuilder();
-        modelBuilder.Entity(
-            "Post",
-            x =>
-            {
-                x.Property<int>("Id");
-                x.Property<string>("Name");
-                x.HasIndex("Name").HasFillFactor(90);
-            }
-        );
+        modelBuilder.Entity("Post", x =>
+        {
+            x.Property<int>("Id");
+            x.Property<string>("Name");
+            x.HasIndex("Name").HasFillFactor(90);
+        });
 
         var index = (IIndex)modelBuilder.Model.FindEntityType("Post")!.GetIndexes().Single();
         var result = generator
@@ -142,16 +127,13 @@ public class SqlServerAnnotationCodeGeneratorTest
     {
         var generator = CreateGenerator();
         var modelBuilder = SqlServerConventionSetBuilder.CreateModelBuilder();
-        modelBuilder.Entity(
-            "Post",
-            x =>
-            {
-                x.Property<int>("Id");
-                x.Property<string>("FirstName");
-                x.Property<string>("LastName");
-                x.HasIndex("LastName").IncludeProperties("FirstName");
-            }
-        );
+        modelBuilder.Entity("Post", x =>
+        {
+            x.Property<int>("Id");
+            x.Property<string>("FirstName");
+            x.Property<string>("LastName");
+            x.HasIndex("LastName").IncludeProperties("FirstName");
+        });
 
         var index = (IIndex)modelBuilder.Model.FindEntityType("Post")!.GetIndexes().Single();
         var result = generator
@@ -252,9 +234,8 @@ public class SqlServerAnnotationCodeGeneratorTest
     {
         var generator = CreateGenerator();
         var modelBuilder = SqlServerConventionSetBuilder.CreateModelBuilder();
-        modelBuilder.Entity(
-            "Post",
-            x => x.Property<int>("Id").UseHiLo("HiLoIndexName", "HiLoIndexSchema")
+        modelBuilder.Entity("Post", x =>
+            x.Property<int>("Id").UseHiLo("HiLoIndexName", "HiLoIndexSchema")
         );
         var property = modelBuilder.Model.FindEntityType("Post")!.FindProperty("Id")!;
 
@@ -298,9 +279,8 @@ public class SqlServerAnnotationCodeGeneratorTest
     {
         var generator = CreateGenerator();
         var modelBuilder = SqlServerConventionSetBuilder.CreateModelBuilder();
-        modelBuilder.Entity(
-            "Post",
-            x => x.Property<int>("Id").UseSequence("KeySequenceName", "KeySequenceSchema")
+        modelBuilder.Entity("Post", x =>
+            x.Property<int>("Id").UseSequence("KeySequenceName", "KeySequenceSchema")
         );
         var property = modelBuilder.Model.FindEntityType("Post")!.FindProperty("Id")!;
 
@@ -322,15 +302,12 @@ public class SqlServerAnnotationCodeGeneratorTest
     {
         var generator = CreateGenerator();
         var modelBuilder = SqlServerConventionSetBuilder.CreateModelBuilder();
-        modelBuilder.Entity(
-            "SomeEntity",
-            x =>
-            {
-                x.Property<string>("Default");
-                x.Property<string>("Sparse").IsSparse();
-                x.Property<string>("NonSparse").IsSparse(false);
-            }
-        );
+        modelBuilder.Entity("SomeEntity", x =>
+        {
+            x.Property<string>("Default");
+            x.Property<string>("Sparse").IsSparse();
+            x.Property<string>("NonSparse").IsSparse(false);
+        });
 
         Assert.Null(GenerateFluentApiCall("SomeEntity", "Default"));
 
@@ -407,14 +384,11 @@ public class SqlServerAnnotationCodeGeneratorTest
         var generator = CreateGenerator();
 
         var modelBuilder = SqlServerConventionSetBuilder.CreateModelBuilder();
-        modelBuilder.Entity(
-            "Post",
-            x =>
-            {
-                x.Property<int>("Id");
-                x.ToTable(tb => tb.IsMemoryOptimized());
-            }
-        );
+        modelBuilder.Entity("Post", x =>
+        {
+            x.Property<int>("Id");
+            x.ToTable(tb => tb.IsMemoryOptimized());
+        });
         var entityType = (IEntityType)modelBuilder.Model.FindEntityType("Post")!;
 
         var result = generator

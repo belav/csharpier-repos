@@ -12,9 +12,8 @@ namespace System.Formats.Asn1.Tests
         [Fact]
         public static void Universal15UndefinedFromEnum()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "universalTagNumber",
-                () => new Asn1Tag((UniversalTagNumber)15)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("universalTagNumber", () =>
+                new Asn1Tag((UniversalTagNumber)15)
             );
         }
 
@@ -39,9 +38,8 @@ namespace System.Formats.Asn1.Tests
         [InlineData(int.MaxValue)]
         public static void UniversalValuesLimitedToEnum(int value)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "universalTagNumber",
-                () => new Asn1Tag((UniversalTagNumber)value)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("universalTagNumber", () =>
+                new Asn1Tag((UniversalTagNumber)value)
             );
         }
 
@@ -54,9 +52,8 @@ namespace System.Formats.Asn1.Tests
         [InlineData(int.MaxValue)]
         public static void TagClassIsVerified(int value)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "tagClass",
-                () => new Asn1Tag((TagClass)value, 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("tagClass", () =>
+                new Asn1Tag((TagClass)value, 1)
             );
         }
 
@@ -75,9 +72,8 @@ namespace System.Formats.Asn1.Tests
         [InlineData(TagClass.Private, int.MinValue)]
         public static void NoNegativeTagNumbers(TagClass tagClass, int value)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "tagValue",
-                () => new Asn1Tag(tagClass, value)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("tagValue", () =>
+                new Asn1Tag(tagClass, value)
             );
         }
 
@@ -201,14 +197,11 @@ namespace System.Formats.Asn1.Tests
             Assert.False(tag.TryEncode(buf.Slice(0, expectedSize - 1), out written));
             Assert.Equal(0, written);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "destination",
-                () =>
-                {
-                    Span<byte> tmp = stackalloc byte[expectedSize - 1];
-                    return tag.Encode(tmp);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("destination", () =>
+            {
+                Span<byte> tmp = stackalloc byte[expectedSize - 1];
+                return tag.Encode(tmp);
+            });
 
             Assert.True(tag.TryEncode(buf, out written));
             Assert.Equal(expectedSize, written);

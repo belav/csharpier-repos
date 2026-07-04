@@ -24,13 +24,11 @@ public class PasswordValidatorTest
 
         // Act
         // Assert
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "password",
-            () => validator.ValidateAsync(null, null, null)
+        await Assert.ThrowsAsync<ArgumentNullException>("password", () =>
+            validator.ValidateAsync(null, null, null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "manager",
-            () => validator.ValidateAsync(null, null, "foo")
+        await Assert.ThrowsAsync<ArgumentNullException>("manager", () =>
+            validator.ValidateAsync(null, null, "foo")
         );
     }
 

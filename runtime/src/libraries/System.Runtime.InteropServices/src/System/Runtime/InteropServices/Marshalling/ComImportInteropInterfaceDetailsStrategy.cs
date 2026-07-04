@@ -74,105 +74,102 @@ namespace System.Runtime.InteropServices.Marshalling
                 );
             }
 
-            Type implementationType = _forwarderInterfaceCache.GetValue(
-                runtimeType,
-                runtimeType =>
+            Type implementationType = _forwarderInterfaceCache.GetValue(runtimeType, runtimeType =>
+            {
+                AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(
+                    new AssemblyName("ComImportForwarder"),
+                    runtimeType.IsCollectible
+                        ? AssemblyBuilderAccess.RunAndCollect
+                        : AssemblyBuilderAccess.Run
+                );
+                ModuleBuilder module = assembly.DefineDynamicModule("ComImportForwarder");
+
+                ConstructorInfo ignoresAccessChecksToAttributeConstructor =
+                    GetIgnoresAccessChecksToAttributeConstructor(module);
+
+                assembly.SetCustomAttribute(
+                    new CustomAttributeBuilder(
+                        ignoresAccessChecksToAttributeConstructor,
+                        new object[] { typeof(IComImportAdapter).Assembly.GetName().Name! }
+                    )
+                );
+
+                TypeBuilder implementation = module.DefineType(
+                    "InterfaceForwarder",
+                    TypeAttributes.Interface | TypeAttributes.Abstract,
+                    parent: null,
+                    interfaces: runtimeType.GetInterfaces()
+                );
+                implementation.AddInterfaceImplementation(runtimeType);
+                implementation.SetCustomAttribute(
+                    new CustomAttributeBuilder(
+                        typeof(DynamicInterfaceCastableImplementationAttribute).GetConstructor(
+                            Array.Empty<Type>()
+                        )!,
+                        Array.Empty<object>()
+                    )
+                );
+
+                foreach (Type iface in implementation.GetInterfaces())
                 {
-                    AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(
-                        new AssemblyName("ComImportForwarder"),
-                        runtimeType.IsCollectible
-                            ? AssemblyBuilderAccess.RunAndCollect
-                            : AssemblyBuilderAccess.Run
-                    );
-                    ModuleBuilder module = assembly.DefineDynamicModule("ComImportForwarder");
-
-                    ConstructorInfo ignoresAccessChecksToAttributeConstructor =
-                        GetIgnoresAccessChecksToAttributeConstructor(module);
-
                     assembly.SetCustomAttribute(
                         new CustomAttributeBuilder(
                             ignoresAccessChecksToAttributeConstructor,
-                            new object[] { typeof(IComImportAdapter).Assembly.GetName().Name! }
+                            new object[] { iface.Assembly.GetName().Name! }
                         )
                     );
-
-                    TypeBuilder implementation = module.DefineType(
-                        "InterfaceForwarder",
-                        TypeAttributes.Interface | TypeAttributes.Abstract,
-                        parent: null,
-                        interfaces: runtimeType.GetInterfaces()
-                    );
-                    implementation.AddInterfaceImplementation(runtimeType);
-                    implementation.SetCustomAttribute(
-                        new CustomAttributeBuilder(
-                            typeof(DynamicInterfaceCastableImplementationAttribute).GetConstructor(
-                                Array.Empty<Type>()
-                            )!,
-                            Array.Empty<object>()
-                        )
-                    );
-
-                    foreach (Type iface in implementation.GetInterfaces())
+                    foreach (MethodInfo method in iface.GetMethods())
                     {
-                        assembly.SetCustomAttribute(
-                            new CustomAttributeBuilder(
-                                ignoresAccessChecksToAttributeConstructor,
-                                new object[] { iface.Assembly.GetName().Name! }
-                            )
-                        );
-                        foreach (MethodInfo method in iface.GetMethods())
+                        Type[] returnTypeOptionalModifiers =
+                            method.ReturnParameter.GetOptionalCustomModifiers();
+                        Type[] returnTypeRequiredModifiers =
+                            method.ReturnParameter.GetRequiredCustomModifiers();
+                        ParameterInfo[] parameters = method.GetParameters();
+                        var parameterTypes = new Type[parameters.Length];
+                        var parameterOptionalModifiers = new Type[parameters.Length][];
+                        var parameterRequiredModifiers = new Type[parameters.Length][];
+                        for (int i = 0; i < parameters.Length; i++)
                         {
-                            Type[] returnTypeOptionalModifiers =
-                                method.ReturnParameter.GetOptionalCustomModifiers();
-                            Type[] returnTypeRequiredModifiers =
-                                method.ReturnParameter.GetRequiredCustomModifiers();
-                            ParameterInfo[] parameters = method.GetParameters();
-                            var parameterTypes = new Type[parameters.Length];
-                            var parameterOptionalModifiers = new Type[parameters.Length][];
-                            var parameterRequiredModifiers = new Type[parameters.Length][];
-                            for (int i = 0; i < parameters.Length; i++)
-                            {
-                                parameterTypes[i] = parameters[i].ParameterType;
-                                parameterOptionalModifiers[i] = parameters[i]
-                                    .GetOptionalCustomModifiers();
-                                parameterRequiredModifiers[i] = parameters[i]
-                                    .GetRequiredCustomModifiers();
-                            }
-                            MethodBuilder builder = implementation.DefineMethod(
-                                method.Name,
-                                MethodAttributes.Private
-                                    | MethodAttributes.Final
-                                    | MethodAttributes.HideBySig
-                                    | MethodAttributes.Virtual,
-                                CallingConventions.HasThis,
-                                method.ReturnType,
-                                returnTypeRequiredModifiers,
-                                returnTypeOptionalModifiers,
-                                parameterTypes,
-                                parameterRequiredModifiers,
-                                parameterOptionalModifiers
-                            );
-                            ILGenerator il = builder.GetILGenerator();
-                            il.Emit(OpCodes.Ldarg_0);
-                            il.Emit(OpCodes.Castclass, typeof(IComImportAdapter));
-                            il.Emit(
-                                OpCodes.Callvirt,
-                                IComImportAdapter.GetRuntimeCallableWrapperMethod
-                            );
-                            il.Emit(OpCodes.Castclass, iface);
-                            for (int i = 0; i < parameters.Length; i++)
-                            {
-                                il.Emit(OpCodes.Ldarg, i + 1);
-                            }
-                            il.Emit(OpCodes.Callvirt, method);
-                            il.Emit(OpCodes.Ret);
-                            implementation.DefineMethodOverride(builder, method);
+                            parameterTypes[i] = parameters[i].ParameterType;
+                            parameterOptionalModifiers[i] = parameters[i]
+                                .GetOptionalCustomModifiers();
+                            parameterRequiredModifiers[i] = parameters[i]
+                                .GetRequiredCustomModifiers();
                         }
+                        MethodBuilder builder = implementation.DefineMethod(
+                            method.Name,
+                            MethodAttributes.Private
+                                | MethodAttributes.Final
+                                | MethodAttributes.HideBySig
+                                | MethodAttributes.Virtual,
+                            CallingConventions.HasThis,
+                            method.ReturnType,
+                            returnTypeRequiredModifiers,
+                            returnTypeOptionalModifiers,
+                            parameterTypes,
+                            parameterRequiredModifiers,
+                            parameterOptionalModifiers
+                        );
+                        ILGenerator il = builder.GetILGenerator();
+                        il.Emit(OpCodes.Ldarg_0);
+                        il.Emit(OpCodes.Castclass, typeof(IComImportAdapter));
+                        il.Emit(
+                            OpCodes.Callvirt,
+                            IComImportAdapter.GetRuntimeCallableWrapperMethod
+                        );
+                        il.Emit(OpCodes.Castclass, iface);
+                        for (int i = 0; i < parameters.Length; i++)
+                        {
+                            il.Emit(OpCodes.Ldarg, i + 1);
+                        }
+                        il.Emit(OpCodes.Callvirt, method);
+                        il.Emit(OpCodes.Ret);
+                        implementation.DefineMethodOverride(builder, method);
                     }
-
-                    return implementation.CreateType();
                 }
-            );
+
+                return implementation.CreateType();
+            });
 
             return new ComImportDetails(runtimeType.GUID, implementationType);
         }

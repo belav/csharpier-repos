@@ -84,22 +84,18 @@ namespace System.Security.Cryptography.Tests
         )]
         public static void NullArguments()
         {
-            Assert.Throws<ArgumentNullException>(
-                "engineName",
-                () => SafeEvpPKeyHandle.OpenPrivateKeyFromEngine(null, TestEngineKeyId)
+            Assert.Throws<ArgumentNullException>("engineName", () =>
+                SafeEvpPKeyHandle.OpenPrivateKeyFromEngine(null, TestEngineKeyId)
             );
-            Assert.Throws<ArgumentNullException>(
-                "keyId",
-                () => SafeEvpPKeyHandle.OpenPrivateKeyFromEngine(TestEngineName, null)
+            Assert.Throws<ArgumentNullException>("keyId", () =>
+                SafeEvpPKeyHandle.OpenPrivateKeyFromEngine(TestEngineName, null)
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "engineName",
-                () => SafeEvpPKeyHandle.OpenPublicKeyFromEngine(null, TestEngineKeyId)
+            Assert.Throws<ArgumentNullException>("engineName", () =>
+                SafeEvpPKeyHandle.OpenPublicKeyFromEngine(null, TestEngineKeyId)
             );
-            Assert.Throws<ArgumentNullException>(
-                "keyId",
-                () => SafeEvpPKeyHandle.OpenPublicKeyFromEngine(TestEngineName, null)
+            Assert.Throws<ArgumentNullException>("keyId", () =>
+                SafeEvpPKeyHandle.OpenPublicKeyFromEngine(TestEngineName, null)
             );
         }
 

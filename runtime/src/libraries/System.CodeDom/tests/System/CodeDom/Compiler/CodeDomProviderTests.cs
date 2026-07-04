@@ -66,9 +66,8 @@ namespace System.CodeDom.Compiler.Tests
         [Fact]
         public void GetConverter_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => new CustomProvider().GetConverter(null)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                new CustomProvider().GetConverter(null)
             );
         }
 
@@ -160,26 +159,22 @@ namespace System.CodeDom.Compiler.Tests
         [Fact]
         public void CreateProvider_NullProviderOptions_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "providerOptions",
-                () => CodeDomProvider.CreateProvider("cs", null)
+            AssertExtensions.Throws<ArgumentNullException>("providerOptions", () =>
+                CodeDomProvider.CreateProvider("cs", null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "providerOptions",
-                () => CodeDomProvider.CreateProvider("vb", null)
+            AssertExtensions.Throws<ArgumentNullException>("providerOptions", () =>
+                CodeDomProvider.CreateProvider("vb", null)
             );
         }
 
         [Fact]
         public void CreateProvider_NullLanguage_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "language",
-                () => CodeDomProvider.CreateProvider(null)
+            AssertExtensions.Throws<ArgumentNullException>("language", () =>
+                CodeDomProvider.CreateProvider(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "language",
-                () => CodeDomProvider.CreateProvider(null, new Dictionary<string, string>())
+            AssertExtensions.Throws<ArgumentNullException>("language", () =>
+                CodeDomProvider.CreateProvider(null, new Dictionary<string, string>())
             );
         }
 
@@ -235,9 +230,8 @@ namespace System.CodeDom.Compiler.Tests
         [Fact]
         public void IsDefinedLanguage_NullLanguage_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "language",
-                () => CodeDomProvider.IsDefinedLanguage(null)
+            AssertExtensions.Throws<ArgumentNullException>("language", () =>
+                CodeDomProvider.IsDefinedLanguage(null)
             );
         }
 
@@ -257,9 +251,8 @@ namespace System.CodeDom.Compiler.Tests
         [Fact]
         public void GetLanguageFromExtension_NullExtension_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "extension",
-                () => CodeDomProvider.GetLanguageFromExtension(null)
+            AssertExtensions.Throws<ArgumentNullException>("extension", () =>
+                CodeDomProvider.GetLanguageFromExtension(null)
             );
         }
 
@@ -295,9 +288,8 @@ namespace System.CodeDom.Compiler.Tests
         [Fact]
         public void IsDefinedExtension_NullExtension_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "extension",
-                () => CodeDomProvider.IsDefinedExtension(null)
+            AssertExtensions.Throws<ArgumentNullException>("extension", () =>
+                CodeDomProvider.IsDefinedExtension(null)
             );
         }
 
@@ -323,9 +315,8 @@ namespace System.CodeDom.Compiler.Tests
         [Fact]
         public void GetCompilerInfo_NullLanguage_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "language",
-                () => CodeDomProvider.GetCompilerInfo(null)
+            AssertExtensions.Throws<ArgumentNullException>("language", () =>
+                CodeDomProvider.GetCompilerInfo(null)
             );
         }
 
@@ -344,9 +335,8 @@ namespace System.CodeDom.Compiler.Tests
         [Fact]
         public void CompileAssemblyFromDom_CallsCompilerMethod()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new CustomProvider().CompileAssemblyFromDom(new CompilerParameters())
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomProvider().CompileAssemblyFromDom(new CompilerParameters())
             );
         }
 
@@ -361,9 +351,8 @@ namespace System.CodeDom.Compiler.Tests
         [Fact]
         public void CompileAssemblyFromFile_CallsCompilerMethod()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "2",
-                () => new CustomProvider().CompileAssemblyFromFile(new CompilerParameters())
+            AssertExtensions.Throws<ArgumentNullException>("2", () =>
+                new CustomProvider().CompileAssemblyFromFile(new CompilerParameters())
             );
         }
 
@@ -378,9 +367,8 @@ namespace System.CodeDom.Compiler.Tests
         [Fact]
         public void CompileAssemblyFromSource_CallsCompilerMethod()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "3",
-                () => new CustomProvider().CompileAssemblyFromSource(new CompilerParameters())
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("3", () =>
+                new CustomProvider().CompileAssemblyFromSource(new CompilerParameters())
             );
         }
 
@@ -395,9 +383,8 @@ namespace System.CodeDom.Compiler.Tests
         [Fact]
         public void CreateEscapedIdentifier_CallsGeneratorMethod()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new CustomProvider().CreateEscapedIdentifier("value")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new CustomProvider().CreateEscapedIdentifier("value")
             );
         }
 
@@ -412,9 +399,8 @@ namespace System.CodeDom.Compiler.Tests
         [Fact]
         public void CreateValidIdentifier_CallsGeneratorMethod()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "2",
-                () => new CustomProvider().CreateValidIdentifier("value")
+            AssertExtensions.Throws<ArgumentNullException>("2", () =>
+                new CustomProvider().CreateValidIdentifier("value")
             );
         }
 
@@ -429,14 +415,12 @@ namespace System.CodeDom.Compiler.Tests
         [Fact]
         public void GenerateCodeFromCompileUnit_CallsGeneratorMethod()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "3",
-                () =>
-                    new CustomProvider().GenerateCodeFromCompileUnit(
-                        new CodeCompileUnit(),
-                        new StringWriter(),
-                        new CodeGeneratorOptions()
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("3", () =>
+                new CustomProvider().GenerateCodeFromCompileUnit(
+                    new CodeCompileUnit(),
+                    new StringWriter(),
+                    new CodeGeneratorOptions()
+                )
             );
         }
 

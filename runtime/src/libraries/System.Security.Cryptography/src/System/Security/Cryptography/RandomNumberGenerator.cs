@@ -238,14 +238,10 @@ namespace System.Security.Cryptography
             ArgumentOutOfRangeException.ThrowIfNegative(length);
 
 #pragma warning disable 8500
-            return string.Create(
-                length,
-                (IntPtr)(&choices),
-                static (destination, state) =>
-                {
-                    GetItemsCore(*(ReadOnlySpan<char>*)state, destination);
-                }
-            );
+            return string.Create(length, (IntPtr)(&choices), static (destination, state) =>
+            {
+                GetItemsCore(*(ReadOnlySpan<char>*)state, destination);
+            });
 #pragma warning restore 8500
         }
 

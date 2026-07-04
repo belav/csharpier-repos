@@ -125,32 +125,26 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void StructureToPtr_NullPtr_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "ptr",
-                () =>
-                    Marshal.StructureToPtr(
-                        (object)new SomeTestStruct_Auto(),
-                        IntPtr.Zero,
-                        fDeleteOld: true
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("ptr", () =>
+                Marshal.StructureToPtr(
+                    (object)new SomeTestStruct_Auto(),
+                    IntPtr.Zero,
+                    fDeleteOld: true
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "ptr",
-                () =>
-                    Marshal.StructureToPtr(new SomeTestStruct_Auto(), IntPtr.Zero, fDeleteOld: true)
+            AssertExtensions.Throws<ArgumentNullException>("ptr", () =>
+                Marshal.StructureToPtr(new SomeTestStruct_Auto(), IntPtr.Zero, fDeleteOld: true)
             );
         }
 
         [Fact]
         public void StructureToPtr_NullStructure_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "structure",
-                () => Marshal.StructureToPtr(null, (IntPtr)1, fDeleteOld: true)
+            AssertExtensions.Throws<ArgumentNullException>("structure", () =>
+                Marshal.StructureToPtr(null, (IntPtr)1, fDeleteOld: true)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "structure",
-                () => Marshal.StructureToPtr<object>(null, (IntPtr)1, fDeleteOld: true)
+            AssertExtensions.Throws<ArgumentNullException>("structure", () =>
+                Marshal.StructureToPtr<object>(null, (IntPtr)1, fDeleteOld: true)
             );
         }
 
@@ -164,13 +158,11 @@ namespace System.Runtime.InteropServices.Tests
         [MemberData(nameof(StructureToPtr_GenericClass_TestData))]
         public void StructureToPtr_GenericObject_ThrowsArgumentException(object o)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "structure",
-                () => Marshal.StructureToPtr(o, (IntPtr)1, fDeleteOld: true)
+            AssertExtensions.Throws<ArgumentException>("structure", () =>
+                Marshal.StructureToPtr(o, (IntPtr)1, fDeleteOld: true)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "structure",
-                () => Marshal.StructureToPtr<object>(o, (IntPtr)1, fDeleteOld: true)
+            AssertExtensions.Throws<ArgumentException>("structure", () =>
+                Marshal.StructureToPtr<object>(o, (IntPtr)1, fDeleteOld: true)
             );
         }
 
@@ -189,13 +181,11 @@ namespace System.Runtime.InteropServices.Tests
         [MemberData(nameof(StructureToPtr_NonBlittableObject_TestData))]
         public void StructureToPtr_NonBlittable_ThrowsArgumentException(object o)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "structure",
-                () => Marshal.StructureToPtr(o, (IntPtr)1, fDeleteOld: true)
+            AssertExtensions.Throws<ArgumentException>("structure", () =>
+                Marshal.StructureToPtr(o, (IntPtr)1, fDeleteOld: true)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "structure",
-                () => Marshal.StructureToPtr<object>(o, (IntPtr)1, fDeleteOld: true)
+            AssertExtensions.Throws<ArgumentException>("structure", () =>
+                Marshal.StructureToPtr<object>(o, (IntPtr)1, fDeleteOld: true)
             );
         }
 
@@ -208,13 +198,11 @@ namespace System.Runtime.InteropServices.Tests
         public void StructureToPtr_AutoLayout_ThrowsArgumentException()
         {
             var someTs_Auto = new SomeTestStruct_Auto();
-            AssertExtensions.Throws<ArgumentException>(
-                "structure",
-                () => Marshal.StructureToPtr((object)someTs_Auto, (IntPtr)1, fDeleteOld: true)
+            AssertExtensions.Throws<ArgumentException>("structure", () =>
+                Marshal.StructureToPtr((object)someTs_Auto, (IntPtr)1, fDeleteOld: true)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "structure",
-                () => Marshal.StructureToPtr(someTs_Auto, (IntPtr)1, fDeleteOld: true)
+            AssertExtensions.Throws<ArgumentException>("structure", () =>
+                Marshal.StructureToPtr(someTs_Auto, (IntPtr)1, fDeleteOld: true)
             );
         }
 

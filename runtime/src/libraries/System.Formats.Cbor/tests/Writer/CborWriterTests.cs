@@ -362,9 +362,8 @@ namespace System.Formats.Cbor.Tests
             CborConformanceMode mode
         )
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "conformanceMode",
-                () => new CborWriter(conformanceMode: mode)
+            Assert.Throws<ArgumentOutOfRangeException>("conformanceMode", () =>
+                new CborWriter(conformanceMode: mode)
             );
         }
 
@@ -375,9 +374,8 @@ namespace System.Formats.Cbor.Tests
             int capacity
         )
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "initialCapacity",
-                () => new CborWriter(initialCapacity: capacity)
+            Assert.Throws<ArgumentOutOfRangeException>("initialCapacity", () =>
+                new CborWriter(initialCapacity: capacity)
             );
         }
 

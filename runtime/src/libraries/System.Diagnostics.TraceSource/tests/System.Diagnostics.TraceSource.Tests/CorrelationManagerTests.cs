@@ -34,9 +34,8 @@ namespace System.Diagnostics.TraceSourceTests
         [Fact]
         public void CorrelationManager_NullOperationId()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "operationId",
-                () => Trace.CorrelationManager.StartLogicalOperation(null)
+            AssertExtensions.Throws<ArgumentNullException>("operationId", () =>
+                Trace.CorrelationManager.StartLogicalOperation(null)
             );
         }
 

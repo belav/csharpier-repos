@@ -108,17 +108,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         previewItems.Add(
-                            new SolutionPreviewItem(
-                                documentId.ProjectId,
-                                documentId,
-                                async c =>
-                                    await CreateChangedDocumentPreviewViewAsync(
-                                            oldSolution.GetRequiredDocument(documentId),
-                                            newSolution.GetRequiredDocument(documentId),
-                                            zoomLevel,
-                                            c
-                                        )
-                                        .ConfigureAwaitRunInline()
+                            new SolutionPreviewItem(documentId.ProjectId, documentId, async c =>
+                                await CreateChangedDocumentPreviewViewAsync(
+                                        oldSolution.GetRequiredDocument(documentId),
+                                        newSolution.GetRequiredDocument(documentId),
+                                        zoomLevel,
+                                        c
+                                    )
+                                    .ConfigureAwaitRunInline()
                             )
                         );
                     }
@@ -127,16 +124,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         previewItems.Add(
-                            new SolutionPreviewItem(
-                                documentId.ProjectId,
-                                documentId,
-                                async c =>
-                                    await CreateAddedDocumentPreviewViewAsync(
-                                            newSolution.GetRequiredDocument(documentId),
-                                            zoomLevel,
-                                            c
-                                        )
-                                        .ConfigureAwaitRunInline()
+                            new SolutionPreviewItem(documentId.ProjectId, documentId, async c =>
+                                await CreateAddedDocumentPreviewViewAsync(
+                                        newSolution.GetRequiredDocument(documentId),
+                                        zoomLevel,
+                                        c
+                                    )
+                                    .ConfigureAwaitRunInline()
                             )
                         );
                     }
@@ -145,16 +139,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         previewItems.Add(
-                            new SolutionPreviewItem(
-                                oldProject.Id,
-                                documentId,
-                                async c =>
-                                    await CreateRemovedDocumentPreviewViewAsync(
-                                            oldSolution.GetRequiredDocument(documentId),
-                                            zoomLevel,
-                                            c
-                                        )
-                                        .ConfigureAwaitRunInline()
+                            new SolutionPreviewItem(oldProject.Id, documentId, async c =>
+                                await CreateRemovedDocumentPreviewViewAsync(
+                                        oldSolution.GetRequiredDocument(documentId),
+                                        zoomLevel,
+                                        c
+                                    )
+                                    .ConfigureAwaitRunInline()
                             )
                         );
                     }
@@ -163,17 +154,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         previewItems.Add(
-                            new SolutionPreviewItem(
-                                documentId.ProjectId,
-                                documentId,
-                                async c =>
-                                    await CreateChangedAdditionalDocumentPreviewViewAsync(
-                                            oldSolution.GetRequiredAdditionalDocument(documentId),
-                                            newSolution.GetRequiredAdditionalDocument(documentId),
-                                            zoomLevel,
-                                            c
-                                        )
-                                        .ConfigureAwaitRunInline()
+                            new SolutionPreviewItem(documentId.ProjectId, documentId, async c =>
+                                await CreateChangedAdditionalDocumentPreviewViewAsync(
+                                        oldSolution.GetRequiredAdditionalDocument(documentId),
+                                        newSolution.GetRequiredAdditionalDocument(documentId),
+                                        zoomLevel,
+                                        c
+                                    )
+                                    .ConfigureAwaitRunInline()
                             )
                         );
                     }
@@ -182,16 +170,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         previewItems.Add(
-                            new SolutionPreviewItem(
-                                documentId.ProjectId,
-                                documentId,
-                                async c =>
-                                    await CreateAddedAdditionalDocumentPreviewViewAsync(
-                                            newSolution.GetRequiredAdditionalDocument(documentId),
-                                            zoomLevel,
-                                            c
-                                        )
-                                        .ConfigureAwaitRunInline()
+                            new SolutionPreviewItem(documentId.ProjectId, documentId, async c =>
+                                await CreateAddedAdditionalDocumentPreviewViewAsync(
+                                        newSolution.GetRequiredAdditionalDocument(documentId),
+                                        zoomLevel,
+                                        c
+                                    )
+                                    .ConfigureAwaitRunInline()
                             )
                         );
                     }
@@ -200,16 +185,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         previewItems.Add(
-                            new SolutionPreviewItem(
-                                oldProject.Id,
-                                documentId,
-                                async c =>
-                                    await CreateRemovedAdditionalDocumentPreviewViewAsync(
-                                            oldSolution.GetRequiredAdditionalDocument(documentId),
-                                            zoomLevel,
-                                            c
-                                        )
-                                        .ConfigureAwaitRunInline()
+                            new SolutionPreviewItem(oldProject.Id, documentId, async c =>
+                                await CreateRemovedAdditionalDocumentPreviewViewAsync(
+                                        oldSolution.GetRequiredAdditionalDocument(documentId),
+                                        zoomLevel,
+                                        c
+                                    )
+                                    .ConfigureAwaitRunInline()
                             )
                         );
                     }
@@ -218,21 +200,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         previewItems.Add(
-                            new SolutionPreviewItem(
-                                documentId.ProjectId,
-                                documentId,
-                                async c =>
-                                    await CreateChangedAnalyzerConfigDocumentPreviewViewAsync(
-                                            oldSolution.GetRequiredAnalyzerConfigDocument(
-                                                documentId
-                                            ),
-                                            newSolution.GetRequiredAnalyzerConfigDocument(
-                                                documentId
-                                            ),
-                                            zoomLevel,
-                                            c
-                                        )
-                                        .ConfigureAwaitRunInline()
+                            new SolutionPreviewItem(documentId.ProjectId, documentId, async c =>
+                                await CreateChangedAnalyzerConfigDocumentPreviewViewAsync(
+                                        oldSolution.GetRequiredAnalyzerConfigDocument(documentId),
+                                        newSolution.GetRequiredAnalyzerConfigDocument(documentId),
+                                        zoomLevel,
+                                        c
+                                    )
+                                    .ConfigureAwaitRunInline()
                             )
                         );
                     }
@@ -241,18 +216,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         previewItems.Add(
-                            new SolutionPreviewItem(
-                                documentId.ProjectId,
-                                documentId,
-                                async c =>
-                                    await CreateAddedAnalyzerConfigDocumentPreviewViewAsync(
-                                            newSolution.GetRequiredAnalyzerConfigDocument(
-                                                documentId
-                                            ),
-                                            zoomLevel,
-                                            c
-                                        )
-                                        .ConfigureAwaitRunInline()
+                            new SolutionPreviewItem(documentId.ProjectId, documentId, async c =>
+                                await CreateAddedAnalyzerConfigDocumentPreviewViewAsync(
+                                        newSolution.GetRequiredAnalyzerConfigDocument(documentId),
+                                        zoomLevel,
+                                        c
+                                    )
+                                    .ConfigureAwaitRunInline()
                             )
                         );
                     }
@@ -261,18 +231,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                     {
                         cancellationToken.ThrowIfCancellationRequested();
                         previewItems.Add(
-                            new SolutionPreviewItem(
-                                oldProject.Id,
-                                documentId,
-                                async c =>
-                                    await CreateRemovedAnalyzerConfigDocumentPreviewViewAsync(
-                                            oldSolution.GetRequiredAnalyzerConfigDocument(
-                                                documentId
-                                            ),
-                                            zoomLevel,
-                                            c
-                                        )
-                                        .ConfigureAwaitRunInline()
+                            new SolutionPreviewItem(oldProject.Id, documentId, async c =>
+                                await CreateRemovedAnalyzerConfigDocumentPreviewViewAsync(
+                                        oldSolution.GetRequiredAnalyzerConfigDocument(documentId),
+                                        zoomLevel,
+                                        c
+                                    )
+                                    .ConfigureAwaitRunInline()
                             )
                         );
                     }

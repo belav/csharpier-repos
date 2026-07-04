@@ -629,9 +629,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     }
                 }
 
-                return statement.ReplaceNodes(
-                    replacements.Keys,
-                    (orig, partiallyReplaced) => replacements[orig]
+                return statement.ReplaceNodes(replacements.Keys, (orig, partiallyReplaced) =>
+                    replacements[orig]
                 );
             }
 

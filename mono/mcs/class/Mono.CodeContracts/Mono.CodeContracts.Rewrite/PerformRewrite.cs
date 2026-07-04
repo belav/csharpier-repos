@@ -177,10 +177,8 @@ namespace Mono.CodeContracts.Rewrite
             }
             if (insert != null)
             {
-                var compiler = new CompileVisitor(
-                    il,
-                    instructionLookup,
-                    inst => il.InsertBefore(instInsertBefore, inst)
+                var compiler = new CompileVisitor(il, instructionLookup, inst =>
+                    il.InsertBefore(instInsertBefore, inst)
                 );
                 compiler.Visit(insert);
             }

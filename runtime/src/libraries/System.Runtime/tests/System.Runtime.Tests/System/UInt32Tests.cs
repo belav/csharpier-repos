@@ -436,9 +436,8 @@ namespace System.Tests
                 // Substitute default NumberFormatInfo
                 Assert.False(uint.TryParse(value, style, new NumberFormatInfo(), out result));
                 Assert.Equal(default, result);
-                Assert.Throws(
-                    exceptionType,
-                    () => uint.Parse(value, style, new NumberFormatInfo())
+                Assert.Throws(exceptionType, () =>
+                    uint.Parse(value, style, new NumberFormatInfo())
                 );
             }
 
@@ -462,9 +461,8 @@ namespace System.Tests
         public static void TryParse_InvalidNumberStyle_ThrowsArgumentException(NumberStyles style)
         {
             uint result = 0;
-            AssertExtensions.Throws<ArgumentException>(
-                "style",
-                () => uint.TryParse("1", style, null, out result)
+            AssertExtensions.Throws<ArgumentException>("style", () =>
+                uint.TryParse("1", style, null, out result)
             );
             Assert.Equal(default(uint), result);
 
@@ -607,9 +605,8 @@ namespace System.Tests
                     Assert.Equal(0u, result);
                 }
 
-                Assert.Throws(
-                    exceptionType,
-                    () => uint.Parse(Encoding.UTF8.GetBytes(value), style, provider)
+                Assert.Throws(exceptionType, () =>
+                    uint.Parse(Encoding.UTF8.GetBytes(value), style, provider)
                 );
 
                 Assert.False(uint.TryParse(valueUtf8, style, provider, out result));

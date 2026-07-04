@@ -2786,20 +2786,14 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
                 new DateTimeOffset(DateTime.Parse("01/01/2000 12:34:56"), TimeSpan.FromHours(-8.0)),
                 () => dt.TestNullableDateTimeOffset
             );
-            AssertEqualIfMapped(
-                entityType,
-                new TimeSpan(0, 10, 9, 8, 7),
-                () => dt.TestNullableTimeSpan
+            AssertEqualIfMapped(entityType, new TimeSpan(0, 10, 9, 8, 7), () =>
+                dt.TestNullableTimeSpan
             );
-            AssertEqualIfMapped(
-                entityType,
-                new DateOnly(2020, 3, 1),
-                () => dt.TestNullableDateOnly
+            AssertEqualIfMapped(entityType, new DateOnly(2020, 3, 1), () =>
+                dt.TestNullableDateOnly
             );
-            AssertEqualIfMapped(
-                entityType,
-                new TimeOnly(12, 30, 45, 123),
-                () => dt.TestNullableTimeOnly
+            AssertEqualIfMapped(entityType, new TimeOnly(12, 30, 45, 123), () =>
+                dt.TestNullableTimeOnly
             );
             AssertEqualIfMapped(entityType, -1.234F, () => dt.TestNullableSingle);
             AssertEqualIfMapped(entityType, false, () => dt.TestNullableBoolean);
@@ -2810,10 +2804,8 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             AssertEqualIfMapped(entityType, Enum8.SomeValue, () => dt.Enum8);
             AssertEqualIfMapped(entityType, (ushort)1234, () => dt.TestNullableUnsignedInt16);
             AssertEqualIfMapped(entityType, 1234565789U, () => dt.TestNullableUnsignedInt32);
-            AssertEqualIfMapped(
-                entityType,
-                1234567890123456789UL,
-                () => dt.TestNullableUnsignedInt64
+            AssertEqualIfMapped(entityType, 1234567890123456789UL, () =>
+                dt.TestNullableUnsignedInt64
             );
             AssertEqualIfMapped(entityType, 'a', () => dt.TestNullableCharacter);
             AssertEqualIfMapped(entityType, (sbyte)-128, () => dt.TestNullableSignedByte);
@@ -2889,10 +2881,8 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             AssertEqualIfMapped(entityType, -1234567890123456789L, () => dt.Int64);
             AssertEqualIfMapped(entityType, -1.23456789, () => dt.Double);
             AssertEqualIfMapped(entityType, -1234567890.01M, () => dt.Decimal);
-            AssertEqualIfMapped(
-                entityType,
-                DateTime.Parse("01/01/2000 12:34:56"),
-                () => dt.DateTime
+            AssertEqualIfMapped(entityType, DateTime.Parse("01/01/2000 12:34:56"), () =>
+                dt.DateTime
             );
             AssertEqualIfMapped(
                 entityType,
@@ -2982,10 +2972,8 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             AssertEqualIfMapped(entityType, -1234567890123456789L, () => dt.Int64);
             AssertEqualIfMapped(entityType, -1.23456789, () => dt.Double);
             AssertEqualIfMapped(entityType, -1234567890.01M, () => dt.Decimal);
-            AssertEqualIfMapped(
-                entityType,
-                DateTime.Parse("01/01/2000 12:34:56"),
-                () => dt.DateTime
+            AssertEqualIfMapped(entityType, DateTime.Parse("01/01/2000 12:34:56"), () =>
+                dt.DateTime
             );
             AssertEqualIfMapped(
                 entityType,
@@ -3076,10 +3064,8 @@ public abstract class BuiltInDataTypesTestBase<TFixture> : IClassFixture<TFixtur
             AssertEqualIfMapped(entityType, -1234567890123456789L, () => dt.Int64);
             AssertEqualIfMapped(entityType, -1.23456789, () => dt.Double);
             AssertEqualIfMapped(entityType, -1234567890.01M, () => dt.Decimal);
-            AssertEqualIfMapped(
-                entityType,
-                DateTime.Parse("01/01/2000 12:34:56"),
-                () => dt.DateTime
+            AssertEqualIfMapped(entityType, DateTime.Parse("01/01/2000 12:34:56"), () =>
+                dt.DateTime
             );
             AssertEqualIfMapped(
                 entityType,

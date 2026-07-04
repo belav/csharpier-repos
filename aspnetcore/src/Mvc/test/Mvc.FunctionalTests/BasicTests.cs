@@ -725,17 +725,14 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
             content,
             TestJsonSerializerOptionsProvider.Options
         );
-        Assert.Collection(
-            problemDetails.Errors,
-            kvp =>
-            {
-                Assert.Empty(kvp.Key);
-                Assert.Equal(
-                    "Failed to read the request form. Form section has invalid Content-Disposition value: ",
-                    string.Join(" ", kvp.Value)
-                );
-            }
-        );
+        Assert.Collection(problemDetails.Errors, kvp =>
+        {
+            Assert.Empty(kvp.Key);
+            Assert.Equal(
+                "Failed to read the request form. Form section has invalid Content-Disposition value: ",
+                string.Join(" ", kvp.Value)
+            );
+        });
     }
 
     public class BindPropertyControllerData

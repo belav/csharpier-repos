@@ -201,16 +201,13 @@ namespace System.Threading.Tests
             var threadLocked = new AutoResetEvent(false);
             var continueThread = new AutoResetEvent(false);
             var m = new Mutex();
-            Thread t = ThreadTestHelpers.CreateGuardedThread(
-                out Action waitForThread,
-                () =>
-                {
-                    Assert.True(m.WaitOne(0));
-                    threadLocked.Set();
-                    continueThread.CheckedWait();
-                    m.ReleaseMutex();
-                }
-            );
+            Thread t = ThreadTestHelpers.CreateGuardedThread(out Action waitForThread, () =>
+            {
+                Assert.True(m.WaitOne(0));
+                threadLocked.Set();
+                continueThread.CheckedWait();
+                m.ReleaseMutex();
+            });
             t.IsBackground = true;
             t.Start();
             threadLocked.CheckedWait();
@@ -232,10 +229,8 @@ namespace System.Threading.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void Ctor_InvalidNames_Unix()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                null,
-                () => new Mutex(false, new string('a', 1000), out bool createdNew)
+            AssertExtensions.Throws<ArgumentException>("name", null, () =>
+                new Mutex(false, new string('a', 1000), out bool createdNew)
             );
         }
 
@@ -343,10 +338,8 @@ namespace System.Threading.Tests
         public void OpenExisting_InvalidNames()
         {
             AssertExtensions.Throws<ArgumentNullException>("name", () => Mutex.OpenExisting(null));
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                null,
-                () => Mutex.OpenExisting(string.Empty)
+            AssertExtensions.Throws<ArgumentException>("name", null, () =>
+                Mutex.OpenExisting(string.Empty)
             );
         }
 
@@ -514,26 +507,23 @@ namespace System.Threading.Tests
                         }
                     }
 
-                    Thread t = ThreadTestHelpers.CreateGuardedThread(
-                        out Action waitForThread,
-                        () =>
+                    Thread t = ThreadTestHelpers.CreateGuardedThread(out Action waitForThread, () =>
+                    {
+                        Assert.True(m.WaitOne(0));
+                        if (m2 != null)
                         {
-                            Assert.True(m.WaitOne(0));
-                            if (m2 != null)
-                            {
-                                Assert.True(m2.WaitOne(0));
-                            }
-
-                            if (abandonDuringWait)
-                            {
-                                threadReadyForAbandon.Set();
-                                abandonSoon.CheckedWait();
-                                Thread.Sleep(ThreadTestHelpers.ExpectedTimeoutMilliseconds);
-                            }
-
-                            // don't release the mutexes; abandon them on this thread
+                            Assert.True(m2.WaitOne(0));
                         }
-                    );
+
+                        if (abandonDuringWait)
+                        {
+                            threadReadyForAbandon.Set();
+                            abandonSoon.CheckedWait();
+                            Thread.Sleep(ThreadTestHelpers.ExpectedTimeoutMilliseconds);
+                        }
+
+                        // don't release the mutexes; abandon them on this thread
+                    });
                     t.IsBackground = true;
                     t.Start();
 
@@ -777,30 +767,24 @@ namespace System.Threading.Tests
                 var startParallelTest = new ManualResetEvent(false);
 
                 var t0Ready = new AutoResetEvent(false);
-                Thread t0 = ThreadTestHelpers.CreateGuardedThread(
-                    out Action waitForT0,
-                    () =>
-                    {
-                        m.CheckedWait();
-                        t0Ready.Set();
-                        startParallelTest.CheckedWait(); // after this, exit T0
-                    }
-                );
+                Thread t0 = ThreadTestHelpers.CreateGuardedThread(out Action waitForT0, () =>
+                {
+                    m.CheckedWait();
+                    t0Ready.Set();
+                    startParallelTest.CheckedWait(); // after this, exit T0
+                });
                 t0.IsBackground = true;
 
                 var t1Ready = new AutoResetEvent(false);
-                Thread t1 = ThreadTestHelpers.CreateGuardedThread(
-                    out Action waitForT1,
-                    () =>
+                Thread t1 = ThreadTestHelpers.CreateGuardedThread(out Action waitForT1, () =>
+                {
+                    using (var m2 = Mutex.OpenExisting(mutexName))
                     {
-                        using (var m2 = Mutex.OpenExisting(mutexName))
-                        {
-                            m.Dispose();
-                            t1Ready.Set();
-                            startParallelTest.CheckedWait(); // after this, close last handle to named mutex, exit T1
-                        }
+                        m.Dispose();
+                        t1Ready.Set();
+                        startParallelTest.CheckedWait(); // after this, close last handle to named mutex, exit T1
                     }
-                );
+                });
                 t1.IsBackground = true;
 
                 t0.Start();
@@ -841,23 +825,20 @@ namespace System.Threading.Tests
             var waitsForThread = new Action[Environment.ProcessorCount];
             for (int i = 0; i < waitsForThread.Length; ++i)
             {
-                var t = ThreadTestHelpers.CreateGuardedThread(
-                    out waitsForThread[i],
-                    () =>
+                var t = ThreadTestHelpers.CreateGuardedThread(out waitsForThread[i], () =>
+                {
+                    for (int i = 0; i < 1000; ++i)
                     {
-                        for (int i = 0; i < 1000; ++i)
-                        {
-                            // Create or open two mutexes with different names, acquire the lock if created, and dispose without
-                            // releasing the lock. What may occasionally happen is, one thread T0 will acquire the lock, another
-                            // thread T1 will open the same mutex, T0 will dispose its mutex while the lock is held, and T1 will
-                            // then release the last reference to the mutex. On some implementations T1 may not be able to destroy
-                            // the mutex when it is still locked by T0, or there may be potential for races in the sequence. This
-                            // test only looks for errors from race conditions.
-                            using (var mutex = new Mutex(true, mutexName)) { }
-                            using (var mutex = new Mutex(true, mutex2Name)) { }
-                        }
+                        // Create or open two mutexes with different names, acquire the lock if created, and dispose without
+                        // releasing the lock. What may occasionally happen is, one thread T0 will acquire the lock, another
+                        // thread T1 will open the same mutex, T0 will dispose its mutex while the lock is held, and T1 will
+                        // then release the last reference to the mutex. On some implementations T1 may not be able to destroy
+                        // the mutex when it is still locked by T0, or there may be potential for races in the sequence. This
+                        // test only looks for errors from race conditions.
+                        using (var mutex = new Mutex(true, mutexName)) { }
+                        using (var mutex = new Mutex(true, mutex2Name)) { }
                     }
-                );
+                });
                 t.IsBackground = true;
                 t.Start();
             }

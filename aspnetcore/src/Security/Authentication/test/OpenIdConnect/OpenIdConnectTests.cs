@@ -78,9 +78,8 @@ public class OpenIdConnectTests
         Assert.Equal(HttpStatusCode.Redirect, res.StatusCode);
         Assert.NotNull(res.Headers.Location);
         var setCookie = Assert.Single(res.Headers, h => h.Key == "Set-Cookie");
-        var nonce = Assert.Single(
-            setCookie.Value,
-            v => v.StartsWith(OpenIdConnectDefaults.CookieNoncePrefix, StringComparison.Ordinal)
+        var nonce = Assert.Single(setCookie.Value, v =>
+            v.StartsWith(OpenIdConnectDefaults.CookieNoncePrefix, StringComparison.Ordinal)
         );
         Assert.Contains("path=/signin-oidc", nonce);
     }
@@ -108,9 +107,8 @@ public class OpenIdConnectTests
         Assert.Equal(HttpStatusCode.Redirect, res.StatusCode);
         Assert.NotNull(res.Headers.Location);
         var setCookie = Assert.Single(res.Headers, h => h.Key == "Set-Cookie");
-        var nonce = Assert.Single(
-            setCookie.Value,
-            v => v.StartsWith(OpenIdConnectDefaults.CookieNoncePrefix, StringComparison.Ordinal)
+        var nonce = Assert.Single(setCookie.Value, v =>
+            v.StartsWith(OpenIdConnectDefaults.CookieNoncePrefix, StringComparison.Ordinal)
         );
         Assert.Contains("path=/", nonce);
         Assert.Contains("ExtN", nonce);
@@ -137,9 +135,8 @@ public class OpenIdConnectTests
         Assert.Equal(HttpStatusCode.Redirect, res.StatusCode);
         Assert.NotNull(res.Headers.Location);
         var setCookie = Assert.Single(res.Headers, h => h.Key == "Set-Cookie");
-        var correlation = Assert.Single(
-            setCookie.Value,
-            v => v.StartsWith(".AspNetCore.Correlation.", StringComparison.Ordinal)
+        var correlation = Assert.Single(setCookie.Value, v =>
+            v.StartsWith(".AspNetCore.Correlation.", StringComparison.Ordinal)
         );
         Assert.Contains("path=/signin-oidc", correlation);
     }
@@ -167,9 +164,8 @@ public class OpenIdConnectTests
         Assert.Equal(HttpStatusCode.Redirect, res.StatusCode);
         Assert.NotNull(res.Headers.Location);
         var setCookie = Assert.Single(res.Headers, h => h.Key == "Set-Cookie");
-        var correlation = Assert.Single(
-            setCookie.Value,
-            v => v.StartsWith(".AspNetCore.Correlation.", StringComparison.Ordinal)
+        var correlation = Assert.Single(setCookie.Value, v =>
+            v.StartsWith(".AspNetCore.Correlation.", StringComparison.Ordinal)
         );
         Assert.Contains("path=/", correlation);
         Assert.EndsWith("ExtC", correlation);
@@ -364,9 +360,8 @@ public class OpenIdConnectTests
             signInTransaction.AuthenticationCookieValue
         );
         Assert.Equal(HttpStatusCode.OK, remoteSignOutTransaction.Response.StatusCode);
-        Assert.DoesNotContain(
-            remoteSignOutTransaction.Response.Headers,
-            h => h.Key == "Set-Cookie"
+        Assert.DoesNotContain(remoteSignOutTransaction.Response.Headers, h =>
+            h.Key == "Set-Cookie"
         );
     }
 
@@ -393,9 +388,8 @@ public class OpenIdConnectTests
             signInTransaction.AuthenticationCookieValue
         );
         Assert.Equal(HttpStatusCode.OK, remoteSignOutTransaction.Response.StatusCode);
-        Assert.DoesNotContain(
-            remoteSignOutTransaction.Response.Headers,
-            h => h.Key == "Set-Cookie"
+        Assert.DoesNotContain(remoteSignOutTransaction.Response.Headers, h =>
+            h.Key == "Set-Cookie"
         );
     }
 

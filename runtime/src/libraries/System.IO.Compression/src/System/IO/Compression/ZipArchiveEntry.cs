@@ -780,18 +780,14 @@ namespace System.IO.Compression
             _currentlyOpenForWrite = true;
             // always put it at the beginning for them
             UncompressedData.Seek(0, SeekOrigin.Begin);
-            return new WrappedStream(
-                UncompressedData,
-                this,
-                thisRef =>
-                {
-                    // once they close, we know uncompressed length, but still not compressed length
-                    // so we don't fill in any size information
-                    // those fields get figured out when we call GetCompressor as we write it to
-                    // the actual archive
-                    thisRef!._currentlyOpenForWrite = false;
-                }
-            );
+            return new WrappedStream(UncompressedData, this, thisRef =>
+            {
+                // once they close, we know uncompressed length, but still not compressed length
+                // so we don't fill in any size information
+                // those fields get figured out when we call GetCompressor as we write it to
+                // the actual archive
+                thisRef!._currentlyOpenForWrite = false;
+            });
         }
 
         private bool IsOpenable(

@@ -160,14 +160,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                         }
                     );
 
-                context.RegisterSourceOutput(
-                    sources,
-                    (context, s) =>
-                    {
-                        if (s != null)
-                            context.AddSource("hint", SourceText.From(s));
-                    }
-                );
+                context.RegisterSourceOutput(sources, (context, s) =>
+                {
+                    if (s != null)
+                        context.AddSource("hint", SourceText.From(s));
+                });
             });
 
             var analyzerConfigId = DocumentId.CreateNewId(projectId);

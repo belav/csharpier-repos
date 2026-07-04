@@ -66,20 +66,17 @@ namespace System.Text.Tests
                 )
                 .Returns(mockEncoding.Object);
 
-            ThreadStaticEncodingProvider.WithEncodingProvider(
-                mockProvider.Object,
-                () =>
-                {
-                    Assert.Throws<NotSupportedException>(() => Encoding.GetEncoding(codePage));
-                    Assert.Throws<NotSupportedException>(() =>
-                        Encoding.GetEncoding(
-                            codePage,
-                            EncoderFallback.ReplacementFallback,
-                            DecoderFallback.ReplacementFallback
-                        )
-                    );
-                }
-            );
+            ThreadStaticEncodingProvider.WithEncodingProvider(mockProvider.Object, () =>
+            {
+                Assert.Throws<NotSupportedException>(() => Encoding.GetEncoding(codePage));
+                Assert.Throws<NotSupportedException>(() =>
+                    Encoding.GetEncoding(
+                        codePage,
+                        EncoderFallback.ReplacementFallback,
+                        DecoderFallback.ReplacementFallback
+                    )
+                );
+            });
         }
 
         [Theory]
@@ -126,20 +123,17 @@ namespace System.Text.Tests
                 )
                 .Returns(mockEncoding.Object);
 
-            ThreadStaticEncodingProvider.WithEncodingProvider(
-                mockProvider.Object,
-                () =>
-                {
-                    Assert.Throws<NotSupportedException>(() => Encoding.GetEncoding(encodingName));
-                    Assert.Throws<NotSupportedException>(() =>
-                        Encoding.GetEncoding(
-                            encodingName,
-                            EncoderFallback.ReplacementFallback,
-                            DecoderFallback.ReplacementFallback
-                        )
-                    );
-                }
-            );
+            ThreadStaticEncodingProvider.WithEncodingProvider(mockProvider.Object, () =>
+            {
+                Assert.Throws<NotSupportedException>(() => Encoding.GetEncoding(encodingName));
+                Assert.Throws<NotSupportedException>(() =>
+                    Encoding.GetEncoding(
+                        encodingName,
+                        EncoderFallback.ReplacementFallback,
+                        DecoderFallback.ReplacementFallback
+                    )
+                );
+            });
         }
 
         [Theory]
@@ -173,21 +167,18 @@ namespace System.Text.Tests
                     new[] { new EncodingInfo(mockProvider.Object, codePage, encodingName, "UTF-7") }
                 );
 
-            ThreadStaticEncodingProvider.WithEncodingProvider(
-                mockProvider.Object,
-                () =>
+            ThreadStaticEncodingProvider.WithEncodingProvider(mockProvider.Object, () =>
+            {
+                foreach (EncodingInfo encodingInfo in Encoding.GetEncodings())
                 {
-                    foreach (EncodingInfo encodingInfo in Encoding.GetEncodings())
-                    {
-                        Assert.NotEqual(
-                            encodingName,
-                            encodingInfo.Name,
-                            StringComparer.OrdinalIgnoreCase
-                        );
-                        Assert.NotEqual(codePage, encodingInfo.CodePage);
-                    }
+                    Assert.NotEqual(
+                        encodingName,
+                        encodingInfo.Name,
+                        StringComparer.OrdinalIgnoreCase
+                    );
+                    Assert.NotEqual(codePage, encodingInfo.CodePage);
                 }
-            );
+            });
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]

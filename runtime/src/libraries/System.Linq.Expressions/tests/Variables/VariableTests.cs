@@ -43,13 +43,11 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void VariableCannotBeTypeVoid()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Variable(typeof(void))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Variable(typeof(void))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Variable(typeof(void), "var")
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Variable(typeof(void), "var")
             );
         }
 
@@ -57,9 +55,8 @@ namespace System.Linq.Expressions.Tests
         public void NullType()
         {
             AssertExtensions.Throws<ArgumentNullException>("type", () => Expression.Variable(null));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => Expression.Variable(null, "var")
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                Expression.Variable(null, "var")
             );
         }
 
@@ -68,9 +65,8 @@ namespace System.Linq.Expressions.Tests
         public void VariableCannotBeByRef(Type type)
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.Variable(type));
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Variable(type, "var")
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Variable(type, "var")
             );
         }
 
@@ -122,22 +118,19 @@ namespace System.Linq.Expressions.Tests
         public void OpenGenericType_ThrowsArgumentException(Type type)
         {
             AssertExtensions.Throws<ArgumentException>("type", () => Expression.Variable(type));
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Variable(type, "name")
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Variable(type, "name")
             );
         }
 
         [Fact]
         public void CannotBePointerType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Variable(typeof(int*))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Variable(typeof(int*))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Variable(typeof(int*), "pointer")
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Variable(typeof(int*), "pointer")
             );
         }
     }

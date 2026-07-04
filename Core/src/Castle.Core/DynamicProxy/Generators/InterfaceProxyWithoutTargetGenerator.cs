@@ -40,9 +40,8 @@ namespace Castle.DynamicProxy.Generators
             INamingScope namingScope
         )
         {
-            return new InterfaceProxyWithoutTargetContributor(
-                namingScope,
-                (c, m) => NullExpression.Instance
+            return new InterfaceProxyWithoutTargetContributor(namingScope, (c, m) =>
+                NullExpression.Instance
             )
             {
                 Logger = Logger,

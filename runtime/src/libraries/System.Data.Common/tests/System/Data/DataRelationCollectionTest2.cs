@@ -430,13 +430,10 @@ namespace System.Data.Tests
             Assert.Equal(typeof(UniqueConstraint), ds.Tables[0].Constraints[0].GetType());
             Assert.Equal(typeof(ForeignKeyConstraint), ds.Tables[1].Constraints[0].GetType());
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    ds.Relations.Add(rel);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                ds.Relations.Add(rel);
+            });
 
             ds.Relations.Add(null);
         }
@@ -522,18 +519,15 @@ namespace System.Data.Tests
             Assert.Equal(2, _changesCounter);
             ds.Relations.Remove((DataRelation)null);
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    DataRelation rel3 = new DataRelation(
-                        "rel3",
-                        ds1.Tables[0].Columns["ParentId"],
-                        ds1.Tables[1].Columns["ParentId"]
-                    );
-                    ds.Relations.Remove(rel3);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                DataRelation rel3 = new DataRelation(
+                    "rel3",
+                    ds1.Tables[0].Columns["ParentId"],
+                    ds1.Tables[1].Columns["ParentId"]
+                );
+                ds.Relations.Remove(rel3);
+            });
         }
 
         [Fact]
@@ -569,21 +563,15 @@ namespace System.Data.Tests
             Assert.Equal(0, ds.Relations.Count);
             Assert.Equal(2, _changesCounter);
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    ds.Relations.Remove((string)null);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                ds.Relations.Remove((string)null);
+            });
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    ds.Relations.Remove("rel3");
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                ds.Relations.Remove("rel3");
+            });
         }
 
         [Fact]

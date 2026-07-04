@@ -71,9 +71,8 @@ namespace System.Net.Mime.Tests
             string contentDisposition
         )
         {
-            Assert.Throws(
-                exceptionType,
-                () => new ContentDisposition().DispositionType = contentDisposition
+            Assert.Throws(exceptionType, () =>
+                new ContentDisposition().DispositionType = contentDisposition
             );
         }
 

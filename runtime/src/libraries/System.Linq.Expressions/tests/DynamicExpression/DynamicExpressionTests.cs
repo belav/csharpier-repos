@@ -175,9 +175,8 @@ namespace System.Linq.Expressions.Tests
             }
 
             AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => ap.GetArgument(-1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => ap.GetArgument(size)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                ap.GetArgument(size)
             );
         }
 
@@ -456,9 +455,8 @@ namespace System.Linq.Expressions.Tests
             );
             DynamicExpression exp = Expression.MakeDynamic(typeof(Func<CallSite, object>), binder);
             // Wrong number of arguments continues to attempt to create new expression, which fails.
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => exp.Update(new[] { Expression.Constant(null) })
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                exp.Update(new[] { Expression.Constant(null) })
             );
         }
 
@@ -480,9 +478,8 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(exp, exp.Update(new[] { Expression.Constant(null) }));
             // Wrong number of arguments continues to attempt to create new expression, which fails.
             AssertExtensions.Throws<ArgumentException>("method", () => exp.Update(null));
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => exp.Update(new[] { arg, arg })
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                exp.Update(new[] { arg, arg })
             );
         }
 
@@ -507,9 +504,8 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(exp, exp.Update(new[] { arg1, arg0 }));
             // Wrong number of arguments continues to attempt to create new expression, which fails.
             AssertExtensions.Throws<ArgumentException>("method", () => exp.Update(null));
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => exp.Update(new Expression[0])
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                exp.Update(new Expression[0])
             );
         }
 
@@ -537,9 +533,8 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(exp, exp.Update(new[] { arg0, arg1, arg0 }));
             // Wrong number of arguments continues to attempt to create new expression, which fails.
             AssertExtensions.Throws<ArgumentException>("method", () => exp.Update(null));
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => exp.Update(new Expression[0])
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                exp.Update(new Expression[0])
             );
         }
 
@@ -570,9 +565,8 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(exp, exp.Update(new[] { arg0, arg1, arg2, arg0 }));
             // Wrong number of arguments continues to attempt to create new expression, which fails.
             AssertExtensions.Throws<ArgumentException>("method", () => exp.Update(null));
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => exp.Update(new Expression[0])
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                exp.Update(new Expression[0])
             );
         }
 
@@ -606,9 +600,8 @@ namespace System.Linq.Expressions.Tests
             Assert.NotSame(exp, exp.Update(new[] { arg0, arg1, arg2, arg3, arg0 }));
             // Wrong number of arguments continues to attempt to create new expression, which fails.
             AssertExtensions.Throws<ArgumentException>("method", () => exp.Update(null));
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => exp.Update(new Expression[0])
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                exp.Update(new Expression[0])
             );
         }
     }

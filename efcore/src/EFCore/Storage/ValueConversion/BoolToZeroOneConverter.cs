@@ -37,11 +37,9 @@ public class BoolToZeroOneConverter<TProvider> : BoolToTwoValuesConverter<TProvi
     ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
     /// </summary>
     public static ValueConverterInfo DefaultInfo { get; } =
-        new(
-            typeof(bool),
-            typeof(TProvider),
-            i => new BoolToZeroOneConverter<TProvider>(i.MappingHints)
-        );
+        new(typeof(bool), typeof(TProvider), i => new BoolToZeroOneConverter<TProvider>(
+            i.MappingHints
+        ));
 
     private static TProvider Zero()
     {

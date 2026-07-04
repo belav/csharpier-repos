@@ -185,24 +185,18 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void ForEachTest()
         {
-            ForEachImpl(
-                ImmutableSegmentedList<int>.Empty,
-                n =>
-                {
-                    throw ExceptionUtilities.Unreachable();
-                }
-            );
+            ForEachImpl(ImmutableSegmentedList<int>.Empty, n =>
+            {
+                throw ExceptionUtilities.Unreachable();
+            });
 
             var list = ImmutableSegmentedList<int>.Empty.AddRange(Enumerable.Range(5, 3));
             var hitTest = new bool[list.Max() + 1];
-            ForEachImpl(
-                list,
-                i =>
-                {
-                    Assert.False(hitTest[i]);
-                    hitTest[i] = true;
-                }
-            );
+            ForEachImpl(list, i =>
+            {
+                Assert.False(hitTest[i]);
+                hitTest[i] = true;
+            });
 
             for (int i = 0; i < hitTest.Length; i++)
             {
@@ -242,16 +236,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void FindLastTest()
         {
-            Assert.Equal(
-                0,
-                FindLastImpl(
-                    ImmutableSegmentedList<int>.Empty,
-                    n =>
-                    {
-                        throw ExceptionUtilities.Unreachable();
-                    }
-                )
-            );
+            Assert.Equal(0, FindLastImpl(ImmutableSegmentedList<int>.Empty, n =>
+                {
+                    throw ExceptionUtilities.Unreachable();
+                }));
             var list = ImmutableSegmentedList<int>.Empty.AddRange(new[] { 2, 3, 4, 5, 6 });
             Assert.Equal(5, FindLastImpl(list, n => (n % 2) == 1));
         }
@@ -491,9 +479,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void Sort_NullComparison_Throws()
         {
-            Assert.Throws<ArgumentNullException>(
-                "comparison",
-                () => this.SortTestHelper(ImmutableSegmentedList<int>.Empty, (Comparison<int>)null!)
+            Assert.Throws<ArgumentNullException>("comparison", () =>
+                this.SortTestHelper(ImmutableSegmentedList<int>.Empty, (Comparison<int>)null!)
             );
         }
 

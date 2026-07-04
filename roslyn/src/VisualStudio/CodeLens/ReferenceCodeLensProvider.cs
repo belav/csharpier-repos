@@ -144,13 +144,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
         {
             lock (_dataPoints)
             {
-                var versionedPoints = _dataPoints.GetOrAdd(
-                    dataPoint.Descriptor.ProjectGuid,
-                    _ =>
-                        (
-                            version: VersionStamp.Default.ToString(),
-                            dataPoints: new HashSet<DataPoint>()
-                        )
+                var versionedPoints = _dataPoints.GetOrAdd(dataPoint.Descriptor.ProjectGuid, _ =>
+                    (version: VersionStamp.Default.ToString(), dataPoints: new HashSet<DataPoint>())
                 );
                 versionedPoints.dataPoints.Add(dataPoint);
 

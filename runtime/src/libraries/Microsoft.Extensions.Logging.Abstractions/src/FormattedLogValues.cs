@@ -42,14 +42,11 @@ namespace Microsoft.Extensions.Logging
                 }
                 else
                 {
-                    _formatter = s_formatters.GetOrAdd(
-                        format,
-                        f =>
-                        {
-                            Interlocked.Increment(ref s_count);
-                            return new LogValuesFormatter(f);
-                        }
-                    );
+                    _formatter = s_formatters.GetOrAdd(format, f =>
+                    {
+                        Interlocked.Increment(ref s_count);
+                        return new LogValuesFormatter(f);
+                    });
                 }
             }
             else

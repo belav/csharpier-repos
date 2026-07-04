@@ -1389,14 +1389,11 @@ partial class C
             void verify(CSharpTestSource source)
             {
                 var compilation = CreateCompilation(source, assemblyName: "Test");
-                var verifier = CompileAndVerify(
-                    compilation,
-                    symbolValidator: module =>
-                    {
-                        var method = module.GlobalNamespace.GetMember<MethodSymbol>("C.M");
-                        Assert.Equal("p2", method.Parameters.Single().Name);
-                    }
-                );
+                var verifier = CompileAndVerify(compilation, symbolValidator: module =>
+                {
+                    var method = module.GlobalNamespace.GetMember<MethodSymbol>("C.M");
+                    Assert.Equal("p2", method.Parameters.Single().Name);
+                });
                 verifier.VerifyDiagnostics(
                     // (5,24): warning CS8826: Partial method declarations 'int C.M(int p2)' and 'int C.M(int p1)' have signature differences.
                     //     public partial int M(int p1) => 42;
@@ -1460,14 +1457,11 @@ partial class C
             void verify(CSharpTestSource source)
             {
                 var compilation = CreateCompilation(source, assemblyName: "Test");
-                var verifier = CompileAndVerify(
-                    compilation,
-                    symbolValidator: module =>
-                    {
-                        var method = module.GlobalNamespace.GetMember<MethodSymbol>("C.M");
-                        Assert.Equal("p2", method.Parameters.Single().Name);
-                    }
-                );
+                var verifier = CompileAndVerify(compilation, symbolValidator: module =>
+                {
+                    var method = module.GlobalNamespace.GetMember<MethodSymbol>("C.M");
+                    Assert.Equal("p2", method.Parameters.Single().Name);
+                });
                 verifier.VerifyDiagnostics(
                     // (4,42): warning CS1734: XML comment on 'C.M(int)' has a paramref tag for 'p2', but there is no parameter by that name
                     //     /** <summary>Accepts <paramref name="p2"/>.</summary> */
@@ -1543,14 +1537,11 @@ partial class C
             void verify(CSharpTestSource source)
             {
                 var compilation = CreateCompilation(source, assemblyName: "Test");
-                var verifier = CompileAndVerify(
-                    compilation,
-                    symbolValidator: module =>
-                    {
-                        var method = module.GlobalNamespace.GetMember<MethodSymbol>("C.M");
-                        Assert.Equal("p2", method.Parameters.Single().Name);
-                    }
-                );
+                var verifier = CompileAndVerify(compilation, symbolValidator: module =>
+                {
+                    var method = module.GlobalNamespace.GetMember<MethodSymbol>("C.M");
+                    Assert.Equal("p2", method.Parameters.Single().Name);
+                });
                 verifier.VerifyDiagnostics(
                     // (4,24): warning CS8826: Partial method declarations 'int C.M(int p2)' and 'int C.M(int p1)' have signature differences.
                     //     public partial int M(int p1) => 42;
@@ -1626,14 +1617,11 @@ partial class C
             void verify(CSharpTestSource source)
             {
                 var compilation = CreateCompilation(source, assemblyName: "Test");
-                var verifier = CompileAndVerify(
-                    compilation,
-                    symbolValidator: module =>
-                    {
-                        var method = module.GlobalNamespace.GetMember<MethodSymbol>("C.M");
-                        Assert.Equal("p2", method.Parameters.Single().Name);
-                    }
-                );
+                var verifier = CompileAndVerify(compilation, symbolValidator: module =>
+                {
+                    var method = module.GlobalNamespace.GetMember<MethodSymbol>("C.M");
+                    Assert.Equal("p2", method.Parameters.Single().Name);
+                });
                 verifier.VerifyDiagnostics(
                     // (4,24): warning CS8826: Partial method declarations 'int C.M(int p2)' and 'int C.M(int p1)' have signature differences.
                     //     public partial int M(int p1) => 42;
@@ -6944,9 +6932,8 @@ public class C { }
                 ((PEModuleSymbol)module).Module.PretendThereArentNoPiaLocalTypes();
 
                 // No reference added.
-                AssertEx.None(
-                    module.GetReferencedAssemblies(),
-                    id => id.Name.Contains("GeneralPia")
+                AssertEx.None(module.GetReferencedAssemblies(), id =>
+                    id.Name.Contains("GeneralPia")
                 );
 
                 // No type embedded.

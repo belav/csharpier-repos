@@ -215,25 +215,21 @@ public class ConnectionLimitTests : LoggedTest
         await using (var server = CreateServerWithMaxConnections(_ => Task.CompletedTask, counter))
         {
             // open a bunch of connections in parallel
-            Parallel.For(
-                0,
-                count,
-                async i =>
+            Parallel.For(0, count, async i =>
+            {
+                try
                 {
-                    try
+                    using (var connection = server.CreateConnection())
                     {
-                        using (var connection = server.CreateConnection())
-                        {
-                            await connection.SendEmptyGetAsKeepAlive();
-                            await connection.Receive("HTTP/1.1 200");
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        openedTcs.TrySetException(ex);
+                        await connection.SendEmptyGetAsKeepAlive();
+                        await connection.Receive("HTTP/1.1 200");
                     }
                 }
-            );
+                catch (Exception ex)
+                {
+                    openedTcs.TrySetException(ex);
+                }
+            });
 
             // wait until resource counter has called lock for each connection
             await openedTcs.Task.TimeoutAfter(TimeSpan.FromSeconds(120));

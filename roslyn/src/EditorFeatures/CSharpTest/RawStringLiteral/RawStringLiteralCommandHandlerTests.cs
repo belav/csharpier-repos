@@ -93,20 +93,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RawStringLiteral
             }
 
             public void SendTypeChar(char ch) =>
-                SendTypeChar(
-                    ch,
-                    _commandHandler.ExecuteCommand,
-                    () => EditorOperations.InsertText(ch.ToString())
+                SendTypeChar(ch, _commandHandler.ExecuteCommand, () =>
+                    EditorOperations.InsertText(ch.ToString())
                 );
 
-            public void SendReturn(bool handled) =>
-                SendReturn(
-                    _commandHandler.ExecuteCommand,
-                    () =>
-                    {
-                        Assert.False(handled, "Return key should have been handled");
-                    }
-                );
+            public void SendReturn(bool handled) => SendReturn(_commandHandler.ExecuteCommand, () =>
+                {
+                    Assert.False(handled, "Return key should have been handled");
+                });
         }
 
         #region enter tests

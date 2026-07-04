@@ -64,9 +64,8 @@ namespace System.Linq.Expressions.Tests
         {
             ConstantExpression instance = Expression.Constant(46);
             ConstantExpression index = Expression.Constant(2);
-            AssertExtensions.Throws<ArgumentException>(
-                "array",
-                () => Expression.ArrayAccess(instance, index)
+            AssertExtensions.Throws<ArgumentException>("array", () =>
+                Expression.ArrayAccess(instance, index)
             );
         }
 
@@ -75,9 +74,8 @@ namespace System.Linq.Expressions.Tests
         {
             ConstantExpression instance = Expression.Constant(new int[2, 3]);
             ConstantExpression index = Expression.Constant(2);
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.ArrayAccess(instance, index)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.ArrayAccess(instance, index)
             );
         }
 
@@ -86,9 +84,8 @@ namespace System.Linq.Expressions.Tests
         {
             ConstantExpression instance = Expression.Constant(new int[4]);
             ConstantExpression index = Expression.Constant("2");
-            AssertExtensions.Throws<ArgumentException>(
-                "indexes",
-                () => Expression.ArrayAccess(instance, index)
+            AssertExtensions.Throws<ArgumentException>("indexes", () =>
+                Expression.ArrayAccess(instance, index)
             );
         }
 
@@ -100,9 +97,8 @@ namespace System.Linq.Expressions.Tests
                 null,
                 typeof(Unreadable<int>).GetProperty(nameof(Unreadable<int>.WriteOnly))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "indexes",
-                () => Expression.ArrayAccess(instance, index)
+            AssertExtensions.Throws<ArgumentException>("indexes", () =>
+                Expression.ArrayAccess(instance, index)
             );
         }
 

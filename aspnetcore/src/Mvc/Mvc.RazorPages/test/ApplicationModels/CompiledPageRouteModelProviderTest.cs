@@ -42,36 +42,27 @@ public class CompiledPageRouteModelProviderTest
             {
                 Assert.Equal("/Pages/About.cshtml", result.RelativePath);
                 Assert.Equal("/About", result.ViewEnginePath);
-                Assert.Collection(
-                    result.Selectors,
-                    selector => Assert.Equal("About", selector.AttributeRouteModel.Template)
+                Assert.Collection(result.Selectors, selector =>
+                    Assert.Equal("About", selector.AttributeRouteModel.Template)
                 );
-                Assert.Collection(
-                    result.RouteValues.OrderBy(k => k.Key),
-                    kvp =>
-                    {
-                        Assert.Equal("page", kvp.Key);
-                        Assert.Equal("/About", kvp.Value);
-                    }
-                );
+                Assert.Collection(result.RouteValues.OrderBy(k => k.Key), kvp =>
+                {
+                    Assert.Equal("page", kvp.Key);
+                    Assert.Equal("/About", kvp.Value);
+                });
             },
             result =>
             {
                 Assert.Equal("/Pages/Home.cshtml", result.RelativePath);
                 Assert.Equal("/Home", result.ViewEnginePath);
-                Assert.Collection(
-                    result.Selectors,
-                    selector =>
-                        Assert.Equal("Home/some-prefix", selector.AttributeRouteModel.Template)
+                Assert.Collection(result.Selectors, selector =>
+                    Assert.Equal("Home/some-prefix", selector.AttributeRouteModel.Template)
                 );
-                Assert.Collection(
-                    result.RouteValues.OrderBy(k => k.Key),
-                    kvp =>
-                    {
-                        Assert.Equal("page", kvp.Key);
-                        Assert.Equal("/Home", kvp.Value);
-                    }
-                );
+                Assert.Collection(result.RouteValues.OrderBy(k => k.Key), kvp =>
+                {
+                    Assert.Equal("page", kvp.Key);
+                    Assert.Equal("/Home", kvp.Value);
+                });
             }
         );
     }
@@ -113,10 +104,8 @@ public class CompiledPageRouteModelProviderTest
             {
                 Assert.Equal("/Areas/Products/Pages/About.cshtml", result.RelativePath);
                 Assert.Equal("/About", result.ViewEnginePath);
-                Assert.Collection(
-                    result.Selectors,
-                    selector =>
-                        Assert.Equal("Products/About", selector.AttributeRouteModel.Template)
+                Assert.Collection(result.Selectors, selector =>
+                    Assert.Equal("Products/About", selector.AttributeRouteModel.Template)
                 );
                 Assert.Collection(
                     result.RouteValues.OrderBy(k => k.Key),
@@ -164,13 +153,8 @@ public class CompiledPageRouteModelProviderTest
             {
                 Assert.Equal("/Areas/Products/Pages/Manage/Edit.cshtml", result.RelativePath);
                 Assert.Equal("/Manage/Edit", result.ViewEnginePath);
-                Assert.Collection(
-                    result.Selectors,
-                    selector =>
-                        Assert.Equal(
-                            "Products/Manage/Edit/{id}",
-                            selector.AttributeRouteModel.Template
-                        )
+                Assert.Collection(result.Selectors, selector =>
+                    Assert.Equal("Products/Manage/Edit/{id}", selector.AttributeRouteModel.Template)
                 );
                 Assert.Collection(
                     result.RouteValues.OrderBy(k => k.Key),
@@ -216,10 +200,8 @@ public class CompiledPageRouteModelProviderTest
             {
                 Assert.Equal("/Areas/Accounts/Pages/Manage/Home.cshtml", result.RelativePath);
                 Assert.Equal("/Manage/Home", result.ViewEnginePath);
-                Assert.Collection(
-                    result.Selectors,
-                    selector =>
-                        Assert.Equal("Accounts/Manage/Home", selector.AttributeRouteModel.Template)
+                Assert.Collection(result.Selectors, selector =>
+                    Assert.Equal("Accounts/Manage/Home", selector.AttributeRouteModel.Template)
                 );
                 Assert.Collection(
                     result.RouteValues.OrderBy(k => k.Key),
@@ -239,18 +221,14 @@ public class CompiledPageRouteModelProviderTest
             {
                 Assert.Equal("/Contact.cshtml", result.RelativePath);
                 Assert.Equal("/Contact", result.ViewEnginePath);
-                Assert.Collection(
-                    result.Selectors,
-                    selector => Assert.Equal("Contact", selector.AttributeRouteModel.Template)
+                Assert.Collection(result.Selectors, selector =>
+                    Assert.Equal("Contact", selector.AttributeRouteModel.Template)
                 );
-                Assert.Collection(
-                    result.RouteValues.OrderBy(k => k.Key),
-                    kvp =>
-                    {
-                        Assert.Equal("page", kvp.Key);
-                        Assert.Equal("/Contact", kvp.Value);
-                    }
-                );
+                Assert.Collection(result.RouteValues.OrderBy(k => k.Key), kvp =>
+                {
+                    Assert.Equal("page", kvp.Key);
+                    Assert.Equal("/Contact", kvp.Value);
+                });
             }
         );
     }
@@ -400,19 +378,16 @@ public class CompiledPageRouteModelProviderTest
             {
                 Assert.Equal("/Pages/Index.cshtml", result.RelativePath);
                 Assert.Equal("/Index", result.ViewEnginePath);
-                Assert.Collection(
-                    result.Selectors,
-                    selector =>
-                        Assert.Equal("some-other-prefix", selector.AttributeRouteModel.Template)
+                Assert.Collection(result.Selectors, selector =>
+                    Assert.Equal("some-other-prefix", selector.AttributeRouteModel.Template)
                 );
             },
             result =>
             {
                 Assert.Equal("/Pages/Home.cshtml", result.RelativePath);
                 Assert.Equal("/Home", result.ViewEnginePath);
-                Assert.Collection(
-                    result.Selectors,
-                    selector => Assert.Equal("some-prefix", selector.AttributeRouteModel.Template)
+                Assert.Collection(result.Selectors, selector =>
+                    Assert.Equal("some-prefix", selector.AttributeRouteModel.Template)
                 );
             }
         );
@@ -480,35 +455,27 @@ public class CompiledPageRouteModelProviderTest
             {
                 Assert.Equal("/Pages/_About.cshtml", result.RelativePath);
                 Assert.Equal("/_About", result.ViewEnginePath);
-                Assert.Collection(
-                    result.Selectors,
-                    selector => Assert.Equal("_About", selector.AttributeRouteModel.Template)
+                Assert.Collection(result.Selectors, selector =>
+                    Assert.Equal("_About", selector.AttributeRouteModel.Template)
                 );
-                Assert.Collection(
-                    result.RouteValues.OrderBy(k => k.Key),
-                    kvp =>
-                    {
-                        Assert.Equal("page", kvp.Key);
-                        Assert.Equal("/_About", kvp.Value);
-                    }
-                );
+                Assert.Collection(result.RouteValues.OrderBy(k => k.Key), kvp =>
+                {
+                    Assert.Equal("page", kvp.Key);
+                    Assert.Equal("/_About", kvp.Value);
+                });
             },
             result =>
             {
                 Assert.Equal("/Pages/Home.cshtml", result.RelativePath);
                 Assert.Equal("/Home", result.ViewEnginePath);
-                Assert.Collection(
-                    result.Selectors,
-                    selector => Assert.Equal("Home", selector.AttributeRouteModel.Template)
+                Assert.Collection(result.Selectors, selector =>
+                    Assert.Equal("Home", selector.AttributeRouteModel.Template)
                 );
-                Assert.Collection(
-                    result.RouteValues.OrderBy(k => k.Key),
-                    kvp =>
-                    {
-                        Assert.Equal("page", kvp.Key);
-                        Assert.Equal("/Home", kvp.Value);
-                    }
-                );
+                Assert.Collection(result.RouteValues.OrderBy(k => k.Key), kvp =>
+                {
+                    Assert.Equal("page", kvp.Key);
+                    Assert.Equal("/Home", kvp.Value);
+                });
             }
         );
     }

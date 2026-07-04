@@ -181,39 +181,31 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 </doc>
 ".Trim();
 
-            TestIncluded(
-                xml,
-                xpath,
-                expectedTextTemplate,
-                includeElement =>
-                    new[]
-                    {
-                        // ExpandIncludes.cs(2,5): warning CS1584: XML comment has syntactically incorrect cref attribute '#'
-                        // /// <include file='d6f61c210f5e.xml' path='see' />
-                        Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, includeElement)
-                            .WithArguments("#"),
-                        // ExpandIncludes.cs(2,5): warning CS1658: Identifier expected. See also error CS1001.
-                        // /// <include file='d6f61c210f5e.xml' path='see' />
-                        Diagnostic(ErrorCode.WRN_ErrorOverride, includeElement)
-                            .WithArguments("Identifier expected", "1001"),
-                        // ExpandIncludes.cs(2,5): warning CS1658: Unexpected character '#'. See also error CS1056.
-                        // /// <include file='d6f61c210f5e.xml' path='see' />
-                        Diagnostic(ErrorCode.WRN_ErrorOverride, includeElement)
-                            .WithArguments("Unexpected character '#'", "1056"),
-                        // ExpandIncludes.cs(5,21): warning CS1584: XML comment has syntactically incorrect cref attribute '#'
-                        // /// ExpandIncludes: <include file='d6f61c210f5e.xml' path='see' />
-                        Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, includeElement)
-                            .WithArguments("#"),
-                        // ExpandIncludes.cs(5,21): warning CS1658: Identifier expected. See also error CS1001.
-                        // /// ExpandIncludes: <include file='d6f61c210f5e.xml' path='see' />
-                        Diagnostic(ErrorCode.WRN_ErrorOverride, includeElement)
-                            .WithArguments("Identifier expected", "1001"),
-                        // ExpandIncludes.cs(5,21): warning CS1658: Unexpected character '#'. See also error CS1056.
-                        // /// ExpandIncludes: <include file='d6f61c210f5e.xml' path='see' />
-                        Diagnostic(ErrorCode.WRN_ErrorOverride, includeElement)
-                            .WithArguments("Unexpected character '#'", "1056"),
-                    }
-            );
+            TestIncluded(xml, xpath, expectedTextTemplate, includeElement => new[]
+                {
+                    // ExpandIncludes.cs(2,5): warning CS1584: XML comment has syntactically incorrect cref attribute '#'
+                    // /// <include file='d6f61c210f5e.xml' path='see' />
+                    Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, includeElement).WithArguments("#"),
+                    // ExpandIncludes.cs(2,5): warning CS1658: Identifier expected. See also error CS1001.
+                    // /// <include file='d6f61c210f5e.xml' path='see' />
+                    Diagnostic(ErrorCode.WRN_ErrorOverride, includeElement)
+                        .WithArguments("Identifier expected", "1001"),
+                    // ExpandIncludes.cs(2,5): warning CS1658: Unexpected character '#'. See also error CS1056.
+                    // /// <include file='d6f61c210f5e.xml' path='see' />
+                    Diagnostic(ErrorCode.WRN_ErrorOverride, includeElement)
+                        .WithArguments("Unexpected character '#'", "1056"),
+                    // ExpandIncludes.cs(5,21): warning CS1584: XML comment has syntactically incorrect cref attribute '#'
+                    // /// ExpandIncludes: <include file='d6f61c210f5e.xml' path='see' />
+                    Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, includeElement).WithArguments("#"),
+                    // ExpandIncludes.cs(5,21): warning CS1658: Identifier expected. See also error CS1001.
+                    // /// ExpandIncludes: <include file='d6f61c210f5e.xml' path='see' />
+                    Diagnostic(ErrorCode.WRN_ErrorOverride, includeElement)
+                        .WithArguments("Identifier expected", "1001"),
+                    // ExpandIncludes.cs(5,21): warning CS1658: Unexpected character '#'. See also error CS1056.
+                    // /// ExpandIncludes: <include file='d6f61c210f5e.xml' path='see' />
+                    Diagnostic(ErrorCode.WRN_ErrorOverride, includeElement)
+                        .WithArguments("Unexpected character '#'", "1056"),
+                });
         }
 
         [Fact]
@@ -283,23 +275,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 </doc>
 ".Trim();
 
-            TestIncluded(
-                xml,
-                xpath,
-                expectedTextTemplate,
-                includeElement =>
-                    new[]
-                    {
-                        // ExpandIncludes.cs(2,5): warning CS1574: XML comment has cref attribute 'NotFound' that could not be resolved
-                        // /// <include file='5127bff2acf3.xml' path='see' />
-                        Diagnostic(ErrorCode.WRN_BadXMLRef, includeElement)
-                            .WithArguments("NotFound"),
-                        // ExpandIncludes.cs(5,21): warning CS1574: XML comment has cref attribute 'NotFound' that could not be resolved
-                        // /// ExpandIncludes: <include file='5127bff2acf3.xml' path='see' />
-                        Diagnostic(ErrorCode.WRN_BadXMLRef, includeElement)
-                            .WithArguments("NotFound"),
-                    }
-            );
+            TestIncluded(xml, xpath, expectedTextTemplate, includeElement => new[]
+                {
+                    // ExpandIncludes.cs(2,5): warning CS1574: XML comment has cref attribute 'NotFound' that could not be resolved
+                    // /// <include file='5127bff2acf3.xml' path='see' />
+                    Diagnostic(ErrorCode.WRN_BadXMLRef, includeElement).WithArguments("NotFound"),
+                    // ExpandIncludes.cs(5,21): warning CS1574: XML comment has cref attribute 'NotFound' that could not be resolved
+                    // /// ExpandIncludes: <include file='5127bff2acf3.xml' path='see' />
+                    Diagnostic(ErrorCode.WRN_BadXMLRef, includeElement).WithArguments("NotFound"),
+                });
         }
 
         [Fact]
@@ -371,23 +355,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 </doc>
 ".Trim();
 
-            TestIncluded(
-                xml,
-                xpath,
-                expectedTextTemplate,
-                includeElement =>
-                    new[]
-                    {
-                        // ExpandIncludes.cs(5,21): warning CS1711: XML comment has a typeparam tag for 'NotFound', but there is no type parameter by that name
-                        // /// ExpandIncludes: <include file='3590e97bd224.xml' path='typeparam' />
-                        Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement)
-                            .WithArguments("NotFound"),
-                        // ExpandIncludes.cs(2,5): warning CS1711: XML comment has a typeparam tag for 'NotFound', but there is no type parameter by that name
-                        // /// <include file='3590e97bd224.xml' path='typeparam' />
-                        Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement)
-                            .WithArguments("NotFound"),
-                    }
-            );
+            TestIncluded(xml, xpath, expectedTextTemplate, includeElement => new[]
+                {
+                    // ExpandIncludes.cs(5,21): warning CS1711: XML comment has a typeparam tag for 'NotFound', but there is no type parameter by that name
+                    // /// ExpandIncludes: <include file='3590e97bd224.xml' path='typeparam' />
+                    Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement)
+                        .WithArguments("NotFound"),
+                    // ExpandIncludes.cs(2,5): warning CS1711: XML comment has a typeparam tag for 'NotFound', but there is no type parameter by that name
+                    // /// <include file='3590e97bd224.xml' path='typeparam' />
+                    Diagnostic(ErrorCode.WRN_UnmatchedTypeParamTag, includeElement)
+                        .WithArguments("NotFound"),
+                });
         }
 
         private static void TestInline(

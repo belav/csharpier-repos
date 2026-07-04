@@ -128,9 +128,8 @@ namespace System.Linq.Expressions.Tests
         [Theory, MemberData(nameof(NonUnaryExpressionTypes))]
         public void MakeUnaryExpressionNonUnary(ExpressionType type)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "unaryType",
-                () => Expression.MakeUnary(type, null, null)
+            AssertExtensions.Throws<ArgumentException>("unaryType", () =>
+                Expression.MakeUnary(type, null, null)
             );
         }
 
@@ -142,16 +141,14 @@ namespace System.Linq.Expressions.Tests
             MethodInfo method = genType.GetMethod(
                 nameof(GenericClassWithNonGenericMethod<int>.DoIntStuff)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => Expression.MakeUnary(type, variable, typeof(int), method)
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                Expression.MakeUnary(type, variable, typeof(int), method)
             );
             method = genType
                 .MakeGenericType(genType)
                 .GetMethod(nameof(GenericClassWithNonGenericMethod<int>.DoIntStuff));
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => Expression.MakeUnary(type, variable, typeof(int), method)
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                Expression.MakeUnary(type, variable, typeof(int), method)
             );
             // Demonstrate does work when closed.
             method = genType
@@ -168,16 +165,14 @@ namespace System.Linq.Expressions.Tests
             MethodInfo method = genType.GetMethod(
                 nameof(GenericClassWithNonGenericMethod<int>.DoBooleanStuff)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => Expression.MakeUnary(type, variable, typeof(bool), method)
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                Expression.MakeUnary(type, variable, typeof(bool), method)
             );
             method = genType
                 .MakeGenericType(genType)
                 .GetMethod(nameof(GenericClassWithNonGenericMethod<int>.DoBooleanStuff));
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => Expression.MakeUnary(type, variable, typeof(bool), method)
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                Expression.MakeUnary(type, variable, typeof(bool), method)
             );
             // Demonstrate does work when closed.
             method = genType
@@ -194,16 +189,14 @@ namespace System.Linq.Expressions.Tests
             MethodInfo method = genType.GetMethod(
                 nameof(GenericClassWithNonGenericMethod<int>.CastLongToInt)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => Expression.MakeUnary(type, variable, typeof(int), method)
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                Expression.MakeUnary(type, variable, typeof(int), method)
             );
             method = genType
                 .MakeGenericType(genType)
                 .GetMethod(nameof(GenericClassWithNonGenericMethod<int>.CastLongToInt));
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => Expression.MakeUnary(type, variable, typeof(int), method)
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                Expression.MakeUnary(type, variable, typeof(int), method)
             );
             // Demonstrate does work when closed.
             method = genType

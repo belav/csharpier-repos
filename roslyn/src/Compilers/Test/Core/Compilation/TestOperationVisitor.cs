@@ -1341,26 +1341,22 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             if (operation.Syntax.Language == LanguageNames.CSharp)
             {
-                Assert.Throws<ArgumentException>(
-                    "compoundAssignment",
-                    () => VisualBasic.VisualBasicExtensions.GetInConversion(operation)
+                Assert.Throws<ArgumentException>("compoundAssignment", () =>
+                    VisualBasic.VisualBasicExtensions.GetInConversion(operation)
                 );
-                Assert.Throws<ArgumentException>(
-                    "compoundAssignment",
-                    () => VisualBasic.VisualBasicExtensions.GetOutConversion(operation)
+                Assert.Throws<ArgumentException>("compoundAssignment", () =>
+                    VisualBasic.VisualBasicExtensions.GetOutConversion(operation)
                 );
                 var inConversionInternal = CSharp.CSharpExtensions.GetInConversion(operation);
                 var outConversionInternal = CSharp.CSharpExtensions.GetOutConversion(operation);
             }
             else
             {
-                Assert.Throws<ArgumentException>(
-                    "compoundAssignment",
-                    () => CSharp.CSharpExtensions.GetInConversion(operation)
+                Assert.Throws<ArgumentException>("compoundAssignment", () =>
+                    CSharp.CSharpExtensions.GetInConversion(operation)
                 );
-                Assert.Throws<ArgumentException>(
-                    "compoundAssignment",
-                    () => CSharp.CSharpExtensions.GetOutConversion(operation)
+                Assert.Throws<ArgumentException>("compoundAssignment", () =>
+                    CSharp.CSharpExtensions.GetOutConversion(operation)
                 );
                 var inConversionInternal = VisualBasic.VisualBasicExtensions.GetInConversion(
                     operation

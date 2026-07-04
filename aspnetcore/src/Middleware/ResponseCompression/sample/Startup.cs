@@ -34,37 +34,31 @@ public class Startup
     {
         app.UseResponseCompression();
 
-        app.Map(
-            "/testfile1kb.txt",
-            fileApp =>
+        app.Map("/testfile1kb.txt", fileApp =>
+        {
+            fileApp.Run(context =>
             {
-                fileApp.Run(context =>
-                {
-                    context.Response.ContentType = "text/plain";
-                    return context.Response.SendFileAsync("testfile1kb.txt");
-                });
-            }
-        );
+                context.Response.ContentType = "text/plain";
+                return context.Response.SendFileAsync("testfile1kb.txt");
+            });
+        });
 
-        app.Map(
-            "/trickle",
-            trickleApp =>
+        app.Map("/trickle", trickleApp =>
+        {
+            trickleApp.Run(async context =>
             {
-                trickleApp.Run(async context =>
-                {
-                    context.Response.ContentType = "text/plain";
-                    // Disables compression on net451 because that GZipStream does not implement Flush.
-                    context.Features.Get<IHttpResponseBodyFeature>().DisableBuffering();
+                context.Response.ContentType = "text/plain";
+                // Disables compression on net451 because that GZipStream does not implement Flush.
+                context.Features.Get<IHttpResponseBodyFeature>().DisableBuffering();
 
-                    for (int i = 0; i < 100; i++)
-                    {
-                        await context.Response.WriteAsync("a");
-                        await context.Response.Body.FlushAsync();
-                        await Task.Delay(TimeSpan.FromSeconds(1));
-                    }
-                });
-            }
-        );
+                for (int i = 0; i < 100; i++)
+                {
+                    await context.Response.WriteAsync("a");
+                    await context.Response.Body.FlushAsync();
+                    await Task.Delay(TimeSpan.FromSeconds(1));
+                }
+            });
+        });
 
         app.Run(async context =>
         {

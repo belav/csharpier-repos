@@ -895,9 +895,8 @@ namespace System.Linq.Parallel.Tests
         public static void ToArray_Unordered(Labeled<Operation> operation)
         {
             IntegerRangeSet seen = new IntegerRangeSet(DefaultStart, DefaultSize);
-            Assert.All(
-                operation.Item(DefaultStart, DefaultSize, DefaultSource).ToArray(),
-                x => seen.Add(x)
+            Assert.All(operation.Item(DefaultStart, DefaultSize, DefaultSource).ToArray(), x =>
+                seen.Add(x)
             );
             seen.AssertComplete();
         }

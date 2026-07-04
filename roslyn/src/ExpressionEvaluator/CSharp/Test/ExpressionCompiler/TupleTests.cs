@@ -224,29 +224,27 @@ class C
     }
 }";
             var comp = CreateCompilationWithMscorlib40(source, options: TestOptions.DebugDll);
-            WithRuntimeInstance(
-                comp,
-                runtime =>
-                {
-                    var context = CreateMethodContext(runtime, "C.M");
-                    var testData = new CompilationTestData();
-                    string error;
-                    var result = context.CompileExpression("(A: 1, B: 2)", out error, testData);
-                    Assert.Null(error);
-                    ReadOnlyCollection<byte> customTypeInfo;
-                    var customTypeInfoId = result.GetCustomTypeInfo(out customTypeInfo);
-                    Assert.Null(customTypeInfo);
-                    var methodData = testData.GetMethodData("<>x.<>m0");
-                    var method = (MethodSymbol)methodData.Method;
-                    Assert.True(method.ReturnType.IsTupleType);
-                    CheckAttribute(
-                        result.Assembly,
-                        method,
-                        AttributeDescription.TupleElementNamesAttribute,
-                        expected: false
-                    );
-                    methodData.VerifyIL(
-                        @" {
+            WithRuntimeInstance(comp, runtime =>
+            {
+                var context = CreateMethodContext(runtime, "C.M");
+                var testData = new CompilationTestData();
+                string error;
+                var result = context.CompileExpression("(A: 1, B: 2)", out error, testData);
+                Assert.Null(error);
+                ReadOnlyCollection<byte> customTypeInfo;
+                var customTypeInfoId = result.GetCustomTypeInfo(out customTypeInfo);
+                Assert.Null(customTypeInfo);
+                var methodData = testData.GetMethodData("<>x.<>m0");
+                var method = (MethodSymbol)methodData.Method;
+                Assert.True(method.ReturnType.IsTupleType);
+                CheckAttribute(
+                    result.Assembly,
+                    method,
+                    AttributeDescription.TupleElementNamesAttribute,
+                    expected: false
+                );
+                methodData.VerifyIL(
+                    @" {
   // Code size        8 (0x8)
   .maxstack  2
   .locals init (System.ValueTuple<int, int> V_0) //o
@@ -255,9 +253,8 @@ class C
   IL_0002:  newobj     ""System.ValueTuple<int, int>..ctor(int, int)""
   IL_0007:  ret
 }"
-                    );
-                }
-            );
+                );
+            });
         }
 
         [Fact]

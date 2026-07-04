@@ -18,9 +18,8 @@ namespace System.Net.Tests
         {
             using (var listener = new HttpListener())
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => listener.TimeoutManager.MinSendBytesPerSecond = value
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    listener.TimeoutManager.MinSendBytesPerSecond = value
                 );
             }
         }
@@ -33,25 +32,20 @@ namespace System.Net.Tests
             using (var listener = new HttpListener())
             {
                 TimeSpan timeSpan = TimeSpan.FromSeconds(totalSeconds);
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => listener.TimeoutManager.EntityBody = timeSpan
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    listener.TimeoutManager.EntityBody = timeSpan
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => listener.TimeoutManager.DrainEntityBody = timeSpan
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    listener.TimeoutManager.DrainEntityBody = timeSpan
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => listener.TimeoutManager.RequestQueue = timeSpan
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    listener.TimeoutManager.RequestQueue = timeSpan
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => listener.TimeoutManager.IdleConnection = timeSpan
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    listener.TimeoutManager.IdleConnection = timeSpan
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => listener.TimeoutManager.HeaderWait = timeSpan
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    listener.TimeoutManager.HeaderWait = timeSpan
                 );
             }
         }

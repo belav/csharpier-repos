@@ -121,9 +121,8 @@ namespace System.Xml.Linq.Tests
         public void NamespaceForPrefixNull(string xml, string prefix, Type expectedException)
         {
             XElement e = XElement.Parse(xml);
-            Assert.Throws(
-                expectedException,
-                () => (e.FirstNode as XElement).GetNamespaceOfPrefix(prefix)
+            Assert.Throws(expectedException, () =>
+                (e.FirstNode as XElement).GetNamespaceOfPrefix(prefix)
             );
         }
 

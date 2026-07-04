@@ -175,14 +175,11 @@ public class PageSaveTempDataPropertyFilterTest
         filter.OnTempDataSaving(tempData);
 
         // Assert
-        Assert.Collection(
-            tempData,
-            item =>
-            {
-                Assert.Equal("Test", item.Key);
-                Assert.Equal("New-Value", item.Value);
-            }
-        );
+        Assert.Collection(tempData, item =>
+        {
+            Assert.Equal("Test", item.Key);
+            Assert.Equal("New-Value", item.Value);
+        });
     }
 
     private PageSaveTempDataPropertyFilter CreatePageSaveTempDataPropertyFilter(

@@ -46,22 +46,16 @@ namespace TypeSystemTests
             Assert.Equal(2, introducedVirtualMethods.Count);
             Assert.Contains(introducedVirtualMethods, m => m.Name == "Equals");
             Assert.Contains(introducedVirtualMethods, m => m.Name == "GetHashCode");
-            Assert.All(
-                introducedVirtualMethods,
-                m =>
-                {
-                    Assert.Same(t, m.OwningType);
-                }
-            );
+            Assert.All(introducedVirtualMethods, m =>
+            {
+                Assert.Same(t, m.OwningType);
+            });
 
             List<MethodDesc> virtualSlots = new List<MethodDesc>(t.EnumAllVirtualSlots());
-            Assert.All(
-                virtualSlots,
-                s =>
-                {
-                    Assert.True(s.OwningType.IsObject);
-                }
-            );
+            Assert.All(virtualSlots, s =>
+            {
+                Assert.True(s.OwningType.IsObject);
+            });
             Assert.Equal(4, virtualSlots.Count);
 
             List<MethodDesc> vtable = virtualSlots
@@ -92,13 +86,10 @@ namespace TypeSystemTests
             );
 
             List<MethodDesc> virtualSlots = new List<MethodDesc>(t.EnumAllVirtualSlots());
-            Assert.All(
-                virtualSlots,
-                s =>
-                {
-                    Assert.True(s.OwningType.IsObject);
-                }
-            );
+            Assert.All(virtualSlots, s =>
+            {
+                Assert.True(s.OwningType.IsObject);
+            });
             Assert.Equal(4, virtualSlots.Count);
 
             List<MethodDesc> vtable = virtualSlots
@@ -129,13 +120,10 @@ namespace TypeSystemTests
             );
 
             List<MethodDesc> virtualSlots = new List<MethodDesc>(t.EnumAllVirtualSlots());
-            Assert.All(
-                virtualSlots,
-                s =>
-                {
-                    Assert.True(s.OwningType.IsObject);
-                }
-            );
+            Assert.All(virtualSlots, s =>
+            {
+                Assert.True(s.OwningType.IsObject);
+            });
             Assert.Equal(4, virtualSlots.Count);
 
             List<MethodDesc> vtable = virtualSlots

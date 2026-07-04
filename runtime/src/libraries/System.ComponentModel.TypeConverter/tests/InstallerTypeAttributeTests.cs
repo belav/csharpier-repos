@@ -39,9 +39,8 @@ namespace System.ComponentModel.Tests
         public void Ctor_NullTypeName_InstallerTypeThrowsArgumentNullException()
         {
             var attribute = new InstallerTypeAttribute((string)null);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "typeName",
-                () => attribute.InstallerType
+            AssertExtensions.Throws<ArgumentNullException>("typeName", () =>
+                attribute.InstallerType
             );
         }
 

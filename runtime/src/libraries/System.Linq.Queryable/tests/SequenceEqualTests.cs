@@ -44,13 +44,11 @@ namespace System.Linq.Tests
         {
             IQueryable<int> first = null;
             int[] second = { };
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source1",
-                () => first.SequenceEqual(second.AsQueryable())
+            AssertExtensions.Throws<ArgumentNullException>("source1", () =>
+                first.SequenceEqual(second.AsQueryable())
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source1",
-                () => first.SequenceEqual(second.AsQueryable(), null)
+            AssertExtensions.Throws<ArgumentNullException>("source1", () =>
+                first.SequenceEqual(second.AsQueryable(), null)
             );
         }
 
@@ -59,13 +57,11 @@ namespace System.Linq.Tests
         {
             int[] first = { };
             IQueryable<int> second = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source2",
-                () => first.AsQueryable().SequenceEqual(second)
+            AssertExtensions.Throws<ArgumentNullException>("source2", () =>
+                first.AsQueryable().SequenceEqual(second)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source2",
-                () => first.AsQueryable().SequenceEqual(second, null)
+            AssertExtensions.Throws<ArgumentNullException>("source2", () =>
+                first.AsQueryable().SequenceEqual(second, null)
             );
         }
 

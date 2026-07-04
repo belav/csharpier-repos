@@ -146,9 +146,8 @@ namespace Microsoft.Extensions.FileProviders.Composite
             // Assert
             Assert.NotNull(files);
             Assert.True(files.Exists);
-            Assert.Collection(
-                files.OrderBy(f => f.Name, StringComparer.Ordinal),
-                file => Assert.Equal(folderCFile3, file)
+            Assert.Collection(files.OrderBy(f => f.Name, StringComparer.Ordinal), file =>
+                Assert.Equal(folderCFile3, file)
             );
         }
 

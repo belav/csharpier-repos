@@ -144,17 +144,14 @@ namespace System.Collections.Tests
         {
             if (!IsReadOnly)
             {
-                Assert.All(
-                    InvalidValues,
-                    invalidValue =>
-                    {
-                        IEnumerable<T> collection = GenericIEnumerableFactory(count);
-                        Add(collection, invalidValue);
-                        for (int i = 0; i < count; i++)
-                            Add(collection, CreateT(i));
-                        Assert.Equal(count * 2, Count(collection));
-                    }
-                );
+                Assert.All(InvalidValues, invalidValue =>
+                {
+                    IEnumerable<T> collection = GenericIEnumerableFactory(count);
+                    Add(collection, invalidValue);
+                    for (int i = 0; i < count; i++)
+                        Add(collection, CreateT(i));
+                    Assert.Equal(count * 2, Count(collection));
+                });
             }
         }
 
@@ -164,17 +161,14 @@ namespace System.Collections.Tests
         {
             if (!IsReadOnly)
             {
-                Assert.All(
-                    InvalidValues,
-                    invalidValue =>
-                    {
-                        IEnumerable<T> collection = GenericIEnumerableFactory(0);
-                        Add(collection, invalidValue);
-                        for (int i = 0; i < count; i++)
-                            Add(collection, CreateT(i));
-                        Assert.Equal(count, Count(collection));
-                    }
-                );
+                Assert.All(InvalidValues, invalidValue =>
+                {
+                    IEnumerable<T> collection = GenericIEnumerableFactory(0);
+                    Add(collection, invalidValue);
+                    for (int i = 0; i < count; i++)
+                        Add(collection, CreateT(i));
+                    Assert.Equal(count, Count(collection));
+                });
             }
         }
 
@@ -184,15 +178,12 @@ namespace System.Collections.Tests
         {
             if (!IsReadOnly)
             {
-                Assert.All(
-                    InvalidValues,
-                    invalidValue =>
-                    {
-                        IEnumerable<T> collection = GenericIEnumerableFactory(count);
-                        Add(collection, invalidValue);
-                        Assert.Equal(count, Count(collection));
-                    }
-                );
+                Assert.All(InvalidValues, invalidValue =>
+                {
+                    IEnumerable<T> collection = GenericIEnumerableFactory(count);
+                    Add(collection, invalidValue);
+                    Assert.Equal(count, Count(collection));
+                });
             }
         }
 
@@ -428,10 +419,8 @@ namespace System.Collections.Tests
         public void IGenericSharedAPI_Contains_InvalidValue_ThrowsArgumentException(int count)
         {
             IEnumerable<T> collection = GenericIEnumerableFactory(count);
-            Assert.All(
-                InvalidValues,
-                invalidValue =>
-                    Assert.Throws<ArgumentException>(() => Contains(collection, invalidValue))
+            Assert.All(InvalidValues, invalidValue =>
+                Assert.Throws<ArgumentException>(() => Contains(collection, invalidValue))
             );
         }
 
@@ -497,9 +486,8 @@ namespace System.Collections.Tests
         {
             IEnumerable<T> collection = GenericIEnumerableFactory(count);
             T[] array = new T[count];
-            Assert.Throws(
-                IGenericSharedAPI_CopyTo_IndexLargerThanArrayCount_ThrowType,
-                () => CopyTo(collection, array, count + 1)
+            Assert.Throws(IGenericSharedAPI_CopyTo_IndexLargerThanArrayCount_ThrowType, () =>
+                CopyTo(collection, array, count + 1)
             );
         }
 

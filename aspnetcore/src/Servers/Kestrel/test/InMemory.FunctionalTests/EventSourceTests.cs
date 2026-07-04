@@ -91,9 +91,8 @@ public class EventSourceTests : LoggedTest
         var connectionStart = events[eventIndex++];
         Assert.Equal("ConnectionStart", connectionStart.EventName);
         Assert.Equal(1, connectionStart.EventId);
-        Assert.All(
-            new[] { "connectionId", "remoteEndPoint", "localEndPoint" },
-            p => Assert.Contains(p, connectionStart.PayloadNames)
+        Assert.All(new[] { "connectionId", "remoteEndPoint", "localEndPoint" }, p =>
+            Assert.Contains(p, connectionStart.PayloadNames)
         );
         Assert.Equal($"127.0.0.1:{port}", GetProperty(connectionStart, "localEndPoint"));
         Assert.Same(KestrelEventSource.Log, connectionStart.EventSource);
@@ -102,9 +101,8 @@ public class EventSourceTests : LoggedTest
         var firstRequestStart = events[eventIndex++];
         Assert.Equal("RequestStart", firstRequestStart.EventName);
         Assert.Equal(3, firstRequestStart.EventId);
-        Assert.All(
-            new[] { "connectionId", "requestId" },
-            p => Assert.Contains(p, firstRequestStart.PayloadNames)
+        Assert.All(new[] { "connectionId", "requestId" }, p =>
+            Assert.Contains(p, firstRequestStart.PayloadNames)
         );
         Assert.Equal(requestIds[0], GetProperty(firstRequestStart, "requestId"));
         Assert.Same(KestrelEventSource.Log, firstRequestStart.EventSource);
@@ -114,9 +112,8 @@ public class EventSourceTests : LoggedTest
         var firstRequestStop = events[eventIndex++];
         Assert.Equal("RequestStop", firstRequestStop.EventName);
         Assert.Equal(4, firstRequestStop.EventId);
-        Assert.All(
-            new[] { "connectionId", "requestId" },
-            p => Assert.Contains(p, firstRequestStop.PayloadNames)
+        Assert.All(new[] { "connectionId", "requestId" }, p =>
+            Assert.Contains(p, firstRequestStop.PayloadNames)
         );
         Assert.Same(KestrelEventSource.Log, firstRequestStop.EventSource);
         Assert.Equal(requestIds[0], GetProperty(firstRequestStop, "requestId"));
@@ -126,9 +123,8 @@ public class EventSourceTests : LoggedTest
         var secondRequestStart = events[eventIndex++];
         Assert.Equal("RequestStart", secondRequestStart.EventName);
         Assert.Equal(3, secondRequestStart.EventId);
-        Assert.All(
-            new[] { "connectionId", "requestId" },
-            p => Assert.Contains(p, secondRequestStart.PayloadNames)
+        Assert.All(new[] { "connectionId", "requestId" }, p =>
+            Assert.Contains(p, secondRequestStart.PayloadNames)
         );
         Assert.Equal(requestIds[1], GetProperty(secondRequestStart, "requestId"));
         Assert.Same(KestrelEventSource.Log, secondRequestStart.EventSource);
@@ -138,9 +134,8 @@ public class EventSourceTests : LoggedTest
         var secondRequestStop = events[eventIndex++];
         Assert.Equal("RequestStop", secondRequestStop.EventName);
         Assert.Equal(4, secondRequestStop.EventId);
-        Assert.All(
-            new[] { "connectionId", "requestId" },
-            p => Assert.Contains(p, secondRequestStop.PayloadNames)
+        Assert.All(new[] { "connectionId", "requestId" }, p =>
+            Assert.Contains(p, secondRequestStop.PayloadNames)
         );
         Assert.Same(KestrelEventSource.Log, secondRequestStop.EventSource);
         Assert.Equal(requestIds[1], GetProperty(secondRequestStop, "requestId"));
@@ -237,9 +232,8 @@ public class EventSourceTests : LoggedTest
         var connectionStart = events[eventIndex++];
         Assert.Equal("ConnectionStart", connectionStart.EventName);
         Assert.Equal(1, connectionStart.EventId);
-        Assert.All(
-            new[] { "connectionId", "remoteEndPoint", "localEndPoint" },
-            p => Assert.Contains(p, connectionStart.PayloadNames)
+        Assert.All(new[] { "connectionId", "remoteEndPoint", "localEndPoint" }, p =>
+            Assert.Contains(p, connectionStart.PayloadNames)
         );
         Assert.Same(KestrelEventSource.Log, connectionStart.EventSource);
         Assert.Equal($"127.0.0.1:{port}", GetProperty(connectionStart, "localEndPoint"));
@@ -248,9 +242,8 @@ public class EventSourceTests : LoggedTest
         var tlsHandshakeStart = events[eventIndex++];
         Assert.Equal("TlsHandshakeStart", tlsHandshakeStart.EventName);
         Assert.Equal(8, tlsHandshakeStart.EventId);
-        Assert.All(
-            new[] { "connectionId", "sslProtocols" },
-            p => Assert.Contains(p, tlsHandshakeStart.PayloadNames)
+        Assert.All(new[] { "connectionId", "sslProtocols" }, p =>
+            Assert.Contains(p, tlsHandshakeStart.PayloadNames)
         );
         Assert.Same(KestrelEventSource.Log, tlsHandshakeStart.EventSource);
         Assert.NotEqual(Guid.Empty, tlsHandshakeStart.ActivityId);
@@ -259,9 +252,8 @@ public class EventSourceTests : LoggedTest
         var tlsHandshakeStop = events[eventIndex++];
         Assert.Equal("TlsHandshakeStop", tlsHandshakeStop.EventName);
         Assert.Equal(9, tlsHandshakeStop.EventId);
-        Assert.All(
-            new[] { "connectionId", "sslProtocols", "applicationProtocol", "hostName" },
-            p => Assert.Contains(p, tlsHandshakeStop.PayloadNames)
+        Assert.All(new[] { "connectionId", "sslProtocols", "applicationProtocol", "hostName" }, p =>
+            Assert.Contains(p, tlsHandshakeStop.PayloadNames)
         );
         Assert.Equal("h2", GetProperty(tlsHandshakeStop, "applicationProtocol"));
         Assert.Same(KestrelEventSource.Log, tlsHandshakeStop.EventSource);
@@ -273,9 +265,8 @@ public class EventSourceTests : LoggedTest
             var requestStart = events[eventIndex++];
             Assert.Equal("RequestStart", requestStart.EventName);
             Assert.Equal(3, requestStart.EventId);
-            Assert.All(
-                new[] { "connectionId", "requestId" },
-                p => Assert.Contains(p, requestStart.PayloadNames)
+            Assert.All(new[] { "connectionId", "requestId" }, p =>
+                Assert.Contains(p, requestStart.PayloadNames)
             );
             Assert.Equal(requestIds[i], GetProperty(requestStart, "requestId"));
             Assert.Same(KestrelEventSource.Log, requestStart.EventSource);
@@ -285,9 +276,8 @@ public class EventSourceTests : LoggedTest
             var requestStop = events[eventIndex++];
             Assert.Equal("RequestStop", requestStop.EventName);
             Assert.Equal(4, requestStop.EventId);
-            Assert.All(
-                new[] { "connectionId", "requestId" },
-                p => Assert.Contains(p, requestStop.PayloadNames)
+            Assert.All(new[] { "connectionId", "requestId" }, p =>
+                Assert.Contains(p, requestStop.PayloadNames)
             );
             Assert.Same(KestrelEventSource.Log, requestStop.EventSource);
             Assert.Equal(requestIds[i], GetProperty(requestStop, "requestId"));
@@ -369,9 +359,8 @@ public class EventSourceTests : LoggedTest
         var connectionStart = events[eventIndex++];
         Assert.Equal("ConnectionStart", connectionStart.EventName);
         Assert.Equal(1, connectionStart.EventId);
-        Assert.All(
-            new[] { "connectionId", "remoteEndPoint", "localEndPoint" },
-            p => Assert.Contains(p, connectionStart.PayloadNames)
+        Assert.All(new[] { "connectionId", "remoteEndPoint", "localEndPoint" }, p =>
+            Assert.Contains(p, connectionStart.PayloadNames)
         );
         Assert.Equal($"127.0.0.1:{port}", GetProperty(connectionStart, "localEndPoint"));
         Assert.Same(KestrelEventSource.Log, connectionStart.EventSource);
@@ -380,9 +369,8 @@ public class EventSourceTests : LoggedTest
         var tlsHandshakeStart = events[eventIndex++];
         Assert.Equal("TlsHandshakeStart", tlsHandshakeStart.EventName);
         Assert.Equal(8, tlsHandshakeStart.EventId);
-        Assert.All(
-            new[] { "connectionId", "sslProtocols" },
-            p => Assert.Contains(p, tlsHandshakeStart.PayloadNames)
+        Assert.All(new[] { "connectionId", "sslProtocols" }, p =>
+            Assert.Contains(p, tlsHandshakeStart.PayloadNames)
         );
         Assert.Same(KestrelEventSource.Log, tlsHandshakeStart.EventSource);
         Assert.NotEqual(Guid.Empty, tlsHandshakeStart.ActivityId);
@@ -391,9 +379,8 @@ public class EventSourceTests : LoggedTest
         var tlsHandshakeFailed = events[eventIndex++];
         Assert.Equal("TlsHandshakeFailed", tlsHandshakeFailed.EventName);
         Assert.Equal(10, tlsHandshakeFailed.EventId);
-        Assert.All(
-            new[] { "connectionId" },
-            p => Assert.Contains(p, tlsHandshakeFailed.PayloadNames)
+        Assert.All(new[] { "connectionId" }, p =>
+            Assert.Contains(p, tlsHandshakeFailed.PayloadNames)
         );
         Assert.Same(KestrelEventSource.Log, tlsHandshakeFailed.EventSource);
         Assert.Equal(tlsHandshakeStart.ActivityId, tlsHandshakeFailed.ActivityId);
@@ -402,9 +389,8 @@ public class EventSourceTests : LoggedTest
         var tlsHandshakeStop = events[eventIndex++];
         Assert.Equal("TlsHandshakeStop", tlsHandshakeStop.EventName);
         Assert.Equal(9, tlsHandshakeStop.EventId);
-        Assert.All(
-            new[] { "connectionId", "sslProtocols", "applicationProtocol", "hostName" },
-            p => Assert.Contains(p, tlsHandshakeStop.PayloadNames)
+        Assert.All(new[] { "connectionId", "sslProtocols", "applicationProtocol", "hostName" }, p =>
+            Assert.Contains(p, tlsHandshakeStop.PayloadNames)
         );
         Assert.Same(KestrelEventSource.Log, tlsHandshakeStop.EventSource);
         Assert.Equal(tlsHandshakeStart.ActivityId, tlsHandshakeStop.ActivityId);
@@ -474,9 +460,8 @@ public class EventSourceTests : LoggedTest
         var connectionStart = events[eventIndex++];
         Assert.Equal("ConnectionStart", connectionStart.EventName);
         Assert.Equal(1, connectionStart.EventId);
-        Assert.All(
-            new[] { "connectionId", "remoteEndPoint", "localEndPoint" },
-            p => Assert.Contains(p, connectionStart.PayloadNames)
+        Assert.All(new[] { "connectionId", "remoteEndPoint", "localEndPoint" }, p =>
+            Assert.Contains(p, connectionStart.PayloadNames)
         );
         Assert.Equal($"127.0.0.1:{port}", GetProperty(connectionStart, "localEndPoint"));
         Assert.Same(KestrelEventSource.Log, connectionStart.EventSource);
@@ -485,9 +470,8 @@ public class EventSourceTests : LoggedTest
         var connectionRejected = events[eventIndex++];
         Assert.Equal("ConnectionRejected", connectionRejected.EventName);
         Assert.Equal(5, connectionRejected.EventId);
-        Assert.All(
-            new[] { "connectionId" },
-            p => Assert.Contains(p, connectionRejected.PayloadNames)
+        Assert.All(new[] { "connectionId" }, p =>
+            Assert.Contains(p, connectionRejected.PayloadNames)
         );
         Assert.Same(KestrelEventSource.Log, connectionRejected.EventSource);
         Assert.Equal(connectionStart.ActivityId, connectionRejected.ActivityId);

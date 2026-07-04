@@ -121,18 +121,16 @@ namespace Microsoft.CodeAnalysis.RemoveAsyncModifier
                 var needsReturnStatementAdded =
                     controlFlow == null || controlFlow.EndPointIsReachable;
 
-                editor.ReplaceNode(
-                    node,
-                    (updatedNode, generator) =>
-                        RemoveAsyncModifier(
-                            solutionServices,
-                            syntaxFacts,
-                            generator,
-                            updatedNode,
-                            methodSymbol.ReturnType,
-                            knownTypes,
-                            needsReturnStatementAdded
-                        )
+                editor.ReplaceNode(node, (updatedNode, generator) =>
+                    RemoveAsyncModifier(
+                        solutionServices,
+                        syntaxFacts,
+                        generator,
+                        updatedNode,
+                        methodSymbol.ReturnType,
+                        knownTypes,
+                        needsReturnStatementAdded
+                    )
                 );
             }
         }

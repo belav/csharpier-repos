@@ -15,30 +15,25 @@ namespace System.IO.Tests
         public async Task NullParametersAsync()
         {
             string path = GetTestFilePath();
-            await Assert.ThrowsAsync<ArgumentNullException>(
-                "path",
-                async () => await File.WriteAllBytesAsync(null, new byte[0])
+            await Assert.ThrowsAsync<ArgumentNullException>("path", async () =>
+                await File.WriteAllBytesAsync(null, new byte[0])
             );
-            await Assert.ThrowsAsync<ArgumentNullException>(
-                "bytes",
-                async () => await File.WriteAllBytesAsync(path, null)
+            await Assert.ThrowsAsync<ArgumentNullException>("bytes", async () =>
+                await File.WriteAllBytesAsync(path, null)
             );
-            await Assert.ThrowsAsync<ArgumentNullException>(
-                "path",
-                async () => await File.ReadAllBytesAsync(null)
+            await Assert.ThrowsAsync<ArgumentNullException>("path", async () =>
+                await File.ReadAllBytesAsync(null)
             );
         }
 
         [Fact]
         public async Task InvalidParametersAsync()
         {
-            await Assert.ThrowsAsync<ArgumentException>(
-                "path",
-                async () => await File.WriteAllBytesAsync(string.Empty, new byte[0])
+            await Assert.ThrowsAsync<ArgumentException>("path", async () =>
+                await File.WriteAllBytesAsync(string.Empty, new byte[0])
             );
-            await Assert.ThrowsAsync<ArgumentException>(
-                "path",
-                async () => await File.ReadAllBytesAsync(string.Empty)
+            await Assert.ThrowsAsync<ArgumentException>("path", async () =>
+                await File.ReadAllBytesAsync(string.Empty)
             );
         }
 

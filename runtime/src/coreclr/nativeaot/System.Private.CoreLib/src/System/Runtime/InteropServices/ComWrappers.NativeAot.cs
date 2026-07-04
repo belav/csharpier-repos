@@ -927,14 +927,11 @@ namespace System.Runtime.InteropServices
                 return ccwValue.ComIp;
             }
 
-            ccwValue = _ccwTable.GetValue(
-                instance,
-                (c) =>
-                {
-                    ManagedObjectWrapper* value = CreateCCW(c, flags);
-                    return new ManagedObjectWrapperHolder(value, c);
-                }
-            );
+            ccwValue = _ccwTable.GetValue(instance, (c) =>
+            {
+                ManagedObjectWrapper* value = CreateCCW(c, flags);
+                return new ManagedObjectWrapperHolder(value, c);
+            });
             ccwValue.AddRef();
             return ccwValue.ComIp;
         }

@@ -50,9 +50,8 @@ namespace System.Data.Tests
             UniqueConstraint cst;
 
             //must have DataTable exception
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new UniqueConstraint(new DataColumn(""))
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new UniqueConstraint(new DataColumn(""))
             );
 
             //Null exception

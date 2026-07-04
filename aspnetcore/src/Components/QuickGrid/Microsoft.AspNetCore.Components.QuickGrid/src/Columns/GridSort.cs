@@ -199,23 +199,19 @@ public sealed class GridSort<TGridItem>
         }
 
         // Now construct the string
-        return string.Create(
-            length,
-            body,
-            (chars, body) =>
+        return string.Create(length, body, (chars, body) =>
+        {
+            var nextPos = chars.Length;
+            while (body is not null)
             {
-                var nextPos = chars.Length;
-                while (body is not null)
+                nextPos -= body.Member.Name.Length;
+                body.Member.Name.CopyTo(chars[nextPos..]);
+                if (nextPos > 0)
                 {
-                    nextPos -= body.Member.Name.Length;
-                    body.Member.Name.CopyTo(chars[nextPos..]);
-                    if (nextPos > 0)
-                    {
-                        chars[--nextPos] = '.';
-                    }
-                    body = (body.Expression as MemberExpression)!;
+                    chars[--nextPos] = '.';
                 }
+                body = (body.Expression as MemberExpression)!;
             }
-        );
+        });
     }
 }

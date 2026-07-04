@@ -299,15 +299,13 @@ public class SqlServerTestStore : RelationalTestStore
     }
 
     public override void OpenConnection() =>
-        new TestSqlServerRetryingExecutionStrategy().Execute(
-            Connection,
-            connection => connection.Open()
+        new TestSqlServerRetryingExecutionStrategy().Execute(Connection, connection =>
+            connection.Open()
         );
 
     public override Task OpenConnectionAsync() =>
-        new TestSqlServerRetryingExecutionStrategy().ExecuteAsync(
-            Connection,
-            connection => connection.OpenAsync()
+        new TestSqlServerRetryingExecutionStrategy().ExecuteAsync(Connection, connection =>
+            connection.OpenAsync()
         );
 
     public T ExecuteScalar<T>(string sql, params object[] parameters) =>

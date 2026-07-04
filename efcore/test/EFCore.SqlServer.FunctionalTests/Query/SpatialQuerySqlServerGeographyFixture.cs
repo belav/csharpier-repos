@@ -20,9 +20,8 @@ public class SpatialQuerySqlServerGeographyFixture : SpatialQuerySqlServerFixtur
         new(NtsGeometryServices.Instance.DefaultPrecisionModel, 4326);
 
     public override GeometryFactory GeometryFactory =>
-        LazyInitializer.EnsureInitialized(
-            ref _geometryFactory,
-            () => GeometryServices.CreateGeometryFactory()
+        LazyInitializer.EnsureInitialized(ref _geometryFactory, () =>
+            GeometryServices.CreateGeometryFactory()
         );
 
     protected override string StoreName => "SpatialQueryGeographyTest";

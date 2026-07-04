@@ -214,13 +214,11 @@ namespace System.ComponentModel.Tests
         public void ApplyResources_NullValue_ThrowsArgumentNullException()
         {
             var resourceManager = new ComponentResourceManager();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => resourceManager.ApplyResources(null, "objectName")
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                resourceManager.ApplyResources(null, "objectName")
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => resourceManager.ApplyResources(null, "objectName", CultureInfo.CurrentCulture)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                resourceManager.ApplyResources(null, "objectName", CultureInfo.CurrentCulture)
             );
         }
 
@@ -228,13 +226,11 @@ namespace System.ComponentModel.Tests
         public void ApplyResources_NullObjectName_ThrowsArgumentNullException()
         {
             var resourceManager = new ComponentResourceManager();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "objectName",
-                () => resourceManager.ApplyResources("value", null)
+            AssertExtensions.Throws<ArgumentNullException>("objectName", () =>
+                resourceManager.ApplyResources("value", null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "objectName",
-                () => resourceManager.ApplyResources("value", null, CultureInfo.CurrentCulture)
+            AssertExtensions.Throws<ArgumentNullException>("objectName", () =>
+                resourceManager.ApplyResources("value", null, CultureInfo.CurrentCulture)
             );
         }
     }

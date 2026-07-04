@@ -164,14 +164,11 @@ namespace MonoTests.System.Threading.Tasks
             });
 
             bool ran = false;
-            Task cont = factory.ContinueWhenAll(
-                tasks,
-                ts =>
-                {
-                    Assert.AreEqual(tasks, ts, "#0");
-                    ran = true;
-                }
-            );
+            Task cont = factory.ContinueWhenAll(tasks, ts =>
+            {
+                Assert.AreEqual(tasks, ts, "#0");
+                ran = true;
+            });
 
             foreach (Task t in tasks)
                 t.Start();
@@ -602,13 +599,10 @@ namespace MonoTests.System.Threading.Tasks
             var result = new TestAsyncResult();
             bool called = false;
 
-            var task = factory.FromAsync(
-                result,
-                l =>
-                {
-                    called = true;
-                }
-            );
+            var task = factory.FromAsync(result, l =>
+            {
+                called = true;
+            });
 
             Assert.IsTrue(task.Wait(1000), "#1");
             Assert.IsTrue(called, "#2");
@@ -620,13 +614,10 @@ namespace MonoTests.System.Threading.Tasks
         {
             var result = new TestAsyncResult();
 
-            var task = factory.FromAsync(
-                result,
-                l =>
-                {
-                    throw new ApplicationException();
-                }
-            );
+            var task = factory.FromAsync(result, l =>
+            {
+                throw new ApplicationException();
+            });
 
             try
             {
@@ -644,14 +635,11 @@ namespace MonoTests.System.Threading.Tasks
             var result = new TestAsyncResult();
             bool called = false;
 
-            var task = factory.FromAsync<int>(
-                result,
-                l =>
-                {
-                    called = true;
-                    return 4;
-                }
-            );
+            var task = factory.FromAsync<int>(result, l =>
+            {
+                called = true;
+                return 4;
+            });
 
             Assert.IsTrue(task.Wait(1000), "#1");
             Assert.IsTrue(called, "#2");

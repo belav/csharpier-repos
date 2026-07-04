@@ -280,13 +280,10 @@ namespace System.Data.Tests
             DataView dv = new DataView(dt);
 
             // FindRows ,no sort - exception
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    dvArr = dv.FindRows(3);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                dvArr = dv.FindRows(3);
+            });
 
             dv.Sort = "String1";
             // Find = wrong sort, can not find
@@ -327,13 +324,10 @@ namespace System.Data.Tests
             DataView dv = new DataView(dt);
 
             // FindRows ,no sort - exception
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    dvArr = dv.FindRows(new object[] { "3", "3-String1" });
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                dvArr = dv.FindRows(new object[] { "3", "3-String1" });
+            });
 
             dv.Sort = "String1,ChildId";
             // Find = wrong sort, can not find
@@ -394,13 +388,10 @@ namespace System.Data.Tests
             }
 
             // Find ,no sort - exception
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    findResult = dv.Find("3");
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                findResult = dv.Find("3");
+            });
 
             dv.Sort = "String1";
             // Find = wrong sort, can not find
@@ -438,13 +429,10 @@ namespace System.Data.Tests
             }
 
             // Find ,no sort - exception
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    FindResult = dv.Find(new object[] { "3", "3-String1" });
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                FindResult = dv.Find(new object[] { "3", "3-String1" });
+            });
 
             dv.Sort = "String1,ParentId";
             // Find = wrong sort, can not find

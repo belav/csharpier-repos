@@ -27,9 +27,8 @@ namespace System.Net.WebSockets.Tests
         [InlineData(0)]
         public static void CreateClientBuffer_InvalidSendValues(int size)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "sendBufferSize",
-                () => WebSocket.CreateClientBuffer(256, size)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("sendBufferSize", () =>
+                WebSocket.CreateClientBuffer(256, size)
             );
         }
 
@@ -47,9 +46,8 @@ namespace System.Net.WebSockets.Tests
         [InlineData(0)]
         public static void CreateClientBuffer_InvalidReceiveValues(int size)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "receiveBufferSize",
-                () => WebSocket.CreateClientBuffer(size, 16)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("receiveBufferSize", () =>
+                WebSocket.CreateClientBuffer(size, 16)
             );
         }
 
@@ -67,9 +65,8 @@ namespace System.Net.WebSockets.Tests
         [InlineData(0)]
         public static void CreateServerBuffer_InvalidReceiveValues(int size)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "receiveBufferSize",
-                () => WebSocket.CreateServerBuffer(size)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("receiveBufferSize", () =>
+                WebSocket.CreateServerBuffer(size)
             );
         }
 
@@ -253,30 +250,24 @@ namespace System.Net.WebSockets.Tests
         [Fact]
         public void ValueWebSocketReceiveResult_Ctor_InvalidArguments_Throws()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => new ValueWebSocketReceiveResult(-1, WebSocketMessageType.Text, true)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                new ValueWebSocketReceiveResult(-1, WebSocketMessageType.Text, true)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => new ValueWebSocketReceiveResult(int.MinValue, WebSocketMessageType.Text, true)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                new ValueWebSocketReceiveResult(int.MinValue, WebSocketMessageType.Text, true)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "messageType",
-                () => new ValueWebSocketReceiveResult(0, (WebSocketMessageType)(-1), true)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("messageType", () =>
+                new ValueWebSocketReceiveResult(0, (WebSocketMessageType)(-1), true)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "messageType",
-                () => new ValueWebSocketReceiveResult(0, (WebSocketMessageType)(3), true)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("messageType", () =>
+                new ValueWebSocketReceiveResult(0, (WebSocketMessageType)(3), true)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "messageType",
-                () => new ValueWebSocketReceiveResult(0, (WebSocketMessageType)(int.MinValue), true)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("messageType", () =>
+                new ValueWebSocketReceiveResult(0, (WebSocketMessageType)(int.MinValue), true)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "messageType",
-                () => new ValueWebSocketReceiveResult(0, (WebSocketMessageType)(int.MaxValue), true)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("messageType", () =>
+                new ValueWebSocketReceiveResult(0, (WebSocketMessageType)(int.MaxValue), true)
             );
         }
 
@@ -318,15 +309,13 @@ namespace System.Net.WebSockets.Tests
                 WebSocketMessageFlags.DisableCompression,
                 default
             );
-            Assert.Throws<ArgumentException>(
-                "messageFlags",
-                () =>
-                    client.SendAsync(
-                        Memory<byte>.Empty,
-                        WebSocketMessageType.Binary,
-                        WebSocketMessageFlags.EndOfMessage,
-                        default
-                    )
+            Assert.Throws<ArgumentException>("messageFlags", () =>
+                client.SendAsync(
+                    Memory<byte>.Empty,
+                    WebSocketMessageType.Binary,
+                    WebSocketMessageFlags.EndOfMessage,
+                    default
+                )
             );
         }
 

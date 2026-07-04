@@ -18,13 +18,10 @@ namespace System.ComponentModel.Composition
             catalog.Dispose();
             var definition = ImportDefinitionFactory.Create();
 
-            ExceptionAssert.ThrowsDisposed(
-                catalog,
-                () =>
-                {
-                    catalog.GetExports(definition);
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(catalog, () =>
+            {
+                catalog.GetExports(definition);
+            });
         }
 
         [Fact]
@@ -32,13 +29,10 @@ namespace System.ComponentModel.Composition
         {
             var catalog = CatalogFactory.Create();
 
-            Assert.Throws<ArgumentNullException>(
-                "definition",
-                () =>
-                {
-                    catalog.GetExports((ImportDefinition)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("definition", () =>
+            {
+                catalog.GetExports((ImportDefinition)null);
+            });
         }
 
         [Fact]

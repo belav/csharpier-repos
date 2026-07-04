@@ -162,9 +162,8 @@ public class TableSharingConcurrencyTokenConventionTest
         Assert.Equal(ValueGenerated.OnUpdate, concurrencyProperty.ValueGenerated);
 
         var cat = model.FindEntityType(typeof(Cat));
-        Assert.DoesNotContain(
-            cat.GetDeclaredProperties(),
-            p => p.Name == "_TableSharingConcurrencyTokenConvention_Version"
+        Assert.DoesNotContain(cat.GetDeclaredProperties(), p =>
+            p.Name == "_TableSharingConcurrencyTokenConvention_Version"
         );
 
         var animalHouse = model.FindEntityType(typeof(AnimalHouse));
@@ -177,9 +176,8 @@ public class TableSharingConcurrencyTokenConventionTest
         Assert.Equal(ValueGenerated.OnUpdate, concurrencyProperty.ValueGenerated);
 
         var theMovie = model.FindEntityType(typeof(TheMovie));
-        Assert.DoesNotContain(
-            theMovie.GetDeclaredProperties(),
-            p => p.Name == "_TableSharingConcurrencyTokenConvention_Version"
+        Assert.DoesNotContain(theMovie.GetDeclaredProperties(), p =>
+            p.Name == "_TableSharingConcurrencyTokenConvention_Version"
         );
     }
 
@@ -243,9 +241,8 @@ public class TableSharingConcurrencyTokenConventionTest
         Assert.Equal(ValueGenerated.OnAddOrUpdate, concurrencyProperty.ValueGenerated);
 
         var animalEntityType = model.FindEntityType(typeof(Animal));
-        Assert.All(
-            animalEntityType.GetProperties(),
-            p => Assert.NotEqual(typeof(byte[]), p.ClrType)
+        Assert.All(animalEntityType.GetProperties(), p =>
+            Assert.NotEqual(typeof(byte[]), p.ClrType)
         );
     }
 
@@ -274,9 +271,8 @@ public class TableSharingConcurrencyTokenConventionTest
         model.FinalizeModel();
 
         var animalEntityType = model.FindEntityType(typeof(Animal));
-        Assert.All(
-            animalEntityType.GetProperties(),
-            p => Assert.NotEqual(typeof(byte[]), p.ClrType)
+        Assert.All(animalEntityType.GetProperties(), p =>
+            Assert.NotEqual(typeof(byte[]), p.ClrType)
         );
     }
 

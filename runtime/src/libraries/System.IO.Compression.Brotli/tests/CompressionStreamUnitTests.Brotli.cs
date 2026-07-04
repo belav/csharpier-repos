@@ -61,27 +61,23 @@ namespace System.IO.Compression
         {
             Assert.Throws<ArgumentOutOfRangeException>("quality", () => new BrotliEncoder(-1, 11));
             Assert.Throws<ArgumentOutOfRangeException>("quality", () => new BrotliEncoder(12, 11));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "quality",
-                () =>
-                    BrotliEncoder.TryCompress(
-                        new ReadOnlySpan<byte>(),
-                        new Span<byte>(),
-                        out int bytesWritten,
-                        -1,
-                        13
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>("quality", () =>
+                BrotliEncoder.TryCompress(
+                    new ReadOnlySpan<byte>(),
+                    new Span<byte>(),
+                    out int bytesWritten,
+                    -1,
+                    13
+                )
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "quality",
-                () =>
-                    BrotliEncoder.TryCompress(
-                        new ReadOnlySpan<byte>(),
-                        new Span<byte>(),
-                        out int bytesWritten,
-                        12,
-                        13
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>("quality", () =>
+                BrotliEncoder.TryCompress(
+                    new ReadOnlySpan<byte>(),
+                    new Span<byte>(),
+                    out int bytesWritten,
+                    12,
+                    13
+                )
             );
         }
 
@@ -91,51 +87,43 @@ namespace System.IO.Compression
             Assert.Throws<ArgumentOutOfRangeException>("window", () => new BrotliEncoder(10, -1));
             Assert.Throws<ArgumentOutOfRangeException>("window", () => new BrotliEncoder(10, 9));
             Assert.Throws<ArgumentOutOfRangeException>("window", () => new BrotliEncoder(10, 25));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "window",
-                () =>
-                    BrotliEncoder.TryCompress(
-                        new ReadOnlySpan<byte>(),
-                        new Span<byte>(),
-                        out int bytesWritten,
-                        6,
-                        -1
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>("window", () =>
+                BrotliEncoder.TryCompress(
+                    new ReadOnlySpan<byte>(),
+                    new Span<byte>(),
+                    out int bytesWritten,
+                    6,
+                    -1
+                )
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "window",
-                () =>
-                    BrotliEncoder.TryCompress(
-                        new ReadOnlySpan<byte>(),
-                        new Span<byte>(),
-                        out int bytesWritten,
-                        6,
-                        9
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>("window", () =>
+                BrotliEncoder.TryCompress(
+                    new ReadOnlySpan<byte>(),
+                    new Span<byte>(),
+                    out int bytesWritten,
+                    6,
+                    9
+                )
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "window",
-                () =>
-                    BrotliEncoder.TryCompress(
-                        new ReadOnlySpan<byte>(),
-                        new Span<byte>(),
-                        out int bytesWritten,
-                        6,
-                        25
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>("window", () =>
+                BrotliEncoder.TryCompress(
+                    new ReadOnlySpan<byte>(),
+                    new Span<byte>(),
+                    out int bytesWritten,
+                    6,
+                    25
+                )
             );
         }
 
         [Fact]
         public void GetMaxCompressedSize_Basic()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "inputSize",
-                () => BrotliEncoder.GetMaxCompressedLength(-1)
+            Assert.Throws<ArgumentOutOfRangeException>("inputSize", () =>
+                BrotliEncoder.GetMaxCompressedLength(-1)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "inputSize",
-                () => BrotliEncoder.GetMaxCompressedLength(2147483133)
+            Assert.Throws<ArgumentOutOfRangeException>("inputSize", () =>
+                BrotliEncoder.GetMaxCompressedLength(2147483133)
             );
             Assert.InRange(BrotliEncoder.GetMaxCompressedLength(2147483132), 0, int.MaxValue);
             Assert.Equal(1, BrotliEncoder.GetMaxCompressedLength(0));

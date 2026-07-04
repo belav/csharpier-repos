@@ -62,29 +62,25 @@ namespace System.Text.Tests
             Decoder decoder = Encoding.UTF8.GetDecoder();
             IBufferWriter<char> writer = new ArrayBufferWriter<char>();
 
-            Assert.Throws<ArgumentNullException>(
-                "decoder",
-                () =>
-                    EncodingExtensions.Convert(
-                        (Decoder)null,
-                        ReadOnlySpan<byte>.Empty,
-                        writer,
-                        true,
-                        out _,
-                        out _
-                    )
+            Assert.Throws<ArgumentNullException>("decoder", () =>
+                EncodingExtensions.Convert(
+                    (Decoder)null,
+                    ReadOnlySpan<byte>.Empty,
+                    writer,
+                    true,
+                    out _,
+                    out _
+                )
             );
-            Assert.Throws<ArgumentNullException>(
-                "writer",
-                () =>
-                    EncodingExtensions.Convert(
-                        decoder,
-                        ReadOnlySpan<byte>.Empty,
-                        (IBufferWriter<char>)null,
-                        true,
-                        out _,
-                        out _
-                    )
+            Assert.Throws<ArgumentNullException>("writer", () =>
+                EncodingExtensions.Convert(
+                    decoder,
+                    ReadOnlySpan<byte>.Empty,
+                    (IBufferWriter<char>)null,
+                    true,
+                    out _,
+                    out _
+                )
             );
         }
 
@@ -160,29 +156,25 @@ namespace System.Text.Tests
             Decoder decoder = Encoding.UTF8.GetDecoder();
             IBufferWriter<char> writer = new ArrayBufferWriter<char>();
 
-            Assert.Throws<ArgumentNullException>(
-                "decoder",
-                () =>
-                    EncodingExtensions.Convert(
-                        (Decoder)null,
-                        ReadOnlySequence<byte>.Empty,
-                        writer,
-                        true,
-                        out _,
-                        out _
-                    )
+            Assert.Throws<ArgumentNullException>("decoder", () =>
+                EncodingExtensions.Convert(
+                    (Decoder)null,
+                    ReadOnlySequence<byte>.Empty,
+                    writer,
+                    true,
+                    out _,
+                    out _
+                )
             );
-            Assert.Throws<ArgumentNullException>(
-                "writer",
-                () =>
-                    EncodingExtensions.Convert(
-                        decoder,
-                        ReadOnlySequence<byte>.Empty,
-                        (IBufferWriter<char>)null,
-                        true,
-                        out _,
-                        out _
-                    )
+            Assert.Throws<ArgumentNullException>("writer", () =>
+                EncodingExtensions.Convert(
+                    decoder,
+                    ReadOnlySequence<byte>.Empty,
+                    (IBufferWriter<char>)null,
+                    true,
+                    out _,
+                    out _
+                )
             );
         }
 
@@ -307,29 +299,25 @@ namespace System.Text.Tests
             Encoder encoder = Encoding.UTF8.GetEncoder();
             IBufferWriter<byte> writer = new ArrayBufferWriter<byte>();
 
-            Assert.Throws<ArgumentNullException>(
-                "encoder",
-                () =>
-                    EncodingExtensions.Convert(
-                        (Encoder)null,
-                        ReadOnlySpan<char>.Empty,
-                        writer,
-                        true,
-                        out _,
-                        out _
-                    )
+            Assert.Throws<ArgumentNullException>("encoder", () =>
+                EncodingExtensions.Convert(
+                    (Encoder)null,
+                    ReadOnlySpan<char>.Empty,
+                    writer,
+                    true,
+                    out _,
+                    out _
+                )
             );
-            Assert.Throws<ArgumentNullException>(
-                "writer",
-                () =>
-                    EncodingExtensions.Convert(
-                        encoder,
-                        ReadOnlySpan<char>.Empty,
-                        (IBufferWriter<byte>)null,
-                        true,
-                        out _,
-                        out _
-                    )
+            Assert.Throws<ArgumentNullException>("writer", () =>
+                EncodingExtensions.Convert(
+                    encoder,
+                    ReadOnlySpan<char>.Empty,
+                    (IBufferWriter<byte>)null,
+                    true,
+                    out _,
+                    out _
+                )
             );
         }
 
@@ -404,29 +392,25 @@ namespace System.Text.Tests
             Encoder encoder = Encoding.UTF8.GetEncoder();
             IBufferWriter<byte> writer = new ArrayBufferWriter<byte>();
 
-            Assert.Throws<ArgumentNullException>(
-                "encoder",
-                () =>
-                    EncodingExtensions.Convert(
-                        (Encoder)null,
-                        ReadOnlySequence<char>.Empty,
-                        writer,
-                        true,
-                        out _,
-                        out _
-                    )
+            Assert.Throws<ArgumentNullException>("encoder", () =>
+                EncodingExtensions.Convert(
+                    (Encoder)null,
+                    ReadOnlySequence<char>.Empty,
+                    writer,
+                    true,
+                    out _,
+                    out _
+                )
             );
-            Assert.Throws<ArgumentNullException>(
-                "writer",
-                () =>
-                    EncodingExtensions.Convert(
-                        encoder,
-                        ReadOnlySequence<char>.Empty,
-                        (IBufferWriter<byte>)null,
-                        true,
-                        out _,
-                        out _
-                    )
+            Assert.Throws<ArgumentNullException>("writer", () =>
+                EncodingExtensions.Convert(
+                    encoder,
+                    ReadOnlySequence<char>.Empty,
+                    (IBufferWriter<byte>)null,
+                    true,
+                    out _,
+                    out _
+                )
             );
         }
 
@@ -548,9 +532,8 @@ namespace System.Text.Tests
         public static void GetBytes_Encoding_ReadOnlySequence_ParamChecks()
         {
             ReadOnlySequence<char> sequence = new ReadOnlySequence<char>(new char[0]);
-            Assert.Throws<ArgumentNullException>(
-                "encoding",
-                () => EncodingExtensions.GetBytes(null, sequence)
+            Assert.Throws<ArgumentNullException>("encoding", () =>
+                EncodingExtensions.GetBytes(null, sequence)
             );
         }
 
@@ -620,14 +603,11 @@ namespace System.Text.Tests
         {
             ReadOnlySequence<char> sequence = new ReadOnlySequence<char>(new char[0]);
             IBufferWriter<byte> writer = new ArrayBufferWriter<byte>();
-            Assert.Throws<ArgumentNullException>(
-                "encoding",
-                () => EncodingExtensions.GetBytes((Encoding)null, sequence, writer)
+            Assert.Throws<ArgumentNullException>("encoding", () =>
+                EncodingExtensions.GetBytes((Encoding)null, sequence, writer)
             );
-            Assert.Throws<ArgumentNullException>(
-                "writer",
-                () =>
-                    EncodingExtensions.GetBytes(Encoding.UTF8, sequence, (IBufferWriter<byte>)null)
+            Assert.Throws<ArgumentNullException>("writer", () =>
+                EncodingExtensions.GetBytes(Encoding.UTF8, sequence, (IBufferWriter<byte>)null)
             );
         }
 
@@ -635,9 +615,8 @@ namespace System.Text.Tests
         public static void GetBytes_Encoding_ReadOnlySequence_Span_ParamChecks()
         {
             ReadOnlySequence<char> sequence = new ReadOnlySequence<char>(new char[0]);
-            Assert.Throws<ArgumentNullException>(
-                "encoding",
-                () => EncodingExtensions.GetBytes((Encoding)null, sequence, Span<byte>.Empty)
+            Assert.Throws<ArgumentNullException>("encoding", () =>
+                EncodingExtensions.GetBytes((Encoding)null, sequence, Span<byte>.Empty)
             );
         }
 
@@ -682,18 +661,15 @@ namespace System.Text.Tests
         {
             IBufferWriter<byte> writer = new ArrayBufferWriter<byte>();
 
-            Assert.Throws<ArgumentNullException>(
-                "encoding",
-                () => EncodingExtensions.GetBytes((Encoding)null, ReadOnlySpan<char>.Empty, writer)
+            Assert.Throws<ArgumentNullException>("encoding", () =>
+                EncodingExtensions.GetBytes((Encoding)null, ReadOnlySpan<char>.Empty, writer)
             );
-            Assert.Throws<ArgumentNullException>(
-                "writer",
-                () =>
-                    EncodingExtensions.GetBytes(
-                        Encoding.UTF8,
-                        ReadOnlySpan<char>.Empty,
-                        (IBufferWriter<byte>)null
-                    )
+            Assert.Throws<ArgumentNullException>("writer", () =>
+                EncodingExtensions.GetBytes(
+                    Encoding.UTF8,
+                    ReadOnlySpan<char>.Empty,
+                    (IBufferWriter<byte>)null
+                )
             );
         }
 
@@ -714,27 +690,23 @@ namespace System.Text.Tests
             // several locations by the internal GetChars chunking logic. This helps us test
             // that we're flowing the 'flush' parameter through the system correctly.
 
-            string largeString = string.Create(
-                5_000_000,
-                (object)null,
-                (span, _) =>
+            string largeString = string.Create(5_000_000, (object)null, (span, _) =>
+            {
+                while (span.Length >= 3)
                 {
-                    while (span.Length >= 3)
-                    {
-                        span[0] = '\u00EA'; // U+00EA LATIN SMALL LETTER E WITH CIRCUMFLEX
-                        span[1] = '\uD83D'; // U+1F405 TIGER
-                        span[2] = '\uDC05';
+                    span[0] = '\u00EA'; // U+00EA LATIN SMALL LETTER E WITH CIRCUMFLEX
+                    span[1] = '\uD83D'; // U+1F405 TIGER
+                    span[2] = '\uDC05';
 
-                        span = span.Slice(3);
-                    }
-
-                    // There are 2 bytes left over.
-
-                    Assert.Equal(2, span.Length);
-                    span[0] = 'x';
-                    span[1] = 'y';
+                    span = span.Slice(3);
                 }
-            );
+
+                // There are 2 bytes left over.
+
+                Assert.Equal(2, span.Length);
+                span[0] = 'x';
+                span[1] = 'y';
+            });
 
             writer = new ArrayBufferWriter<byte>();
             inputData = largeString + '\uD800'; // standalone lead surrogate at end of input, testing replacement
@@ -782,9 +754,8 @@ namespace System.Text.Tests
         public static void GetString_Encoding_ReadOnlySequence_ParamChecks()
         {
             ReadOnlySequence<byte> sequence = new ReadOnlySequence<byte>(new byte[0]);
-            Assert.Throws<ArgumentNullException>(
-                "encoding",
-                () => EncodingExtensions.GetString(null, sequence)
+            Assert.Throws<ArgumentNullException>("encoding", () =>
+                EncodingExtensions.GetString(null, sequence)
             );
         }
 
@@ -823,14 +794,11 @@ namespace System.Text.Tests
         {
             ReadOnlySequence<byte> sequence = new ReadOnlySequence<byte>(new byte[0]);
             IBufferWriter<char> writer = new ArrayBufferWriter<char>();
-            Assert.Throws<ArgumentNullException>(
-                "encoding",
-                () => EncodingExtensions.GetChars((Encoding)null, sequence, writer)
+            Assert.Throws<ArgumentNullException>("encoding", () =>
+                EncodingExtensions.GetChars((Encoding)null, sequence, writer)
             );
-            Assert.Throws<ArgumentNullException>(
-                "writer",
-                () =>
-                    EncodingExtensions.GetChars(Encoding.UTF8, sequence, (IBufferWriter<char>)null)
+            Assert.Throws<ArgumentNullException>("writer", () =>
+                EncodingExtensions.GetChars(Encoding.UTF8, sequence, (IBufferWriter<char>)null)
             );
         }
 
@@ -874,9 +842,8 @@ namespace System.Text.Tests
         public static void GetChars_Encoding_ReadOnlySequence_Span_ParamChecks()
         {
             ReadOnlySequence<byte> sequence = new ReadOnlySequence<byte>(new byte[0]);
-            Assert.Throws<ArgumentNullException>(
-                "encoding",
-                () => EncodingExtensions.GetChars((Encoding)null, sequence, Span<char>.Empty)
+            Assert.Throws<ArgumentNullException>("encoding", () =>
+                EncodingExtensions.GetChars((Encoding)null, sequence, Span<char>.Empty)
             );
         }
 
@@ -885,18 +852,15 @@ namespace System.Text.Tests
         {
             IBufferWriter<char> writer = new ArrayBufferWriter<char>();
 
-            Assert.Throws<ArgumentNullException>(
-                "encoding",
-                () => EncodingExtensions.GetChars((Encoding)null, ReadOnlySpan<byte>.Empty, writer)
+            Assert.Throws<ArgumentNullException>("encoding", () =>
+                EncodingExtensions.GetChars((Encoding)null, ReadOnlySpan<byte>.Empty, writer)
             );
-            Assert.Throws<ArgumentNullException>(
-                "writer",
-                () =>
-                    EncodingExtensions.GetChars(
-                        Encoding.UTF8,
-                        ReadOnlySpan<byte>.Empty,
-                        (IBufferWriter<char>)null
-                    )
+            Assert.Throws<ArgumentNullException>("writer", () =>
+                EncodingExtensions.GetChars(
+                    Encoding.UTF8,
+                    ReadOnlySpan<byte>.Empty,
+                    (IBufferWriter<char>)null
+                )
             );
         }
 

@@ -389,14 +389,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.CompleteStatement
 
                 Logger.Log(
                     FunctionId.CommandHandler_CompleteStatement,
-                    KeyValueLogMessage.Create(
-                        LogType.UserAction,
-                        m =>
-                        {
-                            m[nameof(isInsideDelimiters)] = isInsideDelimiters;
-                            m[nameof(statementNode)] = statementNode.Kind();
-                        }
-                    )
+                    KeyValueLogMessage.Create(LogType.UserAction, m =>
+                    {
+                        m[nameof(isInsideDelimiters)] = isInsideDelimiters;
+                        m[nameof(statementNode)] = statementNode.Kind();
+                    })
                 );
 
                 return args.TextView.TryMoveCaretToAndEnsureVisible(targetPosition);

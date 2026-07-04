@@ -503,9 +503,8 @@ namespace System.IO.Pipes
 
         private SemaphoreSlim EnsureAsyncActiveSemaphoreInitialized()
         {
-            return LazyInitializer.EnsureInitialized(
-                ref _asyncActiveSemaphore,
-                () => new SemaphoreSlim(1, 1)
+            return LazyInitializer.EnsureInitialized(ref _asyncActiveSemaphore, () =>
+                new SemaphoreSlim(1, 1)
             );
         }
 

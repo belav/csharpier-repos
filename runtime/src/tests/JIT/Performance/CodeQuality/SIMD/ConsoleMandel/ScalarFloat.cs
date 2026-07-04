@@ -89,33 +89,29 @@ namespace Algorithms
             float step
         )
         {
-            Parallel.For(
-                0,
-                (int)(((ymax - ymin) / step) + .5f),
-                (yp) =>
+            Parallel.For(0, (int)(((ymax - ymin) / step) + .5f), (yp) =>
+            {
+                if (Abort)
+                    return;
+                float y = ymin + step * yp;
+                int xp = 0;
+                for (float x = xmin; x < xmax; x += step, xp++)
                 {
-                    if (Abort)
-                        return;
-                    float y = ymin + step * yp;
-                    int xp = 0;
-                    for (float x = xmin; x < xmax; x += step, xp++)
+                    ComplexFloat num = new ComplexFloat(x, y);
+                    ComplexFloat accum = num;
+                    int iters = 0;
+                    float sqabs = 0f;
+                    do
                     {
-                        ComplexFloat num = new ComplexFloat(x, y);
-                        ComplexFloat accum = num;
-                        int iters = 0;
-                        float sqabs = 0f;
-                        do
-                        {
-                            accum = accum.square();
-                            accum += num;
-                            iters++;
-                            sqabs = accum.sqabs();
-                        } while (sqabs < limit && iters < max_iters);
+                        accum = accum.square();
+                        accum += num;
+                        iters++;
+                        sqabs = accum.sqabs();
+                    } while (sqabs < limit && iters < max_iters);
 
-                        DrawPixel(xp, yp, iters);
-                    }
+                    DrawPixel(xp, yp, iters);
                 }
-            );
+            });
         }
 
         // Render the fractal with no data type abstraction on multiple threads with scalar floats
@@ -127,35 +123,31 @@ namespace Algorithms
             float step
         )
         {
-            Parallel.For(
-                0,
-                (int)(((ymax - ymin) / step) + .5f),
-                (yp) =>
+            Parallel.For(0, (int)(((ymax - ymin) / step) + .5f), (yp) =>
+            {
+                if (Abort)
+                    return;
+                float y = ymin + step * yp;
+                int xp = 0;
+                for (float x = xmin; x < xmax; x += step, xp++)
                 {
-                    if (Abort)
-                        return;
-                    float y = ymin + step * yp;
-                    int xp = 0;
-                    for (float x = xmin; x < xmax; x += step, xp++)
+                    float accumx = x;
+                    float accumy = y;
+                    int iters = 0;
+                    float sqabs = 0f;
+                    do
                     {
-                        float accumx = x;
-                        float accumy = y;
-                        int iters = 0;
-                        float sqabs = 0f;
-                        do
-                        {
-                            float naccumx = accumx * accumx - accumy * accumy;
-                            float naccumy = 2.0f * accumx * accumy;
-                            accumx = naccumx + x;
-                            accumy = naccumy + y;
-                            iters++;
-                            sqabs = accumx * accumx + accumy * accumy;
-                        } while (sqabs < limit && iters < max_iters);
+                        float naccumx = accumx * accumx - accumy * accumy;
+                        float naccumy = 2.0f * accumx * accumy;
+                        accumx = naccumx + x;
+                        accumy = naccumy + y;
+                        iters++;
+                        sqabs = accumx * accumx + accumy * accumy;
+                    } while (sqabs < limit && iters < max_iters);
 
-                        DrawPixel(xp, yp, iters);
-                    }
+                    DrawPixel(xp, yp, iters);
                 }
-            );
+            });
         }
     }
 }

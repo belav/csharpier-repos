@@ -12,48 +12,38 @@ namespace System.Threading.Tasks.Tests
         [Fact]
         public void InvalidArguments_ThrowExceptions()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "task",
-                () => TaskToAsyncResult.Begin(null, null, null)
+            AssertExtensions.Throws<ArgumentNullException>("task", () =>
+                TaskToAsyncResult.Begin(null, null, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "task",
-                () => TaskToAsyncResult.Begin(null, iar => { }, "test")
+            AssertExtensions.Throws<ArgumentNullException>("task", () =>
+                TaskToAsyncResult.Begin(null, iar => { }, "test")
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "asyncResult",
-                () => TaskToAsyncResult.End(null)
+            AssertExtensions.Throws<ArgumentNullException>("asyncResult", () =>
+                TaskToAsyncResult.End(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "asyncResult",
-                () => TaskToAsyncResult.End<int>(null)
+            AssertExtensions.Throws<ArgumentNullException>("asyncResult", () =>
+                TaskToAsyncResult.End<int>(null)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "asyncResult",
-                () => TaskToAsyncResult.End(new NonTaskIAsyncResult())
+            AssertExtensions.Throws<ArgumentException>("asyncResult", () =>
+                TaskToAsyncResult.End(new NonTaskIAsyncResult())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "asyncResult",
-                () => TaskToAsyncResult.End<int>(new NonTaskIAsyncResult())
+            AssertExtensions.Throws<ArgumentException>("asyncResult", () =>
+                TaskToAsyncResult.End<int>(new NonTaskIAsyncResult())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "asyncResult",
-                () => TaskToAsyncResult.End<int>(Task.FromResult((long)42))
+            AssertExtensions.Throws<ArgumentException>("asyncResult", () =>
+                TaskToAsyncResult.End<int>(Task.FromResult((long)42))
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "asyncResult",
-                () => TaskToAsyncResult.Unwrap(new NonTaskIAsyncResult())
+            AssertExtensions.Throws<ArgumentException>("asyncResult", () =>
+                TaskToAsyncResult.Unwrap(new NonTaskIAsyncResult())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "asyncResult",
-                () => TaskToAsyncResult.Unwrap<int>(new NonTaskIAsyncResult())
+            AssertExtensions.Throws<ArgumentException>("asyncResult", () =>
+                TaskToAsyncResult.Unwrap<int>(new NonTaskIAsyncResult())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "asyncResult",
-                () => TaskToAsyncResult.Unwrap<int>(Task.FromResult((long)42))
+            AssertExtensions.Throws<ArgumentException>("asyncResult", () =>
+                TaskToAsyncResult.Unwrap<int>(Task.FromResult((long)42))
             );
         }
 
@@ -178,13 +168,10 @@ namespace System.Threading.Tasks.Tests
         {
             var tcs = new TaskCompletionSource();
             var invoked = new TaskCompletionSource();
-            _ = Task.Factory.FromAsync(
-                TaskToAsyncResult.Begin(tcs.Task, null, null),
-                iar =>
-                {
-                    invoked.SetResult();
-                }
-            );
+            _ = Task.Factory.FromAsync(TaskToAsyncResult.Begin(tcs.Task, null, null), iar =>
+            {
+                invoked.SetResult();
+            });
             tcs.SetResult();
             await invoked.Task;
         }

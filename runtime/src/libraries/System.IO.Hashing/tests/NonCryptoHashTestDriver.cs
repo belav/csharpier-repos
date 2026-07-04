@@ -180,9 +180,8 @@ namespace System.IO.Hashing.Tests
         [Fact]
         public void StaticOneShotNullArrayThrows()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => StaticOneShot((byte[])null)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                StaticOneShot((byte[])null)
             );
         }
 
@@ -224,9 +223,8 @@ namespace System.IO.Hashing.Tests
                 byte fill = (byte)~i;
                 destination.AsSpan().Fill(fill);
 
-                AssertExtensions.Throws<ArgumentException>(
-                    "destination",
-                    () => StaticOneShot(ReadOnlySpan<byte>.Empty, destination.AsSpan(0, i))
+                AssertExtensions.Throws<ArgumentException>("destination", () =>
+                    StaticOneShot(ReadOnlySpan<byte>.Empty, destination.AsSpan(0, i))
                 );
 
                 for (int j = 0; j < destination.Length; j++)

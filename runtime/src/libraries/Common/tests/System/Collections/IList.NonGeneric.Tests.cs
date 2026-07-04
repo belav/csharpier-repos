@@ -248,13 +248,11 @@ namespace System.Collections.Tests
             {
                 IList list = NonGenericIListFactory(count);
                 object validAdd = CreateT(0);
-                Assert.Throws(
-                    IList_NonGeneric_Item_InvalidIndex_ThrowType,
-                    () => list[-1] = validAdd
+                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () =>
+                    list[-1] = validAdd
                 );
-                Assert.Throws(
-                    IList_NonGeneric_Item_InvalidIndex_ThrowType,
-                    () => list[int.MinValue] = validAdd
+                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () =>
+                    list[int.MinValue] = validAdd
                 );
                 Assert.Equal(count, list.Count);
             }
@@ -268,13 +266,11 @@ namespace System.Collections.Tests
             {
                 IList list = NonGenericIListFactory(count);
                 object validAdd = CreateT(0);
-                Assert.Throws(
-                    IList_NonGeneric_Item_InvalidIndex_ThrowType,
-                    () => list[count] = validAdd
+                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () =>
+                    list[count] = validAdd
                 );
-                Assert.Throws(
-                    IList_NonGeneric_Item_InvalidIndex_ThrowType,
-                    () => list[count + 1] = validAdd
+                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () =>
+                    list[count + 1] = validAdd
                 );
                 Assert.Equal(count, list.Count);
             }
@@ -367,14 +363,11 @@ namespace System.Collections.Tests
         {
             if (!IsReadOnly)
             {
-                Assert.All(
-                    InvalidValues,
-                    value =>
-                    {
-                        IList list = NonGenericIListFactory(count);
-                        Assert.Throws<ArgumentException>(() => list[count / 2] = value);
-                    }
-                );
+                Assert.All(InvalidValues, value =>
+                {
+                    IList list = NonGenericIListFactory(count);
+                    Assert.Throws<ArgumentException>(() => list[count / 2] = value);
+                });
             }
         }
 
@@ -400,17 +393,14 @@ namespace System.Collections.Tests
         {
             if (!IsReadOnly && !ExpectedFixedSize)
             {
-                Assert.All(
-                    InvalidValues,
-                    invalidValue =>
-                    {
-                        IList collection = NonGenericIListFactory(count);
-                        collection.Add(invalidValue);
-                        for (int i = 0; i < count; i++)
-                            collection.Add(CreateT(i));
-                        Assert.Equal(count * 2, collection.Count);
-                    }
-                );
+                Assert.All(InvalidValues, invalidValue =>
+                {
+                    IList collection = NonGenericIListFactory(count);
+                    collection.Add(invalidValue);
+                    for (int i = 0; i < count; i++)
+                        collection.Add(CreateT(i));
+                    Assert.Equal(count * 2, collection.Count);
+                });
             }
         }
 
@@ -420,17 +410,14 @@ namespace System.Collections.Tests
         {
             if (!IsReadOnly && !ExpectedFixedSize)
             {
-                Assert.All(
-                    InvalidValues,
-                    invalidValue =>
-                    {
-                        IList collection = NonGenericIListFactory(0);
-                        collection.Add(invalidValue);
-                        for (int i = 0; i < count; i++)
-                            collection.Add(CreateT(i));
-                        Assert.Equal(count, collection.Count);
-                    }
-                );
+                Assert.All(InvalidValues, invalidValue =>
+                {
+                    IList collection = NonGenericIListFactory(0);
+                    collection.Add(invalidValue);
+                    for (int i = 0; i < count; i++)
+                        collection.Add(CreateT(i));
+                    Assert.Equal(count, collection.Count);
+                });
             }
         }
 
@@ -440,15 +427,12 @@ namespace System.Collections.Tests
         {
             if (!IsReadOnly && !ExpectedFixedSize)
             {
-                Assert.All(
-                    InvalidValues,
-                    invalidValue =>
-                    {
-                        IList collection = NonGenericIListFactory(count);
-                        collection.Add(invalidValue);
-                        Assert.Equal(count, collection.Count);
-                    }
-                );
+                Assert.All(InvalidValues, invalidValue =>
+                {
+                    IList collection = NonGenericIListFactory(count);
+                    collection.Add(invalidValue);
+                    Assert.Equal(count, collection.Count);
+                });
             }
         }
 
@@ -641,10 +625,8 @@ namespace System.Collections.Tests
         public void IList_NonGeneric_Contains_InvalidValue_ThrowsArgumentException(int count)
         {
             IList collection = NonGenericIListFactory(count);
-            Assert.All(
-                InvalidValues,
-                invalidValue =>
-                    Assert.Throws<ArgumentException>(() => collection.Contains(invalidValue))
+            Assert.All(InvalidValues, invalidValue =>
+                Assert.Throws<ArgumentException>(() => collection.Contains(invalidValue))
             );
         }
 
@@ -709,13 +691,10 @@ namespace System.Collections.Tests
         {
             // Assumes no duplicate elements contained in the list returned by NonGenericIListFactory
             IList list = NonGenericIListFactory(count);
-            Assert.All(
-                Enumerable.Range(0, count),
-                index =>
-                {
-                    Assert.Equal(index, list.IndexOf(list[index]));
-                }
-            );
+            Assert.All(Enumerable.Range(0, count), index =>
+            {
+                Assert.Equal(index, list.IndexOf(list[index]));
+            });
         }
 
         [Theory]
@@ -724,14 +703,11 @@ namespace System.Collections.Tests
         {
             if (!IsReadOnly && !ExpectedFixedSize)
             {
-                Assert.All(
-                    InvalidValues,
-                    value =>
-                    {
-                        IList list = NonGenericIListFactory(count);
-                        Assert.Throws<ArgumentException>(() => list.IndexOf(value));
-                    }
-                );
+                Assert.All(InvalidValues, value =>
+                {
+                    IList list = NonGenericIListFactory(count);
+                    Assert.Throws<ArgumentException>(() => list.IndexOf(value));
+                });
             }
         }
 
@@ -770,13 +746,11 @@ namespace System.Collections.Tests
             {
                 IList list = NonGenericIListFactory(count);
                 object validAdd = CreateT(0);
-                Assert.Throws(
-                    IList_NonGeneric_Item_InvalidIndex_ThrowType,
-                    () => list.Insert(-1, validAdd)
+                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () =>
+                    list.Insert(-1, validAdd)
                 );
-                Assert.Throws(
-                    IList_NonGeneric_Item_InvalidIndex_ThrowType,
-                    () => list.Insert(int.MinValue, validAdd)
+                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () =>
+                    list.Insert(int.MinValue, validAdd)
                 );
                 Assert.Equal(count, list.Count);
             }
@@ -888,14 +862,11 @@ namespace System.Collections.Tests
         {
             if (!IsReadOnly && !ExpectedFixedSize)
             {
-                Assert.All(
-                    InvalidValues,
-                    value =>
-                    {
-                        IList list = NonGenericIListFactory(count);
-                        Assert.Throws<ArgumentException>(() => list.Insert(count / 2, value));
-                    }
-                );
+                Assert.All(InvalidValues, value =>
+                {
+                    IList list = NonGenericIListFactory(count);
+                    Assert.Throws<ArgumentException>(() => list.Insert(count / 2, value));
+                });
             }
         }
 
@@ -1034,13 +1005,10 @@ namespace System.Collections.Tests
                 IList collection = NonGenericIListFactory(count);
                 object[] arr = new object[count];
                 collection.CopyTo(arr, 0);
-                Assert.All(
-                    arr,
-                    value =>
-                    {
-                        collection.Remove(value);
-                    }
-                );
+                Assert.All(arr, value =>
+                {
+                    collection.Remove(value);
+                });
                 Assert.Empty(collection);
             }
         }
@@ -1052,13 +1020,10 @@ namespace System.Collections.Tests
             if (!IsReadOnly && !ExpectedFixedSize)
             {
                 IList collection = NonGenericIListFactory(count);
-                Assert.All(
-                    InvalidValues,
-                    value =>
-                    {
-                        Assert.Throws<ArgumentException>(() => collection.Remove(value));
-                    }
-                );
+                Assert.All(InvalidValues, value =>
+                {
+                    Assert.Throws<ArgumentException>(() => collection.Remove(value));
+                });
                 Assert.Equal(count, collection.Count);
             }
         }
@@ -1075,13 +1040,11 @@ namespace System.Collections.Tests
             {
                 IList list = NonGenericIListFactory(count);
                 object validAdd = CreateT(0);
-                Assert.Throws(
-                    IList_NonGeneric_Item_InvalidIndex_ThrowType,
-                    () => list.RemoveAt(-1)
+                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () =>
+                    list.RemoveAt(-1)
                 );
-                Assert.Throws(
-                    IList_NonGeneric_Item_InvalidIndex_ThrowType,
-                    () => list.RemoveAt(int.MinValue)
+                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () =>
+                    list.RemoveAt(int.MinValue)
                 );
                 Assert.Equal(count, list.Count);
             }
@@ -1095,13 +1058,11 @@ namespace System.Collections.Tests
             {
                 IList list = NonGenericIListFactory(count);
                 object validAdd = CreateT(0);
-                Assert.Throws(
-                    IList_NonGeneric_Item_InvalidIndex_ThrowType,
-                    () => list.RemoveAt(count)
+                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () =>
+                    list.RemoveAt(count)
                 );
-                Assert.Throws(
-                    IList_NonGeneric_Item_InvalidIndex_ThrowType,
-                    () => list.RemoveAt(count + 1)
+                Assert.Throws(IList_NonGeneric_Item_InvalidIndex_ThrowType, () =>
+                    list.RemoveAt(count + 1)
                 );
                 Assert.Equal(count, list.Count);
             }
@@ -1127,14 +1088,11 @@ namespace System.Collections.Tests
             {
                 IList list = NonGenericIListFactory(count);
                 Assert.Equal(count, list.Count);
-                Assert.All(
-                    Enumerable.Range(0, count).Reverse(),
-                    index =>
-                    {
-                        list.RemoveAt(index);
-                        Assert.Equal(index, list.Count);
-                    }
-                );
+                Assert.All(Enumerable.Range(0, count).Reverse(), index =>
+                {
+                    list.RemoveAt(index);
+                    Assert.Equal(index, list.Count);
+                });
             }
         }
 
@@ -1145,14 +1103,11 @@ namespace System.Collections.Tests
             if (!IsReadOnly && !ExpectedFixedSize)
             {
                 IList list = NonGenericIListFactory(count);
-                Assert.All(
-                    Enumerable.Range(0, count),
-                    index =>
-                    {
-                        list.RemoveAt(0);
-                        Assert.Equal(count - index - 1, list.Count);
-                    }
-                );
+                Assert.All(Enumerable.Range(0, count), index =>
+                {
+                    list.RemoveAt(0);
+                    Assert.Equal(count - index - 1, list.Count);
+                });
             }
         }
 

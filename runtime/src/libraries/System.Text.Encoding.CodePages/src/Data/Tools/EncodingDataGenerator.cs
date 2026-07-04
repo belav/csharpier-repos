@@ -165,35 +165,22 @@ namespace EncodingDataGenerator
                     nameMappings.OrderBy(kv => kv.Key, StringComparer.Ordinal),
                     kv => new object[] { kv.Value, kv.Key }
                 );
-                OutputData(
-                    output,
-                    MappedCodePages,
-                    preferredNames.OrderBy(kv => kv.Key),
-                    kv => new object[] { kv.Key, kv.Value.Key }
+                OutputData(output, MappedCodePages, preferredNames.OrderBy(kv => kv.Key), kv =>
+                    new object[] { kv.Key, kv.Value.Key }
                 );
 
-                OutputData(
-                    output,
-                    WebNames,
-                    preferredNames.OrderBy(kv => kv.Key),
-                    kv => new object[] { kv.Value.Key, kv.Key }
+                OutputData(output, WebNames, preferredNames.OrderBy(kv => kv.Key), kv =>
+                    new object[] { kv.Value.Key, kv.Key }
                 );
                 {
                     int nextStart = 0;
-                    OutputData(
-                        output,
-                        WebNameIndices,
-                        preferredNames.OrderBy(kv => kv.Key),
-                        kv =>
-                            new object[] { kv.Value.Key, kv.Key, nextStart += kv.Value.Key.Length }
+                    OutputData(output, WebNameIndices, preferredNames.OrderBy(kv => kv.Key), kv =>
+                        new object[] { kv.Value.Key, kv.Key, nextStart += kv.Value.Key.Length }
                     );
                 }
 
-                OutputData(
-                    output,
-                    EnglishNames,
-                    preferredNames.OrderBy(kv => kv.Key),
-                    kv => new object[] { kv.Value.Value, kv.Key }
+                OutputData(output, EnglishNames, preferredNames.OrderBy(kv => kv.Key), kv =>
+                    new object[] { kv.Value.Value, kv.Key }
                 );
                 {
                     int nextStart = 0;

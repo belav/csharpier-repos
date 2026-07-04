@@ -58,13 +58,11 @@ internal sealed class CSharpMakeStructReadOnlyCodeFixProvider : SyntaxEditorBase
         // process from lower to higher, that way we will fixup a nested struct first before fixing the outer struct.
         foreach (var typeDeclaration in typeDeclarations.OrderByDescending(t => t.SpanStart))
         {
-            editor.ReplaceNode(
-                typeDeclaration,
-                (current, generator) =>
-                    generator.WithModifiers(
-                        current,
-                        generator.GetModifiers(current).WithIsReadOnly(true)
-                    )
+            editor.ReplaceNode(typeDeclaration, (current, generator) =>
+                generator.WithModifiers(
+                    current,
+                    generator.GetModifiers(current).WithIsReadOnly(true)
+                )
             );
         }
 

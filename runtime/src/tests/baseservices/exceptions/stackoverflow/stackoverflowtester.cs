@@ -67,14 +67,11 @@ namespace TestStackOverflow
             {
                 string separator = string.Empty;
                 StringBuilder expectedListBuilder = new StringBuilder();
-                Array.ForEach(
-                    expectedExitCodes,
-                    code =>
-                    {
-                        expectedListBuilder.Append($"{separator}0x{code:X8}");
-                        separator = " or ";
-                    }
-                );
+                Array.ForEach(expectedExitCodes, code =>
+                {
+                    expectedListBuilder.Append($"{separator}0x{code:X8}");
+                    separator = " or ";
+                });
                 throw new Exception(
                     $"Exit code: 0x{testProcess.ExitCode:X8}, expected {expectedListBuilder.ToString()}"
                 );

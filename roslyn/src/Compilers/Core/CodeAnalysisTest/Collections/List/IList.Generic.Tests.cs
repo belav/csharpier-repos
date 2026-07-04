@@ -160,9 +160,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 IList<T> list = GenericIListFactory(count);
                 T validAdd = CreateT(0);
                 Assert.Throws(IList_Generic_Item_InvalidIndex_ThrowType, () => list[-1] = validAdd);
-                Assert.Throws(
-                    IList_Generic_Item_InvalidIndex_ThrowType,
-                    () => list[int.MinValue] = validAdd
+                Assert.Throws(IList_Generic_Item_InvalidIndex_ThrowType, () =>
+                    list[int.MinValue] = validAdd
                 );
                 Assert.Equal(count, list.Count);
             }
@@ -176,13 +175,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             {
                 IList<T> list = GenericIListFactory(count);
                 T validAdd = CreateT(0);
-                Assert.Throws(
-                    IList_Generic_Item_InvalidIndex_ThrowType,
-                    () => list[count] = validAdd
+                Assert.Throws(IList_Generic_Item_InvalidIndex_ThrowType, () =>
+                    list[count] = validAdd
                 );
-                Assert.Throws(
-                    IList_Generic_Item_InvalidIndex_ThrowType,
-                    () => list[count + 1] = validAdd
+                Assert.Throws(IList_Generic_Item_InvalidIndex_ThrowType, () =>
+                    list[count + 1] = validAdd
                 );
                 Assert.Equal(count, list.Count);
             }
@@ -290,14 +287,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             if (count > 0 && !IsReadOnly)
             {
-                Assert.All(
-                    InvalidValues,
-                    value =>
-                    {
-                        IList<T> list = GenericIListFactory(count);
-                        Assert.Throws<ArgumentException>(() => list[count / 2] = value);
-                    }
-                );
+                Assert.All(InvalidValues, value =>
+                {
+                    IList<T> list = GenericIListFactory(count);
+                    Assert.Throws<ArgumentException>(() => list[count / 2] = value);
+                });
             }
         }
 
@@ -379,13 +373,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             // Assumes no duplicate elements contained in the list returned by GenericIListFactory
             IList<T> list = GenericIListFactory(count);
-            Assert.All(
-                Enumerable.Range(0, count),
-                index =>
-                {
-                    Assert.Equal(index, list.IndexOf(list[index]));
-                }
-            );
+            Assert.All(Enumerable.Range(0, count), index =>
+            {
+                Assert.Equal(index, list.IndexOf(list[index]));
+            });
         }
 
         [Theory]
@@ -394,14 +385,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             if (!IsReadOnly)
             {
-                Assert.All(
-                    InvalidValues,
-                    value =>
-                    {
-                        IList<T> list = GenericIListFactory(count);
-                        Assert.Throws<ArgumentException>(() => list.IndexOf(value));
-                    }
-                );
+                Assert.All(InvalidValues, value =>
+                {
+                    IList<T> list = GenericIListFactory(count);
+                    Assert.Throws<ArgumentException>(() => list.IndexOf(value));
+                });
             }
         }
 
@@ -556,14 +544,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             if (!IsReadOnly && !AddRemoveClear_ThrowsNotSupported)
             {
-                Assert.All(
-                    InvalidValues,
-                    value =>
-                    {
-                        IList<T> list = GenericIListFactory(count);
-                        Assert.Throws<ArgumentException>(() => list.Insert(count / 2, value));
-                    }
-                );
+                Assert.All(InvalidValues, value =>
+                {
+                    IList<T> list = GenericIListFactory(count);
+                    Assert.Throws<ArgumentException>(() => list.Insert(count / 2, value));
+                });
             }
         }
 
@@ -623,14 +608,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             {
                 IList<T> list = GenericIListFactory(count);
                 Assert.Equal(count, list.Count);
-                Assert.All(
-                    Enumerable.Range(0, count).Reverse(),
-                    index =>
-                    {
-                        list.RemoveAt(index);
-                        Assert.Equal(index, list.Count);
-                    }
-                );
+                Assert.All(Enumerable.Range(0, count).Reverse(), index =>
+                {
+                    list.RemoveAt(index);
+                    Assert.Equal(index, list.Count);
+                });
             }
         }
 
@@ -641,14 +623,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             if (!IsReadOnly && !AddRemoveClear_ThrowsNotSupported)
             {
                 IList<T> list = GenericIListFactory(count);
-                Assert.All(
-                    Enumerable.Range(0, count),
-                    index =>
-                    {
-                        list.RemoveAt(0);
-                        Assert.Equal(count - index - 1, list.Count);
-                    }
-                );
+                Assert.All(Enumerable.Range(0, count), index =>
+                {
+                    list.RemoveAt(0);
+                    Assert.Equal(count - index - 1, list.Count);
+                });
             }
         }
 

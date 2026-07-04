@@ -168,14 +168,11 @@ public abstract class NonSharedModelBulkUpdatesTestBase : NonSharedModelTestBase
             onModelCreating: mb =>
                 mb.Entity<Blog>()
                     .ToTable("Blogs")
-                    .SplitToTable(
-                        "BlogsPart1",
-                        tb =>
-                        {
-                            tb.Property(b => b.Title);
-                            tb.Property(b => b.Rating);
-                        }
-                    ),
+                    .SplitToTable("BlogsPart1", tb =>
+                    {
+                        tb.Property(b => b.Title);
+                        tb.Property(b => b.Rating);
+                    }),
             seed: context =>
             {
                 context.Set<Blog>().Add(new Blog { Title = "SomeBlog" });
@@ -200,14 +197,11 @@ public abstract class NonSharedModelBulkUpdatesTestBase : NonSharedModelTestBase
             onModelCreating: mb =>
                 mb.Entity<Blog>()
                     .ToTable("Blogs")
-                    .SplitToTable(
-                        "BlogsPart1",
-                        tb =>
-                        {
-                            tb.Property(b => b.Title);
-                            tb.Property(b => b.Rating);
-                        }
-                    ),
+                    .SplitToTable("BlogsPart1", tb =>
+                    {
+                        tb.Property(b => b.Title);
+                        tb.Property(b => b.Rating);
+                    }),
             seed: context =>
             {
                 context.Set<Blog>().Add(new Blog { Title = "SomeBlog" });
@@ -407,18 +401,14 @@ public abstract class NonSharedModelBulkUpdatesTestBase : NonSharedModelTestBase
         }
         else
         {
-            TestHelpers.ExecuteWithStrategyInTransaction(
-                contextCreator,
-                UseTransaction,
-                context =>
-                {
-                    var processedQuery = query(context);
+            TestHelpers.ExecuteWithStrategyInTransaction(contextCreator, UseTransaction, context =>
+            {
+                var processedQuery = query(context);
 
-                    var result = processedQuery.ExecuteDelete();
+                var result = processedQuery.ExecuteDelete();
 
-                    Assert.Equal(rowsAffectedCount, result);
-                }
-            );
+                Assert.Equal(rowsAffectedCount, result);
+            });
         }
     }
 
@@ -449,18 +439,14 @@ public abstract class NonSharedModelBulkUpdatesTestBase : NonSharedModelTestBase
         }
         else
         {
-            TestHelpers.ExecuteWithStrategyInTransaction(
-                contextCreator,
-                UseTransaction,
-                context =>
-                {
-                    var processedQuery = query(context);
+            TestHelpers.ExecuteWithStrategyInTransaction(contextCreator, UseTransaction, context =>
+            {
+                var processedQuery = query(context);
 
-                    var result = processedQuery.ExecuteUpdate(setPropertyCalls);
+                var result = processedQuery.ExecuteUpdate(setPropertyCalls);
 
-                    Assert.Equal(rowsAffectedCount, result);
-                }
-            );
+                Assert.Equal(rowsAffectedCount, result);
+            });
         }
     }
 

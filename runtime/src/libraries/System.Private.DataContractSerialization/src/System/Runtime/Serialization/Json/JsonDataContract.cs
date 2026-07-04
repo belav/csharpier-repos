@@ -232,25 +232,21 @@ namespace System.Runtime.Serialization.Json
 
                 lock (s_cacheLock)
                 {
-                    return s_typeToIDCache.GetOrAdd(
-                        typeHandle.Value,
-                        static _ =>
+                    return s_typeToIDCache.GetOrAdd(typeHandle.Value, static _ =>
+                    {
+                        int nextId = s_dataContractID++;
+                        if (nextId >= s_dataContractCache.Length)
                         {
-                            int nextId = s_dataContractID++;
-                            if (nextId >= s_dataContractCache.Length)
+                            int newSize = (nextId < int.MaxValue / 2) ? nextId * 2 : int.MaxValue;
+                            if (newSize <= nextId)
                             {
-                                int newSize =
-                                    (nextId < int.MaxValue / 2) ? nextId * 2 : int.MaxValue;
-                                if (newSize <= nextId)
-                                {
-                                    Debug.Fail("DataContract cache overflow");
-                                    throw new SerializationException(SR.DataContractCacheOverflow);
-                                }
-                                Array.Resize<JsonDataContract>(ref s_dataContractCache, newSize);
+                                Debug.Fail("DataContract cache overflow");
+                                throw new SerializationException(SR.DataContractCacheOverflow);
                             }
-                            return nextId;
+                            Array.Resize<JsonDataContract>(ref s_dataContractCache, newSize);
                         }
-                    );
+                        return nextId;
+                    });
                 }
             }
 

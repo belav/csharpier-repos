@@ -174,77 +174,67 @@ namespace System.Text.Encodings.Tests
                 byte* pBytes = bytesPtr;
                 char* pChars = charsPtr;
 
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "chars",
-                    () =>
-                        encoder.Convert(
-                            null,
-                            chars.Length,
-                            pBytes,
-                            bytes.Length,
-                            true,
-                            out charsUsed,
-                            out bytesUsed,
-                            out completed
-                        )
+                AssertExtensions.Throws<ArgumentNullException>("chars", () =>
+                    encoder.Convert(
+                        null,
+                        chars.Length,
+                        pBytes,
+                        bytes.Length,
+                        true,
+                        out charsUsed,
+                        out bytesUsed,
+                        out completed
+                    )
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "bytes",
-                    () =>
-                        encoder.Convert(
-                            pChars,
-                            chars.Length,
-                            null,
-                            bytes.Length,
-                            true,
-                            out charsUsed,
-                            out bytesUsed,
-                            out completed
-                        )
+                AssertExtensions.Throws<ArgumentNullException>("bytes", () =>
+                    encoder.Convert(
+                        pChars,
+                        chars.Length,
+                        null,
+                        bytes.Length,
+                        true,
+                        out charsUsed,
+                        out bytesUsed,
+                        out completed
+                    )
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "byteCount",
-                    () =>
-                        encoder.Convert(
-                            pChars,
-                            chars.Length,
-                            pBytes,
-                            -1,
-                            true,
-                            out charsUsed,
-                            out bytesUsed,
-                            out completed
-                        )
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("byteCount", () =>
+                    encoder.Convert(
+                        pChars,
+                        chars.Length,
+                        pBytes,
+                        -1,
+                        true,
+                        out charsUsed,
+                        out bytesUsed,
+                        out completed
+                    )
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "charCount",
-                    () =>
-                        encoder.Convert(
-                            pChars,
-                            -1,
-                            pBytes,
-                            bytes.Length,
-                            true,
-                            out charsUsed,
-                            out bytesUsed,
-                            out completed
-                        )
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("charCount", () =>
+                    encoder.Convert(
+                        pChars,
+                        -1,
+                        pBytes,
+                        bytes.Length,
+                        true,
+                        out charsUsed,
+                        out bytesUsed,
+                        out completed
+                    )
                 );
 
-                AssertExtensions.Throws<ArgumentException>(
-                    "bytes",
-                    () =>
-                        encoder.Convert(
-                            pChars,
-                            chars.Length,
-                            pBytes,
-                            0,
-                            true,
-                            out charsUsed,
-                            out bytesUsed,
-                            out completed
-                        )
+                AssertExtensions.Throws<ArgumentException>("bytes", () =>
+                    encoder.Convert(
+                        pChars,
+                        chars.Length,
+                        pBytes,
+                        0,
+                        true,
+                        out charsUsed,
+                        out bytesUsed,
+                        out completed
+                    )
                 );
             }
 
@@ -352,35 +342,28 @@ namespace System.Text.Encodings.Tests
                 byte* pBytes = bytesPtr;
                 char* pChars = charsPtr;
 
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "bytes",
-                    () => encoder.GetBytes(pChars, s.Length, null, 1, true)
+                AssertExtensions.Throws<ArgumentNullException>("bytes", () =>
+                    encoder.GetBytes(pChars, s.Length, null, 1, true)
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "chars",
-                    () => encoder.GetBytes(null, s.Length, pBytes, 4, true)
+                AssertExtensions.Throws<ArgumentNullException>("chars", () =>
+                    encoder.GetBytes(null, s.Length, pBytes, 4, true)
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "chars",
-                    () => encoder.GetByteCount(null, s.Length, true)
+                AssertExtensions.Throws<ArgumentNullException>("chars", () =>
+                    encoder.GetByteCount(null, s.Length, true)
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "charCount",
-                    () => encoder.GetBytes(pChars, -1, pBytes, 4, true)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("charCount", () =>
+                    encoder.GetBytes(pChars, -1, pBytes, 4, true)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "byteCount",
-                    () => encoder.GetBytes(pChars, s.Length, pBytes, -1, true)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("byteCount", () =>
+                    encoder.GetBytes(pChars, s.Length, pBytes, -1, true)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "count",
-                    () => encoder.GetByteCount(pChars, -1, true)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    encoder.GetByteCount(pChars, -1, true)
                 );
 
-                AssertExtensions.Throws<ArgumentException>(
-                    "bytes",
-                    () => encoder.GetBytes(pChars, s.Length, pBytes, 1, true)
+                AssertExtensions.Throws<ArgumentException>("bytes", () =>
+                    encoder.GetBytes(pChars, s.Length, pBytes, 1, true)
                 );
             }
 

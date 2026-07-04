@@ -1899,9 +1899,8 @@ namespace LibraryImportGenerator.UnitTests
                     .OfType<MethodDeclarationSyntax>()
                     .ToList();
 
-                Assert.All(
-                    methods,
-                    method => Assert.NotNull(model.GetDeclaredSymbol(method)!.GetDllImportData())
+                Assert.All(methods, method =>
+                    Assert.NotNull(model.GetDeclaredSymbol(method)!.GetDllImportData())
                 );
             }
         }

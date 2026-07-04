@@ -240,22 +240,19 @@ public abstract class ConfigurationDbContextTestBase<TFixture> : IClassFixture<T
         Skip = "VerificationException : Method System.Linq.Enumerable.MaxFloat: type argument 'System.Char' violates the constraint of type parameter 'T'."
     )]
     public async Task Can_call_ResourceStore_FindApiResourcesByNameAsync() =>
-        await ExecuteWithStrategyInTransactionAsync(
-            SaveApiResources,
-            async context =>
-            {
-                var store = new ResourceStore(context, new FakeLogger<ResourceStore>());
+        await ExecuteWithStrategyInTransactionAsync(SaveApiResources, async context =>
+        {
+            var store = new ResourceStore(context, new FakeLogger<ResourceStore>());
 
-                Assert.Equal(
-                    2,
-                    (
-                        await store.FindApiResourcesByNameAsync(
-                            new[] { "ApiResource2", "ApiResource1" }
-                        )
-                    ).Count()
-                );
-            }
-        );
+            Assert.Equal(
+                2,
+                (
+                    await store.FindApiResourcesByNameAsync(
+                        new[] { "ApiResource2", "ApiResource1" }
+                    )
+                ).Count()
+            );
+        });
 
     [ConditionalFact]
     public void Can_build_ConfigurationDbContext_model()

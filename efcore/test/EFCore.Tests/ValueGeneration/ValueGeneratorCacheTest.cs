@@ -35,19 +35,16 @@ public class ValueGeneratorCacheTest
     private static IModel CreateModel(bool generateValues = true)
     {
         var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
-        modelBuilder.Entity(
-            "Led",
-            eb =>
+        modelBuilder.Entity("Led", eb =>
+        {
+            eb.Property<int>("Id");
+            eb.Property<Guid>("Zeppelin");
+            var property = eb.Property<Guid>("Stairway");
+            if (generateValues)
             {
-                eb.Property<int>("Id");
-                eb.Property<Guid>("Zeppelin");
-                var property = eb.Property<Guid>("Stairway");
-                if (generateValues)
-                {
-                    property.ValueGeneratedOnAdd();
-                }
+                property.ValueGeneratedOnAdd();
             }
-        );
+        });
 
         return modelBuilder.FinalizeModel();
     }

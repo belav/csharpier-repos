@@ -39,9 +39,8 @@ public class CosmosConcurrencyTest : IClassFixture<CosmosConcurrencyTest.CosmosF
     [ConditionalFact]
     public async Task Etag_will_return_when_content_response_enabled_false()
     {
-        await using var testDatabase = CosmosTestStore.CreateInitialized(
-            DatabaseName,
-            o => o.ContentResponseOnWriteEnabled(false)
+        await using var testDatabase = CosmosTestStore.CreateInitialized(DatabaseName, o =>
+            o.ContentResponseOnWriteEnabled(false)
         );
 
         var customer = new Customer { Id = "4", Name = "Theon" };
@@ -72,9 +71,8 @@ public class CosmosConcurrencyTest : IClassFixture<CosmosConcurrencyTest.CosmosF
     [ConditionalFact]
     public async Task Etag_will_return_when_content_response_enabled_true()
     {
-        await using var testDatabase = CosmosTestStore.CreateInitialized(
-            DatabaseName,
-            o => o.ContentResponseOnWriteEnabled()
+        await using var testDatabase = CosmosTestStore.CreateInitialized(DatabaseName, o =>
+            o.ContentResponseOnWriteEnabled()
         );
 
         var customer = new Customer { Id = "3", Name = "Theon" };
@@ -110,16 +108,13 @@ public class CosmosConcurrencyTest : IClassFixture<CosmosConcurrencyTest.CosmosF
         bool? contentResponseOnWriteEnabled
     )
     {
-        await using var testDatabase = CosmosTestStore.CreateInitialized(
-            DatabaseName,
-            o =>
+        await using var testDatabase = CosmosTestStore.CreateInitialized(DatabaseName, o =>
+        {
+            if (contentResponseOnWriteEnabled.HasValue)
             {
-                if (contentResponseOnWriteEnabled.HasValue)
-                {
-                    o.ContentResponseOnWriteEnabled(contentResponseOnWriteEnabled.Value);
-                }
+                o.ContentResponseOnWriteEnabled(contentResponseOnWriteEnabled.Value);
             }
-        );
+        });
 
         var customer = new Customer
         {

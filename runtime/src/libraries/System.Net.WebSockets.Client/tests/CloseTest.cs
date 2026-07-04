@@ -206,17 +206,14 @@ namespace System.Net.WebSockets.Client.Tests
                 );
                 string expectedMessage = expectedException.Message;
 
-                AssertExtensions.Throws<ArgumentException>(
-                    "statusDescription",
-                    () =>
-                    {
-                        Task t = cws.CloseAsync(
-                            WebSocketCloseStatus.NormalClosure,
-                            closeDescription,
-                            cts.Token
-                        );
-                    }
-                );
+                AssertExtensions.Throws<ArgumentException>("statusDescription", () =>
+                {
+                    Task t = cws.CloseAsync(
+                        WebSocketCloseStatus.NormalClosure,
+                        closeDescription,
+                        cts.Token
+                    );
+                });
 
                 Assert.Equal(WebSocketState.Open, cws.State);
             }

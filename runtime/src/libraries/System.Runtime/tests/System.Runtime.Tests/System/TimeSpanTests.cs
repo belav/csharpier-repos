@@ -52,13 +52,11 @@ namespace System.Tests
         [Fact]
         public static void Ctor_Int_Int_Int_Invalid()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                null,
-                () => new TimeSpan((int)TimeSpan.MinValue.TotalHours - 1, 0, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                new TimeSpan((int)TimeSpan.MinValue.TotalHours - 1, 0, 0)
             ); // TimeSpan < TimeSpan.MinValue
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                null,
-                () => new TimeSpan((int)TimeSpan.MaxValue.TotalHours + 1, 0, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                new TimeSpan((int)TimeSpan.MaxValue.TotalHours + 1, 0, 0)
             ); // TimeSpan > TimeSpan.MaxValue
         }
 
@@ -74,118 +72,38 @@ namespace System.Tests
         {
             // TimeSpan > TimeSpan.MinValue
             TimeSpan min = TimeSpan.MinValue;
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                null,
-                () =>
-                    new TimeSpan(
-                        min.Days - 1,
-                        min.Hours,
-                        min.Minutes,
-                        min.Seconds,
-                        min.Milliseconds
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                new TimeSpan(min.Days - 1, min.Hours, min.Minutes, min.Seconds, min.Milliseconds)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                null,
-                () =>
-                    new TimeSpan(
-                        min.Days,
-                        min.Hours - 1,
-                        min.Minutes,
-                        min.Seconds,
-                        min.Milliseconds
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                new TimeSpan(min.Days, min.Hours - 1, min.Minutes, min.Seconds, min.Milliseconds)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                null,
-                () =>
-                    new TimeSpan(
-                        min.Days,
-                        min.Hours,
-                        min.Minutes - 1,
-                        min.Seconds,
-                        min.Milliseconds
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                new TimeSpan(min.Days, min.Hours, min.Minutes - 1, min.Seconds, min.Milliseconds)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                null,
-                () =>
-                    new TimeSpan(
-                        min.Days,
-                        min.Hours,
-                        min.Minutes,
-                        min.Seconds - 1,
-                        min.Milliseconds
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                new TimeSpan(min.Days, min.Hours, min.Minutes, min.Seconds - 1, min.Milliseconds)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                null,
-                () =>
-                    new TimeSpan(
-                        min.Days,
-                        min.Hours,
-                        min.Minutes,
-                        min.Seconds,
-                        min.Milliseconds - 1
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                new TimeSpan(min.Days, min.Hours, min.Minutes, min.Seconds, min.Milliseconds - 1)
             );
 
             // TimeSpan > TimeSpan.MaxValue
             TimeSpan max = TimeSpan.MaxValue;
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                null,
-                () =>
-                    new TimeSpan(
-                        max.Days + 1,
-                        max.Hours,
-                        max.Minutes,
-                        max.Seconds,
-                        max.Milliseconds
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                new TimeSpan(max.Days + 1, max.Hours, max.Minutes, max.Seconds, max.Milliseconds)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                null,
-                () =>
-                    new TimeSpan(
-                        max.Days,
-                        max.Hours + 1,
-                        max.Minutes,
-                        max.Seconds,
-                        max.Milliseconds
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                new TimeSpan(max.Days, max.Hours + 1, max.Minutes, max.Seconds, max.Milliseconds)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                null,
-                () =>
-                    new TimeSpan(
-                        max.Days,
-                        max.Hours,
-                        max.Minutes + 1,
-                        max.Seconds,
-                        max.Milliseconds
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                new TimeSpan(max.Days, max.Hours, max.Minutes + 1, max.Seconds, max.Milliseconds)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                null,
-                () =>
-                    new TimeSpan(
-                        max.Days,
-                        max.Hours,
-                        max.Minutes,
-                        max.Seconds + 1,
-                        max.Milliseconds
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                new TimeSpan(max.Days, max.Hours, max.Minutes, max.Seconds + 1, max.Milliseconds)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                null,
-                () =>
-                    new TimeSpan(
-                        max.Days,
-                        max.Hours,
-                        max.Minutes,
-                        max.Seconds,
-                        max.Milliseconds + 1
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                new TimeSpan(max.Days, max.Hours, max.Minutes, max.Seconds, max.Milliseconds + 1)
             );
         }
 
@@ -201,128 +119,108 @@ namespace System.Tests
         {
             // TimeSpan > TimeSpan.MinValue
             TimeSpan min = TimeSpan.MinValue;
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                null,
-                () =>
-                    new TimeSpan(
-                        min.Days - 1,
-                        min.Hours,
-                        min.Minutes,
-                        min.Seconds,
-                        min.Milliseconds,
-                        min.Microseconds
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                new TimeSpan(
+                    min.Days - 1,
+                    min.Hours,
+                    min.Minutes,
+                    min.Seconds,
+                    min.Milliseconds,
+                    min.Microseconds
+                )
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                null,
-                () =>
-                    new TimeSpan(
-                        min.Days,
-                        min.Hours - 1,
-                        min.Minutes,
-                        min.Seconds,
-                        min.Milliseconds,
-                        min.Microseconds
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                new TimeSpan(
+                    min.Days,
+                    min.Hours - 1,
+                    min.Minutes,
+                    min.Seconds,
+                    min.Milliseconds,
+                    min.Microseconds
+                )
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                null,
-                () =>
-                    new TimeSpan(
-                        min.Days,
-                        min.Hours,
-                        min.Minutes - 1,
-                        min.Seconds,
-                        min.Milliseconds,
-                        min.Microseconds
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                new TimeSpan(
+                    min.Days,
+                    min.Hours,
+                    min.Minutes - 1,
+                    min.Seconds,
+                    min.Milliseconds,
+                    min.Microseconds
+                )
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                null,
-                () =>
-                    new TimeSpan(
-                        min.Days,
-                        min.Hours,
-                        min.Minutes,
-                        min.Seconds - 1,
-                        min.Milliseconds,
-                        min.Microseconds
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                new TimeSpan(
+                    min.Days,
+                    min.Hours,
+                    min.Minutes,
+                    min.Seconds - 1,
+                    min.Milliseconds,
+                    min.Microseconds
+                )
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                null,
-                () =>
-                    new TimeSpan(
-                        min.Days,
-                        min.Hours,
-                        min.Minutes,
-                        min.Seconds,
-                        min.Milliseconds,
-                        min.Microseconds - 1
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                new TimeSpan(
+                    min.Days,
+                    min.Hours,
+                    min.Minutes,
+                    min.Seconds,
+                    min.Milliseconds,
+                    min.Microseconds - 1
+                )
             );
 
             // TimeSpan > TimeSpan.MaxValue
             TimeSpan max = TimeSpan.MaxValue;
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                null,
-                () =>
-                    new TimeSpan(
-                        max.Days + 1,
-                        max.Hours,
-                        max.Minutes,
-                        max.Seconds,
-                        max.Milliseconds,
-                        max.Microseconds
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                new TimeSpan(
+                    max.Days + 1,
+                    max.Hours,
+                    max.Minutes,
+                    max.Seconds,
+                    max.Milliseconds,
+                    max.Microseconds
+                )
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                null,
-                () =>
-                    new TimeSpan(
-                        max.Days,
-                        max.Hours + 1,
-                        max.Minutes,
-                        max.Seconds,
-                        max.Milliseconds,
-                        max.Microseconds
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                new TimeSpan(
+                    max.Days,
+                    max.Hours + 1,
+                    max.Minutes,
+                    max.Seconds,
+                    max.Milliseconds,
+                    max.Microseconds
+                )
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                null,
-                () =>
-                    new TimeSpan(
-                        max.Days,
-                        max.Hours,
-                        max.Minutes + 1,
-                        max.Seconds,
-                        max.Milliseconds,
-                        max.Microseconds
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                new TimeSpan(
+                    max.Days,
+                    max.Hours,
+                    max.Minutes + 1,
+                    max.Seconds,
+                    max.Milliseconds,
+                    max.Microseconds
+                )
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                null,
-                () =>
-                    new TimeSpan(
-                        max.Days,
-                        max.Hours,
-                        max.Minutes,
-                        max.Seconds + 1,
-                        max.Milliseconds,
-                        max.Microseconds
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                new TimeSpan(
+                    max.Days,
+                    max.Hours,
+                    max.Minutes,
+                    max.Seconds + 1,
+                    max.Milliseconds,
+                    max.Microseconds
+                )
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                null,
-                () =>
-                    new TimeSpan(
-                        max.Days,
-                        max.Hours,
-                        max.Minutes,
-                        max.Seconds,
-                        max.Milliseconds,
-                        max.Microseconds + 1
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                new TimeSpan(
+                    max.Days,
+                    max.Hours,
+                    max.Minutes,
+                    max.Seconds,
+                    max.Milliseconds,
+                    max.Microseconds + 1
+                )
             );
         }
 
@@ -746,9 +644,8 @@ namespace System.Tests
             Assert.Throws<OverflowException>(() => TimeSpan.FromDays(maxDays)); // Value > TimeSpan.MaxValue
             Assert.Throws<OverflowException>(() => TimeSpan.FromDays(-maxDays)); // Value < TimeSpan.MinValue
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => TimeSpan.FromMinutes(double.NaN)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                TimeSpan.FromMinutes(double.NaN)
             ); // Value is NaN
         }
 
@@ -781,9 +678,8 @@ namespace System.Tests
             Assert.Throws<OverflowException>(() => TimeSpan.FromHours(maxHours)); // Value > TimeSpan.MaxValue
             Assert.Throws<OverflowException>(() => TimeSpan.FromHours(-maxHours)); // Value < TimeSpan.MinValue
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => TimeSpan.FromMinutes(double.NaN)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                TimeSpan.FromMinutes(double.NaN)
             ); // Value is NaN
         }
 
@@ -816,9 +712,8 @@ namespace System.Tests
             Assert.Throws<OverflowException>(() => TimeSpan.FromMinutes(maxMinutes)); // Value > TimeSpan.MaxValue
             Assert.Throws<OverflowException>(() => TimeSpan.FromMinutes(-maxMinutes)); // Value < TimeSpan.MinValue
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => TimeSpan.FromMinutes(double.NaN)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                TimeSpan.FromMinutes(double.NaN)
             ); // Value is NaN
         }
 
@@ -851,9 +746,8 @@ namespace System.Tests
             Assert.Throws<OverflowException>(() => TimeSpan.FromSeconds(maxSeconds)); // Value > TimeSpan.MaxValue
             Assert.Throws<OverflowException>(() => TimeSpan.FromSeconds(-maxSeconds)); // Value < TimeSpan.MinValue
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => TimeSpan.FromSeconds(double.NaN)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                TimeSpan.FromSeconds(double.NaN)
             ); // Value is NaN
         }
 
@@ -902,9 +796,8 @@ namespace System.Tests
             Assert.Throws<OverflowException>(() => TimeSpan.FromMilliseconds(maxMilliseconds)); // Value > TimeSpan.MaxValue
             Assert.Throws<OverflowException>(() => TimeSpan.FromMilliseconds(-maxMilliseconds)); // Value < TimeSpan.MinValue
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => TimeSpan.FromMilliseconds(double.NaN)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                TimeSpan.FromMilliseconds(double.NaN)
             ); // Value is NaN
         }
 
@@ -1546,38 +1439,27 @@ namespace System.Tests
         [MemberData(nameof(ParseExact_Invalid_TestData))]
         public static void ParseExactTest_Invalid(string input, string format, Type exceptionType)
         {
-            Assert.Throws(
-                exceptionType,
-                () => TimeSpan.ParseExact(input, format, new CultureInfo("en-US"))
+            Assert.Throws(exceptionType, () =>
+                TimeSpan.ParseExact(input, format, new CultureInfo("en-US"))
             );
-            Assert.Throws(
-                exceptionType,
-                () =>
-                    TimeSpan.ParseExact(
-                        input,
-                        format,
-                        new CultureInfo("en-US"),
-                        TimeSpanStyles.None
-                    )
+            Assert.Throws(exceptionType, () =>
+                TimeSpan.ParseExact(input, format, new CultureInfo("en-US"), TimeSpanStyles.None)
             );
 
             Type exceptionTypeMultiple =
                 exceptionType == typeof(OverflowException) || string.IsNullOrEmpty(format)
                     ? typeof(FormatException)
                     : exceptionType;
-            Assert.Throws(
-                exceptionTypeMultiple,
-                () => TimeSpan.ParseExact(input, new string[] { format }, new CultureInfo("en-US"))
+            Assert.Throws(exceptionTypeMultiple, () =>
+                TimeSpan.ParseExact(input, new string[] { format }, new CultureInfo("en-US"))
             );
-            Assert.Throws(
-                exceptionTypeMultiple,
-                () =>
-                    TimeSpan.ParseExact(
-                        input,
-                        new string[] { format },
-                        new CultureInfo("en-US"),
-                        TimeSpanStyles.None
-                    )
+            Assert.Throws(exceptionTypeMultiple, () =>
+                TimeSpan.ParseExact(
+                    input,
+                    new string[] { format },
+                    new CultureInfo("en-US"),
+                    TimeSpanStyles.None
+                )
             );
 
             TimeSpan result;
@@ -1624,9 +1506,8 @@ namespace System.Tests
         {
             TimeSpan result;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "formats",
-                () => TimeSpan.ParseExact("12:34:56", (string[])null, null)
+            AssertExtensions.Throws<ArgumentNullException>("formats", () =>
+                TimeSpan.ParseExact("12:34:56", (string[])null, null)
             );
             Assert.False(TimeSpan.TryParseExact("12:34:56", (string[])null, null, out result));
 
@@ -1649,41 +1530,34 @@ namespace System.Tests
             TimeSpan result;
 
             string inputString = "00:00:00";
-            AssertExtensions.Throws<ArgumentException>(
-                "styles",
-                () => TimeSpan.ParseExact(inputString, "s", new CultureInfo("en-US"), styles)
+            AssertExtensions.Throws<ArgumentException>("styles", () =>
+                TimeSpan.ParseExact(inputString, "s", new CultureInfo("en-US"), styles)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "styles",
-                () =>
-                    TimeSpan.ParseExact(
-                        inputString,
-                        new string[] { "s" },
-                        new CultureInfo("en-US"),
-                        styles
-                    )
+            AssertExtensions.Throws<ArgumentException>("styles", () =>
+                TimeSpan.ParseExact(
+                    inputString,
+                    new string[] { "s" },
+                    new CultureInfo("en-US"),
+                    styles
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "styles",
-                () =>
-                    TimeSpan.TryParseExact(
-                        inputString,
-                        "s",
-                        new CultureInfo("en-US"),
-                        styles,
-                        out result
-                    )
+            AssertExtensions.Throws<ArgumentException>("styles", () =>
+                TimeSpan.TryParseExact(
+                    inputString,
+                    "s",
+                    new CultureInfo("en-US"),
+                    styles,
+                    out result
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "styles",
-                () =>
-                    TimeSpan.TryParseExact(
-                        inputString,
-                        new string[] { "s" },
-                        new CultureInfo("en-US"),
-                        styles,
-                        out result
-                    )
+            AssertExtensions.Throws<ArgumentException>("styles", () =>
+                TimeSpan.TryParseExact(
+                    inputString,
+                    new string[] { "s" },
+                    new CultureInfo("en-US"),
+                    styles,
+                    out result
+                )
             );
         }
 
@@ -1917,10 +1791,8 @@ namespace System.Tests
         {
             if (inputString != null && format != null)
             {
-                Assert.Throws(
-                    exceptionType,
-                    () =>
-                        TimeSpan.ParseExact(inputString.AsSpan(), format, new CultureInfo("en-US"))
+                Assert.Throws(exceptionType, () =>
+                    TimeSpan.ParseExact(inputString.AsSpan(), format, new CultureInfo("en-US"))
                 );
 
                 TimeSpan result;
@@ -1973,9 +1845,8 @@ namespace System.Tests
         {
             TimeSpan result;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "formats",
-                () => TimeSpan.ParseExact("12:34:56".AsSpan(), (string[])null, null)
+            AssertExtensions.Throws<ArgumentNullException>("formats", () =>
+                TimeSpan.ParseExact("12:34:56".AsSpan(), (string[])null, null)
             );
             Assert.False(
                 TimeSpan.TryParseExact("12:34:56".AsSpan(), (string[])null, null, out result)
@@ -1996,42 +1867,34 @@ namespace System.Tests
             TimeSpan result;
 
             string inputString = "00:00:00";
-            AssertExtensions.Throws<ArgumentException>(
-                "styles",
-                () =>
-                    TimeSpan.ParseExact(inputString.AsSpan(), "s", new CultureInfo("en-US"), styles)
+            AssertExtensions.Throws<ArgumentException>("styles", () =>
+                TimeSpan.ParseExact(inputString.AsSpan(), "s", new CultureInfo("en-US"), styles)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "styles",
-                () =>
-                    TimeSpan.ParseExact(
-                        inputString.AsSpan(),
-                        new string[] { "s" },
-                        new CultureInfo("en-US"),
-                        styles
-                    )
+            AssertExtensions.Throws<ArgumentException>("styles", () =>
+                TimeSpan.ParseExact(
+                    inputString.AsSpan(),
+                    new string[] { "s" },
+                    new CultureInfo("en-US"),
+                    styles
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "styles",
-                () =>
-                    TimeSpan.TryParseExact(
-                        inputString.AsSpan(),
-                        "s",
-                        new CultureInfo("en-US"),
-                        styles,
-                        out result
-                    )
+            AssertExtensions.Throws<ArgumentException>("styles", () =>
+                TimeSpan.TryParseExact(
+                    inputString.AsSpan(),
+                    "s",
+                    new CultureInfo("en-US"),
+                    styles,
+                    out result
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "styles",
-                () =>
-                    TimeSpan.TryParseExact(
-                        inputString.AsSpan(),
-                        new string[] { "s" },
-                        new CultureInfo("en-US"),
-                        styles,
-                        out result
-                    )
+            AssertExtensions.Throws<ArgumentException>("styles", () =>
+                TimeSpan.TryParseExact(
+                    inputString.AsSpan(),
+                    new string[] { "s" },
+                    new CultureInfo("en-US"),
+                    styles,
+                    out result
+                )
             );
         }
 
@@ -2670,13 +2533,11 @@ namespace System.Tests
         [Fact]
         public static void NaNMultiplication()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "factor",
-                () => TimeSpan.FromDays(1) * double.NaN
+            AssertExtensions.Throws<ArgumentException>("factor", () =>
+                TimeSpan.FromDays(1) * double.NaN
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "factor",
-                () => double.NaN * TimeSpan.FromDays(1)
+            AssertExtensions.Throws<ArgumentException>("factor", () =>
+                double.NaN * TimeSpan.FromDays(1)
             );
         }
 
@@ -2702,9 +2563,8 @@ namespace System.Tests
         [Fact]
         public static void NaNDivision()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "divisor",
-                () => TimeSpan.FromDays(1) / double.NaN
+            AssertExtensions.Throws<ArgumentException>("divisor", () =>
+                TimeSpan.FromDays(1) / double.NaN
             );
         }
 
@@ -2723,9 +2583,8 @@ namespace System.Tests
         [Fact]
         public static void NamedNaNMultiplication()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "factor",
-                () => TimeSpan.FromDays(1).Multiply(double.NaN)
+            AssertExtensions.Throws<ArgumentException>("factor", () =>
+                TimeSpan.FromDays(1).Multiply(double.NaN)
             );
         }
 
@@ -2751,9 +2610,8 @@ namespace System.Tests
         [Fact]
         public static void NamedNaNDivision()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "divisor",
-                () => TimeSpan.FromDays(1).Divide(double.NaN)
+            AssertExtensions.Throws<ArgumentException>("divisor", () =>
+                TimeSpan.FromDays(1).Divide(double.NaN)
             );
         }
 

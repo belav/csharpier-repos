@@ -44,10 +44,8 @@ namespace System.Security.Cryptography.Xml.Tests
         public void KeySize_SetNegativeValue_ThrowsArgumentOutOfRangeException(int value)
         {
             EncryptionMethod method = new EncryptionMethod();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                null,
-                () => method.KeySize = value
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", null, () =>
+                method.KeySize = value
             );
         }
 
@@ -199,9 +197,8 @@ namespace System.Security.Cryptography.Xml.Tests
         [Fact]
         public void LoadXml_NullValue_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new EncryptionMethod().LoadXml(null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new EncryptionMethod().LoadXml(null)
             );
         }
 

@@ -147,61 +147,58 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// </summary>
             private void ComputeLambdaScopesAndFrameCaptures()
             {
-                VisitNestedFunctions(
-                    ScopeTree,
-                    (scope, function) =>
+                VisitNestedFunctions(ScopeTree, (scope, function) =>
+                {
+                    if (function.CapturedEnvironments.Count > 0)
                     {
-                        if (function.CapturedEnvironments.Count > 0)
+                        var capturedEnvs = PooledHashSet<ClosureEnvironment>.GetInstance();
+                        capturedEnvs.AddAll(function.CapturedEnvironments);
+
+                        // Find the nearest captured class environment, if one exists
+                        var curScope = scope;
+                        while (curScope != null)
                         {
-                            var capturedEnvs = PooledHashSet<ClosureEnvironment>.GetInstance();
-                            capturedEnvs.AddAll(function.CapturedEnvironments);
-
-                            // Find the nearest captured class environment, if one exists
-                            var curScope = scope;
-                            while (curScope != null)
+                            var env = curScope.DeclaredEnvironment;
+                            if (!(env is null) && capturedEnvs.Remove(env) && !env.IsStruct)
                             {
-                                var env = curScope.DeclaredEnvironment;
-                                if (!(env is null) && capturedEnvs.Remove(env) && !env.IsStruct)
-                                {
-                                    function.ContainingEnvironmentOpt = env;
-                                    break;
-                                }
-                                curScope = curScope.Parent;
+                                function.ContainingEnvironmentOpt = env;
+                                break;
                             }
-
-                            // Now we need to walk up the scopes to find environment captures
-                            var oldEnv = curScope?.DeclaredEnvironment;
-                            curScope = curScope?.Parent;
-                            while (curScope != null)
-                            {
-                                if (capturedEnvs.Count == 0)
-                                {
-                                    break;
-                                }
-
-                                var env = curScope.DeclaredEnvironment;
-                                if (!(env is null))
-                                {
-                                    if (!env.IsStruct)
-                                    {
-                                        Debug.Assert(!oldEnv.IsStruct);
-                                        oldEnv.CapturesParent = true;
-                                        oldEnv = env;
-                                    }
-                                    capturedEnvs.Remove(env);
-                                }
-                                curScope = curScope.Parent;
-                            }
-
-                            if (capturedEnvs.Count > 0)
-                            {
-                                throw ExceptionUtilities.Unreachable();
-                            }
-
-                            capturedEnvs.Free();
+                            curScope = curScope.Parent;
                         }
+
+                        // Now we need to walk up the scopes to find environment captures
+                        var oldEnv = curScope?.DeclaredEnvironment;
+                        curScope = curScope?.Parent;
+                        while (curScope != null)
+                        {
+                            if (capturedEnvs.Count == 0)
+                            {
+                                break;
+                            }
+
+                            var env = curScope.DeclaredEnvironment;
+                            if (!(env is null))
+                            {
+                                if (!env.IsStruct)
+                                {
+                                    Debug.Assert(!oldEnv.IsStruct);
+                                    oldEnv.CapturesParent = true;
+                                    oldEnv = env;
+                                }
+                                capturedEnvs.Remove(env);
+                            }
+                            curScope = curScope.Parent;
+                        }
+
+                        if (capturedEnvs.Count > 0)
+                        {
+                            throw ExceptionUtilities.Unreachable();
+                        }
+
+                        capturedEnvs.Free();
                     }
-                );
+                });
             }
 
             /// <summary>
@@ -237,14 +234,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     // If everything that captures the 'this' environment
                     // lives in the containing type, we can remove the env
-                    bool cantRemove = CheckNestedFunctions(
-                        ScopeTree,
-                        (scope, closure) =>
-                        {
-                            return closure.CapturedEnvironments.Contains(env)
-                                && closure.ContainingEnvironmentOpt != null;
-                        }
-                    );
+                    bool cantRemove = CheckNestedFunctions(ScopeTree, (scope, closure) =>
+                    {
+                        return closure.CapturedEnvironments.Contains(env)
+                            && closure.ContainingEnvironmentOpt != null;
+                    });
 
                     if (!cantRemove)
                     {
@@ -266,122 +260,106 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // nested environments which captured a pointer to the 'this'
                     // environment will now capture 'this'
                     RemoveEnv();
-                    VisitNestedFunctions(
-                        ScopeTree,
-                        (scope, closure) =>
+                    VisitNestedFunctions(ScopeTree, (scope, closure) =>
+                    {
+                        if (closure.ContainingEnvironmentOpt == env)
                         {
-                            if (closure.ContainingEnvironmentOpt == env)
-                            {
-                                closure.ContainingEnvironmentOpt = null;
-                            }
+                            closure.ContainingEnvironmentOpt = null;
                         }
-                    );
+                    });
                 }
 
                 void RemoveEnv()
                 {
                     ScopeTree.DeclaredEnvironment = null;
-                    VisitNestedFunctions(
-                        ScopeTree,
-                        (scope, nested) =>
+                    VisitNestedFunctions(ScopeTree, (scope, nested) =>
+                    {
+                        var index = nested.CapturedEnvironments.IndexOf(env);
+                        if (index >= 0)
                         {
-                            var index = nested.CapturedEnvironments.IndexOf(env);
-                            if (index >= 0)
-                            {
-                                nested.CapturedEnvironments.RemoveAt(index);
-                            }
+                            nested.CapturedEnvironments.RemoveAt(index);
                         }
-                    );
+                    });
                 }
             }
 
             private void MakeAndAssignEnvironments()
             {
-                VisitScopeTree(
-                    ScopeTree,
-                    scope =>
+                VisitScopeTree(ScopeTree, scope =>
+                {
+                    // Currently all variables declared in the same scope are added
+                    // to the same closure environment
+                    var variablesInEnvironment = scope.DeclaredVariables;
+
+                    // Don't create empty environments
+                    if (variablesInEnvironment.Count == 0)
                     {
-                        // Currently all variables declared in the same scope are added
-                        // to the same closure environment
-                        var variablesInEnvironment = scope.DeclaredVariables;
+                        return;
+                    }
 
-                        // Don't create empty environments
-                        if (variablesInEnvironment.Count == 0)
+                    // First walk the nested scopes to find all closures which
+                    // capture variables from this scope. They all need to capture
+                    // this environment. This includes closures which captured local
+                    // functions that capture those variables, so multiple passes may
+                    // be needed. This will also decide if the environment is a struct
+                    // or a class.
+
+                    // If we are in a variant interface, runtime might not consider the
+                    // method synthesized directly within the interface as variant safe.
+                    // For simplicity we do not perform precise analysis whether this would
+                    // definitely be the case. If we are in a variant interface, we always force
+                    // creation of a display class.
+                    bool isStruct =
+                        VarianceSafety.GetEnclosingVariantInterface(_topLevelMethod) is null;
+                    var closures = new SetWithInsertionOrder<NestedFunction>();
+                    bool addedItem;
+
+                    // This loop is O(n), where n is the length of the chain
+                    //   L_1 <- L_2 <- L_3 ...
+                    // where L_1 represents a local function that directly captures the current
+                    // environment, L_2 represents a local function that directly captures L_1,
+                    // L_3 represents a local function that captures L_2, and so on.
+                    //
+                    // Each iteration of the loop runs a visitor that is proportional to the
+                    // number of closures in nested scopes, so we hope that the total number
+                    // of nested functions and function chains is small in any real-world code.
+                    do
+                    {
+                        addedItem = false;
+                        VisitNestedFunctions(scope, (closureScope, closure) =>
                         {
-                            return;
-                        }
-
-                        // First walk the nested scopes to find all closures which
-                        // capture variables from this scope. They all need to capture
-                        // this environment. This includes closures which captured local
-                        // functions that capture those variables, so multiple passes may
-                        // be needed. This will also decide if the environment is a struct
-                        // or a class.
-
-                        // If we are in a variant interface, runtime might not consider the
-                        // method synthesized directly within the interface as variant safe.
-                        // For simplicity we do not perform precise analysis whether this would
-                        // definitely be the case. If we are in a variant interface, we always force
-                        // creation of a display class.
-                        bool isStruct =
-                            VarianceSafety.GetEnclosingVariantInterface(_topLevelMethod) is null;
-                        var closures = new SetWithInsertionOrder<NestedFunction>();
-                        bool addedItem;
-
-                        // This loop is O(n), where n is the length of the chain
-                        //   L_1 <- L_2 <- L_3 ...
-                        // where L_1 represents a local function that directly captures the current
-                        // environment, L_2 represents a local function that directly captures L_1,
-                        // L_3 represents a local function that captures L_2, and so on.
-                        //
-                        // Each iteration of the loop runs a visitor that is proportional to the
-                        // number of closures in nested scopes, so we hope that the total number
-                        // of nested functions and function chains is small in any real-world code.
-                        do
-                        {
-                            addedItem = false;
-                            VisitNestedFunctions(
-                                scope,
-                                (closureScope, closure) =>
-                                {
-                                    if (
-                                        !closures.Contains(closure)
-                                        && (
-                                            closure.CapturedVariables.Overlaps(
-                                                scope.DeclaredVariables
-                                            )
-                                            || closure.CapturedVariables.Overlaps(
-                                                closures.Select(c => c.OriginalMethodSymbol)
-                                            )
-                                        )
+                            if (
+                                !closures.Contains(closure)
+                                && (
+                                    closure.CapturedVariables.Overlaps(scope.DeclaredVariables)
+                                    || closure.CapturedVariables.Overlaps(
+                                        closures.Select(c => c.OriginalMethodSymbol)
                                     )
-                                    {
-                                        closures.Add(closure);
-                                        addedItem = true;
-                                        isStruct &= CanTakeRefParameters(
-                                            closure.OriginalMethodSymbol
-                                        );
-                                    }
-                                }
-                            );
-                        } while (addedItem == true);
-
-                        // Next create the environment and add it to the declaration scope
-                        var env = new ClosureEnvironment(variablesInEnvironment, isStruct);
-                        Debug.Assert(scope.DeclaredEnvironment is null);
-                        scope.DeclaredEnvironment = env;
-
-                        _topLevelMethod.TryGetThisParameter(out var thisParam);
-                        foreach (var closure in closures)
-                        {
-                            closure.CapturedEnvironments.Add(env);
-                            if (thisParam != null && env.CapturedVariables.Contains(thisParam))
+                                )
+                            )
                             {
-                                closure.CapturesThis = true;
+                                closures.Add(closure);
+                                addedItem = true;
+                                isStruct &= CanTakeRefParameters(closure.OriginalMethodSymbol);
                             }
+                        });
+                    } while (addedItem == true);
+
+                    // Next create the environment and add it to the declaration scope
+                    var env = new ClosureEnvironment(variablesInEnvironment, isStruct);
+                    Debug.Assert(scope.DeclaredEnvironment is null);
+                    scope.DeclaredEnvironment = env;
+
+                    _topLevelMethod.TryGetThisParameter(out var thisParam);
+                    foreach (var closure in closures)
+                    {
+                        closure.CapturedEnvironments.Add(env);
+                        if (thisParam != null && env.CapturedVariables.Contains(thisParam))
+                        {
+                            closure.CapturesThis = true;
                         }
                     }
-                );
+                });
             }
 
             /// <summary>
@@ -405,31 +383,27 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Scope
                 >.GetInstance();
 
-                VisitScopeTree(
-                    ScopeTree,
-                    scope =>
+                VisitScopeTree(ScopeTree, scope =>
+                {
+                    if (!(scope.DeclaredEnvironment is null))
                     {
-                        if (!(scope.DeclaredEnvironment is null))
-                        {
-                            closuresCapturingScopeVariables[scope] =
-                                PooledHashSet<NestedFunction>.GetInstance();
-                            environmentsToScopes[scope.DeclaredEnvironment] = scope;
-                        }
+                        closuresCapturingScopeVariables[scope] =
+                            PooledHashSet<NestedFunction>.GetInstance();
+                        environmentsToScopes[scope.DeclaredEnvironment] = scope;
+                    }
 
-                        foreach (var closure in scope.NestedFunctions)
+                    foreach (var closure in scope.NestedFunctions)
+                    {
+                        foreach (var env in closure.CapturedEnvironments)
                         {
-                            foreach (var env in closure.CapturedEnvironments)
-                            {
-                                // A closure should only ever capture a scope which is an ancestor of its own,
-                                // which we should have already visited
-                                Debug.Assert(environmentsToScopes.ContainsKey(env));
+                            // A closure should only ever capture a scope which is an ancestor of its own,
+                            // which we should have already visited
+                            Debug.Assert(environmentsToScopes.ContainsKey(env));
 
-                                closuresCapturingScopeVariables[environmentsToScopes[env]]
-                                    .Add(closure);
-                            }
+                            closuresCapturingScopeVariables[environmentsToScopes[env]].Add(closure);
                         }
                     }
-                );
+                });
 
                 environmentsToScopes.Free();
 

@@ -64,23 +64,19 @@ namespace System.Diagnostics
                 SR.TraceAsTraceSource,
                 TraceEventType.Error,
                 0,
-                string.Create(
-                    length,
-                    (message, detailMessage),
-                    (dst, v) =>
+                string.Create(length, (message, detailMessage), (dst, v) =>
+                {
+                    string prefix = v.message;
+                    prefix.CopyTo(dst);
+
+                    if (v.detailMessage != null)
                     {
-                        string prefix = v.message;
-                        prefix.CopyTo(dst);
+                        dst[prefix.Length] = ' ';
 
-                        if (v.detailMessage != null)
-                        {
-                            dst[prefix.Length] = ' ';
-
-                            string detail = v.detailMessage;
-                            detail.CopyTo(dst.Slice(prefix.Length + 1, detail.Length));
-                        }
+                        string detail = v.detailMessage;
+                        detail.CopyTo(dst.Slice(prefix.Length + 1, detail.Length));
                     }
-                )
+                })
             );
         }
 

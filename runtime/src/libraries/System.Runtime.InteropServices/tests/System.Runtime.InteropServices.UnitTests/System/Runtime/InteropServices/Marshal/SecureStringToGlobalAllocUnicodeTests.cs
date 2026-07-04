@@ -51,9 +51,8 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void SecureStringToGlobalAllocUnicode_NullString_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "s",
-                () => Marshal.SecureStringToGlobalAllocUnicode(null)
+            AssertExtensions.Throws<ArgumentNullException>("s", () =>
+                Marshal.SecureStringToGlobalAllocUnicode(null)
             );
         }
 

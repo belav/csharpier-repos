@@ -201,9 +201,8 @@ namespace Microsoft.CodeAnalysis.Editing
 
             var annotation = new SyntaxAnnotation();
 
-            root = root.ReplaceNodes(
-                nodesToSimplify,
-                (o, r) => r.WithAdditionalAnnotations(Simplifier.Annotation, annotation)
+            root = root.ReplaceNodes(nodesToSimplify, (o, r) =>
+                r.WithAdditionalAnnotations(Simplifier.Annotation, annotation)
             );
 
             var first = root.DescendantNodesAndSelf().First(x => x.HasAnnotation(annotation));

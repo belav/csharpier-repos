@@ -78,13 +78,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
         /// A map from a local NoPia type to corresponding canonical type.
         /// </summary>
         internal ConcurrentDictionary<NamedTypeSymbol, NamedTypeSymbol> NoPiaUnificationMap =>
-            LazyInitializer.EnsureInitialized(
-                ref _noPiaUnificationMap,
-                () =>
-                    new ConcurrentDictionary<NamedTypeSymbol, NamedTypeSymbol>(
-                        concurrencyLevel: 2,
-                        capacity: 0
-                    )
+            LazyInitializer.EnsureInitialized(ref _noPiaUnificationMap, () =>
+                new ConcurrentDictionary<NamedTypeSymbol, NamedTypeSymbol>(
+                    concurrencyLevel: 2,
+                    capacity: 0
+                )
             );
 
         /// <summary>

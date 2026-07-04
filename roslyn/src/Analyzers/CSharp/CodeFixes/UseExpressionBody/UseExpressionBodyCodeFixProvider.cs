@@ -84,9 +84,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
             // individual changes made to the child accessors if we're doing a fix-all.
             foreach (var accessorList in accessorLists)
             {
-                editor.ReplaceNode(
-                    accessorList,
-                    (current, _) => current.WithAdditionalAnnotations(Formatter.Annotation)
+                editor.ReplaceNode(accessorList, (current, _) =>
+                    current.WithAdditionalAnnotations(Formatter.Annotation)
                 );
             }
         }

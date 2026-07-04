@@ -29,15 +29,12 @@ namespace System.CommandLine.Rendering
 
         public void AddFormatter<T>(Func<T, TextSpan> format)
         {
-            _formatters.Add(
-                typeof(T),
-                t =>
-                {
-                    var span = format((T)t);
+            _formatters.Add(typeof(T), t =>
+            {
+                var span = format((T)t);
 
-                    return span ?? TextSpan.Empty();
-                }
-            );
+                return span ?? TextSpan.Empty();
+            });
         }
 
         public TextSpan Format(object value)
@@ -77,17 +74,14 @@ namespace System.CommandLine.Rendering
 
         public void AddFormatter<T>(Func<T, FormattableString> format)
         {
-            _formatters.Add(
-                typeof(T),
-                t =>
-                {
-                    var formattableString = format((T)t);
+            _formatters.Add(typeof(T), t =>
+            {
+                var formattableString = format((T)t);
 
-                    return formattableString == null
-                        ? TextSpan.Empty()
-                        : ParseToSpan(formattableString);
-                }
-            );
+                return formattableString == null
+                    ? TextSpan.Empty()
+                    : ParseToSpan(formattableString);
+            });
         }
 
         object IFormatProvider.GetFormat(Type formatType) => this;

@@ -21,9 +21,8 @@ namespace System.Runtime.InteropServices.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void GetStartComSlot_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "t",
-                () => Marshal.GetStartComSlot(null)
+            AssertExtensions.Throws<ArgumentNullException>("t", () =>
+                Marshal.GetStartComSlot(null)
             );
         }
 
@@ -36,9 +35,8 @@ namespace System.Runtime.InteropServices.Tests
             );
             ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
             TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
-            AssertExtensions.Throws<ArgumentException>(
-                "t",
-                () => Marshal.GetStartComSlot(typeBuilder)
+            AssertExtensions.Throws<ArgumentException>("t", () =>
+                Marshal.GetStartComSlot(typeBuilder)
             );
         }
 
@@ -58,9 +56,8 @@ namespace System.Runtime.InteropServices.Tests
         [MemberData(nameof(GetStartComSlot_InvalidGenericType_TestData))]
         public void GetStartComSlot_InvalidGenericType_ThrowsArgumentNullException(Type type)
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                null,
-                () => Marshal.GetStartComSlot(type)
+            AssertExtensions.Throws<ArgumentNullException>(null, () =>
+                Marshal.GetStartComSlot(type)
             );
         }
 

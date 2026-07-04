@@ -20,22 +20,19 @@ public abstract class NorthwindAsNoTrackingQueryTestBase<TFixture> : QueryTestBa
     [InlineData(true, true)]
     public virtual Task Entity_not_added_to_state_manager(bool useParam, bool async) =>
         useParam
-            ? AssertQuery(
-                async,
-                ss => ss.Set<Customer>().AsTracking(QueryTrackingBehavior.NoTracking)
+            ? AssertQuery(async, ss =>
+                ss.Set<Customer>().AsTracking(QueryTrackingBehavior.NoTracking)
             )
             : AssertQuery(async, ss => ss.Set<Customer>().AsNoTracking());
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Applied_to_body_clause(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>()
-                join o in ss.Set<Order>().AsNoTracking() on c.CustomerID equals o.CustomerID
-                where c.CustomerID == "ALFKI"
-                select o
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>()
+            join o in ss.Set<Order>().AsNoTracking() on c.CustomerID equals o.CustomerID
+            where c.CustomerID == "ALFKI"
+            select o
         );
 
     [ConditionalTheory]
@@ -110,29 +107,24 @@ public abstract class NorthwindAsNoTrackingQueryTestBase<TFixture> : QueryTestBa
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Include_reference_and_collection(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Order>().Include(o => o.Customer).Include(o => o.OrderDetails).AsNoTracking()
+        AssertQuery(async, ss =>
+            ss.Set<Order>().Include(o => o.Customer).Include(o => o.OrderDetails).AsNoTracking()
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Applied_after_navigation_expansion(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Order>().Where(o => o.Customer.City != "London").AsNoTracking()
+        AssertQuery(async, ss =>
+            ss.Set<Order>().Where(o => o.Customer.City != "London").AsNoTracking()
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_simple_shadow(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Employee>()
-                    .Where(e => EF.Property<string>(e, "Title") == "Sales Representative")
-                    .AsNoTracking()
+        AssertQuery(async, ss =>
+            ss.Set<Employee>()
+                .Where(e => EF.Property<string>(e, "Title") == "Sales Representative")
+                .AsNoTracking()
         );
 
     [ConditionalTheory]

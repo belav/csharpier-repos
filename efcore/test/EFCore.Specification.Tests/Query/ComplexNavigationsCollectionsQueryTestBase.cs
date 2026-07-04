@@ -480,22 +480,17 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             assertOrder: true,
             elementAsserter: (e, a) =>
             {
-                AssertCollection(
-                    e.Level2s,
-                    a.Level2s,
-                    ordered: true,
-                    elementAsserter: (e2, a2) =>
+                AssertCollection(e.Level2s, a.Level2s, ordered: true, elementAsserter: (e2, a2) =>
+                {
+                    if (e2.Level3 == null)
                     {
-                        if (e2.Level3 == null)
-                        {
-                            Assert.Null(a2.Level3);
-                        }
-                        else
-                        {
-                            AssertCollection(e2.Level3.Level4s, a2.Level3.Level4s, ordered: true);
-                        }
+                        Assert.Null(a2.Level3);
                     }
-                );
+                    else
+                    {
+                        AssertCollection(e2.Level3.Level4s, a2.Level3.Level4s, ordered: true);
+                    }
+                });
             }
         );
 
@@ -666,19 +661,14 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             {
                 Assert.Equal(e.Id, a.Id);
                 Assert.Equal(e.Name, a.Name);
-                AssertCollection(
-                    e.Level2s,
-                    a.Level2s,
-                    ordered: true,
-                    elementAsserter: (ee, aa) =>
-                    {
-                        Assert.Equal(ee.Id, aa.Id);
-                        Assert.Equal(ee.Name, aa.Name);
-                        Assert.Equal(ee.Level1Id, aa.Level1Id);
-                        Assert.Equal(ee.Level2Id, aa.Level2Id);
-                        AssertEqual(ee.Level2, aa.Level2);
-                    }
-                );
+                AssertCollection(e.Level2s, a.Level2s, ordered: true, elementAsserter: (ee, aa) =>
+                {
+                    Assert.Equal(ee.Id, aa.Id);
+                    Assert.Equal(ee.Name, aa.Name);
+                    Assert.Equal(ee.Level1Id, aa.Level1Id);
+                    Assert.Equal(ee.Level2Id, aa.Level2Id);
+                    AssertEqual(ee.Level2, aa.Level2);
+                });
             }
         );
 
@@ -714,19 +704,14 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             {
                 Assert.Equal(e.Id, a.Id);
                 Assert.Equal(e.Name, a.Name);
-                AssertCollection(
-                    e.Level2s,
-                    a.Level2s,
-                    ordered: true,
-                    elementAsserter: (ee, aa) =>
-                    {
-                        Assert.Equal(ee.Id, aa.Id);
-                        Assert.Equal(ee.Name, aa.Name);
-                        Assert.Equal(ee.Level1Id, aa.Level1Id);
-                        Assert.Equal(ee.Level2Id, aa.Level2Id);
-                        AssertEqual(ee.Level2, aa.Level2);
-                    }
-                );
+                AssertCollection(e.Level2s, a.Level2s, ordered: true, elementAsserter: (ee, aa) =>
+                {
+                    Assert.Equal(ee.Id, aa.Id);
+                    Assert.Equal(ee.Name, aa.Name);
+                    Assert.Equal(ee.Level1Id, aa.Level1Id);
+                    Assert.Equal(ee.Level2Id, aa.Level2Id);
+                    AssertEqual(ee.Level2, aa.Level2);
+                });
             }
         );
 
@@ -1602,12 +1587,10 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Include_after_Select(bool async) =>
         AssertIncludeOnNonEntity(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Level1>()
-                        .Select(l1 => l1.OneToOne_Optional_FK1)
-                        .Include(l2 => l2.OneToMany_Optional2)
+            AssertQuery(async, ss =>
+                ss.Set<Level1>()
+                    .Select(l1 => l1.OneToOne_Optional_FK1)
+                    .Include(l2 => l2.OneToMany_Optional2)
             )
         );
 
@@ -1615,13 +1598,11 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Include_after_SelectMany_and_reference_navigation(bool async) =>
         AssertIncludeOnNonEntity(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Level1>()
-                        .SelectMany(l1 => l1.OneToMany_Required1)
-                        .Select(l2 => l2.OneToOne_Optional_FK2)
-                        .Include(l3 => l3.OneToMany_Optional3)
+            AssertQuery(async, ss =>
+                ss.Set<Level1>()
+                    .SelectMany(l1 => l1.OneToMany_Required1)
+                    .Select(l2 => l2.OneToOne_Optional_FK2)
+                    .Include(l3 => l3.OneToMany_Optional3)
             )
         );
 
@@ -1753,15 +1734,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     .Select(l1 => l1.OneToMany_Optional1),
             assertOrder: true,
             elementAsserter: (e, a) =>
-                AssertCollection(
-                    e,
-                    a,
-                    elementAsserter: (ee, aa) =>
-                        AssertInclude(
-                            ee,
-                            aa,
-                            new ExpectedInclude<Level2>(x => x.OneToOne_Optional_PK2)
-                        )
+                AssertCollection(e, a, elementAsserter: (ee, aa) =>
+                    AssertInclude(ee, aa, new ExpectedInclude<Level2>(x => x.OneToOne_Optional_PK2))
                 )
         );
 
@@ -1781,19 +1755,16 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     .Select(l1 => l1.OneToMany_Optional1),
             assertOrder: true,
             elementAsserter: (e, a) =>
-                AssertCollection(
-                    e,
-                    a,
-                    elementAsserter: (ee, aa) =>
-                        AssertInclude(
-                            ee,
-                            aa,
-                            new ExpectedInclude<Level2>(e1 => e1.OneToOne_Optional_PK2),
-                            new ExpectedInclude<Level3>(
-                                e2 => e2.OneToOne_Optional_FK3,
-                                "OneToOne_Optional_PK2"
-                            )
+                AssertCollection(e, a, elementAsserter: (ee, aa) =>
+                    AssertInclude(
+                        ee,
+                        aa,
+                        new ExpectedInclude<Level2>(e1 => e1.OneToOne_Optional_PK2),
+                        new ExpectedInclude<Level3>(
+                            e2 => e2.OneToOne_Optional_FK3,
+                            "OneToOne_Optional_PK2"
                         )
+                    )
                 )
         );
 
@@ -1911,15 +1882,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     .Select(l1 => l1.OneToMany_Optional1.Select(l2 => l2.OneToOne_Optional_PK2)),
             assertOrder: true,
             elementAsserter: (e, a) =>
-                AssertCollection(
-                    e,
-                    a,
-                    elementAsserter: (ee, aa) =>
-                        AssertInclude(
-                            ee,
-                            aa,
-                            new ExpectedInclude<Level3>(x => x.OneToOne_Optional_FK3)
-                        )
+                AssertCollection(e, a, elementAsserter: (ee, aa) =>
+                    AssertInclude(ee, aa, new ExpectedInclude<Level3>(x => x.OneToOne_Optional_FK3))
                 )
         );
 
@@ -2026,20 +1990,15 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Including_reference_navigation_and_projecting_collection_navigation(
         bool async
-    ) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Level1>()
-                    .Include(e => e.OneToOne_Required_FK1)
-                        .ThenInclude(e => e.OneToOne_Optional_FK2)
-                    .Select(e => new Level1
-                    {
-                        Id = e.Id,
-                        OneToOne_Required_FK1 = e.OneToOne_Required_FK1,
-                        OneToMany_Required1 = e.OneToMany_Required1,
-                    })
-        );
+    ) => AssertQuery(async, ss => ss.Set<Level1>()
+                .Include(e => e.OneToOne_Required_FK1)
+                    .ThenInclude(e => e.OneToOne_Optional_FK2)
+                .Select(e => new Level1
+                {
+                    Id = e.Id,
+                    OneToOne_Required_FK1 = e.OneToOne_Required_FK1,
+                    OneToMany_Required1 = e.OneToMany_Required1,
+                }));
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -2049,17 +2008,15 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
     {
         var validIds = new List<string> { "L1 01", "L1 02" };
 
-        return AssertQuery(
-            async,
-            ss =>
-                from l1 in ss.Set<Level1>().Where(l1 => validIds.Any(e => e == l1.Name))
-                join l2 in ss.Set<Level2>() on l1.Id equals l2.Level1_Required_Id into l2s
-                from l2 in l2s.DefaultIfEmpty()
-                select new Level2
-                {
-                    Id = l2 == null ? 0 : l2.Id,
-                    OneToMany_Required2 = l2 == null ? null : l2.OneToMany_Required2,
-                }
+        return AssertQuery(async, ss =>
+            from l1 in ss.Set<Level1>().Where(l1 => validIds.Any(e => e == l1.Name))
+            join l2 in ss.Set<Level2>() on l1.Id equals l2.Level1_Required_Id into l2s
+            from l2 in l2s.DefaultIfEmpty()
+            select new Level2
+            {
+                Id = l2 == null ? 0 : l2.Id,
+                OneToMany_Required2 = l2 == null ? null : l2.OneToMany_Required2,
+            }
         );
     }
 
@@ -2481,20 +2438,18 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 .Replace("\n", ""),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<Level1>()
-                                .Include(l1 =>
-                                    l1.OneToMany_Optional1.Where(x => x.Name != "Foo")
-                                        .OrderBy(x => x.Id)
-                                        .Take(3)
-                                )
-                                .Include(l1 =>
-                                    l1.OneToMany_Optional1.Where(x => x.Name != "Bar")
-                                        .OrderByDescending(x => x.Name)
-                                        .Take(3)
-                                )
+                    AssertQuery(async, ss =>
+                        ss.Set<Level1>()
+                            .Include(l1 =>
+                                l1.OneToMany_Optional1.Where(x => x.Name != "Foo")
+                                    .OrderBy(x => x.Id)
+                                    .Take(3)
+                            )
+                            .Include(l1 =>
+                                l1.OneToMany_Optional1.Where(x => x.Name != "Bar")
+                                    .OrderByDescending(x => x.Name)
+                                    .Take(3)
+                            )
                     )
                 )
             )
@@ -2517,14 +2472,12 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 .Replace("\n", ""),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<Level1>()
-                                .Include(l1 => l1.OneToMany_Optional1.Where(x => x.Name != "Foo"))
-                                    .ThenInclude(l2 => l2.OneToMany_Optional2)
-                                .Include(l1 => l1.OneToMany_Optional1.Where(x => x.Name != "Bar"))
-                                    .ThenInclude(l2 => l2.OneToOne_Required_FK2)
+                    AssertQuery(async, ss =>
+                        ss.Set<Level1>()
+                            .Include(l1 => l1.OneToMany_Optional1.Where(x => x.Name != "Foo"))
+                                .ThenInclude(l2 => l2.OneToMany_Optional2)
+                            .Include(l1 => l1.OneToMany_Optional1.Where(x => x.Name != "Bar"))
+                                .ThenInclude(l2 => l2.OneToOne_Required_FK2)
                     )
                 )
             )
@@ -2889,14 +2842,12 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
     public virtual Task Filtered_include_include_parameter_used_inside_filter_throws(bool async) =>
         AssertInvalidMaterializationType(
             () =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        ss.Set<Level1>()
-                            .Select(l1 =>
-                                ss.Set<Level2>()
-                                    .Include(l2 => l2.OneToMany_Optional2.Where(x => x.Id != l2.Id))
-                            )
+                AssertQuery(async, ss =>
+                    ss.Set<Level1>()
+                        .Select(l1 =>
+                            ss.Set<Level2>()
+                                .Include(l2 => l2.OneToMany_Optional2.Where(x => x.Id != l2.Id))
+                        )
                 ),
             "IEnumerable<T>"
         );
@@ -2961,9 +2912,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             CoreStrings.InvalidIncludeExpression("l1.OneToMany_Optional1.AsQueryable().Distinct()"),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    AssertQuery(
-                        async,
-                        ss => ss.Set<Level1>().Include(l1 => l1.OneToMany_Optional1.Distinct())
+                    AssertQuery(async, ss =>
+                        ss.Set<Level1>().Include(l1 => l1.OneToMany_Optional1.Distinct())
                     )
                 )
             ).Message
@@ -2978,12 +2928,10 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             CoreStrings.InvalidIncludeExpression("l2.AsQueryable().Where(xx => (xx.Id != 42))"),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<Level1>()
-                                .Include(l1 => l1.OneToMany_Optional1)
-                                    .ThenInclude(l2 => l2.AsQueryable().Where(xx => xx.Id != 42))
+                    AssertQuery(async, ss =>
+                        ss.Set<Level1>()
+                            .Include(l1 => l1.OneToMany_Optional1)
+                                .ThenInclude(l2 => l2.AsQueryable().Where(xx => xx.Id != 42))
                     )
                 )
             ).Message
@@ -3243,15 +3191,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             elementAsserter: (e, a) =>
             {
                 AssertEqual(e.Key, a.Key);
-                AssertCollection(
-                    e.Level1s,
-                    a.Level1s,
-                    elementAsserter: (ee, aa) =>
-                        AssertInclude(
-                            ee,
-                            aa,
-                            new ExpectedInclude<Level1>(l => l.OneToMany_Optional1)
-                        )
+                AssertCollection(e.Level1s, a.Level1s, elementAsserter: (ee, aa) =>
+                    AssertInclude(ee, aa, new ExpectedInclude<Level1>(l => l.OneToMany_Optional1))
                 );
             }
         );
@@ -3270,15 +3211,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             elementAsserter: (e, a) =>
             {
                 AssertEqual(e.Key, a.Key);
-                AssertCollection(
-                    e.Level1s,
-                    a.Level1s,
-                    elementAsserter: (ee, aa) =>
-                        AssertInclude(
-                            ee,
-                            aa,
-                            new ExpectedInclude<Level1>(l => l.OneToOne_Optional_FK1)
-                        )
+                AssertCollection(e.Level1s, a.Level1s, elementAsserter: (ee, aa) =>
+                    AssertInclude(ee, aa, new ExpectedInclude<Level1>(l => l.OneToOne_Optional_FK1))
                 );
             }
         );
@@ -3346,17 +3280,13 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
     [MemberData(nameof(IsAsyncData))]
     public virtual Task SelectMany_over_conditional_null_source(bool async) =>
         AssertTranslationFailed(() =>
-            AssertQueryScalar(
-                async,
-                ss =>
-                    ss.Set<Level2>()
-                        .SelectMany(l2 =>
-                            l2.Id == 1
-                                ? l2.OneToMany_Required_Inverse2.OneToMany_Optional1.Select(e =>
-                                    e.Id
-                                )
-                                : null
-                        )
+            AssertQueryScalar(async, ss =>
+                ss.Set<Level2>()
+                    .SelectMany(l2 =>
+                        l2.Id == 1
+                            ? l2.OneToMany_Required_Inverse2.OneToMany_Optional1.Select(e => e.Id)
+                            : null
+                    )
             )
         );
 
@@ -3364,17 +3294,13 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
     [MemberData(nameof(IsAsyncData))]
     public virtual Task SelectMany_over_conditional_empty_source(bool async) =>
         AssertTranslationFailed(() =>
-            AssertQueryScalar(
-                async,
-                ss =>
-                    ss.Set<Level2>()
-                        .SelectMany(l2 =>
-                            l2.Id == 1
-                                ? l2.OneToMany_Required_Inverse2.OneToMany_Optional1.Select(e =>
-                                    e.Id
-                                )
-                                : Enumerable.Empty<int>()
-                        )
+            AssertQueryScalar(async, ss =>
+                ss.Set<Level2>()
+                    .SelectMany(l2 =>
+                        l2.Id == 1
+                            ? l2.OneToMany_Required_Inverse2.OneToMany_Optional1.Select(e => e.Id)
+                            : Enumerable.Empty<int>()
+                    )
             )
         );
 
@@ -3537,19 +3463,14 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 AssertEqual(e.ChildCount, a.ChildCount);
                 AssertEqual(e.Level2Count, a.Level2Count);
                 AssertEqual(e.IsLevel2There, a.IsLevel2There);
-                AssertCollection(
-                    e.Children,
-                    a.Children,
-                    ordered: true,
-                    elementAsserter: (ee, aa) =>
-                    {
-                        AssertEqual(ee.Level1, aa.Level1);
-                        AssertEqual(ee.Level2Name, aa.Level2Name);
-                        AssertEqual(ee.ChildCount, aa.ChildCount);
-                        AssertEqual(ee.Level2Count, aa.Level2Count);
-                        AssertEqual(ee.IsLevel2There, aa.IsLevel2There);
-                    }
-                );
+                AssertCollection(e.Children, a.Children, ordered: true, elementAsserter: (ee, aa) =>
+                {
+                    AssertEqual(ee.Level1, aa.Level1);
+                    AssertEqual(ee.Level2Name, aa.Level2Name);
+                    AssertEqual(ee.ChildCount, aa.ChildCount);
+                    AssertEqual(ee.Level2Count, aa.Level2Count);
+                    AssertEqual(ee.IsLevel2There, aa.IsLevel2There);
+                });
             }
         );
 
@@ -3648,15 +3569,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss => ss.Set<Level1>().Include(l1 => l1.OneToMany_Optional1).GroupBy(l1 => l1.Name),
             elementSorter: e => e.Key,
             elementAsserter: (e, a) =>
-                AssertGrouping(
-                    e,
-                    a,
-                    elementAsserter: (ee, aa) =>
-                        AssertInclude(
-                            ee,
-                            aa,
-                            new ExpectedInclude<Level1>(i => i.OneToMany_Optional1)
-                        )
+                AssertGrouping(e, a, elementAsserter: (ee, aa) =>
+                    AssertInclude(ee, aa, new ExpectedInclude<Level1>(i => i.OneToMany_Optional1))
                 )
         );
 
@@ -3672,19 +3586,16 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     .GroupBy(l1 => l1.Name),
             elementSorter: e => e.Key,
             elementAsserter: (e, a) =>
-                AssertGrouping(
-                    e,
-                    a,
-                    elementAsserter: (ee, aa) =>
-                        AssertInclude(
-                            ee,
-                            aa,
-                            new ExpectedInclude<Level1>(i => i.OneToMany_Optional1),
-                            new ExpectedInclude<Level2>(
-                                l2 => l2.OneToMany_Optional2,
-                                "OneToManyOptional1"
-                            )
+                AssertGrouping(e, a, elementAsserter: (ee, aa) =>
+                    AssertInclude(
+                        ee,
+                        aa,
+                        new ExpectedInclude<Level1>(i => i.OneToMany_Optional1),
+                        new ExpectedInclude<Level2>(
+                            l2 => l2.OneToMany_Optional2,
+                            "OneToManyOptional1"
                         )
+                    )
                 )
         );
 
@@ -3700,19 +3611,16 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     .GroupBy(l1 => l1.Name),
             elementSorter: e => e.Key,
             elementAsserter: (e, a) =>
-                AssertGrouping(
-                    e,
-                    a,
-                    elementAsserter: (ee, aa) =>
-                        AssertInclude(
-                            ee,
-                            aa,
-                            new ExpectedInclude<Level1>(i => i.OneToMany_Optional1),
-                            new ExpectedInclude<Level2>(
-                                l2 => l2.OneToOne_Optional_FK2,
-                                "OneToManyOptional1"
-                            )
+                AssertGrouping(e, a, elementAsserter: (ee, aa) =>
+                    AssertInclude(
+                        ee,
+                        aa,
+                        new ExpectedInclude<Level1>(i => i.OneToMany_Optional1),
+                        new ExpectedInclude<Level2>(
+                            l2 => l2.OneToOne_Optional_FK2,
+                            "OneToManyOptional1"
                         )
+                    )
                 )
         );
 
@@ -3728,16 +3636,13 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     .GroupBy(l1 => l1.Name),
             elementSorter: e => e.Key,
             elementAsserter: (e, a) =>
-                AssertGrouping(
-                    e,
-                    a,
-                    elementAsserter: (ee, aa) =>
-                        AssertInclude(
-                            ee,
-                            aa,
-                            new ExpectedInclude<Level1>(i => i.OneToMany_Optional1),
-                            new ExpectedInclude<Level1>(l2 => l2.OneToMany_Required1)
-                        )
+                AssertGrouping(e, a, elementAsserter: (ee, aa) =>
+                    AssertInclude(
+                        ee,
+                        aa,
+                        new ExpectedInclude<Level1>(i => i.OneToMany_Optional1),
+                        new ExpectedInclude<Level1>(l2 => l2.OneToMany_Required1)
+                    )
                 )
         );
 
@@ -3755,16 +3660,13 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     .GroupBy(l1 => l1.Name),
             elementSorter: e => e.Key,
             elementAsserter: (e, a) =>
-                AssertGrouping(
-                    e,
-                    a,
-                    elementAsserter: (ee, aa) =>
-                        AssertInclude(
-                            ee,
-                            aa,
-                            new ExpectedInclude<Level1>(i => i.OneToMany_Optional1),
-                            new ExpectedInclude<Level1>(l2 => l2.OneToOne_Optional_FK1)
-                        )
+                AssertGrouping(e, a, elementAsserter: (ee, aa) =>
+                    AssertInclude(
+                        ee,
+                        aa,
+                        new ExpectedInclude<Level1>(i => i.OneToMany_Optional1),
+                        new ExpectedInclude<Level1>(l2 => l2.OneToOne_Optional_FK1)
+                    )
                 )
         );
 
@@ -3776,15 +3678,12 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
             ss => ss.Set<Level1>().Include(l1 => l1.OneToOne_Optional_FK1).GroupBy(l1 => l1.Name),
             elementSorter: e => e.Key,
             elementAsserter: (e, a) =>
-                AssertGrouping(
-                    e,
-                    a,
-                    elementAsserter: (ee, aa) =>
-                        AssertInclude(
-                            ee,
-                            aa,
-                            new ExpectedInclude<Level1>(l2 => l2.OneToOne_Optional_FK1)
-                        )
+                AssertGrouping(e, a, elementAsserter: (ee, aa) =>
+                    AssertInclude(
+                        ee,
+                        aa,
+                        new ExpectedInclude<Level1>(l2 => l2.OneToOne_Optional_FK1)
+                    )
                 )
         );
 
@@ -3800,16 +3699,13 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     .GroupBy(l1 => l1.Name),
             elementSorter: e => e.Key,
             elementAsserter: (e, a) =>
-                AssertGrouping(
-                    e,
-                    a,
-                    elementAsserter: (ee, aa) =>
-                        AssertInclude(
-                            ee,
-                            aa,
-                            new ExpectedInclude<Level1>(l2 => l2.OneToOne_Optional_FK1),
-                            new ExpectedInclude<Level1>(l2 => l2.OneToOne_Required_FK1)
-                        )
+                AssertGrouping(e, a, elementAsserter: (ee, aa) =>
+                    AssertInclude(
+                        ee,
+                        aa,
+                        new ExpectedInclude<Level1>(l2 => l2.OneToOne_Optional_FK1),
+                        new ExpectedInclude<Level1>(l2 => l2.OneToOne_Required_FK1)
+                    )
                 )
         );
 

@@ -714,23 +714,13 @@ class C { }
                     sgc.AddSource("test", SourceText.From("public class D{}", Encoding.UTF8));
 
                     // the assert should swallow the exception, so we'll actually successfully generate
-                    Assert.Throws<ArgumentException>(
-                        "hintName",
-                        () =>
-                            sgc.AddSource(
-                                "test",
-                                SourceText.From("public class D{}", Encoding.UTF8)
-                            )
+                    Assert.Throws<ArgumentException>("hintName", () =>
+                        sgc.AddSource("test", SourceText.From("public class D{}", Encoding.UTF8))
                     );
 
                     // also throws for <name> vs <name>.cs
-                    Assert.Throws<ArgumentException>(
-                        "hintName",
-                        () =>
-                            sgc.AddSource(
-                                "test.cs",
-                                SourceText.From("public class D{}", Encoding.UTF8)
-                            )
+                    Assert.Throws<ArgumentException>("hintName", () =>
+                        sgc.AddSource("test.cs", SourceText.From("public class D{}", Encoding.UTF8))
                     );
                 }
             );
@@ -768,49 +758,33 @@ class C { }
             var generator = new PipelineCallbackGenerator(
                 (ctx) =>
                 {
-                    ctx.RegisterSourceOutput(
-                        ctx.CompilationProvider,
-                        (spc, c) =>
-                        {
+                    ctx.RegisterSourceOutput(ctx.CompilationProvider, (spc, c) =>
+                    {
+                        spc.AddSource("test", SourceText.From("public class D{}", Encoding.UTF8));
+
+                        // throws immediately, because we're within the same output node
+                        Assert.Throws<ArgumentException>("hintName", () =>
                             spc.AddSource(
                                 "test",
                                 SourceText.From("public class D{}", Encoding.UTF8)
-                            );
+                            )
+                        );
 
-                            // throws immediately, because we're within the same output node
-                            Assert.Throws<ArgumentException>(
-                                "hintName",
-                                () =>
-                                    spc.AddSource(
-                                        "test",
-                                        SourceText.From("public class D{}", Encoding.UTF8)
-                                    )
-                            );
-
-                            // throws for .cs too
-                            Assert.Throws<ArgumentException>(
-                                "hintName",
-                                () =>
-                                    spc.AddSource(
-                                        "test.cs",
-                                        SourceText.From("public class D{}", Encoding.UTF8)
-                                    )
-                            );
-                        }
-                    );
-
-                    ctx.RegisterSourceOutput(
-                        ctx.CompilationProvider,
-                        (spc, c) =>
-                        {
-                            // will not throw at this point, because we have no way of knowing what the other outputs added
-                            // we *will* throw later in the driver when we combine them however (this is a change for V2, but not visible from V1)
+                        // throws for .cs too
+                        Assert.Throws<ArgumentException>("hintName", () =>
                             spc.AddSource(
-                                "test",
+                                "test.cs",
                                 SourceText.From("public class D{}", Encoding.UTF8)
-                            );
-                        }
-                    );
+                            )
+                        );
+                    });
+
+                    ctx.RegisterSourceOutput(ctx.CompilationProvider, (spc, c) =>
+                    {
+                        // will not throw at this point, because we have no way of knowing what the other outputs added
+                        // we *will* throw later in the driver when we combine them however (this is a change for V2, but not visible from V1)
+                        spc.AddSource("test", SourceText.From("public class D{}", Encoding.UTF8));
+                    });
                 }
             );
 
@@ -2440,9 +2414,8 @@ class C { }
                 new PipelineCallbackGenerator(
                     (ctx) =>
                     {
-                        ctx.RegisterSourceOutput(
-                            ctx.CompilationProvider,
-                            (spc, c) => spc.AddSource("test", "")
+                        ctx.RegisterSourceOutput(ctx.CompilationProvider, (spc, c) =>
+                            spc.AddSource("test", "")
                         );
                         ctx.RegisterSourceOutput(ctx.CompilationProvider, (spc, c) => throw e);
                     }
@@ -2493,9 +2466,8 @@ class C { }
                 new PipelineCallbackGenerator2(
                     (ctx) =>
                     {
-                        ctx.RegisterSourceOutput(
-                            ctx.CompilationProvider,
-                            (spc, c) => spc.AddSource("test", "")
+                        ctx.RegisterSourceOutput(ctx.CompilationProvider, (spc, c) =>
+                            spc.AddSource("test", "")
                         );
                     }
                 )
@@ -2683,46 +2655,34 @@ class C { }
             driver = driver.RunGenerators(compilation);
             var runResult = driver.GetRunResult().Results[0];
 
-            Assert.Collection(
-                runResult.TrackedSteps["IdentityTransform"],
-                step =>
-                {
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                            Assert.Equal(
-                                IncrementalStepRunReason.New,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            )
-                    );
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(IncrementalStepRunReason.New, output.Reason)
-                    );
-                }
-            );
+            Assert.Collection(runResult.TrackedSteps["IdentityTransform"], step =>
+            {
+                Assert.Collection(step.Inputs, source =>
+                    Assert.Equal(
+                        IncrementalStepRunReason.New,
+                        source.Source.Outputs[source.OutputIndex].Reason
+                    )
+                );
+                Assert.Collection(step.Outputs, output =>
+                    Assert.Equal(IncrementalStepRunReason.New, output.Reason)
+                );
+            });
 
             // run the same compilation through again, and confirm the output wasn't called
             driver = driver.RunGenerators(compilation);
             runResult = driver.GetRunResult().Results[0];
-            Assert.Collection(
-                runResult.TrackedSteps["IdentityTransform"],
-                step =>
-                {
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                            Assert.Equal(
-                                IncrementalStepRunReason.Cached,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            )
-                    );
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(IncrementalStepRunReason.Cached, output.Reason)
-                    );
-                }
-            );
+            Assert.Collection(runResult.TrackedSteps["IdentityTransform"], step =>
+            {
+                Assert.Collection(step.Inputs, source =>
+                    Assert.Equal(
+                        IncrementalStepRunReason.Cached,
+                        source.Source.Outputs[source.OutputIndex].Reason
+                    )
+                );
+                Assert.Collection(step.Outputs, output =>
+                    Assert.Equal(IncrementalStepRunReason.Cached, output.Reason)
+                );
+            });
         }
 
         [Fact]
@@ -2775,138 +2735,93 @@ class C { }
             driver = driver.RunGenerators(compilation);
             var runResult = driver.GetRunResult().Results[0];
 
-            Assert.Collection(
-                runResult.TrackedSteps["CompilationTransform"],
-                step =>
+            Assert.Collection(runResult.TrackedSteps["CompilationTransform"], step =>
+            {
+                Assert.Collection(step.Inputs, source =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                        {
-                            Assert.Equal(
-                                compilation,
-                                source.Source.Outputs[source.OutputIndex].Value
-                            );
-                            Assert.Equal(
-                                IncrementalStepRunReason.New,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        }
+                    Assert.Equal(compilation, source.Source.Outputs[source.OutputIndex].Value);
+                    Assert.Equal(
+                        IncrementalStepRunReason.New,
+                        source.Source.Outputs[source.OutputIndex].Reason
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal(compilation, output.Value);
-                            Assert.Equal(IncrementalStepRunReason.New, output.Reason);
-                        }
-                    );
-                }
-            );
-            Assert.Collection(
-                runResult.TrackedSteps["AdditionalTextsTransform"],
-                step =>
+                });
+                Assert.Collection(step.Outputs, output =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                        {
-                            Assert.Equal(text1, source.Source.Outputs[source.OutputIndex].Value);
-                            Assert.Equal(
-                                IncrementalStepRunReason.New,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        }
+                    Assert.Equal(compilation, output.Value);
+                    Assert.Equal(IncrementalStepRunReason.New, output.Reason);
+                });
+            });
+            Assert.Collection(runResult.TrackedSteps["AdditionalTextsTransform"], step =>
+            {
+                Assert.Collection(step.Inputs, source =>
+                {
+                    Assert.Equal(text1, source.Source.Outputs[source.OutputIndex].Value);
+                    Assert.Equal(
+                        IncrementalStepRunReason.New,
+                        source.Source.Outputs[source.OutputIndex].Reason
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal(text1, output.Value);
-                            Assert.Equal(IncrementalStepRunReason.New, output.Reason);
-                        }
-                    );
-                }
-            );
+                });
+                Assert.Collection(step.Outputs, output =>
+                {
+                    Assert.Equal(text1, output.Value);
+                    Assert.Equal(IncrementalStepRunReason.New, output.Reason);
+                });
+            });
 
             // add an additional text, but keep the compilation the same
             driver = driver.AddAdditionalTexts(ImmutableArray.Create<AdditionalText>(text2));
             driver = driver.RunGenerators(compilation);
             runResult = driver.GetRunResult().Results[0];
 
-            Assert.Collection(
-                runResult.TrackedSteps["CompilationTransform"],
-                step =>
+            Assert.Collection(runResult.TrackedSteps["CompilationTransform"], step =>
+            {
+                Assert.Collection(step.Inputs, source =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                        {
-                            Assert.Equal(
-                                compilation,
-                                source.Source.Outputs[source.OutputIndex].Value
-                            );
-                            Assert.Equal(
-                                IncrementalStepRunReason.Cached,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        }
+                    Assert.Equal(compilation, source.Source.Outputs[source.OutputIndex].Value);
+                    Assert.Equal(
+                        IncrementalStepRunReason.Cached,
+                        source.Source.Outputs[source.OutputIndex].Reason
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal(compilation, output.Value);
-                            Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
-                        }
-                    );
-                }
-            );
+                });
+                Assert.Collection(step.Outputs, output =>
+                {
+                    Assert.Equal(compilation, output.Value);
+                    Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
+                });
+            });
             Assert.Collection(
                 runResult.TrackedSteps["AdditionalTextsTransform"],
                 step =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                        {
-                            Assert.Equal(text1, source.Source.Outputs[source.OutputIndex].Value);
-                            Assert.Equal(
-                                IncrementalStepRunReason.Cached,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        }
-                    );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal(text1, output.Value);
-                            Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
-                        }
-                    );
+                    Assert.Collection(step.Inputs, source =>
+                    {
+                        Assert.Equal(text1, source.Source.Outputs[source.OutputIndex].Value);
+                        Assert.Equal(
+                            IncrementalStepRunReason.Cached,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        );
+                    });
+                    Assert.Collection(step.Outputs, output =>
+                    {
+                        Assert.Equal(text1, output.Value);
+                        Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
+                    });
                 },
                 step =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                        {
-                            Assert.Equal(text2, source.Source.Outputs[source.OutputIndex].Value);
-                            Assert.Equal(
-                                IncrementalStepRunReason.New,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        }
-                    );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal(text2, output.Value);
-                            Assert.Equal(IncrementalStepRunReason.New, output.Reason);
-                        }
-                    );
+                    Assert.Collection(step.Inputs, source =>
+                    {
+                        Assert.Equal(text2, source.Source.Outputs[source.OutputIndex].Value);
+                        Assert.Equal(
+                            IncrementalStepRunReason.New,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        );
+                    });
+                    Assert.Collection(step.Outputs, output =>
+                    {
+                        Assert.Equal(text2, output.Value);
+                        Assert.Equal(IncrementalStepRunReason.New, output.Reason);
+                    });
                 }
             );
 
@@ -2917,79 +2832,55 @@ class C { }
             driver = driver.RunGenerators(newCompilation);
             runResult = driver.GetRunResult().Results[0];
 
-            Assert.Collection(
-                runResult.TrackedSteps["CompilationTransform"],
-                step =>
+            Assert.Collection(runResult.TrackedSteps["CompilationTransform"], step =>
+            {
+                Assert.Collection(step.Inputs, source =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                        {
-                            Assert.Equal(
-                                newCompilation,
-                                source.Source.Outputs[source.OutputIndex].Value
-                            );
-                            Assert.Equal(
-                                IncrementalStepRunReason.Modified,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        }
+                    Assert.Equal(newCompilation, source.Source.Outputs[source.OutputIndex].Value);
+                    Assert.Equal(
+                        IncrementalStepRunReason.Modified,
+                        source.Source.Outputs[source.OutputIndex].Reason
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal(newCompilation, output.Value);
-                            Assert.Equal(IncrementalStepRunReason.Modified, output.Reason);
-                        }
-                    );
-                }
-            );
+                });
+                Assert.Collection(step.Outputs, output =>
+                {
+                    Assert.Equal(newCompilation, output.Value);
+                    Assert.Equal(IncrementalStepRunReason.Modified, output.Reason);
+                });
+            });
             Assert.Collection(
                 runResult.TrackedSteps["AdditionalTextsTransform"],
                 step =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                        {
-                            Assert.Equal(text1, source.Source.Outputs[source.OutputIndex].Value);
-                            Assert.Equal(
-                                IncrementalStepRunReason.Cached,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        }
-                    );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal(text1, output.Value);
-                            Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
-                        }
-                    );
+                    Assert.Collection(step.Inputs, source =>
+                    {
+                        Assert.Equal(text1, source.Source.Outputs[source.OutputIndex].Value);
+                        Assert.Equal(
+                            IncrementalStepRunReason.Cached,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        );
+                    });
+                    Assert.Collection(step.Outputs, output =>
+                    {
+                        Assert.Equal(text1, output.Value);
+                        Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
+                    });
                 },
                 step =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                        {
-                            Assert.Equal(text2, source.Source.Outputs[source.OutputIndex].Value);
-                            Assert.Equal(
-                                IncrementalStepRunReason.Cached,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        }
-                    );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal(text2, output.Value);
-                            Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
-                        }
-                    );
+                    Assert.Collection(step.Inputs, source =>
+                    {
+                        Assert.Equal(text2, source.Source.Outputs[source.OutputIndex].Value);
+                        Assert.Equal(
+                            IncrementalStepRunReason.Cached,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        );
+                    });
+                    Assert.Collection(step.Outputs, output =>
+                    {
+                        Assert.Equal(text2, output.Value);
+                        Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
+                    });
                 }
             );
 
@@ -2997,79 +2888,55 @@ class C { }
             driver = driver.RunGenerators(newCompilation);
             runResult = driver.GetRunResult().Results[0];
 
-            Assert.Collection(
-                runResult.TrackedSteps["CompilationTransform"],
-                step =>
+            Assert.Collection(runResult.TrackedSteps["CompilationTransform"], step =>
+            {
+                Assert.Collection(step.Inputs, source =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                        {
-                            Assert.Equal(
-                                newCompilation,
-                                source.Source.Outputs[source.OutputIndex].Value
-                            );
-                            Assert.Equal(
-                                IncrementalStepRunReason.Cached,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        }
+                    Assert.Equal(newCompilation, source.Source.Outputs[source.OutputIndex].Value);
+                    Assert.Equal(
+                        IncrementalStepRunReason.Cached,
+                        source.Source.Outputs[source.OutputIndex].Reason
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal(newCompilation, output.Value);
-                            Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
-                        }
-                    );
-                }
-            );
+                });
+                Assert.Collection(step.Outputs, output =>
+                {
+                    Assert.Equal(newCompilation, output.Value);
+                    Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
+                });
+            });
             Assert.Collection(
                 runResult.TrackedSteps["AdditionalTextsTransform"],
                 step =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                        {
-                            Assert.Equal(text1, source.Source.Outputs[source.OutputIndex].Value);
-                            Assert.Equal(
-                                IncrementalStepRunReason.Cached,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        }
-                    );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal(text1, output.Value);
-                            Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
-                        }
-                    );
+                    Assert.Collection(step.Inputs, source =>
+                    {
+                        Assert.Equal(text1, source.Source.Outputs[source.OutputIndex].Value);
+                        Assert.Equal(
+                            IncrementalStepRunReason.Cached,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        );
+                    });
+                    Assert.Collection(step.Outputs, output =>
+                    {
+                        Assert.Equal(text1, output.Value);
+                        Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
+                    });
                 },
                 step =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                        {
-                            Assert.Equal(text2, source.Source.Outputs[source.OutputIndex].Value);
-                            Assert.Equal(
-                                IncrementalStepRunReason.Cached,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        }
-                    );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal(text2, output.Value);
-                            Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
-                        }
-                    );
+                    Assert.Collection(step.Inputs, source =>
+                    {
+                        Assert.Equal(text2, source.Source.Outputs[source.OutputIndex].Value);
+                        Assert.Equal(
+                            IncrementalStepRunReason.Cached,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        );
+                    });
+                    Assert.Collection(step.Outputs, output =>
+                    {
+                        Assert.Equal(text2, output.Value);
+                        Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
+                    });
                 }
             );
         }
@@ -3099,13 +2966,10 @@ class C { }
                     var compilationSource = ctx.CompilationProvider.WithComparer(
                         new LambdaComparer<Compilation>((c1, c2) => true, 0)
                     );
-                    ctx.RegisterSourceOutput(
-                        compilationSource,
-                        (spc, c) =>
-                        {
-                            compilationsCalledFor.Add(c);
-                        }
-                    );
+                    ctx.RegisterSourceOutput(compilationSource, (spc, c) =>
+                    {
+                        compilationsCalledFor.Add(c);
+                    });
                 })
             );
 
@@ -3181,130 +3045,103 @@ class C { }
             driver = driver.RunGenerators(compilation);
             var runResult = driver.GetRunResult().Results[0];
 
-            Assert.Collection(
-                runResult.TrackedSteps["Step"],
-                step =>
+            Assert.Collection(runResult.TrackedSteps["Step"], step =>
+            {
+                Assert.Collection(
+                    step.Inputs,
+                    source =>
+                    {
+                        Assert.Equal(compilation, source.Source.Outputs[source.OutputIndex].Value);
+                        Assert.Equal(
+                            IncrementalStepRunReason.New,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        );
+                    },
+                    source =>
+                    {
+                        Assert.Equal(
+                            texts[0],
+                            (
+                                (ImmutableArray<AdditionalText>)
+                                    source.Source.Outputs[source.OutputIndex].Value
+                            )[0]
+                        );
+                        Assert.Equal(
+                            IncrementalStepRunReason.New,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        );
+                    }
+                );
+                Assert.Collection(step.Outputs, output =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                        {
-                            Assert.Equal(
-                                compilation,
-                                source.Source.Outputs[source.OutputIndex].Value
-                            );
-                            Assert.Equal(
-                                IncrementalStepRunReason.New,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        },
-                        source =>
-                        {
-                            Assert.Equal(
-                                texts[0],
-                                (
-                                    (ImmutableArray<AdditionalText>)
-                                        source.Source.Outputs[source.OutputIndex].Value
-                                )[0]
-                            );
-                            Assert.Equal(
-                                IncrementalStepRunReason.New,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        }
-                    );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            var value = ((Compilation, ImmutableArray<AdditionalText>))output.Value;
-                            Assert.Equal(compilation, value.Item1);
-                            Assert.Equal(texts[0], value.Item2.Single());
-                            Assert.Equal(IncrementalStepRunReason.New, output.Reason);
-                        }
-                    );
-                }
-            );
+                    var value = ((Compilation, ImmutableArray<AdditionalText>))output.Value;
+                    Assert.Equal(compilation, value.Item1);
+                    Assert.Equal(texts[0], value.Item2.Single());
+                    Assert.Equal(IncrementalStepRunReason.New, output.Reason);
+                });
+            });
 
             // edit the additional texts, and verify that the step output is considered "unchanged" and that the value is the same as the previous value.
             driver = driver.RemoveAdditionalTexts(texts.ToImmutableArray());
             driver = driver.RunGenerators(compilation);
             runResult = driver.GetRunResult().Results[0];
 
-            Assert.Collection(
-                runResult.TrackedSteps["Step"],
-                step =>
-                {
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                        {
-                            Assert.Equal(
-                                compilation,
+            Assert.Collection(runResult.TrackedSteps["Step"], step =>
+            {
+                Assert.Collection(
+                    step.Inputs,
+                    source =>
+                    {
+                        Assert.Equal(compilation, source.Source.Outputs[source.OutputIndex].Value);
+                        Assert.Equal(
+                            IncrementalStepRunReason.Cached,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        );
+                    },
+                    source =>
+                    {
+                        Assert.Empty(
+                            (ImmutableArray<AdditionalText>)
                                 source.Source.Outputs[source.OutputIndex].Value
-                            );
-                            Assert.Equal(
-                                IncrementalStepRunReason.Cached,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        },
-                        source =>
-                        {
-                            Assert.Empty(
-                                (ImmutableArray<AdditionalText>)
-                                    source.Source.Outputs[source.OutputIndex].Value
-                            );
-                            Assert.Equal(
-                                IncrementalStepRunReason.Modified,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        }
-                    );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            var value = ((Compilation, ImmutableArray<AdditionalText>))output.Value;
-                            Assert.Equal(compilation, value.Item1);
-                            Assert.Equal(texts[0], value.Item2.Single());
-                            Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason);
-                        }
-                    );
-                }
-            );
+                        );
+                        Assert.Equal(
+                            IncrementalStepRunReason.Modified,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        );
+                    }
+                );
+                Assert.Collection(step.Outputs, output =>
+                {
+                    var value = ((Compilation, ImmutableArray<AdditionalText>))output.Value;
+                    Assert.Equal(compilation, value.Item1);
+                    Assert.Equal(texts[0], value.Item2.Single());
+                    Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason);
+                });
+            });
 
             // Verify that a step that consumes the result of the Combine step gets the old value as an input
             // and considers the value cached.
-            Assert.Collection(
-                runResult.TrackedSteps["Step2"],
-                step =>
+            Assert.Collection(runResult.TrackedSteps["Step2"], step =>
+            {
+                Assert.Collection(step.Inputs, source =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                        {
-                            var value = ((Compilation, ImmutableArray<AdditionalText>))
-                                source.Source.Outputs[source.OutputIndex].Value;
-                            Assert.Equal(compilation, value.Item1);
-                            Assert.Equal(texts[0], value.Item2.Single());
-                            Assert.Equal(
-                                IncrementalStepRunReason.Unchanged,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        }
+                    var value = ((Compilation, ImmutableArray<AdditionalText>))
+                        source.Source.Outputs[source.OutputIndex].Value;
+                    Assert.Equal(compilation, value.Item1);
+                    Assert.Equal(texts[0], value.Item2.Single());
+                    Assert.Equal(
+                        IncrementalStepRunReason.Unchanged,
+                        source.Source.Outputs[source.OutputIndex].Reason
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            var value = ((Compilation, ImmutableArray<AdditionalText>))output.Value;
-                            Assert.Equal(compilation, value.Item1);
-                            Assert.Equal(texts[0], value.Item2.Single());
-                            Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
-                        }
-                    );
-                }
-            );
+                });
+                Assert.Collection(step.Outputs, output =>
+                {
+                    var value = ((Compilation, ImmutableArray<AdditionalText>))output.Value;
+                    Assert.Equal(compilation, value.Item1);
+                    Assert.Equal(texts[0], value.Item2.Single());
+                    Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
+                });
+            });
 
             // now edit the compilation, run the generator, and confirm that the output *was* called again this time with the new compilation and no additional texts
             Compilation newCompilation = compilation.WithOptions(
@@ -3313,47 +3150,41 @@ class C { }
             driver = driver.RunGenerators(newCompilation);
             runResult = driver.GetRunResult().Results[0];
 
-            Assert.Collection(
-                runResult.TrackedSteps["Step"],
-                step =>
-                {
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                        {
-                            Assert.Equal(
-                                newCompilation,
+            Assert.Collection(runResult.TrackedSteps["Step"], step =>
+            {
+                Assert.Collection(
+                    step.Inputs,
+                    source =>
+                    {
+                        Assert.Equal(
+                            newCompilation,
+                            source.Source.Outputs[source.OutputIndex].Value
+                        );
+                        Assert.Equal(
+                            IncrementalStepRunReason.Modified,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        );
+                    },
+                    source =>
+                    {
+                        Assert.Empty(
+                            (ImmutableArray<AdditionalText>)
                                 source.Source.Outputs[source.OutputIndex].Value
-                            );
-                            Assert.Equal(
-                                IncrementalStepRunReason.Modified,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        },
-                        source =>
-                        {
-                            Assert.Empty(
-                                (ImmutableArray<AdditionalText>)
-                                    source.Source.Outputs[source.OutputIndex].Value
-                            );
-                            Assert.Equal(
-                                IncrementalStepRunReason.Unchanged,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        }
-                    );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            var value = ((Compilation, ImmutableArray<AdditionalText>))output.Value;
-                            Assert.Equal(newCompilation, value.Item1);
-                            Assert.Empty(value.Item2);
-                            Assert.Equal(IncrementalStepRunReason.Modified, output.Reason);
-                        }
-                    );
-                }
-            );
+                        );
+                        Assert.Equal(
+                            IncrementalStepRunReason.Unchanged,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        );
+                    }
+                );
+                Assert.Collection(step.Outputs, output =>
+                {
+                    var value = ((Compilation, ImmutableArray<AdditionalText>))output.Value;
+                    Assert.Equal(newCompilation, value.Item1);
+                    Assert.Empty(value.Item2);
+                    Assert.Equal(IncrementalStepRunReason.Modified, output.Reason);
+                });
+            });
         }
 
         [Fact, WorkItem(61162, "https://github.com/dotnet/roslyn/issues/61162")]
@@ -3371,19 +3202,13 @@ class C { }
                         )
                         .Collect();
 
-                    ctx.RegisterSourceOutput(
-                        invokedMethodsProvider,
-                        static (spc, invokedMethods) =>
-                        {
-                            spc.AddSource(
-                                "InvokedMethods.g.cs",
-                                string.Join(
-                                    Environment.NewLine,
-                                    invokedMethods.Select(m => $"// {m}")
-                                )
-                            );
-                        }
-                    );
+                    ctx.RegisterSourceOutput(invokedMethodsProvider, static (spc, invokedMethods) =>
+                    {
+                        spc.AddSource(
+                            "InvokedMethods.g.cs",
+                            string.Join(Environment.NewLine, invokedMethods.Select(m => $"// {m}"))
+                        );
+                    });
                 })
             );
 
@@ -3480,13 +3305,10 @@ class C { }
                         )
                         .Select((n, _) => n);
 
-                    ctx.RegisterSourceOutput(
-                        invokedMethodsProvider,
-                        static (spc, invokedMethod) =>
-                        {
-                            spc.AddSource(invokedMethod, "// " + invokedMethod);
-                        }
-                    );
+                    ctx.RegisterSourceOutput(invokedMethodsProvider, static (spc, invokedMethod) =>
+                    {
+                        spc.AddSource(invokedMethod, "// " + invokedMethod);
+                    });
                 })
             );
 
@@ -3582,13 +3404,10 @@ class C { }
                     var source4 = ctx.CompilationProvider.Combine(source3);
                     var source5 = ctx.CompilationProvider.Combine(source4);
 
-                    ctx.RegisterSourceOutput(
-                        source5,
-                        (spc, c) =>
-                        {
-                            compilationsCalledFor.Add(c.Item1);
-                        }
-                    );
+                    ctx.RegisterSourceOutput(source5, (spc, c) =>
+                    {
+                        compilationsCalledFor.Add(c.Item1);
+                    });
                 })
             );
 
@@ -3618,13 +3437,10 @@ class C { }
                         .Select((n, _) => n)
                         .WithTrackingName("Select");
 
-                    ctx.RegisterSourceOutput(
-                        invokedMethodsProvider,
-                        static (spc, invokedMethod) =>
-                        {
-                            spc.AddSource(invokedMethod, "// " + invokedMethod);
-                        }
-                    );
+                    ctx.RegisterSourceOutput(invokedMethodsProvider, static (spc, invokedMethod) =>
+                    {
+                        spc.AddSource(invokedMethod, "// " + invokedMethod);
+                    });
                 })
             );
 
@@ -3972,13 +3788,10 @@ class C { }
             // re-run without changes
             driver = driver.RunGenerators(compilation);
             runResult = driver.GetRunResult().Results[0];
-            Assert.Collection(
-                runResult.TrackedSteps["ParseOptions"],
-                step =>
-                {
-                    Assert.Equal(IncrementalStepRunReason.Cached, step.Outputs[0].Reason);
-                }
-            );
+            Assert.Collection(runResult.TrackedSteps["ParseOptions"], step =>
+            {
+                Assert.Equal(IncrementalStepRunReason.Cached, step.Outputs[0].Reason);
+            });
 
             // now update the parse options
             var newParseOptions = parseOptions.WithDocumentationMode(DocumentationMode.Diagnose);
@@ -3994,13 +3807,10 @@ class C { }
             // re-run without changes
             driver = driver.RunGenerators(compilation);
             runResult = driver.GetRunResult().Results[0];
-            Assert.Collection(
-                runResult.TrackedSteps["ParseOptions"],
-                step =>
-                {
-                    Assert.Equal(IncrementalStepRunReason.Cached, step.Outputs[0].Reason);
-                }
-            );
+            Assert.Collection(runResult.TrackedSteps["ParseOptions"], step =>
+            {
+                Assert.Equal(IncrementalStepRunReason.Cached, step.Outputs[0].Reason);
+            });
 
             // replace it with null, and check that it throws
             Assert.Throws<ArgumentNullException>(() => driver.WithUpdatedParseOptions(null!));
@@ -4041,9 +3851,8 @@ class C { }
                         classDeclarations.Collect()
                     );
 
-                    ctx.RegisterSourceOutput(
-                        compilationAndClasses,
-                        (context, ct) => validate(ct.Item1, ct.Item2)
+                    ctx.RegisterSourceOutput(compilationAndClasses, (context, ct) =>
+                        validate(ct.Item1, ct.Item2)
                     );
                 })
             );
@@ -4162,41 +3971,29 @@ class C { }
             );
             driver = driver.RunGenerators(compilation);
             var runResult = driver.GetRunResult().Results[0];
-            Assert.Collection(
-                runResult.TrackedSteps["AnalyzerConfig"],
-                step =>
+            Assert.Collection(runResult.TrackedSteps["AnalyzerConfig"], step =>
+            {
+                Assert.Equal("AnalyzerConfig", step.Name);
+                Assert.Collection(step.Outputs, output =>
                 {
-                    Assert.Equal("AnalyzerConfig", step.Name);
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal("value1", output.Value);
-                            Assert.Equal(IncrementalStepRunReason.New, output.Reason);
-                        }
-                    );
-                }
-            );
+                    Assert.Equal("value1", output.Value);
+                    Assert.Equal(IncrementalStepRunReason.New, output.Reason);
+                });
+            });
 
             // re-run without changes.
             driver = driver.RunGenerators(compilation);
             runResult = driver.GetRunResult().Results[0];
 
-            Assert.Collection(
-                runResult.TrackedSteps["AnalyzerConfig"],
-                step =>
+            Assert.Collection(runResult.TrackedSteps["AnalyzerConfig"], step =>
+            {
+                Assert.Equal("AnalyzerConfig", step.Name);
+                Assert.Collection(step.Outputs, output =>
                 {
-                    Assert.Equal("AnalyzerConfig", step.Name);
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal("value1", output.Value);
-                            Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
-                        }
-                    );
-                }
-            );
+                    Assert.Equal("value1", output.Value);
+                    Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
+                });
+            });
 
             // now update the config
             builder.Clear();
@@ -4210,21 +4007,15 @@ class C { }
             driver = driver.RunGenerators(compilation);
             runResult = driver.GetRunResult().Results[0];
 
-            Assert.Collection(
-                runResult.TrackedSteps["AnalyzerConfig"],
-                step =>
+            Assert.Collection(runResult.TrackedSteps["AnalyzerConfig"], step =>
+            {
+                Assert.Equal("AnalyzerConfig", step.Name);
+                Assert.Collection(step.Outputs, output =>
                 {
-                    Assert.Equal("AnalyzerConfig", step.Name);
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal("value2", output.Value);
-                            Assert.Equal(IncrementalStepRunReason.Modified, output.Reason);
-                        }
-                    );
-                }
-            );
+                    Assert.Equal("value2", output.Value);
+                    Assert.Equal(IncrementalStepRunReason.Modified, output.Reason);
+                });
+            });
 
             // replace it with null, and check that it throws
             Assert.Throws<ArgumentNullException>(() =>
@@ -4279,72 +4070,54 @@ class C { }
                 runResult.TrackedSteps["Paths"],
                 step =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        input =>
-                        {
-                            var consumedInput = input.Source.Outputs[input.OutputIndex];
-                            Assert.Equal(
-                                "path1.txt",
-                                Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
-                            );
-                            Assert.Equal(IncrementalStepRunReason.New, consumedInput.Reason);
-                        }
-                    );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal("path1.txt", output.Value);
-                            Assert.Equal(IncrementalStepRunReason.New, output.Reason);
-                        }
-                    );
+                    Assert.Collection(step.Inputs, input =>
+                    {
+                        var consumedInput = input.Source.Outputs[input.OutputIndex];
+                        Assert.Equal(
+                            "path1.txt",
+                            Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
+                        );
+                        Assert.Equal(IncrementalStepRunReason.New, consumedInput.Reason);
+                    });
+                    Assert.Collection(step.Outputs, output =>
+                    {
+                        Assert.Equal("path1.txt", output.Value);
+                        Assert.Equal(IncrementalStepRunReason.New, output.Reason);
+                    });
                 },
                 step =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        input =>
-                        {
-                            var consumedInput = input.Source.Outputs[input.OutputIndex];
-                            Assert.Equal(
-                                "path2.txt",
-                                Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
-                            );
-                            Assert.Equal(IncrementalStepRunReason.New, consumedInput.Reason);
-                        }
-                    );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal("path2.txt", output.Value);
-                            Assert.Equal(IncrementalStepRunReason.New, output.Reason);
-                        }
-                    );
+                    Assert.Collection(step.Inputs, input =>
+                    {
+                        var consumedInput = input.Source.Outputs[input.OutputIndex];
+                        Assert.Equal(
+                            "path2.txt",
+                            Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
+                        );
+                        Assert.Equal(IncrementalStepRunReason.New, consumedInput.Reason);
+                    });
+                    Assert.Collection(step.Outputs, output =>
+                    {
+                        Assert.Equal("path2.txt", output.Value);
+                        Assert.Equal(IncrementalStepRunReason.New, output.Reason);
+                    });
                 },
                 step =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        input =>
-                        {
-                            var consumedInput = input.Source.Outputs[input.OutputIndex];
-                            Assert.Equal(
-                                "path3.txt",
-                                Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
-                            );
-                            Assert.Equal(IncrementalStepRunReason.New, consumedInput.Reason);
-                        }
-                    );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal("path3.txt", output.Value);
-                            Assert.Equal(IncrementalStepRunReason.New, output.Reason);
-                        }
-                    );
+                    Assert.Collection(step.Inputs, input =>
+                    {
+                        var consumedInput = input.Source.Outputs[input.OutputIndex];
+                        Assert.Equal(
+                            "path3.txt",
+                            Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
+                        );
+                        Assert.Equal(IncrementalStepRunReason.New, consumedInput.Reason);
+                    });
+                    Assert.Collection(step.Outputs, output =>
+                    {
+                        Assert.Equal("path3.txt", output.Value);
+                        Assert.Equal(IncrementalStepRunReason.New, output.Reason);
+                    });
                 }
             );
 
@@ -4355,72 +4128,54 @@ class C { }
                 runResult.TrackedSteps["Paths"],
                 step =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        input =>
-                        {
-                            var consumedInput = input.Source.Outputs[input.OutputIndex];
-                            Assert.Equal(
-                                "path1.txt",
-                                Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
-                            );
-                            Assert.Equal(IncrementalStepRunReason.Cached, consumedInput.Reason);
-                        }
-                    );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal("path1.txt", output.Value);
-                            Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
-                        }
-                    );
+                    Assert.Collection(step.Inputs, input =>
+                    {
+                        var consumedInput = input.Source.Outputs[input.OutputIndex];
+                        Assert.Equal(
+                            "path1.txt",
+                            Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
+                        );
+                        Assert.Equal(IncrementalStepRunReason.Cached, consumedInput.Reason);
+                    });
+                    Assert.Collection(step.Outputs, output =>
+                    {
+                        Assert.Equal("path1.txt", output.Value);
+                        Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
+                    });
                 },
                 step =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        input =>
-                        {
-                            var consumedInput = input.Source.Outputs[input.OutputIndex];
-                            Assert.Equal(
-                                "path2.txt",
-                                Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
-                            );
-                            Assert.Equal(IncrementalStepRunReason.Cached, consumedInput.Reason);
-                        }
-                    );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal("path2.txt", output.Value);
-                            Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
-                        }
-                    );
+                    Assert.Collection(step.Inputs, input =>
+                    {
+                        var consumedInput = input.Source.Outputs[input.OutputIndex];
+                        Assert.Equal(
+                            "path2.txt",
+                            Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
+                        );
+                        Assert.Equal(IncrementalStepRunReason.Cached, consumedInput.Reason);
+                    });
+                    Assert.Collection(step.Outputs, output =>
+                    {
+                        Assert.Equal("path2.txt", output.Value);
+                        Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
+                    });
                 },
                 step =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        input =>
-                        {
-                            var consumedInput = input.Source.Outputs[input.OutputIndex];
-                            Assert.Equal(
-                                "path3.txt",
-                                Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
-                            );
-                            Assert.Equal(IncrementalStepRunReason.Cached, consumedInput.Reason);
-                        }
-                    );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal("path3.txt", output.Value);
-                            Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
-                        }
-                    );
+                    Assert.Collection(step.Inputs, input =>
+                    {
+                        var consumedInput = input.Source.Outputs[input.OutputIndex];
+                        Assert.Equal(
+                            "path3.txt",
+                            Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
+                        );
+                        Assert.Equal(IncrementalStepRunReason.Cached, consumedInput.Reason);
+                    });
+                    Assert.Collection(step.Outputs, output =>
+                    {
+                        Assert.Equal("path3.txt", output.Value);
+                        Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
+                    });
                 }
             );
 
@@ -4437,72 +4192,54 @@ class C { }
                 runResult.TrackedSteps["Paths"],
                 step =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        input =>
-                        {
-                            var consumedInput = input.Source.Outputs[input.OutputIndex];
-                            Assert.Equal(
-                                "path1.txt",
-                                Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
-                            );
-                            Assert.Equal(IncrementalStepRunReason.Cached, consumedInput.Reason);
-                        }
-                    );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal("path1.txt", output.Value);
-                            Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
-                        }
-                    );
+                    Assert.Collection(step.Inputs, input =>
+                    {
+                        var consumedInput = input.Source.Outputs[input.OutputIndex];
+                        Assert.Equal(
+                            "path1.txt",
+                            Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
+                        );
+                        Assert.Equal(IncrementalStepRunReason.Cached, consumedInput.Reason);
+                    });
+                    Assert.Collection(step.Outputs, output =>
+                    {
+                        Assert.Equal("path1.txt", output.Value);
+                        Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
+                    });
                 },
                 step =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        input =>
-                        {
-                            var consumedInput = input.Source.Outputs[input.OutputIndex];
-                            Assert.Equal(
-                                "path4.txt",
-                                Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
-                            );
-                            Assert.Equal(IncrementalStepRunReason.Modified, consumedInput.Reason);
-                        }
-                    );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal("path4.txt", output.Value);
-                            Assert.Equal(IncrementalStepRunReason.Modified, output.Reason);
-                        }
-                    );
+                    Assert.Collection(step.Inputs, input =>
+                    {
+                        var consumedInput = input.Source.Outputs[input.OutputIndex];
+                        Assert.Equal(
+                            "path4.txt",
+                            Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
+                        );
+                        Assert.Equal(IncrementalStepRunReason.Modified, consumedInput.Reason);
+                    });
+                    Assert.Collection(step.Outputs, output =>
+                    {
+                        Assert.Equal("path4.txt", output.Value);
+                        Assert.Equal(IncrementalStepRunReason.Modified, output.Reason);
+                    });
                 },
                 step =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        input =>
-                        {
-                            var consumedInput = input.Source.Outputs[input.OutputIndex];
-                            Assert.Equal(
-                                "path3.txt",
-                                Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
-                            );
-                            Assert.Equal(IncrementalStepRunReason.Cached, consumedInput.Reason);
-                        }
-                    );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal("path3.txt", output.Value);
-                            Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
-                        }
-                    );
+                    Assert.Collection(step.Inputs, input =>
+                    {
+                        var consumedInput = input.Source.Outputs[input.OutputIndex];
+                        Assert.Equal(
+                            "path3.txt",
+                            Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
+                        );
+                        Assert.Equal(IncrementalStepRunReason.Cached, consumedInput.Reason);
+                    });
+                    Assert.Collection(step.Outputs, output =>
+                    {
+                        Assert.Equal("path3.txt", output.Value);
+                        Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
+                    });
                 }
             );
 
@@ -4556,114 +4293,78 @@ class C { }
             );
             driver = driver.RunGenerators(compilation);
             var runResult = driver.GetRunResult().Results[0];
-            Assert.Collection(
-                runResult.TrackedSteps["Path"],
-                step =>
+            Assert.Collection(runResult.TrackedSteps["Path"], step =>
+            {
+                Assert.Collection(step.Inputs, input =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        input =>
-                        {
-                            var consumedInput = input.Source.Outputs[input.OutputIndex];
-                            Assert.Equal(
-                                "path.txt",
-                                Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
-                            );
-                            Assert.Equal(IncrementalStepRunReason.New, consumedInput.Reason);
-                        }
+                    var consumedInput = input.Source.Outputs[input.OutputIndex];
+                    Assert.Equal(
+                        "path.txt",
+                        Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal("path.txt", output.Value);
-                            Assert.Equal(IncrementalStepRunReason.New, output.Reason);
-                        }
-                    );
-                }
-            );
-            Assert.Collection(
-                runResult.TrackedSteps["Content"],
-                step =>
+                    Assert.Equal(IncrementalStepRunReason.New, consumedInput.Reason);
+                });
+                Assert.Collection(step.Outputs, output =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        input =>
-                        {
-                            var consumedInput = input.Source.Outputs[input.OutputIndex];
-                            Assert.Equal(
-                                "path.txt",
-                                Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
-                            );
-                            Assert.Equal(IncrementalStepRunReason.New, consumedInput.Reason);
-                        }
+                    Assert.Equal("path.txt", output.Value);
+                    Assert.Equal(IncrementalStepRunReason.New, output.Reason);
+                });
+            });
+            Assert.Collection(runResult.TrackedSteps["Content"], step =>
+            {
+                Assert.Collection(step.Inputs, input =>
+                {
+                    var consumedInput = input.Source.Outputs[input.OutputIndex];
+                    Assert.Equal(
+                        "path.txt",
+                        Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal("abc", output.Value);
-                            Assert.Equal(IncrementalStepRunReason.New, output.Reason);
-                        }
-                    );
-                }
-            );
+                    Assert.Equal(IncrementalStepRunReason.New, consumedInput.Reason);
+                });
+                Assert.Collection(step.Outputs, output =>
+                {
+                    Assert.Equal("abc", output.Value);
+                    Assert.Equal(IncrementalStepRunReason.New, output.Reason);
+                });
+            });
 
             // re-run and check nothing else got added
             driver = driver.RunGenerators(compilation);
             runResult = driver.GetRunResult().Results[0];
-            Assert.Collection(
-                runResult.TrackedSteps["Path"],
-                step =>
+            Assert.Collection(runResult.TrackedSteps["Path"], step =>
+            {
+                Assert.Collection(step.Inputs, input =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        input =>
-                        {
-                            var consumedInput = input.Source.Outputs[input.OutputIndex];
-                            Assert.Equal(
-                                "path.txt",
-                                Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
-                            );
-                            Assert.Equal(IncrementalStepRunReason.Cached, consumedInput.Reason);
-                        }
+                    var consumedInput = input.Source.Outputs[input.OutputIndex];
+                    Assert.Equal(
+                        "path.txt",
+                        Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal("path.txt", output.Value);
-                            Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
-                        }
-                    );
-                }
-            );
-            Assert.Collection(
-                runResult.TrackedSteps["Content"],
-                step =>
+                    Assert.Equal(IncrementalStepRunReason.Cached, consumedInput.Reason);
+                });
+                Assert.Collection(step.Outputs, output =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        input =>
-                        {
-                            var consumedInput = input.Source.Outputs[input.OutputIndex];
-                            Assert.Equal(
-                                "path.txt",
-                                Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
-                            );
-                            Assert.Equal(IncrementalStepRunReason.Cached, consumedInput.Reason);
-                        }
+                    Assert.Equal("path.txt", output.Value);
+                    Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
+                });
+            });
+            Assert.Collection(runResult.TrackedSteps["Content"], step =>
+            {
+                Assert.Collection(step.Inputs, input =>
+                {
+                    var consumedInput = input.Source.Outputs[input.OutputIndex];
+                    Assert.Equal(
+                        "path.txt",
+                        Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal("abc", output.Value);
-                            Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
-                        }
-                    );
-                }
-            );
+                    Assert.Equal(IncrementalStepRunReason.Cached, consumedInput.Reason);
+                });
+                Assert.Collection(step.Outputs, output =>
+                {
+                    Assert.Equal("abc", output.Value);
+                    Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
+                });
+            });
 
             // now, update the additional text, but keep the path the same
             var secondText = new InMemoryAdditionalText("path.txt", "def");
@@ -4672,58 +4373,40 @@ class C { }
             // run, and check that only the contents are marked as modified
             driver = driver.RunGenerators(compilation);
             runResult = driver.GetRunResult().Results[0];
-            Assert.Collection(
-                runResult.TrackedSteps["Path"],
-                step =>
+            Assert.Collection(runResult.TrackedSteps["Path"], step =>
+            {
+                Assert.Collection(step.Inputs, input =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        input =>
-                        {
-                            var consumedInput = input.Source.Outputs[input.OutputIndex];
-                            Assert.Equal(
-                                "path.txt",
-                                Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
-                            );
-                            Assert.Equal(IncrementalStepRunReason.Modified, consumedInput.Reason);
-                        }
+                    var consumedInput = input.Source.Outputs[input.OutputIndex];
+                    Assert.Equal(
+                        "path.txt",
+                        Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal("path.txt", output.Value);
-                            Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason);
-                        }
-                    );
-                }
-            );
-            Assert.Collection(
-                runResult.TrackedSteps["Content"],
-                step =>
+                    Assert.Equal(IncrementalStepRunReason.Modified, consumedInput.Reason);
+                });
+                Assert.Collection(step.Outputs, output =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        input =>
-                        {
-                            var consumedInput = input.Source.Outputs[input.OutputIndex];
-                            Assert.Equal(
-                                "path.txt",
-                                Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
-                            );
-                            Assert.Equal(IncrementalStepRunReason.Modified, consumedInput.Reason);
-                        }
+                    Assert.Equal("path.txt", output.Value);
+                    Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason);
+                });
+            });
+            Assert.Collection(runResult.TrackedSteps["Content"], step =>
+            {
+                Assert.Collection(step.Inputs, input =>
+                {
+                    var consumedInput = input.Source.Outputs[input.OutputIndex];
+                    Assert.Equal(
+                        "path.txt",
+                        Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal("def", output.Value);
-                            Assert.Equal(IncrementalStepRunReason.Modified, output.Reason);
-                        }
-                    );
-                }
-            );
+                    Assert.Equal(IncrementalStepRunReason.Modified, consumedInput.Reason);
+                });
+                Assert.Collection(step.Outputs, output =>
+                {
+                    Assert.Equal("def", output.Value);
+                    Assert.Equal(IncrementalStepRunReason.Modified, output.Reason);
+                });
+            });
 
             // now replace the text with a different path, but the same text
             var thirdText = new InMemoryAdditionalText("path2.txt", "def");
@@ -4732,58 +4415,40 @@ class C { }
             // run, and check that only the paths got re-run
             driver = driver.RunGenerators(compilation);
             runResult = driver.GetRunResult().Results[0];
-            Assert.Collection(
-                runResult.TrackedSteps["Path"],
-                step =>
+            Assert.Collection(runResult.TrackedSteps["Path"], step =>
+            {
+                Assert.Collection(step.Inputs, input =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        input =>
-                        {
-                            var consumedInput = input.Source.Outputs[input.OutputIndex];
-                            Assert.Equal(
-                                "path2.txt",
-                                Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
-                            );
-                            Assert.Equal(IncrementalStepRunReason.Modified, consumedInput.Reason);
-                        }
+                    var consumedInput = input.Source.Outputs[input.OutputIndex];
+                    Assert.Equal(
+                        "path2.txt",
+                        Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal("path2.txt", output.Value);
-                            Assert.Equal(IncrementalStepRunReason.Modified, output.Reason);
-                        }
-                    );
-                }
-            );
-            Assert.Collection(
-                runResult.TrackedSteps["Content"],
-                step =>
+                    Assert.Equal(IncrementalStepRunReason.Modified, consumedInput.Reason);
+                });
+                Assert.Collection(step.Outputs, output =>
                 {
-                    Assert.Collection(
-                        step.Inputs,
-                        input =>
-                        {
-                            var consumedInput = input.Source.Outputs[input.OutputIndex];
-                            Assert.Equal(
-                                "path2.txt",
-                                Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
-                            );
-                            Assert.Equal(IncrementalStepRunReason.Modified, consumedInput.Reason);
-                        }
+                    Assert.Equal("path2.txt", output.Value);
+                    Assert.Equal(IncrementalStepRunReason.Modified, output.Reason);
+                });
+            });
+            Assert.Collection(runResult.TrackedSteps["Content"], step =>
+            {
+                Assert.Collection(step.Inputs, input =>
+                {
+                    var consumedInput = input.Source.Outputs[input.OutputIndex];
+                    Assert.Equal(
+                        "path2.txt",
+                        Assert.IsType<InMemoryAdditionalText>(consumedInput.Value).Path
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal("def", output.Value);
-                            Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason);
-                        }
-                    );
-                }
-            );
+                    Assert.Equal(IncrementalStepRunReason.Modified, consumedInput.Reason);
+                });
+                Assert.Collection(step.Outputs, output =>
+                {
+                    Assert.Equal("def", output.Value);
+                    Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason);
+                });
+            });
         }
 
         [Theory]
@@ -4824,13 +4489,11 @@ class C { }
                 ctx.RegisterPostInitializationOutput(
                     (context) => context.AddSource("PostInit", "")
                 );
-                ctx.RegisterSourceOutput(
-                    ctx.CompilationProvider,
-                    (context, ct) => context.AddSource("Source", "")
+                ctx.RegisterSourceOutput(ctx.CompilationProvider, (context, ct) =>
+                    context.AddSource("Source", "")
                 );
-                ctx.RegisterImplementationSourceOutput(
-                    ctx.CompilationProvider,
-                    (context, ct) => context.AddSource("Implementation", "")
+                ctx.RegisterImplementationSourceOutput(ctx.CompilationProvider, (context, ct) =>
+                    context.AddSource("Implementation", "")
                 );
             });
 
@@ -4993,13 +4656,8 @@ class C { }
             );
             driver = driver.RunGenerators(compilation);
             GeneratorDriverRunResult runResult = driver.GetRunResult();
-            Assert.All(
-                runResult.Results,
-                result =>
-                    Assert.Contains(
-                        WellKnownGeneratorInputs.AdditionalTexts,
-                        result.TrackedSteps.Keys
-                    )
+            Assert.All(runResult.Results, result =>
+                Assert.Contains(WellKnownGeneratorInputs.AdditionalTexts, result.TrackedSteps.Keys)
             );
             Assert.Equal(2, runResult.Results.Length);
         }
@@ -5031,13 +4689,10 @@ class C { }
             var generator = new IncrementalGeneratorWrapper(
                 new PipelineCallbackGenerator(ctx =>
                 {
-                    ctx.RegisterSourceOutput(
-                        ctx.MetadataReferencesProvider,
-                        (spc, r) =>
-                        {
-                            referenceList.Add(r.Display);
-                        }
-                    );
+                    ctx.RegisterSourceOutput(ctx.MetadataReferencesProvider, (spc, r) =>
+                    {
+                        referenceList.Add(r.Display);
+                    });
                 })
             );
 
@@ -5143,13 +4798,10 @@ public static readonly string F = ""a""
 
             var generator = new PipelineCallbackGenerator(ctx =>
             {
-                ctx.RegisterSourceOutput(
-                    ctx.AdditionalTextsProvider,
-                    (context, text) =>
-                    {
-                        context.AddSource(Path.GetFileName(text.Path), "");
-                    }
-                );
+                ctx.RegisterSourceOutput(ctx.AdditionalTextsProvider, (context, text) =>
+                {
+                    context.AddSource(Path.GetFileName(text.Path), "");
+                });
             });
 
             var additionalText1 = new InMemoryAdditionalText.BinaryText("file1");
@@ -5190,20 +4842,17 @@ public static readonly string F = ""a""
 
             var generator = new PipelineCallbackGenerator(ctx =>
             {
-                ctx.RegisterSourceOutput(
-                    ctx.CompilationProvider,
-                    (context, text) =>
+                ctx.RegisterSourceOutput(ctx.CompilationProvider, (context, text) =>
+                {
+                    if (shouldThrow)
                     {
-                        if (shouldThrow)
-                        {
-                            throw new InvalidOperationException();
-                        }
-                        else
-                        {
-                            context.AddSource("generated", "");
-                        }
+                        throw new InvalidOperationException();
                     }
-                );
+                    else
+                    {
+                        context.AddSource("generated", "");
+                    }
+                });
             });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -5245,13 +4894,10 @@ public static readonly string F = ""a""
 
             var generator = new PipelineCallbackGenerator(ctx =>
             {
-                ctx.RegisterSourceOutput(
-                    ctx.CompilationProvider,
-                    (context, text) =>
-                    {
-                        context.AddSource("generated", "");
-                    }
-                );
+                ctx.RegisterSourceOutput(ctx.CompilationProvider, (context, text) =>
+                {
+                    context.AddSource("generated", "");
+                });
             }).AsSourceGenerator();
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -5287,14 +4933,11 @@ public static readonly string F = ""a""
 
             var generator = new PipelineCallbackGenerator(ctx =>
             {
-                ctx.RegisterSourceOutput(
-                    ctx.CompilationProvider,
-                    (context, text) =>
-                    {
-                        context.AddSource("generated", "");
-                        Thread.Sleep(1);
-                    }
-                );
+                ctx.RegisterSourceOutput(ctx.CompilationProvider, (context, text) =>
+                {
+                    context.AddSource("generated", "");
+                    Thread.Sleep(1);
+                });
             }).AsSourceGenerator();
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -5332,26 +4975,20 @@ public static readonly string F = ""a""
 
             var generator = new PipelineCallbackGenerator(ctx =>
             {
-                ctx.RegisterSourceOutput(
-                    ctx.CompilationProvider,
-                    (context, text) =>
-                    {
-                        context.AddSource("generated", "");
-                        Thread.Sleep(1);
-                    }
-                );
+                ctx.RegisterSourceOutput(ctx.CompilationProvider, (context, text) =>
+                {
+                    context.AddSource("generated", "");
+                    Thread.Sleep(1);
+                });
             }).AsSourceGenerator();
 
             var generator2 = new PipelineCallbackGenerator2(ctx =>
             {
-                ctx.RegisterSourceOutput(
-                    ctx.CompilationProvider,
-                    (context, text) =>
-                    {
-                        context.AddSource("generated", "");
-                        Thread.Sleep(1);
-                    }
-                );
+                ctx.RegisterSourceOutput(ctx.CompilationProvider, (context, text) =>
+                {
+                    context.AddSource("generated", "");
+                    Thread.Sleep(1);
+                });
             }).AsSourceGenerator();
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -5397,14 +5034,11 @@ public static readonly string F = ""a""
 
             var generator = new PipelineCallbackGenerator(ctx =>
             {
-                ctx.RegisterSourceOutput(
-                    ctx.CompilationProvider,
-                    (context, text) =>
-                    {
-                        Thread.Sleep(50);
-                        context.AddSource("generated", "");
-                    }
-                );
+                ctx.RegisterSourceOutput(ctx.CompilationProvider, (context, text) =>
+                {
+                    Thread.Sleep(50);
+                    context.AddSource("generated", "");
+                });
             }).AsSourceGenerator();
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -5574,29 +5208,26 @@ class D {  (int, bool) _field; }";
 
             var generator = new PipelineCallbackGenerator(ctx =>
             {
-                ctx.RegisterSourceOutput(
-                    ctx.CompilationProvider,
-                    (ctx, _) =>
-                    {
-                        var syntaxTree = CSharpSyntaxTree.ParseText(
-                            source,
-                            parseOptions,
-                            path: "/detached"
-                        );
-                        ctx.ReportDiagnostic(
-                            CodeAnalysis.Diagnostic.Create(
-                                "TEST0001",
-                                "Test",
-                                "Test diagnostic",
-                                DiagnosticSeverity.Warning,
-                                DiagnosticSeverity.Warning,
-                                isEnabledByDefault: true,
-                                warningLevel: 1,
-                                location: Location.Create(syntaxTree, TextSpan.FromBounds(0, 2))
-                            )
-                        );
-                    }
-                );
+                ctx.RegisterSourceOutput(ctx.CompilationProvider, (ctx, _) =>
+                {
+                    var syntaxTree = CSharpSyntaxTree.ParseText(
+                        source,
+                        parseOptions,
+                        path: "/detached"
+                    );
+                    ctx.ReportDiagnostic(
+                        CodeAnalysis.Diagnostic.Create(
+                            "TEST0001",
+                            "Test",
+                            "Test diagnostic",
+                            DiagnosticSeverity.Warning,
+                            DiagnosticSeverity.Warning,
+                            isEnabledByDefault: true,
+                            warningLevel: 1,
+                            location: Location.Create(syntaxTree, TextSpan.FromBounds(0, 2))
+                        )
+                    );
+                });
             }).AsSourceGenerator();
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -5632,37 +5263,31 @@ class D {  (int, bool) _field; }";
 
             var generator = new PipelineCallbackGenerator(ctx =>
             {
-                ctx.RegisterSourceOutput(
-                    ctx.CompilationProvider,
-                    (ctx, comp) =>
-                    {
-                        var validSyntaxTree = comp.SyntaxTrees.Single();
-                        var invalidSyntaxTree = CSharpSyntaxTree.ParseText(
-                            source,
-                            parseOptions,
-                            path: "/detached"
-                        );
-                        ctx.ReportDiagnostic(
-                            CodeAnalysis.Diagnostic.Create(
-                                "TEST0001",
-                                "Test",
-                                "Test diagnostic",
-                                DiagnosticSeverity.Warning,
-                                DiagnosticSeverity.Warning,
-                                isEnabledByDefault: true,
-                                warningLevel: 1,
-                                location: Location.Create(
-                                    validSyntaxTree,
-                                    TextSpan.FromBounds(0, 2)
-                                ),
-                                additionalLocations: new[]
-                                {
-                                    Location.Create(invalidSyntaxTree, TextSpan.FromBounds(0, 2)),
-                                }
-                            )
-                        );
-                    }
-                );
+                ctx.RegisterSourceOutput(ctx.CompilationProvider, (ctx, comp) =>
+                {
+                    var validSyntaxTree = comp.SyntaxTrees.Single();
+                    var invalidSyntaxTree = CSharpSyntaxTree.ParseText(
+                        source,
+                        parseOptions,
+                        path: "/detached"
+                    );
+                    ctx.ReportDiagnostic(
+                        CodeAnalysis.Diagnostic.Create(
+                            "TEST0001",
+                            "Test",
+                            "Test diagnostic",
+                            DiagnosticSeverity.Warning,
+                            DiagnosticSeverity.Warning,
+                            isEnabledByDefault: true,
+                            warningLevel: 1,
+                            location: Location.Create(validSyntaxTree, TextSpan.FromBounds(0, 2)),
+                            additionalLocations: new[]
+                            {
+                                Location.Create(invalidSyntaxTree, TextSpan.FromBounds(0, 2)),
+                            }
+                        )
+                    );
+                });
             }).AsSourceGenerator();
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -5814,25 +5439,22 @@ class D {  (int, bool) _field; }";
 
             var generator = new PipelineCallbackGenerator(ctx =>
             {
-                ctx.RegisterSourceOutput(
-                    ctx.CompilationProvider,
-                    (ctx, comp) =>
-                    {
-                        var syntaxTree = comp.SyntaxTrees.Single();
-                        ctx.ReportDiagnostic(
-                            CodeAnalysis.Diagnostic.Create(
-                                "TEST0001",
-                                "Test",
-                                "Test diagnostic",
-                                DiagnosticSeverity.Warning,
-                                DiagnosticSeverity.Warning,
-                                isEnabledByDefault: true,
-                                warningLevel: 1,
-                                location: Location.Create(syntaxTree, TextSpan.FromBounds(0, 100))
-                            )
-                        );
-                    }
-                );
+                ctx.RegisterSourceOutput(ctx.CompilationProvider, (ctx, comp) =>
+                {
+                    var syntaxTree = comp.SyntaxTrees.Single();
+                    ctx.ReportDiagnostic(
+                        CodeAnalysis.Diagnostic.Create(
+                            "TEST0001",
+                            "Test",
+                            "Test diagnostic",
+                            DiagnosticSeverity.Warning,
+                            DiagnosticSeverity.Warning,
+                            isEnabledByDefault: true,
+                            warningLevel: 1,
+                            location: Location.Create(syntaxTree, TextSpan.FromBounds(0, 100))
+                        )
+                    );
+                });
             }).AsSourceGenerator();
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -5869,29 +5491,26 @@ class D {  (int, bool) _field; }";
 
             var generator = new PipelineCallbackGenerator(ctx =>
             {
-                ctx.RegisterSourceOutput(
-                    ctx.CompilationProvider,
-                    (ctx, comp) =>
-                    {
-                        var syntaxTree = comp.SyntaxTrees.Single();
-                        ctx.ReportDiagnostic(
-                            CodeAnalysis.Diagnostic.Create(
-                                "TEST0001",
-                                "Test",
-                                "Test diagnostic",
-                                DiagnosticSeverity.Warning,
-                                DiagnosticSeverity.Warning,
-                                isEnabledByDefault: true,
-                                warningLevel: 1,
-                                location: Location.Create(syntaxTree, TextSpan.FromBounds(0, 2)),
-                                additionalLocations: new[]
-                                {
-                                    Location.Create(syntaxTree, TextSpan.FromBounds(0, 100)),
-                                }
-                            )
-                        );
-                    }
-                );
+                ctx.RegisterSourceOutput(ctx.CompilationProvider, (ctx, comp) =>
+                {
+                    var syntaxTree = comp.SyntaxTrees.Single();
+                    ctx.ReportDiagnostic(
+                        CodeAnalysis.Diagnostic.Create(
+                            "TEST0001",
+                            "Test",
+                            "Test diagnostic",
+                            DiagnosticSeverity.Warning,
+                            DiagnosticSeverity.Warning,
+                            isEnabledByDefault: true,
+                            warningLevel: 1,
+                            location: Location.Create(syntaxTree, TextSpan.FromBounds(0, 2)),
+                            additionalLocations: new[]
+                            {
+                                Location.Create(syntaxTree, TextSpan.FromBounds(0, 100)),
+                            }
+                        )
+                    );
+                });
             }).AsSourceGenerator();
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -6035,25 +5654,22 @@ class D {  (int, bool) _field; }";
 
             var generator = new PipelineCallbackGenerator(ctx =>
             {
-                ctx.RegisterSourceOutput(
-                    ctx.CompilationProvider,
-                    (ctx, comp) =>
-                    {
-                        var syntaxTree = comp.SyntaxTrees.Single();
-                        ctx.ReportDiagnostic(
-                            CodeAnalysis.Diagnostic.Create(
-                                "TEST 0001",
-                                "Test",
-                                "Test diagnostic",
-                                DiagnosticSeverity.Warning,
-                                DiagnosticSeverity.Warning,
-                                isEnabledByDefault: true,
-                                warningLevel: 1,
-                                location: Location.Create(syntaxTree, TextSpan.FromBounds(0, 2))
-                            )
-                        );
-                    }
-                );
+                ctx.RegisterSourceOutput(ctx.CompilationProvider, (ctx, comp) =>
+                {
+                    var syntaxTree = comp.SyntaxTrees.Single();
+                    ctx.ReportDiagnostic(
+                        CodeAnalysis.Diagnostic.Create(
+                            "TEST 0001",
+                            "Test",
+                            "Test diagnostic",
+                            DiagnosticSeverity.Warning,
+                            DiagnosticSeverity.Warning,
+                            isEnabledByDefault: true,
+                            warningLevel: 1,
+                            location: Location.Create(syntaxTree, TextSpan.FromBounds(0, 2))
+                        )
+                    );
+                });
             }).AsSourceGenerator();
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -6226,13 +5842,10 @@ class C { }
                 new PipelineCallbackGenerator2(ctx =>
                 {
                     var source = parseOptionsProvider;
-                    ctx.RegisterSourceOutput(
-                        source,
-                        (spc, c) =>
-                        {
-                            wasCalled = true;
-                        }
-                    );
+                    ctx.RegisterSourceOutput(source, (spc, c) =>
+                    {
+                        wasCalled = true;
+                    });
                 })
             );
 
@@ -6266,13 +5879,10 @@ class C { }
                         (s, _) => true,
                         (s, _) => s.Node
                     );
-                    ctx.RegisterSourceOutput(
-                        syntax,
-                        (spc, c) =>
-                        {
-                            gen1Called = true;
-                        }
-                    );
+                    ctx.RegisterSourceOutput(syntax, (spc, c) =>
+                    {
+                        gen1Called = true;
+                    });
                 })
             );
 
@@ -6294,13 +5904,10 @@ class C { }
                         (s, _) => true,
                         (s, _) => s.Node
                     );
-                    ctx.RegisterSourceOutput(
-                        syntax,
-                        (spc, c) =>
-                        {
-                            gen2Called = true;
-                        }
-                    );
+                    ctx.RegisterSourceOutput(syntax, (spc, c) =>
+                    {
+                        gen2Called = true;
+                    });
                 })
             );
             driver = driver.AddGenerators(ImmutableArray.Create<ISourceGenerator>(generator2));
@@ -6327,16 +5934,13 @@ class C { }
                         .Select(static (node, _) => (ClassDeclarationSyntax)node)
                         .Where(static (node) => node.Modifiers.Any(SyntaxKind.PartialKeyword))
                         .WithTrackingName("MyTransformNode");
-                    ctx.RegisterSourceOutput(
-                        provider,
-                        static (spc, syntax) =>
-                        {
-                            spc.AddSource(
-                                $"{syntax.Identifier.Text}.g",
-                                $"partial class {syntax.Identifier.Text} {{ /* generated */ }}"
-                            );
-                        }
-                    );
+                    ctx.RegisterSourceOutput(provider, static (spc, syntax) =>
+                    {
+                        spc.AddSource(
+                            $"{syntax.Identifier.Text}.g",
+                            $"partial class {syntax.Identifier.Text} {{ /* generated */ }}"
+                        );
+                    });
                 })
             );
 

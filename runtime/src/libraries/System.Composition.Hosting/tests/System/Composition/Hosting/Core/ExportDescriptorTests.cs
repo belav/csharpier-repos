@@ -37,18 +37,16 @@ namespace System.Composition.Hosting.Core.Tests
         [Fact]
         public void Create_NullActivator_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "activator",
-                () => ExportDescriptor.Create(null, new Dictionary<string, object>())
+            AssertExtensions.Throws<ArgumentNullException>("activator", () =>
+                ExportDescriptor.Create(null, new Dictionary<string, object>())
             );
         }
 
         [Fact]
         public void Create_NullMetadata_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "metadata",
-                () => ExportDescriptor.Create(Activator, null)
+            AssertExtensions.Throws<ArgumentNullException>("metadata", () =>
+                ExportDescriptor.Create(Activator, null)
             );
         }
 

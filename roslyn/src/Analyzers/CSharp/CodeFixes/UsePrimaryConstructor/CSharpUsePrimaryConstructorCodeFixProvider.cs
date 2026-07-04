@@ -186,53 +186,50 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider() : CodeFixPro
         var updatedParameterList = GenerateFinalParameterList();
 
         // Finally move the constructors parameter list to the type declaration.
-        constructorDocumentEditor.ReplaceNode(
-            typeDeclaration,
-            (current, generator) =>
-            {
-                var currentTypeDeclaration = (TypeDeclarationSyntax)current;
+        constructorDocumentEditor.ReplaceNode(typeDeclaration, (current, generator) =>
+        {
+            var currentTypeDeclaration = (TypeDeclarationSyntax)current;
 
-                // Move the whitespace that is current after the name (or type args) to after the parameter list.
+            // Move the whitespace that is current after the name (or type args) to after the parameter list.
 
-                var typeParameterList = currentTypeDeclaration.TypeParameterList;
-                var triviaAfterName =
+            var typeParameterList = currentTypeDeclaration.TypeParameterList;
+            var triviaAfterName =
+                typeParameterList != null
+                    ? typeParameterList.GetTrailingTrivia()
+                    : currentTypeDeclaration.Identifier.GetAllTrailingTrivia();
+
+            var finalAttributeLists = currentTypeDeclaration.AttributeLists.AddRange(
+                constructorDeclaration.AttributeLists.Select(a =>
+                    a.WithTarget(AttributeTargetSpecifier(Token(SyntaxKind.MethodKeyword)))
+                        .WithoutTrivia()
+                        .WithAdditionalAnnotations(Formatter.Annotation)
+                )
+            );
+
+            var finalTrivia = CreateFinalTypeDeclarationLeadingTrivia(
+                currentTypeDeclaration,
+                constructorDeclaration,
+                constructor,
+                properties,
+                removedMembers
+            );
+
+            return currentTypeDeclaration
+                .WithAttributeLists(finalAttributeLists)
+                .WithLeadingTrivia(finalTrivia)
+                .WithIdentifier(
                     typeParameterList != null
-                        ? typeParameterList.GetTrailingTrivia()
-                        : currentTypeDeclaration.Identifier.GetAllTrailingTrivia();
-
-                var finalAttributeLists = currentTypeDeclaration.AttributeLists.AddRange(
-                    constructorDeclaration.AttributeLists.Select(a =>
-                        a.WithTarget(AttributeTargetSpecifier(Token(SyntaxKind.MethodKeyword)))
-                            .WithoutTrivia()
-                            .WithAdditionalAnnotations(Formatter.Annotation)
-                    )
+                        ? currentTypeDeclaration.Identifier
+                        : currentTypeDeclaration.Identifier.WithoutTrailingTrivia()
+                )
+                .WithTypeParameterList(typeParameterList?.WithoutTrailingTrivia())
+                .WithParameterList(
+                    updatedParameterList
+                        .WithoutLeadingTrivia()
+                        .WithTrailingTrivia(triviaAfterName)
+                        .WithAdditionalAnnotations(Formatter.Annotation)
                 );
-
-                var finalTrivia = CreateFinalTypeDeclarationLeadingTrivia(
-                    currentTypeDeclaration,
-                    constructorDeclaration,
-                    constructor,
-                    properties,
-                    removedMembers
-                );
-
-                return currentTypeDeclaration
-                    .WithAttributeLists(finalAttributeLists)
-                    .WithLeadingTrivia(finalTrivia)
-                    .WithIdentifier(
-                        typeParameterList != null
-                            ? currentTypeDeclaration.Identifier
-                            : currentTypeDeclaration.Identifier.WithoutTrailingTrivia()
-                    )
-                    .WithTypeParameterList(typeParameterList?.WithoutTrailingTrivia())
-                    .WithParameterList(
-                        updatedParameterList
-                            .WithoutLeadingTrivia()
-                            .WithTrailingTrivia(triviaAfterName)
-                            .WithAdditionalAnnotations(Formatter.Annotation)
-                    );
-            }
-        );
+        });
 
         return;
 
@@ -261,25 +258,22 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider() : CodeFixPro
             if (!removeMembers)
                 return parameterList;
 
-            return parameterList.ReplaceNodes(
-                parameterList.Parameters,
-                (_, current) =>
-                {
-                    var inKeyword = current.Modifiers.FirstOrDefault(t =>
-                        t.Kind() == SyntaxKind.InKeyword
-                    );
-                    if (inKeyword == default)
-                        return current;
+            return parameterList.ReplaceNodes(parameterList.Parameters, (_, current) =>
+            {
+                var inKeyword = current.Modifiers.FirstOrDefault(t =>
+                    t.Kind() == SyntaxKind.InKeyword
+                );
+                if (inKeyword == default)
+                    return current;
 
-                    // remove the 'in' modifier if we're removing the field.  Captures can't refer to an in-parameter.
-                    if (!properties.Values.Any(v => v == current.Identifier.ValueText))
-                        return current;
+                // remove the 'in' modifier if we're removing the field.  Captures can't refer to an in-parameter.
+                if (!properties.Values.Any(v => v == current.Identifier.ValueText))
+                    return current;
 
-                    return current
-                        .WithModifiers(current.Modifiers.Remove(inKeyword))
-                        .WithTriviaFrom(current);
-                }
-            );
+                return current
+                    .WithModifiers(current.Modifiers.Remove(inKeyword))
+                    .WithTriviaFrom(current);
+            });
         }
 
         ParameterListSyntax UpdateReferencesToNestedMembers(ParameterListSyntax parameterList)
@@ -352,26 +346,21 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider() : CodeFixPro
             )
             {
                 var indentation = constructorLeadingWhitespace[typeLeadingWhitespace.Length..];
-                return list.ReplaceNodes(
-                    getElements(list),
-                    (p, _) =>
+                return list.ReplaceNodes(getElements(list), (p, _) =>
+                {
+                    var elementLeadingWhitespace = GetLeadingWhitespace(p);
+                    if (elementLeadingWhitespace.EndsWith(indentation))
                     {
-                        var elementLeadingWhitespace = GetLeadingWhitespace(p);
-                        if (elementLeadingWhitespace.EndsWith(indentation))
-                        {
-                            var leadingTrivia = p.GetLeadingTrivia();
-                            return p.WithLeadingTrivia(
-                                leadingTrivia
-                                    .Take(leadingTrivia.Count - 1)
-                                    .Concat(
-                                        Whitespace(elementLeadingWhitespace[..^indentation.Length])
-                                    )
-                            );
-                        }
-
-                        return p;
+                        var leadingTrivia = p.GetLeadingTrivia();
+                        return p.WithLeadingTrivia(
+                            leadingTrivia
+                                .Take(leadingTrivia.Count - 1)
+                                .Concat(Whitespace(elementLeadingWhitespace[..^indentation.Length]))
+                        );
                     }
-                );
+
+                    return p;
+                });
             }
 
             return list;
@@ -433,40 +422,37 @@ internal partial class CSharpUsePrimaryConstructorCodeFixProvider() : CodeFixPro
                 var synthesizedTypeNode = baseTypeSymbol.GenerateNameSyntax(allowVar: false);
                 var baseTypeSyntax = PrimaryConstructorBaseType(synthesizedTypeNode, argumentList);
 
-                documentEditor.ReplaceNode(
-                    typeDeclaration,
-                    (current, _) =>
+                documentEditor.ReplaceNode(typeDeclaration, (current, _) =>
+                {
+                    var currentTypeDeclaration = (TypeDeclarationSyntax)current;
+                    if (currentTypeDeclaration.BaseList is null)
                     {
-                        var currentTypeDeclaration = (TypeDeclarationSyntax)current;
-                        if (currentTypeDeclaration.BaseList is null)
-                        {
-                            var typeParameterList = currentTypeDeclaration.TypeParameterList;
-                            var triviaAfterName =
-                                typeParameterList != null
-                                    ? typeParameterList.GetTrailingTrivia()
-                                    : currentTypeDeclaration.Identifier.GetAllTrailingTrivia();
+                        var typeParameterList = currentTypeDeclaration.TypeParameterList;
+                        var triviaAfterName =
+                            typeParameterList != null
+                                ? typeParameterList.GetTrailingTrivia()
+                                : currentTypeDeclaration.Identifier.GetAllTrailingTrivia();
 
-                            return currentTypeDeclaration
-                                .WithIdentifier(
-                                    currentTypeDeclaration.Identifier.WithoutTrailingTrivia()
-                                )
-                                .WithTypeParameterList(typeParameterList?.WithoutTrailingTrivia())
-                                .WithBaseList(
-                                    BaseList(SingletonSeparatedList<BaseTypeSyntax>(baseTypeSyntax))
-                                        .WithLeadingTrivia(Space)
-                                        .WithTrailingTrivia(triviaAfterName)
-                                );
-                        }
-                        else
-                        {
-                            return currentTypeDeclaration.WithBaseList(
-                                currentTypeDeclaration.BaseList.WithTypes(
-                                    currentTypeDeclaration.BaseList.Types.Insert(0, baseTypeSyntax)
-                                )
+                        return currentTypeDeclaration
+                            .WithIdentifier(
+                                currentTypeDeclaration.Identifier.WithoutTrailingTrivia()
+                            )
+                            .WithTypeParameterList(typeParameterList?.WithoutTrailingTrivia())
+                            .WithBaseList(
+                                BaseList(SingletonSeparatedList<BaseTypeSyntax>(baseTypeSyntax))
+                                    .WithLeadingTrivia(Space)
+                                    .WithTrailingTrivia(triviaAfterName)
                             );
-                        }
                     }
-                );
+                    else
+                    {
+                        return currentTypeDeclaration.WithBaseList(
+                            currentTypeDeclaration.BaseList.WithTypes(
+                                currentTypeDeclaration.BaseList.Types.Insert(0, baseTypeSyntax)
+                            )
+                        );
+                    }
+                });
             }
         }
 

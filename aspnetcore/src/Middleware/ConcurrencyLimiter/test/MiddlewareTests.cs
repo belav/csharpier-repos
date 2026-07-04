@@ -116,13 +116,10 @@ public class MiddlewareTests
             }
         );
 
-        var middleware = TestUtils.CreateTestMiddleware(
-            queue: testQueue,
-            next: httpContext =>
-            {
-                throw new DivideByZeroException();
-            }
-        );
+        var middleware = TestUtils.CreateTestMiddleware(queue: testQueue, next: httpContext =>
+        {
+            throw new DivideByZeroException();
+        });
 
         Assert.Equal(0, testQueue.QueuedRequests);
         await Assert
@@ -202,14 +199,11 @@ public class MiddlewareTests
         var flag = false;
 
         var queue = new TestQueueForValueTask();
-        var middleware = TestUtils.CreateTestMiddleware(
-            queue,
-            next: async context =>
-            {
-                await Task.CompletedTask;
-                flag = true;
-            }
-        );
+        var middleware = TestUtils.CreateTestMiddleware(queue, next: async context =>
+        {
+            await Task.CompletedTask;
+            flag = true;
+        });
 
         await middleware.Invoke(new DefaultHttpContext());
 

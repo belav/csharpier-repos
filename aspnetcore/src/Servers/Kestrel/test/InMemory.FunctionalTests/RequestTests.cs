@@ -2248,9 +2248,8 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             }
         }
 
-        Assert.All(
-            TestSink.Writes,
-            w => Assert.InRange(w.LogLevel, LogLevel.Trace, LogLevel.Information)
+        Assert.All(TestSink.Writes, w =>
+            Assert.InRange(w.LogLevel, LogLevel.Trace, LogLevel.Information)
         );
     }
 

@@ -247,9 +247,8 @@ namespace System.Linq.Expressions.Tests
                 (Func<Expression, Expression, Expression>)
                     assign.CreateDelegate(typeof(Func<Expression, Expression, Expression>));
 
-            AssertExtensions.Throws<ArgumentException>(
-                "left",
-                () => withAssignment(Expression.Default(type), Expression.Default(type))
+            AssertExtensions.Throws<ArgumentException>("left", () =>
+                withAssignment(Expression.Default(type), Expression.Default(type))
             );
         }
 
@@ -316,9 +315,8 @@ namespace System.Linq.Expressions.Tests
                 null,
                 unreadableType.GetProperty("WriteOnly")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "left",
-                () => withAssignment(property, Expression.Default(type))
+            AssertExtensions.Throws<ArgumentException>("left", () =>
+                withAssignment(property, Expression.Default(type))
             );
         }
 
@@ -336,9 +334,8 @@ namespace System.Linq.Expressions.Tests
                 unreadableType.GetProperty("WriteOnly")
             );
             Expression variable = Expression.Variable(type);
-            AssertExtensions.Throws<ArgumentException>(
-                "right",
-                () => withAssignment(variable, property)
+            AssertExtensions.Throws<ArgumentException>("right", () =>
+                withAssignment(variable, property)
             );
         }
 
@@ -620,9 +617,8 @@ namespace System.Linq.Expressions.Tests
             var lhs = Expression.Parameter(typeof(int));
             var rhs = Expression.Constant(25);
             MethodInfo meth = GetType().GetMethod(nameof(FiftyNinthBear));
-            AssertExtensions.Throws<ArgumentException>(
-                "conversion",
-                () => Expression.MakeBinary(type, lhs, rhs, false, meth, conversion)
+            AssertExtensions.Throws<ArgumentException>("conversion", () =>
+                Expression.MakeBinary(type, lhs, rhs, false, meth, conversion)
             );
         }
 

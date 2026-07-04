@@ -12,23 +12,14 @@ namespace System.IO.IsolatedStorage
         {
             using (IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForAssembly())
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "path",
-                    () => isf.OpenFile(null, FileMode.Create)
+                AssertExtensions.Throws<ArgumentNullException>("path", () =>
+                    isf.OpenFile(null, FileMode.Create)
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "path",
-                    () => isf.OpenFile(null, FileMode.Create, FileAccess.ReadWrite)
+                AssertExtensions.Throws<ArgumentNullException>("path", () =>
+                    isf.OpenFile(null, FileMode.Create, FileAccess.ReadWrite)
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "path",
-                    () =>
-                        isf.OpenFile(
-                            null,
-                            FileMode.Create,
-                            FileAccess.ReadWrite,
-                            FileShare.ReadWrite
-                        )
+                AssertExtensions.Throws<ArgumentNullException>("path", () =>
+                    isf.OpenFile(null, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite)
                 );
             }
         }

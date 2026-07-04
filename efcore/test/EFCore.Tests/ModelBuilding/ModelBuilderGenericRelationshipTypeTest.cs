@@ -60,10 +60,8 @@ public class ModelBuilderGenericRelationshipTypeTest : ModelBuilderGenericTest
             Action<TestEntityTypeBuilder<TEntity>> buildAction
         )
         {
-            ModelBuilder.SharedTypeEntity<TEntity>(
-                name,
-                entityTypeBuilder =>
-                    buildAction(new GenericTypeTestEntityTypeBuilder<TEntity>(entityTypeBuilder))
+            ModelBuilder.SharedTypeEntity<TEntity>(name, entityTypeBuilder =>
+                buildAction(new GenericTypeTestEntityTypeBuilder<TEntity>(entityTypeBuilder))
             );
             return this;
         }
@@ -107,12 +105,10 @@ public class ModelBuilderGenericRelationshipTypeTest : ModelBuilderGenericTest
         )
             where TRelatedEntity : class =>
             Wrap(
-                EntityTypeBuilder.OwnsOne(
-                    navigationExpression,
-                    r =>
-                        buildAction(
-                            new GenericTypeTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(r)
-                        )
+                EntityTypeBuilder.OwnsOne(navigationExpression, r =>
+                    buildAction(
+                        new GenericTypeTestOwnedNavigationBuilder<TEntity, TRelatedEntity>(r)
+                    )
                 )
             );
 
@@ -335,15 +331,12 @@ public class ModelBuilderGenericRelationshipTypeTest : ModelBuilderGenericTest
             Action<TestEntityTypeBuilder<TJoinEntity>> configureJoinEntityType
         ) =>
             new GenericTypeTestEntityTypeBuilder<TRightEntity>(
-                CollectionCollectionBuilder.UsingEntity(
-                    joinEntityName,
-                    typeof(TJoinEntity),
-                    e =>
-                        configureJoinEntityType(
-                            new GenericTypeTestEntityTypeBuilder<TJoinEntity>(
-                                new EntityTypeBuilder<TJoinEntity>(e.Metadata)
-                            )
+                CollectionCollectionBuilder.UsingEntity(joinEntityName, typeof(TJoinEntity), e =>
+                    configureJoinEntityType(
+                        new GenericTypeTestEntityTypeBuilder<TJoinEntity>(
+                            new EntityTypeBuilder<TJoinEntity>(e.Metadata)
                         )
+                    )
                 )
             );
 

@@ -33,14 +33,11 @@ class Program
         _tokens[userId] = GetJwtToken(userId);
 
         var hubConnection = new HubConnectionBuilder()
-            .WithUrl(
-                ServerUrl + "/broadcast",
-                options =>
-                {
-                    options.Transports = transportType;
-                    options.AccessTokenProvider = () => _tokens[userId];
-                }
-            )
+            .WithUrl(ServerUrl + "/broadcast", options =>
+            {
+                options.Transports = transportType;
+                options.AccessTokenProvider = () => _tokens[userId];
+            })
             .Build();
 
         var closedTcs = new TaskCompletionSource();
@@ -50,9 +47,8 @@ class Program
             return Task.CompletedTask;
         };
 
-        hubConnection.On<string, string>(
-            "Message",
-            (sender, message) => Console.WriteLine($"[{userId}] {sender}: {message}")
+        hubConnection.On<string, string>("Message", (sender, message) =>
+            Console.WriteLine($"[{userId}] {sender}: {message}")
         );
         await hubConnection.StartAsync();
         Console.WriteLine($"[{userId}] Connection Started");

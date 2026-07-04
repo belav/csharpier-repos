@@ -73,21 +73,17 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             Assert.Throws<ArgumentOutOfRangeException>(() => new BatchedJoinBlock<int, string>(-1));
             Assert.Throws<ArgumentNullException>(() => new BatchedJoinBlock<int, string>(2, null));
-            AssertExtensions.Throws<ArgumentException>(
-                "dataflowBlockOptions",
-                () =>
-                    new BatchedJoinBlock<int, string>(
-                        2,
-                        new GroupingDataflowBlockOptions { Greedy = false }
-                    )
+            AssertExtensions.Throws<ArgumentException>("dataflowBlockOptions", () =>
+                new BatchedJoinBlock<int, string>(
+                    2,
+                    new GroupingDataflowBlockOptions { Greedy = false }
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "dataflowBlockOptions",
-                () =>
-                    new BatchedJoinBlock<int, string>(
-                        2,
-                        new GroupingDataflowBlockOptions { BoundedCapacity = 2 }
-                    )
+            AssertExtensions.Throws<ArgumentException>("dataflowBlockOptions", () =>
+                new BatchedJoinBlock<int, string>(
+                    2,
+                    new GroupingDataflowBlockOptions { BoundedCapacity = 2 }
+                )
             );
             Assert.Throws<ArgumentNullException>(() =>
                 ((IDataflowBlock)new BatchedJoinBlock<int, string>(2)).Fault(null)
@@ -102,21 +98,17 @@ namespace System.Threading.Tasks.Dataflow.Tests
             Assert.Throws<ArgumentNullException>(() =>
                 new BatchedJoinBlock<int, string, double>(2, null)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "dataflowBlockOptions",
-                () =>
-                    new BatchedJoinBlock<int, string, double>(
-                        2,
-                        new GroupingDataflowBlockOptions { Greedy = false }
-                    )
+            AssertExtensions.Throws<ArgumentException>("dataflowBlockOptions", () =>
+                new BatchedJoinBlock<int, string, double>(
+                    2,
+                    new GroupingDataflowBlockOptions { Greedy = false }
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "dataflowBlockOptions",
-                () =>
-                    new BatchedJoinBlock<int, string, double>(
-                        2,
-                        new GroupingDataflowBlockOptions { BoundedCapacity = 2 }
-                    )
+            AssertExtensions.Throws<ArgumentException>("dataflowBlockOptions", () =>
+                new BatchedJoinBlock<int, string, double>(
+                    2,
+                    new GroupingDataflowBlockOptions { BoundedCapacity = 2 }
+                )
             );
             Assert.Throws<ArgumentNullException>(() =>
                 ((IDataflowBlock)new BatchedJoinBlock<int, string, double>(2)).Fault(null)

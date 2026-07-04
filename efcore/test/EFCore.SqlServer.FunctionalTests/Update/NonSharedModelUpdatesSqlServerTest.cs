@@ -102,25 +102,22 @@ WHERE [Id] = @p5;
                 )
         );
 
-        await ExecuteWithStrategyInTransactionAsync(
-            contextFactory,
-            async context =>
+        await ExecuteWithStrategyInTransactionAsync(contextFactory, async context =>
+        {
+            var digests = await context
+                .Set<User>()
+                .OrderBy(u => u.TimeCreatedUtc)
+                .Take(23)
+                .Select(u => new DailyDigest { User = u })
+                .ToListAsync();
+
+            foreach (var digest in digests)
             {
-                var digests = await context
-                    .Set<User>()
-                    .OrderBy(u => u.TimeCreatedUtc)
-                    .Take(23)
-                    .Select(u => new DailyDigest { User = u })
-                    .ToListAsync();
-
-                foreach (var digest in digests)
-                {
-                    context.Set<DailyDigest>().Add(digest);
-                }
-
-                await context.SaveChangesAsync();
+                context.Set<DailyDigest>().Add(digest);
             }
-        );
+
+            await context.SaveChangesAsync();
+        });
     }
 
     public class User

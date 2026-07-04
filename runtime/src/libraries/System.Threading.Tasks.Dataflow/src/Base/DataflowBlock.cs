@@ -3546,9 +3546,8 @@ namespace System.Threading.Tasks.Dataflow
             {
                 get
                 {
-                    return LazyInitializer.EnsureInitialized(
-                        ref _completion,
-                        static () => new TaskCompletionSource<VoidResult>().Task
+                    return LazyInitializer.EnsureInitialized(ref _completion, static () =>
+                        new TaskCompletionSource<VoidResult>().Task
                     );
                 }
             }

@@ -70,17 +70,14 @@ namespace System.Security.Cryptography.Cng.Tests
                 Assert.True(closedAndInvalid.IsInvalid, "closedAndInvalid.IsInvalid");
 
                 // Tests
-                AssertExtensions.Throws<ArgumentException>(
-                    "parentHandle",
-                    () => new SafeNCryptKeyHandle(IntPtr.Zero, openButInvalid)
+                AssertExtensions.Throws<ArgumentException>("parentHandle", () =>
+                    new SafeNCryptKeyHandle(IntPtr.Zero, openButInvalid)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "parentHandle",
-                    () => new SafeNCryptKeyHandle(IntPtr.Zero, closedButValid)
+                AssertExtensions.Throws<ArgumentException>("parentHandle", () =>
+                    new SafeNCryptKeyHandle(IntPtr.Zero, closedButValid)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "parentHandle",
-                    () => new SafeNCryptKeyHandle(IntPtr.Zero, closedAndInvalid)
+                AssertExtensions.Throws<ArgumentException>("parentHandle", () =>
+                    new SafeNCryptKeyHandle(IntPtr.Zero, closedAndInvalid)
                 );
             }
         }

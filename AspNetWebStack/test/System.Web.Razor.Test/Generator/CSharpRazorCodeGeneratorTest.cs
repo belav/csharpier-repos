@@ -497,27 +497,22 @@ namespace System.Web.Razor.Test.Generator
         [Fact]
         public void CSharpCodeGeneratorRendersHelpersBlockCorrectlyWhenInstanceHelperRequested()
         {
-            RunTest(
-                "Helpers",
-                baselineName: "Helpers.Instance",
-                hostConfig: h => h.StaticHelpers = false
+            RunTest("Helpers", baselineName: "Helpers.Instance", hostConfig: h =>
+                h.StaticHelpers = false
             );
         }
 
         [Fact]
         public void CSharpCodeGeneratorCorrectlyInstrumentsRazorCodeWhenInstrumentationRequested()
         {
-            RunTest(
-                "Instrumented",
-                hostConfig: host =>
-                {
-                    host.EnableInstrumentation = true;
-                    host.InstrumentedSourceFilePath = String.Format(
-                        "~/{0}.cshtml",
-                        host.DefaultClassName
-                    );
-                }
-            );
+            RunTest("Instrumented", hostConfig: host =>
+            {
+                host.EnableInstrumentation = true;
+                host.InstrumentedSourceFilePath = String.Format(
+                    "~/{0}.cshtml",
+                    host.DefaultClassName
+                );
+            });
         }
 
         [Fact]

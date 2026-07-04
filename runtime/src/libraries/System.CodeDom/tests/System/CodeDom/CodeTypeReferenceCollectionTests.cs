@@ -96,9 +96,8 @@ namespace System.CodeDom.Tests
         public void Add_NullType_ThrowsArgumentNullException()
         {
             var collection = new CodeTypeReferenceCollection();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => collection.Add((Type)null)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                collection.Add((Type)null)
             );
         }
     }

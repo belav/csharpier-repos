@@ -536,17 +536,14 @@ namespace System.Reflection.Tests
             object obj = Activator.CreateInstance(type);
             FieldInfo fieldInfo = GetField(type, "bArray");
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => fieldInfo.SetValue(obj, ATypeWithMixedAB)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                fieldInfo.SetValue(obj, ATypeWithMixedAB)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => fieldInfo.SetValue(obj, ATypeWithAllA)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                fieldInfo.SetValue(obj, ATypeWithAllA)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => fieldInfo.SetValue(obj, ATypeWithAllB)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                fieldInfo.SetValue(obj, ATypeWithAllB)
             );
 
             fieldInfo.SetValue(obj, BTypeWithAllB);
@@ -583,9 +580,8 @@ namespace System.Reflection.Tests
             fieldInfo.SetValue(obj, intArray);
             Assert.Equal(intArray, fieldInfo.GetValue(obj));
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => fieldInfo.SetValue(obj, new byte[] { 2, 3, 4 })
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                fieldInfo.SetValue(obj, new byte[] { 2, 3, 4 })
             );
         }
 
@@ -612,13 +608,11 @@ namespace System.Reflection.Tests
             fieldInfo.SetValue(obj, BTypeWithAllB_Contra);
             Assert.Equal(BTypeWithAllB_Contra, fieldInfo.GetValue(obj));
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => fieldInfo.SetValue(obj, new int[] { 1, -1, 2, -2 })
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                fieldInfo.SetValue(obj, new int[] { 1, -1, 2, -2 })
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => fieldInfo.SetValue(obj, new byte[] { 2, 3, 4 })
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                fieldInfo.SetValue(obj, new byte[] { 2, 3, 4 })
             );
         }
 

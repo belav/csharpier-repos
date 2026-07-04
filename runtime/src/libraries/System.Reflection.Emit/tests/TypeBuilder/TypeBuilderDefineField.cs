@@ -194,9 +194,8 @@ namespace System.Reflection.Emit.Tests
         public void DefineField_NullFieldName_ThrowsArgumentNullException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "fieldName",
-                () => type.DefineField(null, typeof(int), FieldAttributes.Public)
+            AssertExtensions.Throws<ArgumentNullException>("fieldName", () =>
+                type.DefineField(null, typeof(int), FieldAttributes.Public)
             );
         }
 
@@ -218,9 +217,8 @@ namespace System.Reflection.Emit.Tests
         public void DefineField_InvalidFieldName_ThrowsArgumentException(string fieldName)
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            AssertExtensions.Throws<ArgumentException>(
-                "fieldName",
-                () => type.DefineField(fieldName, typeof(int), FieldAttributes.Public)
+            AssertExtensions.Throws<ArgumentException>("fieldName", () =>
+                type.DefineField(fieldName, typeof(int), FieldAttributes.Public)
             );
         }
 
@@ -228,9 +226,8 @@ namespace System.Reflection.Emit.Tests
         public void DefineField_NullFieldType_ThrowsArgumentNullException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => type.DefineField("Name", null, FieldAttributes.Public)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                type.DefineField("Name", null, FieldAttributes.Public)
             );
         }
 
@@ -238,9 +235,8 @@ namespace System.Reflection.Emit.Tests
         public void DefineField_VoidFieldType_ThrowsArgumentException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => type.DefineField("Name", typeof(void), FieldAttributes.Public)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                type.DefineField("Name", typeof(void), FieldAttributes.Public)
             );
         }
 

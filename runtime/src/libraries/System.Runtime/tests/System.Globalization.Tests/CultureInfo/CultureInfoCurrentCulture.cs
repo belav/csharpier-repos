@@ -53,9 +53,8 @@ namespace System.Globalization.Tests
         [Fact]
         public void CurrentCulture_Set_Null_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => CultureInfo.CurrentCulture = null
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                CultureInfo.CurrentCulture = null
             );
         }
 
@@ -143,9 +142,8 @@ namespace System.Globalization.Tests
         [Fact]
         public void CurrentUICulture_Set_Null_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => CultureInfo.CurrentUICulture = null
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                CultureInfo.CurrentUICulture = null
             );
         }
 
@@ -247,9 +245,8 @@ namespace System.Globalization.Tests
             {
                 if (
                     Array.FindIndex(essentialVariables, x => x.Equals(de.Key)) >= 0
-                    || Array.FindIndex(
-                        prefixedVariables,
-                        x => ((string)de.Key).StartsWith(x, StringComparison.OrdinalIgnoreCase)
+                    || Array.FindIndex(prefixedVariables, x =>
+                        ((string)de.Key).StartsWith(x, StringComparison.OrdinalIgnoreCase)
                     ) >= 0
                 )
                 {

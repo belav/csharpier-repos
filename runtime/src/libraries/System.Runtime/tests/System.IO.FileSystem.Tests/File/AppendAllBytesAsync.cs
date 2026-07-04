@@ -17,13 +17,11 @@ namespace System.IO.Tests
         {
             string path = GetTestFilePath();
 
-            await Assert.ThrowsAsync<ArgumentNullException>(
-                "path",
-                async () => await File.AppendAllBytesAsync(null, new byte[0])
+            await Assert.ThrowsAsync<ArgumentNullException>("path", async () =>
+                await File.AppendAllBytesAsync(null, new byte[0])
             );
-            await Assert.ThrowsAsync<ArgumentNullException>(
-                "bytes",
-                async () => await File.AppendAllBytesAsync(path, null)
+            await Assert.ThrowsAsync<ArgumentNullException>("bytes", async () =>
+                await File.AppendAllBytesAsync(path, null)
             );
         }
 
@@ -41,9 +39,8 @@ namespace System.IO.Tests
         [Fact]
         public async Task InvalidParametersAsync()
         {
-            await Assert.ThrowsAsync<ArgumentException>(
-                "path",
-                async () => await File.AppendAllBytesAsync(string.Empty, new byte[0])
+            await Assert.ThrowsAsync<ArgumentException>("path", async () =>
+                await File.AppendAllBytesAsync(string.Empty, new byte[0])
             );
         }
 

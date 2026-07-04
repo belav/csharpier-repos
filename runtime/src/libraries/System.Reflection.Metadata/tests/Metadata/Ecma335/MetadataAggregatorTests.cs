@@ -264,15 +264,13 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                 expectedGeneration: 3
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "handle",
-                () =>
-                    TestGenerationHandle(
-                        aggregator,
-                        MetadataTokens.Handle(0x11000032),
-                        expectedHandle: MetadataTokens.Handle(0x00000000),
-                        expectedGeneration: 0
-                    )
+            AssertExtensions.Throws<ArgumentException>("handle", () =>
+                TestGenerationHandle(
+                    aggregator,
+                    MetadataTokens.Handle(0x11000032),
+                    expectedHandle: MetadataTokens.Handle(0x00000000),
+                    expectedGeneration: 0
+                )
             );
         }
 
@@ -368,15 +366,13 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                 expectedGeneration: 4
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "handle",
-                () =>
-                    TestGenerationHandle(
-                        aggregator,
-                        MetadataTokens.StringHandle(22),
-                        expectedHandle: MetadataTokens.StringHandle(0),
-                        expectedGeneration: 0
-                    )
+            AssertExtensions.Throws<ArgumentException>("handle", () =>
+                TestGenerationHandle(
+                    aggregator,
+                    MetadataTokens.StringHandle(22),
+                    expectedHandle: MetadataTokens.StringHandle(0),
+                    expectedGeneration: 0
+                )
             );
         }
     }

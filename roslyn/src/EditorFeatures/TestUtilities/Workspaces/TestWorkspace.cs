@@ -1039,38 +1039,35 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 filePath = Guid.NewGuid().ToString();
             }
 
-            return _createdTextBuffers.GetOrAdd(
-                filePath,
-                _ =>
-                {
-                    var textBuffer = EditorFactory.CreateBuffer(
-                        ExportProvider,
-                        contentType,
-                        initialText
-                    );
+            return _createdTextBuffers.GetOrAdd(filePath, _ =>
+            {
+                var textBuffer = EditorFactory.CreateBuffer(
+                    ExportProvider,
+                    contentType,
+                    initialText
+                );
 
-                    // Ensure that the editor options on the text buffer matches that of the options that can be directly set in the workspace
-                    var editorOptions = ExportProvider
-                        .GetExportedValue<IEditorOptionsFactoryService>()
-                        .GetOptions(textBuffer);
-                    var globalOptions = GlobalOptions;
+                // Ensure that the editor options on the text buffer matches that of the options that can be directly set in the workspace
+                var editorOptions = ExportProvider
+                    .GetExportedValue<IEditorOptionsFactoryService>()
+                    .GetOptions(textBuffer);
+                var globalOptions = GlobalOptions;
 
-                    editorOptions.SetOptionValue(
-                        DefaultOptions.ConvertTabsToSpacesOptionId,
-                        !globalOptions.GetOption(FormattingOptions2.UseTabs, languageName)
-                    );
-                    editorOptions.SetOptionValue(
-                        DefaultOptions.TabSizeOptionId,
-                        globalOptions.GetOption(FormattingOptions2.TabSize, languageName)
-                    );
-                    editorOptions.SetOptionValue(
-                        DefaultOptions.IndentSizeOptionId,
-                        globalOptions.GetOption(FormattingOptions2.IndentationSize, languageName)
-                    );
+                editorOptions.SetOptionValue(
+                    DefaultOptions.ConvertTabsToSpacesOptionId,
+                    !globalOptions.GetOption(FormattingOptions2.UseTabs, languageName)
+                );
+                editorOptions.SetOptionValue(
+                    DefaultOptions.TabSizeOptionId,
+                    globalOptions.GetOption(FormattingOptions2.TabSize, languageName)
+                );
+                editorOptions.SetOptionValue(
+                    DefaultOptions.IndentSizeOptionId,
+                    globalOptions.GetOption(FormattingOptions2.IndentationSize, languageName)
+                );
 
-                    return textBuffer;
-                }
-            );
+                return textBuffer;
+            });
         }
     }
 }

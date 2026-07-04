@@ -39,72 +39,66 @@ namespace Roslyn.VisualStudio.IntegrationTests
             RuntimeHelpers.RunModuleConstructor(typeof(TestBase).Module.ModuleHandle);
             TestTraceListener.Install();
 
-            IdeStateCollector.RegisterCustomState(
-                "Pending asynchronous operations",
-                static () =>
-                {
-                    if (s_listenerProvider is null)
-                        return "Unknown";
+            IdeStateCollector.RegisterCustomState("Pending asynchronous operations", static () =>
+            {
+                if (s_listenerProvider is null)
+                    return "Unknown";
 
-                    var messageBuilder = new StringBuilder();
-                    foreach (
-                        var group in s_listenerProvider
-                            .GetTokens()
-                            .GroupBy(token => token.Listener.FeatureName)
-                    )
+                var messageBuilder = new StringBuilder();
+                foreach (
+                    var group in s_listenerProvider
+                        .GetTokens()
+                        .GroupBy(token => token.Listener.FeatureName)
+                )
+                {
+                    messageBuilder.AppendLine($"Feature '{group.Key}'");
+                    foreach (var token in group)
                     {
-                        messageBuilder.AppendLine($"Feature '{group.Key}'");
-                        foreach (var token in group)
-                        {
-                            messageBuilder.AppendLine($"  {token}");
-                        }
+                        messageBuilder.AppendLine($"  {token}");
+                    }
+                }
+
+                return messageBuilder.ToString();
+            });
+
+            IdeStateCollector.RegisterCustomState("Solution state", static () =>
+            {
+                if (s_workspace is null)
+                    return "Unknown";
+
+                var messageBuilder = new StringBuilder();
+                foreach (var project in s_workspace.CurrentSolution.Projects)
+                {
+                    messageBuilder.AppendLine($"Project '{project.Name}'");
+                    messageBuilder.AppendLine($"  Metadata References");
+                    foreach (var reference in project.MetadataReferences)
+                    {
+                        messageBuilder.AppendLine($"    {reference.Display}");
                     }
 
-                    return messageBuilder.ToString();
-                }
-            );
-
-            IdeStateCollector.RegisterCustomState(
-                "Solution state",
-                static () =>
-                {
-                    if (s_workspace is null)
-                        return "Unknown";
-
-                    var messageBuilder = new StringBuilder();
-                    foreach (var project in s_workspace.CurrentSolution.Projects)
+                    messageBuilder.AppendLine($"  Project References");
+                    foreach (var reference in project.ProjectReferences)
                     {
-                        messageBuilder.AppendLine($"Project '{project.Name}'");
-                        messageBuilder.AppendLine($"  Metadata References");
-                        foreach (var reference in project.MetadataReferences)
-                        {
-                            messageBuilder.AppendLine($"    {reference.Display}");
-                        }
-
-                        messageBuilder.AppendLine($"  Project References");
-                        foreach (var reference in project.ProjectReferences)
-                        {
-                            messageBuilder.AppendLine($"    {reference.ProjectId}");
-                        }
-
-                        messageBuilder.AppendLine($"  Analyzer References");
-                        foreach (var reference in project.AnalyzerReferences)
-                        {
-                            messageBuilder.AppendLine($"    {reference.FullPath}");
-                        }
-
-                        messageBuilder.AppendLine($"  Documents");
-                        foreach (var document in project.Documents)
-                        {
-                            var path = string.Join("/", document.Folders);
-                            path = path == "" ? document.Name : $"{path}/{document.Name}";
-                            messageBuilder.AppendLine($"    {path}");
-                        }
+                        messageBuilder.AppendLine($"    {reference.ProjectId}");
                     }
 
-                    return messageBuilder.ToString();
+                    messageBuilder.AppendLine($"  Analyzer References");
+                    foreach (var reference in project.AnalyzerReferences)
+                    {
+                        messageBuilder.AppendLine($"    {reference.FullPath}");
+                    }
+
+                    messageBuilder.AppendLine($"  Documents");
+                    foreach (var document in project.Documents)
+                    {
+                        var path = string.Join("/", document.Folders);
+                        path = path == "" ? document.Name : $"{path}/{document.Name}";
+                        messageBuilder.AppendLine($"    {path}");
+                    }
                 }
-            );
+
+                return messageBuilder.ToString();
+            });
         }
 
         protected AbstractIntegrationTest()

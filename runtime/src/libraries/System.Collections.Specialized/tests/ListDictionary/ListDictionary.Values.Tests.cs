@@ -97,9 +97,8 @@ namespace System.Collections.Specialized.Tests
                 return;
             }
 
-            Assert.Throws(
-                ICollection_NonGeneric_CopyTo_IndexLargerThanArrayCount_ThrowType,
-                () => collection.CopyTo(array, count + 1)
+            Assert.Throws(ICollection_NonGeneric_CopyTo_IndexLargerThanArrayCount_ThrowType, () =>
+                collection.CopyTo(array, count + 1)
             );
         }
 
@@ -126,9 +125,8 @@ namespace System.Collections.Specialized.Tests
                 return;
             }
 
-            Assert.Throws(
-                ICollection_NonGeneric_CopyTo_NonZeroLowerBound_ThrowType,
-                () => collection.CopyTo(arr, 0)
+            Assert.Throws(ICollection_NonGeneric_CopyTo_NonZeroLowerBound_ThrowType, () =>
+                collection.CopyTo(arr, 0)
             );
         }
     }

@@ -25,9 +25,8 @@ namespace System.Diagnostics.Tests
             DebuggerBrowsableState state
         )
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "state",
-                () => new DebuggerBrowsableAttribute(state)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("state", () =>
+                new DebuggerBrowsableAttribute(state)
             );
         }
     }

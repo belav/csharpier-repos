@@ -283,9 +283,8 @@ namespace System.Globalization.Tests
         public void GetAbbreviatedEraName_Invalid(int era)
         {
             var format = new CultureInfo("en-US").DateTimeFormat;
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "era",
-                () => format.GetAbbreviatedEraName(era)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("era", () =>
+                format.GetAbbreviatedEraName(era)
             );
         }
     }

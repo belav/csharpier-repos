@@ -60,9 +60,8 @@ namespace System.Linq.Tests
         public void NullKeySelector()
         {
             Expression<Func<DateTime, int>> keySelector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => Enumerable.Empty<DateTime>().AsQueryable().OrderBy(keySelector)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                Enumerable.Empty<DateTime>().AsQueryable().OrderBy(keySelector)
             );
         }
 
@@ -70,9 +69,8 @@ namespace System.Linq.Tests
         public void NullSourceComparer()
         {
             IQueryable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.OrderBy(i => i, Comparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.OrderBy(i => i, Comparer<int>.Default)
             );
         }
 
@@ -80,13 +78,11 @@ namespace System.Linq.Tests
         public void NullKeySelectorComparer()
         {
             Expression<Func<DateTime, int>> keySelector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    Enumerable
-                        .Empty<DateTime>()
-                        .AsQueryable()
-                        .OrderBy(keySelector, Comparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                Enumerable
+                    .Empty<DateTime>()
+                    .AsQueryable()
+                    .OrderBy(keySelector, Comparer<int>.Default)
             );
         }
 

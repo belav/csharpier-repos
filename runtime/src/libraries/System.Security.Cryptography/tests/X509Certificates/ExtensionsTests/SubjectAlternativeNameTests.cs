@@ -22,9 +22,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
         [Fact]
         public static void ArrayCtorRejectsNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                "rawData",
-                () => new X509SubjectAlternativeNameExtension((byte[])null)
+            Assert.Throws<ArgumentNullException>("rawData", () =>
+                new X509SubjectAlternativeNameExtension((byte[])null)
             );
         }
 

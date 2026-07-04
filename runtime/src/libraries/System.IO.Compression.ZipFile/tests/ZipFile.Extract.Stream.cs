@@ -11,9 +11,8 @@ public class ZipFile_Extract_Stream : ZipFileTestBase
     [Fact]
     public void ExtractToDirectory_NullStream_Throws()
     {
-        Assert.Throws<ArgumentNullException>(
-            "source",
-            () => ZipFile.ExtractToDirectory(source: null, GetTestFilePath())
+        Assert.Throws<ArgumentNullException>("source", () =>
+            ZipFile.ExtractToDirectory(source: null, GetTestFilePath())
         );
     }
 
@@ -22,9 +21,8 @@ public class ZipFile_Extract_Stream : ZipFileTestBase
     {
         using MemoryStream ms = new();
         using WrappedStream source = new(ms, canRead: false, canWrite: true, canSeek: true);
-        Assert.Throws<ArgumentException>(
-            "source",
-            () => ZipFile.ExtractToDirectory(source, GetTestFilePath())
+        Assert.Throws<ArgumentException>("source", () =>
+            ZipFile.ExtractToDirectory(source, GetTestFilePath())
         );
     }
 

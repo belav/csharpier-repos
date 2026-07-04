@@ -941,18 +941,15 @@ namespace System.Net.Security
                 // For app-compat we want to ensure the credential are accessed under >>process<< account.
                 //
                 using SafeAccessTokenHandle invalidHandle = SafeAccessTokenHandle.InvalidHandle;
-                return WindowsIdentity.RunImpersonated<SafeFreeCredentials>(
-                    invalidHandle,
-                    () =>
-                    {
-                        return SSPIWrapper.AcquireCredentialsHandle(
-                            GlobalSSPI.SSPISecureChannel,
-                            SecurityPackage,
-                            credUsage,
-                            secureCredential
-                        );
-                    }
-                );
+                return WindowsIdentity.RunImpersonated<SafeFreeCredentials>(invalidHandle, () =>
+                {
+                    return SSPIWrapper.AcquireCredentialsHandle(
+                        GlobalSSPI.SSPISecureChannel,
+                        SecurityPackage,
+                        credUsage,
+                        secureCredential
+                    );
+                });
             }
             catch
             {
@@ -978,18 +975,15 @@ namespace System.Net.Security
                 // For app-compat we want to ensure the credential are accessed under >>process<< account.
                 //
                 using SafeAccessTokenHandle invalidHandle = SafeAccessTokenHandle.InvalidHandle;
-                return WindowsIdentity.RunImpersonated<SafeFreeCredentials>(
-                    invalidHandle,
-                    () =>
-                    {
-                        return SSPIWrapper.AcquireCredentialsHandle(
-                            GlobalSSPI.SSPISecureChannel,
-                            SecurityPackage,
-                            credUsage,
-                            secureCredential
-                        );
-                    }
-                );
+                return WindowsIdentity.RunImpersonated<SafeFreeCredentials>(invalidHandle, () =>
+                {
+                    return SSPIWrapper.AcquireCredentialsHandle(
+                        GlobalSSPI.SSPISecureChannel,
+                        SecurityPackage,
+                        credUsage,
+                        secureCredential
+                    );
+                });
             }
             catch
             {

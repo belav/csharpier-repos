@@ -18,10 +18,8 @@ namespace Microsoft.Win32.RegistryTests
             );
 
             // Should throw if subkey name greater than 255 chars
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                null,
-                () => TestRegistryKey.OpenSubKey(new string('a', 256), RegistryRights.FullControl)
+            AssertExtensions.Throws<ArgumentException>("name", null, () =>
+                TestRegistryKey.OpenSubKey(new string('a', 256), RegistryRights.FullControl)
             );
 
             // OpenSubKey should be read only
@@ -84,9 +82,8 @@ namespace Microsoft.Win32.RegistryTests
             string expected,
             string subKeyName
         ) =>
-            Verify_OpenSubKey_KeyExists_OpensWithFixedUpName(
-                expected,
-                () => TestRegistryKey.OpenSubKey(subKeyName, Writable)
+            Verify_OpenSubKey_KeyExists_OpensWithFixedUpName(expected, () =>
+                TestRegistryKey.OpenSubKey(subKeyName, Writable)
             );
 
         [Theory]
@@ -95,9 +92,8 @@ namespace Microsoft.Win32.RegistryTests
             string expected,
             string subKeyName
         ) =>
-            Verify_OpenSubKey_KeyExists_OpensWithFixedUpName(
-                expected,
-                () => TestRegistryKey.OpenSubKey(subKeyName, NonWritable)
+            Verify_OpenSubKey_KeyExists_OpensWithFixedUpName(expected, () =>
+                TestRegistryKey.OpenSubKey(subKeyName, NonWritable)
             );
 
         [Theory]
@@ -106,9 +102,8 @@ namespace Microsoft.Win32.RegistryTests
             string expected,
             string subKeyName
         ) =>
-            Verify_OpenSubKey_KeyDoesNotExist_ReturnsNull(
-                expected,
-                () => TestRegistryKey.OpenSubKey(subKeyName, Writable)
+            Verify_OpenSubKey_KeyDoesNotExist_ReturnsNull(expected, () =>
+                TestRegistryKey.OpenSubKey(subKeyName, Writable)
             );
 
         [Theory]
@@ -117,9 +112,8 @@ namespace Microsoft.Win32.RegistryTests
             string expected,
             string subKeyName
         ) =>
-            Verify_OpenSubKey_KeyDoesNotExist_ReturnsNull(
-                expected,
-                () => TestRegistryKey.OpenSubKey(subKeyName, NonWritable)
+            Verify_OpenSubKey_KeyDoesNotExist_ReturnsNull(expected, () =>
+                TestRegistryKey.OpenSubKey(subKeyName, NonWritable)
             );
     }
 }

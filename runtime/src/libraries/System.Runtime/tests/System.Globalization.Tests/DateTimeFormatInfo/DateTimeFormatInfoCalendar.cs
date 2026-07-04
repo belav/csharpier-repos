@@ -38,9 +38,8 @@ namespace System.Globalization.Tests
         public void Calendar_SetInvalidValue_ThrowsArgumentOutOfRangeException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => format.Calendar = new ThaiBuddhistCalendar()
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                format.Calendar = new ThaiBuddhistCalendar()
             );
         }
 

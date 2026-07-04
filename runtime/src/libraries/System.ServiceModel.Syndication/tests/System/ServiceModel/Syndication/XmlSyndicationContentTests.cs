@@ -91,9 +91,8 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullReader_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "reader",
-                () => new XmlSyndicationContent(null)
+            AssertExtensions.Throws<ArgumentNullException>("reader", () =>
+                new XmlSyndicationContent(null)
             );
         }
 
@@ -230,9 +229,8 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullExtension_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "extension",
-                () => new XmlSyndicationContent("type", null)
+            AssertExtensions.Throws<ArgumentNullException>("extension", () =>
+                new XmlSyndicationContent("type", null)
             );
         }
 
@@ -266,9 +264,8 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => new XmlSyndicationContentSubclass(null)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                new XmlSyndicationContentSubclass(null)
             );
         }
 
@@ -378,9 +375,8 @@ namespace System.ServiceModel.Syndication.Tests
                 "type",
                 new SyndicationElementExtension(new ExtensionObject { Value = 10 })
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "writer",
-                () => content.WriteContentsToEntryPoint(null)
+            AssertExtensions.Throws<ArgumentNullException>("writer", () =>
+                content.WriteContentsToEntryPoint(null)
             );
         }
 

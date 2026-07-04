@@ -279,22 +279,19 @@ namespace System.Data.Tests
         [Fact]
         public void NoTablesTest()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                DataTableReader reader = new DataTableReader(new DataTable[] { });
+                try
                 {
-                    DataTableReader reader = new DataTableReader(new DataTable[] { });
-                    try
-                    {
-                        reader.Read();
-                    }
-                    finally
-                    {
-                        if (reader != null && !reader.IsClosed)
-                            reader.Close();
-                    }
+                    reader.Read();
                 }
-            );
+                finally
+                {
+                    if (reader != null && !reader.IsClosed)
+                        reader.Close();
+                }
+            });
         }
 
         [Fact]

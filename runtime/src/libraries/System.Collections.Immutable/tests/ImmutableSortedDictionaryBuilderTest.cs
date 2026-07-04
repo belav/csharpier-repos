@@ -270,9 +270,8 @@ namespace System.Collections.Immutable.Tests
                 .Add("A", "2")
                 .Add("b", "3")
                 .ToBuilder();
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => builder.KeyComparer = StringComparer.OrdinalIgnoreCase
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.KeyComparer = StringComparer.OrdinalIgnoreCase
             );
 
             // Force all values to be considered equal.
@@ -405,9 +404,8 @@ namespace System.Collections.Immutable.Tests
             Assert.False(dictionary.IsEmpty);
 
             ImmutableSortedDictionary<int, int>.Builder nullBuilder = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "builder",
-                () => nullBuilder.ToImmutableSortedDictionary()
+            AssertExtensions.Throws<ArgumentNullException>("builder", () =>
+                nullBuilder.ToImmutableSortedDictionary()
             );
         }
 

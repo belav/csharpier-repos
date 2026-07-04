@@ -165,9 +165,8 @@ namespace System.DirectoryServices.Protocols.Tests
         [Fact]
         public void Encode_NullFormat_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => BerConverter.Encode(null, new object[0])
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                BerConverter.Encode(null, new object[0])
             );
         }
 
@@ -216,9 +215,8 @@ namespace System.DirectoryServices.Protocols.Tests
         [MemberData(nameof(Encode_Invalid_TestData))]
         public void Encode_Invalid_ThrowsArgumentException(string format, object[] values)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => BerConverter.Encode(format, values)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                BerConverter.Encode(format, values)
             );
         }
 
@@ -310,9 +308,8 @@ namespace System.DirectoryServices.Protocols.Tests
         [Fact]
         public void Decode_NullFormat_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "format",
-                () => BerConverter.Decode(null, new byte[0])
+            AssertExtensions.Throws<ArgumentNullException>("format", () =>
+                BerConverter.Decode(null, new byte[0])
             );
         }
 
@@ -320,9 +317,8 @@ namespace System.DirectoryServices.Protocols.Tests
         [InlineData("p", new byte[] { 48, 132, 0, 0, 0, 6, 1, 1, 255, 1, 1, 0 })]
         public void UnknownFormat_ThrowsArgumentException(string format, byte[] values)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => BerConverter.Decode(format, values)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                BerConverter.Decode(format, values)
             );
         }
 

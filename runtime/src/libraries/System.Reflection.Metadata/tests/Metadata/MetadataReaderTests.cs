@@ -506,9 +506,8 @@ namespace System.Reflection.Metadata.Tests
         public void CannotInstantiateReaderWithNonUtf8Decoder()
         {
             var decoder = new MetadataStringDecoder(Encoding.ASCII);
-            AssertExtensions.Throws<ArgumentException>(
-                "utf8Decoder",
-                () => GetMetadataReader(Misc.Members, decoder: decoder)
+            AssertExtensions.Throws<ArgumentException>("utf8Decoder", () =>
+                GetMetadataReader(Misc.Members, decoder: decoder)
             );
         }
 
@@ -4173,14 +4172,10 @@ namespace System.Reflection.Metadata.Tests
 
                     using (var peReader = new PEReader(stream, PEStreamOptions.LeaveOpen))
                     {
-                        Parallel.For(
-                            0,
-                            4,
-                            _ =>
-                            {
-                                peReader.GetMetadataReader();
-                            }
-                        );
+                        Parallel.For(0, 4, _ =>
+                        {
+                            peReader.GetMetadataReader();
+                        });
                     }
                 }
             }
@@ -4385,14 +4380,11 @@ namespace System.Reflection.Metadata.Tests
         [Fact]
         public void GetAssemblyName()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "assemblyFile",
-                () => MetadataReader.GetAssemblyName(null)
+            AssertExtensions.Throws<ArgumentNullException>("assemblyFile", () =>
+                MetadataReader.GetAssemblyName(null)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "path",
-                null,
-                () => MetadataReader.GetAssemblyName(string.Empty)
+            AssertExtensions.Throws<ArgumentException>("path", null, () =>
+                MetadataReader.GetAssemblyName(string.Empty)
             );
             Assert.Throws<FileNotFoundException>(() =>
                 MetadataReader.GetAssemblyName("IDontExist")

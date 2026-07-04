@@ -98,14 +98,11 @@ namespace Microsoft.CodeAnalysis.CommentSelection
             using (
                 Logger.LogBlock(
                     FunctionId.CommandHandler_ToggleBlockComment,
-                    KeyValueLogMessage.Create(
-                        LogType.UserAction,
-                        m =>
-                        {
-                            m[LanguageNameString] = document.Project.Language;
-                            m[LengthString] = subjectBuffer.CurrentSnapshot.Length;
-                        }
-                    ),
+                    KeyValueLogMessage.Create(LogType.UserAction, m =>
+                    {
+                        m[LanguageNameString] = document.Project.Language;
+                        m[LengthString] = subjectBuffer.CurrentSnapshot.Length;
+                    }),
                     cancellationToken
                 )
             )

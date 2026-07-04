@@ -253,14 +253,11 @@ namespace System.Linq.Parallel.Tests
                             p.Key * KeyFactor,
                             Math.Min(rightCount - p.Key * KeyFactor, KeyFactor)
                         );
-                        Assert.All(
-                            p.Value,
-                            y =>
-                            {
-                                Assert.Equal(p.Key, y / KeyFactor);
-                                seenInner.Add(y);
-                            }
-                        );
+                        Assert.All(p.Value, y =>
+                        {
+                            Assert.Equal(p.Key, y / KeyFactor);
+                            seenInner.Add(y);
+                        });
                         seenInner.AssertComplete();
                     }
                     else
@@ -307,14 +304,11 @@ namespace System.Linq.Parallel.Tests
                     if (p.Key < (rightCount + (KeyFactor - 1)) / KeyFactor)
                     {
                         int seenInner = p.Key * KeyFactor;
-                        Assert.All(
-                            p.Value,
-                            y =>
-                            {
-                                Assert.Equal(p.Key, y / KeyFactor);
-                                Assert.Equal(seenInner++, y);
-                            }
-                        );
+                        Assert.All(p.Value, y =>
+                        {
+                            Assert.Equal(p.Key, y / KeyFactor);
+                            Assert.Equal(seenInner++, y);
+                        });
                         Assert.Equal(Math.Min((p.Key + 1) * KeyFactor, rightCount), seenInner);
                     }
                     else
@@ -375,14 +369,11 @@ namespace System.Linq.Parallel.Tests
                         Assert.Equal(seenNonEmpty++, p.Key);
 
                         int seenInner = p.Key * KeyFactor;
-                        Assert.All(
-                            p.Value,
-                            y =>
-                            {
-                                Assert.Equal(p.Key, y / KeyFactor);
-                                Assert.Equal(seenInner++, y);
-                            }
-                        );
+                        Assert.All(p.Value, y =>
+                        {
+                            Assert.Equal(p.Key, y / KeyFactor);
+                            Assert.Equal(seenInner++, y);
+                        });
                         Assert.Equal(Math.Min((p.Key + 1) * KeyFactor, rightCount), seenInner);
                     }
                     else
@@ -440,14 +431,11 @@ namespace System.Linq.Parallel.Tests
                             (rightCount + (ElementFactor - 1) - p.Key % ElementFactor)
                                 / ElementFactor
                         );
-                        Assert.All(
-                            p.Value,
-                            y =>
-                            {
-                                Assert.Equal(p.Key % KeyFactor, y % ElementFactor);
-                                seenInner.Add(y / ElementFactor);
-                            }
-                        );
+                        Assert.All(p.Value, y =>
+                        {
+                            Assert.Equal(p.Key % KeyFactor, y % ElementFactor);
+                            seenInner.Add(y / ElementFactor);
+                        });
                         seenInner.AssertComplete();
                     }
                     else
@@ -495,14 +483,11 @@ namespace System.Linq.Parallel.Tests
                     if (p.Key % KeyFactor < Math.Min(ElementFactor, rightCount))
                     {
                         int seenInner = p.Key % (KeyFactor / 2) - (KeyFactor / 2);
-                        Assert.All(
-                            p.Value,
-                            y =>
-                            {
-                                Assert.Equal(p.Key % KeyFactor, y % (KeyFactor / 2));
-                                Assert.Equal(seenInner += (KeyFactor / 2), y);
-                            }
-                        );
+                        Assert.All(p.Value, y =>
+                        {
+                            Assert.Equal(p.Key % KeyFactor, y % (KeyFactor / 2));
+                            Assert.Equal(seenInner += (KeyFactor / 2), y);
+                        });
                         Assert.Equal(
                             Math.Max(
                                 p.Key % (KeyFactor / 2),
@@ -598,22 +583,19 @@ namespace System.Linq.Parallel.Tests
 
                         int expectedInner = p.Key % ElementFactor;
                         int seenInnerCount = 0;
-                        Assert.All(
-                            p.Value,
-                            y =>
+                        Assert.All(p.Value, y =>
+                        {
+                            seenInnerCount++;
+                            Assert.Equal(p.Key % KeyFactor, y % ElementFactor);
+                            try
                             {
-                                seenInnerCount++;
-                                Assert.Equal(p.Key % KeyFactor, y % ElementFactor);
-                                try
-                                {
-                                    Assert.Equal(expectedInner, y);
-                                }
-                                finally
-                                {
-                                    expectedInner += ElementFactor;
-                                }
+                                Assert.Equal(expectedInner, y);
                             }
-                        );
+                            finally
+                            {
+                                expectedInner += ElementFactor;
+                            }
+                        });
                         Assert.Equal(
                             (rightCount / ElementFactor)
                                 + (((rightCount % ElementFactor) > (p.Key % KeyFactor)) ? 1 : 0),
@@ -730,121 +712,101 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void GroupJoin_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "outer",
-                () =>
-                    ((ParallelQuery<int>)null).GroupJoin(
+            AssertExtensions.Throws<ArgumentNullException>("outer", () =>
+                ((ParallelQuery<int>)null).GroupJoin(
+                    ParallelEnumerable.Range(0, 1),
+                    i => i,
+                    i => i,
+                    (i, j) => i
+                )
+            );
+            AssertExtensions.Throws<ArgumentNullException>("inner", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .GroupJoin((ParallelQuery<int>)null, i => i, i => i, (i, j) => i)
+            );
+            AssertExtensions.Throws<ArgumentNullException>("outerKeySelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .GroupJoin(
                         ParallelEnumerable.Range(0, 1),
-                        i => i,
+                        (Func<int, int>)null,
                         i => i,
                         (i, j) => i
                     )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "inner",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .GroupJoin((ParallelQuery<int>)null, i => i, i => i, (i, j) => i)
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "outerKeySelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .GroupJoin(
-                            ParallelEnumerable.Range(0, 1),
-                            (Func<int, int>)null,
-                            i => i,
-                            (i, j) => i
-                        )
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "innerKeySelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .GroupJoin(
-                            ParallelEnumerable.Range(0, 1),
-                            i => i,
-                            (Func<int, int>)null,
-                            (i, j) => i
-                        )
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .GroupJoin(
-                            ParallelEnumerable.Range(0, 1),
-                            i => i,
-                            i => i,
-                            (Func<int, IEnumerable<int>, int>)null
-                        )
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "outer",
-                () =>
-                    ((ParallelQuery<int>)null).GroupJoin(
+            AssertExtensions.Throws<ArgumentNullException>("innerKeySelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .GroupJoin(
                         ParallelEnumerable.Range(0, 1),
+                        i => i,
+                        (Func<int, int>)null,
+                        (i, j) => i
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .GroupJoin(
+                        ParallelEnumerable.Range(0, 1),
+                        i => i,
+                        i => i,
+                        (Func<int, IEnumerable<int>, int>)null
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>("outer", () =>
+                ((ParallelQuery<int>)null).GroupJoin(
+                    ParallelEnumerable.Range(0, 1),
+                    i => i,
+                    i => i,
+                    (i, j) => i,
+                    EqualityComparer<int>.Default
+                )
+            );
+            AssertExtensions.Throws<ArgumentNullException>("inner", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .GroupJoin(
+                        (ParallelQuery<int>)null,
                         i => i,
                         i => i,
                         (i, j) => i,
                         EqualityComparer<int>.Default
                     )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "inner",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .GroupJoin(
-                            (ParallelQuery<int>)null,
-                            i => i,
-                            i => i,
-                            (i, j) => i,
-                            EqualityComparer<int>.Default
-                        )
+            AssertExtensions.Throws<ArgumentNullException>("outerKeySelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .GroupJoin(
+                        ParallelEnumerable.Range(0, 1),
+                        (Func<int, int>)null,
+                        i => i,
+                        (i, j) => i,
+                        EqualityComparer<int>.Default
+                    )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "outerKeySelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .GroupJoin(
-                            ParallelEnumerable.Range(0, 1),
-                            (Func<int, int>)null,
-                            i => i,
-                            (i, j) => i,
-                            EqualityComparer<int>.Default
-                        )
+            AssertExtensions.Throws<ArgumentNullException>("innerKeySelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .GroupJoin(
+                        ParallelEnumerable.Range(0, 1),
+                        i => i,
+                        (Func<int, int>)null,
+                        (i, j) => i,
+                        EqualityComparer<int>.Default
+                    )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "innerKeySelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .GroupJoin(
-                            ParallelEnumerable.Range(0, 1),
-                            i => i,
-                            (Func<int, int>)null,
-                            (i, j) => i,
-                            EqualityComparer<int>.Default
-                        )
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .GroupJoin(
-                            ParallelEnumerable.Range(0, 1),
-                            i => i,
-                            i => i,
-                            (Func<int, IEnumerable<int>, int>)null,
-                            EqualityComparer<int>.Default
-                        )
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .GroupJoin(
+                        ParallelEnumerable.Range(0, 1),
+                        i => i,
+                        i => i,
+                        (Func<int, IEnumerable<int>, int>)null,
+                        EqualityComparer<int>.Default
+                    )
             );
         }
     }

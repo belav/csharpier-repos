@@ -1757,14 +1757,11 @@ namespace System.Diagnostics.Metrics.Tests
                 }
             );
             int gaugeState = 0;
-            ObservableGauge<int> og = meter.CreateObservableGauge<int>(
-                "observableGauge1",
-                () =>
-                {
-                    gaugeState += 9;
-                    return gaugeState;
-                }
-            );
+            ObservableGauge<int> og = meter.CreateObservableGauge<int>("observableGauge1", () =>
+            {
+                gaugeState += 9;
+                return gaugeState;
+            });
             Histogram<int> h = meter.CreateHistogram<int>("histogram1");
             UpDownCounter<int> udc = meter.CreateUpDownCounter<int>("upDownCounter1");
             int upDownCounterState = 0;
@@ -2015,23 +2012,17 @@ namespace System.Diagnostics.Metrics.Tests
                     meter = new Meter("TestMeter3");
                     c = meter.CreateCounter<int>("counter1");
                     int counterState = 3;
-                    oc = meter.CreateObservableCounter<int>(
-                        "observableCounter1",
-                        () =>
-                        {
-                            counterState += 7;
-                            return counterState;
-                        }
-                    );
+                    oc = meter.CreateObservableCounter<int>("observableCounter1", () =>
+                    {
+                        counterState += 7;
+                        return counterState;
+                    });
                     int gaugeState = 0;
-                    og = meter.CreateObservableGauge<int>(
-                        "observableGauge1",
-                        () =>
-                        {
-                            gaugeState += 9;
-                            return gaugeState;
-                        }
-                    );
+                    og = meter.CreateObservableGauge<int>("observableGauge1", () =>
+                    {
+                        gaugeState += 9;
+                        return gaugeState;
+                    });
                     h = meter.CreateHistogram<int>("histogram1");
                     udc = meter.CreateUpDownCounter<int>("upDownCounter1");
                     int upDownCounterState = 0;
@@ -2144,23 +2135,17 @@ namespace System.Diagnostics.Metrics.Tests
                     new TagList() { { "Ck1", "Cv1" }, { "Ck2", "Cv2" } }
                 );
                 int counterState = 3;
-                oc = meter.CreateObservableCounter<int>(
-                    "observableCounter1",
-                    () =>
-                    {
-                        counterState += 7;
-                        return counterState;
-                    }
-                );
+                oc = meter.CreateObservableCounter<int>("observableCounter1", () =>
+                {
+                    counterState += 7;
+                    return counterState;
+                });
                 int gaugeState = 0;
-                og = meter.CreateObservableGauge<int>(
-                    "observableGauge1",
-                    () =>
-                    {
-                        gaugeState += 9;
-                        return gaugeState;
-                    }
-                );
+                og = meter.CreateObservableGauge<int>("observableGauge1", () =>
+                {
+                    gaugeState += 9;
+                    return gaugeState;
+                });
                 h = meter.CreateHistogram<int>("histogram1");
                 udc = meter.CreateUpDownCounter<int>(
                     "upDownCounter1",
@@ -2169,14 +2154,11 @@ namespace System.Diagnostics.Metrics.Tests
                     new TagList() { { "udCk1", "udCv1" } }
                 );
                 int upDownCounterState = 0;
-                oudc = meter.CreateObservableUpDownCounter<int>(
-                    "observableUpDownCounter1",
-                    () =>
-                    {
-                        upDownCounterState += 11;
-                        return upDownCounterState;
-                    }
-                );
+                oudc = meter.CreateObservableUpDownCounter<int>("observableUpDownCounter1", () =>
+                {
+                    upDownCounterState += 11;
+                    return upDownCounterState;
+                });
 
                 c.Add(5);
                 h.Record(19);
@@ -2268,26 +2250,23 @@ namespace System.Diagnostics.Metrics.Tests
                 }
             );
             int gaugeState = 0;
-            ObservableGauge<int> og = meter.CreateObservableGauge<int>(
-                "observableGauge1",
-                () =>
+            ObservableGauge<int> og = meter.CreateObservableGauge<int>("observableGauge1", () =>
+            {
+                gaugeState += 9;
+                return new Measurement<int>[]
                 {
-                    gaugeState += 9;
-                    return new Measurement<int>[]
-                    {
-                        new Measurement<int>(
-                            gaugeState,
-                            new KeyValuePair<string, object?>("Color", "red"),
-                            new KeyValuePair<string, object?>("Size", 19)
-                        ),
-                        new Measurement<int>(
-                            2 * gaugeState,
-                            new KeyValuePair<string, object?>("Color", "blue"),
-                            new KeyValuePair<string, object?>("Size", 4)
-                        ),
-                    };
-                }
-            );
+                    new Measurement<int>(
+                        gaugeState,
+                        new KeyValuePair<string, object?>("Color", "red"),
+                        new KeyValuePair<string, object?>("Size", 19)
+                    ),
+                    new Measurement<int>(
+                        2 * gaugeState,
+                        new KeyValuePair<string, object?>("Color", "blue"),
+                        new KeyValuePair<string, object?>("Size", 4)
+                    ),
+                };
+            });
             Histogram<int> h = meter.CreateHistogram<int>("histogram1");
             UpDownCounter<int> udc = meter.CreateUpDownCounter<int>("upDownCounter1");
             int upDownCounterState = 0;
@@ -2627,22 +2606,19 @@ namespace System.Diagnostics.Metrics.Tests
 
             int gaugeState = 0;
             int gaugeCollectInterval = 0;
-            ObservableGauge<int> og = meter.CreateObservableGauge<int>(
-                "observableGauge1",
-                () =>
+            ObservableGauge<int> og = meter.CreateObservableGauge<int>("observableGauge1", () =>
+            {
+                gaugeState += 9;
+                gaugeCollectInterval++;
+                if ((gaugeCollectInterval % 2) == 0)
                 {
-                    gaugeState += 9;
-                    gaugeCollectInterval++;
-                    if ((gaugeCollectInterval % 2) == 0)
-                    {
-                        return new Measurement<int>[] { new Measurement<int>(gaugeState) };
-                    }
-                    else
-                    {
-                        return new Measurement<int>[0];
-                    }
+                    return new Measurement<int>[] { new Measurement<int>(gaugeState) };
                 }
-            );
+                else
+                {
+                    return new Measurement<int>[0];
+                }
+            });
 
             Histogram<int> h = meter.CreateHistogram<int>("histogram1");
 
@@ -3301,14 +3277,11 @@ namespace System.Diagnostics.Metrics.Tests
                 }
             );
             int gaugeState = 0;
-            ObservableGauge<int> og = meter.CreateObservableGauge<int>(
-                "observableGauge1",
-                () =>
-                {
-                    gaugeState += 9;
-                    return gaugeState;
-                }
-            );
+            ObservableGauge<int> og = meter.CreateObservableGauge<int>("observableGauge1", () =>
+            {
+                gaugeState += 9;
+                return gaugeState;
+            });
             Histogram<int> h = meter.CreateHistogram<int>("histogram1");
             UpDownCounter<int> udc = meter.CreateUpDownCounter<int>("upDownCounter1");
             int upDownCounterState = 0;

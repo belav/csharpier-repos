@@ -288,21 +288,18 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
                     // check lines of line edits:
                     _ = expectedResult
-                        .LineEdits.Zip(
-                            result.LineEdits,
-                            (expected, actual) =>
-                            {
-                                AssertEx.Equal(
-                                    expected.LineUpdates,
-                                    actual.LineUpdates,
-                                    itemSeparator: ",\r\n",
-                                    itemInspector: s => $"new({s.OldLine}, {s.NewLine})",
-                                    message: "Line deltas differ in " + assertMessagePrefix
-                                );
+                        .LineEdits.Zip(result.LineEdits, (expected, actual) =>
+                        {
+                            AssertEx.Equal(
+                                expected.LineUpdates,
+                                actual.LineUpdates,
+                                itemSeparator: ",\r\n",
+                                itemInspector: s => $"new({s.OldLine}, {s.NewLine})",
+                                message: "Line deltas differ in " + assertMessagePrefix
+                            );
 
-                                return true;
-                            }
-                        )
+                            return true;
+                        })
                         .ToArray();
                 }
             }
@@ -612,11 +609,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             SyntaxTree newTree
         )
         {
-            AssertEx.Equal(
-                expected,
-                actual,
-                itemSeparator: "\r\n",
-                itemInspector: span => DisplaySpan(newTree, span)
+            AssertEx.Equal(expected, actual, itemSeparator: "\r\n", itemInspector: span =>
+                DisplaySpan(newTree, span)
             );
         }
 

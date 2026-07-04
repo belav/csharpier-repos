@@ -19165,21 +19165,17 @@ class Program
     {
     }
 }";
-            CompileAndVerify(
-                sourceB,
-                references: new[] { refA },
-                symbolValidator: module =>
-                {
-                    var method = module.GlobalNamespace.GetMember<PEMethodSymbol>("I.M");
-                    // Attribute is not included for the parameter from the embedded method.
-                    VerifyParameterSymbol(
-                        method.Parameters[0],
-                        "ref System.Int32 i",
-                        RefKind.Ref,
-                        ScopedKind.None
-                    );
-                }
-            );
+            CompileAndVerify(sourceB, references: new[] { refA }, symbolValidator: module =>
+            {
+                var method = module.GlobalNamespace.GetMember<PEMethodSymbol>("I.M");
+                // Attribute is not included for the parameter from the embedded method.
+                VerifyParameterSymbol(
+                    method.Parameters[0],
+                    "ref System.Int32 i",
+                    RefKind.Ref,
+                    ScopedKind.None
+                );
+            });
         }
 
         [Fact]

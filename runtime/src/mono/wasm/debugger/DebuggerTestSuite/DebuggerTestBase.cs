@@ -355,34 +355,31 @@ namespace DebuggerTests
         {
             object llock = new();
             var tcs = new TaskCompletionSource();
-            insp.On(
-                "Runtime.consoleAPICalled",
-                async (args, c) =>
-                {
-                    (string line, string type) = insp.FormatConsoleAPICalled(args);
-                    if (string.IsNullOrEmpty(line))
-                        return await Task.FromResult(ProtocolEventHandlerReturn.KeepHandler);
+            insp.On("Runtime.consoleAPICalled", async (args, c) =>
+            {
+                (string line, string type) = insp.FormatConsoleAPICalled(args);
+                if (string.IsNullOrEmpty(line))
+                    return await Task.FromResult(ProtocolEventHandlerReturn.KeepHandler);
 
-                    lock (llock)
+                lock (llock)
+                {
+                    try
                     {
-                        try
+                        if (line == message)
                         {
-                            if (line == message)
-                            {
-                                tcs.SetResult();
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            tcs.SetException(ex);
+                            tcs.SetResult();
                         }
                     }
-
-                    return tcs.Task.IsCompleted
-                        ? await Task.FromResult(ProtocolEventHandlerReturn.RemoveHandler)
-                        : await Task.FromResult(ProtocolEventHandlerReturn.KeepHandler);
+                    catch (Exception ex)
+                    {
+                        tcs.SetException(ex);
+                    }
                 }
-            );
+
+                return tcs.Task.IsCompleted
+                    ? await Task.FromResult(ProtocolEventHandlerReturn.RemoveHandler)
+                    : await Task.FromResult(ProtocolEventHandlerReturn.KeepHandler);
+            });
 
             await tcs.Task;
         }
@@ -392,41 +389,38 @@ namespace DebuggerTests
             object llock = new();
             List<string> pathsList = new(paths);
             var tcs = new TaskCompletionSource();
-            insp.On(
-                "Debugger.scriptParsed",
-                async (args, c) =>
+            insp.On("Debugger.scriptParsed", async (args, c) =>
+            {
+                await DefaultScriptParsedHandler(args, c);
+
+                string url = args["url"]?.Value<string>();
+                if (string.IsNullOrEmpty(url))
+                    return await Task.FromResult(ProtocolEventHandlerReturn.KeepHandler);
+
+                lock (llock)
                 {
-                    await DefaultScriptParsedHandler(args, c);
-
-                    string url = args["url"]?.Value<string>();
-                    if (string.IsNullOrEmpty(url))
-                        return await Task.FromResult(ProtocolEventHandlerReturn.KeepHandler);
-
-                    lock (llock)
+                    try
                     {
-                        try
+                        int idx = pathsList.FindIndex(p => url?.EndsWith(p) == true);
+                        if (idx >= 0)
                         {
-                            int idx = pathsList.FindIndex(p => url?.EndsWith(p) == true);
-                            if (idx >= 0)
+                            pathsList.RemoveAt(idx);
+                            if (pathsList.Count == 0)
                             {
-                                pathsList.RemoveAt(idx);
-                                if (pathsList.Count == 0)
-                                {
-                                    tcs.SetResult();
-                                }
+                                tcs.SetResult();
                             }
                         }
-                        catch (Exception ex)
-                        {
-                            tcs.SetException(ex);
-                        }
                     }
-
-                    return tcs.Task.IsCompleted
-                        ? await Task.FromResult(ProtocolEventHandlerReturn.RemoveHandler)
-                        : await Task.FromResult(ProtocolEventHandlerReturn.KeepHandler);
+                    catch (Exception ex)
+                    {
+                        tcs.SetException(ex);
+                    }
                 }
-            );
+
+                return tcs.Task.IsCompleted
+                    ? await Task.FromResult(ProtocolEventHandlerReturn.RemoveHandler)
+                    : await Task.FromResult(ProtocolEventHandlerReturn.KeepHandler);
+            });
 
             await tcs.Task;
         }

@@ -88,9 +88,8 @@ namespace System.Runtime.InteropServices.Tests
         public void QueryInterface_ZeroPointer_ThrowsArgumentNullException()
         {
             Guid iid = Guid.Empty;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "pUnk",
-                () => Marshal.QueryInterface(IntPtr.Zero, in iid, out IntPtr ppv)
+            AssertExtensions.Throws<ArgumentNullException>("pUnk", () =>
+                Marshal.QueryInterface(IntPtr.Zero, in iid, out IntPtr ppv)
             );
         }
     }

@@ -301,9 +301,8 @@ namespace Microsoft.Extensions.Options.Tests
             var services = new ServiceCollection();
             services
                 .AddOptions<ComplexOptions>()
-                .Bind(
-                    new ConfigurationBuilder().AddInMemoryCollection(dic).Build(),
-                    o => o.BindNonPublicProperties = true
+                .Bind(new ConfigurationBuilder().AddInMemoryCollection(dic).Build(), o =>
+                    o.BindNonPublicProperties = true
                 );
             var sp = services.BuildServiceProvider();
             var options = sp.GetRequiredService<IOptions<ComplexOptions>>().Value;
@@ -320,9 +319,8 @@ namespace Microsoft.Extensions.Options.Tests
             var services = new ServiceCollection();
             services
                 .AddOptions<ComplexOptions>("named")
-                .Bind(
-                    new ConfigurationBuilder().AddInMemoryCollection(dic).Build(),
-                    o => o.BindNonPublicProperties = true
+                .Bind(new ConfigurationBuilder().AddInMemoryCollection(dic).Build(), o =>
+                    o.BindNonPublicProperties = true
                 );
             var sp = services.BuildServiceProvider();
             var options = sp.GetRequiredService<IOptionsMonitor<ComplexOptions>>().Get("named");

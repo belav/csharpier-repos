@@ -36,13 +36,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             SegmentedList<T> list = GenericListFactory(count);
             IComparer<T> comparer = Comparer<T>.Default;
             list.Sort();
-            Assert.All(
-                Enumerable.Range(0, count - 2),
-                i =>
-                {
-                    Assert.True(comparer.Compare(list[i], list[i + 1]) < 0);
-                }
-            );
+            Assert.All(Enumerable.Range(0, count - 2), i =>
+            {
+                Assert.True(comparer.Compare(list[i], list[i + 1]) < 0);
+            });
         }
 
         [Theory]
@@ -53,13 +50,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             list.Add(list[0]);
             IComparer<T> comparer = Comparer<T>.Default;
             list.Sort();
-            Assert.All(
-                Enumerable.Range(0, count - 2),
-                i =>
-                {
-                    Assert.True(comparer.Compare(list[i], list[i + 1]) <= 0);
-                }
-            );
+            Assert.All(Enumerable.Range(0, count - 2), i =>
+            {
+                Assert.True(comparer.Compare(list[i], list[i + 1]) <= 0);
+            });
         }
 
         #endregion
@@ -73,13 +67,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             SegmentedList<T> list = GenericListFactory(count);
             IComparer<T> comparer = GetIComparer();
             list.Sort(comparer);
-            Assert.All(
-                Enumerable.Range(0, count - 2),
-                i =>
-                {
-                    Assert.True(comparer.Compare(list[i], list[i + 1]) < 0);
-                }
-            );
+            Assert.All(Enumerable.Range(0, count - 2), i =>
+            {
+                Assert.True(comparer.Compare(list[i], list[i + 1]) < 0);
+            });
         }
 
         [Theory]
@@ -90,13 +81,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             list.Add(list[0]);
             IComparer<T> comparer = GetIComparer();
             list.Sort(comparer);
-            Assert.All(
-                Enumerable.Range(0, count - 2),
-                i =>
-                {
-                    Assert.True(comparer.Compare(list[i], list[i + 1]) <= 0);
-                }
-            );
+            Assert.All(Enumerable.Range(0, count - 2), i =>
+            {
+                Assert.True(comparer.Compare(list[i], list[i + 1]) <= 0);
+            });
         }
 
         #endregion
@@ -116,13 +104,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 }
             );
             list.Sort(comparer);
-            Assert.All(
-                Enumerable.Range(0, count - 2),
-                i =>
-                {
-                    Assert.True(iComparer.Compare(list[i], list[i + 1]) < 0);
-                }
-            );
+            Assert.All(Enumerable.Range(0, count - 2), i =>
+            {
+                Assert.True(iComparer.Compare(list[i], list[i + 1]) < 0);
+            });
         }
 
         [Theory]
@@ -139,13 +124,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 }
             );
             list.Sort(comparer);
-            Assert.All(
-                Enumerable.Range(0, count - 2),
-                i =>
-                {
-                    Assert.True(iComparer.Compare(list[i], list[i + 1]) <= 0);
-                }
-            );
+            Assert.All(Enumerable.Range(0, count - 2), i =>
+            {
+                Assert.True(iComparer.Compare(list[i], list[i + 1]) <= 0);
+            });
         }
 
         #endregion
@@ -205,15 +187,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 Tuple.Create(2, -1),
             };
 
-            Assert.All(
-                InvalidParameters,
-                invalidSet =>
-                {
-                    Assert.Throws<ArgumentOutOfRangeException>(() =>
-                        list.Sort(invalidSet.Item1, invalidSet.Item2, GetIComparer())
-                    );
-                }
-            );
+            Assert.All(InvalidParameters, invalidSet =>
+            {
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    list.Sort(invalidSet.Item1, invalidSet.Item2, GetIComparer())
+                );
+            });
         }
 
         [Theory]
@@ -228,16 +207,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 Tuple.Create(int.MaxValue, 0),
             };
 
-            Assert.All(
-                InvalidParameters,
-                invalidSet =>
-                {
-                    Assert.Throws<ArgumentException>(
-                        null,
-                        () => list.Sort(invalidSet.Item1, invalidSet.Item2, GetIComparer())
-                    );
-                }
-            );
+            Assert.All(InvalidParameters, invalidSet =>
+            {
+                Assert.Throws<ArgumentException>(null, () =>
+                    list.Sort(invalidSet.Item1, invalidSet.Item2, GetIComparer())
+                );
+            });
         }
 
         #endregion

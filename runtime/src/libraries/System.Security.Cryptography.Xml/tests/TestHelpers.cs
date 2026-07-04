@@ -210,15 +210,12 @@ namespace System.Security.Cryptography.Xml.Tests
 
             foreach (var keySize in new[] { 128, 192, 256 })
             {
-                yield return new SymmetricAlgorithmFactory(
-                    $"AES{keySize}",
-                    () =>
-                    {
-                        Aes aes = Aes.Create();
-                        aes.KeySize = keySize;
-                        return aes;
-                    }
-                );
+                yield return new SymmetricAlgorithmFactory($"AES{keySize}", () =>
+                {
+                    Aes aes = Aes.Create();
+                    aes.KeySize = keySize;
+                    return aes;
+                });
             }
         }
 

@@ -60,70 +60,52 @@ public class DebuggerTestFirefox : DebuggerTestBase
     {
         dicScriptsIdToUrl = new Dictionary<string, string>();
         dicFileToUrl = new Dictionary<string, string>();
-        insp.On(
-            "newSource",
-            async (args, c) =>
+        insp.On("newSource", async (args, c) =>
+        {
+            var script_id = args?["source"]?["actor"].Value<string>();
+            var url = args?["source"]?["sourceMapBaseURL"]?.Value<string>();
+            /*_testOutput.WriteLine(script_id);
+            _testOutput.WriteLine(args);*/
+            if (script_id.StartsWith("dotnet://"))
             {
-                var script_id = args?["source"]?["actor"].Value<string>();
-                var url = args?["source"]?["sourceMapBaseURL"]?.Value<string>();
-                /*_testOutput.WriteLine(script_id);
-                _testOutput.WriteLine(args);*/
-                if (script_id.StartsWith("dotnet://"))
-                {
-                    var dbgUrl = args?["source"]?["dotNetUrl"]?.Value<string>();
-                    var arrStr = dbgUrl.Split("/");
-                    dbgUrl =
-                        arrStr[0]
-                        + "/"
-                        + arrStr[1]
-                        + "/"
-                        + arrStr[2]
-                        + "/"
-                        + arrStr[arrStr.Length - 1];
-                    dicScriptsIdToUrl[script_id] = dbgUrl;
-                    dicFileToUrl[dbgUrl] = args?["source"]?["url"]?.Value<string>();
-                }
-                else if (!String.IsNullOrEmpty(url))
-                {
-                    var dbgUrl = args?["source"]?["sourceMapBaseURL"]?.Value<string>();
-                    var arrStr = dbgUrl.Split("/");
-                    dicScriptsIdToUrl[script_id] = arrStr[arrStr.Length - 1];
-                    dicFileToUrl[new Uri(url).AbsolutePath] = url;
-                }
-                return await Task.FromResult(ProtocolEventHandlerReturn.KeepHandler);
+                var dbgUrl = args?["source"]?["dotNetUrl"]?.Value<string>();
+                var arrStr = dbgUrl.Split("/");
+                dbgUrl =
+                    arrStr[0] + "/" + arrStr[1] + "/" + arrStr[2] + "/" + arrStr[arrStr.Length - 1];
+                dicScriptsIdToUrl[script_id] = dbgUrl;
+                dicFileToUrl[dbgUrl] = args?["source"]?["url"]?.Value<string>();
             }
-        );
-        insp.On(
-            "resource-available-form",
-            async (args, c) =>
+            else if (!String.IsNullOrEmpty(url))
             {
-                var script_id = args?["resources"]?[0]?["actor"].Value<string>();
-                var url = args?["resources"]?[0]?["url"]?.Value<string>();
-                if (script_id.StartsWith("dotnet://"))
-                {
-                    var dbgUrl = args?["resources"]?[0]?["dotNetUrl"]?.Value<string>();
-                    var arrStr = dbgUrl.Split("/");
-                    dbgUrl =
-                        arrStr[0]
-                        + "/"
-                        + arrStr[1]
-                        + "/"
-                        + arrStr[2]
-                        + "/"
-                        + arrStr[arrStr.Length - 1];
-                    dicScriptsIdToUrl[script_id] = dbgUrl;
-                    dicFileToUrl[dbgUrl] = args?["resources"]?[0]?["url"]?.Value<string>();
-                }
-                else if (!String.IsNullOrEmpty(url))
-                {
-                    var dbgUrl = args?["resources"]?[0]?["url"]?.Value<string>();
-                    var arrStr = dbgUrl.Split("/");
-                    dicScriptsIdToUrl[script_id] = arrStr[arrStr.Length - 1];
-                    dicFileToUrl[new Uri(url).AbsolutePath] = url;
-                }
-                return await Task.FromResult(ProtocolEventHandlerReturn.KeepHandler);
+                var dbgUrl = args?["source"]?["sourceMapBaseURL"]?.Value<string>();
+                var arrStr = dbgUrl.Split("/");
+                dicScriptsIdToUrl[script_id] = arrStr[arrStr.Length - 1];
+                dicFileToUrl[new Uri(url).AbsolutePath] = url;
             }
-        );
+            return await Task.FromResult(ProtocolEventHandlerReturn.KeepHandler);
+        });
+        insp.On("resource-available-form", async (args, c) =>
+        {
+            var script_id = args?["resources"]?[0]?["actor"].Value<string>();
+            var url = args?["resources"]?[0]?["url"]?.Value<string>();
+            if (script_id.StartsWith("dotnet://"))
+            {
+                var dbgUrl = args?["resources"]?[0]?["dotNetUrl"]?.Value<string>();
+                var arrStr = dbgUrl.Split("/");
+                dbgUrl =
+                    arrStr[0] + "/" + arrStr[1] + "/" + arrStr[2] + "/" + arrStr[arrStr.Length - 1];
+                dicScriptsIdToUrl[script_id] = dbgUrl;
+                dicFileToUrl[dbgUrl] = args?["resources"]?[0]?["url"]?.Value<string>();
+            }
+            else if (!String.IsNullOrEmpty(url))
+            {
+                var dbgUrl = args?["resources"]?[0]?["url"]?.Value<string>();
+                var arrStr = dbgUrl.Split("/");
+                dicScriptsIdToUrl[script_id] = arrStr[arrStr.Length - 1];
+                dicFileToUrl[new Uri(url).AbsolutePath] = url;
+            }
+            return await Task.FromResult(ProtocolEventHandlerReturn.KeepHandler);
+        });
         return dicScriptsIdToUrl;
     }
 

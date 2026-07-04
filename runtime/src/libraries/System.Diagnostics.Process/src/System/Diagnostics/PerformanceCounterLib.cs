@@ -78,15 +78,12 @@ namespace System.Diagnostics
             else
                 machineName = machineName.ToLowerInvariant();
 
-            LazyInitializer.EnsureInitialized(
-                ref s_libraryTable,
-                ref s_internalSyncObject,
-                () => new ConcurrentDictionary<(string, string), PerformanceCounterLib>()
+            LazyInitializer.EnsureInitialized(ref s_libraryTable, ref s_internalSyncObject, () =>
+                new ConcurrentDictionary<(string, string), PerformanceCounterLib>()
             );
 
-            return PerformanceCounterLib.s_libraryTable.GetOrAdd(
-                (machineName, lcidString),
-                (key) => new PerformanceCounterLib(key.machineName, key.lcidString)
+            return PerformanceCounterLib.s_libraryTable.GetOrAdd((machineName, lcidString), (key) =>
+                new PerformanceCounterLib(key.machineName, key.lcidString)
             );
         }
 

@@ -43,9 +43,8 @@ public class ConventionSetBuilderTests
         conventionSet.Add(new TestConvention());
 
         Assert.Contains(conventionSet.ModelFinalizingConventions, c => c is TestConvention);
-        Assert.DoesNotContain(
-            conventionSet.ModelInitializedConventions,
-            c => c is DerivedTestConvention
+        Assert.DoesNotContain(conventionSet.ModelInitializedConventions, c =>
+            c is DerivedTestConvention
         );
 
         conventionSet.Replace<TestConvention>(new DerivedTestConvention());

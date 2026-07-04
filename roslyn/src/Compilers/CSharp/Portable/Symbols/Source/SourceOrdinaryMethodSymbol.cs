@@ -864,9 +864,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 SourceOrdinaryMethodSymbol implementation
             )
             {
-                return !definition.Parameters.SequenceEqual(
-                        implementation.Parameters,
-                        (a, b) => a.Name == b.Name
+                return !definition.Parameters.SequenceEqual(implementation.Parameters, (a, b) =>
+                        a.Name == b.Name
                     )
                     || !definition.TypeParameters.SequenceEqual(
                         implementation.TypeParameters,

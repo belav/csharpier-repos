@@ -46,13 +46,11 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void SizeOf_NullStructure_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "structure",
-                () => Marshal.SizeOf((object)null)
+            AssertExtensions.Throws<ArgumentNullException>("structure", () =>
+                Marshal.SizeOf((object)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "structure",
-                () => Marshal.SizeOf<string>(null)
+            AssertExtensions.Throws<ArgumentNullException>("structure", () =>
+                Marshal.SizeOf<string>(null)
             );
         }
 

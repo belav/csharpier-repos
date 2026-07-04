@@ -238,9 +238,8 @@ public class When_using_a_class_to_do_before_after_mappings_with_resolutionconte
 
     protected override void Because_of()
     {
-        _destination = Mapper.Map<Source, Destination>(
-            new Source { Value = 4 },
-            opt => opt.Items["CustomMultiplier"] = 10
+        _destination = Mapper.Map<Source, Destination>(new Source { Value = 4 }, opt =>
+            opt.Items["CustomMultiplier"] = 10
         );
     }
 
@@ -273,9 +272,8 @@ public class MappingSpecificBeforeMapping : AutoMapperSpecBase
 
     protected override void Because_of()
     {
-        _dest = Mapper.Map<Source, Dest>(
-            new Source { Value = 5 },
-            opt => opt.BeforeMap((src, dest) => src.Value += 10)
+        _dest = Mapper.Map<Source, Dest>(new Source { Value = 5 }, opt =>
+            opt.BeforeMap((src, dest) => src.Value += 10)
         );
     }
 
@@ -308,9 +306,8 @@ public class MappingSpecificAfterMapping : AutoMapperSpecBase
 
     protected override void Because_of()
     {
-        _dest = Mapper.Map<Source, Dest>(
-            new Source { Value = 5 },
-            opt => opt.AfterMap((src, dest) => dest.Value += 10)
+        _dest = Mapper.Map<Source, Dest>(new Source { Value = 5 }, opt =>
+            opt.AfterMap((src, dest) => dest.Value += 10)
         );
     }
 

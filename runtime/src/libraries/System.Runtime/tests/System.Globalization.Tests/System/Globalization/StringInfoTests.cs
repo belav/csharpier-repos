@@ -42,10 +42,8 @@ namespace System.Globalization.Tests
         [Fact]
         public void Ctor_NullValue_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                "String",
-                () => new StringInfo(null)
+            AssertExtensions.Throws<ArgumentNullException>("value", "String", () =>
+                new StringInfo(null)
             );
         }
 
@@ -64,10 +62,8 @@ namespace System.Globalization.Tests
         public void String_SetNull_ThrowsArgumentNullException()
         {
             var stringInfo = new StringInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                "String",
-                () => stringInfo.String = null
+            AssertExtensions.Throws<ArgumentNullException>("value", "String", () =>
+                stringInfo.String = null
             );
         }
 
@@ -203,22 +199,18 @@ namespace System.Globalization.Tests
         [Fact]
         public void GetNextTextElement_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "str",
-                () => StringInfo.GetNextTextElement(null)
+            AssertExtensions.Throws<ArgumentNullException>("str", () =>
+                StringInfo.GetNextTextElement(null)
             ); // Str is null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "str",
-                () => StringInfo.GetNextTextElement(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("str", () =>
+                StringInfo.GetNextTextElement(null, 0)
             ); // Str is null
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => StringInfo.GetNextTextElement("abc", -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                StringInfo.GetNextTextElement("abc", -1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => StringInfo.GetNextTextElement("abc", 4)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                StringInfo.GetNextTextElement("abc", 4)
             ); // Index > str.Length
         }
 
@@ -237,22 +229,18 @@ namespace System.Globalization.Tests
         [Fact]
         public void GetNextTextElementLength_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "str",
-                () => StringInfo.GetNextTextElementLength(null)
+            AssertExtensions.Throws<ArgumentNullException>("str", () =>
+                StringInfo.GetNextTextElementLength(null)
             ); // Str is null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "str",
-                () => StringInfo.GetNextTextElementLength(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("str", () =>
+                StringInfo.GetNextTextElementLength(null, 0)
             ); // Str is null
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => StringInfo.GetNextTextElementLength("abc", -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                StringInfo.GetNextTextElementLength("abc", -1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => StringInfo.GetNextTextElementLength("abc", 4)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                StringInfo.GetNextTextElementLength("abc", 4)
             ); // Index > str.Length
         }
 
@@ -318,22 +306,18 @@ namespace System.Globalization.Tests
         [Fact]
         public void GetTextElementEnumerator_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "str",
-                () => StringInfo.GetTextElementEnumerator(null)
+            AssertExtensions.Throws<ArgumentNullException>("str", () =>
+                StringInfo.GetTextElementEnumerator(null)
             ); // Str is null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "str",
-                () => StringInfo.GetTextElementEnumerator(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("str", () =>
+                StringInfo.GetTextElementEnumerator(null, 0)
             ); // Str is null
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => StringInfo.GetTextElementEnumerator("abc", -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                StringInfo.GetTextElementEnumerator("abc", -1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => StringInfo.GetTextElementEnumerator("abc", 4)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                StringInfo.GetTextElementEnumerator("abc", 4)
             ); // Index > str.Length
         }
 
@@ -447,9 +431,8 @@ namespace System.Globalization.Tests
         [Fact]
         public void ParseCombiningCharacters_Null_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "str",
-                () => StringInfo.ParseCombiningCharacters(null)
+            AssertExtensions.Throws<ArgumentNullException>("str", () =>
+                StringInfo.ParseCombiningCharacters(null)
             ); // Str is null
         }
     }

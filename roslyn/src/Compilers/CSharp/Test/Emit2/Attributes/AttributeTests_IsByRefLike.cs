@@ -533,20 +533,16 @@ public class Test1
                 options: options
             );
 
-            CompileAndVerify(
-                code2,
-                verify: Verification.Passes,
-                symbolValidator: module =>
-                {
-                    // IsByRefLike is not generated in assembly
-                    var isByRefLikeAttributeName = WellKnownTypes.GetMetadataName(
-                        WellKnownType.System_Runtime_CompilerServices_IsByRefLikeAttribute
-                    );
-                    Assert.Null(
-                        module.ContainingAssembly.GetTypeByMetadataName(isByRefLikeAttributeName)
-                    );
-                }
-            );
+            CompileAndVerify(code2, verify: Verification.Passes, symbolValidator: module =>
+            {
+                // IsByRefLike is not generated in assembly
+                var isByRefLikeAttributeName = WellKnownTypes.GetMetadataName(
+                    WellKnownType.System_Runtime_CompilerServices_IsByRefLikeAttribute
+                );
+                Assert.Null(
+                    module.ContainingAssembly.GetTypeByMetadataName(isByRefLikeAttributeName)
+                );
+            });
 
             var code3 = CreateCompilation(
                 @"
@@ -558,21 +554,18 @@ public class Test2
                 options: options
             );
 
-            CompileAndVerify(
-                code3,
-                symbolValidator: module =>
-                {
-                    // IsByRefLike is generated in assembly
-                    AssertGeneratedEmbeddedAttribute(
-                        module.ContainingAssembly,
-                        AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
-                    );
-                    AssertGeneratedEmbeddedAttribute(
-                        module.ContainingAssembly,
-                        AttributeDescription.IsByRefLikeAttribute.FullName
-                    );
-                }
-            );
+            CompileAndVerify(code3, symbolValidator: module =>
+            {
+                // IsByRefLike is generated in assembly
+                AssertGeneratedEmbeddedAttribute(
+                    module.ContainingAssembly,
+                    AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
+                );
+                AssertGeneratedEmbeddedAttribute(
+                    module.ContainingAssembly,
+                    AttributeDescription.IsByRefLikeAttribute.FullName
+                );
+            });
         }
 
         [Fact]
@@ -854,17 +847,14 @@ public ref struct S1{}
 "
             );
 
-            CompileAndVerify(
-                comAssembly,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Test");
+            CompileAndVerify(comAssembly, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Test");
 
-                    var property = type.GetMember<PEPropertySymbol>("Property");
-                    Assert.NotNull(property);
-                    AssertReferencedIsByRefLike(property.Type);
-                }
-            );
+                var property = type.GetMember<PEPropertySymbol>("Property");
+                Assert.NotNull(property);
+                AssertReferencedIsByRefLike(property.Type);
+            });
 
             var code =
                 @"
@@ -1025,17 +1015,13 @@ namespace System
 }
 ";
 
-            CompileAndVerify(
-                text,
-                verify: Verification.Passes,
-                symbolValidator: module =>
-                {
-                    var type = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
-                        .GetTypeMember("S1");
-                    AssertReferencedIsByRefLike(type, hasObsolete: false);
-                }
-            );
+            CompileAndVerify(text, verify: Verification.Passes, symbolValidator: module =>
+            {
+                var type = module
+                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .GetTypeMember("S1");
+                AssertReferencedIsByRefLike(type, hasObsolete: false);
+            });
         }
 
         [Theory]

@@ -123,17 +123,14 @@ namespace System.Security.Cryptography.Tests
                 Assert.Throws<ArgumentOutOfRangeException>(() =>
                     hash.ComputeHash(s_tenBytes, -1, 0)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => hash.ComputeHash(s_tenBytes, 0, -1)
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    hash.ComputeHash(s_tenBytes, 0, -1)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => hash.ComputeHash(s_tenBytes, 0, 11)
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    hash.ComputeHash(s_tenBytes, 0, 11)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => hash.ComputeHash(s_tenBytes, 9, 2)
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    hash.ComputeHash(s_tenBytes, 9, 2)
                 );
 
                 hash.Dispose();

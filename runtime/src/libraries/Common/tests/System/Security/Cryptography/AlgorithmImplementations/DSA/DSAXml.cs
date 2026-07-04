@@ -464,9 +464,8 @@ S      9      R      /       j       6       9        C        v        C
         {
             using (DSA dsa = DSAFactory.Create())
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "xmlString",
-                    () => dsa.FromXmlString(null)
+                AssertExtensions.Throws<ArgumentNullException>("xmlString", () =>
+                    dsa.FromXmlString(null)
                 );
             }
         }

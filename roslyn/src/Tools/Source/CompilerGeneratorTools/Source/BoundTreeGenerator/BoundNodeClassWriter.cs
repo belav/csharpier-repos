@@ -1110,14 +1110,12 @@ namespace BoundTreeGenerator
                     Blank();
                     Write("public{1} {0} Update", node.Name, emitNew ? " new" : "");
                     Paren();
-                    Comma(
-                        AllSpecifiableFields(node),
-                        field =>
-                            string.Format(
-                                "{0} {1}",
-                                GetField(node, field.Name).Type,
-                                ToCamelCase(field.Name)
-                            )
+                    Comma(AllSpecifiableFields(node), field =>
+                        string.Format(
+                            "{0} {1}",
+                            GetField(node, field.Name).Type,
+                            ToCamelCase(field.Name)
+                        )
                     );
                     UnParen();
                     Blank();
@@ -1150,9 +1148,8 @@ namespace BoundTreeGenerator
                     Blank();
                     Write("Public{0} Function Update", emitNew ? " Shadows" : "");
                     Paren();
-                    Comma(
-                        AllSpecifiableFields(node),
-                        field => string.Format("{1} As {0}", field.Type, ToCamelCase(field.Name))
+                    Comma(AllSpecifiableFields(node), field =>
+                        string.Format("{1} As {0}", field.Type, ToCamelCase(field.Name))
                     );
                     UnParen();
                     WriteLine(" As {0}", node.Name);
@@ -1161,20 +1158,18 @@ namespace BoundTreeGenerator
                     if (AllSpecifiableFields(node).Any())
                     {
                         Write("If ");
-                        Or(
-                            AllSpecifiableFields(node),
-                            field =>
-                                IsValueType(field.Type)
-                                    ? string.Format(
-                                        "{0} <> Me.{1}",
-                                        ToCamelCase(field.Name),
-                                        field.Name
-                                    )
-                                    : string.Format(
-                                        "{0} IsNot Me.{1}",
-                                        ToCamelCase(field.Name),
-                                        field.Name
-                                    )
+                        Or(AllSpecifiableFields(node), field =>
+                            IsValueType(field.Type)
+                                ? string.Format(
+                                    "{0} <> Me.{1}",
+                                    ToCamelCase(field.Name),
+                                    field.Name
+                                )
+                                : string.Format(
+                                    "{0} IsNot Me.{1}",
+                                    ToCamelCase(field.Name),
+                                    field.Name
+                                )
                         );
                         WriteLine(" Then");
                         Indent();
@@ -1656,13 +1651,11 @@ namespace BoundTreeGenerator
                         if (hadField)
                         {
                             Write("return node.Update");
-                            ParenList(
-                                AllSpecifiableFields(node),
-                                field =>
-                                    IsDerivedOrListOfDerived("BoundNode", field.Type)
-                                    || TypeIsTypeSymbol(field)
-                                        ? ToCamelCase(field.Name)
-                                        : string.Format("node.{0}", field.Name)
+                            ParenList(AllSpecifiableFields(node), field =>
+                                IsDerivedOrListOfDerived("BoundNode", field.Type)
+                                || TypeIsTypeSymbol(field)
+                                    ? ToCamelCase(field.Name)
+                                    : string.Format("node.{0}", field.Name)
                             );
                             WriteLine(";");
                         }
@@ -1709,13 +1702,11 @@ namespace BoundTreeGenerator
                         if (hadField)
                         {
                             Write("Return node.Update");
-                            ParenList(
-                                AllSpecifiableFields(node),
-                                field =>
-                                    IsDerivedOrListOfDerived("BoundNode", field.Type)
-                                    || field.Type == "TypeSymbol"
-                                        ? ToCamelCase(field.Name)
-                                        : string.Format("node.{0}", field.Name)
+                            ParenList(AllSpecifiableFields(node), field =>
+                                IsDerivedOrListOfDerived("BoundNode", field.Type)
+                                || field.Type == "TypeSymbol"
+                                    ? ToCamelCase(field.Name)
+                                    : string.Format("node.{0}", field.Name)
                             );
                             WriteLine("");
                         }
@@ -1880,38 +1871,35 @@ namespace BoundTreeGenerator
                         void writeUpdate(bool updatedType)
                         {
                             Write("node.Update");
-                            ParenList(
-                                allSpecifiableFields,
-                                field =>
+                            ParenList(allSpecifiableFields, field =>
+                            {
+                                if (SkipInNullabilityRewriter(field))
                                 {
-                                    if (SkipInNullabilityRewriter(field))
-                                    {
-                                        return $"node.{field.Name}";
-                                    }
-                                    else if (IsDerivedOrListOfDerived("BoundNode", field.Type))
-                                    {
-                                        return ToCamelCase(field.Name);
-                                    }
-                                    else if (updatedType && field.Name == "Type")
-                                    {
-                                        // Use the override for the field if any.
-                                        field = GetMostDerivedField(node, field.Name);
-                                        return $"infoAndType.Type"
-                                            + (field.Null == "disallow" ? "!" : "");
-                                    }
-                                    else if (
-                                        symbolIsPotentiallyUpdated(field)
-                                        || immutableArrayIsPotentiallyUpdated(field)
-                                    )
-                                    {
-                                        return $"{ToCamelCase(field.Name)}";
-                                    }
-                                    else
-                                    {
-                                        return $"node.{field.Name}";
-                                    }
+                                    return $"node.{field.Name}";
                                 }
-                            );
+                                else if (IsDerivedOrListOfDerived("BoundNode", field.Type))
+                                {
+                                    return ToCamelCase(field.Name);
+                                }
+                                else if (updatedType && field.Name == "Type")
+                                {
+                                    // Use the override for the field if any.
+                                    field = GetMostDerivedField(node, field.Name);
+                                    return $"infoAndType.Type"
+                                        + (field.Null == "disallow" ? "!" : "");
+                                }
+                                else if (
+                                    symbolIsPotentiallyUpdated(field)
+                                    || immutableArrayIsPotentiallyUpdated(field)
+                                )
+                                {
+                                    return $"{ToCamelCase(field.Name)}";
+                                }
+                                else
+                                {
+                                    return $"node.{field.Name}";
+                                }
+                            });
                         }
 
                         void writeNullabilityUpdate()

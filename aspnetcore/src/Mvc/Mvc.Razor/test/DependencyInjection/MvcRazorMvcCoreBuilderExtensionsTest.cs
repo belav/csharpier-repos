@@ -63,9 +63,8 @@ public class MvcRazorMvcCoreBuilderExtensionsTest
         builder.AddTagHelpersAsServices();
 
         // Assert
-        var activatorDescriptor = Assert.Single(
-            services.ToList(),
-            d => d.ServiceType == typeof(ITagHelperActivator)
+        var activatorDescriptor = Assert.Single(services.ToList(), d =>
+            d.ServiceType == typeof(ITagHelperActivator)
         );
         Assert.Equal(
             typeof(ServiceBasedTagHelperActivator),
@@ -95,23 +94,20 @@ public class MvcRazorMvcCoreBuilderExtensionsTest
         var collection = services.ToList();
         Assert.Equal(3, collection.Count);
 
-        var tagHelperOne = Assert.Single(
-            collection,
-            t => t.ServiceType == typeof(TestTagHelperOne)
+        var tagHelperOne = Assert.Single(collection, t =>
+            t.ServiceType == typeof(TestTagHelperOne)
         );
         Assert.Equal(typeof(TestTagHelperOne), tagHelperOne.ImplementationType);
         Assert.Equal(ServiceLifetime.Transient, tagHelperOne.Lifetime);
 
-        var tagHelperTwo = Assert.Single(
-            collection,
-            t => t.ServiceType == typeof(TestTagHelperTwo)
+        var tagHelperTwo = Assert.Single(collection, t =>
+            t.ServiceType == typeof(TestTagHelperTwo)
         );
         Assert.Equal(typeof(TestTagHelperTwo), tagHelperTwo.ImplementationType);
         Assert.Equal(ServiceLifetime.Transient, tagHelperTwo.Lifetime);
 
-        var activator = Assert.Single(
-            collection,
-            t => t.ServiceType == typeof(ITagHelperActivator)
+        var activator = Assert.Single(collection, t =>
+            t.ServiceType == typeof(ITagHelperActivator)
         );
         Assert.Equal(typeof(ServiceBasedTagHelperActivator), activator.ImplementationType);
         Assert.Equal(ServiceLifetime.Transient, activator.Lifetime);

@@ -19,9 +19,8 @@ namespace System.Runtime.InteropServices.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void CreateWrapperOfType_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "t",
-                () => Marshal.CreateWrapperOfType("object", null)
+            AssertExtensions.Throws<ArgumentNullException>("t", () =>
+                Marshal.CreateWrapperOfType("object", null)
             );
         }
     }

@@ -440,9 +440,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.False(list.IsEmpty);
 
             ImmutableSegmentedList<int>.Builder? nullBuilder = null;
-            Assert.Throws<ArgumentNullException>(
-                "builder",
-                () => nullBuilder!.ToImmutableSegmentedList()
+            Assert.Throws<ArgumentNullException>("builder", () =>
+                nullBuilder!.ToImmutableSegmentedList()
             );
         }
 

@@ -98,43 +98,39 @@ namespace System.Net.WebSockets.Client.Tests
             TimeSpan keepAliveInterval = default,
             IWebProxy proxy = null,
             HttpMessageInvoker? invoker = null
-        ) =>
-            Retry(
-                output,
-                async () =>
+        ) => Retry(output, async () =>
+            {
+                var cws = new ClientWebSocket();
+                if (proxy != null)
                 {
-                    var cws = new ClientWebSocket();
-                    if (proxy != null)
-                    {
-                        cws.Options.Proxy = proxy;
-                    }
-
-                    if (keepAliveInterval.TotalSeconds > 0)
-                    {
-                        cws.Options.KeepAliveInterval = keepAliveInterval;
-                    }
-
-                    using (var cts = new CancellationTokenSource(timeOutMilliseconds))
-                    {
-                        output.WriteLine("GetConnectedWebSocket: ConnectAsync starting.");
-                        Task taskConnect =
-                            invoker == null
-                                ? cws.ConnectAsync(server, cts.Token)
-                                : cws.ConnectAsync(server, invoker, cts.Token);
-                        Assert.True(
-                            (cws.State == WebSocketState.None)
-                                || (cws.State == WebSocketState.Connecting)
-                                || (cws.State == WebSocketState.Open)
-                                || (cws.State == WebSocketState.Aborted),
-                            "State immediately after ConnectAsync incorrect: " + cws.State
-                        );
-                        await taskConnect;
-                        output.WriteLine("GetConnectedWebSocket: ConnectAsync done.");
-                        Assert.Equal(WebSocketState.Open, cws.State);
-                    }
-                    return cws;
+                    cws.Options.Proxy = proxy;
                 }
-            );
+
+                if (keepAliveInterval.TotalSeconds > 0)
+                {
+                    cws.Options.KeepAliveInterval = keepAliveInterval;
+                }
+
+                using (var cts = new CancellationTokenSource(timeOutMilliseconds))
+                {
+                    output.WriteLine("GetConnectedWebSocket: ConnectAsync starting.");
+                    Task taskConnect =
+                        invoker == null
+                            ? cws.ConnectAsync(server, cts.Token)
+                            : cws.ConnectAsync(server, invoker, cts.Token);
+                    Assert.True(
+                        (cws.State == WebSocketState.None)
+                            || (cws.State == WebSocketState.Connecting)
+                            || (cws.State == WebSocketState.Open)
+                            || (cws.State == WebSocketState.Aborted),
+                        "State immediately after ConnectAsync incorrect: " + cws.State
+                    );
+                    await taskConnect;
+                    output.WriteLine("GetConnectedWebSocket: ConnectAsync done.");
+                    Assert.Equal(WebSocketState.Open, cws.State);
+                }
+                return cws;
+            });
 
         public static async Task<T> Retry<T>(ITestOutputHelper output, Func<Task<T>> func)
         {

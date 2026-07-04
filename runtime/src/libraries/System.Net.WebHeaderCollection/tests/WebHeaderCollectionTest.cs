@@ -155,9 +155,8 @@ namespace System.Net.Tests
         public void Setter_InvalidName_Throws(string name)
         {
             WebHeaderCollection w = new WebHeaderCollection();
-            ArgumentException exception = AssertExtensions.Throws<ArgumentException>(
-                "name",
-                () => w[name] = "test"
+            ArgumentException exception = AssertExtensions.Throws<ArgumentException>("name", () =>
+                w[name] = "test"
             );
             Assert.Contains(name, exception.Message);
         }
@@ -241,9 +240,8 @@ namespace System.Net.Tests
         public void Remove_InvalidHeader_ThrowsArgumentException(string name)
         {
             var headers = new WebHeaderCollection();
-            ArgumentException exception = AssertExtensions.Throws<ArgumentException>(
-                "name",
-                () => headers.Remove(name)
+            ArgumentException exception = AssertExtensions.Throws<ArgumentException>("name", () =>
+                headers.Remove(name)
             );
             Assert.Contains(name, exception.Message);
         }
@@ -480,9 +478,8 @@ namespace System.Net.Tests
         public void Add_NullName_ThrowsArgumentNullException()
         {
             var headers = new WebHeaderCollection();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => headers.Add(null, "value")
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                headers.Add(null, "value")
             );
         }
 
@@ -495,9 +492,8 @@ namespace System.Net.Tests
         public void Add_InvalidName_ThrowsArgumentException(string name)
         {
             var headers = new WebHeaderCollection();
-            ArgumentException exception = AssertExtensions.Throws<ArgumentException>(
-                "name",
-                () => headers.Add(name, "value")
+            ArgumentException exception = AssertExtensions.Throws<ArgumentException>("name", () =>
+                headers.Add(name, "value")
             );
 
             if (!string.IsNullOrEmpty(name))
@@ -751,13 +747,11 @@ namespace System.Net.Tests
             WebHeaderCollection w = new WebHeaderCollection();
             char[] arr = new char[ushort.MaxValue + 1];
             string maxStr = new string(arr);
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => w.Add(HttpRequestHeader.ContentLength, maxStr)
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                w.Add(HttpRequestHeader.ContentLength, maxStr)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => w.Add("ContentLength", maxStr)
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                w.Add("ContentLength", maxStr)
             );
         }
 

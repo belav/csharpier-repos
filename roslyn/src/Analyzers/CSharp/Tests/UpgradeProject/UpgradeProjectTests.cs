@@ -50,13 +50,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UpgradeProject
                 );
                 var oldSolution = appliedChanges.Item1;
                 var newSolution = appliedChanges.Item2;
-                Assert.All(
-                    newSolution.Projects.Where(p => p.Language == LanguageNames.CSharp),
-                    p =>
-                        Assert.Equal(
-                            expected,
-                            ((CSharpParseOptions)p.ParseOptions!).SpecifiedLanguageVersion
-                        )
+                Assert.All(newSolution.Projects.Where(p => p.Language == LanguageNames.CSharp), p =>
+                    Assert.Equal(
+                        expected,
+                        ((CSharpParseOptions)p.ParseOptions!).SpecifiedLanguageVersion
+                    )
                 );
 
                 // Verify no document changes when upgrade project

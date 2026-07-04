@@ -43,17 +43,14 @@ public class CascadingParameterTest
         var nestedComponentDiff = batch.DiffsByComponentId[nestedComponentId].Single();
 
         // The nested component was rendered with the correct parameters
-        Assert.Collection(
-            nestedComponentDiff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                AssertFrame.Text(
-                    batch.ReferenceFrames[edit.ReferenceFrameIndex],
-                    "CascadingParameter=Hello; RegularParameter=Goodbye"
-                );
-            }
-        );
+        Assert.Collection(nestedComponentDiff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
+            AssertFrame.Text(
+                batch.ReferenceFrames[edit.ReferenceFrameIndex],
+                "CascadingParameter=Hello; RegularParameter=Goodbye"
+            );
+        });
         Assert.Equal(1, nestedComponent.NumRenders);
     }
 
@@ -106,18 +103,15 @@ public class CascadingParameterTest
         var nestedComponentDiff = secondBatch.DiffsByComponentId[nestedComponentId].Single();
 
         // The nested component was rendered with the correct parameters
-        Assert.Collection(
-            nestedComponentDiff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
-                Assert.Equal(0, edit.ReferenceFrameIndex); // This is the only change
-                AssertFrame.Text(
-                    secondBatch.ReferenceFrames[0],
-                    "CascadingParameter=Hello; RegularParameter=Changed value"
-                );
-            }
-        );
+        Assert.Collection(nestedComponentDiff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
+            Assert.Equal(0, edit.ReferenceFrameIndex); // This is the only change
+            AssertFrame.Text(
+                secondBatch.ReferenceFrames[0],
+                "CascadingParameter=Hello; RegularParameter=Changed value"
+            );
+        });
         Assert.Equal(2, nestedComponent.NumRenders);
     }
 
@@ -164,18 +158,15 @@ public class CascadingParameterTest
         var nestedComponentDiff = secondBatch.DiffsByComponentId[nestedComponentId].Single();
 
         // The nested component was rendered with the correct parameters
-        Assert.Collection(
-            nestedComponentDiff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
-                Assert.Equal(0, edit.ReferenceFrameIndex); // This is the only change
-                AssertFrame.Text(
-                    secondBatch.ReferenceFrames[0],
-                    "CascadingParameter=Updated value; RegularParameter=Goodbye"
-                );
-            }
-        );
+        Assert.Collection(nestedComponentDiff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
+            Assert.Equal(0, edit.ReferenceFrameIndex); // This is the only change
+            AssertFrame.Text(
+                secondBatch.ReferenceFrames[0],
+                "CascadingParameter=Updated value; RegularParameter=Goodbye"
+            );
+        });
         Assert.Equal(2, nestedComponent.NumRenders);
     }
 
@@ -342,17 +333,14 @@ public class CascadingParameterTest
 
         // Assert: Initial value is supplied to descendant
         var nestedComponentDiff = firstBatch.DiffsByComponentId[nestedComponentId].Single();
-        Assert.Collection(
-            nestedComponentDiff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                AssertFrame.Text(
-                    firstBatch.ReferenceFrames[edit.ReferenceFrameIndex],
-                    "CascadingParameter=Initial value; RegularParameter=Goodbye"
-                );
-            }
-        );
+        Assert.Collection(nestedComponentDiff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
+            AssertFrame.Text(
+                firstBatch.ReferenceFrames[edit.ReferenceFrameIndex],
+                "CascadingParameter=Initial value; RegularParameter=Goodbye"
+            );
+        });
 
         // Act 2: Re-render CascadingValue with new value
         providedValue = "Updated value";
@@ -519,28 +507,22 @@ public class CascadingParameterTest
         var nestedComponentDiff2 = batch.DiffsByComponentId[nestedComponentId2].Single();
 
         // The nested components were rendered with the correct parameters
-        Assert.Collection(
-            nestedComponentDiff1.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                AssertFrame.Text(
-                    batch.ReferenceFrames[edit.ReferenceFrameIndex],
-                    "Value 1 is 'Hello 1'."
-                );
-            }
-        );
-        Assert.Collection(
-            nestedComponentDiff2.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                AssertFrame.Text(
-                    batch.ReferenceFrames[edit.ReferenceFrameIndex],
-                    "Value 2 is 'Hello 2'."
-                );
-            }
-        );
+        Assert.Collection(nestedComponentDiff1.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
+            AssertFrame.Text(
+                batch.ReferenceFrames[edit.ReferenceFrameIndex],
+                "Value 1 is 'Hello 1'."
+            );
+        });
+        Assert.Collection(nestedComponentDiff2.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
+            AssertFrame.Text(
+                batch.ReferenceFrames[edit.ReferenceFrameIndex],
+                "Value 2 is 'Hello 2'."
+            );
+        });
     }
 
     [Fact]
@@ -575,17 +557,14 @@ public class CascadingParameterTest
         var diff = batch.DiffsByComponentId[componentId].Single();
 
         // The component was rendered with the correct parameters
-        Assert.Collection(
-            diff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                AssertFrame.Text(
-                    batch.ReferenceFrames[edit.ReferenceFrameIndex],
-                    "CascadingParameter=Hello; RegularParameter=Goodbye"
-                );
-            }
-        );
+        Assert.Collection(diff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
+            AssertFrame.Text(
+                batch.ReferenceFrames[edit.ReferenceFrameIndex],
+                "CascadingParameter=Hello; RegularParameter=Goodbye"
+            );
+        });
         Assert.Equal(1, component.NumRenders);
 
         // Act/Assert: Even if another component consumes the value, we don't call the factory again
@@ -608,10 +587,9 @@ public class CascadingParameterTest
         // Arrange
         var services = new ServiceCollection();
         services.AddCascadingValue("Ignored", _ => new MyParamType("Should be ignored"));
-        services.AddCascadingValue(
-            "My cascading parameter name",
-            _ => new MyParamType("Should be used")
-        );
+        services.AddCascadingValue("My cascading parameter name", _ => new MyParamType(
+            "Should be used"
+        ));
         services.AddCascadingValue("Also ignored", _ => new MyParamType("Should also be ignored"));
         var renderer = new TestRenderer(services.BuildServiceProvider());
         var component = new ConsumeNamedCascadingValueComponent();
@@ -623,17 +601,14 @@ public class CascadingParameterTest
         var diff = batch.DiffsByComponentId[componentId].Single();
 
         // The component was rendered with the correct parameters
-        Assert.Collection(
-            diff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                AssertFrame.Text(
-                    batch.ReferenceFrames[edit.ReferenceFrameIndex],
-                    "The value is 'Should be used'"
-                );
-            }
-        );
+        Assert.Collection(diff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
+            AssertFrame.Text(
+                batch.ReferenceFrames[edit.ReferenceFrameIndex],
+                "The value is 'Should be used'"
+            );
+        });
     }
 
     [Fact]
@@ -677,17 +652,14 @@ public class CascadingParameterTest
         var nestedComponentDiff = batch.DiffsByComponentId[nestedComponentId].Single();
 
         // The nested component was rendered with the correct parameters
-        Assert.Collection(
-            nestedComponentDiff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                AssertFrame.Text(
-                    batch.ReferenceFrames[edit.ReferenceFrameIndex],
-                    "CascadingParameter=Hello from component hierarchy; RegularParameter=Goodbye"
-                );
-            }
-        );
+        Assert.Collection(nestedComponentDiff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
+            AssertFrame.Text(
+                batch.ReferenceFrames[edit.ReferenceFrameIndex],
+                "CascadingParameter=Hello from component hierarchy; RegularParameter=Goodbye"
+            );
+        });
         Assert.Equal(1, nestedComponent.NumRenders);
     }
 
@@ -735,17 +707,14 @@ public class CascadingParameterTest
         renderer.RenderRootComponent(componentId);
         var firstBatch = renderer.Batches.Single();
         var diff = firstBatch.DiffsByComponentId[componentId].Single();
-        Assert.Collection(
-            diff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                AssertFrame.Text(
-                    firstBatch.ReferenceFrames[edit.ReferenceFrameIndex],
-                    "CascadingParameter=Initial value; RegularParameter=Goodbye"
-                );
-            }
-        );
+        Assert.Collection(diff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
+            AssertFrame.Text(
+                firstBatch.ReferenceFrames[edit.ReferenceFrameIndex],
+                "CascadingParameter=Initial value; RegularParameter=Goodbye"
+            );
+        });
         Assert.Equal(1, component.NumRenders);
 
         // Act/Assert 2: Notify about a mutation
@@ -757,18 +726,15 @@ public class CascadingParameterTest
         var diff2 = secondBatch.DiffsByComponentId[componentId].Single();
 
         // The nested component was rendered with the correct parameters
-        Assert.Collection(
-            diff2.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
-                Assert.Equal(0, edit.ReferenceFrameIndex); // This is the only change
-                AssertFrame.Text(
-                    secondBatch.ReferenceFrames[0],
-                    "CascadingParameter=Mutated value; RegularParameter=Goodbye"
-                );
-            }
-        );
+        Assert.Collection(diff2.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
+            Assert.Equal(0, edit.ReferenceFrameIndex); // This is the only change
+            AssertFrame.Text(
+                secondBatch.ReferenceFrames[0],
+                "CascadingParameter=Mutated value; RegularParameter=Goodbye"
+            );
+        });
         Assert.Equal(2, component.NumRenders);
 
         // Act/Assert 3: Notify about a completely different object
@@ -778,18 +744,15 @@ public class CascadingParameterTest
         var diff3 = thirdBatch.DiffsByComponentId[componentId].Single();
 
         // The nested component was rendered with the correct parameters
-        Assert.Collection(
-            diff3.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
-                Assert.Equal(0, edit.ReferenceFrameIndex); // This is the only change
-                AssertFrame.Text(
-                    thirdBatch.ReferenceFrames[0],
-                    "CascadingParameter=Whole new object; RegularParameter=Goodbye"
-                );
-            }
-        );
+        Assert.Collection(diff3.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
+            Assert.Equal(0, edit.ReferenceFrameIndex); // This is the only change
+            AssertFrame.Text(
+                thirdBatch.ReferenceFrames[0],
+                "CascadingParameter=Whole new object; RegularParameter=Goodbye"
+            );
+        });
         Assert.Equal(3, component.NumRenders);
 
         // Disposing the subscriber does not cause any error
@@ -918,18 +881,15 @@ public class CascadingParameterTest
         Assert.Contains("RegularParameter", nestedComponent.LatestParameterView.Keys);
         Assert.Contains("CascadingParameter", nestedComponent.LatestParameterView.Keys);
 
-        Assert.Collection(
-            nestedComponentDiff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
-                Assert.Equal(0, edit.ReferenceFrameIndex);
-                AssertFrame.Text(
-                    secondBatch.ReferenceFrames[0],
-                    "CascadingParameter=Hello; SingleDeliveryCascadingParameter=Initial single delivery value; RegularParameter=Changed value"
-                );
-            }
-        );
+        Assert.Collection(nestedComponentDiff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
+            Assert.Equal(0, edit.ReferenceFrameIndex);
+            AssertFrame.Text(
+                secondBatch.ReferenceFrames[0],
+                "CascadingParameter=Hello; SingleDeliveryCascadingParameter=Initial single delivery value; RegularParameter=Changed value"
+            );
+        });
     }
 
     [Fact]

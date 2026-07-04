@@ -99,9 +99,8 @@ namespace Microsoft.CodeAnalysis
                 && _nameOfLocalizableResource == otherResourceString._nameOfLocalizableResource
                 && _resourceManager == otherResourceString._resourceManager
                 && _resourceSource == otherResourceString._resourceSource
-                && _formatArguments.SequenceEqual(
-                    otherResourceString._formatArguments,
-                    (a, b) => a == b
+                && _formatArguments.SequenceEqual(otherResourceString._formatArguments, (a, b) =>
+                    a == b
                 );
         }
 

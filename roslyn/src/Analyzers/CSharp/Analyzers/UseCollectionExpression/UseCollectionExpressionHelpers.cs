@@ -161,25 +161,17 @@ internal static class UseCollectionExpressionHelpers
                 {
                     // If they have an accessible `public C(int capacity)` constructor, the lang prefers calling that.
                     var constructors = namedType.Constructors;
-                    var capacityConstructor = GetAccessibleInstanceConstructor(
-                        constructors,
-                        c =>
-                            c.Parameters
-                                is [
-                                    {
-                                        Name: "capacity",
-                                        Type.SpecialType: SpecialType.System_Int32
-                                    },
-                                ]
+                    var capacityConstructor = GetAccessibleInstanceConstructor(constructors, c =>
+                        c.Parameters
+                            is [{ Name: "capacity", Type.SpecialType: SpecialType.System_Int32 }]
                     );
                     if (capacityConstructor != null)
                         return true;
 
                     var noArgConstructor =
                         GetAccessibleInstanceConstructor(constructors, c => c.Parameters.IsEmpty)
-                        ?? GetAccessibleInstanceConstructor(
-                            constructors,
-                            c => c.Parameters.All(p => p.IsOptional || p.IsParams)
+                        ?? GetAccessibleInstanceConstructor(constructors, c =>
+                            c.Parameters.All(p => p.IsOptional || p.IsParams)
                         );
                     if (noArgConstructor != null)
                     {

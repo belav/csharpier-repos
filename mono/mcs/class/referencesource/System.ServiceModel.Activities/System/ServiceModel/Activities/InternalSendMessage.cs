@@ -3738,10 +3738,8 @@ namespace System.ServiceModel.Activities
                     && c1.ContractType == c2.ContractType
                     && c1.Behaviors.Count == c2.Behaviors.Count
                     && //we have no way to verify each one
-                    EqualsUnordered<OperationDescription>(
-                        c1.Operations,
-                        c2.Operations,
-                        (o1, o2) => IsOperationDescriptionEquivalent(o1, o2)
+                    EqualsUnordered<OperationDescription>(c1.Operations, c2.Operations, (o1, o2) =>
+                        IsOperationDescriptionEquivalent(o1, o2)
                     )
                 );
             }
@@ -3807,10 +3805,8 @@ namespace System.ServiceModel.Activities
                     && o1.IsOneWay == o2.IsOneWay
                     && IsTransactionBehaviorEquivalent(o1, o2)
                     && //we are verifying only the TransactionFlowBehavior
-                    EqualsOrdered(
-                        o1.Messages,
-                        o2.Messages,
-                        (m1, m2) => IsMessageDescriptionEquivalent(m1, m2)
+                    EqualsOrdered(o1.Messages, o2.Messages, (m1, m2) =>
+                        IsMessageDescriptionEquivalent(m1, m2)
                     )
                 );
             }

@@ -137,25 +137,21 @@ namespace System.Collections.Concurrent.Tests
                 // - string.GetNonRandomizedHashCodeOrdinalIgnoreCase returns 0x24716ca0.
                 // Provide a different seed to produce a different string.
                 // Must check OrdinalIgnoreCase hash code to ensure correctness.
-                string candidate = string.Create(
-                    8,
-                    currentSeed,
-                    static (span, seed) =>
-                    {
-                        Span<byte> asBytes = MemoryMarshal.AsBytes(span);
+                string candidate = string.Create(8, currentSeed, static (span, seed) =>
+                {
+                    Span<byte> asBytes = MemoryMarshal.AsBytes(span);
 
-                        uint hash1 = (5381 << 16) + 5381;
-                        uint hash2 = BitOperations.RotateLeft(hash1, 5) + hash1;
+                    uint hash1 = (5381 << 16) + 5381;
+                    uint hash2 = BitOperations.RotateLeft(hash1, 5) + hash1;
 
-                        MemoryMarshal.Write(asBytes, in seed);
-                        MemoryMarshal.Write(asBytes.Slice(4), in hash2); // set hash2 := 0 (for Ordinal)
+                    MemoryMarshal.Write(asBytes, in seed);
+                    MemoryMarshal.Write(asBytes.Slice(4), in hash2); // set hash2 := 0 (for Ordinal)
 
-                        hash1 = (BitOperations.RotateLeft(hash1, 5) + hash1) ^ (uint)seed;
-                        hash1 = (BitOperations.RotateLeft(hash1, 5) + hash1);
+                    hash1 = (BitOperations.RotateLeft(hash1, 5) + hash1) ^ (uint)seed;
+                    hash1 = (BitOperations.RotateLeft(hash1, 5) + hash1);
 
-                        MemoryMarshal.Write(asBytes.Slice(8), in hash1); // set hash1 := 0 (for Ordinal)
-                    }
-                );
+                    MemoryMarshal.Write(asBytes.Slice(8), in hash1); // set hash1 := 0 (for Ordinal)
+                });
 
                 int ordinalHashCode = nonRandomizedOrdinal(candidate);
                 Assert.Equal(0, ordinalHashCode); // ensure has a zero hash code Ordinal

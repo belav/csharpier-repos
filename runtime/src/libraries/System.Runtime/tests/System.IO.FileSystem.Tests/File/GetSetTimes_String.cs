@@ -60,14 +60,11 @@ namespace System.IO.Tests
                 .FirstOrDefault();
             if (pageFilePath != null)
             {
-                Assert.All(
-                    TimeFunctions(),
-                    (item) =>
-                    {
-                        var time = item.Getter(pageFilePath);
-                        Assert.NotEqual(DateTime.FromFileTime(0), time);
-                    }
-                );
+                Assert.All(TimeFunctions(), (item) =>
+                {
+                    var time = item.Getter(pageFilePath);
+                    Assert.NotEqual(DateTime.FromFileTime(0), time);
+                });
             }
         }
     }

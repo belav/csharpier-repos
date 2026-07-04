@@ -52,9 +52,8 @@ public class RuntimeViewCompilerTest
         // Assert
         Assert.Same(result1, result2);
         Assert.Null(result1.Item);
-        Assert.Collection(
-            result1.ExpirationTokens,
-            token => Assert.Equal(fileProvider.GetChangeToken(path), token)
+        Assert.Collection(result1.ExpirationTokens, token =>
+            Assert.Equal(fileProvider.GetChangeToken(path), token)
         );
     }
 
@@ -382,9 +381,8 @@ public class RuntimeViewCompilerTest
         Assert.Same(precompiledView.Item, result.Item);
 
         // This view has checksums so it should also have tokens
-        Assert.Collection(
-            result.ExpirationTokens,
-            token => Assert.Same(fileProvider.GetChangeToken(path), token)
+        Assert.Collection(result.ExpirationTokens, token =>
+            Assert.Same(fileProvider.GetChangeToken(path), token)
         );
     }
 

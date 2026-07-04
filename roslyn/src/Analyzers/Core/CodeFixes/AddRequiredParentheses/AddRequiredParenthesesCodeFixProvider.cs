@@ -82,14 +82,12 @@ namespace Microsoft.CodeAnalysis.AddRequiredParentheses
 
                 // Do not add the simplifier annotation.  We do not want the simplifier undoing the
                 // work we just did.
-                editor.ReplaceNode(
-                    node,
-                    (current, _) =>
-                        generator.AddParentheses(
-                            current,
-                            includeElasticTrivia: false,
-                            addSimplifierAnnotation: false
-                        )
+                editor.ReplaceNode(node, (current, _) =>
+                    generator.AddParentheses(
+                        current,
+                        includeElasticTrivia: false,
+                        addSimplifierAnnotation: false
+                    )
                 );
             }
 

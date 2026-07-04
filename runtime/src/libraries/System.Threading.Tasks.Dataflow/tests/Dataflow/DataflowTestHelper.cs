@@ -87,57 +87,47 @@ namespace System.Threading.Tasks.Dataflow.Tests
             Assert.Throws<ArgumentNullException>(() =>
                 source.ConsumeMessage(validMessageHeader, invalidTarget, out consumed)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "messageHeader",
-                () => source.ConsumeMessage(invalidMessageHeader, validTarget, out consumed)
+            AssertExtensions.Throws<ArgumentException>("messageHeader", () =>
+                source.ConsumeMessage(invalidMessageHeader, validTarget, out consumed)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "messageHeader",
-                () => source.ConsumeMessage(invalidMessageHeader, invalidTarget, out consumed)
+            AssertExtensions.Throws<ArgumentException>("messageHeader", () =>
+                source.ConsumeMessage(invalidMessageHeader, invalidTarget, out consumed)
             );
             Assert.Throws<ArgumentNullException>(() =>
                 source.ReserveMessage(validMessageHeader, invalidTarget)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "messageHeader",
-                () => source.ReserveMessage(invalidMessageHeader, validTarget)
+            AssertExtensions.Throws<ArgumentException>("messageHeader", () =>
+                source.ReserveMessage(invalidMessageHeader, validTarget)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "messageHeader",
-                () => source.ReserveMessage(invalidMessageHeader, invalidTarget)
+            AssertExtensions.Throws<ArgumentException>("messageHeader", () =>
+                source.ReserveMessage(invalidMessageHeader, invalidTarget)
             );
             Assert.Throws<ArgumentNullException>(() =>
                 source.ReleaseReservation(validMessageHeader, invalidTarget)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "messageHeader",
-                () => source.ReleaseReservation(invalidMessageHeader, validTarget)
+            AssertExtensions.Throws<ArgumentException>("messageHeader", () =>
+                source.ReleaseReservation(invalidMessageHeader, validTarget)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "messageHeader",
-                () => source.ReleaseReservation(invalidMessageHeader, invalidTarget)
+            AssertExtensions.Throws<ArgumentException>("messageHeader", () =>
+                source.ReleaseReservation(invalidMessageHeader, invalidTarget)
             );
         }
 
         internal static void TestOfferMessage_ArgumentValidation<T>(ITargetBlock<T> target)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "messageHeader",
-                () =>
-                    target.OfferMessage(
-                        default(DataflowMessageHeader),
-                        default(T),
-                        new BufferBlock<T>(),
-                        false
-                    )
+            AssertExtensions.Throws<ArgumentException>("messageHeader", () =>
+                target.OfferMessage(
+                    default(DataflowMessageHeader),
+                    default(T),
+                    new BufferBlock<T>(),
+                    false
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "messageHeader",
-                () => target.OfferMessage(default(DataflowMessageHeader), default(T), null, false)
+            AssertExtensions.Throws<ArgumentException>("messageHeader", () =>
+                target.OfferMessage(default(DataflowMessageHeader), default(T), null, false)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "consumeToAccept",
-                () => target.OfferMessage(new DataflowMessageHeader(1), default(T), null, true)
+            AssertExtensions.Throws<ArgumentException>("consumeToAccept", () =>
+                target.OfferMessage(new DataflowMessageHeader(1), default(T), null, true)
             );
         }
 

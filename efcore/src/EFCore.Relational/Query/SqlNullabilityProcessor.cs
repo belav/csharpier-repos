@@ -1010,17 +1010,15 @@ public class SqlNullabilityProcessor
         // for each one.
         // non_nullable IN (1, 2, nullable) -> non_nullable IN (1, 2) OR (non_nullable = nullable AND nullable IS NOT NULL) (full)
         // non_nullable IN (1, 2, NULL, nullable) -> non_nullable IN (1, 2) OR (non_nullable = nullable AND nullable IS NOT NULL) (full)
-        return nullableValues.Aggregate(
-            result,
-            (expr, nullableValue) =>
-                _sqlExpressionFactory.OrElse(
-                    expr,
-                    VisitSqlBinary(
-                        _sqlExpressionFactory.Equal(item, nullableValue),
-                        allowOptimizedExpansion,
-                        out _
-                    )
+        return nullableValues.Aggregate(result, (expr, nullableValue) =>
+            _sqlExpressionFactory.OrElse(
+                expr,
+                VisitSqlBinary(
+                    _sqlExpressionFactory.Equal(item, nullableValue),
+                    allowOptimizedExpansion,
+                    out _
                 )
+            )
         );
 
         InExpression ProcessInExpressionValues(

@@ -21,20 +21,14 @@ namespace System.Net.Http.Tests
             Assert.Equal("x11", via.ProtocolVersion);
             Assert.Equal("[::1]:1818", via.ReceivedBy);
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "protocolVersion",
-                () =>
-                {
-                    new ViaHeaderValue(null, "host");
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "protocolVersion",
-                () =>
-                {
-                    new ViaHeaderValue("", "host");
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("protocolVersion", () =>
+            {
+                new ViaHeaderValue(null, "host");
+            });
+            AssertExtensions.Throws<ArgumentException>("protocolVersion", () =>
+            {
+                new ViaHeaderValue("", "host");
+            });
             Assert.Throws<FormatException>(() =>
             {
                 new ViaHeaderValue("x y", "h");
@@ -47,20 +41,14 @@ namespace System.Net.Http.Tests
             {
                 new ViaHeaderValue(" x", "h");
             });
-            AssertExtensions.Throws<ArgumentNullException>(
-                "receivedBy",
-                () =>
-                {
-                    new ViaHeaderValue("1.1", null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "receivedBy",
-                () =>
-                {
-                    new ViaHeaderValue("1.1", "");
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("receivedBy", () =>
+            {
+                new ViaHeaderValue("1.1", null);
+            });
+            AssertExtensions.Throws<ArgumentException>("receivedBy", () =>
+            {
+                new ViaHeaderValue("1.1", "");
+            });
             Assert.Throws<FormatException>(() =>
             {
                 new ViaHeaderValue("v", "x y");

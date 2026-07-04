@@ -16,30 +16,25 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor_NullAsCatalogArgument_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                "catalog",
-                () =>
-                {
-                    new CatalogExportProvider((ComposablePartCatalog)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("catalog", () =>
+            {
+                new CatalogExportProvider((ComposablePartCatalog)null);
+            });
         }
 
         [Fact]
         public void CompositionOptionsInvalidValueCatalogExportProvider()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "compositionOptions",
-                () => new CatalogExportProvider(new TypeCatalog(), (CompositionOptions)0x0400)
+            Assert.Throws<ArgumentOutOfRangeException>("compositionOptions", () =>
+                new CatalogExportProvider(new TypeCatalog(), (CompositionOptions)0x0400)
             );
         }
 
         [Fact]
         public void CompositionOptionsInvalidValueComposablePartExportProvider()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "compositionOptions",
-                () => new ComposablePartExportProvider((CompositionOptions)0x0400)
+            Assert.Throws<ArgumentOutOfRangeException>("compositionOptions", () =>
+                new ComposablePartExportProvider((CompositionOptions)0x0400)
             );
         }
 
@@ -62,13 +57,10 @@ namespace System.ComponentModel.Composition
             var provider = CreateCatalogExportProvider();
             provider.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                provider,
-                () =>
-                {
-                    var catalog = provider.Catalog;
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(provider, () =>
+            {
+                var catalog = provider.Catalog;
+            });
         }
 
         [Fact]
@@ -76,13 +68,10 @@ namespace System.ComponentModel.Composition
         {
             var provider = CreateCatalogExportProvider();
 
-            Assert.Throws<ArgumentNullException>(
-                "value",
-                () =>
-                {
-                    provider.SourceProvider = null;
-                }
-            );
+            Assert.Throws<ArgumentNullException>("value", () =>
+            {
+                provider.SourceProvider = null;
+            });
         }
 
         [Fact]

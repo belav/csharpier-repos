@@ -28,9 +28,8 @@ namespace System.CodeDom.Tests
         [InlineData("")]
         public void Ctor_StringNullOrEmpty_ThrowsArgumentNullException(string value)
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeGotoStatement(value)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeGotoStatement(value)
             );
         }
 
@@ -50,9 +49,8 @@ namespace System.CodeDom.Tests
         public void Label_SetNullOrEmpty_ThrowsArgumentNullException(string value)
         {
             var gotoStatement = new CodeGotoStatement();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => gotoStatement.Label = value
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                gotoStatement.Label = value
             );
         }
     }

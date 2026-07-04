@@ -260,10 +260,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             && FullyQualifiedContainerName == other.FullyQualifiedContainerName
             && Span.Equals(other.Span)
             && _flags == other._flags
-            && InheritanceNames.SequenceEqual(
-                other.InheritanceNames,
-                arg: true,
-                (s1, s2, _) => s1 == s2
+            && InheritanceNames.SequenceEqual(other.InheritanceNames, arg: true, (s1, s2, _) =>
+                s1 == s2
             );
 
         public override int GetHashCode() =>

@@ -615,26 +615,21 @@ public abstract class DataBindingTestBase<TFixture> : IClassFixture<TFixture>
         Assert.Equal(20, testDriversLocal.Count);
         Assert.Equal(12, teamsLocal.Count);
 
-        Assert.All(
-            context.ChangeTracker.Entries<Driver>().Select(e => e.Entity),
-            e => Assert.True(driversLocal.Contains(e))
+        Assert.All(context.ChangeTracker.Entries<Driver>().Select(e => e.Entity), e =>
+            Assert.True(driversLocal.Contains(e))
         );
-        Assert.All(
-            context.ChangeTracker.Entries<TestDriver>().Select(e => e.Entity),
-            e => Assert.True(driversLocal.Contains(e))
+        Assert.All(context.ChangeTracker.Entries<TestDriver>().Select(e => e.Entity), e =>
+            Assert.True(driversLocal.Contains(e))
         );
-        Assert.All(
-            context.ChangeTracker.Entries<TestDriver>().Select(e => e.Entity),
-            e => Assert.True(testDriversLocal.Contains(e))
+        Assert.All(context.ChangeTracker.Entries<TestDriver>().Select(e => e.Entity), e =>
+            Assert.True(testDriversLocal.Contains(e))
         );
-        Assert.All(
-            context.ChangeTracker.Entries<Team>().Select(e => e.Entity),
-            e => Assert.True(teamsLocal.Contains(e))
+        Assert.All(context.ChangeTracker.Entries<Team>().Select(e => e.Entity), e =>
+            Assert.True(teamsLocal.Contains(e))
         );
 
-        Assert.All(
-            context.ChangeTracker.Entries<Driver>().Select(e => e.Entity),
-            e => Assert.DoesNotContain((object)e, teamsLocal)
+        Assert.All(context.ChangeTracker.Entries<Driver>().Select(e => e.Entity), e =>
+            Assert.DoesNotContain((object)e, teamsLocal)
         );
     }
 

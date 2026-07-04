@@ -127,24 +127,21 @@ namespace System.Threading.Tasks.Tests
                 ManualResetEvent mre = new ManualResetEvent(false);
                 ConcurrentQueue<int> savedDS = new ConcurrentQueue<int>();
 
-                Parallel.ForEach(
-                    partitioner,
-                    (index) =>
+                Parallel.ForEach(partitioner, (index) =>
+                {
+                    if (index == dependencyIndex + 1)
                     {
-                        if (index == dependencyIndex + 1)
-                        {
-                            mre.Set();
-                        }
-                        if (index == dependencyIndex)
-                        {
-                            //if the chunk size will not be one,
-                            //this iteration and the next one will not be processed by the same thread
-                            //waiting here will lead to a deadlock
-                            mre.WaitOne();
-                        }
-                        savedDS.Enqueue(index);
+                        mre.Set();
                     }
-                );
+                    if (index == dependencyIndex)
+                    {
+                        //if the chunk size will not be one,
+                        //this iteration and the next one will not be processed by the same thread
+                        //waiting here will lead to a deadlock
+                        mre.WaitOne();
+                    }
+                    savedDS.Enqueue(index);
+                });
                 //if the PForEach ends this means pass
                 //verify the collection
                 Assert.True(CompareCollections(savedDS, ds));
@@ -171,13 +168,10 @@ namespace System.Threading.Tasks.Tests
                 customEnumerable,
                 EnumerablePartitionerOptions.NoBuffering
             );
-            Parallel.ForEach(
-                partitioner,
-                (index) =>
-                {
-                    savedDS.Enqueue(index);
-                }
-            );
+            Parallel.ForEach(partitioner, (index) =>
+            {
+                savedDS.Enqueue(index);
+            });
             Assert.True(customEnumerable.AreEnumeratorsDisposed());
             Assert.True(CompareCollections(savedDS, ds));
         }

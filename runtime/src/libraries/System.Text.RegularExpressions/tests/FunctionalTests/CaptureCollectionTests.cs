@@ -64,9 +64,8 @@ namespace System.Text.RegularExpressions.Tests
             CaptureCollection captures = regex.Match("aaabbccccccccccaaaabc").Captures;
 
             AssertExtensions.Throws<ArgumentOutOfRangeException>("i", () => captures[-1]);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "i",
-                () => captures[captures.Count]
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("i", () =>
+                captures[captures.Count]
             );
         }
 
@@ -111,15 +110,13 @@ namespace System.Text.RegularExpressions.Tests
             ICollection collection = regex.Match("aaabbccccccccccaaaabc").Captures;
 
             // Array is null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "array",
-                () => collection.CopyTo(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("array", () =>
+                collection.CopyTo(null, 0)
             );
 
             // Array is multidimensional
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => collection.CopyTo(new object[10, 10], 0)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                collection.CopyTo(new object[10, 10], 0)
             );
 
             if (PlatformDetection.IsNonZeroLowerBoundArraySupported)

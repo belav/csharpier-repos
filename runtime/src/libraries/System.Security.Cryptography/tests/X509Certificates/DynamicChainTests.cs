@@ -583,18 +583,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             // permitted DNS name constraint for .example.com
             string nameConstraints = "3012A010300E820C2E6578616D706C652E636F6D";
 
-            TestNameConstrainedChain(
-                nameConstraints,
-                builder,
-                (bool result, X509Chain chain) =>
-                {
-                    Assert.False(result, "chain.Build");
-                    Assert.Equal(
-                        PlatformNameConstraints(X509ChainStatusFlags.HasNotPermittedNameConstraint),
-                        chain.AllStatusFlags()
-                    );
-                }
-            );
+            TestNameConstrainedChain(nameConstraints, builder, (bool result, X509Chain chain) =>
+            {
+                Assert.False(result, "chain.Build");
+                Assert.Equal(
+                    PlatformNameConstraints(X509ChainStatusFlags.HasNotPermittedNameConstraint),
+                    chain.AllStatusFlags()
+                );
+            });
         }
 
         [Fact]
@@ -614,18 +610,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 nameConstraints = "3011A10F300D820B6578616D706C652E636F6D";
             }
 
-            TestNameConstrainedChain(
-                nameConstraints,
-                builder,
-                (bool result, X509Chain chain) =>
-                {
-                    Assert.False(result, "chain.Build");
-                    Assert.Equal(
-                        PlatformNameConstraints(X509ChainStatusFlags.HasExcludedNameConstraint),
-                        chain.AllStatusFlags()
-                    );
-                }
-            );
+            TestNameConstrainedChain(nameConstraints, builder, (bool result, X509Chain chain) =>
+            {
+                Assert.False(result, "chain.Build");
+                Assert.Equal(
+                    PlatformNameConstraints(X509ChainStatusFlags.HasExcludedNameConstraint),
+                    chain.AllStatusFlags()
+                );
+            });
         }
 
         [Fact]
@@ -641,18 +633,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             // permitted DNS name constraint for example.com with a MIN of 9.
             string nameConstraints = "3015A0133011820C2E6578616D706C652E636F6D800109";
 
-            TestNameConstrainedChain(
-                nameConstraints,
-                builder,
-                (bool result, X509Chain chain) =>
-                {
-                    Assert.False(result, "chain.Build");
-                    Assert.Equal(
-                        PlatformNameConstraints(X509ChainStatusFlags.HasNotSupportedNameConstraint),
-                        chain.AllStatusFlags()
-                    );
-                }
-            );
+            TestNameConstrainedChain(nameConstraints, builder, (bool result, X509Chain chain) =>
+            {
+                Assert.False(result, "chain.Build");
+                Assert.Equal(
+                    PlatformNameConstraints(X509ChainStatusFlags.HasNotSupportedNameConstraint),
+                    chain.AllStatusFlags()
+                );
+            });
         }
 
         [Fact]
@@ -669,18 +657,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             // permitted RFC822 name constraint with GeneralName of ///.
             string nameConstraints = "3009A007300581032F2F2F";
 
-            TestNameConstrainedChain(
-                nameConstraints,
-                builder,
-                (bool result, X509Chain chain) =>
-                {
-                    Assert.False(result, "chain.Build");
-                    Assert.Equal(
-                        PlatformNameConstraints(X509ChainStatusFlags.InvalidNameConstraints),
-                        chain.AllStatusFlags()
-                    );
-                }
-            );
+            TestNameConstrainedChain(nameConstraints, builder, (bool result, X509Chain chain) =>
+            {
+                Assert.False(result, "chain.Build");
+                Assert.Equal(
+                    PlatformNameConstraints(X509ChainStatusFlags.InvalidNameConstraints),
+                    chain.AllStatusFlags()
+                );
+            });
         }
 
         [Fact]

@@ -68,9 +68,8 @@ namespace System.Reflection.Emit.Tests
                 typeof(int),
                 null
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "mdBuilder",
-                () => property.SetGetMethod(null)
+            AssertExtensions.Throws<ArgumentNullException>("mdBuilder", () =>
+                property.SetGetMethod(null)
             );
         }
 

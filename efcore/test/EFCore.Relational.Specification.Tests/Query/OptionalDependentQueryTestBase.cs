@@ -24,9 +24,8 @@ public abstract class OptionalDependentQueryTestBase<TFixture> : QueryTestBase<T
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Filter_optional_dependent_with_all_optional_compared_to_null(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<OptionalDependentEntityAllOptional>().Where(x => x.Json == null)
+        AssertQuery(async, ss =>
+            ss.Set<OptionalDependentEntityAllOptional>().Where(x => x.Json == null)
         );
 
     [ConditionalTheory]
@@ -34,17 +33,15 @@ public abstract class OptionalDependentQueryTestBase<TFixture> : QueryTestBase<T
     public virtual Task Filter_optional_dependent_with_all_optional_compared_to_not_null(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<OptionalDependentEntityAllOptional>().Where(x => x.Json != null)
+        AssertQuery(async, ss =>
+            ss.Set<OptionalDependentEntityAllOptional>().Where(x => x.Json != null)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Filter_optional_dependent_with_some_required_compared_to_null(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<OptionalDependentEntitySomeRequired>().Where(x => x.Json == null)
+        AssertQuery(async, ss =>
+            ss.Set<OptionalDependentEntitySomeRequired>().Where(x => x.Json == null)
         );
 
     [ConditionalTheory]
@@ -52,9 +49,8 @@ public abstract class OptionalDependentQueryTestBase<TFixture> : QueryTestBase<T
     public virtual Task Filter_optional_dependent_with_some_required_compared_to_not_null(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<OptionalDependentEntitySomeRequired>().Where(x => x.Json != null)
+        AssertQuery(async, ss =>
+            ss.Set<OptionalDependentEntitySomeRequired>().Where(x => x.Json != null)
         );
 
     [ConditionalTheory]
@@ -62,9 +58,8 @@ public abstract class OptionalDependentQueryTestBase<TFixture> : QueryTestBase<T
     public virtual Task Filter_nested_optional_dependent_with_all_optional_compared_to_null(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<OptionalDependentEntityAllOptional>().Where(x => x.Json.OpNav1 == null)
+        AssertQuery(async, ss =>
+            ss.Set<OptionalDependentEntityAllOptional>().Where(x => x.Json.OpNav1 == null)
         );
 
     [ConditionalTheory]
@@ -72,9 +67,8 @@ public abstract class OptionalDependentQueryTestBase<TFixture> : QueryTestBase<T
     public virtual Task Filter_nested_optional_dependent_with_all_optional_compared_to_not_null(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<OptionalDependentEntityAllOptional>().Where(x => x.Json.OpNav2 != null)
+        AssertQuery(async, ss =>
+            ss.Set<OptionalDependentEntityAllOptional>().Where(x => x.Json.OpNav2 != null)
         );
 
     [ConditionalTheory]
@@ -82,9 +76,8 @@ public abstract class OptionalDependentQueryTestBase<TFixture> : QueryTestBase<T
     public virtual Task Filter_nested_optional_dependent_with_some_required_compared_to_null(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<OptionalDependentEntitySomeRequired>().Where(x => x.Json.ReqNav1 == null)
+        AssertQuery(async, ss =>
+            ss.Set<OptionalDependentEntitySomeRequired>().Where(x => x.Json.ReqNav1 == null)
         );
 
     [ConditionalTheory]
@@ -92,8 +85,7 @@ public abstract class OptionalDependentQueryTestBase<TFixture> : QueryTestBase<T
     public virtual Task Filter_nested_optional_dependent_with_some_required_compared_to_not_null(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<OptionalDependentEntitySomeRequired>().Where(x => x.Json.ReqNav2 != null)
+        AssertQuery(async, ss =>
+            ss.Set<OptionalDependentEntitySomeRequired>().Where(x => x.Json.ReqNav2 != null)
         );
 }

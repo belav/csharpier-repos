@@ -50,14 +50,11 @@
 
         public static void Sync(this SynchronizationContext syncContext, Action action)
         {
-            Sync<AsyncVoid>(
-                syncContext,
-                () =>
-                {
-                    action();
-                    return default(AsyncVoid);
-                }
-            );
+            Sync<AsyncVoid>(syncContext, () =>
+            {
+                action();
+                return default(AsyncVoid);
+            });
         }
     }
 }

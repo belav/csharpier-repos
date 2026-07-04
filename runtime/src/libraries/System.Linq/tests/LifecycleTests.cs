@@ -21,33 +21,30 @@ namespace System.Linq.Tests
                 from sink in Sinks()
                 select (source, unary1, unary2, sink);
 
-            Assert.All(
-                inputs,
-                input =>
+            Assert.All(inputs, input =>
+            {
+                var (source, unary1, unary2, sink) = input;
+                var e = new LifecycleTrackingEnumerable<int>(source.Work);
+
+                // source -> unary1 -> unary2 -> sink
+                bool argError = false;
+                try
                 {
-                    var (source, unary1, unary2, sink) = input;
-                    var e = new LifecycleTrackingEnumerable<int>(source.Work);
-
-                    // source -> unary1 -> unary2 -> sink
-                    bool argError = false;
-                    try
-                    {
-                        sink.Work(unary2.Work(unary1.Work(e)));
-                    }
-                    catch (Exception exc)
-                        when (exc is ArgumentException || exc is InvalidOperationException)
-                    {
-                        argError = true;
-                    }
-
-                    // We expect the source's enumerator should have been constructed 0 or 1 times,
-                    // once if there's no short-circuiting involved.  Then the enumerator's Dispose
-                    // should have been invoked the same number of times.
-                    bool shortCircuits = argError || ShortCircuits(source, unary1, unary2, sink);
-                    Assert.InRange(e.EnumeratorCtorCalls, shortCircuits ? 0 : 1, 1);
-                    Assert.Equal(e.EnumeratorCtorCalls, e.EnumeratorDisposeCalls);
+                    sink.Work(unary2.Work(unary1.Work(e)));
                 }
-            );
+                catch (Exception exc)
+                    when (exc is ArgumentException || exc is InvalidOperationException)
+                {
+                    argError = true;
+                }
+
+                // We expect the source's enumerator should have been constructed 0 or 1 times,
+                // once if there's no short-circuiting involved.  Then the enumerator's Dispose
+                // should have been invoked the same number of times.
+                bool shortCircuits = argError || ShortCircuits(source, unary1, unary2, sink);
+                Assert.InRange(e.EnumeratorCtorCalls, shortCircuits ? 0 : 1, 1);
+                Assert.Equal(e.EnumeratorCtorCalls, e.EnumeratorDisposeCalls);
+            });
         }
 
         [Fact]
@@ -61,43 +58,37 @@ namespace System.Linq.Tests
                 from sink in Sinks()
                 select (source, unary, binary, sink);
 
-            Assert.All(
-                inputs,
-                input =>
+            Assert.All(inputs, input =>
+            {
+                var (source, unary, binary, sink) = input;
+                var es = new[]
                 {
-                    var (source, unary, binary, sink) = input;
-                    var es = new[]
-                    {
-                        new LifecycleTrackingEnumerable<int>(source.Work),
-                        new LifecycleTrackingEnumerable<int>(source.Work),
-                    };
+                    new LifecycleTrackingEnumerable<int>(source.Work),
+                    new LifecycleTrackingEnumerable<int>(source.Work),
+                };
 
-                    // ((source -> unary), (source -> unary)) -> binary -> sink
-                    bool argError = false;
-                    try
-                    {
-                        sink.Work(binary.Work(unary.Work(es[0]), unary.Work(es[1])));
-                    }
-                    catch (Exception exc)
-                        when (exc is ArgumentException || exc is InvalidOperationException)
-                    {
-                        argError = true;
-                    }
-
-                    // We expect the source's enumerator should have been constructed 0 or 1 times,
-                    // once if there's no short-circuiting involved.  Then the enumerator's Dispose
-                    // should have been invoked the same number of times.
-                    bool shortCircuits = argError || ShortCircuits(source, binary, unary, sink);
-                    Assert.All(
-                        es,
-                        e =>
-                        {
-                            Assert.InRange(e.EnumeratorCtorCalls, shortCircuits ? 0 : 1, 1);
-                            Assert.Equal(e.EnumeratorCtorCalls, e.EnumeratorDisposeCalls);
-                        }
-                    );
+                // ((source -> unary), (source -> unary)) -> binary -> sink
+                bool argError = false;
+                try
+                {
+                    sink.Work(binary.Work(unary.Work(es[0]), unary.Work(es[1])));
                 }
-            );
+                catch (Exception exc)
+                    when (exc is ArgumentException || exc is InvalidOperationException)
+                {
+                    argError = true;
+                }
+
+                // We expect the source's enumerator should have been constructed 0 or 1 times,
+                // once if there's no short-circuiting involved.  Then the enumerator's Dispose
+                // should have been invoked the same number of times.
+                bool shortCircuits = argError || ShortCircuits(source, binary, unary, sink);
+                Assert.All(es, e =>
+                {
+                    Assert.InRange(e.EnumeratorCtorCalls, shortCircuits ? 0 : 1, 1);
+                    Assert.Equal(e.EnumeratorCtorCalls, e.EnumeratorDisposeCalls);
+                });
+            });
         }
 
         private static bool ShortCircuits(params Operation[] ops) => ops.Any(o => o.ShortCircuits);
@@ -117,42 +108,35 @@ namespace System.Linq.Tests
 
         private static IEnumerable<Unary> UnaryOperations()
         {
-            yield return new Unary(
-                nameof(Enumerable.Append),
-                e => e.Append(Interlocked.Increment(ref s_nextValue))
+            yield return new Unary(nameof(Enumerable.Append), e =>
+                e.Append(Interlocked.Increment(ref s_nextValue))
             );
             yield return new Unary(nameof(Enumerable.AsEnumerable), e => e.AsEnumerable());
             yield return new Unary(nameof(Enumerable.Cast), e => e.Cast<int>());
             yield return new Unary(nameof(Enumerable.Distinct), e => e.Distinct());
             yield return new Unary(nameof(Enumerable.DefaultIfEmpty), e => e.DefaultIfEmpty());
-            yield return new Unary(
-                nameof(Enumerable.GroupBy),
-                e => e.GroupBy(i => i).Select(g => g.Key)
+            yield return new Unary(nameof(Enumerable.GroupBy), e =>
+                e.GroupBy(i => i).Select(g => g.Key)
             );
-            yield return new Unary(
-                nameof(Enumerable.GroupBy),
-                e => e.GroupBy(i => i, i => i).Select(g => g.Key)
+            yield return new Unary(nameof(Enumerable.GroupBy), e =>
+                e.GroupBy(i => i, i => i).Select(g => g.Key)
             );
             yield return new Unary(nameof(Enumerable.OfType), e => e.OfType<int>());
             yield return new Unary(nameof(Enumerable.OrderBy), e => e.OrderBy(i => i));
-            yield return new Unary(
-                nameof(Enumerable.OrderByDescending),
-                e => e.OrderByDescending(i => i)
+            yield return new Unary(nameof(Enumerable.OrderByDescending), e =>
+                e.OrderByDescending(i => i)
             );
-            yield return new Unary(
-                nameof(Enumerable.Prepend),
-                e => e.Prepend(Interlocked.Increment(ref s_nextValue))
+            yield return new Unary(nameof(Enumerable.Prepend), e =>
+                e.Prepend(Interlocked.Increment(ref s_nextValue))
             );
             yield return new Unary(nameof(Enumerable.Reverse), e => e.Reverse());
             yield return new Unary(nameof(Enumerable.Select), e => e.Select(i => i));
             yield return new Unary(nameof(Enumerable.Select), e => e.Select((i, index) => i));
-            yield return new Unary(
-                nameof(Enumerable.SelectMany),
-                e => e.SelectMany(i => new[] { i })
+            yield return new Unary(nameof(Enumerable.SelectMany), e =>
+                e.SelectMany(i => new[] { i })
             );
-            yield return new Unary(
-                nameof(Enumerable.SelectMany),
-                e => e.SelectMany((i, index) => new[] { i })
+            yield return new Unary(nameof(Enumerable.SelectMany), e =>
+                e.SelectMany((i, index) => new[] { i })
             );
             yield return new Unary(nameof(Enumerable.Skip), e => e.Skip(1));
             yield return new Unary(nameof(Enumerable.SkipWhile), e => e.SkipWhile(i => true));
@@ -166,13 +150,11 @@ namespace System.Linq.Tests
                 e => e.TakeWhile(i => false),
                 shortCircuits: true
             );
-            yield return new Unary(
-                nameof(Enumerable.ThenBy),
-                e => e.OrderBy(i => i).ThenBy(i => i)
+            yield return new Unary(nameof(Enumerable.ThenBy), e =>
+                e.OrderBy(i => i).ThenBy(i => i)
             );
-            yield return new Unary(
-                nameof(Enumerable.ThenByDescending),
-                e => e.OrderByDescending(i => i).ThenByDescending(i => i)
+            yield return new Unary(nameof(Enumerable.ThenByDescending), e =>
+                e.OrderByDescending(i => i).ThenByDescending(i => i)
             );
             yield return new Unary(nameof(Enumerable.Where), e => e.Where(i => true));
             yield return new Unary(nameof(Enumerable.Where), e => e.Where((i, index) => false));
@@ -210,13 +192,11 @@ namespace System.Linq.Tests
         private static IEnumerable<Sink> Sinks()
         {
             yield return new Sink(nameof(Enumerable.All), e => e.All(i => true));
-            yield return new Sink(
-                nameof(Enumerable.Aggregate),
-                e => e.Aggregate(0, (i, j) => i + j)
+            yield return new Sink(nameof(Enumerable.Aggregate), e =>
+                e.Aggregate(0, (i, j) => i + j)
             );
-            yield return new Sink(
-                nameof(Enumerable.Aggregate),
-                e => e.Aggregate(0, (i, j) => i + j, i => i)
+            yield return new Sink(nameof(Enumerable.Aggregate), e =>
+                e.Aggregate(0, (i, j) => i + j, i => i)
             );
             yield return new Sink(nameof(Enumerable.Aggregate), e => e.Aggregate((i, j) => i + j));
             yield return new Sink(nameof(Enumerable.Average), e => e.Average());
@@ -248,16 +228,14 @@ namespace System.Linq.Tests
                 e => e.FirstOrDefault(),
                 shortCircuits: true
             );
-            yield return new Sink(
-                nameof(Enumerable.FirstOrDefault),
-                e => e.FirstOrDefault(i => false)
+            yield return new Sink(nameof(Enumerable.FirstOrDefault), e =>
+                e.FirstOrDefault(i => false)
             );
             yield return new Sink(nameof(Enumerable.Last), e => e.Last());
             yield return new Sink(nameof(Enumerable.Last), e => e.Last(i => true));
             yield return new Sink(nameof(Enumerable.LastOrDefault), e => e.LastOrDefault());
-            yield return new Sink(
-                nameof(Enumerable.LastOrDefault),
-                e => e.LastOrDefault(i => true)
+            yield return new Sink(nameof(Enumerable.LastOrDefault), e =>
+                e.LastOrDefault(i => true)
             );
             yield return new Sink(nameof(Enumerable.LongCount), e => e.LongCount());
             yield return new Sink(nameof(Enumerable.LongCount), e => e.LongCount(i => true));
@@ -273,33 +251,27 @@ namespace System.Linq.Tests
             yield return new Sink(nameof(Enumerable.Single), e => e.Single(), shortCircuits: true);
             yield return new Sink(nameof(Enumerable.Single), e => e.Single(i => false));
             yield return new Sink(nameof(Enumerable.SingleOrDefault), e => e.SingleOrDefault());
-            yield return new Sink(
-                nameof(Enumerable.SingleOrDefault),
-                e => e.SingleOrDefault(i => true)
+            yield return new Sink(nameof(Enumerable.SingleOrDefault), e =>
+                e.SingleOrDefault(i => true)
             );
-            yield return new Sink(
-                nameof(Enumerable.SingleOrDefault),
-                e => e.SingleOrDefault(i => false)
+            yield return new Sink(nameof(Enumerable.SingleOrDefault), e =>
+                e.SingleOrDefault(i => false)
             );
             yield return new Sink(nameof(Enumerable.Sum), e => e.Sum());
             yield return new Sink(nameof(Enumerable.Sum), e => e.Sum(i => i));
             yield return new Sink(nameof(Enumerable.ToArray), e => e.ToArray());
             yield return new Sink(nameof(Enumerable.ToDictionary), e => e.ToDictionary(i => i));
-            yield return new Sink(
-                nameof(Enumerable.ToDictionary),
-                e => e.ToDictionary(i => i, i => i)
+            yield return new Sink(nameof(Enumerable.ToDictionary), e =>
+                e.ToDictionary(i => i, i => i)
             );
             yield return new Sink(nameof(Enumerable.ToHashSet), e => e.ToHashSet());
             yield return new Sink(nameof(Enumerable.ToList), e => e.ToList());
             yield return new Sink(nameof(Enumerable.ToLookup), e => e.ToLookup(i => i));
             yield return new Sink(nameof(Enumerable.ToLookup), e => e.ToLookup(i => i, i => i));
-            yield return new Sink(
-                "foreach",
-                e =>
-                {
-                    foreach (int item in e) { }
-                }
-            );
+            yield return new Sink("foreach", e =>
+            {
+                foreach (int item in e) { }
+            });
             yield return new Sink("nop", e => { }, shortCircuits: true);
         }
 

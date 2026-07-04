@@ -456,9 +456,8 @@ public partial class ParameterViewTest
         var cloned = initial.Clone();
 
         // Assert
-        Assert.Collection(
-            ToEnumerable(cloned),
-            p => AssertParameter("attribute 1", attribute1Value, expectedIsCascading: false)
+        Assert.Collection(ToEnumerable(cloned), p =>
+            AssertParameter("attribute 1", attribute1Value, expectedIsCascading: false)
         );
     }
 

@@ -597,10 +597,8 @@ namespace System.Buffers
 
                 if (Length < int.MaxValue)
                 {
-                    return string.Create(
-                        (int)Length,
-                        charSequence,
-                        (span, sequence) => sequence.CopyTo(span)
+                    return string.Create((int)Length, charSequence, (span, sequence) =>
+                        sequence.CopyTo(span)
                     );
                 }
             }

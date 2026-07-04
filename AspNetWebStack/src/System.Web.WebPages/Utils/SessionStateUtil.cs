@@ -67,54 +67,51 @@ namespace System.Web.WebPages
             ConcurrentDictionary<Type, SessionStateBehavior?> cache
         )
         {
-            return cache.GetOrAdd(
-                page.GetType(),
-                type =>
-                {
-                    SessionStateBehavior sessionStateBehavior = SessionStateBehavior.Default;
-                    var attributes = (RazorDirectiveAttribute[])
-                        type.GetCustomAttributes(typeof(RazorDirectiveAttribute), inherit: false);
-                    var directiveAttributes = attributes
-                        .Where(attr =>
-                            StringComparer.OrdinalIgnoreCase.Equals("sessionstate", attr.Name)
-                        )
-                        .ToList();
-
-                    if (!directiveAttributes.Any())
-                    {
-                        return null;
-                    }
-                    if (directiveAttributes.Count > 1)
-                    {
-                        throw new InvalidOperationException(
-                            WebPageResources.SessionState_TooManyValues
-                        );
-                    }
-                    var directiveAttribute = directiveAttributes[0];
-                    if (
-                        !Enum.TryParse<SessionStateBehavior>(
-                            directiveAttribute.Value,
-                            ignoreCase: true,
-                            result: out sessionStateBehavior
-                        )
+            return cache.GetOrAdd(page.GetType(), type =>
+            {
+                SessionStateBehavior sessionStateBehavior = SessionStateBehavior.Default;
+                var attributes = (RazorDirectiveAttribute[])
+                    type.GetCustomAttributes(typeof(RazorDirectiveAttribute), inherit: false);
+                var directiveAttributes = attributes
+                    .Where(attr =>
+                        StringComparer.OrdinalIgnoreCase.Equals("sessionstate", attr.Name)
                     )
-                    {
-                        var values = Enum.GetValues(typeof(SessionStateBehavior))
-                            .Cast<SessionStateBehavior>()
-                            .Select(s => s.ToString());
-                        throw new ArgumentException(
-                            String.Format(
-                                CultureInfo.CurrentCulture,
-                                WebPageResources.SessionState_InvalidValue,
-                                directiveAttribute.Value,
-                                page.VirtualPath,
-                                String.Join(", ", values)
-                            )
-                        );
-                    }
-                    return sessionStateBehavior;
+                    .ToList();
+
+                if (!directiveAttributes.Any())
+                {
+                    return null;
                 }
-            );
+                if (directiveAttributes.Count > 1)
+                {
+                    throw new InvalidOperationException(
+                        WebPageResources.SessionState_TooManyValues
+                    );
+                }
+                var directiveAttribute = directiveAttributes[0];
+                if (
+                    !Enum.TryParse<SessionStateBehavior>(
+                        directiveAttribute.Value,
+                        ignoreCase: true,
+                        result: out sessionStateBehavior
+                    )
+                )
+                {
+                    var values = Enum.GetValues(typeof(SessionStateBehavior))
+                        .Cast<SessionStateBehavior>()
+                        .Select(s => s.ToString());
+                    throw new ArgumentException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            WebPageResources.SessionState_InvalidValue,
+                            directiveAttribute.Value,
+                            page.VirtualPath,
+                            String.Join(", ", values)
+                        )
+                    );
+                }
+                return sessionStateBehavior;
+            });
         }
     }
 }

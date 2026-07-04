@@ -42,13 +42,9 @@ public class StartupForFallback
             );
         });
 
-        app.Map(
-            "/afterrouting",
-            b =>
-                b.Run(c =>
-                {
-                    return c.Response.WriteAsync("Hello from middleware after routing");
-                })
-        );
+        app.Map("/afterrouting", b => b.Run(c =>
+            {
+                return c.Response.WriteAsync("Hello from middleware after routing");
+            }));
     }
 }

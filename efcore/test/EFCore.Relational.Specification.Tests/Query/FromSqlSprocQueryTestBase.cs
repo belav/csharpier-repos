@@ -30,9 +30,8 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
 
         Assert.Equal(10, actual.Length);
 
-        Assert.Contains(
-            actual,
-            mep => mep.TenMostExpensiveProducts == "Côte de Blaye" && mep.UnitPrice == 263.50m
+        Assert.Contains(actual, mep =>
+            mep.TenMostExpensiveProducts == "Côte de Blaye" && mep.UnitPrice == 263.50m
         );
     }
 
@@ -51,9 +50,8 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
 
         Assert.Equal(10, actual.Length);
 
-        Assert.Contains(
-            actual,
-            mep => mep.TenMostExpensiveProducts == "Côte de Blaye" && mep.UnitPrice == 263.50m
+        Assert.Contains(actual, mep =>
+            mep.TenMostExpensiveProducts == "Côte de Blaye" && mep.UnitPrice == 263.50m
         );
     }
 
@@ -74,9 +72,8 @@ public abstract class FromSqlSprocQueryTestBase<TFixture> : IClassFixture<TFixtu
 
         Assert.Equal(10, actual.Length);
 
-        Assert.Contains(
-            actual,
-            mep => mep.TenMostExpensiveProducts == "Côte de Blaye" && mep.UnitPrice == 263.50m
+        Assert.Contains(actual, mep =>
+            mep.TenMostExpensiveProducts == "Côte de Blaye" && mep.UnitPrice == 263.50m
         );
     }
 

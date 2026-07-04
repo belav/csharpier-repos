@@ -87,13 +87,10 @@ namespace System.ComponentModel.Composition.AttributedModel
             batch.AddPart(importer);
             container.Compose(batch);
 
-            CompositionAssert.ThrowsError(
-                ErrorId.ImportEngine_PartCannotGetExportedValue,
-                () =>
-                {
-                    container.GetExportedValue<string>("writeonly");
-                }
-            );
+            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotGetExportedValue, () =>
+            {
+                container.GetExportedValue<string>("writeonly");
+            });
         }
 
         [Fact]

@@ -67,12 +67,9 @@
         {
             Debug.Assert(memberInfo != null);
             Debug.Assert(lookup != null);
-            return lookup.GetOrAdd(
-                memberInfo,
-                mi => new ReadOnlyCollection<TAttribute>(
-                    (TAttribute[])memberInfo.GetCustomAttributes(typeof(TAttribute), inherit: true)
-                )
-            );
+            return lookup.GetOrAdd(memberInfo, mi => new ReadOnlyCollection<TAttribute>(
+                (TAttribute[])memberInfo.GetCustomAttributes(typeof(TAttribute), inherit: true)
+            ));
         }
     }
 }

@@ -261,29 +261,23 @@ namespace System.ComponentModel.Design.Tests
         {
             var container = new ServiceContainer();
             ServiceCreatorCallback callback = (container, serviceType) => "abc";
-            Assert.Throws<ArgumentNullException>(
-                "serviceType",
-                () => container.AddService(null, new object())
+            Assert.Throws<ArgumentNullException>("serviceType", () =>
+                container.AddService(null, new object())
             );
-            Assert.Throws<ArgumentNullException>(
-                "serviceType",
-                () => container.AddService(null, new object(), true)
+            Assert.Throws<ArgumentNullException>("serviceType", () =>
+                container.AddService(null, new object(), true)
             );
-            Assert.Throws<ArgumentNullException>(
-                "serviceType",
-                () => container.AddService(null, new object(), false)
+            Assert.Throws<ArgumentNullException>("serviceType", () =>
+                container.AddService(null, new object(), false)
             );
-            Assert.Throws<ArgumentNullException>(
-                "serviceType",
-                () => container.AddService(null, callback)
+            Assert.Throws<ArgumentNullException>("serviceType", () =>
+                container.AddService(null, callback)
             );
-            Assert.Throws<ArgumentNullException>(
-                "serviceType",
-                () => container.AddService(null, callback, true)
+            Assert.Throws<ArgumentNullException>("serviceType", () =>
+                container.AddService(null, callback, true)
             );
-            Assert.Throws<ArgumentNullException>(
-                "serviceType",
-                () => container.AddService(null, callback, false)
+            Assert.Throws<ArgumentNullException>("serviceType", () =>
+                container.AddService(null, callback, false)
             );
         }
 
@@ -291,17 +285,14 @@ namespace System.ComponentModel.Design.Tests
         public void AddService_NullServiceInstance_ThrowsArgumentNullException()
         {
             var container = new ServiceContainer();
-            Assert.Throws<ArgumentNullException>(
-                "serviceInstance",
-                () => container.AddService(typeof(object), (object)null)
+            Assert.Throws<ArgumentNullException>("serviceInstance", () =>
+                container.AddService(typeof(object), (object)null)
             );
-            Assert.Throws<ArgumentNullException>(
-                "serviceInstance",
-                () => container.AddService(typeof(object), (object)null, true)
+            Assert.Throws<ArgumentNullException>("serviceInstance", () =>
+                container.AddService(typeof(object), (object)null, true)
             );
-            Assert.Throws<ArgumentNullException>(
-                "serviceInstance",
-                () => container.AddService(typeof(object), (object)null, false)
+            Assert.Throws<ArgumentNullException>("serviceInstance", () =>
+                container.AddService(typeof(object), (object)null, false)
             );
         }
 
@@ -309,17 +300,14 @@ namespace System.ComponentModel.Design.Tests
         public void AddService_ServiceInstanceNotInstanceOfType_ThrowsArgumentException()
         {
             var container = new ServiceContainer();
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => container.AddService(typeof(int), new object())
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                container.AddService(typeof(int), new object())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => container.AddService(typeof(int), new object(), true)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                container.AddService(typeof(int), new object(), true)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => container.AddService(typeof(int), new object(), false)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                container.AddService(typeof(int), new object(), false)
             );
         }
 
@@ -330,29 +318,23 @@ namespace System.ComponentModel.Design.Tests
             var serviceInstance = new object();
             ServiceCreatorCallback callback = (container, serviceType) => "abc";
             container.AddService(typeof(object), serviceInstance);
-            Assert.Throws<ArgumentException>(
-                "serviceType",
-                () => container.AddService(typeof(object), new object())
+            Assert.Throws<ArgumentException>("serviceType", () =>
+                container.AddService(typeof(object), new object())
             );
-            Assert.Throws<ArgumentException>(
-                "serviceType",
-                () => container.AddService(typeof(object), new object(), true)
+            Assert.Throws<ArgumentException>("serviceType", () =>
+                container.AddService(typeof(object), new object(), true)
             );
-            Assert.Throws<ArgumentException>(
-                "serviceType",
-                () => container.AddService(typeof(object), new object(), false)
+            Assert.Throws<ArgumentException>("serviceType", () =>
+                container.AddService(typeof(object), new object(), false)
             );
-            Assert.Throws<ArgumentException>(
-                "serviceType",
-                () => container.AddService(typeof(object), callback)
+            Assert.Throws<ArgumentException>("serviceType", () =>
+                container.AddService(typeof(object), callback)
             );
-            Assert.Throws<ArgumentException>(
-                "serviceType",
-                () => container.AddService(typeof(object), callback, true)
+            Assert.Throws<ArgumentException>("serviceType", () =>
+                container.AddService(typeof(object), callback, true)
             );
-            Assert.Throws<ArgumentException>(
-                "serviceType",
-                () => container.AddService(typeof(object), callback, false)
+            Assert.Throws<ArgumentException>("serviceType", () =>
+                container.AddService(typeof(object), callback, false)
             );
         }
 
@@ -588,17 +570,14 @@ namespace System.ComponentModel.Design.Tests
         public void AddService_NullCallback_ThrowsArgumentNullException()
         {
             var container = new ServiceContainer();
-            Assert.Throws<ArgumentNullException>(
-                "callback",
-                () => container.AddService(typeof(object), null)
+            Assert.Throws<ArgumentNullException>("callback", () =>
+                container.AddService(typeof(object), null)
             );
-            Assert.Throws<ArgumentNullException>(
-                "callback",
-                () => container.AddService(typeof(object), null, true)
+            Assert.Throws<ArgumentNullException>("callback", () =>
+                container.AddService(typeof(object), null, true)
             );
-            Assert.Throws<ArgumentNullException>(
-                "callback",
-                () => container.AddService(typeof(object), null, false)
+            Assert.Throws<ArgumentNullException>("callback", () =>
+                container.AddService(typeof(object), null, false)
             );
         }
 
@@ -609,29 +588,23 @@ namespace System.ComponentModel.Design.Tests
             var serviceInstance = new object();
             ServiceCreatorCallback callback = (container, serviceType) => "abc";
             container.AddService(typeof(object), callback);
-            Assert.Throws<ArgumentException>(
-                "serviceType",
-                () => container.AddService(typeof(object), new object())
+            Assert.Throws<ArgumentException>("serviceType", () =>
+                container.AddService(typeof(object), new object())
             );
-            Assert.Throws<ArgumentException>(
-                "serviceType",
-                () => container.AddService(typeof(object), new object(), true)
+            Assert.Throws<ArgumentException>("serviceType", () =>
+                container.AddService(typeof(object), new object(), true)
             );
-            Assert.Throws<ArgumentException>(
-                "serviceType",
-                () => container.AddService(typeof(object), new object(), false)
+            Assert.Throws<ArgumentException>("serviceType", () =>
+                container.AddService(typeof(object), new object(), false)
             );
-            Assert.Throws<ArgumentException>(
-                "serviceType",
-                () => container.AddService(typeof(object), callback)
+            Assert.Throws<ArgumentException>("serviceType", () =>
+                container.AddService(typeof(object), callback)
             );
-            Assert.Throws<ArgumentException>(
-                "serviceType",
-                () => container.AddService(typeof(object), callback, true)
+            Assert.Throws<ArgumentException>("serviceType", () =>
+                container.AddService(typeof(object), callback, true)
             );
-            Assert.Throws<ArgumentException>(
-                "serviceType",
-                () => container.AddService(typeof(object), callback, false)
+            Assert.Throws<ArgumentException>("serviceType", () =>
+                container.AddService(typeof(object), callback, false)
             );
         }
 
@@ -870,17 +843,14 @@ namespace System.ComponentModel.Design.Tests
         public void RemoveService_NullServiceType_ThrowsArgumentNullException()
         {
             var container = new ServiceContainer();
-            Assert.Throws<ArgumentNullException>(
-                "serviceType",
-                () => container.RemoveService(null)
+            Assert.Throws<ArgumentNullException>("serviceType", () =>
+                container.RemoveService(null)
             );
-            Assert.Throws<ArgumentNullException>(
-                "serviceType",
-                () => container.RemoveService(null, true)
+            Assert.Throws<ArgumentNullException>("serviceType", () =>
+                container.RemoveService(null, true)
             );
-            Assert.Throws<ArgumentNullException>(
-                "serviceType",
-                () => container.RemoveService(null, false)
+            Assert.Throws<ArgumentNullException>("serviceType", () =>
+                container.RemoveService(null, false)
             );
         }
 

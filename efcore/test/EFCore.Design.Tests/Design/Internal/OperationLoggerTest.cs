@@ -21,13 +21,10 @@ public class OperationLoggerTests
             (_, __) => "-- Can't stop the SQL"
         );
 
-        Assert.Collection(
-            reporter.Messages,
-            x =>
-            {
-                Assert.Equal("-- Can't stop the SQL", x.Message);
-                Assert.Equal(LogLevel.Debug, x.Level);
-            }
-        );
+        Assert.Collection(reporter.Messages, x =>
+        {
+            Assert.Equal("-- Can't stop the SQL", x.Message);
+            Assert.Equal(LogLevel.Debug, x.Level);
+        });
     }
 }

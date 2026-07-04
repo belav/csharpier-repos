@@ -330,16 +330,14 @@ namespace System.Text.Json.Tests
 
             Assert.False(json.TryGetDateTime(out var dateTime));
             Assert.Equal(default, dateTime);
-            JsonTestHelper.AssertThrows<FormatException>(
-                ref json,
-                (ref Utf8JsonReader json) => json.GetDateTime()
+            JsonTestHelper.AssertThrows<FormatException>(ref json, (ref Utf8JsonReader json) =>
+                json.GetDateTime()
             );
 
             Assert.False(json.TryGetDateTimeOffset(out var dateTimeOffset));
             Assert.Equal(default, dateTimeOffset);
-            JsonTestHelper.AssertThrows<FormatException>(
-                ref json,
-                (ref Utf8JsonReader json) => json.GetDateTimeOffset()
+            JsonTestHelper.AssertThrows<FormatException>(ref json, (ref Utf8JsonReader json) =>
+                json.GetDateTimeOffset()
             );
         }
     }

@@ -39,18 +39,16 @@ namespace System.Linq.Tests
         [Fact]
         public void NullSource()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IQueryable<int>)null).LongCount()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IQueryable<int>)null).LongCount()
             );
         }
 
         [Fact]
         public void NullSourcePredicateUsed()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IQueryable<int>)null).LongCount(i => i != 0)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IQueryable<int>)null).LongCount(i => i != 0)
             );
         }
 
@@ -58,9 +56,8 @@ namespace System.Linq.Tests
         public void NullPredicateUsed()
         {
             Expression<Func<int, bool>> predicate = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => Enumerable.Range(0, 3).AsQueryable().LongCount(predicate)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                Enumerable.Range(0, 3).AsQueryable().LongCount(predicate)
             );
         }
 

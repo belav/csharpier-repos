@@ -29,14 +29,12 @@ namespace System.IO
         [Fact]
         public void FileSystemAccessRule_InvalidFileSystemRights()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "fileSystemRights",
-                () =>
-                    new FileSystemAccessRule(
-                        Helpers.s_WorldSidNTAccount,
-                        (FileSystemRights)(-1),
-                        AccessControlType.Allow
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("fileSystemRights", () =>
+                new FileSystemAccessRule(
+                    Helpers.s_WorldSidNTAccount,
+                    (FileSystemRights)(-1),
+                    AccessControlType.Allow
+                )
             );
         }
 

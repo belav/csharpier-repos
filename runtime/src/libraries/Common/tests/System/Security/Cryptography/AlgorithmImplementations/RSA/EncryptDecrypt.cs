@@ -21,13 +21,11 @@ namespace System.Security.Cryptography.Rsa.Tests
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "data",
-                    () => rsa.Encrypt(null, RSAEncryptionPadding.OaepSHA1)
+                AssertExtensions.Throws<ArgumentNullException>("data", () =>
+                    rsa.Encrypt(null, RSAEncryptionPadding.OaepSHA1)
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "data",
-                    () => rsa.Decrypt(null, RSAEncryptionPadding.OaepSHA1)
+                AssertExtensions.Throws<ArgumentNullException>("data", () =>
+                    rsa.Decrypt(null, RSAEncryptionPadding.OaepSHA1)
                 );
             }
         }
@@ -46,13 +44,11 @@ namespace System.Security.Cryptography.Rsa.Tests
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "padding",
-                    () => Encrypt(rsa, TestData.HelloBytes, null)
+                AssertExtensions.Throws<ArgumentNullException>("padding", () =>
+                    Encrypt(rsa, TestData.HelloBytes, null)
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "padding",
-                    () => Decrypt(rsa, TestData.HelloBytes, null)
+                AssertExtensions.Throws<ArgumentNullException>("padding", () =>
+                    Decrypt(rsa, TestData.HelloBytes, null)
                 );
             }
         }

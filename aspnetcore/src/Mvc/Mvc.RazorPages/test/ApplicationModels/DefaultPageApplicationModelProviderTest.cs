@@ -646,14 +646,12 @@ public class DefaultPageApplicationModelProviderTest
 
         // Assert
         var pageModel = context.PageApplicationModel;
-        Assert.Contains(
-            pageModel.HandlerProperties,
-            p => p.PropertyInfo == modelType.GetProperty(nameof(ModelWithHandler.BindMe))
+        Assert.Contains(pageModel.HandlerProperties, p =>
+            p.PropertyInfo == modelType.GetProperty(nameof(ModelWithHandler.BindMe))
         );
 
-        Assert.Collection(
-            pageModel.HandlerMethods,
-            p => Assert.Equal(modelType.GetMethod(nameof(ModelWithHandler.OnGet)), p.MethodInfo)
+        Assert.Collection(pageModel.HandlerMethods, p =>
+            Assert.Equal(modelType.GetMethod(nameof(ModelWithHandler.OnGet)), p.MethodInfo)
         );
 
         Assert.Same(typeof(ModelWithHandler).GetTypeInfo(), pageModel.HandlerType);
@@ -703,9 +701,8 @@ public class DefaultPageApplicationModelProviderTest
             p => Assert.Equal(typeInfo.GetProperty(nameof(PageWithHandler.Model)), p.PropertyInfo)
         );
 
-        Assert.Collection(
-            pageModel.HandlerMethods,
-            p => Assert.Equal(typeInfo.GetMethod(nameof(PageWithHandler.OnGet)), p.MethodInfo)
+        Assert.Collection(pageModel.HandlerMethods, p =>
+            Assert.Equal(typeInfo.GetMethod(nameof(PageWithHandler.OnGet)), p.MethodInfo)
         );
 
         Assert.Same(typeof(PageWithHandler).GetTypeInfo(), pageModel.HandlerType);
@@ -953,18 +950,15 @@ public class DefaultPageApplicationModelProviderTest
 
         // Assert
         var handlerMethods = pageModel.HandlerMethods;
-        Assert.Collection(
-            handlerMethods.OrderBy(h => h.MethodInfo.Name),
-            handler =>
-            {
-                Assert.Same(
-                    typeInfo.GetMethod(nameof(PageModelWithHandlerNames.OnPutDeleteAsync)),
-                    handler.MethodInfo
-                );
-                Assert.Equal("Put", handler.HttpMethod);
-                Assert.Equal("Delete", handler.HandlerName);
-            }
-        );
+        Assert.Collection(handlerMethods.OrderBy(h => h.MethodInfo.Name), handler =>
+        {
+            Assert.Same(
+                typeInfo.GetMethod(nameof(PageModelWithHandlerNames.OnPutDeleteAsync)),
+                handler.MethodInfo
+            );
+            Assert.Equal("Put", handler.HttpMethod);
+            Assert.Equal("Delete", handler.HandlerName);
+        });
     }
 
     private class PageModelWithHandlerNames
@@ -1041,16 +1035,13 @@ public class DefaultPageApplicationModelProviderTest
 
         // Assert
         var properties = pageModel.HandlerProperties;
-        Assert.Collection(
-            properties,
-            p =>
-            {
-                Assert.Equal(
-                    typeof(HidesAProperty).GetTypeInfo(),
-                    p.PropertyInfo.DeclaringType.GetTypeInfo()
-                );
-            }
-        );
+        Assert.Collection(properties, p =>
+        {
+            Assert.Equal(
+                typeof(HidesAProperty).GetTypeInfo(),
+                p.PropertyInfo.DeclaringType.GetTypeInfo()
+            );
+        });
     }
 
     private class HasAHiddenProperty
@@ -1082,25 +1073,22 @@ public class DefaultPageApplicationModelProviderTest
 
         // Assert
         var properties = pageModel.HandlerProperties;
-        Assert.Collection(
-            properties.OrderBy(p => p.PropertyName),
-            p =>
-            {
-                Assert.Equal(
-                    typeInfo.GetProperty(nameof(ModelSupportsGetOnProperty.Property)),
-                    p.PropertyInfo
-                );
-                Assert.NotNull(p.BindingInfo.RequestPredicate);
-                Assert.True(
-                    p.BindingInfo.RequestPredicate(
-                        new ActionContext
-                        {
-                            HttpContext = new DefaultHttpContext { Request = { Method = "GET" } },
-                        }
-                    )
-                );
-            }
-        );
+        Assert.Collection(properties.OrderBy(p => p.PropertyName), p =>
+        {
+            Assert.Equal(
+                typeInfo.GetProperty(nameof(ModelSupportsGetOnProperty.Property)),
+                p.PropertyInfo
+            );
+            Assert.NotNull(p.BindingInfo.RequestPredicate);
+            Assert.True(
+                p.BindingInfo.RequestPredicate(
+                    new ActionContext
+                    {
+                        HttpContext = new DefaultHttpContext { Request = { Method = "GET" } },
+                    }
+                )
+            );
+        });
     }
 
     private class ModelSupportsGetOnProperty
@@ -1213,9 +1201,8 @@ public class DefaultPageApplicationModelProviderTest
         provider.PopulateFilters(pageModel);
 
         // Assert
-        Assert.Collection(
-            pageModel.Filters,
-            filter => Assert.IsType<HandleOptionsRequestsPageFilter>(filter)
+        Assert.Collection(pageModel.Filters, filter =>
+            Assert.IsType<HandleOptionsRequestsPageFilter>(filter)
         );
     }
 

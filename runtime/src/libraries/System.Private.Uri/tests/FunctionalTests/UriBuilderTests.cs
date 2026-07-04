@@ -149,9 +149,8 @@ namespace System.PrivateUri.Tests
         [Fact]
         public void Ctor_String_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "uriString",
-                () => new UriBuilder((string)null)
+            AssertExtensions.Throws<ArgumentNullException>("uriString", () =>
+                new UriBuilder((string)null)
             ); // UriString is null
             Assert.Throws<UriFormatException>(() => new UriBuilder(@"http://host\")); // UriString is invalid
         }
@@ -358,10 +357,8 @@ namespace System.PrivateUri.Tests
         [InlineData("fragment?fragment")]
         public void Ctor_InvalidExtraValue_ThrowsArgumentException(string extraValue)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "extraValue",
-                null,
-                () => new UriBuilder("scheme", "host", 80, "path", extraValue)
+            AssertExtensions.Throws<ArgumentException>("extraValue", null, () =>
+                new UriBuilder("scheme", "host", 80, "path", extraValue)
             );
         }
 
@@ -382,31 +379,21 @@ namespace System.PrivateUri.Tests
         [InlineData("-")]
         public void InvalidScheme_ThrowsArgumentException(string schemeName)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => new UriBuilder(schemeName, "host")
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                new UriBuilder(schemeName, "host")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => new UriBuilder(schemeName, "host", 80)
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                new UriBuilder(schemeName, "host", 80)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => new UriBuilder(schemeName, "host", 80, "path")
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                new UriBuilder(schemeName, "host", 80, "path")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => new UriBuilder(schemeName, "host", 80, "?query#fragment")
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                new UriBuilder(schemeName, "host", 80, "?query#fragment")
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => new UriBuilder().Scheme = schemeName
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                new UriBuilder().Scheme = schemeName
             );
         }
 

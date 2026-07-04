@@ -156,20 +156,16 @@ public class MappingExpressionFeatureWithReverseTest
     public class MappingExpressionFeatureA : MappingExpressionFeatureBase<TypeMapFeatureA>
     {
         public MappingExpressionFeatureA(int value)
-            : base(
-                value,
-                new TypeMapFeatureA(value),
-                () => new MappingExpressionFeatureA(value + 1)
+            : base(value, new TypeMapFeatureA(value), () =>
+                new MappingExpressionFeatureA(value + 1)
             ) { }
     }
 
     public class MappingExpressionFeatureB : MappingExpressionFeatureBase<TypeMapFeatureB>
     {
         public MappingExpressionFeatureB(int value)
-            : base(
-                value,
-                new TypeMapFeatureB(value),
-                () => new MappingExpressionFeatureB(value + 1)
+            : base(value, new TypeMapFeatureB(value), () =>
+                new MappingExpressionFeatureB(value + 1)
             ) { }
     }
 

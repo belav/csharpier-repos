@@ -153,30 +153,27 @@ namespace Microsoft.CodeAnalysis.AliasAmbiguousType
 
             ImmutableArray<string> GetNameSegments(ITypeSymbol symbol)
             {
-                return typeToNameSegments.GetOrAdd(
-                    symbol,
-                    static symbol =>
+                return typeToNameSegments.GetOrAdd(symbol, static symbol =>
+                {
+                    using var result = TemporaryArray<string>.Empty;
+
+                    for (
+                        ISymbol current = symbol;
+                        current != null;
+                        current = current.ContainingSymbol
+                    )
                     {
-                        using var result = TemporaryArray<string>.Empty;
+                        if (string.IsNullOrEmpty(current.Name))
+                            break;
 
-                        for (
-                            ISymbol current = symbol;
-                            current != null;
-                            current = current.ContainingSymbol
-                        )
-                        {
-                            if (string.IsNullOrEmpty(current.Name))
-                                break;
-
-                            result.Add(current.Name);
-                        }
-
-                        // We walked upwards to get the name segments.  So reverse teh order here so it goes from outer-most to
-                        // inner-most names.
-                        result.ReverseContents();
-                        return result.ToImmutableAndClear();
+                        result.Add(current.Name);
                     }
-                );
+
+                    // We walked upwards to get the name segments.  So reverse teh order here so it goes from outer-most to
+                    // inner-most names.
+                    result.ReverseContents();
+                    return result.ToImmutableAndClear();
+                });
             }
         }
 

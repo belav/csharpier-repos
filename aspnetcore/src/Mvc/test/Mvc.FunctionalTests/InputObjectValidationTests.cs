@@ -167,9 +167,8 @@ public class InputObjectValidationTests : IClassFixture<MvcTestFixture<Formatter
         var responseObject = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(
             responseContent
         );
-        var errorKeyValuePair = Assert.Single(
-            responseObject,
-            keyValuePair => keyValuePair.Value.Length > 0
+        var errorKeyValuePair = Assert.Single(responseObject, keyValuePair =>
+            keyValuePair.Value.Length > 0
         );
         var errorMessage = Assert.Single(errorKeyValuePair.Value);
         Assert.Equal(expectedModelStateErrorMessage, errorMessage);
@@ -202,9 +201,8 @@ public class InputObjectValidationTests : IClassFixture<MvcTestFixture<Formatter
         var responseObject = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(
             responseContent
         );
-        var errorKeyValuePair = Assert.Single(
-            responseObject,
-            keyValuePair => keyValuePair.Value.Length > 0
+        var errorKeyValuePair = Assert.Single(responseObject, keyValuePair =>
+            keyValuePair.Value.Length > 0
         );
         var errorMessage = Assert.Single(errorKeyValuePair.Value);
         Assert.Equal(expectedModelStateErrorMessage, errorMessage);
@@ -353,20 +351,17 @@ public class InputObjectValidationTests : IClassFixture<MvcTestFixture<Formatter
             responseContent
         );
 
-        Assert.Collection(
-            validationProblemDetails.Errors,
-            error =>
-            {
-                Assert.Empty(error.Key);
-                Assert.Equal(
-                    new[]
-                    {
-                        "Invalid character after parsing property name. Expected ':' but got: =. Path '', line 1, position 4.",
-                    },
-                    error.Value
-                );
-            }
-        );
+        Assert.Collection(validationProblemDetails.Errors, error =>
+        {
+            Assert.Empty(error.Key);
+            Assert.Equal(
+                new[]
+                {
+                    "Invalid character after parsing property name. Expected ':' but got: =. Path '', line 1, position 4.",
+                },
+                error.Value
+            );
+        });
     }
 
     [Fact]
@@ -394,20 +389,17 @@ public class InputObjectValidationTests : IClassFixture<MvcTestFixture<Formatter
             responseContent
         );
 
-        Assert.Collection(
-            validationProblemDetails.Errors,
-            error =>
-            {
-                Assert.Equal("isbn", error.Key);
-                Assert.Equal(
-                    new[]
-                    {
-                        "Required property 'isbn' not found in JSON. Path '', line 1, position 44.",
-                    },
-                    error.Value
-                );
-            }
-        );
+        Assert.Collection(validationProblemDetails.Errors, error =>
+        {
+            Assert.Equal("isbn", error.Key);
+            Assert.Equal(
+                new[]
+                {
+                    "Required property 'isbn' not found in JSON. Path '', line 1, position 44.",
+                },
+                error.Value
+            );
+        });
     }
 
     [Fact]
@@ -439,16 +431,13 @@ public class InputObjectValidationTests : IClassFixture<MvcTestFixture<Formatter
             responseContent
         );
 
-        Assert.Collection(
-            validationProblemDetails.Errors,
-            error =>
-            {
-                Assert.Empty(error.Key);
-                Assert.Equal(
-                    new[] { "An error occurred while deserializing input data." },
-                    error.Value
-                );
-            }
-        );
+        Assert.Collection(validationProblemDetails.Errors, error =>
+        {
+            Assert.Empty(error.Key);
+            Assert.Equal(
+                new[] { "An error occurred while deserializing input data." },
+                error.Value
+            );
+        });
     }
 }

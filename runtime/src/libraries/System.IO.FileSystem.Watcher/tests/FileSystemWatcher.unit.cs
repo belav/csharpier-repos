@@ -97,9 +97,8 @@ namespace System.IO.Tests
         public void FileSystemWatcher_ctor_NullStrings()
         {
             // Null filter
-            Assert.Throws<ArgumentNullException>(
-                "filter",
-                () => new FileSystemWatcher(TestDirectory, null)
+            Assert.Throws<ArgumentNullException>("filter", () =>
+                new FileSystemWatcher(TestDirectory, null)
             );
 
             // Null path
@@ -112,23 +111,19 @@ namespace System.IO.Tests
         public void FileSystemWatcher_ctor_InvalidStrings()
         {
             // Empty path
-            AssertExtensions.Throws<ArgumentException>(
-                "path",
-                () => new FileSystemWatcher(string.Empty)
+            AssertExtensions.Throws<ArgumentException>("path", () =>
+                new FileSystemWatcher(string.Empty)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "path",
-                () => new FileSystemWatcher(string.Empty, "*")
+            AssertExtensions.Throws<ArgumentException>("path", () =>
+                new FileSystemWatcher(string.Empty, "*")
             );
 
             // Invalid directory
-            AssertExtensions.Throws<ArgumentException>(
-                "path",
-                () => new FileSystemWatcher(GetTestFilePath())
+            AssertExtensions.Throws<ArgumentException>("path", () =>
+                new FileSystemWatcher(GetTestFilePath())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "path",
-                () => new FileSystemWatcher(GetTestFilePath(), "*")
+            AssertExtensions.Throws<ArgumentException>("path", () =>
+                new FileSystemWatcher(GetTestFilePath(), "*")
             );
         }
 

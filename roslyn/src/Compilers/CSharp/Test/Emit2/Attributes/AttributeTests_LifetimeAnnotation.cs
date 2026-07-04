@@ -41,17 +41,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 @"void Program.F(scoped ref System.Int32 i)
     [ScopedRef] scoped ref System.Int32 i
 ";
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    Assert.Equal(
-                        "System.Runtime.CompilerServices.ScopedRefAttribute",
-                        GetScopedRefType(module).ToTestDisplayString()
-                    );
-                    AssertScopedRefAttributes(module, expected);
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                Assert.Equal(
+                    "System.Runtime.CompilerServices.ScopedRefAttribute",
+                    GetScopedRefType(module).ToTestDisplayString()
+                );
+                AssertScopedRefAttributes(module, expected);
+            });
         }
 
         [Fact]
@@ -71,14 +68,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 @"void Program.F(scoped ref System.Int32 i)
     [ScopedRef] scoped ref System.Int32 i
 ";
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    Assert.Null(GetScopedRefType(module));
-                    AssertScopedRefAttributes(module, expected);
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                Assert.Null(GetScopedRefType(module));
+                AssertScopedRefAttributes(module, expected);
+            });
         }
 
         [Fact]
@@ -374,17 +368,14 @@ S S.op_Addition(S a, scoped in R b)
 System.Object S.this[scoped in System.Int32 i].get
     [ScopedRef] scoped in System.Int32 i
 ";
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    Assert.Equal(
-                        "System.Runtime.CompilerServices.ScopedRefAttribute",
-                        GetScopedRefType(module).ToTestDisplayString()
-                    );
-                    AssertScopedRefAttributes(module, expected);
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                Assert.Equal(
+                    "System.Runtime.CompilerServices.ScopedRefAttribute",
+                    GetScopedRefType(module).ToTestDisplayString()
+                );
+                AssertScopedRefAttributes(module, expected);
+            });
         }
 
         [Fact]
@@ -401,14 +392,11 @@ class Program
     }
 }";
             var comp = CreateCompilation(source);
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    Assert.Null(GetScopedRefType(module));
-                    AssertScopedRefAttributes(module, "");
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                Assert.Null(GetScopedRefType(module));
+                AssertScopedRefAttributes(module, "");
+            });
         }
 
         [Fact]
@@ -425,14 +413,11 @@ class Program
     }
 }";
             var comp = CreateCompilation(source);
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    Assert.Null(GetScopedRefType(module));
-                    AssertScopedRefAttributes(module, "");
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                Assert.Null(GetScopedRefType(module));
+                AssertScopedRefAttributes(module, "");
+            });
         }
 
         [Fact]
@@ -457,17 +442,14 @@ class Program
 void Program.F5(scoped in R r)
     [ScopedRef] scoped in R r
 ";
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    Assert.Equal(
-                        "System.Runtime.CompilerServices.ScopedRefAttribute",
-                        GetScopedRefType(module).ToTestDisplayString()
-                    );
-                    AssertScopedRefAttributes(module, expected);
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                Assert.Equal(
+                    "System.Runtime.CompilerServices.ScopedRefAttribute",
+                    GetScopedRefType(module).ToTestDisplayString()
+                );
+                AssertScopedRefAttributes(module, expected);
+            });
 
             // https://github.com/dotnet/roslyn/issues/62780: Test additional cases with [UnscopedRef].
         }

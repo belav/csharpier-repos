@@ -113,15 +113,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBodyForLambda
             var originalDeclaration = (LambdaExpressionSyntax)
                 declarationLocation.FindNode(getInnermostNodeForTie: true, cancellationToken);
 
-            editor.ReplaceNode(
-                originalDeclaration,
-                (current, _) =>
-                    UseExpressionBodyForLambdaCodeActionHelpers.Update(
-                        semanticModel,
-                        originalDeclaration,
-                        (LambdaExpressionSyntax)current,
-                        cancellationToken
-                    )
+            editor.ReplaceNode(originalDeclaration, (current, _) =>
+                UseExpressionBodyForLambdaCodeActionHelpers.Update(
+                    semanticModel,
+                    originalDeclaration,
+                    (LambdaExpressionSyntax)current,
+                    cancellationToken
+                )
             );
         }
     }

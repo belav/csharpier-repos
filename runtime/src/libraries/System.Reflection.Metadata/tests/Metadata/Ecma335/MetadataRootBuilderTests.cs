@@ -25,9 +25,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             var mdBuilder = new MetadataBuilder();
 
             Assert.Throws<ArgumentNullException>(() => new MetadataRootBuilder(null));
-            AssertExtensions.Throws<ArgumentException>(
-                "metadataVersion",
-                () => new MetadataRootBuilder(mdBuilder, new string('x', 255))
+            AssertExtensions.Throws<ArgumentException>("metadataVersion", () =>
+                new MetadataRootBuilder(mdBuilder, new string('x', 255))
             );
         }
 

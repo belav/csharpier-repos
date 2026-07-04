@@ -526,13 +526,8 @@ public class JsonConverterReadTests
   ""oneofName2"": ""test""
 }";
 
-        AssertReadJsonError<HelloRequest>(
-            json,
-            ex =>
-                Assert.Equal(
-                    "Multiple values specified for oneof oneof_test",
-                    ex.Message.TrimEnd('.')
-                )
+        AssertReadJsonError<HelloRequest>(json, ex =>
+            Assert.Equal("Multiple values specified for oneof oneof_test", ex.Message.TrimEnd('.'))
         );
     }
 
@@ -614,13 +609,11 @@ public class JsonConverterReadTests
     {
         var json = @"{ ""nullValue"": ""MONKEY"" }";
 
-        AssertReadJsonError<NullValueContainer>(
-            json,
-            ex =>
-                Assert.Equal(
-                    "Invalid enum value: MONKEY for enum type: google.protobuf.NullValue",
-                    ex.Message
-                )
+        AssertReadJsonError<NullValueContainer>(json, ex =>
+            Assert.Equal(
+                "Invalid enum value: MONKEY for enum type: google.protobuf.NullValue",
+                ex.Message
+            )
         );
     }
 

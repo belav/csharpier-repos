@@ -267,13 +267,11 @@ namespace System.Collections.Immutable.Tests
             Assert.False(stack.IsEmpty);
             Assert.Equal(new[] { 2, 1 }, stack);
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "items",
-                () => ImmutableStack.CreateRange((IEnumerable<int>)null)
+            AssertExtensions.Throws<ArgumentNullException>("items", () =>
+                ImmutableStack.CreateRange((IEnumerable<int>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "items",
-                () => ImmutableStack.Create((int[])null)
+            AssertExtensions.Throws<ArgumentNullException>("items", () =>
+                ImmutableStack.Create((int[])null)
             );
         }
 

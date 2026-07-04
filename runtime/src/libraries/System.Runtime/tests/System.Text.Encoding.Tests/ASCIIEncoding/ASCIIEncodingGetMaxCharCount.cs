@@ -56,9 +56,8 @@ namespace System.Text.Tests
         [Fact]
         public void GetMaxCharCount_WithDefaultDecoder_InvalidArg()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "byteCount",
-                () => Encoding.ASCII.GetMaxCharCount(-1)
+            Assert.Throws<ArgumentOutOfRangeException>("byteCount", () =>
+                Encoding.ASCII.GetMaxCharCount(-1)
             );
         }
 
@@ -70,9 +69,8 @@ namespace System.Text.Tests
                 EncoderFallback.ExceptionFallback,
                 new CustomLengthDecoderFallback(1_000_000)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "byteCount",
-                () => asciiEncoding.GetMaxCharCount(5_000_000)
+            Assert.Throws<ArgumentOutOfRangeException>("byteCount", () =>
+                asciiEncoding.GetMaxCharCount(5_000_000)
             );
         }
 

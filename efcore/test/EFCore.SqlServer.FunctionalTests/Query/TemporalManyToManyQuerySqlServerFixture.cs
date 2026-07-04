@@ -427,14 +427,11 @@ public class TemporalManyToManyQuerySqlServerFixture : ManyToManyQueryFixtureBas
             )
             .ToTable(tb => tb.IsTemporal());
 
-        modelBuilder.SharedTypeEntity<ProxyableSharedType>(
-            "PST",
-            b =>
-            {
-                b.IndexerProperty<int>("Id").ValueGeneratedNever();
-                b.IndexerProperty<string>("Payload");
-            }
-        );
+        modelBuilder.SharedTypeEntity<ProxyableSharedType>("PST", b =>
+        {
+            b.IndexerProperty<int>("Id").ValueGeneratedNever();
+            b.IndexerProperty<string>("Payload");
+        });
     }
 
     protected override void Seed(ManyToManyContext context)

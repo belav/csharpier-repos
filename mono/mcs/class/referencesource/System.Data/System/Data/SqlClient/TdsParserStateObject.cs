@@ -1173,14 +1173,11 @@ namespace System.Data.SqlClient
                     }
                     else
                     {
-                        return AsyncHelper.CreateContinuationTask(
-                            writePacketTask,
-                            () =>
-                            {
-                                _pendingData = true;
-                                _messageStatus = 0;
-                            }
-                        );
+                        return AsyncHelper.CreateContinuationTask(writePacketTask, () =>
+                        {
+                            _pendingData = true;
+                            _messageStatus = 0;
+                        });
                     }
                 }
             }

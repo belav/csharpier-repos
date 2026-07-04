@@ -171,19 +171,15 @@ namespace BenchmarksGame
                 // C# doesn't let us pass a pinned variable to a lambda directly
                 var _Crb = pCrb;
 
-                Parallel.For(
-                    0,
-                    size,
-                    y =>
-                    {
-                        var offset = y * lineLength;
+                Parallel.For(0, size, y =>
+                {
+                    var offset = y * lineLength;
 
-                        for (var x = 0; x < lineLength; x++)
-                        {
-                            data[offset + x] = GetByte(_Crb, Cib[y], x * 8, y);
-                        }
+                    for (var x = 0; x < lineLength; x++)
+                    {
+                        data[offset + x] = GetByte(_Crb, Cib[y], x * 8, y);
                     }
-                );
+                });
             }
 
             return data;

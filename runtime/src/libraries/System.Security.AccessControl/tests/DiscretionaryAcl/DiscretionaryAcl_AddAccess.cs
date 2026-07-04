@@ -390,140 +390,122 @@ namespace System.Security.AccessControl.Tests
             byte[] opaque = null;
 
             //Case 1, non-Container, but InheritanceFlags is not None
-            AssertExtensions.Throws<ArgumentException>(
-                "inheritanceFlags",
-                () =>
-                {
-                    isContainer = false;
-                    isDS = false;
-                    rawAcl = new RawAcl(0, 1);
-                    discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
+            AssertExtensions.Throws<ArgumentException>("inheritanceFlags", () =>
+            {
+                isContainer = false;
+                isDS = false;
+                rawAcl = new RawAcl(0, 1);
+                discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
 
-                    discretionaryAcl.AddAccess(
-                        AccessControlType.Allow,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
-                        ),
-                        1,
-                        InheritanceFlags.ContainerInherit,
-                        PropagationFlags.None
-                    );
-                }
-            );
+                discretionaryAcl.AddAccess(
+                    AccessControlType.Allow,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
+                    ),
+                    1,
+                    InheritanceFlags.ContainerInherit,
+                    PropagationFlags.None
+                );
+            });
 
             //Case 2, non-Container, but PropagationFlags is not None
-            AssertExtensions.Throws<ArgumentException>(
-                "propagationFlags",
-                () =>
-                {
-                    isContainer = false;
-                    isDS = false;
-                    rawAcl = new RawAcl(0, 1);
-                    discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
+            AssertExtensions.Throws<ArgumentException>("propagationFlags", () =>
+            {
+                isContainer = false;
+                isDS = false;
+                rawAcl = new RawAcl(0, 1);
+                discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
 
-                    discretionaryAcl.AddAccess(
-                        AccessControlType.Allow,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
-                        ),
-                        1,
-                        InheritanceFlags.None,
-                        PropagationFlags.InheritOnly
-                    );
-                }
-            );
+                discretionaryAcl.AddAccess(
+                    AccessControlType.Allow,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
+                    ),
+                    1,
+                    InheritanceFlags.None,
+                    PropagationFlags.InheritOnly
+                );
+            });
 
             //Case 3, Container, InheritanceFlags is None, PropagationFlags is InheritOnly
-            AssertExtensions.Throws<ArgumentException>(
-                "propagationFlags",
-                () =>
-                {
-                    isContainer = true;
-                    isDS = false;
-                    rawAcl = new RawAcl(0, 1);
-                    discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
+            AssertExtensions.Throws<ArgumentException>("propagationFlags", () =>
+            {
+                isContainer = true;
+                isDS = false;
+                rawAcl = new RawAcl(0, 1);
+                discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
 
-                    discretionaryAcl.AddAccess(
-                        AccessControlType.Allow,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
-                        ),
-                        1,
-                        InheritanceFlags.None,
-                        PropagationFlags.InheritOnly
-                    );
-                }
-            );
+                discretionaryAcl.AddAccess(
+                    AccessControlType.Allow,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
+                    ),
+                    1,
+                    InheritanceFlags.None,
+                    PropagationFlags.InheritOnly
+                );
+            });
 
             //Case 4, Container, InheritanceFlags is None, PropagationFlags is NoPropagateInherit
-            AssertExtensions.Throws<ArgumentException>(
-                "propagationFlags",
-                () =>
-                {
-                    isContainer = true;
-                    isDS = false;
-                    rawAcl = new RawAcl(0, 1);
-                    discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
+            AssertExtensions.Throws<ArgumentException>("propagationFlags", () =>
+            {
+                isContainer = true;
+                isDS = false;
+                rawAcl = new RawAcl(0, 1);
+                discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
 
-                    discretionaryAcl.AddAccess(
-                        AccessControlType.Allow,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
-                        ),
-                        1,
-                        InheritanceFlags.None,
-                        PropagationFlags.NoPropagateInherit
-                    );
-                }
-            );
+                discretionaryAcl.AddAccess(
+                    AccessControlType.Allow,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
+                    ),
+                    1,
+                    InheritanceFlags.None,
+                    PropagationFlags.NoPropagateInherit
+                );
+            });
 
             //Case 5, Container, InheritanceFlags is None, PropagationFlags is NoPropagateInherit | InheritOnly
-            AssertExtensions.Throws<ArgumentException>(
-                "propagationFlags",
-                () =>
-                {
-                    isContainer = true;
-                    isDS = false;
-                    rawAcl = new RawAcl(0, 1);
-                    discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
+            AssertExtensions.Throws<ArgumentException>("propagationFlags", () =>
+            {
+                isContainer = true;
+                isDS = false;
+                rawAcl = new RawAcl(0, 1);
+                discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
 
-                    discretionaryAcl.AddAccess(
-                        AccessControlType.Allow,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
-                        ),
-                        1,
-                        InheritanceFlags.None,
-                        PropagationFlags.NoPropagateInherit | PropagationFlags.InheritOnly
-                    );
-                }
-            );
+                discretionaryAcl.AddAccess(
+                    AccessControlType.Allow,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
+                    ),
+                    1,
+                    InheritanceFlags.None,
+                    PropagationFlags.NoPropagateInherit | PropagationFlags.InheritOnly
+                );
+            });
 
             //Case 6, accessMask = 0
-            AssertExtensions.Throws<ArgumentException>(
-                "accessMask",
-                () =>
-                {
-                    isContainer = true;
-                    isDS = false;
-                    accessControlType = 1;
-                    sid = "BA";
-                    accessMask = 0;
-                    inheritanceFlags = 3;
-                    propagationFlags = 3;
-                    rawAcl = new RawAcl(0, 1);
-                    discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
-                    discretionaryAcl.AddAccess(
-                        (AccessControlType)accessControlType,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
-                        ),
-                        accessMask,
-                        (InheritanceFlags)inheritanceFlags,
-                        (PropagationFlags)propagationFlags
-                    );
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("accessMask", () =>
+            {
+                isContainer = true;
+                isDS = false;
+                accessControlType = 1;
+                sid = "BA";
+                accessMask = 0;
+                inheritanceFlags = 3;
+                propagationFlags = 3;
+                rawAcl = new RawAcl(0, 1);
+                discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
+                discretionaryAcl.AddAccess(
+                    (AccessControlType)accessControlType,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
+                    ),
+                    accessMask,
+                    (InheritanceFlags)inheritanceFlags,
+                    (PropagationFlags)propagationFlags
+                );
+            });
 
             //Case 7, null sid
             Assert.Throws<ArgumentNullException>(() =>
@@ -585,35 +567,32 @@ namespace System.Security.AccessControl.Tests
             //call the same method to check the meaninglessness, only some sanitory cases are enough.
             //bug# 288116
 
-            AssertExtensions.Throws<ArgumentException>(
-                "propagationFlags",
-                () =>
-                {
-                    isContainer = true;
-                    isDS = false;
+            AssertExtensions.Throws<ArgumentException>("propagationFlags", () =>
+            {
+                isContainer = true;
+                isDS = false;
 
-                    inheritanceFlags = 0; //InheritanceFlags.None
-                    propagationFlags = 2; //PropagationFlags.InheritOnly
+                inheritanceFlags = 0; //InheritanceFlags.None
+                propagationFlags = 2; //PropagationFlags.InheritOnly
 
-                    accessControlType = 0;
-                    sid = "BA";
-                    accessMask = 1;
+                accessControlType = 0;
+                sid = "BA";
+                accessMask = 1;
 
-                    rawAcl = new RawAcl(0, 1);
-                    discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
-                    TestAddAccess(
-                        discretionaryAcl,
-                        rawAcl,
-                        (AccessControlType)accessControlType,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
-                        ),
-                        accessMask,
-                        (InheritanceFlags)inheritanceFlags,
-                        (PropagationFlags)propagationFlags
-                    );
-                }
-            );
+                rawAcl = new RawAcl(0, 1);
+                discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
+                TestAddAccess(
+                    discretionaryAcl,
+                    rawAcl,
+                    (AccessControlType)accessControlType,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
+                    ),
+                    accessMask,
+                    (InheritanceFlags)inheritanceFlags,
+                    (PropagationFlags)propagationFlags
+                );
+            });
 
             //Case 10, add Ace of NOT(AccessControlType.Allow |AccessControlType.Denied) to the DiscretionaryAcl with no ACE,
             // should throw appropriate exception for wrong parameter, bug#287188

@@ -677,17 +677,14 @@ namespace System.Net.Sockets.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void Socket_CreateUnixDomainSocket_Throws_OnWindows()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "path",
-                () => new UnixDomainSocketEndPoint(null)
+            AssertExtensions.Throws<ArgumentNullException>("path", () =>
+                new UnixDomainSocketEndPoint(null)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "path",
-                () => new UnixDomainSocketEndPoint("")
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("path", () =>
+                new UnixDomainSocketEndPoint("")
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "path",
-                () => new UnixDomainSocketEndPoint(new string('s', 1000))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("path", () =>
+                new UnixDomainSocketEndPoint(new string('s', 1000))
             );
             Assert.Throws<PlatformNotSupportedException>(() =>
                 new UnixDomainSocketEndPoint("hello")

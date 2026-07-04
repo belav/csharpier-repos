@@ -770,14 +770,10 @@ public class EndToEndTests : FunctionalTestBase
             var url = server.Url + "/authHub";
             var connection = new HubConnectionBuilder()
                 .WithLoggerFactory(LoggerFactory)
-                .WithUrl(
-                    url,
-                    HttpTransportType.LongPolling,
-                    o =>
-                    {
-                        o.AccessTokenProvider = () => Task.FromResult(token);
-                    }
-                )
+                .WithUrl(url, HttpTransportType.LongPolling, o =>
+                {
+                    o.AccessTokenProvider = () => Task.FromResult(token);
+                })
                 .Build();
 
             try

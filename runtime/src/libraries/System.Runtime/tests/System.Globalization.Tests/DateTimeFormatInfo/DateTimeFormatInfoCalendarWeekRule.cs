@@ -1000,9 +1000,8 @@ namespace System.Globalization.Tests
         )
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => format.CalendarWeekRule = value
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                format.CalendarWeekRule = value
             );
         }
 

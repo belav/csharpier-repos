@@ -65,9 +65,8 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Ctor_NullAttributeInAttributes_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "attributes",
-                () => new AttributeCollection(new Attribute[] { null })
+            AssertExtensions.Throws<ArgumentNullException>("attributes", () =>
+                new AttributeCollection(new Attribute[] { null })
             );
         }
 
@@ -112,9 +111,8 @@ namespace System.ComponentModel.Tests
         public void CopyTo_NullArray_ThrowsArgumentNullException()
         {
             var collection = new SubAttributeCollection();
-            Assert.Throws<ArgumentNullException>(
-                "destinationArray",
-                () => collection.CopyTo(null, 0)
+            Assert.Throws<ArgumentNullException>("destinationArray", () =>
+                collection.CopyTo(null, 0)
             );
         }
 
@@ -246,9 +244,8 @@ namespace System.ComponentModel.Tests
         public void GetDefaultAttribute_NullAttributeType_ThrowsArgumentNullException()
         {
             var collection = new SubAttributeCollection();
-            Assert.Throws<ArgumentNullException>(
-                "attributeType",
-                () => collection.GetDefaultAttribute(null)
+            Assert.Throws<ArgumentNullException>("attributeType", () =>
+                collection.GetDefaultAttribute(null)
             );
         }
 
@@ -340,9 +337,8 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void FromExisting_NullExisting_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "existing",
-                () => AttributeCollection.FromExisting(null, new Attribute[0])
+            AssertExtensions.Throws<ArgumentNullException>("existing", () =>
+                AttributeCollection.FromExisting(null, new Attribute[0])
             );
         }
 
@@ -350,9 +346,8 @@ namespace System.ComponentModel.Tests
         public void FromExisting_NullAttributeInNewAttributes_ThrowsArgumentNullException()
         {
             var existing = new AttributeCollection();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "newAttributes",
-                () => AttributeCollection.FromExisting(existing, new Attribute[] { null })
+            AssertExtensions.Throws<ArgumentNullException>("newAttributes", () =>
+                AttributeCollection.FromExisting(existing, new Attribute[] { null })
             );
         }
 

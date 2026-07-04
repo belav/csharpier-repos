@@ -210,12 +210,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                     //
                     // Just move all trivia from our statement to be trailing trivia of the previous
                     // statement
-                    editor.ReplaceNode(
-                        priorStatementSyntax,
-                        (s, g) =>
-                            s.WithAppendedTrailingTrivia(
-                                localDeclarationStatement.GetTrailingTrivia()
-                            )
+                    editor.ReplaceNode(priorStatementSyntax, (s, g) =>
+                        s.WithAppendedTrailingTrivia(localDeclarationStatement.GetTrailingTrivia())
                     );
                 }
                 else
@@ -238,9 +234,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                         }
                     }
 
-                    editor.ReplaceNode(
-                        nextStatementSyntax,
-                        (s, g) => s.WithPrependedNonIndentationTriviaFrom(localDeclarationStatement)
+                    editor.ReplaceNode(nextStatementSyntax, (s, g) =>
+                        s.WithPrependedNonIndentationTriviaFrom(localDeclarationStatement)
                     );
                 }
 
@@ -275,11 +270,9 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineDeclaration
                         )
                     )
                     {
-                        editor.ReplaceNode(
-                            declaration.Type,
-                            (t, g) =>
-                                t.WithTrailingTrivia(SyntaxFactory.ElasticSpace)
-                                    .WithoutAnnotations(Formatter.Annotation)
+                        editor.ReplaceNode(declaration.Type, (t, g) =>
+                            t.WithTrailingTrivia(SyntaxFactory.ElasticSpace)
+                                .WithoutAnnotations(Formatter.Annotation)
                         );
                     }
                 }

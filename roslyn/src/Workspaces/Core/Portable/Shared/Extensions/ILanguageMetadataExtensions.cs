@@ -51,9 +51,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             foreach (var service in services)
             {
                 var language = service.Metadata?.Language ?? string.Empty;
-                var list = builder.GetOrAdd(
-                    language,
-                    _ => ArrayBuilder<Lazy<TInterface, TMetadata>>.GetInstance()
+                var list = builder.GetOrAdd(language, _ =>
+                    ArrayBuilder<Lazy<TInterface, TMetadata>>.GetInstance()
                 );
                 list.Add(service);
             }
@@ -85,9 +84,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 {
                     if (!string.IsNullOrEmpty(language))
                     {
-                        var list = map.GetOrAdd(
-                            language,
-                            _ => ArrayBuilder<Lazy<TInterface, TMetadata>>.GetInstance()
+                        var list = map.GetOrAdd(language, _ =>
+                            ArrayBuilder<Lazy<TInterface, TMetadata>>.GetInstance()
                         );
                         list.Add(service);
                     }

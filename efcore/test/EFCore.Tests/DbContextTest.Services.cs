@@ -4215,9 +4215,8 @@ namespace Microsoft.EntityFrameworkCore
                 .BuildServiceProvider(validateScopes: true);
 
             using (
-                var context = new ChangeWarningsCacheContext(
-                    serviceProvider,
-                    b => b.Default(WarningBehavior.Ignore)
+                var context = new ChangeWarningsCacheContext(serviceProvider, b =>
+                    b.Default(WarningBehavior.Ignore)
                 )
             )
             {
@@ -4225,9 +4224,8 @@ namespace Microsoft.EntityFrameworkCore
             }
 
             using (
-                var context = new ChangeWarningsCacheContext(
-                    serviceProvider,
-                    b => b.Default(WarningBehavior.Log)
+                var context = new ChangeWarningsCacheContext(serviceProvider, b =>
+                    b.Default(WarningBehavior.Log)
                 )
             )
             {
@@ -4249,9 +4247,8 @@ namespace Microsoft.EntityFrameworkCore
                 .BuildServiceProvider(validateScopes: true);
 
             using (
-                var context = new ChangeWarningsCacheContext(
-                    serviceProvider,
-                    b => b.Throw(CoreEventId.QueryExecutionPlanned)
+                var context = new ChangeWarningsCacheContext(serviceProvider, b =>
+                    b.Throw(CoreEventId.QueryExecutionPlanned)
                 )
             )
             {
@@ -4259,9 +4256,8 @@ namespace Microsoft.EntityFrameworkCore
             }
 
             using (
-                var context = new ChangeWarningsCacheContext(
-                    serviceProvider,
-                    b => b.Log(CoreEventId.QueryExecutionPlanned)
+                var context = new ChangeWarningsCacheContext(serviceProvider, b =>
+                    b.Log(CoreEventId.QueryExecutionPlanned)
                 )
             )
             {

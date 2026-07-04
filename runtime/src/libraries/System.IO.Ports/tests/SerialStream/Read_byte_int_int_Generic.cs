@@ -372,9 +372,8 @@ namespace System.IO.Ports.Tests
 
         private void VerifyReadException(Stream serialStream, Type expectedException)
         {
-            Assert.Throws(
-                expectedException,
-                () => serialStream.Read(new byte[defaultByteArraySize], 0, defaultByteArraySize)
+            Assert.Throws(expectedException, () =>
+                serialStream.Read(new byte[defaultByteArraySize], 0, defaultByteArraySize)
             );
         }
 

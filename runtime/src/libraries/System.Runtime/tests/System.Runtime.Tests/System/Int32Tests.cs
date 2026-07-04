@@ -1574,9 +1574,8 @@ namespace System.Tests
         public static void TryParse_InvalidNumberStyle_ThrowsArgumentException(NumberStyles style)
         {
             int result = 0;
-            AssertExtensions.Throws<ArgumentException>(
-                "style",
-                () => int.TryParse("1", style, null, out result)
+            AssertExtensions.Throws<ArgumentException>("style", () =>
+                int.TryParse("1", style, null, out result)
             );
             Assert.Equal(default(int), result);
 
@@ -1827,9 +1826,8 @@ namespace System.Tests
                     Assert.Equal(0, result);
                 }
 
-                Assert.Throws(
-                    exceptionType,
-                    () => int.Parse(Encoding.UTF8.GetBytes(value), style, provider)
+                Assert.Throws(exceptionType, () =>
+                    int.Parse(Encoding.UTF8.GetBytes(value), style, provider)
                 );
 
                 Assert.False(int.TryParse(valueUtf8, style, provider, out result));

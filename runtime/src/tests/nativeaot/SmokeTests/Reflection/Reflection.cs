@@ -1569,25 +1569,20 @@ internal static class ReflectionTest
 
         public static void TestRefReturnMethodInvoke()
         {
-            TestRefReturnInvoke(
-                Mine.One,
-                (p, t) => p.GetGetMethod().Invoke(t, Array.Empty<object>())
+            TestRefReturnInvoke(Mine.One, (p, t) =>
+                p.GetGetMethod().Invoke(t, Array.Empty<object>())
             );
-            TestRefReturnInvoke(
-                "Hello",
-                (p, t) => p.GetGetMethod().Invoke(t, Array.Empty<object>())
+            TestRefReturnInvoke("Hello", (p, t) =>
+                p.GetGetMethod().Invoke(t, Array.Empty<object>())
             );
-            TestRefReturnInvoke(
-                new BigStruct { X = 123, D = 456 },
-                (p, t) => p.GetGetMethod().Invoke(t, Array.Empty<object>())
+            TestRefReturnInvoke(new BigStruct { X = 123, D = 456 }, (p, t) =>
+                p.GetGetMethod().Invoke(t, Array.Empty<object>())
             );
-            TestRefReturnInvoke(
-                new object(),
-                (p, t) => p.GetGetMethod().Invoke(t, Array.Empty<object>())
+            TestRefReturnInvoke(new object(), (p, t) =>
+                p.GetGetMethod().Invoke(t, Array.Empty<object>())
             );
-            TestRefReturnInvoke(
-                (object)null,
-                (p, t) => p.GetGetMethod().Invoke(t, Array.Empty<object>())
+            TestRefReturnInvoke((object)null, (p, t) =>
+                p.GetGetMethod().Invoke(t, Array.Empty<object>())
             );
 
             // Regression test

@@ -21,10 +21,8 @@ public partial struct SyntaxValueProvider
             if (x == y)
                 return true;
 
-            return x.SequenceEqual(
-                y,
-                0,
-                static (a, b, _) => EqualityComparer<T>.Default.Equals(a, b)
+            return x.SequenceEqual(y, 0, static (a, b, _) =>
+                EqualityComparer<T>.Default.Equals(a, b)
             );
         }
 

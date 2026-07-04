@@ -509,9 +509,8 @@ namespace System.Globalization.Tests
         public void GetEraName_InvalidEra_ThrowsArgumentOutOfRangeException(int era)
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "era",
-                () => format.GetEraName(era)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("era", () =>
+                format.GetEraName(era)
             );
         }
     }

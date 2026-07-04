@@ -33,42 +33,34 @@ class Test
 }
 ";
 
-            CompileAndVerify(
-                text,
-                verify: Verification.Fails,
-                symbolValidator: module =>
-                {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
-                        .GetMethod("M");
-                    Assert.Equal(RefKind.RefReadOnly, method.RefKind);
-                    Assert.True(method.ReturnsByRefReadonly);
+            CompileAndVerify(text, verify: Verification.Fails, symbolValidator: module =>
+            {
+                var method = module.ContainingAssembly.GetTypeByMetadataName("Test").GetMethod("M");
+                Assert.Equal(RefKind.RefReadOnly, method.RefKind);
+                Assert.True(method.ReturnsByRefReadonly);
 
-                    var parameter = method.GetParameters().Single();
-                    Assert.Equal(RefKind.In, parameter.RefKind);
+                var parameter = method.GetParameters().Single();
+                Assert.Equal(RefKind.In, parameter.RefKind);
 
-                    Assert.Empty(parameter.GetAttributes());
-                    Assert.Empty(method.GetReturnTypeAttributes());
+                Assert.Empty(parameter.GetAttributes());
+                Assert.Empty(method.GetReturnTypeAttributes());
 
-                    var peModule = (PEModuleSymbol)module;
-                    Assert.True(
-                        peModule.Module.HasIsReadOnlyAttribute(
-                            ((PEMethodSymbol)method).Signature.ReturnParam.Handle
-                        )
-                    );
-                    Assert.True(
-                        peModule.Module.HasIsReadOnlyAttribute(
-                            ((PEParameterSymbol)parameter).Handle
-                        )
-                    );
+                var peModule = (PEModuleSymbol)module;
+                Assert.True(
+                    peModule.Module.HasIsReadOnlyAttribute(
+                        ((PEMethodSymbol)method).Signature.ReturnParam.Handle
+                    )
+                );
+                Assert.True(
+                    peModule.Module.HasIsReadOnlyAttribute(((PEParameterSymbol)parameter).Handle)
+                );
 
-                    AssertDeclaresType(
-                        peModule,
-                        WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute,
-                        Accessibility.Public
-                    );
-                }
-            );
+                AssertDeclaresType(
+                    peModule,
+                    WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute,
+                    Accessibility.Public
+                );
+            });
         }
 
         [Fact]
@@ -82,32 +74,27 @@ class Test
 }
 ";
 
-            CompileAndVerify(
-                text,
-                symbolValidator: module =>
-                {
-                    var parameter = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
-                        .GetMethod("M")
-                        .GetParameters()
-                        .Single();
-                    Assert.Equal(RefKind.In, parameter.RefKind);
-                    Assert.Empty(parameter.GetAttributes());
+            CompileAndVerify(text, symbolValidator: module =>
+            {
+                var parameter = module
+                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .GetMethod("M")
+                    .GetParameters()
+                    .Single();
+                Assert.Equal(RefKind.In, parameter.RefKind);
+                Assert.Empty(parameter.GetAttributes());
 
-                    var peModule = (PEModuleSymbol)module;
-                    Assert.True(
-                        peModule.Module.HasIsReadOnlyAttribute(
-                            ((PEParameterSymbol)parameter).Handle
-                        )
-                    );
+                var peModule = (PEModuleSymbol)module;
+                Assert.True(
+                    peModule.Module.HasIsReadOnlyAttribute(((PEParameterSymbol)parameter).Handle)
+                );
 
-                    AssertDeclaresType(
-                        peModule,
-                        WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute,
-                        Accessibility.Internal
-                    );
-                }
-            );
+                AssertDeclaresType(
+                    peModule,
+                    WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute,
+                    Accessibility.Internal
+                );
+            });
         }
 
         [Fact]
@@ -122,19 +109,14 @@ class Test
 }
 ";
 
-            CompileAndVerify(
-                text,
-                symbolValidator: module =>
-                {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
-                        .GetMethod("M");
-                    Assert.Equal(RefKind.RefReadOnly, method.RefKind);
-                    Assert.True(method.ReturnsByRefReadonly);
+            CompileAndVerify(text, symbolValidator: module =>
+            {
+                var method = module.ContainingAssembly.GetTypeByMetadataName("Test").GetMethod("M");
+                Assert.Equal(RefKind.RefReadOnly, method.RefKind);
+                Assert.True(method.ReturnsByRefReadonly);
 
-                    Assert.Empty(method.GetReturnTypeAttributes());
-                }
-            );
+                Assert.Empty(method.GetReturnTypeAttributes());
+            });
         }
 
         [Fact]
@@ -195,22 +177,19 @@ struct Test
 }
 ";
 
-            CompileAndVerify(
-                text,
-                symbolValidator: module =>
-                {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
-                        .GetMethod("op_Addition");
-                    Assert.Equal(2, method.ParameterCount);
+            CompileAndVerify(text, symbolValidator: module =>
+            {
+                var method = module
+                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .GetMethod("op_Addition");
+                Assert.Equal(2, method.ParameterCount);
 
-                    foreach (var parameter in method.Parameters)
-                    {
-                        Assert.Equal(RefKind.In, parameter.RefKind);
-                        Assert.Empty(parameter.GetAttributes());
-                    }
+                foreach (var parameter in method.Parameters)
+                {
+                    Assert.Equal(RefKind.In, parameter.RefKind);
+                    Assert.Empty(parameter.GetAttributes());
                 }
-            );
+            });
         }
 
         [Fact]
@@ -224,21 +203,18 @@ struct Test
 }
 ";
 
-            CompileAndVerify(
-                text,
-                symbolValidator: module =>
-                {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
-                        .GetMethod("op_Addition");
-                    Assert.Equal(2, method.ParameterCount);
+            CompileAndVerify(text, symbolValidator: module =>
+            {
+                var method = module
+                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .GetMethod("op_Addition");
+                Assert.Equal(2, method.ParameterCount);
 
-                    foreach (var parameter in method.Parameters)
-                    {
-                        Assert.Empty(parameter.GetAttributes());
-                    }
+                foreach (var parameter in method.Parameters)
+                {
+                    Assert.Empty(parameter.GetAttributes());
                 }
-            );
+            });
         }
 
         [Fact]
@@ -261,24 +237,20 @@ struct Test
 }
 ";
 
-            CompileAndVerify(
-                codeB,
-                references: new[] { referenceA },
-                symbolValidator: module =>
+            CompileAndVerify(codeB, references: new[] { referenceA }, symbolValidator: module =>
+            {
+                var method = module
+                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .GetMethod("op_Addition");
+                Assert.Equal(2, method.ParameterCount);
+                foreach (var parameter in method.Parameters)
                 {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
-                        .GetMethod("op_Addition");
-                    Assert.Equal(2, method.ParameterCount);
-                    foreach (var parameter in method.Parameters)
-                    {
-                        Assert.Equal(RefKind.In, parameter.RefKind);
-                        Assert.Empty(parameter.GetAttributes());
-                    }
-
-                    AssertNoIsReadOnlyAttributeExists(module.ContainingAssembly);
+                    Assert.Equal(RefKind.In, parameter.RefKind);
+                    Assert.Empty(parameter.GetAttributes());
                 }
-            );
+
+                AssertNoIsReadOnlyAttributeExists(module.ContainingAssembly);
+            });
         }
 
         [Fact]
@@ -296,19 +268,16 @@ class Test
 }
 ";
 
-            CompileAndVerify(
-                text,
-                symbolValidator: module =>
-                {
-                    var parameter = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
-                        .GetMethod(".ctor")
-                        .Parameters.Single();
+            CompileAndVerify(text, symbolValidator: module =>
+            {
+                var parameter = module
+                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .GetMethod(".ctor")
+                    .Parameters.Single();
 
-                    Assert.Equal(RefKind.In, parameter.RefKind);
-                    Assert.Empty(parameter.GetAttributes());
-                }
-            );
+                Assert.Equal(RefKind.In, parameter.RefKind);
+                Assert.Empty(parameter.GetAttributes());
+            });
         }
 
         [Fact]
@@ -322,17 +291,14 @@ class Test
 }
 ";
 
-            CompileAndVerify(
-                text,
-                symbolValidator: module =>
-                {
-                    var parameter = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
-                        .GetMethod(".ctor")
-                        .Parameters.Single();
-                    Assert.Empty(parameter.GetAttributes());
-                }
-            );
+            CompileAndVerify(text, symbolValidator: module =>
+            {
+                var parameter = module
+                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .GetMethod(".ctor")
+                    .Parameters.Single();
+                Assert.Empty(parameter.GetAttributes());
+            });
         }
 
         [Fact]
@@ -355,22 +321,18 @@ class Test
 }
 ";
 
-            CompileAndVerify(
-                codeB,
-                references: new[] { referenceA },
-                symbolValidator: module =>
-                {
-                    var parameter = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
-                        .GetMethod(".ctor")
-                        .Parameters.Single();
+            CompileAndVerify(codeB, references: new[] { referenceA }, symbolValidator: module =>
+            {
+                var parameter = module
+                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .GetMethod(".ctor")
+                    .Parameters.Single();
 
-                    Assert.Equal(RefKind.In, parameter.RefKind);
-                    Assert.Empty(parameter.GetAttributes());
+                Assert.Equal(RefKind.In, parameter.RefKind);
+                Assert.Empty(parameter.GetAttributes());
 
-                    AssertNoIsReadOnlyAttributeExists(module.ContainingAssembly);
-                }
-            );
+                AssertNoIsReadOnlyAttributeExists(module.ContainingAssembly);
+            });
         }
 
         [Fact]
@@ -390,24 +352,21 @@ class Test
 }
 ";
 
-            CompileAndVerify(
-                text,
-                symbolValidator: module =>
+            CompileAndVerify(text, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Test");
+
+                AssertProperty(type.GetProperty("P1"));
+                AssertProperty(type.GetProperty("P2"));
+
+                void AssertProperty(PropertySymbol property)
                 {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Test");
+                    Assert.Equal(RefKind.RefReadOnly, property.RefKind);
+                    Assert.True(property.ReturnsByRefReadonly);
 
-                    AssertProperty(type.GetProperty("P1"));
-                    AssertProperty(type.GetProperty("P2"));
-
-                    void AssertProperty(PropertySymbol property)
-                    {
-                        Assert.Equal(RefKind.RefReadOnly, property.RefKind);
-                        Assert.True(property.ReturnsByRefReadonly);
-
-                        Assert.Empty(property.GetAttributes());
-                    }
+                    Assert.Empty(property.GetAttributes());
                 }
-            );
+            });
         }
 
         [Fact]
@@ -423,24 +382,21 @@ class Test
 }
 ";
 
-            CompileAndVerify(
-                text,
-                symbolValidator: module =>
+            CompileAndVerify(text, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Test");
+
+                AssertProperty(type.GetProperty("P1"));
+                AssertProperty(type.GetProperty("P2"));
+
+                void AssertProperty(PropertySymbol property)
                 {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Test");
+                    Assert.Equal(RefKind.RefReadOnly, property.RefKind);
+                    Assert.True(property.ReturnsByRefReadonly);
 
-                    AssertProperty(type.GetProperty("P1"));
-                    AssertProperty(type.GetProperty("P2"));
-
-                    void AssertProperty(PropertySymbol property)
-                    {
-                        Assert.Equal(RefKind.RefReadOnly, property.RefKind);
-                        Assert.True(property.ReturnsByRefReadonly);
-
-                        Assert.Empty(property.GetAttributes());
-                    }
+                    Assert.Empty(property.GetAttributes());
                 }
-            );
+            });
         }
 
         [Fact]
@@ -465,26 +421,22 @@ class Test
 }
 ";
 
-            CompileAndVerify(
-                codeB,
-                references: new[] { referenceA },
-                symbolValidator: module =>
+            CompileAndVerify(codeB, references: new[] { referenceA }, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Test");
+
+                AssertProperty(type.GetProperty("P1"));
+                AssertProperty(type.GetProperty("P2"));
+
+                void AssertProperty(PropertySymbol property)
                 {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Test");
+                    Assert.Equal(RefKind.RefReadOnly, property.RefKind);
+                    Assert.True(property.ReturnsByRefReadonly);
+                    Assert.Empty(property.GetAttributes());
 
-                    AssertProperty(type.GetProperty("P1"));
-                    AssertProperty(type.GetProperty("P2"));
-
-                    void AssertProperty(PropertySymbol property)
-                    {
-                        Assert.Equal(RefKind.RefReadOnly, property.RefKind);
-                        Assert.True(property.ReturnsByRefReadonly);
-                        Assert.Empty(property.GetAttributes());
-
-                        AssertNoIsReadOnlyAttributeExists(module.ContainingAssembly);
-                    }
+                    AssertNoIsReadOnlyAttributeExists(module.ContainingAssembly);
                 }
-            );
+            });
         }
 
         [Fact]
@@ -502,24 +454,20 @@ class Test
 }
 ";
 
-            CompileAndVerify(
-                text,
-                verify: Verification.Fails,
-                symbolValidator: module =>
-                {
-                    var indexer = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
-                        .GetProperty("this[]");
-                    Assert.Equal(RefKind.RefReadOnly, indexer.RefKind);
-                    Assert.True(indexer.ReturnsByRefReadonly);
+            CompileAndVerify(text, verify: Verification.Fails, symbolValidator: module =>
+            {
+                var indexer = module
+                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .GetProperty("this[]");
+                Assert.Equal(RefKind.RefReadOnly, indexer.RefKind);
+                Assert.True(indexer.ReturnsByRefReadonly);
 
-                    var parameter = indexer.GetParameters().Single();
-                    Assert.Equal(RefKind.In, parameter.RefKind);
+                var parameter = indexer.GetParameters().Single();
+                Assert.Equal(RefKind.In, parameter.RefKind);
 
-                    Assert.Empty(parameter.GetAttributes());
-                    Assert.Empty(indexer.GetAttributes());
-                }
-            );
+                Assert.Empty(parameter.GetAttributes());
+                Assert.Empty(indexer.GetAttributes());
+            });
         }
 
         [Fact]
@@ -533,20 +481,17 @@ class Test
 }
 ";
 
-            CompileAndVerify(
-                text,
-                symbolValidator: module =>
-                {
-                    var parameter = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
-                        .GetProperty("this[]")
-                        .GetParameters()
-                        .Single();
-                    Assert.Equal(RefKind.In, parameter.RefKind);
+            CompileAndVerify(text, symbolValidator: module =>
+            {
+                var parameter = module
+                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .GetProperty("this[]")
+                    .GetParameters()
+                    .Single();
+                Assert.Equal(RefKind.In, parameter.RefKind);
 
-                    Assert.Empty(parameter.GetAttributes());
-                }
-            );
+                Assert.Empty(parameter.GetAttributes());
+            });
         }
 
         [Fact]
@@ -561,19 +506,16 @@ class Test
 }
 ";
 
-            CompileAndVerify(
-                text,
-                symbolValidator: module =>
-                {
-                    var indexer = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
-                        .GetProperty("this[]");
-                    Assert.Equal(RefKind.RefReadOnly, indexer.RefKind);
-                    Assert.True(indexer.ReturnsByRefReadonly);
+            CompileAndVerify(text, symbolValidator: module =>
+            {
+                var indexer = module
+                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .GetProperty("this[]");
+                Assert.Equal(RefKind.RefReadOnly, indexer.RefKind);
+                Assert.True(indexer.ReturnsByRefReadonly);
 
-                    Assert.Empty(indexer.GetAttributes());
-                }
-            );
+                Assert.Empty(indexer.GetAttributes());
+            });
         }
 
         [Fact]
@@ -631,23 +573,20 @@ namespace System.Runtime.CompilerServices
 public delegate ref readonly int D(in int x);
 ";
 
-            CompileAndVerify(
-                text,
-                symbolValidator: module =>
-                {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("D")
-                        .DelegateInvokeMethod;
-                    Assert.Equal(RefKind.RefReadOnly, method.RefKind);
-                    Assert.True(method.ReturnsByRefReadonly);
+            CompileAndVerify(text, symbolValidator: module =>
+            {
+                var method = module
+                    .ContainingAssembly.GetTypeByMetadataName("D")
+                    .DelegateInvokeMethod;
+                Assert.Equal(RefKind.RefReadOnly, method.RefKind);
+                Assert.True(method.ReturnsByRefReadonly);
 
-                    var parameter = method.GetParameters().Single();
-                    Assert.Equal(RefKind.In, parameter.RefKind);
+                var parameter = method.GetParameters().Single();
+                Assert.Equal(RefKind.In, parameter.RefKind);
 
-                    Assert.Empty(parameter.GetAttributes());
-                    Assert.Empty(method.GetReturnTypeAttributes());
-                }
-            );
+                Assert.Empty(parameter.GetAttributes());
+                Assert.Empty(method.GetReturnTypeAttributes());
+            });
         }
 
         [Fact]
@@ -658,18 +597,15 @@ public delegate ref readonly int D(in int x);
 public delegate void D(in int x);
 ";
 
-            CompileAndVerify(
-                text,
-                symbolValidator: module =>
-                {
-                    var parameter = module
-                        .ContainingAssembly.GetTypeByMetadataName("D")
-                        .DelegateInvokeMethod.GetParameters()
-                        .Single();
-                    Assert.Equal(RefKind.In, parameter.RefKind);
-                    Assert.Empty(parameter.GetAttributes());
-                }
-            );
+            CompileAndVerify(text, symbolValidator: module =>
+            {
+                var parameter = module
+                    .ContainingAssembly.GetTypeByMetadataName("D")
+                    .DelegateInvokeMethod.GetParameters()
+                    .Single();
+                Assert.Equal(RefKind.In, parameter.RefKind);
+                Assert.Empty(parameter.GetAttributes());
+            });
         }
 
         [Fact]
@@ -680,18 +616,15 @@ public delegate void D(in int x);
 public delegate ref readonly int D();
 ";
 
-            CompileAndVerify(
-                text,
-                symbolValidator: module =>
-                {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("D")
-                        .DelegateInvokeMethod;
-                    Assert.Equal(RefKind.RefReadOnly, method.RefKind);
-                    Assert.True(method.ReturnsByRefReadonly);
-                    Assert.Empty(method.GetReturnTypeAttributes());
-                }
-            );
+            CompileAndVerify(text, symbolValidator: module =>
+            {
+                var method = module
+                    .ContainingAssembly.GetTypeByMetadataName("D")
+                    .DelegateInvokeMethod;
+                Assert.Equal(RefKind.RefReadOnly, method.RefKind);
+                Assert.True(method.ReturnsByRefReadonly);
+                Assert.Empty(method.GetReturnTypeAttributes());
+            });
         }
 
         [Fact]
@@ -711,26 +644,22 @@ namespace System.Runtime.CompilerServices
 public delegate ref readonly int D(in int x);
 ";
 
-            CompileAndVerify(
-                codeB,
-                references: new[] { referenceA },
-                symbolValidator: module =>
-                {
-                    var method = module
-                        .ContainingAssembly.GetTypeByMetadataName("D")
-                        .DelegateInvokeMethod;
-                    Assert.Equal(RefKind.RefReadOnly, method.RefKind);
-                    Assert.True(method.ReturnsByRefReadonly);
+            CompileAndVerify(codeB, references: new[] { referenceA }, symbolValidator: module =>
+            {
+                var method = module
+                    .ContainingAssembly.GetTypeByMetadataName("D")
+                    .DelegateInvokeMethod;
+                Assert.Equal(RefKind.RefReadOnly, method.RefKind);
+                Assert.True(method.ReturnsByRefReadonly);
 
-                    var parameter = method.GetParameters().Single();
-                    Assert.Equal(RefKind.In, parameter.RefKind);
+                var parameter = method.GetParameters().Single();
+                Assert.Equal(RefKind.In, parameter.RefKind);
 
-                    Assert.Empty(parameter.GetAttributes());
-                    Assert.Empty(method.GetReturnTypeAttributes());
+                Assert.Empty(parameter.GetAttributes());
+                Assert.Empty(method.GetReturnTypeAttributes());
 
-                    AssertNoIsReadOnlyAttributeExists(module.ContainingAssembly);
-                }
-            );
+                AssertNoIsReadOnlyAttributeExists(module.ContainingAssembly);
+            });
         }
 
         [Fact]
@@ -791,20 +720,16 @@ public class Test
 ";
 
             var options = TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All);
-            CompileAndVerify(
-                text,
-                options: options,
-                symbolValidator: module =>
-                {
-                    var parameter = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
-                        .GetMethod("<M>g__Inner|0_0")
-                        .GetParameters()
-                        .Single();
-                    Assert.Equal(RefKind.In, parameter.RefKind);
-                    Assert.Empty(parameter.GetAttributes());
-                }
-            );
+            CompileAndVerify(text, options: options, symbolValidator: module =>
+            {
+                var parameter = module
+                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .GetMethod("<M>g__Inner|0_0")
+                    .GetParameters()
+                    .Single();
+                Assert.Equal(RefKind.In, parameter.RefKind);
+                Assert.Empty(parameter.GetAttributes());
+            });
         }
 
         [Fact]
@@ -957,19 +882,15 @@ class Test
 ";
 
             var options = TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All);
-            CompileAndVerify(
-                text,
-                options: options,
-                symbolValidator: module =>
-                {
-                    var parameter = module
-                        .GlobalNamespace.GetMember<MethodSymbol>("Test.<>c.<M1>b__0_0")
-                        .GetParameters()
-                        .Single();
-                    Assert.Equal(RefKind.In, parameter.RefKind);
-                    Assert.Empty(parameter.GetAttributes());
-                }
-            );
+            CompileAndVerify(text, options: options, symbolValidator: module =>
+            {
+                var parameter = module
+                    .GlobalNamespace.GetMember<MethodSymbol>("Test.<>c.<M1>b__0_0")
+                    .GetParameters()
+                    .Single();
+                Assert.Equal(RefKind.In, parameter.RefKind);
+                Assert.Empty(parameter.GetAttributes());
+            });
         }
 
         [Fact]
@@ -992,17 +913,13 @@ class Test
 ";
 
             var options = TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All);
-            CompileAndVerify(
-                text,
-                options: options,
-                symbolValidator: module =>
-                {
-                    var method = module.GlobalNamespace.GetMember<MethodSymbol>("Test.<M1>b__1_0");
-                    Assert.Equal(RefKind.RefReadOnly, method.RefKind);
-                    Assert.True(method.ReturnsByRefReadonly);
-                    Assert.Empty(method.GetReturnTypeAttributes());
-                }
-            );
+            CompileAndVerify(text, options: options, symbolValidator: module =>
+            {
+                var method = module.GlobalNamespace.GetMember<MethodSymbol>("Test.<M1>b__1_0");
+                Assert.Equal(RefKind.RefReadOnly, method.RefKind);
+                Assert.True(method.ReturnsByRefReadonly);
+                Assert.Empty(method.GetReturnTypeAttributes());
+            });
         }
 
         [Fact]
@@ -1354,20 +1271,16 @@ public class Test1
                 options: options
             );
 
-            CompileAndVerify(
-                code2,
-                verify: Verification.Fails,
-                symbolValidator: module =>
-                {
-                    // IsReadOnly is not generated in assembly
-                    var isReadOnlyAttributeName = WellKnownTypes.GetMetadataName(
-                        WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute
-                    );
-                    Assert.Null(
-                        module.ContainingAssembly.GetTypeByMetadataName(isReadOnlyAttributeName)
-                    );
-                }
-            );
+            CompileAndVerify(code2, verify: Verification.Fails, symbolValidator: module =>
+            {
+                // IsReadOnly is not generated in assembly
+                var isReadOnlyAttributeName = WellKnownTypes.GetMetadataName(
+                    WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute
+                );
+                Assert.Null(
+                    module.ContainingAssembly.GetTypeByMetadataName(isReadOnlyAttributeName)
+                );
+            });
 
             var code3 = CreateCompilation(
                 @"
@@ -1379,21 +1292,18 @@ public class Test2
                 options: options
             );
 
-            CompileAndVerify(
-                code3,
-                symbolValidator: module =>
-                {
-                    // IsReadOnly is generated in assembly
-                    AssertGeneratedEmbeddedAttribute(
-                        module.ContainingAssembly,
-                        AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
-                    );
-                    AssertGeneratedEmbeddedAttribute(
-                        module.ContainingAssembly,
-                        AttributeDescription.IsReadOnlyAttribute.FullName
-                    );
-                }
-            );
+            CompileAndVerify(code3, symbolValidator: module =>
+            {
+                // IsReadOnly is generated in assembly
+                AssertGeneratedEmbeddedAttribute(
+                    module.ContainingAssembly,
+                    AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
+                );
+                AssertGeneratedEmbeddedAttribute(
+                    module.ContainingAssembly,
+                    AttributeDescription.IsReadOnlyAttribute.FullName
+                );
+            });
         }
 
         [Fact]
@@ -1700,25 +1610,22 @@ public interface Test
 }"
             );
 
-            CompileAndVerify(
-                comAssembly,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Test");
+            CompileAndVerify(comAssembly, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Test");
 
-                    var property = type.GetMember<PEPropertySymbol>("Property");
-                    Assert.NotNull(property);
-                    Assert.Empty(property.GetAttributes());
+                var property = type.GetMember<PEPropertySymbol>("Property");
+                Assert.NotNull(property);
+                Assert.Empty(property.GetAttributes());
 
-                    var method = type.GetMethod("Method");
-                    Assert.NotNull(method);
-                    Assert.Empty(method.GetReturnTypeAttributes());
+                var method = type.GetMethod("Method");
+                Assert.NotNull(method);
+                Assert.Empty(method.GetReturnTypeAttributes());
 
-                    var parameter = method.Parameters.Single();
-                    Assert.NotNull(parameter);
-                    Assert.Empty(parameter.GetAttributes());
-                }
-            );
+                var parameter = method.Parameters.Single();
+                Assert.NotNull(parameter);
+                Assert.Empty(parameter.GetAttributes());
+            });
 
             var code =
                 @"
@@ -2065,34 +1972,28 @@ namespace System.Runtime.CompilerServices
     }
 }";
 
-            CompileAndVerify(
-                code,
-                verify: Verification.Passes,
-                symbolValidator: module =>
-                {
-                    var isReadOnlyAttributeName = WellKnownTypes.GetMetadataName(
-                        WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute
-                    );
-                    var type = module.ContainingAssembly.GetTypeByMetadataName(
-                        isReadOnlyAttributeName
-                    );
+            CompileAndVerify(code, verify: Verification.Passes, symbolValidator: module =>
+            {
+                var isReadOnlyAttributeName = WellKnownTypes.GetMetadataName(
+                    WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute
+                );
+                var type = module.ContainingAssembly.GetTypeByMetadataName(isReadOnlyAttributeName);
 
-                    var method = type.GetMethod("Method");
-                    Assert.Empty(method.GetReturnTypeAttributes());
-                    Assert.Empty(method.Parameters.Single().GetAttributes());
+                var method = type.GetMethod("Method");
+                Assert.Empty(method.GetReturnTypeAttributes());
+                Assert.Empty(method.Parameters.Single().GetAttributes());
 
-                    var @operator = type.GetMethod("op_Addition");
-                    Assert.Empty(@operator.Parameters[0].GetAttributes());
-                    Assert.Empty(@operator.Parameters[1].GetAttributes());
+                var @operator = type.GetMethod("op_Addition");
+                Assert.Empty(@operator.Parameters[0].GetAttributes());
+                Assert.Empty(@operator.Parameters[1].GetAttributes());
 
-                    var property = type.GetProperty("Property");
-                    Assert.Empty(property.GetAttributes());
+                var property = type.GetProperty("Property");
+                Assert.Empty(property.GetAttributes());
 
-                    var indexer = type.GetProperty("this[]");
-                    Assert.Empty(indexer.GetAttributes());
-                    Assert.Empty(indexer.Parameters.Single().GetAttributes());
-                }
-            );
+                var indexer = type.GetProperty("this[]");
+                Assert.Empty(indexer.GetAttributes());
+                Assert.Empty(indexer.Parameters.Single().GetAttributes());
+            });
         }
 
         [Fact]
@@ -2116,34 +2017,28 @@ namespace System.Runtime.CompilerServices
     }
 }";
 
-            CompileAndVerify(
-                code,
-                verify: Verification.Passes,
-                symbolValidator: module =>
-                {
-                    var isReadOnlyAttributeName = WellKnownTypes.GetMetadataName(
-                        WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute
-                    );
-                    var type = module.ContainingAssembly.GetTypeByMetadataName(
-                        isReadOnlyAttributeName
-                    );
+            CompileAndVerify(code, verify: Verification.Passes, symbolValidator: module =>
+            {
+                var isReadOnlyAttributeName = WellKnownTypes.GetMetadataName(
+                    WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute
+                );
+                var type = module.ContainingAssembly.GetTypeByMetadataName(isReadOnlyAttributeName);
 
-                    var method = type.GetMethod("Method");
-                    Assert.Empty(method.GetReturnTypeAttributes());
-                    Assert.Empty(method.Parameters.Single().GetAttributes());
+                var method = type.GetMethod("Method");
+                Assert.Empty(method.GetReturnTypeAttributes());
+                Assert.Empty(method.Parameters.Single().GetAttributes());
 
-                    var @operator = type.GetMethod("op_Addition");
-                    Assert.Empty(@operator.Parameters[0].GetAttributes());
-                    Assert.Empty(@operator.Parameters[1].GetAttributes());
+                var @operator = type.GetMethod("op_Addition");
+                Assert.Empty(@operator.Parameters[0].GetAttributes());
+                Assert.Empty(@operator.Parameters[1].GetAttributes());
 
-                    var property = type.GetProperty("Property");
-                    Assert.Empty(property.GetAttributes());
+                var property = type.GetProperty("Property");
+                Assert.Empty(property.GetAttributes());
 
-                    var indexer = type.GetProperty("this[]");
-                    Assert.Empty(indexer.GetAttributes());
-                    Assert.Empty(indexer.Parameters.Single().GetAttributes());
-                }
-            );
+                var indexer = type.GetProperty("this[]");
+                Assert.Empty(indexer.GetAttributes());
+                Assert.Empty(indexer.Parameters.Single().GetAttributes());
+            });
         }
 
         [Fact]
@@ -2170,29 +2065,25 @@ public class Child : System.Runtime.CompilerServices.IsReadOnlyAttribute
     public ref readonly int this[in int x] => ref value;
 }";
 
-            CompileAndVerify(
-                code,
-                verify: Verification.Passes,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Child");
+            CompileAndVerify(code, verify: Verification.Passes, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Child");
 
-                    var method = type.GetMethod("Method");
-                    Assert.Empty(method.GetReturnTypeAttributes());
-                    Assert.Empty(method.Parameters.Single().GetAttributes());
+                var method = type.GetMethod("Method");
+                Assert.Empty(method.GetReturnTypeAttributes());
+                Assert.Empty(method.Parameters.Single().GetAttributes());
 
-                    var @operator = type.GetMethod("op_Addition");
-                    Assert.Empty(@operator.Parameters[0].GetAttributes());
-                    Assert.Empty(@operator.Parameters[1].GetAttributes());
+                var @operator = type.GetMethod("op_Addition");
+                Assert.Empty(@operator.Parameters[0].GetAttributes());
+                Assert.Empty(@operator.Parameters[1].GetAttributes());
 
-                    var property = type.GetProperty("Property");
-                    Assert.Empty(property.GetAttributes());
+                var property = type.GetProperty("Property");
+                Assert.Empty(property.GetAttributes());
 
-                    var indexer = type.GetProperty("this[]");
-                    Assert.Empty(indexer.GetAttributes());
-                    Assert.Empty(indexer.Parameters.Single().GetAttributes());
-                }
-            );
+                var indexer = type.GetProperty("this[]");
+                Assert.Empty(indexer.GetAttributes());
+                Assert.Empty(indexer.Parameters.Single().GetAttributes());
+            });
         }
 
         [Fact]
@@ -2224,25 +2115,21 @@ public class Child : System.Runtime.CompilerServices.IsReadOnlyAttribute
     public override ref readonly int this[in int x] => ref value;
 }";
 
-            CompileAndVerify(
-                code,
-                verify: Verification.Passes,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Child");
+            CompileAndVerify(code, verify: Verification.Passes, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Child");
 
-                    var method = type.GetMethod("Method");
-                    Assert.Empty(method.GetReturnTypeAttributes());
-                    Assert.Empty(method.Parameters.Single().GetAttributes());
+                var method = type.GetMethod("Method");
+                Assert.Empty(method.GetReturnTypeAttributes());
+                Assert.Empty(method.Parameters.Single().GetAttributes());
 
-                    var property = type.GetProperty("Property");
-                    Assert.Empty(property.GetAttributes());
+                var property = type.GetProperty("Property");
+                Assert.Empty(property.GetAttributes());
 
-                    var indexer = type.GetProperty("this[]");
-                    Assert.Empty(indexer.GetAttributes());
-                    Assert.Empty(indexer.Parameters.Single().GetAttributes());
-                }
-            );
+                var indexer = type.GetProperty("this[]");
+                Assert.Empty(indexer.GetAttributes());
+                Assert.Empty(indexer.Parameters.Single().GetAttributes());
+            });
         }
 
         [Fact]
@@ -2329,28 +2216,24 @@ namespace System.Runtime.CompilerServices
     }
 }";
 
-            CompileAndVerify(
-                code,
-                verify: Verification.Passes,
-                symbolValidator: module =>
-                {
-                    var typeName = WellKnownTypes.GetMetadataName(
-                        WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute
-                    );
-                    var type = module.ContainingAssembly.GetTypeByMetadataName(typeName);
+            CompileAndVerify(code, verify: Verification.Passes, symbolValidator: module =>
+            {
+                var typeName = WellKnownTypes.GetMetadataName(
+                    WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute
+                );
+                var type = module.ContainingAssembly.GetTypeByMetadataName(typeName);
 
-                    var method = type.GetMethod("Method");
-                    Assert.Empty(method.GetReturnTypeAttributes());
-                    Assert.Empty(method.Parameters.Single().GetAttributes());
+                var method = type.GetMethod("Method");
+                Assert.Empty(method.GetReturnTypeAttributes());
+                Assert.Empty(method.Parameters.Single().GetAttributes());
 
-                    var property = type.GetProperty("Property");
-                    Assert.Empty(property.GetAttributes());
+                var property = type.GetProperty("Property");
+                Assert.Empty(property.GetAttributes());
 
-                    var indexer = type.GetProperty("this[]");
-                    Assert.Empty(indexer.GetAttributes());
-                    Assert.Empty(indexer.Parameters.Single().GetAttributes());
-                }
-            );
+                var indexer = type.GetProperty("this[]");
+                Assert.Empty(indexer.GetAttributes());
+                Assert.Empty(indexer.Parameters.Single().GetAttributes());
+            });
         }
 
         [Fact]
@@ -2436,34 +2319,28 @@ namespace System.Runtime.CompilerServices
     }
 }";
 
-            CompileAndVerify(
-                code,
-                verify: Verification.Passes,
-                symbolValidator: module =>
-                {
-                    var isReadOnlyAttributeName = WellKnownTypes.GetMetadataName(
-                        WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute
-                    );
-                    var type = module.ContainingAssembly.GetTypeByMetadataName(
-                        isReadOnlyAttributeName
-                    );
+            CompileAndVerify(code, verify: Verification.Passes, symbolValidator: module =>
+            {
+                var isReadOnlyAttributeName = WellKnownTypes.GetMetadataName(
+                    WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute
+                );
+                var type = module.ContainingAssembly.GetTypeByMetadataName(isReadOnlyAttributeName);
 
-                    var method = type.GetMethod("Method");
-                    Assert.Empty(method.GetReturnTypeAttributes());
-                    Assert.Empty(method.Parameters.Single().GetAttributes());
+                var method = type.GetMethod("Method");
+                Assert.Empty(method.GetReturnTypeAttributes());
+                Assert.Empty(method.Parameters.Single().GetAttributes());
 
-                    var @operator = type.GetMethod("op_Addition");
-                    Assert.Empty(@operator.Parameters[0].GetAttributes());
-                    Assert.Empty(@operator.Parameters[1].GetAttributes());
+                var @operator = type.GetMethod("op_Addition");
+                Assert.Empty(@operator.Parameters[0].GetAttributes());
+                Assert.Empty(@operator.Parameters[1].GetAttributes());
 
-                    var property = type.GetProperty("Property");
-                    Assert.Empty(property.GetAttributes());
+                var property = type.GetProperty("Property");
+                Assert.Empty(property.GetAttributes());
 
-                    var indexer = type.GetProperty("this[]");
-                    Assert.Empty(indexer.GetAttributes());
-                    Assert.Empty(indexer.Parameters.Single().GetAttributes());
-                }
-            );
+                var indexer = type.GetProperty("this[]");
+                Assert.Empty(indexer.GetAttributes());
+                Assert.Empty(indexer.Parameters.Single().GetAttributes());
+            });
         }
 
         [Fact]
@@ -2527,30 +2404,24 @@ namespace System.Runtime.CompilerServices
     }
 }";
 
-            CompileAndVerify(
-                code,
-                verify: Verification.Passes,
-                symbolValidator: module =>
-                {
-                    var typeName = WellKnownTypes.GetMetadataName(
-                        WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute
-                    );
-                    var type = module.ContainingAssembly.GetTypeByMetadataName(typeName);
+            CompileAndVerify(code, verify: Verification.Passes, symbolValidator: module =>
+            {
+                var typeName = WellKnownTypes.GetMetadataName(
+                    WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute
+                );
+                var type = module.ContainingAssembly.GetTypeByMetadataName(typeName);
 
-                    var method = type.GetMethod("System.Runtime.CompilerServices.ITest.Method");
-                    Assert.Empty(method.GetReturnTypeAttributes());
-                    Assert.Empty(method.Parameters.Single().GetAttributes());
+                var method = type.GetMethod("System.Runtime.CompilerServices.ITest.Method");
+                Assert.Empty(method.GetReturnTypeAttributes());
+                Assert.Empty(method.Parameters.Single().GetAttributes());
 
-                    var property = type.GetProperty(
-                        "System.Runtime.CompilerServices.ITest.Property"
-                    );
-                    Assert.Empty(property.GetAttributes());
+                var property = type.GetProperty("System.Runtime.CompilerServices.ITest.Property");
+                Assert.Empty(property.GetAttributes());
 
-                    var indexer = type.GetProperty("System.Runtime.CompilerServices.ITest.Item");
-                    Assert.Empty(indexer.GetAttributes());
-                    Assert.Empty(indexer.Parameters.Single().GetAttributes());
-                }
-            );
+                var indexer = type.GetProperty("System.Runtime.CompilerServices.ITest.Item");
+                Assert.Empty(indexer.GetAttributes());
+                Assert.Empty(indexer.Parameters.Single().GetAttributes());
+            });
         }
 
         [Fact]
@@ -2639,25 +2510,21 @@ public class TestImpl : ITest
     ref readonly int ITest.this[in int x] => ref value;
 }";
 
-            CompileAndVerify(
-                code,
-                verify: Verification.Passes,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("TestImpl");
+            CompileAndVerify(code, verify: Verification.Passes, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("TestImpl");
 
-                    var method = type.GetMethod("ITest.Method");
-                    Assert.Empty(method.GetReturnTypeAttributes());
-                    Assert.Empty(method.Parameters.Single().GetAttributes());
+                var method = type.GetMethod("ITest.Method");
+                Assert.Empty(method.GetReturnTypeAttributes());
+                Assert.Empty(method.Parameters.Single().GetAttributes());
 
-                    var property = type.GetProperty("ITest.Property");
-                    Assert.Empty(property.GetAttributes());
+                var property = type.GetProperty("ITest.Property");
+                Assert.Empty(property.GetAttributes());
 
-                    var indexer = type.GetProperty("ITest.Item");
-                    Assert.Empty(indexer.GetAttributes());
-                    Assert.Empty(indexer.Parameters.Single().GetAttributes());
-                }
-            );
+                var indexer = type.GetProperty("ITest.Item");
+                Assert.Empty(indexer.GetAttributes());
+                Assert.Empty(indexer.Parameters.Single().GetAttributes());
+            });
         }
 
         [Fact]

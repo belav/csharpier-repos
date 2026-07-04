@@ -283,9 +283,8 @@ namespace System.Composition.Hosting.Core.Tests
                 )
             )
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "key",
-                    () => host.TryGetExport((CompositionContract)null, out object export)
+                AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                    host.TryGetExport((CompositionContract)null, out object export)
                 );
             }
         }
@@ -369,16 +368,11 @@ namespace System.Composition.Hosting.Core.Tests
         [Fact]
         public void CreateCompositionHost_NullProvider_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "providers",
-                () => CompositionHost.CreateCompositionHost(null)
+            AssertExtensions.Throws<ArgumentNullException>("providers", () =>
+                CompositionHost.CreateCompositionHost(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "providers",
-                () =>
-                    CompositionHost.CreateCompositionHost(
-                        (IEnumerable<ExportDescriptorProvider>)null
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("providers", () =>
+                CompositionHost.CreateCompositionHost((IEnumerable<ExportDescriptorProvider>)null)
             );
         }
 

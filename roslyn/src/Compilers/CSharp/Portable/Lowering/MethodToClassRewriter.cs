@@ -458,9 +458,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             if (proxies.TryGetValue(parameterOrLocal, out CapturedSymbolReplacement? proxy))
             {
-                replacement = proxy.Replacement(
-                    syntax,
-                    frameType => FramePointer(syntax, frameType)
+                replacement = proxy.Replacement(syntax, frameType =>
+                    FramePointer(syntax, frameType)
                 );
                 return true;
             }

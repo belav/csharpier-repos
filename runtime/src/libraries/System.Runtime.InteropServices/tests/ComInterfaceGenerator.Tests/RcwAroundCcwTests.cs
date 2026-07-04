@@ -384,20 +384,14 @@ namespace ComInterfaceGenerator.Tests
             {
                 obj.ByValueInOutParam(strings);
             });
-            Assert.Throws(
-                hrException,
-                () =>
-                {
-                    obj.OutParam(out strings);
-                }
-            );
-            Assert.Throws(
-                hrException,
-                () =>
-                {
-                    _ = obj.ReturnValue();
-                }
-            );
+            Assert.Throws(hrException, () =>
+            {
+                obj.OutParam(out strings);
+            });
+            Assert.Throws(hrException, () =>
+            {
+                _ = obj.ReturnValue();
+            });
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/87845")]

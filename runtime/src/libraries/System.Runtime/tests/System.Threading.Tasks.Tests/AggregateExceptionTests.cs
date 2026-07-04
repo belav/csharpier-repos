@@ -45,9 +45,8 @@ namespace System.Threading.Tasks.Tests
                 new AggregateException("message", (IEnumerable<Exception>)null)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => ex = new AggregateException("message", new[] { new Exception(), null })
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                ex = new AggregateException("message", new[] { new Exception(), null })
             );
         }
 

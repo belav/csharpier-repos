@@ -340,9 +340,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             ValidationAttributeOverrideBothIsValids attribute =
                 new ValidationAttributeOverrideBothIsValids();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "validationContext",
-                () => attribute.Validate("Any", validationContext: null)
+            AssertExtensions.Throws<ArgumentNullException>("validationContext", () =>
+                attribute.Validate("Any", validationContext: null)
             );
         }
 

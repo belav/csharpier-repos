@@ -537,9 +537,8 @@ namespace System.Dynamic.Tests
         {
             dynamic d = new TestDynamicNameReflective();
             d.DynProp = nameof(d.DynProp);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => d.DynProp = "I wandered lonely as a cloud."
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                d.DynProp = "I wandered lonely as a cloud."
             );
         }
 

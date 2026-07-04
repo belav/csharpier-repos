@@ -65,10 +65,9 @@ namespace System.Security.Cryptography.Cng.Tests
         [ConditionalFact(nameof(SupportsPersistedSymmetricKeys))]
         public static void GetKey_NonExportable()
         {
-            SymmetricCngTestHelpers.GetKey_NonExportable(
-                s_cngAlgorithm,
-                keyName => new AesCng(keyName)
-            );
+            SymmetricCngTestHelpers.GetKey_NonExportable(s_cngAlgorithm, keyName => new AesCng(
+                keyName
+            ));
         }
 
         [OuterLoop( /* Creates/Deletes a persisted key, limit exposure to key leaking */

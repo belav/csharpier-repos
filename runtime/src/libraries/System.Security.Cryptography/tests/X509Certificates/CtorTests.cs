@@ -354,35 +354,24 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void TestNullConstructorArguments()
         {
             Assert.Throws<ArgumentNullException>(() => new X509Certificate2((string)null));
-            AssertExtensions.Throws<ArgumentException>(
-                "handle",
-                () => new X509Certificate2(IntPtr.Zero)
+            AssertExtensions.Throws<ArgumentException>("handle", () =>
+                new X509Certificate2(IntPtr.Zero)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "rawData",
-                () => new X509Certificate2((byte[])null, (string)null)
+            AssertExtensions.Throws<ArgumentException>("rawData", () =>
+                new X509Certificate2((byte[])null, (string)null)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "rawData",
-                () => new X509Certificate2(Array.Empty<byte>(), (string)null)
+            AssertExtensions.Throws<ArgumentException>("rawData", () =>
+                new X509Certificate2(Array.Empty<byte>(), (string)null)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "rawData",
-                () =>
-                    new X509Certificate2(
-                        (byte[])null,
-                        (string)null,
-                        X509KeyStorageFlags.DefaultKeySet
-                    )
+            AssertExtensions.Throws<ArgumentException>("rawData", () =>
+                new X509Certificate2((byte[])null, (string)null, X509KeyStorageFlags.DefaultKeySet)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "rawData",
-                () =>
-                    new X509Certificate2(
-                        Array.Empty<byte>(),
-                        (string)null,
-                        X509KeyStorageFlags.DefaultKeySet
-                    )
+            AssertExtensions.Throws<ArgumentException>("rawData", () =>
+                new X509Certificate2(
+                    Array.Empty<byte>(),
+                    (string)null,
+                    X509KeyStorageFlags.DefaultKeySet
+                )
             );
 
             // A null string password does not throw
@@ -397,13 +386,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
             Assert.Throws<ArgumentNullException>(() => X509Certificate.CreateFromCertFile(null));
             Assert.Throws<ArgumentNullException>(() => X509Certificate.CreateFromSignedFile(null));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "cert",
-                () => new X509Certificate2((X509Certificate2)null)
+            AssertExtensions.Throws<ArgumentNullException>("cert", () =>
+                new X509Certificate2((X509Certificate2)null)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "handle",
-                () => new X509Certificate2(IntPtr.Zero)
+            AssertExtensions.Throws<ArgumentException>("handle", () =>
+                new X509Certificate2(IntPtr.Zero)
             );
 
             // A null SecureString password does not throw
@@ -469,24 +456,20 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             byte[] nonEmptyBytes = new byte[1];
 
-            AssertExtensions.Throws<ArgumentException>(
-                "keyStorageFlags",
-                () => new X509Certificate(nonEmptyBytes, string.Empty, (X509KeyStorageFlags)0xFF)
+            AssertExtensions.Throws<ArgumentException>("keyStorageFlags", () =>
+                new X509Certificate(nonEmptyBytes, string.Empty, (X509KeyStorageFlags)0xFF)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "keyStorageFlags",
-                () => new X509Certificate(string.Empty, string.Empty, (X509KeyStorageFlags)0xFF)
+            AssertExtensions.Throws<ArgumentException>("keyStorageFlags", () =>
+                new X509Certificate(string.Empty, string.Empty, (X509KeyStorageFlags)0xFF)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "keyStorageFlags",
-                () => new X509Certificate2(nonEmptyBytes, string.Empty, (X509KeyStorageFlags)0xFF)
+            AssertExtensions.Throws<ArgumentException>("keyStorageFlags", () =>
+                new X509Certificate2(nonEmptyBytes, string.Empty, (X509KeyStorageFlags)0xFF)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "keyStorageFlags",
-                () => new X509Certificate2(string.Empty, string.Empty, (X509KeyStorageFlags)0xFF)
+            AssertExtensions.Throws<ArgumentException>("keyStorageFlags", () =>
+                new X509Certificate2(string.Empty, string.Empty, (X509KeyStorageFlags)0xFF)
             );
 
             // No test is performed here for the ephemeral flag failing downlevel, because the live
@@ -501,24 +484,20 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
             byte[] nonEmptyBytes = new byte[1];
 
-            AssertExtensions.Throws<ArgumentException>(
-                "keyStorageFlags",
-                () => new X509Certificate(nonEmptyBytes, string.Empty, PersistedEphemeral)
+            AssertExtensions.Throws<ArgumentException>("keyStorageFlags", () =>
+                new X509Certificate(nonEmptyBytes, string.Empty, PersistedEphemeral)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "keyStorageFlags",
-                () => new X509Certificate(string.Empty, string.Empty, PersistedEphemeral)
+            AssertExtensions.Throws<ArgumentException>("keyStorageFlags", () =>
+                new X509Certificate(string.Empty, string.Empty, PersistedEphemeral)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "keyStorageFlags",
-                () => new X509Certificate2(nonEmptyBytes, string.Empty, PersistedEphemeral)
+            AssertExtensions.Throws<ArgumentException>("keyStorageFlags", () =>
+                new X509Certificate2(nonEmptyBytes, string.Empty, PersistedEphemeral)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "keyStorageFlags",
-                () => new X509Certificate2(string.Empty, string.Empty, PersistedEphemeral)
+            AssertExtensions.Throws<ArgumentException>("keyStorageFlags", () =>
+                new X509Certificate2(string.Empty, string.Empty, PersistedEphemeral)
             );
         }
 #endif

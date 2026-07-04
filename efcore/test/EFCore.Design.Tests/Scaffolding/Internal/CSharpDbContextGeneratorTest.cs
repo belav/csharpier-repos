@@ -273,16 +273,13 @@ optionsBuilder
             TestAsync(
                 modelBuilder =>
                 {
-                    modelBuilder.Entity(
-                        "Entity",
-                        x =>
-                        {
-                            x.Property<string>("RequiredString").IsRequired();
-                            x.Property<string>("NonRequiredString");
-                            x.Property<int>("RequiredInt");
-                            x.Property<int?>("NonRequiredInt");
-                        }
-                    );
+                    modelBuilder.Entity("Entity", x =>
+                    {
+                        x.Property<string>("RequiredString").IsRequired();
+                        x.Property<string>("NonRequiredString");
+                        x.Property<int>("RequiredInt");
+                        x.Property<int?>("NonRequiredInt");
+                    });
                 },
                 new ModelCodeGenerationOptions { UseNullableReferenceTypes = false },
                 code =>
@@ -310,16 +307,13 @@ optionsBuilder
             TestAsync(
                 modelBuilder =>
                 {
-                    modelBuilder.Entity(
-                        "Entity",
-                        x =>
-                        {
-                            x.Property<string>("RequiredString").IsRequired();
-                            x.Property<string>("NonRequiredString");
-                            x.Property<int>("RequiredInt");
-                            x.Property<int?>("NonRequiredInt");
-                        }
-                    );
+                    modelBuilder.Entity("Entity", x =>
+                    {
+                        x.Property<string>("RequiredString").IsRequired();
+                        x.Property<string>("NonRequiredString");
+                        x.Property<int>("RequiredInt");
+                        x.Property<int?>("NonRequiredInt");
+                    });
                 },
                 new ModelCodeGenerationOptions { UseNullableReferenceTypes = true },
                 code =>
@@ -341,48 +335,18 @@ optionsBuilder
 
         [ConditionalFact]
         public Task Comments_use_fluent_api() =>
-            TestAsync(
-                modelBuilder =>
-                    modelBuilder.Entity(
-                        "Entity",
-                        x =>
-                        {
-                            x.Property<int>("Id");
-                            x.Property<int>("Property").HasComment("An int property");
-                        }
-                    ),
-                new ModelCodeGenerationOptions(),
-                code => Assert.Contains(".HasComment(\"An int property\")", code.ContextFile.Code),
-                model =>
-                    Assert.Equal(
-                        "An int property",
-                        model
-                            .FindEntityType("TestNamespace.Entity")
-                            .GetProperty("Property")
-                            .GetComment()
-                    )
-            );
+            TestAsync(modelBuilder => modelBuilder.Entity("Entity", x =>
+                    {
+                        x.Property<int>("Id");
+                        x.Property<int>("Property").HasComment("An int property");
+                    }), new ModelCodeGenerationOptions(), code => Assert.Contains(".HasComment(\"An int property\")", code.ContextFile.Code), model => Assert.Equal("An int property", model.FindEntityType("TestNamespace.Entity").GetProperty("Property").GetComment()));
 
         [ConditionalFact]
         public Task Entity_comments_use_fluent_api() =>
-            TestAsync(
-                modelBuilder =>
-                    modelBuilder.Entity(
-                        "Entity",
-                        x =>
-                        {
-                            x.ToTable(tb => tb.HasComment("An entity comment"));
-                        }
-                    ),
-                new ModelCodeGenerationOptions(),
-                code =>
-                    Assert.Contains(".HasComment(\"An entity comment\")", code.ContextFile.Code),
-                model =>
-                    Assert.Equal(
-                        "An entity comment",
-                        model.FindEntityType("TestNamespace.Entity").GetComment()
-                    )
-            );
+            TestAsync(modelBuilder => modelBuilder.Entity("Entity", x =>
+                    {
+                        x.ToTable(tb => tb.HasComment("An entity comment"));
+                    }), new ModelCodeGenerationOptions(), code => Assert.Contains(".HasComment(\"An entity comment\")", code.ContextFile.Code), model => Assert.Equal("An entity comment", model.FindEntityType("TestNamespace.Entity").GetComment()));
 
         [ConditionalFact]
         public Task Views_work() =>
@@ -470,19 +434,15 @@ optionsBuilder
         [ConditionalFact]
         public Task ValueGenerated_works() =>
             TestAsync(
-                modelBuilder =>
-                    modelBuilder.Entity(
-                        "Entity",
-                        x =>
-                        {
-                            x.Property<int>("ValueGeneratedOnAdd").ValueGeneratedOnAdd();
-                            x.Property<int>("ValueGeneratedOnAddOrUpdate")
-                                .ValueGeneratedOnAddOrUpdate();
-                            x.Property<int>("ConcurrencyToken").IsConcurrencyToken();
-                            x.Property<int>("ValueGeneratedOnUpdate").ValueGeneratedOnUpdate();
-                            x.Property<int>("ValueGeneratedNever").ValueGeneratedNever();
-                        }
-                    ),
+                modelBuilder => modelBuilder.Entity("Entity", x =>
+                    {
+                        x.Property<int>("ValueGeneratedOnAdd").ValueGeneratedOnAdd();
+                        x.Property<int>("ValueGeneratedOnAddOrUpdate")
+                            .ValueGeneratedOnAddOrUpdate();
+                        x.Property<int>("ConcurrencyToken").IsConcurrencyToken();
+                        x.Property<int>("ValueGeneratedOnUpdate").ValueGeneratedOnUpdate();
+                        x.Property<int>("ValueGeneratedNever").ValueGeneratedNever();
+                    }),
                 new ModelCodeGenerationOptions(),
                 code =>
                 {
@@ -533,15 +493,11 @@ optionsBuilder
         [ConditionalFact]
         public Task HasPrecision_works() =>
             TestAsync(
-                modelBuilder =>
-                    modelBuilder.Entity(
-                        "Entity",
-                        x =>
-                        {
-                            x.Property<decimal>("HasPrecision").HasPrecision(12);
-                            x.Property<decimal>("HasPrecisionAndScale").HasPrecision(14, 7);
-                        }
-                    ),
+                modelBuilder => modelBuilder.Entity("Entity", x =>
+                    {
+                        x.Property<decimal>("HasPrecision").HasPrecision(12);
+                        x.Property<decimal>("HasPrecisionAndScale").HasPrecision(14, 7);
+                    }),
                 new ModelCodeGenerationOptions(),
                 code =>
                 {
@@ -805,24 +761,20 @@ optionsBuilder
         [ConditionalFact]
         public Task Entity_with_indexes_and_use_data_annotations_false_always_generates_fluent_API() =>
             TestAsync(
-                modelBuilder =>
-                    modelBuilder.Entity(
-                        "EntityWithIndexes",
-                        x =>
-                        {
-                            x.Property<int>("Id");
-                            x.Property<int>("A");
-                            x.Property<int>("B");
-                            x.Property<int>("C");
-                            x.HasKey("Id");
-                            x.HasIndex(new[] { "A", "B" }, "IndexOnAAndB")
-                                .IsUnique()
-                                .IsDescending(false, true);
-                            x.HasIndex(new[] { "B", "C" }, "IndexOnBAndC")
-                                .HasFilter("Filter SQL")
-                                .HasAnnotation("AnnotationName", "AnnotationValue");
-                        }
-                    ),
+                modelBuilder => modelBuilder.Entity("EntityWithIndexes", x =>
+                    {
+                        x.Property<int>("Id");
+                        x.Property<int>("A");
+                        x.Property<int>("B");
+                        x.Property<int>("C");
+                        x.HasKey("Id");
+                        x.HasIndex(new[] { "A", "B" }, "IndexOnAAndB")
+                            .IsUnique()
+                            .IsDescending(false, true);
+                        x.HasIndex(new[] { "B", "C" }, "IndexOnBAndC")
+                            .HasFilter("Filter SQL")
+                            .HasAnnotation("AnnotationName", "AnnotationValue");
+                    }),
                 new ModelCodeGenerationOptions { UseDataAnnotations = false },
                 code =>
                 {
@@ -883,24 +835,20 @@ public partial class TestDbContext : DbContext
         [ConditionalFact]
         public Task Entity_with_indexes_and_use_data_annotations_true_generates_fluent_API_only_for_indexes_with_annotations() =>
             TestAsync(
-                modelBuilder =>
-                    modelBuilder.Entity(
-                        "EntityWithIndexes",
-                        x =>
-                        {
-                            x.Property<int>("Id");
-                            x.Property<int>("A");
-                            x.Property<int>("B");
-                            x.Property<int>("C");
-                            x.HasKey("Id");
-                            x.HasIndex(new[] { "A", "B" }, "IndexOnAAndB")
-                                .IsUnique()
-                                .IsDescending(false, true);
-                            x.HasIndex(new[] { "B", "C" }, "IndexOnBAndC")
-                                .HasFilter("Filter SQL")
-                                .HasAnnotation("AnnotationName", "AnnotationValue");
-                        }
-                    ),
+                modelBuilder => modelBuilder.Entity("EntityWithIndexes", x =>
+                    {
+                        x.Property<int>("Id");
+                        x.Property<int>("A");
+                        x.Property<int>("B");
+                        x.Property<int>("C");
+                        x.HasKey("Id");
+                        x.HasIndex(new[] { "A", "B" }, "IndexOnAAndB")
+                            .IsUnique()
+                            .IsDescending(false, true);
+                        x.HasIndex(new[] { "B", "C" }, "IndexOnBAndC")
+                            .HasFilter("Filter SQL")
+                            .HasAnnotation("AnnotationName", "AnnotationValue");
+                    }),
                 new ModelCodeGenerationOptions { UseDataAnnotations = true },
                 code =>
                 {
@@ -957,26 +905,22 @@ public partial class TestDbContext : DbContext
         [ConditionalFact]
         public Task Indexes_with_descending() =>
             TestAsync(
-                modelBuilder =>
-                    modelBuilder.Entity(
-                        "EntityWithIndexes",
-                        x =>
-                        {
-                            x.Property<int>("Id");
-                            x.Property<int>("X");
-                            x.Property<int>("Y");
-                            x.Property<int>("Z");
-                            x.HasKey("Id");
-                            x.HasIndex(new[] { "X", "Y", "Z" }, "IX_unspecified");
-                            x.HasIndex(new[] { "X", "Y", "Z" }, "IX_empty").IsDescending();
-                            x.HasIndex(new[] { "X", "Y", "Z" }, "IX_all_ascending")
-                                .IsDescending(false, false, false);
-                            x.HasIndex(new[] { "X", "Y", "Z" }, "IX_all_descending")
-                                .IsDescending(true, true, true);
-                            x.HasIndex(new[] { "X", "Y", "Z" }, "IX_mixed")
-                                .IsDescending(false, true, false);
-                        }
-                    ),
+                modelBuilder => modelBuilder.Entity("EntityWithIndexes", x =>
+                    {
+                        x.Property<int>("Id");
+                        x.Property<int>("X");
+                        x.Property<int>("Y");
+                        x.Property<int>("Z");
+                        x.HasKey("Id");
+                        x.HasIndex(new[] { "X", "Y", "Z" }, "IX_unspecified");
+                        x.HasIndex(new[] { "X", "Y", "Z" }, "IX_empty").IsDescending();
+                        x.HasIndex(new[] { "X", "Y", "Z" }, "IX_all_ascending")
+                            .IsDescending(false, false, false);
+                        x.HasIndex(new[] { "X", "Y", "Z" }, "IX_all_descending")
+                            .IsDescending(true, true, true);
+                        x.HasIndex(new[] { "X", "Y", "Z" }, "IX_mixed")
+                            .IsDescending(false, true, false);
+                    }),
                 new ModelCodeGenerationOptions { UseDataAnnotations = false },
                 code =>
                 {
@@ -1034,33 +978,28 @@ public partial class TestDbContext : DbContext
                     var entityType = model.FindEntityType("TestNamespace.EntityWithIndexes")!;
                     Assert.Equal(5, entityType.GetIndexes().Count());
 
-                    var unspecifiedIndex = Assert.Single(
-                        entityType.GetIndexes(),
-                        i => i.Name == "IX_unspecified"
+                    var unspecifiedIndex = Assert.Single(entityType.GetIndexes(), i =>
+                        i.Name == "IX_unspecified"
                     );
                     Assert.Null(unspecifiedIndex.IsDescending);
 
-                    var emptyIndex = Assert.Single(
-                        entityType.GetIndexes(),
-                        i => i.Name == "IX_empty"
+                    var emptyIndex = Assert.Single(entityType.GetIndexes(), i =>
+                        i.Name == "IX_empty"
                     );
                     Assert.Equal(Array.Empty<bool>(), emptyIndex.IsDescending);
 
-                    var allAscendingIndex = Assert.Single(
-                        entityType.GetIndexes(),
-                        i => i.Name == "IX_all_ascending"
+                    var allAscendingIndex = Assert.Single(entityType.GetIndexes(), i =>
+                        i.Name == "IX_all_ascending"
                     );
                     Assert.Null(allAscendingIndex.IsDescending);
 
-                    var allDescendingIndex = Assert.Single(
-                        entityType.GetIndexes(),
-                        i => i.Name == "IX_all_descending"
+                    var allDescendingIndex = Assert.Single(entityType.GetIndexes(), i =>
+                        i.Name == "IX_all_descending"
                     );
                     Assert.Equal(Array.Empty<bool>(), allDescendingIndex.IsDescending);
 
-                    var mixedIndex = Assert.Single(
-                        entityType.GetIndexes(),
-                        i => i.Name == "IX_mixed"
+                    var mixedIndex = Assert.Single(entityType.GetIndexes(), i =>
+                        i.Name == "IX_mixed"
                     );
                     Assert.Equal(new[] { false, true, false }, mixedIndex.IsDescending);
                 }
@@ -1071,28 +1010,22 @@ public partial class TestDbContext : DbContext
             TestAsync(
                 modelBuilder =>
                 {
-                    modelBuilder.Entity(
-                        "PrincipalEntity",
-                        b =>
-                        {
-                            b.Property<int>("Id");
-                            b.Property<int>("PrincipalId");
-                            b.Property<int>("AlternateId");
-                            b.HasKey("AlternateId");
-                        }
-                    );
-                    modelBuilder.Entity(
-                        "DependentEntity",
-                        b =>
-                        {
-                            b.Property<int>("Id");
-                            b.Property<int>("DependentId");
-                            b.HasOne("PrincipalEntity", "NavigationToPrincipal")
-                                .WithOne("NavigationToDependent")
-                                .HasForeignKey("DependentEntity", "DependentId")
-                                .HasPrincipalKey("PrincipalEntity", "PrincipalId");
-                        }
-                    );
+                    modelBuilder.Entity("PrincipalEntity", b =>
+                    {
+                        b.Property<int>("Id");
+                        b.Property<int>("PrincipalId");
+                        b.Property<int>("AlternateId");
+                        b.HasKey("AlternateId");
+                    });
+                    modelBuilder.Entity("DependentEntity", b =>
+                    {
+                        b.Property<int>("Id");
+                        b.Property<int>("DependentId");
+                        b.HasOne("PrincipalEntity", "NavigationToPrincipal")
+                            .WithOne("NavigationToDependent")
+                            .HasForeignKey("DependentEntity", "DependentId")
+                            .HasPrincipalKey("PrincipalEntity", "PrincipalId");
+                    });
                 },
                 new ModelCodeGenerationOptions { UseDataAnnotations = false },
                 code =>
@@ -1155,17 +1088,13 @@ public partial class TestDbContext : DbContext
         [ConditionalFact]
         public Task Column_type_is_not_scaffolded_as_annotation() =>
             TestAsync(
-                modelBuilder =>
-                    modelBuilder.Entity(
-                        "Employee",
-                        x =>
-                        {
-                            x.Property<int>("Id");
-                            x.Property<DateTime>("HireDate")
-                                .HasColumnType("date")
-                                .HasColumnName("hiring_date");
-                        }
-                    ),
+                modelBuilder => modelBuilder.Entity("Employee", x =>
+                    {
+                        x.Property<int>("Id");
+                        x.Property<DateTime>("HireDate")
+                            .HasColumnType("date")
+                            .HasColumnName("hiring_date");
+                    }),
                 new ModelCodeGenerationOptions { UseDataAnnotations = false },
                 code =>
                 {
@@ -1224,27 +1153,11 @@ public partial class TestDbContext : DbContext
 
         [ConditionalFact]
         public Task Is_fixed_length_annotation_should_be_scaffolded_without_optional_parameter() =>
-            TestAsync(
-                modelBuilder =>
-                    modelBuilder.Entity(
-                        "Employee",
-                        x =>
-                        {
-                            x.Property<int>("Id");
-                            x.Property<string>("Name").HasMaxLength(5).IsFixedLength();
-                        }
-                    ),
-                new ModelCodeGenerationOptions { UseDataAnnotations = false },
-                code => Assert.Contains(".IsFixedLength()", code.ContextFile.Code),
-                model =>
-                    Assert.Equal(
-                        true,
-                        model
-                            .FindEntityType("TestNamespace.Employee")
-                            .GetProperty("Name")
-                            .IsFixedLength()
-                    )
-            );
+            TestAsync(modelBuilder => modelBuilder.Entity("Employee", x =>
+                    {
+                        x.Property<int>("Id");
+                        x.Property<string>("Name").HasMaxLength(5).IsFixedLength();
+                    }), new ModelCodeGenerationOptions { UseDataAnnotations = false }, code => Assert.Contains(".IsFixedLength()", code.ContextFile.Code), model => Assert.Equal(true, model.FindEntityType("TestNamespace.Employee").GetProperty("Name").IsFixedLength()));
 
         [ConditionalFact]
         public Task Global_namespace_works() =>
@@ -1398,17 +1311,13 @@ public partial class TestDbContext : DbContext
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(() =>
                         TestAsync(
-                            modelBuilder =>
-                                modelBuilder.Entity(
-                                    "Customer",
-                                    e =>
-                                    {
-                                        e.Property<int>("Id");
-                                        e.Property<string>("Name");
-                                        e.HasKey("Id");
-                                        e.ToTable(tb => tb.IsTemporal());
-                                    }
-                                ),
+                            modelBuilder => modelBuilder.Entity("Customer", e =>
+                                {
+                                    e.Property<int>("Id");
+                                    e.Property<string>("Name");
+                                    e.HasKey("Id");
+                                    e.ToTable(tb => tb.IsTemporal());
+                                }),
                             new ModelCodeGenerationOptions { UseDataAnnotations = false },
                             code =>
                             {
@@ -1512,19 +1421,15 @@ public partial class TestDbContext : DbContext
         [ConditionalFact]
         public Task Trigger_works() =>
             TestAsync(
-                modelBuilder =>
-                    modelBuilder.Entity(
-                        "Employee",
-                        x =>
+                modelBuilder => modelBuilder.Entity("Employee", x =>
+                    {
+                        x.Property<int>("Id");
+                        x.ToTable(tb =>
                         {
-                            x.Property<int>("Id");
-                            x.ToTable(tb =>
-                            {
-                                tb.HasTrigger("Trigger1");
-                                tb.HasTrigger("Trigger2");
-                            });
-                        }
-                    ),
+                            tb.HasTrigger("Trigger1");
+                            tb.HasTrigger("Trigger2");
+                        });
+                    }),
                 new ModelCodeGenerationOptions { UseDataAnnotations = false },
                 code =>
                 {
@@ -1591,17 +1496,13 @@ public partial class TestDbContext : DbContext
         [ConditionalFact]
         public Task ValueGenerationStrategy_works_when_none() =>
             TestAsync(
-                modelBuilder =>
-                    modelBuilder.Entity(
-                        "Channel",
-                        x =>
-                        {
-                            x.Property<int>("Id")
-                                .Metadata.SetValueGenerationStrategy(
-                                    SqlServerValueGenerationStrategy.None
-                                );
-                        }
-                    ),
+                modelBuilder => modelBuilder.Entity("Channel", x =>
+                    {
+                        x.Property<int>("Id")
+                            .Metadata.SetValueGenerationStrategy(
+                                SqlServerValueGenerationStrategy.None
+                            );
+                    }),
                 new ModelCodeGenerationOptions(),
                 code =>
                 {

@@ -504,16 +504,14 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
                 );
             }
 
-            editor.ReplaceNode(
-                forStatement,
-                (currentFor, _) =>
-                    ConvertForNode(
-                        (TForStatementSyntax)currentFor,
-                        typeNode,
-                        foreachIdentifier,
-                        collectionExpression,
-                        iterationType
-                    )
+            editor.ReplaceNode(forStatement, (currentFor, _) =>
+                ConvertForNode(
+                    (TForStatementSyntax)currentFor,
+                    typeNode,
+                    foreachIdentifier,
+                    collectionExpression,
+                    iterationType
+                )
             );
 
             return document.WithSyntaxRoot(editor.GetChangedRoot());
@@ -603,14 +601,12 @@ namespace Microsoft.CodeAnalysis.ConvertForToForEach
 
                         if (shouldWarn)
                         {
-                            editor.ReplaceNode(
-                                current,
-                                (node, _) =>
-                                    node.WithAdditionalAnnotations(
-                                        WarningAnnotation.Create(
-                                            FeaturesResources.Warning_colon_Iteration_variable_crossed_function_boundary
-                                        )
+                            editor.ReplaceNode(current, (node, _) =>
+                                node.WithAdditionalAnnotations(
+                                    WarningAnnotation.Create(
+                                        FeaturesResources.Warning_colon_Iteration_variable_crossed_function_boundary
                                     )
+                                )
                             );
                         }
                     }

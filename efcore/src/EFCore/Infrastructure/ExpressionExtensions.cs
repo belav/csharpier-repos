@@ -218,9 +218,8 @@ public static class ExpressionExtensions
             var interfaceMapping = parameterType
                 .GetTypeInfo()
                 .GetRuntimeInterfaceMap(declaringType);
-            var index = Array.FindIndex(
-                interfaceMapping.InterfaceMethods,
-                p => p.Equals(propertyGetter)
+            var index = Array.FindIndex(interfaceMapping.InterfaceMethods, p =>
+                p.Equals(propertyGetter)
             );
             var targetMethod = interfaceMapping.TargetMethods[index];
             foreach (var runtimeProperty in parameterType.GetRuntimeProperties())

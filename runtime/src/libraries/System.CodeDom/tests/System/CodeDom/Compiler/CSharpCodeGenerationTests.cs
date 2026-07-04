@@ -26,9 +26,8 @@ namespace System.CodeDom.Compiler.Tests
                 "cs",
                 new CSharpCodeProvider(new Dictionary<string, string>()).FileExtension
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "providerOptions",
-                () => new CSharpCodeProvider(null)
+            AssertExtensions.Throws<ArgumentNullException>("providerOptions", () =>
+                new CSharpCodeProvider(null)
             );
         }
 

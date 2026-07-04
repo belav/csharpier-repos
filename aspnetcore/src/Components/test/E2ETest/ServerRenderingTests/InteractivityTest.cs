@@ -46,9 +46,8 @@ public class InteractivityTest
         Navigate($"{ServerPathBase}/interactive?server-shared=3");
 
         Browser.Equal("0", () => Browser.FindElement(By.Id("count-server-shared")).Text);
-        Browser.Equal(
-            "True",
-            () => Browser.FindElement(By.Id("is-interactive-server-shared")).Text
+        Browser.Equal("True", () =>
+            Browser.FindElement(By.Id("is-interactive-server-shared")).Text
         );
 
         Browser.Click(By.Id("increment-server-shared"));
@@ -87,9 +86,8 @@ public class InteractivityTest
 
         Browser.Equal("0", () => Browser.FindElement(By.Id("count-server-shared")).Text);
         Browser.Equal("0", () => Browser.FindElement(By.Id("count-wasm-shared")).Text);
-        Browser.Equal(
-            "True",
-            () => Browser.FindElement(By.Id("is-interactive-server-shared")).Text
+        Browser.Equal("True", () =>
+            Browser.FindElement(By.Id("is-interactive-server-shared")).Text
         );
         Browser.Equal("True", () => Browser.FindElement(By.Id("is-interactive-wasm-shared")).Text);
 
@@ -106,9 +104,8 @@ public class InteractivityTest
     public void CanUseCallSiteRenderMode_Server(bool prerender)
     {
         Navigate(InteractiveCallsiteUrl(prerender, serverIncrement: 3));
-        Browser.Equal(
-            "Call-site interactive components",
-            () => Browser.FindElement(By.TagName("h1")).Text
+        Browser.Equal("Call-site interactive components", () =>
+            Browser.FindElement(By.TagName("h1")).Text
         );
 
         if (prerender)
@@ -137,9 +134,8 @@ public class InteractivityTest
     public void CanUseCallSiteRenderMode_WebAssembly(bool prerender)
     {
         Navigate(InteractiveCallsiteUrl(prerender, webAssemblyIncrement: 4));
-        Browser.Equal(
-            "Call-site interactive components",
-            () => Browser.FindElement(By.TagName("h1")).Text
+        Browser.Equal("Call-site interactive components", () =>
+            Browser.FindElement(By.TagName("h1")).Text
         );
 
         if (prerender)
@@ -168,9 +164,8 @@ public class InteractivityTest
     public void CanUseCallSiteRenderMode_ServerAndWebAssembly(bool prerender)
     {
         Navigate(InteractiveCallsiteUrl(prerender, serverIncrement: 10, webAssemblyIncrement: 11));
-        Browser.Equal(
-            "Call-site interactive components",
-            () => Browser.FindElement(By.TagName("h1")).Text
+        Browser.Equal("Call-site interactive components", () =>
+            Browser.FindElement(By.TagName("h1")).Text
         );
 
         if (prerender)
@@ -295,9 +290,8 @@ public class InteractivityTest
 
             if (addCounterLinkIds[i].Contains("prerendered"))
             {
-                Browser.Equal(
-                    "False",
-                    () => Browser.FindElement(By.Id($"is-interactive-{i}")).Text
+                Browser.Equal("False", () =>
+                    Browser.FindElement(By.Id($"is-interactive-{i}")).Text
                 );
                 Browser.Click(By.Id($"increment-{i}"));
                 Browser.Equal("0", () => Browser.FindElement(By.Id($"count-{i}")).Text);
@@ -334,9 +328,8 @@ public class InteractivityTest
         // Navigate directly to the page with streaming enabled so that we can defer the page load.
         Navigate($"{ServerPathBase}/streaming-interactivity?ShouldStream=True");
         Browser.Equal("Streaming", () => Browser.FindElement(By.Id("status")).Text);
-        Browser.Equal(
-            "loading",
-            () => ((IJavaScriptExecutor)Browser).ExecuteScript("return window.document.readyState;")
+        Browser.Equal("loading", () =>
+            ((IJavaScriptExecutor)Browser).ExecuteScript("return window.document.readyState;")
         );
 
         for (var i = 0; i < addCounterLinkIds.Length; i++)
@@ -353,9 +346,8 @@ public class InteractivityTest
 
             if (addCounterLinkIds[i].Contains("prerendered"))
             {
-                Browser.Equal(
-                    "False",
-                    () => Browser.FindElement(By.Id($"is-interactive-{i}")).Text
+                Browser.Equal("False", () =>
+                    Browser.FindElement(By.Id($"is-interactive-{i}")).Text
                 );
                 Browser.Click(By.Id($"increment-{i}"));
                 Browser.Equal("0", () => Browser.FindElement(By.Id($"count-{i}")).Text);

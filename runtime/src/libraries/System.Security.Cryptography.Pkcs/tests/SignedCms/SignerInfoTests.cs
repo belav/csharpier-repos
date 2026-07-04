@@ -174,14 +174,12 @@ namespace System.Security.Cryptography.Pkcs.Tests
             cms.Decode(SignedDocuments.RsaPssDocument);
             SignerInfo signer = cms.SignerInfos[0];
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "extraStore",
-                () => signer.CheckSignature(null, true)
+            AssertExtensions.Throws<ArgumentNullException>("extraStore", () =>
+                signer.CheckSignature(null, true)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "extraStore",
-                () => signer.CheckSignature(null, false)
+            AssertExtensions.Throws<ArgumentNullException>("extraStore", () =>
+                signer.CheckSignature(null, false)
             );
         }
 
@@ -491,9 +489,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             Assert.Equal(2, cms.SignerInfos[0].CounterSignerInfos.Count);
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "counterSignerInfo",
-                () => cms.SignerInfos[0].RemoveCounterSignature(null)
+            AssertExtensions.Throws<ArgumentNullException>("counterSignerInfo", () =>
+                cms.SignerInfos[0].RemoveCounterSignature(null)
             );
 
             Assert.Equal(2, cms.SignerInfos[0].CounterSignerInfos.Count);

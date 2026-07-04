@@ -15,9 +15,8 @@ namespace System.Linq.Tests
             IQueryable<int> source = null;
 
             AssertExtensions.Throws<ArgumentNullException>("source", () => source.CountBy(x => x));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.CountBy(x => x, EqualityComparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.CountBy(x => x, EqualityComparer<int>.Default)
             );
         }
 
@@ -27,13 +26,11 @@ namespace System.Linq.Tests
             IQueryable<int> source = Enumerable.Empty<int>().AsQueryable();
             Expression<Func<int, int>> keySelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.CountBy(keySelector)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.CountBy(keySelector)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.CountBy(keySelector, EqualityComparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.CountBy(keySelector, EqualityComparer<int>.Default)
             );
         }
 

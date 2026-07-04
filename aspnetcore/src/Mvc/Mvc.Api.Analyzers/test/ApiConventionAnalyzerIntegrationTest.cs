@@ -75,9 +75,8 @@ namespace Test
         var result = await Executor.GetDiagnosticsAsync(testSource.Source);
 
         // Assert
-        var diagnostic = Assert.Single(
-            result,
-            d => d.Id == ApiDiagnosticDescriptors.API1000_ActionReturnsUndocumentedStatusCode.Id
+        var diagnostic = Assert.Single(result, d =>
+            d.Id == ApiDiagnosticDescriptors.API1000_ActionReturnsUndocumentedStatusCode.Id
         );
         AnalyzerAssert.DiagnosticLocation(expectedLocation, diagnostic.Location);
     }
@@ -110,9 +109,8 @@ namespace Test
         var result = await Executor.GetDiagnosticsAsync(source);
 
         // Assert
-        Assert.DoesNotContain(
-            result,
-            d => d.Id == ApiDiagnosticDescriptors.API1000_ActionReturnsUndocumentedStatusCode.Id
+        Assert.DoesNotContain(result, d =>
+            d.Id == ApiDiagnosticDescriptors.API1000_ActionReturnsUndocumentedStatusCode.Id
         );
     }
 
@@ -144,9 +142,8 @@ namespace Test
         var result = await Executor.GetDiagnosticsAsync(testSource.Source);
 
         // Assert
-        Assert.Contains(
-            result,
-            d => d.Id == ApiDiagnosticDescriptors.API1000_ActionReturnsUndocumentedStatusCode.Id
+        Assert.Contains(result, d =>
+            d.Id == ApiDiagnosticDescriptors.API1000_ActionReturnsUndocumentedStatusCode.Id
         );
     }
 
@@ -180,9 +177,8 @@ namespace Test
         var result = await Executor.GetDiagnosticsAsync(testSource.Source);
 
         // Assert
-        Assert.Contains(
-            result,
-            d => d.Id == ApiDiagnosticDescriptors.API1000_ActionReturnsUndocumentedStatusCode.Id
+        Assert.Contains(result, d =>
+            d.Id == ApiDiagnosticDescriptors.API1000_ActionReturnsUndocumentedStatusCode.Id
         );
     }
 
@@ -218,9 +214,8 @@ namespace Test
         var result = await Executor.GetDiagnosticsAsync(testSource.Source);
 
         // Assert
-        Assert.Contains(
-            result,
-            d => d.Id == ApiDiagnosticDescriptors.API1000_ActionReturnsUndocumentedStatusCode.Id
+        Assert.Contains(result, d =>
+            d.Id == ApiDiagnosticDescriptors.API1000_ActionReturnsUndocumentedStatusCode.Id
         );
     }
 
@@ -319,23 +314,20 @@ namespace Test
         var result = await Executor.GetDiagnosticsAsync(testSource.Source);
 
         // Assert
-        Assert.Collection(
-            result,
-            diagnostic =>
-            {
-                Assert.Equal(descriptor.Id, diagnostic.Id);
-                Assert.Same(descriptor, diagnostic.Descriptor);
-                AnalyzerAssert.DiagnosticLocation(expectedLocation, diagnostic.Location);
-                Assert.Equal(
-                    string.Format(
-                        CultureInfo.InvariantCulture,
-                        descriptor.MessageFormat.ToString(CultureInfo.InvariantCulture),
-                        args
-                    ),
-                    diagnostic.GetMessage(CultureInfo.InvariantCulture)
-                );
-            }
-        );
+        Assert.Collection(result, diagnostic =>
+        {
+            Assert.Equal(descriptor.Id, diagnostic.Id);
+            Assert.Same(descriptor, diagnostic.Descriptor);
+            AnalyzerAssert.DiagnosticLocation(expectedLocation, diagnostic.Location);
+            Assert.Equal(
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    descriptor.MessageFormat.ToString(CultureInfo.InvariantCulture),
+                    args
+                ),
+                diagnostic.GetMessage(CultureInfo.InvariantCulture)
+            );
+        });
     }
 
     private class ApiConventionWith1006DiagnosticEnabledRunner : MvcDiagnosticAnalyzerRunner

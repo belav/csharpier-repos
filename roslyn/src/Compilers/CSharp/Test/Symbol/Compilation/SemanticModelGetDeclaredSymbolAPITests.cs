@@ -5429,17 +5429,13 @@ class C { }
 
             int position = text.IndexOf("Obsolete", StringComparison.Ordinal);
 
-            var result = Parallel.For(
-                0,
-                100,
-                i =>
-                {
-                    var symbols = model.LookupSymbols(position, name: "Alias");
-                    var alias = (IAliasSymbol)symbols.Single();
+            var result = Parallel.For(0, 100, i =>
+            {
+                var symbols = model.LookupSymbols(position, name: "Alias");
+                var alias = (IAliasSymbol)symbols.Single();
 
-                    Assert.Equal(@namespace, alias.Target);
-                }
-            );
+                Assert.Equal(@namespace, alias.Target);
+            });
 
             Assert.True(result.IsCompleted);
         }
@@ -5471,18 +5467,14 @@ class C { }
 
             int position = text.IndexOf("Obsolete", StringComparison.Ordinal);
 
-            var result = Parallel.For(
-                0,
-                100,
-                i =>
-                {
-                    var model = compilation.GetSemanticModel(tree);
-                    var symbols = model.LookupSymbols(position, name: "Alias");
-                    var alias = (IAliasSymbol)symbols.Single();
+            var result = Parallel.For(0, 100, i =>
+            {
+                var model = compilation.GetSemanticModel(tree);
+                var symbols = model.LookupSymbols(position, name: "Alias");
+                var alias = (IAliasSymbol)symbols.Single();
 
-                    Assert.Equal(@namespace, alias.Target);
-                }
-            );
+                Assert.Equal(@namespace, alias.Target);
+            });
 
             Assert.True(result.IsCompleted);
         }

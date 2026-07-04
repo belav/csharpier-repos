@@ -31,23 +31,17 @@ public abstract class RawSqlQueryTests
     public virtual void CreateContext()
     {
         var fixture = CreateFixture();
-        fixture.Initialize(
-            1000,
-            1000,
-            2,
-            2,
-            ctx =>
+        fixture.Initialize(1000, 1000, 2, 2, ctx =>
+        {
+            if (!string.IsNullOrEmpty(StoredProcedureCreationScript))
             {
-                if (!string.IsNullOrEmpty(StoredProcedureCreationScript))
-                {
 #if OLD_FROM_SQL
-                    ctx.Database.ExecuteSqlCommand(StoredProcedureCreationScript);
+                ctx.Database.ExecuteSqlCommand(StoredProcedureCreationScript);
 #else
-                    ctx.Database.ExecuteSqlRaw(StoredProcedureCreationScript);
+                ctx.Database.ExecuteSqlRaw(StoredProcedureCreationScript);
 #endif
-                }
             }
-        );
+        });
 
         _context = fixture.CreateContext();
 

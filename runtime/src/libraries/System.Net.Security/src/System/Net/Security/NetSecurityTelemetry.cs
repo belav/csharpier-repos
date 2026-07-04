@@ -83,46 +83,36 @@ namespace System.Net.Security
                     DisplayName = "Total TLS handshakes failed",
                 };
 
-                _sessionsOpenCounter ??= new PollingCounter(
-                    "all-tls-sessions-open",
-                    this,
-                    () => Interlocked.Read(ref _sessionsOpen)
+                _sessionsOpenCounter ??= new PollingCounter("all-tls-sessions-open", this, () =>
+                    Interlocked.Read(ref _sessionsOpen)
                 )
                 {
                     DisplayName = "All TLS Sessions Active",
                 };
 
-                _sessionsOpenTls10Counter ??= new PollingCounter(
-                    "tls10-sessions-open",
-                    this,
-                    () => Interlocked.Read(ref _sessionsOpenTls10)
+                _sessionsOpenTls10Counter ??= new PollingCounter("tls10-sessions-open", this, () =>
+                    Interlocked.Read(ref _sessionsOpenTls10)
                 )
                 {
                     DisplayName = "TLS 1.0 Sessions Active",
                 };
 
-                _sessionsOpenTls11Counter ??= new PollingCounter(
-                    "tls11-sessions-open",
-                    this,
-                    () => Interlocked.Read(ref _sessionsOpenTls11)
+                _sessionsOpenTls11Counter ??= new PollingCounter("tls11-sessions-open", this, () =>
+                    Interlocked.Read(ref _sessionsOpenTls11)
                 )
                 {
                     DisplayName = "TLS 1.1 Sessions Active",
                 };
 
-                _sessionsOpenTls12Counter ??= new PollingCounter(
-                    "tls12-sessions-open",
-                    this,
-                    () => Interlocked.Read(ref _sessionsOpenTls12)
+                _sessionsOpenTls12Counter ??= new PollingCounter("tls12-sessions-open", this, () =>
+                    Interlocked.Read(ref _sessionsOpenTls12)
                 )
                 {
                     DisplayName = "TLS 1.2 Sessions Active",
                 };
 
-                _sessionsOpenTls13Counter ??= new PollingCounter(
-                    "tls13-sessions-open",
-                    this,
-                    () => Interlocked.Read(ref _sessionsOpenTls13)
+                _sessionsOpenTls13Counter ??= new PollingCounter("tls13-sessions-open", this, () =>
+                    Interlocked.Read(ref _sessionsOpenTls13)
                 )
                 {
                     DisplayName = "TLS 1.3 Sessions Active",

@@ -20,25 +20,20 @@ namespace System.IO.MemoryMappedFiles.Tests
         public void InvalidArguments_MapName()
         {
             // Empty string is an invalid map name
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => MemoryMappedFile.CreateNew(string.Empty, 4096)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                MemoryMappedFile.CreateNew(string.Empty, 4096)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    MemoryMappedFile.CreateNew(string.Empty, 4096, MemoryMappedFileAccess.ReadWrite)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                MemoryMappedFile.CreateNew(string.Empty, 4096, MemoryMappedFileAccess.ReadWrite)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    MemoryMappedFile.CreateNew(
-                        string.Empty,
-                        4096,
-                        MemoryMappedFileAccess.ReadWrite,
-                        MemoryMappedFileOptions.None,
-                        HandleInheritability.None
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                MemoryMappedFile.CreateNew(
+                    string.Empty,
+                    4096,
+                    MemoryMappedFileAccess.ReadWrite,
+                    MemoryMappedFileOptions.None,
+                    HandleInheritability.None
+                )
             );
         }
 
@@ -50,24 +45,20 @@ namespace System.IO.MemoryMappedFiles.Tests
         [InlineData(-100)] // negative values don't make sense
         public void InvalidArguments_Capacity(int capacity)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => MemoryMappedFile.CreateNew(null, capacity)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                MemoryMappedFile.CreateNew(null, capacity)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => MemoryMappedFile.CreateNew(null, capacity, MemoryMappedFileAccess.ReadWrite)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                MemoryMappedFile.CreateNew(null, capacity, MemoryMappedFileAccess.ReadWrite)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () =>
-                    MemoryMappedFile.CreateNew(
-                        null,
-                        capacity,
-                        MemoryMappedFileAccess.ReadWrite,
-                        MemoryMappedFileOptions.None,
-                        HandleInheritability.None
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                MemoryMappedFile.CreateNew(
+                    null,
+                    capacity,
+                    MemoryMappedFileAccess.ReadWrite,
+                    MemoryMappedFileOptions.None,
+                    HandleInheritability.None
+                )
             );
         }
 
@@ -80,20 +71,17 @@ namespace System.IO.MemoryMappedFiles.Tests
         public void InvalidArguments_Access(MemoryMappedFileAccess access)
         {
             // Out of range values
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "access",
-                () => MemoryMappedFile.CreateNew(null, 4096, access)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("access", () =>
+                MemoryMappedFile.CreateNew(null, 4096, access)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "access",
-                () =>
-                    MemoryMappedFile.CreateNew(
-                        null,
-                        4096,
-                        access,
-                        MemoryMappedFileOptions.None,
-                        HandleInheritability.None
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("access", () =>
+                MemoryMappedFile.CreateNew(
+                    null,
+                    4096,
+                    access,
+                    MemoryMappedFileOptions.None,
+                    HandleInheritability.None
+                )
             );
         }
 
@@ -104,9 +92,8 @@ namespace System.IO.MemoryMappedFiles.Tests
         public void InvalidArguments_WriteAccess()
         {
             // Write-only access isn't allowed, as it'd be useless
-            AssertExtensions.Throws<ArgumentException>(
-                "access",
-                () => MemoryMappedFile.CreateNew(null, 4096, MemoryMappedFileAccess.Write)
+            AssertExtensions.Throws<ArgumentException>("access", () =>
+                MemoryMappedFile.CreateNew(null, 4096, MemoryMappedFileAccess.Write)
             );
         }
 
@@ -118,16 +105,14 @@ namespace System.IO.MemoryMappedFiles.Tests
         [InlineData((MemoryMappedFileOptions)(-2))]
         public void InvalidArguments_Options(MemoryMappedFileOptions options)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "options",
-                () =>
-                    MemoryMappedFile.CreateNew(
-                        null,
-                        4096,
-                        MemoryMappedFileAccess.Read,
-                        options,
-                        HandleInheritability.None
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () =>
+                MemoryMappedFile.CreateNew(
+                    null,
+                    4096,
+                    MemoryMappedFileAccess.Read,
+                    options,
+                    HandleInheritability.None
+                )
             );
         }
 
@@ -139,16 +124,14 @@ namespace System.IO.MemoryMappedFiles.Tests
         [InlineData((HandleInheritability)(-2))]
         public void InvalidArguments_Inheritability(HandleInheritability inheritability)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "inheritability",
-                () =>
-                    MemoryMappedFile.CreateNew(
-                        null,
-                        4096,
-                        MemoryMappedFileAccess.Read,
-                        MemoryMappedFileOptions.None,
-                        inheritability
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("inheritability", () =>
+                MemoryMappedFile.CreateNew(
+                    null,
+                    4096,
+                    MemoryMappedFileAccess.Read,
+                    MemoryMappedFileOptions.None,
+                    inheritability
+                )
             );
         }
 
@@ -161,9 +144,8 @@ namespace System.IO.MemoryMappedFiles.Tests
         {
             if (IntPtr.Size == 4)
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "capacity",
-                    () => MemoryMappedFile.CreateNew(null, 1 + (long)uint.MaxValue)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                    MemoryMappedFile.CreateNew(null, 1 + (long)uint.MaxValue)
                 );
             }
             else

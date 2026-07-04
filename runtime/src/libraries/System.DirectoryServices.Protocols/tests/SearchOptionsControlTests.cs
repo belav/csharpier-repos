@@ -50,9 +50,8 @@ namespace System.DirectoryServices.Protocols.Tests
         [InlineData(SearchOption.PhantomRoot + 1)]
         public void Ctor_InvalidFlags_ThrowsInvalidEnumArgumentException(SearchOption flag)
         {
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "value",
-                () => new SearchOptionsControl(flag)
+            AssertExtensions.Throws<InvalidEnumArgumentException>("value", () =>
+                new SearchOptionsControl(flag)
             );
         }
     }

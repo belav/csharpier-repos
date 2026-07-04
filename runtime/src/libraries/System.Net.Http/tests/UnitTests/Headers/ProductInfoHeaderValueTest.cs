@@ -39,13 +39,10 @@ namespace System.Net.Http.Tests
             Assert.Null(productInfo.Product);
             Assert.Equal("(this is a comment)", productInfo.Comment);
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "comment",
-                () =>
-                {
-                    new ProductInfoHeaderValue((string)null);
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("comment", () =>
+            {
+                new ProductInfoHeaderValue((string)null);
+            });
             Assert.Throws<FormatException>(() =>
             {
                 new ProductInfoHeaderValue("invalid comment");

@@ -139,44 +139,37 @@ namespace Microsoft.DotNet.CoreSetup.Test
             NetCoreAppBuilder
                 .ForNETCoreApp(Constants.MicrosoftNETCoreApp, currentRid)
                 .WithStandardRuntimeFallbacks()
-                .WithProject(
-                    Constants.MicrosoftNETCoreApp,
-                    version,
-                    p =>
-                        p.WithNativeLibraryGroup(
-                            null,
-                            g =>
-                                g
-                                // ./shared/Microsoft.NETCore.App/<version>/coreclr.dll - this is a mock, will not actually run CoreClr
-                                .WithAsset(
-                                    (
-                                        new NetCoreAppBuilder.RuntimeFileBuilder(
-                                            $"runtimes/{currentRid}/native/{Binaries.CoreClr.FileName}"
-                                        )
-                                    )
-                                        .CopyFromFile(Binaries.CoreClr.MockPath)
-                                        .WithFileOnDiskPath(Binaries.CoreClr.FileName)
+                .WithProject(Constants.MicrosoftNETCoreApp, version, p =>
+                    p.WithNativeLibraryGroup(null, g =>
+                        g
+                        // ./shared/Microsoft.NETCore.App/<version>/coreclr.dll - this is a mock, will not actually run CoreClr
+                        .WithAsset(
+                            (
+                                new NetCoreAppBuilder.RuntimeFileBuilder(
+                                    $"runtimes/{currentRid}/native/{Binaries.CoreClr.FileName}"
                                 )
+                            )
+                                .CopyFromFile(Binaries.CoreClr.MockPath)
+                                .WithFileOnDiskPath(Binaries.CoreClr.FileName)
                         )
+                    )
                 )
                 .WithPackage(
                     $"runtime.{currentRid}.Microsoft.NETCore.DotNetHostPolicy",
                     version,
                     p =>
-                        p.WithNativeLibraryGroup(
-                            null,
-                            g =>
-                                g
-                                // ./shared/Microsoft.NETCore.App/<version>/hostpolicy.dll - this is the real component and will load CoreClr library
-                                .WithAsset(
-                                    (
-                                        new NetCoreAppBuilder.RuntimeFileBuilder(
-                                            $"runtimes/{currentRid}/native/{Binaries.HostPolicy.FileName}"
-                                        )
+                        p.WithNativeLibraryGroup(null, g =>
+                            g
+                            // ./shared/Microsoft.NETCore.App/<version>/hostpolicy.dll - this is the real component and will load CoreClr library
+                            .WithAsset(
+                                (
+                                    new NetCoreAppBuilder.RuntimeFileBuilder(
+                                        $"runtimes/{currentRid}/native/{Binaries.HostPolicy.FileName}"
                                     )
-                                        .CopyFromFile(Binaries.HostPolicy.FilePath)
-                                        .WithFileOnDiskPath(Binaries.HostPolicy.FileName)
                                 )
+                                    .CopyFromFile(Binaries.HostPolicy.FilePath)
+                                    .WithFileOnDiskPath(Binaries.HostPolicy.FileName)
+                            )
                         )
                 )
                 .WithCustomizer(customizer)

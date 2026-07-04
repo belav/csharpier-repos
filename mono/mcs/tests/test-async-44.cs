@@ -27,14 +27,11 @@ class C
         int value = 1;
 
         {
-            await Test(
-                value,
-                async () =>
-                {
-                    int b = value;
-                    await Instance.GetValue(Bar() + b);
-                }
-            );
+            await Test(value, async () =>
+            {
+                int b = value;
+                await Instance.GetValue(Bar() + b);
+            });
         }
 
         return 0;

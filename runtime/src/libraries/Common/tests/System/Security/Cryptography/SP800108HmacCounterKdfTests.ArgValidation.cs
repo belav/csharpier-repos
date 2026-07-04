@@ -11,64 +11,54 @@ namespace System.Security.Cryptography.Tests
         [Fact]
         public static void DeriveBytes_Allocating_ArrayBytes_ArgValidation()
         {
-            Assert.Throws<ArgumentNullException>(
-                "key",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        key: (byte[])null,
-                        HashAlgorithmName.SHA256,
-                        s_labelBytes,
-                        s_contextBytes,
-                        42
-                    )
+            Assert.Throws<ArgumentNullException>("key", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    key: (byte[])null,
+                    HashAlgorithmName.SHA256,
+                    s_labelBytes,
+                    s_contextBytes,
+                    42
+                )
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "label",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        HashAlgorithmName.SHA256,
-                        label: (byte[])null,
-                        s_contextBytes,
-                        42
-                    )
+            Assert.Throws<ArgumentNullException>("label", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    HashAlgorithmName.SHA256,
+                    label: (byte[])null,
+                    s_contextBytes,
+                    42
+                )
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "context",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        HashAlgorithmName.SHA256,
-                        s_labelBytes,
-                        context: (byte[])null,
-                        42
-                    )
+            Assert.Throws<ArgumentNullException>("context", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    HashAlgorithmName.SHA256,
+                    s_labelBytes,
+                    context: (byte[])null,
+                    42
+                )
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "hashAlgorithm",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        s_nullHash,
-                        s_labelBytes,
-                        s_contextBytes,
-                        42
-                    )
+            Assert.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    s_nullHash,
+                    s_labelBytes,
+                    s_contextBytes,
+                    42
+                )
             );
 
-            Assert.Throws<ArgumentException>(
-                "hashAlgorithm",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        s_emptyHash,
-                        s_labelBytes,
-                        s_contextBytes,
-                        42
-                    )
+            Assert.Throws<ArgumentException>("hashAlgorithm", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    s_emptyHash,
+                    s_labelBytes,
+                    s_contextBytes,
+                    42
+                )
             );
 
             CryptographicException ex = Assert.Throws<CryptographicException>(() =>
@@ -82,78 +72,66 @@ namespace System.Security.Cryptography.Tests
             );
             Assert.Contains(s_unknownHash.Name, ex.Message);
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "derivedKeyLengthInBytes",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        HashAlgorithmName.SHA256,
-                        s_labelBytes,
-                        s_contextBytes,
-                        -1
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>("derivedKeyLengthInBytes", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    HashAlgorithmName.SHA256,
+                    s_labelBytes,
+                    s_contextBytes,
+                    -1
+                )
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "derivedKeyLengthInBytes",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        HashAlgorithmName.SHA256,
-                        s_labelBytes,
-                        s_contextBytes,
-                        0x20000000
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>("derivedKeyLengthInBytes", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    HashAlgorithmName.SHA256,
+                    s_labelBytes,
+                    s_contextBytes,
+                    0x20000000
+                )
             );
         }
 
         [Fact]
         public static void DeriveBytes_Allocating_String_ArgValidation()
         {
-            Assert.Throws<ArgumentNullException>(
-                "key",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        key: (byte[])null,
-                        HashAlgorithmName.SHA256,
-                        Label,
-                        Context,
-                        42
-                    )
+            Assert.Throws<ArgumentNullException>("key", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    key: (byte[])null,
+                    HashAlgorithmName.SHA256,
+                    Label,
+                    Context,
+                    42
+                )
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "label",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        HashAlgorithmName.SHA256,
-                        label: (string)null,
-                        Context,
-                        42
-                    )
+            Assert.Throws<ArgumentNullException>("label", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    HashAlgorithmName.SHA256,
+                    label: (string)null,
+                    Context,
+                    42
+                )
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "context",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        HashAlgorithmName.SHA256,
-                        Label,
-                        context: (string)null,
-                        42
-                    )
+            Assert.Throws<ArgumentNullException>("context", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    HashAlgorithmName.SHA256,
+                    Label,
+                    context: (string)null,
+                    42
+                )
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "hashAlgorithm",
-                () => SP800108HmacCounterKdf.DeriveBytes(s_kdk, s_nullHash, Label, Context, 42)
+            Assert.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                SP800108HmacCounterKdf.DeriveBytes(s_kdk, s_nullHash, Label, Context, 42)
             );
 
-            Assert.Throws<ArgumentException>(
-                "hashAlgorithm",
-                () => SP800108HmacCounterKdf.DeriveBytes(s_kdk, s_emptyHash, Label, Context, 42)
+            Assert.Throws<ArgumentException>("hashAlgorithm", () =>
+                SP800108HmacCounterKdf.DeriveBytes(s_kdk, s_emptyHash, Label, Context, 42)
             );
 
             CryptographicException ex = Assert.Throws<CryptographicException>(() =>
@@ -161,56 +139,48 @@ namespace System.Security.Cryptography.Tests
             );
             Assert.Contains(s_unknownHash.Name, ex.Message);
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "derivedKeyLengthInBytes",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        HashAlgorithmName.SHA256,
-                        Label,
-                        Context,
-                        -1
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>("derivedKeyLengthInBytes", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    HashAlgorithmName.SHA256,
+                    Label,
+                    Context,
+                    -1
+                )
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "derivedKeyLengthInBytes",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        HashAlgorithmName.SHA256,
-                        Label,
-                        Context,
-                        0x20000000
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>("derivedKeyLengthInBytes", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    HashAlgorithmName.SHA256,
+                    Label,
+                    Context,
+                    0x20000000
+                )
             );
         }
 
         [Fact]
         public static void DeriveBytes_Allocating_SpanBytes_ArgValidation()
         {
-            Assert.Throws<ArgumentNullException>(
-                "hashAlgorithm",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk.AsSpan(),
-                        s_nullHash,
-                        s_labelBytes.AsSpan(),
-                        s_contextBytes.AsSpan(),
-                        42
-                    )
+            Assert.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk.AsSpan(),
+                    s_nullHash,
+                    s_labelBytes.AsSpan(),
+                    s_contextBytes.AsSpan(),
+                    42
+                )
             );
 
-            Assert.Throws<ArgumentException>(
-                "hashAlgorithm",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk.AsSpan(),
-                        s_emptyHash,
-                        s_labelBytes.AsSpan(),
-                        s_contextBytes.AsSpan(),
-                        42
-                    )
+            Assert.Throws<ArgumentException>("hashAlgorithm", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk.AsSpan(),
+                    s_emptyHash,
+                    s_labelBytes.AsSpan(),
+                    s_contextBytes.AsSpan(),
+                    42
+                )
             );
 
             CryptographicException ex = Assert.Throws<CryptographicException>(() =>
@@ -224,28 +194,24 @@ namespace System.Security.Cryptography.Tests
             );
             Assert.Contains(s_unknownHash.Name, ex.Message);
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "derivedKeyLengthInBytes",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk.AsSpan(),
-                        HashAlgorithmName.SHA256,
-                        s_labelBytes.AsSpan(),
-                        s_contextBytes.AsSpan(),
-                        -1
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>("derivedKeyLengthInBytes", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk.AsSpan(),
+                    HashAlgorithmName.SHA256,
+                    s_labelBytes.AsSpan(),
+                    s_contextBytes.AsSpan(),
+                    -1
+                )
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "derivedKeyLengthInBytes",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk.AsSpan(),
-                        HashAlgorithmName.SHA256,
-                        s_labelBytes.AsSpan(),
-                        s_contextBytes.AsSpan(),
-                        0x20000000
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>("derivedKeyLengthInBytes", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk.AsSpan(),
+                    HashAlgorithmName.SHA256,
+                    s_labelBytes.AsSpan(),
+                    s_contextBytes.AsSpan(),
+                    0x20000000
+                )
             );
         }
 
@@ -254,28 +220,24 @@ namespace System.Security.Cryptography.Tests
         {
             byte[] destination = new byte[42];
 
-            Assert.Throws<ArgumentNullException>(
-                "hashAlgorithm",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        s_nullHash,
-                        s_labelBytes,
-                        s_contextBytes,
-                        destination
-                    )
+            Assert.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    s_nullHash,
+                    s_labelBytes,
+                    s_contextBytes,
+                    destination
+                )
             );
 
-            Assert.Throws<ArgumentException>(
-                "hashAlgorithm",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        s_emptyHash,
-                        s_labelBytes,
-                        s_contextBytes,
-                        destination
-                    )
+            Assert.Throws<ArgumentException>("hashAlgorithm", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    s_emptyHash,
+                    s_labelBytes,
+                    s_contextBytes,
+                    destination
+                )
             );
 
             CryptographicException ex = Assert.Throws<CryptographicException>(() =>
@@ -289,44 +251,38 @@ namespace System.Security.Cryptography.Tests
             );
             Assert.Contains(s_unknownHash.Name, ex.Message);
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "destination",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        HashAlgorithmName.SHA256,
-                        s_labelBytes,
-                        s_contextBytes,
-                        GetOversizedSpan()
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>("destination", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    HashAlgorithmName.SHA256,
+                    s_labelBytes,
+                    s_contextBytes,
+                    GetOversizedSpan()
+                )
             );
         }
 
         [Fact]
         public static void DeriveBytes_Allocating_SpanChars_ArgValidation()
         {
-            Assert.Throws<ArgumentNullException>(
-                "hashAlgorithm",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        s_nullHash,
-                        Label.AsSpan(),
-                        Context.AsSpan(),
-                        42
-                    )
+            Assert.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    s_nullHash,
+                    Label.AsSpan(),
+                    Context.AsSpan(),
+                    42
+                )
             );
 
-            Assert.Throws<ArgumentException>(
-                "hashAlgorithm",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        s_emptyHash,
-                        Label.AsSpan(),
-                        Context.AsSpan(),
-                        42
-                    )
+            Assert.Throws<ArgumentException>("hashAlgorithm", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    s_emptyHash,
+                    Label.AsSpan(),
+                    Context.AsSpan(),
+                    42
+                )
             );
 
             CryptographicException ex = Assert.Throws<CryptographicException>(() =>
@@ -340,28 +296,24 @@ namespace System.Security.Cryptography.Tests
             );
             Assert.Contains(s_unknownHash.Name, ex.Message);
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "derivedKeyLengthInBytes",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        HashAlgorithmName.SHA256,
-                        Label.AsSpan(),
-                        Context.AsSpan(),
-                        -1
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>("derivedKeyLengthInBytes", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    HashAlgorithmName.SHA256,
+                    Label.AsSpan(),
+                    Context.AsSpan(),
+                    -1
+                )
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "derivedKeyLengthInBytes",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        HashAlgorithmName.SHA256,
-                        Label.AsSpan(),
-                        Context.AsSpan(),
-                        0x20000000
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>("derivedKeyLengthInBytes", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    HashAlgorithmName.SHA256,
+                    Label.AsSpan(),
+                    Context.AsSpan(),
+                    0x20000000
+                )
             );
         }
 
@@ -370,28 +322,24 @@ namespace System.Security.Cryptography.Tests
         {
             byte[] destination = new byte[42];
 
-            Assert.Throws<ArgumentNullException>(
-                "hashAlgorithm",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        s_nullHash,
-                        Label.AsSpan(),
-                        Context.AsSpan(),
-                        destination
-                    )
+            Assert.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    s_nullHash,
+                    Label.AsSpan(),
+                    Context.AsSpan(),
+                    destination
+                )
             );
 
-            Assert.Throws<ArgumentException>(
-                "hashAlgorithm",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        s_emptyHash,
-                        Label.AsSpan(),
-                        Context.AsSpan(),
-                        destination
-                    )
+            Assert.Throws<ArgumentException>("hashAlgorithm", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    s_emptyHash,
+                    Label.AsSpan(),
+                    Context.AsSpan(),
+                    destination
+                )
             );
 
             CryptographicException ex = Assert.Throws<CryptographicException>(() =>
@@ -405,35 +353,30 @@ namespace System.Security.Cryptography.Tests
             );
             Assert.Contains(s_unknownHash.Name, ex.Message);
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "destination",
-                () =>
-                    SP800108HmacCounterKdf.DeriveBytes(
-                        s_kdk,
-                        HashAlgorithmName.SHA256,
-                        Label.AsSpan(),
-                        Context.AsSpan(),
-                        GetOversizedSpan()
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>("destination", () =>
+                SP800108HmacCounterKdf.DeriveBytes(
+                    s_kdk,
+                    HashAlgorithmName.SHA256,
+                    Label.AsSpan(),
+                    Context.AsSpan(),
+                    GetOversizedSpan()
+                )
             );
         }
 
         [Fact]
         public static void Ctor_KeyArray_ArgValidation()
         {
-            Assert.Throws<ArgumentNullException>(
-                "key",
-                () => new SP800108HmacCounterKdf((byte[])null, HashAlgorithmName.SHA256)
+            Assert.Throws<ArgumentNullException>("key", () =>
+                new SP800108HmacCounterKdf((byte[])null, HashAlgorithmName.SHA256)
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "hashAlgorithm",
-                () => new SP800108HmacCounterKdf(s_kdk, s_nullHash)
+            Assert.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                new SP800108HmacCounterKdf(s_kdk, s_nullHash)
             );
 
-            Assert.Throws<ArgumentException>(
-                "hashAlgorithm",
-                () => new SP800108HmacCounterKdf(s_kdk, s_emptyHash)
+            Assert.Throws<ArgumentException>("hashAlgorithm", () =>
+                new SP800108HmacCounterKdf(s_kdk, s_emptyHash)
             );
 
             CryptographicException ex = Assert.Throws<CryptographicException>(() =>
@@ -445,14 +388,12 @@ namespace System.Security.Cryptography.Tests
         [Fact]
         public static void Ctor_KeySpan_ArgValidation()
         {
-            Assert.Throws<ArgumentNullException>(
-                "hashAlgorithm",
-                () => new SP800108HmacCounterKdf(s_kdk.AsSpan(), s_nullHash)
+            Assert.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                new SP800108HmacCounterKdf(s_kdk.AsSpan(), s_nullHash)
             );
 
-            Assert.Throws<ArgumentException>(
-                "hashAlgorithm",
-                () => new SP800108HmacCounterKdf(s_kdk.AsSpan(), s_emptyHash)
+            Assert.Throws<ArgumentException>("hashAlgorithm", () =>
+                new SP800108HmacCounterKdf(s_kdk.AsSpan(), s_emptyHash)
             );
 
             CryptographicException ex = Assert.Throws<CryptographicException>(() =>
@@ -469,24 +410,20 @@ namespace System.Security.Cryptography.Tests
                 HashAlgorithmName.SHA256
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "label",
-                () => kdf.DeriveKey((byte[])null, s_contextBytes, 42)
+            Assert.Throws<ArgumentNullException>("label", () =>
+                kdf.DeriveKey((byte[])null, s_contextBytes, 42)
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "context",
-                () => kdf.DeriveKey(s_labelBytes, (byte[])null, 42)
+            Assert.Throws<ArgumentNullException>("context", () =>
+                kdf.DeriveKey(s_labelBytes, (byte[])null, 42)
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "derivedKeyLengthInBytes",
-                () => kdf.DeriveKey(s_labelBytes, s_contextBytes, -1)
+            Assert.Throws<ArgumentOutOfRangeException>("derivedKeyLengthInBytes", () =>
+                kdf.DeriveKey(s_labelBytes, s_contextBytes, -1)
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "derivedKeyLengthInBytes",
-                () => kdf.DeriveKey(s_labelBytes, s_contextBytes, 0x20000000)
+            Assert.Throws<ArgumentOutOfRangeException>("derivedKeyLengthInBytes", () =>
+                kdf.DeriveKey(s_labelBytes, s_contextBytes, 0x20000000)
             );
         }
 
@@ -498,14 +435,12 @@ namespace System.Security.Cryptography.Tests
                 HashAlgorithmName.SHA256
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "derivedKeyLengthInBytes",
-                () => kdf.DeriveKey(s_labelBytes.AsSpan(), s_contextBytes.AsSpan(), -1)
+            Assert.Throws<ArgumentOutOfRangeException>("derivedKeyLengthInBytes", () =>
+                kdf.DeriveKey(s_labelBytes.AsSpan(), s_contextBytes.AsSpan(), -1)
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "derivedKeyLengthInBytes",
-                () => kdf.DeriveKey(s_labelBytes.AsSpan(), s_contextBytes.AsSpan(), 0x20000000)
+            Assert.Throws<ArgumentOutOfRangeException>("derivedKeyLengthInBytes", () =>
+                kdf.DeriveKey(s_labelBytes.AsSpan(), s_contextBytes.AsSpan(), 0x20000000)
             );
         }
 
@@ -517,14 +452,8 @@ namespace System.Security.Cryptography.Tests
                 HashAlgorithmName.SHA256
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "destination",
-                () =>
-                    kdf.DeriveKey(
-                        s_labelBytes.AsSpan(),
-                        s_contextBytes.AsSpan(),
-                        GetOversizedSpan()
-                    )
+            Assert.Throws<ArgumentOutOfRangeException>("destination", () =>
+                kdf.DeriveKey(s_labelBytes.AsSpan(), s_contextBytes.AsSpan(), GetOversizedSpan())
             );
         }
 
@@ -536,14 +465,12 @@ namespace System.Security.Cryptography.Tests
                 HashAlgorithmName.SHA256
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "derivedKeyLengthInBytes",
-                () => kdf.DeriveKey(Label.AsSpan(), Context.AsSpan(), -1)
+            Assert.Throws<ArgumentOutOfRangeException>("derivedKeyLengthInBytes", () =>
+                kdf.DeriveKey(Label.AsSpan(), Context.AsSpan(), -1)
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "derivedKeyLengthInBytes",
-                () => kdf.DeriveKey(Label.AsSpan(), Context.AsSpan(), 0x20000000)
+            Assert.Throws<ArgumentOutOfRangeException>("derivedKeyLengthInBytes", () =>
+                kdf.DeriveKey(Label.AsSpan(), Context.AsSpan(), 0x20000000)
             );
         }
 
@@ -555,9 +482,8 @@ namespace System.Security.Cryptography.Tests
                 HashAlgorithmName.SHA256
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "destination",
-                () => kdf.DeriveKey(Label.AsSpan(), Context.AsSpan(), GetOversizedSpan())
+            Assert.Throws<ArgumentOutOfRangeException>("destination", () =>
+                kdf.DeriveKey(Label.AsSpan(), Context.AsSpan(), GetOversizedSpan())
             );
         }
 
@@ -569,14 +495,12 @@ namespace System.Security.Cryptography.Tests
                 HashAlgorithmName.SHA256
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "derivedKeyLengthInBytes",
-                () => kdf.DeriveKey(Label, Context, -1)
+            Assert.Throws<ArgumentOutOfRangeException>("derivedKeyLengthInBytes", () =>
+                kdf.DeriveKey(Label, Context, -1)
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "derivedKeyLengthInBytes",
-                () => kdf.DeriveKey(Label, Context, 0x20000000)
+            Assert.Throws<ArgumentOutOfRangeException>("derivedKeyLengthInBytes", () =>
+                kdf.DeriveKey(Label, Context, 0x20000000)
             );
         }
 

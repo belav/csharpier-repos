@@ -48,17 +48,14 @@ public partial class HubConnectionTests
         public async Task StartAsyncStartsTheUnderlyingConnection()
         {
             var testConnection = new TestConnection();
-            await AsyncUsing(
-                CreateHubConnection(testConnection),
-                async connection =>
-                {
-                    Assert.Equal(HubConnectionState.Disconnected, connection.State);
+            await AsyncUsing(CreateHubConnection(testConnection), async connection =>
+            {
+                Assert.Equal(HubConnectionState.Disconnected, connection.State);
 
-                    await connection.StartAsync().DefaultTimeout();
-                    Assert.True(testConnection.Started.IsCompleted);
-                    Assert.Equal(HubConnectionState.Connected, connection.State);
-                }
-            );
+                await connection.StartAsync().DefaultTimeout();
+                Assert.True(testConnection.Started.IsCompleted);
+                Assert.Equal(HubConnectionState.Connected, connection.State);
+            });
         }
 
         [Fact]
@@ -66,30 +63,27 @@ public partial class HubConnectionTests
         {
             // Set up StartAsync to wait on the syncPoint when starting
             var testConnection = new TestConnection(onStart: SyncPoint.Create(out var syncPoint));
-            await AsyncUsing(
-                CreateHubConnection(testConnection),
-                async connection =>
-                {
-                    var firstStart = connection.StartAsync();
-                    Assert.False(firstStart.IsCompleted);
+            await AsyncUsing(CreateHubConnection(testConnection), async connection =>
+            {
+                var firstStart = connection.StartAsync();
+                Assert.False(firstStart.IsCompleted);
 
-                    // Wait for us to be in IConnectionFactory.ConnectAsync
-                    await syncPoint.WaitForSyncPoint().DefaultTimeout();
+                // Wait for us to be in IConnectionFactory.ConnectAsync
+                await syncPoint.WaitForSyncPoint().DefaultTimeout();
 
-                    // Try starting again
-                    var secondStart = connection.StartAsync();
-                    Assert.False(secondStart.IsCompleted);
+                // Try starting again
+                var secondStart = connection.StartAsync();
+                Assert.False(secondStart.IsCompleted);
 
-                    // Release the sync point
-                    syncPoint.Continue();
+                // Release the sync point
+                syncPoint.Continue();
 
-                    // The first start should finish fine, but the second throws an InvalidOperationException.
-                    await firstStart.DefaultTimeout();
-                    await Assert
-                        .ThrowsAsync<InvalidOperationException>(() => secondStart)
-                        .DefaultTimeout();
-                }
-            );
+                // The first start should finish fine, but the second throws an InvalidOperationException.
+                await firstStart.DefaultTimeout();
+                await Assert
+                    .ThrowsAsync<InvalidOperationException>(() => secondStart)
+                    .DefaultTimeout();
+            });
         }
 
         [Fact]
@@ -106,24 +100,21 @@ public partial class HubConnectionTests
             var delegateConnectionFactory = new DelegateConnectionFactory(ConnectionFactory);
             builder.Services.AddSingleton<IConnectionFactory>(delegateConnectionFactory);
 
-            await AsyncUsing(
-                builder.Build(),
-                async connection =>
-                {
-                    Assert.Equal(HubConnectionState.Disconnected, connection.State);
+            await AsyncUsing(builder.Build(), async connection =>
+            {
+                Assert.Equal(HubConnectionState.Disconnected, connection.State);
 
-                    await connection.StartAsync().DefaultTimeout();
-                    Assert.Equal(1, createCount);
-                    Assert.Equal(HubConnectionState.Connected, connection.State);
+                await connection.StartAsync().DefaultTimeout();
+                Assert.Equal(1, createCount);
+                Assert.Equal(HubConnectionState.Connected, connection.State);
 
-                    await connection.StopAsync().DefaultTimeout();
-                    Assert.Equal(HubConnectionState.Disconnected, connection.State);
+                await connection.StopAsync().DefaultTimeout();
+                Assert.Equal(HubConnectionState.Disconnected, connection.State);
 
-                    await connection.StartAsync().DefaultTimeout();
-                    Assert.Equal(2, createCount);
-                    Assert.Equal(HubConnectionState.Connected, connection.State);
-                }
-            );
+                await connection.StartAsync().DefaultTimeout();
+                Assert.Equal(2, createCount);
+                Assert.Equal(HubConnectionState.Connected, connection.State);
+            });
         }
 
         [Fact]
@@ -144,31 +135,28 @@ public partial class HubConnectionTests
             var delegateConnectionFactory = new DelegateConnectionFactory(ConnectionFactory);
             builder.Services.AddSingleton<IConnectionFactory>(delegateConnectionFactory);
 
-            await AsyncUsing(
-                builder.Build(),
-                async connection =>
-                {
-                    await connection.StartAsync().DefaultTimeout();
-                    Assert.Equal(1, createCount);
+            await AsyncUsing(builder.Build(), async connection =>
+            {
+                await connection.StartAsync().DefaultTimeout();
+                Assert.Equal(1, createCount);
 
-                    var stopTask = connection.StopAsync();
+                var stopTask = connection.StopAsync();
 
-                    // Wait to hit DisposeAsync on TestConnection (which should be after StopAsync has cleared the connection state)
-                    await syncPoint.WaitForSyncPoint().DefaultTimeout();
+                // Wait to hit DisposeAsync on TestConnection (which should be after StopAsync has cleared the connection state)
+                await syncPoint.WaitForSyncPoint().DefaultTimeout();
 
-                    // We should not yet be able to start now because StopAsync hasn't completed
-                    Assert.False(stopTask.IsCompleted);
-                    var startTask = connection.StartAsync();
-                    Assert.False(stopTask.IsCompleted);
+                // We should not yet be able to start now because StopAsync hasn't completed
+                Assert.False(stopTask.IsCompleted);
+                var startTask = connection.StartAsync();
+                Assert.False(stopTask.IsCompleted);
 
-                    // When we release the sync point, the StopAsync task will finish
-                    syncPoint.Continue();
-                    await stopTask.DefaultTimeout();
+                // When we release the sync point, the StopAsync task will finish
+                syncPoint.Continue();
+                await stopTask.DefaultTimeout();
 
-                    // Which will then allow StartAsync to finish.
-                    await startTask.DefaultTimeout();
-                }
-            );
+                // Which will then allow StartAsync to finish.
+                await startTask.DefaultTimeout();
+            });
         }
 
         [Fact]
@@ -227,19 +215,16 @@ public partial class HubConnectionTests
             var method = MethodsThatRequireActiveConnection[name];
 
             var testConnection = new TestConnection();
-            await AsyncUsing(
-                CreateHubConnection(testConnection),
-                async connection =>
-                {
-                    var ex = await Assert
-                        .ThrowsAsync<InvalidOperationException>(() => method(connection))
-                        .DefaultTimeout();
-                    Assert.Equal(
-                        $"The '{name}' method cannot be called if the connection is not active",
-                        ex.Message
-                    );
-                }
-            );
+            await AsyncUsing(CreateHubConnection(testConnection), async connection =>
+            {
+                var ex = await Assert
+                    .ThrowsAsync<InvalidOperationException>(() => method(connection))
+                    .DefaultTimeout();
+                Assert.Equal(
+                    $"The '{name}' method cannot be called if the connection is not active",
+                    ex.Message
+                );
+            });
         }
 
         [Theory]
@@ -252,34 +237,31 @@ public partial class HubConnectionTests
 
             // Set up StartAsync to wait on the syncPoint when starting
             var testConnection = new TestConnection(onStart: SyncPoint.Create(out var syncPoint));
-            await AsyncUsing(
-                CreateHubConnection(testConnection),
-                async connection =>
+            await AsyncUsing(CreateHubConnection(testConnection), async connection =>
+            {
+                // Start, and wait for the sync point to be hit
+                var startTask = connection.StartAsync();
+                Assert.False(startTask.IsCompleted);
+                await syncPoint.WaitForSyncPoint().DefaultTimeout();
+
+                // Run the method, but it will be waiting for the lock
+                var targetTask = method(connection);
+
+                // Release the SyncPoint
+                syncPoint.Continue();
+
+                // Wait for start to finish
+                await startTask.DefaultTimeout();
+
+                // We need some special logic to ensure InvokeAsync completes.
+                if (string.Equals(name, nameof(HubConnection.InvokeCoreAsync)))
                 {
-                    // Start, and wait for the sync point to be hit
-                    var startTask = connection.StartAsync();
-                    Assert.False(startTask.IsCompleted);
-                    await syncPoint.WaitForSyncPoint().DefaultTimeout();
-
-                    // Run the method, but it will be waiting for the lock
-                    var targetTask = method(connection);
-
-                    // Release the SyncPoint
-                    syncPoint.Continue();
-
-                    // Wait for start to finish
-                    await startTask.DefaultTimeout();
-
-                    // We need some special logic to ensure InvokeAsync completes.
-                    if (string.Equals(name, nameof(HubConnection.InvokeCoreAsync)))
-                    {
-                        await ForceLastInvocationToComplete(testConnection).DefaultTimeout();
-                    }
-
-                    // Wait for the method to complete.
-                    await targetTask.DefaultTimeout();
+                    await ForceLastInvocationToComplete(testConnection).DefaultTimeout();
                 }
-            );
+
+                // Wait for the method to complete.
+                await targetTask.DefaultTimeout();
+            });
         }
 
         [Fact]
@@ -287,112 +269,97 @@ public partial class HubConnectionTests
         {
             // Set up StartAsync to wait on the syncPoint when starting
             var testConnection = new TestConnection(onStart: SyncPoint.Create(out var syncPoint));
-            await AsyncUsing(
-                CreateHubConnection(testConnection),
-                async connection =>
-                {
-                    // Start, and wait for the sync point to be hit
-                    var startTask = connection.StartAsync();
-                    Assert.False(startTask.IsCompleted);
-                    await syncPoint.WaitForSyncPoint().DefaultTimeout();
+            await AsyncUsing(CreateHubConnection(testConnection), async connection =>
+            {
+                // Start, and wait for the sync point to be hit
+                var startTask = connection.StartAsync();
+                Assert.False(startTask.IsCompleted);
+                await syncPoint.WaitForSyncPoint().DefaultTimeout();
 
-                    Assert.Equal(HubConnectionState.Connecting, connection.State);
+                Assert.Equal(HubConnectionState.Connecting, connection.State);
 
-                    // Release the SyncPoint
-                    syncPoint.Continue();
+                // Release the SyncPoint
+                syncPoint.Continue();
 
-                    // Wait for start to finish
-                    await startTask.DefaultTimeout();
+                // Wait for start to finish
+                await startTask.DefaultTimeout();
 
-                    Assert.Equal(HubConnectionState.Connected, connection.State);
-                }
-            );
+                Assert.Equal(HubConnectionState.Connected, connection.State);
+            });
         }
 
         [Fact]
         public async Task StatusIsDisconnectedInCloseEvent()
         {
             var testConnection = new TestConnection();
-            await AsyncUsing(
-                CreateHubConnection(testConnection),
-                async connection =>
+            await AsyncUsing(CreateHubConnection(testConnection), async connection =>
+            {
+                var closed = new TaskCompletionSource();
+                connection.Closed += exception =>
                 {
-                    var closed = new TaskCompletionSource();
-                    connection.Closed += exception =>
-                    {
-                        closed.TrySetResult();
-                        Assert.Equal(HubConnectionState.Disconnected, connection.State);
-                        return Task.CompletedTask;
-                    };
-
+                    closed.TrySetResult();
                     Assert.Equal(HubConnectionState.Disconnected, connection.State);
+                    return Task.CompletedTask;
+                };
 
-                    await connection.StartAsync().DefaultTimeout();
-                    Assert.True(testConnection.Started.IsCompleted);
-                    Assert.Equal(HubConnectionState.Connected, connection.State);
+                Assert.Equal(HubConnectionState.Disconnected, connection.State);
 
-                    await connection.StopAsync().DefaultTimeout();
-                    await testConnection.Disposed.DefaultTimeout();
-                    Assert.Equal(HubConnectionState.Disconnected, connection.State);
+                await connection.StartAsync().DefaultTimeout();
+                Assert.True(testConnection.Started.IsCompleted);
+                Assert.Equal(HubConnectionState.Connected, connection.State);
 
-                    await closed.Task.DefaultTimeout();
-                }
-            );
+                await connection.StopAsync().DefaultTimeout();
+                await testConnection.Disposed.DefaultTimeout();
+                Assert.Equal(HubConnectionState.Disconnected, connection.State);
+
+                await closed.Task.DefaultTimeout();
+            });
         }
 
         [Fact]
         public async Task StopAsyncStopsConnection()
         {
             var testConnection = new TestConnection();
-            await AsyncUsing(
-                CreateHubConnection(testConnection),
-                async connection =>
-                {
-                    await connection.StartAsync().DefaultTimeout();
-                    Assert.True(testConnection.Started.IsCompleted);
+            await AsyncUsing(CreateHubConnection(testConnection), async connection =>
+            {
+                await connection.StartAsync().DefaultTimeout();
+                Assert.True(testConnection.Started.IsCompleted);
 
-                    await connection.StopAsync().DefaultTimeout();
-                    await testConnection.Disposed.DefaultTimeout();
-                }
-            );
+                await connection.StopAsync().DefaultTimeout();
+                await testConnection.Disposed.DefaultTimeout();
+            });
         }
 
         [Fact]
         public async Task StopAsyncNoOpsIfConnectionNotYetStarted()
         {
             var testConnection = new TestConnection();
-            await AsyncUsing(
-                CreateHubConnection(testConnection),
-                async connection =>
-                {
-                    await connection.StopAsync().DefaultTimeout();
-                    Assert.False(testConnection.Disposed.IsCompleted);
-                }
-            );
+            await AsyncUsing(CreateHubConnection(testConnection), async connection =>
+            {
+                await connection.StopAsync().DefaultTimeout();
+                Assert.False(testConnection.Disposed.IsCompleted);
+            });
         }
 
         [Fact]
         public async Task StopAsyncNoOpsIfConnectionAlreadyStopped()
         {
             var testConnection = new TestConnection();
-            await AsyncUsing(
-                CreateHubConnection(testConnection),
-                async connection =>
-                {
-                    Assert.Equal(HubConnectionState.Disconnected, connection.State);
+            await AsyncUsing(CreateHubConnection(testConnection), async connection =>
+            {
+                Assert.Equal(HubConnectionState.Disconnected, connection.State);
 
-                    await connection.StartAsync().DefaultTimeout();
-                    Assert.True(testConnection.Started.IsCompleted);
-                    Assert.Equal(HubConnectionState.Connected, connection.State);
+                await connection.StartAsync().DefaultTimeout();
+                Assert.True(testConnection.Started.IsCompleted);
+                Assert.Equal(HubConnectionState.Connected, connection.State);
 
-                    await connection.StopAsync().DefaultTimeout();
-                    await testConnection.Disposed.DefaultTimeout();
-                    Assert.Equal(HubConnectionState.Disconnected, connection.State);
+                await connection.StopAsync().DefaultTimeout();
+                await testConnection.Disposed.DefaultTimeout();
+                Assert.Equal(HubConnectionState.Disconnected, connection.State);
 
-                    await connection.StopAsync().DefaultTimeout();
-                    Assert.Equal(HubConnectionState.Disconnected, connection.State);
-                }
-            );
+                await connection.StopAsync().DefaultTimeout();
+                Assert.Equal(HubConnectionState.Disconnected, connection.State);
+            });
         }
 
         [Fact]
@@ -401,21 +368,18 @@ public partial class HubConnectionTests
             // Regression test:
             // If there wasn't an active underlying connection, StopAsync would leave a CTS canceled which would cause the next StartAsync to fail
             var testConnection = new TestConnection();
-            await AsyncUsing(
-                CreateHubConnection(testConnection),
-                async connection =>
-                {
-                    Assert.Equal(HubConnectionState.Disconnected, connection.State);
+            await AsyncUsing(CreateHubConnection(testConnection), async connection =>
+            {
+                Assert.Equal(HubConnectionState.Disconnected, connection.State);
 
-                    await connection.StopAsync().DefaultTimeout();
-                    Assert.False(testConnection.Disposed.IsCompleted);
-                    Assert.Equal(HubConnectionState.Disconnected, connection.State);
+                await connection.StopAsync().DefaultTimeout();
+                Assert.False(testConnection.Disposed.IsCompleted);
+                Assert.Equal(HubConnectionState.Disconnected, connection.State);
 
-                    await connection.StartAsync().DefaultTimeout();
-                    Assert.True(testConnection.Started.IsCompleted);
-                    Assert.Equal(HubConnectionState.Connected, connection.State);
-                }
-            );
+                await connection.StartAsync().DefaultTimeout();
+                Assert.True(testConnection.Started.IsCompleted);
+                Assert.Equal(HubConnectionState.Connected, connection.State);
+            });
         }
 
         [Fact]
@@ -423,32 +387,29 @@ public partial class HubConnectionTests
         {
             var testConnection = new TestConnection();
             var closed = new TaskCompletionSource();
-            await AsyncUsing(
-                CreateHubConnection(testConnection),
-                async connection =>
+            await AsyncUsing(CreateHubConnection(testConnection), async connection =>
+            {
+                connection.Closed += (e) =>
                 {
-                    connection.Closed += (e) =>
-                    {
-                        closed.TrySetResult();
-                        return Task.CompletedTask;
-                    };
-                    await connection.StartAsync().DefaultTimeout();
-                    Assert.True(testConnection.Started.IsCompleted);
+                    closed.TrySetResult();
+                    return Task.CompletedTask;
+                };
+                await connection.StartAsync().DefaultTimeout();
+                Assert.True(testConnection.Started.IsCompleted);
 
-                    // Complete the transport side and wait for the connection to close
-                    testConnection.CompleteFromTransport();
-                    await closed.Task.DefaultTimeout();
+                // Complete the transport side and wait for the connection to close
+                testConnection.CompleteFromTransport();
+                await closed.Task.DefaultTimeout();
 
-                    // We should be stopped now
-                    var ex = await Assert
-                        .ThrowsAsync<InvalidOperationException>(() => connection.SendAsync("Foo"))
-                        .DefaultTimeout();
-                    Assert.Equal(
-                        $"The '{nameof(HubConnection.SendCoreAsync)}' method cannot be called if the connection is not active",
-                        ex.Message
-                    );
-                }
-            );
+                // We should be stopped now
+                var ex = await Assert
+                    .ThrowsAsync<InvalidOperationException>(() => connection.SendAsync("Foo"))
+                    .DefaultTimeout();
+                Assert.Equal(
+                    $"The '{nameof(HubConnection.SendCoreAsync)}' method cannot be called if the connection is not active",
+                    ex.Message
+                );
+            });
         }
 
         [Fact]
@@ -456,46 +417,43 @@ public partial class HubConnectionTests
         {
             var testConnection = new TestConnection();
             var connectionClosed = new TaskCompletionSource();
-            await AsyncUsing(
-                CreateHubConnection(testConnection),
-                async connection =>
+            await AsyncUsing(CreateHubConnection(testConnection), async connection =>
+            {
+                connection.Closed += (e) =>
                 {
-                    connection.Closed += (e) =>
-                    {
-                        connectionClosed.TrySetResult();
-                        return Task.CompletedTask;
-                    };
+                    connectionClosed.TrySetResult();
+                    return Task.CompletedTask;
+                };
 
-                    await connection.StartAsync().DefaultTimeout();
-                    Assert.True(testConnection.Started.IsCompleted);
+                await connection.StartAsync().DefaultTimeout();
+                Assert.True(testConnection.Started.IsCompleted);
 
-                    // Start shutting down and complete the transport side
-                    var stopTask = connection.StopAsync();
-                    testConnection.CompleteFromTransport();
+                // Start shutting down and complete the transport side
+                var stopTask = connection.StopAsync();
+                testConnection.CompleteFromTransport();
 
-                    // Wait for the connection to close.
-                    await testConnection.Transport.Input.CompleteAsync();
+                // Wait for the connection to close.
+                await testConnection.Transport.Input.CompleteAsync();
 
-                    // The stop should be completed.
-                    await stopTask.DefaultTimeout();
+                // The stop should be completed.
+                await stopTask.DefaultTimeout();
 
-                    // The HubConnection should now be closed.
-                    await connectionClosed.Task.DefaultTimeout();
+                // The HubConnection should now be closed.
+                await connectionClosed.Task.DefaultTimeout();
 
-                    // We should be stopped now
-                    var ex = await Assert
-                        .ThrowsAsync<InvalidOperationException>(() => connection.SendAsync("Foo"))
-                        .DefaultTimeout();
-                    Assert.Equal(
-                        $"The '{nameof(HubConnection.SendCoreAsync)}' method cannot be called if the connection is not active",
-                        ex.Message
-                    );
+                // We should be stopped now
+                var ex = await Assert
+                    .ThrowsAsync<InvalidOperationException>(() => connection.SendAsync("Foo"))
+                    .DefaultTimeout();
+                Assert.Equal(
+                    $"The '{nameof(HubConnection.SendCoreAsync)}' method cannot be called if the connection is not active",
+                    ex.Message
+                );
 
-                    await testConnection.Disposed.DefaultTimeout();
+                await testConnection.Disposed.DefaultTimeout();
 
-                    Assert.Equal(1, testConnection.DisposeCount);
-                }
-            );
+                Assert.Equal(1, testConnection.DisposeCount);
+            });
         }
 
         [Fact]
@@ -503,41 +461,38 @@ public partial class HubConnectionTests
         {
             var testConnection = new TestConnection();
             var connectionClosed = new TaskCompletionSource();
-            await AsyncUsing(
-                CreateHubConnection(testConnection),
-                async connection =>
+            await AsyncUsing(CreateHubConnection(testConnection), async connection =>
+            {
+                connection.Closed += (e) =>
                 {
-                    connection.Closed += (e) =>
-                    {
-                        connectionClosed.TrySetResult();
-                        return Task.CompletedTask;
-                    };
+                    connectionClosed.TrySetResult();
+                    return Task.CompletedTask;
+                };
 
-                    await connection.StartAsync().DefaultTimeout();
-                    Assert.True(testConnection.Started.IsCompleted);
+                await connection.StartAsync().DefaultTimeout();
+                Assert.True(testConnection.Started.IsCompleted);
 
-                    // Complete the transport side and wait for the connection to close
-                    testConnection.CompleteFromTransport();
+                // Complete the transport side and wait for the connection to close
+                testConnection.CompleteFromTransport();
 
-                    // Start stopping manually (these can't be synchronized by a Sync Point because the transport is disposed outside the lock)
-                    var stopTask = connection.StopAsync();
+                // Start stopping manually (these can't be synchronized by a Sync Point because the transport is disposed outside the lock)
+                var stopTask = connection.StopAsync();
 
-                    await testConnection.Disposed.DefaultTimeout();
+                await testConnection.Disposed.DefaultTimeout();
 
-                    // Wait for the stop task to complete and the closed event to fire
-                    await stopTask.DefaultTimeout();
-                    await connectionClosed.Task.DefaultTimeout();
+                // Wait for the stop task to complete and the closed event to fire
+                await stopTask.DefaultTimeout();
+                await connectionClosed.Task.DefaultTimeout();
 
-                    // We should be stopped now
-                    var ex = await Assert
-                        .ThrowsAsync<InvalidOperationException>(() => connection.SendAsync("Foo"))
-                        .DefaultTimeout();
-                    Assert.Equal(
-                        $"The '{nameof(HubConnection.SendCoreAsync)}' method cannot be called if the connection is not active",
-                        ex.Message
-                    );
-                }
-            );
+                // We should be stopped now
+                var ex = await Assert
+                    .ThrowsAsync<InvalidOperationException>(() => connection.SendAsync("Foo"))
+                    .DefaultTimeout();
+                Assert.Equal(
+                    $"The '{nameof(HubConnection.SendCoreAsync)}' method cannot be called if the connection is not active",
+                    ex.Message
+                );
+            });
         }
 
         [Theory]
@@ -550,36 +505,33 @@ public partial class HubConnectionTests
 
             // Set up StartAsync to wait on the syncPoint when starting
             var testConnection = new TestConnection(onDispose: SyncPoint.Create(out var syncPoint));
-            await AsyncUsing(
-                CreateHubConnection(testConnection),
-                async connection =>
-                {
-                    await connection.StartAsync().DefaultTimeout();
+            await AsyncUsing(CreateHubConnection(testConnection), async connection =>
+            {
+                await connection.StartAsync().DefaultTimeout();
 
-                    // Stop and invoke the method. These two aren't synchronizable via a Sync Point any more because the transport is disposed
-                    // outside the lock :(
-                    var disposeTask = connection.StopAsync();
+                // Stop and invoke the method. These two aren't synchronizable via a Sync Point any more because the transport is disposed
+                // outside the lock :(
+                var disposeTask = connection.StopAsync();
 
-                    // Wait to hit DisposeAsync on TestConnection (which should be after StopAsync has cleared the connection state)
-                    await syncPoint.WaitForSyncPoint().DefaultTimeout();
+                // Wait to hit DisposeAsync on TestConnection (which should be after StopAsync has cleared the connection state)
+                await syncPoint.WaitForSyncPoint().DefaultTimeout();
 
-                    var targetTask = method(connection);
+                var targetTask = method(connection);
 
-                    // Release the sync point
-                    syncPoint.Continue();
+                // Release the sync point
+                syncPoint.Continue();
 
-                    // Wait for the method to complete, with an expected error.
-                    var ex = await Assert
-                        .ThrowsAsync<InvalidOperationException>(() => targetTask)
-                        .DefaultTimeout();
-                    Assert.Equal(
-                        $"The '{methodName}' method cannot be called if the connection is not active",
-                        ex.Message
-                    );
+                // Wait for the method to complete, with an expected error.
+                var ex = await Assert
+                    .ThrowsAsync<InvalidOperationException>(() => targetTask)
+                    .DefaultTimeout();
+                Assert.Equal(
+                    $"The '{methodName}' method cannot be called if the connection is not active",
+                    ex.Message
+                );
 
-                    await disposeTask.DefaultTimeout();
-                }
-            );
+                await disposeTask.DefaultTimeout();
+            });
         }
 
         [Fact]

@@ -405,24 +405,20 @@ public abstract class StoreValueGenerationTestBase<TFixture> : IClassFixture<TFi
             )
         )
         {
-            Assert.Contains(
-                Fixture.ListLoggerFactory.Log,
-                l => l.Id == RelationalEventId.TransactionStarted
+            Assert.Contains(Fixture.ListLoggerFactory.Log, l =>
+                l.Id == RelationalEventId.TransactionStarted
             );
-            Assert.Contains(
-                Fixture.ListLoggerFactory.Log,
-                l => l.Id == RelationalEventId.TransactionCommitted
+            Assert.Contains(Fixture.ListLoggerFactory.Log, l =>
+                l.Id == RelationalEventId.TransactionCommitted
             );
         }
         else
         {
-            Assert.DoesNotContain(
-                Fixture.ListLoggerFactory.Log,
-                l => l.Id == RelationalEventId.TransactionStarted
+            Assert.DoesNotContain(Fixture.ListLoggerFactory.Log, l =>
+                l.Id == RelationalEventId.TransactionStarted
             );
-            Assert.DoesNotContain(
-                Fixture.ListLoggerFactory.Log,
-                l => l.Id == RelationalEventId.TransactionCommitted
+            Assert.DoesNotContain(Fixture.ListLoggerFactory.Log, l =>
+                l.Id == RelationalEventId.TransactionCommitted
             );
         }
 

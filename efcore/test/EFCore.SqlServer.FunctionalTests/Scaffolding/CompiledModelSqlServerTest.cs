@@ -39,10 +39,8 @@ public class CompiledModelSqlServerTest : CompiledModelRelationalTestBase
 
                     if (!jsonColumns)
                     {
-                        ob.ToTable(
-                            "PrincipalBase",
-                            "mySchema",
-                            t => t.Property("PrincipalBaseId").UseIdentityColumn(2, 3)
+                        ob.ToTable("PrincipalBase", "mySchema", t =>
+                            t.Property("PrincipalBaseId").UseIdentityColumn(2, 3)
                         );
                     }
                 }
@@ -51,17 +49,13 @@ public class CompiledModelSqlServerTest : CompiledModelRelationalTestBase
 
         modelBuilder.Entity<PrincipalDerived<DependentBase<byte?>>>(eb =>
         {
-            eb.OwnsMany(
-                typeof(OwnedType).FullName!,
-                "ManyOwned",
-                ob =>
+            eb.OwnsMany(typeof(OwnedType).FullName!, "ManyOwned", ob =>
+            {
+                if (!jsonColumns)
                 {
-                    if (!jsonColumns)
-                    {
-                        ob.ToTable("ManyOwned", t => t.IsMemoryOptimized());
-                    }
+                    ob.ToTable("ManyOwned", t => t.IsMemoryOptimized());
                 }
-            );
+            });
         });
     }
 

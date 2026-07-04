@@ -114,25 +114,21 @@ namespace System.SpanTests
         [Fact]
         public void ArgumentValidation_Copy()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "destination",
-                () =>
-                    ((ReadOnlySpan<T>)new T[] { _oldValue }).Replace(
-                        Span<T>.Empty,
-                        _oldValue,
-                        _newValue
-                    )
+            AssertExtensions.Throws<ArgumentException>("destination", () =>
+                ((ReadOnlySpan<T>)new T[] { _oldValue }).Replace(
+                    Span<T>.Empty,
+                    _oldValue,
+                    _newValue
+                )
             );
 
             T[] values = new T[] { _oldValue, _oldValue, _oldValue };
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new ReadOnlySpan<T>(values, 0, 2).Replace(
-                        new Span<T>(values, 1, 2),
-                        _oldValue,
-                        _newValue
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new ReadOnlySpan<T>(values, 0, 2).Replace(
+                    new Span<T>(values, 1, 2),
+                    _oldValue,
+                    _newValue
+                )
             );
         }
 

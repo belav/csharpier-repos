@@ -42,9 +42,8 @@ namespace System.CodeDom.Tests
         [Fact]
         public void Ctor_Type_String_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => new CodeMemberField((Type)null, "name")
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                new CodeMemberField((Type)null, "name")
             );
         }
 

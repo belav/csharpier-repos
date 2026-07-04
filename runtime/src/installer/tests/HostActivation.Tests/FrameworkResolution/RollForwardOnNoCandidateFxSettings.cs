@@ -282,10 +282,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                     .AddMicrosoftNETCoreAppFrameworkMockHostPolicy("2.5.4")
                     .AddMicrosoftNETCoreAppFrameworkMockHostPolicy("2.5.5")
                     .AddMicrosoftNETCoreAppFrameworkMockHostPolicy("5.1.3")
-                    .AddFramework(
-                        MiddleWare,
-                        "2.1.2",
-                        runtimeConfig => runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.1.3")
+                    .AddFramework(MiddleWare, "2.1.2", runtimeConfig =>
+                        runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.1.3")
                     )
                     .Build();
 

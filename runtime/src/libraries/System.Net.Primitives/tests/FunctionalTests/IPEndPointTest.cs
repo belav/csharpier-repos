@@ -26,9 +26,8 @@ namespace System.Net.Primitives.Functional.Tests
         [InlineData(0x100000000)]
         public static void Ctor_InvalidAddress_ThrowsArgumentOutOfRangeException(long address)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "newAddress",
-                () => new IPEndPoint(address, 500)
+            Assert.Throws<ArgumentOutOfRangeException>("newAddress", () =>
+                new IPEndPoint(address, 500)
             );
         }
 
@@ -61,9 +60,8 @@ namespace System.Net.Primitives.Functional.Tests
         public static void Ctor_InvalidPort_ThrowsArgumentOutOfRangeException(int port)
         {
             Assert.Throws<ArgumentOutOfRangeException>("port", () => new IPEndPoint(1, port));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "port",
-                () => new IPEndPoint(new IPAddress(1), port)
+            Assert.Throws<ArgumentOutOfRangeException>("port", () =>
+                new IPEndPoint(new IPAddress(1), port)
             );
         }
 
@@ -248,9 +246,8 @@ namespace System.Net.Primitives.Functional.Tests
             SocketAddress socketAddress
         )
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "socketAddress",
-                () => endPoint.Create(socketAddress)
+            AssertExtensions.Throws<ArgumentException>("socketAddress", () =>
+                endPoint.Create(socketAddress)
             );
         }
 
@@ -270,9 +267,8 @@ namespace System.Net.Primitives.Functional.Tests
         {
             var endPoint = new IPEndPoint(address, 500);
             var socketAddress = new SocketAddress(Sockets.AddressFamily.InterNetwork, size);
-            AssertExtensions.Throws<ArgumentException>(
-                "socketAddress",
-                () => endPoint.Create(socketAddress)
+            AssertExtensions.Throws<ArgumentException>("socketAddress", () =>
+                endPoint.Create(socketAddress)
             );
         }
 

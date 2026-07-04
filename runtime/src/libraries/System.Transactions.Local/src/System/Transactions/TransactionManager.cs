@@ -731,10 +731,8 @@ namespace System.Transactions
 
         // Table for transaction timeouts
         internal static TransactionTable TransactionTable =>
-            LazyInitializer.EnsureInitialized(
-                ref s_transactionTable,
-                ref s_classSyncObject,
-                () => new TransactionTable()
+            LazyInitializer.EnsureInitialized(ref s_transactionTable, ref s_classSyncObject, () =>
+                new TransactionTable()
             );
 
         // Fault in a DistributedTransactionManager if one has not already been created.

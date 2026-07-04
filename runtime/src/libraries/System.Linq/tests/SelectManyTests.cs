@@ -256,10 +256,8 @@ namespace System.Linq.Tests
         public void NullResultSelector()
         {
             Func<StringWithIntArray, int?, string> resultSelector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () =>
-                    Enumerable.Empty<StringWithIntArray>().SelectMany(e => e.total, resultSelector)
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                Enumerable.Empty<StringWithIntArray>().SelectMany(e => e.total, resultSelector)
             );
         }
 
@@ -267,12 +265,8 @@ namespace System.Linq.Tests
         public void NullResultSelectorIndexedSelector()
         {
             Func<StringWithIntArray, int?, string> resultSelector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () =>
-                    Enumerable
-                        .Empty<StringWithIntArray>()
-                        .SelectMany((e, i) => e.total, resultSelector)
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                Enumerable.Empty<StringWithIntArray>().SelectMany((e, i) => e.total, resultSelector)
             );
         }
 
@@ -280,9 +274,8 @@ namespace System.Linq.Tests
         public void NullSourceWithResultSelector()
         {
             StringWithIntArray[] source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.SelectMany(e => e.total, (e, f) => f.ToString())
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.SelectMany(e => e.total, (e, f) => f.ToString())
             );
         }
 
@@ -290,12 +283,10 @@ namespace System.Linq.Tests
         public void NullCollectionSelector()
         {
             Func<StringWithIntArray, IEnumerable<int?>> collectionSelector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "collectionSelector",
-                () =>
-                    Enumerable
-                        .Empty<StringWithIntArray>()
-                        .SelectMany(collectionSelector, (e, f) => f.ToString())
+            AssertExtensions.Throws<ArgumentNullException>("collectionSelector", () =>
+                Enumerable
+                    .Empty<StringWithIntArray>()
+                    .SelectMany(collectionSelector, (e, f) => f.ToString())
             );
         }
 
@@ -303,12 +294,10 @@ namespace System.Linq.Tests
         public void NullIndexedCollectionSelector()
         {
             Func<StringWithIntArray, int, IEnumerable<int?>> collectionSelector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "collectionSelector",
-                () =>
-                    Enumerable
-                        .Empty<StringWithIntArray>()
-                        .SelectMany(collectionSelector, (e, f) => f.ToString())
+            AssertExtensions.Throws<ArgumentNullException>("collectionSelector", () =>
+                Enumerable
+                    .Empty<StringWithIntArray>()
+                    .SelectMany(collectionSelector, (e, f) => f.ToString())
             );
         }
 
@@ -316,9 +305,8 @@ namespace System.Linq.Tests
         public void NullSource()
         {
             StringWithIntArray[] source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.SelectMany(e => e.total)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.SelectMany(e => e.total)
             );
         }
 
@@ -326,9 +314,8 @@ namespace System.Linq.Tests
         public void NullSourceIndexedSelector()
         {
             StringWithIntArray[] source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.SelectMany((e, i) => e.total)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.SelectMany((e, i) => e.total)
             );
         }
 
@@ -336,9 +323,8 @@ namespace System.Linq.Tests
         public void NullSourceIndexedSelectorWithResultSelector()
         {
             StringWithIntArray[] source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.SelectMany((e, i) => e.total, (e, f) => f.ToString())
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.SelectMany((e, i) => e.total, (e, f) => f.ToString())
             );
         }
 
@@ -346,9 +332,8 @@ namespace System.Linq.Tests
         public void NullSelector()
         {
             Func<StringWithIntArray, int[]> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => new StringWithIntArray[0].SelectMany(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                new StringWithIntArray[0].SelectMany(selector)
             );
         }
 
@@ -356,9 +341,8 @@ namespace System.Linq.Tests
         public void NullIndexedSelector()
         {
             Func<StringWithIntArray, int, int[]> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => new StringWithIntArray[0].SelectMany(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                new StringWithIntArray[0].SelectMany(selector)
             );
         }
 

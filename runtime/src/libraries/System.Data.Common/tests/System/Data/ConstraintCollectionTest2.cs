@@ -283,9 +283,8 @@ namespace System.Data.Tests
             Assert.False(col1.Unique);
 
             table.PrimaryKey = new DataColumn[] { col2 };
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => table.Constraints.Remove(table.Constraints[0])
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                table.Constraints.Remove(table.Constraints[0])
             );
         }
 
@@ -528,18 +527,15 @@ namespace System.Data.Tests
         [Fact]
         public void AddRange_C3()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    var ds = new DataSet();
-                    ds.Tables.Add(DataProvider.CreateParentDataTable());
-                    ds.Tables.Add(DataProvider.CreateChildDataTable());
-                    Constraint badConstraint = new UniqueConstraint(ds.Tables[0].Columns[0]);
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                var ds = new DataSet();
+                ds.Tables.Add(DataProvider.CreateParentDataTable());
+                ds.Tables.Add(DataProvider.CreateChildDataTable());
+                Constraint badConstraint = new UniqueConstraint(ds.Tables[0].Columns[0]);
 
-                    ds.Tables[1].Constraints.AddRange(new Constraint[] { badConstraint }); //Cuz foreign key belongs to child table
-                }
-            );
+                ds.Tables[1].Constraints.AddRange(new Constraint[] { badConstraint }); //Cuz foreign key belongs to child table
+            });
         }
 
         private Constraint[] GetConstraintArray(DataSet ds)
@@ -622,9 +618,8 @@ namespace System.Data.Tests
             DataTable table = new DataTable();
             table.Columns.Add("col1");
             Constraint c = table.Constraints.Add("c", table.Columns[0], false);
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => table.Constraints.Remove("sdfs")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                table.Constraints.Remove("sdfs")
             );
 
             table.Constraints.Remove(c);

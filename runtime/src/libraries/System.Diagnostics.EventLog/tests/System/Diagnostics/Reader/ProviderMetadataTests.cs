@@ -74,25 +74,18 @@ namespace System.Diagnostics.Tests
                             string messageFileName = Path.GetFileName(
                                 providerMetadata.MessageFilePath
                             );
-                            Assert.Contains(
-                                expectedMessageFileNames,
-                                expected =>
-                                    expected.Equals(
-                                        messageFileName,
-                                        StringComparison.OrdinalIgnoreCase
-                                    )
+                            Assert.Contains(expectedMessageFileNames, expected =>
+                                expected.Equals(messageFileName, StringComparison.OrdinalIgnoreCase)
                             );
                             if (providerMetadata.HelpLink != null)
                             {
                                 string helpLink = providerMetadata.HelpLink.ToString();
-                                Assert.Contains(
-                                    expectedMessageFileNames,
-                                    expected =>
-                                        -1
-                                        != helpLink.IndexOf(
-                                            expected,
-                                            StringComparison.OrdinalIgnoreCase
-                                        )
+                                Assert.Contains(expectedMessageFileNames, expected =>
+                                    -1
+                                    != helpLink.IndexOf(
+                                        expected,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
                                 );
                             }
                         }

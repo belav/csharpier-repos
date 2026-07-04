@@ -170,16 +170,13 @@ namespace Castle.DynamicProxy
         /// <param name="asm">The assembly to inspect.</param>
         internal static bool AreInternalsVisibleToDynamicProxy(Assembly asm)
         {
-            return internalsVisibleToDynamicProxy.GetOrAdd(
-                asm,
-                a =>
-                {
-                    var internalsVisibleTo = asm.GetCustomAttributes<InternalsVisibleToAttribute>();
-                    return internalsVisibleTo.Any(attr =>
-                        attr.AssemblyName.Contains(ModuleScope.DEFAULT_ASSEMBLY_NAME)
-                    );
-                }
-            );
+            return internalsVisibleToDynamicProxy.GetOrAdd(asm, a =>
+            {
+                var internalsVisibleTo = asm.GetCustomAttributes<InternalsVisibleToAttribute>();
+                return internalsVisibleTo.Any(attr =>
+                    attr.AssemblyName.Contains(ModuleScope.DEFAULT_ASSEMBLY_NAME)
+                );
+            });
         }
 
         internal static bool IsAccessibleType(Type target)

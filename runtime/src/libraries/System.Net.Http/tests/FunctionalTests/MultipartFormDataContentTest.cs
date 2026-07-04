@@ -21,18 +21,16 @@ namespace System.Net.Http.Functional.Tests
         [Fact]
         public void Ctor_NullBoundary_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "boundary",
-                () => new MultipartFormDataContent(null)
+            AssertExtensions.Throws<ArgumentNullException>("boundary", () =>
+                new MultipartFormDataContent(null)
             );
         }
 
         [Fact]
         public void Ctor_EmptyBoundary_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "boundary",
-                () => new MultipartFormDataContent(string.Empty)
+            AssertExtensions.Throws<ArgumentException>("boundary", () =>
+                new MultipartFormDataContent(string.Empty)
             );
         }
 
@@ -47,9 +45,8 @@ namespace System.Net.Http.Functional.Tests
         public void Add_NullName_ThrowsArgumentException()
         {
             var content = new MultipartFormDataContent();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => content.Add(new StringContent("Hello world"), null)
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                content.Add(new StringContent("Hello world"), null)
             );
         }
 
@@ -57,9 +54,8 @@ namespace System.Net.Http.Functional.Tests
         public void Add_EmptyName_ThrowsArgumentException()
         {
             var content = new MultipartFormDataContent();
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                () => content.Add(new StringContent("Hello world"), string.Empty)
+            AssertExtensions.Throws<ArgumentException>("name", () =>
+                content.Add(new StringContent("Hello world"), string.Empty)
             );
         }
 
@@ -67,9 +63,8 @@ namespace System.Net.Http.Functional.Tests
         public void Add_NullFileName_ThrowsArgumentException()
         {
             var content = new MultipartFormDataContent();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "fileName",
-                () => content.Add(new StringContent("Hello world"), "name", null)
+            AssertExtensions.Throws<ArgumentNullException>("fileName", () =>
+                content.Add(new StringContent("Hello world"), "name", null)
             );
         }
 
@@ -77,9 +72,8 @@ namespace System.Net.Http.Functional.Tests
         public void Add_EmptyFileName_ThrowsArgumentException()
         {
             var content = new MultipartFormDataContent();
-            AssertExtensions.Throws<ArgumentException>(
-                "fileName",
-                () => content.Add(new StringContent("Hello world"), "name", string.Empty)
+            AssertExtensions.Throws<ArgumentException>("fileName", () =>
+                content.Add(new StringContent("Hello world"), "name", string.Empty)
             );
         }
 

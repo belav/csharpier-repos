@@ -409,9 +409,8 @@ namespace System.Formats.Asn1.Tests.Writer
         public void VerifyWriteInteger_InvalidEncodedValue_Throws(string valueHex)
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => writer.WriteInteger(valueHex.HexToByteArray())
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                writer.WriteInteger(valueHex.HexToByteArray())
             );
         }
 
@@ -429,9 +428,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
             Asn1Tag tag = new Asn1Tag(TagClass.Application, 3);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => writer.WriteInteger(valueHex.HexToByteArray(), tag)
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                writer.WriteInteger(valueHex.HexToByteArray(), tag)
             );
         }
 
@@ -444,9 +442,8 @@ namespace System.Formats.Asn1.Tests.Writer
         public void VerifyWriteIntegerUnsigned_InvalidEncodedValue_Throws(string valueHex)
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => writer.WriteIntegerUnsigned(valueHex.HexToByteArray())
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                writer.WriteIntegerUnsigned(valueHex.HexToByteArray())
             );
         }
 
@@ -463,9 +460,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
             Asn1Tag tag = new Asn1Tag(TagClass.Application, 3);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => writer.WriteIntegerUnsigned(valueHex.HexToByteArray(), tag)
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                writer.WriteIntegerUnsigned(valueHex.HexToByteArray(), tag)
             );
         }
 
@@ -476,19 +472,16 @@ namespace System.Formats.Asn1.Tests.Writer
         public void VerifyWriteInteger_Null(AsnEncodingRules ruleSet)
         {
             AsnWriter writer = new AsnWriter(ruleSet);
-            AssertExtensions.Throws<ArgumentException>(
-                "tag",
-                () => writer.WriteInteger(0L, Asn1Tag.Null)
+            AssertExtensions.Throws<ArgumentException>("tag", () =>
+                writer.WriteInteger(0L, Asn1Tag.Null)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "tag",
-                () => writer.WriteInteger(0UL, Asn1Tag.Null)
+            AssertExtensions.Throws<ArgumentException>("tag", () =>
+                writer.WriteInteger(0UL, Asn1Tag.Null)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "tag",
-                () => writer.WriteInteger(BigInteger.Zero, Asn1Tag.Null)
+            AssertExtensions.Throws<ArgumentException>("tag", () =>
+                writer.WriteInteger(BigInteger.Zero, Asn1Tag.Null)
             );
         }
 

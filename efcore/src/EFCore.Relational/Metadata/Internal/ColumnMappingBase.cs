@@ -36,10 +36,8 @@ public class ColumnMappingBase : Annotatable, IColumnMappingBase
 
     /// <inheritdoc />
     public virtual RelationalTypeMapping TypeMapping =>
-        NonCapturingLazyInitializer.EnsureInitialized(
-            ref _typeMapping,
-            this,
-            static mapping => mapping.GetTypeMapping()
+        NonCapturingLazyInitializer.EnsureInitialized(ref _typeMapping, this, static mapping =>
+            mapping.GetTypeMapping()
         );
 
     /// <summary>

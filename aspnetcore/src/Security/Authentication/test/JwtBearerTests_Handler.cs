@@ -569,15 +569,10 @@ public class JwtBearerTests_Handler : SharedAuthenticationTests<JwtBearerOptions
                 },
             };
             options.TokenHandlers.Clear();
-            options.TokenHandlers.Add(
-                new BlobTokenValidator(
-                    "JWT",
-                    token =>
-                    {
-                        Assert.Equal("CustomToken", token);
-                    }
-                )
-            );
+            options.TokenHandlers.Add(new BlobTokenValidator("JWT", token =>
+                {
+                    Assert.Equal("CustomToken", token);
+                }));
         });
 
         using var server = host.GetTestServer();
@@ -938,20 +933,14 @@ public class JwtBearerTests_Handler : SharedAuthenticationTests<JwtBearerOptions
                     {
                         services
                             .AddAuthentication()
-                            .AddJwtBearer(
-                                "JwtAuthSchemaOne",
-                                o =>
-                                {
-                                    o.Events = jwtBearerEvents;
-                                }
-                            )
-                            .AddJwtBearer(
-                                "JwtAuthSchemaTwo",
-                                o =>
-                                {
-                                    o.Events = jwtBearerEvents;
-                                }
-                            );
+                            .AddJwtBearer("JwtAuthSchemaOne", o =>
+                            {
+                                o.Events = jwtBearerEvents;
+                            })
+                            .AddJwtBearer("JwtAuthSchemaTwo", o =>
+                            {
+                                o.Events = jwtBearerEvents;
+                            });
                     })
             )
             .Build();

@@ -25,9 +25,8 @@ namespace System.Net.Sockets.Tests
         public void Select_Read_NotASocket_Throws()
         {
             var list = new List<object> { new object() };
-            AssertExtensions.Throws<ArgumentException>(
-                "socketList",
-                () => Socket.Select(list, null, null, SelectSuccessTimeoutMicroseconds)
+            AssertExtensions.Throws<ArgumentException>("socketList", () =>
+                Socket.Select(list, null, null, SelectSuccessTimeoutMicroseconds)
             );
         }
 
@@ -222,9 +221,8 @@ namespace System.Net.Sockets.Tests
         public void Select_Write_NotASocket_Throws()
         {
             var list = new List<object> { new object() };
-            AssertExtensions.Throws<ArgumentException>(
-                "socketList",
-                () => Socket.Select(null, list, null, SelectSuccessTimeoutMicroseconds)
+            AssertExtensions.Throws<ArgumentException>("socketList", () =>
+                Socket.Select(null, list, null, SelectSuccessTimeoutMicroseconds)
             );
         }
 
@@ -363,9 +361,8 @@ namespace System.Net.Sockets.Tests
         public void Select_Error_NotASocket_Throws()
         {
             var list = new List<object> { new object() };
-            AssertExtensions.Throws<ArgumentException>(
-                "socketList",
-                () => Socket.Select(null, null, list, SelectSuccessTimeoutMicroseconds)
+            AssertExtensions.Throws<ArgumentException>("socketList", () =>
+                Socket.Select(null, null, list, SelectSuccessTimeoutMicroseconds)
             );
         }
 

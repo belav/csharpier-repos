@@ -81,24 +81,21 @@ namespace Microsoft.CodeAnalysis.OrderModifiers
             {
                 var memberDeclaration = diagnostic.Location.FindNode(cancellationToken);
 
-                editor.ReplaceNode(
-                    memberDeclaration,
-                    (currentNode, _) =>
-                    {
-                        var modifiers = _syntaxFacts.GetModifiers(currentNode);
-                        var orderedModifiers = new SyntaxTokenList(
-                            modifiers
-                                .OrderBy(CompareModifiers)
-                                .Select((t, i) => t.WithTriviaFrom(modifiers[i]))
-                        );
+                editor.ReplaceNode(memberDeclaration, (currentNode, _) =>
+                {
+                    var modifiers = _syntaxFacts.GetModifiers(currentNode);
+                    var orderedModifiers = new SyntaxTokenList(
+                        modifiers
+                            .OrderBy(CompareModifiers)
+                            .Select((t, i) => t.WithTriviaFrom(modifiers[i]))
+                    );
 
-                        var updatedMemberDeclaration = _syntaxFacts.WithModifiers(
-                            currentNode,
-                            orderedModifiers
-                        );
-                        return updatedMemberDeclaration;
-                    }
-                );
+                    var updatedMemberDeclaration = _syntaxFacts.WithModifiers(
+                        currentNode,
+                        orderedModifiers
+                    );
+                    return updatedMemberDeclaration;
+                });
             }
 
             return;

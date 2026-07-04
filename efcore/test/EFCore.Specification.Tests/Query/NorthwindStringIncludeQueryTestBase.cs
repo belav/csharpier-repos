@@ -157,12 +157,10 @@ public abstract class NorthwindStringIncludeQueryTestBase<TFixture>
             CoreStrings.IncludeOnNonEntity("\"Item1.Orders\""),
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    AssertQuery(
-                        async,
-                        ss =>
-                            ss.Set<Customer>()
-                                .Select(c => new Tuple<Customer, int>(c, 5))
-                                .Include(t => t.Item1.Orders)
+                    AssertQuery(async, ss =>
+                        ss.Set<Customer>()
+                            .Select(c => new Tuple<Customer, int>(c, 5))
+                            .Include(t => t.Item1.Orders)
                     )
                 )
             ).Message

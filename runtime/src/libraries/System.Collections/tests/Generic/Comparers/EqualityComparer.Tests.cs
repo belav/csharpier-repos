@@ -501,13 +501,11 @@ namespace System.Collections.Generic.Tests
         [Fact]
         public void EqualityComparerCreate_InvalidArguments_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "equals",
-                () => EqualityComparer<int>.Create(null)
+            AssertExtensions.Throws<ArgumentNullException>("equals", () =>
+                EqualityComparer<int>.Create(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "equals",
-                () => EqualityComparer<string>.Create(null, null)
+            AssertExtensions.Throws<ArgumentNullException>("equals", () =>
+                EqualityComparer<string>.Create(null, null)
             );
             EqualityComparer<int>.Create((x, y) => x == y); // no exception
             EqualityComparer<int>.Create((x, y) => x == y, null); // no exception

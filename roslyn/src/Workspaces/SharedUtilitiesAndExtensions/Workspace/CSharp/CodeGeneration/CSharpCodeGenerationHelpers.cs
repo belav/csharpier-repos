@@ -94,29 +94,26 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
         {
             const string MultiLineCommentTerminator = "*/";
             var lastToken = destination.GetLastToken();
-            var updatedToken = lastToken.ReplaceTrivia(
-                lastToken.TrailingTrivia,
-                (t1, t2) =>
+            var updatedToken = lastToken.ReplaceTrivia(lastToken.TrailingTrivia, (t1, t2) =>
+            {
+                if (t1.Kind() == SyntaxKind.MultiLineCommentTrivia)
                 {
-                    if (t1.Kind() == SyntaxKind.MultiLineCommentTrivia)
+                    var text = t1.ToString();
+                    if (!text.EndsWith(MultiLineCommentTerminator, StringComparison.Ordinal))
                     {
-                        var text = t1.ToString();
-                        if (!text.EndsWith(MultiLineCommentTerminator, StringComparison.Ordinal))
-                        {
-                            return SyntaxFactory.SyntaxTrivia(
-                                SyntaxKind.MultiLineCommentTrivia,
-                                text + MultiLineCommentTerminator
-                            );
-                        }
+                        return SyntaxFactory.SyntaxTrivia(
+                            SyntaxKind.MultiLineCommentTrivia,
+                            text + MultiLineCommentTerminator
+                        );
                     }
-                    else if (t1.Kind() == SyntaxKind.SkippedTokensTrivia)
-                    {
-                        return ReplaceUnterminatedConstructs(t1);
-                    }
-
-                    return t1;
                 }
-            );
+                else if (t1.Kind() == SyntaxKind.SkippedTokensTrivia)
+                {
+                    return ReplaceUnterminatedConstructs(t1);
+                }
+
+                return t1;
+            });
 
             return destination.ReplaceToken(lastToken, updatedToken);
         }

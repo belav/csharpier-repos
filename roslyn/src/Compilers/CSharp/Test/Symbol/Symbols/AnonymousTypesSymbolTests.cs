@@ -44,17 +44,15 @@ class Query
     }
 }
 ";
-            var verifier = CompileAndVerify(
-                source,
-                symbolValidator: module =>
-                    TestAnonymousTypeSymbols(
-                        module,
-                        new TypeDescr() { FieldNames = new string[] { "x", "g" } },
-                        new TypeDescr()
-                        {
-                            FieldNames = new string[] { "<>h__TransparentIdentifier0", "z" },
-                        }
-                    )
+            var verifier = CompileAndVerify(source, symbolValidator: module =>
+                TestAnonymousTypeSymbols(
+                    module,
+                    new TypeDescr() { FieldNames = new string[] { "x", "g" } },
+                    new TypeDescr()
+                    {
+                        FieldNames = new string[] { "<>h__TransparentIdentifier0", "z" },
+                    }
+                )
             );
 
             TestAnonymousTypeFieldSymbols_InQuery(verifier.EmittedAssemblyData);
@@ -2051,17 +2049,15 @@ class C
 }
 ";
 
-            CompileAndVerify(
-                source,
-                symbolValidator: module =>
-                    TestAnonymousTypeSymbols(
-                        module,
-                        new TypeDescr() { FieldNames = new[] { "local" } },
-                        new TypeDescr() { FieldNames = new[] { "P" } },
-                        new TypeDescr() { FieldNames = new[] { "L" } },
-                        new TypeDescr() { FieldNames = new[] { "M" } },
-                        new TypeDescr() { FieldNames = new[] { "N" } }
-                    )
+            CompileAndVerify(source, symbolValidator: module =>
+                TestAnonymousTypeSymbols(
+                    module,
+                    new TypeDescr() { FieldNames = new[] { "local" } },
+                    new TypeDescr() { FieldNames = new[] { "P" } },
+                    new TypeDescr() { FieldNames = new[] { "L" } },
+                    new TypeDescr() { FieldNames = new[] { "M" } },
+                    new TypeDescr() { FieldNames = new[] { "N" } }
+                )
             );
         }
 

@@ -222,13 +222,11 @@ namespace System.Tests
             StringComparison maxInvalid =
                 Enum.GetValues(typeof(StringComparison)).Cast<StringComparison>().Max() + 1;
 
-            AssertExtensions.Throws<ArgumentException>(
-                "comparisonType",
-                () => StringComparer.FromComparison(minInvalid)
+            AssertExtensions.Throws<ArgumentException>("comparisonType", () =>
+                StringComparer.FromComparison(minInvalid)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "comparisonType",
-                () => StringComparer.FromComparison(maxInvalid)
+            AssertExtensions.Throws<ArgumentException>("comparisonType", () =>
+                StringComparer.FromComparison(maxInvalid)
             );
         }
 

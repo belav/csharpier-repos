@@ -937,16 +937,12 @@ class Test
                 references: new[] { CSharpRef }
             );
 
-            CompileAndVerify(
-                comp,
-                expectedOutput: "Bug813305.M",
-                symbolValidator: m =>
-                {
-                    var Bug813305 = m.GlobalNamespace.GetTypeMember("Bug813305");
-                    var method = Bug813305.GetMethod("IBug813305.M");
-                    Assert.Equal("Bug813305.IBug813305.M(dynamic)", method.ToDisplayString());
-                }
-            );
+            CompileAndVerify(comp, expectedOutput: "Bug813305.M", symbolValidator: m =>
+            {
+                var Bug813305 = m.GlobalNamespace.GetTypeMember("Bug813305");
+                var method = Bug813305.GetMethod("IBug813305.M");
+                Assert.Equal("Bug813305.IBug813305.M(dynamic)", method.ToDisplayString());
+            });
         }
 
         [Fact]

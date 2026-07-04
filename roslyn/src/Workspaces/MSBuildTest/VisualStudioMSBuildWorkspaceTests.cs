@@ -303,21 +303,17 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 
             Assert.Equal(SourceHashAlgorithm.Sha1, project.State.ChecksumAlgorithm);
 
-            Assert.All(
-                project.Documents,
-                d =>
-                    Assert.Equal(
-                        SourceHashAlgorithm.Sha1,
-                        d.GetTextSynchronously(default).ChecksumAlgorithm
-                    )
+            Assert.All(project.Documents, d =>
+                Assert.Equal(
+                    SourceHashAlgorithm.Sha1,
+                    d.GetTextSynchronously(default).ChecksumAlgorithm
+                )
             );
-            Assert.All(
-                project.AdditionalDocuments,
-                d =>
-                    Assert.Equal(
-                        SourceHashAlgorithm.Sha1,
-                        d.GetTextSynchronously(default).ChecksumAlgorithm
-                    )
+            Assert.All(project.AdditionalDocuments, d =>
+                Assert.Equal(
+                    SourceHashAlgorithm.Sha1,
+                    d.GetTextSynchronously(default).ChecksumAlgorithm
+                )
             );
         }
 
@@ -335,13 +331,11 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
 
             Assert.Equal(SourceHashAlgorithms.Default, project.State.ChecksumAlgorithm);
 
-            Assert.All(
-                project.Documents,
-                d =>
-                    Assert.Equal(
-                        SourceHashAlgorithms.Default,
-                        d.GetTextSynchronously(default).ChecksumAlgorithm
-                    )
+            Assert.All(project.Documents, d =>
+                Assert.Equal(
+                    SourceHashAlgorithms.Default,
+                    d.GetTextSynchronously(default).ChecksumAlgorithm
+                )
             );
         }
 
@@ -1027,9 +1021,8 @@ class C1
             Assert.Contains(documents, d => d.Name == "MainWindow.xaml.cs");
 
             // prove no xaml files are documents
-            Assert.DoesNotContain(
-                documents,
-                d => d.Name.EndsWith(".xaml", StringComparison.OrdinalIgnoreCase)
+            Assert.DoesNotContain(documents, d =>
+                d.Name.EndsWith(".xaml", StringComparison.OrdinalIgnoreCase)
             );
 
             // prove that generated source files for xaml files are included in documents list
@@ -1782,11 +1775,9 @@ class C1
             Assert.Empty(project.AllProjectReferences);
 
             var metaRefs = project.MetadataReferences.ToList();
-            Assert.Contains(
-                metaRefs,
-                r =>
-                    r is PortableExecutableReference reference
-                    && reference.Display.Contains("CSharpProject.dll")
+            Assert.Contains(metaRefs, r =>
+                r is PortableExecutableReference reference
+                && reference.Display.Contains("CSharpProject.dll")
             );
         }
 
@@ -1822,11 +1813,9 @@ class C1
             Assert.Single(project.Solution.ProjectIds);
             Assert.Empty(project.ProjectReferences);
             Assert.Empty(project.AllProjectReferences);
-            Assert.Contains(
-                project.MetadataReferences,
-                r =>
-                    r is PortableExecutableReference reference
-                    && reference.Display.Contains("CSharpProject.dll")
+            Assert.Contains(project.MetadataReferences, r =>
+                r is PortableExecutableReference reference
+                && reference.Display.Contains("CSharpProject.dll")
             );
         }
 
@@ -1887,11 +1876,9 @@ class C1
             var projRefs = project.ProjectReferences.ToList();
             var metaRefs = project.MetadataReferences.ToList();
             Assert.Empty(projRefs);
-            Assert.Contains(
-                metaRefs,
-                r =>
-                    r is PortableExecutableReference reference
-                    && reference.Display.Contains("CSharpProject.dll")
+            Assert.Contains(metaRefs, r =>
+                r is PortableExecutableReference reference
+                && reference.Display.Contains("CSharpProject.dll")
             );
         }
 
@@ -1943,11 +1930,9 @@ class C1
 
             // prove vb project references c# project as a metadata reference
             Assert.Empty(vbProject.ProjectReferences);
-            Assert.Contains(
-                vbProject.MetadataReferences,
-                r =>
-                    r is PortableExecutableReference reference
-                    && reference.Display.Contains("CSharpProject.dll")
+            Assert.Contains(vbProject.MetadataReferences, r =>
+                r is PortableExecutableReference reference
+                && reference.Display.Contains("CSharpProject.dll")
             );
 
             // now explicitly open the c# project that got referenced as metadata
@@ -1956,9 +1941,8 @@ class C1
             // show that the vb project now references the c# project directly (not as metadata)
             vbProject = workspace.CurrentSolution.GetProject(vbProject.Id);
             Assert.Single(vbProject.ProjectReferences);
-            Assert.DoesNotContain(
-                vbProject.MetadataReferences,
-                r => r.Properties.Aliases.Contains("CSharpProject")
+            Assert.DoesNotContain(vbProject.MetadataReferences, r =>
+                r.Properties.Aliases.Contains("CSharpProject")
             );
         }
 
@@ -2030,9 +2014,8 @@ class C1
         public async Task TestCompilationOptions_CSharp_OutputKind_DynamicallyLinkedLibrary()
         {
             CreateCSharpFilesWith("OutputType", "Library");
-            await AssertCSCompilationOptionsAsync(
-                OutputKind.DynamicallyLinkedLibrary,
-                options => options.OutputKind
+            await AssertCSCompilationOptionsAsync(OutputKind.DynamicallyLinkedLibrary, options =>
+                options.OutputKind
             );
         }
 
@@ -2040,9 +2023,8 @@ class C1
         public async Task TestCompilationOptions_CSharp_OutputKind_ConsoleApplication()
         {
             CreateCSharpFilesWith("OutputType", "Exe");
-            await AssertCSCompilationOptionsAsync(
-                OutputKind.ConsoleApplication,
-                options => options.OutputKind
+            await AssertCSCompilationOptionsAsync(OutputKind.ConsoleApplication, options =>
+                options.OutputKind
             );
         }
 
@@ -2050,9 +2032,8 @@ class C1
         public async Task TestCompilationOptions_CSharp_OutputKind_WindowsApplication()
         {
             CreateCSharpFilesWith("OutputType", "WinExe");
-            await AssertCSCompilationOptionsAsync(
-                OutputKind.WindowsApplication,
-                options => options.OutputKind
+            await AssertCSCompilationOptionsAsync(OutputKind.WindowsApplication, options =>
+                options.OutputKind
             );
         }
 
@@ -2060,9 +2041,8 @@ class C1
         public async Task TestCompilationOptions_CSharp_OutputKind_NetModule()
         {
             CreateCSharpFilesWith("OutputType", "Module");
-            await AssertCSCompilationOptionsAsync(
-                OutputKind.NetModule,
-                options => options.OutputKind
+            await AssertCSCompilationOptionsAsync(OutputKind.NetModule, options =>
+                options.OutputKind
             );
         }
 
@@ -2070,9 +2050,8 @@ class C1
         public async Task TestCompilationOptions_CSharp_OptimizationLevel_Release()
         {
             CreateCSharpFilesWith("Optimize", "True");
-            await AssertCSCompilationOptionsAsync(
-                OptimizationLevel.Release,
-                options => options.OptimizationLevel
+            await AssertCSCompilationOptionsAsync(OptimizationLevel.Release, options =>
+                options.OptimizationLevel
             );
         }
 
@@ -2080,9 +2059,8 @@ class C1
         public async Task TestCompilationOptions_CSharp_OptimizationLevel_Debug()
         {
             CreateCSharpFilesWith("Optimize", "False");
-            await AssertCSCompilationOptionsAsync(
-                OptimizationLevel.Debug,
-                options => options.OptimizationLevel
+            await AssertCSCompilationOptionsAsync(OptimizationLevel.Debug, options =>
+                options.OptimizationLevel
             );
         }
 
@@ -2111,9 +2089,8 @@ class C1
         public async Task TestCompilationOptions_CSharp_AssemblyOriginatorKeyFile_SignAssembly_True()
         {
             CreateCSharpFilesWith("SignAssembly", "true");
-            await AssertCSCompilationOptionsAsync(
-                "snKey.snk",
-                options => Path.GetFileName(options.CryptoKeyFile)
+            await AssertCSCompilationOptionsAsync("snKey.snk", options =>
+                Path.GetFileName(options.CryptoKeyFile)
             );
         }
 
@@ -2149,9 +2126,8 @@ class C1
         public async Task TestParseOptions_CSharp_Compatibility_ECMA1()
         {
             CreateCSharpFilesWith("LangVersion", "ISO-1");
-            await AssertCSParseOptionsAsync(
-                CS.LanguageVersion.CSharp1,
-                options => options.LanguageVersion
+            await AssertCSParseOptionsAsync(CS.LanguageVersion.CSharp1, options =>
+                options.LanguageVersion
             );
         }
 
@@ -2159,9 +2135,8 @@ class C1
         public async Task TestParseOptions_CSharp_Compatibility_ECMA2()
         {
             CreateCSharpFilesWith("LangVersion", "ISO-2");
-            await AssertCSParseOptionsAsync(
-                CS.LanguageVersion.CSharp2,
-                options => options.LanguageVersion
+            await AssertCSParseOptionsAsync(CS.LanguageVersion.CSharp2, options =>
+                options.LanguageVersion
             );
         }
 
@@ -2169,9 +2144,8 @@ class C1
         public async Task TestParseOptions_CSharp_Compatibility_None()
         {
             CreateCSharpFilesWith("LangVersion", "3");
-            await AssertCSParseOptionsAsync(
-                CS.LanguageVersion.CSharp3,
-                options => options.LanguageVersion
+            await AssertCSParseOptionsAsync(CS.LanguageVersion.CSharp3, options =>
+                options.LanguageVersion
             );
         }
 
@@ -2189,9 +2163,8 @@ class C1
         public async Task TestParseOptions_CSharp_PreprocessorSymbols()
         {
             CreateCSharpFilesWith("DefineConstants", "DEBUG;TRACE;X;Y");
-            await AssertCSParseOptionsAsync(
-                "DEBUG,TRACE,X,Y",
-                options => string.Join(",", options.PreprocessorSymbolNames)
+            await AssertCSParseOptionsAsync("DEBUG,TRACE,X,Y", options =>
+                string.Join(",", options.PreprocessorSymbolNames)
             );
         }
 
@@ -2199,9 +2172,8 @@ class C1
         public async Task TestConfigurationDebug()
         {
             CreateCSharpFiles();
-            await AssertCSParseOptionsAsync(
-                "DEBUG,TRACE",
-                options => string.Join(",", options.PreprocessorSymbolNames)
+            await AssertCSParseOptionsAsync("DEBUG,TRACE", options =>
+                string.Join(",", options.PreprocessorSymbolNames)
             );
         }
 
@@ -2272,9 +2244,8 @@ class C1
         public async Task TestCompilationOptions_VisualBasic_OutputKind_DynamicallyLinkedLibrary()
         {
             CreateVBFilesWith("OutputType", "Library");
-            await AssertVBCompilationOptionsAsync(
-                OutputKind.DynamicallyLinkedLibrary,
-                options => options.OutputKind
+            await AssertVBCompilationOptionsAsync(OutputKind.DynamicallyLinkedLibrary, options =>
+                options.OutputKind
             );
         }
 
@@ -2282,9 +2253,8 @@ class C1
         public async Task TestCompilationOptions_VisualBasic_OutputKind_ConsoleApplication()
         {
             CreateVBFilesWith("OutputType", "Exe");
-            await AssertVBCompilationOptionsAsync(
-                OutputKind.ConsoleApplication,
-                options => options.OutputKind
+            await AssertVBCompilationOptionsAsync(OutputKind.ConsoleApplication, options =>
+                options.OutputKind
             );
         }
 
@@ -2292,9 +2262,8 @@ class C1
         public async Task TestCompilationOptions_VisualBasic_OutputKind_WindowsApplication()
         {
             CreateVBFilesWith("OutputType", "WinExe");
-            await AssertVBCompilationOptionsAsync(
-                OutputKind.WindowsApplication,
-                options => options.OutputKind
+            await AssertVBCompilationOptionsAsync(OutputKind.WindowsApplication, options =>
+                options.OutputKind
             );
         }
 
@@ -2302,9 +2271,8 @@ class C1
         public async Task TestCompilationOptions_VisualBasic_OutputKind_NetModule()
         {
             CreateVBFilesWith("OutputType", "Module");
-            await AssertVBCompilationOptionsAsync(
-                OutputKind.NetModule,
-                options => options.OutputKind
+            await AssertVBCompilationOptionsAsync(OutputKind.NetModule, options =>
+                options.OutputKind
             );
         }
 
@@ -2319,9 +2287,8 @@ class C1
         public async Task TestCompilationOptions_VisualBasic_OptionStrict_On()
         {
             CreateVBFilesWith("OptionStrict", "On");
-            await AssertVBCompilationOptionsAsync(
-                VB.OptionStrict.On,
-                options => options.OptionStrict
+            await AssertVBCompilationOptionsAsync(VB.OptionStrict.On, options =>
+                options.OptionStrict
             );
         }
 
@@ -2333,9 +2300,8 @@ class C1
             // The VBC MSBuild task specifies '/optionstrict:custom' rather than '/optionstrict-'
             // See https://github.com/dotnet/roslyn/blob/58f44c39048032c6b823ddeedddd20fa589912f5/src/Compilers/Core/MSBuildTask/Vbc.cs#L390-L418 for details.
 
-            await AssertVBCompilationOptionsAsync(
-                VB.OptionStrict.Custom,
-                options => options.OptionStrict
+            await AssertVBCompilationOptionsAsync(VB.OptionStrict.Custom, options =>
+                options.OptionStrict
             );
         }
 
@@ -2343,9 +2309,8 @@ class C1
         public async Task TestCompilationOptions_VisualBasic_OptionStrict_Custom()
         {
             CreateVBFilesWith("OptionStrictType", "Custom");
-            await AssertVBCompilationOptionsAsync(
-                VB.OptionStrict.Custom,
-                options => options.OptionStrict
+            await AssertVBCompilationOptionsAsync(VB.OptionStrict.Custom, options =>
+                options.OptionStrict
             );
         }
 
@@ -3145,15 +3110,8 @@ class C1
         public async Task TestProjectReferenceWithReferenceOutputAssemblyFalse()
         {
             var files = GetProjectReferenceSolutionFiles();
-            files = VisitProjectReferences(
-                files,
-                r =>
-                    r.Add(
-                        new XElement(
-                            XName.Get("ReferenceOutputAssembly", MSBuildNamespace),
-                            "false"
-                        )
-                    )
+            files = VisitProjectReferences(files, r =>
+                r.Add(new XElement(XName.Get("ReferenceOutputAssembly", MSBuildNamespace), "false"))
             );
 
             CreateFiles(files);
@@ -3209,9 +3167,8 @@ class C1
         public async Task TestProjectReferenceWithNoGuid()
         {
             var files = GetProjectReferenceSolutionFiles();
-            files = VisitProjectReferences(
-                files,
-                r => r.Elements(XName.Get("Project", MSBuildNamespace)).Remove()
+            files = VisitProjectReferences(files, r =>
+                r.Elements(XName.Get("Project", MSBuildNamespace)).Remove()
             );
 
             CreateFiles(files);
@@ -4102,9 +4059,8 @@ class C { }";
             // Neither project should contain any unresolved metadata references
             foreach (var project in solution.Projects)
             {
-                Assert.DoesNotContain(
-                    project.MetadataReferences,
-                    mr => mr is UnresolvedMetadataReference
+                Assert.DoesNotContain(project.MetadataReferences, mr =>
+                    mr is UnresolvedMetadataReference
                 );
             }
         }

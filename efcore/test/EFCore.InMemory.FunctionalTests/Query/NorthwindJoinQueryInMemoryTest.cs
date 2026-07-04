@@ -50,23 +50,19 @@ public class NorthwindJoinQueryInMemoryTest
         var ids = new uint[] { 1, 2 };
 
         await AssertTranslationFailed(() =>
-            AssertQueryScalar(
-                async,
-                ss =>
-                    from e in ss.Set<Employee>()
-                    join id in ids on e.EmployeeID equals id
-                    select e.EmployeeID
+            AssertQueryScalar(async, ss =>
+                from e in ss.Set<Employee>()
+                join id in ids on e.EmployeeID equals id
+                select e.EmployeeID
             )
         );
 
         ids = new uint[] { 3 };
         await AssertTranslationFailed(() =>
-            AssertQueryScalar(
-                async,
-                ss =>
-                    from e in ss.Set<Employee>()
-                    join id in ids on e.EmployeeID equals id
-                    select e.EmployeeID
+            AssertQueryScalar(async, ss =>
+                from e in ss.Set<Employee>()
+                join id in ids on e.EmployeeID equals id
+                select e.EmployeeID
             )
         );
     }

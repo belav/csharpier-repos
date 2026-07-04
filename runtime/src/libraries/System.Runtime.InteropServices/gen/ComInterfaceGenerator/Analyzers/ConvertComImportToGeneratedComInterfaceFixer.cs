@@ -209,9 +209,8 @@ namespace Microsoft.Interop.Analyzers
                 editor.ReplaceNode(member, generatedDeclaration);
             }
 
-            editor.ReplaceNode(
-                node,
-                (node, gen) => gen.WithModifiers(node, gen.GetModifiers(node).WithPartial(true))
+            editor.ReplaceNode(node, (node, gen) =>
+                gen.WithModifiers(node, gen.GetModifiers(node).WithPartial(true))
             );
 
             MakeNodeParentsPartial(editor, node);

@@ -711,10 +711,8 @@ public class SqlServerUpdateSqlGenerator : UpdateAndSelectSqlGenerator, ISqlServ
             .Append(") AS ")
             .Append(toInsertTableAlias)
             .Append(" (")
-            .AppendJoin(
-                writeOperations,
-                SqlGenerationHelper,
-                (sb, o, helper) => helper.DelimitIdentifier(sb, o.ColumnName)
+            .AppendJoin(writeOperations, SqlGenerationHelper, (sb, o, helper) =>
+                helper.DelimitIdentifier(sb, o.ColumnName)
             );
         if (additionalColumns != null)
         {
@@ -727,10 +725,8 @@ public class SqlServerUpdateSqlGenerator : UpdateAndSelectSqlGenerator, ISqlServ
             .AppendLine("WHEN NOT MATCHED THEN")
             .Append("INSERT ")
             .Append('(')
-            .AppendJoin(
-                writeOperations,
-                SqlGenerationHelper,
-                (sb, o, helper) => helper.DelimitIdentifier(sb, o.ColumnName)
+            .AppendJoin(writeOperations, SqlGenerationHelper, (sb, o, helper) =>
+                helper.DelimitIdentifier(sb, o.ColumnName)
             )
             .Append(')');
 
@@ -891,21 +887,17 @@ public class SqlServerUpdateSqlGenerator : UpdateAndSelectSqlGenerator, ISqlServ
         {
             commandStringBuilder
                 .Append('(')
-                .AppendJoin(
-                    operations,
-                    SqlGenerationHelper,
-                    (sb, o, helper) =>
+                .AppendJoin(operations, SqlGenerationHelper, (sb, o, helper) =>
+                {
+                    if (o.IsWrite)
                     {
-                        if (o.IsWrite)
-                        {
-                            helper.GenerateParameterName(sb, o.ParameterName!);
-                        }
-                        else
-                        {
-                            sb.Append("DEFAULT");
-                        }
+                        helper.GenerateParameterName(sb, o.ParameterName!);
                     }
-                )
+                    else
+                    {
+                        sb.Append("DEFAULT");
+                    }
+                })
                 .Append(", ")
                 .Append(additionalLiteral)
                 .Append(')');
@@ -925,15 +917,11 @@ public class SqlServerUpdateSqlGenerator : UpdateAndSelectSqlGenerator, ISqlServ
             .Append(name)
             .Append(index)
             .Append(" TABLE (")
-            .AppendJoin(
-                operations,
-                this,
-                (sb, o, generator) =>
-                {
-                    generator.SqlGenerationHelper.DelimitIdentifier(sb, o.ColumnName);
-                    sb.Append(' ').Append(GetTypeNameForCopy(o.Property!));
-                }
-            );
+            .AppendJoin(operations, this, (sb, o, generator) =>
+            {
+                generator.SqlGenerationHelper.DelimitIdentifier(sb, o.ColumnName);
+                sb.Append(' ').Append(GetTypeNameForCopy(o.Property!));
+            });
 
         if (additionalColumns != null)
         {
@@ -983,15 +971,11 @@ public class SqlServerUpdateSqlGenerator : UpdateAndSelectSqlGenerator, ISqlServ
             commandStringBuilder
                 .AppendLine()
                 .Append("OUTPUT ")
-                .AppendJoin(
-                    operations,
-                    SqlGenerationHelper,
-                    (sb, o, helper) =>
-                    {
-                        sb.Append("INSERTED.");
-                        helper.DelimitIdentifier(sb, o.ColumnName);
-                    }
-                );
+                .AppendJoin(operations, SqlGenerationHelper, (sb, o, helper) =>
+                {
+                    sb.Append("INSERTED.");
+                    helper.DelimitIdentifier(sb, o.ColumnName);
+                });
 
             if (additionalReadValues is not null)
             {
@@ -1083,10 +1067,8 @@ public class SqlServerUpdateSqlGenerator : UpdateAndSelectSqlGenerator, ISqlServ
             commandStringBuilder
                 .AppendLine()
                 .Append("SELECT ")
-                .AppendJoin(
-                    readOperations,
-                    SqlGenerationHelper,
-                    (sb, o, helper) => helper.DelimitIdentifier(sb, o.ColumnName, "i")
+                .AppendJoin(readOperations, SqlGenerationHelper, (sb, o, helper) =>
+                    helper.DelimitIdentifier(sb, o.ColumnName, "i")
                 )
                 .Append(" FROM ")
                 .Append(insertedTableName)
@@ -1098,10 +1080,8 @@ public class SqlServerUpdateSqlGenerator : UpdateAndSelectSqlGenerator, ISqlServ
             commandStringBuilder
                 .AppendLine()
                 .Append("SELECT ")
-                .AppendJoin(
-                    readOperations,
-                    SqlGenerationHelper,
-                    (sb, o, helper) => helper.DelimitIdentifier(sb, o.ColumnName, "t")
+                .AppendJoin(readOperations, SqlGenerationHelper, (sb, o, helper) =>
+                    helper.DelimitIdentifier(sb, o.ColumnName, "t")
                 )
                 .Append(" FROM ");
             SqlGenerationHelper.DelimitIdentifier(commandStringBuilder, tableName, schema);

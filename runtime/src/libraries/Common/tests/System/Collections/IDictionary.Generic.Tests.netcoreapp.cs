@@ -18,23 +18,20 @@ namespace System.Collections.Tests
         public void KeyValuePair_Deconstruct(int size)
         {
             IDictionary<TKey, TValue> dictionary = GenericIDictionaryFactory(size);
-            Assert.All(
-                dictionary,
-                (entry) =>
-                {
-                    TKey key;
-                    TValue value;
-                    entry.Deconstruct(out key, out value);
-                    Assert.Equal(entry.Key, key);
-                    Assert.Equal(entry.Value, value);
+            Assert.All(dictionary, (entry) =>
+            {
+                TKey key;
+                TValue value;
+                entry.Deconstruct(out key, out value);
+                Assert.Equal(entry.Key, key);
+                Assert.Equal(entry.Value, value);
 
-                    key = default(TKey);
-                    value = default(TValue);
-                    (key, value) = entry;
-                    Assert.Equal(entry.Key, key);
-                    Assert.Equal(entry.Value, value);
-                }
-            );
+                key = default(TKey);
+                value = default(TValue);
+                (key, value) = entry;
+                Assert.Equal(entry.Key, key);
+                Assert.Equal(entry.Value, value);
+            });
         }
     }
 }

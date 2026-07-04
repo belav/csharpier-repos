@@ -87,14 +87,11 @@ namespace System.Net.Http.Unit.Tests.HPack
 
             // Assert: decoded headers are structurally equal to original headers
             Assert.Equal(headers.Count(), decodedHeaders.Count());
-            Assert.All(
-                headers.Zip(decodedHeaders),
-                pair =>
-                {
-                    Assert.Equal(pair.First.Key, pair.Second.Key);
-                    Assert.Equal(pair.First.Value, pair.Second.Value);
-                }
-            );
+            Assert.All(headers.Zip(decodedHeaders), pair =>
+            {
+                Assert.Equal(pair.First.Key, pair.Second.Key);
+                Assert.Equal(pair.First.Value, pair.Second.Value);
+            });
         }
 
         // adapted from Header serialization code in Http2Connection.cs

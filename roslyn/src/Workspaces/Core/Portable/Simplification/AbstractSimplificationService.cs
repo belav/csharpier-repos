@@ -433,9 +433,8 @@ namespace Microsoft.CodeAnalysis.Simplification
                     && n.HasAnnotation(Simplifier.Annotation)
                 );
 
-            return root.ReplaceNodes(
-                importsToSimplify,
-                (o, r) => r.WithAdditionalAnnotations(removeIfUnusedAnnotation)
+            return root.ReplaceNodes(importsToSimplify, (o, r) =>
+                r.WithAdditionalAnnotations(removeIfUnusedAnnotation)
             );
         }
 

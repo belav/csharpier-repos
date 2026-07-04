@@ -121,9 +121,8 @@ namespace System.Reflection.Emit.Tests
         {
             ModuleBuilder module = Helpers.DynamicModule();
             module.DefineEnum("Name", TypeAttributes.Public, typeof(int));
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => module.DefineEnum("Name", TypeAttributes.Public, typeof(int))
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                module.DefineEnum("Name", TypeAttributes.Public, typeof(int))
             );
         }
 
@@ -131,9 +130,8 @@ namespace System.Reflection.Emit.Tests
         public void DefineEnum_NullName_ThrowsArgumentNullException()
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => module.DefineEnum(null, TypeAttributes.Public, typeof(object))
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                module.DefineEnum(null, TypeAttributes.Public, typeof(object))
             );
         }
 
@@ -144,9 +142,8 @@ namespace System.Reflection.Emit.Tests
         public void DefineEnum_EmptyName_ThrowsArgumentNullException(string name)
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                () => module.DefineEnum(name, TypeAttributes.Public, typeof(object))
+            AssertExtensions.Throws<ArgumentException>("name", () =>
+                module.DefineEnum(name, TypeAttributes.Public, typeof(object))
             );
         }
 
@@ -180,9 +177,8 @@ namespace System.Reflection.Emit.Tests
         )
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            AssertExtensions.Throws<ArgumentException>(
-                paramName,
-                () => module.DefineEnum("Enum", visibility, typeof(int))
+            AssertExtensions.Throws<ArgumentException>(paramName, () =>
+                module.DefineEnum("Enum", visibility, typeof(int))
             );
         }
 
@@ -190,9 +186,8 @@ namespace System.Reflection.Emit.Tests
         public void DefineEnum_NullUnderlyingType_ThrowsArgumentNullException()
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => module.DefineEnum("Name", TypeAttributes.Public, null)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                module.DefineEnum("Name", TypeAttributes.Public, null)
             );
         }
 
@@ -200,9 +195,8 @@ namespace System.Reflection.Emit.Tests
         public void DefineEnum_VoidUnderlyingType_ThrowsArgumentException()
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => module.DefineEnum("Name", TypeAttributes.Public, typeof(void))
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                module.DefineEnum("Name", TypeAttributes.Public, typeof(void))
             );
         }
 

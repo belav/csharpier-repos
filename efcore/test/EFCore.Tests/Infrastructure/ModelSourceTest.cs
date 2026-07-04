@@ -21,15 +21,11 @@ public class ModelSourceTest
 
         var models = new IModel[threadCount];
 
-        Parallel.For(
-            0,
-            threadCount,
-            i =>
-            {
-                using var context = new SlowContext(_serviceProvider);
-                models[i] = context.Model;
-            }
-        );
+        Parallel.For(0, threadCount, i =>
+        {
+            using var context = new SlowContext(_serviceProvider);
+            models[i] = context.Model;
+        });
 
         Assert.NotNull(models[0]);
 

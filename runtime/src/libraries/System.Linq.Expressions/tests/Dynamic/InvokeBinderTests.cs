@@ -71,9 +71,8 @@ namespace System.Dynamic.Tests
         [Fact]
         public void NullCallInfo()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "callInfo",
-                () => new MinimumOverrideInvokeBinder(null)
+            AssertExtensions.Throws<ArgumentNullException>("callInfo", () =>
+                new MinimumOverrideInvokeBinder(null)
             );
         }
 
@@ -101,9 +100,8 @@ namespace System.Dynamic.Tests
                 Expression.Parameter(typeof(object), null),
                 BindingRestrictions.Empty
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "target",
-                () => binder.Bind(null, new[] { arg })
+            AssertExtensions.Throws<ArgumentNullException>("target", () =>
+                binder.Bind(null, new[] { arg })
             );
         }
 
@@ -130,9 +128,8 @@ namespace System.Dynamic.Tests
                 Expression.Parameter(typeof(object), null),
                 BindingRestrictions.Empty
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "args[1]",
-                () => binder.Bind(target, new[] { arg, null, arg })
+            AssertExtensions.Throws<ArgumentNullException>("args[1]", () =>
+                binder.Bind(target, new[] { arg, null, arg })
             );
         }
     }

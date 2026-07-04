@@ -102,11 +102,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 var actual = _generationInfo.Baseline.DeletedMembers.Select(e =>
                     e.Key.ToString() + ": {" + string.Join(", ", e.Value.Select(v => v.Name)) + "}"
                 );
-                AssertEx.SetEqual(
-                    expected,
-                    actual,
-                    itemSeparator: ",\r\n",
-                    itemInspector: s => $"\"{s}\""
+                AssertEx.SetEqual(expected, actual, itemSeparator: ",\r\n", itemInspector: s =>
+                    $"\"{s}\""
                 );
             }
 
@@ -178,11 +175,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     e.Key.ToString() + ": {" + string.Join(", ", e.Value.Select(v => v.Name)) + "}"
                 );
 
-                AssertEx.SetEqual(
-                    expected,
-                    actual,
-                    itemSeparator: ",\r\n",
-                    itemInspector: s => $"\"{s}\""
+                AssertEx.SetEqual(expected, actual, itemSeparator: ",\r\n", itemInspector: s =>
+                    $"\"{s}\""
                 );
             }
 

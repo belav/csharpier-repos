@@ -359,9 +359,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 var listener = await serverData.ServerTask;
                 Assert.True(listener.KeepAliveHit);
                 Assert.Equal(connectionCount, listener.CompletionDataList.Count);
-                Assert.All(
-                    listener.CompletionDataList,
-                    cd => Assert.Equal(CompletionReason.RequestCompleted, cd.Reason)
+                Assert.All(listener.CompletionDataList, cd =>
+                    Assert.Equal(CompletionReason.RequestCompleted, cd.Reason)
                 );
             }
 
@@ -410,9 +409,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 var listener = await serverData.ServerTask;
                 Assert.True(listener.KeepAliveHit);
                 Assert.Equal(connectionCount + 1, listener.CompletionDataList.Count);
-                Assert.All(
-                    listener.CompletionDataList,
-                    cd => Assert.Equal(CompletionReason.RequestCompleted, cd.Reason)
+                Assert.All(listener.CompletionDataList, cd =>
+                    Assert.Equal(CompletionReason.RequestCompleted, cd.Reason)
                 );
             }
         }

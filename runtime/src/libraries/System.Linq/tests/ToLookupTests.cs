@@ -196,9 +196,8 @@ namespace System.Linq.Tests
         public void NullSource()
         {
             IEnumerable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.ToLookup(i => i / 10)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.ToLookup(i => i / 10)
             );
         }
 
@@ -206,9 +205,8 @@ namespace System.Linq.Tests
         public void NullSourceExplicitComparer()
         {
             IEnumerable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.ToLookup(i => i / 10, EqualityComparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.ToLookup(i => i / 10, EqualityComparer<int>.Default)
             );
         }
 
@@ -216,9 +214,8 @@ namespace System.Linq.Tests
         public void NullSourceElementSelector()
         {
             IEnumerable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.ToLookup(i => i / 10, i => i + 2)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.ToLookup(i => i / 10, i => i + 2)
             );
         }
 
@@ -226,9 +223,8 @@ namespace System.Linq.Tests
         public void NullSourceElementSelectorExplicitComparer()
         {
             IEnumerable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.ToLookup(i => i / 10, i => i + 2, EqualityComparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.ToLookup(i => i / 10, i => i + 2, EqualityComparer<int>.Default)
             );
         }
 
@@ -236,9 +232,8 @@ namespace System.Linq.Tests
         public void NullKeySelector()
         {
             Func<int, int> keySelector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => Enumerable.Range(0, 1000).ToLookup(keySelector)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                Enumerable.Range(0, 1000).ToLookup(keySelector)
             );
         }
 
@@ -246,9 +241,8 @@ namespace System.Linq.Tests
         public void NullKeySelectorExplicitComparer()
         {
             Func<int, int> keySelector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => Enumerable.Range(0, 1000).ToLookup(keySelector, EqualityComparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                Enumerable.Range(0, 1000).ToLookup(keySelector, EqualityComparer<int>.Default)
             );
         }
 
@@ -256,9 +250,8 @@ namespace System.Linq.Tests
         public void NullKeySelectorElementSelector()
         {
             Func<int, int> keySelector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => Enumerable.Range(0, 1000).ToLookup(keySelector, i => i + 2)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                Enumerable.Range(0, 1000).ToLookup(keySelector, i => i + 2)
             );
         }
 
@@ -266,12 +259,10 @@ namespace System.Linq.Tests
         public void NullKeySelectorElementSelectorExplicitComparer()
         {
             Func<int, int> keySelector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    Enumerable
-                        .Range(0, 1000)
-                        .ToLookup(keySelector, i => i + 2, EqualityComparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                Enumerable
+                    .Range(0, 1000)
+                    .ToLookup(keySelector, i => i + 2, EqualityComparer<int>.Default)
             );
         }
 
@@ -279,9 +270,8 @@ namespace System.Linq.Tests
         public void NullElementSelector()
         {
             Func<int, int> elementSelector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "elementSelector",
-                () => Enumerable.Range(0, 1000).ToLookup(i => i / 10, elementSelector)
+            AssertExtensions.Throws<ArgumentNullException>("elementSelector", () =>
+                Enumerable.Range(0, 1000).ToLookup(i => i / 10, elementSelector)
             );
         }
 
@@ -289,12 +279,10 @@ namespace System.Linq.Tests
         public void NullElementSelectorExplicitComparer()
         {
             Func<int, int> elementSelector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "elementSelector",
-                () =>
-                    Enumerable
-                        .Range(0, 1000)
-                        .ToLookup(i => i / 10, elementSelector, EqualityComparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("elementSelector", () =>
+                Enumerable
+                    .Range(0, 1000)
+                    .ToLookup(i => i / 10, elementSelector, EqualityComparer<int>.Default)
             );
         }
 

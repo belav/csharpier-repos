@@ -60,9 +60,8 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
                 services.AddAuthentication().AddFacebook(o => o.SignInScheme = "PLACEHOLDER"),
             async context =>
             {
-                await Assert.ThrowsAsync<ArgumentException>(
-                    "AppId",
-                    () => context.ChallengeAsync("Facebook")
+                await Assert.ThrowsAsync<ArgumentException>("AppId", () =>
+                    context.ChallengeAsync("Facebook")
                 );
                 return true;
             }
@@ -80,9 +79,8 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
             services => services.AddAuthentication().AddFacebook(o => o.AppId = "Whatever"),
             async context =>
             {
-                await Assert.ThrowsAsync<ArgumentException>(
-                    "AppSecret",
-                    () => context.ChallengeAsync("Facebook")
+                await Assert.ThrowsAsync<ArgumentException>("AppSecret", () =>
+                    context.ChallengeAsync("Facebook")
                 );
                 return true;
             }
@@ -242,24 +240,18 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
     public async Task NestedMapWillNotAffectRedirect()
     {
         using var host = await CreateHost(
-            app =>
-                app.Map(
-                    "/base",
-                    map =>
-                    {
-                        map.UseAuthentication();
-                        map.Map(
-                            "/login",
-                            signoutApp =>
-                                signoutApp.Run(context =>
-                                    context.ChallengeAsync(
-                                        "Facebook",
-                                        new AuthenticationProperties() { RedirectUri = "/" }
-                                    )
-                                )
-                        );
-                    }
-                ),
+            app => app.Map("/base", map =>
+                {
+                    map.UseAuthentication();
+                    map.Map("/login", signoutApp =>
+                        signoutApp.Run(context =>
+                            context.ChallengeAsync(
+                                "Facebook",
+                                new AuthenticationProperties() { RedirectUri = "/" }
+                            )
+                        )
+                    );
+                }),
             services =>
             {
                 services
@@ -296,15 +288,13 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
             app =>
             {
                 app.UseAuthentication();
-                app.Map(
-                    "/login",
-                    signoutApp =>
-                        signoutApp.Run(context =>
-                            context.ChallengeAsync(
-                                "Facebook",
-                                new AuthenticationProperties() { RedirectUri = "/" }
-                            )
+                app.Map("/login", signoutApp =>
+                    signoutApp.Run(context =>
+                        context.ChallengeAsync(
+                            "Facebook",
+                            new AuthenticationProperties() { RedirectUri = "/" }
                         )
+                    )
                 );
             },
             services =>

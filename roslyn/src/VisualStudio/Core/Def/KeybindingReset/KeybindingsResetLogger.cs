@@ -14,14 +14,11 @@ namespace Microsoft.VisualStudio.LanguageServices.KeybindingReset
         {
             Logger.Log(
                 FunctionId.Experiment_KeybindingsReset,
-                KeyValueLogMessage.Create(
-                    LogType.UserAction,
-                    m =>
-                    {
-                        m[nameof(Name)] = Name;
-                        m[nameof(action)] = action;
-                    }
-                )
+                KeyValueLogMessage.Create(LogType.UserAction, m =>
+                {
+                    m[nameof(Name)] = Name;
+                    m[nameof(action)] = action;
+                })
             );
         }
     }

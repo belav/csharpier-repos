@@ -28,22 +28,19 @@ public class Program
             .ConfigureKestrel(options =>
                 options
                     .Configure(options.ConfigurationLoader.Configuration)
-                    .Endpoint(
-                        "HTTP",
-                        endpointOptions =>
-                        {
-                            if (
-                                responseMessage == null
-                                && !string.Equals(
-                                    "KestrelEndPointSettingValue",
-                                    endpointOptions.ConfigSection["KestrelEndPointSettingName"]
-                                )
+                    .Endpoint("HTTP", endpointOptions =>
+                    {
+                        if (
+                            responseMessage == null
+                            && !string.Equals(
+                                "KestrelEndPointSettingValue",
+                                endpointOptions.ConfigSection["KestrelEndPointSettingName"]
                             )
-                            {
-                                responseMessage = "Default Kestrel configuration not read.";
-                            }
+                        )
+                        {
+                            responseMessage = "Default Kestrel configuration not read.";
                         }
-                    )
+                    })
             )
             .Configure(app =>
                 app.Run(context =>

@@ -103,262 +103,160 @@ namespace System.Net.NetworkInformation.Tests
             Ping p = new Ping();
 
             // Null address
-            AssertExtensions.Throws<ArgumentNullException>(
-                "address",
-                () =>
-                {
-                    p.SendPingAsync((IPAddress)null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "hostNameOrAddress",
-                () =>
-                {
-                    p.SendPingAsync((string)null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "address",
-                () =>
-                {
-                    p.SendAsync((IPAddress)null, null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "hostNameOrAddress",
-                () =>
-                {
-                    p.SendAsync((string)null, null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "address",
-                () =>
-                {
-                    p.Send((IPAddress)null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "hostNameOrAddress",
-                () =>
-                {
-                    p.Send((string)null);
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("address", () =>
+            {
+                p.SendPingAsync((IPAddress)null);
+            });
+            AssertExtensions.Throws<ArgumentNullException>("hostNameOrAddress", () =>
+            {
+                p.SendPingAsync((string)null);
+            });
+            AssertExtensions.Throws<ArgumentNullException>("address", () =>
+            {
+                p.SendAsync((IPAddress)null, null);
+            });
+            AssertExtensions.Throws<ArgumentNullException>("hostNameOrAddress", () =>
+            {
+                p.SendAsync((string)null, null);
+            });
+            AssertExtensions.Throws<ArgumentNullException>("address", () =>
+            {
+                p.Send((IPAddress)null);
+            });
+            AssertExtensions.Throws<ArgumentNullException>("hostNameOrAddress", () =>
+            {
+                p.Send((string)null);
+            });
 
             // Invalid address
-            AssertExtensions.Throws<ArgumentException>(
-                "address",
-                () =>
-                {
-                    p.SendPingAsync(IPAddress.Any);
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "address",
-                () =>
-                {
-                    p.SendPingAsync(IPAddress.IPv6Any);
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "address",
-                () =>
-                {
-                    p.SendAsync(IPAddress.Any, null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "address",
-                () =>
-                {
-                    p.SendAsync(IPAddress.IPv6Any, null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "address",
-                () =>
-                {
-                    p.Send(IPAddress.Any);
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "address",
-                () =>
-                {
-                    p.Send(IPAddress.IPv6Any);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("address", () =>
+            {
+                p.SendPingAsync(IPAddress.Any);
+            });
+            AssertExtensions.Throws<ArgumentException>("address", () =>
+            {
+                p.SendPingAsync(IPAddress.IPv6Any);
+            });
+            AssertExtensions.Throws<ArgumentException>("address", () =>
+            {
+                p.SendAsync(IPAddress.Any, null);
+            });
+            AssertExtensions.Throws<ArgumentException>("address", () =>
+            {
+                p.SendAsync(IPAddress.IPv6Any, null);
+            });
+            AssertExtensions.Throws<ArgumentException>("address", () =>
+            {
+                p.Send(IPAddress.Any);
+            });
+            AssertExtensions.Throws<ArgumentException>("address", () =>
+            {
+                p.Send(IPAddress.IPv6Any);
+            });
 
             // Negative timeout
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "timeout",
-                () =>
-                {
-                    p.SendPingAsync(localIpAddress, -1);
-                }
-            );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "timeout",
-                () =>
-                {
-                    p.SendPingAsync(TestSettings.LocalHost, -1);
-                }
-            );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "timeout",
-                () =>
-                {
-                    p.SendAsync(localIpAddress, -1, null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "timeout",
-                () =>
-                {
-                    p.SendAsync(TestSettings.LocalHost, -1, null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "timeout",
-                () =>
-                {
-                    p.Send(localIpAddress, -1);
-                }
-            );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "timeout",
-                () =>
-                {
-                    p.Send(TestSettings.LocalHost, -1);
-                }
-            );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "timeout",
-                () =>
-                {
-                    p.Send(localIpAddress, TimeSpan.FromMilliseconds(-1), default, default);
-                }
-            );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "timeout",
-                () =>
-                {
-                    p.Send(TestSettings.LocalHost, TimeSpan.FromMilliseconds(-1), default, default);
-                }
-            );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "timeout",
-                () =>
-                {
-                    p.Send(
-                        localIpAddress,
-                        TimeSpan.FromMilliseconds((long)int.MaxValue + 1),
-                        default,
-                        default
-                    );
-                }
-            );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "timeout",
-                () =>
-                {
-                    p.Send(
-                        TestSettings.LocalHost,
-                        TimeSpan.FromMilliseconds((long)int.MaxValue + 1),
-                        default,
-                        default
-                    );
-                }
-            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+            {
+                p.SendPingAsync(localIpAddress, -1);
+            });
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+            {
+                p.SendPingAsync(TestSettings.LocalHost, -1);
+            });
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+            {
+                p.SendAsync(localIpAddress, -1, null);
+            });
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+            {
+                p.SendAsync(TestSettings.LocalHost, -1, null);
+            });
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+            {
+                p.Send(localIpAddress, -1);
+            });
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+            {
+                p.Send(TestSettings.LocalHost, -1);
+            });
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+            {
+                p.Send(localIpAddress, TimeSpan.FromMilliseconds(-1), default, default);
+            });
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+            {
+                p.Send(TestSettings.LocalHost, TimeSpan.FromMilliseconds(-1), default, default);
+            });
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+            {
+                p.Send(
+                    localIpAddress,
+                    TimeSpan.FromMilliseconds((long)int.MaxValue + 1),
+                    default,
+                    default
+                );
+            });
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+            {
+                p.Send(
+                    TestSettings.LocalHost,
+                    TimeSpan.FromMilliseconds((long)int.MaxValue + 1),
+                    default,
+                    default
+                );
+            });
 
             // Null byte[]
-            AssertExtensions.Throws<ArgumentNullException>(
-                "buffer",
-                () =>
-                {
-                    p.SendPingAsync(localIpAddress, 0, null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "buffer",
-                () =>
-                {
-                    p.SendPingAsync(TestSettings.LocalHost, 0, null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "buffer",
-                () =>
-                {
-                    p.SendAsync(localIpAddress, 0, null, null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "buffer",
-                () =>
-                {
-                    p.SendAsync(TestSettings.LocalHost, 0, null, null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "buffer",
-                () =>
-                {
-                    p.Send(localIpAddress, 0, null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "buffer",
-                () =>
-                {
-                    p.Send(TestSettings.LocalHost, 0, null);
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("buffer", () =>
+            {
+                p.SendPingAsync(localIpAddress, 0, null);
+            });
+            AssertExtensions.Throws<ArgumentNullException>("buffer", () =>
+            {
+                p.SendPingAsync(TestSettings.LocalHost, 0, null);
+            });
+            AssertExtensions.Throws<ArgumentNullException>("buffer", () =>
+            {
+                p.SendAsync(localIpAddress, 0, null, null);
+            });
+            AssertExtensions.Throws<ArgumentNullException>("buffer", () =>
+            {
+                p.SendAsync(TestSettings.LocalHost, 0, null, null);
+            });
+            AssertExtensions.Throws<ArgumentNullException>("buffer", () =>
+            {
+                p.Send(localIpAddress, 0, null);
+            });
+            AssertExtensions.Throws<ArgumentNullException>("buffer", () =>
+            {
+                p.Send(TestSettings.LocalHost, 0, null);
+            });
 
             // Too large byte[]
-            AssertExtensions.Throws<ArgumentException>(
-                "buffer",
-                () =>
-                {
-                    p.SendPingAsync(localIpAddress, 1, new byte[65501]);
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "buffer",
-                () =>
-                {
-                    p.SendPingAsync(TestSettings.LocalHost, 1, new byte[65501]);
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "buffer",
-                () =>
-                {
-                    p.SendAsync(localIpAddress, 1, new byte[65501], null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "buffer",
-                () =>
-                {
-                    p.SendAsync(TestSettings.LocalHost, 1, new byte[65501], null);
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "buffer",
-                () =>
-                {
-                    p.Send(localIpAddress, 1, new byte[65501]);
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "buffer",
-                () =>
-                {
-                    p.Send(TestSettings.LocalHost, 1, new byte[65501]);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("buffer", () =>
+            {
+                p.SendPingAsync(localIpAddress, 1, new byte[65501]);
+            });
+            AssertExtensions.Throws<ArgumentException>("buffer", () =>
+            {
+                p.SendPingAsync(TestSettings.LocalHost, 1, new byte[65501]);
+            });
+            AssertExtensions.Throws<ArgumentException>("buffer", () =>
+            {
+                p.SendAsync(localIpAddress, 1, new byte[65501], null);
+            });
+            AssertExtensions.Throws<ArgumentException>("buffer", () =>
+            {
+                p.SendAsync(TestSettings.LocalHost, 1, new byte[65501], null);
+            });
+            AssertExtensions.Throws<ArgumentException>("buffer", () =>
+            {
+                p.Send(localIpAddress, 1, new byte[65501]);
+            });
+            AssertExtensions.Throws<ArgumentException>("buffer", () =>
+            {
+                p.Send(TestSettings.LocalHost, 1, new byte[65501]);
+            });
         }
 
         [Theory]

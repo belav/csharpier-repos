@@ -203,18 +203,14 @@ namespace System.ComponentModel.DataAnnotations
 
                 if (operandType == typeof(int))
                 {
-                    this.Initialize(
-                        (int)minimum,
-                        (int)maximum,
-                        v => Convert.ToInt32(v, CultureInfo.InvariantCulture)
+                    this.Initialize((int)minimum, (int)maximum, v =>
+                        Convert.ToInt32(v, CultureInfo.InvariantCulture)
                     );
                 }
                 else if (operandType == typeof(double))
                 {
-                    this.Initialize(
-                        (double)minimum,
-                        (double)maximum,
-                        v => Convert.ToDouble(v, CultureInfo.InvariantCulture)
+                    this.Initialize((double)minimum, (double)maximum, v =>
+                        Convert.ToDouble(v, CultureInfo.InvariantCulture)
                     );
                 }
                 else

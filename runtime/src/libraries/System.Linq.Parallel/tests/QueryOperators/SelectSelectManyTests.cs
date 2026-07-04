@@ -88,14 +88,11 @@ namespace System.Linq.Parallel.Tests
         {
             ParallelQuery<int> query = labeled.Item;
             int seen = 0;
-            Assert.All(
-                query.Select(x => KeyValuePair.Create(x, x * x)).ToList(),
-                p =>
-                {
-                    Assert.Equal(seen++, p.Key);
-                    Assert.Equal(p.Key * p.Key, p.Value);
-                }
-            );
+            Assert.All(query.Select(x => KeyValuePair.Create(x, x * x)).ToList(), p =>
+            {
+                Assert.Equal(seen++, p.Key);
+                Assert.Equal(p.Key * p.Key, p.Value);
+            });
             Assert.Equal(count, seen);
         }
 
@@ -208,14 +205,11 @@ namespace System.Linq.Parallel.Tests
         {
             ParallelQuery<int> query = labeled.Item;
             int seen = 0;
-            Assert.All(
-                query.Select((x, index) => KeyValuePair.Create(x, index)).ToList(),
-                p =>
-                {
-                    Assert.Equal(seen++, p.Key);
-                    Assert.Equal(p.Key, p.Value);
-                }
-            );
+            Assert.All(query.Select((x, index) => KeyValuePair.Create(x, index)).ToList(), p =>
+            {
+                Assert.Equal(seen++, p.Key);
+                Assert.Equal(p.Key, p.Value);
+            });
             Assert.Equal(count, seen);
         }
 
@@ -233,21 +227,17 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Select_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<bool>)null).Select(x => x)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<bool>)null).Select(x => x)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<bool>)null).Select((x, index) => x)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<bool>)null).Select((x, index) => x)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Empty<bool>().Select((Func<bool, bool>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Empty<bool>().Select((Func<bool, bool>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Empty<bool>().Select((Func<bool, int, bool>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Empty<bool>().Select((Func<bool, int, bool>)null)
             );
         }
 
@@ -451,9 +441,8 @@ namespace System.Linq.Parallel.Tests
             ParallelQuery<int> query = labeled.Item;
             Func<int, int, IEnumerable<int>> expand = expander.Item;
             int seen = 0;
-            Assert.All(
-                query.SelectMany(x => expand(x, expansion)).ToList(),
-                x => Assert.Equal(seen++, x)
+            Assert.All(query.SelectMany(x => expand(x, expansion)).ToList(), x =>
+                Assert.Equal(seen++, x)
             );
             Assert.Equal(count * expansion, seen);
         }
@@ -1022,62 +1011,46 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void SelectMany_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<bool>)null).SelectMany(x => new[] { x })
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<bool>)null).SelectMany(x => new[] { x })
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<bool>)null).SelectMany((x, index) => new[] { x })
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<bool>)null).SelectMany((x, index) => new[] { x })
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () =>
-                    ParallelEnumerable.Empty<bool>().SelectMany((Func<bool, IEnumerable<bool>>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Empty<bool>().SelectMany((Func<bool, IEnumerable<bool>>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () =>
-                    ParallelEnumerable
-                        .Empty<bool>()
-                        .SelectMany((Func<bool, int, IEnumerable<bool>>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable
+                    .Empty<bool>()
+                    .SelectMany((Func<bool, int, IEnumerable<bool>>)null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<bool>)null).SelectMany(x => new[] { x }, (x, y) => x)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<bool>)null).SelectMany(x => new[] { x }, (x, y) => x)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<bool>)null).SelectMany((x, index) => new[] { x }, (x, y) => x)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<bool>)null).SelectMany((x, index) => new[] { x }, (x, y) => x)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "collectionSelector",
-                () =>
-                    ParallelEnumerable
-                        .Empty<bool>()
-                        .SelectMany((Func<bool, IEnumerable<bool>>)null, (x, y) => x)
+            AssertExtensions.Throws<ArgumentNullException>("collectionSelector", () =>
+                ParallelEnumerable
+                    .Empty<bool>()
+                    .SelectMany((Func<bool, IEnumerable<bool>>)null, (x, y) => x)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "collectionSelector",
-                () =>
-                    ParallelEnumerable
-                        .Empty<bool>()
-                        .SelectMany((Func<bool, int, IEnumerable<bool>>)null, (x, y) => x)
+            AssertExtensions.Throws<ArgumentNullException>("collectionSelector", () =>
+                ParallelEnumerable
+                    .Empty<bool>()
+                    .SelectMany((Func<bool, int, IEnumerable<bool>>)null, (x, y) => x)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () =>
-                    ParallelEnumerable
-                        .Empty<bool>()
-                        .SelectMany(x => new[] { x }, (Func<bool, bool, bool>)null)
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                ParallelEnumerable
+                    .Empty<bool>()
+                    .SelectMany(x => new[] { x }, (Func<bool, bool, bool>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () =>
-                    ParallelEnumerable
-                        .Empty<bool>()
-                        .SelectMany((x, index) => new[] { x }, (Func<bool, bool, bool>)null)
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                ParallelEnumerable
+                    .Empty<bool>()
+                    .SelectMany((x, index) => new[] { x }, (Func<bool, bool, bool>)null)
             );
         }
     }

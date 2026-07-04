@@ -28,18 +28,16 @@ namespace System.ConfigurationTests
         [Fact]
         public void NullNameThrows()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                () => new ConfigurationProperty(null, typeof(string))
+            AssertExtensions.Throws<ArgumentException>("name", () =>
+                new ConfigurationProperty(null, typeof(string))
             );
         }
 
         [Fact]
         public void EmptyNameThrows()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                () => new ConfigurationProperty("", typeof(string))
+            AssertExtensions.Throws<ArgumentException>("name", () =>
+                new ConfigurationProperty("", typeof(string))
             );
         }
 
@@ -52,9 +50,8 @@ namespace System.ConfigurationTests
         ]
         public void ReservedNameThrows(string name)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new ConfigurationProperty(name, typeof(string))
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new ConfigurationProperty(name, typeof(string))
             );
         }
 

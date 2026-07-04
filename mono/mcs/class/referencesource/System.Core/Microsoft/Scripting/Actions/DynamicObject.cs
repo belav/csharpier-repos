@@ -293,11 +293,8 @@ namespace System.Dynamic
             {
                 if (IsOverridden("TryGetMember"))
                 {
-                    return CallMethodWithResult(
-                        "TryGetMember",
-                        binder,
-                        NoArgs,
-                        (e) => binder.FallbackGetMember(this, e)
+                    return CallMethodWithResult("TryGetMember", binder, NoArgs, (e) =>
+                        binder.FallbackGetMember(this, e)
                     );
                 }
 
@@ -327,11 +324,8 @@ namespace System.Dynamic
             {
                 if (IsOverridden("TryDeleteMember"))
                 {
-                    return CallMethodNoResult(
-                        "TryDeleteMember",
-                        binder,
-                        NoArgs,
-                        (e) => binder.FallbackDeleteMember(this, e)
+                    return CallMethodNoResult("TryDeleteMember", binder, NoArgs, (e) =>
+                        binder.FallbackDeleteMember(this, e)
                     );
                 }
 
@@ -342,11 +336,8 @@ namespace System.Dynamic
             {
                 if (IsOverridden("TryConvert"))
                 {
-                    return CallMethodWithResult(
-                        "TryConvert",
-                        binder,
-                        NoArgs,
-                        (e) => binder.FallbackConvert(this, e)
+                    return CallMethodWithResult("TryConvert", binder, NoArgs, (e) =>
+                        binder.FallbackConvert(this, e)
                     );
                 }
 
@@ -450,11 +441,8 @@ namespace System.Dynamic
             {
                 if (IsOverridden("TryUnaryOperation"))
                 {
-                    return CallMethodWithResult(
-                        "TryUnaryOperation",
-                        binder,
-                        NoArgs,
-                        (e) => binder.FallbackUnaryOperation(this, e)
+                    return CallMethodWithResult("TryUnaryOperation", binder, NoArgs, (e) =>
+                        binder.FallbackUnaryOperation(this, e)
                     );
                 }
 

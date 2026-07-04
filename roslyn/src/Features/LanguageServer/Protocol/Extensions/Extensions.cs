@@ -103,9 +103,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             var documents = solution.GetDocuments(documentIdentifier.Uri);
             return documents.Length == 0
                 ? null
-                : documents.FindDocumentInProjectContext(
-                    documentIdentifier,
-                    (sln, id) => sln.GetRequiredDocument(id)
+                : documents.FindDocumentInProjectContext(documentIdentifier, (sln, id) =>
+                    sln.GetRequiredDocument(id)
                 );
         }
 
@@ -203,9 +202,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 .ToImmutableArray();
             return !additionalDocuments.Any()
                 ? null
-                : additionalDocuments.FindDocumentInProjectContext(
-                    documentIdentifier,
-                    (sln, id) => sln.GetRequiredAdditionalDocument(id)
+                : additionalDocuments.FindDocumentInProjectContext(documentIdentifier, (sln, id) =>
+                    sln.GetRequiredAdditionalDocument(id)
                 );
         }
 

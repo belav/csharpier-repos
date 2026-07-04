@@ -20,16 +20,14 @@ namespace System.Tests
         [Fact]
         public static void AddMemoryPressure_InvalidBytesAllocated_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "bytesAllocated",
-                () => GC.AddMemoryPressure(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("bytesAllocated", () =>
+                GC.AddMemoryPressure(-1)
             ); // Bytes allocated < 0
 
             if (s_is32Bits)
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "bytesAllocated",
-                    () => GC.AddMemoryPressure((long)int.MaxValue + 1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("bytesAllocated", () =>
+                    GC.AddMemoryPressure((long)int.MaxValue + 1)
                 ); // Bytes allocated > int.MaxValue on 32 bit platforms
             }
         }
@@ -49,9 +47,8 @@ namespace System.Tests
         [Fact]
         public static void Collect_Int_NegativeGeneration_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "generation",
-                () => GC.Collect(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("generation", () =>
+                GC.Collect(-1)
             ); // Generation < 0
         }
 
@@ -75,13 +72,11 @@ namespace System.Tests
         [Fact]
         public static void Collect_NegativeGenerationCount_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "generation",
-                () => GC.Collect(-1, GCCollectionMode.Default)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("generation", () =>
+                GC.Collect(-1, GCCollectionMode.Default)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "generation",
-                () => GC.Collect(-1, GCCollectionMode.Default, false)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("generation", () =>
+                GC.Collect(-1, GCCollectionMode.Default, false)
             );
         }
 
@@ -92,15 +87,11 @@ namespace System.Tests
             GCCollectionMode mode
         )
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "mode",
-                null,
-                () => GC.Collect(2, mode)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("mode", null, () =>
+                GC.Collect(2, mode)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "mode",
-                null,
-                () => GC.Collect(2, mode, false)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("mode", null, () =>
+                GC.Collect(2, mode, false)
             );
         }
 
@@ -340,9 +331,8 @@ namespace System.Tests
         [Fact]
         public static void ReRegisterFoFinalize_NullObject_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "obj",
-                () => GC.ReRegisterForFinalize(null)
+            AssertExtensions.Throws<ArgumentNullException>("obj", () =>
+                GC.ReRegisterForFinalize(null)
             ); // Obj is null
         }
 
@@ -386,25 +376,22 @@ namespace System.Tests
         [Fact]
         public static void CollectionCount_NegativeGeneration_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "generation",
-                () => GC.CollectionCount(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("generation", () =>
+                GC.CollectionCount(-1)
             ); // Generation < 0
         }
 
         [Fact]
         public static void RemoveMemoryPressure_InvalidBytesAllocated_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "bytesAllocated",
-                () => GC.RemoveMemoryPressure(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("bytesAllocated", () =>
+                GC.RemoveMemoryPressure(-1)
             ); // Bytes allocated < 0
 
             if (s_is32Bits)
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "bytesAllocated",
-                    () => GC.RemoveMemoryPressure((long)int.MaxValue + 1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("bytesAllocated", () =>
+                    GC.RemoveMemoryPressure((long)int.MaxValue + 1)
                 ); // Bytes allocated > int.MaxValue on 32 bit platforms
             }
         }
@@ -878,9 +865,8 @@ namespace System.Tests
                 .Invoke(
                     sizeString =>
                     {
-                        AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                            "totalSize",
-                            () => GC.TryStartNoGCRegion(long.Parse(sizeString))
+                        AssertExtensions.Throws<ArgumentOutOfRangeException>("totalSize", () =>
+                            GC.TryStartNoGCRegion(long.Parse(sizeString))
                         );
                     },
                     size.ToString(),
@@ -903,9 +889,8 @@ namespace System.Tests
                 .Invoke(
                     sizeString =>
                     {
-                        AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                            "lohSize",
-                            () => GC.TryStartNoGCRegion(1024, long.Parse(sizeString))
+                        AssertExtensions.Throws<ArgumentOutOfRangeException>("lohSize", () =>
+                            GC.TryStartNoGCRegion(1024, long.Parse(sizeString))
                         );
                     },
                     size.ToString(),

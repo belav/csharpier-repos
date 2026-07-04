@@ -368,9 +368,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             // by the producer and consumer, a producer calling Fault and the
             // processing task processing the user delegate which might throw.
 #pragma warning disable 0420
-            lock (LazyInitializer.EnsureInitialized(
-                ref _exceptions,
-                static () => new List<Exception>()
+            lock (LazyInitializer.EnsureInitialized(ref _exceptions, static () =>
+                new List<Exception>()
             ))
 #pragma warning restore 0420
             {
@@ -429,9 +428,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         {
             get
             {
-                return LazyInitializer.EnsureInitialized(
-                    ref _completionTask,
-                    static () => new TaskCompletionSource<VoidResult>()
+                return LazyInitializer.EnsureInitialized(ref _completionTask, static () =>
+                    new TaskCompletionSource<VoidResult>()
                 );
             }
         }

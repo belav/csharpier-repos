@@ -233,13 +233,10 @@ End Module"
                 tempDir: BuildServerConnection.GetTempPath(currentDirectory.Path)
             );
 
-            var (result, output) = UseTextWriter(
-                redirectEncoding,
-                writer =>
-                    ApplyEnvironmentVariables(
-                        additionalEnvironmentVars,
-                        () => client.RunCompilation(arguments, buildPaths, writer)
-                    )
+            var (result, output) = UseTextWriter(redirectEncoding, writer =>
+                ApplyEnvironmentVariables(additionalEnvironmentVars, () =>
+                    client.RunCompilation(arguments, buildPaths, writer)
+                )
             );
             Assert.Equal(shouldRunOnServer, result.RanOnServer);
             return (result.ExitCode, output);
@@ -1135,10 +1132,8 @@ End Module
 
                 var listener = await serverData.Complete();
                 Assert.Equal(5, listener.CompletionDataList.Count);
-                Assert.All(
-                    listener.CompletionDataList,
-                    completionData =>
-                        Assert.Equal(CompletionReason.RequestCompleted, completionData.Reason)
+                Assert.All(listener.CompletionDataList, completionData =>
+                    Assert.Equal(CompletionReason.RequestCompleted, completionData.Reason)
                 );
             }
 
@@ -1299,10 +1294,8 @@ class Hello
 
                 var listener = await serverData.Complete();
                 Assert.Equal(5, listener.CompletionDataList.Count);
-                Assert.All(
-                    listener.CompletionDataList,
-                    completionData =>
-                        Assert.Equal(CompletionReason.RequestCompleted, completionData.Reason)
+                Assert.All(listener.CompletionDataList, completionData =>
+                    Assert.Equal(CompletionReason.RequestCompleted, completionData.Reason)
                 );
             }
 

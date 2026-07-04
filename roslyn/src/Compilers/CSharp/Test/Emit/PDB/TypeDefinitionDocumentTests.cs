@@ -526,11 +526,8 @@ class F
                     documentName: GetDocumentNames(entry.Value)
                 );
 
-            AssertEx.Equal(
-                expected,
-                actual,
-                itemSeparator: ",\n",
-                itemInspector: i => $"(\"{i.typeName}\", \"{i.documentName}\")"
+            AssertEx.Equal(expected, actual, itemSeparator: ",\n", itemInspector: i =>
+                $"(\"{i.typeName}\", \"{i.documentName}\")"
             );
 
             string GetTypeName(EntityHandle handle)

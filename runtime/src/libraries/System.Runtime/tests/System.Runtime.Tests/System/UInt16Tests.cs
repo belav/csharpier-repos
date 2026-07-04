@@ -407,9 +407,8 @@ namespace System.Tests
                 // Substitute default NumberFormatInfo
                 Assert.False(ushort.TryParse(value, style, new NumberFormatInfo(), out result));
                 Assert.Equal(default, result);
-                Assert.Throws(
-                    exceptionType,
-                    () => ushort.Parse(value, style, new NumberFormatInfo())
+                Assert.Throws(exceptionType, () =>
+                    ushort.Parse(value, style, new NumberFormatInfo())
                 );
             }
 
@@ -433,16 +432,14 @@ namespace System.Tests
         public static void TryParse_InvalidNumberStyle_ThrowsArgumentException(NumberStyles style)
         {
             ushort result = 0;
-            AssertExtensions.Throws<ArgumentException>(
-                "style",
-                () => ushort.TryParse("1", style, null, out result)
+            AssertExtensions.Throws<ArgumentException>("style", () =>
+                ushort.TryParse("1", style, null, out result)
             );
             Assert.Equal(default(ushort), result);
 
             AssertExtensions.Throws<ArgumentException>("style", () => ushort.Parse("1", style));
-            AssertExtensions.Throws<ArgumentException>(
-                "style",
-                () => ushort.Parse("1", style, null)
+            AssertExtensions.Throws<ArgumentException>("style", () =>
+                ushort.Parse("1", style, null)
             );
         }
 
@@ -604,9 +601,8 @@ namespace System.Tests
                     Assert.Equal(0u, result);
                 }
 
-                Assert.Throws(
-                    exceptionType,
-                    () => ushort.Parse(Encoding.UTF8.GetBytes(value), style, provider)
+                Assert.Throws(exceptionType, () =>
+                    ushort.Parse(Encoding.UTF8.GetBytes(value), style, provider)
                 );
 
                 Assert.False(ushort.TryParse(valueUtf8, style, provider, out result));

@@ -25,22 +25,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
     }
 }";
 
-            ParseAndVerify(
-                oldText,
-                validator: oldTree =>
-                {
-                    var newTree = oldTree.WithInsertBefore("public", "async ");
+            ParseAndVerify(oldText, validator: oldTree =>
+            {
+                var newTree = oldTree.WithInsertBefore("public", "async ");
 
-                    Assert.Equal(
-                        default(SyntaxNodeOrToken),
-                        oldTree.FindNodeOrTokenByKind(SyntaxKind.AwaitExpression)
-                    );
-                    Assert.NotEqual(
-                        default(SyntaxNodeOrToken),
-                        newTree.FindNodeOrTokenByKind(SyntaxKind.AwaitExpression)
-                    );
-                }
-            );
+                Assert.Equal(
+                    default(SyntaxNodeOrToken),
+                    oldTree.FindNodeOrTokenByKind(SyntaxKind.AwaitExpression)
+                );
+                Assert.NotEqual(
+                    default(SyntaxNodeOrToken),
+                    newTree.FindNodeOrTokenByKind(SyntaxKind.AwaitExpression)
+                );
+            });
         }
 
         [Fact]
@@ -55,22 +52,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
     }
 }";
 
-            ParseAndVerify(
-                oldText,
-                validator: oldTree =>
-                {
-                    var newTree = oldTree.WithRemoveFirst("async");
+            ParseAndVerify(oldText, validator: oldTree =>
+            {
+                var newTree = oldTree.WithRemoveFirst("async");
 
-                    Assert.NotEqual(
-                        default(SyntaxNodeOrToken),
-                        oldTree.FindNodeOrTokenByKind(SyntaxKind.AwaitExpression)
-                    );
-                    Assert.Equal(
-                        default(SyntaxNodeOrToken),
-                        newTree.FindNodeOrTokenByKind(SyntaxKind.AwaitExpression)
-                    );
-                }
-            );
+                Assert.NotEqual(
+                    default(SyntaxNodeOrToken),
+                    oldTree.FindNodeOrTokenByKind(SyntaxKind.AwaitExpression)
+                );
+                Assert.Equal(
+                    default(SyntaxNodeOrToken),
+                    newTree.FindNodeOrTokenByKind(SyntaxKind.AwaitExpression)
+                );
+            });
         }
 
         #region Helpers

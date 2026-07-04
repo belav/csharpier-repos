@@ -2984,9 +2984,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
 
                     // ctor can possibly see its own assignments indirectly if there are ref parameters or __arglist
                     if (
-                        System.Linq.ImmutableArrayExtensions.All(
-                            ctor.Parameters,
-                            p => p.RefKind == RefKind.None
+                        System.Linq.ImmutableArrayExtensions.All(ctor.Parameters, p =>
+                            p.RefKind == RefKind.None
                         )
                         && !ctor.IsVararg
                         && TryInPlaceCtorCall(left, objCreation, used)

@@ -28,9 +28,8 @@ namespace System.Runtime.InteropServices.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void GetTypeInfoName_NullTypeInfo_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "typeInfo",
-                () => Marshal.GetTypeInfoName((ITypeInfo)null)
+            AssertExtensions.Throws<ArgumentNullException>("typeInfo", () =>
+                Marshal.GetTypeInfoName((ITypeInfo)null)
             );
         }
 

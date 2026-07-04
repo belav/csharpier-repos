@@ -23,30 +23,24 @@ namespace System.IO.Tests
                 )
             )
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "position",
-                    () => fs.Lock(-1, 1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                    fs.Lock(-1, 1)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "position",
-                    () => fs.Lock(-1, -1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                    fs.Lock(-1, -1)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "length",
-                    () => fs.Lock(0, -1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () =>
+                    fs.Lock(0, -1)
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "position",
-                    () => fs.Unlock(-1, 1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                    fs.Unlock(-1, 1)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "position",
-                    () => fs.Unlock(-1, -1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                    fs.Unlock(-1, -1)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "length",
-                    () => fs.Unlock(0, -1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () =>
+                    fs.Unlock(0, -1)
                 );
             }
         }

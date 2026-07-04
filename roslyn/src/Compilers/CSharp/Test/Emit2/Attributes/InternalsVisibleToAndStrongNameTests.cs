@@ -136,28 +136,21 @@ public class Test
                 ByteSequenceComparer.Equals(s_publicKey, other.Assembly.Identity.PublicKey)
             );
 
-            CompileAndVerify(
-                other,
-                symbolValidator: (ModuleSymbol m) =>
+            CompileAndVerify(other, symbolValidator: (ModuleSymbol m) =>
+            {
+                bool haveAttribute = false;
+
+                foreach (var attrData in m.ContainingAssembly.GetAttributes())
                 {
-                    bool haveAttribute = false;
-
-                    foreach (var attrData in m.ContainingAssembly.GetAttributes())
+                    if (attrData.IsTargetAttribute(AttributeDescription.AssemblyKeyFileAttribute))
                     {
-                        if (
-                            attrData.IsTargetAttribute(
-                                AttributeDescription.AssemblyKeyFileAttribute
-                            )
-                        )
-                        {
-                            haveAttribute = true;
-                            break;
-                        }
+                        haveAttribute = true;
+                        break;
                     }
-
-                    Assert.True(haveAttribute);
                 }
-            );
+
+                Assert.True(haveAttribute);
+            });
         }
 
         [Theory]
@@ -376,28 +369,21 @@ public class Test
                 ByteSequenceComparer.Equals(s_publicKey, other.Assembly.Identity.PublicKey)
             );
 
-            CompileAndVerify(
-                other,
-                symbolValidator: (ModuleSymbol m) =>
+            CompileAndVerify(other, symbolValidator: (ModuleSymbol m) =>
+            {
+                bool haveAttribute = false;
+
+                foreach (var attrData in m.ContainingAssembly.GetAttributes())
                 {
-                    bool haveAttribute = false;
-
-                    foreach (var attrData in m.ContainingAssembly.GetAttributes())
+                    if (attrData.IsTargetAttribute(AttributeDescription.AssemblyKeyNameAttribute))
                     {
-                        if (
-                            attrData.IsTargetAttribute(
-                                AttributeDescription.AssemblyKeyNameAttribute
-                            )
-                        )
-                        {
-                            haveAttribute = true;
-                            break;
-                        }
+                        haveAttribute = true;
+                        break;
                     }
-
-                    Assert.True(haveAttribute);
                 }
-            );
+
+                Assert.True(haveAttribute);
+            });
         }
 
         [Theory]
@@ -3697,23 +3683,18 @@ class B
                     .WithLocation(1, 12)
             );
 
-            var verifier = CompileAndVerify(
-                ca,
-                symbolValidator: module =>
-                {
-                    var assembly = module.ContainingAssembly;
-                    Assert.NotNull(assembly);
-                    Assert.False(
-                        assembly
-                            .GetAttributes()
-                            .Any(attr =>
-                                attr.IsTargetAttribute(
-                                    AttributeDescription.InternalsVisibleToAttribute
-                                )
-                            )
-                    );
-                }
-            );
+            var verifier = CompileAndVerify(ca, symbolValidator: module =>
+            {
+                var assembly = module.ContainingAssembly;
+                Assert.NotNull(assembly);
+                Assert.False(
+                    assembly
+                        .GetAttributes()
+                        .Any(attr =>
+                            attr.IsTargetAttribute(AttributeDescription.InternalsVisibleToAttribute)
+                        )
+                );
+            });
         }
 
         [WorkItem(11497, "https://github.com/dotnet/roslyn/issues/11497")]

@@ -27,14 +27,11 @@ public class SharedTypeQueryInMemoryTest : SharedTypeQueryTestBase
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.SharedTypeEntity<Dictionary<string, object>>(
-                "STET",
-                b =>
-                {
-                    b.IndexerProperty<int>("Id");
-                    b.IndexerProperty<string>("Value");
-                }
-            );
+            modelBuilder.SharedTypeEntity<Dictionary<string, object>>("STET", b =>
+            {
+                b.IndexerProperty<int>("Id");
+                b.IndexerProperty<string>("Value");
+            });
 
             modelBuilder
                 .Entity<ViewQuery24601>()

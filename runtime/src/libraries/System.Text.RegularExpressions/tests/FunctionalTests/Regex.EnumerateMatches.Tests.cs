@@ -26,65 +26,48 @@ namespace System.Text.RegularExpressions.Tests
         public void EnumerateMatches_Ctor_Invalid()
         {
             // Pattern is null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "pattern",
-                () => Regex.EnumerateMatches("input", null)
+            AssertExtensions.Throws<ArgumentNullException>("pattern", () =>
+                Regex.EnumerateMatches("input", null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "pattern",
-                () => Regex.EnumerateMatches("input", null, RegexOptions.None)
+            AssertExtensions.Throws<ArgumentNullException>("pattern", () =>
+                Regex.EnumerateMatches("input", null, RegexOptions.None)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "pattern",
-                () =>
-                    Regex.EnumerateMatches(
-                        "input",
-                        null,
-                        RegexOptions.None,
-                        TimeSpan.FromSeconds(1)
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("pattern", () =>
+                Regex.EnumerateMatches("input", null, RegexOptions.None, TimeSpan.FromSeconds(1))
             );
 
             // Options are invalid
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "options",
-                () => Regex.EnumerateMatches("input", "pattern", (RegexOptions)(-1))
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () =>
+                Regex.EnumerateMatches("input", "pattern", (RegexOptions)(-1))
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "options",
-                () =>
-                    Regex.EnumerateMatches(
-                        "input",
-                        "pattern",
-                        (RegexOptions)(-1),
-                        TimeSpan.FromSeconds(1)
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () =>
+                Regex.EnumerateMatches(
+                    "input",
+                    "pattern",
+                    (RegexOptions)(-1),
+                    TimeSpan.FromSeconds(1)
+                )
             );
 
             // 0x400 is new NonBacktracking mode that is now valid, 0x800 is still invalid
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "options",
-                () => Regex.EnumerateMatches("input", "pattern", (RegexOptions)0x800)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () =>
+                Regex.EnumerateMatches("input", "pattern", (RegexOptions)0x800)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "options",
-                () =>
-                    Regex.EnumerateMatches(
-                        "input",
-                        "pattern",
-                        (RegexOptions)0x800,
-                        TimeSpan.FromSeconds(1)
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () =>
+                Regex.EnumerateMatches(
+                    "input",
+                    "pattern",
+                    (RegexOptions)0x800,
+                    TimeSpan.FromSeconds(1)
+                )
             );
 
             // MatchTimeout is invalid
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "matchTimeout",
-                () => Regex.EnumerateMatches("input", "pattern", RegexOptions.None, TimeSpan.Zero)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("matchTimeout", () =>
+                Regex.EnumerateMatches("input", "pattern", RegexOptions.None, TimeSpan.Zero)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "matchTimeout",
-                () => Regex.EnumerateMatches("input", "pattern", RegexOptions.None, TimeSpan.Zero)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("matchTimeout", () =>
+                Regex.EnumerateMatches("input", "pattern", RegexOptions.None, TimeSpan.Zero)
             );
         }
 

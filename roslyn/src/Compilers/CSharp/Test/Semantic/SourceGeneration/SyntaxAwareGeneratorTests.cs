@@ -532,14 +532,11 @@ class C
             var testGenerator = new CallbackGenerator(
                 onInit: (i) =>
                     i.RegisterForSyntaxNotifications(() =>
-                        new TestSyntaxReceiver(
-                            tag: 0,
-                            callback: (a) =>
-                            {
-                                if (a is AssignmentExpressionSyntax)
-                                    throw exception;
-                            }
-                        )
+                        new TestSyntaxReceiver(tag: 0, callback: (a) =>
+                        {
+                            if (a is AssignmentExpressionSyntax)
+                                throw exception;
+                        })
                     ),
                 onExecute: (e) =>
                 {
@@ -600,14 +597,11 @@ class D
 
             Assert.Equal(2, compilation.SyntaxTrees.Count());
 
-            TestSyntaxReceiver receiver1 = new TestSyntaxReceiver(
-                tag: 0,
-                callback: (a) =>
-                {
-                    if (a is PropertyDeclarationSyntax)
-                        throw new Exception("Test Exception");
-                }
-            );
+            TestSyntaxReceiver receiver1 = new TestSyntaxReceiver(tag: 0, callback: (a) =>
+            {
+                if (a is PropertyDeclarationSyntax)
+                    throw new Exception("Test Exception");
+            });
             var testGenerator1 = new CallbackGenerator(
                 onInit: (i) => i.RegisterForSyntaxNotifications(() => receiver1),
                 onExecute: (e) => { }
@@ -664,14 +658,11 @@ class C
             var testGenerator = new CallbackGenerator(
                 onInit: (i) =>
                     i.RegisterForSyntaxNotifications(() =>
-                        new TestSyntaxReceiver(
-                            tag: 0,
-                            callback: (a) =>
-                            {
-                                if (a is AssignmentExpressionSyntax)
-                                    throw exception;
-                            }
-                        )
+                        new TestSyntaxReceiver(tag: 0, callback: (a) =>
+                        {
+                            if (a is AssignmentExpressionSyntax)
+                                throw exception;
+                        })
                     ),
                 onExecute: (e) => { }
             );
@@ -1180,13 +1171,10 @@ class C
                             .Identifier
                             .ValueText
                 );
-                context.RegisterSourceOutput(
-                    source,
-                    (spc, fieldName) =>
-                    {
-                        spc.AddSource(fieldName, "");
-                    }
-                );
+                context.RegisterSourceOutput(source, (spc, fieldName) =>
+                {
+                    spc.AddSource(fieldName, "");
+                });
             });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -1240,25 +1228,19 @@ class classD
                             .Identifier
                             .ValueText
                 );
-                context.RegisterSourceOutput(
-                    source,
-                    (spc, fieldName) =>
-                    {
-                        spc.AddSource(fieldName, "");
-                    }
-                );
+                context.RegisterSourceOutput(source, (spc, fieldName) =>
+                {
+                    spc.AddSource(fieldName, "");
+                });
 
                 var source2 = context.SyntaxProvider.CreateSyntaxProvider(
                     (c, _) => c is ClassDeclarationSyntax fds,
                     (c, _) => ((ClassDeclarationSyntax)c.Node).Identifier.ValueText
                 );
-                context.RegisterSourceOutput(
-                    source2,
-                    (spc, className) =>
-                    {
-                        spc.AddSource(className, "");
-                    }
-                );
+                context.RegisterSourceOutput(source2, (spc, className) =>
+                {
+                    spc.AddSource(className, "");
+                });
             });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -1318,13 +1300,10 @@ class C
                             .Identifier
                             .ValueText
                 );
-                context.RegisterSourceOutput(
-                    source,
-                    (spc, fieldName) =>
-                    {
-                        spc.AddSource(fieldName, "");
-                    }
-                );
+                context.RegisterSourceOutput(source, (spc, fieldName) =>
+                {
+                    spc.AddSource(fieldName, "");
+                });
             });
 
             // Don't enable incremental tracking here as incremental tracking disables the "unchanged compilation implies unchanged syntax trees" optimization.
@@ -1408,13 +1387,10 @@ class D
                                 .ValueText
                     )
                     .WithTrackingName("Fields");
-                context.RegisterSourceOutput(
-                    source,
-                    (spc, fieldName) =>
-                    {
-                        spc.AddSource(fieldName, "");
-                    }
-                );
+                context.RegisterSourceOutput(source, (spc, fieldName) =>
+                {
+                    spc.AddSource(fieldName, "");
+                });
             });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -1436,19 +1412,16 @@ class D
             Assert.Collection(
                 results.Results[0].TrackedSteps["Fields"],
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldA", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldA", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldB", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldB", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldC", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldC", IncrementalStepRunReason.New), output)
                     )
             );
 
@@ -1469,32 +1442,24 @@ class D
             Assert.Collection(
                 results.Results[0].TrackedSteps["Fields"],
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                            Assert.Equal(("fieldA", IncrementalStepRunReason.Unchanged), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldA", IncrementalStepRunReason.Unchanged), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                            Assert.Equal(("fieldB", IncrementalStepRunReason.Unchanged), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldB", IncrementalStepRunReason.Unchanged), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                            Assert.Equal(("fieldC", IncrementalStepRunReason.Unchanged), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldC", IncrementalStepRunReason.Unchanged), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldD", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldD", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldE", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldE", IncrementalStepRunReason.New), output)
                     )
             );
         }
@@ -1542,13 +1507,10 @@ class D
                                 .ValueText
                     )
                     .WithTrackingName("Fields");
-                context.RegisterSourceOutput(
-                    source,
-                    (spc, fieldName) =>
-                    {
-                        spc.AddSource(fieldName, "");
-                    }
-                );
+                context.RegisterSourceOutput(source, (spc, fieldName) =>
+                {
+                    spc.AddSource(fieldName, "");
+                });
             });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -1572,29 +1534,24 @@ class D
             Assert.Collection(
                 results.Results[0].TrackedSteps["Fields"],
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldA", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldA", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldB", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldB", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldC", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldC", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldD", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldD", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldE", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldE", IncrementalStepRunReason.New), output)
                     )
             );
 
@@ -1611,32 +1568,24 @@ class D
             Assert.Collection(
                 results.Results[0].TrackedSteps["Fields"],
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                            Assert.Equal(("fieldA", IncrementalStepRunReason.Unchanged), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldA", IncrementalStepRunReason.Unchanged), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                            Assert.Equal(("fieldB", IncrementalStepRunReason.Unchanged), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldB", IncrementalStepRunReason.Unchanged), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                            Assert.Equal(("fieldC", IncrementalStepRunReason.Unchanged), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldC", IncrementalStepRunReason.Unchanged), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldD", IncrementalStepRunReason.Removed), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldD", IncrementalStepRunReason.Removed), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldE", IncrementalStepRunReason.Removed), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldE", IncrementalStepRunReason.Removed), output)
                     )
             );
         }
@@ -1761,14 +1710,11 @@ class E
                                 .ValueText
                     )
                     .WithTrackingName("Fields");
-                context.RegisterSourceOutput(
-                    source,
-                    (spc, fieldName) =>
-                    {
-                        spc.AddSource(fieldName, "");
-                        fieldsCalledFor.Add(fieldName);
-                    }
-                );
+                context.RegisterSourceOutput(source, (spc, fieldName) =>
+                {
+                    spc.AddSource(fieldName, "");
+                    fieldsCalledFor.Add(fieldName);
+                });
             });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -1789,19 +1735,16 @@ class E
             Assert.Collection(
                 results.Results[0].TrackedSteps["Fields"],
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldA", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldA", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldB", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldB", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldC", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldC", IncrementalStepRunReason.New), output)
                     )
             );
 
@@ -1832,22 +1775,16 @@ class F
             Assert.Collection(
                 results.Results[0].TrackedSteps["Fields"],
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                            Assert.Equal(("fieldD", IncrementalStepRunReason.Modified), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldD", IncrementalStepRunReason.Modified), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                            Assert.Equal(("fieldB", IncrementalStepRunReason.Unchanged), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldB", IncrementalStepRunReason.Unchanged), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                            Assert.Equal(("fieldC", IncrementalStepRunReason.Unchanged), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldC", IncrementalStepRunReason.Unchanged), output)
                     )
             );
             Assert.Equal("fieldD", Assert.Single(fieldsCalledFor));
@@ -1899,14 +1836,11 @@ class E
                                 .ValueText
                     )
                     .WithTrackingName("Fields");
-                context.RegisterSourceOutput(
-                    source,
-                    (spc, fieldName) =>
-                    {
-                        spc.AddSource(fieldName, "");
-                        fieldsCalledFor.Add(fieldName);
-                    }
-                );
+                context.RegisterSourceOutput(source, (spc, fieldName) =>
+                {
+                    spc.AddSource(fieldName, "");
+                    fieldsCalledFor.Add(fieldName);
+                });
             });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -2013,13 +1947,10 @@ class E
                     .Select((s, ct) => s)
                     .WithTrackingName("Fields");
 
-                context.RegisterSourceOutput(
-                    source,
-                    (spc, fieldName) =>
-                    {
-                        spc.AddSource(fieldName, "");
-                    }
-                );
+                context.RegisterSourceOutput(source, (spc, fieldName) =>
+                {
+                    spc.AddSource(fieldName, "");
+                });
             });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -2041,19 +1972,16 @@ class E
             Assert.Collection(
                 results.Results[0].TrackedSteps["Fields"],
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldA", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldA", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldB", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldB", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldC", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldC", IncrementalStepRunReason.New), output)
                     )
             );
             Assert.Equal("fieldA", syntaxFieldsCalledFor[0]);
@@ -2083,40 +2011,31 @@ class E
             Assert.Collection(
                 results.Results[0].TrackedSteps["Syntax"],
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                            Assert.Equal(("fieldA", IncrementalStepRunReason.Unchanged), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldA", IncrementalStepRunReason.Unchanged), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                            Assert.Equal(("fieldB", IncrementalStepRunReason.Unchanged), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldB", IncrementalStepRunReason.Unchanged), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                            Assert.Equal(("fieldC", IncrementalStepRunReason.Unchanged), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldC", IncrementalStepRunReason.Unchanged), output)
                     )
             );
             Assert.Collection(
                 results.Results[0].TrackedSteps["Fields"],
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldA", IncrementalStepRunReason.Cached), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldA", IncrementalStepRunReason.Cached), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldB", IncrementalStepRunReason.Cached), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldB", IncrementalStepRunReason.Cached), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldC", IncrementalStepRunReason.Cached), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldC", IncrementalStepRunReason.Cached), output)
                     )
             );
             Assert.Empty(syntaxFieldsCalledFor);
@@ -2142,19 +2061,16 @@ class E
             Assert.Collection(
                 results.Results[0].TrackedSteps["Fields"],
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldA", IncrementalStepRunReason.Cached), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldA", IncrementalStepRunReason.Cached), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldB", IncrementalStepRunReason.Cached), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldB", IncrementalStepRunReason.Cached), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldC", IncrementalStepRunReason.Cached), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldC", IncrementalStepRunReason.Cached), output)
                     )
             );
             Assert.Equal("fieldC", Assert.Single(syntaxFieldsCalledFor));
@@ -2222,19 +2138,16 @@ class C
             Assert.Collection(
                 results.Results[0].TrackedSteps["Fields"],
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldA", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldA", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldB", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldB", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldC", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldC", IncrementalStepRunReason.New), output)
                     )
             );
 
@@ -2251,22 +2164,16 @@ class C
             Assert.Collection(
                 results.Results[0].TrackedSteps["Fields"],
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                            Assert.Equal(("fieldA", IncrementalStepRunReason.Unchanged), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldA", IncrementalStepRunReason.Unchanged), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                            Assert.Equal(("fieldB", IncrementalStepRunReason.Unchanged), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldB", IncrementalStepRunReason.Unchanged), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                            Assert.Equal(("fieldC", IncrementalStepRunReason.Unchanged), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldC", IncrementalStepRunReason.Unchanged), output)
                     )
             );
         }
@@ -2388,24 +2295,18 @@ class C
                     }
                 );
 
-                context.RegisterSourceOutput(
-                    source,
-                    (spc, fieldName) =>
-                    {
-                        noCompareCalledFor.Add(fieldName);
-                    }
-                );
+                context.RegisterSourceOutput(source, (spc, fieldName) =>
+                {
+                    noCompareCalledFor.Add(fieldName);
+                });
 
                 var comparerSource = source.WithComparer(
                     new LambdaComparer<string>((a, b) => true)
                 );
-                context.RegisterSourceOutput(
-                    comparerSource,
-                    (spc, fieldName) =>
-                    {
-                        compareCalledFor.Add(fieldName);
-                    }
-                );
+                context.RegisterSourceOutput(comparerSource, (spc, fieldName) =>
+                {
+                    compareCalledFor.Add(fieldName);
+                });
             });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
@@ -2504,58 +2405,43 @@ class C
             Assert.Collection(
                 results.Results[0].TrackedSteps["Fields"],
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldA", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldA", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldB", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldB", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldC", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldC", IncrementalStepRunReason.New), output)
                     )
             );
             Assert.Collection(
                 results.Results[0].TrackedSteps["Output"],
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                            Assert.Equal(("Output1_fieldA", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("Output1_fieldA", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                            Assert.Equal(("Output1_fieldB", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("Output1_fieldB", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                            Assert.Equal(("Output1_fieldC", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("Output1_fieldC", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                            Assert.Equal(("Output2_fieldA", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("Output2_fieldA", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                            Assert.Equal(("Output2_fieldB", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("Output2_fieldB", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                            Assert.Equal(("Output2_fieldC", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("Output2_fieldC", IncrementalStepRunReason.New), output)
                     )
             );
         }
@@ -2623,37 +2509,31 @@ class C
             Assert.Collection(
                 results.Results[0].TrackedSteps["Fields"],
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldA", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldA", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldB", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldB", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldC", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldC", IncrementalStepRunReason.New), output)
                     )
             );
             Assert.Collection(
                 results.Results[0].TrackedSteps["Output"],
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldA", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldA", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldB", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldB", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldC", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldC", IncrementalStepRunReason.New), output)
                     )
             );
         }
@@ -2722,52 +2602,43 @@ class C
             Assert.Collection(
                 results.Results[0].TrackedSteps["Fields"],
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldA", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldA", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldA", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldA", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldB", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldB", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldC", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldC", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldB", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldB", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldC", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldC", IncrementalStepRunReason.New), output)
                     )
             );
             Assert.Collection(
                 results.Results[0].TrackedSteps["Output"],
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldA", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldA", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldB", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldB", IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(("fieldC", IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(("fieldC", IncrementalStepRunReason.New), output)
                     )
             );
         }
@@ -2943,9 +2814,8 @@ class C
 
             var testGenerator2 = new PipelineCallbackGenerator2(ctx =>
             {
-                ctx.RegisterSourceOutput(
-                    ctx.CompilationProvider,
-                    (spc, s) => spc.AddSource("test", "")
+                ctx.RegisterSourceOutput(ctx.CompilationProvider, (spc, s) =>
+                    spc.AddSource("test", "")
                 );
             });
 
@@ -3125,18 +2995,15 @@ class C
             var testGenerator = new CallbackGenerator(
                 onInit: (i) =>
                     i.RegisterForSyntaxNotifications(() =>
-                        new TestSyntaxReceiver(
-                            tag: 0,
-                            callback: (a) =>
+                        new TestSyntaxReceiver(tag: 0, callback: (a) =>
+                        {
+                            if (a is AssignmentExpressionSyntax)
                             {
-                                if (a is AssignmentExpressionSyntax)
-                                {
-                                    throw new OperationCanceledException(
-                                        "Simulated cancellation from external source"
-                                    );
-                                }
+                                throw new OperationCanceledException(
+                                    "Simulated cancellation from external source"
+                                );
                             }
-                        )
+                        })
                     ),
                 onExecute: (e) =>
                 {

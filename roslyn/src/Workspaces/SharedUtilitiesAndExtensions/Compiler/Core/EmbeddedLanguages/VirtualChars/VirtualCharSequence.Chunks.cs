@@ -45,19 +45,16 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
                 if (position < array[0].Span.Start || position >= array[^1].Span.End)
                     return null;
 
-                var index = array.BinarySearch(
-                    position,
-                    static (ch, position) =>
-                    {
-                        if (position < ch.Span.Start)
-                            return 1;
+                var index = array.BinarySearch(position, static (ch, position) =>
+                {
+                    if (position < ch.Span.Start)
+                        return 1;
 
-                        if (position >= ch.Span.End)
-                            return -1;
+                    if (position >= ch.Span.End)
+                        return -1;
 
-                        return 0;
-                    }
-                );
+                    return 0;
+                });
 
                 // Characters can be discontiguous (for example, in multi-line-raw-string literals).  So if the
                 // position is in one of the gaps, it won't be able to find a corresponding virtual char.

@@ -467,13 +467,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void HashSet_Generic_Constructor_int_Negative_ThrowsArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => new SegmentedHashSet<T>(-1)
+            Assert.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new SegmentedHashSet<T>(-1)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => new SegmentedHashSet<T>(int.MinValue)
+            Assert.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new SegmentedHashSet<T>(int.MinValue)
             );
         }
 
@@ -510,13 +508,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         public void HashSet_Generic_Constructor_int_IEqualityComparer_Negative_ThrowsArgumentOutOfRangeException()
         {
             IEqualityComparer<T> comparer = GetIEqualityComparer();
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => new SegmentedHashSet<T>(-1, comparer)
+            Assert.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new SegmentedHashSet<T>(-1, comparer)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => new SegmentedHashSet<T>(int.MinValue, comparer)
+            Assert.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new SegmentedHashSet<T>(int.MinValue, comparer)
             );
         }
 

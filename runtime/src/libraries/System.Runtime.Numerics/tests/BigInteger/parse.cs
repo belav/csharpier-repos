@@ -72,22 +72,16 @@ namespace System.Numerics.Tests
                     //invalid number style
                     // ******InvalidNumberStyles
                     NumberStyles invalid = (NumberStyles)0x7c00;
-                    AssertExtensions.Throws<ArgumentException>(
-                        "style",
-                        () =>
-                        {
-                            BigInteger.Parse("1", invalid).ToString("d");
-                        }
-                    );
-                    AssertExtensions.Throws<ArgumentException>(
-                        "style",
-                        () =>
-                        {
-                            BigInteger junk;
-                            BigInteger.TryParse("1", invalid, null, out junk);
-                            Assert.Equal("1", junk.ToString("d"));
-                        }
-                    );
+                    AssertExtensions.Throws<ArgumentException>("style", () =>
+                    {
+                        BigInteger.Parse("1", invalid).ToString("d");
+                    });
+                    AssertExtensions.Throws<ArgumentException>("style", () =>
+                    {
+                        BigInteger junk;
+                        BigInteger.TryParse("1", invalid, null, out junk);
+                        Assert.Equal("1", junk.ToString("d"));
+                    });
 
                     //FormatProvider tests
                     RunFormatProviderParseStrings();
@@ -150,16 +144,13 @@ namespace System.Numerics.Tests
                 BigInteger.Parse("zzz", NumberStyles.HexNumber);
             });
 
-            AssertExtensions.Throws<ArgumentException>(
-                "style",
-                () =>
-                {
-                    BigInteger.Parse(
-                        "1",
-                        NumberStyles.AllowHexSpecifier | NumberStyles.AllowCurrencySymbol
-                    );
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("style", () =>
+            {
+                BigInteger.Parse(
+                    "1",
+                    NumberStyles.AllowHexSpecifier | NumberStyles.AllowCurrencySymbol
+                );
+            });
         }
 
         private static void RunFormatProviderParseStrings()

@@ -326,9 +326,8 @@ namespace System.Runtime.InteropServices.Tests
         public void OffsetOf_NullType_ThrowsArgumentNullException()
         {
             AssertExtensions.Throws<ArgumentNullException>("t", () => Marshal.OffsetOf(null, null));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "t",
-                () => Marshal.OffsetOf(null, "abcd")
+            AssertExtensions.Throws<ArgumentNullException>("t", () =>
+                Marshal.OffsetOf(null, "abcd")
             );
         }
 
@@ -355,9 +354,8 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void OffsetOf_NonRuntimeField_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "fieldName",
-                () => Marshal.OffsetOf(new NonRuntimeType(), "Field")
+            AssertExtensions.Throws<ArgumentException>("fieldName", () =>
+                Marshal.OffsetOf(new NonRuntimeType(), "Field")
             );
         }
 
@@ -395,13 +393,11 @@ namespace System.Runtime.InteropServices.Tests
         )]
         public void OffsetOf_NoLayoutPoint_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Marshal.OffsetOf(typeof(NoLayoutPoint), nameof(NoLayoutPoint.x))
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Marshal.OffsetOf(typeof(NoLayoutPoint), nameof(NoLayoutPoint.x))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Marshal.OffsetOf<NoLayoutPoint>(nameof(NoLayoutPoint.x))
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Marshal.OffsetOf<NoLayoutPoint>(nameof(NoLayoutPoint.x))
             );
         }
 

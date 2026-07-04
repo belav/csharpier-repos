@@ -447,9 +447,8 @@ namespace System.Net.Http.Functional.Tests
                             await server.AcceptConnectionSendResponseAndCloseAsync(
                                 content: "hello world"
                             );
-                        Assert.All(
-                            headers,
-                            header => Assert.DoesNotContain("Authorization", header)
+                        Assert.All(headers, header =>
+                            Assert.DoesNotContain("Authorization", header)
                         );
                     }
                 }
@@ -664,9 +663,8 @@ namespace System.Net.Http.Functional.Tests
                     }
                     else
                     {
-                        Assert.All(
-                            headers,
-                            header => Assert.DoesNotContain("Authorization", header)
+                        Assert.All(headers, header =>
+                            Assert.DoesNotContain("Authorization", header)
                         );
                     }
                 }

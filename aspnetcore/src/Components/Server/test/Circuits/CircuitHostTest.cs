@@ -157,13 +157,10 @@ public class CircuitHostTest
         );
 
         // Assert: Circuit host notifies about the exception
-        Assert.Collection(
-            circuitUnhandledExceptions,
-            eventArgs =>
-            {
-                Assert.Same(componentException, eventArgs.ExceptionObject);
-            }
-        );
+        Assert.Collection(circuitUnhandledExceptions, eventArgs =>
+        {
+            Assert.Same(componentException, eventArgs.ExceptionObject);
+        });
     }
 
     [Fact]

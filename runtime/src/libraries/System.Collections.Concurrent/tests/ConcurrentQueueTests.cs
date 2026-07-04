@@ -300,21 +300,17 @@ namespace System.Collections.Concurrent.Tests
             }
 
             int dequeues = 0;
-            Parallel.For(
-                0,
-                Environment.ProcessorCount,
-                i =>
+            Parallel.For(0, Environment.ProcessorCount, i =>
+            {
+                while (!cq.IsEmpty)
                 {
-                    while (!cq.IsEmpty)
+                    int item;
+                    if (cq.TryDequeue(out item))
                     {
-                        int item;
-                        if (cq.TryDequeue(out item))
-                        {
-                            Interlocked.Increment(ref dequeues);
-                        }
+                        Interlocked.Increment(ref dequeues);
                     }
                 }
-            );
+            });
 
             Assert.Equal(0, cq.Count);
             Assert.True(cq.IsEmpty);
@@ -328,18 +324,14 @@ namespace System.Collections.Concurrent.Tests
             const int ItemsPerThread = 1000;
             int threads = Environment.ProcessorCount;
 
-            Parallel.For(
-                0,
-                threads,
-                i =>
+            Parallel.For(0, threads, i =>
+            {
+                for (int item = 0; item < ItemsPerThread; item++)
                 {
-                    for (int item = 0; item < ItemsPerThread; item++)
-                    {
-                        cq.Enqueue(item + (i * ItemsPerThread));
-                        cq.GetEnumerator().Dispose();
-                    }
+                    cq.Enqueue(item + (i * ItemsPerThread));
+                    cq.GetEnumerator().Dispose();
                 }
-            );
+            });
 
             Assert.Equal(ItemsPerThread * threads, cq.Count);
             Assert.Equal(Enumerable.Range(0, ItemsPerThread * threads), cq.OrderBy(i => i));

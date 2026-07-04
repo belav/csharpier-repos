@@ -31,13 +31,11 @@ namespace System.IO.Tests
         [Fact]
         public void NullFileName()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "sourceFileName",
-                () => File.Replace(null, "", "")
+            AssertExtensions.Throws<ArgumentNullException>("sourceFileName", () =>
+                File.Replace(null, "", "")
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "destinationFileName",
-                () => File.Replace("", null, "")
+            AssertExtensions.Throws<ArgumentNullException>("destinationFileName", () =>
+                File.Replace("", null, "")
             );
         }
 

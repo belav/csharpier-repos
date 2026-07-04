@@ -108,17 +108,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 .ToImmutableArray();
 
             editor.RemoveNode(localDeclaration);
-            editor.ReplaceNode(
-                ifStatement,
-                (i, g) =>
-                {
-                    // Because the local declaration is *inside* the 'if', we need to get the 'if'
-                    // statement after it was already modified and *then* update the condition
-                    // portion of it.
-                    var currentIf = (IfStatementSyntax)i;
-                    return GetUpdatedIfStatement(updatedCondition, trivia, ifStatement, currentIf);
-                }
-            );
+            editor.ReplaceNode(ifStatement, (i, g) =>
+            {
+                // Because the local declaration is *inside* the 'if', we need to get the 'if'
+                // statement after it was already modified and *then* update the condition
+                // portion of it.
+                var currentIf = (IfStatementSyntax)i;
+                return GetUpdatedIfStatement(updatedCondition, trivia, ifStatement, currentIf);
+            });
         }
 
         private static IfStatementSyntax GetUpdatedIfStatement(

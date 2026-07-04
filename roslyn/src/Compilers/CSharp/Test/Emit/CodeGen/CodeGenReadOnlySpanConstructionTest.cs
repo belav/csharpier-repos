@@ -3149,29 +3149,21 @@ public class Test
                 options: TestOptions.UnsafeReleaseDll
             );
             var verifier = CompileAndVerify(compilation, verify: Verification.Skipped);
-            verifier.VerifyTypeIL(
-                "<PrivateImplementationDetails>",
-                il =>
-                {
-                    Assert.Contains($".pack {expectedAlignment}", il);
+            verifier.VerifyTypeIL("<PrivateImplementationDetails>", il =>
+            {
+                Assert.Contains($".pack {expectedAlignment}", il);
 
-                    Match m = Regex.Match(il, @"\.data cil I_([0-9A-F]*) = bytearray");
-                    Assert.True(m.Success, $"Expected regex to match in {il}");
-                    Assert.True(
-                        long.TryParse(
-                            m.Groups[1].Value,
-                            NumberStyles.HexNumber,
-                            null,
-                            out long rva
-                        ),
-                        $"Expected {m.Value} to parse as hex long."
-                    );
-                    Assert.True(
-                        rva % expectedAlignment == 0,
-                        $"Expected RVA {rva:X8} to be {expectedAlignment}-byte aligned."
-                    );
-                }
-            );
+                Match m = Regex.Match(il, @"\.data cil I_([0-9A-F]*) = bytearray");
+                Assert.True(m.Success, $"Expected regex to match in {il}");
+                Assert.True(
+                    long.TryParse(m.Groups[1].Value, NumberStyles.HexNumber, null, out long rva),
+                    $"Expected {m.Value} to parse as hex long."
+                );
+                Assert.True(
+                    rva % expectedAlignment == 0,
+                    $"Expected RVA {rva:X8} to be {expectedAlignment}-byte aligned."
+                );
+            });
         }
 
         [Theory]
@@ -3224,20 +3216,17 @@ public class Test
                 options: TestOptions.UnsafeReleaseDll
             );
             var verifier = CompileAndVerify(compilation, verify: Verification.Skipped);
-            verifier.VerifyTypeIL(
-                "<PrivateImplementationDetails>",
-                il =>
+            verifier.VerifyTypeIL("<PrivateImplementationDetails>", il =>
+            {
+                if (shouldGenerateType)
                 {
-                    if (shouldGenerateType)
-                    {
-                        Assert.Contains("__StaticArrayInitTypeSize=", il);
-                    }
-                    else
-                    {
-                        Assert.DoesNotContain("__StaticArrayInitTypeSize=", il);
-                    }
+                    Assert.Contains("__StaticArrayInitTypeSize=", il);
                 }
-            );
+                else
+                {
+                    Assert.DoesNotContain("__StaticArrayInitTypeSize=", il);
+                }
+            });
         }
 
         [Fact]
@@ -3284,39 +3273,36 @@ class Test
                 options: TestOptions.UnsafeReleaseDll
             );
             var verifier = CompileAndVerify(compilation, verify: Verification.Skipped);
-            verifier.VerifyTypeIL(
-                "<PrivateImplementationDetails>",
-                il =>
+            verifier.VerifyTypeIL("<PrivateImplementationDetails>", il =>
+            {
+                string[] expected = new[]
                 {
-                    string[] expected = new[]
-                    {
-                        "__StaticArrayInitTypeSize=8_Align=2",
-                        "__StaticArrayInitTypeSize=8_Align=4",
-                        "__StaticArrayInitTypeSize=8_Align=8",
-                        "__StaticArrayInitTypeSize=16",
-                        "__StaticArrayInitTypeSize=16_Align=2",
-                        "__StaticArrayInitTypeSize=16_Align=4",
-                        "__StaticArrayInitTypeSize=16_Align=8",
-                        "__StaticArrayInitTypeSize=24",
-                        "__StaticArrayInitTypeSize=24_Align=2",
-                        "__StaticArrayInitTypeSize=24_Align=4",
-                        "__StaticArrayInitTypeSize=24_Align=8",
-                        "__StaticArrayInitTypeSize=32",
-                        "__StaticArrayInitTypeSize=32_Align=2",
-                        "__StaticArrayInitTypeSize=32_Align=4",
-                        "__StaticArrayInitTypeSize=32_Align=8",
-                    };
+                    "__StaticArrayInitTypeSize=8_Align=2",
+                    "__StaticArrayInitTypeSize=8_Align=4",
+                    "__StaticArrayInitTypeSize=8_Align=8",
+                    "__StaticArrayInitTypeSize=16",
+                    "__StaticArrayInitTypeSize=16_Align=2",
+                    "__StaticArrayInitTypeSize=16_Align=4",
+                    "__StaticArrayInitTypeSize=16_Align=8",
+                    "__StaticArrayInitTypeSize=24",
+                    "__StaticArrayInitTypeSize=24_Align=2",
+                    "__StaticArrayInitTypeSize=24_Align=4",
+                    "__StaticArrayInitTypeSize=24_Align=8",
+                    "__StaticArrayInitTypeSize=32",
+                    "__StaticArrayInitTypeSize=32_Align=2",
+                    "__StaticArrayInitTypeSize=32_Align=4",
+                    "__StaticArrayInitTypeSize=32_Align=8",
+                };
 
-                    // .class nested private explicit ansi sealed 'TYPENAME'
-                    string[] actual = Regex
-                        .Matches(il, @"\.class nested private explicit ansi sealed '([^']*?)'")
-                        .Cast<Match>()
-                        .Select(m => m.Groups[1].Value)
-                        .ToArray();
+                // .class nested private explicit ansi sealed 'TYPENAME'
+                string[] actual = Regex
+                    .Matches(il, @"\.class nested private explicit ansi sealed '([^']*?)'")
+                    .Cast<Match>()
+                    .Select(m => m.Groups[1].Value)
+                    .ToArray();
 
-                    Assert.Equal(expected, actual);
-                }
-            );
+                Assert.Equal(expected, actual);
+            });
         }
     }
 }

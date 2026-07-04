@@ -692,20 +692,14 @@ public class When_testing_a_dto_in_a_specfic_profile : NonValidatingSpecBase
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>
         {
-            cfg.CreateProfile(
-                "Good",
-                profile =>
-                {
-                    profile.CreateMap<GoodSource, GoodDest>();
-                }
-            );
-            cfg.CreateProfile(
-                "Bad",
-                profile =>
-                {
-                    profile.CreateMap<GoodSource, BadDest>();
-                }
-            );
+            cfg.CreateProfile("Good", profile =>
+            {
+                profile.CreateMap<GoodSource, GoodDest>();
+            });
+            cfg.CreateProfile("Bad", profile =>
+            {
+                profile.CreateMap<GoodSource, BadDest>();
+            });
         });
 
     [Fact]

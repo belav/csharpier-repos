@@ -160,9 +160,7 @@ public class RuntimeKey : RuntimeAnnotatableBase, IRuntimeKey
 
     /// <inheritdoc />
     Func<bool, IIdentityMap> IRuntimeKey.GetIdentityMapFactory() =>
-        NonCapturingLazyInitializer.EnsureInitialized(
-            ref _identityMapFactory,
-            this,
-            static key => new IdentityMapFactoryFactory().Create(key)
+        NonCapturingLazyInitializer.EnsureInitialized(ref _identityMapFactory, this, static key =>
+            new IdentityMapFactoryFactory().Create(key)
         );
 }

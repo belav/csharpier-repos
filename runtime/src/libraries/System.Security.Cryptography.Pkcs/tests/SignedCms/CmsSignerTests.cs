@@ -16,9 +16,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         {
             CmsSigner signer = new CmsSigner();
 
-            AssertExtensions.Throws<ArgumentException>(
-                expectedParamName: null,
-                () => signer.SignerIdentifierType = invalidType
+            AssertExtensions.Throws<ArgumentException>(expectedParamName: null, () =>
+                signer.SignerIdentifierType = invalidType
             );
         }
 
@@ -40,21 +39,18 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             // Test setter
             CmsSigner signer = new CmsSigner();
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => signer.SignaturePadding = badPadding
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                signer.SignaturePadding = badPadding
             );
 
             // Test ctor
-            AssertExtensions.Throws<ArgumentException>(
-                "signaturePadding",
-                () =>
-                    new CmsSigner(
-                        SubjectIdentifierType.IssuerAndSerialNumber,
-                        certificate: null,
-                        privateKey: null,
-                        badPadding
-                    )
+            AssertExtensions.Throws<ArgumentException>("signaturePadding", () =>
+                new CmsSigner(
+                    SubjectIdentifierType.IssuerAndSerialNumber,
+                    certificate: null,
+                    privateKey: null,
+                    badPadding
+                )
             );
         }
 

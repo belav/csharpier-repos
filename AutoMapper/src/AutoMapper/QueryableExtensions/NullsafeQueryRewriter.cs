@@ -76,18 +76,14 @@ internal class NullsafeQueryRewriter : ExpressionVisitor
         if (IsExtensionMethod(node.Method) && !IsSafe(arguments[0]))
         {
             // insert null-check before invoking extension method
-            return BeSafe(
-                arguments[0],
-                node.Update(null, arguments),
-                fallback =>
-                {
-                    var args = new Expression[arguments.Count];
-                    arguments.CopyTo(args, 0);
-                    args[0] = fallback;
+            return BeSafe(arguments[0], node.Update(null, arguments), fallback =>
+            {
+                var args = new Expression[arguments.Count];
+                arguments.CopyTo(args, 0);
+                args[0] = fallback;
 
-                    return node.Update(null, args);
-                }
-            );
+                return node.Update(null, args);
+            });
         }
 
         return node.Update(target, arguments);

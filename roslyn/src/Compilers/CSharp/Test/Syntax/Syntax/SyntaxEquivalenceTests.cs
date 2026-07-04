@@ -543,10 +543,8 @@ class C
 
             VerifyNotEquivalent(tree1, tree2, topLevel: true);
             VerifyNotEquivalent(tree1, tree2, topLevel: false);
-            VerifyEquivalent(
-                tree1.GetRoot(),
-                tree2.GetRoot(),
-                ignoreChildNode: k => k == SyntaxKind.NullableDirectiveTrivia
+            VerifyEquivalent(tree1.GetRoot(), tree2.GetRoot(), ignoreChildNode: k =>
+                k == SyntaxKind.NullableDirectiveTrivia
             );
 
             var tree3 = SyntaxFactory.ParseSyntaxTree(
@@ -572,10 +570,8 @@ class C
 
             VerifyNotEquivalent(tree3, tree4, topLevel: true);
             VerifyNotEquivalent(tree3, tree4, topLevel: false);
-            VerifyEquivalent(
-                tree3.GetRoot(),
-                tree4.GetRoot(),
-                ignoreChildNode: k => k == SyntaxKind.NullableDirectiveTrivia
+            VerifyEquivalent(tree3.GetRoot(), tree4.GetRoot(), ignoreChildNode: k =>
+                k == SyntaxKind.NullableDirectiveTrivia
             );
         }
 

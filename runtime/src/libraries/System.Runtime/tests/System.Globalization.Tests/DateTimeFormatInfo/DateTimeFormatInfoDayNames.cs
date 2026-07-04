@@ -699,9 +699,8 @@ namespace System.Globalization.Tests
         public void DayNames_SetNulValueInValue_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => format.DayNames = new string[] { "1", "2", "3", null, "5", "6", "7" }
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                format.DayNames = new string[] { "1", "2", "3", null, "5", "6", "7" }
             );
         }
 

@@ -874,12 +874,10 @@ namespace System.ServiceProcess
             if (!CheckMachineName(machineName))
                 throw new ArgumentException(SR.Format(SR.BadMachineName, machineName));
 
-            return GetServices(
+            return GetServices(machineName, serviceType, null, status => new ServiceController(
                 machineName,
-                serviceType,
-                null,
-                status => new ServiceController(machineName, status)
-            );
+                status
+            ));
         }
 
         /// Helper for GetDevices, GetServices, and ServicesDependedOn

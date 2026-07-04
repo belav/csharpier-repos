@@ -545,9 +545,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
 
                 // Ensure that the name is unique in the containing type so we
                 // don't stomp on an existing member.
-                var uniqueName = NameGenerator.GenerateUniqueName(
-                    baseName,
-                    n => containingType.GetMembers(n).IsEmpty
+                var uniqueName = NameGenerator.GenerateUniqueName(baseName, n =>
+                    containingType.GetMembers(n).IsEmpty
                 );
                 return uniqueName;
             }

@@ -368,9 +368,8 @@ namespace LibraryImportGenerator.UnitTests
                 {
                     // Only check the name here. We don't want to accidentally add the attribute and not fail the test due to the application
                     // not having the correct syntax or other features we validate.
-                    Assert.DoesNotContain(
-                        stubMethod.GetAttributes(),
-                        attr => attr.AttributeClass!.ToDisplayString() == _attributeName
+                    Assert.DoesNotContain(stubMethod.GetAttributes(), attr =>
+                        attr.AttributeClass!.ToDisplayString() == _attributeName
                     );
                 }
             }

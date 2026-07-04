@@ -218,10 +218,8 @@ namespace System.Diagnostics.Tests
                     )
                 )
                 {
-                    AssertExtensions.Throws<ArgumentException>(
-                        "instanceName",
-                        "InstanceName",
-                        () => typingCounterSet.CreateCounterSetInstance("Typing Instance")
+                    AssertExtensions.Throws<ArgumentException>("instanceName", "InstanceName", () =>
+                        typingCounterSet.CreateCounterSetInstance("Typing Instance")
                     );
                 }
             }
@@ -238,15 +236,12 @@ namespace System.Diagnostics.Tests
                 )
             )
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "counterSetGuid",
-                    "CounterSetGuid",
-                    () =>
-                        new CounterSet(
-                            _fixture._providerId,
-                            _fixture._typingCounterSetId,
-                            CounterSetInstanceType.Single
-                        )
+                AssertExtensions.Throws<ArgumentException>("counterSetGuid", "CounterSetGuid", () =>
+                    new CounterSet(
+                        _fixture._providerId,
+                        _fixture._typingCounterSetId,
+                        CounterSetInstanceType.Single
+                    )
                 );
             }
         }
@@ -269,9 +264,8 @@ namespace System.Diagnostics.Tests
             {
                 typingCounterSet.AddCounter(6, CounterType.SampleBase, "Percent Base");
                 ArgumentException argumentException = (ArgumentException)
-                    Assert.Throws(
-                        exceptionType,
-                        () => typingCounterSet.CreateCounterSetInstance(instanceName)
+                    Assert.Throws(exceptionType, () =>
+                        typingCounterSet.CreateCounterSetInstance(instanceName)
                     );
                 Assert.Equal("instanceName", argumentException.ParamName);
             }
@@ -296,9 +290,8 @@ namespace System.Diagnostics.Tests
             )
             {
                 ArgumentException argumentException = (ArgumentException)
-                    Assert.Throws(
-                        exceptionType,
-                        () => typingCounterSet.AddCounter(8, CounterType.SampleBase, counterName)
+                    Assert.Throws(exceptionType, () =>
+                        typingCounterSet.AddCounter(8, CounterType.SampleBase, counterName)
                     );
                 Assert.Equal(
                     PlatformDetection.IsNetFramework ? netfxParameterName : netCoreParameterName,

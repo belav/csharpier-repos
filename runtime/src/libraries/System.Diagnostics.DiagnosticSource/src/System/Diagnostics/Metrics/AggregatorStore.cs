@@ -453,10 +453,8 @@ namespace System.Diagnostics.Metrics
             where TAggregator : Aggregator
         {
             LabelInstruction[] instructions = Compile(labels);
-            Array.Sort(
-                instructions,
-                (LabelInstruction a, LabelInstruction b) =>
-                    string.CompareOrdinal(a.LabelName, b.LabelName)
+            Array.Sort(instructions, (LabelInstruction a, LabelInstruction b) =>
+                string.CompareOrdinal(a.LabelName, b.LabelName)
             );
             int expectedLabels = labels.Length;
             switch (instructions.Length)

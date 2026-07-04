@@ -39,9 +39,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     HashAlgorithmName.SHA256
                 );
 
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "signatureGenerator",
-                    () => request.CreateSigningRequest(null)
+                AssertExtensions.Throws<ArgumentNullException>("signatureGenerator", () =>
+                    request.CreateSigningRequest(null)
                 );
             }
         }
@@ -60,9 +59,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     RSASignaturePadding.Pkcs1
                 );
 
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => request.CreateSelfSigned(DateTimeOffset.MaxValue, DateTimeOffset.MinValue)
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    request.CreateSelfSigned(DateTimeOffset.MaxValue, DateTimeOffset.MinValue)
                 );
             }
         }
@@ -85,39 +83,33 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                     RSASignaturePadding.Pkcs1
                 );
 
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "generator",
-                    () =>
-                        request.Create(
-                            testRoot.SubjectName,
-                            null,
-                            DateTimeOffset.MinValue,
-                            DateTimeOffset.MinValue,
-                            null
-                        )
+                AssertExtensions.Throws<ArgumentNullException>("generator", () =>
+                    request.Create(
+                        testRoot.SubjectName,
+                        null,
+                        DateTimeOffset.MinValue,
+                        DateTimeOffset.MinValue,
+                        null
+                    )
                 );
 
                 DateTimeOffset notAfter = testRoot.NotAfter;
                 DateTimeOffset notBefore = testRoot.NotBefore;
 
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => request.Create(testRoot, notAfter, notBefore, null)
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    request.Create(testRoot, notAfter, notBefore, null)
                 );
 
-                AssertExtensions.Throws<ArgumentException>(
-                    "serialNumber",
-                    () => request.Create(testRoot, notBefore, notAfter, null)
+                AssertExtensions.Throws<ArgumentException>("serialNumber", () =>
+                    request.Create(testRoot, notBefore, notAfter, null)
                 );
 
-                AssertExtensions.Throws<ArgumentException>(
-                    "serialNumber",
-                    () => request.Create(testRoot, notBefore, notAfter, Array.Empty<byte>())
+                AssertExtensions.Throws<ArgumentException>("serialNumber", () =>
+                    request.Create(testRoot, notBefore, notAfter, Array.Empty<byte>())
                 );
 
-                AssertExtensions.Throws<ArgumentException>(
-                    "serialNumber",
-                    () => request.Create(testRoot, notBefore, notAfter, ReadOnlySpan<byte>.Empty)
+                AssertExtensions.Throws<ArgumentException>("serialNumber", () =>
+                    request.Create(testRoot, notBefore, notAfter, ReadOnlySpan<byte>.Empty)
                 );
             }
         }
@@ -128,30 +120,26 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             string subjectName = null;
             ECDsa key = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "subjectName",
-                () => new CertificateRequest(subjectName, key, default(HashAlgorithmName))
+            AssertExtensions.Throws<ArgumentNullException>("subjectName", () =>
+                new CertificateRequest(subjectName, key, default(HashAlgorithmName))
             );
 
             subjectName = "";
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => new CertificateRequest(subjectName, key, default(HashAlgorithmName))
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                new CertificateRequest(subjectName, key, default(HashAlgorithmName))
             );
 
             key = ECDsa.Create(EccTestData.Secp384r1Data.KeyParameters);
 
             using (key)
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "hashAlgorithm",
-                    () => new CertificateRequest(subjectName, key, default(HashAlgorithmName))
+                AssertExtensions.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                    new CertificateRequest(subjectName, key, default(HashAlgorithmName))
                 );
 
-                AssertExtensions.Throws<ArgumentException>(
-                    "hashAlgorithm",
-                    () => new CertificateRequest(subjectName, key, new HashAlgorithmName(""))
+                AssertExtensions.Throws<ArgumentException>("hashAlgorithm", () =>
+                    new CertificateRequest(subjectName, key, new HashAlgorithmName(""))
                 );
             }
         }
@@ -162,29 +150,25 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             X500DistinguishedName subjectName = null;
             ECDsa key = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "subjectName",
-                () => new CertificateRequest(subjectName, key, default(HashAlgorithmName))
+            AssertExtensions.Throws<ArgumentNullException>("subjectName", () =>
+                new CertificateRequest(subjectName, key, default(HashAlgorithmName))
             );
 
             subjectName = new X500DistinguishedName("");
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => new CertificateRequest(subjectName, key, default(HashAlgorithmName))
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                new CertificateRequest(subjectName, key, default(HashAlgorithmName))
             );
 
             key = ECDsa.Create(EccTestData.Secp384r1Data.KeyParameters);
 
             using (key)
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "hashAlgorithm",
-                    () => new CertificateRequest(subjectName, key, default(HashAlgorithmName))
+                AssertExtensions.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                    new CertificateRequest(subjectName, key, default(HashAlgorithmName))
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "hashAlgorithm",
-                    () => new CertificateRequest(subjectName, key, new HashAlgorithmName(""))
+                AssertExtensions.Throws<ArgumentException>("hashAlgorithm", () =>
+                    new CertificateRequest(subjectName, key, new HashAlgorithmName(""))
                 );
             }
         }
@@ -196,37 +180,26 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             RSA key = null;
             RSASignaturePadding padding = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "subjectName",
-                () => new CertificateRequest(subjectName, key, default(HashAlgorithmName), padding)
+            AssertExtensions.Throws<ArgumentNullException>("subjectName", () =>
+                new CertificateRequest(subjectName, key, default(HashAlgorithmName), padding)
             );
 
             subjectName = "";
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => new CertificateRequest(subjectName, key, default(HashAlgorithmName), padding)
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                new CertificateRequest(subjectName, key, default(HashAlgorithmName), padding)
             );
 
             key = RSA.Create(TestData.RsaBigExponentParams);
 
             using (key)
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "hashAlgorithm",
-                    () =>
-                        new CertificateRequest(
-                            subjectName,
-                            key,
-                            default(HashAlgorithmName),
-                            padding
-                        )
+                AssertExtensions.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                    new CertificateRequest(subjectName, key, default(HashAlgorithmName), padding)
                 );
 
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "padding",
-                    () =>
-                        new CertificateRequest(subjectName, key, HashAlgorithmName.SHA256, padding)
+                AssertExtensions.Throws<ArgumentNullException>("padding", () =>
+                    new CertificateRequest(subjectName, key, HashAlgorithmName.SHA256, padding)
                 );
             }
         }
@@ -238,43 +211,30 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             RSA key = null;
             RSASignaturePadding padding = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "subjectName",
-                () => new CertificateRequest(subjectName, key, default(HashAlgorithmName), padding)
+            AssertExtensions.Throws<ArgumentNullException>("subjectName", () =>
+                new CertificateRequest(subjectName, key, default(HashAlgorithmName), padding)
             );
 
             subjectName = new X500DistinguishedName("");
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => new CertificateRequest(subjectName, key, default(HashAlgorithmName), padding)
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                new CertificateRequest(subjectName, key, default(HashAlgorithmName), padding)
             );
 
             key = RSA.Create(TestData.RsaBigExponentParams);
 
             using (key)
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "hashAlgorithm",
-                    () =>
-                        new CertificateRequest(
-                            subjectName,
-                            key,
-                            default(HashAlgorithmName),
-                            padding
-                        )
+                AssertExtensions.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                    new CertificateRequest(subjectName, key, default(HashAlgorithmName), padding)
                 );
 
-                AssertExtensions.Throws<ArgumentException>(
-                    "hashAlgorithm",
-                    () =>
-                        new CertificateRequest(subjectName, key, new HashAlgorithmName(""), padding)
+                AssertExtensions.Throws<ArgumentException>("hashAlgorithm", () =>
+                    new CertificateRequest(subjectName, key, new HashAlgorithmName(""), padding)
                 );
 
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "padding",
-                    () =>
-                        new CertificateRequest(subjectName, key, HashAlgorithmName.SHA256, padding)
+                AssertExtensions.Throws<ArgumentNullException>("padding", () =>
+                    new CertificateRequest(subjectName, key, HashAlgorithmName.SHA256, padding)
                 );
             }
         }
@@ -285,16 +245,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             X500DistinguishedName subjectName = null;
             PublicKey publicKey = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "subjectName",
-                () => new CertificateRequest(subjectName, publicKey, default(HashAlgorithmName))
+            AssertExtensions.Throws<ArgumentNullException>("subjectName", () =>
+                new CertificateRequest(subjectName, publicKey, default(HashAlgorithmName))
             );
 
             subjectName = new X500DistinguishedName("");
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "publicKey",
-                () => new CertificateRequest(subjectName, publicKey, default(HashAlgorithmName))
+            AssertExtensions.Throws<ArgumentNullException>("publicKey", () =>
+                new CertificateRequest(subjectName, publicKey, default(HashAlgorithmName))
             );
 
             using (ECDsa ecdsa = ECDsa.Create(EccTestData.Secp384r1Data.KeyParameters))
@@ -303,14 +261,12 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 publicKey = generator.PublicKey;
             }
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "hashAlgorithm",
-                () => new CertificateRequest(subjectName, publicKey, default(HashAlgorithmName))
+            AssertExtensions.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                new CertificateRequest(subjectName, publicKey, default(HashAlgorithmName))
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "hashAlgorithm",
-                () => new CertificateRequest(subjectName, publicKey, new HashAlgorithmName(""))
+            AssertExtensions.Throws<ArgumentException>("hashAlgorithm", () =>
+                new CertificateRequest(subjectName, publicKey, new HashAlgorithmName(""))
             );
         }
 
@@ -487,66 +443,52 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
         [Fact]
         public static void LoadNullArray()
         {
-            Assert.Throws<ArgumentNullException>(
-                "pkcs10",
-                () => CertificateRequest.LoadSigningRequest((byte[])null, HashAlgorithmName.SHA256)
+            Assert.Throws<ArgumentNullException>("pkcs10", () =>
+                CertificateRequest.LoadSigningRequest((byte[])null, HashAlgorithmName.SHA256)
             );
         }
 
         [Fact]
         public static void LoadNullPemString()
         {
-            Assert.Throws<ArgumentNullException>(
-                "pkcs10Pem",
-                () =>
-                    CertificateRequest.LoadSigningRequestPem((string)null, HashAlgorithmName.SHA256)
+            Assert.Throws<ArgumentNullException>("pkcs10Pem", () =>
+                CertificateRequest.LoadSigningRequestPem((string)null, HashAlgorithmName.SHA256)
             );
         }
 
         [Fact]
         public static void LoadWithDefaultHashAlgorithm()
         {
-            Assert.Throws<ArgumentNullException>(
-                "signerHashAlgorithm",
-                () =>
-                    CertificateRequest.LoadSigningRequest(
-                        Array.Empty<byte>(),
-                        default(HashAlgorithmName)
-                    )
+            Assert.Throws<ArgumentNullException>("signerHashAlgorithm", () =>
+                CertificateRequest.LoadSigningRequest(
+                    Array.Empty<byte>(),
+                    default(HashAlgorithmName)
+                )
             );
 
             {
                 int consumed = -1;
 
-                Assert.Throws<ArgumentNullException>(
-                    "signerHashAlgorithm",
-                    () =>
-                        CertificateRequest.LoadSigningRequest(
-                            ReadOnlySpan<byte>.Empty,
-                            default(HashAlgorithmName),
-                            out consumed
-                        )
+                Assert.Throws<ArgumentNullException>("signerHashAlgorithm", () =>
+                    CertificateRequest.LoadSigningRequest(
+                        ReadOnlySpan<byte>.Empty,
+                        default(HashAlgorithmName),
+                        out consumed
+                    )
                 );
 
                 Assert.Equal(-1, consumed);
             }
 
-            Assert.Throws<ArgumentNullException>(
-                "signerHashAlgorithm",
-                () =>
-                    CertificateRequest.LoadSigningRequestPem(
-                        string.Empty,
-                        default(HashAlgorithmName)
-                    )
+            Assert.Throws<ArgumentNullException>("signerHashAlgorithm", () =>
+                CertificateRequest.LoadSigningRequestPem(string.Empty, default(HashAlgorithmName))
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "signerHashAlgorithm",
-                () =>
-                    CertificateRequest.LoadSigningRequestPem(
-                        ReadOnlySpan<char>.Empty,
-                        default(HashAlgorithmName)
-                    )
+            Assert.Throws<ArgumentNullException>("signerHashAlgorithm", () =>
+                CertificateRequest.LoadSigningRequestPem(
+                    ReadOnlySpan<char>.Empty,
+                    default(HashAlgorithmName)
+                )
             );
         }
 
@@ -555,39 +497,30 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
         {
             HashAlgorithmName hashAlgorithm = new HashAlgorithmName("");
 
-            Assert.Throws<ArgumentException>(
-                "signerHashAlgorithm",
-                () => CertificateRequest.LoadSigningRequest(Array.Empty<byte>(), hashAlgorithm)
+            Assert.Throws<ArgumentException>("signerHashAlgorithm", () =>
+                CertificateRequest.LoadSigningRequest(Array.Empty<byte>(), hashAlgorithm)
             );
 
             {
                 int consumed = -1;
 
-                Assert.Throws<ArgumentException>(
-                    "signerHashAlgorithm",
-                    () =>
-                        CertificateRequest.LoadSigningRequest(
-                            ReadOnlySpan<byte>.Empty,
-                            hashAlgorithm,
-                            out consumed
-                        )
+                Assert.Throws<ArgumentException>("signerHashAlgorithm", () =>
+                    CertificateRequest.LoadSigningRequest(
+                        ReadOnlySpan<byte>.Empty,
+                        hashAlgorithm,
+                        out consumed
+                    )
                 );
 
                 Assert.Equal(-1, consumed);
             }
 
-            Assert.Throws<ArgumentException>(
-                "signerHashAlgorithm",
-                () => CertificateRequest.LoadSigningRequestPem(string.Empty, hashAlgorithm)
+            Assert.Throws<ArgumentException>("signerHashAlgorithm", () =>
+                CertificateRequest.LoadSigningRequestPem(string.Empty, hashAlgorithm)
             );
 
-            Assert.Throws<ArgumentException>(
-                "signerHashAlgorithm",
-                () =>
-                    CertificateRequest.LoadSigningRequestPem(
-                        ReadOnlySpan<char>.Empty,
-                        hashAlgorithm
-                    )
+            Assert.Throws<ArgumentException>("signerHashAlgorithm", () =>
+                CertificateRequest.LoadSigningRequestPem(ReadOnlySpan<char>.Empty, hashAlgorithm)
             );
         }
 
@@ -600,14 +533,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA256;
             ArgumentOutOfRangeException ex;
 
-            ex = Assert.Throws<ArgumentOutOfRangeException>(
-                "options",
-                () =>
-                    CertificateRequest.LoadSigningRequest(
-                        Array.Empty<byte>(),
-                        hashAlgorithm,
-                        options
-                    )
+            ex = Assert.Throws<ArgumentOutOfRangeException>("options", () =>
+                CertificateRequest.LoadSigningRequest(Array.Empty<byte>(), hashAlgorithm, options)
             );
 
             Assert.Equal(options, ex.ActualValue);
@@ -615,36 +542,31 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             {
                 int consumed = -1;
 
-                ex = Assert.Throws<ArgumentOutOfRangeException>(
-                    "options",
-                    () =>
-                        CertificateRequest.LoadSigningRequest(
-                            ReadOnlySpan<byte>.Empty,
-                            hashAlgorithm,
-                            out consumed,
-                            options
-                        )
+                ex = Assert.Throws<ArgumentOutOfRangeException>("options", () =>
+                    CertificateRequest.LoadSigningRequest(
+                        ReadOnlySpan<byte>.Empty,
+                        hashAlgorithm,
+                        out consumed,
+                        options
+                    )
                 );
 
                 Assert.Equal(-1, consumed);
                 Assert.Equal(options, ex.ActualValue);
             }
 
-            ex = Assert.Throws<ArgumentOutOfRangeException>(
-                "options",
-                () => CertificateRequest.LoadSigningRequestPem(string.Empty, hashAlgorithm, options)
+            ex = Assert.Throws<ArgumentOutOfRangeException>("options", () =>
+                CertificateRequest.LoadSigningRequestPem(string.Empty, hashAlgorithm, options)
             );
 
             Assert.Equal(options, ex.ActualValue);
 
-            ex = Assert.Throws<ArgumentOutOfRangeException>(
-                "options",
-                () =>
-                    CertificateRequest.LoadSigningRequestPem(
-                        ReadOnlySpan<char>.Empty,
-                        hashAlgorithm,
-                        options
-                    )
+            ex = Assert.Throws<ArgumentOutOfRangeException>("options", () =>
+                CertificateRequest.LoadSigningRequestPem(
+                    ReadOnlySpan<char>.Empty,
+                    hashAlgorithm,
+                    options
+                )
             );
 
             Assert.Equal(options, ex.ActualValue);

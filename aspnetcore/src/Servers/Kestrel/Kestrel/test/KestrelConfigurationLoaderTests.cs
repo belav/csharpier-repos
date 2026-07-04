@@ -189,30 +189,24 @@ public class KestrelConfigurationLoaderTests
             .Build();
         serverOptions
             .Configure(config)
-            .Endpoint(
-                "End1",
-                opt =>
-                {
-                    ran1 = true;
-                    Assert.True(opt.IsHttps);
-                    Assert.NotNull(opt.HttpsOptions.ServerCertificate);
-                    Assert.NotNull(opt.HttpsOptions.ServerCertificateChain);
-                    Assert.Equal(2, opt.HttpsOptions.ServerCertificateChain.Count);
-                    Assert.Equal(
-                        ClientCertificateMode.RequireCertificate,
-                        opt.HttpsOptions.ClientCertificateMode
-                    );
-                    Assert.Equal(HttpProtocols.Http1, opt.ListenOptions.Protocols);
-                }
-            )
-            .LocalhostEndpoint(
-                5002,
-                opt =>
-                {
-                    ran2 = true;
-                    Assert.Equal(HttpProtocols.Http1, opt.Protocols);
-                }
-            )
+            .Endpoint("End1", opt =>
+            {
+                ran1 = true;
+                Assert.True(opt.IsHttps);
+                Assert.NotNull(opt.HttpsOptions.ServerCertificate);
+                Assert.NotNull(opt.HttpsOptions.ServerCertificateChain);
+                Assert.Equal(2, opt.HttpsOptions.ServerCertificateChain.Count);
+                Assert.Equal(
+                    ClientCertificateMode.RequireCertificate,
+                    opt.HttpsOptions.ClientCertificateMode
+                );
+                Assert.Equal(HttpProtocols.Http1, opt.ListenOptions.Protocols);
+            })
+            .LocalhostEndpoint(5002, opt =>
+            {
+                ran2 = true;
+                Assert.Equal(HttpProtocols.Http1, opt.Protocols);
+            })
             .Load();
 
         Assert.True(ran1);
@@ -246,25 +240,19 @@ public class KestrelConfigurationLoaderTests
             .Build();
         serverOptions
             .Configure(config)
-            .Endpoint(
-                "End1",
-                opt =>
-                {
-                    ran1 = true;
-                    Assert.True(opt.IsHttps);
-                    Assert.Equal(
-                        ClientCertificateMode.RequireCertificate,
-                        opt.HttpsOptions.ClientCertificateMode
-                    );
-                }
-            )
-            .LocalhostEndpoint(
-                5002,
-                opt =>
-                {
-                    ran2 = true;
-                }
-            )
+            .Endpoint("End1", opt =>
+            {
+                ran1 = true;
+                Assert.True(opt.IsHttps);
+                Assert.Equal(
+                    ClientCertificateMode.RequireCertificate,
+                    opt.HttpsOptions.ClientCertificateMode
+                );
+            })
+            .LocalhostEndpoint(5002, opt =>
+            {
+                ran2 = true;
+            })
             .Load();
 
         Assert.True(ran1);
@@ -307,18 +295,15 @@ public class KestrelConfigurationLoaderTests
 
             serverOptions
                 .Configure(config)
-                .Endpoint(
-                    "End1",
-                    opt =>
-                    {
-                        ran1 = true;
-                        Assert.True(opt.IsHttps);
-                        Assert.Equal(
-                            opt.HttpsOptions.ServerCertificate.SerialNumber,
-                            certificate.SerialNumber
-                        );
-                    }
-                )
+                .Endpoint("End1", opt =>
+                {
+                    ran1 = true;
+                    Assert.True(opt.IsHttps);
+                    Assert.Equal(
+                        opt.HttpsOptions.ServerCertificate.SerialNumber,
+                        certificate.SerialNumber
+                    );
+                })
                 .Load();
 
             Assert.True(ran1);
@@ -536,14 +521,11 @@ public class KestrelConfigurationLoaderTests
             );
 
             var ran1 = false;
-            serverOptions.ListenAnyIP(
-                4545,
-                listenOptions =>
-                {
-                    ran1 = true;
-                    listenOptions.UseHttps();
-                }
-            );
+            serverOptions.ListenAnyIP(4545, listenOptions =>
+            {
+                ran1 = true;
+                listenOptions.UseHttps();
+            });
             Assert.True(ran1);
 
             var listenOptions = serverOptions.CodeBackedListenOptions.Single();
@@ -595,14 +577,11 @@ public class KestrelConfigurationLoaderTests
             Assert.Null(serverOptions.ConfigurationLoader.DefaultCertificate);
 
             var ran1 = false;
-            serverOptions.ListenAnyIP(
-                4545,
-                listenOptions =>
-                {
-                    ran1 = true;
-                    listenOptions.UseHttps();
-                }
-            );
+            serverOptions.ListenAnyIP(4545, listenOptions =>
+            {
+                ran1 = true;
+                listenOptions.UseHttps();
+            });
             Assert.True(ran1);
 
             // Use Https triggers a load, so the default cert is already set
@@ -652,14 +631,11 @@ public class KestrelConfigurationLoaderTests
             serverOptions.TestOverrideDefaultCertificate = defaultCertificate;
 
             var ran1 = false;
-            serverOptions.ListenAnyIP(
-                4545,
-                listenOptions =>
-                {
-                    ran1 = true;
-                    listenOptions.UseHttps();
-                }
-            );
+            serverOptions.ListenAnyIP(4545, listenOptions =>
+            {
+                ran1 = true;
+                listenOptions.UseHttps();
+            });
             Assert.True(ran1);
 
             var config = new ConfigurationBuilder()
@@ -731,13 +707,10 @@ public class KestrelConfigurationLoaderTests
         {
             serverOptions
                 .Configure(config)
-                .Endpoint(
-                    "End1",
-                    opt =>
-                    {
-                        Assert.True(opt.IsHttps);
-                    }
-                )
+                .Endpoint("End1", opt =>
+                {
+                    Assert.True(opt.IsHttps);
+                })
                 .Load();
         });
     }
@@ -770,13 +743,10 @@ public class KestrelConfigurationLoaderTests
         {
             serverOptions
                 .Configure(config)
-                .Endpoint(
-                    "End1",
-                    opt =>
-                    {
-                        Assert.True(opt.IsHttps);
-                    }
-                )
+                .Endpoint("End1", opt =>
+                {
+                    Assert.True(opt.IsHttps);
+                })
                 .Load();
         });
     }
@@ -809,13 +779,10 @@ public class KestrelConfigurationLoaderTests
         {
             serverOptions
                 .Configure(config)
-                .Endpoint(
-                    "End1",
-                    opt =>
-                    {
-                        Assert.True(opt.IsHttps);
-                    }
-                )
+                .Endpoint("End1", opt =>
+                {
+                    Assert.True(opt.IsHttps);
+                })
                 .Load();
         });
     }
@@ -847,13 +814,10 @@ public class KestrelConfigurationLoaderTests
         {
             serverOptions
                 .Configure(config)
-                .Endpoint(
-                    "End1",
-                    opt =>
-                    {
-                        Assert.True(opt.IsHttps);
-                    }
-                )
+                .Endpoint("End1", opt =>
+                {
+                    Assert.True(opt.IsHttps);
+                })
                 .Load();
         });
         Assert.StartsWith("Error getting private key from", ex.Message);
@@ -914,18 +878,15 @@ public class KestrelConfigurationLoaderTests
 
         serverOptions
             .Configure(config)
-            .Endpoint(
-                "End1",
-                opt =>
-                {
-                    ran1 = true;
-                    Assert.True(opt.IsHttps);
-                    Assert.Equal(
-                        opt.HttpsOptions.ServerCertificate.SerialNumber,
-                        certificate.SerialNumber
-                    );
-                }
-            )
+            .Endpoint("End1", opt =>
+            {
+                ran1 = true;
+                Assert.True(opt.IsHttps);
+                Assert.Equal(
+                    opt.HttpsOptions.ServerCertificate.SerialNumber,
+                    certificate.SerialNumber
+                );
+            })
             .Load();
 
         Assert.True(ran1);
@@ -1210,22 +1171,19 @@ public class KestrelConfigurationLoaderTests
 
             var configLoader = serverOptions
                 .Configure(config, reloadOnChange)
-                .Endpoint(
-                    "End1",
-                    opt =>
-                    {
-                        Assert.True(opt.IsHttps);
-                        var expectedSerialNumber =
-                            endpointConfigurationCallCount == 0
-                                ? oldCertificate.SerialNumber
-                                : newCertificate.SerialNumber;
-                        Assert.Equal(
-                            opt.HttpsOptions.ServerCertificate.SerialNumber,
-                            expectedSerialNumber
-                        );
-                        endpointConfigurationCallCount++;
-                    }
-                );
+                .Endpoint("End1", opt =>
+                {
+                    Assert.True(opt.IsHttps);
+                    var expectedSerialNumber =
+                        endpointConfigurationCallCount == 0
+                            ? oldCertificate.SerialNumber
+                            : newCertificate.SerialNumber;
+                    Assert.Equal(
+                        opt.HttpsOptions.ServerCertificate.SerialNumber,
+                        expectedSerialNumber
+                    );
+                    endpointConfigurationCallCount++;
+                });
 
             configLoader.Load();
 
@@ -1346,22 +1304,19 @@ public class KestrelConfigurationLoaderTests
 
             var configLoader = serverOptions
                 .Configure(config, reloadOnChange: true)
-                .Endpoint(
-                    "End1",
-                    opt =>
-                    {
-                        Assert.True(opt.IsHttps);
-                        var expectedSerialNumber =
-                            endpointConfigurationCallCount == 0
-                                ? oldCertificate.SerialNumber
-                                : newCertificate.SerialNumber;
-                        Assert.Equal(
-                            opt.HttpsOptions.ServerCertificate.SerialNumber,
-                            expectedSerialNumber
-                        );
-                        endpointConfigurationCallCount++;
-                    }
-                );
+                .Endpoint("End1", opt =>
+                {
+                    Assert.True(opt.IsHttps);
+                    var expectedSerialNumber =
+                        endpointConfigurationCallCount == 0
+                            ? oldCertificate.SerialNumber
+                            : newCertificate.SerialNumber;
+                    Assert.Equal(
+                        opt.HttpsOptions.ServerCertificate.SerialNumber,
+                        expectedSerialNumber
+                    );
+                    endpointConfigurationCallCount++;
+                });
 
             configLoader.Load();
 
@@ -1459,37 +1414,28 @@ public class KestrelConfigurationLoaderTests
             .Build();
         serverOptions
             .Configure(config)
-            .Endpoint(
-                "End1",
-                opt =>
-                {
-                    Assert.True(opt.IsHttps);
-                    Assert.NotNull(opt.HttpsOptions.ServerCertificate);
-                    Assert.Equal(
-                        ClientCertificateMode.RequireCertificate,
-                        opt.HttpsOptions.ClientCertificateMode
-                    );
-                    Assert.Equal(expected, opt.ListenOptions.Protocols);
-                    ran1 = true;
-                }
-            )
-            .LocalhostEndpoint(
-                5002,
-                opt =>
-                {
-                    Assert.Equal(expected, opt.Protocols);
-                    ran2 = true;
-                }
-            )
-            .Load();
-        serverOptions.ListenAnyIP(
-            0,
-            opt =>
+            .Endpoint("End1", opt =>
+            {
+                Assert.True(opt.IsHttps);
+                Assert.NotNull(opt.HttpsOptions.ServerCertificate);
+                Assert.Equal(
+                    ClientCertificateMode.RequireCertificate,
+                    opt.HttpsOptions.ClientCertificateMode
+                );
+                Assert.Equal(expected, opt.ListenOptions.Protocols);
+                ran1 = true;
+            })
+            .LocalhostEndpoint(5002, opt =>
             {
                 Assert.Equal(expected, opt.Protocols);
-                ran3 = true;
-            }
-        );
+                ran2 = true;
+            })
+            .Load();
+        serverOptions.ListenAnyIP(0, opt =>
+        {
+            Assert.Equal(expected, opt.Protocols);
+            ran3 = true;
+        });
 
         Assert.True(ranDefault);
         Assert.True(ran1);
@@ -1550,39 +1496,30 @@ public class KestrelConfigurationLoaderTests
             .Build();
         serverOptions
             .Configure(config)
-            .Endpoint(
-                "End1",
-                opt =>
-                {
-                    Assert.True(opt.IsHttps);
-                    Assert.NotNull(opt.HttpsOptions.ServerCertificate);
-                    Assert.Equal(
-                        ClientCertificateMode.RequireCertificate,
-                        opt.HttpsOptions.ClientCertificateMode
-                    );
-                    Assert.Equal(expected, opt.ListenOptions.Protocols);
-                    ran1 = true;
-                }
-            )
-            .LocalhostEndpoint(
-                5002,
-                opt =>
-                {
-                    // Kestrel default.
-                    Assert.Equal(ListenOptions.DefaultHttpProtocols, opt.Protocols);
-                    ran2 = true;
-                }
-            )
-            .Load();
-        serverOptions.ListenAnyIP(
-            0,
-            opt =>
+            .Endpoint("End1", opt =>
+            {
+                Assert.True(opt.IsHttps);
+                Assert.NotNull(opt.HttpsOptions.ServerCertificate);
+                Assert.Equal(
+                    ClientCertificateMode.RequireCertificate,
+                    opt.HttpsOptions.ClientCertificateMode
+                );
+                Assert.Equal(expected, opt.ListenOptions.Protocols);
+                ran1 = true;
+            })
+            .LocalhostEndpoint(5002, opt =>
             {
                 // Kestrel default.
                 Assert.Equal(ListenOptions.DefaultHttpProtocols, opt.Protocols);
-                ran3 = true;
-            }
-        );
+                ran2 = true;
+            })
+            .Load();
+        serverOptions.ListenAnyIP(0, opt =>
+        {
+            // Kestrel default.
+            Assert.Equal(ListenOptions.DefaultHttpProtocols, opt.Protocols);
+            ran3 = true;
+        });
 
         Assert.True(ranDefault);
         Assert.True(ran1);
@@ -1618,29 +1555,23 @@ public class KestrelConfigurationLoaderTests
             .Build();
         serverOptions
             .Configure(config)
-            .Endpoint(
-                "End1",
-                opt =>
-                {
-#pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete
-                    Assert.Equal(SslProtocols.Tls11, opt.HttpsOptions.SslProtocols);
-#pragma warning restore SYSLIB0039
-                    ran1 = true;
-                }
-            )
-            .Load();
-        serverOptions.ListenAnyIP(
-            0,
-            opt =>
+            .Endpoint("End1", opt =>
             {
-                opt.UseHttps(httpsOptions =>
-                {
-                    // Kestrel default.
-                    Assert.Equal(SslProtocols.None, httpsOptions.SslProtocols);
-                    ran2 = true;
-                });
-            }
-        );
+#pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete
+                Assert.Equal(SslProtocols.Tls11, opt.HttpsOptions.SslProtocols);
+#pragma warning restore SYSLIB0039
+                ran1 = true;
+            })
+            .Load();
+        serverOptions.ListenAnyIP(0, opt =>
+        {
+            opt.UseHttps(httpsOptions =>
+            {
+                // Kestrel default.
+                Assert.Equal(SslProtocols.None, httpsOptions.SslProtocols);
+                ran2 = true;
+            });
+        });
 
         Assert.True(ranDefault);
         Assert.True(ran1);
@@ -1670,16 +1601,13 @@ public class KestrelConfigurationLoaderTests
             .Build();
         serverOptions
             .Configure(config)
-            .Endpoint(
-                "End1",
-                opt =>
-                {
+            .Endpoint("End1", opt =>
+            {
 #pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete
-                    Assert.Equal(SslProtocols.Tls11, opt.HttpsOptions.SslProtocols);
+                Assert.Equal(SslProtocols.Tls11, opt.HttpsOptions.SslProtocols);
 #pragma warning restore SYSLIB0039
-                    ran1 = true;
-                }
-            )
+                ran1 = true;
+            })
             .Load();
 
         Assert.True(ran1);
@@ -1707,16 +1635,13 @@ public class KestrelConfigurationLoaderTests
             .Build();
         serverOptions
             .Configure(config)
-            .Endpoint(
-                "End1",
-                opt =>
-                {
+            .Endpoint("End1", opt =>
+            {
 #pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete
-                    Assert.Equal(SslProtocols.Tls11, opt.HttpsOptions.SslProtocols);
+                Assert.Equal(SslProtocols.Tls11, opt.HttpsOptions.SslProtocols);
 #pragma warning restore SYSLIB0039
-                    ran1 = true;
-                }
-            )
+                ran1 = true;
+            })
             .Load();
 
         Assert.True(ran1);
@@ -1749,14 +1674,11 @@ public class KestrelConfigurationLoaderTests
             .Build();
         serverOptions
             .Configure(config)
-            .Endpoint(
-                "End1",
-                opt =>
-                {
-                    Assert.Equal(SslProtocols.Tls12, opt.HttpsOptions.SslProtocols);
-                    ran1 = true;
-                }
-            )
+            .Endpoint("End1", opt =>
+            {
+                Assert.Equal(SslProtocols.Tls12, opt.HttpsOptions.SslProtocols);
+                ran1 = true;
+            })
             .Load();
 
         Assert.True(ran1);
@@ -1793,33 +1715,27 @@ public class KestrelConfigurationLoaderTests
             .Build();
         serverOptions
             .Configure(config)
-            .Endpoint(
-                "End1",
-                opt =>
-                {
-                    Assert.Equal(
-                        ClientCertificateMode.AllowCertificate,
-                        opt.HttpsOptions.ClientCertificateMode
-                    );
-                    ran1 = true;
-                }
-            )
-            .Load();
-        serverOptions.ListenAnyIP(
-            0,
-            opt =>
+            .Endpoint("End1", opt =>
             {
-                opt.UseHttps(httpsOptions =>
-                {
-                    // Kestrel default.
-                    Assert.Equal(
-                        ClientCertificateMode.NoCertificate,
-                        httpsOptions.ClientCertificateMode
-                    );
-                    ran2 = true;
-                });
-            }
-        );
+                Assert.Equal(
+                    ClientCertificateMode.AllowCertificate,
+                    opt.HttpsOptions.ClientCertificateMode
+                );
+                ran1 = true;
+            })
+            .Load();
+        serverOptions.ListenAnyIP(0, opt =>
+        {
+            opt.UseHttps(httpsOptions =>
+            {
+                // Kestrel default.
+                Assert.Equal(
+                    ClientCertificateMode.NoCertificate,
+                    httpsOptions.ClientCertificateMode
+                );
+                ran2 = true;
+            });
+        });
 
         Assert.True(ranDefault);
         Assert.True(ran1);
@@ -1900,17 +1816,14 @@ public class KestrelConfigurationLoaderTests
             .Build();
         serverOptions
             .Configure(config)
-            .Endpoint(
-                "End1",
-                opt =>
-                {
-                    Assert.Equal(
-                        ClientCertificateMode.AllowCertificate,
-                        opt.HttpsOptions.ClientCertificateMode
-                    );
-                    ran1 = true;
-                }
-            )
+            .Endpoint("End1", opt =>
+            {
+                Assert.Equal(
+                    ClientCertificateMode.AllowCertificate,
+                    opt.HttpsOptions.ClientCertificateMode
+                );
+                ran1 = true;
+            })
             .Load();
 
         Assert.True(ran1);
@@ -1941,17 +1854,14 @@ public class KestrelConfigurationLoaderTests
             .Build();
         serverOptions
             .Configure(config)
-            .Endpoint(
-                "End1",
-                opt =>
-                {
-                    Assert.Equal(
-                        ClientCertificateMode.AllowCertificate,
-                        opt.HttpsOptions.ClientCertificateMode
-                    );
-                    ran1 = true;
-                }
-            )
+            .Endpoint("End1", opt =>
+            {
+                Assert.Equal(
+                    ClientCertificateMode.AllowCertificate,
+                    opt.HttpsOptions.ClientCertificateMode
+                );
+                ran1 = true;
+            })
             .Load();
 
         Assert.True(ran1);
@@ -1985,17 +1895,14 @@ public class KestrelConfigurationLoaderTests
             .Build();
         serverOptions
             .Configure(config)
-            .Endpoint(
-                "End1",
-                opt =>
-                {
-                    Assert.Equal(
-                        ClientCertificateMode.RequireCertificate,
-                        opt.HttpsOptions.ClientCertificateMode
-                    );
-                    ran1 = true;
-                }
-            )
+            .Endpoint("End1", opt =>
+            {
+                Assert.Equal(
+                    ClientCertificateMode.RequireCertificate,
+                    opt.HttpsOptions.ClientCertificateMode
+                );
+                ran1 = true;
+            })
             .Load();
 
         Assert.True(ran1);
@@ -2347,9 +2254,8 @@ public class KestrelConfigurationLoaderTests
         serverOptions.Configure();
 
         serverOptions.ConfigurationLoader.LocalhostEndpoint(5000, _ => numEndpointsAdded++);
-        serverOptions.ConfigurationLoader.LocalhostEndpoint(
-            5001,
-            _ => throw new InvalidOperationException()
+        serverOptions.ConfigurationLoader.LocalhostEndpoint(5001, _ =>
+            throw new InvalidOperationException()
         );
         serverOptions.ConfigurationLoader.LocalhostEndpoint(5002, _ => numEndpointsAdded++);
 
@@ -2385,9 +2291,8 @@ public class KestrelConfigurationLoaderTests
 
         mockConfig.Invocations.Clear();
 
-        serverOptions.ConfigurationLoader.LocalhostEndpoint(
-            7000,
-            _ => Assert.Fail("New endpoints should not be added after ProcessEndpointsToAdd")
+        serverOptions.ConfigurationLoader.LocalhostEndpoint(7000, _ =>
+            Assert.Fail("New endpoints should not be added after ProcessEndpointsToAdd")
         );
 
         serverOptions.ConfigurationLoader.Load();
@@ -2411,9 +2316,8 @@ public class KestrelConfigurationLoaderTests
 
         mockConfig.Invocations.Clear();
 
-        serverOptions.ConfigurationLoader.LocalhostEndpoint(
-            7000,
-            _ => Assert.Fail("New endpoints should not be added after Load")
+        serverOptions.ConfigurationLoader.LocalhostEndpoint(7000, _ =>
+            Assert.Fail("New endpoints should not be added after Load")
         );
 
         Assert.Single(serverOptions.CodeBackedListenOptions);
@@ -2426,9 +2330,8 @@ public class KestrelConfigurationLoaderTests
         var serverOptions = CreateServerOptions();
         serverOptions.Configure();
 
-        serverOptions.ConfigurationLoader.LocalhostEndpoint(
-            7000,
-            _ => Assert.Fail("New endpoints should not be added by LoadInternal")
+        serverOptions.ConfigurationLoader.LocalhostEndpoint(7000, _ =>
+            Assert.Fail("New endpoints should not be added by LoadInternal")
         );
 
         serverOptions.ConfigurationLoader.LoadInternal();
@@ -2442,9 +2345,8 @@ public class KestrelConfigurationLoaderTests
 
         serverOptions.ConfigurationLoader.Load();
 
-        serverOptions.ConfigurationLoader.LocalhostEndpoint(
-            7000,
-            _ => Assert.Fail("New endpoints should not be added by Reload")
+        serverOptions.ConfigurationLoader.LocalhostEndpoint(7000, _ =>
+            Assert.Fail("New endpoints should not be added by Reload")
         );
 
         _ = serverOptions.ConfigurationLoader.Reload();

@@ -229,9 +229,8 @@ namespace System.Web.Http.Tracing
         public void ModelBinderToString_With_CompositeModelBinder_Formats()
         {
             // Arrange
-            ModelBinderProvider innerProvider1 = new SimpleModelBinderProvider(
-                typeof(int),
-                () => null
+            ModelBinderProvider innerProvider1 = new SimpleModelBinderProvider(typeof(int), () =>
+                null
             );
             ModelBinderProvider innerProvider2 = new ArrayModelBinderProvider();
             CompositeModelBinderProvider compositeProvider = new CompositeModelBinderProvider(

@@ -34,9 +34,8 @@ namespace System.Reflection.Emit.Tests
                 typeof(object),
                 FieldAttributes.Public
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "con",
-                () => field.SetCustomAttribute(null, new byte[256])
+            AssertExtensions.Throws<ArgumentNullException>("con", () =>
+                field.SetCustomAttribute(null, new byte[256])
             );
         }
 
@@ -52,9 +51,8 @@ namespace System.Reflection.Emit.Tests
             ConstructorInfo attributeConstructor = typeof(EmptyAttribute).GetConstructor(
                 new Type[0]
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "binaryAttribute",
-                () => field.SetCustomAttribute(attributeConstructor, null)
+            AssertExtensions.Throws<ArgumentNullException>("binaryAttribute", () =>
+                field.SetCustomAttribute(attributeConstructor, null)
             );
         }
 
@@ -107,9 +105,8 @@ namespace System.Reflection.Emit.Tests
                 typeof(object),
                 FieldAttributes.Public
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "customBuilder",
-                () => field.SetCustomAttribute(null)
+            AssertExtensions.Throws<ArgumentNullException>("customBuilder", () =>
+                field.SetCustomAttribute(null)
             );
         }
 

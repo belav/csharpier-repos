@@ -38,17 +38,14 @@ public class SimplifierTests
         var semanticModel = await GetDocument()
             .GetRequiredSemanticModelAsync(CancellationToken.None);
 
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "node",
-            () => Simplifier.ExpandAsync<SyntaxNode>(node: null!, document: null!)
+        await Assert.ThrowsAsync<ArgumentNullException>("node", () =>
+            Simplifier.ExpandAsync<SyntaxNode>(node: null!, document: null!)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "document",
-            () => Simplifier.ExpandAsync(node: node, document: null!)
+        await Assert.ThrowsAsync<ArgumentNullException>("document", () =>
+            Simplifier.ExpandAsync(node: node, document: null!)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "document",
-            () => Simplifier.ExpandAsync(token: default, document: null!)
+        await Assert.ThrowsAsync<ArgumentNullException>("document", () =>
+            Simplifier.ExpandAsync(token: default, document: null!)
         );
     }
 
@@ -59,29 +56,23 @@ public class SimplifierTests
         var semanticModel = await GetDocument()
             .GetRequiredSemanticModelAsync(CancellationToken.None);
 
-        Assert.Throws<ArgumentNullException>(
-            "node",
-            () => Simplifier.Expand<SyntaxNode>(node: null!, semanticModel: null!, services: null!)
+        Assert.Throws<ArgumentNullException>("node", () =>
+            Simplifier.Expand<SyntaxNode>(node: null!, semanticModel: null!, services: null!)
         );
-        Assert.Throws<ArgumentNullException>(
-            "semanticModel",
-            () => Simplifier.Expand(node, semanticModel: null!, services: null!)
+        Assert.Throws<ArgumentNullException>("semanticModel", () =>
+            Simplifier.Expand(node, semanticModel: null!, services: null!)
         );
-        Assert.Throws<ArgumentNullException>(
-            "services",
-            () => Simplifier.Expand(node, semanticModel, services: null!)
+        Assert.Throws<ArgumentNullException>("services", () =>
+            Simplifier.Expand(node, semanticModel, services: null!)
         );
-        Assert.Throws<ArgumentNullException>(
-            "workspace",
-            () => Simplifier.Expand(node, semanticModel, workspace: null!)
+        Assert.Throws<ArgumentNullException>("workspace", () =>
+            Simplifier.Expand(node, semanticModel, workspace: null!)
         );
-        Assert.Throws<ArgumentNullException>(
-            "workspace",
-            () => Simplifier.Expand(token: default, semanticModel: null!, workspace: null!)
+        Assert.Throws<ArgumentNullException>("workspace", () =>
+            Simplifier.Expand(token: default, semanticModel: null!, workspace: null!)
         );
-        Assert.Throws<ArgumentNullException>(
-            "workspace",
-            () => Simplifier.Expand(token: default, semanticModel, workspace: null!)
+        Assert.Throws<ArgumentNullException>("workspace", () =>
+            Simplifier.Expand(token: default, semanticModel, workspace: null!)
         );
     }
 
@@ -91,29 +82,23 @@ public class SimplifierTests
         var document = GetDocument();
 
 #pragma warning disable RS0030 // Do not used banned APIs
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "document",
-            () => Simplifier.ReduceAsync(document: null!)
+        await Assert.ThrowsAsync<ArgumentNullException>("document", () =>
+            Simplifier.ReduceAsync(document: null!)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "document",
-            () => Simplifier.ReduceAsync(document: null!, annotation: null!)
+        await Assert.ThrowsAsync<ArgumentNullException>("document", () =>
+            Simplifier.ReduceAsync(document: null!, annotation: null!)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "annotation",
-            () => Simplifier.ReduceAsync(document, annotation: null!)
+        await Assert.ThrowsAsync<ArgumentNullException>("annotation", () =>
+            Simplifier.ReduceAsync(document, annotation: null!)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "document",
-            () => Simplifier.ReduceAsync(document: null!, span: default)
+        await Assert.ThrowsAsync<ArgumentNullException>("document", () =>
+            Simplifier.ReduceAsync(document: null!, span: default)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "document",
-            () => Simplifier.ReduceAsync(document: null!, spans: null!)
+        await Assert.ThrowsAsync<ArgumentNullException>("document", () =>
+            Simplifier.ReduceAsync(document: null!, spans: null!)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "spans",
-            () => Simplifier.ReduceAsync(document, spans: null!)
+        await Assert.ThrowsAsync<ArgumentNullException>("spans", () =>
+            Simplifier.ReduceAsync(document, spans: null!)
         );
 #pragma warning restore
     }

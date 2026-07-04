@@ -27,9 +27,8 @@ namespace System.Formats.Asn1.Tests.Writer
                 "writer.TryEncode (too small)"
             );
             Assert.Equal(0, bytesWritten);
-            AssertExtensions.Throws<ArgumentException>(
-                "destination",
-                () => writer.Encode(encoded2.AsSpan(0, encoded.Length - 1))
+            AssertExtensions.Throws<ArgumentException>("destination", () =>
+                writer.Encode(encoded2.AsSpan(0, encoded.Length - 1))
             );
             Assert.Equal(255, encoded2[0]);
             Assert.Equal(254, encoded2[encoded.Length]);

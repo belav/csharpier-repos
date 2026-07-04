@@ -33,28 +33,24 @@ class Driver
                 UseShellExecute = false,
             };
 
-            Parallel.ForEach(
-                UntilTimeout(15 * 1000),
-                options,
-                _ =>
+            Parallel.ForEach(UntilTimeout(15 * 1000), options, _ =>
+            {
+                using (Process p = Process.Start(psi))
                 {
-                    using (Process p = Process.Start(psi))
-                    {
-                        p.BeginOutputReadLine();
-                        p.WaitForExit();
-                    }
-
-                    lock (count_lock)
-                    {
-                        count += 1;
-
-                        if (count % (10) == 0)
-                            Console.Write(".");
-                        if (count % (10 * 50) == 0)
-                            Console.WriteLine();
-                    }
+                    p.BeginOutputReadLine();
+                    p.WaitForExit();
                 }
-            );
+
+                lock (count_lock)
+                {
+                    count += 1;
+
+                    if (count % (10) == 0)
+                        Console.Write(".");
+                    if (count % (10 * 50) == 0)
+                        Console.WriteLine();
+                }
+            });
         });
 
         t1.Start();

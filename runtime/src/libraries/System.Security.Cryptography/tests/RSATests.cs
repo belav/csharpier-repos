@@ -217,45 +217,36 @@ namespace System.Security.Cryptography.Tests
         {
             var rsa = new DelegateRSA();
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "data",
-                () => rsa.SignData((byte[])null, HashAlgorithmName.SHA256, null)
+            AssertExtensions.Throws<ArgumentNullException>("data", () =>
+                rsa.SignData((byte[])null, HashAlgorithmName.SHA256, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "data",
-                () => rsa.SignData(null, 0, 0, HashAlgorithmName.SHA256, null)
+            AssertExtensions.Throws<ArgumentNullException>("data", () =>
+                rsa.SignData(null, 0, 0, HashAlgorithmName.SHA256, null)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "offset",
-                () => rsa.SignData(new byte[1], -1, 0, HashAlgorithmName.SHA256, null)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                rsa.SignData(new byte[1], -1, 0, HashAlgorithmName.SHA256, null)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "offset",
-                () => rsa.SignData(new byte[1], 2, 0, HashAlgorithmName.SHA256, null)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                rsa.SignData(new byte[1], 2, 0, HashAlgorithmName.SHA256, null)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => rsa.SignData(new byte[1], 0, -1, HashAlgorithmName.SHA256, null)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                rsa.SignData(new byte[1], 0, -1, HashAlgorithmName.SHA256, null)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => rsa.SignData(new byte[1], 0, 2, HashAlgorithmName.SHA256, null)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                rsa.SignData(new byte[1], 0, 2, HashAlgorithmName.SHA256, null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "hashAlgorithm",
-                () => rsa.SignData(new byte[1], 0, 1, new HashAlgorithmName(null), null)
+            AssertExtensions.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                rsa.SignData(new byte[1], 0, 1, new HashAlgorithmName(null), null)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "hashAlgorithm",
-                () => rsa.SignData(new byte[1], 0, 1, new HashAlgorithmName(""), null)
+            AssertExtensions.Throws<ArgumentException>("hashAlgorithm", () =>
+                rsa.SignData(new byte[1], 0, 1, new HashAlgorithmName(""), null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "padding",
-                () => rsa.SignData(new byte[1], 0, 1, new HashAlgorithmName("abc"), null)
+            AssertExtensions.Throws<ArgumentNullException>("padding", () =>
+                rsa.SignData(new byte[1], 0, 1, new HashAlgorithmName("abc"), null)
             );
 
             rsa.HashDataArrayDelegate = (data, offset, count, name) =>
@@ -287,23 +278,19 @@ namespace System.Security.Cryptography.Tests
         {
             var rsa = new DelegateRSA();
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "data",
-                () => rsa.SignData((Stream)null, HashAlgorithmName.SHA256, null)
+            AssertExtensions.Throws<ArgumentNullException>("data", () =>
+                rsa.SignData((Stream)null, HashAlgorithmName.SHA256, null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "hashAlgorithm",
-                () => rsa.SignData(Stream.Null, new HashAlgorithmName(null), null)
+            AssertExtensions.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                rsa.SignData(Stream.Null, new HashAlgorithmName(null), null)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "hashAlgorithm",
-                () => rsa.SignData(Stream.Null, new HashAlgorithmName(""), null)
+            AssertExtensions.Throws<ArgumentException>("hashAlgorithm", () =>
+                rsa.SignData(Stream.Null, new HashAlgorithmName(""), null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "padding",
-                () => rsa.SignData(Stream.Null, new HashAlgorithmName("abc"), null)
+            AssertExtensions.Throws<ArgumentNullException>("padding", () =>
+                rsa.SignData(Stream.Null, new HashAlgorithmName("abc"), null)
             );
 
             rsa.HashDataStreamDelegate = (stream, name) => ((MemoryStream)stream).ToArray();
@@ -324,28 +311,23 @@ namespace System.Security.Cryptography.Tests
         {
             var rsa = new DelegateRSA();
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "data",
-                () => rsa.VerifyData((Stream)null, null, HashAlgorithmName.SHA256, null)
+            AssertExtensions.Throws<ArgumentNullException>("data", () =>
+                rsa.VerifyData((Stream)null, null, HashAlgorithmName.SHA256, null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "signature",
-                () => rsa.VerifyData(Stream.Null, null, HashAlgorithmName.SHA256, null)
+            AssertExtensions.Throws<ArgumentNullException>("signature", () =>
+                rsa.VerifyData(Stream.Null, null, HashAlgorithmName.SHA256, null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "hashAlgorithm",
-                () => rsa.VerifyData(Stream.Null, new byte[1], new HashAlgorithmName(null), null)
+            AssertExtensions.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                rsa.VerifyData(Stream.Null, new byte[1], new HashAlgorithmName(null), null)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "hashAlgorithm",
-                () => rsa.VerifyData(Stream.Null, new byte[1], new HashAlgorithmName(""), null)
+            AssertExtensions.Throws<ArgumentException>("hashAlgorithm", () =>
+                rsa.VerifyData(Stream.Null, new byte[1], new HashAlgorithmName(""), null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "padding",
-                () => rsa.VerifyData(Stream.Null, new byte[1], new HashAlgorithmName("abc"), null)
+            AssertExtensions.Throws<ArgumentNullException>("padding", () =>
+                rsa.VerifyData(Stream.Null, new byte[1], new HashAlgorithmName("abc"), null)
             );
 
             rsa.HashDataStreamDelegate = (stream, name) => ((MemoryStream)stream).ToArray();
@@ -820,15 +802,13 @@ namespace System.Security.Cryptography.Tests
                 rsa.KeySize = 2048;
                 rsa.TrySignDataDelegate = TrySignData;
 
-                Assert.Throws<ArgumentException>(
-                    "destination",
-                    () =>
-                        rsa.SignData(
-                            new byte[] { 1, 2, 3 },
-                            Span<byte>.Empty,
-                            HashAlgorithmName.SHA256,
-                            RSASignaturePadding.Pss
-                        )
+                Assert.Throws<ArgumentException>("destination", () =>
+                    rsa.SignData(
+                        new byte[] { 1, 2, 3 },
+                        Span<byte>.Empty,
+                        HashAlgorithmName.SHA256,
+                        RSASignaturePadding.Pss
+                    )
                 );
             }
         }
@@ -1247,15 +1227,13 @@ namespace System.Security.Cryptography.Tests
                 rsa.KeySize = 2048;
                 rsa.TrySignHashDelegate = TrySignHash;
 
-                Assert.Throws<ArgumentException>(
-                    "destination",
-                    () =>
-                        rsa.SignHash(
-                            new byte[20],
-                            Span<byte>.Empty,
-                            HashAlgorithmName.SHA1,
-                            RSASignaturePadding.Pkcs1
-                        )
+                Assert.Throws<ArgumentException>("destination", () =>
+                    rsa.SignHash(
+                        new byte[20],
+                        Span<byte>.Empty,
+                        HashAlgorithmName.SHA1,
+                        RSASignaturePadding.Pkcs1
+                    )
                 );
             }
         }

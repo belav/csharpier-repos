@@ -28,13 +28,10 @@ class C
 
         {
             int b = 3;
-            await Test(
-                value,
-                async () =>
-                {
-                    await Instance.GetValue(b);
-                }
-            );
+            await Test(value, async () =>
+            {
+                await Instance.GetValue(b);
+            });
         }
 
         return 0;

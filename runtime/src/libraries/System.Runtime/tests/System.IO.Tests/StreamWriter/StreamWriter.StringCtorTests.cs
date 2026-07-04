@@ -14,37 +14,29 @@ namespace System.IO.Tests
         [Fact]
         public static void NullArgs_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "path",
-                () => new StreamWriter((string)null)
+            AssertExtensions.Throws<ArgumentNullException>("path", () =>
+                new StreamWriter((string)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "path",
-                () => new StreamWriter((string)null, null)
+            AssertExtensions.Throws<ArgumentNullException>("path", () =>
+                new StreamWriter((string)null, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "path",
-                () => new StreamWriter((string)null, true)
+            AssertExtensions.Throws<ArgumentNullException>("path", () =>
+                new StreamWriter((string)null, true)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "path",
-                () => new StreamWriter((string)null, true, null)
+            AssertExtensions.Throws<ArgumentNullException>("path", () =>
+                new StreamWriter((string)null, true, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "path",
-                () => new StreamWriter((string)null, true, null, -1)
+            AssertExtensions.Throws<ArgumentNullException>("path", () =>
+                new StreamWriter((string)null, true, null, -1)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "encoding",
-                () => new StreamWriter("path", true, null)
+            AssertExtensions.Throws<ArgumentNullException>("encoding", () =>
+                new StreamWriter("path", true, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "encoding",
-                () => new StreamWriter("path", null, null)
+            AssertExtensions.Throws<ArgumentNullException>("encoding", () =>
+                new StreamWriter("path", null, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "encoding",
-                () => new StreamWriter("path", true, null, -1)
+            AssertExtensions.Throws<ArgumentNullException>("encoding", () =>
+                new StreamWriter("path", true, null, -1)
             );
         }
 
@@ -53,35 +45,29 @@ namespace System.IO.Tests
         {
             // No argument name for the empty path exception
             AssertExtensions.Throws<ArgumentException>("path", () => new StreamWriter(""));
-            AssertExtensions.Throws<ArgumentException>(
-                "path",
-                () => new StreamWriter("", new FileStreamOptions())
+            AssertExtensions.Throws<ArgumentException>("path", () =>
+                new StreamWriter("", new FileStreamOptions())
             );
             AssertExtensions.Throws<ArgumentException>("path", () => new StreamWriter("", true));
-            AssertExtensions.Throws<ArgumentException>(
-                "path",
-                () => new StreamWriter("", true, Encoding.UTF8)
+            AssertExtensions.Throws<ArgumentException>("path", () =>
+                new StreamWriter("", true, Encoding.UTF8)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "path",
-                () => new StreamWriter("", Encoding.UTF8, new FileStreamOptions())
+            AssertExtensions.Throws<ArgumentException>("path", () =>
+                new StreamWriter("", Encoding.UTF8, new FileStreamOptions())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "path",
-                () => new StreamWriter("", true, Encoding.UTF8, -1)
+            AssertExtensions.Throws<ArgumentException>("path", () =>
+                new StreamWriter("", true, Encoding.UTF8, -1)
             );
         }
 
         [Fact]
         public static void NegativeBufferSize_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "bufferSize",
-                () => new StreamWriter("path", false, Encoding.UTF8, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("bufferSize", () =>
+                new StreamWriter("path", false, Encoding.UTF8, -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "bufferSize",
-                () => new StreamWriter("path", true, Encoding.UTF8, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("bufferSize", () =>
+                new StreamWriter("path", true, Encoding.UTF8, 0)
             );
         }
 
@@ -90,13 +76,11 @@ namespace System.IO.Tests
         {
             var readOptions = new FileStreamOptions { Access = FileAccess.Read };
 
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () => new StreamWriter("path", readOptions)
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                new StreamWriter("path", readOptions)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () => new StreamWriter("path", Encoding.UTF8, readOptions)
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                new StreamWriter("path", Encoding.UTF8, readOptions)
             );
         }
 

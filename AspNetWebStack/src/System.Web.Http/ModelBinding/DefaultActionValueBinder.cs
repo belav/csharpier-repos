@@ -119,14 +119,12 @@ namespace System.Web.Http.ModelBinding
         {
             ParameterBindingRulesCollection pb = new ParameterBindingRulesCollection();
 
-            pb.Add(
-                typeof(CancellationToken),
-                parameter => new CancellationTokenParameterBinding(parameter)
-            );
-            pb.Add(
-                typeof(HttpRequestMessage),
-                parameter => new HttpRequestParameterBinding(parameter)
-            );
+            pb.Add(typeof(CancellationToken), parameter => new CancellationTokenParameterBinding(
+                parameter
+            ));
+            pb.Add(typeof(HttpRequestMessage), parameter => new HttpRequestParameterBinding(
+                parameter
+            ));
 
             // Warning binder for HttpContent.
             pb.Add(parameter =>

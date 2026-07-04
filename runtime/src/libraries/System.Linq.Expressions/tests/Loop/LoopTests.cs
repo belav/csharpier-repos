@@ -30,13 +30,11 @@ namespace System.Linq.Expressions.Tests
         public void NullBody()
         {
             AssertExtensions.Throws<ArgumentNullException>("body", () => Expression.Loop(null));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "body",
-                () => Expression.Loop(null, null)
+            AssertExtensions.Throws<ArgumentNullException>("body", () =>
+                Expression.Loop(null, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "body",
-                () => Expression.Loop(null, null, null)
+            AssertExtensions.Throws<ArgumentNullException>("body", () =>
+                Expression.Loop(null, null, null)
             );
         }
 
@@ -50,18 +48,16 @@ namespace System.Linq.Expressions.Tests
             );
             AssertExtensions.Throws<ArgumentException>("body", () => Expression.Loop(body));
             AssertExtensions.Throws<ArgumentException>("body", () => Expression.Loop(body, null));
-            AssertExtensions.Throws<ArgumentException>(
-                "body",
-                () => Expression.Loop(body, null, null)
+            AssertExtensions.Throws<ArgumentException>("body", () =>
+                Expression.Loop(body, null, null)
             );
         }
 
         [Fact]
         public void NonVoidContinue()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "continue",
-                () => Expression.Loop(Expression.Empty(), null, Expression.Label(typeof(int)))
+            AssertExtensions.Throws<ArgumentException>("continue", () =>
+                Expression.Loop(Expression.Empty(), null, Expression.Label(typeof(int)))
             );
         }
 

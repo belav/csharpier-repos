@@ -42,41 +42,37 @@ namespace Algorithms
             Vector<float> vxmax = new Vector<float>(xmax);
             Vector<float> vxmin = VectorHelper.Create(i => xmin + step * i);
 
-            Parallel.For(
-                0,
-                (int)(((ymax - ymin) / step) + .5f),
-                (yp) =>
+            Parallel.For(0, (int)(((ymax - ymin) / step) + .5f), (yp) =>
+            {
+                if (Abort)
+                    return;
+
+                Vector<float> vy = new Vector<float>(ymin + step * yp);
+                int xp = 0;
+                for (
+                    Vector<float> vx = vxmin;
+                    Vector.LessThanOrEqualAny(vx, vxmax);
+                    vx += vinc, xp += Vector<float>.Count
+                )
                 {
-                    if (Abort)
-                        return;
+                    ComplexVecFloat num = new ComplexVecFloat(vx, vy);
+                    ComplexVecFloat accum = num;
 
-                    Vector<float> vy = new Vector<float>(ymin + step * yp);
-                    int xp = 0;
-                    for (
-                        Vector<float> vx = vxmin;
-                        Vector.LessThanOrEqualAny(vx, vxmax);
-                        vx += vinc, xp += Vector<float>.Count
-                    )
+                    Vector<float> viters = Vector<float>.Zero;
+                    Vector<float> increment = Vector<float>.One;
+                    do
                     {
-                        ComplexVecFloat num = new ComplexVecFloat(vx, vy);
-                        ComplexVecFloat accum = num;
+                        accum = accum.square() + num;
+                        viters += increment;
+                        Vector<float> vCond =
+                            Vector.LessThanOrEqual<float>(accum.sqabs(), vlimit)
+                            & Vector.LessThanOrEqual<float>(viters, vmax_iters);
+                        increment = increment & vCond;
+                    } while (increment != Vector<float>.Zero);
 
-                        Vector<float> viters = Vector<float>.Zero;
-                        Vector<float> increment = Vector<float>.One;
-                        do
-                        {
-                            accum = accum.square() + num;
-                            viters += increment;
-                            Vector<float> vCond =
-                                Vector.LessThanOrEqual<float>(accum.sqabs(), vlimit)
-                                & Vector.LessThanOrEqual<float>(viters, vmax_iters);
-                            increment = increment & vCond;
-                        } while (increment != Vector<float>.Zero);
-
-                        viters.ForEach((iter, elemNum) => DrawPixel(xp + elemNum, yp, (int)iter));
-                    }
+                    viters.ForEach((iter, elemNum) => DrawPixel(xp + elemNum, yp, (int)iter));
                 }
-            );
+            });
         }
 
         // Render the fractal on multiple threads using raw Vector<float> data types
@@ -96,45 +92,41 @@ namespace Algorithms
             Vector<float> vxmax = new Vector<float>(xmax);
             Vector<float> vxmin = VectorHelper.Create(i => xmin + step * i);
 
-            Parallel.For(
-                0,
-                (int)(((ymax - ymin) / step) + .5f),
-                (yp) =>
+            Parallel.For(0, (int)(((ymax - ymin) / step) + .5f), (yp) =>
+            {
+                if (Abort)
+                    return;
+
+                Vector<float> vy = new Vector<float>(ymin + step * yp);
+                int xp = 0;
+                for (
+                    Vector<float> vx = vxmin;
+                    Vector.LessThanOrEqualAny(vx, vxmax);
+                    vx += vinc, xp += Vector<float>.Count
+                )
                 {
-                    if (Abort)
-                        return;
+                    Vector<float> accumx = vx;
+                    Vector<float> accumy = vy;
 
-                    Vector<float> vy = new Vector<float>(ymin + step * yp);
-                    int xp = 0;
-                    for (
-                        Vector<float> vx = vxmin;
-                        Vector.LessThanOrEqualAny(vx, vxmax);
-                        vx += vinc, xp += Vector<float>.Count
-                    )
+                    Vector<float> viters = Vector<float>.Zero;
+                    Vector<float> increment = Vector<float>.One;
+                    do
                     {
-                        Vector<float> accumx = vx;
-                        Vector<float> accumy = vy;
+                        Vector<float> naccumx = accumx * accumx - accumy * accumy;
+                        Vector<float> naccumy = accumx * accumy + accumx * accumy;
+                        accumx = naccumx + vx;
+                        accumy = naccumy + vy;
+                        viters += increment;
+                        Vector<float> sqabs = accumx * accumx + accumy * accumy;
+                        Vector<float> vCond =
+                            Vector.LessThanOrEqual<float>(sqabs, vlimit)
+                            & Vector.LessThanOrEqual<float>(viters, vmax_iters);
+                        increment = increment & vCond;
+                    } while (increment != Vector<float>.Zero);
 
-                        Vector<float> viters = Vector<float>.Zero;
-                        Vector<float> increment = Vector<float>.One;
-                        do
-                        {
-                            Vector<float> naccumx = accumx * accumx - accumy * accumy;
-                            Vector<float> naccumy = accumx * accumy + accumx * accumy;
-                            accumx = naccumx + vx;
-                            accumy = naccumy + vy;
-                            viters += increment;
-                            Vector<float> sqabs = accumx * accumx + accumy * accumy;
-                            Vector<float> vCond =
-                                Vector.LessThanOrEqual<float>(sqabs, vlimit)
-                                & Vector.LessThanOrEqual<float>(viters, vmax_iters);
-                            increment = increment & vCond;
-                        } while (increment != Vector<float>.Zero);
-
-                        viters.ForEach((iter, elemNum) => DrawPixel(xp + elemNum, yp, (int)iter));
-                    }
+                    viters.ForEach((iter, elemNum) => DrawPixel(xp + elemNum, yp, (int)iter));
                 }
-            );
+            });
         }
 
         // Render the fractal on a single thread using the ComplexFloatVec data type

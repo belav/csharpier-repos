@@ -36,21 +36,16 @@ internal sealed class RayTracer
 
     internal void RenderParallel(Scene scene, Int32[] rgb, ParallelOptions options)
     {
-        Parallel.For(
-            0,
-            _screenHeight,
-            options,
-            y =>
+        Parallel.For(0, _screenHeight, options, y =>
+        {
+            int stride = y * _screenWidth;
+            Camera camera = scene.Camera;
+            for (int x = 0; x < _screenWidth; x++)
             {
-                int stride = y * _screenWidth;
-                Camera camera = scene.Camera;
-                for (int x = 0; x < _screenWidth; x++)
-                {
-                    Color color = TraceRay(new Ray(camera.Pos, GetPoint(x, y, camera)), scene, 0);
-                    rgb[x + stride] = color.ToInt32();
-                }
+                Color color = TraceRay(new Ray(camera.Pos, GetPoint(x, y, camera)), scene, 0);
+                rgb[x + stride] = color.ToInt32();
             }
-        );
+        });
     }
 
     internal void RenderParallelShowingThreads(Scene scene, Int32[] rgb, ParallelOptions options)

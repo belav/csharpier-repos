@@ -1013,10 +1013,8 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 var qs = new QueryCollection(values);
                 context.Request.Query = qs;
 
-                await dispatcher.ExecuteAsync(
-                    context,
-                    new HttpConnectionDispatcherOptions(),
-                    c => Task.CompletedTask
+                await dispatcher.ExecuteAsync(context, new HttpConnectionDispatcherOptions(), c =>
+                    Task.CompletedTask
                 );
 
                 Assert.Equal(StatusCodes.Status400BadRequest, context.Response.StatusCode);
@@ -1266,9 +1264,8 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var exists = manager.TryGetConnection(connection.ConnectionId, out _);
             Assert.False(exists);
 
-            Assert.Collection(
-                connectionDuration.GetMeasurementSnapshot(),
-                m => AssertDuration(m, "normal_closure", "long_polling")
+            Assert.Collection(connectionDuration.GetMeasurementSnapshot(), m =>
+                AssertDuration(m, "normal_closure", "long_polling")
             );
             Assert.Collection(
                 currentConnections.GetMeasurementSnapshot(),
@@ -3284,24 +3281,21 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var services = new ServiceCollection();
             services.AddSingleton<ServiceProviderConnectionHandler>();
             var iteration = 0;
-            services.AddScoped(
-                typeof(MessageWrapper),
-                _ =>
+            services.AddScoped(typeof(MessageWrapper), _ =>
+            {
+                iteration++;
+                return new MessageWrapper()
                 {
-                    iteration++;
-                    return new MessageWrapper()
-                    {
-                        Buffer = new ReadOnlySequence<byte>(
-                            new byte[]
-                            {
-                                (byte)(iteration + 1),
-                                (byte)(iteration + 2),
-                                (byte)(iteration + 3),
-                            }
-                        ),
-                    };
-                }
-            );
+                    Buffer = new ReadOnlySequence<byte>(
+                        new byte[]
+                        {
+                            (byte)(iteration + 1),
+                            (byte)(iteration + 2),
+                            (byte)(iteration + 3),
+                        }
+                    ),
+                };
+            });
 
             var builder = new ConnectionBuilder(services.BuildServiceProvider());
             builder.UseConnectionHandler<ServiceProviderConnectionHandler>();
@@ -3352,24 +3346,21 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var services = new ServiceCollection();
             services.AddSingleton<ServiceProviderConnectionHandler>();
             var iteration = 0;
-            services.AddScoped(
-                typeof(MessageWrapper),
-                _ =>
+            services.AddScoped(typeof(MessageWrapper), _ =>
+            {
+                iteration++;
+                return new MessageWrapper()
                 {
-                    iteration++;
-                    return new MessageWrapper()
-                    {
-                        Buffer = new ReadOnlySequence<byte>(
-                            new byte[]
-                            {
-                                (byte)(iteration + 1),
-                                (byte)(iteration + 2),
-                                (byte)(iteration + 3),
-                            }
-                        ),
-                    };
-                }
-            );
+                    Buffer = new ReadOnlySequence<byte>(
+                        new byte[]
+                        {
+                            (byte)(iteration + 1),
+                            (byte)(iteration + 2),
+                            (byte)(iteration + 3),
+                        }
+                    ),
+                };
+            });
 
             var builder = new ConnectionBuilder(services.BuildServiceProvider());
             builder.UseConnectionHandler<ServiceProviderConnectionHandler>();
@@ -3546,18 +3537,14 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             },
             endpoints =>
             {
-                endpoints.MapConnectionHandler<AuthConnectionHandler>(
-                    "/foo",
-                    o => o.CloseOnAuthenticationExpiration = true
+                endpoints.MapConnectionHandler<AuthConnectionHandler>("/foo", o =>
+                    o.CloseOnAuthenticationExpiration = true
                 );
 
-                endpoints.MapGet(
-                    "/generatetoken",
-                    context =>
-                    {
-                        return context.Response.WriteAsync(GenerateToken(context));
-                    }
-                );
+                endpoints.MapGet("/generatetoken", context =>
+                {
+                    return context.Response.WriteAsync(GenerateToken(context));
+                });
 
                 string GenerateToken(HttpContext httpContext)
                 {
@@ -3642,24 +3629,20 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             },
             endpoints =>
             {
-                endpoints.MapConnectionHandler<AuthConnectionHandler>(
-                    "/foo",
-                    o => o.CloseOnAuthenticationExpiration = true
+                endpoints.MapConnectionHandler<AuthConnectionHandler>("/foo", o =>
+                    o.CloseOnAuthenticationExpiration = true
                 );
 
-                endpoints.MapGet(
-                    "/signin",
-                    async context =>
+                endpoints.MapGet("/signin", async context =>
+                {
+                    var claims = new List<Claim>
                     {
-                        var claims = new List<Claim>
-                        {
-                            new Claim(ClaimTypes.NameIdentifier, context.Request.Query["user"]),
-                        };
-                        await context.SignInAsync(
-                            new ClaimsPrincipal(new ClaimsIdentity(claims, "Cookies"))
-                        );
-                    }
-                );
+                        new Claim(ClaimTypes.NameIdentifier, context.Request.Query["user"]),
+                    };
+                    await context.SignInAsync(
+                        new ClaimsPrincipal(new ClaimsIdentity(claims, "Cookies"))
+                    );
+                });
             },
             LoggerFactory
         );
@@ -3759,18 +3742,14 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             },
             endpoints =>
             {
-                endpoints.MapConnectionHandler<JwtConnectionHandler>(
-                    "/foo",
-                    o => o.CloseOnAuthenticationExpiration = true
+                endpoints.MapConnectionHandler<JwtConnectionHandler>("/foo", o =>
+                    o.CloseOnAuthenticationExpiration = true
                 );
 
-                endpoints.MapGet(
-                    "/generatetoken",
-                    context =>
-                    {
-                        return context.Response.WriteAsync(GenerateToken(context));
-                    }
-                );
+                endpoints.MapGet("/generatetoken", context =>
+                {
+                    return context.Response.WriteAsync(GenerateToken(context));
+                });
 
                 string GenerateToken(HttpContext httpContext)
                 {

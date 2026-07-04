@@ -204,16 +204,14 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "outer",
-                () =>
-                    outer.GroupJoin(
-                        inner,
-                        e => e.name,
-                        e => e.name,
-                        createJoinRec,
-                        new AnagramEqualityComparer()
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("outer", () =>
+                outer.GroupJoin(
+                    inner,
+                    e => e.name,
+                    e => e.name,
+                    createJoinRec,
+                    new AnagramEqualityComparer()
+                )
             );
         }
 
@@ -228,16 +226,14 @@ namespace System.Linq.Tests
             };
             AnagramRec[] inner = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "inner",
-                () =>
-                    outer.GroupJoin(
-                        inner,
-                        e => e.name,
-                        e => e.name,
-                        createJoinRec,
-                        new AnagramEqualityComparer()
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("inner", () =>
+                outer.GroupJoin(
+                    inner,
+                    e => e.name,
+                    e => e.name,
+                    createJoinRec,
+                    new AnagramEqualityComparer()
+                )
             );
         }
 
@@ -266,16 +262,14 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "outerKeySelector",
-                () =>
-                    outer.GroupJoin(
-                        inner,
-                        null,
-                        e => e.name,
-                        createJoinRec,
-                        new AnagramEqualityComparer()
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("outerKeySelector", () =>
+                outer.GroupJoin(
+                    inner,
+                    null,
+                    e => e.name,
+                    createJoinRec,
+                    new AnagramEqualityComparer()
+                )
             );
         }
 
@@ -304,16 +298,14 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "innerKeySelector",
-                () =>
-                    outer.GroupJoin(
-                        inner,
-                        e => e.name,
-                        null,
-                        createJoinRec,
-                        new AnagramEqualityComparer()
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("innerKeySelector", () =>
+                outer.GroupJoin(
+                    inner,
+                    e => e.name,
+                    null,
+                    createJoinRec,
+                    new AnagramEqualityComparer()
+                )
             );
         }
 
@@ -342,16 +334,14 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () =>
-                    outer.GroupJoin(
-                        inner,
-                        e => e.name,
-                        e => e.name,
-                        (Func<CustomerRec, IEnumerable<AnagramRec>, JoinRec>)null,
-                        new AnagramEqualityComparer()
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                outer.GroupJoin(
+                    inner,
+                    e => e.name,
+                    e => e.name,
+                    (Func<CustomerRec, IEnumerable<AnagramRec>, JoinRec>)null,
+                    new AnagramEqualityComparer()
+                )
             );
         }
 
@@ -375,9 +365,8 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "outer",
-                () => outer.GroupJoin(inner, e => e.name, e => e.name, createJoinRec)
+            AssertExtensions.Throws<ArgumentNullException>("outer", () =>
+                outer.GroupJoin(inner, e => e.name, e => e.name, createJoinRec)
             );
         }
 
@@ -392,9 +381,8 @@ namespace System.Linq.Tests
             };
             AnagramRec[] inner = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "inner",
-                () => outer.GroupJoin(inner, e => e.name, e => e.name, createJoinRec)
+            AssertExtensions.Throws<ArgumentNullException>("inner", () =>
+                outer.GroupJoin(inner, e => e.name, e => e.name, createJoinRec)
             );
         }
 
@@ -423,9 +411,8 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "outerKeySelector",
-                () => outer.GroupJoin(inner, null, e => e.name, createJoinRec)
+            AssertExtensions.Throws<ArgumentNullException>("outerKeySelector", () =>
+                outer.GroupJoin(inner, null, e => e.name, createJoinRec)
             );
         }
 
@@ -454,9 +441,8 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "innerKeySelector",
-                () => outer.GroupJoin(inner, e => e.name, null, createJoinRec)
+            AssertExtensions.Throws<ArgumentNullException>("innerKeySelector", () =>
+                outer.GroupJoin(inner, e => e.name, null, createJoinRec)
             );
         }
 
@@ -485,15 +471,13 @@ namespace System.Linq.Tests
                 },
             };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () =>
-                    outer.GroupJoin(
-                        inner,
-                        e => e.name,
-                        e => e.name,
-                        (Func<CustomerRec, IEnumerable<AnagramRec>, JoinRec>)null
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                outer.GroupJoin(
+                    inner,
+                    e => e.name,
+                    e => e.name,
+                    (Func<CustomerRec, IEnumerable<AnagramRec>, JoinRec>)null
+                )
             );
         }
 

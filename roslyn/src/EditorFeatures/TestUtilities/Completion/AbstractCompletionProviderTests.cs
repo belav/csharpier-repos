@@ -240,20 +240,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
                 }
                 else
                 {
-                    AssertEx.None(
-                        items,
-                        c =>
-                            CompareItems(c.DisplayText, expectedItemOrNull)
-                            && CompareItems(c.DisplayTextSuffix, displayTextSuffix ?? "")
-                            && CompareItems(c.DisplayTextPrefix, displayTextPrefix ?? "")
-                            && CompareItems(c.InlineDescription, inlineDescription ?? "")
-                            && (
-                                expectedDescriptionOrNull != null
-                                    ? completionService
-                                        .GetDescriptionAsync(document, c, options, displayOptions)
-                                        .Result.Text == expectedDescriptionOrNull
-                                    : true
-                            )
+                    AssertEx.None(items, c =>
+                        CompareItems(c.DisplayText, expectedItemOrNull)
+                        && CompareItems(c.DisplayTextSuffix, displayTextSuffix ?? "")
+                        && CompareItems(c.DisplayTextPrefix, displayTextPrefix ?? "")
+                        && CompareItems(c.InlineDescription, inlineDescription ?? "")
+                        && (
+                            expectedDescriptionOrNull != null
+                                ? completionService
+                                    .GetDescriptionAsync(document, c, options, displayOptions)
+                                    .Result.Text == expectedDescriptionOrNull
+                                : true
+                        )
                     );
                 }
             }
@@ -1436,9 +1434,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
                 if (expectedSymbols >= 1)
                 {
                     Assert.NotNull(completionList);
-                    AssertEx.Any(
-                        completionList.ItemsList,
-                        c => CompareItems(c.DisplayText, expectedItem)
+                    AssertEx.Any(completionList.ItemsList, c =>
+                        CompareItems(c.DisplayText, expectedItem)
                     );
 
                     var item = completionList.ItemsList.First(c =>
@@ -1468,9 +1465,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
                 {
                     if (completionList != null)
                     {
-                        AssertEx.None(
-                            completionList.ItemsList,
-                            c => CompareItems(c.DisplayText, expectedItem)
+                        AssertEx.None(completionList.ItemsList, c =>
+                            CompareItems(c.DisplayText, expectedItem)
                         );
                     }
                 }

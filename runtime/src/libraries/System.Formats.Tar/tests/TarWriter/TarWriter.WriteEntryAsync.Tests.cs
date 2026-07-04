@@ -431,9 +431,8 @@ namespace System.Formats.Tar.Tests
             await using TarWriter writer = new(new MemoryStream());
 
             TarEntry entry = InvokeTarEntryCreationConstructor(entryFormat, entryType, name);
-            await Assert.ThrowsAsync<ArgumentException>(
-                "entry",
-                () => writer.WriteEntryAsync(entry)
+            await Assert.ThrowsAsync<ArgumentException>("entry", () =>
+                writer.WriteEntryAsync(entry)
             );
         }
 
@@ -453,9 +452,8 @@ namespace System.Formats.Tar.Tests
             TarEntry entry = InvokeTarEntryCreationConstructor(entryFormat, entryType, "foo");
             entry.LinkName = linkName;
 
-            await Assert.ThrowsAsync<ArgumentException>(
-                "entry",
-                () => writer.WriteEntryAsync(entry)
+            await Assert.ThrowsAsync<ArgumentException>("entry", () =>
+                writer.WriteEntryAsync(entry)
             );
         }
 
@@ -479,9 +477,8 @@ namespace System.Formats.Tar.Tests
             PosixTarEntry posixEntry = Assert.IsAssignableFrom<PosixTarEntry>(entry);
             posixEntry.UserName = userName;
 
-            await Assert.ThrowsAsync<ArgumentException>(
-                "entry",
-                () => writer.WriteEntryAsync(entry)
+            await Assert.ThrowsAsync<ArgumentException>("entry", () =>
+                writer.WriteEntryAsync(entry)
             );
         }
 
@@ -502,9 +499,8 @@ namespace System.Formats.Tar.Tests
             PosixTarEntry posixEntry = Assert.IsAssignableFrom<PosixTarEntry>(entry);
             posixEntry.GroupName = groupName;
 
-            await Assert.ThrowsAsync<ArgumentException>(
-                "entry",
-                () => writer.WriteEntryAsync(entry)
+            await Assert.ThrowsAsync<ArgumentException>("entry", () =>
+                writer.WriteEntryAsync(entry)
             );
         }
 

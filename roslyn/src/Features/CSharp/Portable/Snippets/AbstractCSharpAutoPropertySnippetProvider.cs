@@ -68,9 +68,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
                 .GetRequiredSemanticModelAsync(cancellationToken)
                 .ConfigureAwait(false);
             var generator = SyntaxGenerator.GetGenerator(document);
-            var identifierName = NameGenerator.GenerateUniqueName(
-                "MyProperty",
-                n => semanticModel.LookupSymbols(position, name: n).IsEmpty
+            var identifierName = NameGenerator.GenerateUniqueName("MyProperty", n =>
+                semanticModel.LookupSymbols(position, name: n).IsEmpty
             );
             var syntaxContext = CSharpSyntaxContext.CreateContext(
                 document,

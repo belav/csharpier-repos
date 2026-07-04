@@ -51,21 +51,17 @@ namespace System.Net.Sockets.Tests
         public void Ctor_NullSocket_ThrowsArgumentNullExceptions()
         {
             AssertExtensions.Throws<ArgumentNullException>("socket", () => new NetworkStream(null));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "socket",
-                () => new NetworkStream(null, false)
+            AssertExtensions.Throws<ArgumentNullException>("socket", () =>
+                new NetworkStream(null, false)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "socket",
-                () => new NetworkStream(null, true)
+            AssertExtensions.Throws<ArgumentNullException>("socket", () =>
+                new NetworkStream(null, true)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "socket",
-                () => new NetworkStream(null, FileAccess.ReadWrite)
+            AssertExtensions.Throws<ArgumentNullException>("socket", () =>
+                new NetworkStream(null, FileAccess.ReadWrite)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "socket",
-                () => new NetworkStream(null, FileAccess.ReadWrite, false)
+            AssertExtensions.Throws<ArgumentNullException>("socket", () =>
+                new NetworkStream(null, FileAccess.ReadWrite, false)
             );
         }
 

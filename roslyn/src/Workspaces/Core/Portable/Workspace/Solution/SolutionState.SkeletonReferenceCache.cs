@@ -208,12 +208,10 @@ internal partial class SolutionState
             // threads blocking on a lazy to compute the work.  Instead, we'll only occupy one thread, while any
             // concurrent requests asynchronously wait for that work to be done.
 
-            var lazy = s_compilationToSkeletonSet.GetValue(
-                compilation,
-                compilation =>
-                    AsyncLazy.Create(cancellationToken =>
-                        Task.FromResult(CreateSkeletonSet(services, compilation, cancellationToken))
-                    )
+            var lazy = s_compilationToSkeletonSet.GetValue(compilation, compilation =>
+                AsyncLazy.Create(cancellationToken =>
+                    Task.FromResult(CreateSkeletonSet(services, compilation, cancellationToken))
+                )
             );
 
             return await lazy.GetValueAsync(cancellationToken).ConfigureAwait(false);

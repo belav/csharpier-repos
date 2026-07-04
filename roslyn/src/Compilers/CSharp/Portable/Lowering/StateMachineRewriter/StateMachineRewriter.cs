@@ -437,9 +437,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     bodyBuilder.Add(
                         F.Assignment(
-                            proxy.Replacement(
-                                F.Syntax,
-                                frameType1 => F.Local(stateMachineVariable)
+                            proxy.Replacement(F.Syntax, frameType1 =>
+                                F.Local(stateMachineVariable)
                             ),
                             F.This()
                         )
@@ -454,9 +453,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     bodyBuilder.Add(
                         F.Assignment(
-                            proxy.Replacement(
-                                F.Syntax,
-                                frameType1 => F.Local(stateMachineVariable)
+                            proxy.Replacement(F.Syntax, frameType1 =>
+                                F.Local(stateMachineVariable)
                             ),
                             F.Parameter(parameter)
                         )
@@ -635,9 +633,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     bodyBuilder.Add(
                         F.Assignment(
-                            proxy.Replacement(
-                                F.Syntax,
-                                stateMachineType => F.Local(resultVariable)
+                            proxy.Replacement(F.Syntax, stateMachineType =>
+                                F.Local(resultVariable)
                             ),
                             copySrc[method.ThisParameter]
                                 .Replacement(F.Syntax, stateMachineType => F.This())

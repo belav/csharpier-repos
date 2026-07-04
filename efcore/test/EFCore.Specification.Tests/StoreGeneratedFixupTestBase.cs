@@ -281,41 +281,35 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
     private void AssertFixupAndSave(DbContext context, Category principal, Product dependent)
     {
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    context.Entry(principal).Property(e => e.Id1).CurrentValue,
-                    context.Entry(dependent).Property(e => e.CategoryId1).CurrentValue
-                );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                context.Entry(principal).Property(e => e.Id1).CurrentValue,
+                context.Entry(dependent).Property(e => e.CategoryId1).CurrentValue
+            );
 
-                Assert.Equal(
-                    context.Entry(principal).Property(e => e.Id2).CurrentValue,
-                    context.Entry(dependent).Property(e => e.CategoryId2).CurrentValue
-                );
+            Assert.Equal(
+                context.Entry(principal).Property(e => e.Id2).CurrentValue,
+                context.Entry(dependent).Property(e => e.CategoryId2).CurrentValue
+            );
 
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            }
-        );
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(EntityState.Added, context.Entry(principal).State);
+            Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+        });
 
         context.SaveChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalFact]
@@ -434,39 +428,33 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
     private void AssertFixupAndSave(DbContext context, CategoryPN principal, ProductPN dependent)
     {
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    context.Entry(principal).Property(e => e.Id1).CurrentValue,
-                    context.Entry(dependent).Property(e => e.CategoryId1).CurrentValue
-                );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                context.Entry(principal).Property(e => e.Id1).CurrentValue,
+                context.Entry(dependent).Property(e => e.CategoryId1).CurrentValue
+            );
 
-                Assert.Equal(
-                    context.Entry(principal).Property(e => e.Id2).CurrentValue,
-                    context.Entry(dependent).Property(e => e.CategoryId2).CurrentValue
-                );
+            Assert.Equal(
+                context.Entry(principal).Property(e => e.Id2).CurrentValue,
+                context.Entry(dependent).Property(e => e.CategoryId2).CurrentValue
+            );
 
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            }
-        );
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(EntityState.Added, context.Entry(principal).State);
+            Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+        });
 
         context.SaveChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalFact]
@@ -583,39 +571,33 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
     private void AssertFixupAndSave(DbContext context, CategoryDN principal, ProductDN dependent)
     {
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    context.Entry(principal).Property(e => e.Id1).CurrentValue,
-                    context.Entry(dependent).Property(e => e.CategoryId1).CurrentValue
-                );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                context.Entry(principal).Property(e => e.Id1).CurrentValue,
+                context.Entry(dependent).Property(e => e.CategoryId1).CurrentValue
+            );
 
-                Assert.Equal(
-                    context.Entry(principal).Property(e => e.Id2).CurrentValue,
-                    context.Entry(dependent).Property(e => e.CategoryId2).CurrentValue
-                );
+            Assert.Equal(
+                context.Entry(principal).Property(e => e.Id2).CurrentValue,
+                context.Entry(dependent).Property(e => e.CategoryId2).CurrentValue
+            );
 
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            }
-        );
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(EntityState.Added, context.Entry(principal).State);
+            Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+        });
 
         context.SaveChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalFact]
@@ -662,29 +644,23 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
     private void AssertFixupAndSave(DbContext context, CategoryNN principal, ProductNN dependent)
     {
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Equal(EntityState.Added, context.Entry(principal).State);
+            Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+        });
 
         context.SaveChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.CategoryId1);
-                Assert.Equal(principal.Id2, dependent.CategoryId2);
-                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.CategoryId1);
+            Assert.Equal(principal.Id2, dependent.CategoryId2);
+            Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalFact]
@@ -947,41 +923,35 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
     private void AssertFixupAndSave(DbContext context, Parent principal, Child dependent)
     {
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    context.Entry(principal).Property(e => e.Id1).CurrentValue,
-                    context.Entry(dependent).Property(e => e.ParentId1).CurrentValue
-                );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                context.Entry(principal).Property(e => e.Id1).CurrentValue,
+                context.Entry(dependent).Property(e => e.ParentId1).CurrentValue
+            );
 
-                Assert.Equal(
-                    context.Entry(principal).Property(e => e.Id2).CurrentValue,
-                    context.Entry(dependent).Property(e => e.ParentId2).CurrentValue
-                );
+            Assert.Equal(
+                context.Entry(principal).Property(e => e.Id2).CurrentValue,
+                context.Entry(dependent).Property(e => e.ParentId2).CurrentValue
+            );
 
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            }
-        );
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(EntityState.Added, context.Entry(principal).State);
+            Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+        });
 
         context.SaveChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalFact]
@@ -1100,39 +1070,33 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
     private void AssertFixupAndSave(DbContext context, ParentPN principal, ChildPN dependent)
     {
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    context.Entry(principal).Property(e => e.Id1).CurrentValue,
-                    context.Entry(dependent).Property(e => e.ParentId1).CurrentValue
-                );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                context.Entry(principal).Property(e => e.Id1).CurrentValue,
+                context.Entry(dependent).Property(e => e.ParentId1).CurrentValue
+            );
 
-                Assert.Equal(
-                    context.Entry(principal).Property(e => e.Id2).CurrentValue,
-                    context.Entry(dependent).Property(e => e.ParentId2).CurrentValue
-                );
+            Assert.Equal(
+                context.Entry(principal).Property(e => e.Id2).CurrentValue,
+                context.Entry(dependent).Property(e => e.ParentId2).CurrentValue
+            );
 
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            }
-        );
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(EntityState.Added, context.Entry(principal).State);
+            Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+        });
 
         context.SaveChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalFact]
@@ -1251,39 +1215,33 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
     private void AssertFixupAndSave(DbContext context, ParentDN principal, ChildDN dependent)
     {
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    context.Entry(principal).Property(e => e.Id1).CurrentValue,
-                    context.Entry(dependent).Property(e => e.ParentId1).CurrentValue
-                );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                context.Entry(principal).Property(e => e.Id1).CurrentValue,
+                context.Entry(dependent).Property(e => e.ParentId1).CurrentValue
+            );
 
-                Assert.Equal(
-                    context.Entry(principal).Property(e => e.Id2).CurrentValue,
-                    context.Entry(dependent).Property(e => e.ParentId2).CurrentValue
-                );
+            Assert.Equal(
+                context.Entry(principal).Property(e => e.Id2).CurrentValue,
+                context.Entry(dependent).Property(e => e.ParentId2).CurrentValue
+            );
 
-                Assert.Same(principal, dependent.Parent);
-                Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            }
-        );
+            Assert.Same(principal, dependent.Parent);
+            Assert.Equal(EntityState.Added, context.Entry(principal).State);
+            Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+        });
 
         context.SaveChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalFact]
@@ -1330,29 +1288,23 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
     private void AssertFixupAndSave(DbContext context, ParentNN principal, ChildNN dependent)
     {
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Equal(EntityState.Added, context.Entry(principal).State);
+            Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+        });
 
         context.SaveChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id1, dependent.ParentId1);
-                Assert.Equal(principal.Id2, dependent.ParentId2);
-                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id1, dependent.ParentId1);
+            Assert.Equal(principal.Id2, dependent.ParentId2);
+            Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalFact]
@@ -1373,33 +1325,27 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Same(principal, dependent.Category);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Same(principal, dependent.Category);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -1416,41 +1362,35 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(
-                        context.Entry(principal).Property(e => e.Id1).CurrentValue,
-                        context.Entry(dependent).Property(e => e.CategoryId1).CurrentValue
-                    );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(
+                    context.Entry(principal).Property(e => e.Id1).CurrentValue,
+                    context.Entry(dependent).Property(e => e.CategoryId1).CurrentValue
+                );
 
-                    Assert.Equal(
-                        context.Entry(principal).Property(e => e.Id2).CurrentValue,
-                        context.Entry(dependent).Property(e => e.CategoryId2).CurrentValue
-                    );
+                Assert.Equal(
+                    context.Entry(principal).Property(e => e.Id2).CurrentValue,
+                    context.Entry(dependent).Property(e => e.CategoryId2).CurrentValue
+                );
 
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+                Assert.Same(principal, dependent.Category);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Same(principal, dependent.Category);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -1469,18 +1409,15 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Null(dependent.Category);
-                    Assert.Empty(principal.Products);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Null(dependent.Category);
+                Assert.Empty(principal.Products);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             if (EnforcesFKs)
             {
@@ -1491,21 +1428,18 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 context.SaveChanges();
             }
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Null(dependent.Category);
-                    Assert.Empty(principal.Products);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(
-                        EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
-                        context.Entry(dependent).State
-                    );
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Null(dependent.Category);
+                Assert.Empty(principal.Products);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(
+                    EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                    context.Entry(dependent).State
+                );
+            });
         });
 
     [ConditionalFact]
@@ -1525,18 +1459,15 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Null(dependent.Category);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Null(dependent.Category);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             if (EnforcesFKs)
             {
@@ -1547,21 +1478,18 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 context.SaveChanges();
             }
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Null(dependent.Category);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(
-                        EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
-                        context.Entry(dependent).State
-                    );
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Null(dependent.Category);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(
+                    EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                    context.Entry(dependent).State
+                );
+            });
         });
 
     [ConditionalFact]
@@ -1581,33 +1509,27 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Same(principal, dependent.Category);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Same(principal, dependent.Category);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -1623,17 +1545,14 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(0, dependent.CategoryId1);
-                    Assert.Null(dependent.Category);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(0, dependent.CategoryId1);
+                Assert.Null(dependent.Category);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             if (EnforcesFKs)
             {
@@ -1644,20 +1563,17 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 context.SaveChanges();
             }
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(0, dependent.CategoryId1);
-                    Assert.Null(dependent.Category);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(
-                        EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
-                        context.Entry(dependent).State
-                    );
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(0, dependent.CategoryId1);
+                Assert.Null(dependent.Category);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(
+                    EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                    context.Entry(dependent).State
+                );
+            });
         });
 
     [ConditionalFact]
@@ -1673,41 +1589,35 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(
-                        context.Entry(principal).Property(e => e.Id1).CurrentValue,
-                        context.Entry(dependent).Property(e => e.CategoryId1).CurrentValue
-                    );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(
+                    context.Entry(principal).Property(e => e.Id1).CurrentValue,
+                    context.Entry(dependent).Property(e => e.CategoryId1).CurrentValue
+                );
 
-                    Assert.Equal(
-                        context.Entry(principal).Property(e => e.Id2).CurrentValue,
-                        context.Entry(dependent).Property(e => e.CategoryId2).CurrentValue
-                    );
+                Assert.Equal(
+                    context.Entry(principal).Property(e => e.Id2).CurrentValue,
+                    context.Entry(dependent).Property(e => e.CategoryId2).CurrentValue
+                );
 
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+                Assert.Same(principal, dependent.Category);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Same(principal, dependent.Category);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -1728,33 +1638,27 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Same(principal, dependent.Category);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Same(principal, dependent.Category);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -1771,41 +1675,35 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(
-                        context.Entry(principal).Property(e => e.Id1).CurrentValue,
-                        context.Entry(dependent).Property(e => e.CategoryId1).CurrentValue
-                    );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(
+                    context.Entry(principal).Property(e => e.Id1).CurrentValue,
+                    context.Entry(dependent).Property(e => e.CategoryId1).CurrentValue
+                );
 
-                    Assert.Equal(
-                        context.Entry(principal).Property(e => e.Id2).CurrentValue,
-                        context.Entry(dependent).Property(e => e.CategoryId2).CurrentValue
-                    );
+                Assert.Equal(
+                    context.Entry(principal).Property(e => e.Id2).CurrentValue,
+                    context.Entry(dependent).Property(e => e.CategoryId2).CurrentValue
+                );
 
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+                Assert.Same(principal, dependent.Category);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Same(principal, dependent.Category);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -1824,31 +1722,25 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Null(dependent.Category);
-                    Assert.Empty(principal.Products);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Null(dependent.Category);
+                Assert.Empty(principal.Products);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Null(dependent.Category);
-                    Assert.Empty(principal.Products);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Null(dependent.Category);
+                Assert.Empty(principal.Products);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -1868,33 +1760,27 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Same(principal, dependent.Category);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Same(principal, dependent.Category);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -1914,31 +1800,25 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Empty(principal.Products);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Same(principal, dependent.Category);
+                Assert.Empty(principal.Products);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Empty(principal.Products);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Same(principal, dependent.Category);
+                Assert.Empty(principal.Products);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -1956,33 +1836,27 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Same(principal, dependent.Category);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Same(principal, dependent.Category);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -1998,31 +1872,25 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(0, dependent.CategoryId1);
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Empty(principal.Products);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(0, dependent.CategoryId1);
+                Assert.Same(principal, dependent.Category);
+                Assert.Empty(principal.Products);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(0, dependent.CategoryId1);
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Empty(principal.Products);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(0, dependent.CategoryId1);
+                Assert.Same(principal, dependent.Category);
+                Assert.Empty(principal.Products);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -2041,17 +1909,14 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Empty(principal.Products);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Empty(principal.Products);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             if (EnforcesFKs)
             {
@@ -2062,20 +1927,17 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 context.SaveChanges();
             }
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Empty(principal.Products);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(
-                        EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
-                        context.Entry(dependent).State
-                    );
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Empty(principal.Products);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(
+                    EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                    context.Entry(dependent).State
+                );
+            });
         });
 
     [ConditionalFact]
@@ -2094,29 +1956,23 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Empty(principal.Products);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Empty(principal.Products);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Empty(principal.Products);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Empty(principal.Products);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -2136,17 +1992,14 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             if (EnforcesFKs)
             {
@@ -2157,20 +2010,17 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 context.SaveChanges();
             }
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(
-                        EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
-                        context.Entry(dependent).State
-                    );
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(
+                    EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                    context.Entry(dependent).State
+                );
+            });
         });
 
     [ConditionalFact]
@@ -2186,16 +2036,13 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(0, dependent.CategoryId1);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(0, dependent.CategoryId1);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             if (EnforcesFKs)
             {
@@ -2206,19 +2053,16 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 context.SaveChanges();
             }
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(0, dependent.CategoryId1);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(
-                        EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
-                        context.Entry(dependent).State
-                    );
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(0, dependent.CategoryId1);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(
+                    EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                    context.Entry(dependent).State
+                );
+            });
         });
 
     [ConditionalFact]
@@ -2238,31 +2082,25 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -2278,39 +2116,33 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(
-                        context.Entry(principal).Property(e => e.Id1).CurrentValue,
-                        context.Entry(dependent).Property(e => e.CategoryId1).CurrentValue
-                    );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(
+                    context.Entry(principal).Property(e => e.Id1).CurrentValue,
+                    context.Entry(dependent).Property(e => e.CategoryId1).CurrentValue
+                );
 
-                    Assert.Equal(
-                        context.Entry(principal).Property(e => e.Id2).CurrentValue,
-                        context.Entry(dependent).Property(e => e.CategoryId2).CurrentValue
-                    );
+                Assert.Equal(
+                    context.Entry(principal).Property(e => e.Id2).CurrentValue,
+                    context.Entry(dependent).Property(e => e.CategoryId2).CurrentValue
+                );
 
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -2329,17 +2161,14 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Null(dependent.Category);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Null(dependent.Category);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             if (EnforcesFKs)
             {
@@ -2350,20 +2179,17 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 context.SaveChanges();
             }
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Null(dependent.Category);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(
-                        EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
-                        context.Entry(dependent).State
-                    );
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Null(dependent.Category);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(
+                    EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                    context.Entry(dependent).State
+                );
+            });
         });
 
     [ConditionalFact]
@@ -2383,31 +2209,25 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Same(principal, dependent.Category);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Same(principal, dependent.Category);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -2423,39 +2243,33 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(
-                        context.Entry(principal).Property(e => e.Id1).CurrentValue,
-                        context.Entry(dependent).Property(e => e.CategoryId1).CurrentValue
-                    );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(
+                    context.Entry(principal).Property(e => e.Id1).CurrentValue,
+                    context.Entry(dependent).Property(e => e.CategoryId1).CurrentValue
+                );
 
-                    Assert.Equal(
-                        context.Entry(principal).Property(e => e.Id2).CurrentValue,
-                        context.Entry(dependent).Property(e => e.CategoryId2).CurrentValue
-                    );
+                Assert.Equal(
+                    context.Entry(principal).Property(e => e.Id2).CurrentValue,
+                    context.Entry(dependent).Property(e => e.CategoryId2).CurrentValue
+                );
 
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+                Assert.Same(principal, dependent.Category);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Same(principal, dependent.Category);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -2474,29 +2288,23 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Null(dependent.Category);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Null(dependent.Category);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Null(dependent.Category);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Null(dependent.Category);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -2516,29 +2324,23 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Same(principal, dependent.Category);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Same(principal, dependent.Category);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -2554,29 +2356,23 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(0, dependent.CategoryId1);
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(0, dependent.CategoryId1);
+                Assert.Same(principal, dependent.Category);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(0, dependent.CategoryId1);
-                    Assert.Same(principal, dependent.Category);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(0, dependent.CategoryId1);
+                Assert.Same(principal, dependent.Category);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -2595,16 +2391,13 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             if (EnforcesFKs)
             {
@@ -2615,19 +2408,16 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 context.SaveChanges();
             }
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(
-                        EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
-                        context.Entry(dependent).State
-                    );
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(
+                    EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                    context.Entry(dependent).State
+                );
+            });
         });
 
     [ConditionalFact]
@@ -2646,27 +2436,21 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.CategoryId1);
-                    Assert.Equal(principal.Id2, dependent.CategoryId2);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.CategoryId1);
+                Assert.Equal(principal.Id2, dependent.CategoryId2);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -2687,33 +2471,27 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Same(principal, dependent.Parent);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Same(principal, dependent.Parent);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -2730,41 +2508,35 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(
-                        context.Entry(principal).Property(e => e.Id1).CurrentValue,
-                        context.Entry(dependent).Property(e => e.ParentId1).CurrentValue
-                    );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(
+                    context.Entry(principal).Property(e => e.Id1).CurrentValue,
+                    context.Entry(dependent).Property(e => e.ParentId1).CurrentValue
+                );
 
-                    Assert.Equal(
-                        context.Entry(principal).Property(e => e.Id2).CurrentValue,
-                        context.Entry(dependent).Property(e => e.ParentId2).CurrentValue
-                    );
+                Assert.Equal(
+                    context.Entry(principal).Property(e => e.Id2).CurrentValue,
+                    context.Entry(dependent).Property(e => e.ParentId2).CurrentValue
+                );
 
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+                Assert.Same(principal, dependent.Parent);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Same(principal, dependent.Parent);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -2783,18 +2555,15 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Null(dependent.Parent);
-                    Assert.Null(principal.Child);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Null(dependent.Parent);
+                Assert.Null(principal.Child);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             if (EnforcesFKs)
             {
@@ -2805,21 +2574,18 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 context.SaveChanges();
             }
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Null(dependent.Parent);
-                    Assert.Null(principal.Child);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(
-                        EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
-                        context.Entry(dependent).State
-                    );
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Null(dependent.Parent);
+                Assert.Null(principal.Child);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(
+                    EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                    context.Entry(dependent).State
+                );
+            });
         });
 
     [ConditionalFact]
@@ -2839,18 +2605,15 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Null(dependent.Parent);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Null(dependent.Parent);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             if (EnforcesFKs)
             {
@@ -2861,21 +2624,18 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 context.SaveChanges();
             }
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Null(dependent.Parent);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(
-                        EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
-                        context.Entry(dependent).State
-                    );
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Null(dependent.Parent);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(
+                    EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                    context.Entry(dependent).State
+                );
+            });
         });
 
     [ConditionalFact]
@@ -2895,33 +2655,27 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Same(principal, dependent.Parent);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Same(principal, dependent.Parent);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -2937,17 +2691,14 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(0, dependent.ParentId1);
-                    Assert.Null(dependent.Parent);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(0, dependent.ParentId1);
+                Assert.Null(dependent.Parent);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             if (EnforcesFKs)
             {
@@ -2958,20 +2709,17 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 context.SaveChanges();
             }
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(0, dependent.ParentId1);
-                    Assert.Null(dependent.Parent);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(
-                        EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
-                        context.Entry(dependent).State
-                    );
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(0, dependent.ParentId1);
+                Assert.Null(dependent.Parent);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(
+                    EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                    context.Entry(dependent).State
+                );
+            });
         });
 
     [ConditionalFact]
@@ -2987,41 +2735,35 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(
-                        context.Entry(principal).Property(e => e.Id1).CurrentValue,
-                        context.Entry(dependent).Property(e => e.ParentId1).CurrentValue
-                    );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(
+                    context.Entry(principal).Property(e => e.Id1).CurrentValue,
+                    context.Entry(dependent).Property(e => e.ParentId1).CurrentValue
+                );
 
-                    Assert.Equal(
-                        context.Entry(principal).Property(e => e.Id2).CurrentValue,
-                        context.Entry(dependent).Property(e => e.ParentId2).CurrentValue
-                    );
+                Assert.Equal(
+                    context.Entry(principal).Property(e => e.Id2).CurrentValue,
+                    context.Entry(dependent).Property(e => e.ParentId2).CurrentValue
+                );
 
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+                Assert.Same(principal, dependent.Parent);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Same(principal, dependent.Parent);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -3042,33 +2784,27 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Same(principal, dependent.Parent);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Same(principal, dependent.Parent);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -3085,41 +2821,35 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(
-                        context.Entry(principal).Property(e => e.Id1).CurrentValue,
-                        context.Entry(dependent).Property(e => e.ParentId1).CurrentValue
-                    );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(
+                    context.Entry(principal).Property(e => e.Id1).CurrentValue,
+                    context.Entry(dependent).Property(e => e.ParentId1).CurrentValue
+                );
 
-                    Assert.Equal(
-                        context.Entry(principal).Property(e => e.Id2).CurrentValue,
-                        context.Entry(dependent).Property(e => e.ParentId2).CurrentValue
-                    );
+                Assert.Equal(
+                    context.Entry(principal).Property(e => e.Id2).CurrentValue,
+                    context.Entry(dependent).Property(e => e.ParentId2).CurrentValue
+                );
 
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+                Assert.Same(principal, dependent.Parent);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Same(principal, dependent.Parent);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -3138,31 +2868,25 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Null(dependent.Parent);
-                    Assert.Null(principal.Child);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Null(dependent.Parent);
+                Assert.Null(principal.Child);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Null(dependent.Parent);
-                    Assert.Null(principal.Child);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Null(dependent.Parent);
+                Assert.Null(principal.Child);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -3182,33 +2906,27 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Same(principal, dependent.Parent);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Same(principal, dependent.Parent);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -3228,31 +2946,25 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Null(principal.Child);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Same(principal, dependent.Parent);
+                Assert.Null(principal.Child);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Null(principal.Child);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Same(principal, dependent.Parent);
+                Assert.Null(principal.Child);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -3268,41 +2980,35 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(
-                        context.Entry(principal).Property(e => e.Id1).CurrentValue,
-                        context.Entry(dependent).Property(e => e.ParentId1).CurrentValue
-                    );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(
+                    context.Entry(principal).Property(e => e.Id1).CurrentValue,
+                    context.Entry(dependent).Property(e => e.ParentId1).CurrentValue
+                );
 
-                    Assert.Equal(
-                        context.Entry(principal).Property(e => e.Id2).CurrentValue,
-                        context.Entry(dependent).Property(e => e.ParentId2).CurrentValue
-                    );
+                Assert.Equal(
+                    context.Entry(principal).Property(e => e.Id2).CurrentValue,
+                    context.Entry(dependent).Property(e => e.ParentId2).CurrentValue
+                );
 
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+                Assert.Same(principal, dependent.Parent);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Same(principal, dependent.Parent);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -3318,31 +3024,25 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(0, dependent.ParentId1);
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Null(principal.Child);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(0, dependent.ParentId1);
+                Assert.Same(principal, dependent.Parent);
+                Assert.Null(principal.Child);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(0, dependent.ParentId1);
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Null(principal.Child);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(0, dependent.ParentId1);
+                Assert.Same(principal, dependent.Parent);
+                Assert.Null(principal.Child);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -3361,17 +3061,14 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Null(principal.Child);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Null(principal.Child);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             if (EnforcesFKs)
             {
@@ -3382,20 +3079,17 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 context.SaveChanges();
             }
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Null(principal.Child);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(
-                        EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
-                        context.Entry(dependent).State
-                    );
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Null(principal.Child);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(
+                    EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                    context.Entry(dependent).State
+                );
+            });
         });
 
     [ConditionalFact]
@@ -3414,29 +3108,23 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Null(principal.Child);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Null(principal.Child);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Null(principal.Child);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Null(principal.Child);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -3456,17 +3144,14 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             if (EnforcesFKs)
             {
@@ -3477,20 +3162,17 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 context.SaveChanges();
             }
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(
-                        EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
-                        context.Entry(dependent).State
-                    );
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(
+                    EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                    context.Entry(dependent).State
+                );
+            });
         });
 
     [ConditionalFact]
@@ -3506,16 +3188,13 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(0, dependent.ParentId1);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(0, dependent.ParentId1);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             if (EnforcesFKs)
             {
@@ -3526,19 +3205,16 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 context.SaveChanges();
             }
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(0, dependent.ParentId1);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(
-                        EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
-                        context.Entry(dependent).State
-                    );
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(0, dependent.ParentId1);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(
+                    EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                    context.Entry(dependent).State
+                );
+            });
         });
 
     [ConditionalFact]
@@ -3558,31 +3234,25 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -3598,39 +3268,33 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(
-                        context.Entry(principal).Property(e => e.Id1).CurrentValue,
-                        context.Entry(dependent).Property(e => e.ParentId1).CurrentValue
-                    );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(
+                    context.Entry(principal).Property(e => e.Id1).CurrentValue,
+                    context.Entry(dependent).Property(e => e.ParentId1).CurrentValue
+                );
 
-                    Assert.Equal(
-                        context.Entry(principal).Property(e => e.Id2).CurrentValue,
-                        context.Entry(dependent).Property(e => e.ParentId2).CurrentValue
-                    );
+                Assert.Equal(
+                    context.Entry(principal).Property(e => e.Id2).CurrentValue,
+                    context.Entry(dependent).Property(e => e.ParentId2).CurrentValue
+                );
 
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Same(dependent, principal.Child);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Same(dependent, principal.Child);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -3649,17 +3313,14 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Null(dependent.Parent);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Null(dependent.Parent);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             if (EnforcesFKs)
             {
@@ -3670,20 +3331,17 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 context.SaveChanges();
             }
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Null(dependent.Parent);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(
-                        EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
-                        context.Entry(dependent).State
-                    );
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Null(dependent.Parent);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(
+                    EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                    context.Entry(dependent).State
+                );
+            });
         });
 
     [ConditionalFact]
@@ -3703,31 +3361,25 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Same(principal, dependent.Parent);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Same(principal, dependent.Parent);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -3743,39 +3395,33 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(
-                        context.Entry(principal).Property(e => e.Id1).CurrentValue,
-                        context.Entry(dependent).Property(e => e.ParentId1).CurrentValue
-                    );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(
+                    context.Entry(principal).Property(e => e.Id1).CurrentValue,
+                    context.Entry(dependent).Property(e => e.ParentId1).CurrentValue
+                );
 
-                    Assert.Equal(
-                        context.Entry(principal).Property(e => e.Id2).CurrentValue,
-                        context.Entry(dependent).Property(e => e.ParentId2).CurrentValue
-                    );
+                Assert.Equal(
+                    context.Entry(principal).Property(e => e.Id2).CurrentValue,
+                    context.Entry(dependent).Property(e => e.ParentId2).CurrentValue
+                );
 
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+                Assert.Same(principal, dependent.Parent);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Same(principal, dependent.Parent);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Unchanged, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -3794,29 +3440,23 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Null(dependent.Parent);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Null(dependent.Parent);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Null(dependent.Parent);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Null(dependent.Parent);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -3836,29 +3476,23 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Same(principal, dependent.Parent);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Same(principal, dependent.Parent);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -3874,29 +3508,23 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(0, dependent.ParentId1);
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(0, dependent.ParentId1);
+                Assert.Same(principal, dependent.Parent);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(0, dependent.ParentId1);
-                    Assert.Same(principal, dependent.Parent);
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(0, dependent.ParentId1);
+                Assert.Same(principal, dependent.Parent);
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -3915,16 +3543,13 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Added, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(EntityState.Added, context.Entry(dependent).State);
+            });
 
             if (EnforcesFKs)
             {
@@ -3935,19 +3560,16 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 context.SaveChanges();
             }
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Equal(EntityState.Detached, context.Entry(principal).State);
-                    Assert.Equal(
-                        EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
-                        context.Entry(dependent).State
-                    );
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Equal(EntityState.Detached, context.Entry(principal).State);
+                Assert.Equal(
+                    EnforcesFKs ? EntityState.Added : EntityState.Unchanged,
+                    context.Entry(dependent).State
+                );
+            });
         });
 
     [ConditionalFact]
@@ -3966,27 +3588,21 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             context.ChangeTracker.DetectChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(principal.Id1, dependent.ParentId1);
-                    Assert.Equal(principal.Id2, dependent.ParentId2);
-                    Assert.Equal(EntityState.Added, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(principal.Id1, dependent.ParentId1);
+                Assert.Equal(principal.Id2, dependent.ParentId2);
+                Assert.Equal(EntityState.Added, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
 
             context.SaveChanges();
 
-            AssertFixup(
-                context,
-                () =>
-                {
-                    Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
-                    Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
-                }
-            );
+            AssertFixup(context, () =>
+            {
+                Assert.Equal(EntityState.Unchanged, context.Entry(principal).State);
+                Assert.Equal(EntityState.Detached, context.Entry(dependent).State);
+            });
         });
 
     [ConditionalFact]
@@ -4053,51 +3669,45 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
     private void AssertFixupAndSave(DbContext context, Game game, Level level, Item item)
     {
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(game.Id, context.Entry(level).Property(e => e.GameId).CurrentValue);
-                Assert.Equal(game.Id, context.Entry(item).Property(e => e.GameId).CurrentValue);
-                Assert.Equal(level.Id, context.Entry(item).Property(e => e.LevelId).CurrentValue);
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(game.Id, context.Entry(level).Property(e => e.GameId).CurrentValue);
+            Assert.Equal(game.Id, context.Entry(item).Property(e => e.GameId).CurrentValue);
+            Assert.Equal(level.Id, context.Entry(item).Property(e => e.LevelId).CurrentValue);
 
-                Assert.Same(game, level.Game);
-                Assert.Same(game, item.Game);
-                Assert.Same(level, item.Level);
+            Assert.Same(game, level.Game);
+            Assert.Same(game, item.Game);
+            Assert.Same(level, item.Level);
 
-                Assert.Equal(new[] { item }.ToList(), level.Items);
-                Assert.Equal(new[] { item }.ToList(), game.Items);
-                Assert.Equal(new[] { level }.ToList(), game.Levels);
+            Assert.Equal(new[] { item }.ToList(), level.Items);
+            Assert.Equal(new[] { item }.ToList(), game.Items);
+            Assert.Equal(new[] { level }.ToList(), game.Levels);
 
-                Assert.Equal(EntityState.Added, context.Entry(game).State);
-                Assert.Equal(EntityState.Added, context.Entry(level).State);
-                Assert.Equal(EntityState.Added, context.Entry(item).State);
-            }
-        );
+            Assert.Equal(EntityState.Added, context.Entry(game).State);
+            Assert.Equal(EntityState.Added, context.Entry(level).State);
+            Assert.Equal(EntityState.Added, context.Entry(item).State);
+        });
 
         context.SaveChanges();
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(game.Id, level.GameId);
-                Assert.Equal(game.Id, item.GameId);
-                Assert.Equal(level.Id, item.LevelId);
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(game.Id, level.GameId);
+            Assert.Equal(game.Id, item.GameId);
+            Assert.Equal(level.Id, item.LevelId);
 
-                Assert.Same(game, level.Game);
-                Assert.Same(game, item.Game);
-                Assert.Same(level, item.Level);
+            Assert.Same(game, level.Game);
+            Assert.Same(game, item.Game);
+            Assert.Same(level, item.Level);
 
-                Assert.Equal(new[] { item }.ToList(), level.Items);
-                Assert.Equal(new[] { item }.ToList(), game.Items);
-                Assert.Equal(new[] { level }.ToList(), game.Levels);
+            Assert.Equal(new[] { item }.ToList(), level.Items);
+            Assert.Equal(new[] { item }.ToList(), game.Items);
+            Assert.Equal(new[] { level }.ToList(), game.Levels);
 
-                Assert.Equal(EntityState.Unchanged, context.Entry(game).State);
-                Assert.Equal(EntityState.Unchanged, context.Entry(level).State);
-                Assert.Equal(EntityState.Unchanged, context.Entry(item).State);
-            }
-        );
+            Assert.Equal(EntityState.Unchanged, context.Entry(game).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(level).State);
+            Assert.Equal(EntityState.Unchanged, context.Entry(item).State);
+        });
     }
 
     [ConditionalFact]
@@ -4150,14 +3760,12 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
 
             AssertValidFks(context, firstLevel, tempKeys: true);
 
-            Assert.All(
-                originalSecondLevels.Select(l => context.Entry(l).State),
-                s => Assert.Equal(EntityState.Detached, s)
+            Assert.All(originalSecondLevels.Select(l => context.Entry(l).State), s =>
+                Assert.Equal(EntityState.Detached, s)
             );
 
-            Assert.All(
-                originalThirdLevels.Select(l => context.Entry(l).State),
-                s => Assert.Equal(EntityState.Detached, s)
+            Assert.All(originalThirdLevels.Select(l => context.Entry(l).State), s =>
+                Assert.Equal(EntityState.Detached, s)
             );
 
             context.SaveChanges();
@@ -4181,26 +3789,22 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
             tempKeys = false;
         }
 
-        Assert.All(
-            secondLevels.Select(l => context.Entry(l).State),
-            s => Assert.Equal(expectedState, s)
+        Assert.All(secondLevels.Select(l => context.Entry(l).State), s =>
+            Assert.Equal(expectedState, s)
         );
 
-        Assert.All(
-            thirdLevels.Select(l => context.Entry(l).State),
-            s => Assert.Equal(expectedState, s)
+        Assert.All(thirdLevels.Select(l => context.Entry(l).State), s =>
+            Assert.Equal(expectedState, s)
         );
 
         Assert.Equal(1, context.Entry(firstLevel).Property(e => e.Id).CurrentValue);
 
-        Assert.All(
-            secondLevels.Select(l => context.Entry(l).Property(e => e.Id).CurrentValue),
-            s => Assert.True(tempKeys ? s < 0 : s > 0)
+        Assert.All(secondLevels.Select(l => context.Entry(l).Property(e => e.Id).CurrentValue), s =>
+            Assert.True(tempKeys ? s < 0 : s > 0)
         );
 
-        Assert.All(
-            thirdLevels.Select(l => context.Entry(l).Property(e => e.Id).CurrentValue),
-            s => Assert.True(tempKeys ? s < 0 : s > 0)
+        Assert.All(thirdLevels.Select(l => context.Entry(l).Property(e => e.Id).CurrentValue), s =>
+            Assert.True(tempKeys ? s < 0 : s > 0)
         );
 
         Assert.All(

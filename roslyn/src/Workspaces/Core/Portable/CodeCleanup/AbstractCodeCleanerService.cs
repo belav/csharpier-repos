@@ -859,9 +859,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
         )
         {
             var tokenMap = map.ToDictionary(p => p.Key, p => p.Value);
-            return node.ReplaceTokens(
-                tokenMap.Keys,
-                (o, n) => o.WithAdditionalAnnotations(tokenMap[o].ToArray())
+            return node.ReplaceTokens(tokenMap.Keys, (o, n) =>
+                o.WithAdditionalAnnotations(tokenMap[o].ToArray())
             );
         }
 

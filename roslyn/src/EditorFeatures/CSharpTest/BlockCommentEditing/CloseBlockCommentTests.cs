@@ -283,19 +283,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.BlockCommentEditing
                  *
                  * /$$
                 """;
-            Verify(
-                code,
-                expected,
-                workspace =>
-                {
-                    var globalOptions = workspace.GetService<IGlobalOptionService>();
-                    globalOptions.SetGlobalOption(
-                        BlockCommentEditingOptionsStorage.AutoInsertBlockCommentStartString,
-                        LanguageNames.CSharp,
-                        false
-                    );
-                }
-            );
+            Verify(code, expected, workspace =>
+            {
+                var globalOptions = workspace.GetService<IGlobalOptionService>();
+                globalOptions.SetGlobalOption(
+                    BlockCommentEditingOptionsStorage.AutoInsertBlockCommentStartString,
+                    LanguageNames.CSharp,
+                    false
+                );
+            });
         }
 
         [WpfFact]

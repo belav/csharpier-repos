@@ -1827,84 +1827,73 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void NullType()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => Expression.NewArrayInit(null)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                Expression.NewArrayInit(null)
             );
         }
 
         [Fact]
         public static void VoidType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.NewArrayInit(typeof(void))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.NewArrayInit(typeof(void))
             );
         }
 
         [Fact]
         public static void NullInitializers()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "initializers",
-                () => Expression.NewArrayInit(typeof(int), default(Expression[]))
+            AssertExtensions.Throws<ArgumentNullException>("initializers", () =>
+                Expression.NewArrayInit(typeof(int), default(Expression[]))
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "initializers",
-                () => Expression.NewArrayInit(typeof(int), default(IEnumerable<Expression>))
+            AssertExtensions.Throws<ArgumentNullException>("initializers", () =>
+                Expression.NewArrayInit(typeof(int), default(IEnumerable<Expression>))
             );
         }
 
         [Fact]
         public static void NullInitializer()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "initializers[0]",
-                () => Expression.NewArrayInit(typeof(int), new Expression[] { null, null })
+            AssertExtensions.Throws<ArgumentNullException>("initializers[0]", () =>
+                Expression.NewArrayInit(typeof(int), new Expression[] { null, null })
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "initializers[0]",
-                () => Expression.NewArrayInit(typeof(int), new List<Expression> { null, null })
+            AssertExtensions.Throws<ArgumentNullException>("initializers[0]", () =>
+                Expression.NewArrayInit(typeof(int), new List<Expression> { null, null })
             );
         }
 
         [Fact]
         public static void ByRefType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.NewArrayInit(typeof(int).MakeByRefType())
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.NewArrayInit(typeof(int).MakeByRefType())
             );
         }
 
         [Fact]
         public static void PointerType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.NewArrayInit(typeof(int).MakePointerType())
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.NewArrayInit(typeof(int).MakePointerType())
             );
         }
 
         [Fact]
         public static void GenericType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.NewArrayInit(typeof(List<>))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.NewArrayInit(typeof(List<>))
             );
         }
 
         [Fact]
         public static void TypeContainsGenericParameters()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.NewArrayInit(typeof(List<>.Enumerator))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.NewArrayInit(typeof(List<>.Enumerator))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.NewArrayInit(typeof(List<>).MakeGenericType(typeof(List<>)))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.NewArrayInit(typeof(List<>).MakeGenericType(typeof(List<>)))
             );
         }
 
@@ -2010,9 +1999,8 @@ namespace System.Linq.Expressions.Tests
                 element0,
                 element1
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "expressions",
-                () => newArrayExpression.Update(null)
+            AssertExtensions.Throws<ArgumentNullException>("expressions", () =>
+                newArrayExpression.Update(null)
             );
         }
     }

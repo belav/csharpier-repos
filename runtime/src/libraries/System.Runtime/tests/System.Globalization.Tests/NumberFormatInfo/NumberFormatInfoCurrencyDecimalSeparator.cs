@@ -38,10 +38,8 @@ namespace System.Globalization.Tests
         public void CurrencyDecimalSeparator_SetEmpty_ThrowsArgumentException()
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => format.CurrencyDecimalSeparator = ""
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                format.CurrencyDecimalSeparator = ""
             );
         }
 

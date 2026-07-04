@@ -163,9 +163,8 @@ namespace System.Collections.Specialized.Tests
             }
 
             AssertExtensions.Throws<ArgumentNullException>("array", () => keys.CopyTo(null, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => keys.CopyTo(new object[keys.Count], -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                keys.CopyTo(new object[keys.Count], -1)
             );
         }
 
@@ -310,9 +309,8 @@ namespace System.Collections.Specialized.Tests
             }
 
             AssertExtensions.Throws<ArgumentNullException>("array", () => values.CopyTo(null, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => values.CopyTo(new object[values.Count], -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                values.CopyTo(new object[values.Count], -1)
             );
         }
 

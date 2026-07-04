@@ -106,9 +106,8 @@ namespace System.Reflection.PortableExecutable.Tests
 
             if (privateKeyOpt != null)
             {
-                peBuilder.Sign(
-                    peBlob,
-                    content => SigningUtilities.CalculateRsaSignature(content, privateKeyOpt)
+                peBuilder.Sign(peBlob, content =>
+                    SigningUtilities.CalculateRsaSignature(content, privateKeyOpt)
                 );
             }
 

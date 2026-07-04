@@ -277,17 +277,13 @@ class Program
 "
             );
 
-            var c = CompileAndVerify(
-                text,
-                options: TestOptions.DebugDll,
-                symbolValidator: module =>
-                {
-                    Assert.Equal(
-                        new[] { "<>3__i0", "<>3__i1", "<>4__this" },
-                        module.GetFieldNames("Program.<IEI>d__0")
-                    );
-                }
-            );
+            var c = CompileAndVerify(text, options: TestOptions.DebugDll, symbolValidator: module =>
+            {
+                Assert.Equal(
+                    new[] { "<>3__i0", "<>3__i1", "<>4__this" },
+                    module.GetFieldNames("Program.<IEI>d__0")
+                );
+            });
             c.VerifyPdb(
                 @"
 <symbols>

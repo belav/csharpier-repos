@@ -97,17 +97,14 @@ namespace Microsoft.CodeAnalysis.Remote
                 // We're the first call that is asking about this checksum.  Kick off async computation to compute it
                 // (or use an existing cached value we already have).  Start with an in-flight-count of 1 to represent
                 // our caller.
-                solution = new InFlightSolution(
-                    this,
-                    solutionChecksum,
-                    async cancellationToken =>
-                        cachedSolution
-                        ?? await ComputeDisconnectedSolutionAsync(
-                                assetProvider,
-                                solutionChecksum,
-                                cancellationToken
-                            )
-                            .ConfigureAwait(false)
+                solution = new InFlightSolution(this, solutionChecksum, async cancellationToken =>
+                    cachedSolution
+                    ?? await ComputeDisconnectedSolutionAsync(
+                            assetProvider,
+                            solutionChecksum,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false)
                 );
                 Contract.ThrowIfFalse(solution.InFlightCount == 1);
 

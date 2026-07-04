@@ -145,9 +145,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
 
             var editor = new SyntaxEditor(root, generator);
 
-            editor.ReplaceNode(
-                firstIfOrElseIf,
-                (currentNode, _) => ifGenerator.WithCondition(currentNode, newCondition)
+            editor.ReplaceNode(firstIfOrElseIf, (currentNode, _) =>
+                ifGenerator.WithCondition(currentNode, newCondition)
             );
 
             if (ifGenerator.IsElseIfClause(secondIfOrElseIf, out _))
@@ -179,10 +178,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
                 Debug.Assert(syntaxFacts.IsExecutableStatement(firstIfOrElseIf));
                 Debug.Assert(ifGenerator.GetElseIfAndElseClauses(firstIfOrElseIf).Length == 0);
 
-                editor.ReplaceNode(
-                    firstIfOrElseIf,
-                    (currentNode, _) =>
-                        ifGenerator.WithElseIfAndElseClausesOf(currentNode, secondIfOrElseIf)
+                editor.ReplaceNode(firstIfOrElseIf, (currentNode, _) =>
+                    ifGenerator.WithElseIfAndElseClausesOf(currentNode, secondIfOrElseIf)
                 );
 
                 editor.RemoveNode(secondIfOrElseIf);

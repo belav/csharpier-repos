@@ -172,10 +172,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 
             public void Add(ITextBuffer subjectBuffer, object key, TProperty value)
             {
-                var bufferMap = _subjectBufferMap.GetOrAdd(
-                    subjectBuffer,
-                    _ => new Dictionary<object, TProperty>()
-                );
+                var bufferMap = _subjectBufferMap.GetOrAdd(subjectBuffer, _ => new Dictionary<
+                    object,
+                    TProperty
+                >());
                 bufferMap[key] = value;
             }
 

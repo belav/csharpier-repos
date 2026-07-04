@@ -360,46 +360,43 @@ namespace System.IO.Compression
                 }
             }
 
-            Assert.All(
-                CtorFunctions(),
-                (create) =>
+            Assert.All(CtorFunctions(), (create) =>
+            {
+                //Create the Stream
+                int _bufferSize = 1024;
+                var bytes = new byte[_bufferSize];
+                var baseStream = new MemoryStream(bytes, writable: true);
+
+                using Stream compressor = create(baseStream);
+
+                //Write some data and Close the stream
+                string strData = "Test Data";
+                var encoding = Encoding.UTF8;
+                byte[] data = encoding.GetBytes(strData);
+                compressor.Write(data, 0, data.Length);
+                compressor.Flush();
+                compressor.Dispose();
+                baseStream.Dispose();
+
+                //Read the data
+                byte[] data2 = new byte[_bufferSize];
+                baseStream = new MemoryStream(bytes, writable: false);
+                using var decompressor = CreateStream(baseStream, CompressionMode.Decompress);
+                int size = decompressor.Read(data2, 0, _bufferSize - 5);
+
+                //Verify the data roundtripped
+                for (int i = 0; i < size + 5; i++)
                 {
-                    //Create the Stream
-                    int _bufferSize = 1024;
-                    var bytes = new byte[_bufferSize];
-                    var baseStream = new MemoryStream(bytes, writable: true);
-
-                    using Stream compressor = create(baseStream);
-
-                    //Write some data and Close the stream
-                    string strData = "Test Data";
-                    var encoding = Encoding.UTF8;
-                    byte[] data = encoding.GetBytes(strData);
-                    compressor.Write(data, 0, data.Length);
-                    compressor.Flush();
-                    compressor.Dispose();
-                    baseStream.Dispose();
-
-                    //Read the data
-                    byte[] data2 = new byte[_bufferSize];
-                    baseStream = new MemoryStream(bytes, writable: false);
-                    using var decompressor = CreateStream(baseStream, CompressionMode.Decompress);
-                    int size = decompressor.Read(data2, 0, _bufferSize - 5);
-
-                    //Verify the data roundtripped
-                    for (int i = 0; i < size + 5; i++)
+                    if (i < data.Length)
                     {
-                        if (i < data.Length)
-                        {
-                            Assert.Equal(data[i], data2[i]);
-                        }
-                        else
-                        {
-                            Assert.Equal((byte)0, data2[i]);
-                        }
+                        Assert.Equal(data[i], data2[i]);
+                    }
+                    else
+                    {
+                        Assert.Equal((byte)0, data2[i]);
                     }
                 }
-            );
+            });
         }
 
         [Fact]
@@ -451,22 +448,18 @@ namespace System.IO.Compression
                 CreateStream(null, CompressionMode.Compress, true)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "mode",
-                () => CreateStream(new MemoryStream(), (CompressionMode)42)
+            AssertExtensions.Throws<ArgumentException>("mode", () =>
+                CreateStream(new MemoryStream(), (CompressionMode)42)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "mode",
-                () => CreateStream(new MemoryStream(), (CompressionMode)43, true)
+            AssertExtensions.Throws<ArgumentException>("mode", () =>
+                CreateStream(new MemoryStream(), (CompressionMode)43, true)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "stream",
-                () =>
-                    CreateStream(
-                        new MemoryStream(new byte[1], writable: false),
-                        CompressionLevel.Optimal
-                    )
+            AssertExtensions.Throws<ArgumentException>("stream", () =>
+                CreateStream(
+                    new MemoryStream(new byte[1], writable: false),
+                    CompressionLevel.Optimal
+                )
             );
         }
 

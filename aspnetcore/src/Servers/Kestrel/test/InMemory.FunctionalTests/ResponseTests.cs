@@ -556,14 +556,11 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
         Assert.NotNull(readException);
 
 #pragma warning disable CS0618 // Type or member is obsolete
-        Assert.Contains(
-            TestSink.Writes,
-            w =>
-                w.EventId.Id == 17
-                && w.LogLevel <= LogLevel.Debug
-                && w.Exception is BadHttpRequestException
-                && ((BadHttpRequestException)w.Exception).StatusCode
-                    == StatusCodes.Status400BadRequest
+        Assert.Contains(TestSink.Writes, w =>
+            w.EventId.Id == 17
+            && w.LogLevel <= LogLevel.Debug
+            && w.Exception is BadHttpRequestException
+            && ((BadHttpRequestException)w.Exception).StatusCode == StatusCodes.Status400BadRequest
         );
 #pragma warning restore CS0618 // Type or member is obsolete
     }
@@ -1059,9 +1056,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             }
         }
 
-        var logMessage = Assert.Single(
-            LogMessages,
-            message => message.EventId.Name == "ConnectionHeadResponseBodyWrite"
+        var logMessage = Assert.Single(LogMessages, message =>
+            message.EventId.Name == "ConnectionHeadResponseBodyWrite"
         );
 
         Assert.Contains(
@@ -1285,15 +1281,13 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             }
         }
 
-        Assert.Contains(
-            TestSink.Writes,
-            m =>
-                m.EventId.Name == "ApplicationError"
-                && m.Exception is InvalidOperationException ex
-                && ex.Message.Equals(
-                    CoreStrings.FormatTooFewBytesWritten(12, 13),
-                    StringComparison.Ordinal
-                )
+        Assert.Contains(TestSink.Writes, m =>
+            m.EventId.Name == "ApplicationError"
+            && m.Exception is InvalidOperationException ex
+            && ex.Message.Equals(
+                CoreStrings.FormatTooFewBytesWritten(12, 13),
+                StringComparison.Ordinal
+            )
         );
     }
 
@@ -1351,15 +1345,13 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             }
         }
 
-        Assert.Contains(
-            TestSink.Writes,
-            m =>
-                m.EventId.Name == "ApplicationError"
-                && m.Exception is InvalidOperationException ex
-                && ex.Message.Equals(
-                    CoreStrings.FormatTooFewBytesWritten(12, 13),
-                    StringComparison.Ordinal
-                )
+        Assert.Contains(TestSink.Writes, m =>
+            m.EventId.Name == "ApplicationError"
+            && m.Exception is InvalidOperationException ex
+            && ex.Message.Equals(
+                CoreStrings.FormatTooFewBytesWritten(12, 13),
+                StringComparison.Ordinal
+            )
         );
 
         Assert.NotNull(completeEx);
@@ -1459,9 +1451,8 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
         var error = LogMessages.Where(message => message.LogLevel == LogLevel.Error);
         Assert.Equal(2, error.Count());
-        Assert.All(
-            error,
-            message => message.Message.Equals(CoreStrings.FormatTooFewBytesWritten(0, 5))
+        Assert.All(error, message =>
+            message.Message.Equals(CoreStrings.FormatTooFewBytesWritten(0, 5))
         );
     }
 
@@ -2287,14 +2278,11 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
         }
 
 #pragma warning disable CS0618 // Type or member is obsolete
-        Assert.Contains(
-            LogMessages,
-            w =>
-                w.EventId.Id == 17
-                && w.LogLevel <= LogLevel.Debug
-                && w.Exception is BadHttpRequestException
-                && ((BadHttpRequestException)w.Exception).StatusCode
-                    == StatusCodes.Status400BadRequest
+        Assert.Contains(LogMessages, w =>
+            w.EventId.Id == 17
+            && w.LogLevel <= LogLevel.Debug
+            && w.Exception is BadHttpRequestException
+            && ((BadHttpRequestException)w.Exception).StatusCode == StatusCodes.Status400BadRequest
         );
 #pragma warning restore CS0618 // Type or member is obsolete
     }
@@ -2419,14 +2407,11 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
         }
 
 #pragma warning disable CS0618 // Type or member is obsolete
-        Assert.Contains(
-            LogMessages,
-            w =>
-                w.EventId.Id == 17
-                && w.LogLevel <= LogLevel.Debug
-                && w.Exception is BadHttpRequestException
-                && ((BadHttpRequestException)w.Exception).StatusCode
-                    == StatusCodes.Status400BadRequest
+        Assert.Contains(LogMessages, w =>
+            w.EventId.Id == 17
+            && w.LogLevel <= LogLevel.Debug
+            && w.Exception is BadHttpRequestException
+            && ((BadHttpRequestException)w.Exception).StatusCode == StatusCodes.Status400BadRequest
         );
 #pragma warning restore CS0618 // Type or member is obsolete
     }
@@ -4592,13 +4577,11 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     "",
                     ""
                 );
-                Assert.Contains(
-                    TestSink.Writes,
-                    w =>
-                        w.EventId.Id == 13
-                        && w.LogLevel == LogLevel.Error
-                        && w.Exception is ConnectionAbortedException
-                        && w.Exception.InnerException == expectedException
+                Assert.Contains(TestSink.Writes, w =>
+                    w.EventId.Id == 13
+                    && w.LogLevel == LogLevel.Error
+                    && w.Exception is ConnectionAbortedException
+                    && w.Exception.InnerException == expectedException
                 );
             }
         }
@@ -5177,14 +5160,12 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
         if (sendMalformedRequest)
         {
 #pragma warning disable CS0618 // Type or member is obsolete
-            Assert.Contains(
-                testSink.Writes,
-                w =>
-                    w.EventId.Id == 17
-                    && w.LogLevel <= LogLevel.Debug
-                    && w.Exception is BadHttpRequestException
-                    && ((BadHttpRequestException)w.Exception).StatusCode
-                        == StatusCodes.Status400BadRequest
+            Assert.Contains(testSink.Writes, w =>
+                w.EventId.Id == 17
+                && w.LogLevel <= LogLevel.Debug
+                && w.Exception is BadHttpRequestException
+                && ((BadHttpRequestException)w.Exception).StatusCode
+                    == StatusCodes.Status400BadRequest
             );
 #pragma warning restore CS0618 // Type or member is obsolete
         }

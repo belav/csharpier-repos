@@ -226,31 +226,27 @@ namespace Microsoft.Extensions.Primitives
                 }
 #if NETCOREAPP
                 // Create the new string
-                return string.Create(
-                    length,
-                    values,
-                    (span, strings) =>
+                return string.Create(length, values, (span, strings) =>
+                {
+                    int offset = 0;
+                    // Skip null and empty values
+                    for (int i = 0; i < strings.Length; i++)
                     {
-                        int offset = 0;
-                        // Skip null and empty values
-                        for (int i = 0; i < strings.Length; i++)
+                        string? value = strings[i];
+                        if (value != null && value.Length > 0)
                         {
-                            string? value = strings[i];
-                            if (value != null && value.Length > 0)
+                            if (offset > 0)
                             {
-                                if (offset > 0)
-                                {
-                                    // Add separator
-                                    span[offset] = ',';
-                                    offset++;
-                                }
-
-                                value.AsSpan().CopyTo(span.Slice(offset));
-                                offset += value.Length;
+                                // Add separator
+                                span[offset] = ',';
+                                offset++;
                             }
+
+                            value.AsSpan().CopyTo(span.Slice(offset));
+                            offset += value.Length;
                         }
                     }
-                );
+                });
 #else
                 var sb = new ValueStringBuilder(length);
                 bool hasAdded = false;

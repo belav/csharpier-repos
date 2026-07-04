@@ -961,9 +961,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var services = provider.GetService<IEnumerable<IFakeService>>();
 
             Assert.Equal(10, services.Count());
-            Assert.All(
-                services,
-                service => Assert.IsType<StructServiceWithNoDependencies>(service)
+            Assert.All(services, service =>
+                Assert.IsType<StructServiceWithNoDependencies>(service)
             );
         }
 

@@ -492,10 +492,8 @@ MII
 
         protected override void AssertNoPemFound(ReadOnlySpan<char> input)
         {
-            AssertExtensions.Throws<ArgumentException, char>(
-                "pemData",
-                input,
-                x => PemEncoding.Find(x)
+            AssertExtensions.Throws<ArgumentException, char>("pemData", input, x =>
+                PemEncoding.Find(x)
             );
         }
     }

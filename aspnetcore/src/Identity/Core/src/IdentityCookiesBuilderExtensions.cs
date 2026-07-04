@@ -51,17 +51,14 @@ public static class IdentityCookieAuthenticationBuilderExtensions
         this AuthenticationBuilder builder
     )
     {
-        builder.AddCookie(
-            IdentityConstants.ApplicationScheme,
-            o =>
+        builder.AddCookie(IdentityConstants.ApplicationScheme, o =>
+        {
+            o.LoginPath = new PathString("/Account/Login");
+            o.Events = new CookieAuthenticationEvents
             {
-                o.LoginPath = new PathString("/Account/Login");
-                o.Events = new CookieAuthenticationEvents
-                {
-                    OnValidatePrincipal = SecurityStampValidator.ValidatePrincipalAsync,
-                };
-            }
-        );
+                OnValidatePrincipal = SecurityStampValidator.ValidatePrincipalAsync,
+            };
+        });
         return new OptionsBuilder<CookieAuthenticationOptions>(
             builder.Services,
             IdentityConstants.ApplicationScheme
@@ -77,14 +74,11 @@ public static class IdentityCookieAuthenticationBuilderExtensions
         this AuthenticationBuilder builder
     )
     {
-        builder.AddCookie(
-            IdentityConstants.ExternalScheme,
-            o =>
-            {
-                o.Cookie.Name = IdentityConstants.ExternalScheme;
-                o.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-            }
-        );
+        builder.AddCookie(IdentityConstants.ExternalScheme, o =>
+        {
+            o.Cookie.Name = IdentityConstants.ExternalScheme;
+            o.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+        });
         return new OptionsBuilder<CookieAuthenticationOptions>(
             builder.Services,
             IdentityConstants.ExternalScheme
@@ -100,18 +94,15 @@ public static class IdentityCookieAuthenticationBuilderExtensions
         this AuthenticationBuilder builder
     )
     {
-        builder.AddCookie(
-            IdentityConstants.TwoFactorRememberMeScheme,
-            o =>
+        builder.AddCookie(IdentityConstants.TwoFactorRememberMeScheme, o =>
+        {
+            o.Cookie.Name = IdentityConstants.TwoFactorRememberMeScheme;
+            o.Events = new CookieAuthenticationEvents
             {
-                o.Cookie.Name = IdentityConstants.TwoFactorRememberMeScheme;
-                o.Events = new CookieAuthenticationEvents
-                {
-                    OnValidatePrincipal =
-                        SecurityStampValidator.ValidateAsync<ITwoFactorSecurityStampValidator>,
-                };
-            }
-        );
+                OnValidatePrincipal =
+                    SecurityStampValidator.ValidateAsync<ITwoFactorSecurityStampValidator>,
+            };
+        });
         return new OptionsBuilder<CookieAuthenticationOptions>(
             builder.Services,
             IdentityConstants.TwoFactorRememberMeScheme
@@ -127,18 +118,15 @@ public static class IdentityCookieAuthenticationBuilderExtensions
         this AuthenticationBuilder builder
     )
     {
-        builder.AddCookie(
-            IdentityConstants.TwoFactorUserIdScheme,
-            o =>
+        builder.AddCookie(IdentityConstants.TwoFactorUserIdScheme, o =>
+        {
+            o.Cookie.Name = IdentityConstants.TwoFactorUserIdScheme;
+            o.Events = new CookieAuthenticationEvents
             {
-                o.Cookie.Name = IdentityConstants.TwoFactorUserIdScheme;
-                o.Events = new CookieAuthenticationEvents
-                {
-                    OnRedirectToReturnUrl = _ => Task.CompletedTask,
-                };
-                o.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-            }
-        );
+                OnRedirectToReturnUrl = _ => Task.CompletedTask,
+            };
+            o.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+        });
         return new OptionsBuilder<CookieAuthenticationOptions>(
             builder.Services,
             IdentityConstants.TwoFactorUserIdScheme

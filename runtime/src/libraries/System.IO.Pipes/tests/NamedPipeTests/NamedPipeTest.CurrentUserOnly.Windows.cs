@@ -119,21 +119,18 @@ namespace System.IO.Pipes.Tests
         {
             using (WindowsIdentity serverIdentity = WindowsIdentity.GetCurrent())
             {
-                WindowsIdentity.RunImpersonated(
-                    _testAccountTokenHandle,
-                    () =>
-                    {
-                        using WindowsIdentity clientIdentity = WindowsIdentity.GetCurrent();
-                        Assert.NotEqual(serverIdentity.Name, clientIdentity.Name);
-                        Assert.False(
-                            new WindowsPrincipal(clientIdentity).IsInRole(
-                                WindowsBuiltInRole.Administrator
-                            )
-                        );
+                WindowsIdentity.RunImpersonated(_testAccountTokenHandle, () =>
+                {
+                    using WindowsIdentity clientIdentity = WindowsIdentity.GetCurrent();
+                    Assert.NotEqual(serverIdentity.Name, clientIdentity.Name);
+                    Assert.False(
+                        new WindowsPrincipal(clientIdentity).IsInRole(
+                            WindowsBuiltInRole.Administrator
+                        )
+                    );
 
-                        action();
-                    }
-                );
+                    action();
+                });
             }
         }
 

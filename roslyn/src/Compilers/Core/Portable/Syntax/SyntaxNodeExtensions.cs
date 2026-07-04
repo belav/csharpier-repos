@@ -91,9 +91,8 @@ namespace Microsoft.CodeAnalysis
             }
 
             return (TRoot)
-                root.ReplaceCore(
-                    nodes: new[] { oldNode },
-                    computeReplacementNode: (o, r) => newNode
+                root.ReplaceCore(nodes: new[] { oldNode }, computeReplacementNode: (o, r) =>
+                    newNode
                 );
         }
 

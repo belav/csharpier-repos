@@ -391,13 +391,10 @@ namespace System.ComponentModel.Composition
             {
                 var result = CreateCompositionResult<string>(errorId);
 
-                CompositionAssert.ThrowsError(
-                    (ErrorId)errorId,
-                    () =>
-                    {
-                        var value = result.Value;
-                    }
-                );
+                CompositionAssert.ThrowsError((ErrorId)errorId, () =>
+                {
+                    var value = result.Value;
+                });
             }
         }
 
@@ -410,14 +407,10 @@ namespace System.ComponentModel.Composition
             {
                 var result = CreateCompositionResult<string>(errorId, errorId);
 
-                CompositionAssert.ThrowsErrors(
-                    (ErrorId)errorId,
-                    (ErrorId)errorId,
-                    () =>
-                    {
-                        var value = result.Value;
-                    }
-                );
+                CompositionAssert.ThrowsErrors((ErrorId)errorId, (ErrorId)errorId, () =>
+                {
+                    var value = result.Value;
+                });
             }
         }
 
@@ -434,14 +427,10 @@ namespace System.ComponentModel.Composition
 
                 var result = CreateCompositionResult<string>(errorId1, errorId2);
 
-                CompositionAssert.ThrowsErrors(
-                    (ErrorId)errorId1,
-                    (ErrorId)errorId2,
-                    () =>
-                    {
-                        var value = result.Value;
-                    }
-                );
+                CompositionAssert.ThrowsErrors((ErrorId)errorId1, (ErrorId)errorId2, () =>
+                {
+                    var value = result.Value;
+                });
             }
         }
 

@@ -99,23 +99,20 @@ namespace MonoTests.Mono.Threading
                 {
                     int times = 0;
 
-                    ParallelTestHelper.ParallelStressTest(
-                        snzi,
-                        (s) =>
-                        {
-                            int t = Interlocked.Increment(ref times);
+                    ParallelTestHelper.ParallelStressTest(snzi, (s) =>
+                    {
+                        int t = Interlocked.Increment(ref times);
 
-                            for (int i = 0; i < 20; i++)
-                            {
-                                if (i % 2 == 0)
-                                    snzi.Increment();
-                                else
-                                    snzi.Decrement();
-                                if (i % (3 * t) == 0)
-                                    Thread.Sleep(0);
-                            }
+                        for (int i = 0; i < 20; i++)
+                        {
+                            if (i % 2 == 0)
+                                snzi.Increment();
+                            else
+                                snzi.Decrement();
+                            if (i % (3 * t) == 0)
+                                Thread.Sleep(0);
                         }
-                    );
+                    });
 
                     Assert.IsTrue(snzi.IsSet, "#1");
                 }
@@ -128,20 +125,17 @@ namespace MonoTests.Mono.Threading
             ParallelTestHelper.Repeat(
                 delegate
                 {
-                    ParallelTestHelper.ParallelStressTest(
-                        snzi,
-                        (s) =>
+                    ParallelTestHelper.ParallelStressTest(snzi, (s) =>
+                    {
+                        snzi.Increment();
+                        for (int i = 0; i < 1; i++)
                         {
-                            snzi.Increment();
-                            for (int i = 0; i < 1; i++)
-                            {
-                                if (i % 2 == 0)
-                                    snzi.Increment();
-                                else
-                                    snzi.Decrement();
-                            }
+                            if (i % 2 == 0)
+                                snzi.Increment();
+                            else
+                                snzi.Decrement();
                         }
-                    );
+                    });
 
                     Assert.IsFalse(snzi.IsSet, "#1");
                 }

@@ -125,9 +125,8 @@ namespace System.IO.Tests
             string prefix
         )
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "prefix",
-                () => Directory.CreateTempSubdirectory(prefix)
+            AssertExtensions.Throws<ArgumentException>("prefix", () =>
+                Directory.CreateTempSubdirectory(prefix)
             );
         }
     }

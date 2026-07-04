@@ -18,9 +18,8 @@ internal class AbrahamicContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder options) =>
         options
-            .UseSqlServer(
-                SqlServerTestStore.CreateConnectionString("HierarchyIdTests"),
-                x => x.UseHierarchyId()
+            .UseSqlServer(SqlServerTestStore.CreateConnectionString("HierarchyIdTests"), x =>
+                x.UseHierarchyId()
             )
             .UseLoggerFactory(_loggerFactory);
 

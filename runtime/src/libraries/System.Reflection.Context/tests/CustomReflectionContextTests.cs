@@ -13,9 +13,8 @@ namespace System.Reflection.Context.Tests
         [Fact]
         public void Ctor_Null_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => new FaultyTestCustomReflectionContext()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                new FaultyTestCustomReflectionContext()
             );
         }
 
@@ -23,9 +22,8 @@ namespace System.Reflection.Context.Tests
         public void MapAssembly_Null_Throws()
         {
             var customReflectionContext = new TestCustomReflectionContext();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "assembly",
-                () => customReflectionContext.MapAssembly(null)
+            AssertExtensions.Throws<ArgumentNullException>("assembly", () =>
+                customReflectionContext.MapAssembly(null)
             );
         }
 
@@ -33,9 +31,8 @@ namespace System.Reflection.Context.Tests
         public void MapType_Null_Throws()
         {
             var customReflectionContext = new TestCustomReflectionContext();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => customReflectionContext.MapType(null)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                customReflectionContext.MapType(null)
             );
         }
 

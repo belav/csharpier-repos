@@ -52,23 +52,15 @@ namespace System.Reflection.PortableExecutable.Tests
         [Fact]
         public void Ctor_Streams()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "peStream",
-                () =>
-                    new PEHeaders(
-                        new CustomAccessMemoryStream(
-                            canRead: false,
-                            canSeek: false,
-                            canWrite: false
-                        )
-                    )
+            AssertExtensions.Throws<ArgumentException>("peStream", () =>
+                new PEHeaders(
+                    new CustomAccessMemoryStream(canRead: false, canSeek: false, canWrite: false)
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "peStream",
-                () =>
-                    new PEHeaders(
-                        new CustomAccessMemoryStream(canRead: true, canSeek: false, canWrite: false)
-                    )
+            AssertExtensions.Throws<ArgumentException>("peStream", () =>
+                new PEHeaders(
+                    new CustomAccessMemoryStream(canRead: true, canSeek: false, canWrite: false)
+                )
             );
 
             var s = new CustomAccessMemoryStream(

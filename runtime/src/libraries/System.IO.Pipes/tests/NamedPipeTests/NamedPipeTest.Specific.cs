@@ -21,42 +21,27 @@ namespace System.IO.Pipes.Tests
         {
             using (NamedPipeClientStream client = new NamedPipeClientStream("client1"))
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () => client.Connect(-111)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    client.Connect(-111)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () =>
-                    {
-                        client.ConnectAsync(-111);
-                    }
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                {
+                    client.ConnectAsync(-111);
+                });
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    client.Connect(TimeSpan.FromMilliseconds(-2))
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () => client.Connect(TimeSpan.FromMilliseconds(-2))
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                {
+                    client.ConnectAsync(TimeSpan.FromMilliseconds(-2), default);
+                });
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                    client.Connect(TimeSpan.FromMilliseconds((long)int.MaxValue + 1))
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () =>
-                    {
-                        client.ConnectAsync(TimeSpan.FromMilliseconds(-2), default);
-                    }
-                );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () => client.Connect(TimeSpan.FromMilliseconds((long)int.MaxValue + 1))
-                );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "timeout",
-                    () =>
-                    {
-                        client.ConnectAsync(
-                            TimeSpan.FromMilliseconds((long)int.MaxValue + 1),
-                            default
-                        );
-                    }
-                );
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                {
+                    client.ConnectAsync(TimeSpan.FromMilliseconds((long)int.MaxValue + 1), default);
+                });
             }
         }
 

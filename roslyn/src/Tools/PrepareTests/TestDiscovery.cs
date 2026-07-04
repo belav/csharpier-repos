@@ -29,21 +29,16 @@ internal class TestDiscovery
         var success = true;
         var stopwatch = new Stopwatch();
         stopwatch.Start();
-        Parallel.ForEach(
-            assemblies,
-            assembly =>
-            {
-                var workerPath = assembly.Contains("net472")
-                    ? dotnetFrameworkWorker
-                    : dotnetCoreWorker;
+        Parallel.ForEach(assemblies, assembly =>
+        {
+            var workerPath = assembly.Contains("net472") ? dotnetFrameworkWorker : dotnetCoreWorker;
 
-                var result = RunWorker(dotnetPath, workerPath, assembly);
-                lock (s_lock)
-                {
-                    success &= result;
-                }
+            var result = RunWorker(dotnetPath, workerPath, assembly);
+            lock (s_lock)
+            {
+                success &= result;
             }
-        );
+        });
         stopwatch.Stop();
 
         if (success)

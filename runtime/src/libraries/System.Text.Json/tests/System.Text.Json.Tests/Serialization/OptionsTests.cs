@@ -42,13 +42,11 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions();
 
-            TestIListNonThrowingOperationsWhenMutable(
-                options.Converters,
-                () => new TestConverter()
+            TestIListNonThrowingOperationsWhenMutable(options.Converters, () =>
+                new TestConverter()
             );
-            TestIListNonThrowingOperationsWhenMutable(
-                options.TypeInfoResolverChain,
-                () => new DefaultJsonTypeInfoResolver()
+            TestIListNonThrowingOperationsWhenMutable(options.TypeInfoResolverChain, () =>
+                new DefaultJsonTypeInfoResolver()
             );
 
             // Now set DefaultTypeInfoResolver
@@ -486,9 +484,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions();
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => options.ReadCommentHandling = (JsonCommentHandling)enumValue
+            Assert.Throws<ArgumentOutOfRangeException>("value", () =>
+                options.ReadCommentHandling = (JsonCommentHandling)enumValue
             );
         }
 

@@ -1906,9 +1906,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void NullArray()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "array",
-                () => Expression.ArrayLength(null)
+            AssertExtensions.Throws<ArgumentNullException>("array", () =>
+                Expression.ArrayLength(null)
             );
         }
 
@@ -1916,9 +1915,8 @@ namespace System.Linq.Expressions.Tests
         public static void IsNotArray()
         {
             Expression notArray = Expression.Constant(8);
-            AssertExtensions.Throws<ArgumentException>(
-                "array",
-                () => Expression.ArrayLength(notArray)
+            AssertExtensions.Throws<ArgumentException>("array", () =>
+                Expression.ArrayLength(notArray)
             );
         }
 
@@ -1937,9 +1935,8 @@ namespace System.Linq.Expressions.Tests
         {
             Array arr = new[] { 1, 2, 3 };
             Expression arrayExpression = Expression.Constant(arr, typeof(Array));
-            AssertExtensions.Throws<ArgumentException>(
-                "array",
-                () => Expression.ArrayLength(arrayExpression)
+            AssertExtensions.Throws<ArgumentException>("array", () =>
+                Expression.ArrayLength(arrayExpression)
             );
         }
 
@@ -1951,9 +1948,8 @@ namespace System.Linq.Expressions.Tests
                 { 1, 2, 3 },
                 { 1, 2, 2 },
             };
-            AssertExtensions.Throws<ArgumentException>(
-                "array",
-                () => Expression.ArrayLength(Expression.Constant(arr))
+            AssertExtensions.Throws<ArgumentException>("array", () =>
+                Expression.ArrayLength(Expression.Constant(arr))
             );
         }
 
@@ -1964,9 +1960,8 @@ namespace System.Linq.Expressions.Tests
         public static void ArrayTypeArrayNotAllowedIfNonZeroBoundArray()
         {
             Array arr = Array.CreateInstance(typeof(int), new[] { 3 }, new[] { -1 });
-            AssertExtensions.Throws<ArgumentException>(
-                "array",
-                () => Expression.ArrayLength(Expression.Constant(arr))
+            AssertExtensions.Throws<ArgumentException>("array", () =>
+                Expression.ArrayLength(Expression.Constant(arr))
             );
         }
 
@@ -1978,9 +1973,8 @@ namespace System.Linq.Expressions.Tests
                 typeof(Unreadable<int[]>),
                 nameof(Unreadable<int>.WriteOnly)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "array",
-                () => Expression.ArrayLength(array)
+            AssertExtensions.Throws<ArgumentException>("array", () =>
+                Expression.ArrayLength(array)
             );
         }
 

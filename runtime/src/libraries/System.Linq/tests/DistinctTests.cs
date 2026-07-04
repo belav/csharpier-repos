@@ -157,9 +157,8 @@ namespace System.Linq.Tests
         {
             string[] source = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.Distinct(StringComparer.Ordinal)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.Distinct(StringComparer.Ordinal)
             );
         }
 
@@ -287,13 +286,11 @@ namespace System.Linq.Tests
         {
             string[] first = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => first.DistinctBy(x => x)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                first.DistinctBy(x => x)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => first.DistinctBy(x => x, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                first.DistinctBy(x => x, new AnagramEqualityComparer())
             );
         }
 
@@ -303,13 +300,11 @@ namespace System.Linq.Tests
             string[] source = { "Bob", "Tim", "Robert", "Chris" };
             Func<string, string> keySelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.DistinctBy(keySelector)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.DistinctBy(keySelector)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.DistinctBy(keySelector, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.DistinctBy(keySelector, new AnagramEqualityComparer())
             );
         }
 

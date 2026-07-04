@@ -35,9 +35,8 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void Ctor_MultidimensionalArray_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new ArrayWithOffset(new int[1, 2], 2)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new ArrayWithOffset(new int[1, 2], 2)
             );
         }
 

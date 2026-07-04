@@ -172,13 +172,8 @@ namespace System.Diagnostics.Metrics
         )
             where T : struct =>
             (Counter<T>)
-                GetOrCreateInstrument<T>(
-                    typeof(Counter<T>),
-                    name,
-                    unit,
-                    description,
-                    tags,
-                    () => new Counter<T>(this, name, unit, description, tags)
+                GetOrCreateInstrument<T>(typeof(Counter<T>), name, unit, description, tags, () =>
+                    new Counter<T>(this, name, unit, description, tags)
                 );
 
         /// <summary>
@@ -215,13 +210,8 @@ namespace System.Diagnostics.Metrics
         )
             where T : struct =>
             (Histogram<T>)
-                GetOrCreateInstrument<T>(
-                    typeof(Histogram<T>),
-                    name,
-                    unit,
-                    description,
-                    tags,
-                    () => new Histogram<T>(this, name, unit, description, tags)
+                GetOrCreateInstrument<T>(typeof(Histogram<T>), name, unit, description, tags, () =>
+                    new Histogram<T>(this, name, unit, description, tags)
                 );
 
         /// <summary>

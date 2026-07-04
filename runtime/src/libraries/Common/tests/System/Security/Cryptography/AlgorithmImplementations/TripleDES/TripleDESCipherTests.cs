@@ -1011,9 +1011,8 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                     exceptionType = typeof(CryptographicException);
                 }
 
-                Assert.Throws(
-                    exceptionType,
-                    () => xform.TransformBlock(input, 0, input.Length, output, 0)
+                Assert.Throws(exceptionType, () =>
+                    xform.TransformBlock(input, 0, input.Length, output, 0)
                 );
 
                 Assert.Equal(new byte[output.Length], output);

@@ -2224,12 +2224,8 @@ namespace System.Runtime.InteropServices
         {
             var key = (type, cookie);
 
-            LazyInitializer.EnsureInitialized(
-                ref MarshalerInstanceCache,
-                () =>
-                    new Dictionary<(Type, string), ICustomMarshaler>(
-                        new MarshalerInstanceKeyComparer()
-                    )
+            LazyInitializer.EnsureInitialized(ref MarshalerInstanceCache, () =>
+                new Dictionary<(Type, string), ICustomMarshaler>(new MarshalerInstanceKeyComparer())
             );
 
             ICustomMarshaler result;

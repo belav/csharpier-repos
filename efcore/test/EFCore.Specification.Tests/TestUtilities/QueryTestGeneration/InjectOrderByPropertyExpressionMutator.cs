@@ -66,9 +66,8 @@ public class InjectOrderByPropertyExpressionMutator : ExpressionMutator
         }
 
         var lambda = Expression.Lambda(lambdaBody, prm);
-        var injector = new ExpressionInjector(
-            expressionToInject,
-            e => Expression.Call(orderBy, e, lambda)
+        var injector = new ExpressionInjector(expressionToInject, e =>
+            Expression.Call(orderBy, e, lambda)
         );
 
         return injector.Visit(expression);

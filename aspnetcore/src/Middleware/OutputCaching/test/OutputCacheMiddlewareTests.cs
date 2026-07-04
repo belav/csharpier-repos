@@ -876,20 +876,17 @@ public abstract class OutputCacheMiddlewareTests
         var options = new OutputCacheOptions();
         options.AddBasePolicy(build => build.Cache());
 
-        var middleware = TestUtils.CreateTestMiddleware(
-            options: options,
-            next: async c =>
-            {
-                responseCounter++;
-                task1Executing.Set();
+        var middleware = TestUtils.CreateTestMiddleware(options: options, next: async c =>
+        {
+            responseCounter++;
+            task1Executing.Set();
 
-                // Wait for the second request to start before processing the first one
-                task2Executing.Wait();
+            // Wait for the second request to start before processing the first one
+            task2Executing.Wait();
 
-                // Simulate some delay to allow for the second request to run while this one is pending
-                await Task.Delay(500);
-            }
-        );
+            // Simulate some delay to allow for the second request to run while this one is pending
+            await Task.Delay(500);
+        });
 
         var context1 = TestUtils.CreateTestContext();
         context1.HttpContext.Request.Method = "GET";
@@ -931,23 +928,20 @@ public abstract class OutputCacheMiddlewareTests
         var options = new OutputCacheOptions();
         options.AddBasePolicy(build => build.Cache());
 
-        var middleware = TestUtils.CreateTestMiddleware(
-            options: options,
-            next: async c =>
+        var middleware = TestUtils.CreateTestMiddleware(options: options, next: async c =>
+        {
+            responseCounter++;
+
+            if (responseCounter == 1)
             {
-                responseCounter++;
-
-                if (responseCounter == 1)
-                {
-                    blocker1.SetResult(true);
-                }
-
-                c.Response.Cookies.Append("a", "b");
-                c.Response.Write("Hello" + responseCounter);
-
-                await blocker2.Task;
+                blocker1.SetResult(true);
             }
-        );
+
+            c.Response.Cookies.Append("a", "b");
+            c.Response.Write("Hello" + responseCounter);
+
+            await blocker2.Task;
+        });
 
         var context1 = TestUtils.CreateTestContext();
         context1.HttpContext.Request.Method = "GET";
@@ -997,27 +991,24 @@ public abstract class OutputCacheMiddlewareTests
         var options = new OutputCacheOptions();
         options.AddBasePolicy(build => build.Cache().SetLocking(false));
 
-        var middleware = TestUtils.CreateTestMiddleware(
-            options: options,
-            next: async c =>
+        var middleware = TestUtils.CreateTestMiddleware(options: options, next: async c =>
+        {
+            responseCounter++;
+
+            switch (responseCounter)
             {
-                responseCounter++;
-
-                switch (responseCounter)
-                {
-                    case 1:
-                        blocker1.SetResult(true);
-                        await blocker2.Task;
-                        break;
-                    case 2:
-                        await blocker1.Task;
-                        blocker2.SetResult(true);
-                        break;
-                }
-
-                c.Response.Write("Hello" + responseCounter);
+                case 1:
+                    blocker1.SetResult(true);
+                    await blocker2.Task;
+                    break;
+                case 2:
+                    await blocker1.Task;
+                    blocker2.SetResult(true);
+                    break;
             }
-        );
+
+            c.Response.Write("Hello" + responseCounter);
+        });
 
         var context1 = TestUtils.CreateTestContext();
         context1.HttpContext.Request.Method = "GET";

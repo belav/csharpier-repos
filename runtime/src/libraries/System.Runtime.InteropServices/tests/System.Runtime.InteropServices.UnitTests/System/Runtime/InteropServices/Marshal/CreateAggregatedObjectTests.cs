@@ -80,18 +80,16 @@ namespace System.Runtime.InteropServices.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void CreateAggregateObject_ZeroPointer_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "pOuter",
-                () => Marshal.CreateAggregatedObject(IntPtr.Zero, 1)
+            AssertExtensions.Throws<ArgumentNullException>("pOuter", () =>
+                Marshal.CreateAggregatedObject(IntPtr.Zero, 1)
             );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void CreateAggregateObject_NullObject_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "o",
-                () => Marshal.CreateAggregatedObject((IntPtr)1, null)
+            AssertExtensions.Throws<ArgumentNullException>("o", () =>
+                Marshal.CreateAggregatedObject((IntPtr)1, null)
             );
         }
 
@@ -106,13 +104,11 @@ namespace System.Runtime.InteropServices.Tests
                 IntPtr ptr2 = Marshal.GetIUnknownForObject(o2);
                 try
                 {
-                    AssertExtensions.Throws<ArgumentException>(
-                        "o",
-                        () => Marshal.CreateAggregatedObject(ptr1, o1)
+                    AssertExtensions.Throws<ArgumentException>("o", () =>
+                        Marshal.CreateAggregatedObject(ptr1, o1)
                     );
-                    AssertExtensions.Throws<ArgumentException>(
-                        "o",
-                        () => Marshal.CreateAggregatedObject(ptr1, o2)
+                    AssertExtensions.Throws<ArgumentException>("o", () =>
+                        Marshal.CreateAggregatedObject(ptr1, o2)
                     );
                 }
                 finally

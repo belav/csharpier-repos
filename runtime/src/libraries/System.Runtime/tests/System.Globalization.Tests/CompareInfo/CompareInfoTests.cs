@@ -28,9 +28,8 @@ namespace System.Globalization.Tests
         [Fact]
         public void GetCompareInfo_Null_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => CompareInfo.GetCompareInfo(null)
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                CompareInfo.GetCompareInfo(null)
             );
         }
 
@@ -123,35 +122,24 @@ namespace System.Globalization.Tests
         [Fact]
         public void GetHashCode_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () =>
-                    CultureInfo.InvariantCulture.CompareInfo.GetHashCode(null, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(null, CompareOptions.None)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                        "Test",
-                        CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreCase
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
+                    "Test",
+                    CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreCase
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                        "Test",
-                        CompareOptions.Ordinal | CompareOptions.IgnoreSymbols
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
+                    "Test",
+                    CompareOptions.Ordinal | CompareOptions.IgnoreSymbols
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                        "Test",
-                        (CompareOptions)(-1)
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                CultureInfo.InvariantCulture.CompareInfo.GetHashCode("Test", (CompareOptions)(-1))
             );
         }
 
@@ -1567,14 +1555,12 @@ namespace System.Globalization.Tests
 
                 // First try with a destination which is too small - should result in an error
 
-                Assert.Throws<ArgumentException>(
-                    "destination",
-                    () =>
-                        compareInfo.GetSortKey(
-                            sourceBoundedMemory.Span,
-                            sortKeyBoundedMemory.Span.Slice(1),
-                            options
-                        )
+                Assert.Throws<ArgumentException>("destination", () =>
+                    compareInfo.GetSortKey(
+                        sourceBoundedMemory.Span,
+                        sortKeyBoundedMemory.Span.Slice(1),
+                        options
+                    )
                 );
 
                 // Next, try with a destination which is perfectly sized - should succeed
@@ -1630,9 +1616,8 @@ namespace System.Globalization.Tests
             Assert.True(sk1.Equals(sk1));
 
             AssertExtensions.Throws<ArgumentNullException>("source", () => ci.GetSortKey(null));
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () => ci.GetSortKey(s1, CompareOptions.Ordinal)
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                ci.GetSortKey(s1, CompareOptions.Ordinal)
             );
         }
 
@@ -1746,29 +1731,23 @@ namespace System.Globalization.Tests
         [Fact]
         public void GetHashCode_Span_Invalid()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                        "Test".AsSpan(),
-                        CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreCase
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
+                    "Test".AsSpan(),
+                    CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreCase
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                        "Test".AsSpan(),
-                        CompareOptions.Ordinal | CompareOptions.IgnoreSymbols
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
+                    "Test".AsSpan(),
+                    CompareOptions.Ordinal | CompareOptions.IgnoreSymbols
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
-                        "Test".AsSpan(),
-                        (CompareOptions)(-1)
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                CultureInfo.InvariantCulture.CompareInfo.GetHashCode(
+                    "Test".AsSpan(),
+                    (CompareOptions)(-1)
+                )
             );
         }
     }

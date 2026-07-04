@@ -126,9 +126,8 @@ namespace MonoTests.System.Configuration
         {
             InfiniteTimeSpanConverter cv = new InfiniteTimeSpanConverter();
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => cv.ConvertTo(null, null, "hi", typeof(string))
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                cv.ConvertTo(null, null, "hi", typeof(string))
             );
         }
 
@@ -137,9 +136,8 @@ namespace MonoTests.System.Configuration
         {
             InfiniteTimeSpanConverter cv = new InfiniteTimeSpanConverter();
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => cv.ConvertTo(null, null, 59, typeof(int))
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                cv.ConvertTo(null, null, 59, typeof(int))
             );
         }
     }

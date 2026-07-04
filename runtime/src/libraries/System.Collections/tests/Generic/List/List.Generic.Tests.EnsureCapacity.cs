@@ -37,9 +37,8 @@ namespace System.Collections.Tests
         public void EnsureCapacity_NegativeCapacityRequested_Throws()
         {
             var list = new List<T>();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => list.EnsureCapacity(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                list.EnsureCapacity(-1)
             );
         }
 

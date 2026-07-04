@@ -21,9 +21,8 @@ namespace System.Net.Tests
         [Fact]
         public void Ctor_InvalidArg_Throws()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "level",
-                () => new RequestCachePolicy((RequestCacheLevel)42)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("level", () =>
+                new RequestCachePolicy((RequestCacheLevel)42)
             );
         }
 

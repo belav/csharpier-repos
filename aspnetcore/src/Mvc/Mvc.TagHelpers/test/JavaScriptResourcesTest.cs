@@ -47,14 +47,11 @@ public class JavaScriptResourcesTest
         );
 
         // Assert
-        Assert.Collection(
-            cache,
-            kvp =>
-            {
-                Assert.Equal("test.js", kvp.Key);
-                Assert.Equal(expected, kvp.Value);
-            }
-        );
+        Assert.Collection(cache, kvp =>
+        {
+            Assert.Equal("test.js", kvp.Key);
+            Assert.Equal(expected, kvp.Value);
+        });
     }
 
     [Fact]

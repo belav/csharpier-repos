@@ -137,45 +137,39 @@ namespace Microsoft.CodeAnalysis.CSharp.SplitOrMergeIfStatements
             SyntaxNode elseIfClause
         )
         {
-            editor.ReplaceNode(
-                afterIfOrElseIf,
-                (currentNode, _) =>
+            editor.ReplaceNode(afterIfOrElseIf, (currentNode, _) =>
+            {
+                var ifStatement = (IfStatementSyntax)currentNode;
+                var elseIfStatement = (IfStatementSyntax)elseIfClause;
+
+                var newElseIfStatement = elseIfStatement.WithElse(ifStatement.Else);
+                var newIfStatement = ifStatement.WithElse(
+                    SyntaxFactory.ElseClause(newElseIfStatement)
+                );
+
+                if (ifStatement.Else == null && ContainsEmbeddedIfStatement(ifStatement))
                 {
-                    var ifStatement = (IfStatementSyntax)currentNode;
-                    var elseIfStatement = (IfStatementSyntax)elseIfClause;
-
-                    var newElseIfStatement = elseIfStatement.WithElse(ifStatement.Else);
-                    var newIfStatement = ifStatement.WithElse(
-                        SyntaxFactory.ElseClause(newElseIfStatement)
+                    // If the if statement contains an embedded if statement (not wrapped inside a block), adding an else
+                    // clause might introduce a dangling else problem (the 'else' would bind to the inner if statement),
+                    // so if there used to be no else clause, we'll insert a new block to prevent that.
+                    newIfStatement = newIfStatement.WithStatement(
+                        SyntaxFactory.Block(newIfStatement.Statement)
                     );
-
-                    if (ifStatement.Else == null && ContainsEmbeddedIfStatement(ifStatement))
-                    {
-                        // If the if statement contains an embedded if statement (not wrapped inside a block), adding an else
-                        // clause might introduce a dangling else problem (the 'else' would bind to the inner if statement),
-                        // so if there used to be no else clause, we'll insert a new block to prevent that.
-                        newIfStatement = newIfStatement.WithStatement(
-                            SyntaxFactory.Block(newIfStatement.Statement)
-                        );
-                    }
-
-                    return newIfStatement;
                 }
-            );
+
+                return newIfStatement;
+            });
         }
 
         public void RemoveElseIfClause(SyntaxEditor editor, SyntaxNode elseIfClause)
         {
-            editor.ReplaceNode(
-                elseIfClause.Parent.Parent,
-                (currentNode, _) =>
-                {
-                    var parentIfStatement = (IfStatementSyntax)currentNode;
-                    var elseClause = parentIfStatement.Else;
-                    var elseIfStatement = (IfStatementSyntax)elseClause.Statement;
-                    return parentIfStatement.WithElse(elseIfStatement.Else);
-                }
-            );
+            editor.ReplaceNode(elseIfClause.Parent.Parent, (currentNode, _) =>
+            {
+                var parentIfStatement = (IfStatementSyntax)currentNode;
+                var elseClause = parentIfStatement.Else;
+                var elseIfStatement = (IfStatementSyntax)elseClause.Statement;
+                return parentIfStatement.WithElse(elseIfStatement.Else);
+            });
         }
 
         private static bool ContainsEmbeddedIfStatement(IfStatementSyntax ifStatement)

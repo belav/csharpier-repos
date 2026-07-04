@@ -176,22 +176,18 @@ public class ServerTransportsTest
         var log = Browser.Manage().Logs.GetLog(LogType.Browser);
         foreach (var message in messages)
         {
-            Assert.Contains(
-                log,
-                entry =>
-                {
-                    return entry.Message.Contains(message, StringComparison.InvariantCulture);
-                }
-            );
+            Assert.Contains(log, entry =>
+            {
+                return entry.Message.Contains(message, StringComparison.InvariantCulture);
+            });
         }
     }
 
     void AssertGlobalErrorState(bool hasGlobalError)
     {
         var globalErrorUi = Browser.Exists(By.Id("blazor-error-ui"));
-        Browser.Equal(
-            hasGlobalError ? "block" : "none",
-            () => globalErrorUi.GetCssValue("display")
+        Browser.Equal(hasGlobalError ? "block" : "none", () =>
+            globalErrorUi.GetCssValue("display")
         );
     }
 }

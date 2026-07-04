@@ -5272,27 +5272,24 @@ namespace MonoTests.System
 
         void MustAE(string typename)
         {
-            MustAE_general(
-                typename,
-                tname =>
-                {
-                    return Type.GetType(
-                        tname,
-                        name =>
-                        {
-                            return Assembly.Load(name);
-                        },
-                        (asm, name, ignore) =>
-                        {
-                            return (object)asm == null
-                                ? Type.GetType(name, false, ignore)
-                                : asm.GetType(name, false, ignore);
-                        },
-                        true,
-                        false
-                    );
-                }
-            );
+            MustAE_general(typename, tname =>
+            {
+                return Type.GetType(
+                    tname,
+                    name =>
+                    {
+                        return Assembly.Load(name);
+                    },
+                    (asm, name, ignore) =>
+                    {
+                        return (object)asm == null
+                            ? Type.GetType(name, false, ignore)
+                            : asm.GetType(name, false, ignore);
+                    },
+                    true,
+                    false
+                );
+            });
         }
 
         void MustAEnn(string typename)

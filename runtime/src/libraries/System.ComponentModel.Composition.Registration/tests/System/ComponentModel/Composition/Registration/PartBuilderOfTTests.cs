@@ -380,13 +380,11 @@ namespace System.ComponentModel.Composition.Registration.Tests
         {
             //Same test as above only using default export builder
             var builder = new RegistrationBuilder();
-            Assert.Throws<ArgumentNullException>(
-                "interfaceFilter",
-                () => builder.ForTypesMatching((t) => true).ExportInterfaces(null)
+            Assert.Throws<ArgumentNullException>("interfaceFilter", () =>
+                builder.ForTypesMatching((t) => true).ExportInterfaces(null)
             );
-            Assert.Throws<ArgumentNullException>(
-                "interfaceFilter",
-                () => builder.ForTypesMatching((t) => true).ExportInterfaces(null, null)
+            Assert.Throws<ArgumentNullException>("interfaceFilter", () =>
+                builder.ForTypesMatching((t) => true).ExportInterfaces(null, null)
             );
         }
 
@@ -395,21 +393,17 @@ namespace System.ComponentModel.Composition.Registration.Tests
         {
             //Same test as above only using default export builder
             var builder = new RegistrationBuilder();
-            Assert.Throws<ArgumentNullException>(
-                "propertyFilter",
-                () => builder.ForTypesMatching<IFoo>((t) => true).ImportProperty(null)
+            Assert.Throws<ArgumentNullException>("propertyFilter", () =>
+                builder.ForTypesMatching<IFoo>((t) => true).ImportProperty(null)
             );
-            Assert.Throws<ArgumentNullException>(
-                "propertyFilter",
-                () => builder.ForTypesMatching<IFoo>((t) => true).ImportProperty(null, null)
+            Assert.Throws<ArgumentNullException>("propertyFilter", () =>
+                builder.ForTypesMatching<IFoo>((t) => true).ImportProperty(null, null)
             );
-            Assert.Throws<ArgumentNullException>(
-                "propertyFilter",
-                () => builder.ForTypesMatching<IFoo>((t) => true).ImportProperty<IFirst>(null)
+            Assert.Throws<ArgumentNullException>("propertyFilter", () =>
+                builder.ForTypesMatching<IFoo>((t) => true).ImportProperty<IFirst>(null)
             );
-            Assert.Throws<ArgumentNullException>(
-                "propertyFilter",
-                () => builder.ForTypesMatching<IFoo>((t) => true).ImportProperty<IFirst>(null, null)
+            Assert.Throws<ArgumentNullException>("propertyFilter", () =>
+                builder.ForTypesMatching<IFoo>((t) => true).ImportProperty<IFirst>(null, null)
             );
         }
 
@@ -418,21 +412,17 @@ namespace System.ComponentModel.Composition.Registration.Tests
         {
             //Same test as above only using default export builder
             var builder = new RegistrationBuilder();
-            Assert.Throws<ArgumentNullException>(
-                "propertyFilter",
-                () => builder.ForTypesMatching<IFoo>((t) => true).ExportProperty(null)
+            Assert.Throws<ArgumentNullException>("propertyFilter", () =>
+                builder.ForTypesMatching<IFoo>((t) => true).ExportProperty(null)
             );
-            Assert.Throws<ArgumentNullException>(
-                "propertyFilter",
-                () => builder.ForTypesMatching<IFoo>((t) => true).ExportProperty(null, null)
+            Assert.Throws<ArgumentNullException>("propertyFilter", () =>
+                builder.ForTypesMatching<IFoo>((t) => true).ExportProperty(null, null)
             );
-            Assert.Throws<ArgumentNullException>(
-                "propertyFilter",
-                () => builder.ForTypesMatching<IFoo>((t) => true).ExportProperty<IFirst>(null)
+            Assert.Throws<ArgumentNullException>("propertyFilter", () =>
+                builder.ForTypesMatching<IFoo>((t) => true).ExportProperty<IFirst>(null)
             );
-            Assert.Throws<ArgumentNullException>(
-                "propertyFilter",
-                () => builder.ForTypesMatching<IFoo>((t) => true).ExportProperty<IFirst>(null, null)
+            Assert.Throws<ArgumentNullException>("propertyFilter", () =>
+                builder.ForTypesMatching<IFoo>((t) => true).ExportProperty<IFirst>(null, null)
             );
         }
     }

@@ -44,9 +44,8 @@ namespace System.Web.Mvc.Routing
             var entries = AttributeRoutingMapper.GetAttributeRoutes(controllerType);
 
             // Assert
-            var controllerEntry = Assert.Single(
-                entries,
-                r => !r.Route.Defaults.ContainsKey("action")
+            var controllerEntry = Assert.Single(entries, r =>
+                !r.Route.Defaults.ContainsKey("action")
             );
             Assert.Same(
                 controllerType,
@@ -82,9 +81,8 @@ namespace System.Web.Mvc.Routing
             var entries = AttributeRoutingMapper.GetAttributeRoutes(controllerType);
 
             // Assert
-            var controllerEntry = Assert.Single(
-                entries,
-                r => !r.Route.Defaults.ContainsKey("action")
+            var controllerEntry = Assert.Single(entries, r =>
+                !r.Route.Defaults.ContainsKey("action")
             );
             Assert.Same(
                 controllerType,
@@ -112,9 +110,8 @@ namespace System.Web.Mvc.Routing
             var entries = AttributeRoutingMapper.GetAttributeRoutes(controllerType);
 
             // Assert
-            var controllerEntry = Assert.Single(
-                entries,
-                r => !r.Route.Defaults.ContainsKey("action")
+            var controllerEntry = Assert.Single(entries, r =>
+                !r.Route.Defaults.ContainsKey("action")
             );
             Assert.False(controllerEntry.Route.GetTargetIsAction());
 

@@ -12,21 +12,17 @@ public class HttpLoggingOptionsTests
         var defaultMediaTypes = options.MediaTypeOptions.MediaTypeStates;
         Assert.Equal(5, defaultMediaTypes.Count);
 
-        Assert.Contains(
-            defaultMediaTypes,
-            w => w.MediaTypeHeaderValue.MediaType.Equals("application/json")
+        Assert.Contains(defaultMediaTypes, w =>
+            w.MediaTypeHeaderValue.MediaType.Equals("application/json")
         );
-        Assert.Contains(
-            defaultMediaTypes,
-            w => w.MediaTypeHeaderValue.MediaType.Equals("application/*+json")
+        Assert.Contains(defaultMediaTypes, w =>
+            w.MediaTypeHeaderValue.MediaType.Equals("application/*+json")
         );
-        Assert.Contains(
-            defaultMediaTypes,
-            w => w.MediaTypeHeaderValue.MediaType.Equals("application/xml")
+        Assert.Contains(defaultMediaTypes, w =>
+            w.MediaTypeHeaderValue.MediaType.Equals("application/xml")
         );
-        Assert.Contains(
-            defaultMediaTypes,
-            w => w.MediaTypeHeaderValue.MediaType.Equals("application/*+xml")
+        Assert.Contains(defaultMediaTypes, w =>
+            w.MediaTypeHeaderValue.MediaType.Equals("application/*+xml")
         );
         Assert.Contains(defaultMediaTypes, w => w.MediaTypeHeaderValue.MediaType.Equals("text/*"));
     }
@@ -52,9 +48,8 @@ public class HttpLoggingOptionsTests
         var defaultMediaTypes = options.MediaTypeOptions.MediaTypeStates;
         Assert.Equal(6, defaultMediaTypes.Count);
 
-        Assert.Contains(
-            defaultMediaTypes,
-            w => w.MediaTypeHeaderValue.Encoding.WebName.Equals("us-ascii")
+        Assert.Contains(defaultMediaTypes, w =>
+            w.MediaTypeHeaderValue.Encoding.WebName.Equals("us-ascii")
         );
     }
 

@@ -18,33 +18,26 @@ namespace System.Tests
             const int Count = -1;
             const StringSplitOptions Options = StringSplitOptions.None;
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => Value.Split(',', Count)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                Value.Split(',', Count)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => Value.Split(',', Count, Options)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                Value.Split(',', Count, Options)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => Value.Split(new[] { ',' }, Count)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                Value.Split(new[] { ',' }, Count)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => Value.Split(new[] { ',' }, Count, Options)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                Value.Split(new[] { ',' }, Count, Options)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => Value.Split(",", Count)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                Value.Split(",", Count)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => Value.Split(",", Count, Options)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                Value.Split(",", Count, Options)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => Value.Split(new[] { "," }, Count, Options)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                Value.Split(new[] { "," }, Count, Options)
             );
         }
 
@@ -62,54 +55,42 @@ namespace System.Tests
                 }
             )
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "options",
-                    () => Value.Split(',', options)
+                AssertExtensions.Throws<ArgumentException>("options", () =>
+                    Value.Split(',', options)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "options",
-                    () => Value.Split(',', Count, options)
+                AssertExtensions.Throws<ArgumentException>("options", () =>
+                    Value.Split(',', Count, options)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "options",
-                    () => Value.Split(new[] { ',' }, options)
+                AssertExtensions.Throws<ArgumentException>("options", () =>
+                    Value.Split(new[] { ',' }, options)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "options",
-                    () => Value.Split(new[] { ',' }, Count, options)
+                AssertExtensions.Throws<ArgumentException>("options", () =>
+                    Value.Split(new[] { ',' }, Count, options)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "options",
-                    () => Value.Split(",", options)
+                AssertExtensions.Throws<ArgumentException>("options", () =>
+                    Value.Split(",", options)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "options",
-                    () => Value.Split(",", Count, options)
+                AssertExtensions.Throws<ArgumentException>("options", () =>
+                    Value.Split(",", Count, options)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "options",
-                    () => Value.Split(new[] { "," }, options)
+                AssertExtensions.Throws<ArgumentException>("options", () =>
+                    Value.Split(new[] { "," }, options)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "options",
-                    () => Value.Split(new[] { "," }, Count, options)
+                AssertExtensions.Throws<ArgumentException>("options", () =>
+                    Value.Split(new[] { "," }, Count, options)
                 );
 
-                AssertExtensions.Throws<ArgumentException>(
-                    "options",
-                    () => Value.AsSpan().Split(Span<Range>.Empty, ',', options)
+                AssertExtensions.Throws<ArgumentException>("options", () =>
+                    Value.AsSpan().Split(Span<Range>.Empty, ',', options)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "options",
-                    () => Value.AsSpan().Split(Span<Range>.Empty, ",", options)
+                AssertExtensions.Throws<ArgumentException>("options", () =>
+                    Value.AsSpan().Split(Span<Range>.Empty, ",", options)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "options",
-                    () => Value.AsSpan().SplitAny(Span<Range>.Empty, ",", options)
+                AssertExtensions.Throws<ArgumentException>("options", () =>
+                    Value.AsSpan().SplitAny(Span<Range>.Empty, ",", options)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "options",
-                    () => Value.AsSpan().SplitAny(Span<Range>.Empty, new[] { "," }, options)
+                AssertExtensions.Throws<ArgumentException>("options", () =>
+                    Value.AsSpan().SplitAny(Span<Range>.Empty, new[] { "," }, options)
                 );
             }
         }

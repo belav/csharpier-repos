@@ -52,16 +52,10 @@ namespace Microsoft.CodeAnalysis.Host.Mef
             );
             if (!_exportsMap.TryGetValue(key, out var exports))
             {
-                exports = ImmutableInterlocked.GetOrAdd(
-                    ref _exportsMap,
-                    key,
-                    _ =>
-                    {
-                        return _exportProvider
-                            .GetExports<TExtension, TMetadata>()
-                            .ToImmutableArray();
-                    }
-                );
+                exports = ImmutableInterlocked.GetOrAdd(ref _exportsMap, key, _ =>
+                {
+                    return _exportProvider.GetExports<TExtension, TMetadata>().ToImmutableArray();
+                });
             }
 
             return (IEnumerable<Lazy<TExtension, TMetadata>>)exports;
@@ -75,10 +69,8 @@ namespace Microsoft.CodeAnalysis.Host.Mef
             var key = new ExportKey(typeof(TExtension).AssemblyQualifiedName!, "");
             if (!_exportsMap.TryGetValue(key, out var exports))
             {
-                exports = ImmutableInterlocked.GetOrAdd(
-                    ref _exportsMap,
-                    key,
-                    _ => _exportProvider.GetExports<TExtension>().ToImmutableArray()
+                exports = ImmutableInterlocked.GetOrAdd(ref _exportsMap, key, _ =>
+                    _exportProvider.GetExports<TExtension>().ToImmutableArray()
                 );
             }
 

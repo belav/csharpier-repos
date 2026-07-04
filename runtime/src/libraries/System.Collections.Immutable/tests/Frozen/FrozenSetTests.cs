@@ -58,17 +58,14 @@ namespace System.Collections.Frozen.Tests
         [Fact]
         public void NullSource_ThrowsException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((HashSet<T>)null).ToFrozenSet()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((HashSet<T>)null).ToFrozenSet()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((HashSet<T>)null).ToFrozenSet(null)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((HashSet<T>)null).ToFrozenSet(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((HashSet<T>)null).ToFrozenSet(EqualityComparer<T>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((HashSet<T>)null).ToFrozenSet(EqualityComparer<T>.Default)
             );
         }
 

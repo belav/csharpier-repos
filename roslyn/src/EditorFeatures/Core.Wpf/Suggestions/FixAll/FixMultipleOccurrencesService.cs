@@ -114,21 +114,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
             Solution newSolution = null;
             var extensionManager = workspace.Services.GetService<IExtensionManager>();
-            extensionManager.PerformAction(
-                fixAllState.FixAllProvider,
-                () =>
-                {
-                    // We don't need to post process changes here as the inner code action created for Fix multiple code fix already executes.
-                    newSolution = fixMultipleCodeAction
-                        .GetChangedSolutionInternalAsync(
-                            fixAllState.Solution,
-                            progress,
-                            postProcessChanges: false,
-                            cancellationToken
-                        )
-                        .WaitAndGetResult(cancellationToken);
-                }
-            );
+            extensionManager.PerformAction(fixAllState.FixAllProvider, () =>
+            {
+                // We don't need to post process changes here as the inner code action created for Fix multiple code fix already executes.
+                newSolution = fixMultipleCodeAction
+                    .GetChangedSolutionInternalAsync(
+                        fixAllState.Solution,
+                        progress,
+                        postProcessChanges: false,
+                        cancellationToken
+                    )
+                    .WaitAndGetResult(cancellationToken);
+            });
 
             return newSolution;
         }

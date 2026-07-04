@@ -253,20 +253,17 @@ namespace System.IO.Ports.Tests
 
         private void VerifyReadException(Stream serialStream, Type expectedException)
         {
-            Assert.Throws(
-                expectedException,
-                () =>
-                {
-                    IAsyncResult readAsyncResult = serialStream.BeginRead(
-                        new byte[defaultByteArraySize],
-                        0,
-                        defaultByteArraySize,
-                        null,
-                        null
-                    );
-                    readAsyncResult.AsyncWaitHandle.WaitOne();
-                }
-            );
+            Assert.Throws(expectedException, () =>
+            {
+                IAsyncResult readAsyncResult = serialStream.BeginRead(
+                    new byte[defaultByteArraySize],
+                    0,
+                    defaultByteArraySize,
+                    null,
+                    null
+                );
+                readAsyncResult.AsyncWaitHandle.WaitOne();
+            });
         }
 
         private void VerifyParityReplaceByte(int parityReplace, int parityErrorIndex)

@@ -210,19 +210,14 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
         private void ReplaceWithTuple(
             SyntaxEditor editor,
             TAnonymousObjectCreationExpressionSyntax node
-        ) =>
-            editor.ReplaceNode(
-                node,
-                (current, _) =>
-                {
-                    // Use the callback form as anonymous types may be nested, and we want to
-                    // properly replace them even in that case.
-                    if (current is not TAnonymousObjectCreationExpressionSyntax anonCreation)
-                        return current;
+        ) => editor.ReplaceNode(node, (current, _) =>
+            {
+                // Use the callback form as anonymous types may be nested, and we want to
+                // properly replace them even in that case.
+                if (current is not TAnonymousObjectCreationExpressionSyntax anonCreation)
+                    return current;
 
-                    return ConvertToTuple(anonCreation)
-                        .WithAdditionalAnnotations(Formatter.Annotation);
-                }
-            );
+                return ConvertToTuple(anonCreation).WithAdditionalAnnotations(Formatter.Annotation);
+            });
     }
 }

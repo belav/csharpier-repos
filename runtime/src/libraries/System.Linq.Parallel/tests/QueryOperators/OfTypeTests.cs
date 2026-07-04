@@ -84,9 +84,8 @@ namespace System.Linq.Parallel.Tests
         {
             ParallelQuery<int> query = labeled.Item;
             int seen = 0;
-            Assert.All(
-                query.Select(x => (object)x).OfType<int>().ToList(),
-                x => Assert.Equal(seen++, x)
+            Assert.All(query.Select(x => (object)x).OfType<int>().ToList(), x =>
+                Assert.Equal(seen++, x)
             );
             Assert.Equal(count, seen);
         }
@@ -277,9 +276,8 @@ namespace System.Linq.Parallel.Tests
         {
             ParallelQuery<int> query = labeled.Item;
             int seen = count / 2;
-            Assert.All(
-                query.Select(x => x >= count / 2 ? (object)x : null).OfType<int>(),
-                x => Assert.Equal(seen++, x)
+            Assert.All(query.Select(x => x >= count / 2 ? (object)x : null).OfType<int>(), x =>
+                Assert.Equal(seen++, x)
             );
             Assert.Equal(count, seen);
         }
@@ -364,9 +362,8 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void OfType_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<object>)null).OfType<int>()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<object>)null).OfType<int>()
             );
         }
     }

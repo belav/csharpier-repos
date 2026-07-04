@@ -205,88 +205,76 @@ namespace System.Security.AccessControl.Tests
             });
 
             //Case 2, SystemAudit Ace but non AuditFlags
-            AssertExtensions.Throws<ArgumentException>(
-                "auditFlags",
-                () =>
-                {
-                    isContainer = false;
-                    isDS = false;
-                    rawAcl = new RawAcl(0, 1);
-                    systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
-                    systemAcl.SetAudit(
-                        AuditFlags.None,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
-                        ),
-                        1,
-                        InheritanceFlags.None,
-                        PropagationFlags.None
-                    );
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("auditFlags", () =>
+            {
+                isContainer = false;
+                isDS = false;
+                rawAcl = new RawAcl(0, 1);
+                systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
+                systemAcl.SetAudit(
+                    AuditFlags.None,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                    ),
+                    1,
+                    InheritanceFlags.None,
+                    PropagationFlags.None
+                );
+            });
 
             //Case 3, 0 accessMask
-            AssertExtensions.Throws<ArgumentException>(
-                "accessMask",
-                () =>
-                {
-                    isContainer = false;
-                    isDS = false;
-                    rawAcl = new RawAcl(0, 1);
-                    systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
-                    systemAcl.SetAudit(
-                        AuditFlags.Success,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
-                        ),
-                        0,
-                        InheritanceFlags.None,
-                        PropagationFlags.None
-                    );
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("accessMask", () =>
+            {
+                isContainer = false;
+                isDS = false;
+                rawAcl = new RawAcl(0, 1);
+                systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
+                systemAcl.SetAudit(
+                    AuditFlags.Success,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                    ),
+                    0,
+                    InheritanceFlags.None,
+                    PropagationFlags.None
+                );
+            });
 
             //Case 4, non-Container, but InheritanceFlags is not None
-            AssertExtensions.Throws<ArgumentException>(
-                "inheritanceFlags",
-                () =>
-                {
-                    isContainer = false;
-                    isDS = false;
-                    rawAcl = new RawAcl(0, 1);
-                    systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
-                    systemAcl.SetAudit(
-                        AuditFlags.Success,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
-                        ),
-                        1,
-                        InheritanceFlags.ContainerInherit,
-                        PropagationFlags.None
-                    );
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("inheritanceFlags", () =>
+            {
+                isContainer = false;
+                isDS = false;
+                rawAcl = new RawAcl(0, 1);
+                systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
+                systemAcl.SetAudit(
+                    AuditFlags.Success,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                    ),
+                    1,
+                    InheritanceFlags.ContainerInherit,
+                    PropagationFlags.None
+                );
+            });
 
             //Case 5, non-Container, but PropagationFlags is not None
-            AssertExtensions.Throws<ArgumentException>(
-                "propagationFlags",
-                () =>
-                {
-                    isContainer = false;
-                    isDS = false;
-                    rawAcl = new RawAcl(0, 1);
-                    systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
-                    systemAcl.SetAudit(
-                        AuditFlags.Success,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
-                        ),
-                        1,
-                        InheritanceFlags.None,
-                        PropagationFlags.InheritOnly
-                    );
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("propagationFlags", () =>
+            {
+                isContainer = false;
+                isDS = false;
+                rawAcl = new RawAcl(0, 1);
+                systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
+                systemAcl.SetAudit(
+                    AuditFlags.Success,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                    ),
+                    1,
+                    InheritanceFlags.None,
+                    PropagationFlags.InheritOnly
+                );
+            });
 
             //Case 6, set one audit ACE to the SystemAcl with no ACE
             isContainer = true;

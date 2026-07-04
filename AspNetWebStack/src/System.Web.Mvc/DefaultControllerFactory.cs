@@ -229,20 +229,14 @@ namespace System.Web.Mvc
                 return SessionStateBehavior.Default;
             }
 
-            return _sessionStateCache.GetOrAdd(
-                controllerType,
-                type =>
-                {
-                    var attr = type.GetCustomAttributes(
-                            typeof(SessionStateAttribute),
-                            inherit: true
-                        )
-                        .OfType<SessionStateAttribute>()
-                        .FirstOrDefault();
+            return _sessionStateCache.GetOrAdd(controllerType, type =>
+            {
+                var attr = type.GetCustomAttributes(typeof(SessionStateAttribute), inherit: true)
+                    .OfType<SessionStateAttribute>()
+                    .FirstOrDefault();
 
-                    return (attr != null) ? attr.Behavior : SessionStateBehavior.Default;
-                }
-            );
+                return (attr != null) ? attr.Behavior : SessionStateBehavior.Default;
+            });
         }
 
         protected internal virtual Type GetControllerType(

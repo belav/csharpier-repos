@@ -761,9 +761,8 @@ namespace System.ComponentModel.Composition
                 typeof(ImportsListOfExportOfString)
             );
 
-            CompositionAssert.ThrowsError(
-                ErrorId.ImportEngine_PartCannotGetExportedValue,
-                () => container.GetExportedValue<ImportsListOfExportOfString>()
+            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotGetExportedValue, () =>
+                container.GetExportedValue<ImportsListOfExportOfString>()
             );
         }
 

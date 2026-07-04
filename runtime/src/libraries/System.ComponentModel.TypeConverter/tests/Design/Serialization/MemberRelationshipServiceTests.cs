@@ -59,15 +59,13 @@ namespace System.ComponentModel.Design.Serialization.Tests
 
             var service = new TestMemberRelationshipService();
             Assert.Throws<ArgumentNullException>("sourceOwner", () => service[null, member]);
-            Assert.Throws<ArgumentNullException>(
-                "sourceOwner",
-                () => service[null, member] = new MemberRelationship()
+            Assert.Throws<ArgumentNullException>("sourceOwner", () =>
+                service[null, member] = new MemberRelationship()
             );
 
             Assert.Throws<ArgumentException>("source", () => service[new MemberRelationship()]);
-            Assert.Throws<ArgumentException>(
-                "source",
-                () => service[new MemberRelationship()] = new MemberRelationship()
+            Assert.Throws<ArgumentException>("source", () =>
+                service[new MemberRelationship()] = new MemberRelationship()
             );
         }
 
@@ -76,9 +74,8 @@ namespace System.ComponentModel.Design.Serialization.Tests
         {
             var service = new TestMemberRelationshipService();
             Assert.Throws<ArgumentNullException>("sourceMember", () => service[new object(), null]);
-            Assert.Throws<ArgumentNullException>(
-                "sourceMember",
-                () => service[new object(), null] = new MemberRelationship()
+            Assert.Throws<ArgumentNullException>("sourceMember", () =>
+                service[new object(), null] = new MemberRelationship()
             );
         }
 

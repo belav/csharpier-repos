@@ -85,13 +85,11 @@ namespace System.Tests
         [InlineData("name")]
         public static unsafe void ThrowIfNull_Null_ThrowsArgumentNullException(string paramName)
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                paramName,
-                () => ArgumentNullException.ThrowIfNull((object)null, paramName)
+            AssertExtensions.Throws<ArgumentNullException>(paramName, () =>
+                ArgumentNullException.ThrowIfNull((object)null, paramName)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                paramName,
-                () => ArgumentNullException.ThrowIfNull((void*)null, paramName)
+            AssertExtensions.Throws<ArgumentNullException>(paramName, () =>
+                ArgumentNullException.ThrowIfNull((void*)null, paramName)
             );
         }
 
@@ -99,15 +97,13 @@ namespace System.Tests
         public static unsafe void ThrowIfNull_UsesArgumentExpression()
         {
             object someObject = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                nameof(someObject),
-                () => ArgumentNullException.ThrowIfNull(someObject)
+            AssertExtensions.Throws<ArgumentNullException>(nameof(someObject), () =>
+                ArgumentNullException.ThrowIfNull(someObject)
             );
 
             byte* somePointer = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                nameof(somePointer),
-                () => ArgumentNullException.ThrowIfNull(somePointer)
+            AssertExtensions.Throws<ArgumentNullException>(nameof(somePointer), () =>
+                ArgumentNullException.ThrowIfNull(somePointer)
             );
         }
     }

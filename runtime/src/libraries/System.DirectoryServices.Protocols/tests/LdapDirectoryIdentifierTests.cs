@@ -105,29 +105,23 @@ namespace System.DirectoryServices.Protocols.Tests
         [Fact]
         public void Ctor_ServerHasSpaceInName_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new LdapDirectoryIdentifier("se rver")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new LdapDirectoryIdentifier("se rver")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new LdapDirectoryIdentifier("se rver", 0)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new LdapDirectoryIdentifier("se rver", 0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new LdapDirectoryIdentifier("se rver", false, false)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new LdapDirectoryIdentifier("se rver", false, false)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new LdapDirectoryIdentifier("se rver", 0, false, false)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new LdapDirectoryIdentifier("se rver", 0, false, false)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new LdapDirectoryIdentifier(new string[] { "se rver" }, false, false)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new LdapDirectoryIdentifier(new string[] { "se rver" }, false, false)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new LdapDirectoryIdentifier(new string[] { "se rver" }, 0, false, false)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new LdapDirectoryIdentifier(new string[] { "se rver" }, 0, false, false)
             );
         }
     }

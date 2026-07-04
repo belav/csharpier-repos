@@ -158,20 +158,14 @@ public class ShadowFixupTest
             principalEntry.State = entityState;
         }
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependentEntry.Property("CategoryId").CurrentValue);
-                Assert.Same(principal, dependentEntry.Navigation("Category").CurrentValue);
-                Assert.Equal(
-                    new[] { dependent },
-                    principalEntry.Collection("Products").CurrentValue
-                );
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependentEntry.Property("CategoryId").CurrentValue);
+            Assert.Same(principal, dependentEntry.Navigation("Category").CurrentValue);
+            Assert.Equal(new[] { dependent }, principalEntry.Collection("Products").CurrentValue);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -318,17 +312,14 @@ public class ShadowFixupTest
             principalEntry.State = entityState;
         }
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(principal.Id, dependentEntry.Property("ParentId").CurrentValue);
-                Assert.Same(principal, dependentEntry.Navigation("Parent").CurrentValue);
-                Assert.Same(dependent, principalEntry.Navigation("Child").CurrentValue);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, dependentEntry.Property("ParentId").CurrentValue);
+            Assert.Same(principal, dependentEntry.Navigation("Parent").CurrentValue);
+            Assert.Same(dependent, principalEntry.Navigation("Child").CurrentValue);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     private class Parent

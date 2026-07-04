@@ -43,10 +43,8 @@ namespace Microsoft.CodeAnalysis.VisualBasic.CommandLine
                 VisualBasicCompiler.ResponseFileName
             );
             var compiler = new Vbc(responseFile, buildPaths, args, analyzerLoader);
-            return ConsoleUtil.RunWithUtf8Output(
-                compiler.Arguments.Utf8Output,
-                textWriter,
-                tw => compiler.Run(tw)
+            return ConsoleUtil.RunWithUtf8Output(compiler.Arguments.Utf8Output, textWriter, tw =>
+                compiler.Run(tw)
             );
         }
     }

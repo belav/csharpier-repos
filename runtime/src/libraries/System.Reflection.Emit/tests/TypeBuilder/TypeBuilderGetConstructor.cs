@@ -46,10 +46,8 @@ namespace System.Reflection.Emit.Tests
         [Fact]
         public void GetConstructor_TypeNotTypeBuilder_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () =>
-                    TypeBuilder.GetConstructor(typeof(int), typeof(int).GetConstructor(new Type[0]))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                TypeBuilder.GetConstructor(typeof(int), typeof(int).GetConstructor(new Type[0]))
             );
         }
 
@@ -86,9 +84,8 @@ namespace System.Reflection.Emit.Tests
             );
 
             Type genericInt = type1.MakeGenericType(typeof(int));
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => TypeBuilder.GetConstructor(genericInt, ctor2)
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                TypeBuilder.GetConstructor(genericInt, ctor2)
             );
         }
 
@@ -105,9 +102,8 @@ namespace System.Reflection.Emit.Tests
                     | MethodAttributes.RTSpecialName
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "constructor",
-                () => TypeBuilder.GetConstructor(type.AsType(), ctor)
+            AssertExtensions.Throws<ArgumentException>("constructor", () =>
+                TypeBuilder.GetConstructor(type.AsType(), ctor)
             );
         }
     }

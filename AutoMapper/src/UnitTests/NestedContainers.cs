@@ -69,12 +69,10 @@ namespace AutoMapper.UnitTests
 
             protected override void Because_of()
             {
-                _dest = Mapper.Map<Source, Dest>(
-                    new Source { Value = 5, Value2 = 6 },
-                    opt =>
-                        opt.ConstructServicesUsing(type =>
-                            type == typeof(FooResolver) ? new FooResolver(2) : null
-                        )
+                _dest = Mapper.Map<Source, Dest>(new Source { Value = 5, Value2 = 6 }, opt =>
+                    opt.ConstructServicesUsing(type =>
+                        type == typeof(FooResolver) ? new FooResolver(2) : null
+                    )
                 );
             }
 
@@ -138,12 +136,10 @@ namespace AutoMapper.UnitTests
 
             protected override void Because_of()
             {
-                _dest = Mapper.Map<Source, Dest>(
-                    new Source { Value = 5, Value2 = 6 },
-                    opt =>
-                        opt.ConstructServicesUsing(type =>
-                            type == typeof(FooTypeConverter) ? new FooTypeConverter(2) : null
-                        )
+                _dest = Mapper.Map<Source, Dest>(new Source { Value = 5, Value2 = 6 }, opt =>
+                    opt.ConstructServicesUsing(type =>
+                        type == typeof(FooTypeConverter) ? new FooTypeConverter(2) : null
+                    )
                 );
             }
 

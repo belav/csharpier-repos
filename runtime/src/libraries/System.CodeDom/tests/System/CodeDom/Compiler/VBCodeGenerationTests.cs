@@ -26,9 +26,8 @@ namespace System.CodeDom.Compiler.Tests
         {
             Assert.Equal("vb", new VBCodeProvider().FileExtension);
             Assert.Equal("vb", new VBCodeProvider(new Dictionary<string, string>()).FileExtension);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "providerOptions",
-                () => new VBCodeProvider(null)
+            AssertExtensions.Throws<ArgumentNullException>("providerOptions", () =>
+                new VBCodeProvider(null)
             );
         }
 

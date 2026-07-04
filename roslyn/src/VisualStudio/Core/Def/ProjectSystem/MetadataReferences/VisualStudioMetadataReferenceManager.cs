@@ -193,17 +193,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         ArrayBuilder<TemporaryStorageService.TemporaryStreamStorage>.GetInstance(
                             out var storages
                         );
-                    var newMetadata = CreateAssemblyMetadata(
-                        key,
-                        key =>
-                        {
-                            // <exception cref="IOException"/>
-                            // <exception cref="BadImageFormatException" />
-                            GetMetadataFromTemporaryStorage(key, out var storage, out var metadata);
-                            storages.Add(storage);
-                            return metadata;
-                        }
-                    );
+                    var newMetadata = CreateAssemblyMetadata(key, key =>
+                    {
+                        // <exception cref="IOException"/>
+                        // <exception cref="BadImageFormatException" />
+                        GetMetadataFromTemporaryStorage(key, out var storage, out var metadata);
+                        storages.Add(storage);
+                        return metadata;
+                    });
 
                     var storagesArray = storages.ToImmutable();
 
@@ -297,19 +294,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         /// <exception cref="BadImageFormatException" />
         private AssemblyMetadata CreateAssemblyMetadataFromMetadataImporter(FileKey fileKey)
         {
-            return CreateAssemblyMetadata(
-                fileKey,
-                fileKey =>
-                {
-                    var metadata = TryCreateModuleMetadataFromMetadataImporter(fileKey);
+            return CreateAssemblyMetadata(fileKey, fileKey =>
+            {
+                var metadata = TryCreateModuleMetadataFromMetadataImporter(fileKey);
 
-                    // getting metadata didn't work out through importer. fallback to shadow copy one
-                    if (metadata == null)
-                        GetMetadataFromTemporaryStorage(fileKey, out _, out metadata);
+                // getting metadata didn't work out through importer. fallback to shadow copy one
+                if (metadata == null)
+                    GetMetadataFromTemporaryStorage(fileKey, out _, out metadata);
 
-                    return metadata;
-                }
-            );
+                return metadata;
+            });
 
             ModuleMetadata? TryCreateModuleMetadataFromMetadataImporter(FileKey moduleFileKey)
             {

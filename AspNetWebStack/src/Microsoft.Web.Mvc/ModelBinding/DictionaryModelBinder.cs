@@ -15,10 +15,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             IList<KeyValuePair<TKey, TValue>> newCollection
         )
         {
-            CollectionModelBinderUtil.CreateOrReplaceDictionary(
-                bindingContext,
-                newCollection,
-                () => new Dictionary<TKey, TValue>()
+            CollectionModelBinderUtil.CreateOrReplaceDictionary(bindingContext, newCollection, () =>
+                new Dictionary<TKey, TValue>()
             );
             return true;
         }

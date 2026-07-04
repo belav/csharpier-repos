@@ -132,22 +132,17 @@ public abstract partial class ModelBuilderTest
                 actualEntityTypes = actualEntityTypes.OrderBy(p => p.Name);
             }
 
-            Assert.Equal(
-                expectedEntityTypes,
-                actualEntityTypes,
-                (expected, actual) =>
-                    AssertEqual(
-                        expected,
-                        actual,
-                        compareAnnotations
-                            ? expected.GetAnnotations()
-                            : Enumerable.Empty<IAnnotation>(),
-                        compareAnnotations
-                            ? actual.GetAnnotations()
-                            : Enumerable.Empty<IAnnotation>(),
-                        compareBackreferences: false,
-                        compareMemberAnnotations: compareAnnotations
-                    )
+            Assert.Equal(expectedEntityTypes, actualEntityTypes, (expected, actual) =>
+                AssertEqual(
+                    expected,
+                    actual,
+                    compareAnnotations
+                        ? expected.GetAnnotations()
+                        : Enumerable.Empty<IAnnotation>(),
+                    compareAnnotations ? actual.GetAnnotations() : Enumerable.Empty<IAnnotation>(),
+                    compareBackreferences: false,
+                    compareMemberAnnotations: compareAnnotations
+                )
             );
         }
 
@@ -353,22 +348,17 @@ public abstract partial class ModelBuilderTest
                 actualProperties = actualProperties.OrderBy(p => p.Name);
             }
 
-            Assert.Equal(
-                expectedProperties,
-                actualProperties,
-                (expected, actual) =>
-                    AssertEqual(
-                        expected,
-                        actual,
-                        compareAnnotations
-                            ? expected.GetAnnotations()
-                            : Enumerable.Empty<IAnnotation>(),
-                        compareAnnotations
-                            ? actual.GetAnnotations()
-                            : Enumerable.Empty<IAnnotation>(),
-                        compareBackreferences: false,
-                        compareMemberAnnotations: compareAnnotations
-                    )
+            Assert.Equal(expectedProperties, actualProperties, (expected, actual) =>
+                AssertEqual(
+                    expected,
+                    actual,
+                    compareAnnotations
+                        ? expected.GetAnnotations()
+                        : Enumerable.Empty<IAnnotation>(),
+                    compareAnnotations ? actual.GetAnnotations() : Enumerable.Empty<IAnnotation>(),
+                    compareBackreferences: false,
+                    compareMemberAnnotations: compareAnnotations
+                )
             );
         }
 
@@ -455,21 +445,16 @@ public abstract partial class ModelBuilderTest
                 actualProperties = actualProperties.OrderBy(p => p.Name);
             }
 
-            Assert.Equal(
-                expectedProperties,
-                actualProperties,
-                (expected, actual) =>
-                    AssertEqual(
-                        expected,
-                        actual,
-                        compareAnnotations
-                            ? expected.GetAnnotations()
-                            : Enumerable.Empty<IAnnotation>(),
-                        compareAnnotations
-                            ? actual.GetAnnotations()
-                            : Enumerable.Empty<IAnnotation>(),
-                        compareBackreferences: false
-                    )
+            Assert.Equal(expectedProperties, actualProperties, (expected, actual) =>
+                AssertEqual(
+                    expected,
+                    actual,
+                    compareAnnotations
+                        ? expected.GetAnnotations()
+                        : Enumerable.Empty<IAnnotation>(),
+                    compareAnnotations ? actual.GetAnnotations() : Enumerable.Empty<IAnnotation>(),
+                    compareBackreferences: false
+                )
             );
         }
 
@@ -602,21 +587,16 @@ public abstract partial class ModelBuilderTest
                 actualProperties = actualProperties.OrderBy(p => p.Name);
             }
 
-            Assert.Equal(
-                expectedProperties,
-                actualProperties,
-                (expected, actual) =>
-                    AssertEqual(
-                        expected,
-                        actual,
-                        compareAnnotations
-                            ? expected.GetAnnotations()
-                            : Enumerable.Empty<IAnnotation>(),
-                        compareAnnotations
-                            ? actual.GetAnnotations()
-                            : Enumerable.Empty<IAnnotation>(),
-                        compareBackreferences: false
-                    )
+            Assert.Equal(expectedProperties, actualProperties, (expected, actual) =>
+                AssertEqual(
+                    expected,
+                    actual,
+                    compareAnnotations
+                        ? expected.GetAnnotations()
+                        : Enumerable.Empty<IAnnotation>(),
+                    compareAnnotations ? actual.GetAnnotations() : Enumerable.Empty<IAnnotation>(),
+                    compareBackreferences: false
+                )
             );
         }
 
@@ -688,21 +668,16 @@ public abstract partial class ModelBuilderTest
                 actualNavigations = actualNavigations.OrderBy(p => p.Name);
             }
 
-            Assert.Equal(
-                expectedNavigations,
-                actualNavigations,
-                (expected, actual) =>
-                    AssertEqual(
-                        expected,
-                        actual,
-                        compareAnnotations
-                            ? expected.GetAnnotations()
-                            : Enumerable.Empty<IAnnotation>(),
-                        compareAnnotations
-                            ? actual.GetAnnotations()
-                            : Enumerable.Empty<IAnnotation>(),
-                        compareBackreferences: false
-                    )
+            Assert.Equal(expectedNavigations, actualNavigations, (expected, actual) =>
+                AssertEqual(
+                    expected,
+                    actual,
+                    compareAnnotations
+                        ? expected.GetAnnotations()
+                        : Enumerable.Empty<IAnnotation>(),
+                    compareAnnotations ? actual.GetAnnotations() : Enumerable.Empty<IAnnotation>(),
+                    compareBackreferences: false
+                )
             );
         }
 
@@ -795,21 +770,16 @@ public abstract partial class ModelBuilderTest
                 actualNavigations = actualNavigations.OrderBy(p => p.Name);
             }
 
-            Assert.Equal(
-                expectedNavigations,
-                actualNavigations,
-                (expected, actual) =>
-                    AssertEqual(
-                        expected,
-                        actual,
-                        compareAnnotations
-                            ? expected.GetAnnotations()
-                            : Enumerable.Empty<IAnnotation>(),
-                        compareAnnotations
-                            ? actual.GetAnnotations()
-                            : Enumerable.Empty<IAnnotation>(),
-                        compareBackreferences: false
-                    )
+            Assert.Equal(expectedNavigations, actualNavigations, (expected, actual) =>
+                AssertEqual(
+                    expected,
+                    actual,
+                    compareAnnotations
+                        ? expected.GetAnnotations()
+                        : Enumerable.Empty<IAnnotation>(),
+                    compareAnnotations ? actual.GetAnnotations() : Enumerable.Empty<IAnnotation>(),
+                    compareBackreferences: false
+                )
             );
         }
 
@@ -902,21 +872,16 @@ public abstract partial class ModelBuilderTest
                 actualKeys = actualKeys.Order(KeyComparer.Instance);
             }
 
-            Assert.Equal(
-                expectedKeys,
-                actualKeys,
-                (expected, actual) =>
-                    AssertEqual(
-                        expected,
-                        actual,
-                        compareAnnotations
-                            ? expected.GetAnnotations()
-                            : Enumerable.Empty<IAnnotation>(),
-                        compareAnnotations
-                            ? actual.GetAnnotations()
-                            : Enumerable.Empty<IAnnotation>(),
-                        compareBackreferences: false
-                    )
+            Assert.Equal(expectedKeys, actualKeys, (expected, actual) =>
+                AssertEqual(
+                    expected,
+                    actual,
+                    compareAnnotations
+                        ? expected.GetAnnotations()
+                        : Enumerable.Empty<IAnnotation>(),
+                    compareAnnotations ? actual.GetAnnotations() : Enumerable.Empty<IAnnotation>(),
+                    compareBackreferences: false
+                )
             );
         }
 
@@ -995,22 +960,17 @@ public abstract partial class ModelBuilderTest
                 actualForeignKey = actualForeignKey.Order(ForeignKeyComparer.Instance);
             }
 
-            Assert.Equal(
-                expectedForeignKey,
-                actualForeignKey,
-                (expected, actual) =>
-                    AssertEqual(
-                        expected,
-                        actual,
-                        compareAnnotations
-                            ? expected.GetAnnotations()
-                            : Enumerable.Empty<IAnnotation>(),
-                        compareAnnotations
-                            ? actual.GetAnnotations()
-                            : Enumerable.Empty<IAnnotation>(),
-                        compareBackreferences: false,
-                        compareMemberAnnotations: compareAnnotations
-                    )
+            Assert.Equal(expectedForeignKey, actualForeignKey, (expected, actual) =>
+                AssertEqual(
+                    expected,
+                    actual,
+                    compareAnnotations
+                        ? expected.GetAnnotations()
+                        : Enumerable.Empty<IAnnotation>(),
+                    compareAnnotations ? actual.GetAnnotations() : Enumerable.Empty<IAnnotation>(),
+                    compareBackreferences: false,
+                    compareMemberAnnotations: compareAnnotations
+                )
             );
         }
 
@@ -1126,21 +1086,16 @@ public abstract partial class ModelBuilderTest
                 actualIndex = actualIndex.Order(IndexComparer.Instance);
             }
 
-            Assert.Equal(
-                expectedIndex,
-                actualIndex,
-                (expected, actual) =>
-                    AssertEqual(
-                        expected,
-                        actual,
-                        compareAnnotations
-                            ? expected.GetAnnotations()
-                            : Enumerable.Empty<IAnnotation>(),
-                        compareAnnotations
-                            ? actual.GetAnnotations()
-                            : Enumerable.Empty<IAnnotation>(),
-                        compareBackreferences: false
-                    )
+            Assert.Equal(expectedIndex, actualIndex, (expected, actual) =>
+                AssertEqual(
+                    expected,
+                    actual,
+                    compareAnnotations
+                        ? expected.GetAnnotations()
+                        : Enumerable.Empty<IAnnotation>(),
+                    compareAnnotations ? actual.GetAnnotations() : Enumerable.Empty<IAnnotation>(),
+                    compareBackreferences: false
+                )
             );
         }
 

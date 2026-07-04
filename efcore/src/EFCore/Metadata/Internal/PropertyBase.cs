@@ -360,20 +360,15 @@ public abstract class PropertyBase
     /// </summary>
     public virtual PropertyIndexes PropertyIndexes
     {
-        get =>
-            NonCapturingLazyInitializer.EnsureInitialized(
-                ref _indexes,
-                this,
-                static property =>
-                {
-                    property.EnsureReadOnly();
-                    _ = (
-                        (IRuntimeEntityType)(
-                            ((IRuntimeTypeBase)property.DeclaringType).ContainingEntityType
-                        )
-                    ).Counts;
-                }
-            );
+        get => NonCapturingLazyInitializer.EnsureInitialized(ref _indexes, this, static property =>
+            {
+                property.EnsureReadOnly();
+                _ = (
+                    (IRuntimeEntityType)(
+                        ((IRuntimeTypeBase)property.DeclaringType).ContainingEntityType
+                    )
+                ).Counts;
+            });
         set => NonCapturingLazyInitializer.EnsureInitialized(ref _indexes, value);
     }
 
@@ -384,15 +379,11 @@ public abstract class PropertyBase
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual IClrPropertyGetter Getter =>
-        NonCapturingLazyInitializer.EnsureInitialized(
-            ref _getter,
-            this,
-            static property =>
-            {
-                property.EnsureReadOnly();
-                return new ClrPropertyGetterFactory().Create(property);
-            }
-        );
+        NonCapturingLazyInitializer.EnsureInitialized(ref _getter, this, static property =>
+        {
+            property.EnsureReadOnly();
+            return new ClrPropertyGetterFactory().Create(property);
+        });
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -401,15 +392,11 @@ public abstract class PropertyBase
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual IClrPropertySetter GetSetter() =>
-        NonCapturingLazyInitializer.EnsureInitialized(
-            ref _setter,
-            this,
-            static property =>
-            {
-                property.EnsureReadOnly();
-                return new ClrPropertySetterFactory().Create(property);
-            }
-        );
+        NonCapturingLazyInitializer.EnsureInitialized(ref _setter, this, static property =>
+        {
+            property.EnsureReadOnly();
+            return new ClrPropertySetterFactory().Create(property);
+        });
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -435,15 +422,11 @@ public abstract class PropertyBase
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual PropertyAccessors Accessors =>
-        NonCapturingLazyInitializer.EnsureInitialized(
-            ref _accessors,
-            this,
-            static property =>
-            {
-                property.EnsureReadOnly();
-                return new PropertyAccessorsFactory().Create(property);
-            }
-        );
+        NonCapturingLazyInitializer.EnsureInitialized(ref _accessors, this, static property =>
+        {
+            property.EnsureReadOnly();
+            return new PropertyAccessorsFactory().Create(property);
+        });
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -67,17 +67,15 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 foreach (var pair in CreateUniqueTokenTriviaPairs(tokenPairs, triviaPairs))
                 {
                     var localCopy = pair;
-                    var previousToken = map.GetOrAdd(
-                        localCopy.Item1.PreviousToken,
-                        _ => localCopy.Item1.PreviousToken
+                    var previousToken = map.GetOrAdd(localCopy.Item1.PreviousToken, _ =>
+                        localCopy.Item1.PreviousToken
                     );
                     map[localCopy.Item1.PreviousToken] = previousToken.WithTrailingTrivia(
                         localCopy.Item2.TrailingTrivia
                     );
 
-                    var nextToken = map.GetOrAdd(
-                        localCopy.Item1.NextToken,
-                        _ => localCopy.Item1.NextToken
+                    var nextToken = map.GetOrAdd(localCopy.Item1.NextToken, _ =>
+                        localCopy.Item1.NextToken
                     );
                     map[localCopy.Item1.NextToken] = nextToken.WithLeadingTrivia(
                         localCopy.Item2.LeadingTrivia

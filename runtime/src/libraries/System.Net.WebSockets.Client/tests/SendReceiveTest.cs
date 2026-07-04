@@ -291,19 +291,16 @@ namespace System.Net.WebSockets.Client.Tests
                 var expectedException = new ArgumentException(expectedInnerMessage, "messageType");
                 string expectedMessage = expectedException.Message;
 
-                AssertExtensions.Throws<ArgumentException>(
-                    "messageType",
-                    () =>
-                    {
-                        Task t = SendAsync(
-                            cws,
-                            new ArraySegment<byte>(),
-                            WebSocketMessageType.Close,
-                            true,
-                            cts.Token
-                        );
-                    }
-                );
+                AssertExtensions.Throws<ArgumentException>("messageType", () =>
+                {
+                    Task t = SendAsync(
+                        cws,
+                        new ArraySegment<byte>(),
+                        WebSocketMessageType.Close,
+                        true,
+                        cts.Token
+                    );
+                });
 
                 Assert.Equal(WebSocketState.Open, cws.State);
             }

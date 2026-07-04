@@ -1301,562 +1301,418 @@ namespace System.Globalization.Tests
         public void LastIndexOf_Invalid()
         {
             // Source is null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => s_invariantCompare.LastIndexOf(null, "a")
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                s_invariantCompare.LastIndexOf(null, "a")
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => s_invariantCompare.LastIndexOf(null, "a", CompareOptions.None)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                s_invariantCompare.LastIndexOf(null, "a", CompareOptions.None)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => s_invariantCompare.LastIndexOf(null, "a", 0, 0)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                s_invariantCompare.LastIndexOf(null, "a", 0, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => s_invariantCompare.LastIndexOf(null, "a", 0, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                s_invariantCompare.LastIndexOf(null, "a", 0, CompareOptions.None)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => s_invariantCompare.LastIndexOf(null, "a", 0, 0, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                s_invariantCompare.LastIndexOf(null, "a", 0, 0, CompareOptions.None)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => s_invariantCompare.LastIndexOf(null, 'a')
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                s_invariantCompare.LastIndexOf(null, 'a')
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => s_invariantCompare.LastIndexOf(null, 'a', CompareOptions.None)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                s_invariantCompare.LastIndexOf(null, 'a', CompareOptions.None)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => s_invariantCompare.LastIndexOf(null, 'a', 0, 0)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                s_invariantCompare.LastIndexOf(null, 'a', 0, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => s_invariantCompare.LastIndexOf(null, 'a', 0, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                s_invariantCompare.LastIndexOf(null, 'a', 0, CompareOptions.None)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => s_invariantCompare.LastIndexOf(null, 'a', 0, 0, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                s_invariantCompare.LastIndexOf(null, 'a', 0, 0, CompareOptions.None)
             );
 
             // Value is null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => s_invariantCompare.LastIndexOf("", null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                s_invariantCompare.LastIndexOf("", null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => s_invariantCompare.LastIndexOf("", null, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                s_invariantCompare.LastIndexOf("", null, CompareOptions.None)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => s_invariantCompare.LastIndexOf("", null, 0, 0)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                s_invariantCompare.LastIndexOf("", null, 0, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => s_invariantCompare.LastIndexOf("", null, 0, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                s_invariantCompare.LastIndexOf("", null, 0, CompareOptions.None)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => s_invariantCompare.LastIndexOf("", null, 0, 0, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                s_invariantCompare.LastIndexOf("", null, 0, 0, CompareOptions.None)
             );
 
             // Source and value are null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => s_invariantCompare.LastIndexOf(null, null)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                s_invariantCompare.LastIndexOf(null, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => s_invariantCompare.LastIndexOf(null, null, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                s_invariantCompare.LastIndexOf(null, null, CompareOptions.None)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => s_invariantCompare.LastIndexOf(null, null, 0, 0)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                s_invariantCompare.LastIndexOf(null, null, 0, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => s_invariantCompare.LastIndexOf(null, null, 0, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                s_invariantCompare.LastIndexOf(null, null, 0, CompareOptions.None)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => s_invariantCompare.LastIndexOf(null, null, 0, 0, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                s_invariantCompare.LastIndexOf(null, null, 0, 0, CompareOptions.None)
             );
 
             // Options are invalid
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () => s_invariantCompare.LastIndexOf("Test's", "Tests", CompareOptions.StringSort)
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf("Test's", "Tests", CompareOptions.StringSort)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf("Test's", "Tests", 0, CompareOptions.StringSort)
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf("Test's", "Tests", 0, CompareOptions.StringSort)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf(
-                        "Test's",
-                        "Tests",
-                        0,
-                        1,
-                        CompareOptions.StringSort
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf("Test's", "Tests", 0, 1, CompareOptions.StringSort)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () => s_invariantCompare.LastIndexOf("Test's", 'a', CompareOptions.StringSort)
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf("Test's", 'a', CompareOptions.StringSort)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () => s_invariantCompare.LastIndexOf("Test's", 'a', 0, CompareOptions.StringSort)
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf("Test's", 'a', 0, CompareOptions.StringSort)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () => s_invariantCompare.LastIndexOf("Test's", 'a', 0, 1, CompareOptions.StringSort)
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf("Test's", 'a', 0, 1, CompareOptions.StringSort)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf(
-                        "Test's",
-                        "a".AsSpan(),
-                        CompareOptions.StringSort
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf("Test's", "a".AsSpan(), CompareOptions.StringSort)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf(
-                        "Test's",
-                        "a".AsSpan(),
-                        CompareOptions.StringSort,
-                        out int matchLength
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf(
+                    "Test's",
+                    "a".AsSpan(),
+                    CompareOptions.StringSort,
+                    out int matchLength
+                )
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf(
-                        "Test's",
-                        "Tests",
-                        CompareOptions.Ordinal | CompareOptions.IgnoreWidth
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf(
+                    "Test's",
+                    "Tests",
+                    CompareOptions.Ordinal | CompareOptions.IgnoreWidth
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf(
-                        "Test's",
-                        "Tests",
-                        0,
-                        CompareOptions.Ordinal | CompareOptions.IgnoreWidth
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf(
+                    "Test's",
+                    "Tests",
+                    0,
+                    CompareOptions.Ordinal | CompareOptions.IgnoreWidth
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf(
-                        "Test's",
-                        "Tests",
-                        0,
-                        1,
-                        CompareOptions.Ordinal | CompareOptions.IgnoreWidth
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf(
+                    "Test's",
+                    "Tests",
+                    0,
+                    1,
+                    CompareOptions.Ordinal | CompareOptions.IgnoreWidth
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf(
-                        "Test's",
-                        'a',
-                        CompareOptions.Ordinal | CompareOptions.IgnoreWidth
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf(
+                    "Test's",
+                    'a',
+                    CompareOptions.Ordinal | CompareOptions.IgnoreWidth
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf(
-                        "Test's",
-                        'a',
-                        0,
-                        CompareOptions.Ordinal | CompareOptions.IgnoreWidth
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf(
+                    "Test's",
+                    'a',
+                    0,
+                    CompareOptions.Ordinal | CompareOptions.IgnoreWidth
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf(
-                        "Test's",
-                        'a',
-                        0,
-                        1,
-                        CompareOptions.Ordinal | CompareOptions.IgnoreWidth
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf(
+                    "Test's",
+                    'a',
+                    0,
+                    1,
+                    CompareOptions.Ordinal | CompareOptions.IgnoreWidth
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf(
-                        "Test's",
-                        "a".AsSpan(),
-                        CompareOptions.Ordinal | CompareOptions.IgnoreWidth
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf(
+                    "Test's",
+                    "a".AsSpan(),
+                    CompareOptions.Ordinal | CompareOptions.IgnoreWidth
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf(
-                        "Test's",
-                        "a".AsSpan(),
-                        CompareOptions.Ordinal | CompareOptions.IgnoreWidth,
-                        out int matchLength
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf(
+                    "Test's",
+                    "a".AsSpan(),
+                    CompareOptions.Ordinal | CompareOptions.IgnoreWidth,
+                    out int matchLength
+                )
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf(
-                        "Test's",
-                        "Tests",
-                        CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreWidth
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf(
+                    "Test's",
+                    "Tests",
+                    CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreWidth
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf(
-                        "Test's",
-                        "Tests",
-                        0,
-                        CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreWidth
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf(
+                    "Test's",
+                    "Tests",
+                    0,
+                    CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreWidth
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf(
-                        "Test's",
-                        "Tests",
-                        0,
-                        1,
-                        CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreWidth
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf(
+                    "Test's",
+                    "Tests",
+                    0,
+                    1,
+                    CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreWidth
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf(
-                        "Test's",
-                        'a',
-                        CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreWidth
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf(
+                    "Test's",
+                    'a',
+                    CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreWidth
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf(
-                        "Test's",
-                        'a',
-                        0,
-                        CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreWidth
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf(
+                    "Test's",
+                    'a',
+                    0,
+                    CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreWidth
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf(
-                        "Test's",
-                        'a',
-                        0,
-                        1,
-                        CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreWidth
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf(
+                    "Test's",
+                    'a',
+                    0,
+                    1,
+                    CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreWidth
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf(
-                        "Test's",
-                        "a".AsSpan(),
-                        CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreWidth
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf(
+                    "Test's",
+                    "a".AsSpan(),
+                    CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreWidth
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf(
-                        "Test's",
-                        "a".AsSpan(),
-                        CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreWidth,
-                        out int matchLength
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf(
+                    "Test's",
+                    "a".AsSpan(),
+                    CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreWidth,
+                    out int matchLength
+                )
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () => s_invariantCompare.LastIndexOf("Test's", "Tests", (CompareOptions)(-1))
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf("Test's", "Tests", (CompareOptions)(-1))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () => s_invariantCompare.LastIndexOf("Test's", "Tests", 0, (CompareOptions)(-1))
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf("Test's", "Tests", 0, (CompareOptions)(-1))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () => s_invariantCompare.LastIndexOf("Test's", "Tests", 0, 1, (CompareOptions)(-1))
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf("Test's", "Tests", 0, 1, (CompareOptions)(-1))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () => s_invariantCompare.LastIndexOf("Test's", "Tests", (CompareOptions)(-1))
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf("Test's", "Tests", (CompareOptions)(-1))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () => s_invariantCompare.LastIndexOf("Test's", 'a', 0, (CompareOptions)(-1))
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf("Test's", 'a', 0, (CompareOptions)(-1))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () => s_invariantCompare.LastIndexOf("Test's", 'a', 0, 1, (CompareOptions)(-1))
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf("Test's", 'a', 0, 1, (CompareOptions)(-1))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () => s_invariantCompare.LastIndexOf("Test's", "a".AsSpan(), (CompareOptions)(-1))
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf("Test's", "a".AsSpan(), (CompareOptions)(-1))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf(
-                        "Test's",
-                        "a".AsSpan(),
-                        (CompareOptions)(-1),
-                        out int matchLength
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf(
+                    "Test's",
+                    "a".AsSpan(),
+                    (CompareOptions)(-1),
+                    out int matchLength
+                )
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () => s_invariantCompare.LastIndexOf("Test's", "Tests", (CompareOptions)0x11111111)
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf("Test's", "Tests", (CompareOptions)0x11111111)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf("Test's", "Tests", 0, (CompareOptions)0x11111111)
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf("Test's", "Tests", 0, (CompareOptions)0x11111111)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf(
-                        "Test's",
-                        "Tests",
-                        0,
-                        1,
-                        (CompareOptions)0x11111111
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf("Test's", "Tests", 0, 1, (CompareOptions)0x11111111)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () => s_invariantCompare.LastIndexOf("Test's", 'a', (CompareOptions)0x11111111)
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf("Test's", 'a', (CompareOptions)0x11111111)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () => s_invariantCompare.LastIndexOf("Test's", 'a', 0, (CompareOptions)0x11111111)
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf("Test's", 'a', 0, (CompareOptions)0x11111111)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf("Test's", 'a', 0, 1, (CompareOptions)0x11111111)
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf("Test's", 'a', 0, 1, (CompareOptions)0x11111111)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf(
-                        "Test's",
-                        "a".AsSpan(),
-                        (CompareOptions)0x11111111
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf("Test's", "a".AsSpan(), (CompareOptions)0x11111111)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.LastIndexOf(
-                        "Test's",
-                        "a".AsSpan(),
-                        (CompareOptions)0x11111111,
-                        out int matchLength
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.LastIndexOf(
+                    "Test's",
+                    "a".AsSpan(),
+                    (CompareOptions)0x11111111,
+                    out int matchLength
+                )
             );
 
             // StartIndex < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => s_invariantCompare.LastIndexOf("Test", "Test", -1, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                s_invariantCompare.LastIndexOf("Test", "Test", -1, CompareOptions.None)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => s_invariantCompare.LastIndexOf("Test", "Test", -1, 2)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                s_invariantCompare.LastIndexOf("Test", "Test", -1, 2)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => s_invariantCompare.LastIndexOf("Test", "Test", -1, 2, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                s_invariantCompare.LastIndexOf("Test", "Test", -1, 2, CompareOptions.None)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => s_invariantCompare.LastIndexOf("Test", 'a', -1, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                s_invariantCompare.LastIndexOf("Test", 'a', -1, CompareOptions.None)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => s_invariantCompare.LastIndexOf("Test", 'a', -1, 2)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                s_invariantCompare.LastIndexOf("Test", 'a', -1, 2)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => s_invariantCompare.LastIndexOf("Test", 'a', -1, 2, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                s_invariantCompare.LastIndexOf("Test", 'a', -1, 2, CompareOptions.None)
             );
 
             // StartIndex >= source.Length
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => s_invariantCompare.LastIndexOf("Test", "Test", 5, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                s_invariantCompare.LastIndexOf("Test", "Test", 5, CompareOptions.None)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => s_invariantCompare.LastIndexOf("Test", "Test", 5, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                s_invariantCompare.LastIndexOf("Test", "Test", 5, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => s_invariantCompare.LastIndexOf("Test", "Test", 5, 0, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                s_invariantCompare.LastIndexOf("Test", "Test", 5, 0, CompareOptions.None)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => s_invariantCompare.LastIndexOf("Test", 'a', 5, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                s_invariantCompare.LastIndexOf("Test", 'a', 5, CompareOptions.None)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => s_invariantCompare.LastIndexOf("Test", 'a', 5, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                s_invariantCompare.LastIndexOf("Test", 'a', 5, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => s_invariantCompare.LastIndexOf("Test", 'a', 5, 0, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                s_invariantCompare.LastIndexOf("Test", 'a', 5, 0, CompareOptions.None)
             );
 
             // Count < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", "Test", 0, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", "Test", 0, -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", "Test", 0, -1, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", "Test", 0, -1, CompareOptions.None)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", 'a', 0, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", 'a', 0, -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", 'a', 0, -1, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", 'a', 0, -1, CompareOptions.None)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", "Test", 4, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", "Test", 4, -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", "Test", 4, -1, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", "Test", 4, -1, CompareOptions.None)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", 'a', 4, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", 'a', 4, -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", 'a', 4, -1, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", 'a', 4, -1, CompareOptions.None)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", "", 4, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", "", 4, -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", "", 4, -1, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", "", 4, -1, CompareOptions.None)
             );
 
             // Count > source.Length
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", "Test", 0, 5)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", "Test", 0, 5)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", "Test", 0, 5, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", "Test", 0, 5, CompareOptions.None)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", 'a', 0, 5)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", 'a', 0, 5)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", 'a', 0, 5, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", 'a', 0, 5, CompareOptions.None)
             );
 
             // StartIndex + count > source.Length + 1
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", "Test", 3, 5)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", "Test", 3, 5)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", "Test", 3, 5, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", "Test", 3, 5, CompareOptions.None)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", 'a', 3, 5)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", 'a', 3, 5)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", 'a', 3, 5, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", 'a', 3, 5, CompareOptions.None)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", "s", 4, 6)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", "s", 4, 6)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", "s", 4, 7, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", "s", 4, 7, CompareOptions.None)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", 's', 4, 6)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", 's', 4, 6)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", 's', 4, 7, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", 's', 4, 7, CompareOptions.None)
             );
 
             // Count > StartIndex + 1
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", "e", 1, 3)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", "e", 1, 3)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", "e", 1, 3, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", "e", 1, 3, CompareOptions.None)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", 'e', 1, 3)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", 'e', 1, 3)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => s_invariantCompare.LastIndexOf("Test", 'e', 1, 3, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                s_invariantCompare.LastIndexOf("Test", 'e', 1, 3, CompareOptions.None)
             );
         }
 

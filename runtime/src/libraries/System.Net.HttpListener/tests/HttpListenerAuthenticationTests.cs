@@ -383,9 +383,8 @@ namespace System.Net.Tests
         {
             using (var listener = new HttpListener())
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "value",
-                    () => listener.ExtendedProtectionPolicy = null
+                AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                    listener.ExtendedProtectionPolicy = null
                 );
             }
         }
@@ -408,10 +407,8 @@ namespace System.Net.Tests
                     PolicyEnforcement.Always,
                     new CustomChannelBinding()
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "value",
-                    "CustomChannelBinding",
-                    () => listener.ExtendedProtectionPolicy = protectionPolicy
+                AssertExtensions.Throws<ArgumentException>("value", "CustomChannelBinding", () =>
+                    listener.ExtendedProtectionPolicy = protectionPolicy
                 );
             }
         }
@@ -450,10 +447,8 @@ namespace System.Net.Tests
         {
             using (var listener = new HttpListener())
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "value",
-                    null,
-                    () => listener.ExtendedProtectionSelectorDelegate = null
+                AssertExtensions.Throws<ArgumentNullException>("value", null, () =>
+                    listener.ExtendedProtectionSelectorDelegate = null
                 );
             }
         }

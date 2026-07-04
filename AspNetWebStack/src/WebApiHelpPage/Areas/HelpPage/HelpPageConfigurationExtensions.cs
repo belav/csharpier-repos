@@ -365,9 +365,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         )
         {
             return (ModelDescriptionGenerator)
-                config.Properties.GetOrAdd(
-                    typeof(ModelDescriptionGenerator),
-                    k => InitializeModelDescriptionGenerator(config)
+                config.Properties.GetOrAdd(typeof(ModelDescriptionGenerator), k =>
+                    InitializeModelDescriptionGenerator(config)
                 );
         }
 

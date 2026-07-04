@@ -91,22 +91,16 @@ public class When_mapping_with_lowercae_naming_conventions_two_ways_in_profiles 
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>
         {
-            cfg.CreateProfile(
-                "MyMapperProfile",
-                prf =>
-                {
-                    prf.SourceMemberNamingConvention = new LowerUnderscoreNamingConvention();
-                    prf.CreateMap<Neda, Dario>();
-                }
-            );
-            cfg.CreateProfile(
-                "MyMapperProfile2",
-                prf =>
-                {
-                    prf.DestinationMemberNamingConvention = new LowerUnderscoreNamingConvention();
-                    prf.CreateMap<Dario, Neda>();
-                }
-            );
+            cfg.CreateProfile("MyMapperProfile", prf =>
+            {
+                prf.SourceMemberNamingConvention = new LowerUnderscoreNamingConvention();
+                prf.CreateMap<Neda, Dario>();
+            });
+            cfg.CreateProfile("MyMapperProfile2", prf =>
+            {
+                prf.DestinationMemberNamingConvention = new LowerUnderscoreNamingConvention();
+                prf.CreateMap<Dario, Neda>();
+            });
         });
 
     protected override void Because_of()

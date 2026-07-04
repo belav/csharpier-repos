@@ -50,29 +50,23 @@ public class HttpsTests : LoggedTest
         var serverOptions = CreateServerOptions();
         serverOptions.TestOverrideDefaultCertificate = _x509Certificate2;
 
-        serverOptions.ListenLocalhost(
-            5000,
-            options =>
-            {
-                options.UseHttps();
-            }
-        );
+        serverOptions.ListenLocalhost(5000, options =>
+        {
+            options.UseHttps();
+        });
 
         Assert.False(serverOptions.IsDevelopmentCertificateLoaded);
 
         var ranUseHttpsAction = false;
-        serverOptions.ListenLocalhost(
-            5001,
-            options =>
+        serverOptions.ListenLocalhost(5001, options =>
+        {
+            options.UseHttps(opt =>
             {
-                options.UseHttps(opt =>
-                {
-                    // The default cert is applied after UseHttps.
-                    Assert.Null(opt.ServerCertificate);
-                    ranUseHttpsAction = true;
-                });
-            }
-        );
+                // The default cert is applied after UseHttps.
+                Assert.Null(opt.ServerCertificate);
+                ranUseHttpsAction = true;
+            });
+        });
 
         Assert.True(ranUseHttpsAction);
         Assert.False(serverOptions.IsDevelopmentCertificateLoaded);
@@ -140,21 +134,15 @@ public class HttpsTests : LoggedTest
             options.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
         });
         var ranUseHttpsAction = false;
-        serverOptions.ListenLocalhost(
-            5000,
-            options =>
+        serverOptions.ListenLocalhost(5000, options =>
+        {
+            options.UseHttps(opt =>
             {
-                options.UseHttps(opt =>
-                {
-                    Assert.Equal(_x509Certificate2, opt.ServerCertificate);
-                    Assert.Equal(
-                        ClientCertificateMode.RequireCertificate,
-                        opt.ClientCertificateMode
-                    );
-                    ranUseHttpsAction = true;
-                });
-            }
-        );
+                Assert.Equal(_x509Certificate2, opt.ServerCertificate);
+                Assert.Equal(ClientCertificateMode.RequireCertificate, opt.ClientCertificateMode);
+                ranUseHttpsAction = true;
+            });
+        });
 
         Assert.True(ranUseHttpsAction);
 
@@ -178,22 +166,16 @@ public class HttpsTests : LoggedTest
             options.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
         });
         var ranUseHttpsAction = false;
-        serverOptions.ListenLocalhost(
-            5000,
-            options =>
+        serverOptions.ListenLocalhost(5000, options =>
+        {
+            options.UseHttps(opt =>
             {
-                options.UseHttps(opt =>
-                {
-                    Assert.Null(opt.ServerCertificate);
-                    Assert.NotNull(opt.ServerCertificateSelector);
-                    Assert.Equal(
-                        ClientCertificateMode.RequireCertificate,
-                        opt.ClientCertificateMode
-                    );
-                    ranUseHttpsAction = true;
-                });
-            }
-        );
+                Assert.Null(opt.ServerCertificate);
+                Assert.NotNull(opt.ServerCertificateSelector);
+                Assert.Equal(ClientCertificateMode.RequireCertificate, opt.ClientCertificateMode);
+                ranUseHttpsAction = true;
+            });
+        });
 
         Assert.True(ranUseHttpsAction);
 
@@ -554,14 +536,11 @@ public class HttpsTests : LoggedTest
                 testContext,
                 serverOptions =>
                 {
-                    serverOptions.ListenLocalhost(
-                        5001,
-                        listenOptions =>
-                        {
-                            listenOptions.Protocols = HttpProtocols.Http3;
-                            listenOptions.UseHttps();
-                        }
-                    );
+                    serverOptions.ListenLocalhost(5001, listenOptions =>
+                    {
+                        listenOptions.Protocols = HttpProtocols.Http3;
+                        listenOptions.UseHttps();
+                    });
                 },
                 services =>
                 {
@@ -608,14 +587,11 @@ public class HttpsTests : LoggedTest
                     {
                         https.ServerCertificate = _x509Certificate2;
                     });
-                    serverOptions.ListenLocalhost(
-                        5001,
-                        listenOptions =>
-                        {
-                            listenOptions.Protocols = HttpProtocols.Http3;
-                            listenOptions.UseHttps();
-                        }
-                    );
+                    serverOptions.ListenLocalhost(5001, listenOptions =>
+                    {
+                        listenOptions.Protocols = HttpProtocols.Http3;
+                        listenOptions.UseHttps();
+                    });
                 },
                 services =>
                 {
@@ -659,13 +635,10 @@ public class HttpsTests : LoggedTest
                 testContext,
                 serverOptions =>
                 {
-                    serverOptions.ListenLocalhost(
-                        5001,
-                        listenOptions =>
-                        {
-                            listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
-                        }
-                    );
+                    serverOptions.ListenLocalhost(5001, listenOptions =>
+                    {
+                        listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
+                    });
                 },
                 services =>
                 {
@@ -701,13 +674,10 @@ public class HttpsTests : LoggedTest
                 testContext,
                 serverOptions =>
                 {
-                    serverOptions.ListenLocalhost(
-                        5001,
-                        listenOptions =>
-                        {
-                            listenOptions.Protocols = HttpProtocols.Http3;
-                        }
-                    );
+                    serverOptions.ListenLocalhost(5001, listenOptions =>
+                    {
+                        listenOptions.Protocols = HttpProtocols.Http3;
+                    });
                 },
                 services =>
                 {
@@ -744,27 +714,22 @@ public class HttpsTests : LoggedTest
                 testContext,
                 serverOptions =>
                 {
-                    serverOptions.ListenLocalhost(
-                        5001,
-                        listenOptions =>
-                        {
-                            listenOptions.Protocols = HttpProtocols.Http3;
-                            listenOptions.UseHttps(
-                                (
-                                    SslStream stream,
-                                    SslClientHelloInfo clientHelloInfo,
-                                    object state,
-                                    CancellationToken cancellationToken
-                                ) =>
-                                {
-                                    return ValueTask.FromResult(
-                                        new SslServerAuthenticationOptions()
-                                    );
-                                },
-                                state: testState
-                            );
-                        }
-                    );
+                    serverOptions.ListenLocalhost(5001, listenOptions =>
+                    {
+                        listenOptions.Protocols = HttpProtocols.Http3;
+                        listenOptions.UseHttps(
+                            (
+                                SslStream stream,
+                                SslClientHelloInfo clientHelloInfo,
+                                object state,
+                                CancellationToken cancellationToken
+                            ) =>
+                            {
+                                return ValueTask.FromResult(new SslServerAuthenticationOptions());
+                            },
+                            state: testState
+                        );
+                    });
                 },
                 services =>
                 {
@@ -780,9 +745,8 @@ public class HttpsTests : LoggedTest
         var tlsOptions = bindFeatures.Get<TlsConnectionCallbackOptions>();
         Assert.NotNull(tlsOptions);
 
-        Assert.Collection(
-            tlsOptions.ApplicationProtocols,
-            p => Assert.Equal(SslApplicationProtocol.Http3, p)
+        Assert.Collection(tlsOptions.ApplicationProtocols, p =>
+            Assert.Equal(SslApplicationProtocol.Http3, p)
         );
 
         Assert.Equal(testState, tlsOptions.OnConnectionState);
@@ -810,25 +774,22 @@ public class HttpsTests : LoggedTest
                 testContext,
                 serverOptions =>
                 {
-                    serverOptions.ListenLocalhost(
-                        5001,
-                        listenOptions =>
-                        {
-                            listenOptions.Protocols = HttpProtocols.Http3;
-                            listenOptions.UseHttps(
-                                new TlsHandshakeCallbackOptions()
+                    serverOptions.ListenLocalhost(5001, listenOptions =>
+                    {
+                        listenOptions.Protocols = HttpProtocols.Http3;
+                        listenOptions.UseHttps(
+                            new TlsHandshakeCallbackOptions()
+                            {
+                                OnConnection = context =>
                                 {
-                                    OnConnection = context =>
-                                    {
-                                        return ValueTask.FromResult(
-                                            new SslServerAuthenticationOptions()
-                                        );
-                                    },
-                                    OnConnectionState = testState,
-                                }
-                            );
-                        }
-                    );
+                                    return ValueTask.FromResult(
+                                        new SslServerAuthenticationOptions()
+                                    );
+                                },
+                                OnConnectionState = testState,
+                            }
+                        );
+                    });
                 },
                 services =>
                 {
@@ -842,9 +803,8 @@ public class HttpsTests : LoggedTest
         Assert.NotNull(bindFeatures);
 
         var tlsOptions = bindFeatures.Get<TlsConnectionCallbackOptions>();
-        Assert.Collection(
-            tlsOptions.ApplicationProtocols,
-            p => Assert.Equal(SslApplicationProtocol.Http3, p)
+        Assert.Collection(tlsOptions.ApplicationProtocols, p =>
+            Assert.Equal(SslApplicationProtocol.Http3, p)
         );
 
         Assert.NotNull(tlsOptions.OnConnection);

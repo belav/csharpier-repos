@@ -241,10 +241,8 @@ namespace Roslyn.Test.Utilities
             BlobHandle blobHandle
         )
         {
-            return ReadArray(
-                reader,
-                blobHandle,
-                (ref BlobReader blobReader) => blobReader.ReadByte()
+            return ReadArray(reader, blobHandle, (ref BlobReader blobReader) =>
+                blobReader.ReadByte()
             );
         }
 
@@ -253,10 +251,8 @@ namespace Roslyn.Test.Utilities
             BlobHandle blobHandle
         )
         {
-            return ReadArray(
-                reader,
-                blobHandle,
-                (ref BlobReader blobReader) => blobReader.ReadBoolean()
+            return ReadArray(reader, blobHandle, (ref BlobReader blobReader) =>
+                blobReader.ReadBoolean()
             );
         }
 
@@ -648,30 +644,24 @@ namespace Roslyn.Test.Utilities
 
         internal static void AssertEmptyOrThrowNull(ImmutableArray<byte> peImage)
         {
-            VerifyMethodBodies(
-                peImage,
-                (il) =>
+            VerifyMethodBodies(peImage, (il) =>
+            {
+                if (il != null)
                 {
-                    if (il != null)
-                    {
-                        AssertEx.Equal(ThrowNull, il);
-                    }
+                    AssertEx.Equal(ThrowNull, il);
                 }
-            );
+            });
         }
 
         internal static void AssertNotThrowNull(ImmutableArray<byte> peImage)
         {
-            VerifyMethodBodies(
-                peImage,
-                (il) =>
+            VerifyMethodBodies(peImage, (il) =>
+            {
+                if (il != null)
                 {
-                    if (il != null)
-                    {
-                        AssertEx.NotEqual(ThrowNull, il);
-                    }
+                    AssertEx.NotEqual(ThrowNull, il);
                 }
-            );
+            });
         }
     }
 }

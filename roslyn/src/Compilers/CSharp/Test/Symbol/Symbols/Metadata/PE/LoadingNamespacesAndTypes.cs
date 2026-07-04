@@ -343,16 +343,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
   } // end of method S::.ctor
 } // end of class S
 ";
-            CompileWithCustomILSource(
-                string.Empty,
-                ilSource,
-                comp =>
-                {
-                    var structType = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("S");
-                    var constructor = structType.InstanceConstructors.Single();
-                    Assert.False(constructor.IsImplicitlyDeclared);
-                }
-            );
+            CompileWithCustomILSource(string.Empty, ilSource, comp =>
+            {
+                var structType = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("S");
+                var constructor = structType.InstanceConstructors.Single();
+                Assert.False(constructor.IsImplicitlyDeclared);
+            });
         }
 
         [ClrOnlyFact]
@@ -367,16 +363,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
   .size 1
 } // end of class S
 ";
-            CompileWithCustomILSource(
-                string.Empty,
-                ilSource,
-                comp =>
-                {
-                    var structType = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("S");
-                    var constructor = structType.InstanceConstructors.Single();
-                    Assert.True(constructor.IsImplicitlyDeclared);
-                }
-            );
+            CompileWithCustomILSource(string.Empty, ilSource, comp =>
+            {
+                var structType = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("S");
+                var constructor = structType.InstanceConstructors.Single();
+                Assert.True(constructor.IsImplicitlyDeclared);
+            });
         }
 
         [ClrOnlyFact]
@@ -397,23 +389,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
   } // end of method S::.ctor
 } // end of class S
 ";
-            CompileWithCustomILSource(
-                string.Empty,
-                ilSource,
-                comp =>
-                {
-                    var structType = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("S");
-                    var constructors = structType.InstanceConstructors;
-                    Assert.Equal(2, constructors.Length);
+            CompileWithCustomILSource(string.Empty, ilSource, comp =>
+            {
+                var structType = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("S");
+                var constructors = structType.InstanceConstructors;
+                Assert.Equal(2, constructors.Length);
 
-                    int withParameterIndex = constructors[0].Parameters.Any() ? 0 : 1;
-                    int withoutParameterIndex = 1 - withParameterIndex;
+                int withParameterIndex = constructors[0].Parameters.Any() ? 0 : 1;
+                int withoutParameterIndex = 1 - withParameterIndex;
 
-                    Assert.Equal(0, constructors[withoutParameterIndex].Parameters.Length);
-                    Assert.False(constructors[withParameterIndex].IsImplicitlyDeclared);
-                    Assert.True(constructors[withoutParameterIndex].IsImplicitlyDeclared);
-                }
-            );
+                Assert.Equal(0, constructors[withoutParameterIndex].Parameters.Length);
+                Assert.False(constructors[withParameterIndex].IsImplicitlyDeclared);
+                Assert.True(constructors[withoutParameterIndex].IsImplicitlyDeclared);
+            });
         }
 
         [Fact]

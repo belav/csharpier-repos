@@ -408,17 +408,13 @@ public class MaxRequestBodySizeTests : LoggedTest
         // be controlled by the app. We have no choice but to throw if the bad request is not observed until after the
         // app starts reading the request body. We log ApplicationErrors because these tests rethrow the
         // BadHttpRequestExceptions. IIS should emit no other logs over LogLevel.Debug for these bad requests.
-        var appErrorLog = Assert.Single(
-            TestSink.Writes,
-            w =>
-                w.LoggerName == "Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer"
-                && w.LogLevel > LogLevel.Debug
+        var appErrorLog = Assert.Single(TestSink.Writes, w =>
+            w.LoggerName == "Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer"
+            && w.LogLevel > LogLevel.Debug
         );
-        var badRequestLog = Assert.Single(
-            TestSink.Writes,
-            w =>
-                w.LoggerName == "Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer"
-                && w.EventId == new EventId(4, "ConnectionBadRequest")
+        var badRequestLog = Assert.Single(TestSink.Writes, w =>
+            w.LoggerName == "Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer"
+            && w.EventId == new EventId(4, "ConnectionBadRequest")
         );
 
         Assert.Equal(new EventId(2, "ApplicationError"), appErrorLog.EventId);

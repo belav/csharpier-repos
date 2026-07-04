@@ -47,9 +47,8 @@ public class MemoryOutputCacheStoreTests
         var value = "abc"u8.ToArray();
         string key = null;
 
-        _ = await Assert.ThrowsAsync<ArgumentNullException>(
-            "key",
-            () => store.SetAsync(key, value, null, TimeSpan.FromMilliseconds(5), default).AsTask()
+        _ = await Assert.ThrowsAsync<ArgumentNullException>("key", () =>
+            store.SetAsync(key, value, null, TimeSpan.FromMilliseconds(5), default).AsTask()
         );
     }
 
@@ -60,9 +59,8 @@ public class MemoryOutputCacheStoreTests
         var value = default(byte[]);
         var key = "abc";
 
-        _ = await Assert.ThrowsAsync<ArgumentNullException>(
-            "value",
-            () => store.SetAsync(key, value, null, TimeSpan.FromMilliseconds(5), default).AsTask()
+        _ = await Assert.ThrowsAsync<ArgumentNullException>("value", () =>
+            store.SetAsync(key, value, null, TimeSpan.FromMilliseconds(5), default).AsTask()
         );
     }
 

@@ -297,9 +297,8 @@ namespace Tests.Integration
             var container = CreateWithAttributedCatalog(typeof(Foo));
 
             var importDef = ReflectionModelServicesEx.CreateImportDefinition(
-                new LazyMemberInfo(
-                    MemberTypes.Field,
-                    () => new MemberInfo[] { typeof(ExportFactoryTests) }
+                new LazyMemberInfo(MemberTypes.Field, () =>
+                    new MemberInfo[] { typeof(ExportFactoryTests) }
                 ), // Give it a bogus member
                 AttributedModelServices.GetContractName(typeof(Foo)),
                 AttributedModelServices.GetTypeIdentity(typeof(Foo)),

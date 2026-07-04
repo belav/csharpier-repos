@@ -2154,23 +2154,19 @@ public class DbContextPoolingTest
             ? BuildServiceProvider<IPooledContext, PooledContext>()
             : BuildServiceProvider<PooledContext>();
 
-        Parallel.For(
-            fromInclusive: 0,
-            toExclusive: 32,
-            body: s =>
-            {
-                using var scope = serviceProvider.CreateScope();
-                var scopedProvider = scope.ServiceProvider;
+        Parallel.For(fromInclusive: 0, toExclusive: 32, body: s =>
+        {
+            using var scope = serviceProvider.CreateScope();
+            var scopedProvider = scope.ServiceProvider;
 
-                var context = useInterface
-                    ? (PooledContext)scopedProvider.GetService<IPooledContext>()
-                    : scopedProvider.GetService<PooledContext>();
+            var context = useInterface
+                ? (PooledContext)scopedProvider.GetService<IPooledContext>()
+                : scopedProvider.GetService<PooledContext>();
 
-                var _ = context.Customers.ToList();
+            var _ = context.Customers.ToList();
 
-                context.Dispose();
-            }
-        );
+            context.Dispose();
+        });
     }
 
     [ConditionalTheory]

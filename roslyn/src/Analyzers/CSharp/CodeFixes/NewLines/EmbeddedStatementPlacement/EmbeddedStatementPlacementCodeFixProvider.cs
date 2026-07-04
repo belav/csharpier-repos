@@ -109,33 +109,27 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.EmbeddedStatementPlacement
             // Walk from lower statements to higher so the higher up changes see the changes below.
             foreach (var badStatement in badStatements.OrderByDescending(s => s.SpanStart))
             {
-                editor.ReplaceNode(
-                    badStatement,
-                    (currentBadStatement, _) =>
+                editor.ReplaceNode(badStatement, (currentBadStatement, _) =>
+                {
+                    // Ensure a newline between the statement and the statement that preceded it.
+                    var updatedStatement = AddLeadingTrivia(currentBadStatement, endOfLineTrivia);
+
+                    // Ensure that if we wrap an empty block that the trailing brace is on a new line as well.
+                    if (
+                        updatedStatement is BlockSyntax blockSyntax
+                        && blockSyntax.Statements.Count == 0
+                    )
                     {
-                        // Ensure a newline between the statement and the statement that preceded it.
-                        var updatedStatement = AddLeadingTrivia(
-                            currentBadStatement,
-                            endOfLineTrivia
+                        updatedStatement = blockSyntax.WithCloseBraceToken(
+                            AddLeadingTrivia(
+                                blockSyntax.CloseBraceToken,
+                                SyntaxFactory.ElasticMarker
+                            )
                         );
-
-                        // Ensure that if we wrap an empty block that the trailing brace is on a new line as well.
-                        if (
-                            updatedStatement is BlockSyntax blockSyntax
-                            && blockSyntax.Statements.Count == 0
-                        )
-                        {
-                            updatedStatement = blockSyntax.WithCloseBraceToken(
-                                AddLeadingTrivia(
-                                    blockSyntax.CloseBraceToken,
-                                    SyntaxFactory.ElasticMarker
-                                )
-                            );
-                        }
-
-                        return updatedStatement;
                     }
-                );
+
+                    return updatedStatement;
+                });
             }
 
             // Now walk up all our containing blocks ensuring that they wrap over multiple lines
@@ -145,35 +139,29 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.EmbeddedStatementPlacement
                 var openBrace = block.OpenBraceToken;
                 var previousToken = openBrace.GetPreviousToken();
 
-                editor.ReplaceNode(
-                    block,
-                    (current, _) =>
-                    {
-                        // If the block's open { is not already on a new line, add an elastic marker so it will be placed there.
-                        var currentBlock = (BlockSyntax)current;
-                        if (
-                            !EmbeddedStatementPlacementDiagnosticAnalyzer.ContainsEndOfLineBetween(
-                                previousToken,
-                                openBrace
-                            )
+                editor.ReplaceNode(block, (current, _) =>
+                {
+                    // If the block's open { is not already on a new line, add an elastic marker so it will be placed there.
+                    var currentBlock = (BlockSyntax)current;
+                    if (
+                        !EmbeddedStatementPlacementDiagnosticAnalyzer.ContainsEndOfLineBetween(
+                            previousToken,
+                            openBrace
                         )
-                        {
-                            currentBlock = currentBlock.WithOpenBraceToken(
-                                AddLeadingTrivia(
-                                    currentBlock.OpenBraceToken,
-                                    SyntaxFactory.ElasticMarker
-                                )
-                            );
-                        }
-
-                        return currentBlock.WithCloseBraceToken(
+                    )
+                    {
+                        currentBlock = currentBlock.WithOpenBraceToken(
                             AddLeadingTrivia(
-                                currentBlock.CloseBraceToken,
+                                currentBlock.OpenBraceToken,
                                 SyntaxFactory.ElasticMarker
                             )
                         );
                     }
-                );
+
+                    return currentBlock.WithCloseBraceToken(
+                        AddLeadingTrivia(currentBlock.CloseBraceToken, SyntaxFactory.ElasticMarker)
+                    );
+                });
             }
         }
 

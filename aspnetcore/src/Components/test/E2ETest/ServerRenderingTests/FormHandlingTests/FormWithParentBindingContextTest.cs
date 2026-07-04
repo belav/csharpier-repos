@@ -316,13 +316,10 @@ public class FormWithParentBindingContextTest
             SuppressEnhancedNavigation = suppressEnhancedNavigation,
             AssertErrors = errors =>
             {
-                Assert.Collection(
-                    errors,
-                    error =>
-                    {
-                        Assert.Equal("The value 'abc' is not valid for 'Parameter'.", error.Text);
-                    }
-                );
+                Assert.Collection(errors, error =>
+                {
+                    Assert.Equal("The value 'abc' is not valid for 'Parameter'.", error.Text);
+                });
                 Assert.Equal(
                     "abc",
                     Browser
@@ -625,9 +622,8 @@ public class FormWithParentBindingContextTest
         Browser.Exists(By.CssSelector("[data-email='Email']"));
         Browser.Exists(By.CssSelector("[data-preferred='IsPreferred']"));
 
-        Browser.Equal(
-            3,
-            () => Browser.FindElements(By.CssSelector("li.validation-message")).Count()
+        Browser.Equal(3, () =>
+            Browser.FindElements(By.CssSelector("li.validation-message")).Count()
         );
 
         if (!suppressEnhancedNavigation)
@@ -728,9 +724,8 @@ public class FormWithParentBindingContextTest
             .Exists(By.CssSelector("[data-index='1']"))
             .Text.Contains("The value 'invalid1' is not valid for 'IsPreferred'.");
 
-        Browser.Equal(
-            2,
-            () => Browser.FindElements(By.CssSelector("li.validation-message")).Count()
+        Browser.Equal(2, () =>
+            Browser.FindElements(By.CssSelector("li.validation-message")).Count()
         );
 
         if (!suppressEnhancedNavigation)
@@ -757,13 +752,10 @@ public class FormWithParentBindingContextTest
             SuppressEnhancedNavigation = suppressEnhancedNavigation,
             AssertErrors = errors =>
             {
-                Assert.Collection(
-                    errors,
-                    error =>
-                    {
-                        Assert.Equal("The value 'abc' is not valid for 'Parameter'.", error.Text);
-                    }
-                );
+                Assert.Collection(errors, error =>
+                {
+                    Assert.Equal("The value 'abc' is not valid for 'Parameter'.", error.Text);
+                });
                 Assert.Equal(
                     "abc",
                     Browser
@@ -1094,19 +1086,13 @@ public class FormWithParentBindingContextTest
         Browser.Exists(By.Id("send")).Click();
         Browser.Exists(By.Id("pass"));
 
-        Browser.Equal(
-            "StringViaExplicitPropertyName value",
-            () =>
-                Browser
-                    .Exists(By.CssSelector("#StringViaExplicitPropertyName input"))
-                    .GetAttribute("value")
+        Browser.Equal("StringViaExplicitPropertyName value", () =>
+            Browser
+                .Exists(By.CssSelector("#StringViaExplicitPropertyName input"))
+                .GetAttribute("value")
         );
-        Browser.Equal(
-            "StringViaOverriddenName value",
-            () =>
-                Browser
-                    .Exists(By.CssSelector("#StringViaOverriddenName input"))
-                    .GetAttribute("value")
+        Browser.Equal("StringViaOverriddenName value", () =>
+            Browser.Exists(By.CssSelector("#StringViaOverriddenName input")).GetAttribute("value")
         );
         Browser.Equal( /* should not match */
             "",
@@ -1115,16 +1101,13 @@ public class FormWithParentBindingContextTest
                     .Exists(By.CssSelector("#StringViaOverriddenNameUnmatched input"))
                     .GetAttribute("value")
         );
-        Browser.Equal(
-            "StringViaExpression value",
-            () => Browser.Exists(By.CssSelector("#StringViaExpression input")).GetAttribute("value")
+        Browser.Equal("StringViaExpression value", () =>
+            Browser.Exists(By.CssSelector("#StringViaExpression input")).GetAttribute("value")
         );
-        Browser.Equal(
-            "StringViaExpressionWithHandler value",
-            () =>
-                Browser
-                    .Exists(By.CssSelector("#StringViaExpressionWithHandler input"))
-                    .GetAttribute("value")
+        Browser.Equal("StringViaExpressionWithHandler value", () =>
+            Browser
+                .Exists(By.CssSelector("#StringViaExpressionWithHandler input"))
+                .GetAttribute("value")
         );
         Browser.Equal( /* should not match */
             "",
@@ -1133,13 +1116,11 @@ public class FormWithParentBindingContextTest
                     .Exists(By.CssSelector("#StringViaExpressionWithUnmatchedHandler input"))
                     .GetAttribute("value")
         );
-        Browser.Equal(
-            "PersonName value",
-            () => Browser.Exists(By.CssSelector("#PersonName input")).GetAttribute("value")
+        Browser.Equal("PersonName value", () =>
+            Browser.Exists(By.CssSelector("#PersonName input")).GetAttribute("value")
         );
-        Browser.Equal(
-            "123",
-            () => Browser.Exists(By.CssSelector("#PersonAge input")).GetAttribute("value")
+        Browser.Equal("123", () =>
+            Browser.Exists(By.CssSelector("#PersonAge input")).GetAttribute("value")
         );
     }
 
@@ -1367,13 +1348,11 @@ public class FormWithParentBindingContextTest
         // Remember that the rendercount would be reset to zero since this is SSR, so
         // receiving 2 here shows we did render twice on this cycle
         Browser.Exists(By.Id("mutate-and-notify")).Click();
-        Browser.Equal(
-            "Abc Modified",
-            () => Browser.Exists(By.Id("simple-value")).GetAttribute("value")
+        Browser.Equal("Abc Modified", () =>
+            Browser.Exists(By.Id("simple-value")).GetAttribute("value")
         );
-        Browser.Equal(
-            "Def Modified",
-            () => Browser.Exists(By.Id("complex-value")).GetAttribute("value")
+        Browser.Equal("Def Modified", () =>
+            Browser.Exists(By.Id("complex-value")).GetAttribute("value")
         );
         Browser.Equal("2", () => Browser.Exists(By.Id("render-count")).Text);
         Browser.Exists(By.Id("received-notification"));
@@ -1568,13 +1547,11 @@ public class FormWithParentBindingContextTest
 
         void AssertUiState(string expectedStringValue, bool expectedBoolValue)
         {
-            Browser.Equal(
-                expectedStringValue,
-                () => Browser.FindElement(By.Id("mystring-value")).Text
+            Browser.Equal(expectedStringValue, () =>
+                Browser.FindElement(By.Id("mystring-value")).Text
             );
-            Browser.Equal(
-                expectedBoolValue.ToString(),
-                () => Browser.FindElement(By.Id("mybool-value")).Text
+            Browser.Equal(expectedBoolValue.ToString(), () =>
+                Browser.FindElement(By.Id("mybool-value")).Text
             );
 
             // If we're not suppressing, we'll keep referencing the same elements to show they were preserved
@@ -1641,10 +1618,8 @@ public class FormWithParentBindingContextTest
         // Check the warning
         var logs = Browser.GetBrowserLogs(LogLevel.Warning);
         Assert.True(logs.Count > 0);
-        Assert.Contains(
-            logs,
-            log =>
-                log.Message.Contains("A form cannot be enhanced when its method is \\\"dialog\\\".")
+        Assert.Contains(logs, log =>
+            log.Message.Contains("A form cannot be enhanced when its method is \\\"dialog\\\".")
         );
     }
 
@@ -1659,10 +1634,8 @@ public class FormWithParentBindingContextTest
         // Check the warning
         var logs = Browser.GetBrowserLogs(LogLevel.Warning);
         Assert.True(logs.Count > 0);
-        Assert.Contains(
-            logs,
-            log =>
-                log.Message.Contains("A form cannot be enhanced when its method is \\\"dialog\\\".")
+        Assert.Contains(logs, log =>
+            log.Message.Contains("A form cannot be enhanced when its method is \\\"dialog\\\".")
         );
     }
 
@@ -1676,12 +1649,10 @@ public class FormWithParentBindingContextTest
         // Check the warning
         var logs = Browser.GetBrowserLogs(LogLevel.Warning);
         Assert.True(logs.Count > 0);
-        Assert.Contains(
-            logs,
-            log =>
-                log.Message.Contains(
-                    "A form cannot be enhanced when its target is different from the default value \\\"_self\\\"."
-                )
+        Assert.Contains(logs, log =>
+            log.Message.Contains(
+                "A form cannot be enhanced when its target is different from the default value \\\"_self\\\"."
+            )
         );
     }
 
@@ -1696,12 +1667,10 @@ public class FormWithParentBindingContextTest
         // Check the warning
         var logs = Browser.GetBrowserLogs(LogLevel.Warning);
         Assert.True(logs.Count > 0);
-        Assert.Contains(
-            logs,
-            log =>
-                log.Message.Contains(
-                    "A form cannot be enhanced when its target is different from the default value \\\"_self\\\"."
-                )
+        Assert.Contains(logs, log =>
+            log.Message.Contains(
+                "A form cannot be enhanced when its target is different from the default value \\\"_self\\\"."
+            )
         );
     }
 
@@ -1712,9 +1681,8 @@ public class FormWithParentBindingContextTest
 
         Browser.Exists(By.Id("submit-button")).Click();
 
-        Browser.Equal(
-            "application/x-www-form-urlencoded",
-            () => Browser.Exists(By.Id("content-type")).Text
+        Browser.Equal("application/x-www-form-urlencoded", () =>
+            Browser.Exists(By.Id("content-type")).Text
         );
     }
 
@@ -1739,9 +1707,8 @@ public class FormWithParentBindingContextTest
 
         Browser.Exists(By.Id("submit-button")).Click();
 
-        Browser.Equal(
-            "application/x-www-form-urlencoded",
-            () => Browser.Exists(By.Id("content-type")).Text
+        Browser.Equal("application/x-www-form-urlencoded", () =>
+            Browser.Exists(By.Id("content-type")).Text
         );
     }
 
@@ -1808,9 +1775,8 @@ public class FormWithParentBindingContextTest
             if (dispatch.SuppressEnhancedNavigation)
             {
                 // Chrome's built-in error UI for a 500 response when there's no response content
-                Browser.Contains(
-                    "HTTP ERROR 400",
-                    () => Browser.Exists(By.CssSelector("div.error-code")).Text
+                Browser.Contains("HTTP ERROR 400", () =>
+                    Browser.Exists(By.CssSelector("div.error-code")).Text
                 );
             }
             else

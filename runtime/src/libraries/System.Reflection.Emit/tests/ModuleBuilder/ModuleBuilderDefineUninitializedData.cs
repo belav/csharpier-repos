@@ -59,9 +59,8 @@ namespace System.Reflection.Emit.Tests
         )
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                () => module.DefineUninitializedData("", 1, attributes)
+            AssertExtensions.Throws<ArgumentException>("name", () =>
+                module.DefineUninitializedData("", 1, attributes)
             );
         }
 
@@ -74,9 +73,8 @@ namespace System.Reflection.Emit.Tests
             ModuleBuilder module = Helpers.DynamicModule();
             foreach (int size in new int[] { -1, 0, 0x003f0000, 0x003f0000 + 1 })
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () => module.DefineUninitializedData("TestField", size, attributes)
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    module.DefineUninitializedData("TestField", size, attributes)
                 );
             }
         }
@@ -88,9 +86,8 @@ namespace System.Reflection.Emit.Tests
         )
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => module.DefineUninitializedData(null, 1, attributes)
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                module.DefineUninitializedData(null, 1, attributes)
             );
         }
 

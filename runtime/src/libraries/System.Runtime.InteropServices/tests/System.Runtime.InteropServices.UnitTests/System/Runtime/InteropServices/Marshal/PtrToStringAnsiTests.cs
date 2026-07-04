@@ -44,9 +44,8 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void PtrToStringAnsi_ZeroPointer_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "ptr",
-                () => Marshal.PtrToStringAnsi(IntPtr.Zero, 123)
+            AssertExtensions.Throws<ArgumentNullException>("ptr", () =>
+                Marshal.PtrToStringAnsi(IntPtr.Zero, 123)
             );
         }
 

@@ -128,13 +128,11 @@ namespace System.Collections.Immutable.Tests
             mutable.Insert(2, 3);
             Assert.Equal(new[] { 0, 1, 3 }, mutable);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => mutable.Insert(-1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                mutable.Insert(-1, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => mutable.Insert(4, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                mutable.Insert(4, 0)
             );
         }
 
@@ -247,9 +245,8 @@ namespace System.Collections.Immutable.Tests
             mutable.RemoveRange(new double[] { -1.5 }, absComparer);
             Assert.Equal(new[] { 4.7 }, mutable);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => mutable.RemoveRange(2, 3)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                mutable.RemoveRange(2, 3)
             );
         }
 
@@ -265,25 +262,21 @@ namespace System.Collections.Immutable.Tests
             mutable.RemoveAt(0);
             Assert.Equal(new[] { 2 }, mutable);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => mutable.RemoveAt(1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                mutable.RemoveAt(1)
             );
 
             mutable.RemoveAt(0);
             Assert.Equal(new int[0], mutable);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => mutable.RemoveAt(0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                mutable.RemoveAt(0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => mutable.RemoveAt(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                mutable.RemoveAt(-1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => mutable.RemoveAt(1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                mutable.RemoveAt(1)
             );
         }
 
@@ -525,9 +518,8 @@ namespace System.Collections.Immutable.Tests
             Assert.False(list.IsEmpty);
 
             ImmutableList<int>.Builder nullBuilder = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "builder",
-                () => nullBuilder.ToImmutableList()
+            AssertExtensions.Throws<ArgumentNullException>("builder", () =>
+                nullBuilder.ToImmutableList()
             );
         }
 

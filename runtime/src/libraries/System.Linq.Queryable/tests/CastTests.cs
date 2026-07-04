@@ -212,9 +212,8 @@ namespace System.Linq.Tests
         [Fact]
         public void NullSource()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IQueryable<object>)null).Cast<string>()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IQueryable<object>)null).Cast<string>()
             );
         }
 

@@ -12,26 +12,20 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_MediaTypeNull_Throw()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "mediaType",
-                () =>
-                {
-                    new MediaTypeHeaderValue(null);
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("mediaType", () =>
+            {
+                new MediaTypeHeaderValue(null);
+            });
         }
 
         [Fact]
         public void Ctor_MediaTypeEmpty_Throw()
         {
             // null and empty should be treated the same. So we also throw for empty strings.
-            AssertExtensions.Throws<ArgumentException>(
-                "mediaType",
-                () =>
-                {
-                    new MediaTypeHeaderValue(string.Empty);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("mediaType", () =>
+            {
+                new MediaTypeHeaderValue(string.Empty);
+            });
         }
 
         [Fact]

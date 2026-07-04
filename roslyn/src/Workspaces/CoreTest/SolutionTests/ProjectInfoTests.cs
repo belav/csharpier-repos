@@ -75,17 +75,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var pid = ProjectId.CreateNewId();
 
             var documentInfo = DocumentInfo.Create(DocumentId.CreateNewId(pid), "doc");
-            Assert.Throws<ArgumentException>(
-                "documents[1]",
-                () =>
-                    ProjectInfo.Create(
-                        pid,
-                        VersionStamp.Default,
-                        "proj",
-                        "assembly",
-                        "C#",
-                        documents: new[] { documentInfo, documentInfo }
-                    )
+            Assert.Throws<ArgumentException>("documents[1]", () =>
+                ProjectInfo.Create(
+                    pid,
+                    VersionStamp.Default,
+                    "proj",
+                    "assembly",
+                    "C#",
+                    documents: new[] { documentInfo, documentInfo }
+                )
             );
 
             Assert.Throws<ArgumentNullException>(() =>
@@ -99,17 +97,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 )
             );
 
-            Assert.Throws<ArgumentException>(
-                "additionalDocuments[1]",
-                () =>
-                    ProjectInfo.Create(
-                        pid,
-                        VersionStamp.Default,
-                        "proj",
-                        "assembly",
-                        "C#",
-                        additionalDocuments: new[] { documentInfo, documentInfo }
-                    )
+            Assert.Throws<ArgumentException>("additionalDocuments[1]", () =>
+                ProjectInfo.Create(
+                    pid,
+                    VersionStamp.Default,
+                    "proj",
+                    "assembly",
+                    "C#",
+                    additionalDocuments: new[] { documentInfo, documentInfo }
+                )
             );
 
             Assert.Throws<ArgumentNullException>(() =>
@@ -124,44 +120,38 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
 
             var projectReference = new ProjectReference(ProjectId.CreateNewId());
-            Assert.Throws<ArgumentException>(
-                "projectReferences[1]",
-                () =>
-                    ProjectInfo.Create(
-                        pid,
-                        VersionStamp.Default,
-                        "proj",
-                        "assembly",
-                        "C#",
-                        projectReferences: new[] { projectReference, projectReference }
-                    )
+            Assert.Throws<ArgumentException>("projectReferences[1]", () =>
+                ProjectInfo.Create(
+                    pid,
+                    VersionStamp.Default,
+                    "proj",
+                    "assembly",
+                    "C#",
+                    projectReferences: new[] { projectReference, projectReference }
+                )
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "analyzerReferences[0]",
-                () =>
-                    ProjectInfo.Create(
-                        pid,
-                        VersionStamp.Default,
-                        name: "Goo",
-                        assemblyName: "Bar",
-                        language: "C#",
-                        analyzerReferences: new AnalyzerReference[] { null }
-                    )
+            Assert.Throws<ArgumentNullException>("analyzerReferences[0]", () =>
+                ProjectInfo.Create(
+                    pid,
+                    VersionStamp.Default,
+                    name: "Goo",
+                    assemblyName: "Bar",
+                    language: "C#",
+                    analyzerReferences: new AnalyzerReference[] { null }
+                )
             );
 
             var analyzerReference = new TestAnalyzerReference();
-            Assert.Throws<ArgumentException>(
-                "analyzerReferences[1]",
-                () =>
-                    ProjectInfo.Create(
-                        pid,
-                        VersionStamp.Default,
-                        "proj",
-                        "assembly",
-                        "C#",
-                        analyzerReferences: new[] { analyzerReference, analyzerReference }
-                    )
+            Assert.Throws<ArgumentException>("analyzerReferences[1]", () =>
+                ProjectInfo.Create(
+                    pid,
+                    VersionStamp.Default,
+                    "proj",
+                    "assembly",
+                    "C#",
+                    analyzerReferences: new[] { analyzerReference, analyzerReference }
+                )
             );
 
             Assert.Throws<ArgumentNullException>(() =>
@@ -176,17 +166,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
 
             var metadataReference = new TestMetadataReference();
-            Assert.Throws<ArgumentException>(
-                "metadataReferences[1]",
-                () =>
-                    ProjectInfo.Create(
-                        pid,
-                        VersionStamp.Default,
-                        "proj",
-                        "assembly",
-                        "C#",
-                        metadataReferences: new[] { metadataReference, metadataReference }
-                    )
+            Assert.Throws<ArgumentException>("metadataReferences[1]", () =>
+                ProjectInfo.Create(
+                    pid,
+                    VersionStamp.Default,
+                    "proj",
+                    "assembly",
+                    "C#",
+                    metadataReferences: new[] { metadataReference, metadataReference }
+                )
             );
         }
 

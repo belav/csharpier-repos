@@ -20,19 +20,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
     {
         private static readonly ObjectPool<
             CachingIdentityFactory<string, SyntaxKind>
-        > s_keywordKindPool = CachingIdentityFactory<string, SyntaxKind>.CreatePool(
-            512,
-            (key) =>
+        > s_keywordKindPool = CachingIdentityFactory<string, SyntaxKind>.CreatePool(512, (key) =>
+        {
+            var kind = SyntaxFacts.GetKeywordKind(key);
+            if (kind == SyntaxKind.None)
             {
-                var kind = SyntaxFacts.GetKeywordKind(key);
-                if (kind == SyntaxKind.None)
-                {
-                    kind = SyntaxFacts.GetContextualKeywordKind(key);
-                }
-
-                return kind;
+                kind = SyntaxFacts.GetContextualKeywordKind(key);
             }
-        );
+
+            return kind;
+        });
 
         private readonly TextKeyedCache<SyntaxTrivia> _triviaMap;
         private readonly TextKeyedCache<SyntaxToken> _tokenMap;

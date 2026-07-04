@@ -267,18 +267,15 @@ public class EndpointRoutingApplicationBuilderExtensionsTest
         // Act
         app.UseRouting();
 
-        app.Map(
-            "/foo",
-            b =>
+        app.Map("/foo", b =>
+        {
+            b.UseRouting();
+            b.UseEndpoints(builder =>
             {
-                b.UseRouting();
-                b.UseEndpoints(builder =>
-                {
-                    builder.Map("/1", d => null).WithDisplayName("Test endpoint 1");
-                    builder.Map("/2", d => null).WithDisplayName("Test endpoint 2");
-                });
-            }
-        );
+                builder.Map("/1", d => null).WithDisplayName("Test endpoint 1");
+                builder.Map("/2", d => null).WithDisplayName("Test endpoint 2");
+            });
+        });
 
         app.UseEndpoints(builder =>
         {
@@ -343,9 +340,8 @@ public class EndpointRoutingApplicationBuilderExtensionsTest
         var requestDelegate = app.Build();
 
         var endpointDataSource = Assert.Single(mockRouteBuilder.Object.DataSources);
-        Assert.Collection(
-            endpointDataSource.Endpoints,
-            e => Assert.Equal("Test endpoint 1", e.DisplayName)
+        Assert.Collection(endpointDataSource.Endpoints, e =>
+            Assert.Equal("Test endpoint 1", e.DisplayName)
         );
 
         var routeOptions = app.ApplicationServices.GetRequiredService<IOptions<RouteOptions>>();

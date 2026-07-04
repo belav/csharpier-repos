@@ -650,9 +650,8 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] inputData = { 0x1E, 4, 0, (byte)'h', 0, (byte)'i' };
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "expectedTag",
-                () => reader.TryReadBMPStringBytes(Asn1Tag.Null, out _)
+            AssertExtensions.Throws<ArgumentException>("expectedTag", () =>
+                reader.TryReadBMPStringBytes(Asn1Tag.Null, out _)
             );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
@@ -677,9 +676,8 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] inputData = { 0x87, 2, 0x20, 0x10 };
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "expectedTag",
-                () => reader.TryReadBMPStringBytes(Asn1Tag.Null, out _)
+            AssertExtensions.Throws<ArgumentException>("expectedTag", () =>
+                reader.TryReadBMPStringBytes(Asn1Tag.Null, out _)
             );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");

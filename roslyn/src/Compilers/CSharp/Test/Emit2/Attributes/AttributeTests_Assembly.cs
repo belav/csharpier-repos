@@ -40,13 +40,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 @"[assembly: System.Reflection.AssemblyVersion(""1.22.333.4444"")] public class C {}";
 
             var comp = CreateCompilation(s, options: TestOptions.ReleaseDll);
-            VerifyAssemblyTable(
-                comp,
-                r =>
-                {
-                    Assert.Equal(new Version(1, 22, 333, 4444), r.Version);
-                }
-            );
+            VerifyAssemblyTable(comp, r =>
+            {
+                Assert.Equal(new Version(1, 22, 333, 4444), r.Version);
+            });
         }
 
         [Fact]
@@ -54,16 +51,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             var s = @"[assembly: System.Reflection.AssemblyVersion(""1.2"")] public class C {}";
             var comp = CreateCompilation(s, options: TestOptions.ReleaseDll);
-            VerifyAssemblyTable(
-                comp,
-                r =>
-                {
-                    Assert.Equal(1, r.Version.Major);
-                    Assert.Equal(2, r.Version.Minor);
-                    Assert.Equal(0, r.Version.Build);
-                    Assert.Equal(0, r.Version.Revision);
-                }
-            );
+            VerifyAssemblyTable(comp, r =>
+            {
+                Assert.Equal(1, r.Version.Major);
+                Assert.Equal(2, r.Version.Minor);
+                Assert.Equal(0, r.Version.Build);
+                Assert.Equal(0, r.Version.Revision);
+            });
         }
 
         [Fact]
@@ -80,16 +74,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 s,
                 options: TestOptions.ReleaseDll.WithCurrentLocalTime(now)
             );
-            VerifyAssemblyTable(
-                comp,
-                r =>
-                {
-                    Assert.Equal(10101, r.Version.Major);
-                    Assert.Equal(0, r.Version.Minor);
-                    Assert.Equal(days, r.Version.Build);
-                    Assert.Equal(seconds, r.Version.Revision);
-                }
-            );
+            VerifyAssemblyTable(comp, r =>
+            {
+                Assert.Equal(10101, r.Version.Major);
+                Assert.Equal(0, r.Version.Minor);
+                Assert.Equal(days, r.Version.Build);
+                Assert.Equal(seconds, r.Version.Revision);
+            });
         }
 
         [Fact]
@@ -101,16 +92,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 s,
                 options: TestOptions.ReleaseDll.WithCurrentLocalTime(new DateTime(2300, 1, 1))
             );
-            VerifyAssemblyTable(
-                comp,
-                r =>
-                {
-                    Assert.Equal(10101, r.Version.Major);
-                    Assert.Equal(0, r.Version.Minor);
-                    Assert.Equal(65535, r.Version.Build);
-                    Assert.Equal(0, r.Version.Revision);
-                }
-            );
+            VerifyAssemblyTable(comp, r =>
+            {
+                Assert.Equal(10101, r.Version.Major);
+                Assert.Equal(0, r.Version.Minor);
+                Assert.Equal(65535, r.Version.Build);
+                Assert.Equal(0, r.Version.Revision);
+            });
         }
 
         [Fact, WorkItem(545947, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545947")]
@@ -384,24 +372,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             string s = @"[assembly: System.Reflection.AssemblyCultureAttribute("""")]";
             var comp = CreateCompilation(s, options: TestOptions.ReleaseDll);
-            VerifyAssemblyTable(
-                comp,
-                r =>
-                {
-                    Assert.True(r.Culture.IsNil);
-                }
-            );
+            VerifyAssemblyTable(comp, r =>
+            {
+                Assert.True(r.Culture.IsNil);
+            });
 
             s =
                 @"[assembly: System.Reflection.AssemblyCulture(null)] public class C {  static void Main() { }  }";
             comp = CreateCompilation(s, options: TestOptions.ReleaseDll);
-            VerifyAssemblyTable(
-                comp,
-                r =>
-                {
-                    Assert.True(r.Culture.IsNil);
-                }
-            );
+            VerifyAssemblyTable(comp, r =>
+            {
+                Assert.True(r.Culture.IsNil);
+            });
 
             s = @"[assembly: System.Reflection.AssemblyCultureAttribute(""zh-CN"")]";
             comp = CreateCompilation(s, options: TestOptions.ReleaseDll);
@@ -415,24 +397,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             string s =
                 @"[assembly: System.Reflection.AssemblyCulture(null)] public class C {  static void Main() { }  }";
             var comp = CreateCompilation(s, options: TestOptions.ReleaseExe);
-            VerifyAssemblyTable(
-                comp,
-                r =>
-                {
-                    Assert.True(r.Culture.IsNil);
-                }
-            );
+            VerifyAssemblyTable(comp, r =>
+            {
+                Assert.True(r.Culture.IsNil);
+            });
 
             s =
                 @"[assembly: System.Reflection.AssemblyCulture("""")] public class C {  static void Main() { }  }";
             comp = CreateCompilation(s, options: TestOptions.ReleaseExe);
-            VerifyAssemblyTable(
-                comp,
-                r =>
-                {
-                    Assert.True(r.Culture.IsNil);
-                }
-            );
+            VerifyAssemblyTable(comp, r =>
+            {
+                Assert.True(r.Culture.IsNil);
+            });
         }
 
         [Fact, WorkItem(545949, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545949")]
@@ -458,18 +434,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             // PEVerify:
             // Warning: Invalid locale string.
-            CompileAndVerify(
-                comp,
-                verify: Verification.FailsPEVerify,
-                symbolValidator: m =>
-                {
-                    var utf8 = new System.Text.UTF8Encoding(false, false);
-                    Assert.Equal(
-                        utf8.GetString(utf8.GetBytes("\uD800")),
-                        m.ContainingAssembly.Identity.CultureName
-                    );
-                }
-            );
+            CompileAndVerify(comp, verify: Verification.FailsPEVerify, symbolValidator: m =>
+            {
+                var utf8 = new System.Text.UTF8Encoding(false, false);
+                Assert.Equal(
+                    utf8.GetString(utf8.GetBytes("\uD800")),
+                    m.ContainingAssembly.Identity.CultureName
+                );
+            });
         }
 
         [Fact, WorkItem(1034455, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1034455")]
@@ -1664,35 +1636,26 @@ class Program
             Assert.Empty(comp.GetDiagnostics());
             var attrs = comp.Assembly.GetAttributes();
             Assert.Equal(1, attrs.Length);
-            VerifyAssemblyTable(
-                comp,
-                r =>
-                {
-                    Assert.Equal(AssemblyHashAlgorithm.MD5, r.HashAlgorithm);
-                }
-            );
+            VerifyAssemblyTable(comp, r =>
+            {
+                Assert.Equal(AssemblyHashAlgorithm.MD5, r.HashAlgorithm);
+            });
 
             s =
                 @"[assembly: System.Reflection.AssemblyAlgorithmIdAttribute(System.Configuration.Assemblies.AssemblyHashAlgorithm.None)] public class C {}";
             comp = CreateCompilation(s, options: TestOptions.ReleaseDll);
-            VerifyAssemblyTable(
-                comp,
-                r =>
-                {
-                    Assert.Equal(AssemblyHashAlgorithm.None, r.HashAlgorithm);
-                }
-            );
+            VerifyAssemblyTable(comp, r =>
+            {
+                Assert.Equal(AssemblyHashAlgorithm.None, r.HashAlgorithm);
+            });
 
             s =
                 @"[assembly: System.Reflection.AssemblyAlgorithmIdAttribute(12345)] public class C {}";
             comp = CreateCompilation(s, options: TestOptions.ReleaseDll);
-            VerifyAssemblyTable(
-                comp,
-                r =>
-                {
-                    Assert.Equal(12345, (int)r.HashAlgorithm);
-                }
-            );
+            VerifyAssemblyTable(comp, r =>
+            {
+                Assert.Equal(12345, (int)r.HashAlgorithm);
+            });
         }
 
         [Fact]
@@ -1711,13 +1674,10 @@ public class C {}
             var flags =
                 System.Reflection.AssemblyNameFlags.EnableJITcompileOptimizer
                 | System.Reflection.AssemblyNameFlags.Retargetable;
-            VerifyAssemblyTable(
-                comp,
-                r =>
-                {
-                    Assert.Equal((int)flags, (int)r.Flags);
-                }
-            );
+            VerifyAssemblyTable(comp, r =>
+            {
+                Assert.Equal((int)flags, (int)r.Flags);
+            });
         }
 
         [Fact, WorkItem(546635, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546635")]
@@ -1727,13 +1687,10 @@ public class C {}
 
             var comp = CreateCompilation(s, options: TestOptions.ReleaseDll);
             // Both native & Roslyn PEVerifier fail: [MD]: Error: Invalid Assembly flags (0x3038). [token:0x20000001]
-            VerifyAssemblyTable(
-                comp,
-                r =>
-                {
-                    Assert.Equal((uint)(12345 - 1), (uint)r.Flags);
-                }
-            );
+            VerifyAssemblyTable(comp, r =>
+            {
+                Assert.Equal((uint)(12345 - 1), (uint)r.Flags);
+            });
 
             comp.VerifyDiagnostics(
                 // (1,12): warning CS0618: 'System.Reflection.AssemblyFlagsAttribute.AssemblyFlagsAttribute(int)' is obsolete: 'This constructor has been deprecated. Please use AssemblyFlagsAttribute(AssemblyNameFlags) instead. http://go.microsoft.com/fwlink/?linkid=14202'
@@ -1756,13 +1713,10 @@ public class C {}
 
             var comp = CreateCompilation(s, options: TestOptions.ReleaseDll);
             // Both native & Roslyn PEVerifier fail: [MD]: Error: Invalid Assembly flags (0x3038). [token:0x20000001]
-            VerifyAssemblyTable(
-                comp,
-                r =>
-                {
-                    Assert.Equal((uint)(12345 - 1), (uint)r.Flags);
-                }
-            );
+            VerifyAssemblyTable(comp, r =>
+            {
+                Assert.Equal((uint)(12345 - 1), (uint)r.Flags);
+            });
 
             comp.VerifyDiagnostics(
                 // (1,12): warning CS0618: 'System.Reflection.AssemblyFlagsAttribute.AssemblyFlagsAttribute(int)' is obsolete: 'This constructor has been deprecated. Please use AssemblyFlagsAttribute(AssemblyNameFlags) instead. http://go.microsoft.com/fwlink/?linkid=14202'
@@ -1898,35 +1852,27 @@ public class C {}
 
             // EMITTED ATTRIBUTES
 
-            CompileAndVerify(
-                compilation,
-                symbolValidator: module =>
-                {
-                    // We should get only unique netmodule/assembly attributes here, duplicate ones should not be emitted.
-                    var expectedEmittedAttrsCount =
-                        expectedSrcAttrCount - expectedDuplicateAttrCount;
+            CompileAndVerify(compilation, symbolValidator: module =>
+            {
+                // We should get only unique netmodule/assembly attributes here, duplicate ones should not be emitted.
+                var expectedEmittedAttrsCount = expectedSrcAttrCount - expectedDuplicateAttrCount;
 
-                    var metadataAttributes = module
-                        .ContainingAssembly.GetAttributes()
-                        .Where(a =>
-                            string.Equals(
-                                a.AttributeClass.Name,
-                                attrTypeName,
-                                StringComparison.Ordinal
-                            )
-                        );
-
-                    Assert.Equal(expectedEmittedAttrsCount, metadataAttributes.Count());
-
-                    var uniqueAttributes = new HashSet<CSharpAttributeData>(
-                        comparer: CommonAttributeDataComparer.Instance
+                var metadataAttributes = module
+                    .ContainingAssembly.GetAttributes()
+                    .Where(a =>
+                        string.Equals(a.AttributeClass.Name, attrTypeName, StringComparison.Ordinal)
                     );
-                    foreach (var attr in metadataAttributes)
-                    {
-                        Assert.True(uniqueAttributes.Add(attr));
-                    }
+
+                Assert.Equal(expectedEmittedAttrsCount, metadataAttributes.Count());
+
+                var uniqueAttributes = new HashSet<CSharpAttributeData>(
+                    comparer: CommonAttributeDataComparer.Instance
+                );
+                foreach (var attr in metadataAttributes)
+                {
+                    Assert.True(uniqueAttributes.Add(attr));
                 }
-            );
+            });
         }
 
         #endregion
@@ -2311,50 +2257,47 @@ public class C {}
                 attrTypeName: "AssemblyTitleAttribute"
             );
 
-            CompileAndVerify(
-                consoleappCompilation,
-                symbolValidator: module =>
+            CompileAndVerify(consoleappCompilation, symbolValidator: module =>
+            {
+                foreach (var a in module.ContainingAssembly.GetAttributes())
                 {
-                    foreach (var a in module.ContainingAssembly.GetAttributes())
+                    switch (a.AttributeClass.Name)
                     {
-                        switch (a.AttributeClass.Name)
-                        {
-                            case "AssemblyTitleAttribute":
-                                Assert.Equal(
-                                    @"System.Reflection.AssemblyTitleAttribute(""AssemblyTitle (from source)"")",
-                                    a.ToString()
-                                );
-                                break;
-                            case "FileIOPermissionAttribute":
-                                Assert.Equal(
-                                    @"System.Security.Permissions.FileIOPermissionAttribute(System.Security.Permissions.SecurityAction.RequestOptional)",
-                                    a.ToString()
-                                );
-                                break;
-                            case "UserDefinedAssemblyAttrNoAllowMultipleAttribute":
-                                Assert.Equal(
-                                    @"UserDefinedAssemblyAttrNoAllowMultipleAttribute(""UserDefinedAssemblyAttrNoAllowMultiple"")",
-                                    a.ToString()
-                                );
-                                break;
-                            case "UserDefinedAssemblyAttrAllowMultipleAttribute":
-                                Assert.Equal(
-                                    @"UserDefinedAssemblyAttrAllowMultipleAttribute(""UserDefinedAssemblyAttrAllowMultiple"")",
-                                    a.ToString()
-                                );
-                                break;
-                            case "CompilationRelaxationsAttribute":
-                            case "RuntimeCompatibilityAttribute":
-                            case "DebuggableAttribute":
-                                // synthesized attributes
-                                break;
-                            default:
-                                Assert.Equal("Unexpected Attr", a.AttributeClass.Name);
-                                break;
-                        }
+                        case "AssemblyTitleAttribute":
+                            Assert.Equal(
+                                @"System.Reflection.AssemblyTitleAttribute(""AssemblyTitle (from source)"")",
+                                a.ToString()
+                            );
+                            break;
+                        case "FileIOPermissionAttribute":
+                            Assert.Equal(
+                                @"System.Security.Permissions.FileIOPermissionAttribute(System.Security.Permissions.SecurityAction.RequestOptional)",
+                                a.ToString()
+                            );
+                            break;
+                        case "UserDefinedAssemblyAttrNoAllowMultipleAttribute":
+                            Assert.Equal(
+                                @"UserDefinedAssemblyAttrNoAllowMultipleAttribute(""UserDefinedAssemblyAttrNoAllowMultiple"")",
+                                a.ToString()
+                            );
+                            break;
+                        case "UserDefinedAssemblyAttrAllowMultipleAttribute":
+                            Assert.Equal(
+                                @"UserDefinedAssemblyAttrAllowMultipleAttribute(""UserDefinedAssemblyAttrAllowMultiple"")",
+                                a.ToString()
+                            );
+                            break;
+                        case "CompilationRelaxationsAttribute":
+                        case "RuntimeCompatibilityAttribute":
+                        case "DebuggableAttribute":
+                            // synthesized attributes
+                            break;
+                        default:
+                            Assert.Equal("Unexpected Attr", a.AttributeClass.Name);
+                            break;
                     }
                 }
-            );
+            });
         }
 
         [Fact]
@@ -3017,25 +2960,22 @@ public class C { }
                 assemblyName: "C"
             );
 
-            CompileAndVerify(
-                assembly,
-                symbolValidator: moduleSymbol =>
-                {
-                    var attrs = moduleSymbol
-                        .ContainingAssembly.GetAttributes()
-                        .Select(a => a.ToString())
-                        .ToArray();
-                    AssertEx.SetEqual(
-                        new[]
-                        {
-                            "System.Diagnostics.DebuggableAttribute(System.Diagnostics.DebuggableAttribute.DebuggingModes.IgnoreSymbolStoreSequencePoints)",
-                            "System.Runtime.CompilerServices.RuntimeCompatibilityAttribute(WrapNonExceptionThrows = false)",
-                            "System.Runtime.CompilerServices.CompilationRelaxationsAttribute(System.Runtime.CompilerServices.CompilationRelaxations.NoStringInterning)",
-                        },
-                        attrs
-                    );
-                }
-            );
+            CompileAndVerify(assembly, symbolValidator: moduleSymbol =>
+            {
+                var attrs = moduleSymbol
+                    .ContainingAssembly.GetAttributes()
+                    .Select(a => a.ToString())
+                    .ToArray();
+                AssertEx.SetEqual(
+                    new[]
+                    {
+                        "System.Diagnostics.DebuggableAttribute(System.Diagnostics.DebuggableAttribute.DebuggingModes.IgnoreSymbolStoreSequencePoints)",
+                        "System.Runtime.CompilerServices.RuntimeCompatibilityAttribute(WrapNonExceptionThrows = false)",
+                        "System.Runtime.CompilerServices.CompilationRelaxationsAttribute(System.Runtime.CompilerServices.CompilationRelaxations.NoStringInterning)",
+                    },
+                    attrs
+                );
+            });
         }
 
         [Fact, WorkItem(546460, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546460")]
@@ -3423,19 +3363,16 @@ public class C { }
 
             Assert.Equal(3, appCompilation.Assembly.Modules.Length);
 
-            CompileAndVerify(
-                    appCompilation,
-                    symbolValidator: (ModuleSymbol m) =>
-                    {
-                        var list = GetAssemblyDescriptionAttributes(m.ContainingAssembly).ToArray();
+            CompileAndVerify(appCompilation, symbolValidator: (ModuleSymbol m) =>
+                {
+                    var list = GetAssemblyDescriptionAttributes(m.ContainingAssembly).ToArray();
 
-                        Assert.Equal(1, list.Length);
-                        Assert.Equal(
-                            "System.Reflection.AssemblyDescriptionAttribute(\"Module1\")",
-                            list[0].ToString()
-                        );
-                    }
-                )
+                    Assert.Equal(1, list.Length);
+                    Assert.Equal(
+                        "System.Reflection.AssemblyDescriptionAttribute(\"Module1\")",
+                        list[0].ToString()
+                    );
+                })
                 .VerifyDiagnostics();
         }
 
@@ -3484,19 +3421,16 @@ public class C { }
 
             Assert.Equal(3, appCompilation.Assembly.Modules.Length);
 
-            CompileAndVerify(
-                    appCompilation,
-                    symbolValidator: (ModuleSymbol m) =>
-                    {
-                        var list = GetAssemblyDescriptionAttributes(m.ContainingAssembly).ToArray();
+            CompileAndVerify(appCompilation, symbolValidator: (ModuleSymbol m) =>
+                {
+                    var list = GetAssemblyDescriptionAttributes(m.ContainingAssembly).ToArray();
 
-                        Assert.Equal(1, list.Length);
-                        Assert.Equal(
-                            "System.Reflection.AssemblyDescriptionAttribute(\"Module2\")",
-                            list[0].ToString()
-                        );
-                    }
-                )
+                    Assert.Equal(1, list.Length);
+                    Assert.Equal(
+                        "System.Reflection.AssemblyDescriptionAttribute(\"Module2\")",
+                        list[0].ToString()
+                    );
+                })
                 .VerifyDiagnostics(
                     // warning CS7090: Attribute 'System.Reflection.AssemblyDescriptionAttribute' from .NET module 'M1.netmodule' is overridden.
                     Diagnostic(ErrorCode.WRN_AssemblyAttributeFromModuleIsOverridden)
@@ -3541,19 +3475,16 @@ public class C { }
 
             Assert.Equal(3, appCompilation.Assembly.Modules.Length);
 
-            CompileAndVerify(
-                    appCompilation,
-                    symbolValidator: (ModuleSymbol m) =>
-                    {
-                        var list = GetAssemblyDescriptionAttributes(m.ContainingAssembly).ToArray();
+            CompileAndVerify(appCompilation, symbolValidator: (ModuleSymbol m) =>
+                {
+                    var list = GetAssemblyDescriptionAttributes(m.ContainingAssembly).ToArray();
 
-                        Assert.Equal(1, list.Length);
-                        Assert.Equal(
-                            "System.Reflection.AssemblyDescriptionAttribute(\"Module3\")",
-                            list[0].ToString()
-                        );
-                    }
-                )
+                    Assert.Equal(1, list.Length);
+                    Assert.Equal(
+                        "System.Reflection.AssemblyDescriptionAttribute(\"Module3\")",
+                        list[0].ToString()
+                    );
+                })
                 .VerifyDiagnostics(
                     // warning CS7090: Attribute 'System.Reflection.AssemblyDescriptionAttribute' from .NET module 'M2.netmodule' is overridden.
                     Diagnostic(ErrorCode.WRN_AssemblyAttributeFromModuleIsOverridden)
@@ -3604,19 +3535,16 @@ public class C { }
 
             Assert.Equal(3, appCompilation.Assembly.Modules.Length);
 
-            CompileAndVerify(
-                    appCompilation,
-                    symbolValidator: (ModuleSymbol m) =>
-                    {
-                        var list = GetAssemblyDescriptionAttributes(m.ContainingAssembly).ToArray();
+            CompileAndVerify(appCompilation, symbolValidator: (ModuleSymbol m) =>
+                {
+                    var list = GetAssemblyDescriptionAttributes(m.ContainingAssembly).ToArray();
 
-                        Assert.Equal(1, list.Length);
-                        Assert.Equal(
-                            "System.Reflection.AssemblyDescriptionAttribute(\"Module1\")",
-                            list[0].ToString()
-                        );
-                    }
-                )
+                    Assert.Equal(1, list.Length);
+                    Assert.Equal(
+                        "System.Reflection.AssemblyDescriptionAttribute(\"Module1\")",
+                        list[0].ToString()
+                    );
+                })
                 .VerifyDiagnostics(
                     // warning CS7090: Attribute 'System.Reflection.AssemblyDescriptionAttribute' from .NET module 'M2.netmodule' is overridden.
                     Diagnostic(ErrorCode.WRN_AssemblyAttributeFromModuleIsOverridden)
@@ -3648,22 +3576,19 @@ public class C { }
 
             Assert.Equal(2, appCompilation.Assembly.Modules.Length);
 
-            CompileAndVerify(
-                    appCompilation,
-                    symbolValidator: (ModuleSymbol m) =>
-                    {
-                        var attrs = m.ContainingAssembly.GetAttributes();
-                        var attrlist = attrs.Where(a =>
-                            a.IsTargetAttribute(AttributeDescription.AssemblyFileVersionAttribute)
-                        );
+            CompileAndVerify(appCompilation, symbolValidator: (ModuleSymbol m) =>
+                {
+                    var attrs = m.ContainingAssembly.GetAttributes();
+                    var attrlist = attrs.Where(a =>
+                        a.IsTargetAttribute(AttributeDescription.AssemblyFileVersionAttribute)
+                    );
 
-                        Assert.Equal(1, attrlist.Count());
-                        Assert.Equal(
-                            "System.Reflection.AssemblyFileVersionAttribute(\"4.3.2.1\")",
-                            attrlist.First().ToString()
-                        );
-                    }
-                )
+                    Assert.Equal(1, attrlist.Count());
+                    Assert.Equal(
+                        "System.Reflection.AssemblyFileVersionAttribute(\"4.3.2.1\")",
+                        attrlist.First().ToString()
+                    );
+                })
                 .VerifyDiagnostics(
                     // warning CS7090: Attribute 'System.Reflection.AssemblyFileVersionAttribute' from module 'M1.netmodule' will be ignored in favor of the instance appearing in source
                     Diagnostic(ErrorCode.WRN_AssemblyAttributeFromModuleIsOverridden)
@@ -3730,27 +3655,24 @@ public class A1 : System.Attribute
                 options: TestOptions.ReleaseDll
             );
 
-            CompileAndVerify(
-                    comp,
-                    symbolValidator: (m) =>
-                    {
-                        var attrs = m.ContainingAssembly.GetAttributes();
-                        Assert.Equal(4, attrs.Length);
-                        AssertEx.Equal(
-                            "System.Runtime.CompilerServices.CompilationRelaxationsAttribute(8)",
-                            attrs[0].ToString()
-                        );
-                        AssertEx.Equal(
-                            "System.Runtime.CompilerServices.RuntimeCompatibilityAttribute(WrapNonExceptionThrows = true)",
-                            attrs[1].ToString()
-                        );
-                        AssertEx.Equal(
-                            "System.Diagnostics.DebuggableAttribute(System.Diagnostics.DebuggableAttribute.DebuggingModes.IgnoreSymbolStoreSequencePoints)",
-                            attrs[2].ToString()
-                        );
-                        AssertEx.Equal("A1(1)", attrs[3].ToString());
-                    }
-                )
+            CompileAndVerify(comp, symbolValidator: (m) =>
+                {
+                    var attrs = m.ContainingAssembly.GetAttributes();
+                    Assert.Equal(4, attrs.Length);
+                    AssertEx.Equal(
+                        "System.Runtime.CompilerServices.CompilationRelaxationsAttribute(8)",
+                        attrs[0].ToString()
+                    );
+                    AssertEx.Equal(
+                        "System.Runtime.CompilerServices.RuntimeCompatibilityAttribute(WrapNonExceptionThrows = true)",
+                        attrs[1].ToString()
+                    );
+                    AssertEx.Equal(
+                        "System.Diagnostics.DebuggableAttribute(System.Diagnostics.DebuggableAttribute.DebuggingModes.IgnoreSymbolStoreSequencePoints)",
+                        attrs[2].ToString()
+                    );
+                    AssertEx.Equal("A1(1)", attrs[3].ToString());
+                })
                 .VerifyDiagnostics();
 
             var comp2 = CreateCompilation(
@@ -3837,27 +3759,24 @@ public class A1 : System.Attribute
                 options: TestOptions.ReleaseDll
             );
 
-            CompileAndVerify(
-                    comp,
-                    symbolValidator: (m) =>
-                    {
-                        var attrs = m.ContainingAssembly.GetAttributes();
-                        Assert.Equal(4, attrs.Length);
-                        AssertEx.Equal(
-                            "System.Runtime.CompilerServices.CompilationRelaxationsAttribute(8)",
-                            attrs[0].ToString()
-                        );
-                        AssertEx.Equal(
-                            "System.Runtime.CompilerServices.RuntimeCompatibilityAttribute(WrapNonExceptionThrows = true)",
-                            attrs[1].ToString()
-                        );
-                        AssertEx.Equal(
-                            "System.Diagnostics.DebuggableAttribute(System.Diagnostics.DebuggableAttribute.DebuggingModes.IgnoreSymbolStoreSequencePoints)",
-                            attrs[2].ToString()
-                        );
-                        AssertEx.Equal("A1(typeof(C1))", attrs[3].ToString());
-                    }
-                )
+            CompileAndVerify(comp, symbolValidator: (m) =>
+                {
+                    var attrs = m.ContainingAssembly.GetAttributes();
+                    Assert.Equal(4, attrs.Length);
+                    AssertEx.Equal(
+                        "System.Runtime.CompilerServices.CompilationRelaxationsAttribute(8)",
+                        attrs[0].ToString()
+                    );
+                    AssertEx.Equal(
+                        "System.Runtime.CompilerServices.RuntimeCompatibilityAttribute(WrapNonExceptionThrows = true)",
+                        attrs[1].ToString()
+                    );
+                    AssertEx.Equal(
+                        "System.Diagnostics.DebuggableAttribute(System.Diagnostics.DebuggableAttribute.DebuggingModes.IgnoreSymbolStoreSequencePoints)",
+                        attrs[2].ToString()
+                    );
+                    AssertEx.Equal("A1(typeof(C1))", attrs[3].ToString());
+                })
                 .VerifyDiagnostics();
 
             var comp2 = CreateCompilation(
@@ -3898,26 +3817,23 @@ public class A1 : System.Attribute
                 options: TestOptions.ReleaseDll
             );
 
-            CompileAndVerify(
-                    comp3,
-                    symbolValidator: (m) =>
-                    {
-                        var attrs = m.ContainingAssembly.GetAttributes();
-                        Assert.Equal(3, attrs.Length);
-                        AssertEx.Equal(
-                            "System.Runtime.CompilerServices.CompilationRelaxationsAttribute(8)",
-                            attrs[0].ToString()
-                        );
-                        AssertEx.Equal(
-                            "System.Runtime.CompilerServices.RuntimeCompatibilityAttribute(WrapNonExceptionThrows = true)",
-                            attrs[1].ToString()
-                        );
-                        AssertEx.Equal(
-                            "System.Diagnostics.DebuggableAttribute(System.Diagnostics.DebuggableAttribute.DebuggingModes.IgnoreSymbolStoreSequencePoints)",
-                            attrs[2].ToString()
-                        );
-                    }
-                )
+            CompileAndVerify(comp3, symbolValidator: (m) =>
+                {
+                    var attrs = m.ContainingAssembly.GetAttributes();
+                    Assert.Equal(3, attrs.Length);
+                    AssertEx.Equal(
+                        "System.Runtime.CompilerServices.CompilationRelaxationsAttribute(8)",
+                        attrs[0].ToString()
+                    );
+                    AssertEx.Equal(
+                        "System.Runtime.CompilerServices.RuntimeCompatibilityAttribute(WrapNonExceptionThrows = true)",
+                        attrs[1].ToString()
+                    );
+                    AssertEx.Equal(
+                        "System.Diagnostics.DebuggableAttribute(System.Diagnostics.DebuggableAttribute.DebuggingModes.IgnoreSymbolStoreSequencePoints)",
+                        attrs[2].ToString()
+                    );
+                })
                 .VerifyDiagnostics();
         }
     }

@@ -118,13 +118,10 @@ namespace System.Collections.Tests
             List<T> expectedList = list.ToList();
             IndexOfDelegate IndexOf = IndexOfDelegateFromType(indexOfMethod);
 
-            Assert.All(
-                Enumerable.Range(0, count),
-                i =>
-                {
-                    Assert.Equal(i, IndexOf(list, expectedList[i]));
-                }
-            );
+            Assert.All(Enumerable.Range(0, count), i =>
+            {
+                Assert.Equal(i, IndexOf(list, expectedList[i]));
+            });
         }
 
         [Theory]
@@ -146,13 +143,10 @@ namespace System.Collections.Tests
             );
             IndexOfDelegate IndexOf = IndexOfDelegateFromType(indexOfMethod);
 
-            Assert.All(
-                nonexistentValues,
-                nonexistentValue =>
-                {
-                    Assert.Equal(-1, IndexOf(list, nonexistentValue));
-                }
-            );
+            Assert.All(nonexistentValues, nonexistentValue =>
+            {
+                Assert.Equal(-1, IndexOf(list, nonexistentValue));
+            });
         }
 
         [Theory]
@@ -186,16 +180,13 @@ namespace System.Collections.Tests
             list.AddRange(list);
             IndexOfDelegate IndexOf = IndexOfDelegateFromType(indexOfMethod);
 
-            Assert.All(
-                Enumerable.Range(0, count),
-                i =>
-                {
-                    if (frontToBackOrder)
-                        Assert.Equal(i, IndexOf(list, withoutDuplicates[i]));
-                    else
-                        Assert.Equal(count + i, IndexOf(list, withoutDuplicates[i]));
-                }
-            );
+            Assert.All(Enumerable.Range(0, count), i =>
+            {
+                if (frontToBackOrder)
+                    Assert.Equal(i, IndexOf(list, withoutDuplicates[i]));
+                else
+                    Assert.Equal(count + i, IndexOf(list, withoutDuplicates[i]));
+            });
         }
 
         [Theory]
@@ -208,27 +199,18 @@ namespace System.Collections.Tests
             list.AddRange(list);
             list.AddRange(list);
 
-            Assert.All(
-                Enumerable.Range(0, count),
-                i =>
+            Assert.All(Enumerable.Range(0, count), i =>
+            {
+                Assert.All(Enumerable.Range(0, 4), j =>
                 {
-                    Assert.All(
-                        Enumerable.Range(0, 4),
-                        j =>
-                        {
-                            int expectedIndex = (j * count) + i;
-                            Assert.Equal(
-                                expectedIndex,
-                                list.IndexOf(withoutDuplicates[i], (count * j))
-                            );
-                            Assert.Equal(
-                                expectedIndex,
-                                list.IndexOf(withoutDuplicates[i], (count * j), count)
-                            );
-                        }
+                    int expectedIndex = (j * count) + i;
+                    Assert.Equal(expectedIndex, list.IndexOf(withoutDuplicates[i], (count * j)));
+                    Assert.Equal(
+                        expectedIndex,
+                        list.IndexOf(withoutDuplicates[i], (count * j), count)
                     );
-                }
-            );
+                });
+            });
         }
 
         [Theory]
@@ -241,27 +223,21 @@ namespace System.Collections.Tests
             list.AddRange(list);
             list.AddRange(list);
 
-            Assert.All(
-                Enumerable.Range(0, count),
-                i =>
+            Assert.All(Enumerable.Range(0, count), i =>
+            {
+                Assert.All(Enumerable.Range(0, 4), j =>
                 {
-                    Assert.All(
-                        Enumerable.Range(0, 4),
-                        j =>
-                        {
-                            int expectedIndex = (j * count) + i;
-                            Assert.Equal(
-                                expectedIndex,
-                                list.LastIndexOf(withoutDuplicates[i], (count * (j + 1)) - 1)
-                            );
-                            Assert.Equal(
-                                expectedIndex,
-                                list.LastIndexOf(withoutDuplicates[i], (count * (j + 1)) - 1, count)
-                            );
-                        }
+                    int expectedIndex = (j * count) + i;
+                    Assert.Equal(
+                        expectedIndex,
+                        list.LastIndexOf(withoutDuplicates[i], (count * (j + 1)) - 1)
                     );
-                }
-            );
+                    Assert.Equal(
+                        expectedIndex,
+                        list.LastIndexOf(withoutDuplicates[i], (count * (j + 1)) - 1, count)
+                    );
+                });
+            });
         }
 
         [Theory]

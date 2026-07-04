@@ -28,9 +28,8 @@ namespace System.DirectoryServices.Protocols.Tests
         public void Timeout_SetNegative_ThrowsArgumentException()
         {
             var connection = new SubDirectoryConnection();
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => connection.Timeout = TimeSpan.FromTicks(-1)
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                connection.Timeout = TimeSpan.FromTicks(-1)
             );
         }
 

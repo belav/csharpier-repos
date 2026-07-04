@@ -1754,17 +1754,14 @@ namespace System.Globalization.Tests
             using BoundedMemory<char> boundedMemory = BoundedMemory.Allocate<char>(0); // AV if dereferenced
             boundedMemory.MakeReadonly();
 
-            Assert.Throws<ArgumentException>(
-                "source",
-                () =>
-                {
-                    ReadOnlySpan<char> dummySpan = MemoryMarshal.CreateReadOnlySpan(
-                        ref MemoryMarshal.GetReference(boundedMemory.Span),
-                        inputLength
-                    );
-                    CultureInfo.InvariantCulture.CompareInfo.GetSortKeyLength(dummySpan);
-                }
-            );
+            Assert.Throws<ArgumentException>("source", () =>
+            {
+                ReadOnlySpan<char> dummySpan = MemoryMarshal.CreateReadOnlySpan(
+                    ref MemoryMarshal.GetReference(boundedMemory.Span),
+                    inputLength
+                );
+                CultureInfo.InvariantCulture.CompareInfo.GetSortKeyLength(dummySpan);
+            });
         }
 
         [ConditionalTheory(nameof(PredefinedCulturesOnlyIsDisabled))]
@@ -1786,10 +1783,8 @@ namespace System.Globalization.Tests
 
             // First, validate that too short a buffer throws
 
-            Assert.Throws<ArgumentException>(
-                "destination",
-                () =>
-                    compareInfo.GetSortKey(input, new byte[expectedOutputBytes.Length - 1], options)
+            Assert.Throws<ArgumentException>("destination", () =>
+                compareInfo.GetSortKey(input, new byte[expectedOutputBytes.Length - 1], options)
             );
 
             // Next, validate that using a properly-sized buffer succeeds

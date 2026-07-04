@@ -324,9 +324,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
 
         await middleware.Invoke(httpContext);
 
-        Assert.Contains(
-            TestSink.Writes,
-            w => w.Message.Contains("RequestBody: [Not consumed by app]")
+        Assert.Contains(TestSink.Writes, w =>
+            w.Message.Contains("RequestBody: [Not consumed by app]")
         );
     }
 
@@ -630,9 +629,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         await middleware.Invoke(httpContext);
 
         Assert.DoesNotContain(TestSink.Writes, w => w.Message.Contains(expected));
-        Assert.Contains(
-            TestSink.Writes,
-            w => w.Message.Contains("Unrecognized Content-Type for request body.")
+        Assert.Contains(TestSink.Writes, w =>
+            w.Message.Contains("Unrecognized Content-Type for request body.")
         );
     }
 
@@ -933,9 +931,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         var httpContext = new DefaultHttpContext();
 
         await middleware.Invoke(httpContext);
-        Assert.Contains(
-            TestSink.Writes,
-            w => w.Message.StartsWith("Duration: ", StringComparison.Ordinal)
+        Assert.Contains(TestSink.Writes, w =>
+            w.Message.StartsWith("Duration: ", StringComparison.Ordinal)
         );
     }
 
@@ -1248,9 +1245,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
 
         await middleware.Invoke(httpContext);
 
-        Assert.Contains(
-            TestSink.Writes,
-            w => w.Message.Contains("Unrecognized Content-Type for response body.")
+        Assert.Contains(TestSink.Writes, w =>
+            w.Message.Contains("Unrecognized Content-Type for response body.")
         );
     }
 
@@ -1266,9 +1262,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
 
         await middleware.Invoke(httpContext);
 
-        Assert.Contains(
-            TestSink.Writes,
-            w => w.Message.Contains("No Content-Type header for request body.")
+        Assert.Contains(TestSink.Writes, w =>
+            w.Message.Contains("No Content-Type header for request body.")
         );
     }
 
@@ -1744,9 +1739,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         Assert.Contains(TestSink.Writes, w => w.Message.Contains("RequestBody: test"));
         // Only response is disabled
         Assert.DoesNotContain(TestSink.Writes, w => w.Message.Contains("StatusCode: 418"));
-        Assert.DoesNotContain(
-            TestSink.Writes,
-            w => w.Message.Contains("Content-Type: text/plain; p=response")
+        Assert.DoesNotContain(TestSink.Writes, w =>
+            w.Message.Contains("Content-Type: text/plain; p=response")
         );
         Assert.DoesNotContain(TestSink.Writes, w => w.Message.Contains("Body: Hello World"));
     }
@@ -1924,9 +1918,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         var initialResponse = await client.SendAsync(request);
 
         var filteredLogs = TestSink.Writes.Where(w => w.LoggerName.Contains("HttpLogging"));
-        Assert.Contains(
-            filteredLogs,
-            w => w.Message.Equals("RequestBody: fro[Truncated by RequestBodyLogLimit]")
+        Assert.Contains(filteredLogs, w =>
+            w.Message.Equals("RequestBody: fro[Truncated by RequestBodyLogLimit]")
         );
         Assert.Contains(filteredLogs, w => w.Message.Equals("ResponseBody: testin"));
     }
@@ -2036,9 +2029,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         var initialResponse = await client.SendAsync(request);
 
         var filteredLogs = TestSink.Writes.Where(w => w.LoggerName.Contains("HttpLogging"));
-        Assert.Contains(
-            filteredLogs,
-            w => w.Message.Equals("RequestBody: fro[Truncated by RequestBodyLogLimit]")
+        Assert.Contains(filteredLogs, w =>
+            w.Message.Equals("RequestBody: fro[Truncated by RequestBodyLogLimit]")
         );
         Assert.Contains(filteredLogs, w => w.Message.Equals("ResponseBody: testin"));
     }
@@ -2100,14 +2092,11 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                     app.UseHttpLogging();
                     app.UseEndpoints(endpoint =>
                     {
-                        endpoint.MapGet(
-                            "/",
-                            async (HttpContext c) =>
-                            {
-                                await c.Request.Body.ReadAsync(new byte[100]);
-                                return "testing";
-                            }
-                        );
+                        endpoint.MapGet("/", async (HttpContext c) =>
+                        {
+                            await c.Request.Body.ReadAsync(new byte[100]);
+                            return "testing";
+                        });
                     });
                 });
         });
@@ -2227,14 +2216,11 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                         );
 
                         endpoint
-                            .MapGet(
-                                "/ext_responseonly",
-                                async (HttpContext c) =>
-                                {
-                                    await c.Request.Body.ReadAsync(new byte[100]);
-                                    return "testing";
-                                }
-                            )
+                            .MapGet("/ext_responseonly", async (HttpContext c) =>
+                            {
+                                await c.Request.Body.ReadAsync(new byte[100]);
+                                return "testing";
+                            })
                             .WithHttpLogging(HttpLoggingFields.Response);
 
                         endpoint.MapGet(
@@ -2249,14 +2235,11 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                         );
 
                         endpoint
-                            .MapGet(
-                                "/ext_responseandrequest",
-                                async (HttpContext c) =>
-                                {
-                                    await c.Request.Body.ReadAsync(new byte[100]);
-                                    return "testing";
-                                }
-                            )
+                            .MapGet("/ext_responseandrequest", async (HttpContext c) =>
+                            {
+                                await c.Request.Body.ReadAsync(new byte[100]);
+                                return "testing";
+                            })
                             .WithHttpLogging(HttpLoggingFields.All);
 
                         endpoint.MapGet(
@@ -2276,14 +2259,11 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                         );
 
                         endpoint
-                            .MapGet(
-                                "/ext_restrictedheaders",
-                                async (HttpContext c) =>
-                                {
-                                    await c.Request.Body.ReadAsync(new byte[100]);
-                                    return "testing";
-                                }
-                            )
+                            .MapGet("/ext_restrictedheaders", async (HttpContext c) =>
+                            {
+                                await c.Request.Body.ReadAsync(new byte[100]);
+                                return "testing";
+                            })
                             .WithHttpLogging(
                                 (HttpLoggingFields.Request & ~HttpLoggingFields.RequestScheme)
                                     | (
@@ -2307,14 +2287,11 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                         );
 
                         endpoint
-                            .MapGet(
-                                "/ext_restrictedsize",
-                                async (HttpContext c) =>
-                                {
-                                    await c.Request.Body.ReadAsync(new byte[100]);
-                                    return "testing";
-                                }
-                            )
+                            .MapGet("/ext_restrictedsize", async (HttpContext c) =>
+                            {
+                                await c.Request.Body.ReadAsync(new byte[100]);
+                                return "testing";
+                            })
                             .WithHttpLogging(
                                 HttpLoggingFields.RequestBody | HttpLoggingFields.ResponseBody,
                                 requestBodyLogLimit: 3,

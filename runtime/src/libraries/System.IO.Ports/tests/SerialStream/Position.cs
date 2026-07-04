@@ -107,13 +107,10 @@ namespace System.IO.Ports.Tests
         )
         {
             Assert.Throws(expectedException, () => serialStream.Position = value);
-            Assert.Throws(
-                expectedException,
-                () =>
-                {
-                    _ = serialStream.Position;
-                }
-            );
+            Assert.Throws(expectedException, () =>
+            {
+                _ = serialStream.Position;
+            });
         }
         #endregion
     }

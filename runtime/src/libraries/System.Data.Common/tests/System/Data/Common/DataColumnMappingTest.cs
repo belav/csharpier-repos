@@ -31,16 +31,14 @@ namespace System.Data.Tests.Common
         [Fact]
         public void GetDataColumnBySchemaAction_String_String_DataTable_Type_MissingSchemaAction_MissingDataTableThrowsException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "dataTable",
-                () =>
-                    DataColumnMapping.GetDataColumnBySchemaAction(
-                        "",
-                        "",
-                        null,
-                        typeof(string),
-                        new MissingSchemaAction()
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("dataTable", () =>
+                DataColumnMapping.GetDataColumnBySchemaAction(
+                    "",
+                    "",
+                    null,
+                    typeof(string),
+                    new MissingSchemaAction()
+                )
             );
         }
 

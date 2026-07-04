@@ -79,28 +79,22 @@ namespace System.Threading.Tasks.Tests.Status
                     && (options & TaskCreationOptions.RunContinuationsAsynchronously) != 0
                 )
                 {
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                        "creationOptions",
-                        () => new TaskCompletionSource(options)
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>("creationOptions", () =>
+                        new TaskCompletionSource(options)
                     );
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                        "creationOptions",
-                        () =>
-                            new TaskCompletionSource(
-                                options | TaskCreationOptions.RunContinuationsAsynchronously
-                            )
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>("creationOptions", () =>
+                        new TaskCompletionSource(
+                            options | TaskCreationOptions.RunContinuationsAsynchronously
+                        )
                     );
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                        "creationOptions",
-                        () => new TaskCompletionSource(new object(), options)
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>("creationOptions", () =>
+                        new TaskCompletionSource(new object(), options)
                     );
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                        "creationOptions",
-                        () =>
-                            new TaskCompletionSource(
-                                new object(),
-                                options | TaskCreationOptions.RunContinuationsAsynchronously
-                            )
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>("creationOptions", () =>
+                        new TaskCompletionSource(
+                            new object(),
+                            options | TaskCreationOptions.RunContinuationsAsynchronously
+                        )
                     );
                 }
             }

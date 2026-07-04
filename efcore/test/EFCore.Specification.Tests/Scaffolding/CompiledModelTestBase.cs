@@ -1460,10 +1460,8 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         if (useContext != null)
         {
             ListLoggerFactory.Clear();
-            TestStore.Initialize(
-                ServiceProvider,
-                contextFactory.CreateContext,
-                c => useContext((TContext)c)
+            TestStore.Initialize(ServiceProvider, contextFactory.CreateContext, c =>
+                useContext((TContext)c)
             );
         }
 

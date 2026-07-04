@@ -172,10 +172,8 @@ namespace System.Transactions
 
         private static string? s_instanceIdentifier;
         internal static string InstanceIdentifier =>
-            LazyInitializer.EnsureInitialized(
-                ref s_instanceIdentifier,
-                ref s_classSyncObject,
-                () => $"{Guid.NewGuid()}:"
+            LazyInitializer.EnsureInitialized(ref s_instanceIdentifier, ref s_classSyncObject, () =>
+                $"{Guid.NewGuid()}:"
             );
 
         // Double-checked locking pattern requires volatile for read/write synchronization

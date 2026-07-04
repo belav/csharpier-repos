@@ -374,15 +374,12 @@ public partial class HttpConnectionTests
             {
                 var httpHandler = new TestHttpMessageHandler();
 
-                httpHandler.OnGet(
-                    "/?id=00000000-0000-0000-0000-000000000000",
-                    (_, __) =>
-                    {
-                        return Task.FromResult(
-                            ResponseUtils.CreateResponse(HttpStatusCode.InternalServerError)
-                        );
-                    }
-                );
+                httpHandler.OnGet("/?id=00000000-0000-0000-0000-000000000000", (_, __) =>
+                {
+                    return Task.FromResult(
+                        ResponseUtils.CreateResponse(HttpStatusCode.InternalServerError)
+                    );
+                });
 
                 var sse = new ServerSentEventsTransport(
                     new HttpClient(httpHandler),
@@ -409,14 +406,11 @@ public partial class HttpConnectionTests
                 var httpHandler = new TestHttpMessageHandler();
 
                 var connectResponseTcs = new TaskCompletionSource();
-                httpHandler.OnGet(
-                    "/?id=00000000-0000-0000-0000-000000000000",
-                    async (_, __) =>
-                    {
-                        await connectResponseTcs.Task;
-                        return ResponseUtils.CreateResponse(HttpStatusCode.Accepted);
-                    }
-                );
+                httpHandler.OnGet("/?id=00000000-0000-0000-0000-000000000000", async (_, __) =>
+                {
+                    await connectResponseTcs.Task;
+                    return ResponseUtils.CreateResponse(HttpStatusCode.Accepted);
+                });
 
                 var sse = new ServerSentEventsTransport(
                     new HttpClient(httpHandler),
@@ -459,32 +453,29 @@ public partial class HttpConnectionTests
                     }
                 );
 
-                await WithConnectionAsync(
-                    CreateConnection(testHttpHandler),
-                    async (connection) =>
-                    {
-                        // Kick off StartAsync, but don't wait for it
-                        var cts = new CancellationTokenSource();
-                        var startTask = connection.StartAsync(cts.Token);
+                await WithConnectionAsync(CreateConnection(testHttpHandler), async (connection) =>
+                {
+                    // Kick off StartAsync, but don't wait for it
+                    var cts = new CancellationTokenSource();
+                    var startTask = connection.StartAsync(cts.Token);
 
-                        // Wait for the connection to get to the "WaitToContinue" call above,
-                        // which means it has gotten to Negotiate
-                        await negotiateSyncPoint.WaitForSyncPoint().DefaultTimeout();
+                    // Wait for the connection to get to the "WaitToContinue" call above,
+                    // which means it has gotten to Negotiate
+                    await negotiateSyncPoint.WaitForSyncPoint().DefaultTimeout();
 
-                        // Assert that StartAsync has not yet been canceled
-                        Assert.False(startTask.IsCanceled);
+                    // Assert that StartAsync has not yet been canceled
+                    Assert.False(startTask.IsCanceled);
 
-                        // Cancel StartAsync, then "release" the SyncPoint
-                        // so the negotiate handler can keep going
-                        cts.Cancel();
-                        negotiateSyncPoint.Continue();
+                    // Cancel StartAsync, then "release" the SyncPoint
+                    // so the negotiate handler can keep going
+                    cts.Cancel();
+                    negotiateSyncPoint.Continue();
 
-                        // Assert that StartAsync was canceled
-                        await Assert
-                            .ThrowsAsync<TaskCanceledException>(() => startTask)
-                            .DefaultTimeout();
-                    }
-                );
+                    // Assert that StartAsync was canceled
+                    await Assert
+                        .ThrowsAsync<TaskCanceledException>(() => startTask)
+                        .DefaultTimeout();
+                });
             }
         }
 
@@ -567,14 +558,11 @@ public partial class HttpConnectionTests
             using (StartVerifiableLog(expectedErrorsFilter: ExpectedErrors))
             {
                 var httpHandler = new TestHttpMessageHandler();
-                httpHandler.OnGet(
-                    "/?id=00000000-0000-0000-0000-000000000000",
-                    (_, __) =>
-                    {
-                        // Simulating a cancellationToken canceling this request.
-                        throw new OperationCanceledException("Cancel SSE Start.");
-                    }
-                );
+                httpHandler.OnGet("/?id=00000000-0000-0000-0000-000000000000", (_, __) =>
+                {
+                    // Simulating a cancellationToken canceling this request.
+                    throw new OperationCanceledException("Cancel SSE Start.");
+                });
 
                 var sse = new ServerSentEventsTransport(
                     new HttpClient(httpHandler),

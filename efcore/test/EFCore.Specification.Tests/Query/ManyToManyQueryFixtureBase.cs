@@ -735,14 +735,11 @@ public abstract class ManyToManyQueryFixtureBase
                         })
             );
 
-        modelBuilder.SharedTypeEntity<ProxyableSharedType>(
-            "PST",
-            b =>
-            {
-                b.IndexerProperty<int>("Id").ValueGeneratedNever();
-                b.IndexerProperty<string>("Payload");
-            }
-        );
+        modelBuilder.SharedTypeEntity<ProxyableSharedType>("PST", b =>
+        {
+            b.IndexerProperty<int>("Id").ValueGeneratedNever();
+            b.IndexerProperty<string>("Payload");
+        });
     }
 
     public virtual bool UseGeneratedKeys => false;

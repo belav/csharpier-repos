@@ -30,9 +30,8 @@ namespace System
             }
 
             T ignore;
-            AssertThrows<IndexOutOfRangeException, T>(
-                span,
-                (_span) => ignore = _span[expected.Length]
+            AssertThrows<IndexOutOfRangeException, T>(span, (_span) =>
+                ignore = _span[expected.Length]
             );
         }
 
@@ -100,9 +99,8 @@ namespace System
             }
 
             T ignore;
-            AssertThrows<IndexOutOfRangeException, T>(
-                span,
-                (_span) => ignore = _span[expected.Length]
+            AssertThrows<IndexOutOfRangeException, T>(span, (_span) =>
+                ignore = _span[expected.Length]
             );
         }
 

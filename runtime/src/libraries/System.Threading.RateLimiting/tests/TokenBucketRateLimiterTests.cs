@@ -39,96 +39,72 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override void InvalidOptionsThrows()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    new TokenBucketRateLimiter(
-                        new TokenBucketRateLimiterOptions
-                        {
-                            TokenLimit = -1,
-                            QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                            QueueLimit = 1,
-                            ReplenishmentPeriod = TimeSpan.FromMinutes(2),
-                            TokensPerPeriod = 1,
-                            AutoReplenishment = false,
-                        }
-                    )
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    new TokenBucketRateLimiter(
-                        new TokenBucketRateLimiterOptions
-                        {
-                            TokenLimit = 1,
-                            QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                            QueueLimit = -1,
-                            ReplenishmentPeriod = TimeSpan.FromMinutes(2),
-                            TokensPerPeriod = 1,
-                            AutoReplenishment = false,
-                        }
-                    )
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    new TokenBucketRateLimiter(
-                        new TokenBucketRateLimiterOptions
-                        {
-                            TokenLimit = 1,
-                            QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                            QueueLimit = 1,
-                            ReplenishmentPeriod = TimeSpan.FromMinutes(2),
-                            TokensPerPeriod = -1,
-                            AutoReplenishment = false,
-                        }
-                    )
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    new TokenBucketRateLimiter(
-                        new TokenBucketRateLimiterOptions
-                        {
-                            TokenLimit = 1,
-                            QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                            QueueLimit = 1,
-                            ReplenishmentPeriod = TimeSpan.MinValue,
-                            TokensPerPeriod = 1,
-                            AutoReplenishment = false,
-                        }
-                    )
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    new TokenBucketRateLimiter(
-                        new TokenBucketRateLimiterOptions
-                        {
-                            TokenLimit = 1,
-                            QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                            QueueLimit = 1,
-                            ReplenishmentPeriod = TimeSpan.FromMilliseconds(-1),
-                            TokensPerPeriod = 1,
-                            AutoReplenishment = false,
-                        }
-                    )
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    new TokenBucketRateLimiter(
-                        new TokenBucketRateLimiterOptions
-                        {
-                            TokenLimit = 1,
-                            QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                            QueueLimit = 1,
-                            ReplenishmentPeriod = TimeSpan.Zero,
-                            TokensPerPeriod = 1,
-                            AutoReplenishment = false,
-                        }
-                    )
-            );
+            AssertExtensions.Throws<ArgumentException>("options", () => new TokenBucketRateLimiter(
+                    new TokenBucketRateLimiterOptions
+                    {
+                        TokenLimit = -1,
+                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                        QueueLimit = 1,
+                        ReplenishmentPeriod = TimeSpan.FromMinutes(2),
+                        TokensPerPeriod = 1,
+                        AutoReplenishment = false,
+                    }
+                ));
+            AssertExtensions.Throws<ArgumentException>("options", () => new TokenBucketRateLimiter(
+                    new TokenBucketRateLimiterOptions
+                    {
+                        TokenLimit = 1,
+                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                        QueueLimit = -1,
+                        ReplenishmentPeriod = TimeSpan.FromMinutes(2),
+                        TokensPerPeriod = 1,
+                        AutoReplenishment = false,
+                    }
+                ));
+            AssertExtensions.Throws<ArgumentException>("options", () => new TokenBucketRateLimiter(
+                    new TokenBucketRateLimiterOptions
+                    {
+                        TokenLimit = 1,
+                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                        QueueLimit = 1,
+                        ReplenishmentPeriod = TimeSpan.FromMinutes(2),
+                        TokensPerPeriod = -1,
+                        AutoReplenishment = false,
+                    }
+                ));
+            AssertExtensions.Throws<ArgumentException>("options", () => new TokenBucketRateLimiter(
+                    new TokenBucketRateLimiterOptions
+                    {
+                        TokenLimit = 1,
+                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                        QueueLimit = 1,
+                        ReplenishmentPeriod = TimeSpan.MinValue,
+                        TokensPerPeriod = 1,
+                        AutoReplenishment = false,
+                    }
+                ));
+            AssertExtensions.Throws<ArgumentException>("options", () => new TokenBucketRateLimiter(
+                    new TokenBucketRateLimiterOptions
+                    {
+                        TokenLimit = 1,
+                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                        QueueLimit = 1,
+                        ReplenishmentPeriod = TimeSpan.FromMilliseconds(-1),
+                        TokensPerPeriod = 1,
+                        AutoReplenishment = false,
+                    }
+                ));
+            AssertExtensions.Throws<ArgumentException>("options", () => new TokenBucketRateLimiter(
+                    new TokenBucketRateLimiterOptions
+                    {
+                        TokenLimit = 1,
+                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                        QueueLimit = 1,
+                        ReplenishmentPeriod = TimeSpan.Zero,
+                        TokensPerPeriod = 1,
+                        AutoReplenishment = false,
+                    }
+                ));
         }
 
         [Fact]
@@ -837,9 +813,8 @@ namespace System.Threading.RateLimiting.Test
                 }
             );
             using var lease = limiter.AttemptAcquire(1);
-            Assert.Collection(
-                lease.MetadataNames,
-                metadataName => Assert.Equal(metadataName, MetadataName.RetryAfter.Name)
+            Assert.Collection(lease.MetadataNames, metadataName =>
+                Assert.Equal(metadataName, MetadataName.RetryAfter.Name)
             );
         }
 
@@ -943,9 +918,8 @@ namespace System.Threading.RateLimiting.Test
 
             Assert.True(failedLease.TryGetMetadata(MetadataName.RetryAfter, out var typedMetadata));
             Assert.Equal(options.ReplenishmentPeriod.Ticks * 2, typedMetadata.Ticks);
-            Assert.Collection(
-                failedLease.MetadataNames,
-                item => item.Equals(MetadataName.RetryAfter.Name)
+            Assert.Collection(failedLease.MetadataNames, item =>
+                item.Equals(MetadataName.RetryAfter.Name)
             );
         }
 

@@ -737,9 +737,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             );
 
             const string UnnecessaryMarkupKey = "Unnecessary";
-            var unnecessarySpans = initialSpanMap.GetOrAdd(
-                UnnecessaryMarkupKey,
-                _ => ImmutableArray<TextSpan>.Empty
+            var unnecessarySpans = initialSpanMap.GetOrAdd(UnnecessaryMarkupKey, _ =>
+                ImmutableArray<TextSpan>.Empty
             );
 
             MarkupTestFile.GetSpans(
@@ -749,21 +748,17 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 parameters.treatPositionIndicatorsAsCode
             );
 
-            var conflictSpans = expectedSpanMap.GetOrAdd(
-                "Conflict",
-                _ => ImmutableArray<TextSpan>.Empty
+            var conflictSpans = expectedSpanMap.GetOrAdd("Conflict", _ =>
+                ImmutableArray<TextSpan>.Empty
             );
-            var renameSpans = expectedSpanMap.GetOrAdd(
-                "Rename",
-                _ => ImmutableArray<TextSpan>.Empty
+            var renameSpans = expectedSpanMap.GetOrAdd("Rename", _ =>
+                ImmutableArray<TextSpan>.Empty
             );
-            var warningSpans = expectedSpanMap.GetOrAdd(
-                "Warning",
-                _ => ImmutableArray<TextSpan>.Empty
+            var warningSpans = expectedSpanMap.GetOrAdd("Warning", _ =>
+                ImmutableArray<TextSpan>.Empty
             );
-            var navigationSpans = expectedSpanMap.GetOrAdd(
-                "Navigation",
-                _ => ImmutableArray<TextSpan>.Empty
+            var navigationSpans = expectedSpanMap.GetOrAdd("Navigation", _ =>
+                ImmutableArray<TextSpan>.Empty
             );
 
             using (var workspace = CreateWorkspaceFromOptions(initialMarkup, parameters))
@@ -1288,9 +1283,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
                 foreach (var diagnostic in diagnostics)
                 {
                     var key = (diagnostic, codeAction.EquivalenceKey);
-                    var existingTitle = diagnosticsAndEquivalenceKeyToTitleMap.GetOrAdd(
-                        key,
-                        _ => codeAction.Title
+                    var existingTitle = diagnosticsAndEquivalenceKeyToTitleMap.GetOrAdd(key, _ =>
+                        codeAction.Title
                     );
                     if (existingTitle != codeAction.Title)
                     {

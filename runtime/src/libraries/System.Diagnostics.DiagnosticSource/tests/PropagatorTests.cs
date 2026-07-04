@@ -219,38 +219,34 @@ namespace System.Diagnostics.Tests
         )
         {
             // Test with non-current
-            propagator.Inject(
-                a,
-                null,
-                (object carrier, string fieldName, string value) =>
+            propagator.Inject(a, null, (object carrier, string fieldName, string value) =>
+            {
+                if (fieldName == TraceParent && a.IdFormat == ActivityIdFormat.W3C)
                 {
-                    if (fieldName == TraceParent && a.IdFormat == ActivityIdFormat.W3C)
-                    {
-                        Assert.Equal(a.Id, value);
-                        return;
-                    }
-
-                    if (fieldName == RequestId && a.IdFormat != ActivityIdFormat.W3C)
-                    {
-                        Assert.Equal(a.Id, value);
-                        return;
-                    }
-
-                    if (fieldName == TraceState)
-                    {
-                        Assert.Equal(a.TraceStateString, value);
-                        return;
-                    }
-
-                    if (fieldName == CorrelationContext)
-                    {
-                        Assert.Equal(GetFormattedBaggage(a.Baggage), value);
-                        return;
-                    }
-
-                    Assert.Fail($"Encountered wrong header name '{fieldName}'");
+                    Assert.Equal(a.Id, value);
+                    return;
                 }
-            );
+
+                if (fieldName == RequestId && a.IdFormat != ActivityIdFormat.W3C)
+                {
+                    Assert.Equal(a.Id, value);
+                    return;
+                }
+
+                if (fieldName == TraceState)
+                {
+                    Assert.Equal(a.TraceStateString, value);
+                    return;
+                }
+
+                if (fieldName == CorrelationContext)
+                {
+                    Assert.Equal(GetFormattedBaggage(a.Baggage), value);
+                    return;
+                }
+
+                Assert.Fail($"Encountered wrong header name '{fieldName}'");
+            });
 
             TestDefaultExtraction(propagator, a);
             TestBaggageExtraction(propagator, a);
@@ -269,16 +265,12 @@ namespace System.Diagnostics.Tests
                 baggage
             );
 
-            propagator.Inject(
-                a,
-                null,
-                (object carrier, string fieldName, string value) =>
-                {
-                    Assert.Fail(
-                        $"Not expected to have the setter callback be called in the NoOutput propgator."
-                    );
-                }
-            );
+            propagator.Inject(a, null, (object carrier, string fieldName, string value) =>
+            {
+                Assert.Fail(
+                    $"Not expected to have the setter callback be called in the NoOutput propgator."
+                );
+            });
 
             TestDefaultExtraction(propagator, a);
 
@@ -293,16 +285,12 @@ namespace System.Diagnostics.Tests
         {
             using Activity a = CreateW3CActivity("NoOutputW3C", state, baggage);
 
-            propagator.Inject(
-                a,
-                null,
-                (object carrier, string fieldName, string value) =>
-                {
-                    Assert.Fail(
-                        $"Not expected to have the setter callback be called in the NoOutput propgator."
-                    );
-                }
-            );
+            propagator.Inject(a, null, (object carrier, string fieldName, string value) =>
+            {
+                Assert.Fail(
+                    $"Not expected to have the setter callback be called in the NoOutput propgator."
+                );
+            });
 
             TestDefaultExtraction(propagator, a);
 
@@ -335,40 +323,34 @@ namespace System.Diagnostics.Tests
                 }
             );
 
-            propagator.Inject(
-                a,
-                null,
-                (object carrier, string fieldName, string value) =>
+            propagator.Inject(a, null, (object carrier, string fieldName, string value) =>
+            {
+                if (fieldName == TraceParent)
                 {
-                    if (fieldName == TraceParent)
-                    {
-                        Assert.Fail(
-                            $"Unexpected to inject a TraceParent with Hierarchical Activity."
-                        );
-                        return;
-                    }
-
-                    if (fieldName == RequestId)
-                    {
-                        Assert.Equal(a.Id, value);
-                        return;
-                    }
-
-                    if (fieldName == TraceState)
-                    {
-                        Assert.Equal(a.TraceStateString, value);
-                        return;
-                    }
-
-                    if (fieldName == CorrelationContext)
-                    {
-                        Assert.Equal(GetFormattedBaggage(a.Baggage), value);
-                        return;
-                    }
-
-                    Assert.Fail($"Encountered wrong header name '{fieldName}'");
+                    Assert.Fail($"Unexpected to inject a TraceParent with Hierarchical Activity.");
+                    return;
                 }
-            );
+
+                if (fieldName == RequestId)
+                {
+                    Assert.Equal(a.Id, value);
+                    return;
+                }
+
+                if (fieldName == TraceState)
+                {
+                    Assert.Equal(a.TraceStateString, value);
+                    return;
+                }
+
+                if (fieldName == CorrelationContext)
+                {
+                    Assert.Equal(GetFormattedBaggage(a.Baggage), value);
+                    return;
+                }
+
+                Assert.Fail($"Encountered wrong header name '{fieldName}'");
+            });
 
             TestDefaultExtraction(propagator, a);
             TestDefaultExtraction(propagator, b);
@@ -405,40 +387,34 @@ namespace System.Diagnostics.Tests
                 }
             );
 
-            propagator.Inject(
-                a,
-                null,
-                (object carrier, string fieldName, string value) =>
+            propagator.Inject(a, null, (object carrier, string fieldName, string value) =>
+            {
+                if (fieldName == TraceParent)
                 {
-                    if (fieldName == TraceParent)
-                    {
-                        Assert.Fail(
-                            $"Unexpected to inject a TraceParent with Hierarchical Activity."
-                        );
-                        return;
-                    }
-
-                    if (fieldName == RequestId)
-                    {
-                        Assert.Equal(c.ParentId, value);
-                        return;
-                    }
-
-                    if (fieldName == TraceState)
-                    {
-                        Assert.Equal(c.TraceStateString, value);
-                        return;
-                    }
-
-                    if (fieldName == CorrelationContext)
-                    {
-                        Assert.Equal(GetFormattedBaggage(c.Baggage), value);
-                        return;
-                    }
-
-                    Assert.Fail($"Encountered wrong header name '{fieldName}'");
+                    Assert.Fail($"Unexpected to inject a TraceParent with Hierarchical Activity.");
+                    return;
                 }
-            );
+
+                if (fieldName == RequestId)
+                {
+                    Assert.Equal(c.ParentId, value);
+                    return;
+                }
+
+                if (fieldName == TraceState)
+                {
+                    Assert.Equal(c.TraceStateString, value);
+                    return;
+                }
+
+                if (fieldName == CorrelationContext)
+                {
+                    Assert.Equal(GetFormattedBaggage(c.Baggage), value);
+                    return;
+                }
+
+                Assert.Fail($"Encountered wrong header name '{fieldName}'");
+            });
 
             TestDefaultExtraction(propagator, a);
             TestDefaultExtraction(propagator, b);
@@ -461,32 +437,28 @@ namespace System.Diagnostics.Tests
                 baggage
             );
 
-            propagator.Inject(
-                a,
-                null,
-                (object carrier, string fieldName, string value) =>
+            propagator.Inject(a, null, (object carrier, string fieldName, string value) =>
+            {
+                if (fieldName == TraceParent)
                 {
-                    if (fieldName == TraceParent)
-                    {
-                        Assert.Equal(a.Id, value);
-                        return;
-                    }
-
-                    if (fieldName == TraceState)
-                    {
-                        Assert.Equal(a.TraceStateString, value);
-                        return;
-                    }
-
-                    if (fieldName == CorrelationContext)
-                    {
-                        Assert.Equal(GetFormattedBaggage(a.Baggage), value);
-                        return;
-                    }
-
-                    Assert.Fail($"Encountered wrong header name '{fieldName}'");
+                    Assert.Equal(a.Id, value);
+                    return;
                 }
-            );
+
+                if (fieldName == TraceState)
+                {
+                    Assert.Equal(a.TraceStateString, value);
+                    return;
+                }
+
+                if (fieldName == CorrelationContext)
+                {
+                    Assert.Equal(GetFormattedBaggage(a.Baggage), value);
+                    return;
+                }
+
+                Assert.Fail($"Encountered wrong header name '{fieldName}'");
+            });
 
             TestDefaultExtraction(propagator, a);
             TestBaggageExtraction(propagator, a);
@@ -498,33 +470,25 @@ namespace System.Diagnostics.Tests
         {
             Activity.Current = null;
 
-            propagator.Inject(
-                null,
-                null,
-                (object carrier, string fieldName, string value) =>
-                {
-                    Assert.Fail(
-                        $"PassThroughPropagator shouldn't inject anything if the Activity.Current is null"
-                    );
-                }
-            );
+            propagator.Inject(null, null, (object carrier, string fieldName, string value) =>
+            {
+                Assert.Fail(
+                    $"PassThroughPropagator shouldn't inject anything if the Activity.Current is null"
+                );
+            });
 
             using Activity a = CreateW3CActivity("PassThroughNotNull", "", null);
 
-            propagator.Inject(
-                a,
-                null,
-                (object carrier, string fieldName, string value) =>
+            propagator.Inject(a, null, (object carrier, string fieldName, string value) =>
+            {
+                if (fieldName == TraceParent)
                 {
-                    if (fieldName == TraceParent)
-                    {
-                        Assert.Equal(a.Id, value);
-                        return;
-                    }
-
-                    Assert.Fail($"Encountered wrong header name '{fieldName}'");
+                    Assert.Equal(a.Id, value);
+                    return;
                 }
-            );
+
+                Assert.Fail($"Encountered wrong header name '{fieldName}'");
+            });
         }
 
         private void TestDefaultExtraction(DistributedContextPropagator propagator, Activity a)

@@ -2536,23 +2536,19 @@ namespace System.Xml
             if (cch == 0)
                 return string.Empty;
 
-            return string.Create(
-                cch,
-                (_data, pos),
-                static (dstChars, state) =>
-                {
-                    // bitblt source bytes directly into the destination char span
-                    // n.b. source buffer assumed to be well-formed UTF-16 machine endian
+            return string.Create(cch, (_data, pos), static (dstChars, state) =>
+            {
+                // bitblt source bytes directly into the destination char span
+                // n.b. source buffer assumed to be well-formed UTF-16 machine endian
 
-                    int cch = dstChars.Length;
-                    ReadOnlySpan<byte> srcBytes = state._data.AsSpan(
-                        state.pos,
-                        checked(cch * sizeof(char))
-                    );
-                    Span<byte> dstBytes = MemoryMarshal.AsBytes(dstChars);
-                    srcBytes.CopyTo(dstBytes);
-                }
-            );
+                int cch = dstChars.Length;
+                ReadOnlySpan<byte> srcBytes = state._data.AsSpan(
+                    state.pos,
+                    checked(cch * sizeof(char))
+                );
+                Span<byte> dstBytes = MemoryMarshal.AsBytes(dstChars);
+                srcBytes.CopyTo(dstBytes);
+            });
         }
 
         private string GetAttributeText(int i)

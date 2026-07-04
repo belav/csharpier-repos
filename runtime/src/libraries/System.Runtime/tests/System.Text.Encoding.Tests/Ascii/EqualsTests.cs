@@ -65,15 +65,11 @@ namespace System.Text.Tests
                         yield return new object[]
                         {
                             new string(i, i),
-                            string.Create(
-                                i,
-                                i,
-                                (destination, iteration) =>
-                                {
-                                    destination.Fill(iteration);
-                                    destination[iteration / 2] = (char)128;
-                                }
-                            ),
+                            string.Create(i, i, (destination, iteration) =>
+                            {
+                                destination.Fill(iteration);
+                                destination[iteration / 2] = (char)128;
+                            }),
                         };
                     }
                 }

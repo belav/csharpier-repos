@@ -39,9 +39,8 @@ public class ProtectedBrowserStorageInjectionTest
 
         if (_serverFixture.ExecutionMode == ExecutionMode.Client)
         {
-            Browser.Contains(
-                "cannot be used when running in a browser.",
-                () => messageElement.Text
+            Browser.Contains("cannot be used when running in a browser.", () =>
+                messageElement.Text
             );
         }
         else
@@ -62,9 +61,8 @@ public class ProtectedBrowserStorageInjectionTest
 
         if (_serverFixture.ExecutionMode == ExecutionMode.Client)
         {
-            Browser.Contains(
-                "cannot be used when running in a browser.",
-                () => messageElement.Text
+            Browser.Contains("cannot be used when running in a browser.", () =>
+                messageElement.Text
             );
         }
         else

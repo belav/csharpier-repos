@@ -11,26 +11,20 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_ETagNull_Throw()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "tag",
-                () =>
-                {
-                    new EntityTagHeaderValue(null);
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("tag", () =>
+            {
+                new EntityTagHeaderValue(null);
+            });
         }
 
         [Fact]
         public void Ctor_ETagEmpty_Throw()
         {
             // null and empty should be treated the same. So we also throw for empty strings.
-            AssertExtensions.Throws<ArgumentException>(
-                "tag",
-                () =>
-                {
-                    new EntityTagHeaderValue(string.Empty);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("tag", () =>
+            {
+                new EntityTagHeaderValue(string.Empty);
+            });
         }
 
         [Fact]

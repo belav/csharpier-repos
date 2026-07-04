@@ -30,22 +30,18 @@ namespace System.Security.Cryptography.Tests
         [Fact]
         public static void NamedCreateMethods_NullInput()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => AsymmetricAlgorithm.Create(null)
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                AsymmetricAlgorithm.Create(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => HashAlgorithm.Create(null)
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                HashAlgorithm.Create(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => KeyedHashAlgorithm.Create(null)
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                KeyedHashAlgorithm.Create(null)
             );
             AssertExtensions.Throws<ArgumentNullException>("name", () => HMAC.Create(null));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => SymmetricAlgorithm.Create(null)
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                SymmetricAlgorithm.Create(null)
             );
         }
 
@@ -241,9 +237,8 @@ namespace System.Security.Cryptography.Tests
         [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser")]
         public static void AddOID_EmptyString_Throws()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "names",
-                () => CryptoConfig.AddOID(string.Empty, string.Empty)
+            AssertExtensions.Throws<ArgumentException>("names", () =>
+                CryptoConfig.AddOID(string.Empty, string.Empty)
             );
         }
 
@@ -259,9 +254,8 @@ namespace System.Security.Cryptography.Tests
         [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser")]
         public static void AddOID_NullOid_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "oid",
-                () => CryptoConfig.AddOID(null, string.Empty)
+            AssertExtensions.Throws<ArgumentNullException>("oid", () =>
+                CryptoConfig.AddOID(null, string.Empty)
             );
         }
 
@@ -269,9 +263,8 @@ namespace System.Security.Cryptography.Tests
         [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser")]
         public static void AddOID_NullNames_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "names",
-                () => CryptoConfig.AddOID(string.Empty, null)
+            AssertExtensions.Throws<ArgumentNullException>("names", () =>
+                CryptoConfig.AddOID(string.Empty, null)
             );
         }
 
@@ -293,9 +286,8 @@ namespace System.Security.Cryptography.Tests
         [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser")]
         public static void AddAlgorithm_NonVisibleType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "algorithm",
-                () => CryptoConfig.AddAlgorithm(typeof(AESFancy), "AESFancy")
+            AssertExtensions.Throws<ArgumentException>("algorithm", () =>
+                CryptoConfig.AddAlgorithm(typeof(AESFancy), "AESFancy")
             );
         }
 
@@ -305,9 +297,8 @@ namespace System.Security.Cryptography.Tests
         [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser")]
         public static void AddAlgorithm_EmptyString_Throws()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "names",
-                () => CryptoConfig.AddAlgorithm(typeof(CryptoConfigTests), string.Empty)
+            AssertExtensions.Throws<ArgumentException>("names", () =>
+                CryptoConfig.AddAlgorithm(typeof(CryptoConfigTests), string.Empty)
             );
         }
 
@@ -323,9 +314,8 @@ namespace System.Security.Cryptography.Tests
         [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser")]
         public static void AddAlgorithm_NullAlgorithm_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "algorithm",
-                () => CryptoConfig.AddAlgorithm(null, string.Empty)
+            AssertExtensions.Throws<ArgumentNullException>("algorithm", () =>
+                CryptoConfig.AddAlgorithm(null, string.Empty)
             );
         }
 
@@ -333,9 +323,8 @@ namespace System.Security.Cryptography.Tests
         [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser")]
         public static void AddAlgorithm_NullNames_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "names",
-                () => CryptoConfig.AddAlgorithm(typeof(CryptoConfigTests), null)
+            AssertExtensions.Throws<ArgumentNullException>("names", () =>
+                CryptoConfig.AddAlgorithm(typeof(CryptoConfigTests), null)
             );
         }
 

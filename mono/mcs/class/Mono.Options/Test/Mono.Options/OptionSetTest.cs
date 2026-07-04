@@ -463,26 +463,16 @@ namespace MonoTests.Mono.Options
                 }
             );
             // another named option while expecting one -- follow Getopt::Long
-            Utils.AssertException(
-                null,
-                null,
-                p,
-                v =>
-                {
-                    v.Parse(_("-a", "-a"));
-                }
-            );
+            Utils.AssertException(null, null, p, v =>
+            {
+                v.Parse(_("-a", "-a"));
+            });
             Assert.AreEqual(a, "-a");
             // no exception when an unregistered named option follows.
-            Utils.AssertException(
-                null,
-                null,
-                p,
-                v =>
-                {
-                    v.Parse(_("-a", "-b"));
-                }
-            );
+            Utils.AssertException(null, null, p, v =>
+            {
+                v.Parse(_("-a", "-b"));
+            });
             Assert.AreEqual(a, "-b");
             Utils.AssertException(
                 typeof(ArgumentNullException),
@@ -957,15 +947,10 @@ namespace MonoTests.Mono.Options
         public void Localization()
         {
             var p = new OptionSet(f => "hello!") { { "n=", (int v) => { } } };
-            Utils.AssertException(
-                typeof(OptionException),
-                "hello!",
-                p,
-                v =>
-                {
-                    v.Parse(_("-n=value"));
-                }
-            );
+            Utils.AssertException(typeof(OptionException), "hello!", p, v =>
+            {
+                v.Parse(_("-n=value"));
+            });
 
             StringWriter expected = new StringWriter();
             expected.WriteLine("  -nhello!                   hello!");
@@ -1042,15 +1027,10 @@ namespace MonoTests.Mono.Options
             Assert.AreEqual(p.GetOptionForName("help"), p[0]);
             Assert.AreEqual(p.GetOptionForName("invalid"), null);
 
-            Utils.AssertException(
-                typeof(ArgumentException),
-                "prototypes must be null!",
-                p,
-                v =>
-                {
-                    v.Add("N|NUM=", (int n) => { });
-                }
-            );
+            Utils.AssertException(typeof(ArgumentException), "prototypes must be null!", p, v =>
+            {
+                v.Add("N|NUM=", (int n) => { });
+            });
             Utils.AssertException(
                 typeof(ArgumentNullException),
                 $"Value cannot be null.{Environment.NewLine}Parameter name: option",

@@ -245,17 +245,14 @@ public class HealthCheckMiddlewareTests
                     {
                         services
                             .AddHealthChecks()
-                            .AddAsyncCheck(
-                                "Foo",
-                                () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                            .AddAsyncCheck("Foo", () =>
+                                Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
                             )
-                            .AddAsyncCheck(
-                                "Bar",
-                                () => Task.FromResult(HealthCheckResult.Unhealthy("Pretty bad."))
+                            .AddAsyncCheck("Bar", () =>
+                                Task.FromResult(HealthCheckResult.Unhealthy("Pretty bad."))
                             )
-                            .AddAsyncCheck(
-                                "Baz",
-                                () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                            .AddAsyncCheck("Baz", () =>
+                                Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
                             );
                     });
             })
@@ -289,14 +286,12 @@ public class HealthCheckMiddlewareTests
                     {
                         services
                             .AddHealthChecks()
-                            .AddAsyncCheck(
-                                "Foo",
-                                () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                            .AddAsyncCheck("Foo", () =>
+                                Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
                             )
                             .AddAsyncCheck("Bar", () => throw null)
-                            .AddAsyncCheck(
-                                "Baz",
-                                () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                            .AddAsyncCheck("Baz", () =>
+                                Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
                             );
                     });
             })
@@ -345,17 +340,14 @@ public class HealthCheckMiddlewareTests
                     {
                         services
                             .AddHealthChecks()
-                            .AddAsyncCheck(
-                                "Foo",
-                                () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                            .AddAsyncCheck("Foo", () =>
+                                Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
                             )
-                            .AddAsyncCheck(
-                                "Bar",
-                                () => Task.FromResult(HealthCheckResult.Unhealthy("Pretty bad."))
+                            .AddAsyncCheck("Bar", () =>
+                                Task.FromResult(HealthCheckResult.Unhealthy("Pretty bad."))
                             )
-                            .AddAsyncCheck(
-                                "Baz",
-                                () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                            .AddAsyncCheck("Baz", () =>
+                                Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
                             );
                     });
             })
@@ -393,17 +385,14 @@ public class HealthCheckMiddlewareTests
                     {
                         services
                             .AddHealthChecks()
-                            .AddAsyncCheck(
-                                "Foo",
-                                () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                            .AddAsyncCheck("Foo", () =>
+                                Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
                             )
-                            .AddAsyncCheck(
-                                "Bar",
-                                () => Task.FromResult(HealthCheckResult.Unhealthy("Pretty bad."))
+                            .AddAsyncCheck("Bar", () =>
+                                Task.FromResult(HealthCheckResult.Unhealthy("Pretty bad."))
                             )
-                            .AddAsyncCheck(
-                                "Baz",
-                                () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                            .AddAsyncCheck("Baz", () =>
+                                Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
                             );
                     });
             })
@@ -550,18 +539,15 @@ public class HealthCheckMiddlewareTests
                     {
                         services
                             .AddHealthChecks()
-                            .AddAsyncCheck(
-                                "Foo",
-                                () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                            .AddAsyncCheck("Foo", () =>
+                                Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
                             )
                             // Will get filtered out
-                            .AddAsyncCheck(
-                                "Bar",
-                                () => Task.FromResult(HealthCheckResult.Unhealthy("A-ok!"))
+                            .AddAsyncCheck("Bar", () =>
+                                Task.FromResult(HealthCheckResult.Unhealthy("A-ok!"))
                             )
-                            .AddAsyncCheck(
-                                "Baz",
-                                () => Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
+                            .AddAsyncCheck("Baz", () =>
+                                Task.FromResult(HealthCheckResult.Healthy("A-ok!"))
                             );
                     });
             })

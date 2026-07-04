@@ -449,9 +449,8 @@ namespace System.Linq.Expressions.Tests
                 expr = Expression.Call(instance, typeof(MS).GetMethod("I" + argNum), args);
 
                 // Should attempt to create new expression, and fail due to incorrect arguments.
-                AssertExtensions.Throws<ArgumentException>(
-                    "method",
-                    () => expr.Update(instance, null)
+                AssertExtensions.Throws<ArgumentException>("method", () =>
+                    expr.Update(instance, null)
                 );
             }
         }
@@ -472,9 +471,8 @@ namespace System.Linq.Expressions.Tests
                 );
 
                 // Should attempt to create new expression, and fail due to incorrect arguments.
-                AssertExtensions.Throws<ArgumentException>(
-                    "method",
-                    () => expr.Update(null, args.Append(Expression.Constant(-1)))
+                AssertExtensions.Throws<ArgumentException>("method", () =>
+                    expr.Update(null, args.Append(Expression.Constant(-1)))
                 );
             }
         }
@@ -497,9 +495,8 @@ namespace System.Linq.Expressions.Tests
                 );
 
                 // Should attempt to create new expression, and fail due to incorrect arguments.
-                AssertExtensions.Throws<ArgumentException>(
-                    "method",
-                    () => expr.Update(instance, args.Append(Expression.Constant(-1)))
+                AssertExtensions.Throws<ArgumentException>("method", () =>
+                    expr.Update(instance, args.Append(Expression.Constant(-1)))
                 );
             }
         }

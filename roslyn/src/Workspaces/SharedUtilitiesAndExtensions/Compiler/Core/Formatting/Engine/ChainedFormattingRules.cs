@@ -173,12 +173,10 @@ namespace Microsoft.CodeAnalysis.Formatting
 
         private static Type? GetTypeImplementingMethod(object obj, string name)
         {
-            return s_typeImplementingMethod.GetOrAdd(
-                (obj.GetType(), name),
-                key =>
-                    key.type.GetRuntimeMethods()
-                        .FirstOrDefault(method => method.Name == key.name)
-                        ?.DeclaringType
+            return s_typeImplementingMethod.GetOrAdd((obj.GetType(), name), key =>
+                key.type.GetRuntimeMethods()
+                    .FirstOrDefault(method => method.Name == key.name)
+                    ?.DeclaringType
             );
         }
     }

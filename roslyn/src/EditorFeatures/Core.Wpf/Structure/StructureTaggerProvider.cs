@@ -53,9 +53,8 @@ namespace Microsoft.CodeAnalysis.Editor.Structure
 
         internal override object? GetCollapsedHintForm(StructureTag structureTag)
         {
-            return new ViewHostingControl(
-                CreateElisionBufferView,
-                () => CreateElisionBufferForTagTooltip(structureTag)
+            return new ViewHostingControl(CreateElisionBufferView, () =>
+                CreateElisionBufferForTagTooltip(structureTag)
             );
         }
 

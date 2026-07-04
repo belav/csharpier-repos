@@ -840,25 +840,17 @@ public static class XmlDictionaryWriterTest
 
         foreach (var length in lengths)
         {
-            string allAscii = string.Create(
-                length,
-                null,
-                (Span<char> chars, object _) =>
-                {
-                    for (int i = 0; i < chars.Length; ++i)
-                        chars[i] = (char)(i % 128);
-                }
-            );
-            string multiByteLast = string.Create(
-                length,
-                null,
-                (Span<char> chars, object _) =>
-                {
-                    for (int i = 0; i < chars.Length; ++i)
-                        chars[i] = (char)(i % 128);
-                    chars[^1] = '\u00E4'; // '�' - Latin Small Letter a with Diaeresis. Latin-1 Supplement.
-                }
-            );
+            string allAscii = string.Create(length, null, (Span<char> chars, object _) =>
+            {
+                for (int i = 0; i < chars.Length; ++i)
+                    chars[i] = (char)(i % 128);
+            });
+            string multiByteLast = string.Create(length, null, (Span<char> chars, object _) =>
+            {
+                for (int i = 0; i < chars.Length; ++i)
+                    chars[i] = (char)(i % 128);
+                chars[^1] = '\u00E4'; // '�' - Latin Small Letter a with Diaeresis. Latin-1 Supplement.
+            });
 
             int numBytes = Encoding.UTF8.GetBytes(allAscii, buffer);
             Assert.True(numBytes == length, "Test setup wrong - allAscii");

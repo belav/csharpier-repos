@@ -126,9 +126,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
                 )
             );
 
-            workspaceImpl.AddProjectRuleSetFileToInternalMaps(
-                ProjectSystemProject,
-                () => ProjectSystemProjectOptionsProcessor.EffectiveRuleSetFilePath
+            workspaceImpl.AddProjectRuleSetFileToInternalMaps(ProjectSystemProject, () =>
+                ProjectSystemProjectOptionsProcessor.EffectiveRuleSetFilePath
             );
 
             // Right now VB doesn't have the concept of "default namespace". But we conjure one in workspace

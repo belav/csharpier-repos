@@ -344,9 +344,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.False(set.IsEmpty);
 
             ImmutableSegmentedHashSet<int>.Builder? nullBuilder = null;
-            Assert.Throws<ArgumentNullException>(
-                "builder",
-                () => nullBuilder!.ToImmutableSegmentedHashSet()
+            Assert.Throws<ArgumentNullException>("builder", () =>
+                nullBuilder!.ToImmutableSegmentedHashSet()
             );
         }
 

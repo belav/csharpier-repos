@@ -214,9 +214,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                     // probably we need to dig in to see how expensvie it is to support this
                     var controlService =
                         _excerptResult.Document.Project.Solution.Services.GetRequiredService<IContentControlService>();
-                    controlService.AttachToolTipToControl(
-                        content,
-                        () => CreateDisposableToolTip(_excerptResult.Document, _excerptResult.Span)
+                    controlService.AttachToolTipToControl(content, () =>
+                        CreateDisposableToolTip(_excerptResult.Document, _excerptResult.Span)
                     );
 
                     return true;

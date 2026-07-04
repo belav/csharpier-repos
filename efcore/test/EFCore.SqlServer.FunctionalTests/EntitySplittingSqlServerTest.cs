@@ -18,13 +18,10 @@ public class EntitySplittingSqlServerTest : EntitySplittingTestBase
 
                 modelBuilder.Entity<MeterReading>(ob =>
                 {
-                    ob.SplitToTable(
-                        "MeterReadingDetails",
-                        t =>
-                        {
-                            t.HasTrigger("MeterReadingsDetails_Trigger");
-                        }
-                    );
+                    ob.SplitToTable("MeterReadingDetails", t =>
+                    {
+                        t.HasTrigger("MeterReadingsDetails_Trigger");
+                    });
                 });
             },
             sensitiveLogEnabled: false,

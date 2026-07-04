@@ -16,19 +16,16 @@ public class Startup
     public void Configure(IApplicationBuilder app)
     {
         app.UseRequestDecompression();
-        app.Map(
-            "/test",
-            testApp =>
+        app.Map("/test", testApp =>
+        {
+            testApp.Run(async context =>
             {
-                testApp.Run(async context =>
-                {
-                    using var reader = new StreamReader(context.Request.Body);
-                    var decompressedBody = await reader.ReadToEndAsync(context.RequestAborted);
+                using var reader = new StreamReader(context.Request.Body);
+                var decompressedBody = await reader.ReadToEndAsync(context.RequestAborted);
 
-                    await context.Response.WriteAsync(decompressedBody, context.RequestAborted);
-                });
-            }
-        );
+                await context.Response.WriteAsync(decompressedBody, context.RequestAborted);
+            });
+        });
     }
 
     public static Task Main(string[] args)

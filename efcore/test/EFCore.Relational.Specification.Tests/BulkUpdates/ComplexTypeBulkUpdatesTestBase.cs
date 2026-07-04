@@ -27,14 +27,12 @@ public abstract class ComplexTypeBulkUpdatesTestBase<TFixture> : BulkUpdatesTest
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Delete_complex_type_throws(bool async) =>
-        AssertTranslationFailed(
-            RelationalStrings.ExecuteDeleteOnNonEntityType,
-            () =>
-                AssertDelete(
-                    async,
-                    ss => ss.Set<Customer>().Select(c => c.ShippingAddress),
-                    rowsAffectedCount: 0
-                )
+        AssertTranslationFailed(RelationalStrings.ExecuteDeleteOnNonEntityType, () =>
+            AssertDelete(
+                async,
+                ss => ss.Set<Customer>().Select(c => c.ShippingAddress),
+                rowsAffectedCount: 0
+            )
         );
 
     [ConditionalTheory]

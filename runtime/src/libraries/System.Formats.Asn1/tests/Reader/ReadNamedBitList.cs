@@ -186,9 +186,8 @@ namespace System.Formats.Asn1.Tests.Reader
             string inputHex = "030100";
             AsnReader reader = new AsnReader(inputHex.HexToByteArray(), ruleSet);
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "flagsEnumType",
-                () => reader.ReadNamedBitListValue(null!)
+            AssertExtensions.Throws<ArgumentNullException>("flagsEnumType", () =>
+                reader.ReadNamedBitListValue(null!)
             );
 
             Assert.True(reader.HasData, "reader.HasData");
@@ -203,9 +202,8 @@ namespace System.Formats.Asn1.Tests.Reader
             string inputHex = "030100";
             AsnReader reader = new AsnReader(inputHex.HexToByteArray(), ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "flagsEnumType",
-                () => reader.ReadNamedBitListValue<AsnEncodingRules>()
+            AssertExtensions.Throws<ArgumentException>("flagsEnumType", () =>
+                reader.ReadNamedBitListValue<AsnEncodingRules>()
             );
 
             Assert.True(reader.HasData, "reader.HasData");
@@ -269,9 +267,8 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] inputData = { 3, 2, 1, 2 };
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "expectedTag",
-                () => reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>(Asn1Tag.Null)
+            AssertExtensions.Throws<ArgumentException>("expectedTag", () =>
+                reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>(Asn1Tag.Null)
             );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
@@ -300,9 +297,8 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] inputData = { 0x87, 2, 2, 4 };
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "expectedTag",
-                () => reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>(Asn1Tag.Null)
+            AssertExtensions.Throws<ArgumentException>("expectedTag", () =>
+                reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>(Asn1Tag.Null)
             );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");

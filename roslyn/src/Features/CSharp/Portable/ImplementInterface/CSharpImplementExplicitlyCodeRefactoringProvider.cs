@@ -181,11 +181,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
             else
             {
                 // Accessing the member like `x.Goo()`.  Replace with `((IGoo)x).Goo()`
-                editor.ReplaceNode(
-                    instance.Syntax,
-                    (current, g) =>
-                        g.AddParentheses(g.CastExpression(interfaceType, current.WithoutTrivia()))
-                            .WithTriviaFrom(current)
+                editor.ReplaceNode(instance.Syntax, (current, g) =>
+                    g.AddParentheses(g.CastExpression(interfaceType, current.WithoutTrivia()))
+                        .WithTriviaFrom(current)
                 );
             }
         }

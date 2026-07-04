@@ -332,47 +332,41 @@ namespace MonoTests.System.Configuration
         [Test]
         public void DefaultValues()
         {
-            Run<DefaultMachineConfig>(
-                "DefaultValues",
-                (config, label) =>
-                {
-                    var my = config.Sections["my"] as MySection;
+            Run<DefaultMachineConfig>("DefaultValues", (config, label) =>
+            {
+                var my = config.Sections["my"] as MySection;
 
-                    AssertNotModified(my, label);
+                AssertNotModified(my, label);
 
-                    label.EnterScope("file");
-                    Assert.That(File.Exists(config.FilePath), Is.False, label.Get());
+                label.EnterScope("file");
+                Assert.That(File.Exists(config.FilePath), Is.False, label.Get());
 
-                    config.Save(ConfigurationSaveMode.Minimal);
-                    Assert.That(File.Exists(config.FilePath), Is.False, label.Get());
-                    label.LeaveScope();
-                }
-            );
+                config.Save(ConfigurationSaveMode.Minimal);
+                Assert.That(File.Exists(config.FilePath), Is.False, label.Get());
+                label.LeaveScope();
+            });
         }
 
         [Test]
         public void AddDefaultListElement()
         {
-            Run<DefaultMachineConfig>(
-                "AddDefaultListElement",
-                (config, label) =>
-                {
-                    var my = config.Sections["my"] as MySection;
+            Run<DefaultMachineConfig>("AddDefaultListElement", (config, label) =>
+            {
+                var my = config.Sections["my"] as MySection;
 
-                    AssertNotModified(my, label);
+                AssertNotModified(my, label);
 
-                    label.EnterScope("add");
-                    var element = my.List.Collection.AddElement();
-                    Assert.That(my.IsModified, Is.True, label.Get());
-                    Assert.That(my.List.IsModified, Is.True, label.Get());
-                    Assert.That(my.List.Collection.IsModified, Is.True, label.Get());
-                    Assert.That(element.IsModified, Is.False, label.Get());
-                    label.LeaveScope();
+                label.EnterScope("add");
+                var element = my.List.Collection.AddElement();
+                Assert.That(my.IsModified, Is.True, label.Get());
+                Assert.That(my.List.IsModified, Is.True, label.Get());
+                Assert.That(my.List.Collection.IsModified, Is.True, label.Get());
+                Assert.That(element.IsModified, Is.False, label.Get());
+                label.LeaveScope();
 
-                    config.Save(ConfigurationSaveMode.Minimal);
-                    Assert.That(File.Exists(config.FilePath), Is.False, label.Get());
-                }
-            );
+                config.Save(ConfigurationSaveMode.Minimal);
+                Assert.That(File.Exists(config.FilePath), Is.False, label.Get());
+            });
         }
 
         [Test]
@@ -519,66 +513,60 @@ namespace MonoTests.System.Configuration
         [Test]
         public void NotModifiedAfterSave()
         {
-            Run<DefaultMachineConfig>(
-                "NotModifiedAfterSave",
-                (config, label) =>
-                {
-                    var my = config.Sections["my"] as MySection;
+            Run<DefaultMachineConfig>("NotModifiedAfterSave", (config, label) =>
+            {
+                var my = config.Sections["my"] as MySection;
 
-                    AssertNotModified(my, label);
+                AssertNotModified(my, label);
 
-                    label.EnterScope("add");
-                    var element = my.List.Collection.AddElement();
-                    Assert.That(my.IsModified, Is.True, label.Get());
-                    Assert.That(my.List.IsModified, Is.True, label.Get());
-                    Assert.That(my.List.Collection.IsModified, Is.True, label.Get());
-                    Assert.That(element.IsModified, Is.False, label.Get());
-                    label.LeaveScope();
+                label.EnterScope("add");
+                var element = my.List.Collection.AddElement();
+                Assert.That(my.IsModified, Is.True, label.Get());
+                Assert.That(my.List.IsModified, Is.True, label.Get());
+                Assert.That(my.List.Collection.IsModified, Is.True, label.Get());
+                Assert.That(element.IsModified, Is.False, label.Get());
+                label.LeaveScope();
 
-                    label.EnterScope("1st-save");
-                    config.Save(ConfigurationSaveMode.Minimal);
-                    Assert.That(File.Exists(config.FilePath), Is.False, label.Get());
-                    config.Save(ConfigurationSaveMode.Modified);
-                    Assert.That(File.Exists(config.FilePath), Is.False, label.Get());
-                    label.LeaveScope();
+                label.EnterScope("1st-save");
+                config.Save(ConfigurationSaveMode.Minimal);
+                Assert.That(File.Exists(config.FilePath), Is.False, label.Get());
+                config.Save(ConfigurationSaveMode.Modified);
+                Assert.That(File.Exists(config.FilePath), Is.False, label.Get());
+                label.LeaveScope();
 
-                    label.EnterScope("modify");
-                    element.Hello = 12;
-                    Assert.That(my.IsModified, Is.True, label.Get());
-                    Assert.That(my.List.IsModified, Is.True, label.Get());
-                    Assert.That(my.List.Collection.IsModified, Is.True, label.Get());
-                    Assert.That(element.IsModified, Is.True, label.Get());
-                    label.LeaveScope();
+                label.EnterScope("modify");
+                element.Hello = 12;
+                Assert.That(my.IsModified, Is.True, label.Get());
+                Assert.That(my.List.IsModified, Is.True, label.Get());
+                Assert.That(my.List.Collection.IsModified, Is.True, label.Get());
+                Assert.That(element.IsModified, Is.True, label.Get());
+                label.LeaveScope();
 
-                    label.EnterScope("2nd-save");
-                    config.Save(ConfigurationSaveMode.Modified);
-                    Assert.That(File.Exists(config.FilePath), Is.True, label.Get());
+                label.EnterScope("2nd-save");
+                config.Save(ConfigurationSaveMode.Modified);
+                Assert.That(File.Exists(config.FilePath), Is.True, label.Get());
 
-                    Assert.That(my.IsModified, Is.False, label.Get());
-                    Assert.That(my.List.IsModified, Is.False, label.Get());
-                    Assert.That(my.List.Collection.IsModified, Is.False, label.Get());
-                    Assert.That(element.IsModified, Is.False, label.Get());
-                    label.LeaveScope(); // 2nd-save
-                }
-            );
+                Assert.That(my.IsModified, Is.False, label.Get());
+                Assert.That(my.List.IsModified, Is.False, label.Get());
+                Assert.That(my.List.Collection.IsModified, Is.False, label.Get());
+                Assert.That(element.IsModified, Is.False, label.Get());
+                label.LeaveScope(); // 2nd-save
+            });
         }
 
         [Test]
         public void AddSection()
         {
-            Run(
-                "AddSection",
-                (config, label) =>
-                {
-                    Assert.That(config.Sections["my"], Is.Null, label.Get());
+            Run("AddSection", (config, label) =>
+            {
+                Assert.That(config.Sections["my"], Is.Null, label.Get());
 
-                    var my = new MySection();
-                    config.Sections.Add("my2", my);
-                    config.Save(ConfigurationSaveMode.Full);
+                var my = new MySection();
+                config.Sections.Add("my2", my);
+                config.Save(ConfigurationSaveMode.Full);
 
-                    Assert.That(File.Exists(config.FilePath), Is.True, label.Get());
-                }
-            );
+                Assert.That(File.Exists(config.FilePath), Is.True, label.Get());
+            });
         }
 
         [Test]
@@ -638,24 +626,21 @@ namespace MonoTests.System.Configuration
         [Test]
         public void ModifyListElement()
         {
-            Run<RoamingAndExe>(
-                "ModifyListElement",
-                (config, label) =>
-                {
-                    var my = config.Sections["my"] as MySection;
+            Run<RoamingAndExe>("ModifyListElement", (config, label) =>
+            {
+                var my = config.Sections["my"] as MySection;
 
-                    AssertNotModified(my, label);
+                AssertNotModified(my, label);
 
-                    my.Test.Hello = 29;
+                my.Test.Hello = 29;
 
-                    label.EnterScope("file");
-                    Assert.That(File.Exists(config.FilePath), Is.False, label.Get());
+                label.EnterScope("file");
+                Assert.That(File.Exists(config.FilePath), Is.False, label.Get());
 
-                    config.Save(ConfigurationSaveMode.Minimal);
-                    Assert.That(File.Exists(config.FilePath), Is.False, label.Get());
-                    label.LeaveScope();
-                }
-            );
+                config.Save(ConfigurationSaveMode.Minimal);
+                Assert.That(File.Exists(config.FilePath), Is.False, label.Get());
+                label.LeaveScope();
+            });
         }
 
         [Test]

@@ -145,24 +145,15 @@ internal abstract class AbstractFixAllGetFixesService : IFixAllGetFixesService
             _ => throw ExceptionUtilities.UnexpectedValue(fixAllKind),
         };
 
-        using (
-            Logger.LogBlock(
-                functionId,
-                KeyValueLogMessage.Create(
-                    LogType.UserAction,
-                    m =>
+        using (Logger.LogBlock(functionId, KeyValueLogMessage.Create(LogType.UserAction, m =>
+                {
+                    // only set when correlation id is given
+                    // we might not have this info for suppression
+                    if (correlationId.HasValue)
                     {
-                        // only set when correlation id is given
-                        // we might not have this info for suppression
-                        if (correlationId.HasValue)
-                        {
-                            m[FixAllLogger.CorrelationId] = correlationId;
-                        }
+                        m[FixAllLogger.CorrelationId] = correlationId;
                     }
-                ),
-                cancellationToken
-            )
-        )
+                }), cancellationToken))
         {
             var glyph =
                 language == null ? Glyph.Assembly
@@ -205,20 +196,11 @@ internal abstract class AbstractFixAllGetFixesService : IFixAllGetFixesService
             _ => throw ExceptionUtilities.UnexpectedValue(fixAllKind),
         };
 
-        using (
-            Logger.LogBlock(
-                functionId,
-                KeyValueLogMessage.Create(
-                    LogType.UserAction,
-                    m =>
-                    {
-                        m[FixAllLogger.CorrelationId] = fixAllContext.State.CorrelationId;
-                        m[FixAllLogger.FixAllScope] = fixAllContext.State.Scope.ToString();
-                    }
-                ),
-                fixAllContext.CancellationToken
-            )
-        )
+        using (Logger.LogBlock(functionId, KeyValueLogMessage.Create(LogType.UserAction, m =>
+                {
+                    m[FixAllLogger.CorrelationId] = fixAllContext.State.CorrelationId;
+                    m[FixAllLogger.FixAllScope] = fixAllContext.State.Scope.ToString();
+                }), fixAllContext.CancellationToken))
         {
             CodeAction? action = null;
             try

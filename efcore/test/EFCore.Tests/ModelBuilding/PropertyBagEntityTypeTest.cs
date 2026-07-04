@@ -12,47 +12,36 @@ public class PropertyBagEntityTypeTest
     {
         var modelBuilder = CreateModelBuilder();
 
-        modelBuilder.Entity(
-            "Customer",
-            b =>
+        modelBuilder.Entity("Customer", b =>
+        {
+            b.Property<string>("CustomerId");
+
+            b.HasKey("CustomerId");
+
+            b.OwnsOne("CustomerDetails", "Details", b1 =>
             {
-                b.Property<string>("CustomerId");
+                b1.Property<string>("CustomerId");
 
-                b.HasKey("CustomerId");
+                b1.HasKey("CustomerId");
 
-                b.OwnsOne(
-                    "CustomerDetails",
-                    "Details",
-                    b1 =>
-                    {
-                        b1.Property<string>("CustomerId");
+                b1.HasOne("Customer")
+                    .WithOne("Details")
+                    .HasForeignKey("CustomerDetails", "CustomerId")
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
 
-                        b1.HasKey("CustomerId");
+            b.OwnsOne("CustomerDetails", "AdditionalDetails", b1 =>
+            {
+                b1.Property<string>("CustomerId");
 
-                        b1.HasOne("Customer")
-                            .WithOne("Details")
-                            .HasForeignKey("CustomerDetails", "CustomerId")
-                            .OnDelete(DeleteBehavior.Cascade);
-                    }
-                );
+                b1.HasKey("CustomerId");
 
-                b.OwnsOne(
-                    "CustomerDetails",
-                    "AdditionalDetails",
-                    b1 =>
-                    {
-                        b1.Property<string>("CustomerId");
-
-                        b1.HasKey("CustomerId");
-
-                        b1.HasOne("Customer")
-                            .WithOne("AdditionalDetails")
-                            .HasForeignKey("CustomerDetails", "CustomerId")
-                            .OnDelete(DeleteBehavior.Cascade);
-                    }
-                );
-            }
-        );
+                b1.HasOne("Customer")
+                    .WithOne("AdditionalDetails")
+                    .HasForeignKey("CustomerDetails", "CustomerId")
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+        });
 
         var model = modelBuilder.Model;
         var ownership1 = model.FindEntityType("Customer")!.FindNavigation("Details")!.ForeignKey;

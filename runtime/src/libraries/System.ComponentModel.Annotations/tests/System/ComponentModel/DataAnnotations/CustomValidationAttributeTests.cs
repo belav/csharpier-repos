@@ -328,9 +328,8 @@ namespace System.ComponentModel.DataAnnotations.Tests
             CustomValidationAttribute attribute = GetAttribute(
                 nameof(CustomValidator.ValidationMethodThrowsException)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => attribute.Validate(new IConvertibleImplementor(), s_testValidationContext)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                attribute.Validate(new IConvertibleImplementor(), s_testValidationContext)
             );
         }
 

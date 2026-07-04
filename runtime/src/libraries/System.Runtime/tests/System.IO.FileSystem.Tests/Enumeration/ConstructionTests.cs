@@ -11,18 +11,16 @@ namespace System.IO.Tests.Enumeration
         [Fact]
         public void Enumerable_NullTransformThrows()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "transform",
-                () => new FileSystemEnumerable<string>(TestDirectory, transform: null)
+            AssertExtensions.Throws<ArgumentNullException>("transform", () =>
+                new FileSystemEnumerable<string>(TestDirectory, transform: null)
             );
         }
 
         [Fact]
         public void Enumerable_NullDirectoryThrows()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "directory",
-                () => new FileSystemEnumerable<string>(null, null)
+            AssertExtensions.Throws<ArgumentNullException>("directory", () =>
+                new FileSystemEnumerable<string>(null, null)
             );
         }
 
@@ -40,9 +38,8 @@ namespace System.IO.Tests.Enumeration
         [Fact]
         public void Enumerator_NullDirectoryThrows()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "directory",
-                () => new TestEnumerator(null, null)
+            AssertExtensions.Throws<ArgumentNullException>("directory", () =>
+                new TestEnumerator(null, null)
             );
         }
     }

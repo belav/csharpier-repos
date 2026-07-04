@@ -62,19 +62,13 @@ namespace Microsoft.CodeAnalysis
 #pragma warning disable CS0618 // Type or member is obsolete
             if (
                 s_isObsoleteLoadTextAndVersionAsyncOverriden
-                    .GetValue(
-                        GetType(),
-                        _ => new StrongBox<bool>(
-                            new Func<
-                                Workspace,
-                                DocumentId,
-                                CancellationToken,
-                                Task<TextAndVersion>
-                            >(LoadTextAndVersionAsync)
-                                .Method
-                                .DeclaringType != typeof(TextLoader)
+                    .GetValue(GetType(), _ => new StrongBox<bool>(
+                        new Func<Workspace, DocumentId, CancellationToken, Task<TextAndVersion>>(
+                            LoadTextAndVersionAsync
                         )
-                    )
+                            .Method
+                            .DeclaringType != typeof(TextLoader)
+                    ))
                     .Value
             )
             {

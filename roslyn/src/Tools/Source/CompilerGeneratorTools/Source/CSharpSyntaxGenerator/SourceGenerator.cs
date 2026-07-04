@@ -57,64 +57,59 @@ namespace CSharpSyntaxGenerator
                 .AdditionalTextsProvider.Where(at => Path.GetFileName(at.Path) == "Syntax.xml")
                 .Collect();
 
-            context.RegisterSourceOutput(
-                syntaxXmlFiles,
-                static (context, syntaxXmlFiles) =>
+            context.RegisterSourceOutput(syntaxXmlFiles, static (context, syntaxXmlFiles) =>
+            {
+                var input = syntaxXmlFiles.SingleOrDefault();
+
+                if (input == null)
                 {
-                    var input = syntaxXmlFiles.SingleOrDefault();
-
-                    if (input == null)
-                    {
-                        context.ReportDiagnostic(
-                            Diagnostic.Create(s_MissingSyntaxXml, location: null)
-                        );
-                        return;
-                    }
-
-                    var inputText = input.GetText();
-                    if (inputText == null)
-                    {
-                        context.ReportDiagnostic(
-                            Diagnostic.Create(s_UnableToReadSyntaxXml, location: null)
-                        );
-                        return;
-                    }
-
-                    Tree tree;
-
-                    try
-                    {
-                        var reader = XmlReader.Create(
-                            new SourceTextReader(inputText),
-                            new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit }
-                        );
-                        var serializer = new XmlSerializer(typeof(Tree));
-                        tree = (Tree)serializer.Deserialize(reader);
-                    }
-                    catch (InvalidOperationException ex) when (ex.InnerException is XmlException)
-                    {
-                        var xmlException = (XmlException)ex.InnerException;
-
-                        var line = inputText.Lines[xmlException.LineNumber - 1]; // LineNumber is one-based.
-                        int offset = xmlException.LinePosition - 1; // LinePosition is one-based
-                        var position = line.Start + offset;
-                        var span = new TextSpan(position, 0);
-                        var lineSpan = inputText.Lines.GetLinePositionSpan(span);
-
-                        context.ReportDiagnostic(
-                            Diagnostic.Create(
-                                s_SyntaxXmlError,
-                                location: Location.Create(input.Path, span, lineSpan),
-                                xmlException.Message
-                            )
-                        );
-
-                        return;
-                    }
-
-                    DoGeneration(tree, context, context.CancellationToken);
+                    context.ReportDiagnostic(Diagnostic.Create(s_MissingSyntaxXml, location: null));
+                    return;
                 }
-            );
+
+                var inputText = input.GetText();
+                if (inputText == null)
+                {
+                    context.ReportDiagnostic(
+                        Diagnostic.Create(s_UnableToReadSyntaxXml, location: null)
+                    );
+                    return;
+                }
+
+                Tree tree;
+
+                try
+                {
+                    var reader = XmlReader.Create(
+                        new SourceTextReader(inputText),
+                        new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit }
+                    );
+                    var serializer = new XmlSerializer(typeof(Tree));
+                    tree = (Tree)serializer.Deserialize(reader);
+                }
+                catch (InvalidOperationException ex) when (ex.InnerException is XmlException)
+                {
+                    var xmlException = (XmlException)ex.InnerException;
+
+                    var line = inputText.Lines[xmlException.LineNumber - 1]; // LineNumber is one-based.
+                    int offset = xmlException.LinePosition - 1; // LinePosition is one-based
+                    var position = line.Start + offset;
+                    var span = new TextSpan(position, 0);
+                    var lineSpan = inputText.Lines.GetLinePositionSpan(span);
+
+                    context.ReportDiagnostic(
+                        Diagnostic.Create(
+                            s_SyntaxXmlError,
+                            location: Location.Create(input.Path, span, lineSpan),
+                            xmlException.Message
+                        )
+                    );
+
+                    return;
+                }
+
+                DoGeneration(tree, context, context.CancellationToken);
+            });
         }
 
         private static void DoGeneration(

@@ -577,10 +577,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests
             foreach (var ch in typeChars)
             {
                 var localCh = ch;
-                SendTypeChar(
-                    ch,
-                    commandHandler,
-                    () => EditorOperations.InsertText(localCh.ToString())
+                SendTypeChar(ch, commandHandler, () =>
+                    EditorOperations.InsertText(localCh.ToString())
                 );
             }
         }

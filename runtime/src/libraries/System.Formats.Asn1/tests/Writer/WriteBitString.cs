@@ -186,19 +186,16 @@ namespace System.Formats.Asn1.Tests.Writer
 
             if (expectThrow)
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "unusedBitCount",
-                    () => writer.WriteBitString(inputBytes, unusedBitCount)
+                AssertExtensions.Throws<ArgumentException>("unusedBitCount", () =>
+                    writer.WriteBitString(inputBytes, unusedBitCount)
                 );
 
-                AssertExtensions.Throws<ArgumentException>(
-                    "unusedBitCount",
-                    () =>
-                        writer.WriteBitString(
-                            inputBytes,
-                            unusedBitCount,
-                            new Asn1Tag(TagClass.ContextSpecific, 3)
-                        )
+                AssertExtensions.Throws<ArgumentException>("unusedBitCount", () =>
+                    writer.WriteBitString(
+                        inputBytes,
+                        unusedBitCount,
+                        new Asn1Tag(TagClass.ContextSpecific, 3)
+                    )
                 );
 
                 return;
@@ -244,9 +241,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnWriter writer = new AsnWriter(ruleSet);
 
             ArgumentOutOfRangeException exception =
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    nameof(unusedBitCount),
-                    () => writer.WriteBitString(data, unusedBitCount)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(unusedBitCount), () =>
+                    writer.WriteBitString(data, unusedBitCount)
                 );
 
             Assert.Equal(unusedBitCount, exception.ActualValue);
@@ -272,26 +268,22 @@ namespace System.Formats.Asn1.Tests.Writer
         {
             AsnWriter writer = new AsnWriter(ruleSet);
 
-            Assert.Throws<ArgumentException>(
-                "unusedBitCount",
-                () => writer.WriteBitString(ReadOnlySpan<byte>.Empty, 1)
+            Assert.Throws<ArgumentException>("unusedBitCount", () =>
+                writer.WriteBitString(ReadOnlySpan<byte>.Empty, 1)
             );
 
-            Assert.Throws<ArgumentException>(
-                "unusedBitCount",
-                () => writer.WriteBitString(ReadOnlySpan<byte>.Empty, 7)
+            Assert.Throws<ArgumentException>("unusedBitCount", () =>
+                writer.WriteBitString(ReadOnlySpan<byte>.Empty, 7)
             );
 
             Asn1Tag contextTag = new Asn1Tag(TagClass.ContextSpecific, 19);
 
-            Assert.Throws<ArgumentException>(
-                "unusedBitCount",
-                () => writer.WriteBitString(ReadOnlySpan<byte>.Empty, 1, contextTag)
+            Assert.Throws<ArgumentException>("unusedBitCount", () =>
+                writer.WriteBitString(ReadOnlySpan<byte>.Empty, 1, contextTag)
             );
 
-            Assert.Throws<ArgumentException>(
-                "unusedBitCount",
-                () => writer.WriteBitString(ReadOnlySpan<byte>.Empty, 7, contextTag)
+            Assert.Throws<ArgumentException>("unusedBitCount", () =>
+                writer.WriteBitString(ReadOnlySpan<byte>.Empty, 7, contextTag)
             );
 
             writer.WriteBitString(ReadOnlySpan<byte>.Empty, 0);
@@ -335,14 +327,12 @@ namespace System.Formats.Asn1.Tests.Writer
         {
             AsnWriter writer = new AsnWriter(ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "tag",
-                () => writer.WriteBitString(ReadOnlySpan<byte>.Empty, tag: Asn1Tag.Null)
+            AssertExtensions.Throws<ArgumentException>("tag", () =>
+                writer.WriteBitString(ReadOnlySpan<byte>.Empty, tag: Asn1Tag.Null)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "tag",
-                () => writer.WriteBitString(new byte[1], tag: Asn1Tag.Null)
+            AssertExtensions.Throws<ArgumentException>("tag", () =>
+                writer.WriteBitString(new byte[1], tag: Asn1Tag.Null)
             );
         }
     }

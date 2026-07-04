@@ -135,9 +135,8 @@ namespace System.Security.Cryptography.Tests
         {
             using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "data",
-                    () => rng.GetNonZeroBytes(null)
+                AssertExtensions.Throws<ArgumentNullException>("data", () =>
+                    rng.GetNonZeroBytes(null)
                 );
 
                 // Array should not have any zeros
@@ -253,9 +252,8 @@ namespace System.Security.Cryptography.Tests
         {
             using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "data",
-                    () => rng.GetNonZeroBytes(null)
+                AssertExtensions.Throws<ArgumentNullException>("data", () =>
+                    rng.GetNonZeroBytes(null)
                 );
                 GetBytes_InvalidArgs_Helper(rng);
             }
@@ -274,9 +272,8 @@ namespace System.Security.Cryptography.Tests
         [Fact]
         public static void GetBytes_Int_Negative()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => RandomNumberGenerator.GetBytes(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                RandomNumberGenerator.GetBytes(-1)
             );
         }
 
@@ -568,40 +565,35 @@ namespace System.Security.Cryptography.Tests
         [Fact]
         public static void GetItems_Choices_Empty_ArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "choices",
-                () => RandomNumberGenerator.GetItems(ReadOnlySpan<int>.Empty, 6)
+            AssertExtensions.Throws<ArgumentException>("choices", () =>
+                RandomNumberGenerator.GetItems(ReadOnlySpan<int>.Empty, 6)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "choices",
-                () => RandomNumberGenerator.GetItems(ReadOnlySpan<int>.Empty, stackalloc int[6])
+            AssertExtensions.Throws<ArgumentException>("choices", () =>
+                RandomNumberGenerator.GetItems(ReadOnlySpan<int>.Empty, stackalloc int[6])
             );
         }
 
         [Fact]
         public static void GetString_Choices_Empty_ArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "choices",
-                () => RandomNumberGenerator.GetString(ReadOnlySpan<char>.Empty, 6)
+            AssertExtensions.Throws<ArgumentException>("choices", () =>
+                RandomNumberGenerator.GetString(ReadOnlySpan<char>.Empty, 6)
             );
         }
 
         [Fact]
         public static void GetItems_NegativeLength_ArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "length",
-                () => RandomNumberGenerator.GetItems<int>(new int[1], -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () =>
+                RandomNumberGenerator.GetItems<int>(new int[1], -1)
             );
         }
 
         [Fact]
         public static void GetString_NegativeLength_ArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "length",
-                () => RandomNumberGenerator.GetString("a", -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () =>
+                RandomNumberGenerator.GetString("a", -1)
             );
         }
 
@@ -1014,17 +1006,14 @@ namespace System.Security.Cryptography.Tests
         private static void GetBytes_InvalidArgs_Helper(RandomNumberGenerator rng)
         {
             AssertExtensions.Throws<ArgumentNullException>("data", () => rng.GetBytes(null, 0, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "offset",
-                () => rng.GetBytes(Array.Empty<byte>(), -1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                rng.GetBytes(Array.Empty<byte>(), -1, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => rng.GetBytes(Array.Empty<byte>(), 0, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                rng.GetBytes(Array.Empty<byte>(), 0, -1)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => rng.GetBytes(Array.Empty<byte>(), 0, 1)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                rng.GetBytes(Array.Empty<byte>(), 0, 1)
             );
             // GetBytes(null) covered in test NullInput()
         }

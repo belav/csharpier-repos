@@ -4588,24 +4588,21 @@ class C
             );
             var compilation1 = compilation0.WithSource(source1.Tree);
 
-            var v0 = CompileAndVerify(
-                compilation0,
-                symbolValidator: module =>
-                {
-                    Assert.Equal(
-                        new[]
-                        {
-                            "<>1__state: int",
-                            "<>2__current: int",
-                            "<>l__initialThreadId: int",
-                            "<>s__1: int[]",
-                            "<>s__2: int",
-                            "<item>5__3: object",
-                        },
-                        module.GetFieldNamesAndTypes("C.<F>d__0")
-                    );
-                }
-            );
+            var v0 = CompileAndVerify(compilation0, symbolValidator: module =>
+            {
+                Assert.Equal(
+                    new[]
+                    {
+                        "<>1__state: int",
+                        "<>2__current: int",
+                        "<>l__initialThreadId: int",
+                        "<>s__1: int[]",
+                        "<>s__2: int",
+                        "<item>5__3: object",
+                    },
+                    module.GetFieldNamesAndTypes("C.<F>d__0")
+                );
+            });
 
             var symReader = v0.CreateSymReader();
 
@@ -8240,23 +8237,20 @@ class C
             var h2 = compilation2.GetMember<MethodSymbol>("C.H");
             var h3 = compilation3.GetMember<MethodSymbol>("C.H");
 
-            var v0 = CompileAndVerify(
-                compilation0,
-                symbolValidator: module =>
-                {
-                    Assert.Equal(
-                        new[]
-                        {
-                            "<>1__state: int",
-                            "<>t__builder: System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>",
-                            "<a1>5__1: bool",
-                            "<a2>5__2: int",
-                            "<>u__1: System.Runtime.CompilerServices.TaskAwaiter",
-                        },
-                        module.GetFieldNamesAndTypes("C.<F>d__0")
-                    );
-                }
-            );
+            var v0 = CompileAndVerify(compilation0, symbolValidator: module =>
+            {
+                Assert.Equal(
+                    new[]
+                    {
+                        "<>1__state: int",
+                        "<>t__builder: System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>",
+                        "<a1>5__1: bool",
+                        "<a2>5__2: int",
+                        "<>u__1: System.Runtime.CompilerServices.TaskAwaiter",
+                    },
+                    module.GetFieldNamesAndTypes("C.<F>d__0")
+                );
+            });
 
             var md0 = ModuleMetadata.CreateFromImage(v0.EmittedAssemblyData);
             var syntaxMap1 = GetSyntaxMapFromMarkers(source0, source1);
@@ -8935,33 +8929,30 @@ class C
                 options: ComSafeDebugDll.WithMetadataImportOptions(MetadataImportOptions.All)
             );
 
-            CompileAndVerify(
-                compilation0,
-                symbolValidator: module =>
-                {
-                    Assert.Equal(
-                        new[]
-                        {
-                            "<>1__state: int",
-                            "<>t__builder: System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>",
-                            "<>u__1: System.Runtime.CompilerServices.TaskAwaiter<bool>",
-                            "<>u__2: System.Runtime.CompilerServices.TaskAwaiter<int>",
-                        },
-                        module.GetFieldNamesAndTypes("C.<F>d__3")
-                    );
+            CompileAndVerify(compilation0, symbolValidator: module =>
+            {
+                Assert.Equal(
+                    new[]
+                    {
+                        "<>1__state: int",
+                        "<>t__builder: System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>",
+                        "<>u__1: System.Runtime.CompilerServices.TaskAwaiter<bool>",
+                        "<>u__2: System.Runtime.CompilerServices.TaskAwaiter<int>",
+                    },
+                    module.GetFieldNamesAndTypes("C.<F>d__3")
+                );
 
-                    Assert.Equal(
-                        new[]
-                        {
-                            "<>1__state: int",
-                            "<>t__builder: System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>",
-                            "<>u__1: System.Runtime.CompilerServices.TaskAwaiter<int>",
-                            "<>u__2: System.Runtime.CompilerServices.TaskAwaiter<bool>",
-                        },
-                        module.GetFieldNamesAndTypes("C.<G>d__4")
-                    );
-                }
-            );
+                Assert.Equal(
+                    new[]
+                    {
+                        "<>1__state: int",
+                        "<>t__builder: System.Runtime.CompilerServices.AsyncTaskMethodBuilder<int>",
+                        "<>u__1: System.Runtime.CompilerServices.TaskAwaiter<int>",
+                        "<>u__2: System.Runtime.CompilerServices.TaskAwaiter<bool>",
+                    },
+                    module.GetFieldNamesAndTypes("C.<G>d__4")
+                );
+            });
         }
 
         [Theory]
@@ -9909,23 +9900,20 @@ class C
             var compilation1 = compilation0.WithSource(source1.Tree);
             var compilation2 = compilation1.WithSource(source2.Tree);
 
-            var v0 = CompileAndVerify(
-                compilation0,
-                symbolValidator: module =>
-                {
-                    Assert.Equal(
-                        new[]
-                        {
-                            "<>1__state: int",
-                            "<>t__builder: System.Runtime.CompilerServices.AsyncTaskMethodBuilder",
-                            "<>4__this: C.<>c",
-                            "<>u__1: System.Runtime.CompilerServices.TaskAwaiter<bool>",
-                            "<>u__2: System.Runtime.CompilerServices.TaskAwaiter<int>",
-                        },
-                        module.GetFieldNamesAndTypes("C.<>c.<<F>b__0_0>d")
-                    );
-                }
-            );
+            var v0 = CompileAndVerify(compilation0, symbolValidator: module =>
+            {
+                Assert.Equal(
+                    new[]
+                    {
+                        "<>1__state: int",
+                        "<>t__builder: System.Runtime.CompilerServices.AsyncTaskMethodBuilder",
+                        "<>4__this: C.<>c",
+                        "<>u__1: System.Runtime.CompilerServices.TaskAwaiter<bool>",
+                        "<>u__2: System.Runtime.CompilerServices.TaskAwaiter<int>",
+                    },
+                    module.GetFieldNamesAndTypes("C.<>c.<<F>b__0_0>d")
+                );
+            });
 
             var md0 = ModuleMetadata.CreateFromImage(v0.EmittedAssemblyData);
 

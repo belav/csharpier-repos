@@ -194,13 +194,10 @@ namespace Newtonsoft.Json.Tests.Schema
 
             List<string> errors = new List<string>();
 
-            token.Validate(
-                typeSchema,
-                (sender, args) =>
-                {
-                    errors.Add(args.Message);
-                }
-            );
+            token.Validate(typeSchema, (sender, args) =>
+            {
+                errors.Add(args.Message);
+            });
 
             if (errors.Count > 0)
             {

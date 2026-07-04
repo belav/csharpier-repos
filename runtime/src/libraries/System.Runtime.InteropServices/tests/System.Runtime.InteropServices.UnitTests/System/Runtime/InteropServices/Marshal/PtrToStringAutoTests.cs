@@ -16,9 +16,8 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void PtrToStringAuto_ZeroPtrWithLength_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "ptr",
-                () => Marshal.PtrToStringAuto(IntPtr.Zero, 0)
+            AssertExtensions.Throws<ArgumentNullException>("ptr", () =>
+                Marshal.PtrToStringAuto(IntPtr.Zero, 0)
             );
         }
 

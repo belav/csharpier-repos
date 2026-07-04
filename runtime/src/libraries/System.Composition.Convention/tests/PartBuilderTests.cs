@@ -504,13 +504,11 @@ namespace System.Composition.Convention.Tests
         public void ExportInterfaceSelectorNull_ShouldThrowArgumentNull()
         {
             var builder = new ConventionBuilder();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "interfaceFilter",
-                () => builder.ForTypesMatching((t) => true).ExportInterfaces(null)
+            AssertExtensions.Throws<ArgumentNullException>("interfaceFilter", () =>
+                builder.ForTypesMatching((t) => true).ExportInterfaces(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "interfaceFilter",
-                () => builder.ForTypesMatching((t) => true).ExportInterfaces(null, null)
+            AssertExtensions.Throws<ArgumentNullException>("interfaceFilter", () =>
+                builder.ForTypesMatching((t) => true).ExportInterfaces(null, null)
             );
         }
 
@@ -518,21 +516,17 @@ namespace System.Composition.Convention.Tests
         public void ImportSelectorNull_ShouldThrowArgumentNull()
         {
             var builder = new ConventionBuilder();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "propertyFilter",
-                () => builder.ForTypesMatching((t) => true).ImportProperties(null)
+            AssertExtensions.Throws<ArgumentNullException>("propertyFilter", () =>
+                builder.ForTypesMatching((t) => true).ImportProperties(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "propertyFilter",
-                () => builder.ForTypesMatching((t) => true).ImportProperties(null, null)
+            AssertExtensions.Throws<ArgumentNullException>("propertyFilter", () =>
+                builder.ForTypesMatching((t) => true).ImportProperties(null, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "propertyFilter",
-                () => builder.ForTypesMatching((t) => true).ImportProperties<IFirst>(null)
+            AssertExtensions.Throws<ArgumentNullException>("propertyFilter", () =>
+                builder.ForTypesMatching((t) => true).ImportProperties<IFirst>(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "propertyFilter",
-                () => builder.ForTypesMatching((t) => true).ImportProperties<IFirst>(null, null)
+            AssertExtensions.Throws<ArgumentNullException>("propertyFilter", () =>
+                builder.ForTypesMatching((t) => true).ImportProperties<IFirst>(null, null)
             );
         }
 
@@ -540,21 +534,17 @@ namespace System.Composition.Convention.Tests
         public void ExportSelectorNull_ShouldThrowArgumentNull()
         {
             var builder = new ConventionBuilder();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "propertyFilter",
-                () => builder.ForTypesMatching((t) => true).ExportProperties(null)
+            AssertExtensions.Throws<ArgumentNullException>("propertyFilter", () =>
+                builder.ForTypesMatching((t) => true).ExportProperties(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "propertyFilter",
-                () => builder.ForTypesMatching((t) => true).ExportProperties(null, null)
+            AssertExtensions.Throws<ArgumentNullException>("propertyFilter", () =>
+                builder.ForTypesMatching((t) => true).ExportProperties(null, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "propertyFilter",
-                () => builder.ForTypesMatching((t) => true).ExportProperties<IFirst>(null)
+            AssertExtensions.Throws<ArgumentNullException>("propertyFilter", () =>
+                builder.ForTypesMatching((t) => true).ExportProperties<IFirst>(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "propertyFilter",
-                () => builder.ForTypesMatching((t) => true).ExportProperties<IFirst>(null, null)
+            AssertExtensions.Throws<ArgumentNullException>("propertyFilter", () =>
+                builder.ForTypesMatching((t) => true).ExportProperties<IFirst>(null, null)
             );
         }
 

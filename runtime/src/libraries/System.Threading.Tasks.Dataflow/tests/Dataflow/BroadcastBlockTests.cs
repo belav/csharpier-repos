@@ -50,25 +50,21 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public void TestArgumentExceptions()
         {
             Assert.Throws<ArgumentNullException>(() => new BroadcastBlock<int>(i => i, null));
-            AssertExtensions.Throws<ArgumentException>(
-                "messageHeader",
-                () =>
-                    ((ITargetBlock<int>)new BroadcastBlock<int>(null)).OfferMessage(
-                        default(DataflowMessageHeader),
-                        0,
-                        null,
-                        consumeToAccept: false
-                    )
+            AssertExtensions.Throws<ArgumentException>("messageHeader", () =>
+                ((ITargetBlock<int>)new BroadcastBlock<int>(null)).OfferMessage(
+                    default(DataflowMessageHeader),
+                    0,
+                    null,
+                    consumeToAccept: false
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "consumeToAccept",
-                () =>
-                    ((ITargetBlock<int>)new BroadcastBlock<int>(null)).OfferMessage(
-                        new DataflowMessageHeader(1),
-                        0,
-                        null,
-                        consumeToAccept: true
-                    )
+            AssertExtensions.Throws<ArgumentException>("consumeToAccept", () =>
+                ((ITargetBlock<int>)new BroadcastBlock<int>(null)).OfferMessage(
+                    new DataflowMessageHeader(1),
+                    0,
+                    null,
+                    consumeToAccept: true
+                )
             );
             DataflowTestHelpers.TestArgumentsExceptions(new BroadcastBlock<int>(i => i));
         }

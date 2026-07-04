@@ -698,14 +698,10 @@ public static partial class DataContractSerializerTests
             @"<ArrayOfSimpleType xmlns=""http://schemas.datacontract.org/2004/07/SerializationTypes"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""><SimpleType><P1>abc</P1><P2>11</P2></SimpleType><SimpleType><P1>def</P1><P2>12</P2></SimpleType></ArrayOfSimpleType>"
         );
 
-        Utils.Equal<SimpleType>(
-            x,
-            y,
-            (a, b) =>
-            {
-                return SimpleType.AreEqual(a, b);
-            }
-        );
+        Utils.Equal<SimpleType>(x, y, (a, b) =>
+        {
+            return SimpleType.AreEqual(a, b);
+        });
     }
 
     [Fact]
@@ -733,23 +729,15 @@ public static partial class DataContractSerializerTests
             );
 
         Assert.NotNull(y);
-        Utils.Equal<SimpleType>(
-            x.F1,
-            y.F1,
-            (a, b) =>
-            {
-                return SimpleType.AreEqual(a, b);
-            }
-        );
+        Utils.Equal<SimpleType>(x.F1, y.F1, (a, b) =>
+        {
+            return SimpleType.AreEqual(a, b);
+        });
         Assert.Equal<int>(x.F2, y.F2);
-        Utils.Equal<SimpleType>(
-            x.P1,
-            y.P1,
-            (a, b) =>
-            {
-                return SimpleType.AreEqual(a, b);
-            }
-        );
+        Utils.Equal<SimpleType>(x.P1, y.P1, (a, b) =>
+        {
+            return SimpleType.AreEqual(a, b);
+        });
         Assert.Equal<int>(x.P2, y.P2);
     }
 
@@ -769,14 +757,10 @@ public static partial class DataContractSerializerTests
             );
 
         Assert.NotNull(y);
-        Utils.Equal<SimpleType>(
-            x.P1,
-            y.P1,
-            (a, b) =>
-            {
-                return SimpleType.AreEqual(a, b);
-            }
-        );
+        Utils.Equal<SimpleType>(x.P1, y.P1, (a, b) =>
+        {
+            return SimpleType.AreEqual(a, b);
+        });
         Assert.Equal<int>(x.P2, y.P2);
     }
 

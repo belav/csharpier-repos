@@ -99,15 +99,13 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedVariable
                 var node = root.FindNode(diagnostic.Location.SourceSpan);
                 if (IsCatchDeclarationIdentifier(token))
                 {
-                    (int, Action) pair = (
-                        token.Parent.SpanStart,
-                        () =>
-                            syntaxEditor.ReplaceNode(
-                                token.Parent,
-                                token
-                                    .Parent.ReplaceToken(token, default(SyntaxToken))
-                                    .WithAdditionalAnnotations(Formatter.Annotation)
-                            )
+                    (int, Action) pair = (token.Parent.SpanStart, () =>
+                        syntaxEditor.ReplaceNode(
+                            token.Parent,
+                            token
+                                .Parent.ReplaceToken(token, default(SyntaxToken))
+                                .WithAdditionalAnnotations(Formatter.Annotation)
+                        )
                     );
                     actionsToPerform.Add(pair);
                 }

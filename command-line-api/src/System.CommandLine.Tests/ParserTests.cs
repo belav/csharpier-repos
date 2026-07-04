@@ -379,21 +379,17 @@ namespace System.CommandLine.Tests
             // all should be equivalent
             result1
                 .Should()
-                .BeEquivalentTo(
-                    result2,
-                    x =>
-                        x.IgnoringCyclicReferences()
-                            .Excluding(y => y.WhichGetterHas(CSharpAccessModifier.Internal))
-                            .Excluding(y => y.WhichGetterHas(CSharpAccessModifier.PrivateProtected))
+                .BeEquivalentTo(result2, x =>
+                    x.IgnoringCyclicReferences()
+                        .Excluding(y => y.WhichGetterHas(CSharpAccessModifier.Internal))
+                        .Excluding(y => y.WhichGetterHas(CSharpAccessModifier.PrivateProtected))
                 );
             result1
                 .Should()
-                .BeEquivalentTo(
-                    result3,
-                    x =>
-                        x.IgnoringCyclicReferences()
-                            .Excluding(y => y.WhichGetterHas(CSharpAccessModifier.Internal))
-                            .Excluding(y => y.WhichGetterHas(CSharpAccessModifier.PrivateProtected))
+                .BeEquivalentTo(result3, x =>
+                    x.IgnoringCyclicReferences()
+                        .Excluding(y => y.WhichGetterHas(CSharpAccessModifier.Internal))
+                        .Excluding(y => y.WhichGetterHas(CSharpAccessModifier.PrivateProtected))
                 );
         }
 

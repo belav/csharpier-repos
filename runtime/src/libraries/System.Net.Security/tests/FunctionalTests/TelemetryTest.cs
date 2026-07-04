@@ -192,9 +192,8 @@ namespace System.Net.Security.Tests
                         .Where(e => e.Event.EventName == "HandshakeStop")
                         .ToArray();
                     Assert.Equal(2, stops.Length);
-                    Assert.All(
-                        stops,
-                        s => ValidateHandshakeStopEventPayload(s.Event, failure: true)
+                    Assert.All(stops, s =>
+                        ValidateHandshakeStopEventPayload(s.Event, failure: true)
                     );
 
                     EventWrittenEventArgs serverStop = Assert
@@ -315,9 +314,8 @@ namespace System.Net.Security.Tests
 
             if (shouldHaveFailures)
             {
-                Assert.All(
-                    tlsHandshakeDurations,
-                    durations => Assert.All(durations, d => Assert.Equal(0, d))
+                Assert.All(tlsHandshakeDurations, durations =>
+                    Assert.All(durations, d => Assert.Equal(0, d))
                 );
                 Assert.All(allHandshakeDurations, d => Assert.Equal(0, d));
             }

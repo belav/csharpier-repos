@@ -328,9 +328,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             if (reflectionImport is ReflectionMemberImportDefinition memberImport)
             {
                 LazyMemberInfo lazyMember = memberImport.ImportingLazyMember;
-                LazyMemberInfo importingMember = new LazyMemberInfo(
-                    lazyMember.MemberType,
-                    () => GetAccessors(lazyMember)
+                LazyMemberInfo importingMember = new LazyMemberInfo(lazyMember.MemberType, () =>
+                    GetAccessors(lazyMember)
                 );
 
                 if (isExportFactory)
@@ -456,9 +455,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 )
             );
 
-            LazyMemberInfo exportingMember = new LazyMemberInfo(
-                capturedLazyMember.MemberType,
-                () => GetAccessors(capturedLazyMember)
+            LazyMemberInfo exportingMember = new LazyMemberInfo(capturedLazyMember.MemberType, () =>
+                GetAccessors(capturedLazyMember)
             );
             Lazy<IDictionary<string, object?>> lazyMetadata = new Lazy<
                 IDictionary<string, object?>

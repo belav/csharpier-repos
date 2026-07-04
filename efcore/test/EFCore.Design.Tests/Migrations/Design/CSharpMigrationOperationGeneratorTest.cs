@@ -2438,10 +2438,8 @@ mb.RestartSequence(
 
     [ConditionalFact]
     public void SqlOperation_required_args() =>
-        Test(
-            new SqlOperation { Sql = "-- I <3 DDL" },
-            "mb.Sql(\"-- I <3 DDL\");",
-            o => Assert.Equal("-- I <3 DDL", o.Sql)
+        Test(new SqlOperation { Sql = "-- I <3 DDL" }, "mb.Sql(\"-- I <3 DDL\");", o =>
+            Assert.Equal("-- I <3 DDL", o.Sql)
         );
 
     private static readonly LineString _lineString1 = new(

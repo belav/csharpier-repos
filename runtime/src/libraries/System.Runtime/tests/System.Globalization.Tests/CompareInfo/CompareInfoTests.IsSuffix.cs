@@ -708,65 +708,52 @@ namespace System.Globalization.Tests
         public void IsSuffix_Invalid()
         {
             // Source is null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => s_invariantCompare.IsSuffix(null, "")
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                s_invariantCompare.IsSuffix(null, "")
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => s_invariantCompare.IsSuffix(null, "", CompareOptions.None)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                s_invariantCompare.IsSuffix(null, "", CompareOptions.None)
             );
 
             // Prefix is null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "suffix",
-                () => s_invariantCompare.IsSuffix("", null)
+            AssertExtensions.Throws<ArgumentNullException>("suffix", () =>
+                s_invariantCompare.IsSuffix("", null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "suffix",
-                () => s_invariantCompare.IsSuffix("", null, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentNullException>("suffix", () =>
+                s_invariantCompare.IsSuffix("", null, CompareOptions.None)
             );
 
             // Source and prefix are null
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => s_invariantCompare.IsSuffix(null, null)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                s_invariantCompare.IsSuffix(null, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => s_invariantCompare.IsSuffix(null, null, CompareOptions.None)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                s_invariantCompare.IsSuffix(null, null, CompareOptions.None)
             );
 
             // Options are invalid
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () => s_invariantCompare.IsSuffix("Test's", "Tests", CompareOptions.StringSort)
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.IsSuffix("Test's", "Tests", CompareOptions.StringSort)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.IsSuffix(
-                        "Test's",
-                        "Tests",
-                        CompareOptions.Ordinal | CompareOptions.IgnoreWidth
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.IsSuffix(
+                    "Test's",
+                    "Tests",
+                    CompareOptions.Ordinal | CompareOptions.IgnoreWidth
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    s_invariantCompare.IsSuffix(
-                        "Test's",
-                        "Tests",
-                        CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreWidth
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.IsSuffix(
+                    "Test's",
+                    "Tests",
+                    CompareOptions.OrdinalIgnoreCase | CompareOptions.IgnoreWidth
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () => s_invariantCompare.IsSuffix("Test's", "Tests", (CompareOptions)(-1))
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.IsSuffix("Test's", "Tests", (CompareOptions)(-1))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () => s_invariantCompare.IsSuffix("Test's", "Tests", (CompareOptions)0x11111111)
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                s_invariantCompare.IsSuffix("Test's", "Tests", (CompareOptions)0x11111111)
             );
         }
 

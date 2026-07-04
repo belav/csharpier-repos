@@ -376,24 +376,21 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
             public override Task ComputeRefactoringsAsync(CodeRefactoringContext context)
             {
                 context.RegisterRefactoring(
-                    CodeAction.Create(
-                        Title,
-                        createChangedSolution: async ct =>
-                        {
-                            var document = context.TextDocument;
-                            var text = await document.GetTextAsync(ct).ConfigureAwait(false);
-                            var newText = SourceText.From(text.ToString() + Title);
-                            if (document.Kind == TextDocumentKind.AdditionalDocument)
-                                return document.Project.Solution.WithAdditionalDocumentText(
-                                    document.Id,
-                                    newText
-                                );
-                            return document.Project.Solution.WithAnalyzerConfigDocumentText(
+                    CodeAction.Create(Title, createChangedSolution: async ct =>
+                    {
+                        var document = context.TextDocument;
+                        var text = await document.GetTextAsync(ct).ConfigureAwait(false);
+                        var newText = SourceText.From(text.ToString() + Title);
+                        if (document.Kind == TextDocumentKind.AdditionalDocument)
+                            return document.Project.Solution.WithAdditionalDocumentText(
                                 document.Id,
                                 newText
                             );
-                        }
-                    )
+                        return document.Project.Solution.WithAnalyzerConfigDocumentText(
+                            document.Id,
+                            newText
+                        );
+                    })
                 );
 
                 return Task.CompletedTask;

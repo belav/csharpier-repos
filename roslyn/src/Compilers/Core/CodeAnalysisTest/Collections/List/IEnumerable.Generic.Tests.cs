@@ -369,31 +369,24 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             int count
         )
         {
-            Assert.All(
-                GetModifyEnumerables(ModifyEnumeratorThrows),
-                ModifyEnumerable =>
+            Assert.All(GetModifyEnumerables(ModifyEnumeratorThrows), ModifyEnumerable =>
+            {
+                IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
+                using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
                 {
-                    IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
-                    using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
+                    if (ModifyEnumerable(enumerable))
                     {
-                        if (ModifyEnumerable(enumerable))
+                        if (Enumerator_ModifiedDuringEnumeration_ThrowsInvalidOperationException)
                         {
-                            if (
-                                Enumerator_ModifiedDuringEnumeration_ThrowsInvalidOperationException
-                            )
-                            {
-                                Assert.Throws<InvalidOperationException>(() =>
-                                    enumerator.MoveNext()
-                                );
-                            }
-                            else
-                            {
-                                enumerator.MoveNext();
-                            }
+                            Assert.Throws<InvalidOperationException>(() => enumerator.MoveNext());
+                        }
+                        else
+                        {
+                            enumerator.MoveNext();
                         }
                     }
                 }
-            );
+            });
         }
 
         [Theory]
@@ -402,25 +395,20 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             int count
         )
         {
-            Assert.All(
-                GetModifyEnumerables(ModifyEnumeratorAllowed),
-                ModifyEnumerable =>
+            Assert.All(GetModifyEnumerables(ModifyEnumeratorAllowed), ModifyEnumerable =>
+            {
+                IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
+                using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
                 {
-                    IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
-                    using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
+                    if (ModifyEnumerable(enumerable))
                     {
-                        if (ModifyEnumerable(enumerable))
+                        if (Enumerator_ModifiedDuringEnumeration_ThrowsInvalidOperationException)
                         {
-                            if (
-                                Enumerator_ModifiedDuringEnumeration_ThrowsInvalidOperationException
-                            )
-                            {
-                                enumerator.MoveNext();
-                            }
+                            enumerator.MoveNext();
                         }
                     }
                 }
-            );
+            });
         }
 
         [Theory]
@@ -429,33 +417,26 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             int count
         )
         {
-            Assert.All(
-                GetModifyEnumerables(ModifyEnumeratorThrows),
-                ModifyEnumerable =>
+            Assert.All(GetModifyEnumerables(ModifyEnumeratorThrows), ModifyEnumerable =>
+            {
+                IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
+                using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
                 {
-                    IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
-                    using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
+                    for (int i = 0; i < count / 2; i++)
+                        enumerator.MoveNext();
+                    if (ModifyEnumerable(enumerable))
                     {
-                        for (int i = 0; i < count / 2; i++)
-                            enumerator.MoveNext();
-                        if (ModifyEnumerable(enumerable))
+                        if (Enumerator_ModifiedDuringEnumeration_ThrowsInvalidOperationException)
                         {
-                            if (
-                                Enumerator_ModifiedDuringEnumeration_ThrowsInvalidOperationException
-                            )
-                            {
-                                Assert.Throws<InvalidOperationException>(() =>
-                                    enumerator.MoveNext()
-                                );
-                            }
-                            else
-                            {
-                                enumerator.MoveNext();
-                            }
+                            Assert.Throws<InvalidOperationException>(() => enumerator.MoveNext());
+                        }
+                        else
+                        {
+                            enumerator.MoveNext();
                         }
                     }
                 }
-            );
+            });
         }
 
         [Theory]
@@ -464,22 +445,19 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             int count
         )
         {
-            Assert.All(
-                GetModifyEnumerables(ModifyEnumeratorAllowed),
-                ModifyEnumerable =>
+            Assert.All(GetModifyEnumerables(ModifyEnumeratorAllowed), ModifyEnumerable =>
+            {
+                IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
+                using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
                 {
-                    IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
-                    using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
+                    for (int i = 0; i < count / 2; i++)
+                        enumerator.MoveNext();
+                    if (ModifyEnumerable(enumerable))
                     {
-                        for (int i = 0; i < count / 2; i++)
-                            enumerator.MoveNext();
-                        if (ModifyEnumerable(enumerable))
-                        {
-                            enumerator.MoveNext();
-                        }
+                        enumerator.MoveNext();
                     }
                 }
-            );
+            });
         }
 
         [Theory]
@@ -488,33 +466,26 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             int count
         )
         {
-            Assert.All(
-                GetModifyEnumerables(ModifyEnumeratorThrows),
-                ModifyEnumerable =>
+            Assert.All(GetModifyEnumerables(ModifyEnumeratorThrows), ModifyEnumerable =>
+            {
+                IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
+                using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
                 {
-                    IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
-                    using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
+                    while (enumerator.MoveNext())
+                        ;
+                    if (ModifyEnumerable(enumerable))
                     {
-                        while (enumerator.MoveNext())
-                            ;
-                        if (ModifyEnumerable(enumerable))
+                        if (Enumerator_ModifiedDuringEnumeration_ThrowsInvalidOperationException)
                         {
-                            if (
-                                Enumerator_ModifiedDuringEnumeration_ThrowsInvalidOperationException
-                            )
-                            {
-                                Assert.Throws<InvalidOperationException>(() =>
-                                    enumerator.MoveNext()
-                                );
-                            }
-                            else
-                            {
-                                enumerator.MoveNext();
-                            }
+                            Assert.Throws<InvalidOperationException>(() => enumerator.MoveNext());
+                        }
+                        else
+                        {
+                            enumerator.MoveNext();
                         }
                     }
                 }
-            );
+            });
         }
 
         [Theory]
@@ -523,22 +494,19 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             int count
         )
         {
-            Assert.All(
-                GetModifyEnumerables(ModifyEnumeratorAllowed),
-                ModifyEnumerable =>
+            Assert.All(GetModifyEnumerables(ModifyEnumeratorAllowed), ModifyEnumerable =>
+            {
+                IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
+                using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
                 {
-                    IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
-                    using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
+                    while (enumerator.MoveNext())
+                        ;
+                    if (ModifyEnumerable(enumerable))
                     {
-                        while (enumerator.MoveNext())
-                            ;
-                        if (ModifyEnumerable(enumerable))
-                        {
-                            enumerator.MoveNext();
-                        }
+                        enumerator.MoveNext();
                     }
                 }
-            );
+            });
         }
 
         [Fact]
@@ -677,24 +645,21 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             int count
         )
         {
-            Assert.All(
-                GetModifyEnumerables(ModifyEnumeratorThrows),
-                ModifyEnumerable =>
+            Assert.All(GetModifyEnumerables(ModifyEnumeratorThrows), ModifyEnumerable =>
+            {
+                T current;
+                IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
+                using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
                 {
-                    T current;
-                    IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
-                    using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
+                    if (ModifyEnumerable(enumerable))
                     {
-                        if (ModifyEnumerable(enumerable))
-                        {
-                            if (Enumerator_Current_UndefinedOperation_Throws)
-                                Assert.Throws<InvalidOperationException>(() => enumerator.Current);
-                            else
-                                current = enumerator.Current;
-                        }
+                        if (Enumerator_Current_UndefinedOperation_Throws)
+                            Assert.Throws<InvalidOperationException>(() => enumerator.Current);
+                        else
+                            current = enumerator.Current;
                     }
                 }
-            );
+            });
         }
 
         [Theory]
@@ -703,21 +668,18 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             int count
         )
         {
-            Assert.All(
-                GetModifyEnumerables(ModifyEnumeratorAllowed),
-                ModifyEnumerable =>
+            Assert.All(GetModifyEnumerables(ModifyEnumeratorAllowed), ModifyEnumerable =>
+            {
+                T current;
+                IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
+                using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
                 {
-                    T current;
-                    IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
-                    using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
+                    if (ModifyEnumerable(enumerable))
                     {
-                        if (ModifyEnumerable(enumerable))
-                        {
-                            current = enumerator.Current;
-                        }
+                        current = enumerator.Current;
                     }
                 }
-            );
+            });
         }
 
         #endregion
@@ -743,29 +705,24 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             int count
         )
         {
-            Assert.All(
-                GetModifyEnumerables(ModifyEnumeratorThrows),
-                ModifyEnumerable =>
+            Assert.All(GetModifyEnumerables(ModifyEnumeratorThrows), ModifyEnumerable =>
+            {
+                IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
+                using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
                 {
-                    IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
-                    using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
+                    if (ModifyEnumerable(enumerable))
                     {
-                        if (ModifyEnumerable(enumerable))
+                        if (Enumerator_ModifiedDuringEnumeration_ThrowsInvalidOperationException)
                         {
-                            if (
-                                Enumerator_ModifiedDuringEnumeration_ThrowsInvalidOperationException
-                            )
-                            {
-                                Assert.Throws<InvalidOperationException>(() => enumerator.Reset());
-                            }
-                            else
-                            {
-                                enumerator.Reset();
-                            }
+                            Assert.Throws<InvalidOperationException>(() => enumerator.Reset());
+                        }
+                        else
+                        {
+                            enumerator.Reset();
                         }
                     }
                 }
-            );
+            });
         }
 
         [Theory]
@@ -774,20 +731,17 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             int count
         )
         {
-            Assert.All(
-                GetModifyEnumerables(ModifyEnumeratorAllowed),
-                ModifyEnumerable =>
+            Assert.All(GetModifyEnumerables(ModifyEnumeratorAllowed), ModifyEnumerable =>
+            {
+                IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
+                using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
                 {
-                    IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
-                    using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
+                    if (ModifyEnumerable(enumerable))
                     {
-                        if (ModifyEnumerable(enumerable))
-                        {
-                            enumerator.Reset();
-                        }
+                        enumerator.Reset();
                     }
                 }
-            );
+            });
         }
 
         [Theory]
@@ -796,31 +750,26 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             int count
         )
         {
-            Assert.All(
-                GetModifyEnumerables(ModifyEnumeratorThrows),
-                ModifyEnumerable =>
+            Assert.All(GetModifyEnumerables(ModifyEnumeratorThrows), ModifyEnumerable =>
+            {
+                IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
+                using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
                 {
-                    IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
-                    using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
+                    for (int i = 0; i < count / 2; i++)
+                        enumerator.MoveNext();
+                    if (ModifyEnumerable(enumerable))
                     {
-                        for (int i = 0; i < count / 2; i++)
-                            enumerator.MoveNext();
-                        if (ModifyEnumerable(enumerable))
+                        if (Enumerator_ModifiedDuringEnumeration_ThrowsInvalidOperationException)
                         {
-                            if (
-                                Enumerator_ModifiedDuringEnumeration_ThrowsInvalidOperationException
-                            )
-                            {
-                                Assert.Throws<InvalidOperationException>(() => enumerator.Reset());
-                            }
-                            else
-                            {
-                                enumerator.Reset();
-                            }
+                            Assert.Throws<InvalidOperationException>(() => enumerator.Reset());
+                        }
+                        else
+                        {
+                            enumerator.Reset();
                         }
                     }
                 }
-            );
+            });
         }
 
         [Theory]
@@ -829,22 +778,19 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             int count
         )
         {
-            Assert.All(
-                GetModifyEnumerables(ModifyEnumeratorAllowed),
-                ModifyEnumerable =>
+            Assert.All(GetModifyEnumerables(ModifyEnumeratorAllowed), ModifyEnumerable =>
+            {
+                IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
+                using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
                 {
-                    IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
-                    using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
+                    for (int i = 0; i < count / 2; i++)
+                        enumerator.MoveNext();
+                    if (ModifyEnumerable(enumerable))
                     {
-                        for (int i = 0; i < count / 2; i++)
-                            enumerator.MoveNext();
-                        if (ModifyEnumerable(enumerable))
-                        {
-                            enumerator.Reset();
-                        }
+                        enumerator.Reset();
                     }
                 }
-            );
+            });
         }
 
         [Theory]
@@ -853,31 +799,26 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             int count
         )
         {
-            Assert.All(
-                GetModifyEnumerables(ModifyEnumeratorThrows),
-                ModifyEnumerable =>
+            Assert.All(GetModifyEnumerables(ModifyEnumeratorThrows), ModifyEnumerable =>
+            {
+                IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
+                using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
                 {
-                    IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
-                    using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
+                    while (enumerator.MoveNext())
+                        ;
+                    if (ModifyEnumerable(enumerable))
                     {
-                        while (enumerator.MoveNext())
-                            ;
-                        if (ModifyEnumerable(enumerable))
+                        if (Enumerator_ModifiedDuringEnumeration_ThrowsInvalidOperationException)
                         {
-                            if (
-                                Enumerator_ModifiedDuringEnumeration_ThrowsInvalidOperationException
-                            )
-                            {
-                                Assert.Throws<InvalidOperationException>(() => enumerator.Reset());
-                            }
-                            else
-                            {
-                                enumerator.Reset();
-                            }
+                            Assert.Throws<InvalidOperationException>(() => enumerator.Reset());
+                        }
+                        else
+                        {
+                            enumerator.Reset();
                         }
                     }
                 }
-            );
+            });
         }
 
         [Theory]
@@ -886,22 +827,19 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             int count
         )
         {
-            Assert.All(
-                GetModifyEnumerables(ModifyEnumeratorAllowed),
-                ModifyEnumerable =>
+            Assert.All(GetModifyEnumerables(ModifyEnumeratorAllowed), ModifyEnumerable =>
+            {
+                IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
+                using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
                 {
-                    IEnumerable<T> enumerable = GenericIEnumerableFactory(count);
-                    using (IEnumerator<T> enumerator = enumerable.GetEnumerator())
+                    while (enumerator.MoveNext())
+                        ;
+                    if (ModifyEnumerable(enumerable))
                     {
-                        while (enumerator.MoveNext())
-                            ;
-                        if (ModifyEnumerable(enumerable))
-                        {
-                            enumerator.Reset();
-                        }
+                        enumerator.Reset();
                     }
                 }
-            );
+            });
         }
 
         [Fact]

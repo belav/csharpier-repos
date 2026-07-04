@@ -29,9 +29,8 @@ namespace Microsoft.Extensions.Configuration
             IEnumerable<IConfigurationProvider> providers = reference?.Providers ?? root.Providers;
 
             IEnumerable<IConfigurationSection> children = providers
-                .Aggregate(
-                    Enumerable.Empty<string>(),
-                    (seed, source) => source.GetChildKeys(seed, path)
+                .Aggregate(Enumerable.Empty<string>(), (seed, source) =>
+                    source.GetChildKeys(seed, path)
                 )
                 .Distinct(StringComparer.OrdinalIgnoreCase)
                 .Select(key =>

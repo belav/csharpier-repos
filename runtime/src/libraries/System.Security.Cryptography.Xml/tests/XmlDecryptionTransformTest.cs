@@ -167,9 +167,8 @@ namespace System.Security.Cryptography.Xml.Tests
             doc.LoadXml(xml);
 
             transform.LoadInput(doc);
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => transform.GetOutput(typeof(string))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                transform.GetOutput(typeof(string))
             );
         }
 

@@ -1147,9 +1147,8 @@ namespace ILLink.Tasks.Tests
             task.ToolExe = dotnetToolName;
 
             Assert.False(task.Execute());
-            Assert.Contains(
-                task.Messages,
-                message => message.Line.Contains("No input files were specified")
+            Assert.Contains(task.Messages, message =>
+                message.Line.Contains("No input files were specified")
             );
         }
     }

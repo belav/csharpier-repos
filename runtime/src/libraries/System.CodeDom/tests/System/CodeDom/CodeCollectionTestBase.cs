@@ -87,28 +87,24 @@ namespace System.CodeDom.Tests
             AssertExtensions.Throws<ArgumentNullException>("value", () => CtorCollection(null));
 
             var collection = Ctor();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => AddRange(collection, (TItem[])null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                AddRange(collection, (TItem[])null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => AddRange(collection, (TCollection)null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                AddRange(collection, (TCollection)null)
             );
         }
 
         [Fact]
         public void AddRange_NullObjectInValue_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => CtorArray(new TItem[] { null })
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                CtorArray(new TItem[] { null })
             );
 
             var collection = Ctor();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => AddRange(collection, new TItem[] { null })
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                AddRange(collection, new TItem[] { null })
             );
         }
 
@@ -147,9 +143,8 @@ namespace System.CodeDom.Tests
         public void Insert_InvalidIndex_ThrowsArgumentOutOfRangeException(int index)
         {
             var collection = Ctor();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => Insert(collection, index, new TItem())
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                Insert(collection, index, new TItem())
             );
         }
 
@@ -157,9 +152,8 @@ namespace System.CodeDom.Tests
         public void Insert_Null_ThrowsArgumentNullException()
         {
             var collection = Ctor();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => Insert(collection, 0, null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                Insert(collection, 0, null)
             );
         }
 
@@ -199,13 +193,11 @@ namespace System.CodeDom.Tests
         public void Item_InvalidIndex_ThrowsArgumentOutOfRangeException(int index)
         {
             var collection = Ctor();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => GetItem(collection, index)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                GetItem(collection, index)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => SetItem(collection, index, new TItem())
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                SetItem(collection, index, new TItem())
             );
         }
 

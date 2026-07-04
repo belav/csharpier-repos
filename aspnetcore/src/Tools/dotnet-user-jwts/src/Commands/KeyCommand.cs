@@ -11,51 +11,48 @@ internal sealed class KeyCommand
 {
     public static void Register(ProjectCommandLineApplication app)
     {
-        app.Command(
-            "key",
-            cmd =>
+        app.Command("key", cmd =>
+        {
+            cmd.Description = Resources.KeyCommand_Description;
+
+            var schemeOption = cmd.Option(
+                "--scheme",
+                Resources.KeyCommand_SchemeOption_Description,
+                CommandOptionType.SingleValue
+            );
+
+            var issuerOption = cmd.Option(
+                "--issuer",
+                Resources.KeyCommand_IssuerOption_Description,
+                CommandOptionType.SingleValue
+            );
+
+            var resetOption = cmd.Option(
+                "--reset",
+                Resources.KeyCommand_ResetOption_Description,
+                CommandOptionType.NoValue
+            );
+
+            var forceOption = cmd.Option(
+                "--force",
+                Resources.KeyCommand_ForceOption_Description,
+                CommandOptionType.NoValue
+            );
+
+            cmd.HelpOption("-h|--help");
+
+            cmd.OnExecute(() =>
             {
-                cmd.Description = Resources.KeyCommand_Description;
-
-                var schemeOption = cmd.Option(
-                    "--scheme",
-                    Resources.KeyCommand_SchemeOption_Description,
-                    CommandOptionType.SingleValue
+                return Execute(
+                    cmd.Reporter,
+                    cmd.ProjectOption.Value(),
+                    schemeOption.Value() ?? DevJwtsDefaults.Scheme,
+                    issuerOption.Value() ?? DevJwtsDefaults.Issuer,
+                    resetOption.HasValue(),
+                    forceOption.HasValue()
                 );
-
-                var issuerOption = cmd.Option(
-                    "--issuer",
-                    Resources.KeyCommand_IssuerOption_Description,
-                    CommandOptionType.SingleValue
-                );
-
-                var resetOption = cmd.Option(
-                    "--reset",
-                    Resources.KeyCommand_ResetOption_Description,
-                    CommandOptionType.NoValue
-                );
-
-                var forceOption = cmd.Option(
-                    "--force",
-                    Resources.KeyCommand_ForceOption_Description,
-                    CommandOptionType.NoValue
-                );
-
-                cmd.HelpOption("-h|--help");
-
-                cmd.OnExecute(() =>
-                {
-                    return Execute(
-                        cmd.Reporter,
-                        cmd.ProjectOption.Value(),
-                        schemeOption.Value() ?? DevJwtsDefaults.Scheme,
-                        issuerOption.Value() ?? DevJwtsDefaults.Issuer,
-                        resetOption.HasValue(),
-                        forceOption.HasValue()
-                    );
-                });
-            }
-        );
+            });
+        });
     }
 
     private static int Execute(

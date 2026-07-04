@@ -22,9 +22,8 @@ namespace System.IO.Tests
         {
             using (SafeFileHandle handle = GetHandleToExistingFile(FileAccess.Read, options))
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "buffers",
-                    () => RandomAccess.Read(handle, buffers: null, 0)
+                AssertExtensions.Throws<ArgumentNullException>("buffers", () =>
+                    RandomAccess.Read(handle, buffers: null, 0)
                 );
             }
         }

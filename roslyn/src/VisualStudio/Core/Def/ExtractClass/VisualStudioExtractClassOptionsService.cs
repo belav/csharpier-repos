@@ -86,9 +86,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractClass
                 .ContainingNamespace.GetAllTypes(cancellationToken)
                 .Select(t => t.Name);
             var candidateName = selectedType.Name + "Base";
-            var defaultTypeName = NameGenerator.GenerateUniqueName(
-                candidateName,
-                name => !conflictingTypeNames.Contains(name)
+            var defaultTypeName = NameGenerator.GenerateUniqueName(candidateName, name =>
+                !conflictingTypeNames.Contains(name)
             );
 
             var containingNamespaceDisplay = selectedType.ContainingNamespace.IsGlobalNamespace

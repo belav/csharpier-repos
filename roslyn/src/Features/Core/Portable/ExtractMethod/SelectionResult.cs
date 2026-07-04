@@ -249,9 +249,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             var tokenMap = pairs
                 .GroupBy(p => p.Item1, p => p.Item2)
                 .ToDictionary(g => g.Key, g => g.ToArray());
-            return root.ReplaceTokens(
-                tokenMap.Keys,
-                (o, n) => o.WithAdditionalAnnotations(tokenMap[o])
+            return root.ReplaceTokens(tokenMap.Keys, (o, n) =>
+                o.WithAdditionalAnnotations(tokenMap[o])
             );
         }
 
@@ -270,9 +269,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
             var tokenMap = pairs
                 .GroupBy(p => p.Item1, p => p.Item2)
                 .ToDictionary(g => g.Key, g => g.ToArray());
-            return root.ReplaceNodes(
-                tokenMap.Keys,
-                (o, n) => o.WithAdditionalAnnotations(tokenMap[o])
+            return root.ReplaceNodes(tokenMap.Keys, (o, n) =>
+                o.WithAdditionalAnnotations(tokenMap[o])
             );
         }
     }

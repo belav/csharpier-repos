@@ -121,51 +121,39 @@ namespace ContextualReflectionTest
 
         void VerifyTestResolve()
         {
-            TestResolve.Assert(
-                ResolveEvents.ExpectedEvent,
-                () =>
-                    AssemblyLoadContext.Default.LoadFromAssemblyName(
-                        new AssemblyName("TestDefaultLoad")
-                    )
+            TestResolve.Assert(ResolveEvents.ExpectedEvent, () =>
+                AssemblyLoadContext.Default.LoadFromAssemblyName(
+                    new AssemblyName("TestDefaultLoad")
+                )
             );
-            TestResolve.Assert(
-                ResolveEvents.NoEvent,
-                () =>
-                    AssemblyLoadContext.Default.LoadFromAssemblyName(
-                        new AssemblyName("TestIsolatedLoad")
-                    )
+            TestResolve.Assert(ResolveEvents.NoEvent, () =>
+                AssemblyLoadContext.Default.LoadFromAssemblyName(
+                    new AssemblyName("TestIsolatedLoad")
+                )
             );
-            TestResolve.Assert(
-                ResolveEvents.ExpectedEvent,
-                () => alc.LoadFromAssemblyName(new AssemblyName("TestIsolatedLoad"))
+            TestResolve.Assert(ResolveEvents.ExpectedEvent, () =>
+                alc.LoadFromAssemblyName(new AssemblyName("TestIsolatedLoad"))
             );
-            TestResolve.Assert(
-                ResolveEvents.ExpectedEvent,
-                () => alc.LoadFromAssemblyName(new AssemblyName("TestDefaultLoad"))
+            TestResolve.Assert(ResolveEvents.ExpectedEvent, () =>
+                alc.LoadFromAssemblyName(new AssemblyName("TestDefaultLoad"))
             );
 
             // Make sure failure is not cached
-            TestResolve.Assert(
-                ResolveEvents.ExpectedEvent,
-                () =>
-                    AssemblyLoadContext.Default.LoadFromAssemblyName(
-                        new AssemblyName("TestDefaultLoad")
-                    )
+            TestResolve.Assert(ResolveEvents.ExpectedEvent, () =>
+                AssemblyLoadContext.Default.LoadFromAssemblyName(
+                    new AssemblyName("TestDefaultLoad")
+                )
             );
-            TestResolve.Assert(
-                ResolveEvents.NoEvent,
-                () =>
-                    AssemblyLoadContext.Default.LoadFromAssemblyName(
-                        new AssemblyName("TestIsolatedLoad")
-                    )
+            TestResolve.Assert(ResolveEvents.NoEvent, () =>
+                AssemblyLoadContext.Default.LoadFromAssemblyName(
+                    new AssemblyName("TestIsolatedLoad")
+                )
             );
-            TestResolve.Assert(
-                ResolveEvents.ExpectedEvent,
-                () => alc.LoadFromAssemblyName(new AssemblyName("TestIsolatedLoad"))
+            TestResolve.Assert(ResolveEvents.ExpectedEvent, () =>
+                alc.LoadFromAssemblyName(new AssemblyName("TestIsolatedLoad"))
             );
-            TestResolve.Assert(
-                ResolveEvents.ExpectedEvent,
-                () => alc.LoadFromAssemblyName(new AssemblyName("TestDefaultLoad"))
+            TestResolve.Assert(ResolveEvents.ExpectedEvent, () =>
+                alc.LoadFromAssemblyName(new AssemblyName("TestDefaultLoad"))
             );
         }
 
@@ -388,23 +376,20 @@ namespace ContextualReflectionTest
         void TestAssemblyLoad(bool isolated)
         {
             TestAssemblyLoad(isolated, (string assemblyName) => Assembly.Load(assemblyName));
-            TestAssemblyLoad(
-                isolated,
-                (string assemblyName) => Assembly.Load(new AssemblyName(assemblyName))
+            TestAssemblyLoad(isolated, (string assemblyName) =>
+                Assembly.Load(new AssemblyName(assemblyName))
             );
 #pragma warning disable 618
-            TestAssemblyLoad(
-                isolated,
-                (string assemblyName) => Assembly.LoadWithPartialName(assemblyName)
+            TestAssemblyLoad(isolated, (string assemblyName) =>
+                Assembly.LoadWithPartialName(assemblyName)
             );
 #pragma warning restore 618
         }
 
         void TestAssemblyLoad(bool isolated, Func<string, Assembly> assemblyLoad)
         {
-            TestResolveMissingAssembly(
-                isolated,
-                (string assemblyName) => assemblyLoad(assemblyName)
+            TestResolveMissingAssembly(isolated, (string assemblyName) =>
+                assemblyLoad(assemblyName)
             );
 
             using (AssemblyLoadContext.EnterContextualReflection(null))
@@ -457,47 +442,38 @@ namespace ContextualReflectionTest
         void TestTypeGetType(bool isolated)
         {
             TestTypeGetType(isolated, (string typeName) => Type.GetType(typeName));
-            TestTypeGetType(
-                isolated,
-                (string typeName) => Type.GetType(typeName, throwOnError: false)
+            TestTypeGetType(isolated, (string typeName) =>
+                Type.GetType(typeName, throwOnError: false)
             );
-            TestTypeGetType(
-                isolated,
-                (string typeName) => Type.GetType(typeName, throwOnError: false, ignoreCase: false)
+            TestTypeGetType(isolated, (string typeName) =>
+                Type.GetType(typeName, throwOnError: false, ignoreCase: false)
             );
-            TestTypeGetType(
-                isolated,
-                (string typeName) =>
-                    Type.GetType(typeName, assemblyResolver: null, typeResolver: null)
+            TestTypeGetType(isolated, (string typeName) =>
+                Type.GetType(typeName, assemblyResolver: null, typeResolver: null)
             );
-            TestTypeGetType(
-                isolated,
-                (string typeName) =>
-                    Type.GetType(
-                        typeName,
-                        assemblyResolver: null,
-                        typeResolver: null,
-                        throwOnError: false
-                    )
+            TestTypeGetType(isolated, (string typeName) =>
+                Type.GetType(
+                    typeName,
+                    assemblyResolver: null,
+                    typeResolver: null,
+                    throwOnError: false
+                )
             );
-            TestTypeGetType(
-                isolated,
-                (string typeName) =>
-                    Type.GetType(
-                        typeName,
-                        assemblyResolver: null,
-                        typeResolver: null,
-                        throwOnError: false,
-                        ignoreCase: false
-                    )
+            TestTypeGetType(isolated, (string typeName) =>
+                Type.GetType(
+                    typeName,
+                    assemblyResolver: null,
+                    typeResolver: null,
+                    throwOnError: false,
+                    ignoreCase: false
+                )
             );
         }
 
         void TestTypeGetType(bool isolated, Func<string, System.Type> typeGetType)
         {
-            TestResolveMissingAssembly(
-                isolated,
-                (string assemblyName) => typeGetType(string.Format("MyType, {0}", assemblyName))
+            TestResolveMissingAssembly(isolated, (string assemblyName) =>
+                typeGetType(string.Format("MyType, {0}", assemblyName))
             );
 
             using (AssemblyLoadContext.EnterContextualReflection(null))
@@ -622,15 +598,13 @@ namespace ContextualReflectionTest
         void TestAssemblyGetType(bool isolated)
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
-            TestResolveMissingAssembly(
-                isolated,
-                (string assemblyName) =>
-                    assembly.GetType(
-                        string.Format(
-                            "ContextualReflectionTest.AGenericClass`1[[MyType, {0}]]",
-                            assemblyName
-                        )
+            TestResolveMissingAssembly(isolated, (string assemblyName) =>
+                assembly.GetType(
+                    string.Format(
+                        "ContextualReflectionTest.AGenericClass`1[[MyType, {0}]]",
+                        assemblyName
                     )
+                )
             );
 
             using (AssemblyLoadContext.EnterContextualReflection(null))
@@ -781,9 +755,8 @@ namespace ContextualReflectionTest
 
         void TestActivatorCreateInstance(bool isolated)
         {
-            TestResolveMissingAssembly(
-                isolated,
-                (string assemblyName) => Activator.CreateInstance(assemblyName, "MyType")
+            TestResolveMissingAssembly(isolated, (string assemblyName) =>
+                Activator.CreateInstance(assemblyName, "MyType")
             );
             TestResolveMissingAssembly(
                 isolated,
@@ -798,16 +771,14 @@ namespace ContextualReflectionTest
                 skipNullIsolated: true
             );
 
-            TestResolveMissingAssembly(
-                isolated,
-                (string assemblyName) =>
-                    Activator.CreateInstance(
-                        "ContextualReflection",
-                        string.Format(
-                            "ContextualReflectionTest.AGenericClass`1[[MyType, {0}]]",
-                            assemblyName
-                        )
+            TestResolveMissingAssembly(isolated, (string assemblyName) =>
+                Activator.CreateInstance(
+                    "ContextualReflection",
+                    string.Format(
+                        "ContextualReflectionTest.AGenericClass`1[[MyType, {0}]]",
+                        assemblyName
                     )
+                )
             );
 
             Assembly assembly = Assembly.GetExecutingAssembly();
@@ -1024,17 +995,15 @@ namespace ContextualReflectionTest
 
             AssemblyLoadContext context = AssemblyLoadContext.GetLoadContext(assemblyBuilder);
             Assert.Equal(assemblyLoadContext, context);
-            Assert.Contains(
-                assemblyLoadContext.Assemblies,
-                a => AssemblyName.ReferenceMatchesDefinition(a.GetName(), assemblyBuilder.GetName())
+            Assert.Contains(assemblyLoadContext.Assemblies, a =>
+                AssemblyName.ReferenceMatchesDefinition(a.GetName(), assemblyBuilder.GetName())
             );
         }
 
         void TestMockAssemblyThrows()
         {
-            Exception e = AssertExtensions.ThrowsArgumentException(
-                "activating",
-                () => AssemblyLoadContext.EnterContextualReflection(new MockAssembly())
+            Exception e = AssertExtensions.ThrowsArgumentException("activating", () =>
+                AssemblyLoadContext.EnterContextualReflection(new MockAssembly())
             );
         }
 

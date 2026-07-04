@@ -29,71 +29,68 @@ internal static class WebAssemblyNetDebugProxyAppBuilderExtensions
     /// </summary>
     public static void UseWebAssemblyDebugging(this IApplicationBuilder app)
     {
-        app.Map(
-            "/_framework/debug",
-            app =>
-            {
-                app.Run(
-                    async (context) =>
+        app.Map("/_framework/debug", app =>
+        {
+            app.Run(
+                async (context) =>
+                {
+                    var queryParams = HttpUtility.ParseQueryString(
+                        context.Request.QueryString.Value!
+                    );
+                    var browserParam = queryParams.Get("browser");
+                    Uri? browserUrl = null;
+                    var devToolsHost = "http://localhost:9222";
+                    if (browserParam != null)
                     {
-                        var queryParams = HttpUtility.ParseQueryString(
-                            context.Request.QueryString.Value!
-                        );
-                        var browserParam = queryParams.Get("browser");
-                        Uri? browserUrl = null;
-                        var devToolsHost = "http://localhost:9222";
-                        if (browserParam != null)
-                        {
-                            browserUrl = new Uri(browserParam);
-                            devToolsHost = $"http://{browserUrl.Host}:{browserUrl.Port}";
-                        }
-                        var isFirefox = string.IsNullOrEmpty(queryParams.Get("isFirefox"))
-                            ? false
-                            : true;
-                        if (isFirefox)
-                        {
-                            devToolsHost = "localhost:6000";
-                        }
-                        var debugProxyBaseUrl = await DebugProxyLauncher.EnsureLaunchedAndGetUrl(
-                            context.RequestServices,
-                            devToolsHost,
-                            isFirefox
-                        );
-                        var requestPath = context.Request.Path.ToString();
-                        if (requestPath == string.Empty)
-                        {
-                            requestPath = "/";
-                        }
-
-                        switch (requestPath)
-                        {
-                            case "/":
-                                var targetPickerUi = new TargetPickerUi(
-                                    debugProxyBaseUrl,
-                                    devToolsHost
-                                );
-                                if (isFirefox)
-                                {
-                                    await targetPickerUi.DisplayFirefox(context);
-                                }
-                                else
-                                {
-                                    await targetPickerUi.Display(context);
-                                }
-                                break;
-                            case "/ws-proxy":
-                                context.Response.Redirect(
-                                    $"{debugProxyBaseUrl}{browserUrl!.PathAndQuery}"
-                                );
-                                break;
-                            default:
-                                context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-                                break;
-                        }
+                        browserUrl = new Uri(browserParam);
+                        devToolsHost = $"http://{browserUrl.Host}:{browserUrl.Port}";
                     }
-                );
-            }
-        );
+                    var isFirefox = string.IsNullOrEmpty(queryParams.Get("isFirefox"))
+                        ? false
+                        : true;
+                    if (isFirefox)
+                    {
+                        devToolsHost = "localhost:6000";
+                    }
+                    var debugProxyBaseUrl = await DebugProxyLauncher.EnsureLaunchedAndGetUrl(
+                        context.RequestServices,
+                        devToolsHost,
+                        isFirefox
+                    );
+                    var requestPath = context.Request.Path.ToString();
+                    if (requestPath == string.Empty)
+                    {
+                        requestPath = "/";
+                    }
+
+                    switch (requestPath)
+                    {
+                        case "/":
+                            var targetPickerUi = new TargetPickerUi(
+                                debugProxyBaseUrl,
+                                devToolsHost
+                            );
+                            if (isFirefox)
+                            {
+                                await targetPickerUi.DisplayFirefox(context);
+                            }
+                            else
+                            {
+                                await targetPickerUi.Display(context);
+                            }
+                            break;
+                        case "/ws-proxy":
+                            context.Response.Redirect(
+                                $"{debugProxyBaseUrl}{browserUrl!.PathAndQuery}"
+                            );
+                            break;
+                        default:
+                            context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                            break;
+                    }
+                }
+            );
+        });
     }
 }
 

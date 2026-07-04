@@ -16,9 +16,8 @@ namespace System.Formats.Asn1.Tests.Writer
         {
             AsnWriter writer = new AsnWriter(ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => writer.WriteEncodedValue(ReadOnlySpan<byte>.Empty)
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                writer.WriteEncodedValue(ReadOnlySpan<byte>.Empty)
             );
         }
 
@@ -38,9 +37,8 @@ namespace System.Formats.Asn1.Tests.Writer
             }
             else
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "value",
-                    () => writer.WriteEncodedValue(wideNull)
+                AssertExtensions.Throws<ArgumentException>("value", () =>
+                    writer.WriteEncodedValue(wideNull)
                 );
             }
         }
@@ -54,9 +52,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnWriter writer = new AsnWriter(ruleSet);
             byte[] nullAndARogueByte = { 0x05, 0x00, 0x00 };
 
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => writer.WriteEncodedValue(nullAndARogueByte)
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                writer.WriteEncodedValue(nullAndARogueByte)
             );
         }
 

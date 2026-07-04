@@ -241,13 +241,10 @@
                     typeof(ActionMethodSelectorAttribute),
                     true /* inherit */
                 );
-            ActionSelector[] selectors = Array.ConvertAll(
-                attrs,
-                attr =>
-                    (ActionSelector)(
-                        controllerContext =>
-                            attr.IsValidForRequest(controllerContext, AsyncMethodInfo)
-                    )
+            ActionSelector[] selectors = Array.ConvertAll(attrs, attr =>
+                (ActionSelector)(
+                    controllerContext => attr.IsValidForRequest(controllerContext, AsyncMethodInfo)
+                )
             );
             return selectors;
         }

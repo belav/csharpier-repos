@@ -179,15 +179,11 @@ namespace System.Xml
             else if (nCount == 0)
                 buf = $"{buf}\\";
 
-            return string.Create(
-                buf.Length + systemId.Length,
-                (buf, systemId),
-                (dest, state) =>
-                {
-                    state.buf.CopyTo(dest);
-                    state.systemId.AsSpan().Replace(dest.Slice(state.buf.Length), '\\', '/');
-                }
-            );
+            return string.Create(buf.Length + systemId.Length, (buf, systemId), (dest, state) =>
+            {
+                state.buf.CopyTo(dest);
+                state.systemId.AsSpan().Replace(dest.Slice(state.buf.Length), '\\', '/');
+            });
         }
 
         //childrenBaseURI returns where the entity reference node's children come from

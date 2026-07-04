@@ -35,9 +35,8 @@ FROM "Orders" AS "o"
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Select_datetime_year_component_composed(bool async)
     {
-        await AssertQueryScalar(
-            async,
-            ss => ss.Set<Order>().Select(o => o.OrderDate.Value.AddYears(1).Year)
+        await AssertQueryScalar(async, ss =>
+            ss.Set<Order>().Select(o => o.OrderDate.Value.AddYears(1).Year)
         );
 
         AssertSql(

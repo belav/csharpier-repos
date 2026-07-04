@@ -278,16 +278,10 @@ namespace Microsoft.Interop
                     }
                 );
 
-            context.RegisterSourceOutput(
-                filesToGenerate,
-                (context, data) =>
-                {
-                    context.AddSource(
-                        data.TypeName.Replace(TypeNames.GlobalAlias, ""),
-                        data.Source
-                    );
-                }
-            );
+            context.RegisterSourceOutput(filesToGenerate, (context, data) =>
+            {
+                context.AddSource(data.TypeName.Replace(TypeNames.GlobalAlias, ""), data.Source);
+            });
         }
 
         private static readonly AttributeSyntax s_iUnknownDerivedAttributeTemplate = Attribute(

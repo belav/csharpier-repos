@@ -17,9 +17,8 @@ namespace System.Reflection.Metadata.Ecma335.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => new MetadataBuilder(0, -1));
             Assert.Throws<ArgumentOutOfRangeException>(() => new MetadataBuilder(0, 0, -1));
             Assert.Throws<ArgumentOutOfRangeException>(() => new MetadataBuilder(0, 0, 0, -1));
-            AssertExtensions.Throws<ArgumentException>(
-                "guidHeapStartOffset",
-                () => new MetadataBuilder(0, 0, 0, 1)
+            AssertExtensions.Throws<ArgumentException>("guidHeapStartOffset", () =>
+                new MetadataBuilder(0, 0, 0, 1)
             );
 
             new MetadataBuilder(userStringHeapStartOffset: 0x00fffffe);
@@ -374,136 +373,106 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     default(BlobHandle)
                 )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    builder.AddTypeDefinition(
-                        0,
-                        default(StringHandle),
-                        default(StringHandle),
-                        badHandleKind,
-                        default(FieldDefinitionHandle),
-                        default(MethodDefinitionHandle)
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.AddTypeDefinition(
+                    0,
+                    default(StringHandle),
+                    default(StringHandle),
+                    badHandleKind,
+                    default(FieldDefinitionHandle),
+                    default(MethodDefinitionHandle)
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    builder.AddInterfaceImplementation(default(TypeDefinitionHandle), badHandleKind)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.AddInterfaceImplementation(default(TypeDefinitionHandle), badHandleKind)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    builder.AddTypeReference(
-                        badHandleKind,
-                        default(StringHandle),
-                        default(StringHandle)
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.AddTypeReference(
+                    badHandleKind,
+                    default(StringHandle),
+                    default(StringHandle)
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => builder.AddEvent(0, default(StringHandle), badHandleKind)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.AddEvent(0, default(StringHandle), badHandleKind)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => builder.AddConstant(badHandleKind, 0)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.AddConstant(badHandleKind, 0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => builder.AddMethodSemantics(badHandleKind, 0, default(MethodDefinitionHandle))
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.AddMethodSemantics(badHandleKind, 0, default(MethodDefinitionHandle))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    builder.AddCustomAttribute(
-                        badHandleKind,
-                        default(MethodDefinitionHandle),
-                        default(BlobHandle)
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.AddCustomAttribute(
+                    badHandleKind,
+                    default(MethodDefinitionHandle),
+                    default(BlobHandle)
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    builder.AddCustomAttribute(
-                        default(TypeDefinitionHandle),
-                        badHandleKind,
-                        default(BlobHandle)
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.AddCustomAttribute(
+                    default(TypeDefinitionHandle),
+                    badHandleKind,
+                    default(BlobHandle)
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => builder.AddMethodSpecification(badHandleKind, default(BlobHandle))
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.AddMethodSpecification(badHandleKind, default(BlobHandle))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => builder.AddGenericParameter(badHandleKind, 0, default(StringHandle), 0)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.AddGenericParameter(badHandleKind, 0, default(StringHandle), 0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    builder.AddGenericParameterConstraint(
-                        default(GenericParameterHandle),
-                        badHandleKind
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.AddGenericParameterConstraint(
+                    default(GenericParameterHandle),
+                    badHandleKind
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => builder.AddMarshallingDescriptor(badHandleKind, default(BlobHandle))
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.AddMarshallingDescriptor(badHandleKind, default(BlobHandle))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    builder.AddMethodImplementation(
-                        default(TypeDefinitionHandle),
-                        badHandleKind,
-                        default(MethodDefinitionHandle)
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.AddMethodImplementation(
+                    default(TypeDefinitionHandle),
+                    badHandleKind,
+                    default(MethodDefinitionHandle)
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    builder.AddMethodImplementation(
-                        default(TypeDefinitionHandle),
-                        default(MethodDefinitionHandle),
-                        badHandleKind
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.AddMethodImplementation(
+                    default(TypeDefinitionHandle),
+                    default(MethodDefinitionHandle),
+                    badHandleKind
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    builder.AddMemberReference(
-                        badHandleKind,
-                        default(StringHandle),
-                        default(BlobHandle)
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.AddMemberReference(
+                    badHandleKind,
+                    default(StringHandle),
+                    default(BlobHandle)
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => builder.AddManifestResource(0, default(StringHandle), badHandleKind, 0)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.AddManifestResource(0, default(StringHandle), badHandleKind, 0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    builder.AddExportedType(
-                        0,
-                        default(StringHandle),
-                        default(StringHandle),
-                        badHandleKind,
-                        0
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.AddExportedType(
+                    0,
+                    default(StringHandle),
+                    default(StringHandle),
+                    badHandleKind,
+                    0
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => builder.AddDeclarativeSecurityAttribute(badHandleKind, 0, default(BlobHandle))
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.AddDeclarativeSecurityAttribute(badHandleKind, 0, default(BlobHandle))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    builder.AddCustomDebugInformation(
-                        badHandleKind,
-                        default(GuidHandle),
-                        default(BlobHandle)
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                builder.AddCustomDebugInformation(
+                    badHandleKind,
+                    default(GuidHandle),
+                    default(BlobHandle)
+                )
             );
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
@@ -691,33 +660,26 @@ namespace System.Reflection.Metadata.Ecma335.Tests
         public void GetOrAddErrors()
         {
             var mdBuilder = new MetadataBuilder();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => mdBuilder.GetOrAddBlob((BlobBuilder)null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                mdBuilder.GetOrAddBlob((BlobBuilder)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => mdBuilder.GetOrAddBlob((byte[])null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                mdBuilder.GetOrAddBlob((byte[])null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => mdBuilder.GetOrAddBlob(default(ImmutableArray<byte>))
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                mdBuilder.GetOrAddBlob(default(ImmutableArray<byte>))
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => mdBuilder.GetOrAddBlobUTF8(null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                mdBuilder.GetOrAddBlobUTF8(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => mdBuilder.GetOrAddBlobUTF16(null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                mdBuilder.GetOrAddBlobUTF16(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => mdBuilder.GetOrAddDocumentName(null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                mdBuilder.GetOrAddDocumentName(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => mdBuilder.GetOrAddString(null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                mdBuilder.GetOrAddString(null)
             );
         }
 

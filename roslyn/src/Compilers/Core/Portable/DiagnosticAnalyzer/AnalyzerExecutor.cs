@@ -2444,9 +2444,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 );
             }
 
-            return _lazyControlFlowGraphMap.GetOrAdd(
-                operation,
-                op => ControlFlowGraphBuilder.Create(op)
+            return _lazyControlFlowGraphMap.GetOrAdd(operation, op =>
+                ControlFlowGraphBuilder.Create(op)
             );
         }
 

@@ -676,9 +676,8 @@ namespace System.Text.Tests
                     Assert.Throws<NotSupportedException>(() =>
                         Encoding.GetEncoding((int)mapping[0])
                     );
-                    AssertExtensions.Throws<ArgumentException>(
-                        "name",
-                        () => Encoding.GetEncoding((string)mapping[2])
+                    AssertExtensions.Throws<ArgumentException>("name", () =>
+                        Encoding.GetEncoding((string)mapping[2])
                     );
                 }
 
@@ -883,13 +882,8 @@ namespace System.Text.Tests
 
             // Names can't be empty, and must be printable characters.
             Assert.False(string.IsNullOrWhiteSpace(name));
-            Assert.All(
-                name,
-                c =>
-                    Assert.True(
-                        c >= ' ' && c < '~' + 1,
-                        "Name: " + name + " contains character: " + c
-                    )
+            Assert.All(name, c =>
+                Assert.True(c >= ' ' && c < '~' + 1, "Name: " + name + " contains character: " + c)
             );
         }
 

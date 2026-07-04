@@ -23,10 +23,8 @@ namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
 
             // Check to see if we need to add or remove
             // If there's a modifier, then we need to remove it, otherwise no modifier, add it.
-            editor.ReplaceNode(
-                declaration,
-                (currentDeclaration, _) =>
-                    UpdateAccessibility(currentDeclaration, preferredAccessibility)
+            editor.ReplaceNode(declaration, (currentDeclaration, _) =>
+                UpdateAccessibility(currentDeclaration, preferredAccessibility)
             );
 
             return;

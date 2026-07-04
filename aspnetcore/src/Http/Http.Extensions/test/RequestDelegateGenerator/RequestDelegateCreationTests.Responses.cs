@@ -48,13 +48,10 @@ public abstract partial class RequestDelegateCreationTests
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            result,
-            (endpointModel) =>
-            {
-                Assert.Equal(httpMethod, endpointModel.HttpMethod);
-            }
-        );
+        VerifyStaticEndpointModel(result, (endpointModel) =>
+        {
+            Assert.Equal(httpMethod, endpointModel.HttpMethod);
+        });
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
@@ -76,13 +73,10 @@ app.MapGet("/hello", () => "Hello world!")
         var endpoint = GetEndpointFromCompilation(compilation);
 
         await VerifyAgainstBaselineUsingFile(compilation);
-        VerifyStaticEndpointModel(
-            result,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-            }
-        );
+        VerifyStaticEndpointModel(result, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+        });
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
@@ -104,13 +98,10 @@ app.MapGet("/hello", () => "Hello world!")
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            result,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-            }
-        );
+        VerifyStaticEndpointModel(result, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+        });
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
@@ -151,13 +142,10 @@ app.MapGet("/", GetTodo);
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            result,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-            }
-        );
+        VerifyStaticEndpointModel(result, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+        });
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
@@ -179,13 +167,10 @@ app.MapGet("/", GetTodo);
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            result,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-            }
-        );
+        VerifyStaticEndpointModel(result, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+        });
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
@@ -234,14 +219,11 @@ app.MapGet("/", GetTodo);
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            result,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-                Assert.True(endpointModel.Response.IsAwaitable);
-            }
-        );
+        VerifyStaticEndpointModel(result, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+            Assert.True(endpointModel.Response.IsAwaitable);
+        });
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
@@ -275,14 +257,11 @@ app.MapGet("/", GetTodo);
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            result,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-                Assert.True(endpointModel.Response.IsAwaitable);
-            }
-        );
+        VerifyStaticEndpointModel(result, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+            Assert.True(endpointModel.Response.IsAwaitable);
+        });
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
@@ -331,14 +310,11 @@ app.MapGet("/", GetTodo);
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            result,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-                Assert.True(endpointModel.Response.IsAwaitable);
-            }
-        );
+        VerifyStaticEndpointModel(result, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+            Assert.True(endpointModel.Response.IsAwaitable);
+        });
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
@@ -355,25 +331,21 @@ app.MapGet("/value-task", () => ValueTask.CompletedTask);
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoints = GetEndpointsFromCompilation(compilation);
 
-        VerifyStaticEndpointModels(
-            result,
-            endpointModels =>
-                Assert.Collection(
-                    endpointModels,
-                    endpointModel =>
-                    {
-                        Assert.Equal("MapGet", endpointModel.HttpMethod);
-                        Assert.True(endpointModel.Response.IsAwaitable);
-                        Assert.True(endpointModel.Response.HasNoResponse);
-                    },
-                    endpointModel =>
-                    {
-                        Assert.Equal("MapGet", endpointModel.HttpMethod);
-                        Assert.True(endpointModel.Response.IsAwaitable);
-                        Assert.True(endpointModel.Response.HasNoResponse);
-                    }
-                )
-        );
+        VerifyStaticEndpointModels(result, endpointModels => Assert.Collection(
+                endpointModels,
+                endpointModel =>
+                {
+                    Assert.Equal("MapGet", endpointModel.HttpMethod);
+                    Assert.True(endpointModel.Response.IsAwaitable);
+                    Assert.True(endpointModel.Response.HasNoResponse);
+                },
+                endpointModel =>
+                {
+                    Assert.Equal("MapGet", endpointModel.HttpMethod);
+                    Assert.True(endpointModel.Response.IsAwaitable);
+                    Assert.True(endpointModel.Response.HasNoResponse);
+                }
+            ));
 
         var httpContext = CreateHttpContext();
         await endpoints[0].RequestDelegate(httpContext);
@@ -572,13 +544,10 @@ app.MapGet("/todos", () => "not going to be returned")
 
         await endpoint.RequestDelegate(httpContext);
 
-        await VerifyResponseJsonBodyAsync<Todo>(
-            httpContext,
-            (todo) =>
-            {
-                Assert.Equal("Write even more tests!", todo.Name);
-            }
-        );
+        await VerifyResponseJsonBodyAsync<Todo>(httpContext, (todo) =>
+        {
+            Assert.Equal("Write even more tests!", todo.Name);
+        });
     }
 
     [Fact]
@@ -651,14 +620,11 @@ static ValueTask<Todo> StaticValueTaskTestAction() => ValueTask.FromResult(new T
 
         await endpoint.RequestDelegate(httpContext);
 
-        await VerifyResponseJsonBodyAsync<Todo>(
-            httpContext,
-            (todo) =>
-            {
-                Assert.NotNull(todo);
-                Assert.Equal("Write even more tests!", todo!.Name);
-            }
-        );
+        await VerifyResponseJsonBodyAsync<Todo>(httpContext, (todo) =>
+        {
+            Assert.NotNull(todo);
+            Assert.Equal("Write even more tests!", todo!.Name);
+        });
     }
 
     [Fact]
@@ -675,16 +641,13 @@ app.MapPost("/", () => new TodoStruct(42, "Bob", true, TodoStatus.Done));
 
         await endpoint.RequestDelegate(httpContext);
 
-        await VerifyResponseJsonBodyAsync<TodoStruct>(
-            httpContext,
-            (todo) =>
-            {
-                Assert.Equal(42, todo.Id);
-                Assert.Equal("Bob", todo.Name);
-                Assert.True(todo.IsComplete);
-                Assert.Equal(TodoStatus.Done, todo.Status);
-            }
-        );
+        await VerifyResponseJsonBodyAsync<TodoStruct>(httpContext, (todo) =>
+        {
+            Assert.Equal(42, todo.Id);
+            Assert.Equal("Bob", todo.Name);
+            Assert.True(todo.IsComplete);
+            Assert.Equal(TodoStatus.Done, todo.Status);
+        });
     }
 
     public static IEnumerable<object[]> ChildResult
@@ -759,15 +722,12 @@ app.MapPost("/", async ValueTask<Todo> () => {
 
         await endpoint.RequestDelegate(httpContext);
 
-        await VerifyResponseJsonBodyAsync<TodoChild>(
-            httpContext,
-            (todo) =>
-            {
-                Assert.NotNull(todo);
-                Assert.Equal("Write even more tests!", todo!.Name);
-                Assert.Equal("With type hierarchies!", todo!.Child);
-            }
-        );
+        await VerifyResponseJsonBodyAsync<TodoChild>(httpContext, (todo) =>
+        {
+            Assert.NotNull(todo);
+            Assert.Equal("Write even more tests!", todo!.Name);
+            Assert.Equal("With type hierarchies!", todo!.Child);
+        });
     }
 
     public static IEnumerable<object[]> PolymorphicResult
@@ -848,15 +808,12 @@ app.MapPost("/", async ValueTask<JsonTodo> () => {
 
         await endpoint.RequestDelegate(httpContext);
 
-        await VerifyResponseJsonBodyAsync<JsonTodoChild>(
-            httpContext,
-            (todo) =>
-            {
-                Assert.NotNull(todo);
-                Assert.Equal("Write even more tests!", todo!.Name);
-                Assert.Equal("With type hierarchies!", todo!.Child);
-            }
-        );
+        await VerifyResponseJsonBodyAsync<JsonTodoChild>(httpContext, (todo) =>
+        {
+            Assert.NotNull(todo);
+            Assert.Equal("Write even more tests!", todo!.Name);
+            Assert.Equal("With type hierarchies!", todo!.Child);
+        });
     }
 
     [Theory]
@@ -876,15 +833,12 @@ app.MapPost("/", async ValueTask<JsonTodo> () => {
 
         await endpoint.RequestDelegate(httpContext);
 
-        await VerifyResponseJsonNodeAsync(
-            httpContext,
-            (node) =>
-            {
-                Assert.NotNull(node);
-                Assert.NotNull(node["$type"]);
-                Assert.Equal(nameof(JsonTodoChild), node["$type"]!.GetValue<string>());
-            }
-        );
+        await VerifyResponseJsonNodeAsync(httpContext, (node) =>
+        {
+            Assert.NotNull(node);
+            Assert.NotNull(node["$type"]);
+            Assert.Equal(nameof(JsonTodoChild), node["$type"]!.GetValue<string>());
+        });
     }
 
     public static IEnumerable<object[]> StringResult
@@ -1195,13 +1149,10 @@ app.MapPost("/", TodoStruct? () => null);
     {
         var (result, compilation) = await RunGeneratorAsync(source);
 
-        VerifyStaticEndpointModel(
-            result,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-                Assert.Equal(expectedContentType, endpointModel.Response.ContentType);
-            }
-        );
+        VerifyStaticEndpointModel(result, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+            Assert.Equal(expectedContentType, endpointModel.Response.ContentType);
+        });
     }
 }

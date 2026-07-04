@@ -30,9 +30,8 @@ namespace System.IO.Tests
         [Fact]
         public void ThrowsArgumentNullExceptionForNullHandle()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "handle",
-                () => MethodUnderTest(null, Array.Empty<byte>(), 0)
+            AssertExtensions.Throws<ArgumentNullException>("handle", () =>
+                MethodUnderTest(null, Array.Empty<byte>(), 0)
             );
         }
 
@@ -41,9 +40,8 @@ namespace System.IO.Tests
         {
             SafeFileHandle handle = new SafeFileHandle(new IntPtr(-1), ownsHandle: false);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "handle",
-                () => MethodUnderTest(handle, Array.Empty<byte>(), 0)
+            AssertExtensions.Throws<ArgumentException>("handle", () =>
+                MethodUnderTest(handle, Array.Empty<byte>(), 0)
             );
         }
 
@@ -98,9 +96,8 @@ namespace System.IO.Tests
                     )
                 )
                 {
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                        "fileOffset",
-                        () => MethodUnderTest(handle, Array.Empty<byte>(), -1)
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>("fileOffset", () =>
+                        MethodUnderTest(handle, Array.Empty<byte>(), -1)
                     );
                 }
             }

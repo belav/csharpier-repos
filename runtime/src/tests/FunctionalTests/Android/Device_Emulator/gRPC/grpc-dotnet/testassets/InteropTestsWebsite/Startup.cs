@@ -29,23 +29,20 @@ namespace InteropTestsWebsite
             services.AddGrpc();
             services.AddCors(o =>
             {
-                o.AddPolicy(
-                    "InteropTests",
-                    builder =>
-                    {
-                        builder.AllowAnyOrigin();
-                        builder.AllowAnyMethod();
-                        builder.AllowAnyHeader();
-                        builder.WithExposedHeaders(
-                            "Grpc-Status",
-                            "Grpc-Message",
-                            "Grpc-Encoding",
-                            "Grpc-Accept-Encoding",
-                            "x-grpc-test-echo-initial",
-                            "x-grpc-test-echo-trailing-bin"
-                        );
-                    }
-                );
+                o.AddPolicy("InteropTests", builder =>
+                {
+                    builder.AllowAnyOrigin();
+                    builder.AllowAnyMethod();
+                    builder.AllowAnyHeader();
+                    builder.WithExposedHeaders(
+                        "Grpc-Status",
+                        "Grpc-Message",
+                        "Grpc-Encoding",
+                        "Grpc-Accept-Encoding",
+                        "x-grpc-test-echo-initial",
+                        "x-grpc-test-echo-trailing-bin"
+                    );
+                });
             });
         }
 

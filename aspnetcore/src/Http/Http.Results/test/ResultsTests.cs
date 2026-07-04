@@ -504,18 +504,16 @@ public partial class ResultsTests
     [Fact]
     public void Stream_WithNullPipeReader_ThrowsArgNullException()
     {
-        Assert.Throws<ArgumentNullException>(
-            "pipeReader",
-            () => Results.Stream(default(PipeReader))
+        Assert.Throws<ArgumentNullException>("pipeReader", () =>
+            Results.Stream(default(PipeReader))
         );
     }
 
     [Fact]
     public void Stream_WithNullCallback_ThrowsArgNullException()
     {
-        Assert.Throws<ArgumentNullException>(
-            "streamWriterCallback",
-            () => TypedResults.Stream(default(Func<Stream, Task>))
+        Assert.Throws<ArgumentNullException>("streamWriterCallback", () =>
+            TypedResults.Stream(default(Func<Stream, Task>))
         );
     }
 
@@ -1182,18 +1180,16 @@ public partial class ResultsTests
     [Fact]
     public void JsonOfT_WithNullSerializerContext_ThrowsArgException()
     {
-        Assert.Throws<ArgumentNullException>(
-            "context",
-            () => Results.Json<object>(null, context: null)
+        Assert.Throws<ArgumentNullException>("context", () =>
+            Results.Json<object>(null, context: null)
         );
     }
 
     [Fact]
     public void Json_WithNullSerializerContext_ThrowsArgException()
     {
-        Assert.Throws<ArgumentNullException>(
-            "context",
-            () => Results.Json(null, type: typeof(object), context: null)
+        Assert.Throws<ArgumentNullException>("context", () =>
+            Results.Json(null, type: typeof(object), context: null)
         );
     }
 
@@ -1224,18 +1220,16 @@ public partial class ResultsTests
     [Fact]
     public void Json_WithNullTypeInfo_ThrowsArgException()
     {
-        Assert.Throws<ArgumentNullException>(
-            "jsonTypeInfo",
-            () => Results.Json(null, jsonTypeInfo: null)
+        Assert.Throws<ArgumentNullException>("jsonTypeInfo", () =>
+            Results.Json(null, jsonTypeInfo: null)
         );
     }
 
     [Fact]
     public void JsonOfT_WithNullTypeInfo_ThrowsArgException()
     {
-        Assert.Throws<ArgumentNullException>(
-            "jsonTypeInfo",
-            () => Results.Json<object>(null, jsonTypeInfo: null)
+        Assert.Throws<ArgumentNullException>("jsonTypeInfo", () =>
+            Results.Json<object>(null, jsonTypeInfo: null)
         );
     }
 
@@ -1411,9 +1405,8 @@ public partial class ResultsTests
     [Fact]
     public void Problem_WithNullProblem_ThrowsArgNullException()
     {
-        Assert.Throws<ArgumentNullException>(
-            "problemDetails",
-            () => Results.Problem(default(ProblemDetails))
+        Assert.Throws<ArgumentNullException>("problemDetails", () =>
+            Results.Problem(default(ProblemDetails))
         );
     }
 
@@ -1527,9 +1520,8 @@ public partial class ResultsTests
     [Fact]
     public void ValidationProblem_WithNullErrors_ThrowsArgNullException()
     {
-        Assert.Throws<ArgumentNullException>(
-            "errors",
-            () => Results.ValidationProblem(default(IDictionary<string, string[]>))
+        Assert.Throws<ArgumentNullException>("errors", () =>
+            Results.ValidationProblem(default(IDictionary<string, string[]>))
         );
     }
 

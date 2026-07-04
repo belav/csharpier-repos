@@ -18,18 +18,15 @@ public class TypedClientBuilderTests
         var task = typedProxy.Method("foo", 42, objArg);
         Assert.False(task.IsCompleted);
 
-        Assert.Collection(
-            clientProxy.Sends,
-            send =>
-            {
-                Assert.Equal("Method", send.Method);
-                Assert.Equal("foo", send.Arguments[0]);
-                Assert.Equal(42, send.Arguments[1]);
-                Assert.Equal(CancellationToken.None, send.CancellationToken);
-                Assert.Same(objArg, send.Arguments[2]);
-                send.Complete();
-            }
-        );
+        Assert.Collection(clientProxy.Sends, send =>
+        {
+            Assert.Equal("Method", send.Method);
+            Assert.Equal("foo", send.Arguments[0]);
+            Assert.Equal(42, send.Arguments[1]);
+            Assert.Equal(CancellationToken.None, send.CancellationToken);
+            Assert.Same(objArg, send.Arguments[2]);
+            send.Complete();
+        });
 
         await task.DefaultTimeout();
     }
@@ -44,18 +41,15 @@ public class TypedClientBuilderTests
         var task = typedProxy.MethodAsync("foo", 42, objArg);
         Assert.False(task.IsCompleted);
 
-        Assert.Collection(
-            clientProxy.Sends,
-            send =>
-            {
-                Assert.Equal("Method", send.Method);
-                Assert.Equal("foo", send.Arguments[0]);
-                Assert.Equal(42, send.Arguments[1]);
-                Assert.Equal(CancellationToken.None, send.CancellationToken);
-                Assert.Same(objArg, send.Arguments[2]);
-                send.Complete();
-            }
-        );
+        Assert.Collection(clientProxy.Sends, send =>
+        {
+            Assert.Equal("Method", send.Method);
+            Assert.Equal("foo", send.Arguments[0]);
+            Assert.Equal(42, send.Arguments[1]);
+            Assert.Equal(CancellationToken.None, send.CancellationToken);
+            Assert.Same(objArg, send.Arguments[2]);
+            send.Complete();
+        });
 
         await task.DefaultTimeout();
     }
@@ -248,21 +242,18 @@ public class TypedClientBuilderTests
         var task = typedProxy.GetValue(1008, objArg, "test");
         Assert.False(task.IsCompleted);
 
-        Assert.Collection(
-            clientProxy.Sends,
-            send =>
-            {
-                Assert.Equal("GetValue", send.Method);
-                Assert.Collection(
-                    send.Arguments,
-                    arg1 => Assert.Equal(1008, arg1),
-                    arg2 => Assert.Same(objArg, arg2),
-                    arg3 => Assert.Same("test", arg3)
-                );
-                Assert.Equal(CancellationToken.None, send.CancellationToken);
-                send.Complete();
-            }
-        );
+        Assert.Collection(clientProxy.Sends, send =>
+        {
+            Assert.Equal("GetValue", send.Method);
+            Assert.Collection(
+                send.Arguments,
+                arg1 => Assert.Equal(1008, arg1),
+                arg2 => Assert.Same(objArg, arg2),
+                arg3 => Assert.Same("test", arg3)
+            );
+            Assert.Equal(CancellationToken.None, send.CancellationToken);
+            send.Complete();
+        });
 
         var result = await task.DefaultTimeout();
         Assert.Equal(default(int), result);

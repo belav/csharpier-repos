@@ -35,28 +35,24 @@ class Test
 }
 ";
 
-            CompileAndVerify(
-                text,
-                verify: Verification.Passes,
-                symbolValidator: module =>
-                {
-                    var type = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
-                        .GetTypeMember("S1");
-                    Assert.True(type.IsReadOnly);
-                    Assert.Empty(type.GetAttributes());
+            CompileAndVerify(text, verify: Verification.Passes, symbolValidator: module =>
+            {
+                var type = module
+                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .GetTypeMember("S1");
+                Assert.True(type.IsReadOnly);
+                Assert.Empty(type.GetAttributes());
 
-                    var peModule = (PEModuleSymbol)module;
-                    Assert.True(
-                        peModule.Module.HasIsReadOnlyAttribute(((PENamedTypeSymbol)type).Handle)
-                    );
-                    AssertDeclaresType(
-                        peModule,
-                        WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute,
-                        Accessibility.Public
-                    );
-                }
-            );
+                var peModule = (PEModuleSymbol)module;
+                Assert.True(
+                    peModule.Module.HasIsReadOnlyAttribute(((PENamedTypeSymbol)type).Handle)
+                );
+                AssertDeclaresType(
+                    peModule,
+                    WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute,
+                    Accessibility.Public
+                );
+            });
         }
 
         [Fact]
@@ -67,16 +63,12 @@ class Test
 readonly struct S1{}
 ";
 
-            CompileAndVerify(
-                text,
-                verify: Verification.Passes,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("S1");
-                    Assert.True(type.IsReadOnly);
-                    Assert.Empty(type.GetAttributes());
-                }
-            );
+            CompileAndVerify(text, verify: Verification.Passes, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("S1");
+                Assert.True(type.IsReadOnly);
+                Assert.Empty(type.GetAttributes());
+            });
         }
 
         [Fact]
@@ -90,18 +82,14 @@ class Test
 }
 ";
 
-            CompileAndVerify(
-                text,
-                verify: Verification.Passes,
-                symbolValidator: module =>
-                {
-                    var type = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test")
-                        .GetTypeMember("S1");
-                    Assert.True(type.IsReadOnly);
-                    Assert.Empty(type.GetAttributes());
-                }
-            );
+            CompileAndVerify(text, verify: Verification.Passes, symbolValidator: module =>
+            {
+                var type = module
+                    .ContainingAssembly.GetTypeByMetadataName("Test")
+                    .GetTypeMember("S1");
+                Assert.True(type.IsReadOnly);
+                Assert.Empty(type.GetAttributes());
+            });
         }
 
         [Fact]
@@ -115,16 +103,12 @@ class Test
 }
 ";
 
-            CompileAndVerify(
-                text,
-                verify: Verification.Passes,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Test+S1`1");
-                    Assert.True(type.IsReadOnly);
-                    Assert.Empty(type.GetAttributes());
-                }
-            );
+            CompileAndVerify(text, verify: Verification.Passes, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Test+S1`1");
+                Assert.True(type.IsReadOnly);
+                Assert.Empty(type.GetAttributes());
+            });
         }
 
         [Fact]
@@ -138,18 +122,14 @@ class Test<T>
 }
 ";
 
-            CompileAndVerify(
-                text,
-                verify: Verification.Passes,
-                symbolValidator: module =>
-                {
-                    var type = module
-                        .ContainingAssembly.GetTypeByMetadataName("Test`1")
-                        .GetTypeMember("S1");
-                    Assert.True(type.IsReadOnly);
-                    Assert.Empty(type.GetAttributes());
-                }
-            );
+            CompileAndVerify(text, verify: Verification.Passes, symbolValidator: module =>
+            {
+                var type = module
+                    .ContainingAssembly.GetTypeByMetadataName("Test`1")
+                    .GetTypeMember("S1");
+                Assert.True(type.IsReadOnly);
+                Assert.Empty(type.GetAttributes());
+            });
         }
 
         [Fact]
@@ -459,20 +439,16 @@ public class Test1
                 options: options
             );
 
-            CompileAndVerify(
-                code2,
-                verify: Verification.Passes,
-                symbolValidator: module =>
-                {
-                    // IsReadOnly is not generated in assembly
-                    var isReadOnlyAttributeName = WellKnownTypes.GetMetadataName(
-                        WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute
-                    );
-                    Assert.Null(
-                        module.ContainingAssembly.GetTypeByMetadataName(isReadOnlyAttributeName)
-                    );
-                }
-            );
+            CompileAndVerify(code2, verify: Verification.Passes, symbolValidator: module =>
+            {
+                // IsReadOnly is not generated in assembly
+                var isReadOnlyAttributeName = WellKnownTypes.GetMetadataName(
+                    WellKnownType.System_Runtime_CompilerServices_IsReadOnlyAttribute
+                );
+                Assert.Null(
+                    module.ContainingAssembly.GetTypeByMetadataName(isReadOnlyAttributeName)
+                );
+            });
 
             var code3 = CreateCompilation(
                 @"
@@ -484,21 +460,18 @@ public class Test2
                 options: options
             );
 
-            CompileAndVerify(
-                code3,
-                symbolValidator: module =>
-                {
-                    // IsReadOnly is generated in assembly
-                    AssertGeneratedEmbeddedAttribute(
-                        module.ContainingAssembly,
-                        AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
-                    );
-                    AssertGeneratedEmbeddedAttribute(
-                        module.ContainingAssembly,
-                        AttributeDescription.IsReadOnlyAttribute.FullName
-                    );
-                }
-            );
+            CompileAndVerify(code3, symbolValidator: module =>
+            {
+                // IsReadOnly is generated in assembly
+                AssertGeneratedEmbeddedAttribute(
+                    module.ContainingAssembly,
+                    AttributeDescription.CodeAnalysisEmbeddedAttribute.FullName
+                );
+                AssertGeneratedEmbeddedAttribute(
+                    module.ContainingAssembly,
+                    AttributeDescription.IsReadOnlyAttribute.FullName
+                );
+            });
         }
 
         [Fact]
@@ -779,17 +752,14 @@ public readonly struct S1{}
 "
             );
 
-            CompileAndVerify(
-                comAssembly,
-                symbolValidator: module =>
-                {
-                    var type = module.ContainingAssembly.GetTypeByMetadataName("Test");
+            CompileAndVerify(comAssembly, symbolValidator: module =>
+            {
+                var type = module.ContainingAssembly.GetTypeByMetadataName("Test");
 
-                    var property = type.GetMember<PEPropertySymbol>("Property");
-                    Assert.NotNull(property);
-                    AssertNotReferencedIsReadOnlyAttribute(type.GetAttributes());
-                }
-            );
+                var property = type.GetMember<PEPropertySymbol>("Property");
+                Assert.NotNull(property);
+                AssertNotReferencedIsReadOnlyAttribute(type.GetAttributes());
+            });
 
             var code =
                 @"

@@ -88,9 +88,8 @@ namespace Microsoft.CodeAnalysis
                 IReadOnlyList<AnalyzerReference> analyzerReferences
             ) =>
                 s_referencesToExtensionsMap
-                    .GetValue(
-                        analyzerReferences,
-                        _ => new(ComputeExtensions(language, analyzerReferences))
+                    .GetValue(analyzerReferences, _ =>
+                        new(ComputeExtensions(language, analyzerReferences))
                     )
                     .Value;
 

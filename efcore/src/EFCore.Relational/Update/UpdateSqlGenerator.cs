@@ -320,10 +320,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
         {
             commandStringBuilder
                 .Append(" (")
-                .AppendJoin(
-                    operations,
-                    SqlGenerationHelper,
-                    (sb, o, helper) => helper.DelimitIdentifier(sb, o.ColumnName)
+                .AppendJoin(operations, SqlGenerationHelper, (sb, o, helper) =>
+                    helper.DelimitIdentifier(sb, o.ColumnName)
                 )
                 .Append(')');
         }
@@ -363,17 +361,13 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
         SqlGenerationHelper.DelimitIdentifier(commandStringBuilder, name, schema);
         commandStringBuilder
             .Append(" SET ")
-            .AppendJoin(
-                operations,
-                (this, name, schema),
-                (sb, o, p) =>
-                {
-                    var (g, n, s) = p;
-                    g.SqlGenerationHelper.DelimitIdentifier(sb, o.ColumnName);
-                    sb.Append(" = ");
-                    AppendUpdateColumnValue(g.SqlGenerationHelper, o, sb, n, s);
-                }
-            );
+            .AppendJoin(operations, (this, name, schema), (sb, o, p) =>
+            {
+                var (g, n, s) = p;
+                g.SqlGenerationHelper.DelimitIdentifier(sb, o.ColumnName);
+                sb.Append(" = ");
+                AppendUpdateColumnValue(g.SqlGenerationHelper, o, sb, n, s);
+            });
     }
 
     /// <summary>
@@ -535,32 +529,28 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
         {
             commandStringBuilder
                 .Append('(')
-                .AppendJoin(
-                    operations,
-                    (this, name, schema),
-                    (sb, o, p) =>
+                .AppendJoin(operations, (this, name, schema), (sb, o, p) =>
+                {
+                    if (o.IsWrite)
                     {
-                        if (o.IsWrite)
+                        var (g, n, s) = p;
+                        if (!o.UseCurrentValueParameter)
                         {
-                            var (g, n, s) = p;
-                            if (!o.UseCurrentValueParameter)
-                            {
-                                AppendSqlLiteral(sb, o, n, s);
-                            }
-                            else
-                            {
-                                g.SqlGenerationHelper.GenerateParameterNamePlaceholder(
-                                    sb,
-                                    o.ParameterName
-                                );
-                            }
+                            AppendSqlLiteral(sb, o, n, s);
                         }
                         else
                         {
-                            sb.Append("DEFAULT");
+                            g.SqlGenerationHelper.GenerateParameterNamePlaceholder(
+                                sb,
+                                o.ParameterName
+                            );
                         }
                     }
-                )
+                    else
+                    {
+                        sb.Append("DEFAULT");
+                    }
+                })
                 .Append(')');
         }
     }
@@ -582,10 +572,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
             commandStringBuilder
                 .AppendLine()
                 .Append("RETURNING ")
-                .AppendJoin(
-                    operations,
-                    SqlGenerationHelper,
-                    (sb, o, helper) => helper.DelimitIdentifier(sb, o.ColumnName)
+                .AppendJoin(operations, SqlGenerationHelper, (sb, o, helper) =>
+                    helper.DelimitIdentifier(sb, o.ColumnName)
                 );
 
             if (additionalValues is not null)

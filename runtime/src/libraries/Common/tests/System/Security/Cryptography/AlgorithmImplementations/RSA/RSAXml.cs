@@ -1338,9 +1338,8 @@ zM=
         {
             using (RSA rsa = RSAFactory.Create())
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "xmlString",
-                    () => rsa.FromXmlString(null)
+                AssertExtensions.Throws<ArgumentNullException>("xmlString", () =>
+                    rsa.FromXmlString(null)
                 );
             }
         }

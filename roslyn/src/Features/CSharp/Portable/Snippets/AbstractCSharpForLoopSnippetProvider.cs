@@ -56,9 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
             var semanticModel = syntaxContext.SemanticModel;
             var compilation = semanticModel.Compilation;
 
-            var iteratorName = NameGenerator.GenerateUniqueName(
-                s_iteratorBaseNames,
-                n => semanticModel.LookupSymbols(syntaxContext.Position, name: n).IsEmpty
+            var iteratorName = NameGenerator.GenerateUniqueName(s_iteratorBaseNames, n =>
+                semanticModel.LookupSymbols(syntaxContext.Position, name: n).IsEmpty
             );
             var iteratorVariable = generator.Identifier(iteratorName);
             var indexVariable = (ExpressionSyntax)generator.IdentifierName(iteratorName);

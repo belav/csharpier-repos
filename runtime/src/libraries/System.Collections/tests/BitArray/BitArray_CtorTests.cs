@@ -81,9 +81,8 @@ namespace System.Collections.Tests
         public static void Ctor_Int_NegativeLength_ThrowsArgumentOutOfRangeException()
         {
             AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () => new BitArray(-1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "length",
-                () => new BitArray(-1, false)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () =>
+                new BitArray(-1, false)
             );
         }
 
@@ -142,9 +141,8 @@ namespace System.Collections.Tests
         [Fact]
         public static void Ctor_NullBoolArray_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "values",
-                () => new BitArray((bool[])null)
+            AssertExtensions.Throws<ArgumentNullException>("values", () =>
+                new BitArray((bool[])null)
             );
         }
 
@@ -251,9 +249,8 @@ namespace System.Collections.Tests
         [Fact]
         public static void Ctor_NullBitArray_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "bits",
-                () => new BitArray((BitArray)null)
+            AssertExtensions.Throws<ArgumentNullException>("bits", () =>
+                new BitArray((BitArray)null)
             );
         }
 
@@ -299,18 +296,16 @@ namespace System.Collections.Tests
         [Fact]
         public static void Ctor_NullIntArray_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "values",
-                () => new BitArray((int[])null)
+            AssertExtensions.Throws<ArgumentNullException>("values", () =>
+                new BitArray((int[])null)
             );
         }
 
         [Fact]
         public static void Ctor_LargeIntArrayOverflowingBitArray_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "values",
-                () => new BitArray(new int[int.MaxValue / BitsPerInt32 + 1])
+            AssertExtensions.Throws<ArgumentException>("values", () =>
+                new BitArray(new int[int.MaxValue / BitsPerInt32 + 1])
             );
         }
 
@@ -365,18 +360,16 @@ namespace System.Collections.Tests
         [Fact]
         public static void Ctor_NullByteArray_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "bytes",
-                () => new BitArray((byte[])null)
+            AssertExtensions.Throws<ArgumentNullException>("bytes", () =>
+                new BitArray((byte[])null)
             );
         }
 
         [Fact]
         public static void Ctor_LargeByteArrayOverflowingBitArray_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "bytes",
-                () => new BitArray(new byte[int.MaxValue / BitsPerByte + 1])
+            AssertExtensions.Throws<ArgumentException>("bytes", () =>
+                new BitArray(new byte[int.MaxValue / BitsPerByte + 1])
             );
         }
 

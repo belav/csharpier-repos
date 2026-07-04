@@ -4019,9 +4019,8 @@ namespace CoreXml.Test.XLinq
 
                     using (XmlReader reader = doc.CreateReader())
                     {
-                        Exception exception = AssertExtensions.Throws<ArgumentException>(
-                            null,
-                            () => MoveToFirstElement(reader).ReadOuterXml()
+                        Exception exception = AssertExtensions.Throws<ArgumentException>(null, () =>
+                            MoveToFirstElement(reader).ReadOuterXml()
                         );
                         // \p{Pi} any kind of opening quote https://www.compart.com/en/unicode/category/Pi
                         // \p{Pf} any kind of closing quote https://www.compart.com/en/unicode/category/Pf
@@ -4238,9 +4237,8 @@ namespace CoreXml.Test.XLinq
 
                     using (XmlReader reader = doc.CreateReader())
                     {
-                        Exception exception = AssertExtensions.Throws<ArgumentException>(
-                            null,
-                            () => MoveToFirstElement(reader).ReadOuterXml()
+                        Exception exception = AssertExtensions.Throws<ArgumentException>(null, () =>
+                            MoveToFirstElement(reader).ReadOuterXml()
                         );
                         // \b word boundary
                         // \p{Pi} any kind of opening quote https://www.compart.com/en/unicode/category/Pi
@@ -4947,9 +4945,8 @@ namespace CoreXml.Test.XLinq
 
                     using (XmlReader reader = doc.CreateReader())
                     {
-                        Exception exception = AssertExtensions.Throws<ArgumentException>(
-                            null,
-                            () => MoveToFirstElement(reader).ReadOuterXml()
+                        Exception exception = AssertExtensions.Throws<ArgumentException>(null, () =>
+                            MoveToFirstElement(reader).ReadOuterXml()
                         );
                         // \b word boundary
                         // \p{Pi} any kind of opening quote https://www.compart.com/en/unicode/category/Pi

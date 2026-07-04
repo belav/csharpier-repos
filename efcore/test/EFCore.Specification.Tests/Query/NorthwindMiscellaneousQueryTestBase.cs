@@ -169,35 +169,31 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Lifting_when_subquery_nested_order_by_simple(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c1_Orders in ss.Set<Order>()
-                join _c1 in (
-                    from c1 in (from c in ss.Set<Customer>() orderby c.CustomerID select c).Take(2)
-                    from c2 in ss.Set<Customer>()
-                    select EF.Property<string>(c1, "CustomerID")
-                ).Distinct()
-                    on EF.Property<string>(c1_Orders, "CustomerID") equals _c1
-                orderby _c1
-                select c1_Orders
+        AssertQuery(async, ss =>
+            from c1_Orders in ss.Set<Order>()
+            join _c1 in (
+                from c1 in (from c in ss.Set<Customer>() orderby c.CustomerID select c).Take(2)
+                from c2 in ss.Set<Customer>()
+                select EF.Property<string>(c1, "CustomerID")
+            ).Distinct()
+                on EF.Property<string>(c1_Orders, "CustomerID") equals _c1
+            orderby _c1
+            select c1_Orders
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Lifting_when_subquery_nested_order_by_anonymous(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c1_Orders in ss.Set<Order>()
-                join _c1 in (
-                    from c1 in (from c in ss.Set<Customer>() orderby c.CustomerID select c).Take(2)
-                    from c2 in ss.Set<Customer>()
-                    select new { CustomerID = EF.Property<string>(c1, "CustomerID") }
-                ).Distinct()
-                    on EF.Property<string>(c1_Orders, "CustomerID") equals _c1.CustomerID
-                orderby _c1.CustomerID
-                select c1_Orders
+        AssertQuery(async, ss =>
+            from c1_Orders in ss.Set<Order>()
+            join _c1 in (
+                from c1 in (from c in ss.Set<Customer>() orderby c.CustomerID select c).Take(2)
+                from c2 in ss.Set<Customer>()
+                select new { CustomerID = EF.Property<string>(c1, "CustomerID") }
+            ).Distinct()
+                on EF.Property<string>(c1_Orders, "CustomerID") equals _c1.CustomerID
+            orderby _c1.CustomerID
+            select c1_Orders
         );
 
     private class Context
@@ -297,13 +293,12 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Entity_equality_self(bool async)
     {
-        return AssertQuery(
-            async,
-            ss => from c in ss.Set<Customer>()
+        return AssertQuery(async, ss =>
+            from c in ss.Set<Customer>()
 #pragma warning disable CS1718 // Comparison made to same variable
-                where c == c
+            where c == c
 #pragma warning restore CS1718 // Comparison made to same variable
-                select c.CustomerID
+            select c.CustomerID
         );
     }
 
@@ -313,9 +308,10 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     {
         var local = new Customer { CustomerID = "ANATR" };
 
-        return AssertQuery(
-            async,
-            ss => from c in ss.Set<Customer>() where c == local select c.CustomerID
+        return AssertQuery(async, ss =>
+            from c in ss.Set<Customer>()
+            where c == local
+            select c.CustomerID
         );
     }
 
@@ -325,9 +321,10 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     {
         var local = new OrderDetail { OrderID = 10248, ProductID = 11 };
 
-        return AssertQuery(
-            async,
-            ss => from od in ss.Set<OrderDetail>() where od.Equals(local) select od
+        return AssertQuery(async, ss =>
+            from od in ss.Set<OrderDetail>()
+            where od.Equals(local)
+            select od
         );
     }
 
@@ -337,9 +334,10 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     {
         var local = new Customer { CustomerID = "ANATR" };
 
-        return AssertQuery(
-            async,
-            ss => from c in ss.Set<Customer>() where c == local && local == c select c.CustomerID
+        return AssertQuery(async, ss =>
+            from c in ss.Set<Customer>()
+            where c == local && local == c
+            select c.CustomerID
         );
     }
 
@@ -349,42 +347,34 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     {
         var local = new Customer { CustomerID = "ANATR" };
 
-        return AssertQuery(
-            async,
-            ss =>
-                (from c1 in ss.Set<Customer>() where c1 == local select c1)
-                    .Join(
-                        from c2 in ss.Set<Customer>()
-                        where c2 == local
-                        select c2,
-                        o => o,
-                        i => i,
-                        (o, i) => o
-                    )
-                    .Select(e => e.CustomerID)
-        );
+        return AssertQuery(async, ss => (from c1 in ss.Set<Customer>() where c1 == local select c1)
+                .Join(
+                    from c2 in ss.Set<Customer>()
+                    where c2 == local
+                    select c2,
+                    o => o,
+                    i => i,
+                    (o, i) => o
+                )
+                .Select(e => e.CustomerID));
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Entity_equality_local_inline(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>()
-                where c == new Customer { CustomerID = "ANATR" }
-                select c.CustomerID
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>()
+            where c == new Customer { CustomerID = "ANATR" }
+            select c.CustomerID
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Entity_equality_local_inline_composite_key(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from od in ss.Set<OrderDetail>()
-                where od.Equals(new OrderDetail { OrderID = 10248, ProductID = 11 })
-                select od
+        AssertQuery(async, ss =>
+            from od in ss.Set<OrderDetail>()
+            where od.Equals(new OrderDetail { OrderID = 10248, ProductID = 11 })
+            select od
         );
 
     [ConditionalTheory]
@@ -418,23 +408,19 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Entity_equality_through_nested_anonymous_type_projection(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Order>()
-                    .Select(x => new { CustomerInfo = new { x.Customer } })
-                    .Where(x => x.CustomerInfo.Customer != null)
+        AssertQuery(async, ss =>
+            ss.Set<Order>()
+                .Select(x => new { CustomerInfo = new { x.Customer } })
+                .Where(x => x.CustomerInfo.Customer != null)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Entity_equality_through_DTO_projection(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Order>()
-                    .Select(o => new CustomerWrapper { Customer = o.Customer })
-                    .Where(x => x.Customer != null)
+        AssertQuery(async, ss =>
+            ss.Set<Order>()
+                .Select(o => new CustomerWrapper { Customer = o.Customer })
+                .Where(x => x.Customer != null)
         );
 
     private class CustomerWrapper
@@ -450,25 +436,21 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Entity_equality_through_subquery(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>()
-                where c.Orders.FirstOrDefault() != null
-                select c.CustomerID
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>()
+            where c.Orders.FirstOrDefault() != null
+            select c.CustomerID
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Entity_equality_through_subquery_composite_key(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Order>()
-                    .Where(o =>
-                        o.OrderDetails.FirstOrDefault()
-                        == new OrderDetail { OrderID = 10248, ProductID = 11 }
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<Order>()
+                .Where(o =>
+                    o.OrderDetails.FirstOrDefault()
+                    == new OrderDetail { OrderID = 10248, ProductID = 11 }
+                )
         );
 
     [ConditionalTheory]
@@ -535,17 +517,15 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Queryable_simple_anonymous_projection_subquery(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Take(91).Select(c => new { c }).Select(a => a.c.City)
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Take(91).Select(c => new { c }).Select(a => a.c.City)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Queryable_simple_anonymous_subquery(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Select(c => new { c }).Take(91).Select(a => a.c)
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Select(c => new { c }).Take(91).Select(a => a.c)
         );
 
     [ConditionalTheory]
@@ -553,12 +533,10 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     public virtual Task Queryable_reprojection(bool async) =>
         AssertTranslationFailedWithDetails(
             () =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        ss.Set<Customer>()
-                            .Where(c => c.IsLondon)
-                            .Select(c => new Customer { CustomerID = "Foo", City = c.City })
+                AssertQuery(async, ss =>
+                    ss.Set<Customer>()
+                        .Where(c => c.IsLondon)
+                        .Select(c => new Customer { CustomerID = "Foo", City = c.City })
                 ),
             CoreStrings.QueryUnableToTranslateMember(nameof(Customer.IsLondon), nameof(Customer))
         );
@@ -566,11 +544,9 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Queryable_nested_simple(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c1 in (from c2 in (from c3 in ss.Set<Customer>() select c3) select c2)
-                select c1
+        AssertQuery(async, ss =>
+            from c1 in (from c2 in (from c3 in ss.Set<Customer>() select c3) select c2)
+            select c1
         );
 
     [ConditionalTheory]
@@ -699,18 +675,16 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     public virtual Task Join_Customers_Orders_Skip_Take_followed_by_constant_projection(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss =>
-                (
-                    from c in ss.Set<Customer>()
-                    join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID
-                    orderby o.OrderID
-                    select new { c.ContactName, o.OrderID }
-                )
-                    .Skip(10)
-                    .Take(5)
-                    .Select(e => "Foo")
+        AssertQuery(async, ss =>
+            (
+                from c in ss.Set<Customer>()
+                join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID
+                orderby o.OrderID
+                select new { c.ContactName, o.OrderID }
+            )
+                .Skip(10)
+                .Take(5)
+                .Select(e => "Foo")
         );
 
     [ConditionalTheory]
@@ -762,18 +736,14 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         Customer customer = null;
         var hasData = customer is not null;
 
-        return AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Select(c => new
-                    {
-                        c.CustomerID,
-                        Data1 = hasData ? customer.CustomerID : "none",
-                        Data2 = customer != null ? customer.CustomerID : "none",
-                        Data3 = !hasData ? "none" : customer.CustomerID,
-                    })
-        );
+        return AssertQuery(async, ss => ss.Set<Customer>()
+                .Select(c => new
+                {
+                    c.CustomerID,
+                    Data1 = hasData ? customer.CustomerID : "none",
+                    Data2 = customer != null ? customer.CustomerID : "none",
+                    Data3 = !hasData ? "none" : customer.CustomerID,
+                }));
     }
 
     [ConditionalTheory]
@@ -782,18 +752,14 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     {
         DateTime? param = null;
 
-        return AssertQuery(
-            async,
-            ss =>
-                ss.Set<Order>()
-                    .Select(o => new
-                    {
-                        // ReSharper disable SimplifyConditionalTernaryExpression
-                        Data1 = param != null ? o.OrderDate == param.Value : true,
-                        Data2 = param == null ? true : o.OrderDate == param.Value,
-                        // ReSharper restore SimplifyConditionalTernaryExpression
-                    })
-        );
+        return AssertQuery(async, ss => ss.Set<Order>()
+                .Select(o => new
+                {
+                    // ReSharper disable SimplifyConditionalTernaryExpression
+                    Data1 = param != null ? o.OrderDate == param.Value : true,
+                    Data2 = param == null ? true : o.OrderDate == param.Value,
+                    // ReSharper restore SimplifyConditionalTernaryExpression
+                }));
     }
 
     [ConditionalTheory]
@@ -803,12 +769,10 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         List<int> values = null;
         bool? test = false;
 
-        return AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Distinct()
-                    .Select(c => new { Customer = c, Test = test ?? values.Contains(1) })
+        return AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Distinct()
+                .Select(c => new { Customer = c, Test = test ?? values.Contains(1) })
         );
     }
 
@@ -819,14 +783,12 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         List<Customer> values = null;
         bool? test = false;
 
-        return AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Select(c => new
-                    {
-                        Result = test ?? values.Select(c2 => c2.CustomerID).Contains(c.CustomerID),
-                    })
+        return AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Select(c => new
+                {
+                    Result = test ?? values.Select(c2 => c2.CustomerID).Contains(c.CustomerID),
+                })
         );
     }
 
@@ -847,9 +809,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Skip_Take_Distinct(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().OrderBy(c => c.ContactName).Skip(5).Take(10).Distinct()
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().OrderBy(c => c.ContactName).Skip(5).Take(10).Distinct()
         );
 
     [ConditionalTheory]
@@ -896,23 +857,20 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Take_Skip_Distinct(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().OrderBy(c => c.ContactName).Take(10).Skip(5).Distinct()
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().OrderBy(c => c.ContactName).Take(10).Skip(5).Distinct()
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Take_Skip_Distinct_Caching(bool async)
     {
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().OrderBy(c => c.ContactName).Take(10).Skip(5).Distinct()
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().OrderBy(c => c.ContactName).Take(10).Skip(5).Distinct()
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().OrderBy(c => c.ContactName).Take(15).Skip(10).Distinct()
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().OrderBy(c => c.ContactName).Take(15).Skip(10).Distinct()
         );
     }
 
@@ -943,9 +901,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Take_Where_Distinct_Count(bool async) =>
-        AssertCount(
-            async,
-            ss => ss.Set<Order>().Where(o => o.CustomerID == "FRANK").Take(5).Distinct()
+        AssertCount(async, ss =>
+            ss.Set<Order>().Where(o => o.CustomerID == "FRANK").Take(5).Distinct()
         );
 
     [ConditionalTheory]
@@ -981,71 +938,56 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Any_nested_negated2(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c =>
-                        c.City != "London"
-                        && !ss.Set<Order>().Any(o => o.CustomerID.StartsWith("ABC"))
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c =>
+                    c.City != "London" && !ss.Set<Order>().Any(o => o.CustomerID.StartsWith("ABC"))
+                )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Any_nested_negated3(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c =>
-                        !ss.Set<Order>().Any(o => o.CustomerID.StartsWith("ABC"))
-                        && c.City != "London"
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c =>
+                    !ss.Set<Order>().Any(o => o.CustomerID.StartsWith("ABC")) && c.City != "London"
+                )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Any_nested(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => ss.Set<Order>().Any(o => o.CustomerID.StartsWith("A")))
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => ss.Set<Order>().Any(o => o.CustomerID.StartsWith("A")))
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Any_nested2(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c =>
-                        c.City != "London" && ss.Set<Order>().Any(o => o.CustomerID.StartsWith("A"))
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c =>
+                    c.City != "London" && ss.Set<Order>().Any(o => o.CustomerID.StartsWith("A"))
+                )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Any_nested3(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c =>
-                        ss.Set<Order>().Any(o => o.CustomerID.StartsWith("A")) && c.City != "London"
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c =>
+                    ss.Set<Order>().Any(o => o.CustomerID.StartsWith("A")) && c.City != "London"
+                )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Any_with_multiple_conditions_still_uses_exists(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => c.City == "London" && c.Orders.Any(o => o.EmployeeID == 1))
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c => c.City == "London" && c.Orders.Any(o => o.EmployeeID == 1))
         );
 
     [ConditionalTheory]
@@ -1153,17 +1095,15 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Take_with_single_select_many(bool async) =>
-        AssertSingle(
-            async,
-            ss =>
-                (
-                    from c in ss.Set<Customer>()
-                    from o in ss.Set<Order>()
-                    orderby c.CustomerID, o.OrderID
-                    select new { c, o }
-                )
-                    .Take(1)
-                    .Cast<object>()
+        AssertSingle(async, ss =>
+            (
+                from c in ss.Set<Customer>()
+                from o in ss.Set<Order>()
+                orderby c.CustomerID, o.OrderID
+                select new { c, o }
+            )
+                .Take(1)
+                .Cast<object>()
         );
 
     [ConditionalTheory]
@@ -1265,76 +1205,56 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_subquery_anon(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from e in ss.Set<Employee>()
-                    .OrderBy(ee => ee.EmployeeID)
-                    .Take(3)
-                    .Select(e => new { e })
-                from o in ss.Set<Order>().OrderBy(oo => oo.OrderID).Take(5).Select(o => new { o })
-                where e.e.EmployeeID == o.o.EmployeeID
-                select new { e, o }
+        AssertQuery(async, ss =>
+            from e in ss.Set<Employee>().OrderBy(ee => ee.EmployeeID).Take(3).Select(e => new { e })
+            from o in ss.Set<Order>().OrderBy(oo => oo.OrderID).Take(5).Select(o => new { o })
+            where e.e.EmployeeID == o.o.EmployeeID
+            select new { e, o }
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_subquery_anon_nested(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from t in (
-                    from e in ss.Set<Employee>()
-                        .OrderBy(ee => ee.EmployeeID)
-                        .Take(3)
-                        .Select(e => new { e })
-                        .Where(e => e.e.City == "Seattle")
-                    from o in ss.Set<Order>()
-                        .OrderBy(oo => oo.OrderID)
-                        .Take(5)
-                        .Select(o => new { o })
-                    select new { e, o }
-                )
-                from c in ss.Set<Customer>()
-                    .OrderBy(cc => cc.CustomerID)
-                    .Take(2)
-                    .Select(c => new { c })
-                select new
-                {
-                    t.e,
-                    t.o,
-                    c,
-                }
+        AssertQuery(async, ss =>
+            from t in (
+                from e in ss.Set<Employee>()
+                    .OrderBy(ee => ee.EmployeeID)
+                    .Take(3)
+                    .Select(e => new { e })
+                    .Where(e => e.e.City == "Seattle")
+                from o in ss.Set<Order>().OrderBy(oo => oo.OrderID).Take(5).Select(o => new { o })
+                select new { e, o }
+            )
+            from c in ss.Set<Customer>().OrderBy(cc => cc.CustomerID).Take(2).Select(c => new { c })
+            select new
+            {
+                t.e,
+                t.o,
+                c,
+            }
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Where_subquery_expression(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-            {
-                var firstOrder = ss.Set<Order>().First();
-                Expression<Func<Order, bool>> expr = z => z.OrderID == firstOrder.OrderID;
-                return ss.Set<Order>().Where(x => ss.Set<Order>().Where(expr).Any());
-            }
-        );
+    public virtual Task Where_subquery_expression(bool async) => AssertQuery(async, ss =>
+        {
+            var firstOrder = ss.Set<Order>().First();
+            Expression<Func<Order, bool>> expr = z => z.OrderID == firstOrder.OrderID;
+            return ss.Set<Order>().Where(x => ss.Set<Order>().Where(expr).Any());
+        });
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_subquery_expression_same_parametername(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-            {
-                var firstOrder = ss.Set<Order>().OrderBy(o => o.OrderID).First();
-                Expression<Func<Order, bool>> expr = x => x.OrderID == firstOrder.OrderID;
-                return ss.Set<Order>()
-                    .Where(x =>
-                        ss.Set<Order>().Where(expr).Where(o => o.CustomerID == x.CustomerID).Any()
-                    );
-            }
-        );
+        AssertQuery(async, ss =>
+        {
+            var firstOrder = ss.Set<Order>().OrderBy(o => o.OrderID).First();
+            Expression<Func<Order, bool>> expr = x => x.OrderID == firstOrder.OrderID;
+            return ss.Set<Order>()
+                .Where(x =>
+                    ss.Set<Order>().Where(expr).Where(o => o.CustomerID == x.CustomerID).Any()
+                );
+        });
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -1506,15 +1426,13 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     public virtual Task Select_DTO_with_member_init_distinct_in_subquery_translated_to_server(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss =>
-                from o in ss.Set<Order>()
-                    .Where(o => o.OrderID < 10300)
-                    .Select(o => new OrderCountDTO { Id = o.CustomerID, Count = o.OrderID })
-                    .Distinct()
-                from c in ss.Set<Customer>().Where(c => c.CustomerID == o.Id)
-                select c
+        AssertQuery(async, ss =>
+            from o in ss.Set<Order>()
+                .Where(o => o.OrderID < 10300)
+                .Select(o => new OrderCountDTO { Id = o.CustomerID, Count = o.OrderID })
+                .Distinct()
+            from c in ss.Set<Customer>().Where(c => c.CustomerID == o.Id)
+            select c
         );
 
     [ConditionalTheory]
@@ -1522,15 +1440,13 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     public virtual Task Select_DTO_with_member_init_distinct_in_subquery_translated_to_server_2(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss =>
-                from o in ss.Set<Order>()
-                    .Where(o => o.OrderID < 10300)
-                    .Select(o => new OrderCountDTO { Id = o.CustomerID, Count = o.OrderID })
-                    .Distinct()
-                from c in ss.Set<Customer>().Where(c => o.Id == c.CustomerID)
-                select c
+        AssertQuery(async, ss =>
+            from o in ss.Set<Order>()
+                .Where(o => o.OrderID < 10300)
+                .Select(o => new OrderCountDTO { Id = o.CustomerID, Count = o.OrderID })
+                .Distinct()
+            from c in ss.Set<Customer>().Where(c => o.Id == c.CustomerID)
+            select c
         );
 
     [ConditionalTheory]
@@ -1634,18 +1550,16 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     ) =>
         AssertInvalidMaterializationType(
             () =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        from c in ss.Set<Customer>().OrderBy(c => c.CustomerID).Take(3)
-                        select new QueryableDto
-                        {
-                            Orders = ss.Set<Order>()
-                                .OrderBy(o => o.OrderID)
-                                .ThenBy(o => c.CustomerID)
-                                .Skip(100)
-                                .Take(2),
-                        }
+                AssertQuery(async, ss =>
+                    from c in ss.Set<Customer>().OrderBy(c => c.CustomerID).Take(3)
+                    select new QueryableDto
+                    {
+                        Orders = ss.Set<Order>()
+                            .OrderBy(o => o.OrderID)
+                            .ThenBy(o => c.CustomerID)
+                            .Skip(100)
+                            .Take(2),
+                    }
                 ),
             typeof(IQueryable<Order>).ShortDisplayName()
         );
@@ -1794,64 +1708,52 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_subquery_on_bool(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from p in ss.Set<Product>()
-                where ss.Set<Product>().Select(p2 => p2.ProductName).Contains("Chai")
-                select p
+        AssertQuery(async, ss =>
+            from p in ss.Set<Product>()
+            where ss.Set<Product>().Select(p2 => p2.ProductName).Contains("Chai")
+            select p
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_subquery_on_collection(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Product>()
-                    .Where(p =>
-                        ss.Set<OrderDetail>()
-                            .Where(o => o.ProductID == p.ProductID)
-                            .Select(od => od.Quantity)
-                            .Contains<short>(5)
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<Product>()
+                .Where(p =>
+                    ss.Set<OrderDetail>()
+                        .Where(o => o.ProductID == p.ProductID)
+                        .Select(od => od.Quantity)
+                        .Contains<short>(5)
+                )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_query_composition(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from e1 in ss.Set<Employee>()
-                where
-                    e1.FirstName
-                    == ss.Set<Employee>().OrderBy(e => e.EmployeeID).FirstOrDefault().FirstName
-                select e1
+        AssertQuery(async, ss =>
+            from e1 in ss.Set<Employee>()
+            where
+                e1.FirstName
+                == ss.Set<Employee>().OrderBy(e => e.EmployeeID).FirstOrDefault().FirstName
+            select e1
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_query_composition_is_null(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from e1 in ss.Set<Employee>().OrderBy(e => e.EmployeeID).Take(3)
-                where
-                    ss.Set<Employee>().SingleOrDefault(e2 => e2.EmployeeID == e1.ReportsTo) == null
-                select e1
+        AssertQuery(async, ss =>
+            from e1 in ss.Set<Employee>().OrderBy(e => e.EmployeeID).Take(3)
+            where ss.Set<Employee>().SingleOrDefault(e2 => e2.EmployeeID == e1.ReportsTo) == null
+            select e1
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_query_composition_is_not_null(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from e1 in ss.Set<Employee>().OrderBy(e => e.EmployeeID).Skip(4).Take(3)
-                where
-                    ss.Set<Employee>().SingleOrDefault(e2 => e2.EmployeeID == e1.ReportsTo) != null
-                select e1
+        AssertQuery(async, ss =>
+            from e1 in ss.Set<Employee>().OrderBy(e => e.EmployeeID).Skip(4).Take(3)
+            where ss.Set<Employee>().SingleOrDefault(e2 => e2.EmployeeID == e1.ReportsTo) != null
+            select e1
         );
 
     [ConditionalTheory]
@@ -2081,66 +1983,46 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_query_composition2(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from e1 in ss.Set<Employee>().Take(3)
-                where
-                    e1.FirstName
-                    == (
-                        from e2 in ss.Set<Employee>().OrderBy(e => e.EmployeeID)
-                        select new { Foo = e2 }
-                    )
-                        .First()
-                        .Foo.FirstName
-                select e1
-        );
+        AssertQuery(async, ss => from e1 in ss.Set<Employee>().Take(3) where
+                e1.FirstName
+                == (
+                    from e2 in ss.Set<Employee>().OrderBy(e => e.EmployeeID)
+                    select new { Foo = e2 }
+                )
+                    .First()
+                    .Foo.FirstName select e1);
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_query_composition2_FirstOrDefault(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from e1 in ss.Set<Employee>().Take(3)
-                where
-                    e1.FirstName
-                    == (from e2 in ss.Set<Employee>().OrderBy(e => e.EmployeeID) select e2)
-                        .FirstOrDefault()
-                        .FirstName
-                select e1
-        );
+        AssertQuery(async, ss => from e1 in ss.Set<Employee>().Take(3) where
+                e1.FirstName
+                == (from e2 in ss.Set<Employee>().OrderBy(e => e.EmployeeID) select e2)
+                    .FirstOrDefault()
+                    .FirstName select e1);
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_query_composition2_FirstOrDefault_with_anonymous(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from e1 in ss.Set<Employee>().Take(3)
-                where
-                    e1.FirstName
-                    == (
-                        from e2 in ss.Set<Employee>().OrderBy(e => e.EmployeeID)
-                        select new { Foo = e2 }
-                    )
-                        .FirstOrDefault()
-                        .Foo.FirstName
-                select e1
-        );
+        AssertQuery(async, ss => from e1 in ss.Set<Employee>().Take(3) where
+                e1.FirstName
+                == (
+                    from e2 in ss.Set<Employee>().OrderBy(e => e.EmployeeID)
+                    select new { Foo = e2 }
+                )
+                    .FirstOrDefault()
+                    .Foo.FirstName select e1);
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_query_composition3(bool async) =>
         AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    from c1 in ss.Set<Customer>()
-                    where
-                        c1.City
-                        == ss.Set<Customer>().OrderBy(c => c.CustomerID).First(c => c.IsLondon).City
-                    select c1
+            AssertQuery(async, ss =>
+                from c1 in ss.Set<Customer>()
+                where
+                    c1.City
+                    == ss.Set<Customer>().OrderBy(c => c.CustomerID).First(c => c.IsLondon).City
+                select c1
             )
         );
 
@@ -2148,22 +2030,20 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_query_composition4(bool async) =>
         AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    from c1 in ss.Set<Customer>().OrderBy(c => c.CustomerID).Take(2)
-                    where
-                        c1.City
-                        == (
-                            from c2 in ss.Set<Customer>().OrderBy(c => c.CustomerID)
-                            from c3 in ss.Set<Customer>()
-                                .OrderBy(c => c.IsLondon)
-                                .ThenBy(c => c.CustomerID)
-                            select new { c3 }
-                        )
-                            .First()
-                            .c3.City
-                    select c1
+            AssertQuery(async, ss =>
+                from c1 in ss.Set<Customer>().OrderBy(c => c.CustomerID).Take(2)
+                where
+                    c1.City
+                    == (
+                        from c2 in ss.Set<Customer>().OrderBy(c => c.CustomerID)
+                        from c3 in ss.Set<Customer>()
+                            .OrderBy(c => c.IsLondon)
+                            .ThenBy(c => c.CustomerID)
+                        select new { c3 }
+                    )
+                        .First()
+                        .c3.City
+                select c1
             )
         );
 
@@ -2172,14 +2052,12 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     public virtual Task Where_query_composition5(bool async) =>
         AssertTranslationFailedWithDetails(
             () =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        from c1 in ss.Set<Customer>()
-                        where
-                            c1.IsLondon
-                            == ss.Set<Customer>().OrderBy(c => c.CustomerID).First().IsLondon
-                        select c1
+                AssertQuery(async, ss =>
+                    from c1 in ss.Set<Customer>()
+                    where
+                        c1.IsLondon
+                        == ss.Set<Customer>().OrderBy(c => c.CustomerID).First().IsLondon
+                    select c1
                 ),
             CoreStrings.QueryUnableToTranslateMember(nameof(Customer.IsLondon), nameof(Customer))
         );
@@ -2189,18 +2067,16 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     public virtual Task Where_query_composition6(bool async) =>
         AssertTranslationFailedWithDetails(
             () =>
-                AssertQuery(
-                    async,
-                    ss =>
-                        from c1 in ss.Set<Customer>()
-                        where
-                            c1.IsLondon
-                            == ss.Set<Customer>()
-                                .OrderBy(c => c.CustomerID)
-                                .Select(c => new { Foo = c })
-                                .First()
-                                .Foo.IsLondon
-                        select c1
+                AssertQuery(async, ss =>
+                    from c1 in ss.Set<Customer>()
+                    where
+                        c1.IsLondon
+                        == ss.Set<Customer>()
+                            .OrderBy(c => c.CustomerID)
+                            .Select(c => new { Foo = c })
+                            .First()
+                            .Foo.IsLondon
+                    select c1
                 ),
             CoreStrings.QueryUnableToTranslateMember(nameof(Customer.IsLondon), nameof(Customer))
         );
@@ -2425,50 +2301,42 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task SelectMany_primitive(bool async) =>
-        AssertQueryScalar(
-            async,
-            ss =>
-                from e1 in ss.Set<Employee>()
-                from i in ss.Set<Employee>().Select(e2 => e2.EmployeeID)
-                select i
+        AssertQueryScalar(async, ss =>
+            from e1 in ss.Set<Employee>()
+            from i in ss.Set<Employee>().Select(e2 => e2.EmployeeID)
+            select i
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task SelectMany_primitive_select_subquery(bool async) =>
-        AssertQueryScalar(
-            async,
-            ss =>
-                from e1 in ss.Set<Employee>()
-                from i in ss.Set<Employee>().Select(e2 => e2.EmployeeID)
-                select ss.Set<Employee>().Any()
+        AssertQueryScalar(async, ss =>
+            from e1 in ss.Set<Employee>()
+            from i in ss.Set<Employee>().Select(e2 => e2.EmployeeID)
+            select ss.Set<Employee>().Any()
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Join_Where_Count(bool async) =>
-        AssertCount(
-            async,
-            ss =>
-                (
-                    from c in ss.Set<Customer>()
-                    join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID
-                    where c.CustomerID == "ALFKI"
-                    select c
-                )
+        AssertCount(async, ss =>
+            (
+                from c in ss.Set<Customer>()
+                join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID
+                where c.CustomerID == "ALFKI"
+                select c
+            )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_Join_Any(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c =>
-                        c.CustomerID.StartsWith("A")
-                        && c.Orders.Any(o => o.OrderDate == new DateTime(1998, 1, 15))
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c =>
+                    c.CustomerID.StartsWith("A")
+                    && c.Orders.Any(o => o.OrderDate == new DateTime(1998, 1, 15))
+                )
         );
 
     [ConditionalTheory]
@@ -2477,14 +2345,12 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         // Translate List.Exists. Issue #17762.
         =>
         AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Customer>()
-                        .Where(c =>
-                            c.CustomerID == "ALFKI"
-                            && c.Orders.Exists(o => o.OrderDate == new DateTime(2008, 10, 24))
-                        )
+            AssertQuery(async, ss =>
+                ss.Set<Customer>()
+                    .Where(c =>
+                        c.CustomerID == "ALFKI"
+                        && c.Orders.Exists(o => o.OrderDate == new DateTime(2008, 10, 24))
+                    )
             )
         );
 
@@ -2494,14 +2360,12 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         // Translate List.Exists. Issue #17762.
         =>
         AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Customer>()
-                        .Where(c =>
-                            c.CustomerID == "ALFKI"
-                            && c.Orders.Exists(o => o.OrderDate != new DateTime(2008, 10, 24))
-                        )
+            AssertQuery(async, ss =>
+                ss.Set<Customer>()
+                    .Where(c =>
+                        c.CustomerID == "ALFKI"
+                        && c.Orders.Exists(o => o.OrderDate != new DateTime(2008, 10, 24))
+                    )
             )
         );
 
@@ -2511,11 +2375,9 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         // Translate List.Exists. Issue #17762.
         =>
         AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Customer>()
-                        .Where(c => c.CustomerID == "ALFKI" && c.Orders.Exists(o => false))
+            AssertQuery(async, ss =>
+                ss.Set<Customer>()
+                    .Where(c => c.CustomerID == "ALFKI" && c.Orders.Exists(o => false))
             )
         );
 
@@ -2525,125 +2387,107 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         // Translate List.Exists. Issue #17762.
         =>
         AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Customer>()
-                        .Where(c => c.CustomerID == "ALFKI" && !c.Orders.Exists(o => false))
+            AssertQuery(async, ss =>
+                ss.Set<Customer>()
+                    .Where(c => c.CustomerID == "ALFKI" && !c.Orders.Exists(o => false))
             )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Multiple_joins_Where_Order_Any(bool async) =>
-        AssertAny(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Join(
-                        ss.Set<Order>(),
-                        c => c.CustomerID,
-                        o => o.CustomerID,
-                        (cr, or) => new { cr, or }
-                    )
-                    .Join(
-                        ss.Set<OrderDetail>(),
-                        e => e.or.OrderID,
-                        od => od.OrderID,
-                        (e, od) =>
-                            new
-                            {
-                                e.cr,
-                                e.or,
-                                od,
-                            }
-                    )
-                    .Where(r => r.cr.City == "London")
-                    .OrderBy(r => r.cr.CustomerID)
-        );
+        AssertAny(async, ss => ss.Set<Customer>()
+                .Join(
+                    ss.Set<Order>(),
+                    c => c.CustomerID,
+                    o => o.CustomerID,
+                    (cr, or) => new { cr, or }
+                )
+                .Join(
+                    ss.Set<OrderDetail>(),
+                    e => e.or.OrderID,
+                    od => od.OrderID,
+                    (e, od) =>
+                        new
+                        {
+                            e.cr,
+                            e.or,
+                            od,
+                        }
+                )
+                .Where(r => r.cr.City == "London")
+                .OrderBy(r => r.cr.CustomerID));
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Join_OrderBy_Count(bool async) =>
-        AssertCount(
-            async,
-            ss =>
-                from c in ss.Set<Customer>()
-                join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID
-                orderby c.CustomerID
-                select c
+        AssertCount(async, ss =>
+            from c in ss.Set<Customer>()
+            join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID
+            orderby c.CustomerID
+            select c
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_join_select(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                (
-                    from c in ss.Set<Customer>()
-                    where c.CustomerID == "ALFKI"
-                    join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID
-                    select c
-                )
+        AssertQuery(async, ss =>
+            (
+                from c in ss.Set<Customer>()
+                where c.CustomerID == "ALFKI"
+                join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID
+                select c
+            )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_orderby_join_select(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                (
-                    from c in ss.Set<Customer>()
-                    where c.CustomerID != "ALFKI"
-                    orderby c.CustomerID
-                    join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID
-                    select c
-                )
+        AssertQuery(async, ss =>
+            (
+                from c in ss.Set<Customer>()
+                where c.CustomerID != "ALFKI"
+                orderby c.CustomerID
+                join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID
+                select c
+            )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_join_orderby_join_select(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>()
-                where c.CustomerID != "ALFKI"
-                join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID
-                orderby c.CustomerID
-                join od in ss.Set<OrderDetail>() on o.OrderID equals od.OrderID
-                select c
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>()
+            where c.CustomerID != "ALFKI"
+            join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID
+            orderby c.CustomerID
+            join od in ss.Set<OrderDetail>() on o.OrderID equals od.OrderID
+            select c
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_select_many(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                (
-                    from c in ss.Set<Customer>()
-                    where c.CustomerID == "ALFKI"
-                    from o in ss.Set<Order>()
-                    select c
-                )
+        AssertQuery(async, ss =>
+            (
+                from c in ss.Set<Customer>()
+                where c.CustomerID == "ALFKI"
+                from o in ss.Set<Order>()
+                select c
+            )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_orderby_select_many(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                (
-                    from c in ss.Set<Customer>()
-                    where c.CustomerID == "ALFKI"
-                    orderby c.CustomerID
-                    from o in ss.Set<Order>()
-                    select c
-                )
+        AssertQuery(async, ss =>
+            (
+                from c in ss.Set<Customer>()
+                where c.CustomerID == "ALFKI"
+                orderby c.CustomerID
+                from o in ss.Set<Order>()
+                select c
+            )
         );
 
     private class Foo
@@ -2656,13 +2500,9 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Default_if_empty_top_level(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from e in ss.Set<Employee>()
-                    .Where(c => c.EmployeeID == NonExistentID)
-                    .DefaultIfEmpty()
-                select e
+        AssertQuery(async, ss =>
+            from e in ss.Set<Employee>().Where(c => c.EmployeeID == NonExistentID).DefaultIfEmpty()
+            select e
         );
 
     [ConditionalTheory]
@@ -2691,26 +2531,20 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Default_if_empty_top_level_followed_by_projecting_constant(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from e in ss.Set<Employee>()
-                    .Where(c => c.EmployeeID == NonExistentID)
-                    .DefaultIfEmpty()
-                select "Foo"
+        AssertQuery(async, ss =>
+            from e in ss.Set<Employee>().Where(c => c.EmployeeID == NonExistentID).DefaultIfEmpty()
+            select "Foo"
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Default_if_empty_top_level_arg(bool async) =>
         AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    from e in ss.Set<Employee>()
-                        .Where(c => c.EmployeeID == NonExistentID)
-                        .DefaultIfEmpty(new Employee())
-                    select e
+            AssertQuery(async, ss =>
+                from e in ss.Set<Employee>()
+                    .Where(c => c.EmployeeID == NonExistentID)
+                    .DefaultIfEmpty(new Employee())
+                select e
             )
         );
 
@@ -2720,37 +2554,31 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         bool async
     ) =>
         AssertTranslationFailed(() =>
-            AssertQueryScalar(
-                async,
-                ss =>
-                    from e in ss.Set<Employee>()
-                        .Where(c => c.EmployeeID == NonExistentID)
-                        .DefaultIfEmpty(new Employee())
-                    select 42
+            AssertQueryScalar(async, ss =>
+                from e in ss.Set<Employee>()
+                    .Where(c => c.EmployeeID == NonExistentID)
+                    .DefaultIfEmpty(new Employee())
+                select 42
             )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Default_if_empty_top_level_positive(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from e in ss.Set<Employee>().Where(c => c.EmployeeID > 0).DefaultIfEmpty()
-                select e
+        AssertQuery(async, ss =>
+            from e in ss.Set<Employee>().Where(c => c.EmployeeID > 0).DefaultIfEmpty()
+            select e
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Default_if_empty_top_level_projection(bool async) =>
-        AssertQueryScalar(
-            async,
-            ss =>
-                from e in ss.Set<Employee>()
-                    .Where(e => e.EmployeeID == NonExistentID)
-                    .Select(e => e.EmployeeID)
-                    .DefaultIfEmpty()
-                select e
+        AssertQueryScalar(async, ss =>
+            from e in ss.Set<Employee>()
+                .Where(e => e.EmployeeID == NonExistentID)
+                .Select(e => e.EmployeeID)
+                .DefaultIfEmpty()
+            select e
         );
 
     [ConditionalTheory]
@@ -2769,29 +2597,29 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task SelectMany_Count(bool async) =>
-        AssertCount(
-            async,
-            ss => from c in ss.Set<Customer>() from o in ss.Set<Order>() select c.CustomerID
+        AssertCount(async, ss =>
+            from c in ss.Set<Customer>()
+            from o in ss.Set<Order>()
+            select c.CustomerID
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task SelectMany_LongCount(bool async) =>
-        AssertLongCount(
-            async,
-            ss => from c in ss.Set<Customer>() from o in ss.Set<Order>() select c.CustomerID
+        AssertLongCount(async, ss =>
+            from c in ss.Set<Customer>()
+            from o in ss.Set<Order>()
+            select c.CustomerID
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task SelectMany_OrderBy_ThenBy_Any(bool async) =>
-        AssertAny(
-            async,
-            ss =>
-                from c in ss.Set<Customer>()
-                from o in ss.Set<Order>()
-                orderby c.CustomerID, c.City
-                select c
+        AssertAny(async, ss =>
+            from c in ss.Set<Customer>()
+            from o in ss.Set<Order>()
+            orderby c.CustomerID, c.City
+            select c
         );
 
     [ConditionalTheory]
@@ -2865,14 +2693,12 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [MemberData(nameof(IsAsyncData))]
     public virtual Task OrderBy_multiple_queries(bool async) =>
         AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    from c in ss.Set<Customer>()
-                    join o in ss.Set<Order>()
-                        on new Foo { Bar = c.CustomerID } equals new Foo { Bar = o.CustomerID }
-                    orderby c.IsLondon, o.OrderDate
-                    select new { c, o }
+            AssertQuery(async, ss =>
+                from c in ss.Set<Customer>()
+                join o in ss.Set<Order>()
+                    on new Foo { Bar = c.CustomerID } equals new Foo { Bar = o.CustomerID }
+                orderby c.IsLondon, o.OrderDate
+                select new { c, o }
             )
         );
 
@@ -2917,17 +2743,15 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task OrderBy_correlated_subquery2(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Order>()
-                    .Where(o =>
-                        o.OrderID <= 10250
-                        && ss.Set<Customer>()
-                            .OrderBy(c => ss.Set<Customer>().Any(c2 => c2.CustomerID == "ALFKI"))
-                            .FirstOrDefault()
-                            .City != "Nowhere"
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<Order>()
+                .Where(o =>
+                    o.OrderID <= 10250
+                    && ss.Set<Customer>()
+                        .OrderBy(c => ss.Set<Customer>().Any(c2 => c2.CustomerID == "ALFKI"))
+                        .FirstOrDefault()
+                        .City != "Nowhere"
+                )
         );
 
     [ConditionalTheory]
@@ -3028,21 +2852,17 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task OrderBy_ThenBy_Any(bool async) =>
-        AssertAny(
-            async,
-            ss => ss.Set<Customer>().OrderBy(c => c.CustomerID).ThenBy(c => c.ContactName)
+        AssertAny(async, ss =>
+            ss.Set<Customer>().OrderBy(c => c.CustomerID).ThenBy(c => c.ContactName)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task OrderBy_Join(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>().OrderBy(c => c.CustomerID)
-                join o in ss.Set<Order>().OrderBy(o => o.OrderID)
-                    on c.CustomerID equals o.CustomerID
-                select new { c.CustomerID, o.OrderID }
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>().OrderBy(c => c.CustomerID)
+            join o in ss.Set<Order>().OrderBy(o => o.OrderID) on c.CustomerID equals o.CustomerID
+            select new { c.CustomerID, o.OrderID }
         );
 
     [ConditionalTheory]
@@ -3084,9 +2904,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task OrderBy_arithmetic(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Employee>().OrderBy(e => e.EmployeeID - e.EmployeeID).Select(e => e)
+        AssertQuery(async, ss =>
+            ss.Set<Employee>().OrderBy(e => e.EmployeeID - e.EmployeeID).Select(e => e)
         );
 
     [ConditionalTheory]
@@ -3161,26 +2980,22 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task SelectMany_Joined_DefaultIfEmpty2(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>()
-                from o in ss.Set<Order>().Where(o => o.CustomerID == c.CustomerID).DefaultIfEmpty()
-                select o
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>()
+            from o in ss.Set<Order>().Where(o => o.CustomerID == c.CustomerID).DefaultIfEmpty()
+            select o
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task SelectMany_Joined_DefaultIfEmpty3(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>()
-                from o in ss.Set<Order>()
-                    .Where(o => o.CustomerID == c.CustomerID)
-                    .Where(o => o.OrderDetails.Any())
-                    .DefaultIfEmpty()
-                select o
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>()
+            from o in ss.Set<Order>()
+                .Where(o => o.CustomerID == c.CustomerID)
+                .Where(o => o.OrderDetails.Any())
+                .DefaultIfEmpty()
+            select o
         );
 
     [ConditionalTheory]
@@ -3236,12 +3051,10 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     public virtual Task OrderBy_conditional_operator_where_condition_false(bool async)
     {
         var fakeCustomer = new Customer();
-        return AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .OrderBy(c => fakeCustomer.City == "London" ? "ZZ" : c.City)
-                    .Select(c => c)
+        return AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .OrderBy(c => fakeCustomer.City == "London" ? "ZZ" : c.City)
+                .Select(c => c)
         );
     }
 
@@ -3269,18 +3082,15 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Filter_coalesce_operator(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>().Where(c => (c.CompanyName ?? c.ContactName) == "The Big Cheese")
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => (c.CompanyName ?? c.ContactName) == "The Big Cheese")
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Take_skip_null_coalesce_operator(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().OrderBy(c => c.Region ?? "ZZ").Take(10).Skip(5).Distinct()
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().OrderBy(c => c.Region ?? "ZZ").Take(10).Skip(5).Distinct()
         );
 
     [ConditionalTheory]
@@ -3342,60 +3152,56 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_take_skip_null_coalesce_operator3(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().OrderBy(c => c.Region ?? "ZZ").Take(10).Skip(5)
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().OrderBy(c => c.Region ?? "ZZ").Take(10).Skip(5)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_Property_when_non_shadow(bool async) =>
-        AssertQueryScalar(
-            async,
-            ss => from o in ss.Set<Order>() select EF.Property<int>(o, "OrderID")
+        AssertQueryScalar(async, ss =>
+            from o in ss.Set<Order>()
+            select EF.Property<int>(o, "OrderID")
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_Property_when_non_shadow(bool async) =>
-        AssertQuery(
-            async,
-            ss => from o in ss.Set<Order>() where EF.Property<int>(o, "OrderID") == 10248 select o
+        AssertQuery(async, ss =>
+            from o in ss.Set<Order>()
+            where EF.Property<int>(o, "OrderID") == 10248
+            select o
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_Property_when_shadow(bool async) =>
-        AssertQuery(
-            async,
-            ss => from e in ss.Set<Employee>() select EF.Property<string>(e, "Title")
+        AssertQuery(async, ss =>
+            from e in ss.Set<Employee>()
+            select EF.Property<string>(e, "Title")
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_Property_when_shadow(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from e in ss.Set<Employee>()
-                where EF.Property<string>(e, "Title") == "Sales Representative"
-                select e
+        AssertQuery(async, ss =>
+            from e in ss.Set<Employee>()
+            where EF.Property<string>(e, "Title") == "Sales Representative"
+            select e
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_Property_when_shadow_unconstrained_generic_method(bool async) =>
-        AssertQuery(
-            async,
-            ss => ShadowPropertySelect<Employee, string>(ss.Set<Employee>(), "Title")
+        AssertQuery(async, ss =>
+            ShadowPropertySelect<Employee, string>(ss.Set<Employee>(), "Title")
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_Property_when_shadow_unconstrained_generic_method(bool async) =>
-        AssertQuery(
-            async,
-            ss => ShadowPropertyWhere(ss.Set<Employee>(), "Title", "Sales Representative")
+        AssertQuery(async, ss =>
+            ShadowPropertyWhere(ss.Set<Employee>(), "Title", "Sales Representative")
         );
 
     protected IQueryable<TOut> ShadowPropertySelect<TIn, TOut>(
@@ -3416,26 +3222,23 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         var propertyName = "Title";
         var value = "Sales Representative";
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Employee>().Where(e => EF.Property<string>(e, propertyName) == value)
+        await AssertQuery(async, ss =>
+            ss.Set<Employee>().Where(e => EF.Property<string>(e, propertyName) == value)
         );
 
         propertyName = "FirstName";
         value = "Steven";
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Employee>().Where(e => EF.Property<string>(e, propertyName) == value)
+        await AssertQuery(async, ss =>
+            ss.Set<Employee>().Where(e => EF.Property<string>(e, propertyName) == value)
         );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Selected_column_can_coalesce(bool async) =>
-        AssertQuery(
-            async,
-            ss => (from c in ss.Set<Customer>() orderby c.Region ?? "ZZ" select c).Select(x => x)
+        AssertQuery(async, ss =>
+            (from c in ss.Set<Customer>() orderby c.Region ?? "ZZ" select c).Select(x => x)
         );
 
     [ConditionalFact]
@@ -3451,68 +3254,56 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_Subquery_Single(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                (
-                    from od in ss.Set<OrderDetail>()
-                    orderby od.ProductID, od.OrderID
-                    select (
+        AssertQuery(async, ss =>
+            (
+                from od in ss.Set<OrderDetail>()
+                orderby od.ProductID, od.OrderID
+                select (
+                    from o in ss.Set<Order>()
+                    where od.OrderID == o.OrderID
+                    orderby o.OrderID
+                    select o
+                ).First()
+            ).Take(2)
+        );
+
+    [ConditionalTheory]
+    [MemberData(nameof(IsAsyncData))]
+    public virtual Task Select_Where_Subquery_Deep_Single(bool async) => AssertQuery(async, ss => (
+                from od in ss.Set<OrderDetail>().Where(od => od.OrderID == 10344)
+                where
+                    (
                         from o in ss.Set<Order>()
                         where od.OrderID == o.OrderID
-                        orderby o.OrderID
-                        select o
-                    ).First()
-                ).Take(2)
-        );
+                        select (
+                            from c in ss.Set<Customer>()
+                            where o.CustomerID == c.CustomerID
+                            select c
+                        ).Single()
+                    )
+                        .Single()
+                        .City == "Seattle"
+                select od
+            ).Take(2));
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Select_Where_Subquery_Deep_Single(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                (
-                    from od in ss.Set<OrderDetail>().Where(od => od.OrderID == 10344)
-                    where
-                        (
-                            from o in ss.Set<Order>()
-                            where od.OrderID == o.OrderID
-                            select (
-                                from c in ss.Set<Customer>()
-                                where o.CustomerID == c.CustomerID
-                                select c
-                            ).Single()
-                        )
-                            .Single()
-                            .City == "Seattle"
-                    select od
-                ).Take(2)
-        );
-
-    [ConditionalTheory]
-    [MemberData(nameof(IsAsyncData))]
-    public virtual Task Select_Where_Subquery_Deep_First(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                (
-                    from od in ss.Set<OrderDetail>()
-                    where
-                        (
-                            from o in ss.Set<Order>()
-                            where od.OrderID == o.OrderID
-                            select (
-                                from c in ss.Set<Customer>()
-                                where o.CustomerID == c.CustomerID
-                                select c
-                            ).FirstOrDefault()
-                        )
-                            .FirstOrDefault()
-                            .City == "Seattle"
-                    select od
-                ).Take(2)
-        );
+    public virtual Task Select_Where_Subquery_Deep_First(bool async) => AssertQuery(async, ss => (
+                from od in ss.Set<OrderDetail>()
+                where
+                    (
+                        from o in ss.Set<Order>()
+                        where od.OrderID == o.OrderID
+                        select (
+                            from c in ss.Set<Customer>()
+                            where o.CustomerID == c.CustomerID
+                            select c
+                        ).FirstOrDefault()
+                    )
+                        .FirstOrDefault()
+                        .City == "Seattle"
+                select od
+            ).Take(2));
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -3652,9 +3443,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task DateTime_parse_is_inlined(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Order>().Where(o => o.OrderDate > DateTime.Parse("1/1/1998 12:00:00 PM"))
+        AssertQuery(async, ss =>
+            ss.Set<Order>().Where(o => o.OrderDate > DateTime.Parse("1/1/1998 12:00:00 PM"))
         );
 
     [ConditionalTheory]
@@ -3663,18 +3453,16 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     {
         var date = "1/1/1998 12:00:00 PM";
 
-        return AssertQuery(
-            async,
-            ss => ss.Set<Order>().Where(o => o.OrderDate > DateTime.Parse(date))
+        return AssertQuery(async, ss =>
+            ss.Set<Order>().Where(o => o.OrderDate > DateTime.Parse(date))
         );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task New_DateTime_is_inlined(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Order>().Where(o => o.OrderDate > new DateTime(1998, 1, 1, 12, 0, 0))
+        AssertQuery(async, ss =>
+            ss.Set<Order>().Where(o => o.OrderDate > new DateTime(1998, 1, 1, 12, 0, 0))
         );
 
     [ConditionalTheory]
@@ -3686,20 +3474,14 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         var date = 1;
         var hour = 12;
 
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Order>()
-                    .Where(o => o.OrderDate > new DateTime(year, month, date, hour, 0, 0))
+        await AssertQuery(async, ss =>
+            ss.Set<Order>().Where(o => o.OrderDate > new DateTime(year, month, date, hour, 0, 0))
         );
 
         hour = 11;
 
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Order>()
-                    .Where(o => o.OrderDate > new DateTime(year, month, date, hour, 0, 0))
+        await AssertQuery(async, ss =>
+            ss.Set<Order>().Where(o => o.OrderDate > new DateTime(year, month, date, hour, 0, 0))
         );
     }
 
@@ -3739,9 +3521,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Random_next_is_not_funcletized_6(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Order>().Where(o => o.OrderID > new Random(15).Next(0, 10))
+        AssertQuery(async, ss =>
+            ss.Set<Order>().Where(o => o.OrderID > new Random(15).Next(0, 10))
         );
 
     [ConditionalTheory]
@@ -3784,84 +3565,73 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task String_concat_with_navigation2(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Order>().Select(o => o.Customer.City + " " + o.Customer.City)
+        AssertQuery(async, ss =>
+            ss.Set<Order>().Select(o => o.Customer.City + " " + o.Customer.City)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_bitwise_or(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .OrderBy(c => c.CustomerID)
-                    .Select(c => new
-                    {
-                        c.CustomerID,
-                        Value = c.CustomerID == "ALFKI" | c.CustomerID == "ANATR",
-                    })
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .OrderBy(c => c.CustomerID)
+                .Select(c => new
+                {
+                    c.CustomerID,
+                    Value = c.CustomerID == "ALFKI" | c.CustomerID == "ANATR",
+                })
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_bitwise_or_multiple(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .OrderBy(c => c.CustomerID)
-                    .Select(c => new
-                    {
-                        c.CustomerID,
-                        Value = c.CustomerID == "ALFKI"
-                            | c.CustomerID == "ANATR"
-                            | c.CustomerID == "ANTON",
-                    })
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .OrderBy(c => c.CustomerID)
+                .Select(c => new
+                {
+                    c.CustomerID,
+                    Value = c.CustomerID == "ALFKI"
+                        | c.CustomerID == "ANATR"
+                        | c.CustomerID == "ANTON",
+                })
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_bitwise_and(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .OrderBy(c => c.CustomerID)
-                    .Select(c => new
-                    {
-                        c.CustomerID,
-                        Value = c.CustomerID == "ALFKI" & c.CustomerID == "ANATR",
-                    })
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .OrderBy(c => c.CustomerID)
+                .Select(c => new
+                {
+                    c.CustomerID,
+                    Value = c.CustomerID == "ALFKI" & c.CustomerID == "ANATR",
+                })
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_bitwise_and_or(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .OrderBy(c => c.CustomerID)
-                    .Select(c => new
-                    {
-                        c.CustomerID,
-                        Value = c.CustomerID == "ALFKI" & c.CustomerID == "ANATR"
-                            | c.CustomerID == "ANTON",
-                    })
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .OrderBy(c => c.CustomerID)
+                .Select(c => new
+                {
+                    c.CustomerID,
+                    Value = c.CustomerID == "ALFKI" & c.CustomerID == "ANATR"
+                        | c.CustomerID == "ANTON",
+                })
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_bitwise_or_with_logical_or(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c =>
-                        c.CustomerID == "ALFKI" | c.CustomerID == "ANATR" || c.CustomerID == "ANTON"
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c =>
+                    c.CustomerID == "ALFKI" | c.CustomerID == "ANATR" || c.CustomerID == "ANTON"
+                )
         );
 
     [ConditionalTheory]
@@ -3880,25 +3650,21 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_bitwise_or_with_logical_and(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c =>
-                        c.CustomerID == "ALFKI" | c.CustomerID == "ANATR" && c.Country == "Germany"
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c =>
+                    c.CustomerID == "ALFKI" | c.CustomerID == "ANATR" && c.Country == "Germany"
+                )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Where_bitwise_and_with_logical_or(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c =>
-                        c.CustomerID == "ALFKI" & c.CustomerID == "ANATR" || c.CustomerID == "ANTON"
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c =>
+                    c.CustomerID == "ALFKI" & c.CustomerID == "ANATR" || c.CustomerID == "ANTON"
+                )
         );
 
     [ConditionalTheory]
@@ -3923,33 +3689,29 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_bitwise_or_with_logical_or(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .OrderBy(c => c.CustomerID)
-                    .Select(c => new
-                    {
-                        c.CustomerID,
-                        Value = c.CustomerID == "ALFKI" | c.CustomerID == "ANATR"
-                            || c.CustomerID == "ANTON",
-                    })
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .OrderBy(c => c.CustomerID)
+                .Select(c => new
+                {
+                    c.CustomerID,
+                    Value = c.CustomerID == "ALFKI" | c.CustomerID == "ANATR"
+                        || c.CustomerID == "ANTON",
+                })
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_bitwise_and_with_logical_and(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .OrderBy(c => c.CustomerID)
-                    .Select(c => new
-                    {
-                        c.CustomerID,
-                        Value = c.CustomerID == "ALFKI" & c.CustomerID == "ANATR"
-                            && c.CustomerID == "ANTON",
-                    })
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .OrderBy(c => c.CustomerID)
+                .Select(c => new
+                {
+                    c.CustomerID,
+                    Value = c.CustomerID == "ALFKI" & c.CustomerID == "ANATR"
+                        && c.CustomerID == "ANTON",
+                })
         );
 
     [ConditionalTheory]
@@ -3957,13 +3719,11 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     public virtual Task Handle_materialization_properly_when_more_than_two_query_sources_are_involved(
         bool async
     ) =>
-        AssertFirstOrDefault(
-            async,
-            ss =>
-                from c in ss.Set<Customer>().OrderBy(c => c.CustomerID)
-                from o in ss.Set<Order>()
-                from e in ss.Set<Employee>()
-                select new { c }
+        AssertFirstOrDefault(async, ss =>
+            from c in ss.Set<Customer>().OrderBy(c => c.CustomerID)
+            from o in ss.Set<Order>()
+            from e in ss.Set<Employee>()
+            select new { c }
         );
 
     [ConditionalTheory]
@@ -3972,40 +3732,36 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     {
         DateTime? dateFilter = new DateTime(1996, 7, 15);
 
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Order>()
-                    .Where(o =>
-                        (o.OrderID < 10400)
-                        && (
-                            (dateFilter == null)
-                            || (
-                                o.OrderDate.HasValue
-                                && o.OrderDate.Value.Month == dateFilter.Value.Month
-                                && o.OrderDate.Value.Year == dateFilter.Value.Year
-                            )
+        await AssertQuery(async, ss =>
+            ss.Set<Order>()
+                .Where(o =>
+                    (o.OrderID < 10400)
+                    && (
+                        (dateFilter == null)
+                        || (
+                            o.OrderDate.HasValue
+                            && o.OrderDate.Value.Month == dateFilter.Value.Month
+                            && o.OrderDate.Value.Year == dateFilter.Value.Year
                         )
                     )
+                )
         );
 
         dateFilter = null;
 
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Order>()
-                    .Where(o =>
-                        (o.OrderID < 10400)
-                        && (
-                            (dateFilter == null)
-                            || (
-                                o.OrderDate.HasValue
-                                && o.OrderDate.Value.Month == dateFilter.Value.Month
-                                && o.OrderDate.Value.Year == dateFilter.Value.Year
-                            )
+        await AssertQuery(async, ss =>
+            ss.Set<Order>()
+                .Where(o =>
+                    (o.OrderID < 10400)
+                    && (
+                        (dateFilter == null)
+                        || (
+                            o.OrderDate.HasValue
+                            && o.OrderDate.Value.Month == dateFilter.Value.Month
+                            && o.OrderDate.Value.Year == dateFilter.Value.Year
                         )
                     )
+                )
         );
     }
 
@@ -4015,19 +3771,17 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     {
         DateTime? dateFilter = new DateTime(1996, 7, 15);
 
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Order>()
-                    .Where(o =>
-                        (o.OrderID < 10400)
-                        && (dateFilter.HasValue)
-                        && (
-                            o.OrderDate.HasValue
-                            && o.OrderDate.Value.Month == dateFilter.Value.Month
-                            && o.OrderDate.Value.Year == dateFilter.Value.Year
-                        )
+        await AssertQuery(async, ss =>
+            ss.Set<Order>()
+                .Where(o =>
+                    (o.OrderID < 10400)
+                    && (dateFilter.HasValue)
+                    && (
+                        o.OrderDate.HasValue
+                        && o.OrderDate.Value.Month == dateFilter.Value.Month
+                        && o.OrderDate.Value.Year == dateFilter.Value.Year
                     )
+                )
         );
 
         dateFilter = null;
@@ -4055,36 +3809,32 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     {
         DateTime? dateFilter = new DateTime(1996, 7, 15);
 
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Order>()
-                    .Where(o =>
-                        (o.OrderID < 10400)
-                        || (dateFilter == null)
-                        || (
-                            o.OrderDate.HasValue
-                            && o.OrderDate.Value.Month == dateFilter.Value.Month
-                            && o.OrderDate.Value.Year == dateFilter.Value.Year
-                        )
+        await AssertQuery(async, ss =>
+            ss.Set<Order>()
+                .Where(o =>
+                    (o.OrderID < 10400)
+                    || (dateFilter == null)
+                    || (
+                        o.OrderDate.HasValue
+                        && o.OrderDate.Value.Month == dateFilter.Value.Month
+                        && o.OrderDate.Value.Year == dateFilter.Value.Year
                     )
+                )
         );
 
         dateFilter = null;
 
-        await AssertQuery(
-            async,
-            ss =>
-                ss.Set<Order>()
-                    .Where(o =>
-                        (o.OrderID < 10400)
-                        || (dateFilter == null)
-                        || (
-                            o.OrderDate.HasValue
-                            && o.OrderDate.Value.Month == dateFilter.Value.Month
-                            && o.OrderDate.Value.Year == dateFilter.Value.Year
-                        )
+        await AssertQuery(async, ss =>
+            ss.Set<Order>()
+                .Where(o =>
+                    (o.OrderID < 10400)
+                    || (dateFilter == null)
+                    || (
+                        o.OrderDate.HasValue
+                        && o.OrderDate.Value.Month == dateFilter.Value.Month
+                        && o.OrderDate.Value.Year == dateFilter.Value.Year
                     )
+                )
         );
     }
 
@@ -4095,10 +3845,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         var customer = new Customer();
 
         return Assert.ThrowsAsync<InvalidOperationException>(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Customer>().Where(c => Equals(c.Orders.First(), customer.Orders.First()))
+            AssertQuery(async, ss =>
+                ss.Set<Customer>().Where(c => Equals(c.Orders.First(), customer.Orders.First()))
             )
         );
     }
@@ -4110,16 +3858,14 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         DateTime? dateFilter = null;
 
         return Assert.ThrowsAsync<InvalidOperationException>(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Order>()
-                        .Where(o =>
-                            (o.OrderID < 10400)
-                            && o.OrderDate.HasValue
-                            && o.OrderDate.Value.Month == dateFilter.Value.Month
-                            && o.OrderDate.Value.Year == dateFilter.Value.Year
-                        )
+            AssertQuery(async, ss =>
+                ss.Set<Order>()
+                    .Where(o =>
+                        (o.OrderID < 10400)
+                        && o.OrderDate.HasValue
+                        && o.OrderDate.Value.Month == dateFilter.Value.Month
+                        && o.OrderDate.Value.Year == dateFilter.Value.Year
+                    )
             )
         );
     }
@@ -4334,15 +4080,13 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_expression_date_add_milliseconds_below_the_range(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Order>()
-                    .Where(o => o.OrderDate != null)
-                    .Select(o => new Order
-                    {
-                        OrderDate = o.OrderDate.Value.AddMilliseconds(-1000000000000),
-                    })
+        AssertQuery(async, ss =>
+            ss.Set<Order>()
+                .Where(o => o.OrderDate != null)
+                .Select(o => new Order
+                {
+                    OrderDate = o.OrderDate.Value.AddMilliseconds(-1000000000000),
+                })
         );
 
     [ConditionalTheory]
@@ -4390,28 +4134,24 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     {
         var nextYear = 2017;
 
-        return AssertQueryScalar(
-            async,
-            ss =>
-                ss.Set<Order>()
-                    .Where(o => o.OrderDate != null)
-                    .Select(o => o.OrderDate.Value.Year)
-                    .Distinct()
-                    .Where(x => x < nextYear)
+        return AssertQueryScalar(async, ss =>
+            ss.Set<Order>()
+                .Where(o => o.OrderDate != null)
+                .Select(o => o.OrderDate.Value.Year)
+                .Distinct()
+                .Where(x => x < nextYear)
         );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task DefaultIfEmpty_without_group_join(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => c.City == "London")
-                    .DefaultIfEmpty()
-                    .Where(d => d != null)
-                    .Select(d => d.CustomerID)
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c => c.City == "London")
+                .DefaultIfEmpty()
+                .Where(d => d != null)
+                .Select(d => d.CustomerID)
         );
 
     [ConditionalTheory]
@@ -4757,33 +4497,29 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     {
         var dates = new[] { new DateTime(1996, 07, 04), new DateTime(1996, 07, 16) };
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Order>().Where(e => dates.Contains(e.OrderDate.Value.Date))
+        await AssertQuery(async, ss =>
+            ss.Set<Order>().Where(e => dates.Contains(e.OrderDate.Value.Date))
         );
 
         dates = new[] { new DateTime(1996, 07, 04) };
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Order>().Where(e => dates.Contains(e.OrderDate.Value.Date))
+        await AssertQuery(async, ss =>
+            ss.Set<Order>().Where(e => dates.Contains(e.OrderDate.Value.Date))
         );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Contains_with_subquery_involving_join_binds_to_correct_table(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Order>()
-                    .Where(o =>
-                        o.OrderID > 11000
-                        && ss.Set<OrderDetail>()
-                            .Where(od => od.Product.ProductName == "Chai")
-                            .Select(od => od.OrderID)
-                            .Contains(o.OrderID)
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<Order>()
+                .Where(o =>
+                    o.OrderID > 11000
+                    && ss.Set<OrderDetail>()
+                        .Where(od => od.Product.ProductName == "Chai")
+                        .Select(od => od.OrderID)
+                        .Contains(o.OrderID)
+                )
         );
 
     [ConditionalTheory]
@@ -5066,19 +4802,17 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Complex_query_with_repeated_query_model_compiles_correctly(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(outer => outer.CustomerID == "ALFKI")
-                    .Where(outer =>
-                        (
-                            from c in ss.Set<Customer>()
-                            let customers = ss.Set<Customer>().Select(cc => cc.CustomerID).ToList()
-                            where customers.Any()
-                            select customers
-                        ).Any()
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(outer => outer.CustomerID == "ALFKI")
+                .Where(outer =>
+                    (
+                        from c in ss.Set<Customer>()
+                        let customers = ss.Set<Customer>().Select(cc => cc.CustomerID).ToList()
+                        where customers.Any()
+                        select customers
+                    ).Any()
+                )
         );
 
     [ConditionalTheory]
@@ -5086,28 +4820,26 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     public virtual Task Complex_query_with_repeated_nested_query_model_compiles_correctly(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(outer => outer.CustomerID == "ALFKI")
-                    .Where(outer =>
-                        (
-                            from c in ss.Set<Customer>()
-                            let customers = ss.Set<Customer>()
-                                .Where(cc =>
-                                    ss.Set<Customer>()
-                                        .OrderBy(inner => inner.CustomerID)
-                                        .Take(10)
-                                        .Distinct()
-                                        .Any()
-                                )
-                                .Select(cc => cc.CustomerID)
-                                .ToList()
-                            where customers.Any()
-                            select customers
-                        ).Any()
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(outer => outer.CustomerID == "ALFKI")
+                .Where(outer =>
+                    (
+                        from c in ss.Set<Customer>()
+                        let customers = ss.Set<Customer>()
+                            .Where(cc =>
+                                ss.Set<Customer>()
+                                    .OrderBy(inner => inner.CustomerID)
+                                    .Take(10)
+                                    .Distinct()
+                                    .Any()
+                            )
+                            .Select(cc => cc.CustomerID)
+                            .ToList()
+                        where customers.Any()
+                        select customers
+                    ).Any()
+                )
         );
 
     [ConditionalTheory]
@@ -5122,39 +4854,34 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Subquery_is_null_translated_correctly(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>()
-                let lastOrder = c
-                    .Orders.OrderByDescending(o => o.OrderID)
-                    .Select(o => o.CustomerID)
-                    .FirstOrDefault()
-                where lastOrder == null
-                select c
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>()
+            let lastOrder = c
+                .Orders.OrderByDescending(o => o.OrderID)
+                .Select(o => o.CustomerID)
+                .FirstOrDefault()
+            where lastOrder == null
+            select c
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Subquery_is_not_null_translated_correctly(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>()
-                let lastOrder = c
-                    .Orders.OrderByDescending(o => o.OrderID)
-                    .Select(o => o.CustomerID)
-                    .FirstOrDefault()
-                where lastOrder != null
-                select c
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>()
+            let lastOrder = c
+                .Orders.OrderByDescending(o => o.OrderID)
+                .Select(o => o.CustomerID)
+                .FirstOrDefault()
+            where lastOrder != null
+            select c
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_take_average(bool async) =>
-        AssertAverage(
-            async,
-            ss => ss.Set<Order>().OrderBy(o => o.OrderID).Select(o => o.OrderID).Take(10)
+        AssertAverage(async, ss =>
+            ss.Set<Order>().OrderBy(o => o.OrderID).Select(o => o.OrderID).Take(10)
         );
 
     [ConditionalTheory]
@@ -5180,33 +4907,29 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_take_max(bool async) =>
-        AssertMax(
-            async,
-            ss => ss.Set<Order>().OrderBy(o => o.OrderID).Select(o => o.OrderID).Take(10)
+        AssertMax(async, ss =>
+            ss.Set<Order>().OrderBy(o => o.OrderID).Select(o => o.OrderID).Take(10)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_take_min(bool async) =>
-        AssertMin(
-            async,
-            ss => ss.Set<Order>().OrderBy(o => o.OrderID).Select(o => o.OrderID).Take(10)
+        AssertMin(async, ss =>
+            ss.Set<Order>().OrderBy(o => o.OrderID).Select(o => o.OrderID).Take(10)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_take_sum(bool async) =>
-        AssertSum(
-            async,
-            ss => ss.Set<Order>().OrderBy(o => o.OrderID).Select(o => o.OrderID).Take(10)
+        AssertSum(async, ss =>
+            ss.Set<Order>().OrderBy(o => o.OrderID).Select(o => o.OrderID).Take(10)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_skip_average(bool async) =>
-        AssertAverage(
-            async,
-            ss => ss.Set<Order>().OrderBy(o => o.OrderID).Select(o => o.OrderID).Skip(10)
+        AssertAverage(async, ss =>
+            ss.Set<Order>().OrderBy(o => o.OrderID).Select(o => o.OrderID).Skip(10)
         );
 
     [ConditionalTheory]
@@ -5232,25 +4955,22 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_skip_max(bool async) =>
-        AssertMax(
-            async,
-            ss => ss.Set<Order>().OrderBy(o => o.OrderID).Select(o => o.OrderID).Skip(10)
+        AssertMax(async, ss =>
+            ss.Set<Order>().OrderBy(o => o.OrderID).Select(o => o.OrderID).Skip(10)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_skip_min(bool async) =>
-        AssertMin(
-            async,
-            ss => ss.Set<Order>().OrderBy(o => o.OrderID).Select(o => o.OrderID).Skip(10)
+        AssertMin(async, ss =>
+            ss.Set<Order>().OrderBy(o => o.OrderID).Select(o => o.OrderID).Skip(10)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_skip_sum(bool async) =>
-        AssertSum(
-            async,
-            ss => ss.Set<Order>().OrderBy(o => o.OrderID).Select(o => o.OrderID).Skip(10)
+        AssertSum(async, ss =>
+            ss.Set<Order>().OrderBy(o => o.OrderID).Select(o => o.OrderID).Skip(10)
         );
 
     [ConditionalTheory]
@@ -5296,15 +5016,13 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Comparing_entities_using_Equals(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c1 in ss.Set<Customer>()
-                from c2 in ss.Set<Customer>()
-                where c1.CustomerID.StartsWith("ALFKI")
-                where c1.Equals(c2)
-                orderby c1.CustomerID
-                select new { Id1 = c1.CustomerID, Id2 = c2.CustomerID }
+        AssertQuery(async, ss =>
+            from c1 in ss.Set<Customer>()
+            from c2 in ss.Set<Customer>()
+            where c1.CustomerID.StartsWith("ALFKI")
+            where c1.Equals(c2)
+            orderby c1.CustomerID
+            select new { Id1 = c1.CustomerID, Id2 = c2.CustomerID }
         );
 
     [ConditionalTheory]
@@ -5324,14 +5042,12 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Comparing_entity_to_null_using_Equals(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>()
-                where c.CustomerID.StartsWith("A")
-                where !Equals(null, c)
-                orderby c.CustomerID
-                select c.CustomerID
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>()
+            where c.CustomerID.StartsWith("A")
+            where !Equals(null, c)
+            orderby c.CustomerID
+            select c.CustomerID
         );
 
     [ConditionalTheory]
@@ -5419,13 +5135,11 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Compare_collection_navigation_with_itself(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>()
-                where c.CustomerID.StartsWith("A")
-                where c.Orders == c.Orders
-                select c.CustomerID
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>()
+            where c.CustomerID.StartsWith("A")
+            where c.Orders == c.Orders
+            select c.CustomerID
         );
 
     [ConditionalTheory]
@@ -5536,16 +5250,14 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     public virtual Task Complex_nested_query_properly_binds_to_grandparent_when_parent_returns_scalar_result(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => c.CustomerID == "ALFKI")
-                    .Select(c => new
-                    {
-                        c.CustomerID,
-                        OuterOrders = c.Orders.Count(o => c.Orders.Count() > 0),
-                    })
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c => c.CustomerID == "ALFKI")
+                .Select(c => new
+                {
+                    c.CustomerID,
+                    OuterOrders = c.Orders.Count(o => c.Orders.Count() > 0),
+                })
         );
 
     [ConditionalTheory]
@@ -5565,15 +5277,13 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Join_take_count_works(bool async) =>
-        AssertCount(
-            async,
-            ss =>
-                (
-                    from o in ss.Set<Order>().Where(o => o.OrderID > 690 && o.OrderID < 710)
-                    join c in ss.Set<Customer>().Where(c => c.CustomerID == "ALFKI")
-                        on o.CustomerID equals c.CustomerID
-                    select o
-                ).Take(5)
+        AssertCount(async, ss =>
+            (
+                from o in ss.Set<Order>().Where(o => o.OrderID > 690 && o.OrderID < 710)
+                join c in ss.Set<Customer>().Where(c => c.CustomerID == "ALFKI")
+                    on o.CustomerID equals c.CustomerID
+                select o
+            ).Take(5)
         );
 
     [ConditionalTheory]
@@ -5582,9 +5292,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     {
         var list = new List<string>();
 
-        return AssertQuery(
-            async,
-            ss => ss.Set<Customer>().OrderBy(c => list.Contains(c.CustomerID)).Select(c => c)
+        return AssertQuery(async, ss =>
+            ss.Set<Customer>().OrderBy(c => list.Contains(c.CustomerID)).Select(c => c)
         );
     }
 
@@ -5594,9 +5303,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     {
         var list = new List<string>();
 
-        return AssertQuery(
-            async,
-            ss => ss.Set<Customer>().OrderBy(c => !list.Contains(c.CustomerID)).Select(c => c)
+        return AssertQuery(async, ss =>
+            ss.Set<Customer>().OrderBy(c => !list.Contains(c.CustomerID)).Select(c => c)
         );
     }
 
@@ -5623,55 +5331,48 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
             orderParameter
         );
 
-        return AssertQuery(
-            async,
-            ss => ss.Set<Order>().Where(o => o.OrderID < 10300).Select(selector)
+        return AssertQuery(async, ss =>
+            ss.Set<Order>().Where(o => o.OrderID < 10300).Select(selector)
         );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Let_subquery_with_multiple_occurrences(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from o in ss.Set<Order>()
-                let details = from od in o.OrderDetails
-                where od.Quantity < 10
-                select od.Quantity
-                where details.Any()
-                select new { Count = details.Count() }
+        AssertQuery(async, ss =>
+            from o in ss.Set<Order>()
+            let details = from od in o.OrderDetails
+            where od.Quantity < 10
+            select od.Quantity
+            where details.Any()
+            select new { Count = details.Count() }
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Let_entity_equality_to_null(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>().Where(c => c.CustomerID.StartsWith("A"))
-                let o = c.Orders.OrderBy(e => e.OrderDate).FirstOrDefault()
-                where o != null
-                select new { c.CustomerID, o.OrderDate }
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>().Where(c => c.CustomerID.StartsWith("A"))
+            let o = c.Orders.OrderBy(e => e.OrderDate).FirstOrDefault()
+            where o != null
+            select new { c.CustomerID, o.OrderDate }
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Let_entity_equality_to_other_entity(bool async)
     {
-        return AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>().Where(c => c.CustomerID.StartsWith("A"))
-                let o = c.Orders.OrderBy(e => e.OrderDate).FirstOrDefault()
-                where o != new Order()
-                select new
-                {
-                    c.CustomerID,
+        return AssertQuery(async, ss =>
+            from c in ss.Set<Customer>().Where(c => c.CustomerID.StartsWith("A"))
+            let o = c.Orders.OrderBy(e => e.OrderDate).FirstOrDefault()
+            where o != new Order()
+            select new
+            {
+                c.CustomerID,
 #pragma warning disable IDE0031 // Use null propagation
-                    A = (o != null ? o.OrderDate : null)
+                A = (o != null ? o.OrderDate : null)
 #pragma warning restore IDE0031 // Use null propagation
-                }
+            }
         );
     }
 
@@ -5679,14 +5380,12 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [MemberData(nameof(IsAsyncData))]
     public virtual Task SelectMany_after_client_method(bool async) =>
         AssertTranslationFailed(() =>
-            AssertQueryScalar(
-                async,
-                ss =>
-                    ss.Set<Customer>()
-                        .OrderBy(c => ClientOrderBy(c))
-                        .SelectMany(c => c.Orders)
-                        .Distinct()
-                        .Select(o => o.OrderDate)
+            AssertQueryScalar(async, ss =>
+                ss.Set<Customer>()
+                    .OrderBy(c => ClientOrderBy(c))
+                    .SelectMany(c => c.Orders)
+                    .Distinct()
+                    .Select(o => o.OrderDate)
             )
         );
 
@@ -5750,45 +5449,39 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         // Dependency issues between visitors Issue #20445.
         =>
         AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Customer>()
-                        .Where(c =>
-                            c.CustomerID.StartsWith("A")
-                            && ss.Set<Order>()
-                                .Where(o => o.OrderID < 10300)
+            AssertQuery(async, ss =>
+                ss.Set<Customer>()
+                    .Where(c =>
+                        c.CustomerID.StartsWith("A")
+                        && ss.Set<Order>()
+                            .Where(o => o.OrderID < 10300)
+                            .OrderBy(o => o.OrderID)
+                            .FirstOrDefault()
+                            .OrderDetails
+                            == ss.Set<Order>()
+                                .Where(o => o.OrderID > 10500)
                                 .OrderBy(o => o.OrderID)
                                 .FirstOrDefault()
                                 .OrderDetails
-                                == ss.Set<Order>()
-                                    .Where(o => o.OrderID > 10500)
-                                    .OrderBy(o => o.OrderID)
-                                    .FirstOrDefault()
-                                    .OrderDetails
-                        )
+                    )
             )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Inner_parameter_in_nested_lambdas_gets_preserved(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c =>
-                        c.Orders.Where(o => c == new Customer { CustomerID = o.CustomerID }).Count()
-                        > 0
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c =>
+                    c.Orders.Where(o => c == new Customer { CustomerID = o.CustomerID }).Count() > 0
+                )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Convert_to_nullable_on_nullable_value_is_ignored(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Order>().Select(o => new Order { OrderDate = o.OrderDate.Value })
+        AssertQuery(async, ss =>
+            ss.Set<Order>().Select(o => new Order { OrderDate = o.OrderDate.Value })
         );
 
     [ConditionalTheory]
@@ -5907,16 +5600,14 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Subquery_DefaultIfEmpty_Any(bool async) =>
-        AssertAny(
-            async,
-            ss =>
-                (
-                    from e in ss.Set<Employee>()
-                        .Where(e => e.EmployeeID == NonExistentID)
-                        .Select(e => e.EmployeeID)
-                        .DefaultIfEmpty()
-                    select e
-                )
+        AssertAny(async, ss =>
+            (
+                from e in ss.Set<Employee>()
+                    .Where(e => e.EmployeeID == NonExistentID)
+                    .Select(e => e.EmployeeID)
+                    .DefaultIfEmpty()
+                select e
+            )
         );
 
     // Issue#18374
@@ -6011,44 +5702,38 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Projection_skip_projection(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Order>()
-                    .Where(o => o.OrderID < 10300)
-                    .OrderBy(o => o.OrderID)
-                    .Select(o => new { Item = o })
-                    .Skip(5)
-                    .Select(e => new { e.Item.Customer.City })
+        AssertQuery(async, ss =>
+            ss.Set<Order>()
+                .Where(o => o.OrderID < 10300)
+                .OrderBy(o => o.OrderID)
+                .Select(o => new { Item = o })
+                .Skip(5)
+                .Select(e => new { e.Item.Customer.City })
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Projection_take_projection(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Order>()
-                    .Where(o => o.OrderID < 10300)
-                    .OrderBy(o => o.OrderID)
-                    .Select(o => new { Item = o })
-                    .Take(10)
-                    .Select(e => new { e.Item.Customer.City })
+        AssertQuery(async, ss =>
+            ss.Set<Order>()
+                .Where(o => o.OrderID < 10300)
+                .OrderBy(o => o.OrderID)
+                .Select(o => new { Item = o })
+                .Take(10)
+                .Select(e => new { e.Item.Customer.City })
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Projection_skip_take_projection(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Order>()
-                    .Where(o => o.OrderID < 10300)
-                    .OrderBy(o => o.OrderID)
-                    .Select(o => new { Item = o })
-                    .Skip(5)
-                    .Take(10)
-                    .Select(e => new { e.Item.Customer.City })
+        AssertQuery(async, ss =>
+            ss.Set<Order>()
+                .Where(o => o.OrderID < 10300)
+                .OrderBy(o => o.OrderID)
+                .Select(o => new { Item = o })
+                .Skip(5)
+                .Take(10)
+                .Select(e => new { e.Item.Customer.City })
         );
 
     // Issue#19207
@@ -6113,27 +5798,23 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Anonymous_projection_skip_empty_collection_FirstOrDefault(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => c.CustomerID == "FISSA")
-                    .Select(c => new { Customer = c })
-                    .Skip(0)
-                    .Select(e => e.Customer.Orders.FirstOrDefault())
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c => c.CustomerID == "FISSA")
+                .Select(c => new { Customer = c })
+                .Skip(0)
+                .Select(e => e.Customer.Orders.FirstOrDefault())
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Anonymous_projection_take_empty_collection_FirstOrDefault(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => c.CustomerID == "FISSA")
-                    .Select(c => new { Customer = c })
-                    .Take(1)
-                    .Select(e => e.Customer.Orders.FirstOrDefault())
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c => c.CustomerID == "FISSA")
+                .Select(c => new { Customer = c })
+                .Take(1)
+                .Select(e => e.Customer.Orders.FirstOrDefault())
         );
 
     [ConditionalTheory]
@@ -6141,15 +5822,13 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     public virtual Task Anonymous_projection_skip_take_empty_collection_FirstOrDefault(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => c.CustomerID == "FISSA")
-                    .Select(c => new { Customer = c })
-                    .Skip(0)
-                    .Take(1)
-                    .Select(e => e.Customer.Orders.FirstOrDefault())
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c => c.CustomerID == "FISSA")
+                .Select(c => new { Customer = c })
+                .Skip(0)
+                .Take(1)
+                .Select(e => e.Customer.Orders.FirstOrDefault())
         );
 
     [ConditionalTheory]
@@ -6282,9 +5961,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [MemberData(nameof(IsAsyncData))]
     public virtual Task EF_Property_include_on_incorrect_property_throws(bool async) =>
         Assert.ThrowsAsync<InvalidOperationException>(async () =>
-            await AssertQuery(
-                async,
-                ss => ss.Set<Customer>().Include(c => EF.Property<Customer>(c, "OrderDetails"))
+            await AssertQuery(async, ss =>
+                ss.Set<Customer>().Include(c => EF.Property<Customer>(c, "OrderDetails"))
             )
         );
 
@@ -6360,11 +6038,9 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     public virtual Task Using_string_Equals_with_StringComparison_throws_informative_error(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c => c.CustomerID.Equals("ALFKI", StringComparison.InvariantCulture))
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c => c.CustomerID.Equals("ALFKI", StringComparison.InvariantCulture))
         );
 
     [ConditionalTheory]
@@ -6372,41 +6048,33 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     public virtual Task Using_static_string_Equals_with_StringComparison_throws_informative_error(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Where(c =>
-                        string.Equals(c.CustomerID, "ALFKI", StringComparison.InvariantCulture)
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Where(c => string.Equals(c.CustomerID, "ALFKI", StringComparison.InvariantCulture))
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Single_non_scalar_projection_after_skip_uses_join(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Select(c =>
-                        c.Orders.OrderBy(o => o.OrderDate)
-                            .ThenBy(o => o.OrderID)
-                            .Skip(2)
-                            .FirstOrDefault()
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Select(c =>
+                    c.Orders.OrderBy(o => o.OrderDate)
+                        .ThenBy(o => o.OrderID)
+                        .Skip(2)
+                        .FirstOrDefault()
+                )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Select_distinct_Select_with_client_bindings(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Order>()
-                    .Where(o => o.OrderID < 20000)
-                    .Select(o => o.OrderDate.Value.Year)
-                    .Distinct()
-                    .Select(e => new DTO<int> { Property = ClientMethod(e) })
+        AssertQuery(async, ss =>
+            ss.Set<Order>()
+                .Where(o => o.OrderID < 20000)
+                .Select(o => o.OrderDate.Value.Year)
+                .Distinct()
+                .Select(e => new DTO<int> { Property = ClientMethod(e) })
         );
 
     [ConditionalTheory]
@@ -6457,9 +6125,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
             "Nullable object must have a value.",
             (
                 await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                    AssertQuery(
-                        async,
-                        ss => ss.Set<Customer>().Select(e => new { e.Region.Length })
+                    AssertQuery(async, ss =>
+                        ss.Set<Customer>().Select(e => new { e.Region.Length })
                     )
                 )
             ).Message
@@ -6567,9 +6234,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     public virtual Task DefaultIfEmpty_over_empty_collection_followed_by_projecting_constant(
         bool async
     ) =>
-        AssertFirstOrDefault(
-            async,
-            ss => ss.Set<Customer>().Where(c => false).DefaultIfEmpty().Select(c => "520")
+        AssertFirstOrDefault(async, ss =>
+            ss.Set<Customer>().Where(c => false).DefaultIfEmpty().Select(c => "520")
         );
 
     [ConditionalTheory]
@@ -6639,13 +6305,11 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [MemberData(nameof(IsAsyncData))]
     public virtual Task SkipWhile_throws_meaningful_exception(bool async) =>
         AssertTranslationFailed(() =>
-            AssertQuery(
-                async,
-                ss =>
-                    ss.Set<Customer>()
-                        .OrderBy(c => c.CustomerID)
-                        .SkipWhile(c => c.CustomerID != "Foo")
-                        .Skip(1)
+            AssertQuery(async, ss =>
+                ss.Set<Customer>()
+                    .OrderBy(c => c.CustomerID)
+                    .SkipWhile(c => c.CustomerID != "Foo")
+                    .Skip(1)
             )
         );
 
@@ -6659,9 +6323,8 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
             assertEmpty: true
         );
 
-        await AssertQuery(
-            async,
-            ss => ss.Set<Customer>().OrderBy(c => c.CustomerID).Skip(1).Take(1)
+        await AssertQuery(async, ss =>
+            ss.Set<Customer>().OrderBy(c => c.CustomerID).Skip(1).Take(1)
         );
     }
 
@@ -6964,8 +6627,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Subquery_with_navigation_inside_inline_collection(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<Customer>().Where(c => new[] { 100, c.Orders.Count }.Sum() > 101)
+        AssertQuery(async, ss =>
+            ss.Set<Customer>().Where(c => new[] { 100, c.Orders.Count }.Sum() > 101)
         );
 }

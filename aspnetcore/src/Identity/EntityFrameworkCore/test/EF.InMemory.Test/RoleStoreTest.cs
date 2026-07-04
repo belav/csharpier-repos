@@ -73,29 +73,23 @@ public class RoleStoreTest : IClassFixture<InMemoryDatabaseFixture>
     {
         Assert.Throws<ArgumentNullException>("context", () => new RoleStore<IdentityRole>(null));
         var store = new RoleStore<IdentityRole>(InMemoryContext.Create(_fixture.Connection));
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "role",
-            async () => await store.GetRoleIdAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("role", async () =>
+            await store.GetRoleIdAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "role",
-            async () => await store.GetRoleNameAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("role", async () =>
+            await store.GetRoleNameAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "role",
-            async () => await store.SetRoleNameAsync(null, null)
+        await Assert.ThrowsAsync<ArgumentNullException>("role", async () =>
+            await store.SetRoleNameAsync(null, null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "role",
-            async () => await store.CreateAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("role", async () =>
+            await store.CreateAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "role",
-            async () => await store.UpdateAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("role", async () =>
+            await store.UpdateAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "role",
-            async () => await store.DeleteAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("role", async () =>
+            await store.DeleteAsync(null)
         );
     }
 

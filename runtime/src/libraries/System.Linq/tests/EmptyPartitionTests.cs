@@ -46,9 +46,8 @@ namespace System.Linq.Tests
         [Fact]
         public void ElementAtThrows()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => GetEmptyPartition<int>().ElementAt(0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                GetEmptyPartition<int>().ElementAt(0)
             );
         }
 

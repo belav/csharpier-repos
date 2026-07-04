@@ -102,16 +102,13 @@ namespace System.IO.Pipes.Tests
             Assert.Equal(expectedAccessRules.Count, actualAccessRules.Count);
             if (expectedAccessRules.Count > 0)
             {
-                Assert.All(
-                    expectedAccessRules,
-                    actualAccessRule =>
-                    {
-                        int count = expectedAccessRules.Count(expectedAccessRule =>
-                            AreAccessRulesEqual(expectedAccessRule, actualAccessRule)
-                        );
-                        Assert.True(count > 0);
-                    }
-                );
+                Assert.All(expectedAccessRules, actualAccessRule =>
+                {
+                    int count = expectedAccessRules.Count(expectedAccessRule =>
+                        AreAccessRulesEqual(expectedAccessRule, actualAccessRule)
+                    );
+                    Assert.True(count > 0);
+                });
             }
         }
 

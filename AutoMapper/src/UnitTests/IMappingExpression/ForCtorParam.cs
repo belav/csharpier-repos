@@ -119,17 +119,13 @@ public class When_configuring__non_generic_ctor_param_members : AutoMapperSpecBa
     {
         var mapper = new MapperConfiguration(cfg =>
             cfg.CreateMap<Source, Dest>()
-                .ForCtorParam(
-                    "thing",
-                    opt =>
-                        opt.MapFrom(
-                            (src, ctxt) =>
-                            {
-                                var rev = src.Value + 3;
-                                return rev;
-                            }
-                        )
-                )
+                .ForCtorParam("thing", opt => opt.MapFrom(
+                        (src, ctxt) =>
+                        {
+                            var rev = src.Value + 3;
+                            return rev;
+                        }
+                    ))
         ).CreateMapper();
 
         var dest = mapper.Map<Source, Dest>(new Source { Value = 5 });
@@ -146,9 +142,8 @@ public class When_configuring__non_generic_ctor_param_members : AutoMapperSpecBa
                 .ForCtorParam("thing", opt => opt.MapFrom((src, ctx) => ctx.Items[itemKey]))
         ).CreateMapper();
 
-        var dest = mapper.Map<Source, Dest>(
-            new Source { Value = 8 },
-            opts => opts.Items[itemKey] = 10
+        var dest = mapper.Map<Source, Dest>(new Source { Value = 8 }, opts =>
+            opts.Items[itemKey] = 10
         );
 
         dest.Value1.ShouldBe(10);

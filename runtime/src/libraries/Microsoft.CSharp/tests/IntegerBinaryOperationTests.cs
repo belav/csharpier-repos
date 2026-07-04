@@ -767,21 +767,17 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 Expression.Parameter(typeof(object)),
                 BindingRestrictions.Empty
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "target",
-                () => binder.FallbackBinaryOperation(null, null)
+            AssertExtensions.Throws<ArgumentNullException>("target", () =>
+                binder.FallbackBinaryOperation(null, null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "arg",
-                () => binder.FallbackBinaryOperation(dmo2, null)
+            AssertExtensions.Throws<ArgumentNullException>("arg", () =>
+                binder.FallbackBinaryOperation(dmo2, null)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "target",
-                () => binder.FallbackBinaryOperation(dmoNoVal, null)
+            AssertExtensions.Throws<ArgumentException>("target", () =>
+                binder.FallbackBinaryOperation(dmoNoVal, null)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "arg",
-                () => binder.FallbackBinaryOperation(dmo2, dmoNoVal)
+            AssertExtensions.Throws<ArgumentException>("arg", () =>
+                binder.FallbackBinaryOperation(dmo2, dmoNoVal)
             );
         }
     }

@@ -25,10 +25,10 @@ namespace System.Security.Cryptography.X509Certificates
         {
             if (certificatePal is CertificatePal pal)
             {
-                return DecodeECPublicKey(
-                    pal,
-                    factory: cngKey => new ECDsaCng(cngKey, transferOwnership: true)
-                );
+                return DecodeECPublicKey(pal, factory: cngKey => new ECDsaCng(
+                    cngKey,
+                    transferOwnership: true
+                ));
             }
 
             throw new NotSupportedException(SR.NotSupported_KeyAlgorithm);

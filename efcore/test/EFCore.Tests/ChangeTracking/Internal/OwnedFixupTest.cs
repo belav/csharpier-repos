@@ -247,50 +247,47 @@ public class OwnedFixupTest
 
         Assert.Equal(3, context.ChangeTracker.Entries().Count());
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(entityState, context.Entry(principal).State);
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(entityState, context.Entry(principal).State);
 
-                Assert.Same(dependent, principal.Child1);
-                Assert.Null(principal.Child2);
-                var dependentEntry = context.Entry(dependent);
-                Assert.Equal(principal.Id, dependentEntry.Property("ParentId").CurrentValue);
-                Assert.Equal(
-                    useTrackGraph == null ? EntityState.Added : entityState,
-                    dependentEntry.State
-                );
-                Assert.Equal(
-                    typeof(ParentPN).ShortDisplayName()
-                        + "."
-                        + nameof(ParentPN.Child1)
-                        + "#"
-                        + nameof(ChildPN),
-                    dependentEntry.Metadata.DisplayName()
-                );
+            Assert.Same(dependent, principal.Child1);
+            Assert.Null(principal.Child2);
+            var dependentEntry = context.Entry(dependent);
+            Assert.Equal(principal.Id, dependentEntry.Property("ParentId").CurrentValue);
+            Assert.Equal(
+                useTrackGraph == null ? EntityState.Added : entityState,
+                dependentEntry.State
+            );
+            Assert.Equal(
+                typeof(ParentPN).ShortDisplayName()
+                    + "."
+                    + nameof(ParentPN.Child1)
+                    + "#"
+                    + nameof(ChildPN),
+                dependentEntry.Metadata.DisplayName()
+            );
 
-                Assert.Same(subDependent, dependent.SubChild);
-                var subDependentEntry = context.Entry(subDependent);
-                Assert.Equal(principal.Id, subDependentEntry.Property("ParentId").CurrentValue);
-                Assert.Equal(
-                    useTrackGraph == null ? EntityState.Added : entityState,
-                    subDependentEntry.State
-                );
-                Assert.Equal(
-                    typeof(ParentPN).ShortDisplayName()
-                        + "."
-                        + nameof(ParentPN.Child1)
-                        + "#"
-                        + nameof(ChildPN)
-                        + "."
-                        + nameof(ChildPN.SubChild)
-                        + "#"
-                        + nameof(SubChildPN),
-                    subDependentEntry.Metadata.DisplayName()
-                );
-            }
-        );
+            Assert.Same(subDependent, dependent.SubChild);
+            var subDependentEntry = context.Entry(subDependent);
+            Assert.Equal(principal.Id, subDependentEntry.Property("ParentId").CurrentValue);
+            Assert.Equal(
+                useTrackGraph == null ? EntityState.Added : entityState,
+                subDependentEntry.State
+            );
+            Assert.Equal(
+                typeof(ParentPN).ShortDisplayName()
+                    + "."
+                    + nameof(ParentPN.Child1)
+                    + "#"
+                    + nameof(ChildPN)
+                    + "."
+                    + nameof(ChildPN.SubChild)
+                    + "#"
+                    + nameof(SubChildPN),
+                subDependentEntry.Metadata.DisplayName()
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -352,65 +349,59 @@ public class OwnedFixupTest
 
         Assert.Equal(4, context.ChangeTracker.Entries().Count());
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(dependent, principal.Child1);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(
-                    useTrackGraph == null ? EntityState.Added : entityState,
-                    context.Entry(dependent).State
-                );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(dependent, principal.Child1);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(
+                useTrackGraph == null ? EntityState.Added : entityState,
+                context.Entry(dependent).State
+            );
 
-                Assert.Same(subDependent1, dependent.SubChild1);
-                Assert.Same(dependent, subDependent1.Parent);
-                var subDependentEntry1 = context.Entry(subDependent1);
-                Assert.Equal(principal.Id, subDependentEntry1.Property("ParentId").CurrentValue);
-                Assert.Equal(
-                    useTrackGraph == null ? EntityState.Added : entityState,
-                    subDependentEntry1.State
-                );
-                Assert.Equal(
-                    typeof(Parent).ShortDisplayName()
-                        + "."
-                        + nameof(Parent.Child1)
-                        + "#"
-                        + nameof(Child)
-                        + "."
-                        + nameof(Child.SubChild1)
-                        + "#"
-                        + nameof(SubChild),
-                    subDependentEntry1.Metadata.DisplayName()
-                );
+            Assert.Same(subDependent1, dependent.SubChild1);
+            Assert.Same(dependent, subDependent1.Parent);
+            var subDependentEntry1 = context.Entry(subDependent1);
+            Assert.Equal(principal.Id, subDependentEntry1.Property("ParentId").CurrentValue);
+            Assert.Equal(
+                useTrackGraph == null ? EntityState.Added : entityState,
+                subDependentEntry1.State
+            );
+            Assert.Equal(
+                typeof(Parent).ShortDisplayName()
+                    + "."
+                    + nameof(Parent.Child1)
+                    + "#"
+                    + nameof(Child)
+                    + "."
+                    + nameof(Child.SubChild1)
+                    + "#"
+                    + nameof(SubChild),
+                subDependentEntry1.Metadata.DisplayName()
+            );
 
-                Assert.Same(subDependent2, dependent.SubChild2);
-                Assert.Same(dependent, subDependent2.Parent);
-                var subDependentEntry2 = context.Entry(subDependent1);
-                Assert.Equal(principal.Id, subDependentEntry2.Property("ParentId").CurrentValue);
-                Assert.Equal(
-                    useTrackGraph == null ? EntityState.Added : entityState,
-                    subDependentEntry2.State
-                );
-                Assert.Equal(
-                    typeof(Parent).ShortDisplayName()
-                        + "."
-                        + nameof(Parent.Child1)
-                        + "#"
-                        + nameof(Child)
-                        + "."
-                        + nameof(Child.SubChild1)
-                        + "#"
-                        + nameof(SubChild),
-                    subDependentEntry2.Metadata.DisplayName()
-                );
-            }
-        );
+            Assert.Same(subDependent2, dependent.SubChild2);
+            Assert.Same(dependent, subDependent2.Parent);
+            var subDependentEntry2 = context.Entry(subDependent1);
+            Assert.Equal(principal.Id, subDependentEntry2.Property("ParentId").CurrentValue);
+            Assert.Equal(
+                useTrackGraph == null ? EntityState.Added : entityState,
+                subDependentEntry2.State
+            );
+            Assert.Equal(
+                typeof(Parent).ShortDisplayName()
+                    + "."
+                    + nameof(Parent.Child1)
+                    + "#"
+                    + nameof(Child)
+                    + "."
+                    + nameof(Child.SubChild1)
+                    + "#"
+                    + nameof(SubChild),
+                subDependentEntry2.Metadata.DisplayName()
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -474,65 +465,59 @@ public class OwnedFixupTest
 
         Assert.Equal(4, context.ChangeTracker.Entries().Count());
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(dependent, principal.Child1);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(
-                    useTrackGraph == null ? EntityState.Added : entityState,
-                    context.Entry(dependent).State
-                );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(dependent, principal.Child1);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(
+                useTrackGraph == null ? EntityState.Added : entityState,
+                context.Entry(dependent).State
+            );
 
-                Assert.Same(subDependent1, dependent.SubChild1);
-                Assert.Same(dependent, subDependent1.Parent);
-                var subDependentEntry1 = context.Entry(subDependent1);
-                Assert.Equal(principal.Id, subDependentEntry1.Property("ParentId").CurrentValue);
-                Assert.Equal(
-                    useTrackGraph == null ? EntityState.Added : entityState,
-                    subDependentEntry1.State
-                );
-                Assert.Equal(
-                    typeof(Parent).ShortDisplayName()
-                        + "."
-                        + nameof(Parent.Child1)
-                        + "#"
-                        + nameof(Child)
-                        + "."
-                        + nameof(Child.SubChild1)
-                        + "#"
-                        + nameof(SubChild),
-                    subDependentEntry1.Metadata.DisplayName()
-                );
+            Assert.Same(subDependent1, dependent.SubChild1);
+            Assert.Same(dependent, subDependent1.Parent);
+            var subDependentEntry1 = context.Entry(subDependent1);
+            Assert.Equal(principal.Id, subDependentEntry1.Property("ParentId").CurrentValue);
+            Assert.Equal(
+                useTrackGraph == null ? EntityState.Added : entityState,
+                subDependentEntry1.State
+            );
+            Assert.Equal(
+                typeof(Parent).ShortDisplayName()
+                    + "."
+                    + nameof(Parent.Child1)
+                    + "#"
+                    + nameof(Child)
+                    + "."
+                    + nameof(Child.SubChild1)
+                    + "#"
+                    + nameof(SubChild),
+                subDependentEntry1.Metadata.DisplayName()
+            );
 
-                Assert.Same(subDependent2, dependent.SubChild2);
-                Assert.Same(dependent, subDependent2.Parent);
-                var subDependentEntry2 = context.Entry(subDependent2);
-                Assert.Equal(principal.Id, subDependentEntry1.Property("ParentId").CurrentValue);
-                Assert.Equal(
-                    useTrackGraph == null ? EntityState.Added : entityState,
-                    subDependentEntry2.State
-                );
-                Assert.Equal(
-                    typeof(Parent).ShortDisplayName()
-                        + "."
-                        + nameof(Parent.Child1)
-                        + "#"
-                        + nameof(Child)
-                        + "."
-                        + nameof(Child.SubChild2)
-                        + "#"
-                        + nameof(SubChild),
-                    subDependentEntry2.Metadata.DisplayName()
-                );
-            }
-        );
+            Assert.Same(subDependent2, dependent.SubChild2);
+            Assert.Same(dependent, subDependent2.Parent);
+            var subDependentEntry2 = context.Entry(subDependent2);
+            Assert.Equal(principal.Id, subDependentEntry1.Property("ParentId").CurrentValue);
+            Assert.Equal(
+                useTrackGraph == null ? EntityState.Added : entityState,
+                subDependentEntry2.State
+            );
+            Assert.Equal(
+                typeof(Parent).ShortDisplayName()
+                    + "."
+                    + nameof(Parent.Child1)
+                    + "#"
+                    + nameof(Child)
+                    + "."
+                    + nameof(Child.SubChild2)
+                    + "#"
+                    + nameof(SubChild),
+                subDependentEntry2.Metadata.DisplayName()
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -615,25 +600,22 @@ public class OwnedFixupTest
         }
         else if (useTrackGraph == true)
         {
-            context.ChangeTracker.TrackGraph(
-                principal,
-                e =>
+            context.ChangeTracker.TrackGraph(principal, e =>
+            {
+                if (entityState != EntityState.Added)
                 {
-                    if (entityState != EntityState.Added)
+                    if (ReferenceEquals(e.Entry.Entity, dependent))
                     {
-                        if (ReferenceEquals(e.Entry.Entity, dependent))
-                        {
-                            e.Entry.Property("Id").CurrentValue = 10;
-                        }
-                        else if (ReferenceEquals(e.Entry.Entity, subDependent))
-                        {
-                            e.Entry.Property("Id").CurrentValue = 100;
-                        }
+                        e.Entry.Property("Id").CurrentValue = 10;
                     }
-
-                    e.Entry.State = entityState;
+                    else if (ReferenceEquals(e.Entry.Entity, subDependent))
+                    {
+                        e.Entry.Property("Id").CurrentValue = 100;
+                    }
                 }
-            );
+
+                e.Entry.State = entityState;
+            });
         }
         else
         {
@@ -658,53 +640,47 @@ public class OwnedFixupTest
 
         Assert.Equal(3, context.ChangeTracker.Entries().Count());
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(entityState, context.Entry(principal).State);
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(entityState, context.Entry(principal).State);
 
-                Assert.Contains(principal.ChildCollection1, e => ReferenceEquals(e, dependent));
-                Assert.Null(principal.ChildCollection2);
-                var dependentEntry = context.Entry(dependent);
-                Assert.Equal(principal.Id, dependentEntry.Property("ParentId").CurrentValue);
-                Assert.Equal(
-                    useTrackGraph == null ? EntityState.Added : entityState,
-                    dependentEntry.State
-                );
-                Assert.Equal(
-                    typeof(ParentPN).ShortDisplayName()
-                        + "."
-                        + nameof(ParentPN.ChildCollection1)
-                        + "#"
-                        + nameof(ChildPN),
-                    dependentEntry.Metadata.DisplayName()
-                );
+            Assert.Contains(principal.ChildCollection1, e => ReferenceEquals(e, dependent));
+            Assert.Null(principal.ChildCollection2);
+            var dependentEntry = context.Entry(dependent);
+            Assert.Equal(principal.Id, dependentEntry.Property("ParentId").CurrentValue);
+            Assert.Equal(
+                useTrackGraph == null ? EntityState.Added : entityState,
+                dependentEntry.State
+            );
+            Assert.Equal(
+                typeof(ParentPN).ShortDisplayName()
+                    + "."
+                    + nameof(ParentPN.ChildCollection1)
+                    + "#"
+                    + nameof(ChildPN),
+                dependentEntry.Metadata.DisplayName()
+            );
 
-                Assert.Contains(
-                    dependent.SubChildCollection,
-                    e => ReferenceEquals(e, subDependent)
-                );
-                var subDependentEntry = context.Entry(subDependent);
-                Assert.Equal(principal.Id, subDependentEntry.Property("ParentId").CurrentValue);
-                Assert.Equal(
-                    useTrackGraph == null ? EntityState.Added : entityState,
-                    subDependentEntry.State
-                );
-                Assert.Equal(
-                    typeof(ParentPN).ShortDisplayName()
-                        + "."
-                        + nameof(ParentPN.ChildCollection1)
-                        + "#"
-                        + nameof(ChildPN)
-                        + "."
-                        + nameof(ChildPN.SubChildCollection)
-                        + "#"
-                        + nameof(SubChildPN),
-                    subDependentEntry.Metadata.DisplayName()
-                );
-            }
-        );
+            Assert.Contains(dependent.SubChildCollection, e => ReferenceEquals(e, subDependent));
+            var subDependentEntry = context.Entry(subDependent);
+            Assert.Equal(principal.Id, subDependentEntry.Property("ParentId").CurrentValue);
+            Assert.Equal(
+                useTrackGraph == null ? EntityState.Added : entityState,
+                subDependentEntry.State
+            );
+            Assert.Equal(
+                typeof(ParentPN).ShortDisplayName()
+                    + "."
+                    + nameof(ParentPN.ChildCollection1)
+                    + "#"
+                    + nameof(ChildPN)
+                    + "."
+                    + nameof(ChildPN.SubChildCollection)
+                    + "#"
+                    + nameof(SubChildPN),
+                subDependentEntry.Metadata.DisplayName()
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -787,25 +763,22 @@ public class OwnedFixupTest
         }
         else if (useTrackGraph == true)
         {
-            context.ChangeTracker.TrackGraph(
-                principal,
-                e =>
+            context.ChangeTracker.TrackGraph(principal, e =>
+            {
+                if (entityState != EntityState.Added)
                 {
-                    if (entityState != EntityState.Added)
+                    if (ReferenceEquals(e.Entry.Entity, dependent))
                     {
-                        if (ReferenceEquals(e.Entry.Entity, dependent))
-                        {
-                            e.Entry.Property("Id").CurrentValue = 10;
-                        }
-                        else if (ReferenceEquals(e.Entry.Entity, subDependent))
-                        {
-                            e.Entry.Property("Id").CurrentValue = 100;
-                        }
+                        e.Entry.Property("Id").CurrentValue = 10;
                     }
-
-                    e.Entry.State = entityState;
+                    else if (ReferenceEquals(e.Entry.Entity, subDependent))
+                    {
+                        e.Entry.Property("Id").CurrentValue = 100;
+                    }
                 }
-            );
+
+                e.Entry.State = entityState;
+            });
         }
         else
         {
@@ -830,48 +803,39 @@ public class OwnedFixupTest
 
         Assert.Equal(3, context.ChangeTracker.Entries().Count());
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Contains(principal.ChildCollection1, e => ReferenceEquals(e, dependent));
-                Assert.Same(principal, dependent.Parent);
-                Assert.Null(principal.ChildCollection2);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(
-                    useTrackGraph == null ? EntityState.Added : entityState,
-                    context.Entry(dependent).State
-                );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Contains(principal.ChildCollection1, e => ReferenceEquals(e, dependent));
+            Assert.Same(principal, dependent.Parent);
+            Assert.Null(principal.ChildCollection2);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(
+                useTrackGraph == null ? EntityState.Added : entityState,
+                context.Entry(dependent).State
+            );
 
-                Assert.Contains(
-                    dependent.SubChildCollection,
-                    e => ReferenceEquals(e, subDependent)
-                );
-                Assert.Same(dependent, subDependent.Parent);
-                var subDependentEntry = context.Entry(subDependent);
-                Assert.Equal(principal.Id, subDependentEntry.Property("ParentId").CurrentValue);
-                Assert.Equal(
-                    useTrackGraph == null ? EntityState.Added : entityState,
-                    subDependentEntry.State
-                );
-                Assert.Equal(
-                    typeof(Parent).ShortDisplayName()
-                        + "."
-                        + nameof(ParentPN.ChildCollection1)
-                        + "#"
-                        + nameof(Child)
-                        + "."
-                        + nameof(Child.SubChildCollection)
-                        + "#"
-                        + nameof(SubChild),
-                    subDependentEntry.Metadata.DisplayName()
-                );
-            }
-        );
+            Assert.Contains(dependent.SubChildCollection, e => ReferenceEquals(e, subDependent));
+            Assert.Same(dependent, subDependent.Parent);
+            var subDependentEntry = context.Entry(subDependent);
+            Assert.Equal(principal.Id, subDependentEntry.Property("ParentId").CurrentValue);
+            Assert.Equal(
+                useTrackGraph == null ? EntityState.Added : entityState,
+                subDependentEntry.State
+            );
+            Assert.Equal(
+                typeof(Parent).ShortDisplayName()
+                    + "."
+                    + nameof(ParentPN.ChildCollection1)
+                    + "#"
+                    + nameof(Child)
+                    + "."
+                    + nameof(Child.SubChildCollection)
+                    + "#"
+                    + nameof(SubChild),
+                subDependentEntry.Metadata.DisplayName()
+            );
+        });
     }
 
     [ConditionalTheory]
@@ -954,25 +918,22 @@ public class OwnedFixupTest
         }
         else if (useTrackGraph == true)
         {
-            context.ChangeTracker.TrackGraph(
-                principal,
-                e =>
+            context.ChangeTracker.TrackGraph(principal, e =>
+            {
+                if (entityState != EntityState.Added)
                 {
-                    if (entityState != EntityState.Added)
+                    if (ReferenceEquals(e.Entry.Entity, dependent))
                     {
-                        if (ReferenceEquals(e.Entry.Entity, dependent))
-                        {
-                            e.Entry.Property("Id").CurrentValue = 10;
-                        }
-                        else if (ReferenceEquals(e.Entry.Entity, subDependent))
-                        {
-                            e.Entry.Property("Id").CurrentValue = 100;
-                        }
+                        e.Entry.Property("Id").CurrentValue = 10;
                     }
-
-                    e.Entry.State = entityState;
+                    else if (ReferenceEquals(e.Entry.Entity, subDependent))
+                    {
+                        e.Entry.Property("Id").CurrentValue = 100;
+                    }
                 }
-            );
+
+                e.Entry.State = entityState;
+            });
         }
         else
         {
@@ -997,48 +958,39 @@ public class OwnedFixupTest
 
         Assert.Equal(3, context.ChangeTracker.Entries().Count());
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Contains(principal.ChildCollection1, e => ReferenceEquals(e, dependent));
-                Assert.Null(principal.ChildCollection2);
-                Assert.Same(principal, dependent.Parent);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(
-                    useTrackGraph == null ? EntityState.Added : entityState,
-                    context.Entry(dependent).State
-                );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Contains(principal.ChildCollection1, e => ReferenceEquals(e, dependent));
+            Assert.Null(principal.ChildCollection2);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(
+                useTrackGraph == null ? EntityState.Added : entityState,
+                context.Entry(dependent).State
+            );
 
-                Assert.Contains(
-                    dependent.SubChildCollection,
-                    e => ReferenceEquals(e, subDependent)
-                );
-                Assert.Same(dependent, subDependent.Parent);
-                var subDependentEntry = context.Entry(subDependent);
-                Assert.Equal(principal.Id, subDependentEntry.Property("ParentId").CurrentValue);
-                Assert.Equal(
-                    useTrackGraph == null ? EntityState.Added : entityState,
-                    subDependentEntry.State
-                );
-                Assert.Equal(
-                    typeof(Parent).ShortDisplayName()
-                        + "."
-                        + nameof(Parent.ChildCollection1)
-                        + "#"
-                        + nameof(Child)
-                        + "."
-                        + nameof(Child.SubChildCollection)
-                        + "#"
-                        + nameof(SubChild),
-                    subDependentEntry.Metadata.DisplayName()
-                );
-            }
-        );
+            Assert.Contains(dependent.SubChildCollection, e => ReferenceEquals(e, subDependent));
+            Assert.Same(dependent, subDependent.Parent);
+            var subDependentEntry = context.Entry(subDependent);
+            Assert.Equal(principal.Id, subDependentEntry.Property("ParentId").CurrentValue);
+            Assert.Equal(
+                useTrackGraph == null ? EntityState.Added : entityState,
+                subDependentEntry.State
+            );
+            Assert.Equal(
+                typeof(Parent).ShortDisplayName()
+                    + "."
+                    + nameof(Parent.ChildCollection1)
+                    + "#"
+                    + nameof(Child)
+                    + "."
+                    + nameof(Child.SubChildCollection)
+                    + "#"
+                    + nameof(SubChild),
+                subDependentEntry.Metadata.DisplayName()
+            );
+        });
     }
 
     [ConditionalFact]
@@ -1055,19 +1007,13 @@ public class OwnedFixupTest
 
         Assert.Equal(2, context.ChangeTracker.Entries().Count());
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(dependent, principal.Child1);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(dependent, principal.Child1);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]

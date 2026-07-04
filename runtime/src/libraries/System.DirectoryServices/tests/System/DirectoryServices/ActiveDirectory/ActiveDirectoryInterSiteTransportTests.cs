@@ -12,13 +12,11 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         [Fact]
         public void FindByTransportType_NullContext_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "context",
-                () =>
-                    ActiveDirectoryInterSiteTransport.FindByTransportType(
-                        null,
-                        ActiveDirectoryTransportType.Rpc
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("context", () =>
+                ActiveDirectoryInterSiteTransport.FindByTransportType(
+                    null,
+                    ActiveDirectoryTransportType.Rpc
+                )
             );
         }
 
@@ -42,13 +40,11 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void FindByTransportType_ForestNoDomainAssociatedWithName_ThrowsActiveDirectoryOperationException()
         {
             var context = new DirectoryContext(DirectoryContextType.Forest, "server:port");
-            AssertExtensions.Throws<ArgumentException>(
-                "context",
-                () =>
-                    ActiveDirectoryInterSiteTransport.FindByTransportType(
-                        context,
-                        ActiveDirectoryTransportType.Rpc
-                    )
+            AssertExtensions.Throws<ArgumentException>("context", () =>
+                ActiveDirectoryInterSiteTransport.FindByTransportType(
+                    context,
+                    ActiveDirectoryTransportType.Rpc
+                )
             );
         }
 
@@ -59,13 +55,11 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void FindByTransportType_ForestNoDomainAssociatedWithName_ThrowsActiveDirectoryOperationException_NoDomain()
         {
             var context = new DirectoryContext(DirectoryContextType.Forest, "\0");
-            AssertExtensions.Throws<ArgumentException>(
-                "context",
-                () =>
-                    ActiveDirectoryInterSiteTransport.FindByTransportType(
-                        context,
-                        ActiveDirectoryTransportType.Rpc
-                    )
+            AssertExtensions.Throws<ArgumentException>("context", () =>
+                ActiveDirectoryInterSiteTransport.FindByTransportType(
+                    context,
+                    ActiveDirectoryTransportType.Rpc
+                )
             );
         }
 
@@ -73,13 +67,11 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         public void FindByTransportType_DomainNoDomainAssociatedWithoutName_ThrowsArgumentException()
         {
             var context = new DirectoryContext(DirectoryContextType.Domain);
-            AssertExtensions.Throws<ArgumentException>(
-                "context",
-                () =>
-                    ActiveDirectoryInterSiteTransport.FindByTransportType(
-                        context,
-                        ActiveDirectoryTransportType.Rpc
-                    )
+            AssertExtensions.Throws<ArgumentException>("context", () =>
+                ActiveDirectoryInterSiteTransport.FindByTransportType(
+                    context,
+                    ActiveDirectoryTransportType.Rpc
+                )
             );
         }
 
@@ -134,9 +126,8 @@ namespace System.DirectoryServices.ActiveDirectory.Tests
         )
         {
             var context = new DirectoryContext(DirectoryContextType.ConfigurationSet, "Name");
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "value",
-                () => ActiveDirectoryInterSiteTransport.FindByTransportType(context, transport)
+            AssertExtensions.Throws<InvalidEnumArgumentException>("value", () =>
+                ActiveDirectoryInterSiteTransport.FindByTransportType(context, transport)
             );
         }
     }

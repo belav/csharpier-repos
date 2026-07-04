@@ -334,15 +334,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         {
             DkmEvaluationEnumAsyncResult getItemsResult = default(DkmEvaluationEnumAsyncResult);
             var workList = new DkmWorkList();
-            enumContext.GetItems(
-                workList,
-                startIndex,
-                count,
-                r =>
-                {
-                    getItemsResult = r;
-                }
-            );
+            enumContext.GetItems(workList, startIndex, count, r =>
+            {
+                getItemsResult = r;
+            });
             workList.Execute();
             var exception = getItemsResult.Exception;
             if (exception != null)

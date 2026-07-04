@@ -201,9 +201,8 @@ public class ReplaceName : ISourceToDestinationNameMapper
             .Concat(
                 new[]
                 {
-                    MemberNameReplacers.Aggregate(
-                        nameToSearch,
-                        (s, r) => s.Replace(r.OriginalValue, r.NewValue)
+                    MemberNameReplacers.Aggregate(nameToSearch, (s, r) =>
+                        s.Replace(r.OriginalValue, r.NewValue)
                     ),
                     nameToSearch,
                 }

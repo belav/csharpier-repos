@@ -3563,15 +3563,13 @@ public class C : B
                     .GetMember<PropertySymbol>("P"),
             };
 
-            AssertEx.All(
-                properties,
-                p =>
-                    p.DeclaredAccessibility
-                    == (
-                        p.ContainingType.Name == "A"
-                            ? Accessibility.ProtectedOrInternal
-                            : Accessibility.Protected
-                    )
+            AssertEx.All(properties, p =>
+                p.DeclaredAccessibility
+                == (
+                    p.ContainingType.Name == "A"
+                        ? Accessibility.ProtectedOrInternal
+                        : Accessibility.Protected
+                )
             );
         }
 
@@ -3632,15 +3630,13 @@ public class C : B
                     .GetMember<PropertySymbol>("P"),
             };
 
-            AssertEx.All(
-                properties,
-                p =>
-                    p.DeclaredAccessibility
-                    == (
-                        p.ContainingType.Name == "A"
-                            ? Accessibility.ProtectedOrInternal
-                            : Accessibility.Protected
-                    )
+            AssertEx.All(properties, p =>
+                p.DeclaredAccessibility
+                == (
+                    p.ContainingType.Name == "A"
+                        ? Accessibility.ProtectedOrInternal
+                        : Accessibility.Protected
+                )
             );
         }
 
@@ -3968,9 +3964,8 @@ public class B : A
                     .GetMember<PropertySymbol>("P"),
             };
 
-            AssertEx.All(
-                properties,
-                p => p.DeclaredAccessibility == Accessibility.ProtectedOrInternal
+            AssertEx.All(properties, p =>
+                p.DeclaredAccessibility == Accessibility.ProtectedOrInternal
             );
         }
 
@@ -4025,15 +4020,13 @@ public class C : B
                 comp3.GlobalNamespace.GetMember<NamedTypeSymbol>("C").GetMember<EventSymbol>("E"),
             };
 
-            AssertEx.All(
-                events,
-                e =>
-                    e.DeclaredAccessibility
-                    == (
-                        e.ContainingType.Name == "A"
-                            ? Accessibility.ProtectedOrInternal
-                            : Accessibility.Protected
-                    )
+            AssertEx.All(events, e =>
+                e.DeclaredAccessibility
+                == (
+                    e.ContainingType.Name == "A"
+                        ? Accessibility.ProtectedOrInternal
+                        : Accessibility.Protected
+                )
             );
         }
 

@@ -56,9 +56,8 @@ namespace System.CodeDom.Tests
         [Fact]
         public void Ctor_NullStatements_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeIterationStatement(null, null, null, null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeIterationStatement(null, null, null, null)
             );
         }
 
@@ -66,9 +65,8 @@ namespace System.CodeDom.Tests
         public void Ctor_NullObjectInStatements_ThrowsArgumentNullException()
         {
             CodeStatement[] statements = new CodeStatement[] { null };
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeIterationStatement(null, null, null, statements)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeIterationStatement(null, null, null, statements)
             );
         }
 

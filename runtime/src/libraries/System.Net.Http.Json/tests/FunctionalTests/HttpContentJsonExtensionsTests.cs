@@ -21,26 +21,21 @@ namespace System.Net.Http.Json.Functional.Tests
         public void ThrowOnNull()
         {
             HttpContent content = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "content",
-                () => content.ReadFromJsonAsync<Person>()
+            AssertExtensions.Throws<ArgumentNullException>("content", () =>
+                content.ReadFromJsonAsync<Person>()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "content",
-                () => content.ReadFromJsonAsync(typeof(Person))
+            AssertExtensions.Throws<ArgumentNullException>("content", () =>
+                content.ReadFromJsonAsync(typeof(Person))
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "content",
-                () => content.ReadFromJsonAsAsyncEnumerable<Person>()
+            AssertExtensions.Throws<ArgumentNullException>("content", () =>
+                content.ReadFromJsonAsAsyncEnumerable<Person>()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "content",
-                () => content.ReadFromJsonAsAsyncEnumerable<Person>(options: null)
+            AssertExtensions.Throws<ArgumentNullException>("content", () =>
+                content.ReadFromJsonAsAsyncEnumerable<Person>(options: null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "content",
-                () => content.ReadFromJsonAsAsyncEnumerable<Person>(jsonTypeInfo: null)
+            AssertExtensions.Throws<ArgumentNullException>("content", () =>
+                content.ReadFromJsonAsAsyncEnumerable<Person>(jsonTypeInfo: null)
             );
         }
 

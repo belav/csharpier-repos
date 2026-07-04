@@ -223,26 +223,23 @@ public class Program
                 source,
                 options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All)
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                        "System.Runtime.CompilerServices.NullableContextAttribute"
-                    );
-                    AttributeUsageInfo attributeUsage = attributeType.GetAttributeUsageInfo();
-                    Assert.False(attributeUsage.Inherited);
-                    Assert.False(attributeUsage.AllowMultiple);
-                    Assert.True(attributeUsage.HasValidAttributeTargets);
-                    var expectedTargets =
-                        AttributeTargets.Class
-                        | AttributeTargets.Delegate
-                        | AttributeTargets.Interface
-                        | AttributeTargets.Method
-                        | AttributeTargets.Struct;
-                    Assert.Equal(expectedTargets, attributeUsage.ValidTargets);
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
+                    "System.Runtime.CompilerServices.NullableContextAttribute"
+                );
+                AttributeUsageInfo attributeUsage = attributeType.GetAttributeUsageInfo();
+                Assert.False(attributeUsage.Inherited);
+                Assert.False(attributeUsage.AllowMultiple);
+                Assert.True(attributeUsage.HasValidAttributeTargets);
+                var expectedTargets =
+                    AttributeTargets.Class
+                    | AttributeTargets.Delegate
+                    | AttributeTargets.Interface
+                    | AttributeTargets.Method
+                    | AttributeTargets.Struct;
+                Assert.Equal(expectedTargets, attributeUsage.ValidTargets);
+            });
         }
 
         [Fact]
@@ -392,10 +389,8 @@ class Program
                 parseOptions: TestOptions.Regular8,
                 options: TestOptions.DebugExe
             );
-            CompileAndVerify(
-                comp,
-                expectedOutput: expectedOutput,
-                symbolValidator: module => AssertNullableAttributes(module, expectedAttributes)
+            CompileAndVerify(comp, expectedOutput: expectedOutput, symbolValidator: module =>
+                AssertNullableAttributes(module, expectedAttributes)
             );
         }
 
@@ -478,9 +473,8 @@ class Program
 
         private void AssertNullableAttributes(CSharpCompilation comp, string expected)
         {
-            CompileAndVerify(
-                comp,
-                symbolValidator: module => AssertNullableAttributes(module, expected)
+            CompileAndVerify(comp, symbolValidator: module =>
+                AssertNullableAttributes(module, expected)
             );
         }
 

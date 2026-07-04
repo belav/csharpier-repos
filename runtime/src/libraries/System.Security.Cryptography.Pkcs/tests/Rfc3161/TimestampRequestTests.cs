@@ -166,9 +166,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         [Fact]
         public static void BuildFromNullSignerInfo()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "signerInfo",
-                () => Rfc3161TimestampRequest.CreateFromSignerInfo(null, HashAlgorithmName.SHA256)
+            AssertExtensions.Throws<ArgumentNullException>("signerInfo", () =>
+                Rfc3161TimestampRequest.CreateFromSignerInfo(null, HashAlgorithmName.SHA256)
             );
         }
 

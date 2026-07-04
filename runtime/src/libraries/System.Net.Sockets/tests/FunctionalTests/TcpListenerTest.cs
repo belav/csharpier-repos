@@ -14,23 +14,19 @@ namespace System.Net.Sockets.Tests
         public void Ctor_InvalidArguments_Throws()
         {
             AssertExtensions.Throws<ArgumentNullException>("localEP", () => new TcpListener(null));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "localaddr",
-                () => new TcpListener(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("localaddr", () =>
+                new TcpListener(null, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "port",
-                () => new TcpListener(IPAddress.Loopback, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("port", () =>
+                new TcpListener(IPAddress.Loopback, -1)
             );
 #pragma warning disable 0618 // ctor is obsolete
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "port",
-                () => new TcpListener(66000)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("port", () =>
+                new TcpListener(66000)
             );
 #pragma warning restore 0618
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "port",
-                () => TcpListener.Create(66000)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("port", () =>
+                TcpListener.Create(66000)
             );
         }
 
@@ -161,13 +157,11 @@ namespace System.Net.Sockets.Tests
             Assert.Throws<ArgumentNullException>(() => listener.EndAcceptSocket(null));
             Assert.Throws<ArgumentNullException>(() => listener.EndAcceptTcpClient(null));
 
-            AssertExtensions.Throws<ArgumentException>(
-                "asyncResult",
-                () => listener.EndAcceptSocket(Task.CompletedTask)
+            AssertExtensions.Throws<ArgumentException>("asyncResult", () =>
+                listener.EndAcceptSocket(Task.CompletedTask)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "asyncResult",
-                () => listener.EndAcceptTcpClient(Task.CompletedTask)
+            AssertExtensions.Throws<ArgumentException>("asyncResult", () =>
+                listener.EndAcceptTcpClient(Task.CompletedTask)
             );
         }
 

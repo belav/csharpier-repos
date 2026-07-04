@@ -327,9 +327,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         public void ComponentWithDependencies()
         {
             sharedTestState
-                .RunComponentResolutionTest(
-                    sharedTestState.ComponentWithDependencies,
-                    command => command.RuntimeId("win10-x86")
+                .RunComponentResolutionTest(sharedTestState.ComponentWithDependencies, command =>
+                    command.RuntimeId("win10-x86")
                 )
                 .Should()
                 .Pass()
@@ -424,10 +423,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             // but with a different extension. This causes a failure.
             // Make sure the file exists so that we avoid failing due to missing file.
             var component = sharedTestState.CreateComponentWithDependencies(b =>
-                b.WithPackage(
-                    "ComponentDependency_Dupe",
-                    "1.0.0",
-                    p => p.WithAssemblyGroup(null, g => g.WithAsset("ComponentDependency.notdll"))
+                b.WithPackage("ComponentDependency_Dupe", "1.0.0", p =>
+                    p.WithAssemblyGroup(null, g => g.WithAsset("ComponentDependency.notdll"))
                 )
             );
 
@@ -454,10 +451,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         {
             // Add a reference to a package which has asset of the native image of the existing ComponentDependency.
             var component = sharedTestState.CreateComponentWithDependencies(b =>
-                b.WithPackage(
-                    "ComponentDependency_NI",
-                    "1.0.0",
-                    p => p.WithAssemblyGroup(null, g => g.WithAsset("ComponentDependency.ni.dll"))
+                b.WithPackage("ComponentDependency_NI", "1.0.0", p =>
+                    p.WithAssemblyGroup(null, g => g.WithAsset("ComponentDependency.ni.dll"))
                 )
             );
 
@@ -532,10 +527,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             File.Copy(sharedTestState.FrameworkReferenceApp.DepsJson, additionalDepsPath);
 
             sharedTestState
-                .RunComponentResolutionTest(
-                    component,
-                    command =>
-                        command.EnvironmentVariable("DOTNET_ADDITIONAL_DEPS", additionalDepsPath)
+                .RunComponentResolutionTest(component, command =>
+                    command.EnvironmentVariable("DOTNET_ADDITIONAL_DEPS", additionalDepsPath)
                 )
                 .Should()
                 .Pass()
@@ -636,64 +629,42 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                 NetCoreAppBuilder builder = NetCoreAppBuilder
                     .PortableForNETCoreApp(componentWithDependencies)
                     .WithProject(p => p.WithAssemblyGroup(null, g => g.WithMainAssembly()))
-                    .WithProject(
-                        "ComponentDependency",
-                        "1.0.0",
-                        p => p.WithAssemblyGroup(null, g => g.WithAsset("ComponentDependency.dll"))
+                    .WithProject("ComponentDependency", "1.0.0", p =>
+                        p.WithAssemblyGroup(null, g => g.WithAsset("ComponentDependency.dll"))
                     )
-                    .WithPackage(
-                        AdditionalDependencyName,
-                        "2.0.1",
-                        p =>
-                            p.WithAssemblyGroup(
-                                null,
-                                g =>
-                                    g.WithAsset(
-                                        $"lib/netstandard1.0/{AdditionalDependencyName}.dll",
-                                        f =>
-                                            f.WithVersion("2.0.0.0", "2.0.1.23344")
-                                                .WithFileOnDiskPath(
-                                                    $"{AdditionalDependencyName}.dll"
-                                                )
-                                    )
+                    .WithPackage(AdditionalDependencyName, "2.0.1", p =>
+                        p.WithAssemblyGroup(null, g =>
+                            g.WithAsset($"lib/netstandard1.0/{AdditionalDependencyName}.dll", f =>
+                                f.WithVersion("2.0.0.0", "2.0.1.23344")
+                                    .WithFileOnDiskPath($"{AdditionalDependencyName}.dll")
                             )
+                        )
                     )
-                    .WithPackage(
-                        "Libuv",
-                        "1.9.1",
-                        p =>
-                            p.WithNativeLibraryGroup(
-                                    "debian-x64",
-                                    g => g.WithAsset("runtimes/debian-x64/native/libuv.so")
-                                )
-                                .WithNativeLibraryGroup(
-                                    "fedora-x64",
-                                    g => g.WithAsset("runtimes/fedora-x64/native/libuv.so")
-                                )
-                                .WithNativeLibraryGroup(
-                                    "opensuse-x64",
-                                    g => g.WithAsset("runtimes/opensuse-x64/native/libuv.so")
-                                )
-                                .WithNativeLibraryGroup(
-                                    "osx",
-                                    g => g.WithAsset("runtimes/osx/native/libuv.dylib")
-                                )
-                                .WithNativeLibraryGroup(
-                                    "rhel-x64",
-                                    g => g.WithAsset("runtimes/rhel-x64/native/libuv.so")
-                                )
-                                .WithNativeLibraryGroup(
-                                    "win10-arm",
-                                    g => g.WithAsset("runtimes/win10-arm/native/libuv.dll")
-                                )
-                                .WithNativeLibraryGroup(
-                                    "win10-x64",
-                                    g => g.WithAsset("runtimes/win10-x64/native/libuv.dll")
-                                )
-                                .WithNativeLibraryGroup(
-                                    "win10-x86",
-                                    g => g.WithAsset("runtimes/win10-x86/native/libuv.dll")
-                                )
+                    .WithPackage("Libuv", "1.9.1", p =>
+                        p.WithNativeLibraryGroup("debian-x64", g =>
+                                g.WithAsset("runtimes/debian-x64/native/libuv.so")
+                            )
+                            .WithNativeLibraryGroup("fedora-x64", g =>
+                                g.WithAsset("runtimes/fedora-x64/native/libuv.so")
+                            )
+                            .WithNativeLibraryGroup("opensuse-x64", g =>
+                                g.WithAsset("runtimes/opensuse-x64/native/libuv.so")
+                            )
+                            .WithNativeLibraryGroup("osx", g =>
+                                g.WithAsset("runtimes/osx/native/libuv.dylib")
+                            )
+                            .WithNativeLibraryGroup("rhel-x64", g =>
+                                g.WithAsset("runtimes/rhel-x64/native/libuv.so")
+                            )
+                            .WithNativeLibraryGroup("win10-arm", g =>
+                                g.WithAsset("runtimes/win10-arm/native/libuv.dll")
+                            )
+                            .WithNativeLibraryGroup("win10-x64", g =>
+                                g.WithAsset("runtimes/win10-x64/native/libuv.dll")
+                            )
+                            .WithNativeLibraryGroup("win10-x86", g =>
+                                g.WithAsset("runtimes/win10-x86/native/libuv.dll")
+                            )
                     );
                 customizer?.Invoke(builder);
 

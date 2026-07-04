@@ -115,9 +115,8 @@ namespace System.Formats.Tar.Tests
         {
             await using MemoryStream archiveStream = new MemoryStream();
             await using TarWriter writer = new TarWriter(archiveStream, leaveOpen: false);
-            await Assert.ThrowsAsync<ArgumentException>(
-                "entry",
-                () => writer.WriteEntryAsync(new V7TarEntry(entryType, "link"))
+            await Assert.ThrowsAsync<ArgumentException>("entry", () =>
+                writer.WriteEntryAsync(new V7TarEntry(entryType, "link"))
             );
         }
     }

@@ -52,13 +52,10 @@ public class When_mapping_with_contextual_values
 
         var dest = config
             .CreateMapper()
-            .Map<Source, Dest>(
-                new Source { Value = 5 },
-                opt =>
-                {
-                    opt.Items["Item"] = 10;
-                }
-            );
+            .Map<Source, Dest>(new Source { Value = 5 }, opt =>
+            {
+                opt.Items["Item"] = 10;
+            });
 
         dest.Value.ShouldBe(15);
     }
@@ -171,13 +168,10 @@ public class When_mapping_with_contextual_values_in_resolve_func
 
         var dest = config
             .CreateMapper()
-            .Map<Source, Dest>(
-                new Source { Value1 = 5 },
-                opt =>
-                {
-                    opt.Items["Item"] = 10;
-                }
-            );
+            .Map<Source, Dest>(new Source { Value1 = 5 }, opt =>
+            {
+                opt.Items["Item"] = 10;
+            });
 
         dest.Value1.ShouldBe(15);
     }
@@ -283,13 +277,10 @@ public class When_mapping_nested_context_items : AutoMapperSpecBase
             },
         };
 
-        var toGarage = Mapper.Map<ToGarage>(
-            fromGarage,
-            opts =>
-            {
-                opts.Items.Add("Door", door);
-            }
-        );
+        var toGarage = Mapper.Map<ToGarage>(fromGarage, opts =>
+        {
+            opts.Items.Add("Door", door);
+        });
 
         foreach (var d in toGarage.ToCars.Select(c => c.Door))
         {

@@ -4414,19 +4414,14 @@ public class ClassC
 }";
             var expected = code.Replace("$$", ";$$");
 
-            Verify(
-                code,
-                expected,
-                ExecuteTest,
-                setOptions: workspace =>
-                {
-                    var globalOptions = workspace.GetService<IGlobalOptionService>();
-                    globalOptions.SetGlobalOption(
-                        CompleteStatementOptionsStorage.AutomaticallyCompleteStatementOnSemicolon,
-                        false
-                    );
-                }
-            );
+            Verify(code, expected, ExecuteTest, setOptions: workspace =>
+            {
+                var globalOptions = workspace.GetService<IGlobalOptionService>();
+                globalOptions.SetGlobalOption(
+                    CompleteStatementOptionsStorage.AutomaticallyCompleteStatementOnSemicolon,
+                    false
+                );
+            });
         }
 
         [WpfFact]

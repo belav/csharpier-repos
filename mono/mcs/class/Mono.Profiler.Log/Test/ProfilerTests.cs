@@ -26,16 +26,13 @@ namespace MonoTests.Mono.Profiler.Log
 
                 Assert.NotNull(domainName);
                 Assert.Equal(0, domainName.AppDomainId);
-                Assert.Contains(
-                    events,
-                    ev => ev is AppDomainLoadEvent e && e.AppDomainId == domainName.AppDomainId
+                Assert.Contains(events, ev =>
+                    ev is AppDomainLoadEvent e && e.AppDomainId == domainName.AppDomainId
                 );
-                Assert.Contains(
-                    events,
-                    ev =>
-                        ev is ContextLoadEvent e
-                        && e.AppDomainId == domainName.AppDomainId
-                        && e.ContextId == 0
+                Assert.Contains(events, ev =>
+                    ev is ContextLoadEvent e
+                    && e.AppDomainId == domainName.AppDomainId
+                    && e.ContextId == 0
                 );
 
                 var imageLoad = events
@@ -43,19 +40,15 @@ namespace MonoTests.Mono.Profiler.Log
                     .SingleOrDefault(e => Path.GetFileName(e.Name) == "log-profiler-test.exe");
 
                 Assert.NotNull(imageLoad);
-                Assert.Contains(
-                    events,
-                    ev =>
-                        ev is AssemblyLoadEvent e
-                        && e.ImagePointer == imageLoad.ImagePointer
-                        && new AssemblyName(e.Name).Name == "log-profiler-test"
+                Assert.Contains(events, ev =>
+                    ev is AssemblyLoadEvent e
+                    && e.ImagePointer == imageLoad.ImagePointer
+                    && new AssemblyName(e.Name).Name == "log-profiler-test"
                 );
-                Assert.Contains(
-                    events,
-                    ev =>
-                        ev is ClassLoadEvent e
-                        && e.ImagePointer == imageLoad.ImagePointer
-                        && e.Name == "Mono.Profiling.Tests.DoNothingTest"
+                Assert.Contains(events, ev =>
+                    ev is ClassLoadEvent e
+                    && e.ImagePointer == imageLoad.ImagePointer
+                    && e.Name == "Mono.Profiling.Tests.DoNothingTest"
                 );
 
                 var threadName = events
@@ -63,22 +56,18 @@ namespace MonoTests.Mono.Profiler.Log
                     .SingleOrDefault(e => e.Name == "Main");
 
                 Assert.NotNull(threadName);
-                Assert.Contains(
-                    events,
-                    ev => ev is ThreadStartEvent e && e.ThreadId == threadName.ThreadId
+                Assert.Contains(events, ev =>
+                    ev is ThreadStartEvent e && e.ThreadId == threadName.ThreadId
                 );
 
-                Assert.Contains(
-                    events,
-                    ev => ev is JitEvent e && e.Name == "Mono.Profiling.Tests.DoNothingTest:Run ()"
+                Assert.Contains(events, ev =>
+                    ev is JitEvent e && e.Name == "Mono.Profiling.Tests.DoNothingTest:Run ()"
                 );
-                Assert.Contains(
-                    events,
-                    ev => ev is JitHelperEvent e && e.Type == LogJitHelper.ExceptionHandling
+                Assert.Contains(events, ev =>
+                    ev is JitHelperEvent e && e.Type == LogJitHelper.ExceptionHandling
                 );
-                Assert.Contains(
-                    events,
-                    ev => ev is JitHelperEvent e && e.Type == LogJitHelper.Method
+                Assert.Contains(events, ev =>
+                    ev is JitHelperEvent e && e.Type == LogJitHelper.Method
                 );
             });
         }
@@ -115,13 +104,11 @@ namespace MonoTests.Mono.Profiler.Log
         {
             new ProfilerTestRun("simple-allocation", "heapshot=ondemand").Run(events =>
             {
-                Assert.DoesNotContain(
-                    events,
-                    ev =>
-                        ev is HeapBeginEvent
-                        || ev is HeapEndEvent
-                        || ev is HeapObjectEvent
-                        || ev is HeapRootsEvent
+                Assert.DoesNotContain(events, ev =>
+                    ev is HeapBeginEvent
+                    || ev is HeapEndEvent
+                    || ev is HeapObjectEvent
+                    || ev is HeapRootsEvent
                 );
             });
         }
@@ -224,29 +211,23 @@ namespace MonoTests.Mono.Profiler.Log
                     2,
                     events.OfType<ThrowEvent>().Count(ev => ev.ObjectPointer == alloc.ObjectPointer)
                 );
-                Assert.Contains(
-                    events,
-                    ev =>
-                        ev is ExceptionClauseEvent e
-                        && e.MethodPointer == jit.MethodPointer
-                        && e.ObjectPointer == alloc.ObjectPointer
-                        && e.Type == LogExceptionClause.Catch
+                Assert.Contains(events, ev =>
+                    ev is ExceptionClauseEvent e
+                    && e.MethodPointer == jit.MethodPointer
+                    && e.ObjectPointer == alloc.ObjectPointer
+                    && e.Type == LogExceptionClause.Catch
                 );
-                Assert.Contains(
-                    events,
-                    ev =>
-                        ev is ExceptionClauseEvent e
-                        && e.MethodPointer == jit.MethodPointer
-                        && e.ObjectPointer == alloc.ObjectPointer
-                        && e.Type == LogExceptionClause.Filter
+                Assert.Contains(events, ev =>
+                    ev is ExceptionClauseEvent e
+                    && e.MethodPointer == jit.MethodPointer
+                    && e.ObjectPointer == alloc.ObjectPointer
+                    && e.Type == LogExceptionClause.Filter
                 );
-                Assert.Contains(
-                    events,
-                    ev =>
-                        ev is ExceptionClauseEvent e
-                        && e.MethodPointer == jit.MethodPointer
-                        && e.ObjectPointer == alloc.ObjectPointer
-                        && e.Type == LogExceptionClause.Finally
+                Assert.Contains(events, ev =>
+                    ev is ExceptionClauseEvent e
+                    && e.MethodPointer == jit.MethodPointer
+                    && e.ObjectPointer == alloc.ObjectPointer
+                    && e.Type == LogExceptionClause.Finally
                 );
             });
         }
@@ -370,9 +351,8 @@ namespace MonoTests.Mono.Profiler.Log
         {
             new ProfilerTestRun("monitor-lock", "monitor").Run(events =>
             {
-                Assert.Contains(
-                    events,
-                    ev => ev is MonitorEvent e && e.Event == LogMonitorEvent.Done
+                Assert.Contains(events, ev =>
+                    ev is MonitorEvent e && e.Event == LogMonitorEvent.Done
                 );
 
                 var countCont = events
@@ -545,27 +525,22 @@ namespace MonoTests.Mono.Profiler.Log
                 AssertExtensions.GreaterThanOrEqualTo(events.OfType<GCResizeEvent>().Count(), 500);
                 AssertExtensions.GreaterThanOrEqualTo(events.OfType<GCEvent>().Count(), 10000);
                 Assert.Contains(events, ev => ev is GCEvent e && e.Type == LogGCEvent.PreStopWorld);
-                Assert.Contains(
-                    events,
-                    ev => ev is GCEvent e && e.Type == LogGCEvent.PreStopWorldLocked
+                Assert.Contains(events, ev =>
+                    ev is GCEvent e && e.Type == LogGCEvent.PreStopWorldLocked
                 );
-                Assert.Contains(
-                    events,
-                    ev => ev is GCEvent e && e.Type == LogGCEvent.PostStopWorld
+                Assert.Contains(events, ev =>
+                    ev is GCEvent e && e.Type == LogGCEvent.PostStopWorld
                 );
                 Assert.Contains(events, ev => ev is GCEvent e && e.Type == LogGCEvent.Begin);
                 Assert.Contains(events, ev => ev is GCEvent e && e.Type == LogGCEvent.End);
-                Assert.Contains(
-                    events,
-                    ev => ev is GCEvent e && e.Type == LogGCEvent.PreStartWorld
+                Assert.Contains(events, ev =>
+                    ev is GCEvent e && e.Type == LogGCEvent.PreStartWorld
                 );
-                Assert.Contains(
-                    events,
-                    ev => ev is GCEvent e && e.Type == LogGCEvent.PostStartWorld
+                Assert.Contains(events, ev =>
+                    ev is GCEvent e && e.Type == LogGCEvent.PostStartWorld
                 );
-                Assert.Contains(
-                    events,
-                    ev => ev is GCEvent e && e.Type == LogGCEvent.PostStartWorldUnlocked
+                Assert.Contains(events, ev =>
+                    ev is GCEvent e && e.Type == LogGCEvent.PostStartWorldUnlocked
                 );
                 Assert.Contains(events, ev => ev is GCEvent e && e.Generation == 0);
                 Assert.Contains(events, ev => ev is GCEvent e && e.Generation == 1);
@@ -673,18 +648,15 @@ namespace MonoTests.Mono.Profiler.Log
                             inHeapshot = false;
 
                             foreach (var kvp in objects)
-                                Assert.All(
-                                    kvp.Value,
-                                    reference => objects.ContainsKey(reference.ObjectPointer)
+                                Assert.All(kvp.Value, reference =>
+                                    objects.ContainsKey(reference.ObjectPointer)
                                 );
 
                             foreach (var root in roots)
                             {
-                                Assert.Contains(
-                                    ranges,
-                                    kvp =>
-                                        root.SlotPointer >= kvp.Key
-                                        && root.SlotPointer < kvp.Key + kvp.Value
+                                Assert.Contains(ranges, kvp =>
+                                    root.SlotPointer >= kvp.Key
+                                    && root.SlotPointer < kvp.Key + kvp.Value
                                 );
                                 Assert.True(objects.ContainsKey(root.ObjectPointer));
                             }

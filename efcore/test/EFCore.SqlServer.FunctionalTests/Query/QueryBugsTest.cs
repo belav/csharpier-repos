@@ -1599,49 +1599,37 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
     {
         var contextFactory = await InitializeAsync<MyContext5456>(seed: c => c.Seed());
 
-        Parallel.For(
-            0,
-            10,
-            i =>
-            {
-                using var ctx = contextFactory.CreateContext();
-                var result = ctx.Posts.Where(x => x.Blog.Id > 1).Include(x => x.Blog).ToList();
+        Parallel.For(0, 10, i =>
+        {
+            using var ctx = contextFactory.CreateContext();
+            var result = ctx.Posts.Where(x => x.Blog.Id > 1).Include(x => x.Blog).ToList();
 
-                Assert.Equal(198, result.Count);
-            }
-        );
+            Assert.Equal(198, result.Count);
+        });
 
-        Parallel.For(
-            0,
-            10,
-            i =>
-            {
-                using var ctx = contextFactory.CreateContext();
-                var result = ctx
-                    .Posts.Where(x => x.Blog.Id > 1)
-                    .Include(x => x.Blog)
-                    .Include(x => x.Comments)
-                    .ToList();
+        Parallel.For(0, 10, i =>
+        {
+            using var ctx = contextFactory.CreateContext();
+            var result = ctx
+                .Posts.Where(x => x.Blog.Id > 1)
+                .Include(x => x.Blog)
+                .Include(x => x.Comments)
+                .ToList();
 
-                Assert.Equal(198, result.Count);
-            }
-        );
+            Assert.Equal(198, result.Count);
+        });
 
-        Parallel.For(
-            0,
-            10,
-            i =>
-            {
-                using var ctx = contextFactory.CreateContext();
-                var result = ctx
-                    .Posts.Where(x => x.Blog.Id > 1)
-                    .Include(x => x.Blog)
-                        .ThenInclude(b => b.Author)
-                    .ToList();
+        Parallel.For(0, 10, i =>
+        {
+            using var ctx = contextFactory.CreateContext();
+            var result = ctx
+                .Posts.Where(x => x.Blog.Id > 1)
+                .Include(x => x.Blog)
+                    .ThenInclude(b => b.Author)
+                .ToList();
 
-                Assert.Equal(198, result.Count);
-            }
-        );
+            Assert.Equal(198, result.Count);
+        });
     }
 
     [ConditionalFact]
@@ -7768,15 +7756,11 @@ FROM [Businesses] AS [b]
 
         var ids = new[] { 1, 2, 3 };
 
-        Parallel.For(
-            0,
-            100,
-            i =>
-            {
-                using var context = contextFactory.CreateContext();
-                var query = context.Lists.Where(l => !l.IsDeleted && ids.Contains(l.Id)).ToList();
-            }
-        );
+        Parallel.For(0, 100, i =>
+        {
+            using var context = contextFactory.CreateContext();
+            var query = context.Lists.Where(l => !l.IsDeleted && ids.Contains(l.Id)).ToList();
+        });
     }
 
     protected class MyContext21666 : DbContext
@@ -9612,11 +9596,8 @@ WHERE [l].[Name] = N'My Location'
             Expression<Func<MyContext19253.B19253, string>> rightKeySelector = y => y.forkey;
 
             var query = context
-                .A.GroupJoin(
-                    context.B,
-                    leftKeySelector,
-                    rightKeySelector,
-                    (left, rightg) => new { left, rightg }
+                .A.GroupJoin(context.B, leftKeySelector, rightKeySelector, (left, rightg) =>
+                    new { left, rightg }
                 )
                 .SelectMany(
                     r => r.rightg.DefaultIfEmpty(),
@@ -9632,11 +9613,8 @@ WHERE [l].[Name] = N'My Location'
                 )
                 .Concat(
                     context
-                        .B.GroupJoin(
-                            context.A,
-                            rightKeySelector,
-                            leftKeySelector,
-                            (right, leftg) => new { leftg, right }
+                        .B.GroupJoin(context.A, rightKeySelector, leftKeySelector, (right, leftg) =>
+                            new { leftg, right }
                         )
                         .SelectMany(
                             l => l.leftg.DefaultIfEmpty(),
@@ -9677,11 +9655,8 @@ WHERE [a0].[Id] IS NULL
             Expression<Func<MyContext19253.B19253, string>> rightKeySelector = y => y.forkey;
 
             var query = context
-                .A.GroupJoin(
-                    context.B,
-                    leftKeySelector,
-                    rightKeySelector,
-                    (left, rightg) => new { left, rightg }
+                .A.GroupJoin(context.B, leftKeySelector, rightKeySelector, (left, rightg) =>
+                    new { left, rightg }
                 )
                 .SelectMany(
                     r => r.rightg.DefaultIfEmpty(),
@@ -9697,11 +9672,8 @@ WHERE [a0].[Id] IS NULL
                 )
                 .Union(
                     context
-                        .B.GroupJoin(
-                            context.A,
-                            rightKeySelector,
-                            leftKeySelector,
-                            (right, leftg) => new { leftg, right }
+                        .B.GroupJoin(context.A, rightKeySelector, leftKeySelector, (right, leftg) =>
+                            new { leftg, right }
                         )
                         .SelectMany(
                             l => l.leftg.DefaultIfEmpty(),
@@ -9742,11 +9714,8 @@ WHERE [a0].[Id] IS NULL
             Expression<Func<MyContext19253.B19253, string>> rightKeySelector = y => y.forkey;
 
             var query = context
-                .A.GroupJoin(
-                    context.B,
-                    leftKeySelector,
-                    rightKeySelector,
-                    (left, rightg) => new { left, rightg }
+                .A.GroupJoin(context.B, leftKeySelector, rightKeySelector, (left, rightg) =>
+                    new { left, rightg }
                 )
                 .SelectMany(
                     r => r.rightg.DefaultIfEmpty(),
@@ -9762,11 +9731,8 @@ WHERE [a0].[Id] IS NULL
                 )
                 .Except(
                     context
-                        .B.GroupJoin(
-                            context.A,
-                            rightKeySelector,
-                            leftKeySelector,
-                            (right, leftg) => new { leftg, right }
+                        .B.GroupJoin(context.A, rightKeySelector, leftKeySelector, (right, leftg) =>
+                            new { leftg, right }
                         )
                         .SelectMany(
                             l => l.leftg.DefaultIfEmpty(),
@@ -9805,11 +9771,8 @@ LEFT JOIN [A] AS [a0] ON [b0].[forkey] = [a0].[forkey]
             Expression<Func<MyContext19253.B19253, string>> rightKeySelector = y => y.forkey;
 
             var query = context
-                .A.GroupJoin(
-                    context.B,
-                    leftKeySelector,
-                    rightKeySelector,
-                    (left, rightg) => new { left, rightg }
+                .A.GroupJoin(context.B, leftKeySelector, rightKeySelector, (left, rightg) =>
+                    new { left, rightg }
                 )
                 .SelectMany(
                     r => r.rightg.DefaultIfEmpty(),
@@ -9825,11 +9788,8 @@ LEFT JOIN [A] AS [a0] ON [b0].[forkey] = [a0].[forkey]
                 )
                 .Intersect(
                     context
-                        .B.GroupJoin(
-                            context.A,
-                            rightKeySelector,
-                            leftKeySelector,
-                            (right, leftg) => new { leftg, right }
+                        .B.GroupJoin(context.A, rightKeySelector, leftKeySelector, (right, leftg) =>
+                            new { leftg, right }
                         )
                         .SelectMany(
                             l => l.leftg.DefaultIfEmpty(),

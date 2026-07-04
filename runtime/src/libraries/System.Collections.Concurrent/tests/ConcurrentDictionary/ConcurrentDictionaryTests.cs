@@ -522,12 +522,10 @@ namespace System.Collections.Concurrent.Tests
         [Fact]
         public static void TryRemove_KeyValuePair_ArgumentValidation()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "item",
-                () =>
-                    new ConcurrentDictionary<string, int>().TryRemove(
-                        new KeyValuePair<string, int>(null, 42)
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("item", () =>
+                new ConcurrentDictionary<string, int>().TryRemove(
+                    new KeyValuePair<string, int>(null, 42)
+                )
             );
             new ConcurrentDictionary<int, int>().TryRemove(new KeyValuePair<int, int>(0, 0)); // no error when using default value type
             new ConcurrentDictionary<int?, int>().TryRemove(new KeyValuePair<int?, int>(0, 0)); // or nullable
@@ -884,12 +882,10 @@ namespace System.Collections.Concurrent.Tests
             // "TestConstructor:  FAILED.  Constructor didn't throw ANE when collection has null key passed");
 
             // Duplicate keys.
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new ConcurrentDictionary<int, int>(
-                        new[] { new KeyValuePair<int, int>(1, 1), new KeyValuePair<int, int>(1, 2) }
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new ConcurrentDictionary<int, int>(
+                    new[] { new KeyValuePair<int, int>(1, 1), new KeyValuePair<int, int>(1, 2) }
+                )
             );
 
             Assert.Throws<ArgumentNullException>(() =>
@@ -976,9 +972,8 @@ namespace System.Collections.Concurrent.Tests
 
             // Duplicate key.
             dictionary.TryAdd("1", 1);
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => ((IDictionary<string, int>)dictionary).Add("1", 2)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                ((IDictionary<string, int>)dictionary).Add("1", 2)
             );
         }
 
@@ -1148,9 +1143,8 @@ namespace System.Collections.Concurrent.Tests
 
             //add one item to the dictionary
             ((ConcurrentDictionary<int, int>)dictionary).TryAdd(1, 1);
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => dictionary.CopyTo(new object[] { }, 0)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                dictionary.CopyTo(new object[] { }, 0)
             );
             // "TestICollection:  FAILED.  CopyTo didn't throw AE when the Array size is smaller than the dictionary count");
         }

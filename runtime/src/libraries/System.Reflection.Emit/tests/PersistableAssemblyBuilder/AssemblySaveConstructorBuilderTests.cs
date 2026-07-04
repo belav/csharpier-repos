@@ -140,12 +140,8 @@ namespace System.Reflection.Emit.Tests
                 out TypeBuilder type,
                 out MethodInfo saveMethod
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    type.DefineDefaultConstructor(
-                        MethodAttributes.Virtual | MethodAttributes.Static
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                type.DefineDefaultConstructor(MethodAttributes.Virtual | MethodAttributes.Static)
             );
         }
 
@@ -274,9 +270,8 @@ namespace System.Reflection.Emit.Tests
             );
 
             Type genericInt = type1.MakeGenericType(typeof(int));
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => TypeBuilder.GetConstructor(genericInt, ctor2)
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                TypeBuilder.GetConstructor(genericInt, ctor2)
             );
         }
 
@@ -290,9 +285,8 @@ namespace System.Reflection.Emit.Tests
 
             ConstructorBuilder ctor = type.DefineDefaultConstructor(MethodAttributes.Public);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "constructor",
-                () => TypeBuilder.GetConstructor(type.AsType(), ctor)
+            AssertExtensions.Throws<ArgumentException>("constructor", () =>
+                TypeBuilder.GetConstructor(type.AsType(), ctor)
             );
         }
     }

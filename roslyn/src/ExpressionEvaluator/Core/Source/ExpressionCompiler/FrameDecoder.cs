@@ -157,36 +157,33 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             var typeParameters = _instructionDecoder.GetAllTypeParameters(method);
             if (!typeParameters.IsEmpty)
             {
-                frame.GetClrGenericParameters(
-                    workList,
-                    result =>
+                frame.GetClrGenericParameters(workList, result =>
+                {
+                    try
                     {
-                        try
+                        // DkmGetClrGenericParametersAsyncResult.ParameterTypeNames will throw if ErrorCode != 0.
+                        var serializedTypeNames =
+                            (result.ErrorCode == 0) ? result.ParameterTypeNames : null;
+                        var typeArguments = _instructionDecoder.GetTypeSymbols(
+                            compilation,
+                            method,
+                            serializedTypeNames
+                        );
+                        if (!typeArguments.IsEmpty)
                         {
-                            // DkmGetClrGenericParametersAsyncResult.ParameterTypeNames will throw if ErrorCode != 0.
-                            var serializedTypeNames =
-                                (result.ErrorCode == 0) ? result.ParameterTypeNames : null;
-                            var typeArguments = _instructionDecoder.GetTypeSymbols(
-                                compilation,
+                            method = _instructionDecoder.ConstructMethod(
                                 method,
-                                serializedTypeNames
+                                typeParameters,
+                                typeArguments
                             );
-                            if (!typeArguments.IsEmpty)
-                            {
-                                method = _instructionDecoder.ConstructMethod(
-                                    method,
-                                    typeParameters,
-                                    typeArguments
-                                );
-                            }
-                            onSuccess(method);
                         }
-                        catch (Exception e)
-                        {
-                            onFailure(e);
-                        }
+                        onSuccess(method);
                     }
-                );
+                    catch (Exception e)
+                    {
+                        onFailure(e);
+                    }
+                });
             }
             else
             {
@@ -227,59 +224,55 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
                 // GetFrameArguments returns an array of formatted argument values. We'll pass
                 // ourselves (GetFrameName) as the continuation of the GetFrameArguments call.
-                inspectionContext.GetFrameArguments(
-                    workList,
-                    frame,
-                    result =>
+                inspectionContext.GetFrameArguments(workList, frame, result =>
+                {
+                    // DkmGetFrameArgumentsAsyncResult.Arguments will throw if ErrorCode != 0.
+                    var argumentValues = (result.ErrorCode == 0) ? result.Arguments : null;
+                    try
                     {
-                        // DkmGetFrameArgumentsAsyncResult.Arguments will throw if ErrorCode != 0.
-                        var argumentValues = (result.ErrorCode == 0) ? result.Arguments : null;
-                        try
+                        ArrayBuilder<string?>? builder = null;
+                        if (argumentValues != null)
                         {
-                            ArrayBuilder<string?>? builder = null;
-                            if (argumentValues != null)
+                            builder = ArrayBuilder<string?>.GetInstance();
+                            foreach (var argument in argumentValues)
                             {
-                                builder = ArrayBuilder<string?>.GetInstance();
-                                foreach (var argument in argumentValues)
-                                {
-                                    var formattedArgument = argument as DkmSuccessEvaluationResult;
-                                    // Not expecting Expandable bit, at least not from this EE.
-                                    Debug.Assert(
-                                        (formattedArgument == null)
-                                            || (
-                                                formattedArgument.Flags
-                                                & DkmEvaluationResultFlags.Expandable
-                                            ) == 0
-                                    );
-                                    builder.Add(formattedArgument?.Value);
-                                }
+                                var formattedArgument = argument as DkmSuccessEvaluationResult;
+                                // Not expecting Expandable bit, at least not from this EE.
+                                Debug.Assert(
+                                    (formattedArgument == null)
+                                        || (
+                                            formattedArgument.Flags
+                                            & DkmEvaluationResultFlags.Expandable
+                                        ) == 0
+                                );
+                                builder.Add(formattedArgument?.Value);
                             }
+                        }
 
-                            var frameName = _instructionDecoder.GetName(
-                                method,
-                                includeParameterTypes,
-                                includeParameterNames,
-                                argumentValues: builder
-                            );
-                            builder?.Free();
-                            completionRoutine(new DkmGetFrameNameAsyncResult(frameName));
-                        }
-                        catch (Exception e)
+                        var frameName = _instructionDecoder.GetName(
+                            method,
+                            includeParameterTypes,
+                            includeParameterNames,
+                            argumentValues: builder
+                        );
+                        builder?.Free();
+                        completionRoutine(new DkmGetFrameNameAsyncResult(frameName));
+                    }
+                    catch (Exception e)
+                    {
+                        completionRoutine(DkmGetFrameNameAsyncResult.CreateErrorResult(e));
+                    }
+                    finally
+                    {
+                        if (argumentValues != null)
                         {
-                            completionRoutine(DkmGetFrameNameAsyncResult.CreateErrorResult(e));
-                        }
-                        finally
-                        {
-                            if (argumentValues != null)
+                            foreach (var argument in argumentValues)
                             {
-                                foreach (var argument in argumentValues)
-                                {
-                                    argument.Close();
-                                }
+                                argument.Close();
                             }
                         }
                     }
-                );
+                });
             }
             else
             {

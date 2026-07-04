@@ -97,17 +97,14 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             var names = Expectations.GetContractNamesWithEmpty();
 
-            Assert.All(
-                names,
-                name =>
-                {
-                    var definition = CreateReflectionParameterImportDefinition(name);
+            Assert.All(names, name =>
+            {
+                var definition = CreateReflectionParameterImportDefinition(name);
 
-                    var e = CreateDisplayNameExpectationFromParameterName(definition, name);
+                var e = CreateDisplayNameExpectationFromParameterName(definition, name);
 
-                    Assert.Equal(e, ((ICompositionElement)definition).DisplayName);
-                }
-            );
+                Assert.Equal(e, ((ICompositionElement)definition).DisplayName);
+            });
         }
 
         [Fact]
@@ -115,17 +112,14 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             var types = Expectations.GetTypes();
 
-            Assert.All(
-                types,
-                type =>
-                {
-                    var definition = CreateReflectionParameterImportDefinition(type);
+            Assert.All(types, type =>
+            {
+                var definition = CreateReflectionParameterImportDefinition(type);
 
-                    var e = CreateDisplayNameExpectationFromContractName(definition, type);
+                var e = CreateDisplayNameExpectationFromContractName(definition, type);
 
-                    Assert.Equal(e, ((ICompositionElement)definition).DisplayName);
-                }
-            );
+                Assert.Equal(e, ((ICompositionElement)definition).DisplayName);
+            });
         }
 
         private Lazy<ParameterInfo> CreateLazyParameter()

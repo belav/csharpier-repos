@@ -48,23 +48,20 @@ namespace InteropTestsWebsite
                             var useTls = context.Configuration.GetValue<bool>("use_tls", false);
 
                             options.Limits.MinRequestBodyDataRate = null;
-                            options.ListenAnyIP(
-                                http2Port,
-                                o => ConfigureEndpoint(o, useTls, HttpProtocols.Http2)
+                            options.ListenAnyIP(http2Port, o =>
+                                ConfigureEndpoint(o, useTls, HttpProtocols.Http2)
                             );
                             if (http1Port != -1)
                             {
-                                options.ListenAnyIP(
-                                    http1Port,
-                                    o => ConfigureEndpoint(o, useTls, HttpProtocols.Http1)
+                                options.ListenAnyIP(http1Port, o =>
+                                    ConfigureEndpoint(o, useTls, HttpProtocols.Http1)
                                 );
                             }
                             if (http3Port != -1)
                             {
 #pragma warning disable CA2252 // This API requires opting into preview features
-                                options.ListenAnyIP(
-                                    http3Port,
-                                    o => ConfigureEndpoint(o, useTls, HttpProtocols.Http3)
+                                options.ListenAnyIP(http3Port, o =>
+                                    ConfigureEndpoint(o, useTls, HttpProtocols.Http3)
                                 );
 #pragma warning restore CA2252 // This API requires opting into preview features
                             }

@@ -129,24 +129,16 @@ namespace System.ComponentModel.Composition.Registration.Tests
         [Fact]
         public void WhereNullArgument_ShouldThrowArgumentException()
         {
-            Assert.Throws<ArgumentNullException>(
-                "typeFilter",
-                () =>
-                {
-                    var ctx = new RegistrationBuilder();
-                    ctx.ForTypesMatching(null);
-                    var catalog = new TypeCatalog(
-                        new[]
-                        {
-                            typeof(IFoo),
-                            typeof(FooImplementation1),
-                            typeof(FooImplementation2),
-                        },
-                        ctx
-                    );
-                    Assert.True(catalog.Parts.Count() == 0);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("typeFilter", () =>
+            {
+                var ctx = new RegistrationBuilder();
+                ctx.ForTypesMatching(null);
+                var catalog = new TypeCatalog(
+                    new[] { typeof(IFoo), typeof(FooImplementation1), typeof(FooImplementation2) },
+                    ctx
+                );
+                Assert.True(catalog.Parts.Count() == 0);
+            });
         }
 
         [Fact]

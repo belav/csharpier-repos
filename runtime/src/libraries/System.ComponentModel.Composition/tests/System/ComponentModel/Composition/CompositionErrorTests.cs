@@ -64,14 +64,11 @@ namespace System.ComponentModel.Composition
         {
             var expectations = Expectations.GetExceptionMessages();
 
-            Assert.All(
-                expectations,
-                e =>
-                {
-                    var exception = new CompositionError(e);
-                    Assert.Equal(e, exception.Description);
-                }
-            );
+            Assert.All(expectations, e =>
+            {
+                var exception = new CompositionError(e);
+                Assert.Equal(e, exception.Description);
+            });
         }
 
         [Fact]
@@ -79,15 +76,12 @@ namespace System.ComponentModel.Composition
         {
             var expectations = Expectations.GetExceptionMessages();
 
-            Assert.All(
-                expectations,
-                e =>
-                {
-                    var exception = new CompositionError(e, ElementFactory.Create());
+            Assert.All(expectations, e =>
+            {
+                var exception = new CompositionError(e, ElementFactory.Create());
 
-                    Assert.Equal(e, exception.Description);
-                }
-            );
+                Assert.Equal(e, exception.Description);
+            });
         }
 
         [Fact]
@@ -95,14 +89,11 @@ namespace System.ComponentModel.Composition
         {
             var expectations = Expectations.GetExceptionMessages();
 
-            Assert.All(
-                expectations,
-                e =>
-                {
-                    var exception = new CompositionError(e, new Exception());
-                    Assert.Equal(e, exception.Description);
-                }
-            );
+            Assert.All(expectations, e =>
+            {
+                var exception = new CompositionError(e, new Exception());
+                Assert.Equal(e, exception.Description);
+            });
         }
 
         [Fact]
@@ -110,18 +101,11 @@ namespace System.ComponentModel.Composition
         {
             var expectations = Expectations.GetExceptionMessages();
 
-            Assert.All(
-                expectations,
-                e =>
-                {
-                    var exception = new CompositionError(
-                        e,
-                        ElementFactory.Create(),
-                        new Exception()
-                    );
-                    Assert.Equal(e, exception.Description);
-                }
-            );
+            Assert.All(expectations, e =>
+            {
+                var exception = new CompositionError(e, ElementFactory.Create(), new Exception());
+                Assert.Equal(e, exception.Description);
+            });
         }
 
         [Fact]
@@ -129,19 +113,16 @@ namespace System.ComponentModel.Composition
         {
             var expectations = Expectations.GetExceptionMessages();
 
-            Assert.All(
-                expectations,
-                e =>
-                {
-                    var exception = new CompositionError(
-                        CompositionErrorId.Unknown,
-                        e,
-                        ElementFactory.Create(),
-                        new Exception()
-                    );
-                    Assert.Equal(e, exception.Description);
-                }
-            );
+            Assert.All(expectations, e =>
+            {
+                var exception = new CompositionError(
+                    CompositionErrorId.Unknown,
+                    e,
+                    ElementFactory.Create(),
+                    new Exception()
+                );
+                Assert.Equal(e, exception.Description);
+            });
         }
 
         [Fact]
@@ -198,14 +179,11 @@ namespace System.ComponentModel.Composition
         {
             var expectations = Expectations.GetInnerExceptions();
 
-            Assert.All(
-                expectations,
-                e =>
-                {
-                    var error = new CompositionError("Description", e);
-                    Assert.Same(e, error.Exception);
-                }
-            );
+            Assert.All(expectations, e =>
+            {
+                var error = new CompositionError("Description", e);
+                Assert.Same(e, error.Exception);
+            });
         }
 
         [Fact]
@@ -213,14 +191,11 @@ namespace System.ComponentModel.Composition
         {
             var expectations = Expectations.GetInnerExceptions();
 
-            Assert.All(
-                expectations,
-                e =>
-                {
-                    var error = new CompositionError("Description", ElementFactory.Create(), e);
-                    Assert.Same(e, error.Exception);
-                }
-            );
+            Assert.All(expectations, e =>
+            {
+                var error = new CompositionError("Description", ElementFactory.Create(), e);
+                Assert.Same(e, error.Exception);
+            });
         }
 
         [Fact]
@@ -228,19 +203,16 @@ namespace System.ComponentModel.Composition
         {
             var expectations = Expectations.GetInnerExceptions();
 
-            Assert.All(
-                expectations,
-                e =>
-                {
-                    var error = new CompositionError(
-                        CompositionErrorId.Unknown,
-                        "Description",
-                        ElementFactory.Create(),
-                        e
-                    );
-                    Assert.Same(e, error.Exception);
-                }
-            );
+            Assert.All(expectations, e =>
+            {
+                var error = new CompositionError(
+                    CompositionErrorId.Unknown,
+                    "Description",
+                    ElementFactory.Create(),
+                    e
+                );
+                Assert.Same(e, error.Exception);
+            });
         }
 
         [Fact]
@@ -297,14 +269,11 @@ namespace System.ComponentModel.Composition
         {
             var expectations = Expectations.GetInnerExceptions();
 
-            Assert.All(
-                expectations,
-                e =>
-                {
-                    var error = new CompositionError("Description", e);
-                    Assert.Same(e, error.InnerException);
-                }
-            );
+            Assert.All(expectations, e =>
+            {
+                var error = new CompositionError("Description", e);
+                Assert.Same(e, error.InnerException);
+            });
         }
 
         [Fact]
@@ -312,14 +281,11 @@ namespace System.ComponentModel.Composition
         {
             var expectations = Expectations.GetInnerExceptions();
 
-            Assert.All(
-                expectations,
-                e =>
-                {
-                    var error = new CompositionError("Description", ElementFactory.Create(), e);
-                    Assert.Same(e, error.InnerException);
-                }
-            );
+            Assert.All(expectations, e =>
+            {
+                var error = new CompositionError("Description", ElementFactory.Create(), e);
+                Assert.Same(e, error.InnerException);
+            });
         }
 
         [Fact]
@@ -363,19 +329,16 @@ namespace System.ComponentModel.Composition
         {
             var expectations = Expectations.GetEnumValues<CompositionErrorId>();
 
-            Assert.All(
-                expectations,
-                e =>
-                {
-                    var error = new CompositionError(
-                        e,
-                        "Description",
-                        ElementFactory.Create(),
-                        new Exception()
-                    );
-                    Assert.Equal(e, error.Id);
-                }
-            );
+            Assert.All(expectations, e =>
+            {
+                var error = new CompositionError(
+                    e,
+                    "Description",
+                    ElementFactory.Create(),
+                    new Exception()
+                );
+                Assert.Equal(e, error.Id);
+            });
         }
 
         [Fact]
@@ -432,14 +395,11 @@ namespace System.ComponentModel.Composition
         {
             var expectations = Expectations.GetCompositionElements();
 
-            Assert.All(
-                expectations,
-                e =>
-                {
-                    var exception = new CompositionError("Description", (ICompositionElement)e);
-                    Assert.Same(e, exception.Element);
-                }
-            );
+            Assert.All(expectations, e =>
+            {
+                var exception = new CompositionError("Description", (ICompositionElement)e);
+                Assert.Same(e, exception.Element);
+            });
         }
 
         [Fact]
@@ -447,18 +407,15 @@ namespace System.ComponentModel.Composition
         {
             var expectations = Expectations.GetCompositionElements();
 
-            Assert.All(
-                expectations,
-                e =>
-                {
-                    var exception = new CompositionError(
-                        "Description",
-                        (ICompositionElement)e,
-                        new Exception()
-                    );
-                    Assert.Same(e, exception.Element);
-                }
-            );
+            Assert.All(expectations, e =>
+            {
+                var exception = new CompositionError(
+                    "Description",
+                    (ICompositionElement)e,
+                    new Exception()
+                );
+                Assert.Same(e, exception.Element);
+            });
         }
 
         [Fact]
@@ -466,19 +423,16 @@ namespace System.ComponentModel.Composition
         {
             var expectations = Expectations.GetCompositionElements();
 
-            Assert.All(
-                expectations,
-                e =>
-                {
-                    var exception = new CompositionError(
-                        CompositionErrorId.Unknown,
-                        "Description",
-                        (ICompositionElement)e,
-                        new Exception()
-                    );
-                    Assert.Same(e, exception.Element);
-                }
-            );
+            Assert.All(expectations, e =>
+            {
+                var exception = new CompositionError(
+                    CompositionErrorId.Unknown,
+                    "Description",
+                    (ICompositionElement)e,
+                    new Exception()
+                );
+                Assert.Same(e, exception.Element);
+            });
         }
 
         [Fact]
@@ -486,14 +440,11 @@ namespace System.ComponentModel.Composition
         {
             var expectations = Expectations.GetExceptionMessages();
 
-            Assert.All(
-                expectations,
-                e =>
-                {
-                    var error = CreateCompositionError(e);
-                    Assert.Equal(error.Description, error.ToString());
-                }
-            );
+            Assert.All(expectations, e =>
+            {
+                var error = CreateCompositionError(e);
+                Assert.Equal(error.Description, error.ToString());
+            });
         }
 
         private static CompositionError CreateCompositionError()

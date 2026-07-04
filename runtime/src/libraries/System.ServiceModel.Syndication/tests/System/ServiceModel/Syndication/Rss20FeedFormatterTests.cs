@@ -93,13 +93,11 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullFeedToWrite_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "feedToWrite",
-                () => new Rss20FeedFormatter((SyndicationFeed)null)
+            AssertExtensions.Throws<ArgumentNullException>("feedToWrite", () =>
+                new Rss20FeedFormatter((SyndicationFeed)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "feedToWrite",
-                () => new Rss20FeedFormatter<SyndicationFeed>(null)
+            AssertExtensions.Throws<ArgumentNullException>("feedToWrite", () =>
+                new Rss20FeedFormatter<SyndicationFeed>(null)
             );
         }
 
@@ -119,18 +117,16 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullFeedTypeToCreate_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "feedTypeToCreate",
-                () => new Rss20FeedFormatter((Type)null)
+            AssertExtensions.Throws<ArgumentNullException>("feedTypeToCreate", () =>
+                new Rss20FeedFormatter((Type)null)
             );
         }
 
         [Fact]
         public void Ctor_InvalidFeedTypeToCreate_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "feedTypeToCreate",
-                () => new Rss20FeedFormatter(typeof(int))
+            AssertExtensions.Throws<ArgumentException>("feedTypeToCreate", () =>
+                new Rss20FeedFormatter(typeof(int))
             );
         }
 
@@ -550,20 +546,16 @@ namespace System.ServiceModel.Syndication.Tests
 
             CompareHelper.AssertEqualWriteOutput(expectedFull, writer => formatter.WriteTo(writer));
             CompareHelper.AssertEqualWriteOutput(expectedFull, writer => feed.SaveAsRss20(writer));
-            CompareHelper.AssertEqualWriteOutput(
-                expectedSerializable,
-                writer =>
-                {
-                    writer.WriteStartElement("feed");
-                    ((IXmlSerializable)formatter).WriteXml(writer);
-                    writer.WriteEndElement();
-                }
-            );
+            CompareHelper.AssertEqualWriteOutput(expectedSerializable, writer =>
+            {
+                writer.WriteStartElement("feed");
+                ((IXmlSerializable)formatter).WriteXml(writer);
+                writer.WriteEndElement();
+            });
 
             var genericFormatter = new Rss20FeedFormatter<SyndicationFeed>(feed);
-            CompareHelper.AssertEqualWriteOutput(
-                expectedFull,
-                writer => genericFormatter.WriteTo(writer)
+            CompareHelper.AssertEqualWriteOutput(expectedFull, writer =>
+                genericFormatter.WriteTo(writer)
             );
             CompareHelper.AssertEqualWriteOutput(expectedFull, writer => feed.SaveAsRss20(writer));
         }
@@ -590,9 +582,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteXml_NullWriter_ThrowsArgumentNullException()
         {
             IXmlSerializable formatter = new Rss20FeedFormatter();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "writer",
-                () => formatter.WriteXml(null)
+            AssertExtensions.Throws<ArgumentNullException>("writer", () =>
+                formatter.WriteXml(null)
             );
         }
 
@@ -2075,9 +2066,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void ReadFrom_NullReader_ThrowsArgumentNullException()
         {
             var formatter = new Rss20FeedFormatter();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "reader",
-                () => formatter.ReadFrom(null)
+            AssertExtensions.Throws<ArgumentNullException>("reader", () =>
+                formatter.ReadFrom(null)
             );
         }
 
@@ -2092,9 +2082,8 @@ namespace System.ServiceModel.Syndication.Tests
             using (XmlReader reader = XmlReader.Create(stringReader))
             {
                 var formatter = new NullCreatedFeedFormatter();
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "feed",
-                    () => formatter.ReadFrom(reader)
+                AssertExtensions.Throws<ArgumentNullException>("feed", () =>
+                    formatter.ReadFrom(reader)
                 );
             }
         }
@@ -2181,9 +2170,8 @@ namespace System.ServiceModel.Syndication.Tests
                 reader.MoveToContent();
 
                 IXmlSerializable formatter = new NullCreatedFeedFormatter();
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "feed",
-                    () => formatter.ReadXml(reader)
+                AssertExtensions.Throws<ArgumentNullException>("feed", () =>
+                    formatter.ReadXml(reader)
                 );
             }
         }
@@ -2248,9 +2236,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void ReadItem_NullReader_ThrowsArgumentNullException()
         {
             var formatter = new Formatter();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "reader",
-                () => formatter.ReadItemEntryPoint(null, new SyndicationFeed())
+            AssertExtensions.Throws<ArgumentNullException>("reader", () =>
+                formatter.ReadItemEntryPoint(null, new SyndicationFeed())
             );
         }
 
@@ -2261,9 +2248,8 @@ namespace System.ServiceModel.Syndication.Tests
             using (XmlReader reader = XmlReader.Create(stringReader))
             {
                 var formatter = new Formatter();
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "feed",
-                    () => formatter.ReadItemEntryPoint(reader, null)
+                AssertExtensions.Throws<ArgumentNullException>("feed", () =>
+                    formatter.ReadItemEntryPoint(reader, null)
                 );
             }
         }
@@ -2309,14 +2295,12 @@ namespace System.ServiceModel.Syndication.Tests
         public void ReadItems_NullReader_ThrowsArgumentNullException()
         {
             var formatter = new Formatter();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "reader",
-                () =>
-                    formatter.ReadItemsEntryPoint(
-                        null,
-                        new SyndicationFeed(),
-                        out var areAllItemsReader
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("reader", () =>
+                formatter.ReadItemsEntryPoint(
+                    null,
+                    new SyndicationFeed(),
+                    out var areAllItemsReader
+                )
             );
         }
 
@@ -2327,9 +2311,8 @@ namespace System.ServiceModel.Syndication.Tests
             using (XmlReader reader = XmlReader.Create(stringReader))
             {
                 var formatter = new Formatter();
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "feed",
-                    () => formatter.ReadItemsEntryPoint(reader, null, out var areAllItemsReader)
+                AssertExtensions.Throws<ArgumentNullException>("feed", () =>
+                    formatter.ReadItemsEntryPoint(reader, null, out var areAllItemsReader)
                 );
             }
         }

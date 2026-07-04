@@ -78,28 +78,24 @@ namespace BasicEventSourceTests
                 EventSource.GenerateManifest(typeof(Sdt.UnsealedEventSource), string.Empty)
             );
 
-            Exception e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.UnsealedEventSource),
-                        string.Empty,
-                        strictOptions
-                    )
+            Exception e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.UnsealedEventSource),
+                    string.Empty,
+                    strictOptions
+                )
             );
             AssertExceptionStringsEqual(
                 () => GetResourceString("EventSource_TypeMustBeSealedOrAbstract"),
                 e
             );
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.UnsealedEventSource),
-                        string.Empty,
-                        strictOptions
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.UnsealedEventSource),
+                    string.Empty,
+                    strictOptions
+                )
             );
             AssertExceptionStringsEqual(
                 () => GetResourceString("EventSource_TypeMustBeSealedOrAbstract"),
@@ -127,46 +123,35 @@ namespace BasicEventSourceTests
                 )
             );
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.NegativeEventIdEventSource),
-                        string.Empty
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(typeof(Sdt.NegativeEventIdEventSource), string.Empty)
             );
             AssertExceptionStringsEqual(() => GetResourceString("EventSource_NeedPositiveId"), e);
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.NegativeEventIdEventSource),
-                        string.Empty,
-                        strictOptions
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.NegativeEventIdEventSource),
+                    string.Empty,
+                    strictOptions
+                )
             );
             AssertExceptionStringsEqual(() => GetResourceString("EventSource_NeedPositiveId"), e);
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.NegativeEventIdEventSource),
-                        string.Empty,
-                        EventManifestOptions.AllowEventSourceOverride
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.NegativeEventIdEventSource),
+                    string.Empty,
+                    EventManifestOptions.AllowEventSourceOverride
+                )
             );
             AssertExceptionStringsEqual(() => GetResourceString("EventSource_NeedPositiveId"), e);
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.OutOfRangeKwdEventSource),
-                        string.Empty,
-                        strictOptions
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.OutOfRangeKwdEventSource),
+                    string.Empty,
+                    strictOptions
+                )
             );
             AssertExceptionStringsEqual(
                 () =>
@@ -189,14 +174,12 @@ namespace BasicEventSourceTests
 
             if (PlatformDetection.IsWindows)
             {
-                e = AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () =>
-                        EventSource.GenerateManifest(
-                            typeof(Sdt.EventWithAdminChannelNoMessageEventSource),
-                            string.Empty,
-                            strictOptions
-                        )
+                e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                    EventSource.GenerateManifest(
+                        typeof(Sdt.EventWithAdminChannelNoMessageEventSource),
+                        string.Empty,
+                        strictOptions
+                    )
                 );
                 AssertExceptionStringsEqual(
                     () =>
@@ -209,14 +192,12 @@ namespace BasicEventSourceTests
                 );
             }
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.ReservedOpcodeEventSource),
-                        string.Empty,
-                        strictOptions
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.ReservedOpcodeEventSource),
+                    string.Empty,
+                    strictOptions
+                )
             );
             AssertExceptionStringsEqual(
                 () =>
@@ -232,14 +213,12 @@ namespace BasicEventSourceTests
                 e
             );
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.ReservedOpcodeEventSource),
-                        string.Empty,
-                        strictOptions
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.ReservedOpcodeEventSource),
+                    string.Empty,
+                    strictOptions
+                )
             );
             AssertExceptionStringsEqual(
                 () =>
@@ -255,27 +234,20 @@ namespace BasicEventSourceTests
                 e
             );
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.EnumKindMismatchEventSource),
-                        string.Empty
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(typeof(Sdt.EnumKindMismatchEventSource), string.Empty)
             );
             AssertExceptionStringsEqual(
                 () => GetResourceString("EventSource_UndefinedKeyword", "0x1", "WriteInteger"),
                 e
             );
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.EnumKindMismatchEventSource),
-                        string.Empty,
-                        strictOptions
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.EnumKindMismatchEventSource),
+                    string.Empty,
+                    strictOptions
+                )
             );
             AssertExceptionStringsEqual(
                 () =>
@@ -291,14 +263,12 @@ namespace BasicEventSourceTests
                 e
             );
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.EnumKindMismatchEventSource),
-                        string.Empty,
-                        EventManifestOptions.AllowEventSourceOverride
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.EnumKindMismatchEventSource),
+                    string.Empty,
+                    EventManifestOptions.AllowEventSourceOverride
+                )
             );
             AssertExceptionStringsEqual(
                 () => GetResourceString("EventSource_UndefinedKeyword", "0x1", "WriteInteger"),
@@ -310,14 +280,12 @@ namespace BasicEventSourceTests
             );
 
             // These tests require the IL to be present for inspection.
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.MismatchIdEventSource),
-                        string.Empty,
-                        strictOptions
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.MismatchIdEventSource),
+                    string.Empty,
+                    strictOptions
+                )
             );
             AssertExceptionStringsEqual(
                 () =>
@@ -325,14 +293,12 @@ namespace BasicEventSourceTests
                 e
             );
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.MismatchIdEventSource),
-                        string.Empty,
-                        strictOptions
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.MismatchIdEventSource),
+                    string.Empty,
+                    strictOptions
+                )
             );
             AssertExceptionStringsEqual(
                 () =>
@@ -344,14 +310,12 @@ namespace BasicEventSourceTests
                 EventSource.GenerateManifest(typeof(Sdt.EventIdReusedEventSource), string.Empty)
             );
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.EventIdReusedEventSource),
-                        string.Empty,
-                        strictOptions
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.EventIdReusedEventSource),
+                    string.Empty,
+                    strictOptions
+                )
             );
             AssertExceptionStringsEqual(
                 () =>
@@ -369,14 +333,12 @@ namespace BasicEventSourceTests
                 e
             );
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.EventIdReusedEventSource),
-                        string.Empty,
-                        strictOptions
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.EventIdReusedEventSource),
+                    string.Empty,
+                    strictOptions
+                )
             );
             AssertExceptionStringsEqual(
                 () =>
@@ -394,28 +356,24 @@ namespace BasicEventSourceTests
                 e
             );
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.EventNameReusedEventSource),
-                        string.Empty,
-                        strictOptions
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.EventNameReusedEventSource),
+                    string.Empty,
+                    strictOptions
+                )
             );
             AssertExceptionStringsEqual(
                 () => GetResourceString("EventSource_EventNameReused", "WriteInteger"),
                 e
             );
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.EventNameReusedEventSource),
-                        string.Empty,
-                        strictOptions
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.EventNameReusedEventSource),
+                    string.Empty,
+                    strictOptions
+                )
             );
             AssertExceptionStringsEqual(
                 () => GetResourceString("EventSource_EventNameReused", "WriteInteger"),
@@ -429,14 +387,12 @@ namespace BasicEventSourceTests
                 )
             );
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.TaskOpcodePairReusedEventSource),
-                        string.Empty,
-                        strictOptions
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.TaskOpcodePairReusedEventSource),
+                    string.Empty,
+                    strictOptions
+                )
             );
             AssertExceptionStringsEqual(
                 () =>
@@ -450,14 +406,12 @@ namespace BasicEventSourceTests
                 e
             );
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.TaskOpcodePairReusedEventSource),
-                        string.Empty,
-                        strictOptions
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.TaskOpcodePairReusedEventSource),
+                    string.Empty,
+                    strictOptions
+                )
             );
             AssertExceptionStringsEqual(
                 () =>
@@ -478,14 +432,12 @@ namespace BasicEventSourceTests
                 )
             );
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.EventWithOpcodeNoTaskEventSource),
-                        string.Empty,
-                        strictOptions
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.EventWithOpcodeNoTaskEventSource),
+                    string.Empty,
+                    strictOptions
+                )
             );
             AssertExceptionStringsEqual(
                 () =>
@@ -497,14 +449,12 @@ namespace BasicEventSourceTests
                 e
             );
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.EventWithOpcodeNoTaskEventSource),
-                        string.Empty,
-                        strictOptions
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.EventWithOpcodeNoTaskEventSource),
+                    string.Empty,
+                    strictOptions
+                )
             );
             AssertExceptionStringsEqual(
                 () =>
@@ -523,14 +473,12 @@ namespace BasicEventSourceTests
                 )
             );
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.EventWithInvalidMessageEventSource),
-                        string.Empty,
-                        strictOptions
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.EventWithInvalidMessageEventSource),
+                    string.Empty,
+                    strictOptions
+                )
             );
             AssertExceptionStringsEqual(
                 () =>
@@ -542,14 +490,12 @@ namespace BasicEventSourceTests
                 e
             );
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.AbstractWithKwdTaskOpcodeEventSource),
-                        string.Empty,
-                        strictOptions
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.AbstractWithKwdTaskOpcodeEventSource),
+                    string.Empty,
+                    strictOptions
+                )
             );
             AssertExceptionStringsEqual(
                 () =>
@@ -562,14 +508,12 @@ namespace BasicEventSourceTests
                 e
             );
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.AbstractWithKwdTaskOpcodeEventSource),
-                        string.Empty,
-                        strictOptions
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.AbstractWithKwdTaskOpcodeEventSource),
+                    string.Empty,
+                    strictOptions
+                )
             );
             AssertExceptionStringsEqual(
                 () =>
@@ -582,14 +526,12 @@ namespace BasicEventSourceTests
                 e
             );
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.AbstractWithEventsEventSource),
-                        string.Empty,
-                        strictOptions
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.AbstractWithEventsEventSource),
+                    string.Empty,
+                    strictOptions
+                )
             );
             AssertExceptionStringsEqual(
                 () =>
@@ -601,14 +543,12 @@ namespace BasicEventSourceTests
                 e
             );
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.AbstractWithEventsEventSource),
-                        string.Empty,
-                        strictOptions
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.AbstractWithEventsEventSource),
+                    string.Empty,
+                    strictOptions
+                )
             );
             AssertExceptionStringsEqual(
                 () =>
@@ -620,14 +560,12 @@ namespace BasicEventSourceTests
                 e
             );
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.ImplementsInterfaceEventSource),
-                        string.Empty,
-                        strictOptions
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.ImplementsInterfaceEventSource),
+                    string.Empty,
+                    strictOptions
+                )
             );
             AssertExceptionStringsEqual(
                 () =>
@@ -639,14 +577,12 @@ namespace BasicEventSourceTests
                 e
             );
 
-            e = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    EventSource.GenerateManifest(
-                        typeof(Sdt.ImplementsInterfaceEventSource),
-                        string.Empty,
-                        strictOptions
-                    )
+            e = AssertExtensions.Throws<ArgumentException>(null, () =>
+                EventSource.GenerateManifest(
+                    typeof(Sdt.ImplementsInterfaceEventSource),
+                    string.Empty,
+                    strictOptions
+                )
             );
             AssertExceptionStringsEqual(
                 () =>

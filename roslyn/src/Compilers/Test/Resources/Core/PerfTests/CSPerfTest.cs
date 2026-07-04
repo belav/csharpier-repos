@@ -3454,39 +3454,35 @@ namespace ns1
 
                 // Generic Type Inference, Nested Lambdas
                 goo(x, "", del1);
-                goo(
-                    func,
-                    del2,
-                    (T a, List<T> b, Dictionary<List<T>, T> c) =>
+                goo(func, del2, (T a, List<T> b, Dictionary<List<T>, T> c) =>
+                {
+                    int z = x;
                     {
-                        int z = x;
-                        {
-                            goo(
-                                new Action(() => x = 2),
-                                new Func<ArgumentException, int>(
-                                    (aa) =>
-                                    {
-                                        return y + x + +z + b.Count;
-                                    }
-                                ),
-                                new Func<Exception, long>(
-                                    delegate(Exception aa)
-                                    {
-                                        return y * z * x - c.Count;
-                                    }
-                                )
-                            );
-                        }
-                        x = z;
-                        {
-                            goo(
-                                (aa, bb) => a.ToString(),
-                                (long bb, string cc) => y - (int)bb + b.Count - z,
-                                (string cc, int aa) => x + y + aa + c.Values.Count
-                            );
-                        }
+                        goo(
+                            new Action(() => x = 2),
+                            new Func<ArgumentException, int>(
+                                (aa) =>
+                                {
+                                    return y + x + +z + b.Count;
+                                }
+                            ),
+                            new Func<Exception, long>(
+                                delegate(Exception aa)
+                                {
+                                    return y * z * x - c.Count;
+                                }
+                            )
+                        );
                     }
-                );
+                    x = z;
+                    {
+                        goo(
+                            (aa, bb) => a.ToString(),
+                            (long bb, string cc) => y - (int)bb + b.Count - z,
+                            (string cc, int aa) => x + y + aa + c.Values.Count
+                        );
+                    }
+                });
 
                 // Generic Type Inference, Dominant Type
                 goo(

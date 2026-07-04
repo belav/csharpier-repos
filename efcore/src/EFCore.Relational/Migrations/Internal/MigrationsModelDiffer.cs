@@ -1479,19 +1479,12 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         IEnumerable<IUniqueConstraint> target,
         DiffContext diffContext
     ) =>
-        DiffCollection(
-            source,
-            target,
-            diffContext,
-            Diff,
-            Add,
-            Remove,
-            (s, t, c) =>
-                s.Name == t.Name
-                && s.Columns.Select(p => p.Name)
-                    .SequenceEqual(t.Columns.Select(p => c.FindSource(p)?.Name))
-                && s.GetIsPrimaryKey() == t.GetIsPrimaryKey()
-                && !HasDifferences(s.GetAnnotations(), t.GetAnnotations())
+        DiffCollection(source, target, diffContext, Diff, Add, Remove, (s, t, c) =>
+            s.Name == t.Name
+            && s.Columns.Select(p => p.Name)
+                .SequenceEqual(t.Columns.Select(p => c.FindSource(p)?.Name))
+            && s.GetIsPrimaryKey() == t.GetIsPrimaryKey()
+            && !HasDifferences(s.GetAnnotations(), t.GetAnnotations())
         );
 
     /// <summary>
@@ -1580,22 +1573,15 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         IEnumerable<IForeignKeyConstraint> target,
         DiffContext diffContext
     ) =>
-        DiffCollection(
-            source,
-            target,
-            diffContext,
-            Diff,
-            Add,
-            Remove,
-            (s, t, context) =>
-                s.Name == t.Name
-                && s.Columns.Select(c => c.Name)
-                    .SequenceEqual(t.Columns.Select(c => context.FindSource(c)?.Name))
-                && s.PrincipalTable == context.FindSource(t.PrincipalTable)
-                && s.PrincipalColumns.Select(c => c.Name)
-                    .SequenceEqual(t.PrincipalColumns.Select(c => context.FindSource(c)?.Name))
-                && s.OnDeleteAction == t.OnDeleteAction
-                && !HasDifferences(s.GetAnnotations(), t.GetAnnotations())
+        DiffCollection(source, target, diffContext, Diff, Add, Remove, (s, t, context) =>
+            s.Name == t.Name
+            && s.Columns.Select(c => c.Name)
+                .SequenceEqual(t.Columns.Select(c => context.FindSource(c)?.Name))
+            && s.PrincipalTable == context.FindSource(t.PrincipalTable)
+            && s.PrincipalColumns.Select(c => c.Name)
+                .SequenceEqual(t.PrincipalColumns.Select(c => context.FindSource(c)?.Name))
+            && s.OnDeleteAction == t.OnDeleteAction
+            && !HasDifferences(s.GetAnnotations(), t.GetAnnotations())
         );
 
     /// <summary>
@@ -1805,17 +1791,10 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         IEnumerable<ICheckConstraint> target,
         DiffContext diffContext
     ) =>
-        DiffCollection(
-            source,
-            target,
-            diffContext,
-            Diff,
-            Add,
-            Remove,
-            (s, t, c) =>
-                c.FindTable(s.EntityType) == c.FindSource(c.FindTable(t.EntityType))
-                && string.Equals(s.Name, t.Name, StringComparison.OrdinalIgnoreCase)
-                && string.Equals(s.Sql, t.Sql, StringComparison.OrdinalIgnoreCase)
+        DiffCollection(source, target, diffContext, Diff, Add, Remove, (s, t, c) =>
+            c.FindTable(s.EntityType) == c.FindSource(c.FindTable(t.EntityType))
+            && string.Equals(s.Name, t.Name, StringComparison.OrdinalIgnoreCase)
+            && string.Equals(s.Sql, t.Sql, StringComparison.OrdinalIgnoreCase)
         );
 
     /// <summary>

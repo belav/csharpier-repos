@@ -76,13 +76,11 @@ namespace System.Tests
         public void Ctor_NegativeMajor_ThrowsArgumentOutOfRangeException()
         {
             AssertExtensions.Throws<ArgumentOutOfRangeException>("major", () => new Version(-1, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "major",
-                () => new Version(-1, 0, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("major", () =>
+                new Version(-1, 0, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "major",
-                () => new Version(-1, 0, 0, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("major", () =>
+                new Version(-1, 0, 0, 0)
             );
         }
 
@@ -90,35 +88,30 @@ namespace System.Tests
         public void Ctor_NegativeMinor_ThrowsArgumentOutOfRangeException()
         {
             AssertExtensions.Throws<ArgumentOutOfRangeException>("minor", () => new Version(0, -1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "minor",
-                () => new Version(0, -1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("minor", () =>
+                new Version(0, -1, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "minor",
-                () => new Version(0, -1, 0, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("minor", () =>
+                new Version(0, -1, 0, 0)
             );
         }
 
         [Fact]
         public void Ctor_NegativeBuild_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "build",
-                () => new Version(0, 0, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("build", () =>
+                new Version(0, 0, -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "build",
-                () => new Version(0, 0, -1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("build", () =>
+                new Version(0, 0, -1, 0)
             );
         }
 
         [Fact]
         public void Ctor_NegativeRevision_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "revision",
-                () => new Version(0, 0, 0, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("revision", () =>
+                new Version(0, 0, 0, -1)
             );
         }
 
@@ -212,9 +205,8 @@ namespace System.Tests
         {
             var version = new Version(1, 1);
             AssertExtensions.Throws<ArgumentException>("version", () => version.CompareTo(other));
-            AssertExtensions.Throws<ArgumentException>(
-                "version",
-                () => ((IComparable)version).CompareTo(other)
+            AssertExtensions.Throws<ArgumentException>("version", () =>
+                ((IComparable)version).CompareTo(other)
             );
         }
 
@@ -395,9 +387,8 @@ namespace System.Tests
             Assert.Equal(expected[maxFieldCount], version.ToString());
 
             AssertExtensions.Throws<ArgumentException>("fieldCount", () => version.ToString(-1)); // Index < 0
-            AssertExtensions.Throws<ArgumentException>(
-                "fieldCount",
-                () => version.ToString(maxFieldCount + 1)
+            AssertExtensions.Throws<ArgumentException>("fieldCount", () =>
+                version.ToString(maxFieldCount + 1)
             ); // Index > version.fieldCount
         }
 
@@ -468,13 +459,11 @@ namespace System.Tests
                 );
 
                 dest = new byte[0];
-                AssertExtensions.Throws<ArgumentException>(
-                    "fieldCount",
-                    () => version.TryFormat(dest, -1, out bytesWritten)
+                AssertExtensions.Throws<ArgumentException>("fieldCount", () =>
+                    version.TryFormat(dest, -1, out bytesWritten)
                 ); // Index < 0
-                AssertExtensions.Throws<ArgumentException>(
-                    "fieldCount",
-                    () => version.TryFormat(dest, maxFieldCount + 1, out bytesWritten)
+                AssertExtensions.Throws<ArgumentException>("fieldCount", () =>
+                    version.TryFormat(dest, maxFieldCount + 1, out bytesWritten)
                 ); // Index > version.fieldCount
             }
         }

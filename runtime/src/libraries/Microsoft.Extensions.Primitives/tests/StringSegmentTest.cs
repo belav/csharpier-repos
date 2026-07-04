@@ -404,9 +404,8 @@ namespace Microsoft.Extensions.Primitives
             var segment = new StringSegment();
 
             // Act & assert
-            Assert.Throws<ArgumentNullException>(
-                "text",
-                () => segment.EndsWith((string)null, StringComparison.Ordinal)
+            Assert.Throws<ArgumentNullException>("text", () =>
+                segment.EndsWith((string)null, StringComparison.Ordinal)
             );
         }
 
@@ -417,13 +416,11 @@ namespace Microsoft.Extensions.Primitives
             var segment = new StringSegment();
 
             // Act & assert
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "comparisonType",
-                () => segment.EndsWith(string.Empty, (StringComparison)(-1))
+            Assert.Throws<ArgumentOutOfRangeException>("comparisonType", () =>
+                segment.EndsWith(string.Empty, (StringComparison)(-1))
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "comparisonType",
-                () => segment.EndsWith(string.Empty, (StringComparison)6)
+            Assert.Throws<ArgumentOutOfRangeException>("comparisonType", () =>
+                segment.EndsWith(string.Empty, (StringComparison)6)
             );
         }
 
@@ -481,9 +478,8 @@ namespace Microsoft.Extensions.Primitives
             var segment = new StringSegment();
 
             // Act & assert
-            Assert.Throws<ArgumentNullException>(
-                "text",
-                () => segment.StartsWith((string)null, StringComparison.Ordinal)
+            Assert.Throws<ArgumentNullException>("text", () =>
+                segment.StartsWith((string)null, StringComparison.Ordinal)
             );
         }
 
@@ -494,13 +490,11 @@ namespace Microsoft.Extensions.Primitives
             var segment = new StringSegment();
 
             // Act & assert
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "comparisonType",
-                () => segment.StartsWith(string.Empty, (StringComparison)(-1))
+            Assert.Throws<ArgumentOutOfRangeException>("comparisonType", () =>
+                segment.StartsWith(string.Empty, (StringComparison)(-1))
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "comparisonType",
-                () => segment.StartsWith(string.Empty, (StringComparison)6)
+            Assert.Throws<ArgumentOutOfRangeException>("comparisonType", () =>
+                segment.StartsWith(string.Empty, (StringComparison)6)
             );
         }
 
@@ -569,13 +563,11 @@ namespace Microsoft.Extensions.Primitives
             var segment = new StringSegment();
 
             // Act & assert
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "comparisonType",
-                () => segment.Equals("Hello!", (StringComparison)(-1))
+            Assert.Throws<ArgumentOutOfRangeException>("comparisonType", () =>
+                segment.Equals("Hello!", (StringComparison)(-1))
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "comparisonType",
-                () => segment.Equals("Hello!", (StringComparison)6)
+            Assert.Throws<ArgumentOutOfRangeException>("comparisonType", () =>
+                segment.Equals("Hello!", (StringComparison)6)
             );
         }
 
@@ -586,13 +578,11 @@ namespace Microsoft.Extensions.Primitives
             var segment = new StringSegment();
 
             // Act & assert
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "comparisonType",
-                () => segment.Equals(new StringSegment(), (StringComparison)(-1))
+            Assert.Throws<ArgumentOutOfRangeException>("comparisonType", () =>
+                segment.Equals(new StringSegment(), (StringComparison)(-1))
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "comparisonType",
-                () => segment.Equals(new StringSegment(), (StringComparison)6)
+            Assert.Throws<ArgumentOutOfRangeException>("comparisonType", () =>
+                segment.Equals(new StringSegment(), (StringComparison)6)
             );
         }
 
@@ -1115,13 +1105,11 @@ namespace Microsoft.Extensions.Primitives
             var segment = new StringSegment();
 
             // Act & assert
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "comparisonType",
-                () => StringSegment.Compare(segment, segment, (StringComparison)(-1))
+            Assert.Throws<ArgumentOutOfRangeException>("comparisonType", () =>
+                StringSegment.Compare(segment, segment, (StringComparison)(-1))
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "comparisonType",
-                () => StringSegment.Compare(segment, segment, (StringComparison)6)
+            Assert.Throws<ArgumentOutOfRangeException>("comparisonType", () =>
+                StringSegment.Compare(segment, segment, (StringComparison)6)
             );
         }
 

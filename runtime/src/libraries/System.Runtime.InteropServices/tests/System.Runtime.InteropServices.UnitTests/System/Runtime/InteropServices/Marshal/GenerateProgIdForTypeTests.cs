@@ -46,9 +46,8 @@ namespace System.Runtime.InteropServices.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void GenerateProgIdForType_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => Marshal.GenerateProgIdForType(null)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                Marshal.GenerateProgIdForType(null)
             );
         }
 

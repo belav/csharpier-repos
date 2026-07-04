@@ -477,31 +477,25 @@ public class EventTests
 
     private static void ConfigureEndpoints(IEndpointRouteBuilder builder)
     {
-        builder.Map(
-            "/Authenticate",
-            async context =>
+        builder.Map("/Authenticate", async context =>
+        {
+            if (!context.User.Identity.IsAuthenticated)
             {
-                if (!context.User.Identity.IsAuthenticated)
-                {
-                    await context.ChallengeAsync();
-                    return;
-                }
-
-                Assert.Equal("HTTP/1.1", context.Request.Protocol); // Not HTTP/2
-                var name = context.User.Identity.Name;
-                Assert.False(string.IsNullOrEmpty(name), "name");
-                await context.Response.WriteAsync(name);
+                await context.ChallengeAsync();
+                return;
             }
-        );
 
-        builder.Map(
-            "/418",
-            context =>
-            {
-                context.Response.StatusCode = StatusCodes.Status418ImATeapot;
-                return Task.CompletedTask;
-            }
-        );
+            Assert.Equal("HTTP/1.1", context.Request.Protocol); // Not HTTP/2
+            var name = context.User.Identity.Name;
+            Assert.False(string.IsNullOrEmpty(name), "name");
+            await context.Response.WriteAsync(name);
+        });
+
+        builder.Map("/418", context =>
+        {
+            context.Response.StatusCode = StatusCodes.Status418ImATeapot;
+            return Task.CompletedTask;
+        });
     }
 
     private static Task<HttpContext> SendAsync(

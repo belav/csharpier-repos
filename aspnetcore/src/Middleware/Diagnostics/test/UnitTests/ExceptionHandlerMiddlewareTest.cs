@@ -286,15 +286,13 @@ public class ExceptionHandlerMiddlewareTest
         await middleware.Invoke(httpContext);
 
         // Assert
-        Assert.Collection(
-            diagnosticsRequestExceptionCollector.GetMeasurementSnapshot(),
-            m =>
-                AssertRequestException(
-                    m,
-                    "System.InvalidOperationException",
-                    "handled",
-                    typeof(TestExceptionHandler).FullName
-                )
+        Assert.Collection(diagnosticsRequestExceptionCollector.GetMeasurementSnapshot(), m =>
+            AssertRequestException(
+                m,
+                "System.InvalidOperationException",
+                "handled",
+                typeof(TestExceptionHandler).FullName
+            )
         );
     }
 
@@ -325,9 +323,8 @@ public class ExceptionHandlerMiddlewareTest
         await Assert.ThrowsAsync<InvalidOperationException>(() => middleware.Invoke(httpContext));
 
         // Assert
-        Assert.Collection(
-            diagnosticsRequestExceptionCollector.GetMeasurementSnapshot(),
-            m => AssertRequestException(m, "System.InvalidOperationException", "skipped")
+        Assert.Collection(diagnosticsRequestExceptionCollector.GetMeasurementSnapshot(), m =>
+            AssertRequestException(m, "System.InvalidOperationException", "skipped")
         );
     }
 
@@ -360,9 +357,8 @@ public class ExceptionHandlerMiddlewareTest
         await middleware.Invoke(httpContext);
 
         // Assert
-        Assert.Collection(
-            diagnosticsRequestExceptionCollector.GetMeasurementSnapshot(),
-            m => AssertRequestException(m, "System.InvalidOperationException", "handled", null)
+        Assert.Collection(diagnosticsRequestExceptionCollector.GetMeasurementSnapshot(), m =>
+            AssertRequestException(m, "System.InvalidOperationException", "handled", null)
         );
     }
 
@@ -394,9 +390,8 @@ public class ExceptionHandlerMiddlewareTest
         await Assert.ThrowsAsync<InvalidOperationException>(() => middleware.Invoke(httpContext));
 
         // Assert
-        Assert.Collection(
-            diagnosticsRequestExceptionCollector.GetMeasurementSnapshot(),
-            m => AssertRequestException(m, "System.InvalidOperationException", "unhandled")
+        Assert.Collection(diagnosticsRequestExceptionCollector.GetMeasurementSnapshot(), m =>
+            AssertRequestException(m, "System.InvalidOperationException", "unhandled")
         );
     }
 

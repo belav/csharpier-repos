@@ -77,22 +77,19 @@ namespace System.Linq.Tests
         [Fact]
         public void FirstNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "first",
-                () => ((IEnumerable<int>)null).Concat(Enumerable.Range(0, 0))
+            AssertExtensions.Throws<ArgumentNullException>("first", () =>
+                ((IEnumerable<int>)null).Concat(Enumerable.Range(0, 0))
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "first",
-                () => ((IEnumerable<int>)null).Concat(null)
+            AssertExtensions.Throws<ArgumentNullException>("first", () =>
+                ((IEnumerable<int>)null).Concat(null)
             ); // If both inputs are null, throw for "first" first
         }
 
         [Fact]
         public void SecondNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "second",
-                () => Enumerable.Range(0, 0).Concat(null)
+            AssertExtensions.Throws<ArgumentNullException>("second", () =>
+                Enumerable.Range(0, 0).Concat(null)
             );
         }
 

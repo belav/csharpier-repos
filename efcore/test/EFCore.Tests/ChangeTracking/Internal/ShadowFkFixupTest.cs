@@ -29,20 +29,17 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -61,20 +58,17 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -92,20 +86,17 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -126,20 +117,17 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -159,20 +147,17 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -191,20 +176,17 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -222,20 +204,17 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -256,20 +235,17 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -288,20 +264,17 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -319,20 +292,17 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -353,20 +323,17 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -386,20 +353,17 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -418,20 +382,17 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -449,20 +410,17 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -482,19 +440,16 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -514,19 +469,16 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -547,19 +499,16 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -578,19 +527,16 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -611,19 +557,16 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -642,19 +585,16 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Equal(new[] { dependent }.ToList(), principal.Products);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Equal(new[] { dependent }.ToList(), principal.Products);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -674,19 +614,16 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -706,19 +643,16 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -736,19 +670,16 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -768,19 +699,16 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -800,19 +728,16 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -830,19 +755,16 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Category);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Same(principal, dependent.Category);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -862,18 +784,15 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -893,18 +812,15 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("CategoryId").CurrentValue
-                );
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(
+                principal.Id,
+                context.Entry(dependent).Property("CategoryId").CurrentValue
+            );
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -925,21 +841,15 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -958,20 +868,14 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -989,20 +893,14 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1023,20 +921,14 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1056,20 +948,14 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1088,20 +974,14 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1119,20 +999,14 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1153,20 +1027,14 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1185,20 +1053,14 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1216,20 +1078,14 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1250,20 +1106,14 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1283,20 +1133,14 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1315,20 +1159,14 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1346,20 +1184,14 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Parent);
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1379,19 +1211,13 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1411,19 +1237,13 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1444,19 +1264,13 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1475,19 +1289,13 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1508,19 +1316,13 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1539,19 +1341,13 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(dependent, principal.Child);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(dependent, principal.Child);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1571,19 +1367,13 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Parent);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1603,19 +1393,13 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Parent);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1633,19 +1417,13 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Parent);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1664,19 +1442,13 @@ public class ShadowFkFixupTest
         context.Entry(dependent).Property("ParentId").CurrentValue = principal.Id;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Parent);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1695,19 +1467,13 @@ public class ShadowFkFixupTest
         context.Entry(dependent).Property("ParentId").CurrentValue = principal.Id;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Parent);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1725,19 +1491,13 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Same(principal, dependent.Parent);
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Same(principal, dependent.Parent);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1757,18 +1517,12 @@ public class ShadowFkFixupTest
         context.Entry(dependent).State = entityState;
         context.Entry(principal).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     [ConditionalTheory]
@@ -1788,18 +1542,12 @@ public class ShadowFkFixupTest
         context.Entry(principal).State = entityState;
         context.Entry(dependent).State = entityState;
 
-        AssertFixup(
-            context,
-            () =>
-            {
-                Assert.Equal(
-                    principal.Id,
-                    context.Entry(dependent).Property("ParentId").CurrentValue
-                );
-                Assert.Equal(entityState, context.Entry(principal).State);
-                Assert.Equal(entityState, context.Entry(dependent).State);
-            }
-        );
+        AssertFixup(context, () =>
+        {
+            Assert.Equal(principal.Id, context.Entry(dependent).Property("ParentId").CurrentValue);
+            Assert.Equal(entityState, context.Entry(principal).State);
+            Assert.Equal(entityState, context.Entry(dependent).State);
+        });
     }
 
     private class Parent

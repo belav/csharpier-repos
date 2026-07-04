@@ -21,18 +21,15 @@ namespace System.IO.Tests
             T item = GetExistingItem();
             item.Delete();
 
-            Assert.All(
-                TimeFunctions(),
-                (function) =>
-                {
-                    Assert.Equal(
-                        function.Kind == DateTimeKind.Local
-                            ? DateTime.FromFileTime(0).Ticks
-                            : DateTime.FromFileTimeUtc(0).Ticks,
-                        function.Getter(item).Ticks
-                    );
-                }
-            );
+            Assert.All(TimeFunctions(), (function) =>
+            {
+                Assert.Equal(
+                    function.Kind == DateTimeKind.Local
+                        ? DateTime.FromFileTime(0).Ticks
+                        : DateTime.FromFileTimeUtc(0).Ticks,
+                    function.Getter(item).Ticks
+                );
+            });
         }
 
         [Fact]
@@ -53,14 +50,11 @@ namespace System.IO.Tests
             // Deleting should refresh state
             item.Delete();
 
-            Assert.All(
-                times,
-                time =>
-                {
-                    // We check that all the file times have been refreshed
-                    Assert.NotEqual(time.Key.Getter(item), time.Value);
-                }
-            );
+            Assert.All(times, time =>
+            {
+                // We check that all the file times have been refreshed
+                Assert.NotEqual(time.Key.Getter(item), time.Value);
+            });
         }
     }
 }

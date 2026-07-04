@@ -218,9 +218,8 @@ namespace System.Security.Permissions.Tests
         public void AddAttribute_Name_Invalid()
         {
             SecurityElement elem = CreateElement();
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => elem.AddAttribute("<invalid>", "valid")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                elem.AddAttribute("<invalid>", "valid")
             );
         }
 
@@ -228,9 +227,8 @@ namespace System.Security.Permissions.Tests
         public void AddAttribute_Value_Invalid()
         {
             SecurityElement elem = CreateElement();
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => elem.AddAttribute("valid", "invalid\"")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                elem.AddAttribute("valid", "invalid\"")
             );
         }
 
@@ -247,9 +245,8 @@ namespace System.Security.Permissions.Tests
         public void AddAttribute_InvalidValue3()
         {
             SecurityElement elem = CreateElement();
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => elem.AddAttribute("valid", "<invalid>")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                elem.AddAttribute("valid", "<invalid>")
             );
         }
 
@@ -258,9 +255,8 @@ namespace System.Security.Permissions.Tests
         {
             SecurityElement elem = CreateElement();
             elem.AddAttribute("valid", "first time");
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => elem.AddAttribute("valid", "second time")
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                elem.AddAttribute("valid", "second time")
             );
         }
 

@@ -262,13 +262,11 @@ namespace System.Collections.Immutable.Tests
             Assert.False(queue.IsEmpty);
             Assert.Equal(new[] { 1, 2 }, queue);
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "items",
-                () => ImmutableQueue.CreateRange((IEnumerable<int>)null)
+            AssertExtensions.Throws<ArgumentNullException>("items", () =>
+                ImmutableQueue.CreateRange((IEnumerable<int>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "items",
-                () => ImmutableQueue.Create((int[])null)
+            AssertExtensions.Throws<ArgumentNullException>("items", () =>
+                ImmutableQueue.Create((int[])null)
             );
         }
 

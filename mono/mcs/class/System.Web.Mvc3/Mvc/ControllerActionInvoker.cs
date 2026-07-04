@@ -378,9 +378,8 @@
             // need to reverse the filter list because the continuations are built up backward
             Func<ActionExecutedContext> thunk = filters
                 .Reverse()
-                .Aggregate(
-                    continuation,
-                    (next, filter) => () => InvokeActionMethodFilter(filter, preContext, next)
+                .Aggregate(continuation, (next, filter) =>
+                    () => InvokeActionMethodFilter(filter, preContext, next)
                 );
             return thunk();
         }
@@ -479,9 +478,8 @@
             // need to reverse the filter list because the continuations are built up backward
             Func<ResultExecutedContext> thunk = filters
                 .Reverse()
-                .Aggregate(
-                    continuation,
-                    (next, filter) => () => InvokeActionResultFilter(filter, preContext, next)
+                .Aggregate(continuation, (next, filter) =>
+                    () => InvokeActionResultFilter(filter, preContext, next)
                 );
             return thunk();
         }

@@ -429,9 +429,8 @@ public class KestrelServerTests
             CancellationToken.None
         );
 
-        Assert.Collection(
-            transportFactory.BoundEndPoints,
-            ep => Assert.Equal(endpoint, ep.OriginalEndPoint)
+        Assert.Collection(transportFactory.BoundEndPoints, ep =>
+            Assert.Equal(endpoint, ep.OriginalEndPoint)
         );
     }
 
@@ -439,14 +438,11 @@ public class KestrelServerTests
     public async Task StartWithNoValidTransportFactoryThrows_Http3()
     {
         var serverOptions = CreateServerOptions();
-        serverOptions.Listen(
-            new IPEndPoint(IPAddress.Loopback, 0),
-            c =>
-            {
-                c.Protocols = HttpProtocols.Http3;
-                c.UseHttps(TestResources.GetTestCertificate());
-            }
-        );
+        serverOptions.Listen(new IPEndPoint(IPAddress.Loopback, 0), c =>
+        {
+            c.Protocols = HttpProtocols.Http3;
+            c.UseHttps(TestResources.GetTestCertificate());
+        });
 
         using var server = CreateKestrelServer(
             serverOptions,
@@ -475,14 +471,11 @@ public class KestrelServerTests
     {
         var endpoint = new IPEndPoint(IPAddress.Loopback, 0);
         var serverOptions = CreateServerOptions();
-        serverOptions.Listen(
-            endpoint,
-            c =>
-            {
-                c.Protocols = HttpProtocols.Http3;
-                c.UseHttps(TestResources.GetTestCertificate());
-            }
-        );
+        serverOptions.Listen(endpoint, c =>
+        {
+            c.Protocols = HttpProtocols.Http3;
+            c.UseHttps(TestResources.GetTestCertificate());
+        });
 
         var transportFactory = new MockMultiplexedTransportFactory();
 
@@ -501,9 +494,8 @@ public class KestrelServerTests
             CancellationToken.None
         );
 
-        Assert.Collection(
-            transportFactory.BoundEndPoints,
-            ep => Assert.Equal(endpoint, ep.OriginalEndPoint)
+        Assert.Collection(transportFactory.BoundEndPoints, ep =>
+            Assert.Equal(endpoint, ep.OriginalEndPoint)
         );
     }
 
@@ -513,14 +505,11 @@ public class KestrelServerTests
         var options = CreateServerOptions();
 
         var customEndpoint = new UriEndPoint(new("http://localhost:5000"));
-        options.Listen(
-            customEndpoint,
-            options =>
-            {
-                options.UseHttps(TestResources.GetTestCertificate());
-                options.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
-            }
-        );
+        options.Listen(customEndpoint, options =>
+        {
+            options.UseHttps(TestResources.GetTestCertificate());
+            options.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
+        });
 
         var mockTransportFactory = new MockTransportFactory();
         var mockMultiplexedTransportFactory = new MockMultiplexedTransportFactory();
@@ -549,14 +538,11 @@ public class KestrelServerTests
     public async Task ListenIPWithStaticPort_TransportsGetIPv6Any()
     {
         var options = CreateServerOptions();
-        options.ListenAnyIP(
-            5000,
-            options =>
-            {
-                options.UseHttps(TestResources.GetTestCertificate());
-                options.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
-            }
-        );
+        options.ListenAnyIP(5000, options =>
+        {
+            options.UseHttps(TestResources.GetTestCertificate());
+            options.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
+        });
 
         var mockTransportFactory = new MockTransportFactory();
         var mockMultiplexedTransportFactory = new MockMultiplexedTransportFactory();
@@ -592,14 +578,11 @@ public class KestrelServerTests
     public async Task ListenIPWithEphemeralPort_TransportsGetIPv6Any()
     {
         var options = CreateServerOptions();
-        options.ListenAnyIP(
-            0,
-            options =>
-            {
-                options.UseHttps(TestResources.GetTestCertificate());
-                options.Protocols = HttpProtocols.Http1AndHttp2;
-            }
-        );
+        options.ListenAnyIP(0, options =>
+        {
+            options.UseHttps(TestResources.GetTestCertificate());
+            options.Protocols = HttpProtocols.Http1AndHttp2;
+        });
 
         var mockTransportFactory = new MockTransportFactory();
         var mockMultiplexedTransportFactory = new MockMultiplexedTransportFactory();
@@ -627,14 +610,11 @@ public class KestrelServerTests
     public async Task ListenIPWithEphemeralPort_MultiplexedTransportsGetIPv6Any()
     {
         var options = CreateServerOptions();
-        options.ListenAnyIP(
-            0,
-            options =>
-            {
-                options.UseHttps(TestResources.GetTestCertificate());
-                options.Protocols = HttpProtocols.Http3;
-            }
-        );
+        options.ListenAnyIP(0, options =>
+        {
+            options.UseHttps(TestResources.GetTestCertificate());
+            options.Protocols = HttpProtocols.Http3;
+        });
 
         var mockTransportFactory = new MockTransportFactory();
         var mockMultiplexedTransportFactory = new MockMultiplexedTransportFactory();

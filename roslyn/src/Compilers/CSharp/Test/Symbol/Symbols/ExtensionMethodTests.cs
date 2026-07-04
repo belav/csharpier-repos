@@ -2903,28 +2903,25 @@ internal static class C
                 options: TestOptions.DebugExe.WithMetadataImportOptions(MetadataImportOptions.All)
             );
 
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var method = module
-                        .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
-                        .GetMember<PEMethodSymbol>("M1");
-                    Assert.True(method.IsExtensionMethod);
-                    Assert.Equal(
-                        SpecialType.System_Object,
-                        method.Parameters.Single().Type.SpecialType
-                    );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var method = module
+                    .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                    .GetMember<PEMethodSymbol>("M1");
+                Assert.True(method.IsExtensionMethod);
+                Assert.Equal(
+                    SpecialType.System_Object,
+                    method.Parameters.Single().Type.SpecialType
+                );
 
-                    var attr = ((PEModuleSymbol)module)
-                        .GetCustomAttributesForToken(method.Handle)
-                        .Single();
-                    Assert.Equal(
-                        "System.Runtime.CompilerServices.ExtensionAttribute",
-                        attr.AttributeClass.ToTestDisplayString()
-                    );
-                }
-            );
+                var attr = ((PEModuleSymbol)module)
+                    .GetCustomAttributesForToken(method.Handle)
+                    .Single();
+                Assert.Equal(
+                    "System.Runtime.CompilerServices.ExtensionAttribute",
+                    attr.AttributeClass.ToTestDisplayString()
+                );
+            });
         }
 
         [WorkItem(541327, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/541327")]
@@ -3019,31 +3016,25 @@ S"
     public static int Generic<T>(this T o) { return o.GetHashCode(); }
 }
 ";
-            CompileAndVerify(
-                source,
-                validator: module =>
-                {
-                    var type = module.GlobalNamespace.GetMember<NamedTypeSymbol>("Extensions");
-                    var nonGenericExtension = type.GetMember<MethodSymbol>("NonGeneric");
-                    var genericExtension = type.GetMember<MethodSymbol>("Generic");
+            CompileAndVerify(source, validator: module =>
+            {
+                var type = module.GlobalNamespace.GetMember<NamedTypeSymbol>("Extensions");
+                var nonGenericExtension = type.GetMember<MethodSymbol>("NonGeneric");
+                var genericExtension = type.GetMember<MethodSymbol>("Generic");
 
-                    Assert.True(nonGenericExtension.IsExtensionMethod);
-                    Assert.Throws<ArgumentNullException>(() =>
-                        nonGenericExtension.ReduceExtensionMethod(
-                            receiverType: null,
-                            compilation: null!
-                        )
-                    );
+                Assert.True(nonGenericExtension.IsExtensionMethod);
+                Assert.Throws<ArgumentNullException>(() =>
+                    nonGenericExtension.ReduceExtensionMethod(
+                        receiverType: null,
+                        compilation: null!
+                    )
+                );
 
-                    Assert.True(genericExtension.IsExtensionMethod);
-                    Assert.Throws<ArgumentNullException>(() =>
-                        genericExtension.ReduceExtensionMethod(
-                            receiverType: null,
-                            compilation: null!
-                        )
-                    );
-                }
-            );
+                Assert.True(genericExtension.IsExtensionMethod);
+                Assert.Throws<ArgumentNullException>(() =>
+                    genericExtension.ReduceExtensionMethod(receiverType: null, compilation: null!)
+                );
+            });
         }
 
         [WorkItem(528730, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/528730")]

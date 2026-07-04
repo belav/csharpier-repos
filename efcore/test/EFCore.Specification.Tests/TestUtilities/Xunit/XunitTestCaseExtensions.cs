@@ -21,14 +21,12 @@ public static class XunitTestCaseExtensions
 
         var skipReasons = new List<string>();
         var attributes = _assemblyAttributes
-            .GetOrAdd(
-                assembly.Name,
-                a => assembly.GetCustomAttributes(typeof(ITestCondition)).ToList()
+            .GetOrAdd(assembly.Name, a =>
+                assembly.GetCustomAttributes(typeof(ITestCondition)).ToList()
             )
             .Concat(
-                _typeAttributes.GetOrAdd(
-                    type.Name,
-                    t => type.GetCustomAttributes(typeof(ITestCondition)).ToList()
+                _typeAttributes.GetOrAdd(type.Name, t =>
+                    type.GetCustomAttributes(typeof(ITestCondition)).ToList()
                 )
             )
             .Concat(method.GetCustomAttributes(typeof(ITestCondition)))

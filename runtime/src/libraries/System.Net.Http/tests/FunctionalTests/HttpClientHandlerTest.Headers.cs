@@ -652,9 +652,8 @@ namespace System.Net.Http.Functional.Tests
                         Assert.Same(request, requestMessage);
                         seenHeaderNames.Add(name);
                         return Assert
-                            .Single(
-                                s_nonAsciiHeaders,
-                                h => h.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
+                            .Single(s_nonAsciiHeaders, h =>
+                                h.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
                             )
                             .ValueEncoding;
                     };
@@ -672,13 +671,11 @@ namespace System.Net.Http.Functional.Tests
                 {
                     HttpRequestData requestData = await server.HandleRequestAsync();
 
-                    Assert.All(
-                        requestData.Headers,
-                        h =>
-                            Assert.False(
-                                h.HuffmanEncoded,
-                                "Expose raw decoded bytes once HuffmanEncoding is supported"
-                            )
+                    Assert.All(requestData.Headers, h =>
+                        Assert.False(
+                            h.HuffmanEncoded,
+                            "Expose raw decoded bytes once HuffmanEncoding is supported"
+                        )
                     );
 
                     foreach (
@@ -691,11 +688,9 @@ namespace System.Net.Http.Functional.Tests
                     )
                     {
                         byte[] valueBytes = valueEncoding.GetBytes(string.Join(separator, values));
-                        Assert.Single(
-                            requestData.Headers,
-                            h =>
-                                h.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
-                                && h.Raw.AsSpan().IndexOf(valueBytes) != -1
+                        Assert.Single(requestData.Headers, h =>
+                            h.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
+                            && h.Raw.AsSpan().IndexOf(valueBytes) != -1
                         );
                     }
                 }
@@ -734,9 +729,8 @@ namespace System.Net.Http.Functional.Tests
                         )
                         {
                             return Assert
-                                .Single(
-                                    s_nonAsciiHeaders,
-                                    h => h.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
+                                .Single(s_nonAsciiHeaders, h =>
+                                    h.Name.Equals(name, StringComparison.OrdinalIgnoreCase)
                                 )
                                 .ValueEncoding;
                         }
@@ -763,9 +757,8 @@ namespace System.Net.Http.Functional.Tests
                     {
                         Assert.Contains(name, seenHeaderNames);
                         IEnumerable<string> receivedValues = Assert
-                            .Single(
-                                response.Headers,
-                                h => h.Key.Equals(name, StringComparison.OrdinalIgnoreCase)
+                            .Single(response.Headers, h =>
+                                h.Key.Equals(name, StringComparison.OrdinalIgnoreCase)
                             )
                             .Value;
                         string value = Assert.Single(receivedValues);

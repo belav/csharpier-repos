@@ -63,13 +63,11 @@ namespace System.Reflection.Emit.Tests
         [Fact]
         public void GetMethod_TypeNotTypeBuilder_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () =>
-                    TypeBuilder.GetMethod(
-                        typeof(int),
-                        typeof(int).GetMethod("Parse", new Type[] { typeof(string) })
-                    )
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                TypeBuilder.GetMethod(
+                    typeof(int),
+                    typeof(int).GetMethod("Parse", new Type[] { typeof(string) })
+                )
             );
         }
 
@@ -95,9 +93,8 @@ namespace System.Reflection.Emit.Tests
 
             Type genericIntType = type.MakeGenericType(typeof(int));
             MethodInfo createdGenericMethod = genericMethod.MakeGenericMethod(typeof(int));
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => TypeBuilder.GetMethod(genericIntType, createdGenericMethod)
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                TypeBuilder.GetMethod(genericIntType, createdGenericMethod)
             );
         }
 
@@ -148,9 +145,8 @@ namespace System.Reflection.Emit.Tests
             );
 
             Type genericIntType = type1.MakeGenericType(typeof(int));
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => TypeBuilder.GetMethod(genericIntType, genMethod2)
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                TypeBuilder.GetMethod(genericIntType, genMethod2)
             );
         }
 
@@ -173,9 +169,8 @@ namespace System.Reflection.Emit.Tests
                 null
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => TypeBuilder.GetMethod(type.AsType(), genericMethod)
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                TypeBuilder.GetMethod(type.AsType(), genericMethod)
             );
         }
 

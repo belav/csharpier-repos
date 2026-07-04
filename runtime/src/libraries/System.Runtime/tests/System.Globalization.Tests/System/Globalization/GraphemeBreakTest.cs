@@ -248,33 +248,27 @@ namespace System.Globalization.Tests
                     .Trim()
                     .Split(BREAK_REQUIRED, StringSplitOptions.RemoveEmptyEntries);
 
-                yield return (
-                    Array.ConvertAll(
-                        clusters,
-                        cluster =>
-                        {
-                            string[] scalarsWithinClusterAsStrings = cluster.Split(
-                                BREAK_FORBIDDEN,
-                                StringSplitOptions.RemoveEmptyEntries
-                            );
-                            uint[] scalarsWithinClusterAsUInt32s = Array.ConvertAll(
-                                scalarsWithinClusterAsStrings,
-                                scalar =>
-                                    uint.Parse(
-                                        scalar,
-                                        NumberStyles.HexNumber,
-                                        CultureInfo.InvariantCulture
-                                    )
-                            );
-                            Rune[] scalarsWithinClusterAsRunes = Array.ConvertAll(
-                                scalarsWithinClusterAsUInt32s,
-                                scalar => new Rune(scalar)
-                            );
-                            return scalarsWithinClusterAsRunes;
-                        }
-                    ),
-                    line
-                );
+                yield return (Array.ConvertAll(clusters, cluster =>
+                    {
+                        string[] scalarsWithinClusterAsStrings = cluster.Split(
+                            BREAK_FORBIDDEN,
+                            StringSplitOptions.RemoveEmptyEntries
+                        );
+                        uint[] scalarsWithinClusterAsUInt32s = Array.ConvertAll(
+                            scalarsWithinClusterAsStrings,
+                            scalar =>
+                                uint.Parse(
+                                    scalar,
+                                    NumberStyles.HexNumber,
+                                    CultureInfo.InvariantCulture
+                                )
+                        );
+                        Rune[] scalarsWithinClusterAsRunes = Array.ConvertAll(
+                            scalarsWithinClusterAsUInt32s,
+                            scalar => new Rune(scalar)
+                        );
+                        return scalarsWithinClusterAsRunes;
+                    }), line);
             }
         }
 

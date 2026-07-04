@@ -51,9 +51,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 ],
                 item => Assert.Contains(item, completionItems)
             );
-            Assert.All(
-                ["int", "return", "System"],
-                item => Assert.DoesNotContain(item, completionItems)
+            Assert.All(["int", "return", "System"], item =>
+                Assert.DoesNotContain(item, completionItems)
             );
 
             await TestServices.InteractiveWindow.ClearReplTextAsync(
@@ -88,9 +87,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 ],
                 item => Assert.Contains(item, completionItems)
             );
-            Assert.All(
-                ["cls", "help", "load", "prompt", "reset", "undef", "define"],
-                item => Assert.DoesNotContain(item, completionItems)
+            Assert.All(["cls", "help", "load", "prompt", "reset", "undef", "define"], item =>
+                Assert.DoesNotContain(item, completionItems)
             );
         }
 

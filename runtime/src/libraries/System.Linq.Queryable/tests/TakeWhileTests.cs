@@ -30,9 +30,8 @@ namespace System.Linq.Tests
         public void ThrowsOnNullSource()
         {
             IQueryable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.TakeWhile(x => true)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.TakeWhile(x => true)
             );
         }
 
@@ -41,9 +40,8 @@ namespace System.Linq.Tests
         {
             IQueryable<int> source = new[] { 1, 2, 3 }.AsQueryable();
             Expression<Func<int, bool>> nullPredicate = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => source.TakeWhile(nullPredicate)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                source.TakeWhile(nullPredicate)
             );
         }
 
@@ -51,9 +49,8 @@ namespace System.Linq.Tests
         public void ThrowsOnNullSourceIndexed()
         {
             IQueryable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.TakeWhile((x, i) => true)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.TakeWhile((x, i) => true)
             );
         }
 
@@ -62,9 +59,8 @@ namespace System.Linq.Tests
         {
             IQueryable<int> source = new[] { 1, 2, 3 }.AsQueryable();
             Expression<Func<int, int, bool>> nullPredicate = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => source.TakeWhile(nullPredicate)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                source.TakeWhile(nullPredicate)
             );
         }
 

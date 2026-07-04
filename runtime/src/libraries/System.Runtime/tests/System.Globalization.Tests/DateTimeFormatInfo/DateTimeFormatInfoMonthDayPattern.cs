@@ -243,9 +243,8 @@ namespace System.Globalization.Tests
         public void MonthDayPattern_SetNull_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => format.MonthDayPattern = null
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                format.MonthDayPattern = null
             );
         }
 

@@ -167,17 +167,14 @@ namespace Microsoft.Build.BuildEngine
         {
             var taskEngine = new TaskEngine(parentTarget.Project, null, Type);
 
-            taskEngine.PublishOutput(
-                taskElement,
-                l =>
-                {
-                    var pv = GetParameterValue(l.Name);
+            taskEngine.PublishOutput(taskElement, l =>
+            {
+                var pv = GetParameterValue(l.Name);
 
-                    Expression exp = new Expression();
-                    exp.Parse(pv, ParseOptions.AllowItemsMetadataAndSplit);
-                    return exp.ConvertTo(parentTarget.Project, l.PropertyType);
-                }
-            );
+                Expression exp = new Expression();
+                exp.Parse(pv, ParseOptions.AllowItemsMetadataAndSplit);
+                return exp.ConvertTo(parentTarget.Project, l.PropertyType);
+            });
 
             return true;
         }

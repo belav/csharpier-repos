@@ -116,37 +116,33 @@ namespace Tracing.Tests.DiagnosticPortValidation
                     subprocessId = pid;
 
                     var mre = new ManualResetEvent(false);
-                    await ConfigureAndWaitForResumeSignal(
-                        pid,
-                        mre,
-                        async () =>
+                    await ConfigureAndWaitForResumeSignal(pid, mre, async () =>
+                    {
+                        for (int i = 0; i < s_NumberOfPorts; i++)
                         {
-                            for (int i = 0; i < s_NumberOfPorts; i++)
-                            {
-                                fSuccess &= !mre.WaitOne(0);
-                                Logger.logger.Log(
-                                    $"Runtime HAS NOT resumed (expects: true): {fSuccess}"
-                                );
-                                var (server, _) = serverAndNames[i];
-                                int serverIndex = i;
-                                Stream stream = await server.AcceptAsync();
-                                IpcAdvertise advertise = IpcAdvertise.Parse(stream);
-                                lock (sync)
-                                    advertisements.Add(advertise);
-                                Logger.logger.Log(
-                                    $"Server {serverIndex} got advertise {advertise.ToString()}"
-                                );
+                            fSuccess &= !mre.WaitOne(0);
+                            Logger.logger.Log(
+                                $"Runtime HAS NOT resumed (expects: true): {fSuccess}"
+                            );
+                            var (server, _) = serverAndNames[i];
+                            int serverIndex = i;
+                            Stream stream = await server.AcceptAsync();
+                            IpcAdvertise advertise = IpcAdvertise.Parse(stream);
+                            lock (sync)
+                                advertisements.Add(advertise);
+                            Logger.logger.Log(
+                                $"Server {serverIndex} got advertise {advertise.ToString()}"
+                            );
 
-                                // send resume command on this connection
-                                var message = new IpcMessage(0x04, 0x01);
-                                Logger.logger.Log($"Port {serverIndex} sent: {message.ToString()}");
-                                IpcMessage response = IpcClient.SendMessage(stream, message);
-                                Logger.logger.Log(
-                                    $"Port {serverIndex} received: {response.ToString()}"
-                                );
-                            }
+                            // send resume command on this connection
+                            var message = new IpcMessage(0x04, 0x01);
+                            Logger.logger.Log($"Port {serverIndex} sent: {message.ToString()}");
+                            IpcMessage response = IpcClient.SendMessage(stream, message);
+                            Logger.logger.Log(
+                                $"Port {serverIndex} received: {response.ToString()}"
+                            );
                         }
-                    );
+                    });
 
                     // runtime should have resumed now
                     fSuccess &= mre.WaitOne(0);
@@ -188,27 +184,21 @@ namespace Tracing.Tests.DiagnosticPortValidation
                 duringExecution: async (int pid) =>
                 {
                     var mre = new ManualResetEvent(false);
-                    await ConfigureAndWaitForResumeSignal(
-                        pid,
-                        mre,
-                        () =>
-                        {
-                            fSuccess &= !mre.WaitOne(0);
-                            Logger.logger.Log(
-                                $"Runtime HAS NOT resumed (expects: true): {fSuccess}"
-                            );
+                    await ConfigureAndWaitForResumeSignal(pid, mre, () =>
+                    {
+                        fSuccess &= !mre.WaitOne(0);
+                        Logger.logger.Log($"Runtime HAS NOT resumed (expects: true): {fSuccess}");
 
-                            // send resume command on this connection
-                            var message = new IpcMessage(0x04, 0x01);
-                            Logger.logger.Log($"Sent: {message.ToString()}");
-                            IpcMessage response = IpcClient.SendMessage(
-                                ConnectionHelper.GetStandardTransport(pid),
-                                message
-                            );
-                            Logger.logger.Log($"Received: {response.ToString()}");
-                            return Task.CompletedTask;
-                        }
-                    );
+                        // send resume command on this connection
+                        var message = new IpcMessage(0x04, 0x01);
+                        Logger.logger.Log($"Sent: {message.ToString()}");
+                        IpcMessage response = IpcClient.SendMessage(
+                            ConnectionHelper.GetStandardTransport(pid),
+                            message
+                        );
+                        Logger.logger.Log($"Received: {response.ToString()}");
+                        return Task.CompletedTask;
+                    });
 
                     // runtime should have resumed now
                     fSuccess &= mre.WaitOne(0);

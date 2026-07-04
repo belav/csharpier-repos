@@ -67,9 +67,8 @@ namespace System.Tests
             int utf32
         )
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "utf32",
-                () => char.ConvertFromUtf32(utf32)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("utf32", () =>
+                char.ConvertFromUtf32(utf32)
             );
         }
 
@@ -105,55 +104,43 @@ namespace System.Tests
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.ConvertToUtf32(null, 0)); // String is null
 
-            AssertExtensions.Throws<ArgumentException>(
-                "s",
-                () => char.ConvertToUtf32("\uD800\uD800", 0)
+            AssertExtensions.Throws<ArgumentException>("s", () =>
+                char.ConvertToUtf32("\uD800\uD800", 0)
             ); // High, high
-            AssertExtensions.Throws<ArgumentException>(
-                "s",
-                () => char.ConvertToUtf32("\uD800\uD800", 1)
+            AssertExtensions.Throws<ArgumentException>("s", () =>
+                char.ConvertToUtf32("\uD800\uD800", 1)
             ); // High, high
-            AssertExtensions.Throws<ArgumentException>(
-                "s",
-                () => char.ConvertToUtf32("\uD800\uD7FF", 0)
+            AssertExtensions.Throws<ArgumentException>("s", () =>
+                char.ConvertToUtf32("\uD800\uD7FF", 0)
             ); // High, non-surrogate
-            AssertExtensions.Throws<ArgumentException>(
-                "s",
-                () => char.ConvertToUtf32("\uD800\u0000", 0)
+            AssertExtensions.Throws<ArgumentException>("s", () =>
+                char.ConvertToUtf32("\uD800\u0000", 0)
             ); // High, non-surrogate
 
-            AssertExtensions.Throws<ArgumentException>(
-                "s",
-                () => char.ConvertToUtf32("\uDC01\uD940", 0)
+            AssertExtensions.Throws<ArgumentException>("s", () =>
+                char.ConvertToUtf32("\uDC01\uD940", 0)
             ); // Low, high
-            AssertExtensions.Throws<ArgumentException>(
-                "s",
-                () => char.ConvertToUtf32("\uDC01\uD940", 1)
+            AssertExtensions.Throws<ArgumentException>("s", () =>
+                char.ConvertToUtf32("\uDC01\uD940", 1)
             ); // Low, high
-            AssertExtensions.Throws<ArgumentException>(
-                "s",
-                () => char.ConvertToUtf32("\uDD00\uDE00", 0)
+            AssertExtensions.Throws<ArgumentException>("s", () =>
+                char.ConvertToUtf32("\uDD00\uDE00", 0)
             ); // Low, low
-            AssertExtensions.Throws<ArgumentException>(
-                "s",
-                () => char.ConvertToUtf32("\uDD00\uDE00", 1)
+            AssertExtensions.Throws<ArgumentException>("s", () =>
+                char.ConvertToUtf32("\uDD00\uDE00", 1)
             ); // Low, hig
-            AssertExtensions.Throws<ArgumentException>(
-                "s",
-                () => char.ConvertToUtf32("\uDF01\u0000", 0)
+            AssertExtensions.Throws<ArgumentException>("s", () =>
+                char.ConvertToUtf32("\uDF01\u0000", 0)
             ); // Low, non-surrogateh
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.ConvertToUtf32("abcde", -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.ConvertToUtf32("abcde", -1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.ConvertToUtf32("abcde", 5)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.ConvertToUtf32("abcde", 5)
             ); // Index >= string.Length
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.ConvertToUtf32("", 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.ConvertToUtf32("", 0)
             ); // Index >= string.Length
         }
 
@@ -180,39 +167,31 @@ namespace System.Tests
         [Fact]
         public static void ConvertToUtf32_Char_Char_Invalid()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "lowSurrogate",
-                () => char.ConvertToUtf32('\uD800', '\uD800')
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("lowSurrogate", () =>
+                char.ConvertToUtf32('\uD800', '\uD800')
             ); // High, high
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "lowSurrogate",
-                () => char.ConvertToUtf32('\uD800', '\uD7FF')
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("lowSurrogate", () =>
+                char.ConvertToUtf32('\uD800', '\uD7FF')
             ); // High, non-surrogate
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "lowSurrogate",
-                () => char.ConvertToUtf32('\uD800', '\u0000')
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("lowSurrogate", () =>
+                char.ConvertToUtf32('\uD800', '\u0000')
             ); // High, non-surrogate
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "highSurrogate",
-                () => char.ConvertToUtf32('\uDD00', '\uDE00')
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("highSurrogate", () =>
+                char.ConvertToUtf32('\uDD00', '\uDE00')
             ); // Low, low
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "highSurrogate",
-                () => char.ConvertToUtf32('\uDC01', '\uD940')
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("highSurrogate", () =>
+                char.ConvertToUtf32('\uDC01', '\uD940')
             ); // Low, high
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "highSurrogate",
-                () => char.ConvertToUtf32('\uDF01', '\u0000')
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("highSurrogate", () =>
+                char.ConvertToUtf32('\uDF01', '\u0000')
             ); // Low, non-surrogate
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "highSurrogate",
-                () => char.ConvertToUtf32('\u0032', '\uD7FF')
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("highSurrogate", () =>
+                char.ConvertToUtf32('\u0032', '\uD7FF')
             ); // Non-surrogate, non-surrogate
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "highSurrogate",
-                () => char.ConvertToUtf32('\u0000', '\u0000')
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("highSurrogate", () =>
+                char.ConvertToUtf32('\u0000', '\u0000')
             ); // Non-surrogate, non-surrogate
         }
 
@@ -257,17 +236,14 @@ namespace System.Tests
         [Fact]
         public static void GetNumericValue_String_Int_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "s",
-                () => char.GetNumericValue(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("s", () =>
+                char.GetNumericValue(null, 0)
             ); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.GetNumericValue("abc", -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.GetNumericValue("abc", -1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.GetNumericValue("abc", 3)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.GetNumericValue("abc", 3)
             ); // Index >= string.Length
         }
 
@@ -351,13 +327,11 @@ namespace System.Tests
         public static void IsControl_String_Int_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsControl(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsControl("abc", -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsControl("abc", -1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsControl("abc", 3)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsControl("abc", 3)
             ); // Index >= string.Length
         }
 
@@ -385,13 +359,11 @@ namespace System.Tests
         public static void IsDigit_String_Int_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsDigit(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsDigit("abc", -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsDigit("abc", -1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsDigit("abc", 3)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsDigit("abc", 3)
             ); // Index >= string.Length
         }
 
@@ -562,13 +534,11 @@ namespace System.Tests
         public static void IsLetter_String_Int_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsLetter(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsLetter("abc", -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsLetter("abc", -1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsLetter("abc", 3)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsLetter("abc", 3)
             ); // Index >= string.Length
         }
 
@@ -613,17 +583,14 @@ namespace System.Tests
         [Fact]
         public static void IsLetterOrDigit_String_Int_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "s",
-                () => char.IsLetterOrDigit(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("s", () =>
+                char.IsLetterOrDigit(null, 0)
             ); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsLetterOrDigit("abc", -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsLetterOrDigit("abc", -1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsLetterOrDigit("abc", 3)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsLetterOrDigit("abc", 3)
             ); // Index >= string.Length
         }
 
@@ -651,13 +618,11 @@ namespace System.Tests
         public static void IsLower_String_Int_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsLower(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsLower("abc", -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsLower("abc", -1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsLower("abc", 3)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsLower("abc", 3)
             ); // Index >= string.Length
         }
 
@@ -697,13 +662,11 @@ namespace System.Tests
         public static void IsNumber_String_Int_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsNumber(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsNumber("abc", -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsNumber("abc", -1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsNumber("abc", 3)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsNumber("abc", 3)
             ); // Index >= string.Length
         }
 
@@ -751,13 +714,11 @@ namespace System.Tests
         public static void IsPunctuation_String_Int_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsPunctuation(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsPunctuation("abc", -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsPunctuation("abc", -1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsPunctuation("abc", 3)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsPunctuation("abc", 3)
             ); // Index >= string.Length
         }
 
@@ -797,13 +758,11 @@ namespace System.Tests
         public static void IsSeparator_String_Int_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsSeparator(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsSeparator("abc", -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsSeparator("abc", -1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsSeparator("abc", 3)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsSeparator("abc", 3)
             ); // Index >= string.Length
         }
 
@@ -837,13 +796,11 @@ namespace System.Tests
         public static void IsLowSurrogate_String_Int_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsLowSurrogate(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsLowSurrogate("abc", -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsLowSurrogate("abc", -1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsLowSurrogate("abc", 3)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsLowSurrogate("abc", 3)
             ); // Index >= string.Length
         }
 
@@ -876,17 +833,14 @@ namespace System.Tests
         [Fact]
         public static void IsHighSurrogate_String_Int_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "s",
-                () => char.IsHighSurrogate(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("s", () =>
+                char.IsHighSurrogate(null, 0)
             ); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsHighSurrogate("abc", -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsHighSurrogate("abc", -1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsHighSurrogate("abc", 3)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsHighSurrogate("abc", 3)
             ); // Index >= string.Length
         }
 
@@ -920,13 +874,11 @@ namespace System.Tests
         public static void IsSurrogate_String_Int_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsSurrogate(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsSurrogate("abc", -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsSurrogate("abc", -1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsSurrogate("abc", 3)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsSurrogate("abc", 3)
             ); // Index >= string.Length
         }
 
@@ -967,17 +919,14 @@ namespace System.Tests
         [Fact]
         public static void IsSurrogatePair_String_Int_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "s",
-                () => char.IsSurrogatePair(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("s", () =>
+                char.IsSurrogatePair(null, 0)
             ); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsSurrogatePair("abc", -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsSurrogatePair("abc", -1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsSurrogatePair("abc", 3)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsSurrogatePair("abc", 3)
             ); // Index >= string.Length
         }
 
@@ -1019,13 +968,11 @@ namespace System.Tests
         public static void IsSymbol_String_Int_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsSymbol(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsSymbol("abc", -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsSymbol("abc", -1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsSymbol("abc", 3)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsSymbol("abc", 3)
             ); // Index >= string.Length
         }
 
@@ -1053,13 +1000,11 @@ namespace System.Tests
         public static void IsUpper_String_Int_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsUpper(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsUpper("abc", -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsUpper("abc", -1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsUpper("abc", 3)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsUpper("abc", 3)
             ); // Index >= string.Length
         }
 
@@ -1114,13 +1059,11 @@ namespace System.Tests
         public static void IsWhiteSpace_String_Int_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsWhiteSpace(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsWhiteSpace("abc", -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsWhiteSpace("abc", -1)
             ); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => char.IsWhiteSpace("abc", 3)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                char.IsWhiteSpace("abc", 3)
             ); // Index >= string.Length
         }
 

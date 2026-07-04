@@ -318,9 +318,8 @@ namespace System.Security.Cryptography.Xml.Tests
         public void UnsupportedOutput()
         {
             XmlDocument doc = new XmlDocument();
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => transform.GetOutput(doc.GetType())
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                transform.GetOutput(doc.GetType())
             );
         }
     }

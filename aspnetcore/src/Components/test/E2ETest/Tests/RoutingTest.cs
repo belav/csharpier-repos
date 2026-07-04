@@ -276,9 +276,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
         // Can add more parameters while remaining on same page
         app.FindElement(By.LinkText("With more parameters")).Click();
-        Browser.Equal(
-            "Your full name is Abc McDef.",
-            () => app.FindElement(By.Id("test-info")).Text
+        Browser.Equal("Your full name is Abc McDef.", () =>
+            app.FindElement(By.Id("test-info")).Text
         );
         AssertHighlightedLinks("With parameters", "With more parameters");
 
@@ -802,9 +801,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
             .Click();
 
         // The navigation finally continues
-        Browser.Equal(
-            expectedAbsoluteUriPostNavigation,
-            () => app.FindElement(By.Id("test-info")).Text
+        Browser.Equal(expectedAbsoluteUriPostNavigation, () =>
+            app.FindElement(By.Id("test-info")).Text
         );
 
         // The "LocationChanged" event was called
@@ -913,9 +911,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         SetUrlViaPushState(relativeUriPostNavigation);
 
         // The navigation was not blocked because the location changed callback parameter was removed
-        Browser.Equal(
-            expectedAbsoluteUriPostNavigation,
-            () => app.FindElement(By.Id("test-info")).Text
+        Browser.Equal(expectedAbsoluteUriPostNavigation, () =>
+            app.FindElement(By.Id("test-info")).Text
         );
 
         // The "LocationChanged" event was called
@@ -972,9 +969,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         SetUrlViaPushState(relativeUriPostNavigation);
 
         // The navigation was not blocked because the lock was removed when the navigation lock component was disposed
-        Browser.Equal(
-            expectedAbsoluteUriPostNavigation,
-            () => app.FindElement(By.Id("test-info")).Text
+        Browser.Equal(expectedAbsoluteUriPostNavigation, () =>
+            app.FindElement(By.Id("test-info")).Text
         );
 
         // The "LocationChanged" event was called
@@ -1016,14 +1012,12 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         SetUrlViaPushState(relativeUriPostNavigation);
 
         // The navigation was canceled and logged
-        Browser.Equal(
-            $"Canceling '{expectedCanceledAbsoluteUri}'",
-            () =>
-                app.FindElement(
-                    By.CssSelector(
-                        "#navigation-lock-0 > p.navigation-log > span.navigation-log-entry-0"
-                    )
-                )?.Text
+        Browser.Equal($"Canceling '{expectedCanceledAbsoluteUri}'", () =>
+            app.FindElement(
+                By.CssSelector(
+                    "#navigation-lock-0 > p.navigation-log > span.navigation-log-entry-0"
+                )
+            )?.Text
         );
 
         // The location was reverted again
@@ -1039,9 +1033,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
             .Click();
 
         // We navigated to the updated URL
-        Browser.Equal(
-            expectedAbsoluteUriPostNavigation,
-            () => app.FindElement(By.Id("test-info")).Text
+        Browser.Equal(expectedAbsoluteUriPostNavigation, () =>
+            app.FindElement(By.Id("test-info")).Text
         );
 
         // The "LocationChanged" event was called
@@ -1086,14 +1079,12 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
         // The first navigation was canceled and logged
         var expectedCanceledAbsoluteUri = $"{_serverFixture.RootUri}subdir/mytestpath0";
-        Browser.Equal(
-            $"Canceling '{expectedCanceledAbsoluteUri}'",
-            () =>
-                app.FindElement(
-                    By.CssSelector(
-                        "#navigation-lock-0 > p.navigation-log > span.navigation-log-entry-0"
-                    )
-                )?.Text
+        Browser.Equal($"Canceling '{expectedCanceledAbsoluteUri}'", () =>
+            app.FindElement(
+                By.CssSelector(
+                    "#navigation-lock-0 > p.navigation-log > span.navigation-log-entry-0"
+                )
+            )?.Text
         );
 
         // Unblock the new navigation
@@ -1107,9 +1098,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
         // We navigated to the updated URL
         var expectedPostNavigationAbsoluteUri = $"{_serverFixture.RootUri}subdir/mytestpath0";
-        Browser.Equal(
-            expectedPostNavigationAbsoluteUri,
-            () => app.FindElement(By.Id("test-info")).Text
+        Browser.Equal(expectedPostNavigationAbsoluteUri, () =>
+            app.FindElement(By.Id("test-info")).Text
         );
 
         // The "LocationChanged" event was called
@@ -1148,14 +1138,12 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         Browser.FindElement(By.Id("programmatic-navigation")).Click();
 
         // The navigation was canceled and logged
-        Browser.Equal(
-            $"Canceling '{expectedCanceledRelativeUri}'",
-            () =>
-                app.FindElement(
-                    By.CssSelector(
-                        "#navigation-lock-0 > p.navigation-log > span.navigation-log-entry-0"
-                    )
-                )?.Text
+        Browser.Equal($"Canceling '{expectedCanceledRelativeUri}'", () =>
+            app.FindElement(
+                By.CssSelector(
+                    "#navigation-lock-0 > p.navigation-log > span.navigation-log-entry-0"
+                )
+            )?.Text
         );
 
         // The location was reverted again
@@ -1171,9 +1159,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
             .Click();
 
         // We navigated to the updated URL
-        Browser.Equal(
-            expectedAbsoluteUriPostNavigation,
-            () => app.FindElement(By.Id("test-info")).Text
+        Browser.Equal(expectedAbsoluteUriPostNavigation, () =>
+            app.FindElement(By.Id("test-info")).Text
         );
 
         // The "LocationChanged" event was called
@@ -1214,14 +1201,12 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         Browser.FindElement(By.Id("internal-link-navigation")).Click();
 
         // The navigation was canceled and logged
-        Browser.Equal(
-            $"Canceling '{expectedCanceledAbsoluteUri}'",
-            () =>
-                app.FindElement(
-                    By.CssSelector(
-                        "#navigation-lock-0 > p.navigation-log > span.navigation-log-entry-0"
-                    )
-                )?.Text
+        Browser.Equal($"Canceling '{expectedCanceledAbsoluteUri}'", () =>
+            app.FindElement(
+                By.CssSelector(
+                    "#navigation-lock-0 > p.navigation-log > span.navigation-log-entry-0"
+                )
+            )?.Text
         );
 
         // The location was reverted again
@@ -1237,9 +1222,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
             .Click();
 
         // We navigated to the updated URL
-        Browser.Equal(
-            expectedAbsoluteUriPostNavigation,
-            () => app.FindElement(By.Id("test-info")).Text
+        Browser.Equal(expectedAbsoluteUriPostNavigation, () =>
+            app.FindElement(By.Id("test-info")).Text
         );
 
         // The "LocationChanged" event was called
@@ -1292,14 +1276,12 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         Browser.Equal(expectedFinalAbsoluteUri, () => app.FindElement(By.Id("test-info")).Text);
 
         // The navigation was logged
-        Browser.Equal(
-            $"Continuing '{expectedFinalAbsoluteUri}'",
-            () =>
-                app.FindElement(
-                    By.CssSelector(
-                        "#navigation-lock-0 > p.navigation-log > span.navigation-log-entry-0"
-                    )
-                )?.Text
+        Browser.Equal($"Continuing '{expectedFinalAbsoluteUri}'", () =>
+            app.FindElement(
+                By.CssSelector(
+                    "#navigation-lock-0 > p.navigation-log > span.navigation-log-entry-0"
+                )
+            )?.Text
         );
 
         // The "LocationChanged" event was called
@@ -1386,14 +1368,10 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         Browser.Exists(By.CssSelector("#navigation-lock-0 > div.blocking-controls"));
 
         // The state was captured in the programmatically-initiated navigation.
-        Browser.Equal(
-            "State = 'Navigation index 1'",
-            () =>
-                app.FindElement(
-                    By.CssSelector(
-                        "#navigation-lock-0 > div.blocking-controls > span.history-state"
-                    )
-                )?.Text
+        Browser.Equal("State = 'Navigation index 1'", () =>
+            app.FindElement(
+                By.CssSelector("#navigation-lock-0 > div.blocking-controls > span.history-state")
+            )?.Text
         );
 
         // Unblock the navigation
@@ -1412,14 +1390,10 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         Browser.Navigate().Back();
 
         // The state was captured in the browser-initiated navigation.
-        Browser.Equal(
-            "State = 'Navigation index 0'",
-            () =>
-                app.FindElement(
-                    By.CssSelector(
-                        "#navigation-lock-0 > div.blocking-controls > span.history-state"
-                    )
-                )?.Text
+        Browser.Equal("State = 'Navigation index 0'", () =>
+            app.FindElement(
+                By.CssSelector("#navigation-lock-0 > div.blocking-controls > span.history-state")
+            )?.Text
         );
 
         // Unblock the navigation
@@ -1550,17 +1524,15 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
     {
         SetUrlViaPushState("/LongPage1");
         var app = Browser.MountTestComponent<TestRouter>();
-        Browser.Equal(
-            "This is a long page you can scroll.",
-            () => app.FindElement(By.Id("test-info")).Text
+        Browser.Equal("This is a long page you can scroll.", () =>
+            app.FindElement(By.Id("test-info")).Text
         );
         BrowserScrollY = 500;
         Browser.True(() => BrowserScrollY > 300); // Exact position doesn't matter
 
         app.FindElement(By.LinkText("Long page 2")).Click();
-        Browser.Equal(
-            "This is another long page you can scroll.",
-            () => app.FindElement(By.Id("test-info")).Text
+        Browser.Equal("This is another long page you can scroll.", () =>
+            app.FindElement(By.Id("test-info")).Text
         );
         Browser.Equal(0, () => BrowserScrollY);
     }
@@ -1570,17 +1542,15 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
     {
         SetUrlViaPushState("/LongPage1");
         var app = Browser.MountTestComponent<TestRouter>();
-        Browser.Equal(
-            "This is a long page you can scroll.",
-            () => app.FindElement(By.Id("test-info")).Text
+        Browser.Equal("This is a long page you can scroll.", () =>
+            app.FindElement(By.Id("test-info")).Text
         );
         BrowserScrollY = 500;
         Browser.True(() => BrowserScrollY > 300); // Exact position doesn't matter
 
         app.FindElement(By.Id("go-to-longpage2")).Click();
-        Browser.Equal(
-            "This is another long page you can scroll.",
-            () => app.FindElement(By.Id("test-info")).Text
+        Browser.Equal("This is another long page you can scroll.", () =>
+            app.FindElement(By.Id("test-info")).Text
         );
         Browser.Equal(0, () => BrowserScrollY);
     }
@@ -1717,9 +1687,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         SetUrlViaPushState("/LongPage1");
 
         // Confirm that the route was rendered
-        Browser.Equal(
-            "This is a long page you can scroll.",
-            () => app.FindElement(By.Id("test-info")).Text
+        Browser.Equal("This is a long page you can scroll.", () =>
+            app.FindElement(By.Id("test-info")).Text
         );
     }
 
@@ -2136,9 +2105,8 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
     private void AssertHighlightedLinks(params string[] linkTexts)
     {
-        Browser.Equal(
-            linkTexts,
-            () => Browser.FindElements(By.CssSelector("a.active")).Select(x => x.Text)
+        Browser.Equal(linkTexts, () =>
+            Browser.FindElements(By.CssSelector("a.active")).Select(x => x.Text)
         );
     }
 

@@ -271,9 +271,8 @@ public class MemberConfigurationExpression<TSource, TDestination, TMember>
         var destMember = DestinationMember;
         if (destMember.DeclaringType.ContainsGenericParameters)
         {
-            destMember = Array.Find(
-                typeMap.DestinationTypeDetails.ReadAccessors,
-                m => m.MetadataToken == destMember.MetadataToken
+            destMember = Array.Find(typeMap.DestinationTypeDetails.ReadAccessors, m =>
+                m.MetadataToken == destMember.MetadataToken
             );
         }
         var propertyMap = typeMap.FindOrCreatePropertyMapFor(

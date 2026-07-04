@@ -156,15 +156,11 @@ public class Key : ConventionAnnotatable, IMutableKey, IConventionKey, IRuntimeK
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual Func<bool, IIdentityMap> IdentityMapFactory =>
-        NonCapturingLazyInitializer.EnsureInitialized(
-            ref _identityMapFactory,
-            this,
-            static key =>
-            {
-                key.EnsureReadOnly();
-                return new IdentityMapFactoryFactory().Create(key);
-            }
-        );
+        NonCapturingLazyInitializer.EnsureInitialized(ref _identityMapFactory, this, static key =>
+        {
+            key.EnsureReadOnly();
+            return new IdentityMapFactoryFactory().Create(key);
+        });
 
     private static readonly MethodInfo _createPrincipalKeyValueFactoryMethod = typeof(Key)
         .GetTypeInfo()

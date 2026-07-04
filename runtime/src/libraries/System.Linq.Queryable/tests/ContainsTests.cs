@@ -56,9 +56,8 @@ namespace System.Linq.Tests
             IQueryable<int> source = null;
 
             AssertExtensions.Throws<ArgumentNullException>("source", () => source.Contains(42));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.Contains(42, EqualityComparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.Contains(42, EqualityComparer<int>.Default)
             );
         }
 

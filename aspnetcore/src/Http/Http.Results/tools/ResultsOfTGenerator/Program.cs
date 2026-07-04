@@ -1196,14 +1196,10 @@ public static class StringExtensions
         };
 
     public static string TitleCase(this string value) =>
-        string.Create(
-            value.Length,
-            value,
-            (c, s) =>
-            {
-                var origValueSpan = s.AsSpan();
-                c[0] = char.ToUpper(origValueSpan[0], CultureInfo.InvariantCulture);
-                origValueSpan[1..].TryCopyTo(c[1..]);
-            }
-        );
+        string.Create(value.Length, value, (c, s) =>
+        {
+            var origValueSpan = s.AsSpan();
+            c[0] = char.ToUpper(origValueSpan[0], CultureInfo.InvariantCulture);
+            origValueSpan[1..].TryCopyTo(c[1..]);
+        });
 }

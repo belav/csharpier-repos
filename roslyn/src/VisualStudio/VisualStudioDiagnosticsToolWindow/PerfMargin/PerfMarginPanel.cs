@@ -32,10 +32,8 @@ namespace Roslyn.Hosting.Diagnostics.PerfMargin
         public PerfMarginPanel()
         {
             Logger.SetLogger(
-                AggregateLogger.AddOrReplace(
-                    s_logger,
-                    Logger.GetLogger(),
-                    l => l is PerfEventActivityLogger
+                AggregateLogger.AddOrReplace(s_logger, Logger.GetLogger(), l =>
+                    l is PerfEventActivityLogger
                 )
             );
 

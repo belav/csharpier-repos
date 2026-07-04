@@ -1343,28 +1343,20 @@ namespace System.Data.Services.Client
                                 }
                             );
                         case SequenceMethod.OrderBy:
-                            return AnalyzeResourceSetMethod(
-                                mce,
-                                (callExp, resource, selector) =>
-                                    ApplyOrdering(callExp, resource, selector, false, false)
+                            return AnalyzeResourceSetMethod(mce, (callExp, resource, selector) =>
+                                ApplyOrdering(callExp, resource, selector, false, false)
                             );
                         case SequenceMethod.ThenBy:
-                            return AnalyzeResourceSetMethod(
-                                mce,
-                                (callExp, resource, selector) =>
-                                    ApplyOrdering(callExp, resource, selector, false, true)
+                            return AnalyzeResourceSetMethod(mce, (callExp, resource, selector) =>
+                                ApplyOrdering(callExp, resource, selector, false, true)
                             );
                         case SequenceMethod.OrderByDescending:
-                            return AnalyzeResourceSetMethod(
-                                mce,
-                                (callExp, resource, selector) =>
-                                    ApplyOrdering(callExp, resource, selector, true, false)
+                            return AnalyzeResourceSetMethod(mce, (callExp, resource, selector) =>
+                                ApplyOrdering(callExp, resource, selector, true, false)
                             );
                         case SequenceMethod.ThenByDescending:
-                            return AnalyzeResourceSetMethod(
-                                mce,
-                                (callExp, resource, selector) =>
-                                    ApplyOrdering(callExp, resource, selector, true, true)
+                            return AnalyzeResourceSetMethod(mce, (callExp, resource, selector) =>
+                                ApplyOrdering(callExp, resource, selector, true, true)
                             );
 #if !ASTORIA_LIGHT
                         case SequenceMethod.First:

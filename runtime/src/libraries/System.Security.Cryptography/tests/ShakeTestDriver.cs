@@ -410,25 +410,21 @@ namespace System.Security.Cryptography.Tests
         {
             byte[] source = new byte[1];
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "outputLength",
-                () => TShakeTrait.HashData(source, outputLength: -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("outputLength", () =>
+                TShakeTrait.HashData(source, outputLength: -1)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "outputLength",
-                () => TShakeTrait.HashData(new ReadOnlySpan<byte>(source), outputLength: -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("outputLength", () =>
+                TShakeTrait.HashData(new ReadOnlySpan<byte>(source), outputLength: -1)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "outputLength",
-                () => TShakeTrait.HashData(Stream.Null, outputLength: -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("outputLength", () =>
+                TShakeTrait.HashData(Stream.Null, outputLength: -1)
             );
 
             // This assert is not async - argument validation should occur synchronously.
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "outputLength",
-                () => TShakeTrait.HashDataAsync(Stream.Null, outputLength: -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("outputLength", () =>
+                TShakeTrait.HashDataAsync(Stream.Null, outputLength: -1)
             );
         }
 
@@ -437,24 +433,20 @@ namespace System.Security.Cryptography.Tests
         {
             byte[] buffer = new byte[1];
 
-            AssertExtensions.Throws<ArgumentException>(
-                "source",
-                () => TShakeTrait.HashData(UntouchableStream.Instance, buffer)
+            AssertExtensions.Throws<ArgumentException>("source", () =>
+                TShakeTrait.HashData(UntouchableStream.Instance, buffer)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "source",
-                () => TShakeTrait.HashDataAsync(UntouchableStream.Instance, buffer)
+            AssertExtensions.Throws<ArgumentException>("source", () =>
+                TShakeTrait.HashDataAsync(UntouchableStream.Instance, buffer)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "source",
-                () => TShakeTrait.HashData(UntouchableStream.Instance, outputLength: 1)
+            AssertExtensions.Throws<ArgumentException>("source", () =>
+                TShakeTrait.HashData(UntouchableStream.Instance, outputLength: 1)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "source",
-                () => TShakeTrait.HashDataAsync(UntouchableStream.Instance, outputLength: 1)
+            AssertExtensions.Throws<ArgumentException>("source", () =>
+                TShakeTrait.HashDataAsync(UntouchableStream.Instance, outputLength: 1)
             );
         }
 
@@ -476,14 +468,12 @@ namespace System.Security.Cryptography.Tests
         [ConditionalFact(nameof(IsSupported))]
         public void ArgValidation_OneShot_HashData_SourceNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => TShakeTrait.HashData((byte[])null, outputLength: 1)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                TShakeTrait.HashData((byte[])null, outputLength: 1)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => TShakeTrait.HashData((Stream)null, outputLength: 1)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                TShakeTrait.HashData((Stream)null, outputLength: 1)
             );
         }
 
@@ -492,9 +482,8 @@ namespace System.Security.Cryptography.Tests
         {
             using (TShake shake = new TShake())
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "outputLength",
-                    () => TShakeTrait.GetCurrentHash(shake, outputLength: -1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("outputLength", () =>
+                    TShakeTrait.GetCurrentHash(shake, outputLength: -1)
                 );
             }
         }
@@ -504,9 +493,8 @@ namespace System.Security.Cryptography.Tests
         {
             using (TShake shake = new TShake())
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "outputLength",
-                    () => TShakeTrait.GetHashAndReset(shake, outputLength: -1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("outputLength", () =>
+                    TShakeTrait.GetHashAndReset(shake, outputLength: -1)
                 );
             }
         }
@@ -516,9 +504,8 @@ namespace System.Security.Cryptography.Tests
         {
             using (TShake shake = new TShake())
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "data",
-                    () => TShakeTrait.AppendData(shake, (byte[])null)
+                AssertExtensions.Throws<ArgumentNullException>("data", () =>
+                    TShakeTrait.AppendData(shake, (byte[])null)
                 );
             }
         }

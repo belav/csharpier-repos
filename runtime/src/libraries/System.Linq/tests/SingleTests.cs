@@ -153,9 +153,8 @@ namespace System.Linq.Tests
         {
             int[] source = null;
             AssertExtensions.Throws<ArgumentNullException>("source", () => source.Single());
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.Single(i => i % 2 == 0)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.Single(i => i % 2 == 0)
             );
         }
 
@@ -164,9 +163,8 @@ namespace System.Linq.Tests
         {
             int[] source = { };
             Func<int, bool> nullPredicate = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => source.Single(nullPredicate)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                source.Single(nullPredicate)
             );
         }
     }

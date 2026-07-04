@@ -83,9 +83,8 @@ namespace System.Globalization.Tests
         public void GetMonthName_InvalidMonth_ThrowsArgumentOutOfRangeException(int month)
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "month",
-                () => format.GetMonthName(month)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("month", () =>
+                format.GetMonthName(month)
             );
         }
     }

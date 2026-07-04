@@ -266,17 +266,14 @@ public class StatePersistenceTest
         string interactiveRuntime = null
     )
     {
-        Browser.Equal(
-            $"Render mode: {renderMode}",
-            () => Browser.FindElement(By.Id("render-mode")).Text
+        Browser.Equal($"Render mode: {renderMode}", () =>
+            Browser.FindElement(By.Id("render-mode")).Text
         );
-        Browser.Equal(
-            $"Streaming id:{streamingId}",
-            () => Browser.FindElement(By.Id("streaming-id")).Text
+        Browser.Equal($"Streaming id:{streamingId}", () =>
+            Browser.FindElement(By.Id("streaming-id")).Text
         );
-        Browser.Equal(
-            $"Interactive: {interactive}",
-            () => Browser.FindElement(By.Id("interactive")).Text
+        Browser.Equal($"Interactive: {interactive}", () =>
+            Browser.FindElement(By.Id("interactive")).Text
         );
         if (streamingId == null || streamingCompleted)
         {
@@ -290,17 +287,14 @@ public class StatePersistenceTest
                     )
                 );
 
-            Browser.Equal(
-                $"Interactive runtime: {interactiveRuntime}",
-                () => Browser.FindElement(By.Id("interactive-runtime")).Text
+            Browser.Equal($"Interactive runtime: {interactiveRuntime}", () =>
+                Browser.FindElement(By.Id("interactive-runtime")).Text
             );
-            Browser.Equal(
-                $"State found:{stateFound}",
-                () => Browser.FindElement(By.Id("state-found")).Text
+            Browser.Equal($"State found:{stateFound}", () =>
+                Browser.FindElement(By.Id("state-found")).Text
             );
-            Browser.Equal(
-                $"State value:{stateValue}",
-                () => Browser.FindElement(By.Id("state-value")).Text
+            Browser.Equal($"State value:{stateValue}", () =>
+                Browser.FindElement(By.Id("state-value")).Text
             );
         }
         else

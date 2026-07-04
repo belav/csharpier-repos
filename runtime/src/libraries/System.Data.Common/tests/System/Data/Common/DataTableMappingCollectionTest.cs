@@ -313,15 +313,12 @@ namespace System.Data.Tests.Common
         [Fact]
         public void RemoveException2()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    _tableMapCollection.AddRange(_tabs);
-                    DataTableMapping mymap = new DataTableMapping("sourceAge", "dataSetAge");
-                    _tableMapCollection.Remove(mymap);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                _tableMapCollection.AddRange(_tabs);
+                DataTableMapping mymap = new DataTableMapping("sourceAge", "dataSetAge");
+                _tableMapCollection.Remove(mymap);
+            });
         }
 
         [Fact]

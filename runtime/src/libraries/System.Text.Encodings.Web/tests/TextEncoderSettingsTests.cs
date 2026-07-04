@@ -120,18 +120,16 @@ namespace System.Text.Encodings.Web.Tests
         [Fact]
         public void Ctor_Null_UnicodeRanges()
         {
-            Assert.Throws<ArgumentNullException>(
-                "allowedRanges",
-                () => new TextEncoderSettings(default(UnicodeRange[]))
+            Assert.Throws<ArgumentNullException>("allowedRanges", () =>
+                new TextEncoderSettings(default(UnicodeRange[]))
             );
         }
 
         [Fact]
         public void Ctor_Null_TextEncoderSettings()
         {
-            Assert.Throws<ArgumentNullException>(
-                "other",
-                () => new TextEncoderSettings(default(TextEncoderSettings))
+            Assert.Throws<ArgumentNullException>("other", () =>
+                new TextEncoderSettings(default(TextEncoderSettings))
             );
         }
 

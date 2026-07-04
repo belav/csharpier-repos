@@ -106,9 +106,8 @@ public class SqlServerUdtTypeMapping : RelationalTypeMapping
 
     private void SetUdtTypeName(DbParameter parameter)
     {
-        LazyInitializer.EnsureInitialized(
-            ref _udtTypeNameSetter,
-            () => CreateUdtTypeNameAccessor(parameter.GetType())
+        LazyInitializer.EnsureInitialized(ref _udtTypeNameSetter, () =>
+            CreateUdtTypeNameAccessor(parameter.GetType())
         );
 
         if (parameter.Value != null && parameter.Value != DBNull.Value)

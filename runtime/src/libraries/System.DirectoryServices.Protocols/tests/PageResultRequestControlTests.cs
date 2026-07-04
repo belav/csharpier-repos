@@ -65,9 +65,8 @@ namespace System.DirectoryServices.Protocols.Tests
         [Fact]
         public void Ctor_NegativePageSize_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => new PageResultRequestControl(-1)
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                new PageResultRequestControl(-1)
             );
         }
 

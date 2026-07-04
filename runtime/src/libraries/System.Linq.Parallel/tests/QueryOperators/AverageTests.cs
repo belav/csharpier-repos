@@ -745,92 +745,69 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Average_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int>)null).Average()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).Average()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat(0, 1).Average((Func<int, int>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat(0, 1).Average((Func<int, int>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int?>)null).Average()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int?>)null).Average()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((int?)0, 1).Average((Func<int?, int?>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((int?)0, 1).Average((Func<int?, int?>)null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<long>)null).Average()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<long>)null).Average()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((long)0, 1).Average((Func<long, long>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((long)0, 1).Average((Func<long, long>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<long?>)null).Average()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<long?>)null).Average()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((long?)0, 1).Average((Func<long?, long?>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((long?)0, 1).Average((Func<long?, long?>)null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<float>)null).Average()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<float>)null).Average()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((float)0, 1).Average((Func<float, float>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((float)0, 1).Average((Func<float, float>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<float?>)null).Average()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<float?>)null).Average()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((float?)0, 1).Average((Func<float?, float?>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((float?)0, 1).Average((Func<float?, float?>)null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<double>)null).Average()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<double>)null).Average()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((double)0, 1).Average((Func<double, double>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((double)0, 1).Average((Func<double, double>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<double?>)null).Average()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<double?>)null).Average()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((double?)0, 1).Average((Func<double?, double?>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((double?)0, 1).Average((Func<double?, double?>)null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<decimal>)null).Average()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<decimal>)null).Average()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => ParallelEnumerable.Repeat((decimal)0, 1).Average((Func<decimal, decimal>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((decimal)0, 1).Average((Func<decimal, decimal>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<decimal?>)null).Average()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<decimal?>)null).Average()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () =>
-                    ParallelEnumerable
-                        .Repeat((decimal?)0, 1)
-                        .Average((Func<decimal?, decimal?>)null)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                ParallelEnumerable.Repeat((decimal?)0, 1).Average((Func<decimal?, decimal?>)null)
             );
         }
     }

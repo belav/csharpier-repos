@@ -993,9 +993,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     .WithProperty(AppMultiPropertyName, AppMultiPropertyValue)
                     .Save();
 
-                SelfContainedApp = CreateSelfContainedApp(
-                    "SelfContained",
-                    b => b.WithRuntimeConfig(c => c.WithProperty(AppPropertyName, AppPropertyValue))
+                SelfContainedApp = CreateSelfContainedApp("SelfContained", b =>
+                    b.WithRuntimeConfig(c => c.WithProperty(AppPropertyName, AppPropertyValue))
                 );
 
                 SelfContainedApp_IncludedFrameworks = CreateSelfContainedApp(

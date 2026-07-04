@@ -186,18 +186,16 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 // this is keyed per reference, so that have unique SymbolTreeInfo's per reference with their own
                 // correct checksum.  Ensuring we only compute this once per *Metadata* instance though is handled below in
                 // CreateMetadataSymbolTreeInfoAsync
-                var asyncLazy = s_peReferenceToInfo.GetValue(
-                    reference,
-                    id =>
-                        AsyncLazy.Create(c =>
-                            CreateMetadataSymbolTreeInfoAsync(
-                                services,
-                                solutionKey,
-                                reference,
-                                checksum,
-                                c
-                            )
+                var asyncLazy = s_peReferenceToInfo.GetValue(reference, id =>
+                    AsyncLazy.Create(c =>
+                        CreateMetadataSymbolTreeInfoAsync(
+                            services,
+                            solutionKey,
+                            reference,
+                            checksum,
+                            c
                         )
+                    )
                 );
 
                 return await asyncLazy.GetValueAsync(cancellationToken).ConfigureAwait(false);
@@ -215,24 +213,22 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 if (metadataId == null)
                     return CreateEmpty(checksum);
 
-                var asyncLazy = s_metadataIdToSymbolTreeInfo.GetValue(
-                    metadataId,
-                    metadataId =>
-                        AsyncLazy.Create(cancellationToken =>
-                            LoadOrCreateAsync(
-                                services,
-                                solutionKey,
-                                checksum,
-                                createAsync: checksum => new ValueTask<SymbolTreeInfo>(
-                                    new MetadataInfoCreator(
-                                        checksum,
-                                        GetMetadataNoThrow(reference)
-                                    ).Create()
-                                ),
-                                keySuffix: GetMetadataKeySuffix(reference),
-                                cancellationToken
-                            )
+                var asyncLazy = s_metadataIdToSymbolTreeInfo.GetValue(metadataId, metadataId =>
+                    AsyncLazy.Create(cancellationToken =>
+                        LoadOrCreateAsync(
+                            services,
+                            solutionKey,
+                            checksum,
+                            createAsync: checksum => new ValueTask<SymbolTreeInfo>(
+                                new MetadataInfoCreator(
+                                    checksum,
+                                    GetMetadataNoThrow(reference)
+                                ).Create()
+                            ),
+                            keySuffix: GetMetadataKeySuffix(reference),
+                            cancellationToken
                         )
+                    )
                 );
 
                 var metadataIdSymbolTreeInfo = await asyncLazy

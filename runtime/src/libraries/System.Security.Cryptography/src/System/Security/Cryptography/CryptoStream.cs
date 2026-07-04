@@ -1090,9 +1090,8 @@ namespace System.Security.Cryptography
             {
                 // Lazily-initialize _lazyAsyncActiveSemaphore.  As we're never accessing the SemaphoreSlim's
                 // WaitHandle, we don't need to worry about Disposing it.
-                return LazyInitializer.EnsureInitialized(
-                    ref _lazyAsyncActiveSemaphore,
-                    () => new SemaphoreSlim(1, 1)
+                return LazyInitializer.EnsureInitialized(ref _lazyAsyncActiveSemaphore, () =>
+                    new SemaphoreSlim(1, 1)
                 );
             }
         }

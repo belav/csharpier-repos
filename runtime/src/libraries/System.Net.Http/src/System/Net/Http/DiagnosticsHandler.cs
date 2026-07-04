@@ -388,22 +388,18 @@ namespace System.Net.Http
 
         private void InjectHeaders(Activity currentActivity, HttpRequestMessage request)
         {
-            _propagator.Inject(
-                currentActivity,
-                request,
-                static (carrier, key, value) =>
+            _propagator.Inject(currentActivity, request, static (carrier, key, value) =>
+            {
+                if (
+                    carrier is HttpRequestMessage request
+                    && key is not null
+                    && HeaderDescriptor.TryGet(key, out HeaderDescriptor descriptor)
+                    && !request.Headers.TryGetHeaderValue(descriptor, out _)
+                )
                 {
-                    if (
-                        carrier is HttpRequestMessage request
-                        && key is not null
-                        && HeaderDescriptor.TryGet(key, out HeaderDescriptor descriptor)
-                        && !request.Headers.TryGetHeaderValue(descriptor, out _)
-                    )
-                    {
-                        request.Headers.TryAddWithoutValidation(descriptor, value);
-                    }
+                    request.Headers.TryAddWithoutValidation(descriptor, value);
                 }
-            );
+            });
         }
 
         [UnconditionalSuppressMessage(

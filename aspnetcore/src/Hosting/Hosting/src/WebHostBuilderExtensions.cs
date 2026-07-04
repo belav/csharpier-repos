@@ -199,20 +199,17 @@ public static class WebHostBuilderExtensions
             }
             else
             {
-                services.AddSingleton(
-                    typeof(IStartup),
-                    sp =>
-                    {
-                        var hostingEnvironment = sp.GetRequiredService<IHostEnvironment>();
-                        return new ConventionBasedStartup(
-                            StartupLoader.LoadMethods(
-                                sp,
-                                startupType,
-                                hostingEnvironment.EnvironmentName
-                            )
-                        );
-                    }
-                );
+                services.AddSingleton(typeof(IStartup), sp =>
+                {
+                    var hostingEnvironment = sp.GetRequiredService<IHostEnvironment>();
+                    return new ConventionBasedStartup(
+                        StartupLoader.LoadMethods(
+                            sp,
+                            startupType,
+                            hostingEnvironment.EnvironmentName
+                        )
+                    );
+                });
             }
         });
     }

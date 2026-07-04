@@ -44,28 +44,25 @@ class C
     }
 }";
             var compilation0 = CreateCompilation(source, options: TestOptions.DebugExe);
-            WithRuntimeInstance(
-                compilation0,
-                runtime =>
-                {
-                    var context = CreateMethodContext(runtime, "C.M");
-                    string error;
-                    var testData = new CompilationTestData();
-                    var result = context.CompileExpression("this", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+            WithRuntimeInstance(compilation0, runtime =>
+            {
+                var context = CreateMethodContext(runtime, "C.M");
+                string error;
+                var testData = new CompilationTestData();
+                var result = context.CompileExpression("this", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(
+                        @"{
   // Code size        2 (0x2)
   .maxstack  1
   .locals init (I V_0) //o
   IL_0000:  ldarg.0
   IL_0001:  ret
 }"
-                        );
-                }
-            );
+                    );
+            });
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1035310")]
@@ -97,28 +94,25 @@ public interface I
                 new[] { referencePIA },
                 TestOptions.DebugDll
             );
-            WithRuntimeInstance(
-                compilation0,
-                runtime =>
-                {
-                    var context = CreateMethodContext(runtime, "C.M");
-                    string error;
-                    var testData = new CompilationTestData();
-                    var result = context.CompileExpression("o", out error, testData);
-                    Assert.Null(error);
-                    testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+            WithRuntimeInstance(compilation0, runtime =>
+            {
+                var context = CreateMethodContext(runtime, "C.M");
+                string error;
+                var testData = new CompilationTestData();
+                var result = context.CompileExpression("o", out error, testData);
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(
+                        @"{
   // Code size        2 (0x2)
   .maxstack  1
   .locals init (I V_0) //o
   IL_0000:  ldloc.0
   IL_0001:  ret
 }"
-                        );
-                }
-            );
+                    );
+            });
         }
 
         /// <summary>

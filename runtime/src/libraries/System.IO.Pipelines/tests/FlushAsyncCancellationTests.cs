@@ -231,9 +231,8 @@ namespace System.IO.Pipelines.Tests
 
             ValueTask<FlushResult> task = Pipe.Writer.FlushAsync(cancellationTokenSource.Token);
             Assert.True(task.IsCanceled);
-            await AssertExtensions.CanceledAsync(
-                cancellationTokenSource.Token,
-                async () => await task
+            await AssertExtensions.CanceledAsync(cancellationTokenSource.Token, async () =>
+                await task
             );
         }
 
@@ -336,9 +335,8 @@ namespace System.IO.Pipelines.Tests
             // and not only setting IsCompleted flag
             var task = Pipe.Reader.ReadAsync().AsTask();
 
-            await AssertExtensions.CanceledAsync(
-                cancellationTokenSource.Token,
-                async () => await Pipe.Writer.FlushAsync(cancellationTokenSource.Token)
+            await AssertExtensions.CanceledAsync(cancellationTokenSource.Token, async () =>
+                await Pipe.Writer.FlushAsync(cancellationTokenSource.Token)
             );
 
             Pipe.Writer.Complete();

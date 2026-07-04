@@ -625,9 +625,8 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] inputData = { 0x16, 2, (byte)'e', (byte)'l' };
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "expectedTag",
-                () => reader.TryGetIA5StringBytes(Asn1Tag.Null, out _)
+            AssertExtensions.Throws<ArgumentException>("expectedTag", () =>
+                reader.TryGetIA5StringBytes(Asn1Tag.Null, out _)
             );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
@@ -652,9 +651,8 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] inputData = { 0x87, 2, (byte)'h', (byte)'i' };
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "expectedTag",
-                () => reader.TryGetIA5StringBytes(Asn1Tag.Null, out _)
+            AssertExtensions.Throws<ArgumentException>("expectedTag", () =>
+                reader.TryGetIA5StringBytes(Asn1Tag.Null, out _)
             );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
@@ -770,9 +768,8 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] inputData = "16026869".HexToByteArray();
             AsnReader reader = new AsnReader(inputData, AsnEncodingRules.BER);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "expectedTag",
-                () => reader.TryReadCharacterStringBytes(Span<byte>.Empty, Asn1Tag.Boolean, out _)
+            AssertExtensions.Throws<ArgumentException>("expectedTag", () =>
+                reader.TryReadCharacterStringBytes(Span<byte>.Empty, Asn1Tag.Boolean, out _)
             );
         }
     }

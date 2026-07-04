@@ -178,18 +178,15 @@ namespace System.CodeDom.Tests
         [Fact]
         public void Ctor_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => new CodeVariableDeclarationStatement((Type)null, "Name")
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                new CodeVariableDeclarationStatement((Type)null, "Name")
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () =>
-                    new CodeVariableDeclarationStatement(
-                        (Type)null,
-                        "Name",
-                        new CodePrimitiveExpression("Value")
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                new CodeVariableDeclarationStatement(
+                    (Type)null,
+                    "Name",
+                    new CodePrimitiveExpression("Value")
+                )
             );
         }
 

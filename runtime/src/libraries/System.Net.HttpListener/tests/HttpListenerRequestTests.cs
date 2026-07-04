@@ -490,9 +490,8 @@ namespace System.Net.Tests
         public async Task EndGetClientCertificate_NullAsyncResult_ThrowsArgumentException()
         {
             HttpListenerRequest request = await GetRequest("POST", null, null);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "asyncResult",
-                () => request.EndGetClientCertificate(null)
+            AssertExtensions.Throws<ArgumentNullException>("asyncResult", () =>
+                request.EndGetClientCertificate(null)
             );
         }
 
@@ -508,13 +507,11 @@ namespace System.Net.Tests
                     null
                 );
 
-                AssertExtensions.Throws<ArgumentException>(
-                    "asyncResult",
-                    () => request2.EndGetClientCertificate(new CustomAsyncResult())
+                AssertExtensions.Throws<ArgumentException>("asyncResult", () =>
+                    request2.EndGetClientCertificate(new CustomAsyncResult())
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "asyncResult",
-                    () => request2.EndGetClientCertificate(beginGetClientCertificateResult1)
+                AssertExtensions.Throws<ArgumentException>("asyncResult", () =>
+                    request2.EndGetClientCertificate(beginGetClientCertificateResult1)
                 );
             }
         }

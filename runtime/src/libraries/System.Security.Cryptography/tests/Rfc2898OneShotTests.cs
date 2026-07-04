@@ -20,32 +20,28 @@ namespace System.Security.Cryptography
         [Fact]
         public static void Pbkdf2_PasswordBytes_NullPassword()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "password",
-                () =>
-                    Rfc2898DeriveBytes.Pbkdf2(
-                        password: (byte[])null,
-                        s_salt,
-                        iterations: 1,
-                        HashAlgorithmName.SHA256,
-                        s_extractLength
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("password", () =>
+                Rfc2898DeriveBytes.Pbkdf2(
+                    password: (byte[])null,
+                    s_salt,
+                    iterations: 1,
+                    HashAlgorithmName.SHA256,
+                    s_extractLength
+                )
             );
         }
 
         [Fact]
         public static void Pbkdf2_PasswordBytes_NullSalt()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "salt",
-                () =>
-                    Rfc2898DeriveBytes.Pbkdf2(
-                        s_passwordBytes,
-                        salt: (byte[])null,
-                        iterations: 1,
-                        HashAlgorithmName.SHA256,
-                        s_extractLength
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("salt", () =>
+                Rfc2898DeriveBytes.Pbkdf2(
+                    s_passwordBytes,
+                    salt: (byte[])null,
+                    iterations: 1,
+                    HashAlgorithmName.SHA256,
+                    s_extractLength
+                )
             );
         }
 
@@ -66,32 +62,28 @@ namespace System.Security.Cryptography
         [Fact]
         public static void Pbkdf2_PasswordBytes_SaltBytes_IterationsNegative()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "iterations",
-                () =>
-                    Rfc2898DeriveBytes.Pbkdf2(
-                        s_passwordBytes,
-                        s_salt,
-                        iterations: -1,
-                        HashAlgorithmName.SHA256,
-                        s_extractLength
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("iterations", () =>
+                Rfc2898DeriveBytes.Pbkdf2(
+                    s_passwordBytes,
+                    s_salt,
+                    iterations: -1,
+                    HashAlgorithmName.SHA256,
+                    s_extractLength
+                )
             );
         }
 
         [Fact]
         public static void Pbkdf2_PasswordBytes_SaltBytes_OutputLengthNegative()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "outputLength",
-                () =>
-                    Rfc2898DeriveBytes.Pbkdf2(
-                        s_passwordBytes,
-                        s_salt,
-                        iterations: 1,
-                        HashAlgorithmName.SHA256,
-                        -1
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("outputLength", () =>
+                Rfc2898DeriveBytes.Pbkdf2(
+                    s_passwordBytes,
+                    s_salt,
+                    iterations: 1,
+                    HashAlgorithmName.SHA256,
+                    -1
+                )
             );
         }
 
@@ -112,75 +104,65 @@ namespace System.Security.Cryptography
         [Fact]
         public static void Pbkdf2_PasswordBytes_NullHashName()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "hashAlgorithm",
-                () =>
-                    Rfc2898DeriveBytes.Pbkdf2(
-                        s_passwordBytes,
-                        s_salt,
-                        iterations: 1,
-                        default(HashAlgorithmName),
-                        s_extractLength
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                Rfc2898DeriveBytes.Pbkdf2(
+                    s_passwordBytes,
+                    s_salt,
+                    iterations: 1,
+                    default(HashAlgorithmName),
+                    s_extractLength
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "hashAlgorithm",
-                () =>
-                    Rfc2898DeriveBytes.Pbkdf2(
-                        s_passwordBytes,
-                        s_salt,
-                        iterations: 1,
-                        new HashAlgorithmName(""),
-                        s_extractLength
-                    )
+            AssertExtensions.Throws<ArgumentException>("hashAlgorithm", () =>
+                Rfc2898DeriveBytes.Pbkdf2(
+                    s_passwordBytes,
+                    s_salt,
+                    iterations: 1,
+                    new HashAlgorithmName(""),
+                    s_extractLength
+                )
             );
         }
 
         [Fact]
         public static void Pbkdf2_PasswordBytes_EmptyHashName()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "hashAlgorithm",
-                () =>
-                    Rfc2898DeriveBytes.Pbkdf2(
-                        s_passwordBytes,
-                        s_salt,
-                        iterations: 1,
-                        new HashAlgorithmName(""),
-                        s_extractLength
-                    )
+            AssertExtensions.Throws<ArgumentException>("hashAlgorithm", () =>
+                Rfc2898DeriveBytes.Pbkdf2(
+                    s_passwordBytes,
+                    s_salt,
+                    iterations: 1,
+                    new HashAlgorithmName(""),
+                    s_extractLength
+                )
             );
         }
 
         [Fact]
         public static void Pbkdf2_PasswordString_NullPassword()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "password",
-                () =>
-                    Rfc2898DeriveBytes.Pbkdf2(
-                        password: (string)null,
-                        s_salt,
-                        iterations: 1,
-                        HashAlgorithmName.SHA256,
-                        s_extractLength
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("password", () =>
+                Rfc2898DeriveBytes.Pbkdf2(
+                    password: (string)null,
+                    s_salt,
+                    iterations: 1,
+                    HashAlgorithmName.SHA256,
+                    s_extractLength
+                )
             );
         }
 
         [Fact]
         public static void Pbkdf2_PasswordString_NullSalt()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "salt",
-                () =>
-                    Rfc2898DeriveBytes.Pbkdf2(
-                        Password,
-                        salt: null,
-                        iterations: 1,
-                        HashAlgorithmName.SHA256,
-                        s_extractLength
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("salt", () =>
+                Rfc2898DeriveBytes.Pbkdf2(
+                    Password,
+                    salt: null,
+                    iterations: 1,
+                    HashAlgorithmName.SHA256,
+                    s_extractLength
+                )
             );
         }
 
@@ -201,32 +183,28 @@ namespace System.Security.Cryptography
         [Fact]
         public static void Pbkdf2_PasswordString_SaltBytes_IterationsNegative()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "iterations",
-                () =>
-                    Rfc2898DeriveBytes.Pbkdf2(
-                        Password,
-                        s_salt,
-                        iterations: -1,
-                        HashAlgorithmName.SHA256,
-                        s_extractLength
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("iterations", () =>
+                Rfc2898DeriveBytes.Pbkdf2(
+                    Password,
+                    s_salt,
+                    iterations: -1,
+                    HashAlgorithmName.SHA256,
+                    s_extractLength
+                )
             );
         }
 
         [Fact]
         public static void Pbkdf2_PasswordString_SaltBytes_OutputLengthNegative()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "outputLength",
-                () =>
-                    Rfc2898DeriveBytes.Pbkdf2(
-                        Password,
-                        s_salt,
-                        iterations: 1,
-                        HashAlgorithmName.SHA256,
-                        -1
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("outputLength", () =>
+                Rfc2898DeriveBytes.Pbkdf2(
+                    Password,
+                    s_salt,
+                    iterations: 1,
+                    HashAlgorithmName.SHA256,
+                    -1
+                )
             );
         }
 
@@ -247,43 +225,37 @@ namespace System.Security.Cryptography
         [Fact]
         public static void Pbkdf2_PasswordString_NullHashName()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "hashAlgorithm",
-                () =>
-                    Rfc2898DeriveBytes.Pbkdf2(
-                        Password,
-                        s_salt,
-                        iterations: 1,
-                        default(HashAlgorithmName),
-                        s_extractLength
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                Rfc2898DeriveBytes.Pbkdf2(
+                    Password,
+                    s_salt,
+                    iterations: 1,
+                    default(HashAlgorithmName),
+                    s_extractLength
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "hashAlgorithm",
-                () =>
-                    Rfc2898DeriveBytes.Pbkdf2(
-                        Password,
-                        s_salt,
-                        iterations: 1,
-                        new HashAlgorithmName(""),
-                        s_extractLength
-                    )
+            AssertExtensions.Throws<ArgumentException>("hashAlgorithm", () =>
+                Rfc2898DeriveBytes.Pbkdf2(
+                    Password,
+                    s_salt,
+                    iterations: 1,
+                    new HashAlgorithmName(""),
+                    s_extractLength
+                )
             );
         }
 
         [Fact]
         public static void Pbkdf2_PasswordString_EmptyHashName()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "hashAlgorithm",
-                () =>
-                    Rfc2898DeriveBytes.Pbkdf2(
-                        Password,
-                        s_salt,
-                        iterations: 1,
-                        new HashAlgorithmName(""),
-                        s_extractLength
-                    )
+            AssertExtensions.Throws<ArgumentException>("hashAlgorithm", () =>
+                Rfc2898DeriveBytes.Pbkdf2(
+                    Password,
+                    s_salt,
+                    iterations: 1,
+                    new HashAlgorithmName(""),
+                    s_extractLength
+                )
             );
         }
 

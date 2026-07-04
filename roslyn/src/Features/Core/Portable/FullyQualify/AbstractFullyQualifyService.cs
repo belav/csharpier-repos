@@ -423,9 +423,8 @@ internal abstract partial class AbstractFullyQualifyService<TSimpleNameSyntax>
         SemanticModel model,
         CancellationToken cancellationToken
     ) =>
-        Enumerable.Any(
-            @namespace.GetAllTypes(cancellationToken),
-            t => t.IsAccessibleWithin(model.Compilation.Assembly)
+        Enumerable.Any(@namespace.GetAllTypes(cancellationToken), t =>
+            t.IsAccessibleWithin(model.Compilation.Assembly)
         );
 
     private static IEnumerable<SymbolResult> GetContainers(

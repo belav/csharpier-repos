@@ -264,9 +264,8 @@ namespace System.Net.Http.Metrics
 
         private static object GetBoxedStatusCode(int statusCode)
         {
-            object[] boxes = LazyInitializer.EnsureInitialized(
-                ref s_boxedStatusCodes,
-                static () => new object[512]
+            object[] boxes = LazyInitializer.EnsureInitialized(ref s_boxedStatusCodes, static () =>
+                new object[512]
             );
 
             return (uint)statusCode < (uint)boxes.Length

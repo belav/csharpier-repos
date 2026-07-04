@@ -471,9 +471,8 @@ namespace System.Net.Sockets.Tests
                 null
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "endPoint",
-                () => socket.EndReceiveMessageFrom(iar, ref socketFlags, ref invalidEndPoint, out _)
+            Assert.Throws<ArgumentNullException>("endPoint", () =>
+                socket.EndReceiveMessageFrom(iar, ref socketFlags, ref invalidEndPoint, out _)
             );
         }
 
@@ -495,9 +494,8 @@ namespace System.Net.Sockets.Tests
                 null
             );
 
-            Assert.Throws<ArgumentException>(
-                "endPoint",
-                () => socket.EndReceiveMessageFrom(iar, ref socketFlags, ref invalidEndPoint, out _)
+            Assert.Throws<ArgumentException>("endPoint", () =>
+                socket.EndReceiveMessageFrom(iar, ref socketFlags, ref invalidEndPoint, out _)
             );
         }
 

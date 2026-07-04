@@ -59,14 +59,11 @@ namespace Moq.Tests
         public void Can_register_factory_for_generic_type()
         {
             var provider = new Provider();
-            provider.Register(
-                typeof(IEnumerable<>),
-                (type, __) =>
-                {
-                    var elementType = type.GetGenericArguments()[0];
-                    return Array.CreateInstance(elementType, 0);
-                }
-            );
+            provider.Register(typeof(IEnumerable<>), (type, __) =>
+            {
+                var elementType = type.GetGenericArguments()[0];
+                return Array.CreateInstance(elementType, 0);
+            });
 
             var actual = provider.GetDefaultValue(typeof(IEnumerable<int>));
 
@@ -78,14 +75,11 @@ namespace Moq.Tests
         public void Can_register_factory_for_array_type()
         {
             var provider = new Provider();
-            provider.Register(
-                typeof(Array),
-                (type, __) =>
-                {
-                    var elementType = type.GetElementType();
-                    return Array.CreateInstance(elementType, 0);
-                }
-            );
+            provider.Register(typeof(Array), (type, __) =>
+            {
+                var elementType = type.GetElementType();
+                return Array.CreateInstance(elementType, 0);
+            });
 
             var actual = provider.GetDefaultValue(typeof(int[]));
 

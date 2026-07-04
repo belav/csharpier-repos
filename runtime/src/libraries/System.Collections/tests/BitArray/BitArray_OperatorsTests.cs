@@ -428,9 +428,8 @@ namespace System.Collections.Tests
         public static void LeftShift_NegativeCount_ThrowsArgumentOutOfRangeException()
         {
             BitArray bitArray = new BitArray(1);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => bitArray.LeftShift(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                bitArray.LeftShift(-1)
             );
         }
 
@@ -493,9 +492,8 @@ namespace System.Collections.Tests
         public static void RightShift_NegativeCount_ThrowsArgumentOutOfRangeException()
         {
             BitArray bitArray = new BitArray(1);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => bitArray.RightShift(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                bitArray.RightShift(-1)
             );
         }
 

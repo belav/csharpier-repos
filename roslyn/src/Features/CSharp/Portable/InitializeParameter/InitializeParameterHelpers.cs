@@ -116,9 +116,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InitializeParameter
                     // Otherwise, we have no statements in this block.  Add the new statement
                     // as the single statement the block will have.
                     Debug.Assert(block.Statements.Count == 0);
-                    editor.ReplaceNode(
-                        block,
-                        (currentBlock, _) => ((BlockSyntax)currentBlock).AddStatements(statement)
+                    editor.ReplaceNode(block, (currentBlock, _) =>
+                        ((BlockSyntax)currentBlock).AddStatements(statement)
                     );
                 }
 
@@ -132,10 +131,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InitializeParameter
                 //              } };
                 if (CSharpSyntaxFacts.Instance.IsOnSingleLine(block, fullSpan: false))
                 {
-                    editor.ReplaceNode(
-                        block,
-                        (currentBlock, _) =>
-                            currentBlock.WithAdditionalAnnotations(Formatter.Annotation)
+                    editor.ReplaceNode(block, (currentBlock, _) =>
+                        currentBlock.WithAdditionalAnnotations(Formatter.Annotation)
                     );
                 }
             }

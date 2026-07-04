@@ -1179,24 +1179,22 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
             var components = formatted.Split(", ");
             Check.DebugAssert(components.Length > 0, "components.Length > 0");
 
-            return components.Aggregate(
-                (ExpressionSyntax?)null,
-                (last, next) =>
-                    last is null
-                        ? MemberAccessExpression(
+            return components.Aggregate((ExpressionSyntax?)null, (last, next) =>
+                last is null
+                    ? MemberAccessExpression(
+                        SyntaxKind.SimpleMemberAccessExpression,
+                        IdentifierName(enumType.Name),
+                        IdentifierName(next)
+                    )
+                    : BinaryExpression(
+                        SyntaxKind.BitwiseOrExpression,
+                        last,
+                        MemberAccessExpression(
                             SyntaxKind.SimpleMemberAccessExpression,
                             IdentifierName(enumType.Name),
                             IdentifierName(next)
                         )
-                        : BinaryExpression(
-                            SyntaxKind.BitwiseOrExpression,
-                            last,
-                            MemberAccessExpression(
-                                SyntaxKind.SimpleMemberAccessExpression,
-                                IdentifierName(enumType.Name),
-                                IdentifierName(next)
-                            )
-                        )
+                    )
             )!;
         }
 
@@ -2220,16 +2218,14 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 return (ConditionalExpression)(
                     node.Cases.SelectMany(c => c.TestValues, (c, tv) => new { c.Body, Label = tv })
                         .Reverse()
-                        .Aggregate(
-                            node.DefaultBody,
-                            (expression, arm) =>
-                                expression is null
-                                    ? E.IfThen(E.Equal(node.SwitchValue, arm.Label), arm.Body)
-                                    : E.IfThenElse(
-                                        E.Equal(node.SwitchValue, arm.Label),
-                                        arm.Body,
-                                        expression
-                                    )
+                        .Aggregate(node.DefaultBody, (expression, arm) =>
+                            expression is null
+                                ? E.IfThen(E.Equal(node.SwitchValue, arm.Label), arm.Body)
+                                : E.IfThenElse(
+                                    E.Equal(node.SwitchValue, arm.Label),
+                                    arm.Body,
+                                    expression
+                                )
                         )
                     ?? throw new NotImplementedException("Empty switch statement")
                 );
@@ -2244,10 +2240,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 node
                     .Cases.SelectMany(c => c.TestValues, (c, tv) => new { c.Body, Label = tv })
                     .Reverse()
-                    .Aggregate(
-                        node.DefaultBody,
-                        (expression, arm) =>
-                            E.Condition(E.Equal(node.SwitchValue, arm.Label), arm.Body, expression)
+                    .Aggregate(node.DefaultBody, (expression, arm) =>
+                        E.Condition(E.Equal(node.SwitchValue, arm.Label), arm.Body, expression)
                     );
         }
     }

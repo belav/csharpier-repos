@@ -108,13 +108,10 @@ namespace Microsoft.Interop.UnitTests
             }
 
             var compDiags = comp.GetDiagnostics();
-            Assert.All(
-                compDiags,
-                diag =>
-                {
-                    Assert.Subset(allowedDiagnostics, new HashSet<string> { diag.Id });
-                }
-            );
+            Assert.All(compDiags, diag =>
+            {
+                Assert.Subset(allowedDiagnostics, new HashSet<string> { diag.Id });
+            });
         }
 
         /// <summary>
@@ -138,13 +135,10 @@ namespace Microsoft.Interop.UnitTests
             }
 
             var compDiags = comp.GetDiagnostics();
-            Assert.All(
-                compDiags,
-                diag =>
-                {
-                    Assert.Subset(allowedDiagnostics, new HashSet<string> { diag.Id });
-                }
-            );
+            Assert.All(compDiags, diag =>
+            {
+                Assert.Subset(allowedDiagnostics, new HashSet<string> { diag.Id });
+            });
         }
 
         /// <summary>

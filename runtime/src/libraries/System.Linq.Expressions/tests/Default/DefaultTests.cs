@@ -59,40 +59,35 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void ByRefType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Default(typeof(int).MakeByRefType())
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Default(typeof(int).MakeByRefType())
             );
         }
 
         [Fact]
         public void PointerType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Default(typeof(int).MakePointerType())
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Default(typeof(int).MakePointerType())
             );
         }
 
         [Fact]
         public void GenericType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Default(typeof(List<>))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Default(typeof(List<>))
             );
         }
 
         [Fact]
         public void TypeContainsGenericParameters()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Default(typeof(List<>.Enumerator))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Default(typeof(List<>.Enumerator))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.Default(typeof(List<>).MakeGenericType(typeof(List<>)))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.Default(typeof(List<>).MakeGenericType(typeof(List<>)))
             );
         }
 

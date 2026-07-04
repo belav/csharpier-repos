@@ -113,11 +113,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                     }
                 }
                 """;
-            await TestAsync(
-                pdbLocation,
-                sourceLocation,
-                source,
-                c => c.GetMember<IMethodSymbol>("C.M").Parameters.First()
+            await TestAsync(pdbLocation, sourceLocation, source, c =>
+                c.GetMember<IMethodSymbol>("C.M").Parameters.First()
             );
         }
 

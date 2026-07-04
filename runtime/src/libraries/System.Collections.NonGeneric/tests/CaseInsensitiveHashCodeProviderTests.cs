@@ -137,18 +137,16 @@ namespace System.Collections.Tests
         [Fact]
         public void Ctor_CultureInfo_NullCulture_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "culture",
-                () => new CaseInsensitiveHashCodeProvider(null)
+            AssertExtensions.Throws<ArgumentNullException>("culture", () =>
+                new CaseInsensitiveHashCodeProvider(null)
             );
         }
 
         [Fact]
         public void GetHashCode_NullObj_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "obj",
-                () => new CaseInsensitiveHashCodeProvider().GetHashCode(null)
+            AssertExtensions.Throws<ArgumentNullException>("obj", () =>
+                new CaseInsensitiveHashCodeProvider().GetHashCode(null)
             );
         }
 

@@ -319,25 +319,22 @@ namespace Microsoft.CodeAnalysis.IntroduceParameter
                         if (argumentListSyntax == null)
                             continue;
 
-                        editor.ReplaceNode(
-                            argumentListSyntax,
-                            (currentArgumentListSyntax, _) =>
-                            {
-                                return GenerateNewArgumentListSyntaxForTrampoline(
-                                    compilation,
-                                    invocationSemanticModel,
-                                    parameterToArgumentMap,
-                                    currentArgumentListSyntax,
-                                    argumentListSyntax,
-                                    invocation,
-                                    validParameters,
-                                    parameterName,
-                                    newMethodIdentifier,
-                                    insertionIndex,
-                                    cancellationToken
-                                );
-                            }
-                        );
+                        editor.ReplaceNode(argumentListSyntax, (currentArgumentListSyntax, _) =>
+                        {
+                            return GenerateNewArgumentListSyntaxForTrampoline(
+                                compilation,
+                                invocationSemanticModel,
+                                parameterToArgumentMap,
+                                currentArgumentListSyntax,
+                                argumentListSyntax,
+                                invocation,
+                                validParameters,
+                                parameterName,
+                                newMethodIdentifier,
+                                insertionIndex,
+                                cancellationToken
+                            );
+                        });
                     }
                 }
 
@@ -752,43 +749,38 @@ namespace Microsoft.CodeAnalysis.IntroduceParameter
 
                     if (argumentListSyntax is not null)
                     {
-                        editor.ReplaceNode(
-                            argumentListSyntax,
-                            (currentArgumentListSyntax, _) =>
-                            {
-                                var updatedInvocationArguments =
-                                    (SeparatedSyntaxList<TArgumentSyntax>)
-                                        _syntaxFacts.GetArgumentsOfArgumentList(
-                                            currentArgumentListSyntax
-                                        );
-                                var updatedExpression = CreateNewArgumentExpression(
-                                    expressionEditor,
-                                    expressionToParameterMap,
-                                    parameterToArgumentMap,
-                                    updatedInvocationArguments
-                                );
-                                var named = ShouldArgumentBeNamed(
-                                    compilation,
-                                    invocationSemanticModel,
-                                    invocationArguments,
-                                    insertionIndex,
-                                    cancellationToken
-                                );
-                                var allArguments = AddArgumentToArgumentList(
-                                    updatedInvocationArguments,
-                                    updatedExpression.WithAdditionalAnnotations(
-                                        Formatter.Annotation
-                                    ),
-                                    parameterName,
-                                    insertionIndex,
-                                    named
-                                );
-                                return _service.UpdateArgumentListSyntax(
-                                    currentArgumentListSyntax,
-                                    allArguments
-                                );
-                            }
-                        );
+                        editor.ReplaceNode(argumentListSyntax, (currentArgumentListSyntax, _) =>
+                        {
+                            var updatedInvocationArguments =
+                                (SeparatedSyntaxList<TArgumentSyntax>)
+                                    _syntaxFacts.GetArgumentsOfArgumentList(
+                                        currentArgumentListSyntax
+                                    );
+                            var updatedExpression = CreateNewArgumentExpression(
+                                expressionEditor,
+                                expressionToParameterMap,
+                                parameterToArgumentMap,
+                                updatedInvocationArguments
+                            );
+                            var named = ShouldArgumentBeNamed(
+                                compilation,
+                                invocationSemanticModel,
+                                invocationArguments,
+                                insertionIndex,
+                                cancellationToken
+                            );
+                            var allArguments = AddArgumentToArgumentList(
+                                updatedInvocationArguments,
+                                updatedExpression.WithAdditionalAnnotations(Formatter.Annotation),
+                                parameterName,
+                                insertionIndex,
+                                named
+                            );
+                            return _service.UpdateArgumentListSyntax(
+                                currentArgumentListSyntax,
+                                allArguments
+                            );
+                        });
                     }
                 }
 

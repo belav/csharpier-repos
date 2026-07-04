@@ -23,34 +23,31 @@ public class RelationalModelBuilderTest : ModelBuilderTest
 
             modelBuilder
                 .Entity<Order>()
-                .SplitToTable(
-                    "OrderDetails",
-                    s =>
+                .SplitToTable("OrderDetails", s =>
+                {
+                    s.ExcludeFromMigrations();
+                    var propertyBuilder = s.Property(o => o.CustomerId);
+                    var columnBuilder = propertyBuilder.HasColumnName("id");
+                    if (columnBuilder is IInfrastructure<ColumnBuilder<int?>> genericBuilder)
                     {
-                        s.ExcludeFromMigrations();
-                        var propertyBuilder = s.Property(o => o.CustomerId);
-                        var columnBuilder = propertyBuilder.HasColumnName("id");
-                        if (columnBuilder is IInfrastructure<ColumnBuilder<int?>> genericBuilder)
-                        {
-                            Assert.IsType<PropertyBuilder<int?>>(
-                                genericBuilder.Instance.GetInfrastructure<PropertyBuilder<int?>>()
-                            );
-                            Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
-                                genericBuilder.GetInfrastructure().Overrides
-                            );
-                        }
-                        else
-                        {
-                            var nonGenericBuilder = (IInfrastructure<ColumnBuilder>)columnBuilder;
-                            Assert.IsAssignableFrom<PropertyBuilder>(
-                                nonGenericBuilder.Instance.GetInfrastructure()
-                            );
-                            Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
-                                nonGenericBuilder.Instance.Overrides
-                            );
-                        }
+                        Assert.IsType<PropertyBuilder<int?>>(
+                            genericBuilder.Instance.GetInfrastructure<PropertyBuilder<int?>>()
+                        );
+                        Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
+                            genericBuilder.GetInfrastructure().Overrides
+                        );
                     }
-                );
+                    else
+                    {
+                        var nonGenericBuilder = (IInfrastructure<ColumnBuilder>)columnBuilder;
+                        Assert.IsAssignableFrom<PropertyBuilder>(
+                            nonGenericBuilder.Instance.GetInfrastructure()
+                        );
+                        Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
+                            nonGenericBuilder.Instance.Overrides
+                        );
+                    }
+                });
             modelBuilder.Ignore<Customer>();
             modelBuilder.Ignore<Product>();
 
@@ -92,10 +89,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             modelBuilder
                 .Entity<Order>()
                 .ToTable("Order", "dbo")
-                .SplitToTable(
-                    "OrderDetails",
-                    "sch",
-                    s => s.ExcludeFromMigrations().Property(o => o.CustomerId).HasColumnName("id")
+                .SplitToTable("OrderDetails", "sch", s =>
+                    s.ExcludeFromMigrations().Property(o => o.CustomerId).HasColumnName("id")
                 );
             modelBuilder.Ignore<Customer>();
             modelBuilder.Ignore<Product>();
@@ -147,36 +142,30 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             modelBuilder
                 .Entity<Order>()
                 .ToView("Order")
-                .SplitToView(
-                    "OrderDetails",
-                    s =>
+                .SplitToView("OrderDetails", s =>
+                {
+                    var propertyBuilder = s.Property(o => o.CustomerId);
+                    var columnBuilder = propertyBuilder.HasColumnName("id");
+                    if (columnBuilder is IInfrastructure<ViewColumnBuilder<int?>> genericBuilder)
                     {
-                        var propertyBuilder = s.Property(o => o.CustomerId);
-                        var columnBuilder = propertyBuilder.HasColumnName("id");
-                        if (
-                            columnBuilder is IInfrastructure<ViewColumnBuilder<int?>> genericBuilder
-                        )
-                        {
-                            Assert.IsType<PropertyBuilder<int?>>(
-                                genericBuilder.Instance.GetInfrastructure<PropertyBuilder<int?>>()
-                            );
-                            Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
-                                genericBuilder.GetInfrastructure().Overrides
-                            );
-                        }
-                        else
-                        {
-                            var nonGenericBuilder =
-                                (IInfrastructure<ViewColumnBuilder>)columnBuilder;
-                            Assert.IsAssignableFrom<PropertyBuilder>(
-                                nonGenericBuilder.Instance.GetInfrastructure()
-                            );
-                            Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
-                                nonGenericBuilder.Instance.Overrides
-                            );
-                        }
+                        Assert.IsType<PropertyBuilder<int?>>(
+                            genericBuilder.Instance.GetInfrastructure<PropertyBuilder<int?>>()
+                        );
+                        Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
+                            genericBuilder.GetInfrastructure().Overrides
+                        );
                     }
-                );
+                    else
+                    {
+                        var nonGenericBuilder = (IInfrastructure<ViewColumnBuilder>)columnBuilder;
+                        Assert.IsAssignableFrom<PropertyBuilder>(
+                            nonGenericBuilder.Instance.GetInfrastructure()
+                        );
+                        Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
+                            nonGenericBuilder.Instance.Overrides
+                        );
+                    }
+                });
             modelBuilder.Ignore<Customer>();
             modelBuilder.Ignore<Product>();
 
@@ -209,10 +198,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             modelBuilder
                 .Entity<Order>()
                 .ToView("Order", "dbo")
-                .SplitToView(
-                    "OrderDetails",
-                    "sch",
-                    s => s.Property(o => o.CustomerId).HasColumnName("id")
+                .SplitToView("OrderDetails", "sch", s =>
+                    s.Property(o => o.CustomerId).HasColumnName("id")
                 );
             modelBuilder.Ignore<Customer>();
             modelBuilder.Ignore<Product>();
@@ -525,34 +512,31 @@ public class RelationalModelBuilderTest : ModelBuilderTest
 
             modelBuilder
                 .Entity<Order>()
-                .SplitToTable(
-                    "OrderDetails",
-                    s =>
+                .SplitToTable("OrderDetails", s =>
+                {
+                    s.ExcludeFromMigrations();
+                    var propertyBuilder = s.Property(o => o.CustomerId);
+                    var columnBuilder = propertyBuilder.HasColumnName("id");
+                    if (columnBuilder is IInfrastructure<ColumnBuilder<int?>> genericBuilder)
                     {
-                        s.ExcludeFromMigrations();
-                        var propertyBuilder = s.Property(o => o.CustomerId);
-                        var columnBuilder = propertyBuilder.HasColumnName("id");
-                        if (columnBuilder is IInfrastructure<ColumnBuilder<int?>> genericBuilder)
-                        {
-                            Assert.IsType<PropertyBuilder<int?>>(
-                                genericBuilder.Instance.GetInfrastructure<PropertyBuilder<int?>>()
-                            );
-                            Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
-                                genericBuilder.GetInfrastructure().Overrides
-                            );
-                        }
-                        else
-                        {
-                            var nonGenericBuilder = (IInfrastructure<ColumnBuilder>)columnBuilder;
-                            Assert.IsAssignableFrom<PropertyBuilder>(
-                                nonGenericBuilder.Instance.GetInfrastructure()
-                            );
-                            Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
-                                nonGenericBuilder.Instance.Overrides
-                            );
-                        }
+                        Assert.IsType<PropertyBuilder<int?>>(
+                            genericBuilder.Instance.GetInfrastructure<PropertyBuilder<int?>>()
+                        );
+                        Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
+                            genericBuilder.GetInfrastructure().Overrides
+                        );
                     }
-                );
+                    else
+                    {
+                        var nonGenericBuilder = (IInfrastructure<ColumnBuilder>)columnBuilder;
+                        Assert.IsAssignableFrom<PropertyBuilder>(
+                            nonGenericBuilder.Instance.GetInfrastructure()
+                        );
+                        Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
+                            nonGenericBuilder.Instance.Overrides
+                        );
+                    }
+                });
             modelBuilder.Ignore<Customer>();
             modelBuilder.Ignore<Product>();
 
@@ -594,10 +578,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             modelBuilder
                 .Entity<Order>()
                 .ToTable("Order", "dbo")
-                .SplitToTable(
-                    "OrderDetails",
-                    "sch",
-                    s => s.ExcludeFromMigrations().Property(o => o.CustomerId).HasColumnName("id")
+                .SplitToTable("OrderDetails", "sch", s =>
+                    s.ExcludeFromMigrations().Property(o => o.CustomerId).HasColumnName("id")
                 );
             modelBuilder.Ignore<Customer>();
             modelBuilder.Ignore<Product>();
@@ -649,36 +631,30 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             modelBuilder
                 .Entity<Order>()
                 .ToView("Order")
-                .SplitToView(
-                    "OrderDetails",
-                    s =>
+                .SplitToView("OrderDetails", s =>
+                {
+                    var propertyBuilder = s.Property(o => o.CustomerId);
+                    var columnBuilder = propertyBuilder.HasColumnName("id");
+                    if (columnBuilder is IInfrastructure<ViewColumnBuilder<int?>> genericBuilder)
                     {
-                        var propertyBuilder = s.Property(o => o.CustomerId);
-                        var columnBuilder = propertyBuilder.HasColumnName("id");
-                        if (
-                            columnBuilder is IInfrastructure<ViewColumnBuilder<int?>> genericBuilder
-                        )
-                        {
-                            Assert.IsType<PropertyBuilder<int?>>(
-                                genericBuilder.Instance.GetInfrastructure<PropertyBuilder<int?>>()
-                            );
-                            Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
-                                genericBuilder.GetInfrastructure().Overrides
-                            );
-                        }
-                        else
-                        {
-                            var nonGenericBuilder =
-                                (IInfrastructure<ViewColumnBuilder>)columnBuilder;
-                            Assert.IsAssignableFrom<PropertyBuilder>(
-                                nonGenericBuilder.Instance.GetInfrastructure()
-                            );
-                            Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
-                                nonGenericBuilder.Instance.Overrides
-                            );
-                        }
+                        Assert.IsType<PropertyBuilder<int?>>(
+                            genericBuilder.Instance.GetInfrastructure<PropertyBuilder<int?>>()
+                        );
+                        Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
+                            genericBuilder.GetInfrastructure().Overrides
+                        );
                     }
-                );
+                    else
+                    {
+                        var nonGenericBuilder = (IInfrastructure<ViewColumnBuilder>)columnBuilder;
+                        Assert.IsAssignableFrom<PropertyBuilder>(
+                            nonGenericBuilder.Instance.GetInfrastructure()
+                        );
+                        Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
+                            nonGenericBuilder.Instance.Overrides
+                        );
+                    }
+                });
             modelBuilder.Ignore<Customer>();
             modelBuilder.Ignore<Product>();
 
@@ -711,10 +687,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             modelBuilder
                 .Entity<Order>()
                 .ToView("Order", "dbo")
-                .SplitToView(
-                    "OrderDetails",
-                    "sch",
-                    s => s.Property(o => o.CustomerId).HasColumnName("id")
+                .SplitToView("OrderDetails", "sch", s =>
+                    s.Property(o => o.CustomerId).HasColumnName("id")
                 );
             modelBuilder.Ignore<Customer>();
             modelBuilder.Ignore<Product>();
@@ -939,34 +913,31 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             var modelBuilder = CreateModelBuilder();
             modelBuilder
                 .Entity<Order>()
-                .SplitToTable(
-                    "OrderDetails",
-                    s =>
+                .SplitToTable("OrderDetails", s =>
+                {
+                    s.ExcludeFromMigrations();
+                    var propertyBuilder = s.Property(o => o.CustomerId);
+                    var columnBuilder = propertyBuilder.HasColumnName("id");
+                    if (columnBuilder is IInfrastructure<ColumnBuilder<int?>> genericBuilder)
                     {
-                        s.ExcludeFromMigrations();
-                        var propertyBuilder = s.Property(o => o.CustomerId);
-                        var columnBuilder = propertyBuilder.HasColumnName("id");
-                        if (columnBuilder is IInfrastructure<ColumnBuilder<int?>> genericBuilder)
-                        {
-                            Assert.IsType<PropertyBuilder<int?>>(
-                                genericBuilder.Instance.GetInfrastructure<PropertyBuilder<int?>>()
-                            );
-                            Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
-                                genericBuilder.GetInfrastructure().Overrides
-                            );
-                        }
-                        else
-                        {
-                            var nonGenericBuilder = (IInfrastructure<ColumnBuilder>)columnBuilder;
-                            Assert.IsAssignableFrom<PropertyBuilder>(
-                                nonGenericBuilder.Instance.GetInfrastructure()
-                            );
-                            Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
-                                nonGenericBuilder.Instance.Overrides
-                            );
-                        }
+                        Assert.IsType<PropertyBuilder<int?>>(
+                            genericBuilder.Instance.GetInfrastructure<PropertyBuilder<int?>>()
+                        );
+                        Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
+                            genericBuilder.GetInfrastructure().Overrides
+                        );
                     }
-                );
+                    else
+                    {
+                        var nonGenericBuilder = (IInfrastructure<ColumnBuilder>)columnBuilder;
+                        Assert.IsAssignableFrom<PropertyBuilder>(
+                            nonGenericBuilder.Instance.GetInfrastructure()
+                        );
+                        Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
+                            nonGenericBuilder.Instance.Overrides
+                        );
+                    }
+                });
             modelBuilder.Ignore<Customer>();
             modelBuilder.Ignore<Product>();
 
@@ -1047,39 +1018,33 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                         lb.Ignore(l => l.Book);
                         lb.Property<string>("ShadowProp");
 
-                        lb.SplitToTable(
-                            "BookLabelDetails",
-                            s =>
+                        lb.SplitToTable("BookLabelDetails", s =>
+                        {
+                            var propertyBuilder = s.Property(o => o.Id);
+                            var columnBuilder = propertyBuilder.HasColumnName("bid");
+                            if (columnBuilder is IInfrastructure<ColumnBuilder<int>> genericBuilder)
                             {
-                                var propertyBuilder = s.Property(o => o.Id);
-                                var columnBuilder = propertyBuilder.HasColumnName("bid");
-                                if (
-                                    columnBuilder
-                                    is IInfrastructure<ColumnBuilder<int>> genericBuilder
-                                )
-                                {
-                                    Assert.IsType<PropertyBuilder<int>>(
-                                        genericBuilder.Instance.GetInfrastructure<
-                                            PropertyBuilder<int>
-                                        >()
-                                    );
-                                    Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
-                                        genericBuilder.GetInfrastructure().Overrides
-                                    );
-                                }
-                                else
-                                {
-                                    var nonGenericBuilder =
-                                        (IInfrastructure<ColumnBuilder>)columnBuilder;
-                                    Assert.IsAssignableFrom<PropertyBuilder>(
-                                        nonGenericBuilder.Instance.GetInfrastructure()
-                                    );
-                                    Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
-                                        nonGenericBuilder.Instance.Overrides
-                                    );
-                                }
+                                Assert.IsType<PropertyBuilder<int>>(
+                                    genericBuilder.Instance.GetInfrastructure<
+                                        PropertyBuilder<int>
+                                    >()
+                                );
+                                Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
+                                    genericBuilder.GetInfrastructure().Overrides
+                                );
                             }
-                        );
+                            else
+                            {
+                                var nonGenericBuilder =
+                                    (IInfrastructure<ColumnBuilder>)columnBuilder;
+                                Assert.IsAssignableFrom<PropertyBuilder>(
+                                    nonGenericBuilder.Instance.GetInfrastructure()
+                                );
+                                Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
+                                    nonGenericBuilder.Instance.Overrides
+                                );
+                            }
+                        });
                     }
                 );
             modelBuilder.Entity<Book>().OwnsOne(b => b.AlternateLabel);
@@ -1146,39 +1111,36 @@ public class RelationalModelBuilderTest : ModelBuilderTest
                         r.Property<string>("ShadowProp");
 
                         r.ToView("Order");
-                        r.SplitToView(
-                            "OrderDetails",
-                            s =>
+                        r.SplitToView("OrderDetails", s =>
+                        {
+                            var propertyBuilder = s.Property(o => o.AnotherCustomerId);
+                            var columnBuilder = propertyBuilder.HasColumnName("cid");
+                            if (
+                                columnBuilder
+                                is IInfrastructure<ViewColumnBuilder<Guid>> genericBuilder
+                            )
                             {
-                                var propertyBuilder = s.Property(o => o.AnotherCustomerId);
-                                var columnBuilder = propertyBuilder.HasColumnName("cid");
-                                if (
-                                    columnBuilder
-                                    is IInfrastructure<ViewColumnBuilder<Guid>> genericBuilder
-                                )
-                                {
-                                    Assert.IsType<PropertyBuilder<Guid>>(
-                                        genericBuilder.Instance.GetInfrastructure<
-                                            PropertyBuilder<Guid>
-                                        >()
-                                    );
-                                    Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
-                                        genericBuilder.GetInfrastructure().Overrides
-                                    );
-                                }
-                                else
-                                {
-                                    var nonGenericBuilder =
-                                        (IInfrastructure<ViewColumnBuilder>)columnBuilder;
-                                    Assert.IsAssignableFrom<PropertyBuilder>(
-                                        nonGenericBuilder.Instance.GetInfrastructure()
-                                    );
-                                    Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
-                                        nonGenericBuilder.Instance.Overrides
-                                    );
-                                }
+                                Assert.IsType<PropertyBuilder<Guid>>(
+                                    genericBuilder.Instance.GetInfrastructure<
+                                        PropertyBuilder<Guid>
+                                    >()
+                                );
+                                Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
+                                    genericBuilder.GetInfrastructure().Overrides
+                                );
                             }
-                        );
+                            else
+                            {
+                                var nonGenericBuilder =
+                                    (IInfrastructure<ViewColumnBuilder>)columnBuilder;
+                                Assert.IsAssignableFrom<PropertyBuilder>(
+                                    nonGenericBuilder.Instance.GetInfrastructure()
+                                );
+                                Assert.IsAssignableFrom<IMutableRelationalPropertyOverrides>(
+                                    nonGenericBuilder.Instance.Overrides
+                                );
+                            }
+                        });
                     }
                 );
 
@@ -2534,9 +2496,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureParameterBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasParameter(
-                    propertyName,
-                    s => buildAction(new TestStoredProcedureParameterBuilder(s))
+                StoredProcedureBuilder.HasParameter(propertyName, s =>
+                    buildAction(new TestStoredProcedureParameterBuilder(s))
                 )
             );
 
@@ -2549,9 +2510,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureParameterBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasParameter<TProperty>(
-                    propertyExpression,
-                    s => buildAction(new TestStoredProcedureParameterBuilder(s))
+                StoredProcedureBuilder.HasParameter<TProperty>(propertyExpression, s =>
+                    buildAction(new TestStoredProcedureParameterBuilder(s))
                 )
             );
 
@@ -2564,9 +2524,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureParameterBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasParameter(
-                    propertyExpression,
-                    s => buildAction(new TestStoredProcedureParameterBuilder(s))
+                StoredProcedureBuilder.HasParameter(propertyExpression, s =>
+                    buildAction(new TestStoredProcedureParameterBuilder(s))
                 )
             );
 
@@ -2579,9 +2538,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureParameterBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasOriginalValueParameter(
-                    propertyName,
-                    s => buildAction(new TestStoredProcedureParameterBuilder(s))
+                StoredProcedureBuilder.HasOriginalValueParameter(propertyName, s =>
+                    buildAction(new TestStoredProcedureParameterBuilder(s))
                 )
             );
 
@@ -2594,9 +2552,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureParameterBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasOriginalValueParameter<TProperty>(
-                    propertyExpression,
-                    s => buildAction(new TestStoredProcedureParameterBuilder(s))
+                StoredProcedureBuilder.HasOriginalValueParameter<TProperty>(propertyExpression, s =>
+                    buildAction(new TestStoredProcedureParameterBuilder(s))
                 )
             );
 
@@ -2614,9 +2571,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureParameterBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasOriginalValueParameter(
-                    propertyExpression,
-                    s => buildAction(new TestStoredProcedureParameterBuilder(s))
+                StoredProcedureBuilder.HasOriginalValueParameter(propertyExpression, s =>
+                    buildAction(new TestStoredProcedureParameterBuilder(s))
                 )
             );
 
@@ -2640,9 +2596,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureResultColumnBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasResultColumn(
-                    propertyName,
-                    s => buildAction(new TestStoredProcedureResultColumnBuilder(s))
+                StoredProcedureBuilder.HasResultColumn(propertyName, s =>
+                    buildAction(new TestStoredProcedureResultColumnBuilder(s))
                 )
             );
 
@@ -2655,9 +2610,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureResultColumnBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasResultColumn<TProperty>(
-                    propertyExpression,
-                    s => buildAction(new TestStoredProcedureResultColumnBuilder(s))
+                StoredProcedureBuilder.HasResultColumn<TProperty>(propertyExpression, s =>
+                    buildAction(new TestStoredProcedureResultColumnBuilder(s))
                 )
             );
 
@@ -2675,9 +2629,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureResultColumnBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasResultColumn(
-                    propertyExpression,
-                    s => buildAction(new TestStoredProcedureResultColumnBuilder(s))
+                StoredProcedureBuilder.HasResultColumn(propertyExpression, s =>
+                    buildAction(new TestStoredProcedureResultColumnBuilder(s))
                 )
             );
 
@@ -2730,9 +2683,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureParameterBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasParameter(
-                    propertyName,
-                    s => buildAction(new TestStoredProcedureParameterBuilder(s))
+                StoredProcedureBuilder.HasParameter(propertyName, s =>
+                    buildAction(new TestStoredProcedureParameterBuilder(s))
                 )
             );
 
@@ -2745,9 +2697,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureParameterBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasParameter(
-                    propertyExpression.GetMemberAccess().Name,
-                    s => buildAction(new TestStoredProcedureParameterBuilder(s))
+                StoredProcedureBuilder.HasParameter(propertyExpression.GetMemberAccess().Name, s =>
+                    buildAction(new TestStoredProcedureParameterBuilder(s))
                 )
             );
 
@@ -2760,9 +2711,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureParameterBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasParameter(
-                    propertyExpression.GetMemberAccess().Name,
-                    s => buildAction(new TestStoredProcedureParameterBuilder(s))
+                StoredProcedureBuilder.HasParameter(propertyExpression.GetMemberAccess().Name, s =>
+                    buildAction(new TestStoredProcedureParameterBuilder(s))
                 )
             );
 
@@ -2775,9 +2725,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureParameterBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasOriginalValueParameter(
-                    propertyName,
-                    s => buildAction(new TestStoredProcedureParameterBuilder(s))
+                StoredProcedureBuilder.HasOriginalValueParameter(propertyName, s =>
+                    buildAction(new TestStoredProcedureParameterBuilder(s))
                 )
             );
 
@@ -2845,9 +2794,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureResultColumnBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasResultColumn(
-                    propertyName,
-                    s => buildAction(new TestStoredProcedureResultColumnBuilder(s))
+                StoredProcedureBuilder.HasResultColumn(propertyName, s =>
+                    buildAction(new TestStoredProcedureResultColumnBuilder(s))
                 )
             );
 
@@ -3078,9 +3026,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureParameterBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasParameter(
-                    propertyName,
-                    s => buildAction(new TestStoredProcedureParameterBuilder(s))
+                StoredProcedureBuilder.HasParameter(propertyName, s =>
+                    buildAction(new TestStoredProcedureParameterBuilder(s))
                 )
             );
 
@@ -3099,9 +3046,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureParameterBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasParameter(
-                    propertyExpression,
-                    s => buildAction(new TestStoredProcedureParameterBuilder(s))
+                StoredProcedureBuilder.HasParameter(propertyExpression, s =>
+                    buildAction(new TestStoredProcedureParameterBuilder(s))
                 )
             );
 
@@ -3119,9 +3065,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureParameterBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasOriginalValueParameter(
-                    propertyName,
-                    s => buildAction(new TestStoredProcedureParameterBuilder(s))
+                StoredProcedureBuilder.HasOriginalValueParameter(propertyName, s =>
+                    buildAction(new TestStoredProcedureParameterBuilder(s))
                 )
             );
 
@@ -3140,9 +3085,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureParameterBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasOriginalValueParameter(
-                    propertyExpression,
-                    s => buildAction(new TestStoredProcedureParameterBuilder(s))
+                StoredProcedureBuilder.HasOriginalValueParameter(propertyExpression, s =>
+                    buildAction(new TestStoredProcedureParameterBuilder(s))
                 )
             );
 
@@ -3175,9 +3119,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureResultColumnBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasResultColumn(
-                    propertyName,
-                    s => buildAction(new TestStoredProcedureResultColumnBuilder(s))
+                StoredProcedureBuilder.HasResultColumn(propertyName, s =>
+                    buildAction(new TestStoredProcedureResultColumnBuilder(s))
                 )
             );
 
@@ -3196,9 +3139,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureResultColumnBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasResultColumn(
-                    propertyExpression,
-                    s => buildAction(new TestStoredProcedureResultColumnBuilder(s))
+                StoredProcedureBuilder.HasResultColumn(propertyExpression, s =>
+                    buildAction(new TestStoredProcedureResultColumnBuilder(s))
                 )
             );
 
@@ -3271,9 +3213,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureParameterBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasParameter(
-                    propertyName,
-                    s => buildAction(new TestStoredProcedureParameterBuilder(s))
+                StoredProcedureBuilder.HasParameter(propertyName, s =>
+                    buildAction(new TestStoredProcedureParameterBuilder(s))
                 )
             );
 
@@ -3292,9 +3233,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureParameterBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasParameter(
-                    propertyExpression.GetMemberAccess().Name,
-                    s => buildAction(new TestStoredProcedureParameterBuilder(s))
+                StoredProcedureBuilder.HasParameter(propertyExpression.GetMemberAccess().Name, s =>
+                    buildAction(new TestStoredProcedureParameterBuilder(s))
                 )
             );
 
@@ -3312,9 +3252,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureParameterBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasOriginalValueParameter(
-                    propertyName,
-                    s => buildAction(new TestStoredProcedureParameterBuilder(s))
+                StoredProcedureBuilder.HasOriginalValueParameter(propertyName, s =>
+                    buildAction(new TestStoredProcedureParameterBuilder(s))
                 )
             );
 
@@ -3373,9 +3312,8 @@ public class RelationalModelBuilderTest : ModelBuilderTest
             Action<TestStoredProcedureResultColumnBuilder> buildAction
         ) =>
             Wrap(
-                StoredProcedureBuilder.HasResultColumn(
-                    propertyName,
-                    s => buildAction(new TestStoredProcedureResultColumnBuilder(s))
+                StoredProcedureBuilder.HasResultColumn(propertyName, s =>
+                    buildAction(new TestStoredProcedureResultColumnBuilder(s))
                 )
             );
 

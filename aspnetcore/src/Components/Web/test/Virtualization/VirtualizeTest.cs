@@ -82,11 +82,8 @@ public class VirtualizeTest
 
         var rootComponent = new VirtualizeTestHostcomponent
         {
-            InnerContent = BuildVirtualize(
-                10f,
-                AlwaysThrowsItemsProvider<int>,
-                null,
-                virtualize => renderedVirtualize = virtualize
+            InnerContent = BuildVirtualize(10f, AlwaysThrowsItemsProvider<int>, null, virtualize =>
+                renderedVirtualize = virtualize
             ),
         };
 
@@ -135,9 +132,8 @@ public class VirtualizeTest
 
             if (captureRenderedVirtualize != null)
             {
-                builder.AddComponentReferenceCapture(
-                    4,
-                    component => captureRenderedVirtualize(component as Virtualize<TItem>)
+                builder.AddComponentReferenceCapture(4, component =>
+                    captureRenderedVirtualize(component as Virtualize<TItem>)
                 );
             }
 

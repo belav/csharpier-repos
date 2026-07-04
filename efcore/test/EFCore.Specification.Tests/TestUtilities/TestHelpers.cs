@@ -75,28 +75,24 @@ public abstract class TestHelpers
         Action<EntityFrameworkDesignServicesBuilder> replaceServices = null,
         Action<IServiceCollection> addDesignTimeServices = null,
         IOperationReporter reporter = null
-    ) =>
-        CreateServiceProvider(
-            customServices,
-            services =>
+    ) => CreateServiceProvider(customServices, services =>
+        {
+            if (replaceServices != null)
             {
-                if (replaceServices != null)
-                {
-                    var builder = CreateEntityFrameworkDesignServicesBuilder(services);
-                    replaceServices(builder);
-                }
-
-                if (addDesignTimeServices != null)
-                {
-                    addDesignTimeServices(services);
-                }
-
-                ConfigureProviderServices(provider, services);
-                services.AddEntityFrameworkDesignTimeServices(reporter);
-
-                return services;
+                var builder = CreateEntityFrameworkDesignServicesBuilder(services);
+                replaceServices(builder);
             }
-        );
+
+            if (addDesignTimeServices != null)
+            {
+                addDesignTimeServices(services);
+            }
+
+            ConfigureProviderServices(provider, services);
+            services.AddEntityFrameworkDesignTimeServices(reporter);
+
+            return services;
+        });
 
     protected virtual EntityFrameworkDesignServicesBuilder CreateEntityFrameworkDesignServicesBuilder(
         IServiceCollection services
@@ -408,49 +404,46 @@ public abstract class TestHelpers
     {
         using var c = createContext();
         c.Database.CreateExecutionStrategy()
-            .Execute(
-                c,
-                context =>
+            .Execute(c, context =>
+            {
+                using var transaction = context.Database.BeginTransaction();
+                using (var innerContext = createContext())
                 {
-                    using var transaction = context.Database.BeginTransaction();
-                    using (var innerContext = createContext())
-                    {
-                        useTransaction(innerContext.Database, transaction);
-                        testOperation(innerContext);
-                    }
-
-                    if (nestedTestOperation1 == null)
-                    {
-                        return;
-                    }
-
-                    using (var innerContext1 = createContext())
-                    {
-                        useTransaction(innerContext1.Database, transaction);
-                        nestedTestOperation1(innerContext1);
-                    }
-
-                    if (nestedTestOperation2 == null)
-                    {
-                        return;
-                    }
-
-                    using (var innerContext2 = createContext())
-                    {
-                        useTransaction(innerContext2.Database, transaction);
-                        nestedTestOperation2(innerContext2);
-                    }
-
-                    if (nestedTestOperation3 == null)
-                    {
-                        return;
-                    }
-
-                    using var innerContext3 = createContext();
-                    useTransaction(innerContext3.Database, transaction);
-                    nestedTestOperation3(innerContext3);
+                    useTransaction(innerContext.Database, transaction);
+                    testOperation(innerContext);
                 }
-            );
+
+                if (nestedTestOperation1 == null)
+                {
+                    return;
+                }
+
+                using (var innerContext1 = createContext())
+                {
+                    useTransaction(innerContext1.Database, transaction);
+                    nestedTestOperation1(innerContext1);
+                }
+
+                if (nestedTestOperation2 == null)
+                {
+                    return;
+                }
+
+                using (var innerContext2 = createContext())
+                {
+                    useTransaction(innerContext2.Database, transaction);
+                    nestedTestOperation2(innerContext2);
+                }
+
+                if (nestedTestOperation3 == null)
+                {
+                    return;
+                }
+
+                using var innerContext3 = createContext();
+                useTransaction(innerContext3.Database, transaction);
+                nestedTestOperation3(innerContext3);
+            });
     }
 
     public static async Task ExecuteWithStrategyInTransactionAsync<TContext>(
@@ -466,49 +459,46 @@ public abstract class TestHelpers
         using var c = createContext();
         await c
             .Database.CreateExecutionStrategy()
-            .ExecuteAsync(
-                c,
-                async context =>
+            .ExecuteAsync(c, async context =>
+            {
+                using var transaction = await context.Database.BeginTransactionAsync();
+                using (var innerContext = createContext())
                 {
-                    using var transaction = await context.Database.BeginTransactionAsync();
-                    using (var innerContext = createContext())
-                    {
-                        useTransaction(innerContext.Database, transaction);
-                        await testOperation(innerContext);
-                    }
-
-                    if (nestedTestOperation1 == null)
-                    {
-                        return;
-                    }
-
-                    using (var innerContext1 = createContext())
-                    {
-                        useTransaction(innerContext1.Database, transaction);
-                        await nestedTestOperation1(innerContext1);
-                    }
-
-                    if (nestedTestOperation2 == null)
-                    {
-                        return;
-                    }
-
-                    using (var innerContext2 = createContext())
-                    {
-                        useTransaction(innerContext2.Database, transaction);
-                        await nestedTestOperation2(innerContext2);
-                    }
-
-                    if (nestedTestOperation3 == null)
-                    {
-                        return;
-                    }
-
-                    using var innerContext3 = createContext();
-                    useTransaction(innerContext3.Database, transaction);
-                    await nestedTestOperation3(innerContext3);
+                    useTransaction(innerContext.Database, transaction);
+                    await testOperation(innerContext);
                 }
-            );
+
+                if (nestedTestOperation1 == null)
+                {
+                    return;
+                }
+
+                using (var innerContext1 = createContext())
+                {
+                    useTransaction(innerContext1.Database, transaction);
+                    await nestedTestOperation1(innerContext1);
+                }
+
+                if (nestedTestOperation2 == null)
+                {
+                    return;
+                }
+
+                using (var innerContext2 = createContext())
+                {
+                    useTransaction(innerContext2.Database, transaction);
+                    await nestedTestOperation2(innerContext2);
+                }
+
+                if (nestedTestOperation3 == null)
+                {
+                    return;
+                }
+
+                using var innerContext3 = createContext();
+                useTransaction(innerContext3.Database, transaction);
+                await nestedTestOperation3(innerContext3);
+            });
     }
 
     public class TestModelBuilder : ModelBuilder

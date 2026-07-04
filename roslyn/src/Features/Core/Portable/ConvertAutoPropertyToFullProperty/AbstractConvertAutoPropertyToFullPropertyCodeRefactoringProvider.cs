@@ -172,15 +172,13 @@ namespace Microsoft.CodeAnalysis.ConvertAutoPropertyToFullProperty
                 );
                 if (property.Ancestors().Contains(typeBlock))
                 {
-                    editor.ReplaceNode(
-                        typeBlock,
-                        (currentTypeDeclaration, _) =>
-                            info.Service.AddField(
-                                currentTypeDeclaration,
-                                newField,
-                                info,
-                                cancellationToken
-                            )
+                    editor.ReplaceNode(typeBlock, (currentTypeDeclaration, _) =>
+                        info.Service.AddField(
+                            currentTypeDeclaration,
+                            newField,
+                            info,
+                            cancellationToken
+                        )
                     );
                 }
             }

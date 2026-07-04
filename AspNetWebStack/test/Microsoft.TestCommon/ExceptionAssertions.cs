@@ -70,13 +70,10 @@ namespace Microsoft.TestCommon
         /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
         public static new Exception Throws(Type exceptionType, Func<object> testCode)
         {
-            return Throws(
-                exceptionType,
-                () =>
-                {
-                    testCode();
-                }
-            );
+            return Throws(exceptionType, () =>
+            {
+                testCode();
+            });
         }
 
         /// <summary>

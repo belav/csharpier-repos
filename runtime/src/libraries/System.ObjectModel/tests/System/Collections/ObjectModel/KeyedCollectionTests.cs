@@ -743,9 +743,8 @@ namespace System.Collections.ObjectModel.Tests
         public void RemoveItem_InvalidIndex_ThrowsArgumentOutOfRangeException(int index)
         {
             var collection = new StringKeyedCollection<string>(null, 3);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => collection.RemoveItem(index)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                collection.RemoveItem(index)
             );
         }
 
@@ -1017,10 +1016,8 @@ namespace System.Collections.ObjectModel.Tests
             collection.Add("first");
             collection.Add("second");
 
-            AssertExtensions.Throws<ArgumentException>(
-                "key",
-                null,
-                () => collection.ChangeItemKey("first", newKey)
+            AssertExtensions.Throws<ArgumentException>("key", null, () =>
+                collection.ChangeItemKey("first", newKey)
             );
         }
 
@@ -1031,43 +1028,31 @@ namespace System.Collections.ObjectModel.Tests
             collection.GetKeyForItemHandler = item => item + "_key";
 
             // Empty.
-            AssertExtensions.Throws<ArgumentException>(
-                "item",
-                null,
-                () => collection.ChangeItemKey("NoSuchItem", "other_key")
+            AssertExtensions.Throws<ArgumentException>("item", null, () =>
+                collection.ChangeItemKey("NoSuchItem", "other_key")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "item",
-                null,
-                () => collection.ChangeItemKey("FIRST", "other_key")
+            AssertExtensions.Throws<ArgumentException>("item", null, () =>
+                collection.ChangeItemKey("FIRST", "other_key")
             );
 
             // Without dictionary.
             collection.Add("first");
-            AssertExtensions.Throws<ArgumentException>(
-                "item",
-                null,
-                () => collection.ChangeItemKey("NoSuchItem", "other_key")
+            AssertExtensions.Throws<ArgumentException>("item", null, () =>
+                collection.ChangeItemKey("NoSuchItem", "other_key")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "item",
-                null,
-                () => collection.ChangeItemKey("FIRST", "other_key")
+            AssertExtensions.Throws<ArgumentException>("item", null, () =>
+                collection.ChangeItemKey("FIRST", "other_key")
             );
 
             // With dictionary.
             collection.Add("second");
             collection.Add("third");
             collection.Add("fourth");
-            AssertExtensions.Throws<ArgumentException>(
-                "item",
-                null,
-                () => collection.ChangeItemKey("NoSuchItem", "other_key")
+            AssertExtensions.Throws<ArgumentException>("item", null, () =>
+                collection.ChangeItemKey("NoSuchItem", "other_key")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "item",
-                null,
-                () => collection.ChangeItemKey("FIRST", "other_key")
+            AssertExtensions.Throws<ArgumentException>("item", null, () =>
+                collection.ChangeItemKey("FIRST", "other_key")
             );
         }
 
@@ -1100,10 +1085,8 @@ namespace System.Collections.ObjectModel.Tests
 
             // With dictionary.
             collection.Add(4);
-            AssertExtensions.Throws<ArgumentException>(
-                "item",
-                null,
-                () => collection.ChangeItemKey(2, newKey)
+            AssertExtensions.Throws<ArgumentException>("item", null, () =>
+                collection.ChangeItemKey(2, newKey)
             );
             Assert.Equal(
                 new Dictionary<string, int>
@@ -1327,9 +1310,8 @@ namespace System.Collections.ObjectModel.Tests
         {
             var collection = new StringKeyedCollection<string>(null, 3);
             collection.GetKeyForItemHandler = item => item + "_key";
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => collection.SetItem(index, "first")
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                collection.SetItem(index, "first")
             );
         }
 
@@ -1441,9 +1423,8 @@ namespace System.Collections.ObjectModel.Tests
         {
             var collection = new StringKeyedCollection<string>();
             string item = "item";
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => collection.TryGetValue(null, out item)
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                collection.TryGetValue(null, out item)
             );
             Assert.Equal("item", item);
         }

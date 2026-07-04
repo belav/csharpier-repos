@@ -43,9 +43,8 @@ namespace System.ServiceModel.Syndication.Tests
             TextSyndicationContentKind textKind
         )
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "textKind",
-                () => new TextSyndicationContent(null, textKind)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("textKind", () =>
+                new TextSyndicationContent(null, textKind)
             );
         }
 
@@ -77,9 +76,8 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => new TextSyndicationContentSubclass(null)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                new TextSyndicationContentSubclass(null)
             );
         }
 

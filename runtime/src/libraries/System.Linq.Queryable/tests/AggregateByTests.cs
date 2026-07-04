@@ -14,19 +14,11 @@ namespace System.Linq.Tests
         {
             IQueryable<int> source = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.AggregateBy(x => x, x => 0, (x, y) => x + y)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.AggregateBy(x => x, x => 0, (x, y) => x + y)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () =>
-                    source.AggregateBy(
-                        x => x,
-                        x => 0,
-                        (x, y) => x + y,
-                        EqualityComparer<int>.Default
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.AggregateBy(x => x, x => 0, (x, y) => x + y, EqualityComparer<int>.Default)
             );
         }
 
@@ -36,19 +28,16 @@ namespace System.Linq.Tests
             IQueryable<int> source = Enumerable.Empty<int>().AsQueryable();
             Expression<Func<int, int>> keySelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.AggregateBy(keySelector, x => 0, (x, y) => x + y)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.AggregateBy(keySelector, x => 0, (x, y) => x + y)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    source.AggregateBy(
-                        keySelector,
-                        x => 0,
-                        (x, y) => x + y,
-                        EqualityComparer<int>.Default
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.AggregateBy(
+                    keySelector,
+                    x => 0,
+                    (x, y) => x + y,
+                    EqualityComparer<int>.Default
+                )
             );
         }
 
@@ -58,19 +47,16 @@ namespace System.Linq.Tests
             IQueryable<int> source = Enumerable.Empty<int>().AsQueryable();
             Expression<Func<int, int>> seedSelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "seedSelector",
-                () => source.AggregateBy(x => x, seedSelector, (x, y) => x + y)
+            AssertExtensions.Throws<ArgumentNullException>("seedSelector", () =>
+                source.AggregateBy(x => x, seedSelector, (x, y) => x + y)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "seedSelector",
-                () =>
-                    source.AggregateBy(
-                        x => x,
-                        seedSelector,
-                        (x, y) => x + y,
-                        EqualityComparer<int>.Default
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("seedSelector", () =>
+                source.AggregateBy(
+                    x => x,
+                    seedSelector,
+                    (x, y) => x + y,
+                    EqualityComparer<int>.Default
+                )
             );
         }
 
@@ -80,13 +66,11 @@ namespace System.Linq.Tests
             IQueryable<int> source = Enumerable.Empty<int>().AsQueryable();
             Expression<Func<int, int, int>> func = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "func",
-                () => source.AggregateBy(x => x, x => 0, func)
+            AssertExtensions.Throws<ArgumentNullException>("func", () =>
+                source.AggregateBy(x => x, x => 0, func)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "func",
-                () => source.AggregateBy(x => x, x => 0, func, EqualityComparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("func", () =>
+                source.AggregateBy(x => x, x => 0, func, EqualityComparer<int>.Default)
             );
         }
 

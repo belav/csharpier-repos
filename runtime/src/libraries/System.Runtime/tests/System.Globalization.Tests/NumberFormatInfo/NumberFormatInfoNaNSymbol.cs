@@ -28,10 +28,8 @@ namespace System.Globalization.Tests
         public void NaNSymbol_SetNull_ThrowsArgumentNullException()
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                "NaNSymbol",
-                () => format.NaNSymbol = null
+            AssertExtensions.Throws<ArgumentNullException>("value", "NaNSymbol", () =>
+                format.NaNSymbol = null
             );
         }
 

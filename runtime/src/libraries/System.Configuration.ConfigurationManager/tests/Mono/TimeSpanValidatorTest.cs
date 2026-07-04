@@ -121,9 +121,8 @@ namespace MonoTests.System.Configuration
                 2
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => v.Validate(TimeSpan.FromTicks(40000))
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                v.Validate(TimeSpan.FromTicks(40000))
             );
         }
     }

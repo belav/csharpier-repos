@@ -96,14 +96,10 @@ namespace System.Web.Http.Filters
             var filter = (IActionFilter)filterMock.Object;
 
             // Act
-            await filter.ExecuteActionFilterAsync(
-                context,
-                CancellationToken.None,
-                () =>
-                {
-                    return Task.FromResult(new HttpResponseMessage());
-                }
-            );
+            await filter.ExecuteActionFilterAsync(context, CancellationToken.None, () =>
+            {
+                return Task.FromResult(new HttpResponseMessage());
+            });
 
             // Assert
             filterMock.Verify(f => f.OnActionExecuting(context));
@@ -128,15 +124,11 @@ namespace System.Web.Http.Filters
 
             // Act
             var exception = await Assert.ThrowsAsync<Exception>(() =>
-                filter.ExecuteActionFilterAsync(
-                    context,
-                    CancellationToken.None,
-                    () =>
-                    {
-                        continuationCalled = true;
-                        return null;
-                    }
-                )
+                filter.ExecuteActionFilterAsync(context, CancellationToken.None, () =>
+                {
+                    continuationCalled = true;
+                    return null;
+                })
             );
 
             // Assert
@@ -194,10 +186,8 @@ namespace System.Web.Http.Filters
 
             // Act & Assert
             return Assert.ThrowsAsync<TaskCanceledException>(() =>
-                filter.ExecuteActionFilterAsync(
-                    context,
-                    CancellationToken.None,
-                    () => TaskHelpers.Canceled<HttpResponseMessage>()
+                filter.ExecuteActionFilterAsync(context, CancellationToken.None, () =>
+                    TaskHelpers.Canceled<HttpResponseMessage>()
                 )
             );
         }
@@ -216,10 +206,8 @@ namespace System.Web.Http.Filters
             HttpResponseMessage response = new HttpResponseMessage();
 
             // Act
-            await filter.ExecuteActionFilterAsync(
-                context,
-                CancellationToken.None,
-                () => Task.FromResult(response)
+            await filter.ExecuteActionFilterAsync(context, CancellationToken.None, () =>
+                Task.FromResult(response)
             );
 
             // Assert
@@ -419,10 +407,8 @@ namespace System.Web.Http.Filters
 
             // Act
             Exception result = await Assert.ThrowsAsync<Exception>(() =>
-                filter.ExecuteActionFilterAsync(
-                    context,
-                    CancellationToken.None,
-                    () => TaskHelpers.FromError<HttpResponseMessage>(exception)
+                filter.ExecuteActionFilterAsync(context, CancellationToken.None, () =>
+                    TaskHelpers.FromError<HttpResponseMessage>(exception)
                 )
             );
 
@@ -484,10 +470,8 @@ namespace System.Web.Http.Filters
 
             // Act
             Exception actual = await Assert.ThrowsAsync<Exception>(() =>
-                filter.ExecuteActionFilterAsync(
-                    context,
-                    CancellationToken.None,
-                    () => Task.FromResult(new HttpResponseMessage())
+                filter.ExecuteActionFilterAsync(context, CancellationToken.None, () =>
+                    Task.FromResult(new HttpResponseMessage())
                 )
             );
 
@@ -577,10 +561,8 @@ namespace System.Web.Http.Filters
             // Act and Assert
             return Assert.ThrowsAsync<InvalidOperationException>(
                 () =>
-                    filter.ExecuteActionFilterAsync(
-                        context,
-                        CancellationToken.None,
-                        () => Task.FromResult(response)
+                    filter.ExecuteActionFilterAsync(context, CancellationToken.None, () =>
+                        Task.FromResult(response)
                     ),
                 "After calling ActionFilterAttributeProxy.OnActionExecuted, the HttpActionExecutedContext properties Result and Exception were both null. At least one of these values must be non-null. To provide a new response, please set the Result object; to indicate an error, please throw an exception."
             );

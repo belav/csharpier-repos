@@ -556,13 +556,11 @@ public class PollyHttpClientBuilderExtensionsTest
         Assert.Same(existingRegistry, services.GetService<IReadOnlyPolicyRegistry<string>>());
 
         Assert.Single(serviceCollection, sd => sd.ServiceType == typeof(IPolicyRegistry<string>));
-        Assert.Single(
-            serviceCollection,
-            sd => sd.ServiceType == typeof(IReadOnlyPolicyRegistry<string>)
+        Assert.Single(serviceCollection, sd =>
+            sd.ServiceType == typeof(IReadOnlyPolicyRegistry<string>)
         );
-        Assert.Single(
-            serviceCollection,
-            sd => sd.ServiceType == typeof(IConcurrentPolicyRegistry<string>)
+        Assert.Single(serviceCollection, sd =>
+            sd.ServiceType == typeof(IConcurrentPolicyRegistry<string>)
         );
     }
 
@@ -593,13 +591,11 @@ public class PollyHttpClientBuilderExtensionsTest
 
         // Assert
         Assert.Single(serviceCollection, sd => sd.ServiceType == typeof(IPolicyRegistry<string>));
-        Assert.Single(
-            serviceCollection,
-            sd => sd.ServiceType == typeof(IReadOnlyPolicyRegistry<string>)
+        Assert.Single(serviceCollection, sd =>
+            sd.ServiceType == typeof(IReadOnlyPolicyRegistry<string>)
         );
-        Assert.Single(
-            serviceCollection,
-            sd => sd.ServiceType == typeof(IConcurrentPolicyRegistry<string>)
+        Assert.Single(serviceCollection, sd =>
+            sd.ServiceType == typeof(IConcurrentPolicyRegistry<string>)
         );
     }
 

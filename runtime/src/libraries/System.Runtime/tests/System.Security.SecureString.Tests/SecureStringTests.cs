@@ -29,26 +29,20 @@ namespace System.Security.Tests
         [Fact]
         public static unsafe void Ctor_CharInt_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new SecureString(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new SecureString(null, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "length",
-                () =>
-                {
-                    fixed (char* chars = "test")
-                        new SecureString(chars, -1);
-                }
-            );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "length",
-                () =>
-                    CreateSecureString(
-                        CreateString(
-                            ushort.MaxValue + 2 /*65537: Max allowed length is 65536*/
-                        )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () =>
+            {
+                fixed (char* chars = "test")
+                    new SecureString(chars, -1);
+            });
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () =>
+                CreateSecureString(
+                    CreateString(
+                        ushort.MaxValue + 2 /*65537: Max allowed length is 65536*/
                     )
+                )
             );
         }
 
@@ -73,9 +67,8 @@ namespace System.Security.Tests
         {
             using (SecureString ss = CreateSecureString(CreateString(ushort.MaxValue + 1)))
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "capacity",
-                    () => ss.AppendChar('a')
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                    ss.AppendChar('a')
                 );
             }
         }
@@ -227,21 +220,18 @@ namespace System.Security.Tests
         {
             using (SecureString testString = CreateSecureString("bd"))
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "index",
-                    () => testString.InsertAt(-1, 'S')
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    testString.InsertAt(-1, 'S')
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "index",
-                    () => testString.InsertAt(6, 'S')
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    testString.InsertAt(6, 'S')
                 );
             }
 
             using (SecureString testString = CreateSecureString(CreateString(ushort.MaxValue + 1)))
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "capacity",
-                    () => testString.InsertAt(22, 'S')
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                    testString.InsertAt(22, 'S')
                 );
             }
         }
@@ -294,17 +284,14 @@ namespace System.Security.Tests
         {
             using (SecureString testString = CreateSecureString("test"))
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "index",
-                    () => testString.RemoveAt(-1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    testString.RemoveAt(-1)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "index",
-                    () => testString.RemoveAt(testString.Length)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    testString.RemoveAt(testString.Length)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "index",
-                    () => testString.RemoveAt(testString.Length + 1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    testString.RemoveAt(testString.Length + 1)
                 );
             }
         }
@@ -339,17 +326,14 @@ namespace System.Security.Tests
         {
             using (SecureString testString = CreateSecureString("test"))
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "index",
-                    () => testString.SetAt(-1, 'a')
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    testString.SetAt(-1, 'a')
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "index",
-                    () => testString.SetAt(testString.Length, 'b')
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    testString.SetAt(testString.Length, 'b')
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "index",
-                    () => testString.SetAt(testString.Length + 1, 'c')
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                    testString.SetAt(testString.Length + 1, 'c')
                 );
             }
         }
@@ -357,21 +341,17 @@ namespace System.Security.Tests
         [Fact]
         public static void SecureStringMarshal_NullArgsAllowed_IntPtrZero()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "s",
-                () => SecureStringMarshal.SecureStringToCoTaskMemAnsi(null)
+            AssertExtensions.Throws<ArgumentNullException>("s", () =>
+                SecureStringMarshal.SecureStringToCoTaskMemAnsi(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "s",
-                () => SecureStringMarshal.SecureStringToCoTaskMemUnicode(null)
+            AssertExtensions.Throws<ArgumentNullException>("s", () =>
+                SecureStringMarshal.SecureStringToCoTaskMemUnicode(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "s",
-                () => SecureStringMarshal.SecureStringToGlobalAllocAnsi(null)
+            AssertExtensions.Throws<ArgumentNullException>("s", () =>
+                SecureStringMarshal.SecureStringToGlobalAllocAnsi(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "s",
-                () => SecureStringMarshal.SecureStringToGlobalAllocUnicode(null)
+            AssertExtensions.Throws<ArgumentNullException>("s", () =>
+                SecureStringMarshal.SecureStringToGlobalAllocUnicode(null)
             );
         }
 

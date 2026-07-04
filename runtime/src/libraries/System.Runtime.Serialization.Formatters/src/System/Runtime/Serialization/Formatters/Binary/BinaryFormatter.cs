@@ -64,20 +64,17 @@ namespace System.Runtime.Serialization.Formatters.Binary
         }
 
         internal static TypeInformation GetTypeInformation(Type type) =>
-            s_typeNameCache.GetOrAdd(
-                type,
-                t =>
-                {
-                    string assemblyName = FormatterServices.GetClrAssemblyName(
-                        t,
-                        out bool hasTypeForwardedFrom
-                    );
-                    return new TypeInformation(
-                        FormatterServices.GetClrTypeFullName(t),
-                        assemblyName,
-                        hasTypeForwardedFrom
-                    );
-                }
-            );
+            s_typeNameCache.GetOrAdd(type, t =>
+            {
+                string assemblyName = FormatterServices.GetClrAssemblyName(
+                    t,
+                    out bool hasTypeForwardedFrom
+                );
+                return new TypeInformation(
+                    FormatterServices.GetClrTypeFullName(t),
+                    assemblyName,
+                    hasTypeForwardedFrom
+                );
+            });
     }
 }

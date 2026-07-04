@@ -156,18 +156,16 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void ThrowsOnLeftNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "left",
-                () => Expression.ReferenceNotEqual(null, Expression.Constant(""))
+            AssertExtensions.Throws<ArgumentNullException>("left", () =>
+                Expression.ReferenceNotEqual(null, Expression.Constant(""))
             );
         }
 
         [Fact]
         public void ThrowsOnRightNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "right",
-                () => Expression.ReferenceNotEqual(Expression.Constant(""), null)
+            AssertExtensions.Throws<ArgumentNullException>("right", () =>
+                Expression.ReferenceNotEqual(Expression.Constant(""), null)
             );
         }
 
@@ -175,9 +173,8 @@ namespace System.Linq.Expressions.Tests
         public static void ThrowsOnLeftUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<string>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>(
-                "left",
-                () => Expression.ReferenceNotEqual(value, Expression.Constant(""))
+            AssertExtensions.Throws<ArgumentException>("left", () =>
+                Expression.ReferenceNotEqual(value, Expression.Constant(""))
             );
         }
 
@@ -185,9 +182,8 @@ namespace System.Linq.Expressions.Tests
         public static void ThrowsOnRightUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<string>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>(
-                "right",
-                () => Expression.ReferenceNotEqual(Expression.Constant(""), value)
+            AssertExtensions.Throws<ArgumentException>("right", () =>
+                Expression.ReferenceNotEqual(Expression.Constant(""), value)
             );
         }
 

@@ -213,9 +213,8 @@ namespace System.Tests
         [Fact]
         public void GetInterface_NullName_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "fullname",
-                () => typeof(int).GetInterface(null)
+            AssertExtensions.Throws<ArgumentNullException>("fullname", () =>
+                typeof(int).GetInterface(null)
             );
         }
 

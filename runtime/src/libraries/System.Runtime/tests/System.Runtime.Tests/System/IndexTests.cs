@@ -36,13 +36,11 @@ namespace System.Tests
             Assert.Equal(10, index.Value);
             Assert.True(index.IsFromEnd);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => new Index(-1, fromEnd: false)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                new Index(-1, fromEnd: false)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => Index.FromStart(-3)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                Index.FromStart(-3)
             );
             AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => Index.FromEnd(-1));
         }

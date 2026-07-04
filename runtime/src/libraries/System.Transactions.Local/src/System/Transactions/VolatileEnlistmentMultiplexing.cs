@@ -77,10 +77,8 @@ namespace System.Transactions
 
         private static WaitCallback? s_prepareCallback;
         private static WaitCallback PrepareCallback =>
-            LazyInitializer.EnsureInitialized(
-                ref s_prepareCallback,
-                ref s_classSyncObject,
-                () => new WaitCallback(PoolablePrepare!)
+            LazyInitializer.EnsureInitialized(ref s_prepareCallback, ref s_classSyncObject, () =>
+                new WaitCallback(PoolablePrepare!)
             );
 
         protected static void PoolablePrepare(object state)
@@ -121,10 +119,8 @@ namespace System.Transactions
 
         private static WaitCallback? s_commitCallback;
         private static WaitCallback CommitCallback =>
-            LazyInitializer.EnsureInitialized(
-                ref s_commitCallback,
-                ref s_classSyncObject,
-                () => new WaitCallback(PoolableCommit!)
+            LazyInitializer.EnsureInitialized(ref s_commitCallback, ref s_classSyncObject, () =>
+                new WaitCallback(PoolableCommit!)
             );
 
         protected static void PoolableCommit(object state)
@@ -165,10 +161,8 @@ namespace System.Transactions
 
         private static WaitCallback? s_rollbackCallback;
         private static WaitCallback RollbackCallback =>
-            LazyInitializer.EnsureInitialized(
-                ref s_rollbackCallback,
-                ref s_classSyncObject,
-                () => new WaitCallback(PoolableRollback!)
+            LazyInitializer.EnsureInitialized(ref s_rollbackCallback, ref s_classSyncObject, () =>
+                new WaitCallback(PoolableRollback!)
             );
 
         protected static void PoolableRollback(object state)
@@ -209,10 +203,8 @@ namespace System.Transactions
 
         private static WaitCallback? s_inDoubtCallback;
         private static WaitCallback InDoubtCallback =>
-            LazyInitializer.EnsureInitialized(
-                ref s_inDoubtCallback,
-                ref s_classSyncObject,
-                () => new WaitCallback(PoolableInDoubt!)
+            LazyInitializer.EnsureInitialized(ref s_inDoubtCallback, ref s_classSyncObject, () =>
+                new WaitCallback(PoolableInDoubt!)
             );
 
         protected static void PoolableInDoubt(object state)

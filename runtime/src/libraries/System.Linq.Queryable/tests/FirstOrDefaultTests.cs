@@ -98,26 +98,22 @@ namespace System.Linq.Tests
         [Fact]
         public void NullSource()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IQueryable<int>)null).FirstOrDefault()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IQueryable<int>)null).FirstOrDefault()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IQueryable<int>)null).FirstOrDefault(5)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IQueryable<int>)null).FirstOrDefault(5)
             );
         }
 
         [Fact]
         public void NullSourcePredicateUsed()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IQueryable<int>)null).FirstOrDefault(i => i != 2)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IQueryable<int>)null).FirstOrDefault(i => i != 2)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IQueryable<int>)null).FirstOrDefault(i => i != 2, 5)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IQueryable<int>)null).FirstOrDefault(i => i != 2, 5)
             );
         }
 
@@ -125,13 +121,11 @@ namespace System.Linq.Tests
         public void NullPredicate()
         {
             Expression<Func<int, bool>> predicate = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => Enumerable.Range(0, 3).AsQueryable().FirstOrDefault(predicate)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                Enumerable.Range(0, 3).AsQueryable().FirstOrDefault(predicate)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => Enumerable.Range(0, 3).AsQueryable().FirstOrDefault(predicate, 5)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                Enumerable.Range(0, 3).AsQueryable().FirstOrDefault(predicate, 5)
             );
         }
 

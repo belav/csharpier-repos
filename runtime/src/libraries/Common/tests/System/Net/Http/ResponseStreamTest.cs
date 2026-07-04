@@ -650,30 +650,24 @@ namespace System.Net.Http.Functional.Tests
             TransferError transferError
         )
         {
-            await StartTransferTypeAndErrorServer(
-                transferType,
-                transferError,
-                async uri =>
+            await StartTransferTypeAndErrorServer(transferType, transferError, async uri =>
+            {
+                if (PlatformDetection.IsBrowser) // TypeError: Failed to fetch
                 {
-                    if (PlatformDetection.IsBrowser) // TypeError: Failed to fetch
-                    {
-                        await Assert.ThrowsAsync<HttpRequestException>(() =>
-                            ReadAsStreamHelper(uri)
-                        );
-                    }
-                    else if (IsWinHttpHandler)
-                    {
-                        await Assert.ThrowsAsync<IOException>(() => ReadAsStreamHelper(uri));
-                    }
-                    else
-                    {
-                        HttpIOException exception = await Assert.ThrowsAsync<HttpIOException>(() =>
-                            ReadAsStreamHelper(uri)
-                        );
-                        Assert.Equal(HttpRequestError.ResponseEnded, exception.HttpRequestError);
-                    }
+                    await Assert.ThrowsAsync<HttpRequestException>(() => ReadAsStreamHelper(uri));
                 }
-            );
+                else if (IsWinHttpHandler)
+                {
+                    await Assert.ThrowsAsync<IOException>(() => ReadAsStreamHelper(uri));
+                }
+                else
+                {
+                    HttpIOException exception = await Assert.ThrowsAsync<HttpIOException>(() =>
+                        ReadAsStreamHelper(uri)
+                    );
+                    Assert.Equal(HttpRequestError.ResponseEnded, exception.HttpRequestError);
+                }
+            });
         }
 
         [Theory]
@@ -685,14 +679,10 @@ namespace System.Net.Http.Functional.Tests
             TransferError transferError
         )
         {
-            await StartTransferTypeAndErrorServer(
-                transferType,
-                transferError,
-                async uri =>
-                {
-                    await ReadAsStreamHelper(uri);
-                }
-            );
+            await StartTransferTypeAndErrorServer(transferType, transferError, async uri =>
+            {
+                await ReadAsStreamHelper(uri);
+            });
         }
 
         [Theory]
@@ -704,28 +694,24 @@ namespace System.Net.Http.Functional.Tests
             TransferError transferError
         )
         {
-            await StartTransferTypeAndErrorServer(
-                transferType,
-                transferError,
-                async uri =>
-                {
-                    using (HttpClient client = CreateHttpClient())
-                    using (
-                        HttpResponseMessage response = await client.GetAsync(
-                            uri,
-                            HttpCompletionOption.ResponseHeadersRead
-                        )
+            await StartTransferTypeAndErrorServer(transferType, transferError, async uri =>
+            {
+                using (HttpClient client = CreateHttpClient())
+                using (
+                    HttpResponseMessage response = await client.GetAsync(
+                        uri,
+                        HttpCompletionOption.ResponseHeadersRead
                     )
-                    {
-                        Stream stream = await response.Content.ReadAsStreamAsync();
-                        Assert.True(stream.CanRead);
+                )
+                {
+                    Stream stream = await response.Content.ReadAsStreamAsync();
+                    Assert.True(stream.CanRead);
 
-                        stream.Dispose();
+                    stream.Dispose();
 
-                        Assert.False(stream.CanRead);
-                    }
+                    Assert.False(stream.CanRead);
                 }
-            );
+            });
         }
 #endif
 
@@ -750,72 +736,64 @@ namespace System.Net.Http.Functional.Tests
             Func<Uri, Task> clientFunc
         )
         {
-            return LoopbackServer.CreateClientAndServerAsync(
-                clientFunc,
-                server =>
-                    server.AcceptConnectionAsync(async connection =>
+            return LoopbackServer.CreateClientAndServerAsync(clientFunc, server =>
+                server.AcceptConnectionAsync(async connection =>
+                {
+                    // Read past request headers.
+                    await connection.ReadRequestHeaderAsync();
+
+                    // Determine response transfer headers.
+                    string transferHeader = null;
+                    string content = "This is some response content.";
+                    if (transferType == TransferType.ContentLength)
                     {
-                        // Read past request headers.
-                        await connection.ReadRequestHeaderAsync();
+                        transferHeader =
+                            transferError == TransferError.ContentLengthTooLarge
+                                ? $"Content-Length: {content.Length + 42}\r\n"
+                                : $"Content-Length: {content.Length}\r\n";
+                    }
+                    else if (transferType == TransferType.Chunked)
+                    {
+                        transferHeader = "Transfer-Encoding: chunked\r\n";
+                    }
 
-                        // Determine response transfer headers.
-                        string transferHeader = null;
-                        string content = "This is some response content.";
-                        if (transferType == TransferType.ContentLength)
-                        {
-                            transferHeader =
-                                transferError == TransferError.ContentLengthTooLarge
-                                    ? $"Content-Length: {content.Length + 42}\r\n"
-                                    : $"Content-Length: {content.Length}\r\n";
-                        }
-                        else if (transferType == TransferType.Chunked)
-                        {
-                            transferHeader = "Transfer-Encoding: chunked\r\n";
-                        }
+                    // Write response header
+                    await connection.WriteStringAsync("HTTP/1.1 200 OK\r\n").ConfigureAwait(false);
+                    await connection
+                        .WriteStringAsync($"Date: {DateTimeOffset.UtcNow:R}\r\n")
+                        .ConfigureAwait(false);
+                    await connection
+                        .WriteStringAsync(LoopbackServer.CorsHeaders)
+                        .ConfigureAwait(false);
+                    await connection
+                        .WriteStringAsync("Content-Type: text/plain\r\n")
+                        .ConfigureAwait(false);
+                    if (!string.IsNullOrEmpty(transferHeader))
+                    {
+                        await connection.WriteStringAsync(transferHeader).ConfigureAwait(false);
+                    }
+                    await connection.WriteStringAsync("\r\n").ConfigureAwait(false);
 
-                        // Write response header
-                        await connection
-                            .WriteStringAsync("HTTP/1.1 200 OK\r\n")
-                            .ConfigureAwait(false);
-                        await connection
-                            .WriteStringAsync($"Date: {DateTimeOffset.UtcNow:R}\r\n")
-                            .ConfigureAwait(false);
-                        await connection
-                            .WriteStringAsync(LoopbackServer.CorsHeaders)
-                            .ConfigureAwait(false);
-                        await connection
-                            .WriteStringAsync("Content-Type: text/plain\r\n")
-                            .ConfigureAwait(false);
-                        if (!string.IsNullOrEmpty(transferHeader))
+                    // Write response body
+                    if (transferType == TransferType.Chunked)
+                    {
+                        string chunkSizeInHex = string.Format(
+                            "{0:x}\r\n",
+                            content.Length
+                                + (transferError == TransferError.ChunkSizeTooLarge ? 42 : 0)
+                        );
+                        await connection.WriteStringAsync(chunkSizeInHex).ConfigureAwait(false);
+                        await connection.WriteStringAsync($"{content}\r\n").ConfigureAwait(false);
+                        if (transferError != TransferError.MissingChunkTerminator)
                         {
-                            await connection.WriteStringAsync(transferHeader).ConfigureAwait(false);
+                            await connection.WriteStringAsync("0\r\n\r\n").ConfigureAwait(false);
                         }
-                        await connection.WriteStringAsync("\r\n").ConfigureAwait(false);
-
-                        // Write response body
-                        if (transferType == TransferType.Chunked)
-                        {
-                            string chunkSizeInHex = string.Format(
-                                "{0:x}\r\n",
-                                content.Length
-                                    + (transferError == TransferError.ChunkSizeTooLarge ? 42 : 0)
-                            );
-                            await connection.WriteStringAsync(chunkSizeInHex).ConfigureAwait(false);
-                            await connection
-                                .WriteStringAsync($"{content}\r\n")
-                                .ConfigureAwait(false);
-                            if (transferError != TransferError.MissingChunkTerminator)
-                            {
-                                await connection
-                                    .WriteStringAsync("0\r\n\r\n")
-                                    .ConfigureAwait(false);
-                            }
-                        }
-                        else
-                        {
-                            await connection.WriteStringAsync($"{content}").ConfigureAwait(false);
-                        }
-                    })
+                    }
+                    else
+                    {
+                        await connection.WriteStringAsync($"{content}").ConfigureAwait(false);
+                    }
+                })
             );
         }
 

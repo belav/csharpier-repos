@@ -239,26 +239,22 @@ namespace System.Collections.Tests
         [Fact]
         public void PriorityQueue_Constructor_int_Negative_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "initialCapacity",
-                () => new PriorityQueue<int, int>(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("initialCapacity", () =>
+                new PriorityQueue<int, int>(-1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "initialCapacity",
-                () => new PriorityQueue<int, int>(int.MinValue)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("initialCapacity", () =>
+                new PriorityQueue<int, int>(int.MinValue)
             );
         }
 
         [Fact]
         public void PriorityQueue_Constructor_Enumerable_null_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "items",
-                () => new PriorityQueue<int, int>(items: null)
+            AssertExtensions.Throws<ArgumentNullException>("items", () =>
+                new PriorityQueue<int, int>(items: null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "items",
-                () => new PriorityQueue<int, int>(items: null, comparer: Comparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("items", () =>
+                new PriorityQueue<int, int>(items: null, comparer: Comparer<int>.Default)
             );
         }
 
@@ -310,13 +306,11 @@ namespace System.Collections.Tests
         public void PriorityQueue_EnsureCapacity_Negative_ShouldThrowException()
         {
             PriorityQueue<int, int> queue = new PriorityQueue<int, int>();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => queue.EnsureCapacity(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                queue.EnsureCapacity(-1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => queue.EnsureCapacity(int.MinValue)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                queue.EnsureCapacity(int.MinValue)
             );
         }
 

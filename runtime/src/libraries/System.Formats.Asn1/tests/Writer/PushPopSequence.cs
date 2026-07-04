@@ -513,9 +513,8 @@ namespace System.Formats.Asn1.Tests.Writer
         public static void PushSequence_Null(AsnEncodingRules ruleSet)
         {
             AsnWriter writer = new AsnWriter(ruleSet);
-            AssertExtensions.Throws<ArgumentException>(
-                "tag",
-                () => writer.PushSequence(Asn1Tag.Null)
+            AssertExtensions.Throws<ArgumentException>("tag", () =>
+                writer.PushSequence(Asn1Tag.Null)
             );
         }
 

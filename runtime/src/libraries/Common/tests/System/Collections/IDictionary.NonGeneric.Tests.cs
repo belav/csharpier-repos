@@ -907,35 +907,32 @@ namespace System.Collections.Tests
             int count
         )
         {
-            Assert.All(
-                GetModifyEnumerables(ModifyEnumeratorThrows),
-                ModifyEnumerable =>
+            Assert.All(GetModifyEnumerables(ModifyEnumeratorThrows), ModifyEnumerable =>
+            {
+                object current,
+                    key,
+                    value,
+                    entry;
+                IDictionary enumerable = NonGenericIDictionaryFactory(count);
+                IDictionaryEnumerator enumerator = enumerable.GetEnumerator();
+                if (ModifyEnumerable(enumerable))
                 {
-                    object current,
-                        key,
-                        value,
-                        entry;
-                    IDictionary enumerable = NonGenericIDictionaryFactory(count);
-                    IDictionaryEnumerator enumerator = enumerable.GetEnumerator();
-                    if (ModifyEnumerable(enumerable))
+                    if (Enumerator_Current_UndefinedOperation_Throws)
                     {
-                        if (Enumerator_Current_UndefinedOperation_Throws)
-                        {
-                            Assert.Throws<InvalidOperationException>(() => enumerator.Current);
-                            Assert.Throws<InvalidOperationException>(() => enumerator.Key);
-                            Assert.Throws<InvalidOperationException>(() => enumerator.Value);
-                            Assert.Throws<InvalidOperationException>(() => enumerator.Entry);
-                        }
-                        else
-                        {
-                            current = enumerator.Current;
-                            key = enumerator.Key;
-                            value = enumerator.Value;
-                            entry = enumerator.Entry;
-                        }
+                        Assert.Throws<InvalidOperationException>(() => enumerator.Current);
+                        Assert.Throws<InvalidOperationException>(() => enumerator.Key);
+                        Assert.Throws<InvalidOperationException>(() => enumerator.Value);
+                        Assert.Throws<InvalidOperationException>(() => enumerator.Entry);
+                    }
+                    else
+                    {
+                        current = enumerator.Current;
+                        key = enumerator.Key;
+                        value = enumerator.Value;
+                        entry = enumerator.Entry;
                     }
                 }
-            );
+            });
         }
 
         #endregion

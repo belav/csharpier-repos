@@ -30,9 +30,8 @@ public class SqlServerConfigPatternsTest
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
                 optionsBuilder
                     .EnableServiceProviderCaching(false)
-                    .UseSqlServer(
-                        SqlServerNorthwindTestStoreFactory.NorthwindConnectionString,
-                        b => b.ApplyConfiguration()
+                    .UseSqlServer(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString, b =>
+                        b.ApplyConfiguration()
                     );
 
             protected override void OnModelCreating(ModelBuilder modelBuilder) =>
@@ -487,9 +486,8 @@ public class SqlServerConfigPatternsTest
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
                 optionsBuilder
                     .UseInternalServiceProvider(_serviceProvider)
-                    .UseSqlServer(
-                        SqlServerNorthwindTestStoreFactory.NorthwindConnectionString,
-                        b => b.ApplyConfiguration()
+                    .UseSqlServer(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString, b =>
+                        b.ApplyConfiguration()
                     );
         }
     }
@@ -572,16 +570,13 @@ public class SqlServerConfigPatternsTest
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
                 optionsBuilder
                     .EnableServiceProviderCaching(false)
-                    .UseSqlServer(
-                        SqlServerNorthwindTestStoreFactory.NorthwindConnectionString,
-                        a =>
+                    .UseSqlServer(SqlServerNorthwindTestStoreFactory.NorthwindConnectionString, a =>
+                    {
+                        if (_isAzure)
                         {
-                            if (_isAzure)
-                            {
-                                a.UseAzureSqlDefaults();
-                            }
+                            a.UseAzureSqlDefaults();
                         }
-                    );
+                    });
 
             protected override void OnModelCreating(ModelBuilder modelBuilder) =>
                 ConfigureModel(modelBuilder);

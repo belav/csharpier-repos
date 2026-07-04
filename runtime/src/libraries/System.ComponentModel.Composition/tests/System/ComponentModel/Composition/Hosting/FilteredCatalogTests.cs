@@ -13,44 +13,34 @@ namespace System.ComponentModel.Composition.Hosting
         [Fact]
         public void Constructor_ThrowsOnNullCatalog()
         {
-            Assert.Throws<ArgumentNullException>(
-                "catalog",
-                () =>
-                {
-                    new FilteredCatalog(null, p => true);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("catalog", () =>
+            {
+                new FilteredCatalog(null, p => true);
+            });
         }
 
         [Fact]
         public void Constructor_ThrowsOnNullFilter()
         {
-            Assert.Throws<ArgumentNullException>(
-                "filter",
-                () =>
-                {
-                    new FilteredCatalog(CreateCatalog(), null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("filter", () =>
+            {
+                new FilteredCatalog(CreateCatalog(), null);
+            });
         }
 
         [Fact]
         public void Parts_Throws_WhenDisposed()
         {
             var originalCatalog = this.CreateCatalog();
-            FilteredCatalog catalog = new FilteredCatalog(
-                originalCatalog,
-                p => p.Exports<IContract1>()
+            FilteredCatalog catalog = new FilteredCatalog(originalCatalog, p =>
+                p.Exports<IContract1>()
             );
             catalog.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                catalog,
-                () =>
-                {
-                    var p = catalog.Parts;
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(catalog, () =>
+            {
+                var p = catalog.Parts;
+            });
         }
 
         [Fact]
@@ -58,9 +48,8 @@ namespace System.ComponentModel.Composition.Hosting
         {
             var originalCatalog = this.CreateCatalog();
             using (
-                FilteredCatalog catalog = new FilteredCatalog(
-                    originalCatalog,
-                    p => p.Exports<IContract1>()
+                FilteredCatalog catalog = new FilteredCatalog(originalCatalog, p =>
+                    p.Exports<IContract1>()
                 )
             )
             {
@@ -73,19 +62,15 @@ namespace System.ComponentModel.Composition.Hosting
         public void GetExports_Throws_WhenDisposed()
         {
             var originalCatalog = this.CreateCatalog();
-            FilteredCatalog catalog = new FilteredCatalog(
-                originalCatalog,
-                p => p.Exports<IContract1>()
+            FilteredCatalog catalog = new FilteredCatalog(originalCatalog, p =>
+                p.Exports<IContract1>()
             );
             catalog.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                catalog,
-                () =>
-                {
-                    var p = catalog.GetExports<IContract1>();
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(catalog, () =>
+            {
+                var p = catalog.GetExports<IContract1>();
+            });
         }
 
         [Fact]
@@ -93,9 +78,8 @@ namespace System.ComponentModel.Composition.Hosting
         {
             var originalCatalog = this.CreateCatalog();
             using (
-                FilteredCatalog catalog = new FilteredCatalog(
-                    originalCatalog,
-                    p => p.Exports<IContract1>()
+                FilteredCatalog catalog = new FilteredCatalog(originalCatalog, p =>
+                    p.Exports<IContract1>()
                 )
             )
             {
@@ -116,9 +100,8 @@ namespace System.ComponentModel.Composition.Hosting
                 typeof(Exporter22)
             );
             using (
-                FilteredCatalog catalog = new FilteredCatalog(
-                    originalCatalog,
-                    p => p.Exports<IContract1>()
+                FilteredCatalog catalog = new FilteredCatalog(originalCatalog, p =>
+                    p.Exports<IContract1>()
                 ).IncludeDependents()
             )
             {
@@ -137,19 +120,15 @@ namespace System.ComponentModel.Composition.Hosting
         public void Complement_Throws_WhenDisposed()
         {
             var originalCatalog = this.CreateCatalog();
-            FilteredCatalog catalog = new FilteredCatalog(
-                originalCatalog,
-                p => p.Exports<IContract1>()
+            FilteredCatalog catalog = new FilteredCatalog(originalCatalog, p =>
+                p.Exports<IContract1>()
             );
             catalog.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                catalog,
-                () =>
-                {
-                    var c = catalog.Complement;
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(catalog, () =>
+            {
+                var c = catalog.Complement;
+            });
         }
 
         [Fact]
@@ -157,9 +136,8 @@ namespace System.ComponentModel.Composition.Hosting
         {
             var originalCatalog = this.CreateCatalog();
             using (
-                FilteredCatalog catalog = new FilteredCatalog(
-                    originalCatalog,
-                    p => p.Exports<IContract1>()
+                FilteredCatalog catalog = new FilteredCatalog(originalCatalog, p =>
+                    p.Exports<IContract1>()
                 )
             )
             {
@@ -179,9 +157,8 @@ namespace System.ComponentModel.Composition.Hosting
         {
             var originalCatalog = this.CreateCatalog();
             using (
-                FilteredCatalog catalog = new FilteredCatalog(
-                    originalCatalog,
-                    p => p.Exports<IContract1>()
+                FilteredCatalog catalog = new FilteredCatalog(originalCatalog, p =>
+                    p.Exports<IContract1>()
                 )
             )
             {
@@ -197,9 +174,8 @@ namespace System.ComponentModel.Composition.Hosting
         {
             var originalCatalog = this.CreateCatalog();
             using (
-                FilteredCatalog catalog = new FilteredCatalog(
-                    originalCatalog,
-                    p => p.Exports<IContract1>()
+                FilteredCatalog catalog = new FilteredCatalog(originalCatalog, p =>
+                    p.Exports<IContract1>()
                 )
             )
             {

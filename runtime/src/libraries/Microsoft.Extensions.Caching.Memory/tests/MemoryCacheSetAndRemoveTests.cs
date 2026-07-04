@@ -90,14 +90,11 @@ namespace Microsoft.Extensions.Caching.Memory
             string key = "myKey";
             bool invoked = false;
 
-            var result = cache.GetOrCreate(
-                key,
-                e =>
-                {
-                    invoked = true;
-                    return obj;
-                }
-            );
+            var result = cache.GetOrCreate(key, e =>
+            {
+                invoked = true;
+                return obj;
+            });
 
             Assert.Same(obj, result);
             Assert.True(invoked);
@@ -114,14 +111,11 @@ namespace Microsoft.Extensions.Caching.Memory
             string key = "myKey";
             bool invoked = false;
 
-            var result = await cache.GetOrCreateAsync(
-                key,
-                e =>
-                {
-                    invoked = true;
-                    return Task.FromResult(obj);
-                }
-            );
+            var result = await cache.GetOrCreateAsync(key, e =>
+            {
+                invoked = true;
+                return Task.FromResult(obj);
+            });
 
             Assert.Same(obj, result);
             Assert.True(invoked);
@@ -141,14 +135,11 @@ namespace Microsoft.Extensions.Caching.Memory
 
             cache.Set(key, obj);
 
-            var result = cache.GetOrCreate(
-                key,
-                e =>
-                {
-                    invoked = true;
-                    return obj1;
-                }
-            );
+            var result = cache.GetOrCreate(key, e =>
+            {
+                invoked = true;
+                return obj1;
+            });
 
             Assert.False(invoked);
             Assert.Same(obj, result);
@@ -165,14 +156,11 @@ namespace Microsoft.Extensions.Caching.Memory
 
             cache.Set(key, obj);
 
-            var result = await cache.GetOrCreateAsync(
-                key,
-                e =>
-                {
-                    invoked = true;
-                    return Task.FromResult(obj1);
-                }
-            );
+            var result = await cache.GetOrCreateAsync(key, e =>
+            {
+                invoked = true;
+                return Task.FromResult(obj1);
+            });
 
             Assert.False(invoked);
             Assert.Same(obj, result);
@@ -189,13 +177,10 @@ namespace Microsoft.Extensions.Caching.Memory
             string key = "myKey";
             try
             {
-                cache.GetOrCreate<int>(
-                    key,
-                    entry =>
-                    {
-                        throw new Exception();
-                    }
-                );
+                cache.GetOrCreate<int>(key, entry =>
+                {
+                    throw new Exception();
+                });
             }
             catch (Exception) { }
 
@@ -216,13 +201,10 @@ namespace Microsoft.Extensions.Caching.Memory
             string key = "myKey";
             try
             {
-                await cache.GetOrCreateAsync<int>(
-                    key,
-                    entry =>
-                    {
-                        throw new Exception();
-                    }
-                );
+                await cache.GetOrCreateAsync<int>(key, entry =>
+                {
+                    throw new Exception();
+                });
             }
             catch (Exception) { }
 

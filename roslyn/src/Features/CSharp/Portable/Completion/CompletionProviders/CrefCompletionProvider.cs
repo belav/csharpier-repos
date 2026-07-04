@@ -428,30 +428,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     // Note: we intentionally don't add the "params" modifier for any parameters.
 
                     builder.Append(symbol.IsIndexer() ? '[' : '(');
-                    builder.AppendJoinedValues(
-                        ", ",
-                        parameters,
-                        (p, builder) =>
-                        {
-                            builder.Append(
-                                p.RefKind switch
-                                {
-                                    RefKind.Ref => "ref ",
-                                    RefKind.Out => "out ",
-                                    RefKind.In => "in ",
-                                    RefKind.RefReadOnlyParameter => "ref readonly ",
-                                    _ => "",
-                                }
-                            );
-                            builder.Append(
-                                p.Type.ToMinimalDisplayString(
-                                    semanticModel,
-                                    position,
-                                    MinimalParameterTypeFormat
-                                )
-                            );
-                        }
-                    );
+                    builder.AppendJoinedValues(", ", parameters, (p, builder) =>
+                    {
+                        builder.Append(
+                            p.RefKind switch
+                            {
+                                RefKind.Ref => "ref ",
+                                RefKind.Out => "out ",
+                                RefKind.In => "in ",
+                                RefKind.RefReadOnlyParameter => "ref readonly ",
+                                _ => "",
+                            }
+                        );
+                        builder.Append(
+                            p.Type.ToMinimalDisplayString(
+                                semanticModel,
+                                position,
+                                MinimalParameterTypeFormat
+                            )
+                        );
+                    });
                     builder.Append(symbol.IsIndexer() ? ']' : ')');
                 }
             }

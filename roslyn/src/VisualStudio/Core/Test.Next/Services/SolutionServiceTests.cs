@@ -242,13 +242,11 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
         {
             var code = @"class Test { void Method() { } }";
 
-            await VerifySolutionUpdate(
-                code,
-                s =>
-                    s.WithDocumentText(
-                        s.Projects.First().DocumentIds.First(),
-                        SourceText.From(code + " ")
-                    )
+            await VerifySolutionUpdate(code, s =>
+                s.WithDocumentText(
+                    s.Projects.First().DocumentIds.First(),
+                    SourceText.From(code + " ")
+                )
             );
         }
 
@@ -312,10 +310,8 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
         {
             var code = @"class Test { void Method() { } }";
 
-            await VerifySolutionUpdate(
-                code,
-                s =>
-                    s.WithDocumentFolders(s.Projects.First().Documents.First().Id, new[] { "test" })
+            await VerifySolutionUpdate(code, s =>
+                s.WithDocumentFolders(s.Projects.First().Documents.First().Id, new[] { "test" })
             );
         }
 
@@ -324,32 +320,29 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
         {
             var code = @"class Test { void Method() { } }";
 
-            await VerifySolutionUpdate(
-                code,
-                s =>
-                {
-                    var existingProjectId = s.ProjectIds.First();
+            await VerifySolutionUpdate(code, s =>
+            {
+                var existingProjectId = s.ProjectIds.First();
 
-                    s = s.AddProject("newProject", "newProject", LanguageNames.CSharp).Solution;
+                s = s.AddProject("newProject", "newProject", LanguageNames.CSharp).Solution;
 
-                    var project = s.GetProject(existingProjectId);
-                    project = project.WithCompilationOptions(
-                        project.CompilationOptions.WithModuleName("modified")
-                    );
+                var project = s.GetProject(existingProjectId);
+                project = project.WithCompilationOptions(
+                    project.CompilationOptions.WithModuleName("modified")
+                );
 
-                    var existingDocumentId = project.DocumentIds.First();
+                var existingDocumentId = project.DocumentIds.First();
 
-                    project = project
-                        .AddDocument("newDocument", SourceText.From("// new text"))
-                        .Project;
+                project = project
+                    .AddDocument("newDocument", SourceText.From("// new text"))
+                    .Project;
 
-                    var document = project.GetDocument(existingDocumentId);
+                var document = project.GetDocument(existingDocumentId);
 
-                    document = document.WithSourceCodeKind(SourceCodeKind.Script);
+                document = document.WithSourceCodeKind(SourceCodeKind.Script);
 
-                    return document.Project.Solution;
-                }
-            );
+                return document.Project.Solution;
+            });
         }
 
         [Fact]
@@ -368,34 +361,25 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                 )
             );
 
-            await VerifySolutionUpdate(
-                workspace,
-                s =>
-                {
-                    return s.AddAdditionalDocument(additionalDocumentInfo);
-                }
-            );
+            await VerifySolutionUpdate(workspace, s =>
+            {
+                return s.AddAdditionalDocument(additionalDocumentInfo);
+            });
 
             workspace.OnAdditionalDocumentAdded(additionalDocumentInfo);
 
-            await VerifySolutionUpdate(
-                workspace,
-                s =>
-                {
-                    return s.WithAdditionalDocumentText(
-                        additionalDocumentId,
-                        SourceText.From("changed")
-                    );
-                }
-            );
+            await VerifySolutionUpdate(workspace, s =>
+            {
+                return s.WithAdditionalDocumentText(
+                    additionalDocumentId,
+                    SourceText.From("changed")
+                );
+            });
 
-            await VerifySolutionUpdate(
-                workspace,
-                s =>
-                {
-                    return s.RemoveAdditionalDocument(additionalDocumentId);
-                }
-            );
+            await VerifySolutionUpdate(workspace, s =>
+            {
+                return s.RemoveAdditionalDocument(additionalDocumentId);
+            });
         }
 
         [Fact]
@@ -420,36 +404,27 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                 filePath: configPath
             );
 
-            await VerifySolutionUpdate(
-                workspace,
-                s =>
-                {
-                    return s.AddAnalyzerConfigDocuments(
-                        ImmutableArray.Create(analyzerConfigDocumentInfo)
-                    );
-                }
-            );
+            await VerifySolutionUpdate(workspace, s =>
+            {
+                return s.AddAnalyzerConfigDocuments(
+                    ImmutableArray.Create(analyzerConfigDocumentInfo)
+                );
+            });
 
             workspace.OnAnalyzerConfigDocumentAdded(analyzerConfigDocumentInfo);
 
-            await VerifySolutionUpdate(
-                workspace,
-                s =>
-                {
-                    return s.WithAnalyzerConfigDocumentText(
-                        analyzerConfigDocumentId,
-                        SourceText.From("root = false")
-                    );
-                }
-            );
+            await VerifySolutionUpdate(workspace, s =>
+            {
+                return s.WithAnalyzerConfigDocumentText(
+                    analyzerConfigDocumentId,
+                    SourceText.From("root = false")
+                );
+            });
 
-            await VerifySolutionUpdate(
-                workspace,
-                s =>
-                {
-                    return s.RemoveAnalyzerConfigDocument(analyzerConfigDocumentId);
-                }
-            );
+            await VerifySolutionUpdate(workspace, s =>
+            {
+                return s.RemoveAnalyzerConfigDocument(analyzerConfigDocumentId);
+            });
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.RemoteHost)]
@@ -469,31 +444,22 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                 )
             );
 
-            await VerifySolutionUpdate(
-                workspace,
-                s =>
-                {
-                    return s.AddDocument(documentInfo);
-                }
-            );
+            await VerifySolutionUpdate(workspace, s =>
+            {
+                return s.AddDocument(documentInfo);
+            });
 
             workspace.OnDocumentAdded(documentInfo);
 
-            await VerifySolutionUpdate(
-                workspace,
-                s =>
-                {
-                    return s.WithDocumentText(documentId, SourceText.From("class Changed { }"));
-                }
-            );
+            await VerifySolutionUpdate(workspace, s =>
+            {
+                return s.WithDocumentText(documentId, SourceText.From("class Changed { }"));
+            });
 
-            await VerifySolutionUpdate(
-                workspace,
-                s =>
-                {
-                    return s.RemoveDocument(documentId);
-                }
-            );
+            await VerifySolutionUpdate(workspace, s =>
+            {
+                return s.RemoveDocument(documentId);
+            });
         }
 
         [Fact]

@@ -190,9 +190,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         {
             Stream stream = MakeRequestStream();
 
-            AssertExtensions.Throws<ArgumentException>(
-                "buffer",
-                () => stream.Write(new byte[1], 0, 3)
+            AssertExtensions.Throws<ArgumentException>("buffer", () =>
+                stream.Write(new byte[1], 0, 3)
             );
         }
 
@@ -201,9 +200,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         {
             Stream stream = MakeRequestStream();
 
-            AssertExtensions.Throws<ArgumentException>(
-                "buffer",
-                () => stream.Write(new byte[1], int.MaxValue, int.MaxValue)
+            AssertExtensions.Throws<ArgumentException>("buffer", () =>
+                stream.Write(new byte[1], int.MaxValue, int.MaxValue)
             );
         }
 

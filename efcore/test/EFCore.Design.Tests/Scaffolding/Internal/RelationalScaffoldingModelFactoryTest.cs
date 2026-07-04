@@ -1606,21 +1606,18 @@ public class RelationalScaffoldingModelFactoryTest
 
         var entityType = model.FindEntityType("SomeTable")!;
 
-        var unspecifiedIndex = Assert.Single(
-            entityType.GetIndexes(),
-            i => i.Name == "IX_unspecified"
+        var unspecifiedIndex = Assert.Single(entityType.GetIndexes(), i =>
+            i.Name == "IX_unspecified"
         );
         Assert.Null(unspecifiedIndex.IsDescending);
 
-        var allAscendingIndex = Assert.Single(
-            entityType.GetIndexes(),
-            i => i.Name == "IX_all_ascending"
+        var allAscendingIndex = Assert.Single(entityType.GetIndexes(), i =>
+            i.Name == "IX_all_ascending"
         );
         Assert.Null(allAscendingIndex.IsDescending);
 
-        var allDescendingIndex = Assert.Single(
-            entityType.GetIndexes(),
-            i => i.Name == "IX_all_descending"
+        var allDescendingIndex = Assert.Single(entityType.GetIndexes(), i =>
+            i.Name == "IX_all_descending"
         );
         Assert.Equal(Array.Empty<bool>(), allDescendingIndex.IsDescending);
 
@@ -1719,19 +1716,16 @@ public class RelationalScaffoldingModelFactoryTest
 
         var model = _factory.Create(info, new ModelReverseEngineerOptions());
 
-        Assert.Collection(
-            model.GetSequences(),
-            first =>
-            {
-                Assert.NotNull(first);
-                Assert.Equal("CountByThree", first.Name);
-                Assert.Equal(3, first.IncrementBy);
-                Assert.Null(first.Schema);
-                Assert.Null(first.MaxValue);
-                Assert.Null(first.MinValue);
-                Assert.False(first.IsCyclic);
-            }
-        );
+        Assert.Collection(model.GetSequences(), first =>
+        {
+            Assert.NotNull(first);
+            Assert.Equal("CountByThree", first.Name);
+            Assert.Equal(3, first.IncrementBy);
+            Assert.Null(first.Schema);
+            Assert.Null(first.MaxValue);
+            Assert.Null(first.MinValue);
+            Assert.False(first.IsCyclic);
+        });
     }
 
     [ConditionalFact]

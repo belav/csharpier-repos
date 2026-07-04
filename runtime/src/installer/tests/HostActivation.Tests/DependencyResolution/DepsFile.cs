@@ -83,11 +83,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                     MicrosoftNETCoreApp,
                     TestContext.MicrosoftNETCoreAppVersion,
                     b =>
-                        b.WithProject(
-                            DependencyName,
-                            "1.0.0",
-                            p =>
-                                p.WithAssemblyGroup(null, g => g.WithAsset($"{DependencyName}.dll"))
+                        b.WithProject(DependencyName, "1.0.0", p =>
+                            p.WithAssemblyGroup(null, g => g.WithAsset($"{DependencyName}.dll"))
                         )
                 );
 

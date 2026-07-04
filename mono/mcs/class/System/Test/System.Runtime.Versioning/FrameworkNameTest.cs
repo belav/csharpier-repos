@@ -81,231 +81,147 @@ namespace MonoTests.System.Runtime.Versioning
         {
             FrameworkName fn;
 
-            Throws<ArgumentNullException>(
-                "#A1",
-                () =>
-                {
-                    fn = new FrameworkName(null);
-                }
-            );
+            Throws<ArgumentNullException>("#A1", () =>
+            {
+                fn = new FrameworkName(null);
+            });
 
-            Throws<ArgumentException>(
-                "#A1-1",
-                () =>
-                {
-                    fn = new FrameworkName(String.Empty);
-                }
-            );
+            Throws<ArgumentException>("#A1-1", () =>
+            {
+                fn = new FrameworkName(String.Empty);
+            });
 
-            Throws<ArgumentException>(
-                "#A1-2",
-                () =>
-                {
-                    fn = new FrameworkName(".NETFramework");
-                }
-            );
+            Throws<ArgumentException>("#A1-2", () =>
+            {
+                fn = new FrameworkName(".NETFramework");
+            });
 
-            Throws<ArgumentException>(
-                "#A1-3",
-                () =>
-                {
-                    fn = new FrameworkName(".NETFramework,Ver=test");
-                }
-            );
+            Throws<ArgumentException>("#A1-3", () =>
+            {
+                fn = new FrameworkName(".NETFramework,Ver=test");
+            });
 
-            Throws<ArgumentException>(
-                "#A1-4",
-                () =>
-                {
-                    fn = new FrameworkName(".NETFramework,Version=A");
-                }
-            );
+            Throws<ArgumentException>("#A1-4", () =>
+            {
+                fn = new FrameworkName(".NETFramework,Version=A");
+            });
 
-            Throws<ArgumentException>(
-                "#A1-5",
-                () =>
-                {
-                    fn = new FrameworkName("Version=1.2,.NETFramework");
-                }
-            );
+            Throws<ArgumentException>("#A1-5", () =>
+            {
+                fn = new FrameworkName("Version=1.2,.NETFramework");
+            });
 
-            Throws<ArgumentException>(
-                "#A1-6",
-                () =>
-                {
-                    fn = new FrameworkName(".NETFramework,Version=vA");
-                }
-            );
+            Throws<ArgumentException>("#A1-6", () =>
+            {
+                fn = new FrameworkName(".NETFramework,Version=vA");
+            });
 
-            Throws<ArgumentException>(
-                "#A1-7",
-                () =>
-                {
-                    fn = new FrameworkName(".NETFramework,Version=A.B");
-                }
-            );
+            Throws<ArgumentException>("#A1-7", () =>
+            {
+                fn = new FrameworkName(".NETFramework,Version=A.B");
+            });
 
-            Throws<ArgumentException>(
-                "#A1-8",
-                () =>
-                {
-                    fn = new FrameworkName(".NETFramework,Version=vA.B");
-                }
-            );
+            Throws<ArgumentException>("#A1-8", () =>
+            {
+                fn = new FrameworkName(".NETFramework,Version=vA.B");
+            });
 
-            Throws<ArgumentException>(
-                "#A1-9",
-                () =>
-                {
-                    fn = new FrameworkName(".NETFramework,Version=VA.B");
-                }
-            );
+            Throws<ArgumentException>("#A1-9", () =>
+            {
+                fn = new FrameworkName(".NETFramework,Version=VA.B");
+            });
 
-            Throws<ArgumentException>(
-                "#A1-10",
-                () =>
-                {
-                    fn = new FrameworkName(".NETFramework,Version=vA.B.C");
-                }
-            );
+            Throws<ArgumentException>("#A1-10", () =>
+            {
+                fn = new FrameworkName(".NETFramework,Version=vA.B.C");
+            });
 
-            Throws<ArgumentException>(
-                "#A1-11",
-                () =>
-                {
-                    fn = new FrameworkName(".NETFramework,Version=vA.B.C.D");
-                }
-            );
+            Throws<ArgumentException>("#A1-11", () =>
+            {
+                fn = new FrameworkName(".NETFramework,Version=vA.B.C.D");
+            });
 
-            Throws<ArgumentException>(
-                "#A1-12",
-                () =>
-                {
-                    fn = new FrameworkName(".NETFramework,Version=2");
-                }
-            );
+            Throws<ArgumentException>("#A1-12", () =>
+            {
+                fn = new FrameworkName(".NETFramework,Version=2");
+            });
 
-            Throws<ArgumentException>(
-                "#A1-13",
-                () =>
-                {
-                    fn = new FrameworkName(".NETFramework,Version=v2");
-                }
-            );
+            Throws<ArgumentException>("#A1-13", () =>
+            {
+                fn = new FrameworkName(".NETFramework,Version=v2");
+            });
 
-            Throws<ArgumentException>(
-                "#A1-14",
-                () =>
-                {
-                    fn = new FrameworkName(".NETFramework,Version=v2.0.1.A");
-                }
-            );
+            Throws<ArgumentException>("#A1-14", () =>
+            {
+                fn = new FrameworkName(".NETFramework,Version=v2.0.1.A");
+            });
 
-            Throws<ArgumentException>(
-                "#A1-15",
-                () =>
-                {
-                    fn = new FrameworkName(".NETFramework,Version=v2.0.1.0,Some=value");
-                }
-            );
+            Throws<ArgumentException>("#A1-15", () =>
+            {
+                fn = new FrameworkName(".NETFramework,Version=v2.0.1.0,Some=value");
+            });
 
-            Throws<ArgumentException>(
-                "#A1-16",
-                () =>
-                {
-                    fn = new FrameworkName(
-                        ".NETFramework,Version=v2.0.1.0,Profile=profile name, Extra=value"
-                    );
-                }
-            );
+            Throws<ArgumentException>("#A1-16", () =>
+            {
+                fn = new FrameworkName(
+                    ".NETFramework,Version=v2.0.1.0,Profile=profile name, Extra=value"
+                );
+            });
 
-            Throws<ArgumentException>(
-                "#A1-17",
-                () =>
-                {
-                    fn = new FrameworkName(".NETFramework,Profile=profile name");
-                }
-            );
+            Throws<ArgumentException>("#A1-17", () =>
+            {
+                fn = new FrameworkName(".NETFramework,Profile=profile name");
+            });
 
-            Throws<ArgumentException>(
-                "#A1-18",
-                () =>
-                {
-                    fn = new FrameworkName("Profile=profile name,.NETFramework,Version=v2.0.1.0");
-                }
-            );
+            Throws<ArgumentException>("#A1-18", () =>
+            {
+                fn = new FrameworkName("Profile=profile name,.NETFramework,Version=v2.0.1.0");
+            });
 
-            Throws<ArgumentException>(
-                "#A1-19",
-                () =>
-                {
-                    var n = new FrameworkName(".NETFramework, ,Version=v2.0.1.0");
-                }
-            );
+            Throws<ArgumentException>("#A1-19", () =>
+            {
+                var n = new FrameworkName(".NETFramework, ,Version=v2.0.1.0");
+            });
 
-            Throws<ArgumentException>(
-                "#A1-20",
-                () =>
-                {
-                    fn = new FrameworkName(".NETFramework,Version=v2..0.1.0");
-                }
-            );
+            Throws<ArgumentException>("#A1-20", () =>
+            {
+                fn = new FrameworkName(".NETFramework,Version=v2..0.1.0");
+            });
 
-            Throws<ArgumentException>(
-                "#A1-21",
-                () =>
-                {
-                    fn = new FrameworkName(".NETFramework,Version=v.0.1.0");
-                }
-            );
+            Throws<ArgumentException>("#A1-21", () =>
+            {
+                fn = new FrameworkName(".NETFramework,Version=v.0.1.0");
+            });
 
-            Throws<ArgumentException>(
-                "#A1-22",
-                () =>
-                {
-                    fn = new FrameworkName(".NETFramework,Version=v1.-2.1.0");
-                }
-            );
+            Throws<ArgumentException>("#A1-22", () =>
+            {
+                fn = new FrameworkName(".NETFramework,Version=v1.-2.1.0");
+            });
 
-            Throws<ArgumentException>(
-                "#A1-23",
-                () =>
-                {
-                    fn = new FrameworkName(".NETFramework,Version=v0.0.0.0.0");
-                }
-            );
+            Throws<ArgumentException>("#A1-23", () =>
+            {
+                fn = new FrameworkName(".NETFramework,Version=v0.0.0.0.0");
+            });
 
-            Throws<ArgumentException>(
-                "#A1-24",
-                () =>
-                {
-                    fn = new FrameworkName(".NETFramework,Version=vA.0.0.0,Version=v1.2.3.4");
-                }
-            );
+            Throws<ArgumentException>("#A1-24", () =>
+            {
+                fn = new FrameworkName(".NETFramework,Version=vA.0.0.0,Version=v1.2.3.4");
+            });
 
-            Throws<ArgumentException>(
-                "#A1-25",
-                () =>
-                {
-                    fn = new FrameworkName(".NETFramework,Version=v0.0.0.0,Version=vA.2.3.4");
-                }
-            );
+            Throws<ArgumentException>("#A1-25", () =>
+            {
+                fn = new FrameworkName(".NETFramework,Version=v0.0.0.0,Version=vA.2.3.4");
+            });
 
-            Throws<ArgumentException>(
-                "#A1-26",
-                () =>
-                {
-                    fn = new FrameworkName("Version=1.2,profile=test profile");
-                }
-            );
+            Throws<ArgumentException>("#A1-26", () =>
+            {
+                fn = new FrameworkName("Version=1.2,profile=test profile");
+            });
 
-            Throws<ArgumentException>(
-                "#A1-27",
-                () =>
-                {
-                    fn = new FrameworkName(".NETFramework,Version=");
-                }
-            );
+            Throws<ArgumentException>("#A1-27", () =>
+            {
+                fn = new FrameworkName(".NETFramework,Version=");
+            });
 
             fn = new FrameworkName(".NETFramework=test,Version=3.5");
             Assert.AreEqual(".NETFramework=test", fn.Identifier, "#A2-1");
@@ -401,29 +317,20 @@ namespace MonoTests.System.Runtime.Versioning
         {
             FrameworkName fn;
 
-            Throws<ArgumentNullException>(
-                "#A1-1",
-                () =>
-                {
-                    fn = new FrameworkName(null, new Version(2, 0));
-                }
-            );
+            Throws<ArgumentNullException>("#A1-1", () =>
+            {
+                fn = new FrameworkName(null, new Version(2, 0));
+            });
 
-            Throws<ArgumentNullException>(
-                "#A1-2",
-                () =>
-                {
-                    fn = new FrameworkName("identifier", null);
-                }
-            );
+            Throws<ArgumentNullException>("#A1-2", () =>
+            {
+                fn = new FrameworkName("identifier", null);
+            });
 
-            Throws<ArgumentException>(
-                "#A1-3",
-                () =>
-                {
-                    fn = new FrameworkName(String.Empty, new Version(2, 0));
-                }
-            );
+            Throws<ArgumentException>("#A1-3", () =>
+            {
+                fn = new FrameworkName(String.Empty, new Version(2, 0));
+            });
 
             var v = new Version(1, 2, 3, 4);
             fn = new FrameworkName("identifier", v);
@@ -451,29 +358,20 @@ namespace MonoTests.System.Runtime.Versioning
             FrameworkName fn;
             var v = new Version(1, 2, 3, 4);
 
-            Throws<ArgumentNullException>(
-                "#A1-1",
-                () =>
-                {
-                    fn = new FrameworkName(null, new Version(2, 0), "profile");
-                }
-            );
+            Throws<ArgumentNullException>("#A1-1", () =>
+            {
+                fn = new FrameworkName(null, new Version(2, 0), "profile");
+            });
 
-            Throws<ArgumentNullException>(
-                "#A1-2",
-                () =>
-                {
-                    fn = new FrameworkName("identifier", null, "profile");
-                }
-            );
+            Throws<ArgumentNullException>("#A1-2", () =>
+            {
+                fn = new FrameworkName("identifier", null, "profile");
+            });
 
-            Throws<ArgumentException>(
-                "#A1-3",
-                () =>
-                {
-                    fn = new FrameworkName(String.Empty, new Version(2, 0), "profile");
-                }
-            );
+            Throws<ArgumentException>("#A1-3", () =>
+            {
+                fn = new FrameworkName(String.Empty, new Version(2, 0), "profile");
+            });
 
             fn = new FrameworkName("identifier,Version=v2.0", v, "Profile name");
             Assert.AreEqual("identifier,Version=v2.0", fn.Identifier, "#A2-1");

@@ -103,17 +103,15 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
                     return false;
                 }
 
-                var asyncLazy = s_metadataIdToDesignerAttributeInfo.GetValue(
-                    metadataId,
-                    _ =>
-                        AsyncLazy.Create(cancellationToken =>
-                            ComputeHasDesignerCategoryTypeAsync(
-                                solutionServices,
-                                solutionKey,
-                                peReference,
-                                cancellationToken
-                            )
+                var asyncLazy = s_metadataIdToDesignerAttributeInfo.GetValue(metadataId, _ =>
+                    AsyncLazy.Create(cancellationToken =>
+                        ComputeHasDesignerCategoryTypeAsync(
+                            solutionServices,
+                            solutionKey,
+                            peReference,
+                            cancellationToken
                         )
+                    )
                 );
                 return await asyncLazy.GetValueAsync(cancellationToken).ConfigureAwait(false);
             }

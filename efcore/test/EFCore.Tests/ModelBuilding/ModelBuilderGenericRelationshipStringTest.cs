@@ -93,10 +93,8 @@ public class ModelBuilderGenericRelationshipStringTest : ModelBuilderGenericTest
             Action<TestEntityTypeBuilder<TEntity>> buildAction
         )
         {
-            ModelBuilder.SharedTypeEntity<TEntity>(
-                name,
-                entityTypeBuilder =>
-                    buildAction(new GenericStringTestEntityTypeBuilder<TEntity>(entityTypeBuilder))
+            ModelBuilder.SharedTypeEntity<TEntity>(name, entityTypeBuilder =>
+                buildAction(new GenericStringTestEntityTypeBuilder<TEntity>(entityTypeBuilder))
             );
             return this;
         }

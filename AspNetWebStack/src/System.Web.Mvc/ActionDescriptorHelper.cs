@@ -15,12 +15,10 @@ namespace System.Web.Mvc
                     typeof(ActionMethodSelectorAttribute),
                     inherit: true
                 );
-            ActionSelector[] selectors = Array.ConvertAll(
-                attrs,
-                attr =>
-                    (ActionSelector)(
-                        controllerContext => attr.IsValidForRequest(controllerContext, methodInfo)
-                    )
+            ActionSelector[] selectors = Array.ConvertAll(attrs, attr =>
+                (ActionSelector)(
+                    controllerContext => attr.IsValidForRequest(controllerContext, methodInfo)
+                )
             );
             return selectors;
         }
@@ -29,13 +27,11 @@ namespace System.Web.Mvc
         {
             ActionNameSelectorAttribute[] attrs = (ActionNameSelectorAttribute[])
                 methodInfo.GetCustomAttributes(typeof(ActionNameSelectorAttribute), inherit: true);
-            ActionNameSelector[] selectors = Array.ConvertAll(
-                attrs,
-                attr =>
-                    (ActionNameSelector)(
-                        (controllerContext, actionName) =>
-                            attr.IsValidName(controllerContext, actionName, methodInfo)
-                    )
+            ActionNameSelector[] selectors = Array.ConvertAll(attrs, attr =>
+                (ActionNameSelector)(
+                    (controllerContext, actionName) =>
+                        attr.IsValidName(controllerContext, actionName, methodInfo)
+                )
             );
             return selectors;
         }

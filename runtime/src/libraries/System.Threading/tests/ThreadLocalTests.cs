@@ -480,32 +480,29 @@ namespace System.Threading.Tests
             var waitsForReader = new Action[readerCount];
             for (int i = 0; i < readerCount; ++i)
             {
-                Thread reader = ThreadTestHelpers.CreateGuardedThread(
-                    out waitsForReader[i],
-                    () =>
+                Thread reader = ThreadTestHelpers.CreateGuardedThread(out waitsForReader[i], () =>
+                {
+                    startTest.CheckedWait();
+                    do
                     {
-                        startTest.CheckedWait();
-                        do
+                        var tl = Volatile.Read(ref threadLocal);
+                        if (tl == null)
                         {
-                            var tl = Volatile.Read(ref threadLocal);
-                            if (tl == null)
-                            {
-                                continue;
-                            }
+                            continue;
+                        }
 
-                            try
-                            {
-                                IList<int> values = tl.Values;
-                            }
-                            catch (ObjectDisposedException) { }
-                            catch
-                            {
-                                gotUnexpectedException.Set();
-                                throw;
-                            }
-                        } while (!Volatile.Read(ref stop));
-                    }
-                );
+                        try
+                        {
+                            IList<int> values = tl.Values;
+                        }
+                        catch (ObjectDisposedException) { }
+                        catch
+                        {
+                            gotUnexpectedException.Set();
+                            throw;
+                        }
+                    } while (!Volatile.Read(ref stop));
+                });
                 reader.IsBackground = true;
                 reader.Start();
             }

@@ -282,27 +282,24 @@ internal partial class ConvertStringToRawStringCodeRefactoringProvider
                 if (!hasMatchingKind)
                     continue;
 
-                editor.ReplaceNode(
-                    expression,
-                    (current, _) =>
-                    {
-                        if (current is not ExpressionSyntax currentExpression)
-                            return current;
+                editor.ReplaceNode(expression, (current, _) =>
+                {
+                    if (current is not ExpressionSyntax currentExpression)
+                        return current;
 
-                        var currentParsedDocument = parsedDocument.WithChangedRoot(
-                            currentExpression.SyntaxTree.GetRoot(cancellationToken),
-                            cancellationToken
-                        );
-                        var replacement = provider.Convert(
-                            currentParsedDocument,
-                            currentExpression,
-                            kind,
-                            formattingOptions,
-                            cancellationToken
-                        );
-                        return replacement;
-                    }
-                );
+                    var currentParsedDocument = parsedDocument.WithChangedRoot(
+                        currentExpression.SyntaxTree.GetRoot(cancellationToken),
+                        cancellationToken
+                    );
+                    var replacement = provider.Convert(
+                        currentParsedDocument,
+                        currentExpression,
+                        kind,
+                        formattingOptions,
+                        cancellationToken
+                    );
+                    return replacement;
+                });
             }
         }
     }

@@ -15,14 +15,12 @@ namespace System.Formats.Asn1.Tests.Writer
         [InlineData(int.MinValue)]
         public static void ValidateRuleSet(int value)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "ruleSet",
-                () => new AsnWriter((AsnEncodingRules)value)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("ruleSet", () =>
+                new AsnWriter((AsnEncodingRules)value)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "ruleSet",
-                () => new AsnWriter((AsnEncodingRules)value, initialCapacity: 1000)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("ruleSet", () =>
+                new AsnWriter((AsnEncodingRules)value, initialCapacity: 1000)
             );
         }
 
@@ -31,9 +29,8 @@ namespace System.Formats.Asn1.Tests.Writer
         [InlineData(int.MinValue)]
         public static void ValidateInitialCapacity(int initialCapacity)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "initialCapacity",
-                () => new AsnWriter(AsnEncodingRules.DER, initialCapacity)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("initialCapacity", () =>
+                new AsnWriter(AsnEncodingRules.DER, initialCapacity)
             );
         }
 
@@ -139,9 +136,8 @@ namespace System.Formats.Asn1.Tests.Writer
         {
             AsnWriter writer = new AsnWriter(ruleSet);
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "other",
-                () => writer.EncodedValueEquals((AsnWriter)null)
+            AssertExtensions.Throws<ArgumentNullException>("other", () =>
+                writer.EncodedValueEquals((AsnWriter)null)
             );
         }
 
@@ -153,9 +149,8 @@ namespace System.Formats.Asn1.Tests.Writer
         {
             AsnWriter writer = new AsnWriter(ruleSet);
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "destination",
-                () => writer.CopyTo(null)
+            AssertExtensions.Throws<ArgumentNullException>("destination", () =>
+                writer.CopyTo(null)
             );
         }
 

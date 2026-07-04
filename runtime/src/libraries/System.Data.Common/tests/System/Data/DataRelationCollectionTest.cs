@@ -91,20 +91,17 @@ namespace System.Data.Tests
         [Fact]
         public void AddException2()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    DataRelationCollection drcol = _dataset.Relations;
-                    DataRelation dr1 = new DataRelation(
-                        "CustOrder",
-                        _dataset.Tables["Customer"].Columns["custid"],
-                        _dataset.Tables["Order"].Columns["custid"]
-                    );
-                    drcol.Add(dr1);
-                    drcol.Add(dr1);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                DataRelationCollection drcol = _dataset.Relations;
+                DataRelation dr1 = new DataRelation(
+                    "CustOrder",
+                    _dataset.Tables["Customer"].Columns["custid"],
+                    _dataset.Tables["Order"].Columns["custid"]
+                );
+                drcol.Add(dr1);
+                drcol.Add(dr1);
+            });
         }
 
         [Fact]

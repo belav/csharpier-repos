@@ -126,21 +126,17 @@ class A {
 
             Action writers = () =>
             {
-                Parallel.For(
-                    0,
-                    Math.Max(1, Environment.ProcessorCount - 1),
-                    t =>
+                Parallel.For(0, Math.Max(1, Environment.ProcessorCount - 1), t =>
+                {
+                    Random r = new Random(t);
+                    while (state.IncompleteParts != 0)
                     {
-                        Random r = new Random(t);
-                        while (state.IncompleteParts != 0)
-                        {
-                            CompletionPart part = (CompletionPart)(
-                                1 << r.Next(8 * sizeof(CompletionPart))
-                            );
-                            state.NotePartComplete(part);
-                        }
+                        CompletionPart part = (CompletionPart)(
+                            1 << r.Next(8 * sizeof(CompletionPart))
+                        );
+                        state.NotePartComplete(part);
                     }
-                );
+                });
             };
 
             for (int i = 0; i < 1000; i++)

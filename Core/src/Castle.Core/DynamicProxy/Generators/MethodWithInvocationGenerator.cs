@@ -297,9 +297,8 @@ namespace Castle.DynamicProxy.Generators
             Reference invocationLocal
         )
         {
-            var genericParameters = Array.FindAll(
-                method.GetGenericArguments(),
-                t => t.IsGenericParameter
+            var genericParameters = Array.FindAll(method.GetGenericArguments(), t =>
+                t.IsGenericParameter
             );
             var genericParamsArrayLocal = methodEmitter.CodeBuilder.DeclareLocal(typeof(Type[]));
             methodEmitter.CodeBuilder.AddStatement(

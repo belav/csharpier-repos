@@ -107,17 +107,14 @@ namespace System.Text.Tests
         [Fact]
         public void CreateTranscodingStream_InvalidArgs()
         {
-            Assert.Throws<ArgumentNullException>(
-                "innerStream",
-                () => Encoding.CreateTranscodingStream(null, Encoding.UTF8, Encoding.UTF8)
+            Assert.Throws<ArgumentNullException>("innerStream", () =>
+                Encoding.CreateTranscodingStream(null, Encoding.UTF8, Encoding.UTF8)
             );
-            Assert.Throws<ArgumentNullException>(
-                "innerStreamEncoding",
-                () => Encoding.CreateTranscodingStream(Stream.Null, null, Encoding.UTF8)
+            Assert.Throws<ArgumentNullException>("innerStreamEncoding", () =>
+                Encoding.CreateTranscodingStream(Stream.Null, null, Encoding.UTF8)
             );
-            Assert.Throws<ArgumentNullException>(
-                "outerStreamEncoding",
-                () => Encoding.CreateTranscodingStream(Stream.Null, Encoding.UTF8, null)
+            Assert.Throws<ArgumentNullException>("outerStreamEncoding", () =>
+                Encoding.CreateTranscodingStream(Stream.Null, Encoding.UTF8, null)
             );
         }
 
@@ -413,9 +410,8 @@ namespace System.Text.Tests
                 Encoding.UTF8
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "buffer",
-                () => transcodingStream.Read(null, 0, 0)
+            Assert.Throws<ArgumentNullException>("buffer", () =>
+                transcodingStream.Read(null, 0, 0)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 transcodingStream.Read(new byte[5], -1, -1)
@@ -722,9 +718,8 @@ namespace System.Text.Tests
                 Encoding.UTF8
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "buffer",
-                () => (object)transcodingStream.ReadAsync(null, 0, 0)
+            Assert.Throws<ArgumentNullException>("buffer", () =>
+                (object)transcodingStream.ReadAsync(null, 0, 0)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 (object)transcodingStream.ReadAsync(new byte[5], -1, -1)
@@ -752,9 +747,8 @@ namespace System.Text.Tests
                 Encoding.UTF8
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "buffer",
-                () => transcodingStream.BeginRead(null, 0, 0, null, null)
+            Assert.Throws<ArgumentNullException>("buffer", () =>
+                transcodingStream.BeginRead(null, 0, 0, null, null)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 transcodingStream.BeginRead(new byte[5], -1, -1, null, null)
@@ -1043,9 +1037,8 @@ namespace System.Text.Tests
                 Encoding.UTF8
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "buffer",
-                () => transcodingStream.Write(null, 0, 0)
+            Assert.Throws<ArgumentNullException>("buffer", () =>
+                transcodingStream.Write(null, 0, 0)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 transcodingStream.Write(new byte[5], -1, -1)
@@ -1228,9 +1221,8 @@ namespace System.Text.Tests
                 Encoding.UTF8
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "buffer",
-                () => (object)transcodingStream.WriteAsync(null, 0, 0)
+            Assert.Throws<ArgumentNullException>("buffer", () =>
+                (object)transcodingStream.WriteAsync(null, 0, 0)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 (object)transcodingStream.WriteAsync(new byte[5], -1, -1)
@@ -1299,9 +1291,8 @@ namespace System.Text.Tests
                 Encoding.UTF8
             );
 
-            Assert.Throws<ArgumentNullException>(
-                "buffer",
-                () => transcodingStream.BeginWrite(null, 0, 0, null, null)
+            Assert.Throws<ArgumentNullException>("buffer", () =>
+                transcodingStream.BeginWrite(null, 0, 0, null, null)
             );
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 transcodingStream.BeginWrite(new byte[5], -1, -1, null, null)
@@ -1323,17 +1314,13 @@ namespace System.Text.Tests
         // returns "abc...xyzabc...xyzabc..."
         private static string GetVeryLongAsciiString(int length)
         {
-            return string.Create(
-                length,
-                (object)null,
-                (buffer, _) =>
+            return string.Create(length, (object)null, (buffer, _) =>
+            {
+                for (int i = 0; i < buffer.Length; i++)
                 {
-                    for (int i = 0; i < buffer.Length; i++)
-                    {
-                        buffer[i] = (char)('a' + (i % 26));
-                    }
+                    buffer[i] = (char)('a' + (i % 26));
                 }
-            );
+            });
         }
 
         // A custom ASCIIEncoding where both encoder + decoder fallbacks have been specified

@@ -86,9 +86,8 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => new SyndicationCategorySubclass(null)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                new SyndicationCategorySubclass(null)
             );
         }
 
@@ -166,9 +165,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteAttributeExtensions_Invoke_ReturnsExpected(string version)
         {
             var category = new SyndicationCategorySubclass();
-            CompareHelper.AssertEqualWriteOutput(
-                "",
-                writer => category.WriteAttributeExtensionsEntryPoint(writer, version)
+            CompareHelper.AssertEqualWriteOutput("", writer =>
+                category.WriteAttributeExtensionsEntryPoint(writer, version)
             );
 
             category.AttributeExtensions.Add(new XmlQualifiedName("name1"), "value");
@@ -184,9 +182,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteAttributeExtensions_NullWriter_ThrowsArgumentNullException()
         {
             var category = new SyndicationCategorySubclass();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "writer",
-                () => category.WriteAttributeExtensionsEntryPoint(null, "version")
+            AssertExtensions.Throws<ArgumentNullException>("writer", () =>
+                category.WriteAttributeExtensionsEntryPoint(null, "version")
             );
         }
 
@@ -197,9 +194,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteElementExtensions_Invoke_ReturnsExpected(string version)
         {
             var category = new SyndicationCategorySubclass();
-            CompareHelper.AssertEqualWriteOutput(
-                "",
-                writer => category.WriteElementExtensionsEntryPoint(writer, version)
+            CompareHelper.AssertEqualWriteOutput("", writer =>
+                category.WriteElementExtensionsEntryPoint(writer, version)
             );
 
             category.ElementExtensions.Add(new ExtensionObject { Value = 10 });
@@ -219,9 +215,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteElementExtensions_NullWriter_ThrowsArgumentNullException()
         {
             var category = new SyndicationCategorySubclass();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "writer",
-                () => category.WriteElementExtensionsEntryPoint(null, "version")
+            AssertExtensions.Throws<ArgumentNullException>("writer", () =>
+                category.WriteElementExtensionsEntryPoint(null, "version")
             );
         }
 

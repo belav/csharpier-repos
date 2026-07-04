@@ -135,19 +135,16 @@ namespace System.Web.Mvc
             }
 
             // Function is called frequently, so ensure the error delegate is stateless
-            binder = ModelBinders.GetBinderFromAttributes(
-                modelType,
-                (Type errorModel) =>
-                {
-                    throw new InvalidOperationException(
-                        String.Format(
-                            CultureInfo.CurrentCulture,
-                            MvcResources.ModelBinderDictionary_MultipleAttributes,
-                            errorModel.FullName
-                        )
-                    );
-                }
-            );
+            binder = ModelBinders.GetBinderFromAttributes(modelType, (Type errorModel) =>
+            {
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        MvcResources.ModelBinderDictionary_MultipleAttributes,
+                        errorModel.FullName
+                    )
+                );
+            });
 
             return binder ?? fallbackBinder;
         }

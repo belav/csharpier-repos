@@ -12,9 +12,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
         [Fact]
         public static void OidRequired()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "bagIdValue",
-                () => new TestSafeBag(null)
+            AssertExtensions.Throws<ArgumentNullException>("bagIdValue", () =>
+                new TestSafeBag(null)
             );
         }
 

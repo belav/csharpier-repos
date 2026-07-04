@@ -35,16 +35,10 @@ namespace System.Reflection.Tests
                 )
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    CustomAttributeExtensions.IsDefined(
-                        s_typeTestClass.GetTypeInfo(),
-                        typeof(string)
-                    );
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                CustomAttributeExtensions.IsDefined(s_typeTestClass.GetTypeInfo(), typeof(string));
+            });
 
             Assert.Throws<ArgumentNullException>(() =>
             {
@@ -142,16 +136,13 @@ namespace System.Reflection.Tests
                 );
             });
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    attribute = CustomAttributeExtensions.GetCustomAttribute(
-                        s_typeTestClass.GetTypeInfo(),
-                        typeof(string)
-                    );
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                attribute = CustomAttributeExtensions.GetCustomAttribute(
+                    s_typeTestClass.GetTypeInfo(),
+                    typeof(string)
+                );
+            });
 
             Assert.Throws<ArgumentNullException>(() =>
             {
@@ -177,16 +168,13 @@ namespace System.Reflection.Tests
             );
             Assert.Equal(0, attributes.Count());
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    attributes = CustomAttributeExtensions.GetCustomAttributes(
-                        s_typeTestClass.GetTypeInfo(),
-                        typeof(string)
-                    );
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                attributes = CustomAttributeExtensions.GetCustomAttributes(
+                    s_typeTestClass.GetTypeInfo(),
+                    typeof(string)
+                );
+            });
 
             Assert.Throws<ArgumentNullException>(() =>
             {

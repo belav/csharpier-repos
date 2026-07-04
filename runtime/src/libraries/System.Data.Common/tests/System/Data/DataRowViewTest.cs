@@ -43,43 +43,34 @@ namespace System.Data.Tests
         [Fact]
         public void CreateChildViewNullStringArg()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    DataView dv = CreateTestView();
-                    DataRowView dvr = dv[0];
-                    dvr.CreateChildView((string)null);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                DataView dv = CreateTestView();
+                DataRowView dvr = dv[0];
+                dvr.CreateChildView((string)null);
+            });
         }
 
         [Fact]
         public void CreateChildViewNullDataRelationArg()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    DataView dv = CreateTestView();
-                    DataRowView dvr = dv[0];
-                    dvr.CreateChildView((DataRelation)null);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                DataView dv = CreateTestView();
+                DataRowView dvr = dv[0];
+                dvr.CreateChildView((DataRelation)null);
+            });
         }
 
         [Fact]
         public void CreateChildViewNonExistentName()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    DataView dv = CreateTestView();
-                    DataRowView dvr = dv[0];
-                    dvr.CreateChildView("nothing");
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                DataView dv = CreateTestView();
+                DataRowView dvr = dv[0];
+                dvr.CreateChildView("nothing");
+            });
         }
 
         [Fact]

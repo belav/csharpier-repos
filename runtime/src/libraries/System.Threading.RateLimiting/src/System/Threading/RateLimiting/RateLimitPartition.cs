@@ -68,27 +68,24 @@ namespace System.Threading.RateLimiting
             Func<TKey, TokenBucketRateLimiterOptions> factory
         )
         {
-            return Get(
-                partitionKey,
-                key =>
+            return Get(partitionKey, key =>
+            {
+                TokenBucketRateLimiterOptions options = factory(key);
+                // We don't want individual TokenBucketRateLimiters to have timers. We will instead have our own internal Timer handling all of them
+                if (options.AutoReplenishment is true)
                 {
-                    TokenBucketRateLimiterOptions options = factory(key);
-                    // We don't want individual TokenBucketRateLimiters to have timers. We will instead have our own internal Timer handling all of them
-                    if (options.AutoReplenishment is true)
+                    options = new TokenBucketRateLimiterOptions
                     {
-                        options = new TokenBucketRateLimiterOptions
-                        {
-                            TokenLimit = options.TokenLimit,
-                            QueueProcessingOrder = options.QueueProcessingOrder,
-                            QueueLimit = options.QueueLimit,
-                            ReplenishmentPeriod = options.ReplenishmentPeriod,
-                            TokensPerPeriod = options.TokensPerPeriod,
-                            AutoReplenishment = false,
-                        };
-                    }
-                    return new TokenBucketRateLimiter(options);
+                        TokenLimit = options.TokenLimit,
+                        QueueProcessingOrder = options.QueueProcessingOrder,
+                        QueueLimit = options.QueueLimit,
+                        ReplenishmentPeriod = options.ReplenishmentPeriod,
+                        TokensPerPeriod = options.TokensPerPeriod,
+                        AutoReplenishment = false,
+                    };
                 }
-            );
+                return new TokenBucketRateLimiter(options);
+            });
         }
 
         /// <summary>
@@ -106,27 +103,24 @@ namespace System.Threading.RateLimiting
             Func<TKey, SlidingWindowRateLimiterOptions> factory
         )
         {
-            return Get(
-                partitionKey,
-                key =>
+            return Get(partitionKey, key =>
+            {
+                SlidingWindowRateLimiterOptions options = factory(key);
+                // We don't want individual SlidingWindowRateLimiters to have timers. We will instead have our own internal Timer handling all of them
+                if (options.AutoReplenishment is true)
                 {
-                    SlidingWindowRateLimiterOptions options = factory(key);
-                    // We don't want individual SlidingWindowRateLimiters to have timers. We will instead have our own internal Timer handling all of them
-                    if (options.AutoReplenishment is true)
+                    options = new SlidingWindowRateLimiterOptions
                     {
-                        options = new SlidingWindowRateLimiterOptions
-                        {
-                            PermitLimit = options.PermitLimit,
-                            QueueProcessingOrder = options.QueueProcessingOrder,
-                            QueueLimit = options.QueueLimit,
-                            Window = options.Window,
-                            SegmentsPerWindow = options.SegmentsPerWindow,
-                            AutoReplenishment = false,
-                        };
-                    }
-                    return new SlidingWindowRateLimiter(options);
+                        PermitLimit = options.PermitLimit,
+                        QueueProcessingOrder = options.QueueProcessingOrder,
+                        QueueLimit = options.QueueLimit,
+                        Window = options.Window,
+                        SegmentsPerWindow = options.SegmentsPerWindow,
+                        AutoReplenishment = false,
+                    };
                 }
-            );
+                return new SlidingWindowRateLimiter(options);
+            });
         }
 
         /// <summary>
@@ -144,26 +138,23 @@ namespace System.Threading.RateLimiting
             Func<TKey, FixedWindowRateLimiterOptions> factory
         )
         {
-            return Get(
-                partitionKey,
-                key =>
+            return Get(partitionKey, key =>
+            {
+                FixedWindowRateLimiterOptions options = factory(key);
+                // We don't want individual FixedWindowRateLimiters to have timers. We will instead have our own internal Timer handling all of them
+                if (options.AutoReplenishment is true)
                 {
-                    FixedWindowRateLimiterOptions options = factory(key);
-                    // We don't want individual FixedWindowRateLimiters to have timers. We will instead have our own internal Timer handling all of them
-                    if (options.AutoReplenishment is true)
+                    options = new FixedWindowRateLimiterOptions
                     {
-                        options = new FixedWindowRateLimiterOptions
-                        {
-                            PermitLimit = options.PermitLimit,
-                            QueueProcessingOrder = options.QueueProcessingOrder,
-                            QueueLimit = options.QueueLimit,
-                            Window = options.Window,
-                            AutoReplenishment = false,
-                        };
-                    }
-                    return new FixedWindowRateLimiter(options);
+                        PermitLimit = options.PermitLimit,
+                        QueueProcessingOrder = options.QueueProcessingOrder,
+                        QueueLimit = options.QueueLimit,
+                        Window = options.Window,
+                        AutoReplenishment = false,
+                    };
                 }
-            );
+                return new FixedWindowRateLimiter(options);
+            });
         }
     }
 }

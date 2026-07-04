@@ -24,9 +24,8 @@ namespace System.Linq.Tests
         {
             IEnumerable<int?> sourceNullableInt = null;
             AssertExtensions.Throws<ArgumentNullException>("source", () => sourceNullableInt.Sum());
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => sourceNullableInt.Sum(x => x)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                sourceNullableInt.Sum(x => x)
             );
         }
 
@@ -42,13 +41,11 @@ namespace System.Linq.Tests
         public void SumOfNullableOfLong_SourceIsNull_ArgumentNullExceptionThrown()
         {
             IEnumerable<long?> sourceNullableLong = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => sourceNullableLong.Sum()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                sourceNullableLong.Sum()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => sourceNullableLong.Sum(x => x)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                sourceNullableLong.Sum(x => x)
             );
         }
 
@@ -64,13 +61,11 @@ namespace System.Linq.Tests
         public void SumOfNullableOfFloat_SourceIsNull_ArgumentNullExceptionThrown()
         {
             IEnumerable<float?> sourceNullableFloat = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => sourceNullableFloat.Sum()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                sourceNullableFloat.Sum()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => sourceNullableFloat.Sum(x => x)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                sourceNullableFloat.Sum(x => x)
             );
         }
 
@@ -79,9 +74,8 @@ namespace System.Linq.Tests
         {
             IEnumerable<double> sourceDouble = null;
             AssertExtensions.Throws<ArgumentNullException>("source", () => sourceDouble.Sum());
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => sourceDouble.Sum(x => x)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                sourceDouble.Sum(x => x)
             );
         }
 
@@ -89,13 +83,11 @@ namespace System.Linq.Tests
         public void SumOfNullableOfDouble_SourceIsNull_ArgumentNullExceptionThrown()
         {
             IEnumerable<double?> sourceNullableDouble = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => sourceNullableDouble.Sum()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                sourceNullableDouble.Sum()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => sourceNullableDouble.Sum(x => x)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                sourceNullableDouble.Sum(x => x)
             );
         }
 
@@ -104,9 +96,8 @@ namespace System.Linq.Tests
         {
             IEnumerable<decimal> sourceDecimal = null;
             AssertExtensions.Throws<ArgumentNullException>("source", () => sourceDecimal.Sum());
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => sourceDecimal.Sum(x => x)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                sourceDecimal.Sum(x => x)
             );
         }
 
@@ -114,13 +105,11 @@ namespace System.Linq.Tests
         public void SumOfNullableOfDecimal_SourceIsNull_ArgumentNullExceptionThrown()
         {
             IEnumerable<decimal?> sourceNullableDecimal = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => sourceNullableDecimal.Sum()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                sourceNullableDecimal.Sum()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => sourceNullableDecimal.Sum(x => x)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                sourceNullableDecimal.Sum(x => x)
             );
         }
 
@@ -133,9 +122,8 @@ namespace System.Linq.Tests
         {
             IEnumerable<int> sourceInt = Enumerable.Empty<int>();
             Func<int, int> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => sourceInt.Sum(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                sourceInt.Sum(selector)
             );
         }
 
@@ -144,9 +132,8 @@ namespace System.Linq.Tests
         {
             IEnumerable<int?> sourceNullableInt = Enumerable.Empty<int?>();
             Func<int?, int?> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => sourceNullableInt.Sum(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                sourceNullableInt.Sum(selector)
             );
         }
 
@@ -155,9 +142,8 @@ namespace System.Linq.Tests
         {
             IEnumerable<long> sourceLong = Enumerable.Empty<long>();
             Func<long, long> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => sourceLong.Sum(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                sourceLong.Sum(selector)
             );
         }
 
@@ -166,9 +152,8 @@ namespace System.Linq.Tests
         {
             IEnumerable<long?> sourceNullableLong = Enumerable.Empty<long?>();
             Func<long?, long?> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => sourceNullableLong.Sum(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                sourceNullableLong.Sum(selector)
             );
         }
 
@@ -177,9 +162,8 @@ namespace System.Linq.Tests
         {
             IEnumerable<float> sourceFloat = Enumerable.Empty<float>();
             Func<float, float> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => sourceFloat.Sum(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                sourceFloat.Sum(selector)
             );
         }
 
@@ -188,9 +172,8 @@ namespace System.Linq.Tests
         {
             IEnumerable<float?> sourceNullableFloat = Enumerable.Empty<float?>();
             Func<float?, float?> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => sourceNullableFloat.Sum(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                sourceNullableFloat.Sum(selector)
             );
         }
 
@@ -199,9 +182,8 @@ namespace System.Linq.Tests
         {
             IEnumerable<double> sourceDouble = Enumerable.Empty<double>();
             Func<double, double> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => sourceDouble.Sum(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                sourceDouble.Sum(selector)
             );
         }
 
@@ -210,9 +192,8 @@ namespace System.Linq.Tests
         {
             IEnumerable<double?> sourceNullableDouble = Enumerable.Empty<double?>();
             Func<double?, double?> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => sourceNullableDouble.Sum(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                sourceNullableDouble.Sum(selector)
             );
         }
 
@@ -221,9 +202,8 @@ namespace System.Linq.Tests
         {
             IEnumerable<decimal> sourceDecimal = Enumerable.Empty<decimal>();
             Func<decimal, decimal> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => sourceDecimal.Sum(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                sourceDecimal.Sum(selector)
             );
         }
 
@@ -232,9 +212,8 @@ namespace System.Linq.Tests
         {
             IEnumerable<decimal?> sourceNullableDecimal = Enumerable.Empty<decimal?>();
             Func<decimal?, decimal?> selector = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => sourceNullableDecimal.Sum(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                sourceNullableDecimal.Sum(selector)
             );
         }
 

@@ -150,13 +150,11 @@ public abstract class WasmAppBuilderBaseTask : Task
             "wasmHostProperties",
             () => new JsonObject()
         );
-        JsonArray runtimeArgsArray = wasmHostProperties.GetOrCreate<JsonArray>(
-            "runtimeArgs",
-            () => new JsonArray()
+        JsonArray runtimeArgsArray = wasmHostProperties.GetOrCreate<JsonArray>("runtimeArgs", () =>
+            new JsonArray()
         );
-        JsonArray perHostConfigs = wasmHostProperties.GetOrCreate<JsonArray>(
-            "perHostConfig",
-            () => new JsonArray()
+        JsonArray perHostConfigs = wasmHostProperties.GetOrCreate<JsonArray>("perHostConfig", () =>
+            new JsonArray()
         );
 
         if (string.IsNullOrEmpty(DefaultHostConfig) && HostConfigs.Length > 0)

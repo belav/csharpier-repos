@@ -107,14 +107,10 @@ public delegate dynamic[] MyDelegate(dynamic[] x);
                 references: new[] { SystemCoreRef, ValueTupleRef, SystemRuntimeFacadeRef }
             );
 
-            CompileAndVerify(
-                comp,
-                verify: Verification.Passes,
-                symbolValidator: module =>
-                {
-                    DynamicAttributeValidator.ValidateDynamicAttributes(module);
-                }
-            );
+            CompileAndVerify(comp, verify: Verification.Passes, symbolValidator: module =>
+            {
+                DynamicAttributeValidator.ValidateDynamicAttributes(module);
+            });
         }
 
         internal struct DynamicAttributeValidator
@@ -1385,19 +1381,16 @@ dynamic x = 0;
                 references: new[] { SystemCoreRef, CSharpDesktopRef }
             );
 
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var implicitField = module
-                        .GlobalNamespace.GetTypeMember("Script")
-                        .GetMember<FieldSymbol>("x");
-                    DynamicAttributeValidator.ValidateDynamicAttribute(
-                        implicitField.GetAttributes(),
-                        expectedDynamicAttribute: true
-                    );
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var implicitField = module
+                    .GlobalNamespace.GetTypeMember("Script")
+                    .GetMember<FieldSymbol>("x");
+                DynamicAttributeValidator.ValidateDynamicAttribute(
+                    implicitField.GetAttributes(),
+                    expectedDynamicAttribute: true
+                );
+            });
         }
 
         [Fact]
@@ -1432,21 +1425,18 @@ Gen<dynamic> x = null;";
                 references: new[] { SystemCoreRef }
             );
 
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var implicitField = module
-                        .GlobalNamespace.GetTypeMember("Script")
-                        .GetMember<FieldSymbol>("x");
-                    var expectedTransformsFlags = new bool[] { false, true };
-                    DynamicAttributeValidator.ValidateDynamicAttribute(
-                        implicitField.GetAttributes(),
-                        expectedDynamicAttribute: true,
-                        expectedTransformFlags: expectedTransformsFlags
-                    );
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var implicitField = module
+                    .GlobalNamespace.GetTypeMember("Script")
+                    .GetMember<FieldSymbol>("x");
+                var expectedTransformsFlags = new bool[] { false, true };
+                DynamicAttributeValidator.ValidateDynamicAttribute(
+                    implicitField.GetAttributes(),
+                    expectedDynamicAttribute: true,
+                    expectedTransformFlags: expectedTransformsFlags
+                );
+            });
         }
 
         [Fact]
@@ -1485,21 +1475,18 @@ Gen<dynamic> x = null;";
                 references: new[] { SystemCoreRef }
             );
 
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var implicitField = module
-                        .GlobalNamespace.GetTypeMember("Script")
-                        .GetMember<FieldSymbol>("x");
-                    var expectedTransformsFlags = new bool[] { false, true };
-                    DynamicAttributeValidator.ValidateDynamicAttribute(
-                        implicitField.GetAttributes(),
-                        expectedDynamicAttribute: true,
-                        expectedTransformFlags: expectedTransformsFlags
-                    );
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var implicitField = module
+                    .GlobalNamespace.GetTypeMember("Script")
+                    .GetMember<FieldSymbol>("x");
+                var expectedTransformsFlags = new bool[] { false, true };
+                DynamicAttributeValidator.ValidateDynamicAttribute(
+                    implicitField.GetAttributes(),
+                    expectedDynamicAttribute: true,
+                    expectedTransformFlags: expectedTransformsFlags
+                );
+            });
         }
 
         [Fact]
@@ -1515,21 +1502,18 @@ Gen<dynamic> x = null;";
                 references: new[] { SystemCoreRef }
             );
 
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var implicitField = module
-                        .GlobalNamespace.GetTypeMember("Script")
-                        .GetMember<FieldSymbol>("x");
-                    var expectedTransformsFlags = new bool[] { false, true };
-                    DynamicAttributeValidator.ValidateDynamicAttribute(
-                        implicitField.GetAttributes(),
-                        expectedDynamicAttribute: true,
-                        expectedTransformFlags: expectedTransformsFlags
-                    );
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var implicitField = module
+                    .GlobalNamespace.GetTypeMember("Script")
+                    .GetMember<FieldSymbol>("x");
+                var expectedTransformsFlags = new bool[] { false, true };
+                DynamicAttributeValidator.ValidateDynamicAttribute(
+                    implicitField.GetAttributes(),
+                    expectedDynamicAttribute: true,
+                    expectedTransformFlags: expectedTransformsFlags
+                );
+            });
         }
 
         [Fact]

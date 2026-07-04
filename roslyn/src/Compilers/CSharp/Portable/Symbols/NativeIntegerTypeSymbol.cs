@@ -472,11 +472,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             throw ExceptionUtilities.Unreachable();
 
         public override bool Equals(Symbol? other, TypeCompareKind comparison) =>
-            NativeIntegerTypeSymbol.EqualsHelper(
-                this,
-                other,
-                comparison,
-                symbol => symbol.UnderlyingMethod
+            NativeIntegerTypeSymbol.EqualsHelper(this, other, comparison, symbol =>
+                symbol.UnderlyingMethod
             );
 
         public override int GetHashCode() => UnderlyingMethod.GetHashCode();
@@ -544,11 +541,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             _underlyingParameter.HasInterpolatedStringHandlerArgumentError;
 
         public override bool Equals(Symbol? other, TypeCompareKind comparison) =>
-            NativeIntegerTypeSymbol.EqualsHelper(
-                this,
-                other,
-                comparison,
-                symbol => symbol._underlyingParameter
+            NativeIntegerTypeSymbol.EqualsHelper(this, other, comparison, symbol =>
+                symbol._underlyingParameter
             );
 
         public override int GetHashCode() => _underlyingParameter.GetHashCode();
@@ -610,11 +604,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             _underlyingProperty.MustCallMethodsDirectly;
 
         public override bool Equals(Symbol? other, TypeCompareKind comparison) =>
-            NativeIntegerTypeSymbol.EqualsHelper(
-                this,
-                other,
-                comparison,
-                symbol => symbol._underlyingProperty
+            NativeIntegerTypeSymbol.EqualsHelper(this, other, comparison, symbol =>
+                symbol._underlyingProperty
             );
 
         public override int GetHashCode() => _underlyingProperty.GetHashCode();

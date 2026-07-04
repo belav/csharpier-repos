@@ -846,9 +846,8 @@ class B {";
 
             if (useVSDiagnostics)
             {
-                Assert.All(
-                    results.Single().Diagnostics,
-                    d => Assert.Equal("CSProj1", ((VSDiagnostic)d).Projects.Single().ProjectName)
+                Assert.All(results.Single().Diagnostics, d =>
+                    Assert.Equal("CSProj1", ((VSDiagnostic)d).Projects.Single().ProjectName)
                 );
             }
         }
@@ -1286,9 +1285,8 @@ class A
                 useVSDiagnostics
             );
 
-            Assert.All(
-                results.Single().Diagnostics,
-                d => Assert.False(d.Tags!.Contains(DiagnosticTag.Unnecessary))
+            Assert.All(results.Single().Diagnostics, d =>
+                Assert.False(d.Tags!.Contains(DiagnosticTag.Unnecessary))
             );
         }
 

@@ -1437,9 +1437,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         )
         {
             // Search for the start of the span (the spans are non-overlapping and sorted)
-            int index = initializers.BinarySearch(
-                position,
-                (initializer, pos) => initializer.Syntax.Span.Start.CompareTo(pos)
+            int index = initializers.BinarySearch(position, (initializer, pos) =>
+                initializer.Syntax.Span.Start.CompareTo(pos)
             );
 
             // Binary search returns non-negative result if the position is exactly the start of some span.
@@ -3430,9 +3429,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         && !ContainsModifier(propertyDecl.Modifiers, SyntaxKind.AbstractKeyword)
                         && !ContainsModifier(propertyDecl.Modifiers, SyntaxKind.ExternKeyword)
                         && propertyDecl.AccessorList != null
-                        && All(
-                            propertyDecl.AccessorList.Accessors,
-                            a => a.Body == null && a.ExpressionBody == null
+                        && All(propertyDecl.AccessorList.Accessors, a =>
+                            a.Body == null && a.ExpressionBody == null
                         );
                 case SyntaxKind.EventFieldDeclaration:
                     // field-like event declaration

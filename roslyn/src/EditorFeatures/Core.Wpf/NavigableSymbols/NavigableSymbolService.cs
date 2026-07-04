@@ -47,10 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.NavigableSymbols
             ITextView textView,
             ITextBuffer buffer
         ) =>
-            textView.GetOrCreatePerSubjectBufferProperty(
-                buffer,
-                s_key,
-                (view, _) => new NavigableSymbolSource(this, view)
+            textView.GetOrCreatePerSubjectBufferProperty(buffer, s_key, (view, _) =>
+                new NavigableSymbolSource(this, view)
             );
     }
 }

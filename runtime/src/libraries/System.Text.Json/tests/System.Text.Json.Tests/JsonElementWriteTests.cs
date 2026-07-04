@@ -327,9 +327,8 @@ namespace System.Text.Json.Tests
 
                 Assert.Equal(overwriteJson, rootElement.GetRawText());
 
-                AssertExtensions.Throws<ArgumentException>(
-                    "utf8FormattedNumber",
-                    () => WriteDocument(document, writer)
+                AssertExtensions.Throws<ArgumentException>("utf8FormattedNumber", () =>
+                    WriteDocument(document, writer)
                 );
             }
         }

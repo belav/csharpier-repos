@@ -4312,22 +4312,15 @@ void X()
 }
 static void Target<T>() { }
 ";
-        var verifier = CompileAndVerify(
-            source,
-            symbolValidator: static module =>
-            {
-                VerifyCacheContainer(
-                    "Program.<Owner>O__0_0",
-                    arity: 1,
-                    "System.Action <0>__Target"
-                )(module);
-                VerifyCacheContainer(
-                    "Program.<Owner>O__0_1",
-                    arity: 1,
-                    "System.Action <0>__Target"
-                )(module);
-            }
-        );
+        var verifier = CompileAndVerify(source, symbolValidator: static module =>
+        {
+            VerifyCacheContainer("Program.<Owner>O__0_0", arity: 1, "System.Action <0>__Target")(
+                module
+            );
+            VerifyCacheContainer("Program.<Owner>O__0_1", arity: 1, "System.Action <0>__Target")(
+                module
+            );
+        });
         verifier.VerifyIL(
             "Program.<<Main>$>g__Owner|0_0<T>",
             @"
@@ -4380,18 +4373,11 @@ class C
     static void Target<T>() { }
 }
 ";
-        var verifier = CompileAndVerify(
-            source,
-            symbolValidator: static module =>
-            {
-                VerifyCacheContainer("C.<Owner>O__0_0", arity: 1, "System.Action <0>__Target")(
-                    module
-                );
-                VerifyCacheContainer("C.<Owner>O__1_0", arity: 1, "System.Action <0>__Target")(
-                    module
-                );
-            }
-        );
+        var verifier = CompileAndVerify(source, symbolValidator: static module =>
+        {
+            VerifyCacheContainer("C.<Owner>O__0_0", arity: 1, "System.Action <0>__Target")(module);
+            VerifyCacheContainer("C.<Owner>O__1_0", arity: 1, "System.Action <0>__Target")(module);
+        });
         verifier.VerifyIL(
             "C.Owner<T>(int)",
             @"
@@ -4447,18 +4433,11 @@ class C
     static void Target<T>() { }
 }
 ";
-        var verifier = CompileAndVerify(
-            source,
-            symbolValidator: static module =>
-            {
-                VerifyCacheContainer("C.<Owner>O__0_0", arity: 1, "System.Action <0>__Target")(
-                    module
-                );
-                VerifyCacheContainer("C.<Owner>O__1_0", arity: 1, "System.Action <0>__Target")(
-                    module
-                );
-            }
-        );
+        var verifier = CompileAndVerify(source, symbolValidator: static module =>
+        {
+            VerifyCacheContainer("C.<Owner>O__0_0", arity: 1, "System.Action <0>__Target")(module);
+            VerifyCacheContainer("C.<Owner>O__1_0", arity: 1, "System.Action <0>__Target")(module);
+        });
         verifier.VerifyIL(
             "C.Owner<T>(int)",
             @"
@@ -7227,9 +7206,8 @@ class Test
             AssertEx.NotNull(containingType);
 
             var nestedTypes = containingType.GetTypeMembers();
-            Assert.DoesNotContain(
-                nestedTypes,
-                t => t.Name.StartsWith("<") && t.Name.Contains(">O")
+            Assert.DoesNotContain(nestedTypes, t =>
+                t.Name.StartsWith("<") && t.Name.Contains(">O")
             );
         };
     }

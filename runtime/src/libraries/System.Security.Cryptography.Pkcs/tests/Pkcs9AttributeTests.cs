@@ -139,10 +139,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             AsnEncodedData a = new AsnEncodedData(oid, new byte[3]);
             object ign;
-            AssertExtensions.Throws<ArgumentException>(
-                "asnEncodedData",
-                "oid.Value",
-                () => ign = new Pkcs9AttributeObject(a)
+            AssertExtensions.Throws<ArgumentException>("asnEncodedData", "oid.Value", () =>
+                ign = new Pkcs9AttributeObject(a)
             );
         }
 

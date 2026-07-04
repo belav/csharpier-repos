@@ -1159,66 +1159,56 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void NonNullableValueType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.TypeAs(Expression.Constant(0), typeof(int))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.TypeAs(Expression.Constant(0), typeof(int))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.TypeAs(Expression.Constant(null), typeof(DateTime))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.TypeAs(Expression.Constant(null), typeof(DateTime))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.TypeAs(Expression.Constant(DateTime.MinValue), typeof(DateTime))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.TypeAs(Expression.Constant(DateTime.MinValue), typeof(DateTime))
             );
         }
 
         [Fact]
         public static void NullType() =>
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => Expression.TypeAs(Expression.Constant(""), null)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                Expression.TypeAs(Expression.Constant(""), null)
             );
 
         [Fact]
         public static void NullExpression() =>
-            AssertExtensions.Throws<ArgumentNullException>(
-                "expression",
-                () => Expression.TypeAs(null, typeof(string))
+            AssertExtensions.Throws<ArgumentNullException>("expression", () =>
+                Expression.TypeAs(null, typeof(string))
             );
 
         [Fact]
         public static void AsOpenGeneric()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.TypeAs(Expression.Constant(""), typeof(List<>))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.TypeAs(Expression.Constant(""), typeof(List<>))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () =>
-                    Expression.TypeAs(
-                        Expression.Constant(""),
-                        typeof(List<>).MakeGenericType(typeof(List<>))
-                    )
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.TypeAs(
+                    Expression.Constant(""),
+                    typeof(List<>).MakeGenericType(typeof(List<>))
+                )
             );
         }
 
         [Fact]
         public static void PointerType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.TypeAs(Expression.Constant(""), typeof(int).MakePointerType())
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.TypeAs(Expression.Constant(""), typeof(int).MakePointerType())
             );
         }
 
         [Fact]
         public static void ByRefType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.TypeAs(Expression.Constant(""), typeof(string).MakeByRefType())
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.TypeAs(Expression.Constant(""), typeof(string).MakeByRefType())
             );
         }
 
@@ -1230,9 +1220,8 @@ namespace System.Linq.Expressions.Tests
                 typeof(Unreadable<string>),
                 nameof(Unreadable<string>.WriteOnly)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "expression",
-                () => Expression.TypeAs(unreadable, typeof(string))
+            AssertExtensions.Throws<ArgumentException>("expression", () =>
+                Expression.TypeAs(unreadable, typeof(string))
             );
         }
 

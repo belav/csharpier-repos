@@ -2818,14 +2818,11 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                 {
                     services.AddAuthorization(options =>
                     {
-                        options.AddPolicy(
-                            "test",
-                            policy =>
-                            {
-                                policy.RequireClaim(ClaimTypes.NameIdentifier);
-                                policy.AddAuthenticationSchemes("Default");
-                            }
-                        );
+                        options.AddPolicy("test", policy =>
+                        {
+                            policy.RequireClaim(ClaimTypes.NameIdentifier);
+                            policy.AddAuthenticationSchemes("Default");
+                        });
                     });
                 },
                 LoggerFactory
@@ -2862,14 +2859,11 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                 {
                     services.AddAuthorization(options =>
                     {
-                        options.AddPolicy(
-                            "test",
-                            policy =>
-                            {
-                                policy.RequireClaim(ClaimTypes.NameIdentifier);
-                                policy.AddAuthenticationSchemes("Default");
-                            }
-                        );
+                        options.AddPolicy("test", policy =>
+                        {
+                            policy.RequireClaim(ClaimTypes.NameIdentifier);
+                            policy.AddAuthenticationSchemes("Default");
+                        });
                     });
                 },
                 LoggerFactory
@@ -2985,14 +2979,11 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                 {
                     services.AddAuthorization(options =>
                     {
-                        options.AddPolicy(
-                            "test",
-                            policy =>
-                            {
-                                policy.RequireClaim(ClaimTypes.NameIdentifier);
-                                policy.AddAuthenticationSchemes("Default");
-                            }
-                        );
+                        options.AddPolicy("test", policy =>
+                        {
+                            policy.RequireClaim(ClaimTypes.NameIdentifier);
+                            policy.AddAuthenticationSchemes("Default");
+                        });
                     });
 
                     services.AddSingleton<IAuthorizationHandler, TestAuthHandler>();
@@ -4717,13 +4708,10 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
         {
             services.AddAuthorization(options =>
             {
-                options.AddPolicy(
-                    "test",
-                    policy =>
-                    {
-                        policy.Requirements.Add(new DelayRequirement(tcsService));
-                    }
-                );
+                options.AddPolicy("test", policy =>
+                {
+                    policy.Requirements.Add(new DelayRequirement(tcsService));
+                });
             });
         });
         var connectionHandler = serviceProvider.GetService<HubConnectionHandler<MethodHub>>();

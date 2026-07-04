@@ -36,9 +36,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             var compilation = semanticModel.Compilation;
 
             return constructor.Parameters.Length == parameters.Length
-                && constructor.Parameters.SequenceEqual(
-                    parameters,
-                    (p1, p2) => p1.RefKind == p2.RefKind
+                && constructor.Parameters.SequenceEqual(parameters, (p1, p2) =>
+                    p1.RefKind == p2.RefKind
                 )
                 && IsSymbolAccessible(compilation, constructor)
                 && IsCompatible(semanticFacts, semanticModel, constructor, expressions);

@@ -22,16 +22,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
             if (type.IsGenericType && type.ContainsGenericParameters)
             {
                 List<Type> pureGenericParameters = new List<Type>();
-                TraverseGenericType(
-                    type,
-                    (Type t) =>
+                TraverseGenericType(type, (Type t) =>
+                {
+                    if (t.IsGenericParameter)
                     {
-                        if (t.IsGenericParameter)
-                        {
-                            pureGenericParameters.Add(t);
-                        }
+                        pureGenericParameters.Add(t);
                     }
-                );
+                });
                 return pureGenericParameters;
             }
             else
@@ -48,16 +45,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
             if (type.IsGenericType && type.ContainsGenericParameters)
             {
                 List<Type> pureGenericParameters = new List<Type>();
-                TraverseGenericType(
-                    type,
-                    (Type t) =>
+                TraverseGenericType(type, (Type t) =>
+                {
+                    if (t.IsGenericParameter)
                     {
-                        if (t.IsGenericParameter)
-                        {
-                            genericArity++;
-                        }
+                        genericArity++;
                     }
-                );
+                });
             }
             return genericArity;
         }

@@ -66,14 +66,11 @@ public class ValidationProblemDetailsTest
 
         // Assert
         Assert.Equal("One or more validation errors occurred.", problemDescription.Title);
-        Assert.Collection(
-            problemDescription.Errors,
-            item =>
-            {
-                Assert.Equal("unsafeError", item.Key);
-                Assert.Equal(new[] { "The input was not valid." }, item.Value);
-            }
-        );
+        Assert.Collection(problemDescription.Errors, item =>
+        {
+            Assert.Equal("unsafeError", item.Key);
+            Assert.Equal(new[] { "The input was not valid." }, item.Value);
+        });
     }
 
     [Fact]

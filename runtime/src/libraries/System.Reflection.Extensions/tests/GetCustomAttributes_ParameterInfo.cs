@@ -44,13 +44,10 @@ namespace System.Reflection.Tests
                 CustomAttributeExtensions.IsDefined(piWithAttributes, typeof(MyAttribute_Single_P))
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    CustomAttributeExtensions.IsDefined(piWithAttributes, typeof(string));
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                CustomAttributeExtensions.IsDefined(piWithAttributes, typeof(string));
+            });
 
             Assert.Throws<ArgumentNullException>(() =>
             {
@@ -173,16 +170,13 @@ namespace System.Reflection.Tests
                 );
             });
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    attribute = CustomAttributeExtensions.GetCustomAttribute(
-                        piWithAttributes,
-                        typeof(string)
-                    );
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                attribute = CustomAttributeExtensions.GetCustomAttribute(
+                    piWithAttributes,
+                    typeof(string)
+                );
+            });
 
             Assert.Throws<ArgumentNullException>(() =>
             {
@@ -230,16 +224,13 @@ namespace System.Reflection.Tests
             );
             Assert.Equal(0, attributes.Count());
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    attributes = CustomAttributeExtensions.GetCustomAttributes(
-                        piWithAttributes,
-                        typeof(string)
-                    );
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                attributes = CustomAttributeExtensions.GetCustomAttributes(
+                    piWithAttributes,
+                    typeof(string)
+                );
+            });
 
             Assert.Throws<ArgumentNullException>(() =>
             {

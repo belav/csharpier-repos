@@ -21,9 +21,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
         [Fact]
         public void GetSerializableMembers_InvalidArguments_ThrowsException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => FormatterServices.GetSerializableMembers(null)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                FormatterServices.GetSerializableMembers(null)
             );
         }
 
@@ -39,13 +38,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
         [Fact]
         public void GetUninitializedObject_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => FormatterServices.GetUninitializedObject(null)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                FormatterServices.GetUninitializedObject(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => FormatterServices.GetSafeUninitializedObject(null)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                FormatterServices.GetSafeUninitializedObject(null)
             );
         }
 
@@ -77,13 +74,11 @@ namespace System.Runtime.Serialization.Formatters.Tests
         [MemberData(nameof(GetUninitializedObject_NotSupportedType_TestData))]
         public void GetUninitializedObject_NotSupportedType_ThrowsArgumentException(Type type)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => FormatterServices.GetUninitializedObject(type)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                FormatterServices.GetUninitializedObject(type)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => FormatterServices.GetSafeUninitializedObject(type)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                FormatterServices.GetSafeUninitializedObject(type)
             );
         }
 
@@ -420,36 +415,28 @@ namespace System.Runtime.Serialization.Formatters.Tests
         [Fact]
         public void PopulateObjectMembers_InvalidArguments_ThrowsException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "obj",
-                () =>
-                    FormatterServices.PopulateObjectMembers(null, new MemberInfo[0], new object[0])
+            AssertExtensions.Throws<ArgumentNullException>("obj", () =>
+                FormatterServices.PopulateObjectMembers(null, new MemberInfo[0], new object[0])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "members",
-                () => FormatterServices.PopulateObjectMembers(new object(), null, new object[0])
+            AssertExtensions.Throws<ArgumentNullException>("members", () =>
+                FormatterServices.PopulateObjectMembers(new object(), null, new object[0])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "data",
-                () => FormatterServices.PopulateObjectMembers(new object(), new MemberInfo[0], null)
+            AssertExtensions.Throws<ArgumentNullException>("data", () =>
+                FormatterServices.PopulateObjectMembers(new object(), new MemberInfo[0], null)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    FormatterServices.PopulateObjectMembers(
-                        new object(),
-                        new MemberInfo[1],
-                        new object[2]
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                FormatterServices.PopulateObjectMembers(
+                    new object(),
+                    new MemberInfo[1],
+                    new object[2]
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "members",
-                () =>
-                    FormatterServices.PopulateObjectMembers(
-                        new object(),
-                        new MemberInfo[1],
-                        new object[1]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("members", () =>
+                FormatterServices.PopulateObjectMembers(
+                    new object(),
+                    new MemberInfo[1],
+                    new object[1]
+                )
             );
             Assert.Throws<SerializationException>(() =>
                 FormatterServices.PopulateObjectMembers(
@@ -463,17 +450,14 @@ namespace System.Runtime.Serialization.Formatters.Tests
         [Fact]
         public void GetObjectData_InvalidArguments_ThrowsException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "obj",
-                () => FormatterServices.GetObjectData(null, new MemberInfo[0])
+            AssertExtensions.Throws<ArgumentNullException>("obj", () =>
+                FormatterServices.GetObjectData(null, new MemberInfo[0])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "members",
-                () => FormatterServices.GetObjectData(new object(), null)
+            AssertExtensions.Throws<ArgumentNullException>("members", () =>
+                FormatterServices.GetObjectData(new object(), null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "members",
-                () => FormatterServices.GetObjectData(new object(), new MemberInfo[1])
+            AssertExtensions.Throws<ArgumentNullException>("members", () =>
+                FormatterServices.GetObjectData(new object(), new MemberInfo[1])
             );
             Assert.Throws<SerializationException>(() =>
                 FormatterServices.GetObjectData(
@@ -486,9 +470,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
         [Fact]
         public void GetSurrogateForCyclicalReference_InvalidArguments_ThrowsException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "innerSurrogate",
-                () => FormatterServices.GetSurrogateForCyclicalReference(null)
+            AssertExtensions.Throws<ArgumentNullException>("innerSurrogate", () =>
+                FormatterServices.GetSurrogateForCyclicalReference(null)
             );
         }
 
@@ -505,9 +488,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
         [Fact]
         public void GetTypeFromAssembly_InvalidArguments_ThrowsException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "assem",
-                () => FormatterServices.GetTypeFromAssembly(null, "name")
+            AssertExtensions.Throws<ArgumentNullException>("assem", () =>
+                FormatterServices.GetTypeFromAssembly(null, "name")
             );
             Assert.Null(
                 FormatterServices.GetTypeFromAssembly(

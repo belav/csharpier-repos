@@ -28,9 +28,8 @@ namespace System.ComponentModel.DataAnnotations.Schema.Tests
             DatabaseGeneratedOption databaseGeneratedOption
         )
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "databaseGeneratedOption",
-                () => new DatabaseGeneratedAttribute(databaseGeneratedOption)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("databaseGeneratedOption", () =>
+                new DatabaseGeneratedAttribute(databaseGeneratedOption)
             );
         }
     }

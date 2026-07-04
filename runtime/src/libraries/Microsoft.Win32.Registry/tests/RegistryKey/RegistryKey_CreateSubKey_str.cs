@@ -19,10 +19,8 @@ namespace Microsoft.Win32.RegistryTests
 
             // Should throw if key length above 255 characters
             const int maxValueNameLength = 255;
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                null,
-                () => TestRegistryKey.CreateSubKey(new string('a', maxValueNameLength + 1))
+            AssertExtensions.Throws<ArgumentException>("name", null, () =>
+                TestRegistryKey.CreateSubKey(new string('a', maxValueNameLength + 1))
             );
 
             // Should throw if RegistryKey is readonly
@@ -133,9 +131,8 @@ namespace Microsoft.Win32.RegistryTests
             string expected,
             string subKeyName
         ) =>
-            Verify_CreateSubKey_KeyExists_OpensKeyWithFixedUpName(
-                expected,
-                () => TestRegistryKey.CreateSubKey(subKeyName)
+            Verify_CreateSubKey_KeyExists_OpensKeyWithFixedUpName(expected, () =>
+                TestRegistryKey.CreateSubKey(subKeyName)
             );
 
         [Theory]
@@ -144,9 +141,8 @@ namespace Microsoft.Win32.RegistryTests
             string expected,
             string subKeyName
         ) =>
-            Verify_CreateSubKey_KeyDoesNotExist_CreatesKeyWithFixedUpName(
-                expected,
-                () => TestRegistryKey.CreateSubKey(subKeyName)
+            Verify_CreateSubKey_KeyDoesNotExist_CreatesKeyWithFixedUpName(expected, () =>
+                TestRegistryKey.CreateSubKey(subKeyName)
             );
     }
 }

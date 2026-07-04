@@ -70,9 +70,8 @@ namespace System.Text.Json.Serialization.Tests
             {
                 if (expectedExceptionType != null)
                 {
-                    await Assert.ThrowsAsync(
-                        expectedExceptionType,
-                        () => Serializer.SerializeWrapper(value, options)
+                    await Assert.ThrowsAsync(expectedExceptionType, () =>
+                        Serializer.SerializeWrapper(value, options)
                     );
                 }
                 else
@@ -90,9 +89,8 @@ namespace System.Text.Json.Serialization.Tests
             {
                 if (expectedExceptionType != null)
                 {
-                    await Assert.ThrowsAsync(
-                        expectedExceptionType,
-                        () => Serializer.SerializeWrapper<object>(value, options)
+                    await Assert.ThrowsAsync(expectedExceptionType, () =>
+                        Serializer.SerializeWrapper<object>(value, options)
                     );
                 }
                 else
@@ -108,9 +106,8 @@ namespace System.Text.Json.Serialization.Tests
 
                 if (expectedExceptionType != null)
                 {
-                    await Assert.ThrowsAsync(
-                        expectedExceptionType,
-                        () => Serializer.SerializeWrapper(poco, options)
+                    await Assert.ThrowsAsync(expectedExceptionType, () =>
+                        Serializer.SerializeWrapper(poco, options)
                     );
                 }
                 else
@@ -137,9 +134,8 @@ namespace System.Text.Json.Serialization.Tests
 
                 if (expectedExceptionType != null)
                 {
-                    await Assert.ThrowsAsync(
-                        expectedExceptionType,
-                        () => Serializer.SerializeWrapper(poco, options)
+                    await Assert.ThrowsAsync(expectedExceptionType, () =>
+                        Serializer.SerializeWrapper(poco, options)
                     );
                 }
                 else
@@ -162,9 +158,8 @@ namespace System.Text.Json.Serialization.Tests
 
                 if (expectedExceptionType != null)
                 {
-                    await Assert.ThrowsAsync(
-                        expectedExceptionType,
-                        () => Serializer.SerializeWrapper(list, options)
+                    await Assert.ThrowsAsync(expectedExceptionType, () =>
+                        Serializer.SerializeWrapper(list, options)
                     );
                 }
                 else
@@ -184,9 +179,8 @@ namespace System.Text.Json.Serialization.Tests
 
                 if (expectedExceptionType != null)
                 {
-                    await Assert.ThrowsAsync(
-                        expectedExceptionType,
-                        () => Serializer.SerializeWrapper(list, options)
+                    await Assert.ThrowsAsync(expectedExceptionType, () =>
+                        Serializer.SerializeWrapper(list, options)
                     );
                 }
                 else
@@ -203,9 +197,8 @@ namespace System.Text.Json.Serialization.Tests
 
                 if (expectedExceptionType != null)
                 {
-                    await Assert.ThrowsAsync(
-                        expectedExceptionType,
-                        () => Serializer.SerializeWrapper(dictionary, options)
+                    await Assert.ThrowsAsync(expectedExceptionType, () =>
+                        Serializer.SerializeWrapper(dictionary, options)
                     );
                 }
                 else
@@ -233,9 +226,8 @@ namespace System.Text.Json.Serialization.Tests
 
                 if (expectedExceptionType != null)
                 {
-                    await Assert.ThrowsAsync(
-                        expectedExceptionType,
-                        () => Serializer.SerializeWrapper(dictionary, options)
+                    await Assert.ThrowsAsync(expectedExceptionType, () =>
+                        Serializer.SerializeWrapper(dictionary, options)
                     );
                 }
                 else
@@ -259,9 +251,8 @@ namespace System.Text.Json.Serialization.Tests
 
                 if (expectedExceptionType != null)
                 {
-                    await Assert.ThrowsAsync(
-                        expectedExceptionType,
-                        () => Serializer.SerializeWrapper(jsonObject, options)
+                    await Assert.ThrowsAsync(expectedExceptionType, () =>
+                        Serializer.SerializeWrapper(jsonObject, options)
                     );
                 }
                 else
@@ -322,9 +313,8 @@ namespace System.Text.Json.Serialization.Tests
             {
                 if (expectedExceptionType != null)
                 {
-                    await Assert.ThrowsAsync(
-                        expectedExceptionType,
-                        () => Serializer.DeserializeWrapper<TValue>(json, options)
+                    await Assert.ThrowsAsync(expectedExceptionType, () =>
+                        Serializer.DeserializeWrapper<TValue>(json, options)
                     );
                 }
                 else
@@ -344,10 +334,8 @@ namespace System.Text.Json.Serialization.Tests
 
                 if (expectedExceptionType != null)
                 {
-                    await Assert.ThrowsAsync(
-                        expectedExceptionType,
-                        () =>
-                            Serializer.DeserializeWrapper<GenericPoco<TValue>>(wrappedJson, options)
+                    await Assert.ThrowsAsync(expectedExceptionType, () =>
+                        Serializer.DeserializeWrapper<GenericPoco<TValue>>(wrappedJson, options)
                     );
                 }
                 else
@@ -365,9 +353,8 @@ namespace System.Text.Json.Serialization.Tests
 
                 if (expectedExceptionType != null)
                 {
-                    await Assert.ThrowsAsync(
-                        expectedExceptionType,
-                        () => Serializer.DeserializeWrapper<List<TValue>>(wrappedJson, options)
+                    await Assert.ThrowsAsync(expectedExceptionType, () =>
+                        Serializer.DeserializeWrapper<List<TValue>>(wrappedJson, options)
                     );
                 }
                 else
@@ -388,13 +375,11 @@ namespace System.Text.Json.Serialization.Tests
 
                 if (expectedExceptionType != null)
                 {
-                    await Assert.ThrowsAsync(
-                        expectedExceptionType,
-                        () =>
-                            Serializer.DeserializeWrapper<Dictionary<string, TValue>>(
-                                wrappedJson,
-                                options
-                            )
+                    await Assert.ThrowsAsync(expectedExceptionType, () =>
+                        Serializer.DeserializeWrapper<Dictionary<string, TValue>>(
+                            wrappedJson,
+                            options
+                        )
                     );
                 }
                 else
@@ -415,17 +400,14 @@ namespace System.Text.Json.Serialization.Tests
 
                 if (expectedExceptionType != null)
                 {
-                    await Assert.ThrowsAsync(
-                        expectedExceptionType,
-                        async () =>
-                        {
-                            JsonNode jsonNode = await Serializer.DeserializeWrapper<JsonNode>(
-                                wrappedJson,
-                                options
-                            );
-                            JsonSerializer.Deserialize<TValue>(jsonNode[key], options);
-                        }
-                    );
+                    await Assert.ThrowsAsync(expectedExceptionType, async () =>
+                    {
+                        JsonNode jsonNode = await Serializer.DeserializeWrapper<JsonNode>(
+                            wrappedJson,
+                            options
+                        );
+                        JsonSerializer.Deserialize<TValue>(jsonNode[key], options);
+                    });
                 }
                 else
                 {

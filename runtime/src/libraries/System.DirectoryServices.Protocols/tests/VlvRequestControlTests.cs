@@ -307,43 +307,36 @@ namespace System.DirectoryServices.Protocols.Tests
         [Fact]
         public void Ctor_NegativeBeforeCount_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => new VlvRequestControl(-1, 0, "target")
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                new VlvRequestControl(-1, 0, "target")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => new VlvRequestControl(-1, 0, 0)
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                new VlvRequestControl(-1, 0, 0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => new VlvRequestControl(-1, 0, new byte[0])
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                new VlvRequestControl(-1, 0, new byte[0])
             );
         }
 
         [Fact]
         public void Ctor_NegativeAfterCount_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => new VlvRequestControl(0, -1, "target")
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                new VlvRequestControl(0, -1, "target")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => new VlvRequestControl(0, -1, 0)
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                new VlvRequestControl(0, -1, 0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => new VlvRequestControl(0, -1, new byte[0])
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                new VlvRequestControl(0, -1, new byte[0])
             );
         }
 
         [Fact]
         public void Ctor_NegativeOffset_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () => new VlvRequestControl(0, 0, -1)
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+                new VlvRequestControl(0, 0, -1)
             );
         }
 

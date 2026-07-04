@@ -457,16 +457,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                 var provider = context.AdditionalTextsProvider;
                 var finalProvider = rootOperator.Apply(provider);
 
-                context.RegisterSourceOutput(
-                    finalProvider,
-                    (context, text) =>
-                    {
-                        context.AddSource(
-                            ((InMemoryAdditionalText)text).Path,
-                            ((InMemoryAdditionalText)text).GetText()!.ToString()
-                        );
-                    }
-                );
+                context.RegisterSourceOutput(finalProvider, (context, text) =>
+                {
+                    context.AddSource(
+                        ((InMemoryAdditionalText)text).Path,
+                        ((InMemoryAdditionalText)text).GetText()!.ToString()
+                    );
+                });
             }
 
             Operator makeOperatorTree(Operator @operator, int depth)
@@ -739,13 +736,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                                     )
                         )
                 );
-                context.RegisterSourceOutput(
-                    provider,
-                    (context, text) =>
-                    {
-                        context.AddSource(text.Path, text.GetText()!.ToString());
-                    }
-                );
+                context.RegisterSourceOutput(provider, (context, text) =>
+                {
+                    context.AddSource(text.Path, text.GetText()!.ToString());
+                });
             }
         }
     }

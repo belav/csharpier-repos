@@ -49,16 +49,14 @@ namespace System.Formats.Asn1.Tests.Writer
 
             if (nonOidValue == null)
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "oidValue",
-                    () => writer.WriteObjectIdentifier(nonOidValue)
+                AssertExtensions.Throws<ArgumentNullException>("oidValue", () =>
+                    writer.WriteObjectIdentifier(nonOidValue)
                 );
             }
             else
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "oidValue",
-                    () => writer.WriteObjectIdentifier(nonOidValue)
+                AssertExtensions.Throws<ArgumentException>("oidValue", () =>
+                    writer.WriteObjectIdentifier(nonOidValue)
                 );
             }
         }
@@ -74,9 +72,8 @@ namespace System.Formats.Asn1.Tests.Writer
             _ = description;
             AsnWriter writer = new AsnWriter(ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "oidValue",
-                () => writer.WriteObjectIdentifier(nonOidValue.AsSpan())
+            AssertExtensions.Throws<ArgumentException>("oidValue", () =>
+                writer.WriteObjectIdentifier(nonOidValue.AsSpan())
             );
         }
 
@@ -114,23 +111,20 @@ namespace System.Formats.Asn1.Tests.Writer
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.BER);
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "oidValue",
-                () =>
+            AssertExtensions.Throws<ArgumentNullException>("oidValue", () =>
+            {
+                if (defaultTag)
                 {
-                    if (defaultTag)
-                    {
-                        writer.WriteObjectIdentifier((string)null);
-                    }
-                    else
-                    {
-                        writer.WriteObjectIdentifier(
-                            (string)null,
-                            new Asn1Tag(TagClass.ContextSpecific, 6)
-                        );
-                    }
+                    writer.WriteObjectIdentifier((string)null);
                 }
-            );
+                else
+                {
+                    writer.WriteObjectIdentifier(
+                        (string)null,
+                        new Asn1Tag(TagClass.ContextSpecific, 6)
+                    );
+                }
+            });
         }
 
         [Theory]
@@ -141,14 +135,12 @@ namespace System.Formats.Asn1.Tests.Writer
         {
             AsnWriter writer = new AsnWriter(ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "tag",
-                () => writer.WriteObjectIdentifier("1.1", Asn1Tag.Null)
+            AssertExtensions.Throws<ArgumentException>("tag", () =>
+                writer.WriteObjectIdentifier("1.1", Asn1Tag.Null)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "tag",
-                () => writer.WriteObjectIdentifier("1.1".AsSpan(), Asn1Tag.Null)
+            AssertExtensions.Throws<ArgumentException>("tag", () =>
+                writer.WriteObjectIdentifier("1.1".AsSpan(), Asn1Tag.Null)
             );
         }
 

@@ -401,9 +401,8 @@ namespace System.Threading.Tasks.Tests
                         Task<int>.Factory.ContinueWhenAny<int>((Task<int>[])antecedents, t => 0);
                     });
 
-                    AssertExtensions.Throws<ArgumentException>(
-                        "tasks",
-                        () => Task<int>.Factory.ContinueWhenAny(new Task<int>[0], t => 0)
+                    AssertExtensions.Throws<ArgumentException>("tasks", () =>
+                        Task<int>.Factory.ContinueWhenAny(new Task<int>[0], t => 0)
                     );
 
                     //
@@ -494,9 +493,8 @@ namespace System.Threading.Tasks.Tests
                         Task<int>.Factory.ContinueWhenAny(antecedents, (t) => 0);
                     });
 
-                    AssertExtensions.Throws<ArgumentException>(
-                        "tasks",
-                        () => Task<int>.Factory.ContinueWhenAny(new Task[0], t => 0)
+                    AssertExtensions.Throws<ArgumentException>("tasks", () =>
+                        Task<int>.Factory.ContinueWhenAny(new Task[0], t => 0)
                     );
 
                     //
@@ -579,15 +577,13 @@ namespace System.Threading.Tasks.Tests
 
                         Assert.Throws<ArgumentException>(() =>
                         {
-                            Task.Factory.ContinueWhenAny<int, int>(
-                                (Task<int>[])antecedents,
-                                t => 0
+                            Task.Factory.ContinueWhenAny<int, int>((Task<int>[])antecedents, t =>
+                                0
                             );
                         });
 
-                        AssertExtensions.Throws<ArgumentException>(
-                            "tasks",
-                            () => Task.Factory.ContinueWhenAny(new Task<int>[0], t => 0)
+                        AssertExtensions.Throws<ArgumentException>("tasks", () =>
+                            Task.Factory.ContinueWhenAny(new Task<int>[0], t => 0)
                         );
 
                         //
@@ -670,9 +666,8 @@ namespace System.Threading.Tasks.Tests
                             Task.Factory.ContinueWhenAny<int>(antecedents, t => 0);
                         });
 
-                        AssertExtensions.Throws<ArgumentException>(
-                            "tasks",
-                            () => Task.Factory.ContinueWhenAny(new Task[0], t => 0)
+                        AssertExtensions.Throws<ArgumentException>("tasks", () =>
+                            Task.Factory.ContinueWhenAny(new Task[0], t => 0)
                         );
 
                         //
@@ -755,9 +750,8 @@ namespace System.Threading.Tasks.Tests
                             Task.Factory.ContinueWhenAny<int>((Task<int>[])antecedents, t => { });
                         });
 
-                        AssertExtensions.Throws<ArgumentException>(
-                            "tasks",
-                            () => Task.Factory.ContinueWhenAny(new Task<int>[] { }, t => { })
+                        AssertExtensions.Throws<ArgumentException>("tasks", () =>
+                            Task.Factory.ContinueWhenAny(new Task<int>[] { }, t => { })
                         );
 
                         //
@@ -836,9 +830,8 @@ namespace System.Threading.Tasks.Tests
                             Task.Factory.ContinueWhenAny(antecedents, t => { });
                         });
 
-                        AssertExtensions.Throws<ArgumentException>(
-                            "tasks",
-                            () => Task.Factory.ContinueWhenAny(new Task[0], t => { })
+                        AssertExtensions.Throws<ArgumentException>("tasks", () =>
+                            Task.Factory.ContinueWhenAny(new Task[0], t => { })
                         );
 
                         //

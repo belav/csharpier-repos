@@ -476,14 +476,12 @@ public class FormTagHelperTest
 
                     var routeValueDictionary = Assert.IsType<RouteValueDictionary>(routeValues);
                     Assert.Equal(2, routeValueDictionary.Count);
-                    var routeValue = Assert.Single(
-                        routeValueDictionary,
-                        attr => attr.Key.Equals("val")
+                    var routeValue = Assert.Single(routeValueDictionary, attr =>
+                        attr.Key.Equals("val")
                     );
                     Assert.Equal("hello", routeValue.Value);
-                    routeValue = Assert.Single(
-                        routeValueDictionary,
-                        attr => attr.Key.Equals("-Name")
+                    routeValue = Assert.Single(routeValueDictionary, attr =>
+                        attr.Key.Equals("-Name")
                     );
                     Assert.Equal("Value", routeValue.Value);
                 }
@@ -945,14 +943,11 @@ public class FormTagHelperTest
                 ) =>
                 {
                     var rvd = Assert.IsType<RouteValueDictionary>(routeValues);
-                    Assert.Collection(
-                        rvd.OrderBy(item => item.Key),
-                        item =>
-                        {
-                            Assert.Equal("area", item.Key);
-                            Assert.Equal("test-area", item.Value);
-                        }
-                    );
+                    Assert.Collection(rvd.OrderBy(item => item.Key), item =>
+                    {
+                        Assert.Equal("area", item.Key);
+                        Assert.Equal("test-area", item.Value);
+                    });
                 }
             )
             .Returns(new TagBuilder("form"))

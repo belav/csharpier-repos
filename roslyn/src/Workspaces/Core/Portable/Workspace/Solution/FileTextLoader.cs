@@ -70,13 +70,10 @@ namespace Microsoft.CodeAnalysis
 #pragma warning disable CS0618 // Type or member is obsolete
         private bool IsObsoleteCreateTextOverridden =>
             s_isObsoleteCreateTextOverriden
-                .GetValue(
-                    GetType(),
-                    _ => new StrongBox<bool>(
-                        new Func<Stream, Workspace, SourceText>(CreateText).Method.DeclaringType
-                            != typeof(FileTextLoader)
-                    )
-                )
+                .GetValue(GetType(), _ => new StrongBox<bool>(
+                    new Func<Stream, Workspace, SourceText>(CreateText).Method.DeclaringType
+                        != typeof(FileTextLoader)
+                ))
                 .Value;
 #pragma warning restore
 

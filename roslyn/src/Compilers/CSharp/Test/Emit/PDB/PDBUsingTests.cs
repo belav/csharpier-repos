@@ -2682,37 +2682,34 @@ class C
                 parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute(),
                 references: new[] { SystemCoreRef.WithAliases(new[] { "A" }), SystemDataRef }
             );
-            var v = CompileAndVerify(
-                comp,
-                validator: (peAssembly) =>
-                {
-                    var reader = peAssembly.ManifestModule.MetadataReader;
+            var v = CompileAndVerify(comp, validator: (peAssembly) =>
+            {
+                var reader = peAssembly.ManifestModule.MetadataReader;
 
-                    Assert.Equal(
-                        new[] { "mscorlib", "System.Core", "System.Data" },
-                        peAssembly.AssemblyReferences.Select(ai => ai.Name)
-                    );
+                Assert.Equal(
+                    new[] { "mscorlib", "System.Core", "System.Data" },
+                    peAssembly.AssemblyReferences.Select(ai => ai.Name)
+                );
 
-                    Assert.Equal(
-                        new[]
-                        {
-                            "CompilationRelaxationsAttribute",
-                            "RuntimeCompatibilityAttribute",
-                            "DebuggableAttribute",
-                            "DebuggingModes",
-                            "Object",
-                            "Func`1",
-                            "Enumerable",
-                            "DataColumn",
-                        },
-                        reader.TypeReferences.Select(h =>
-                            reader.GetString(reader.GetTypeReference(h).Name)
-                        )
-                    );
+                Assert.Equal(
+                    new[]
+                    {
+                        "CompilationRelaxationsAttribute",
+                        "RuntimeCompatibilityAttribute",
+                        "DebuggableAttribute",
+                        "DebuggingModes",
+                        "Object",
+                        "Func`1",
+                        "Enumerable",
+                        "DataColumn",
+                    },
+                    reader.TypeReferences.Select(h =>
+                        reader.GetString(reader.GetTypeReference(h).Name)
+                    )
+                );
 
-                    Assert.Equal(1, reader.GetTableRowCount(TableIndex.TypeSpec));
-                }
-            );
+                Assert.Equal(1, reader.GetTableRowCount(TableIndex.TypeSpec));
+            });
         }
 
         [Fact]

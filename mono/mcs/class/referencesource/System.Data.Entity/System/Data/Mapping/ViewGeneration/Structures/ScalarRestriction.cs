@@ -149,9 +149,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                                     cqt.Equal(c.AsCqt(row, this.RestrictedMemberSlot.MemberPath))
                             )
                             .ToList();
-                        cqt = Helpers.BuildBalancedTreeInPlace(
-                            operands,
-                            (prev, next) => prev.Or(next)
+                        cqt = Helpers.BuildBalancedTreeInPlace(operands, (prev, next) =>
+                            prev.Or(next)
                         );
                     }
                 },

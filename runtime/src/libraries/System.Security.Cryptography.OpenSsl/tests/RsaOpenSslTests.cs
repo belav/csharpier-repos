@@ -95,9 +95,8 @@ namespace System.Security.Cryptography.OpenSsl.Tests
 
                 using (pkey) { }
 
-                AssertExtensions.Throws<ArgumentException>(
-                    "pkeyHandle",
-                    () => new RSAOpenSsl(pkey)
+                AssertExtensions.Throws<ArgumentException>("pkeyHandle", () =>
+                    new RSAOpenSsl(pkey)
                 );
             }
         }
@@ -107,9 +106,8 @@ namespace System.Security.Cryptography.OpenSsl.Tests
         {
             using (SafeEvpPKeyHandle pkey = new SafeEvpPKeyHandle(IntPtr.Zero, false))
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "pkeyHandle",
-                    () => new RSAOpenSsl(pkey)
+                AssertExtensions.Throws<ArgumentException>("pkeyHandle", () =>
+                    new RSAOpenSsl(pkey)
                 );
             }
         }

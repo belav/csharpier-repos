@@ -77,49 +77,30 @@ namespace Wasm.Build.Tests
                 )
                 .ToArray();
 
-            Assert.Contains(
-                packNames,
-                name =>
-                    Regex.IsMatch(
-                        name!,
-                        "Microsoft\\.NET\\.Runtime\\.Emscripten\\.[0-9\\.]+\\.Cache\\."
-                    )
+            Assert.Contains(packNames, name =>
+                Regex.IsMatch(
+                    name!,
+                    "Microsoft\\.NET\\.Runtime\\.Emscripten\\.[0-9\\.]+\\.Cache\\."
+                )
             );
-            Assert.Contains(
-                packNames,
-                name =>
-                    Regex.IsMatch(
-                        name!,
-                        "Microsoft\\.NET\\.Runtime\\.Emscripten\\.[0-9\\.]+\\.Node\\."
-                    )
+            Assert.Contains(packNames, name =>
+                Regex.IsMatch(name!, "Microsoft\\.NET\\.Runtime\\.Emscripten\\.[0-9\\.]+\\.Node\\.")
             );
-            Assert.Contains(
-                packNames,
-                name =>
-                    Regex.IsMatch(
-                        name!,
-                        "Microsoft\\.NET\\.Runtime\\.Emscripten\\.[0-9\\.]+\\.Sdk\\."
-                    )
+            Assert.Contains(packNames, name =>
+                Regex.IsMatch(name!, "Microsoft\\.NET\\.Runtime\\.Emscripten\\.[0-9\\.]+\\.Sdk\\.")
             );
 
             // linux doesn't have Emscripten.Python package, so only 2 there
             if (!RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                Assert.Contains(
-                    packNames,
-                    name =>
-                        Regex.IsMatch(
-                            name!,
-                            "Microsoft\\.NET\\.Runtime\\.Emscripten\\.[0-9\\.]+\\.Python\\."
-                        )
-                );
-
-            Assert.Contains(
-                packNames,
-                name =>
+                Assert.Contains(packNames, name =>
                     Regex.IsMatch(
                         name!,
-                        "Microsoft.NETCore.App.Runtime.AOT\\..*\\.Cross.browser-wasm"
+                        "Microsoft\\.NET\\.Runtime\\.Emscripten\\.[0-9\\.]+\\.Python\\."
                     )
+                );
+
+            Assert.Contains(packNames, name =>
+                Regex.IsMatch(name!, "Microsoft.NETCore.App.Runtime.AOT\\..*\\.Cross.browser-wasm")
             );
         }
     }

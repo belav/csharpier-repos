@@ -170,14 +170,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             bool isField = true
         )
         {
-            return CompileAndVerifyCommon(
-                compilation,
-                assemblyValidator: (assembly) =>
-                    MetadataValidation.MarshalAsMetadataValidator(
-                        assembly,
-                        getExpectedBlob,
-                        isField
-                    )
+            return CompileAndVerifyCommon(compilation, assemblyValidator: (assembly) =>
+                MetadataValidation.MarshalAsMetadataValidator(assembly, getExpectedBlob, isField)
             );
         }
 

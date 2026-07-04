@@ -65,9 +65,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             Func<CallSite, object, object, object, object> target = site.Target;
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => target.Invoke(site, "Ceci n'est pas un type", 2, 2)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                target.Invoke(site, "Ceci n'est pas un type", 2, 2)
             );
         }
 
@@ -98,9 +97,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             Func<CallSite, object, object, object, object> target = site.Target;
-            Assert.Throws<ArgumentException>(
-                "Type Argument",
-                () => target.Invoke(site, "Ceci n'est pas un type", 2, 2)
+            Assert.Throws<ArgumentException>("Type Argument", () =>
+                target.Invoke(site, "Ceci n'est pas un type", 2, 2)
             );
         }
 
@@ -131,9 +129,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             Func<CallSite, object, object, object, object> target = site.Target;
-            AssertExtensions.Throws<ArgumentException>(
-                "Type Argument",
-                () => target.Invoke(site, null, 2, 2)
+            AssertExtensions.Throws<ArgumentException>("Type Argument", () =>
+                target.Invoke(site, null, 2, 2)
             );
         }
 
@@ -157,9 +154,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
             );
             Func<CallSite, object, object> targ = site.Target;
-            AssertExtensions.Throws<ArgumentException>(
-                "Type Argument",
-                () => targ.Invoke(site, 23)
+            AssertExtensions.Throws<ArgumentException>("Type Argument", () =>
+                targ.Invoke(site, 23)
             );
         }
     }

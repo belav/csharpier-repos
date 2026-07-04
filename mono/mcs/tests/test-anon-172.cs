@@ -18,13 +18,10 @@ class MainClass
         var generator = dynMethod.GetILGenerator();
 
         generator.Emit(OpCodes.Ldc_I4_7);
-        GenerateCodeCall(
-            generator,
-            (int a) =>
-            {
-                Console.WriteLine(a);
-            }
-        );
+        GenerateCodeCall(generator, (int a) =>
+        {
+            Console.WriteLine(a);
+        });
 
         generator.Emit(OpCodes.Ret);
 

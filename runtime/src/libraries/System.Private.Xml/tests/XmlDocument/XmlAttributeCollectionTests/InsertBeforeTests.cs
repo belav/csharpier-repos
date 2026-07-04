@@ -70,9 +70,8 @@ namespace System.Xml.XmlDocumentTests
             );
 
             XmlAttributeCollection target = element.Attributes;
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => target.InsertBefore(newAttr, anotherOwnerElementAttr)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                target.InsertBefore(newAttr, anotherOwnerElementAttr)
             );
         }
 
@@ -88,9 +87,8 @@ namespace System.Xml.XmlDocumentTests
             );
 
             XmlAttributeCollection target = element.Attributes;
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => target.InsertBefore(anotherOwnerDocumentAttr, existingAttr)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                target.InsertBefore(anotherOwnerDocumentAttr, existingAttr)
             );
         }
 

@@ -237,13 +237,11 @@ namespace System.Linq.Tests
         public void ThrowsOnNullSource()
         {
             int[] source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.SingleOrDefault()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.SingleOrDefault()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.SingleOrDefault(i => i % 2 == 0)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.SingleOrDefault(i => i % 2 == 0)
             );
         }
 
@@ -251,13 +249,11 @@ namespace System.Linq.Tests
         public void ThrowsOnNullSourceDefault()
         {
             int[] source = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.SingleOrDefault(5)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.SingleOrDefault(5)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => source.SingleOrDefault(i => i % 2 == 0, 5)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                source.SingleOrDefault(i => i % 2 == 0, 5)
             );
         }
 
@@ -266,9 +262,8 @@ namespace System.Linq.Tests
         {
             int[] source = { };
             Func<int, bool> nullPredicate = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => source.SingleOrDefault(nullPredicate)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                source.SingleOrDefault(nullPredicate)
             );
         }
 
@@ -277,9 +272,8 @@ namespace System.Linq.Tests
         {
             int[] source = { };
             Func<int, bool> nullPredicate = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => source.SingleOrDefault(nullPredicate, 5)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                source.SingleOrDefault(nullPredicate, 5)
             );
         }
     }

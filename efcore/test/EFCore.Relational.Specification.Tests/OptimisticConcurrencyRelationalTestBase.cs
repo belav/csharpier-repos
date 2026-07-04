@@ -18,25 +18,22 @@ public abstract class OptimisticConcurrencyRelationalTestBase<TFixture, TRowVers
     {
         using var c = CreateF1Context();
         c.Database.CreateExecutionStrategy()
-            .Execute(
-                c,
-                context =>
+            .Execute(c, context =>
+            {
+                using (context.Database.BeginTransaction())
                 {
-                    using (context.Database.BeginTransaction())
-                    {
-                        // ReSharper disable once UnusedVariable
-                        var engine = context.Engines.OrderBy(e => e.Id).First();
-                        var trackedEntry = context.ChangeTracker.Entries<Engine>().First();
-                        trackedEntry.Property(e => e.Name).OriginalValue = "ChangedEngine";
+                    // ReSharper disable once UnusedVariable
+                    var engine = context.Engines.OrderBy(e => e.Id).First();
+                    var trackedEntry = context.ChangeTracker.Entries<Engine>().First();
+                    trackedEntry.Property(e => e.Name).OriginalValue = "ChangedEngine";
 
-                        Assert.Equal(
-                            RelationalStrings.UpdateConcurrencyException("1", "0"),
-                            Assert
-                                .Throws<DbUpdateConcurrencyException>(() => context.SaveChanges())
-                                .Message
-                        );
-                    }
+                    Assert.Equal(
+                        RelationalStrings.UpdateConcurrencyException("1", "0"),
+                        Assert
+                            .Throws<DbUpdateConcurrencyException>(() => context.SaveChanges())
+                            .Message
+                    );
                 }
-            );
+            });
     }
 }

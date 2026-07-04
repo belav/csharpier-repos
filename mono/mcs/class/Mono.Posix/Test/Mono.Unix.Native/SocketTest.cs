@@ -191,77 +191,72 @@ namespace MonoTests.Mono.Unix.Native
         [Test]
         public void SockOpt()
         {
-            WithSockets(
-                UnixAddressFamily.AF_UNIX,
-                UnixSocketType.SOCK_STREAM,
-                0,
-                (so1, so2) =>
-                {
-                    int value;
-                    if (
-                        Syscall.getsockopt(
-                            so1,
-                            UnixSocketProtocol.SOL_SOCKET,
-                            UnixSocketOptionName.SO_REUSEADDR,
-                            out value
-                        ) < 0
-                    )
-                        UnixMarshal.ThrowExceptionForLastError();
-                    Assert.AreEqual(0, value);
+            WithSockets(UnixAddressFamily.AF_UNIX, UnixSocketType.SOCK_STREAM, 0, (so1, so2) =>
+            {
+                int value;
+                if (
+                    Syscall.getsockopt(
+                        so1,
+                        UnixSocketProtocol.SOL_SOCKET,
+                        UnixSocketOptionName.SO_REUSEADDR,
+                        out value
+                    ) < 0
+                )
+                    UnixMarshal.ThrowExceptionForLastError();
+                Assert.AreEqual(0, value);
 
-                    // Set SO_REUSEADDR to 1
-                    if (
-                        Syscall.setsockopt(
-                            so1,
-                            UnixSocketProtocol.SOL_SOCKET,
-                            UnixSocketOptionName.SO_REUSEADDR,
-                            1
-                        ) < 0
-                    )
-                        UnixMarshal.ThrowExceptionForLastError();
+                // Set SO_REUSEADDR to 1
+                if (
+                    Syscall.setsockopt(
+                        so1,
+                        UnixSocketProtocol.SOL_SOCKET,
+                        UnixSocketOptionName.SO_REUSEADDR,
+                        1
+                    ) < 0
+                )
+                    UnixMarshal.ThrowExceptionForLastError();
 
-                    // Get and check SO_REUSEADDR
-                    if (
-                        Syscall.getsockopt(
-                            so1,
-                            UnixSocketProtocol.SOL_SOCKET,
-                            UnixSocketOptionName.SO_REUSEADDR,
-                            out value
-                        ) < 0
-                    )
-                        UnixMarshal.ThrowExceptionForLastError();
-                    Assert.AreNotEqual(0, value);
+                // Get and check SO_REUSEADDR
+                if (
+                    Syscall.getsockopt(
+                        so1,
+                        UnixSocketProtocol.SOL_SOCKET,
+                        UnixSocketOptionName.SO_REUSEADDR,
+                        out value
+                    ) < 0
+                )
+                    UnixMarshal.ThrowExceptionForLastError();
+                Assert.AreNotEqual(0, value);
 
-                    // Set SO_REUSEADDR to 0
-                    if (
-                        Syscall.setsockopt(
-                            so1,
-                            UnixSocketProtocol.SOL_SOCKET,
-                            UnixSocketOptionName.SO_REUSEADDR,
-                            new byte[10],
-                            4
-                        ) < 0
-                    )
-                        UnixMarshal.ThrowExceptionForLastError();
+                // Set SO_REUSEADDR to 0
+                if (
+                    Syscall.setsockopt(
+                        so1,
+                        UnixSocketProtocol.SOL_SOCKET,
+                        UnixSocketOptionName.SO_REUSEADDR,
+                        new byte[10],
+                        4
+                    ) < 0
+                )
+                    UnixMarshal.ThrowExceptionForLastError();
 
-                    // Get and check SO_REUSEADDR
-                    var buffer = new byte[15];
-                    long size = 12;
-                    if (
-                        Syscall.getsockopt(
-                            so1,
-                            UnixSocketProtocol.SOL_SOCKET,
-                            UnixSocketOptionName.SO_REUSEADDR,
-                            buffer,
-                            ref size
-                        ) < 0
-                    )
-                        UnixMarshal.ThrowExceptionForLastError();
-                    Assert.AreEqual(size, 4);
-                    for (int i = 0; i < size; i++)
-                        Assert.AreEqual(buffer[i], 0);
-                }
-            );
+                // Get and check SO_REUSEADDR
+                var buffer = new byte[15];
+                long size = 12;
+                if (
+                    Syscall.getsockopt(
+                        so1,
+                        UnixSocketProtocol.SOL_SOCKET,
+                        UnixSocketOptionName.SO_REUSEADDR,
+                        buffer,
+                        ref size
+                    ) < 0
+                )
+                    UnixMarshal.ThrowExceptionForLastError();
+                Assert.AreEqual(size, 4);
+                for (int i = 0; i < size; i++)
+                    Assert.AreEqual(buffer[i], 0);
+            });
         }
 
         [Test]
@@ -545,46 +540,41 @@ namespace MonoTests.Mono.Unix.Native
                 sin6_port = Syscall.htons(0),
                 sin6_addr = NativeConvert.ToIn6Addr(IPAddress.IPv6Loopback),
             };
-            WithSockets(
-                UnixAddressFamily.AF_INET6,
-                UnixSocketType.SOCK_STREAM,
-                0,
-                (so1, so2) =>
-                {
-                    if (Syscall.bind(so1, address) < 0)
-                        UnixMarshal.ThrowExceptionForLastError();
+            WithSockets(UnixAddressFamily.AF_INET6, UnixSocketType.SOCK_STREAM, 0, (so1, so2) =>
+            {
+                if (Syscall.bind(so1, address) < 0)
+                    UnixMarshal.ThrowExceptionForLastError();
 
-                    var address1Stor = new SockaddrStorage();
-                    if (Syscall.getsockname(so1, address1Stor) < 0)
-                        UnixMarshal.ThrowExceptionForLastError();
-                    var address1 = new SockaddrIn6();
-                    address1Stor.CopyTo(address1);
+                var address1Stor = new SockaddrStorage();
+                if (Syscall.getsockname(so1, address1Stor) < 0)
+                    UnixMarshal.ThrowExceptionForLastError();
+                var address1 = new SockaddrIn6();
+                address1Stor.CopyTo(address1);
 
-                    // Check getsockname(socket, null)
-                    if (Syscall.getsockname(so1, null) < 0)
-                        UnixMarshal.ThrowExceptionForLastError();
+                // Check getsockname(socket, null)
+                if (Syscall.getsockname(so1, null) < 0)
+                    UnixMarshal.ThrowExceptionForLastError();
 
-                    var address2 = new SockaddrIn6();
-                    if (Syscall.getsockname(so1, address2) < 0)
-                        UnixMarshal.ThrowExceptionForLastError();
+                var address2 = new SockaddrIn6();
+                if (Syscall.getsockname(so1, address2) < 0)
+                    UnixMarshal.ThrowExceptionForLastError();
 
-                    Assert.AreEqual(address1, address2);
-                    Assert.IsTrue(Syscall.ntohs(address1.sin6_port) != 0);
-                    address1.sin6_port = 0;
-                    Assert.AreEqual(address, address1);
+                Assert.AreEqual(address1, address2);
+                Assert.IsTrue(Syscall.ntohs(address1.sin6_port) != 0);
+                address1.sin6_port = 0;
+                Assert.AreEqual(address, address1);
 
-                    var address3 = new Sockaddr();
-                    if (Syscall.getsockname(so1, address3) < 0)
-                        UnixMarshal.ThrowExceptionForLastError();
-                    Assert.AreEqual(address.sa_family, address3.sa_family);
+                var address3 = new Sockaddr();
+                if (Syscall.getsockname(so1, address3) < 0)
+                    UnixMarshal.ThrowExceptionForLastError();
+                Assert.AreEqual(address.sa_family, address3.sa_family);
 
-                    // Try to store a sockaddr_in6 into a Sockaddr. Should fail because sockaddr_in6 should be larger than sockaddr_in
-                    var address4 = new SockaddrIn();
-                    if (Syscall.getsockname(so1, address4) == 0)
-                        Assert.Fail("getsockname() should have failed");
-                    Assert.AreEqual(Errno.ENOBUFS, Stdlib.GetLastError());
-                }
-            );
+                // Try to store a sockaddr_in6 into a Sockaddr. Should fail because sockaddr_in6 should be larger than sockaddr_in
+                var address4 = new SockaddrIn();
+                if (Syscall.getsockname(so1, address4) == 0)
+                    Assert.Fail("getsockname() should have failed");
+                Assert.AreEqual(Errno.ENOBUFS, Stdlib.GetLastError());
+            });
         }
 
         [Test]
@@ -594,70 +584,65 @@ namespace MonoTests.Mono.Unix.Native
             var address2 = SockaddrUn.FromSockaddrStorage(address.ToSockaddrStorage());
             Assert.AreEqual(address, address2);
 
-            WithSockets(
-                UnixAddressFamily.AF_UNIX,
-                UnixSocketType.SOCK_STREAM,
-                0,
-                (so1, so2) =>
+            WithSockets(UnixAddressFamily.AF_UNIX, UnixSocketType.SOCK_STREAM, 0, (so1, so2) =>
+            {
+                if (Syscall.bind(so1, address) < 0)
+                    UnixMarshal.ThrowExceptionForLastError();
+
+                if (Syscall.listen(so1, 5) < 0)
+                    UnixMarshal.ThrowExceptionForLastError();
+
+                if (Syscall.connect(so2, address) < 0)
+                    UnixMarshal.ThrowExceptionForLastError();
+
+                var address3 = new SockaddrUn();
+                if (Syscall.getsockname(so1, address3) < 0)
+                    UnixMarshal.ThrowExceptionForLastError();
+                Assert.AreEqual(address, address3);
+
+                var address4 = new SockaddrStorage();
+                if (Syscall.getsockname(so1, address4) < 0)
+                    UnixMarshal.ThrowExceptionForLastError();
+                Assert.AreEqual(UnixAddressFamily.AF_UNIX, address4.sa_family);
+                Assert.AreEqual(address3, SockaddrUn.FromSockaddrStorage(address4));
+
+                var address5 = new SockaddrUn();
+                if (Syscall.getsockname(so1, address5) < 0)
+                    UnixMarshal.ThrowExceptionForLastError();
+                Assert.AreEqual(UnixAddressFamily.AF_UNIX, address5.sa_family);
+
+                // Check getsockname(socket, null)
+                if (Syscall.getsockname(so1, null) < 0)
+                    UnixMarshal.ThrowExceptionForLastError();
+
+                int so3;
+                var remote = new SockaddrUn();
+                if ((so3 = Syscall.accept(so1, remote)) < 0)
+                    UnixMarshal.ThrowExceptionForLastError();
+                try
                 {
-                    if (Syscall.bind(so1, address) < 0)
+                    // Send and receive a few bytes
+                    long ret;
+                    var buffer1 = new byte[] { 42, 43, 44 };
+                    ret = Syscall.send(so2, buffer1, (ulong)buffer1.Length, 0);
+                    if (ret < 0)
                         UnixMarshal.ThrowExceptionForLastError();
 
-                    if (Syscall.listen(so1, 5) < 0)
+                    var buffer2 = new byte[1024];
+                    ret = Syscall.recv(so3, buffer2, (ulong)buffer2.Length, 0);
+                    if (ret < 0)
                         UnixMarshal.ThrowExceptionForLastError();
 
-                    if (Syscall.connect(so2, address) < 0)
-                        UnixMarshal.ThrowExceptionForLastError();
-
-                    var address3 = new SockaddrUn();
-                    if (Syscall.getsockname(so1, address3) < 0)
-                        UnixMarshal.ThrowExceptionForLastError();
-                    Assert.AreEqual(address, address3);
-
-                    var address4 = new SockaddrStorage();
-                    if (Syscall.getsockname(so1, address4) < 0)
-                        UnixMarshal.ThrowExceptionForLastError();
-                    Assert.AreEqual(UnixAddressFamily.AF_UNIX, address4.sa_family);
-                    Assert.AreEqual(address3, SockaddrUn.FromSockaddrStorage(address4));
-
-                    var address5 = new SockaddrUn();
-                    if (Syscall.getsockname(so1, address5) < 0)
-                        UnixMarshal.ThrowExceptionForLastError();
-                    Assert.AreEqual(UnixAddressFamily.AF_UNIX, address5.sa_family);
-
-                    // Check getsockname(socket, null)
-                    if (Syscall.getsockname(so1, null) < 0)
-                        UnixMarshal.ThrowExceptionForLastError();
-
-                    int so3;
-                    var remote = new SockaddrUn();
-                    if ((so3 = Syscall.accept(so1, remote)) < 0)
-                        UnixMarshal.ThrowExceptionForLastError();
-                    try
-                    {
-                        // Send and receive a few bytes
-                        long ret;
-                        var buffer1 = new byte[] { 42, 43, 44 };
-                        ret = Syscall.send(so2, buffer1, (ulong)buffer1.Length, 0);
-                        if (ret < 0)
-                            UnixMarshal.ThrowExceptionForLastError();
-
-                        var buffer2 = new byte[1024];
-                        ret = Syscall.recv(so3, buffer2, (ulong)buffer2.Length, 0);
-                        if (ret < 0)
-                            UnixMarshal.ThrowExceptionForLastError();
-
-                        Assert.AreEqual(buffer1.Length, ret);
-                        for (int i = 0; i < buffer1.Length; i++)
-                            Assert.AreEqual(buffer1[i], buffer2[i]);
-                    }
-                    finally
-                    {
-                        if (Syscall.close(so3) < 0)
-                            UnixMarshal.ThrowExceptionForLastError();
-                    }
+                    Assert.AreEqual(buffer1.Length, ret);
+                    for (int i = 0; i < buffer1.Length; i++)
+                        Assert.AreEqual(buffer1[i], buffer2[i]);
                 }
-            );
+                finally
+                {
+                    if (Syscall.close(so3) < 0)
+                        UnixMarshal.ThrowExceptionForLastError();
+                }
+            });
         }
 
         [Test]
@@ -667,55 +652,50 @@ namespace MonoTests.Mono.Unix.Native
 #endif
         public void Accept4()
         {
-            WithSockets(
-                UnixAddressFamily.AF_UNIX,
-                UnixSocketType.SOCK_STREAM,
-                0,
-                (so1, so2) =>
+            WithSockets(UnixAddressFamily.AF_UNIX, UnixSocketType.SOCK_STREAM, 0, (so1, so2) =>
+            {
+                var address = new SockaddrUn(TempFolder + "/socket2");
+                if (Syscall.bind(so1, address) < 0)
+                    UnixMarshal.ThrowExceptionForLastError();
+                if (Syscall.listen(so1, 5) < 0)
+                    UnixMarshal.ThrowExceptionForLastError();
+                if (Syscall.connect(so2, address) < 0)
+                    UnixMarshal.ThrowExceptionForLastError();
+
+                int so3;
+                var remote = new SockaddrUn();
+                if (
+                    (
+                        so3 = Syscall.accept4(
+                            so1,
+                            remote,
+                            UnixSocketFlags.SOCK_CLOEXEC | UnixSocketFlags.SOCK_NONBLOCK
+                        )
+                    ) < 0
+                )
+                    UnixMarshal.ThrowExceptionForLastError();
+                try
                 {
-                    var address = new SockaddrUn(TempFolder + "/socket2");
-                    if (Syscall.bind(so1, address) < 0)
+                    int _flags;
+                    if ((_flags = Syscall.fcntl(so3, FcntlCommand.F_GETFL)) < 0)
                         UnixMarshal.ThrowExceptionForLastError();
-                    if (Syscall.listen(so1, 5) < 0)
-                        UnixMarshal.ThrowExceptionForLastError();
-                    if (Syscall.connect(so2, address) < 0)
-                        UnixMarshal.ThrowExceptionForLastError();
+                    var flags = NativeConvert.ToOpenFlags(_flags);
+                    Assert.IsTrue((flags & OpenFlags.O_NONBLOCK) != 0);
 
-                    int so3;
-                    var remote = new SockaddrUn();
-                    if (
-                        (
-                            so3 = Syscall.accept4(
-                                so1,
-                                remote,
-                                UnixSocketFlags.SOCK_CLOEXEC | UnixSocketFlags.SOCK_NONBLOCK
-                            )
-                        ) < 0
-                    )
+                    int _flagsFD;
+                    if ((_flagsFD = Syscall.fcntl(so3, FcntlCommand.F_GETFD)) < 0)
                         UnixMarshal.ThrowExceptionForLastError();
-                    try
-                    {
-                        int _flags;
-                        if ((_flags = Syscall.fcntl(so3, FcntlCommand.F_GETFL)) < 0)
-                            UnixMarshal.ThrowExceptionForLastError();
-                        var flags = NativeConvert.ToOpenFlags(_flags);
-                        Assert.IsTrue((flags & OpenFlags.O_NONBLOCK) != 0);
-
-                        int _flagsFD;
-                        if ((_flagsFD = Syscall.fcntl(so3, FcntlCommand.F_GETFD)) < 0)
-                            UnixMarshal.ThrowExceptionForLastError();
-                        // FD_CLOEXEC must be set
-                        //var flagsFD = NativeConvert.ToFdFlags (_flagsFD);
-                        //Assert.IsTrue ((flagsFD & FdFlags.FD_CLOEXEC) != 0);
-                        Assert.IsTrue(_flagsFD != 0);
-                    }
-                    finally
-                    {
-                        if (Syscall.close(so3) < 0)
-                            UnixMarshal.ThrowExceptionForLastError();
-                    }
+                    // FD_CLOEXEC must be set
+                    //var flagsFD = NativeConvert.ToFdFlags (_flagsFD);
+                    //Assert.IsTrue ((flagsFD & FdFlags.FD_CLOEXEC) != 0);
+                    Assert.IsTrue(_flagsFD != 0);
                 }
-            );
+                finally
+                {
+                    if (Syscall.close(so3) < 0)
+                        UnixMarshal.ThrowExceptionForLastError();
+                }
+            });
         }
 
         [Test]

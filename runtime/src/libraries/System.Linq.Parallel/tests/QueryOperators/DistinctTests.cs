@@ -140,9 +140,8 @@ namespace System.Linq.Parallel.Tests
         {
             ParallelQuery<int> query = labeled.Item;
             int seen = 0;
-            Assert.All(
-                query.Distinct(new ModularCongruenceComparer(count)).ToList(),
-                x => Assert.Equal(seen++, x % count)
+            Assert.All(query.Distinct(new ModularCongruenceComparer(count)).ToList(), x =>
+                Assert.Equal(seen++, x % count)
             );
             Assert.Equal(count, seen);
         }
@@ -223,9 +222,8 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Distinct_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int>)null).Distinct()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).Distinct()
             );
         }
     }

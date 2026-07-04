@@ -159,30 +159,24 @@ public class RoleManagerTest
     [Fact]
     public async Task RoleManagerPublicNullChecks()
     {
-        Assert.Throws<ArgumentNullException>(
-            "store",
-            () => new RoleManager<PocoRole>(null, null, null, null, null)
+        Assert.Throws<ArgumentNullException>("store", () =>
+            new RoleManager<PocoRole>(null, null, null, null, null)
         );
         var manager = CreateRoleManager(new NotImplementedStore());
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "role",
-            async () => await manager.CreateAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("role", async () =>
+            await manager.CreateAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "role",
-            async () => await manager.UpdateAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("role", async () =>
+            await manager.UpdateAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "role",
-            async () => await manager.DeleteAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("role", async () =>
+            await manager.DeleteAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "roleName",
-            async () => await manager.FindByNameAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("roleName", async () =>
+            await manager.FindByNameAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "roleName",
-            async () => await manager.RoleExistsAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("roleName", async () =>
+            await manager.RoleExistsAsync(null)
         );
     }
 

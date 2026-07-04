@@ -97,9 +97,8 @@ public class TwitterTests : RemoteAuthenticationTests<TwitterOptions>
         });
 
         using var server = host.GetTestServer();
-        await Assert.ThrowsAsync<ArgumentException>(
-            "ConsumerKey",
-            async () => await server.SendAsync("http://example.com/challenge")
+        await Assert.ThrowsAsync<ArgumentException>("ConsumerKey", async () =>
+            await server.SendAsync("http://example.com/challenge")
         );
     }
 
@@ -116,9 +115,8 @@ public class TwitterTests : RemoteAuthenticationTests<TwitterOptions>
         });
 
         using var server = host.GetTestServer();
-        await Assert.ThrowsAsync<ArgumentException>(
-            "ConsumerSecret",
-            async () => await server.SendAsync("http://example.com/challenge")
+        await Assert.ThrowsAsync<ArgumentException>("ConsumerSecret", async () =>
+            await server.SendAsync("http://example.com/challenge")
         );
     }
 
@@ -688,9 +686,8 @@ public class TwitterTests : RemoteAuthenticationTests<TwitterOptions>
                         };
                         services
                             .AddAuthentication(TestExtensions.CookieAuthenticationScheme)
-                            .AddCookie(
-                                TestExtensions.CookieAuthenticationScheme,
-                                o => o.ForwardChallenge = TwitterDefaults.AuthenticationScheme
+                            .AddCookie(TestExtensions.CookieAuthenticationScheme, o =>
+                                o.ForwardChallenge = TwitterDefaults.AuthenticationScheme
                             )
                             .AddTwitter(wrapOptions);
                     })

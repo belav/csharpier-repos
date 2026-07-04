@@ -288,9 +288,8 @@ namespace ILLink.CodeFix
             if (addAsReturnAttribute)
             {
                 // don't use AddReturnAttribute because it's the same as AddAttribute https://github.com/dotnet/roslyn/pull/63084
-                editor.ReplaceNode(
-                    targetNode,
-                    (d, g) => g.AddReturnAttributes(d, new[] { attribute })
+                editor.ReplaceNode(targetNode, (d, g) =>
+                    g.AddReturnAttributes(d, new[] { attribute })
                 );
             }
             else if (addGenericParameterAttribute)

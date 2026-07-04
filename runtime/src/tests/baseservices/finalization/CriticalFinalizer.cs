@@ -37,15 +37,11 @@ public static class CriticalFinalizerTest
     {
         var arr = new object[checked(count * 2)];
 
-        Parallel.For(
-            0,
-            count,
-            i =>
-            {
-                arr[i * 2] = new Normal();
-                arr[i * 2 + 1] = new Critical();
-            }
-        );
+        Parallel.For(0, count, i =>
+        {
+            arr[i * 2] = new Normal();
+            arr[i * 2 + 1] = new Critical();
+        });
 
         GC.KeepAlive(arr);
     }

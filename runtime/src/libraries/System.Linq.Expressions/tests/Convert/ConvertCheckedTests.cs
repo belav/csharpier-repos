@@ -22285,49 +22285,38 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void OpenGenericnType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.ConvertChecked(Expression.Constant(null), typeof(List<>))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.ConvertChecked(Expression.Constant(null), typeof(List<>))
             );
         }
 
         [Fact]
         public static void TypeContainingGenericParameters()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () =>
-                    Expression.ConvertChecked(Expression.Constant(null), typeof(List<>.Enumerator))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.ConvertChecked(Expression.Constant(null), typeof(List<>.Enumerator))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () =>
-                    Expression.ConvertChecked(
-                        Expression.Constant(null),
-                        typeof(List<>).MakeGenericType(typeof(List<>))
-                    )
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.ConvertChecked(
+                    Expression.Constant(null),
+                    typeof(List<>).MakeGenericType(typeof(List<>))
+                )
             );
         }
 
         [Fact]
         public static void ByRefType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () =>
-                    Expression.ConvertChecked(
-                        Expression.Constant(null),
-                        typeof(object).MakeByRefType()
-                    )
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.ConvertChecked(Expression.Constant(null), typeof(object).MakeByRefType())
             );
         }
 
         [Fact]
         public static void PointerType()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "type",
-                () => Expression.ConvertChecked(Expression.Constant(null), typeof(int*))
+            AssertExtensions.Throws<ArgumentException>("type", () =>
+                Expression.ConvertChecked(Expression.Constant(null), typeof(int*))
             );
         }
 

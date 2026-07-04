@@ -233,9 +233,8 @@ namespace System.Globalization.Tests
         public void AMDesignator_SetNullValue_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => format.AMDesignator = null
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                format.AMDesignator = null
             );
         }
 

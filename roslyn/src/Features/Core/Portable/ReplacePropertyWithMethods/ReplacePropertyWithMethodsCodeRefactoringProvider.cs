@@ -101,9 +101,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
             CancellationToken cancellationToken
         )
         {
-            var desiredMethodSuffix = NameGenerator.GenerateUniqueName(
-                propertySymbol.Name,
-                n => !HasAnyMatchingGetOrSetMethods(propertySymbol, n)
+            var desiredMethodSuffix = NameGenerator.GenerateUniqueName(propertySymbol.Name, n =>
+                !HasAnyMatchingGetOrSetMethods(propertySymbol, n)
             );
 
             var desiredGetMethodName = GetPrefix + desiredMethodSuffix;
@@ -226,9 +225,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
             // Otherwise, generate a good name for the backing field we're generating.  This is
             // the case for C# where we have mangled names for the backing field and need something
             // actually usable in code.
-            var uniqueName = NameGenerator.GenerateUniqueName(
-                property.Name.ToCamelCase(),
-                n => !property.ContainingType.GetMembers(n).Any()
+            var uniqueName = NameGenerator.GenerateUniqueName(property.Name.ToCamelCase(), n =>
+                !property.ContainingType.GetMembers(n).Any()
             );
 
             return CodeGenerationSymbolFactory.CreateFieldSymbol(

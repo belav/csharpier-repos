@@ -493,13 +493,10 @@ namespace System.Net.Http.Tests
         {
             MockHeaders headers = new MockHeaders();
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () =>
-                {
-                    headers.Add(headerName, "value");
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+            {
+                headers.Add(headerName, "value");
+            });
         }
 
         [Theory]
@@ -509,13 +506,10 @@ namespace System.Net.Http.Tests
         {
             MockHeaders headers = new MockHeaders();
 
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                () =>
-                {
-                    headers.Add(headerName, "value");
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("name", () =>
+            {
+                headers.Add(headerName, "value");
+            });
         }
 
         [Theory]
@@ -1190,13 +1184,10 @@ namespace System.Net.Http.Tests
         {
             MockHeaders headers = new MockHeaders();
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () =>
-                {
-                    headers.Remove(headerName);
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+            {
+                headers.Remove(headerName);
+            });
         }
 
         [Theory]
@@ -1206,13 +1197,10 @@ namespace System.Net.Http.Tests
         {
             MockHeaders headers = new MockHeaders();
 
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                () =>
-                {
-                    headers.Remove(headerName);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("name", () =>
+            {
+                headers.Remove(headerName);
+            });
         }
 
         [Theory]
@@ -1361,13 +1349,10 @@ namespace System.Net.Http.Tests
         {
             MockHeaders headers = new MockHeaders();
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () =>
-                {
-                    headers.GetValues(headerName);
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+            {
+                headers.GetValues(headerName);
+            });
         }
 
         [Theory]
@@ -1377,13 +1362,10 @@ namespace System.Net.Http.Tests
         {
             MockHeaders headers = new MockHeaders();
 
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                () =>
-                {
-                    headers.GetValues(headerName);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("name", () =>
+            {
+                headers.GetValues(headerName);
+            });
         }
 
         [Theory]
@@ -1779,13 +1761,10 @@ namespace System.Net.Http.Tests
         {
             MockHeaders headers = new MockHeaders();
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () =>
-                {
-                    headers.Contains(headerName);
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+            {
+                headers.Contains(headerName);
+            });
         }
 
         [Theory]
@@ -1795,13 +1774,10 @@ namespace System.Net.Http.Tests
         {
             MockHeaders headers = new MockHeaders();
 
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                () =>
-                {
-                    headers.Contains(headerName);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("name", () =>
+            {
+                headers.Contains(headerName);
+            });
         }
 
         [Theory]
@@ -2658,9 +2634,8 @@ namespace System.Net.Http.Tests
                 // Ordering is lost when adding more than ArrayThreshold headers
                 Array.Sort(nonValidatedKeys, (a, b) => int.Parse(a).CompareTo(int.Parse(b)));
                 Array.Sort(newKeys, (a, b) => int.Parse(a).CompareTo(int.Parse(b)));
-                Array.Sort(
-                    nonValidatedKeysAfterValidation,
-                    (a, b) => int.Parse(a).CompareTo(int.Parse(b))
+                Array.Sort(nonValidatedKeysAfterValidation, (a, b) =>
+                    int.Parse(a).CompareTo(int.Parse(b))
                 );
             }
             Assert.Equal(keys, nonValidatedKeys);

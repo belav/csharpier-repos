@@ -230,30 +230,24 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void CountLongCount_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<bool>)null).Count()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<bool>)null).Count()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<bool>)null).Count(x => x)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<bool>)null).Count(x => x)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ParallelEnumerable.Empty<bool>().Count(null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ParallelEnumerable.Empty<bool>().Count(null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<bool>)null).LongCount()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<bool>)null).LongCount()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<bool>)null).LongCount(x => x)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<bool>)null).LongCount(x => x)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => ParallelEnumerable.Empty<bool>().LongCount(null)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                ParallelEnumerable.Empty<bool>().LongCount(null)
             );
         }
     }

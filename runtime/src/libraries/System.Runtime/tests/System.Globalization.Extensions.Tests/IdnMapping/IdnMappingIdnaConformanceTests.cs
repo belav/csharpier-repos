@@ -23,30 +23,27 @@ namespace System.Globalization.Tests
         [Fact]
         public void GetAscii_Success()
         {
-            Assert.All(
-                Factory.GetDataset().Where(e => e.ASCIIResult.Success),
-                entry =>
+            Assert.All(Factory.GetDataset().Where(e => e.ASCIIResult.Success), entry =>
+            {
+                try
                 {
-                    try
-                    {
-                        var map = new IdnMapping() { UseStd3AsciiRules = true };
-                        var asciiResult = map.GetAscii(entry.Source);
-                        Assert.Equal(
-                            entry.ASCIIResult.Value,
-                            asciiResult,
-                            StringComparer.OrdinalIgnoreCase
-                        );
-                    }
-                    catch (ArgumentException)
-                    {
-                        string actualCodePoints = GetCodePoints(entry.Source);
-                        string expectedCodePoints = GetCodePoints(entry.ASCIIResult.Value);
-                        throw new Exception(
-                            $"Expected IdnMapping.GetAscii(\"{actualCodePoints}\" to return \"{expectedCodePoints}\". Line Number: {entry.LineNumber}"
-                        );
-                    }
+                    var map = new IdnMapping() { UseStd3AsciiRules = true };
+                    var asciiResult = map.GetAscii(entry.Source);
+                    Assert.Equal(
+                        entry.ASCIIResult.Value,
+                        asciiResult,
+                        StringComparer.OrdinalIgnoreCase
+                    );
                 }
-            );
+                catch (ArgumentException)
+                {
+                    string actualCodePoints = GetCodePoints(entry.Source);
+                    string expectedCodePoints = GetCodePoints(entry.ASCIIResult.Value);
+                    throw new Exception(
+                        $"Expected IdnMapping.GetAscii(\"{actualCodePoints}\" to return \"{expectedCodePoints}\". Line Number: {entry.LineNumber}"
+                    );
+                }
+            });
         }
 
         /// <summary>
@@ -115,27 +112,23 @@ namespace System.Globalization.Tests
         )] // https://github.com/dotnet/runtime/issues/22409
         public void GetAscii_Invalid()
         {
-            Assert.All(
-                Factory.GetDataset().Where(entry => !entry.ASCIIResult.Success),
-                entry =>
+            Assert.All(Factory.GetDataset().Where(entry => !entry.ASCIIResult.Success), entry =>
+            {
+                try
                 {
-                    try
-                    {
-                        var map = new IdnMapping() { UseStd3AsciiRules = true };
-                        AssertExtensions.Throws<ArgumentException>(
-                            "unicode",
-                            () => map.GetAscii(entry.Source)
-                        );
-                    }
-                    catch (ThrowsException)
-                    {
-                        string codePoints = GetCodePoints(entry.Source);
-                        throw new Exception(
-                            $"Expected IdnMapping.GetAscii(\"{codePoints}\") to throw an ArgumentException. Line Number: {entry.LineNumber}"
-                        );
-                    }
+                    var map = new IdnMapping() { UseStd3AsciiRules = true };
+                    AssertExtensions.Throws<ArgumentException>("unicode", () =>
+                        map.GetAscii(entry.Source)
+                    );
                 }
-            );
+                catch (ThrowsException)
+                {
+                    string codePoints = GetCodePoints(entry.Source);
+                    throw new Exception(
+                        $"Expected IdnMapping.GetAscii(\"{codePoints}\") to throw an ArgumentException. Line Number: {entry.LineNumber}"
+                    );
+                }
+            });
         }
 
         /// <summary>
@@ -149,27 +142,23 @@ namespace System.Globalization.Tests
         [Fact]
         public void GetUnicode_Invalid()
         {
-            Assert.All(
-                Factory.GetDataset().Where(entry => !entry.UnicodeResult.Success),
-                entry =>
+            Assert.All(Factory.GetDataset().Where(entry => !entry.UnicodeResult.Success), entry =>
+            {
+                try
                 {
-                    try
-                    {
-                        var map = new IdnMapping() { UseStd3AsciiRules = true };
-                        AssertExtensions.Throws<ArgumentException>(
-                            "ascii",
-                            () => map.GetUnicode(entry.Source)
-                        );
-                    }
-                    catch (ThrowsException)
-                    {
-                        string codePoints = GetCodePoints(entry.Source);
-                        throw new Exception(
-                            $"Expected IdnMapping.GetUnicode(\"{codePoints}\") to throw an ArgumentException. Line Number: {entry.LineNumber}"
-                        );
-                    }
+                    var map = new IdnMapping() { UseStd3AsciiRules = true };
+                    AssertExtensions.Throws<ArgumentException>("ascii", () =>
+                        map.GetUnicode(entry.Source)
+                    );
                 }
-            );
+                catch (ThrowsException)
+                {
+                    string codePoints = GetCodePoints(entry.Source);
+                    throw new Exception(
+                        $"Expected IdnMapping.GetUnicode(\"{codePoints}\") to throw an ArgumentException. Line Number: {entry.LineNumber}"
+                    );
+                }
+            });
         }
 
         [Theory]

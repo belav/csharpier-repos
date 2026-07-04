@@ -187,9 +187,8 @@ namespace System.IO.Tests
             using var watcher = new FileSystemWatcher(watchedTestDirectory, "*");
 
             Action action = () =>
-                Array.ForEach(
-                    dirs,
-                    dir => Directory.Move(dir.DirectoryInWatchedDir, dir.DirectoryInUnwatchedDir)
+                Array.ForEach(dirs, dir =>
+                    Directory.Move(dir.DirectoryInWatchedDir, dir.DirectoryInUnwatchedDir)
                 );
 
             // On macOS, for each file we receive two events as describe in comment below.
@@ -235,9 +234,8 @@ namespace System.IO.Tests
             using var watcher = new FileSystemWatcher(watchedTestDirectory, "*");
 
             Action action = () =>
-                Array.ForEach(
-                    dirs,
-                    dir => Directory.Move(dir.DirectoryInUnwatchedDir, dir.DirectoryInWatchedDir)
+                Array.ForEach(dirs, dir =>
+                    Directory.Move(dir.DirectoryInUnwatchedDir, dir.DirectoryInWatchedDir)
                 );
 
             List<FiredEvent> events = ExpectEvents(watcher, filesCount, action);

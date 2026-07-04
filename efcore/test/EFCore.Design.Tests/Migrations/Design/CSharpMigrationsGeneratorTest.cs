@@ -742,16 +742,13 @@ namespace MyNamespace
             RelationalAnnotationNames.DbFunctions,
             new Dictionary<string, IDbFunction>()
         );
-        modelBuilder.Entity(
-            "T1",
-            eb =>
-            {
-                eb.Property<int>("Id");
-                eb.Property<string>("C2").IsRequired();
-                eb.Property<int>("C3");
-                eb.HasKey("Id");
-            }
-        );
+        modelBuilder.Entity("T1", eb =>
+        {
+            eb.Property<int>("Id");
+            eb.Property<string>("C2").IsRequired();
+            eb.Property<int>("C3");
+            eb.HasKey("Id");
+        });
         modelBuilder.HasAnnotation(CoreAnnotationNames.ProductVersion, null);
 
         var finalizedModel = modelBuilder.FinalizeModel(designTime: true);

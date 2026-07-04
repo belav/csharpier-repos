@@ -26,21 +26,15 @@ namespace System.Security.Cryptography
 
         internal static int GetHashSizeInBytes(HashAlgorithmName hashAlgorithm)
         {
-            return s_hashSizes.GetOrAdd(
-                hashAlgorithm,
-                static hashAlgorithm =>
+            return s_hashSizes.GetOrAdd(hashAlgorithm, static hashAlgorithm =>
+            {
+                using (
+                    HashProviderCng hashProvider = new HashProviderCng(hashAlgorithm.Name!, null)
+                )
                 {
-                    using (
-                        HashProviderCng hashProvider = new HashProviderCng(
-                            hashAlgorithm.Name!,
-                            null
-                        )
-                    )
-                    {
-                        return hashProvider.HashSizeInBytes;
-                    }
+                    return hashProvider.HashSizeInBytes;
                 }
-            );
+            });
         }
 
         /// <summary>

@@ -150,50 +150,47 @@ public delegate object D([DecimalConstant(0, 0, 0, 0, 3)]decimal o = 3);
 ";
             var comp1 = CreateCompilation(source1, options: TestOptions.DebugDll);
             comp1.VerifyDiagnostics();
-            CompileAndVerify(
-                comp1,
-                sourceSymbolValidator: module =>
-                {
-                    var type = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
-                    VerifyDefaultValueAttribute(
-                        type.GetMember<MethodSymbol>("F").Parameters[0],
-                        "DecimalConstantAttribute",
-                        1,
-                        false
-                    );
-                    VerifyDefaultValueAttribute(
-                        type.GetMember<PropertySymbol>("this[]").Parameters[1],
-                        "DecimalConstantAttribute",
-                        2,
-                        false
-                    );
-                    VerifyDefaultValueAttribute(
-                        type.GetMember<MethodSymbol>("get_Item").Parameters[1],
-                        "DecimalConstantAttribute",
-                        2,
-                        false
-                    );
-                    VerifyDefaultValueAttribute(
-                        type.GetMember<MethodSymbol>("set_Item").Parameters[1],
-                        "DecimalConstantAttribute",
-                        2,
-                        false
-                    );
-                    type = module.GlobalNamespace.GetMember<NamedTypeSymbol>("D");
-                    VerifyDefaultValueAttribute(
-                        type.GetMember<MethodSymbol>("Invoke").Parameters[0],
-                        "DecimalConstantAttribute",
-                        3,
-                        false
-                    );
-                    VerifyDefaultValueAttribute(
-                        type.GetMember<MethodSymbol>("BeginInvoke").Parameters[0],
-                        "DecimalConstantAttribute",
-                        3,
-                        false
-                    );
-                }
-            );
+            CompileAndVerify(comp1, sourceSymbolValidator: module =>
+            {
+                var type = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
+                VerifyDefaultValueAttribute(
+                    type.GetMember<MethodSymbol>("F").Parameters[0],
+                    "DecimalConstantAttribute",
+                    1,
+                    false
+                );
+                VerifyDefaultValueAttribute(
+                    type.GetMember<PropertySymbol>("this[]").Parameters[1],
+                    "DecimalConstantAttribute",
+                    2,
+                    false
+                );
+                VerifyDefaultValueAttribute(
+                    type.GetMember<MethodSymbol>("get_Item").Parameters[1],
+                    "DecimalConstantAttribute",
+                    2,
+                    false
+                );
+                VerifyDefaultValueAttribute(
+                    type.GetMember<MethodSymbol>("set_Item").Parameters[1],
+                    "DecimalConstantAttribute",
+                    2,
+                    false
+                );
+                type = module.GlobalNamespace.GetMember<NamedTypeSymbol>("D");
+                VerifyDefaultValueAttribute(
+                    type.GetMember<MethodSymbol>("Invoke").Parameters[0],
+                    "DecimalConstantAttribute",
+                    3,
+                    false
+                );
+                VerifyDefaultValueAttribute(
+                    type.GetMember<MethodSymbol>("BeginInvoke").Parameters[0],
+                    "DecimalConstantAttribute",
+                    3,
+                    false
+                );
+            });
             var source2 =
                 @"class P
 {
@@ -252,19 +249,16 @@ partial class C
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics();
-            CompileAndVerify(
-                comp,
-                sourceSymbolValidator: module =>
-                {
-                    var type = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
-                    VerifyDefaultValueAttribute(
-                        type.GetMember<MethodSymbol>("F").Parameters[0],
-                        "DecimalConstantAttribute",
-                        2,
-                        false
-                    );
-                }
-            );
+            CompileAndVerify(comp, sourceSymbolValidator: module =>
+            {
+                var type = module.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
+                VerifyDefaultValueAttribute(
+                    type.GetMember<MethodSymbol>("F").Parameters[0],
+                    "DecimalConstantAttribute",
+                    2,
+                    false
+                );
+            });
         }
 
         private static void VerifyDefaultValueAttribute(
@@ -610,22 +604,19 @@ class C
 }";
             var comp = CreateCompilation(source);
 
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var field = (PEFieldSymbol)
-                        module.GlobalNamespace.GetTypeMember("C").GetField("F15");
-                    var attribute = ((PEModuleSymbol)module)
-                        .GetCustomAttributesForToken(field.Handle)
-                        .Single();
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var field = (PEFieldSymbol)
+                    module.GlobalNamespace.GetTypeMember("C").GetField("F15");
+                var attribute = ((PEModuleSymbol)module)
+                    .GetCustomAttributesForToken(field.Handle)
+                    .Single();
 
-                    Assert.Equal(
-                        "System.Runtime.CompilerServices.DecimalConstantAttribute",
-                        attribute.AttributeClass.ToTestDisplayString()
-                    );
-                }
-            );
+                Assert.Equal(
+                    "System.Runtime.CompilerServices.DecimalConstantAttribute",
+                    attribute.AttributeClass.ToTestDisplayString()
+                );
+            });
         }
     }
 }

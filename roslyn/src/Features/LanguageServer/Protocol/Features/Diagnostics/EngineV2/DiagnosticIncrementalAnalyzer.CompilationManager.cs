@@ -66,9 +66,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 .ConfigureAwait(false);
 
             // Add new analyzer driver to the map
-            compilationWithAnalyzers = _projectCompilationsWithAnalyzers.GetValue(
-                project,
-                _ => newCompilationWithAnalyzers
+            compilationWithAnalyzers = _projectCompilationsWithAnalyzers.GetValue(project, _ =>
+                newCompilationWithAnalyzers
             );
 
             // if somebody has beat us, make sure analyzers are good.

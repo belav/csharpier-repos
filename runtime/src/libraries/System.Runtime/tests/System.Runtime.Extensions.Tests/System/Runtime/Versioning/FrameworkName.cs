@@ -82,57 +82,44 @@ namespace System.Runtime.Versioning.Tests
         public static void ConstructFromInvalidString()
         {
             Assert.Throws<ArgumentNullException>(() => new FrameworkName(null));
-            AssertExtensions.Throws<ArgumentException>(
-                "frameworkName",
-                () => new FrameworkName(string.Empty)
+            AssertExtensions.Throws<ArgumentException>("frameworkName", () =>
+                new FrameworkName(string.Empty)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "frameworkName",
-                () => new FrameworkName(" ,A")
+            AssertExtensions.Throws<ArgumentException>("frameworkName", () =>
+                new FrameworkName(" ,A")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "frameworkName",
-                () => new FrameworkName("A")
+            AssertExtensions.Throws<ArgumentException>("frameworkName", () =>
+                new FrameworkName("A")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "frameworkName",
-                () => new FrameworkName("A,B")
+            AssertExtensions.Throws<ArgumentException>("frameworkName", () =>
+                new FrameworkName("A,B")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "frameworkName",
-                () => new FrameworkName("A,B,C")
+            AssertExtensions.Throws<ArgumentException>("frameworkName", () =>
+                new FrameworkName("A,B,C")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "frameworkName",
-                () => new FrameworkName("A,Version=1.0.0.0,C")
+            AssertExtensions.Throws<ArgumentException>("frameworkName", () =>
+                new FrameworkName("A,Version=1.0.0.0,C")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "frameworkName",
-                () => new FrameworkName("A,1.0.0.0,Profile=C")
+            AssertExtensions.Throws<ArgumentException>("frameworkName", () =>
+                new FrameworkName("A,1.0.0.0,Profile=C")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "frameworkName",
-                () => new FrameworkName("A,Version=1.z.0.0,Profile=C")
+            AssertExtensions.Throws<ArgumentException>("frameworkName", () =>
+                new FrameworkName("A,Version=1.z.0.0,Profile=C")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "frameworkName",
-                () => new FrameworkName("A,Something=1.z.0.0,Profile=C")
+            AssertExtensions.Throws<ArgumentException>("frameworkName", () =>
+                new FrameworkName("A,Something=1.z.0.0,Profile=C")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "frameworkName",
-                () => new FrameworkName("A,Profile=C")
+            AssertExtensions.Throws<ArgumentException>("frameworkName", () =>
+                new FrameworkName("A,Profile=C")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "frameworkName",
-                () => new FrameworkName("A,======")
+            AssertExtensions.Throws<ArgumentException>("frameworkName", () =>
+                new FrameworkName("A,======")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "frameworkName",
-                () => new FrameworkName("A,    =B=")
+            AssertExtensions.Throws<ArgumentException>("frameworkName", () =>
+                new FrameworkName("A,    =B=")
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "frameworkName",
-                () => new FrameworkName("A,1  =2=3")
+            AssertExtensions.Throws<ArgumentException>("frameworkName", () =>
+                new FrameworkName("A,1  =2=3")
             );
         }
 
@@ -152,13 +139,11 @@ namespace System.Runtime.Versioning.Tests
         public static void ConstructFromInvalidIdentifierVersion()
         {
             Assert.Throws<ArgumentNullException>(() => new FrameworkName(null, s_testVersion));
-            AssertExtensions.Throws<ArgumentException>(
-                "identifier",
-                () => new FrameworkName(string.Empty, s_testVersion)
+            AssertExtensions.Throws<ArgumentException>("identifier", () =>
+                new FrameworkName(string.Empty, s_testVersion)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "identifier",
-                () => new FrameworkName("   \r\n\t", s_testVersion)
+            AssertExtensions.Throws<ArgumentException>("identifier", () =>
+                new FrameworkName("   \r\n\t", s_testVersion)
             );
 
             Assert.Throws<ArgumentNullException>(() => new FrameworkName(TestIdentifier, null));
@@ -190,13 +175,11 @@ namespace System.Runtime.Versioning.Tests
             Assert.Throws<ArgumentNullException>(() =>
                 new FrameworkName(null, s_testVersion, TestProfile)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "identifier",
-                () => new FrameworkName(string.Empty, s_testVersion, TestProfile)
+            AssertExtensions.Throws<ArgumentException>("identifier", () =>
+                new FrameworkName(string.Empty, s_testVersion, TestProfile)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "identifier",
-                () => new FrameworkName("   \r\n\t", s_testVersion, TestProfile)
+            AssertExtensions.Throws<ArgumentException>("identifier", () =>
+                new FrameworkName("   \r\n\t", s_testVersion, TestProfile)
             );
 
             Assert.Throws<ArgumentNullException>(() =>

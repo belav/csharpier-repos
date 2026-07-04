@@ -10,18 +10,16 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [Fact]
         public void Ctor_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => new AssociatedMetadataTypeTypeDescriptionProvider(null)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                new AssociatedMetadataTypeTypeDescriptionProvider(null)
             );
         }
 
         [Fact]
         public void Ctor_NullAssociatedMetadataType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "associatedMetadataType",
-                () => new AssociatedMetadataTypeTypeDescriptionProvider(typeof(string), null)
+            AssertExtensions.Throws<ArgumentNullException>("associatedMetadataType", () =>
+                new AssociatedMetadataTypeTypeDescriptionProvider(typeof(string), null)
             );
         }
 

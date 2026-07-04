@@ -29,9 +29,8 @@ public class SqlServerMigrationsAnnotationProviderTest
             .For(property.GetTableColumnMappings().Single().Column, true)
             .ToList();
 
-        var identity = Assert.Single(
-            migrationAnnotations,
-            a => a.Name == SqlServerAnnotationNames.Identity
+        var identity = Assert.Single(migrationAnnotations, a =>
+            a.Name == SqlServerAnnotationNames.Identity
         );
         Assert.Equal("2, 3", identity.Value);
     }

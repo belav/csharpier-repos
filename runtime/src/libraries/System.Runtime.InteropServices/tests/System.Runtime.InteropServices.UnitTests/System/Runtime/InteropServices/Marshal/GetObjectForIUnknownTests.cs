@@ -74,9 +74,8 @@ namespace System.Runtime.InteropServices.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void GetObjectForIUnknown_NullPointer_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "pUnk",
-                () => Marshal.GetObjectForIUnknown(IntPtr.Zero)
+            AssertExtensions.Throws<ArgumentNullException>("pUnk", () =>
+                Marshal.GetObjectForIUnknown(IntPtr.Zero)
             );
         }
 

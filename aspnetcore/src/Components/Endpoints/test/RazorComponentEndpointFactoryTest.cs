@@ -43,11 +43,9 @@ public class RazorComponentEndpointFactoryTest
         Assert.Contains(endpoint.Metadata, m => m is ComponentTypeMetadata);
         Assert.Contains(endpoint.Metadata, m => m is SuppressLinkGenerationMetadata);
         Assert.Contains(endpoint.Metadata, m => m is AuthorizeAttribute);
-        Assert.Contains(
-            endpoint.Metadata,
-            m =>
-                m is ConfiguredRenderModesMetadata c
-                && c.ConfiguredRenderModes.Single() == testRenderMode
+        Assert.Contains(endpoint.Metadata, m =>
+            m is ConfiguredRenderModesMetadata c
+            && c.ConfiguredRenderModes.Single() == testRenderMode
         );
         Assert.NotNull(endpoint.RequestDelegate);
 

@@ -307,61 +307,58 @@ namespace System.Runtime.CompilerServices
             // is enabled, and in doing so it allows us to pass the awaited task's information into the end event
             // in a purely pay-for-play manner (the alternatively would be to increase the size of TaskAwaiter
             // just for this ETW purpose, not pay-for-play, since GetResult would need to know whether a real yield occurred).
-            return AsyncMethodBuilderCore.CreateContinuationWrapper(
-                continuation,
-                () =>
+            return AsyncMethodBuilderCore.CreateContinuationWrapper(continuation, () =>
+            {
+                if (Task.s_asyncDebuggingEnabled)
                 {
-                    if (Task.s_asyncDebuggingEnabled)
-                    {
-                        Task.RemoveFromActiveTasks(task.Id);
-                    }
-#if !MONO
-                    // ETW event for Task Wait End.
-                    Guid prevActivityId = new Guid();
-                    bool bEtwLogEnabled = etwLog.IsEnabled();
-                    if (bEtwLogEnabled)
-                    {
-                        var currentTaskAtEnd = Task.InternalCurrent;
-                        etwLog.TaskWaitEnd(
-                            (
-                                currentTaskAtEnd != null
-                                    ? currentTaskAtEnd.m_taskScheduler.Id
-                                    : TaskScheduler.Default.Id
-                            ),
-                            (currentTaskAtEnd != null ? currentTaskAtEnd.Id : 0),
-                            task.Id
-                        );
-
-                        // Ensure the continuation runs under the activity ID of the task that completed for the
-                        // case the antecendent is a promise (in the other cases this is already the case).
-                        if (
-                            etwLog.TasksSetActivityIds
-                            && (task.Options & (TaskCreationOptions)InternalTaskOptions.PromiseTask)
-                                != 0
-                        )
-                            EventSource.SetCurrentThreadActivityId(
-                                TplEtwProvider.CreateGuidForTaskID(task.Id),
-                                out prevActivityId
-                            );
-                    }
-#endif
-                    // Invoke the original continuation provided to OnCompleted.
-                    continuation();
-
-#if !MONO
-                    if (bEtwLogEnabled)
-                    {
-                        etwLog.TaskWaitContinuationComplete(task.Id);
-                        if (
-                            etwLog.TasksSetActivityIds
-                            && (task.Options & (TaskCreationOptions)InternalTaskOptions.PromiseTask)
-                                != 0
-                        )
-                            EventSource.SetCurrentThreadActivityId(prevActivityId);
-                    }
-#endif
+                    Task.RemoveFromActiveTasks(task.Id);
                 }
-            );
+#if !MONO
+                // ETW event for Task Wait End.
+                Guid prevActivityId = new Guid();
+                bool bEtwLogEnabled = etwLog.IsEnabled();
+                if (bEtwLogEnabled)
+                {
+                    var currentTaskAtEnd = Task.InternalCurrent;
+                    etwLog.TaskWaitEnd(
+                        (
+                            currentTaskAtEnd != null
+                                ? currentTaskAtEnd.m_taskScheduler.Id
+                                : TaskScheduler.Default.Id
+                        ),
+                        (currentTaskAtEnd != null ? currentTaskAtEnd.Id : 0),
+                        task.Id
+                    );
+
+                    // Ensure the continuation runs under the activity ID of the task that completed for the
+                    // case the antecendent is a promise (in the other cases this is already the case).
+                    if (
+                        etwLog.TasksSetActivityIds
+                        && (task.Options & (TaskCreationOptions)InternalTaskOptions.PromiseTask)
+                            != 0
+                    )
+                        EventSource.SetCurrentThreadActivityId(
+                            TplEtwProvider.CreateGuidForTaskID(task.Id),
+                            out prevActivityId
+                        );
+                }
+#endif
+                // Invoke the original continuation provided to OnCompleted.
+                continuation();
+
+#if !MONO
+                if (bEtwLogEnabled)
+                {
+                    etwLog.TaskWaitContinuationComplete(task.Id);
+                    if (
+                        etwLog.TasksSetActivityIds
+                        && (task.Options & (TaskCreationOptions)InternalTaskOptions.PromiseTask)
+                            != 0
+                    )
+                        EventSource.SetCurrentThreadActivityId(prevActivityId);
+                }
+#endif
+            });
         }
     }
 

@@ -3506,81 +3506,73 @@ class C
             // from it the nodes that describe the operators. We then compare the description of
             // the operators given to the comment that follows the use of the operator.
 
-            TestBoundTree(
-                source,
-                edges =>
-                    from edge in edges
-                    let node = edge.Value
-                    where node.Text == "operatorKind"
-                    where node.Value != null
-                    select node.Value.ToString()
+            TestBoundTree(source, edges =>
+                from edge in edges
+                let node = edge.Value
+                where node.Text == "operatorKind"
+                where node.Value != null
+                select node.Value.ToString()
             );
         }
 
         private void TestCompoundAssignment(string source)
         {
-            TestBoundTree(
-                source,
-                edges =>
-                    from edge in edges
-                    let node = edge.Value
-                    where
-                        node != null
-                        && (
-                            node.Text == "eventAssignmentOperator"
-                            || node.Text == "compoundAssignmentOperator"
-                        )
-                    select string.Join(
-                        " ",
-                        from child in node.Children
-                        where
-                            child.Text == "@operator"
-                            || child.Text == "isAddition"
-                            || child.Text == "isDynamic"
-                            || child.Text == "leftConversion"
-                            || child.Text == "finalConversion"
-                        select child.Text
-                            + ": "
-                            + (
-                                child.Text switch
-                                {
-                                    "@operator" => (
-                                        (BinaryOperatorSignature)child.Value
-                                    ).Kind.ToString(),
-                                    "leftConversion" or "finalConversion" => (
-                                        child.Children.SingleOrDefault() is TreeDumperNode node
-                                            ? (
-                                                node.Text switch
-                                                {
-                                                    "conversion" => node
-                                                        .Children.ElementAt(1)
-                                                        .Value,
-                                                    "valuePlaceholder" => Conversion.Identity,
-                                                    _ => throw ExceptionUtilities.UnexpectedValue(
-                                                        node.Text
-                                                    ),
-                                                }
-                                            )
-                                            : Conversion.NoConversion
-                                    ).ToString(),
-                                    _ => child.Value.ToString(),
-                                }
-                            )
+            TestBoundTree(source, edges =>
+                from edge in edges
+                let node = edge.Value
+                where
+                    node != null
+                    && (
+                        node.Text == "eventAssignmentOperator"
+                        || node.Text == "compoundAssignmentOperator"
                     )
+                select string.Join(
+                    " ",
+                    from child in node.Children
+                    where
+                        child.Text == "@operator"
+                        || child.Text == "isAddition"
+                        || child.Text == "isDynamic"
+                        || child.Text == "leftConversion"
+                        || child.Text == "finalConversion"
+                    select child.Text
+                        + ": "
+                        + (
+                            child.Text switch
+                            {
+                                "@operator" => (
+                                    (BinaryOperatorSignature)child.Value
+                                ).Kind.ToString(),
+                                "leftConversion" or "finalConversion" => (
+                                    child.Children.SingleOrDefault() is TreeDumperNode node
+                                        ? (
+                                            node.Text switch
+                                            {
+                                                "conversion" => node.Children.ElementAt(1).Value,
+                                                "valuePlaceholder" => Conversion.Identity,
+                                                _ => throw ExceptionUtilities.UnexpectedValue(
+                                                    node.Text
+                                                ),
+                                            }
+                                        )
+                                        : Conversion.NoConversion
+                                ).ToString(),
+                                _ => child.Value.ToString(),
+                            }
+                        )
+                )
             );
         }
 
         private void TestTypes(string source)
         {
-            TestBoundTree(
-                source,
-                edges =>
-                    from edge in edges
-                    let node = edge.Value
-                    where node.Text == "type"
-                    select edge.Key.Text
-                        + ": "
-                        + (node.Value != null ? node.Value.ToString() : "<null>")
+            TestBoundTree(source, edges =>
+                from edge in edges
+                let node = edge.Value
+                where node.Text == "type"
+                select edge.Key.Text
+                    + ": "
+                    + (node.Value != null ? node.Value.ToString() : "<null>")
             );
         }
 
@@ -3606,16 +3598,14 @@ class C
 
         private void TestDynamicMemberAccessCore(string source)
         {
-            TestBoundTree(
-                source,
-                edges =>
-                    from edge in edges
-                    let node = edge.Value
-                    where node.Text == "dynamicMemberAccess"
-                    let name = node["name"]
-                    let typeArguments = node["typeArgumentsOpt"].Value
-                        as ImmutableArray<TypeWithAnnotations>?
-                    select name.Value.ToString() + FormatTypeArgumentList(typeArguments)
+            TestBoundTree(source, edges =>
+                from edge in edges
+                let node = edge.Value
+                where node.Text == "dynamicMemberAccess"
+                let name = node["name"]
+                let typeArguments = node["typeArgumentsOpt"].Value
+                    as ImmutableArray<TypeWithAnnotations>?
+                select name.Value.ToString() + FormatTypeArgumentList(typeArguments)
             );
         }
 

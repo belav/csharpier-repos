@@ -115,15 +115,10 @@ namespace MonoTests.Mono.Options
                     new DefaultOption("<>:", null);
                 }
             );
-            Utils.AssertException(
-                null,
-                null,
-                p,
-                v =>
-                {
-                    new DefaultOption("t|<>=", null, 1);
-                }
-            );
+            Utils.AssertException(null, null, p, v =>
+            {
+                new DefaultOption("t|<>=", null, 1);
+            });
             Utils.AssertException(
                 typeof(ArgumentException),
                 $"The default option handler '<>' cannot require values.{Environment.NewLine}Parameter name: prototype",
@@ -133,15 +128,10 @@ namespace MonoTests.Mono.Options
                     new DefaultOption("t|<>=", null, 2);
                 }
             );
-            Utils.AssertException(
-                null,
-                null,
-                p,
-                v =>
-                {
-                    new DefaultOption("a|b=", null, 2);
-                }
-            );
+            Utils.AssertException(null, null, p, v =>
+            {
+                new DefaultOption("a|b=", null, 2);
+            });
             Utils.AssertException(
                 typeof(ArgumentOutOfRangeException),
                 $"Specified argument was out of the range of valid values.{Environment.NewLine}Parameter name: maxValueCount",
@@ -243,97 +233,57 @@ namespace MonoTests.Mono.Options
                     new DefaultOption("a=+-*/", null);
                 }
             );
-            Utils.AssertException(
-                null,
-                null,
-                p,
-                v =>
-                {
-                    new DefaultOption("a", null, 0);
-                }
-            );
-            Utils.AssertException(
-                null,
-                null,
-                p,
-                v =>
-                {
-                    new DefaultOption("a", null, 0);
-                }
-            );
-            Utils.AssertException(
-                null,
-                null,
-                p,
-                v =>
-                {
-                    var d = new DefaultOption("a", null);
-                    Assert.AreEqual(d.GetValueSeparators().Length, 0);
-                }
-            );
-            Utils.AssertException(
-                null,
-                null,
-                p,
-                v =>
-                {
-                    var d = new DefaultOption("a=", null, 1);
-                    string[] s = d.GetValueSeparators();
-                    Assert.AreEqual(s.Length, 0);
-                }
-            );
-            Utils.AssertException(
-                null,
-                null,
-                p,
-                v =>
-                {
-                    var d = new DefaultOption("a=", null, 2);
-                    string[] s = d.GetValueSeparators();
-                    Assert.AreEqual(s.Length, 2);
-                    Assert.AreEqual(s[0], ":");
-                    Assert.AreEqual(s[1], "=");
-                }
-            );
-            Utils.AssertException(
-                null,
-                null,
-                p,
-                v =>
-                {
-                    var d = new DefaultOption("a={}", null, 2);
-                    string[] s = d.GetValueSeparators();
-                    Assert.AreEqual(s.Length, 0);
-                }
-            );
-            Utils.AssertException(
-                null,
-                null,
-                p,
-                v =>
-                {
-                    var d = new DefaultOption("a={-->}{=>}", null, 2);
-                    string[] s = d.GetValueSeparators();
-                    Assert.AreEqual(s.Length, 2);
-                    Assert.AreEqual(s[0], "-->");
-                    Assert.AreEqual(s[1], "=>");
-                }
-            );
-            Utils.AssertException(
-                null,
-                null,
-                p,
-                v =>
-                {
-                    var d = new DefaultOption("a=+-*/", null, 2);
-                    string[] s = d.GetValueSeparators();
-                    Assert.AreEqual(s.Length, 4);
-                    Assert.AreEqual(s[0], "+");
-                    Assert.AreEqual(s[1], "-");
-                    Assert.AreEqual(s[2], "*");
-                    Assert.AreEqual(s[3], "/");
-                }
-            );
+            Utils.AssertException(null, null, p, v =>
+            {
+                new DefaultOption("a", null, 0);
+            });
+            Utils.AssertException(null, null, p, v =>
+            {
+                new DefaultOption("a", null, 0);
+            });
+            Utils.AssertException(null, null, p, v =>
+            {
+                var d = new DefaultOption("a", null);
+                Assert.AreEqual(d.GetValueSeparators().Length, 0);
+            });
+            Utils.AssertException(null, null, p, v =>
+            {
+                var d = new DefaultOption("a=", null, 1);
+                string[] s = d.GetValueSeparators();
+                Assert.AreEqual(s.Length, 0);
+            });
+            Utils.AssertException(null, null, p, v =>
+            {
+                var d = new DefaultOption("a=", null, 2);
+                string[] s = d.GetValueSeparators();
+                Assert.AreEqual(s.Length, 2);
+                Assert.AreEqual(s[0], ":");
+                Assert.AreEqual(s[1], "=");
+            });
+            Utils.AssertException(null, null, p, v =>
+            {
+                var d = new DefaultOption("a={}", null, 2);
+                string[] s = d.GetValueSeparators();
+                Assert.AreEqual(s.Length, 0);
+            });
+            Utils.AssertException(null, null, p, v =>
+            {
+                var d = new DefaultOption("a={-->}{=>}", null, 2);
+                string[] s = d.GetValueSeparators();
+                Assert.AreEqual(s.Length, 2);
+                Assert.AreEqual(s[0], "-->");
+                Assert.AreEqual(s[1], "=>");
+            });
+            Utils.AssertException(null, null, p, v =>
+            {
+                var d = new DefaultOption("a=+-*/", null, 2);
+                string[] s = d.GetValueSeparators();
+                Assert.AreEqual(s.Length, 4);
+                Assert.AreEqual(s[0], "+");
+                Assert.AreEqual(s[1], "-");
+                Assert.AreEqual(s[2], "*");
+                Assert.AreEqual(s[3], "/");
+            });
         }
     }
 }

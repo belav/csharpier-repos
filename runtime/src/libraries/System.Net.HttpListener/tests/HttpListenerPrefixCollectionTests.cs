@@ -97,9 +97,8 @@ namespace System.Net.Tests
 
             // Exception thrown when not empty.
             listener.Prefixes.Add("http://localhost:9200/");
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => listener.Prefixes.CopyTo(new object[1, 1], 0)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                listener.Prefixes.CopyTo(new object[1, 1], 0)
             );
         }
 
@@ -135,13 +134,11 @@ namespace System.Net.Tests
         {
             var listener = new HttpListener();
             listener.Prefixes.Add("http://localhost:9200/");
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "array",
-                () => listener.Prefixes.CopyTo((Array)new string[0], 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("array", () =>
+                listener.Prefixes.CopyTo((Array)new string[0], 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "array",
-                () => listener.Prefixes.CopyTo(new string[0], 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("array", () =>
+                listener.Prefixes.CopyTo(new string[0], 0)
             );
         }
 
@@ -152,13 +149,11 @@ namespace System.Net.Tests
         {
             var listener = new HttpListener();
             listener.Prefixes.Add("http://localhost:9200/");
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "offset",
-                () => listener.Prefixes.CopyTo((Array)new string[1], offset)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                listener.Prefixes.CopyTo((Array)new string[1], offset)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "offset",
-                () => listener.Prefixes.CopyTo(new string[1], offset)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                listener.Prefixes.CopyTo(new string[1], offset)
             );
         }
 
@@ -193,9 +188,8 @@ namespace System.Net.Tests
             Assert.Equal(1, listener.Prefixes.Count);
             Assert.True(listener.Prefixes.Contains(uriPrefix));
 
-            Assert.All(
-                listener.DefaultServiceNames.Cast<string>(),
-                serviceNames => Assert.StartsWith("HTTP/", serviceNames)
+            Assert.All(listener.DefaultServiceNames.Cast<string>(), serviceNames =>
+                Assert.StartsWith("HTTP/", serviceNames)
             );
         }
 
@@ -444,9 +438,8 @@ namespace System.Net.Tests
         public void Add_InvalidPrefix_ThrowsArgumentException(string uriPrefix)
         {
             var listener = new HttpListener();
-            AssertExtensions.Throws<ArgumentException>(
-                "uriPrefix",
-                () => listener.Prefixes.Add(uriPrefix)
+            AssertExtensions.Throws<ArgumentException>("uriPrefix", () =>
+                listener.Prefixes.Add(uriPrefix)
             );
 
             // If the prefix was invalid, it shouldn't be added to the list.
@@ -458,9 +451,8 @@ namespace System.Net.Tests
         public void Add_NullPrefix_ThrowsArgumentNullException()
         {
             var listener = new HttpListener();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "uriPrefix",
-                () => listener.Prefixes.Add(null)
+            AssertExtensions.Throws<ArgumentNullException>("uriPrefix", () =>
+                listener.Prefixes.Add(null)
             );
         }
 
@@ -469,9 +461,8 @@ namespace System.Net.Tests
         {
             var listener = new HttpListener();
             string longPrefix = "http://" + new string('a', 256) + "/";
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "hostName",
-                () => listener.Prefixes.Add(longPrefix)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("hostName", () =>
+                listener.Prefixes.Add(longPrefix)
             );
 
             // Ouch: even though adding the prefix threw an exception, the prefix was still added.
@@ -510,9 +501,8 @@ namespace System.Net.Tests
         public void Contains_NullPrefix_ThrowsArgumentNullException()
         {
             var listener = new HttpListener();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => listener.Prefixes.Contains(null)
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                listener.Prefixes.Contains(null)
             );
         }
 
@@ -571,9 +561,8 @@ namespace System.Net.Tests
         public void Remove_NullPrefix_ThrowsArgumentNullException()
         {
             var listener = new HttpListener();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "uriPrefix",
-                () => listener.Prefixes.Remove(null)
+            AssertExtensions.Throws<ArgumentNullException>("uriPrefix", () =>
+                listener.Prefixes.Remove(null)
             );
         }
 

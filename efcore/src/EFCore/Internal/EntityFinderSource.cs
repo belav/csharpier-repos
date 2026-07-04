@@ -32,17 +32,15 @@ public class EntityFinderSource : IEntityFinderSource
         IDbSetCache setCache,
         IEntityType type
     ) =>
-        _cache.GetOrAdd(
-            type.ClrType,
-            t =>
-                (Func<IStateManager, IDbSetSource, IDbSetCache, IEntityType, IEntityFinder>)
-                    typeof(EntityFinderSource)
-                        .GetMethod(
-                            nameof(CreateConstructor),
-                            BindingFlags.NonPublic | BindingFlags.Static
-                        )!
-                        .MakeGenericMethod(t)
-                        .Invoke(null, null)!
+        _cache.GetOrAdd(type.ClrType, t =>
+            (Func<IStateManager, IDbSetSource, IDbSetCache, IEntityType, IEntityFinder>)
+                typeof(EntityFinderSource)
+                    .GetMethod(
+                        nameof(CreateConstructor),
+                        BindingFlags.NonPublic | BindingFlags.Static
+                    )!
+                    .MakeGenericMethod(t)
+                    .Invoke(null, null)!
         )(stateManager, setSource, setCache, type);
 
     [UsedImplicitly]

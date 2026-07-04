@@ -280,12 +280,10 @@ internal partial class SerializerService : ISerializerService
     }
 
     private IOptionsSerializationService GetOptionsSerializationService(string languageName) =>
-        _lazyLanguageSerializationService.GetOrAdd(
-            languageName,
-            n =>
-                _workspaceServices
-                    .GetLanguageServices(n)
-                    .GetRequiredService<IOptionsSerializationService>()
+        _lazyLanguageSerializationService.GetOrAdd(languageName, n =>
+            _workspaceServices
+                .GetLanguageServices(n)
+                .GetRequiredService<IOptionsSerializationService>()
         );
 
     public Checksum CreateParseOptionsChecksum(ParseOptions value) => Checksum.Create(value, this);

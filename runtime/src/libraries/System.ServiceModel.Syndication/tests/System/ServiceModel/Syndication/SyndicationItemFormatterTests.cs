@@ -31,9 +31,8 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullItemToWrite_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "itemToWrite",
-                () => new Formatter(null)
+            AssertExtensions.Throws<ArgumentNullException>("itemToWrite", () =>
+                new Formatter(null)
             );
         }
 
@@ -52,9 +51,8 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void CreateCategory_NullItem_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "item",
-                () => Formatter.CreateCategoryEntryPoint(null)
+            AssertExtensions.Throws<ArgumentNullException>("item", () =>
+                Formatter.CreateCategoryEntryPoint(null)
             );
         }
 
@@ -84,9 +82,8 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void CreateLink_NullItem_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "item",
-                () => Formatter.CreateLinkEntryPoint(null)
+            AssertExtensions.Throws<ArgumentNullException>("item", () =>
+                Formatter.CreateLinkEntryPoint(null)
             );
         }
 
@@ -112,9 +109,8 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void CreatePerson_NullItem_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "item",
-                () => Formatter.CreatePersonEntryPoint(null)
+            AssertExtensions.Throws<ArgumentNullException>("item", () =>
+                Formatter.CreatePersonEntryPoint(null)
             );
         }
 
@@ -162,14 +158,12 @@ namespace System.ServiceModel.Syndication.Tests
         public void LoadElementExtensions_NullCategories_ThrowsArgumentNullException()
         {
             XmlReader reader = new XElement("Name").CreateReader();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "category",
-                () =>
-                    Formatter.LoadElementExtensionsEntryPoint(
-                        reader,
-                        (SyndicationCategory)null,
-                        int.MaxValue
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("category", () =>
+                Formatter.LoadElementExtensionsEntryPoint(
+                    reader,
+                    (SyndicationCategory)null,
+                    int.MaxValue
+                )
             );
         }
 
@@ -209,14 +203,12 @@ namespace System.ServiceModel.Syndication.Tests
         public void LoadElementExtensions_NullItem_ThrowsArgumentNullException()
         {
             XmlReader reader = new XElement("Name").CreateReader();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "item",
-                () =>
-                    Formatter.LoadElementExtensionsEntryPoint(
-                        reader,
-                        (SyndicationItem)null,
-                        int.MaxValue
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("item", () =>
+                Formatter.LoadElementExtensionsEntryPoint(
+                    reader,
+                    (SyndicationItem)null,
+                    int.MaxValue
+                )
             );
         }
 
@@ -256,14 +248,12 @@ namespace System.ServiceModel.Syndication.Tests
         public void LoadElementExtensions_NullLink_ThrowsArgumentNullException()
         {
             XmlReader reader = new XElement("Name").CreateReader();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "link",
-                () =>
-                    Formatter.LoadElementExtensionsEntryPoint(
-                        reader,
-                        (SyndicationLink)null,
-                        int.MaxValue
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("link", () =>
+                Formatter.LoadElementExtensionsEntryPoint(
+                    reader,
+                    (SyndicationLink)null,
+                    int.MaxValue
+                )
             );
         }
 
@@ -304,55 +294,37 @@ namespace System.ServiceModel.Syndication.Tests
         public void LoadElementExtensions_NullPerson_ThrowsArgumentNullException()
         {
             XmlReader reader = new XElement("Name").CreateReader();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "person",
-                () =>
-                    Formatter.LoadElementExtensionsEntryPoint(
-                        reader,
-                        (SyndicationPerson)null,
-                        int.MaxValue
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("person", () =>
+                Formatter.LoadElementExtensionsEntryPoint(
+                    reader,
+                    (SyndicationPerson)null,
+                    int.MaxValue
+                )
             );
         }
 
         [Fact]
         public void LoadElementExtensions_NullReader_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "readerOverUnparsedExtensions",
-                () =>
-                    Formatter.LoadElementExtensionsEntryPoint(
-                        null,
-                        new SyndicationCategory(),
-                        int.MaxValue
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("readerOverUnparsedExtensions", () =>
+                Formatter.LoadElementExtensionsEntryPoint(
+                    null,
+                    new SyndicationCategory(),
+                    int.MaxValue
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "readerOverUnparsedExtensions",
-                () =>
-                    Formatter.LoadElementExtensionsEntryPoint(
-                        null,
-                        new SyndicationItem(),
-                        int.MaxValue
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("readerOverUnparsedExtensions", () =>
+                Formatter.LoadElementExtensionsEntryPoint(null, new SyndicationItem(), int.MaxValue)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "readerOverUnparsedExtensions",
-                () =>
-                    Formatter.LoadElementExtensionsEntryPoint(
-                        null,
-                        new SyndicationLink(),
-                        int.MaxValue
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("readerOverUnparsedExtensions", () =>
+                Formatter.LoadElementExtensionsEntryPoint(null, new SyndicationLink(), int.MaxValue)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "readerOverUnparsedExtensions",
-                () =>
-                    Formatter.LoadElementExtensionsEntryPoint(
-                        null,
-                        new SyndicationPerson(),
-                        int.MaxValue
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("readerOverUnparsedExtensions", () =>
+                Formatter.LoadElementExtensionsEntryPoint(
+                    null,
+                    new SyndicationPerson(),
+                    int.MaxValue
+                )
             );
         }
 
@@ -360,22 +332,17 @@ namespace System.ServiceModel.Syndication.Tests
         public void LoadElementExtensions_NegativeMaxExtensionSize_ThrowsArgumentOutOfRangeException()
         {
             XmlReader reader = new XElement("Name").CreateReader();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "maxExtensionSize",
-                () =>
-                    Formatter.LoadElementExtensionsEntryPoint(reader, new SyndicationCategory(), -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("maxExtensionSize", () =>
+                Formatter.LoadElementExtensionsEntryPoint(reader, new SyndicationCategory(), -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "maxExtensionSize",
-                () => Formatter.LoadElementExtensionsEntryPoint(reader, new SyndicationItem(), -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("maxExtensionSize", () =>
+                Formatter.LoadElementExtensionsEntryPoint(reader, new SyndicationItem(), -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "maxExtensionSize",
-                () => Formatter.LoadElementExtensionsEntryPoint(reader, new SyndicationLink(), -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("maxExtensionSize", () =>
+                Formatter.LoadElementExtensionsEntryPoint(reader, new SyndicationLink(), -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "maxExtensionSize",
-                () => Formatter.LoadElementExtensionsEntryPoint(reader, new SyndicationPerson(), -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("maxExtensionSize", () =>
+                Formatter.LoadElementExtensionsEntryPoint(reader, new SyndicationPerson(), -1)
             );
         }
 
@@ -439,16 +406,14 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void TryParseAttribute_NullCategories_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "category",
-                () =>
-                    Formatter.TryParseAttributeEntryPoint(
-                        "name",
-                        "namespace",
-                        "value",
-                        (SyndicationCategory)null,
-                        "version"
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("category", () =>
+                Formatter.TryParseAttributeEntryPoint(
+                    "name",
+                    "namespace",
+                    "value",
+                    (SyndicationCategory)null,
+                    "version"
+                )
             );
         }
 
@@ -477,16 +442,14 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void TryParseAttribute_NullItem_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "item",
-                () =>
-                    Formatter.TryParseAttributeEntryPoint(
-                        "name",
-                        "namespace",
-                        "value",
-                        (SyndicationItem)null,
-                        "version"
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("item", () =>
+                Formatter.TryParseAttributeEntryPoint(
+                    "name",
+                    "namespace",
+                    "value",
+                    (SyndicationItem)null,
+                    "version"
+                )
             );
         }
 
@@ -515,16 +478,14 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void TryParseAttribute_NullLink_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "link",
-                () =>
-                    Formatter.TryParseAttributeEntryPoint(
-                        "name",
-                        "namespace",
-                        "value",
-                        (SyndicationLink)null,
-                        "version"
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("link", () =>
+                Formatter.TryParseAttributeEntryPoint(
+                    "name",
+                    "namespace",
+                    "value",
+                    (SyndicationLink)null,
+                    "version"
+                )
             );
         }
 
@@ -553,16 +514,14 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void TryParseAttribute_NullPerson_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "person",
-                () =>
-                    Formatter.TryParseAttributeEntryPoint(
-                        "name",
-                        "namespace",
-                        "value",
-                        (SyndicationPerson)null,
-                        "version"
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("person", () =>
+                Formatter.TryParseAttributeEntryPoint(
+                    "name",
+                    "namespace",
+                    "value",
+                    (SyndicationPerson)null,
+                    "version"
+                )
             );
         }
 
@@ -632,14 +591,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void TryParseElement_NullCategory_ThrowsArgumentNullException()
         {
             XmlReader reader = new XElement("Name").CreateReader();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "category",
-                () =>
-                    Formatter.TryParseElementEntryPoint(
-                        reader,
-                        (SyndicationCategory)null,
-                        "version"
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("category", () =>
+                Formatter.TryParseElementEntryPoint(reader, (SyndicationCategory)null, "version")
             );
         }
 
@@ -656,9 +609,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void TryParseElement_Item_ThrowsArgumentNullException()
         {
             XmlReader reader = new XElement("Name").CreateReader();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "item",
-                () => Formatter.TryParseElementEntryPoint(reader, (SyndicationItem)null, "version")
+            AssertExtensions.Throws<ArgumentNullException>("item", () =>
+                Formatter.TryParseElementEntryPoint(reader, (SyndicationItem)null, "version")
             );
         }
 
@@ -675,9 +627,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void TryParseElement_NullLink_ThrowsArgumentNullException()
         {
             XmlReader reader = new XElement("Name").CreateReader();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "link",
-                () => Formatter.TryParseElementEntryPoint(reader, (SyndicationLink)null, "version")
+            AssertExtensions.Throws<ArgumentNullException>("link", () =>
+                Formatter.TryParseElementEntryPoint(reader, (SyndicationLink)null, "version")
             );
         }
 
@@ -694,10 +645,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void TryParseElement_NullDocument_ThrowsArgumentNullException()
         {
             XmlReader reader = new XElement("Name").CreateReader();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "person",
-                () =>
-                    Formatter.TryParseElementEntryPoint(reader, (SyndicationPerson)null, "version")
+            AssertExtensions.Throws<ArgumentNullException>("person", () =>
+                Formatter.TryParseElementEntryPoint(reader, (SyndicationPerson)null, "version")
             );
         }
 
@@ -713,9 +662,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteAttributeExtensions_Category_Success(string version)
         {
             var category = new SyndicationCategory();
-            CompareHelper.AssertEqualWriteOutput(
-                "",
-                writer => Formatter.WriteAttributeExtensionsEntryPoint(writer, category, version)
+            CompareHelper.AssertEqualWriteOutput("", writer =>
+                Formatter.WriteAttributeExtensionsEntryPoint(writer, category, version)
             );
 
             category.AttributeExtensions.Add(new XmlQualifiedName("name1"), "value");
@@ -733,14 +681,12 @@ namespace System.ServiceModel.Syndication.Tests
             using (var stringWriter = new StringWriter())
             using (XmlWriter writer = XmlWriter.Create(stringWriter))
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "category",
-                    () =>
-                        Formatter.WriteAttributeExtensionsEntryPoint(
-                            writer,
-                            (SyndicationCategory)null,
-                            "version"
-                        )
+                AssertExtensions.Throws<ArgumentNullException>("category", () =>
+                    Formatter.WriteAttributeExtensionsEntryPoint(
+                        writer,
+                        (SyndicationCategory)null,
+                        "version"
+                    )
                 );
             }
         }
@@ -750,9 +696,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteAttributeExtensions_Item_Success(string version)
         {
             var item = new SyndicationItem();
-            CompareHelper.AssertEqualWriteOutput(
-                "",
-                writer => Formatter.WriteAttributeExtensionsEntryPoint(writer, item, version)
+            CompareHelper.AssertEqualWriteOutput("", writer =>
+                Formatter.WriteAttributeExtensionsEntryPoint(writer, item, version)
             );
 
             item.AttributeExtensions.Add(new XmlQualifiedName("name1"), "value");
@@ -770,14 +715,12 @@ namespace System.ServiceModel.Syndication.Tests
             using (var stringWriter = new StringWriter())
             using (XmlWriter writer = XmlWriter.Create(stringWriter))
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "item",
-                    () =>
-                        Formatter.WriteAttributeExtensionsEntryPoint(
-                            writer,
-                            (SyndicationItem)null,
-                            "version"
-                        )
+                AssertExtensions.Throws<ArgumentNullException>("item", () =>
+                    Formatter.WriteAttributeExtensionsEntryPoint(
+                        writer,
+                        (SyndicationItem)null,
+                        "version"
+                    )
                 );
             }
         }
@@ -787,9 +730,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteAttributeExtensions_Link_Success(string version)
         {
             var link = new SyndicationLink();
-            CompareHelper.AssertEqualWriteOutput(
-                "",
-                writer => Formatter.WriteAttributeExtensionsEntryPoint(writer, link, version)
+            CompareHelper.AssertEqualWriteOutput("", writer =>
+                Formatter.WriteAttributeExtensionsEntryPoint(writer, link, version)
             );
 
             link.AttributeExtensions.Add(new XmlQualifiedName("name1"), "value");
@@ -807,14 +749,12 @@ namespace System.ServiceModel.Syndication.Tests
             using (var stringWriter = new StringWriter())
             using (XmlWriter writer = XmlWriter.Create(stringWriter))
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "link",
-                    () =>
-                        Formatter.WriteAttributeExtensionsEntryPoint(
-                            writer,
-                            (SyndicationLink)null,
-                            "version"
-                        )
+                AssertExtensions.Throws<ArgumentNullException>("link", () =>
+                    Formatter.WriteAttributeExtensionsEntryPoint(
+                        writer,
+                        (SyndicationLink)null,
+                        "version"
+                    )
                 );
             }
         }
@@ -824,9 +764,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteAttributeExtensions_Person_Success(string version)
         {
             var person = new SyndicationPerson();
-            CompareHelper.AssertEqualWriteOutput(
-                "",
-                writer => Formatter.WriteAttributeExtensionsEntryPoint(writer, person, version)
+            CompareHelper.AssertEqualWriteOutput("", writer =>
+                Formatter.WriteAttributeExtensionsEntryPoint(writer, person, version)
             );
 
             person.AttributeExtensions.Add(new XmlQualifiedName("name1"), "value");
@@ -844,14 +783,12 @@ namespace System.ServiceModel.Syndication.Tests
             using (var stringWriter = new StringWriter())
             using (XmlWriter writer = XmlWriter.Create(stringWriter))
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "person",
-                    () =>
-                        Formatter.WriteAttributeExtensionsEntryPoint(
-                            writer,
-                            (SyndicationPerson)null,
-                            "version"
-                        )
+                AssertExtensions.Throws<ArgumentNullException>("person", () =>
+                    Formatter.WriteAttributeExtensionsEntryPoint(
+                        writer,
+                        (SyndicationPerson)null,
+                        "version"
+                    )
                 );
             }
         }
@@ -859,41 +796,25 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void WriteAttributeExtensions_NullWriter_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "writer",
-                () =>
-                    Formatter.WriteAttributeExtensionsEntryPoint(
-                        null,
-                        new SyndicationCategory(),
-                        "version"
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("writer", () =>
+                Formatter.WriteAttributeExtensionsEntryPoint(
+                    null,
+                    new SyndicationCategory(),
+                    "version"
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "writer",
-                () =>
-                    Formatter.WriteAttributeExtensionsEntryPoint(
-                        null,
-                        new SyndicationItem(),
-                        "version"
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("writer", () =>
+                Formatter.WriteAttributeExtensionsEntryPoint(null, new SyndicationItem(), "version")
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "writer",
-                () =>
-                    Formatter.WriteAttributeExtensionsEntryPoint(
-                        null,
-                        new SyndicationLink(),
-                        "version"
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("writer", () =>
+                Formatter.WriteAttributeExtensionsEntryPoint(null, new SyndicationLink(), "version")
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "writer",
-                () =>
-                    Formatter.WriteAttributeExtensionsEntryPoint(
-                        null,
-                        new SyndicationPerson(),
-                        "version"
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("writer", () =>
+                Formatter.WriteAttributeExtensionsEntryPoint(
+                    null,
+                    new SyndicationPerson(),
+                    "version"
+                )
             );
         }
 
@@ -903,9 +824,8 @@ namespace System.ServiceModel.Syndication.Tests
         {
             var category = new SyndicationCategory();
             var formatter = new Formatter();
-            CompareHelper.AssertEqualWriteOutput(
-                "",
-                writer => formatter.WriteElementExtensionsEntryPoint(writer, category, version)
+            CompareHelper.AssertEqualWriteOutput("", writer =>
+                formatter.WriteElementExtensionsEntryPoint(writer, category, version)
             );
 
             category.ElementExtensions.Add(new ExtensionObject { Value = 10 });
@@ -928,14 +848,12 @@ namespace System.ServiceModel.Syndication.Tests
             using (XmlWriter writer = XmlWriter.Create(stringWriter))
             {
                 var formatter = new Formatter();
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "category",
-                    () =>
-                        formatter.WriteElementExtensionsEntryPoint(
-                            writer,
-                            (SyndicationCategory)null,
-                            "version"
-                        )
+                AssertExtensions.Throws<ArgumentNullException>("category", () =>
+                    formatter.WriteElementExtensionsEntryPoint(
+                        writer,
+                        (SyndicationCategory)null,
+                        "version"
+                    )
                 );
             }
         }
@@ -945,9 +863,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void WriteElementExtensions_Item_Success(string version)
         {
             var item = new SyndicationItem();
-            CompareHelper.AssertEqualWriteOutput(
-                "",
-                writer => Formatter.WriteElementExtensionsEntryPoint(writer, item, version)
+            CompareHelper.AssertEqualWriteOutput("", writer =>
+                Formatter.WriteElementExtensionsEntryPoint(writer, item, version)
             );
 
             item.ElementExtensions.Add(new ExtensionObject { Value = 10 });
@@ -969,9 +886,8 @@ namespace System.ServiceModel.Syndication.Tests
             using (var stringWriter = new StringWriter())
             using (XmlWriter writer = XmlWriter.Create(stringWriter))
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "item",
-                    () => Formatter.WriteElementExtensionsEntryPoint(writer, null, "version")
+                AssertExtensions.Throws<ArgumentNullException>("item", () =>
+                    Formatter.WriteElementExtensionsEntryPoint(writer, null, "version")
                 );
             }
         }
@@ -982,9 +898,8 @@ namespace System.ServiceModel.Syndication.Tests
         {
             var link = new SyndicationLink();
             var formatter = new Formatter();
-            CompareHelper.AssertEqualWriteOutput(
-                "",
-                writer => formatter.WriteElementExtensionsEntryPoint(writer, link, version)
+            CompareHelper.AssertEqualWriteOutput("", writer =>
+                formatter.WriteElementExtensionsEntryPoint(writer, link, version)
             );
 
             link.ElementExtensions.Add(new ExtensionObject { Value = 10 });
@@ -1007,14 +922,12 @@ namespace System.ServiceModel.Syndication.Tests
             using (XmlWriter writer = XmlWriter.Create(stringWriter))
             {
                 var formatter = new Formatter();
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "link",
-                    () =>
-                        formatter.WriteElementExtensionsEntryPoint(
-                            writer,
-                            (SyndicationLink)null,
-                            "version"
-                        )
+                AssertExtensions.Throws<ArgumentNullException>("link", () =>
+                    formatter.WriteElementExtensionsEntryPoint(
+                        writer,
+                        (SyndicationLink)null,
+                        "version"
+                    )
                 );
             }
         }
@@ -1025,9 +938,8 @@ namespace System.ServiceModel.Syndication.Tests
         {
             var person = new SyndicationPerson();
             var formatter = new Formatter();
-            CompareHelper.AssertEqualWriteOutput(
-                "",
-                writer => formatter.WriteElementExtensionsEntryPoint(writer, person, version)
+            CompareHelper.AssertEqualWriteOutput("", writer =>
+                formatter.WriteElementExtensionsEntryPoint(writer, person, version)
             );
 
             person.ElementExtensions.Add(new ExtensionObject { Value = 10 });
@@ -1050,14 +962,12 @@ namespace System.ServiceModel.Syndication.Tests
             using (XmlWriter writer = XmlWriter.Create(stringWriter))
             {
                 var formatter = new Formatter();
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "person",
-                    () =>
-                        formatter.WriteElementExtensionsEntryPoint(
-                            writer,
-                            (SyndicationPerson)null,
-                            "version"
-                        )
+                AssertExtensions.Throws<ArgumentNullException>("person", () =>
+                    formatter.WriteElementExtensionsEntryPoint(
+                        writer,
+                        (SyndicationPerson)null,
+                        "version"
+                    )
                 );
             }
         }
@@ -1065,14 +975,8 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void WriteElementExtensions_NullWriter_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "writer",
-                () =>
-                    Formatter.WriteElementExtensionsEntryPoint(
-                        null,
-                        new SyndicationItem(),
-                        "version"
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("writer", () =>
+                Formatter.WriteElementExtensionsEntryPoint(null, new SyndicationItem(), "version")
             );
         }
 

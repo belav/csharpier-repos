@@ -158,11 +158,8 @@ namespace System.Web.UI
 
             WebResourceAttribute attr = null;
             if (
-                !resourceCache.InsertOrGet(
-                    (uint)rce.GetHashCode(),
-                    rce,
-                    false,
-                    () => CheckIfAssemblyContainsResource(assembly, resourceName, out attr)
+                !resourceCache.InsertOrGet((uint)rce.GetHashCode(), rce, false, () =>
+                    CheckIfAssemblyContainsResource(assembly, resourceName, out attr)
                 )
             )
                 throw new InvalidOperationException(

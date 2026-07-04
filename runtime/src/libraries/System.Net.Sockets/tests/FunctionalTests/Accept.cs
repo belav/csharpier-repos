@@ -152,9 +152,8 @@ namespace System.Net.Sockets.Tests
                     }
 
                     await Task.WhenAll(clientConnects);
-                    Assert.All(
-                        clientConnects,
-                        c => Assert.Equal(TaskStatus.RanToCompletion, c.Status)
+                    Assert.All(clientConnects, c =>
+                        Assert.Equal(TaskStatus.RanToCompletion, c.Status)
                     );
 
                     await Task.WhenAll(servers);

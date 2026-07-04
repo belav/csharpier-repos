@@ -1423,76 +1423,59 @@ public class UserManagerTest
     [Fact]
     public async Task ManagerPublicNullChecks()
     {
-        Assert.Throws<ArgumentNullException>(
-            "store",
-            () => new UserManager<PocoUser>(null, null, null, null, null, null, null, null, null)
+        Assert.Throws<ArgumentNullException>("store", () =>
+            new UserManager<PocoUser>(null, null, null, null, null, null, null, null, null)
         );
 
         var manager = MockHelpers.TestUserManager(new NotImplementedStore());
 
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.CreateAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.CreateAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.CreateAsync(null, null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.CreateAsync(null, null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "password",
-            async () => await manager.CreateAsync(new PocoUser(), null)
+        await Assert.ThrowsAsync<ArgumentNullException>("password", async () =>
+            await manager.CreateAsync(new PocoUser(), null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.UpdateAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.UpdateAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.DeleteAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.DeleteAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "claim",
-            async () => await manager.AddClaimAsync(null, null)
+        await Assert.ThrowsAsync<ArgumentNullException>("claim", async () =>
+            await manager.AddClaimAsync(null, null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "claim",
-            async () => await manager.ReplaceClaimAsync(null, null, null)
+        await Assert.ThrowsAsync<ArgumentNullException>("claim", async () =>
+            await manager.ReplaceClaimAsync(null, null, null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "claims",
-            async () => await manager.AddClaimsAsync(null, null)
+        await Assert.ThrowsAsync<ArgumentNullException>("claims", async () =>
+            await manager.AddClaimsAsync(null, null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "userName",
-            async () => await manager.FindByNameAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("userName", async () =>
+            await manager.FindByNameAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "login",
-            async () => await manager.AddLoginAsync(null, null)
+        await Assert.ThrowsAsync<ArgumentNullException>("login", async () =>
+            await manager.AddLoginAsync(null, null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "loginProvider",
-            async () => await manager.RemoveLoginAsync(null, null, null)
+        await Assert.ThrowsAsync<ArgumentNullException>("loginProvider", async () =>
+            await manager.RemoveLoginAsync(null, null, null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "providerKey",
-            async () => await manager.RemoveLoginAsync(null, "", null)
+        await Assert.ThrowsAsync<ArgumentNullException>("providerKey", async () =>
+            await manager.RemoveLoginAsync(null, "", null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "email",
-            async () => await manager.FindByEmailAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("email", async () =>
+            await manager.FindByEmailAsync(null)
         );
-        Assert.Throws<ArgumentNullException>(
-            "provider",
-            () => manager.RegisterTokenProvider("whatever", null)
+        Assert.Throws<ArgumentNullException>("provider", () =>
+            manager.RegisterTokenProvider("whatever", null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "roles",
-            async () => await manager.AddToRolesAsync(new PocoUser(), null)
+        await Assert.ThrowsAsync<ArgumentNullException>("roles", async () =>
+            await manager.AddToRolesAsync(new PocoUser(), null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "roles",
-            async () => await manager.RemoveFromRolesAsync(new PocoUser(), null)
+        await Assert.ThrowsAsync<ArgumentNullException>("roles", async () =>
+            await manager.RemoveFromRolesAsync(new PocoUser(), null)
         );
     }
 
@@ -1501,194 +1484,146 @@ public class UserManagerTest
     {
         var manager = MockHelpers.TestUserManager(new EmptyStore());
         manager.RegisterTokenProvider("whatever", new NoOpTokenProvider());
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.GetUserNameAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.GetUserNameAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.SetUserNameAsync(null, "bogus")
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.SetUserNameAsync(null, "bogus")
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.AddClaimAsync(null, new Claim("a", "b"))
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.AddClaimAsync(null, new Claim("a", "b"))
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.AddLoginAsync(null, new UserLoginInfo("", "", ""))
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.AddLoginAsync(null, new UserLoginInfo("", "", ""))
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.AddPasswordAsync(null, null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.AddPasswordAsync(null, null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.AddToRoleAsync(null, null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.AddToRoleAsync(null, null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.AddToRolesAsync(null, null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.AddToRolesAsync(null, null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.ChangePasswordAsync(null, null, null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.ChangePasswordAsync(null, null, null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.GetClaimsAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.GetClaimsAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.GetLoginsAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.GetLoginsAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.GetRolesAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.GetRolesAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.IsInRoleAsync(null, null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.IsInRoleAsync(null, null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.RemoveClaimAsync(null, new Claim("a", "b"))
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.RemoveClaimAsync(null, new Claim("a", "b"))
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.RemoveLoginAsync(null, "", "")
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.RemoveLoginAsync(null, "", "")
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.RemovePasswordAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.RemovePasswordAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.RemoveFromRoleAsync(null, null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.RemoveFromRoleAsync(null, null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.RemoveFromRolesAsync(null, null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.RemoveFromRolesAsync(null, null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () =>
-                await manager.ReplaceClaimAsync(null, new Claim("a", "b"), new Claim("a", "c"))
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.ReplaceClaimAsync(null, new Claim("a", "b"), new Claim("a", "c"))
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.UpdateSecurityStampAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.UpdateSecurityStampAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.GetSecurityStampAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.GetSecurityStampAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.HasPasswordAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.HasPasswordAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.GeneratePasswordResetTokenAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.GeneratePasswordResetTokenAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.ResetPasswordAsync(null, null, null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.ResetPasswordAsync(null, null, null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.IsEmailConfirmedAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.IsEmailConfirmedAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.GenerateEmailConfirmationTokenAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.GenerateEmailConfirmationTokenAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.ConfirmEmailAsync(null, null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.ConfirmEmailAsync(null, null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.GetEmailAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.GetEmailAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.SetEmailAsync(null, null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.SetEmailAsync(null, null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.IsPhoneNumberConfirmedAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.IsPhoneNumberConfirmedAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.ChangePhoneNumberAsync(null, null, null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.ChangePhoneNumberAsync(null, null, null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.VerifyChangePhoneNumberTokenAsync(null, null, null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.VerifyChangePhoneNumberTokenAsync(null, null, null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.GetPhoneNumberAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.GetPhoneNumberAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.SetPhoneNumberAsync(null, null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.SetPhoneNumberAsync(null, null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.GetTwoFactorEnabledAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.GetTwoFactorEnabledAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.SetTwoFactorEnabledAsync(null, true)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.SetTwoFactorEnabledAsync(null, true)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.GenerateTwoFactorTokenAsync(null, null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.GenerateTwoFactorTokenAsync(null, null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.VerifyTwoFactorTokenAsync(null, null, null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.VerifyTwoFactorTokenAsync(null, null, null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.GetValidTwoFactorProvidersAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.GetValidTwoFactorProvidersAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.VerifyUserTokenAsync(null, null, null, null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.VerifyUserTokenAsync(null, null, null, null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.AccessFailedAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.AccessFailedAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.ResetAccessFailedCountAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.ResetAccessFailedCountAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.GetAccessFailedCountAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.GetAccessFailedCountAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.GetLockoutEnabledAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.GetLockoutEnabledAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.SetLockoutEnabledAsync(null, false)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.SetLockoutEnabledAsync(null, false)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.SetLockoutEndDateAsync(null, DateTimeOffset.UtcNow)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.SetLockoutEndDateAsync(null, DateTimeOffset.UtcNow)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.GetLockoutEndDateAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.GetLockoutEndDateAsync(null)
         );
-        await Assert.ThrowsAsync<ArgumentNullException>(
-            "user",
-            async () => await manager.IsLockedOutAsync(null)
+        await Assert.ThrowsAsync<ArgumentNullException>("user", async () =>
+            await manager.IsLockedOutAsync(null)
         );
     }
 

@@ -105,20 +105,14 @@ namespace System.Net.Http.Tests
             range.Unit = "myunit";
             Assert.Equal("myunit", range.Unit); // "Unit (custom value)"
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () =>
-                {
-                    range.Unit = null;
-                }
-            ); // "<null>"
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                () =>
-                {
-                    range.Unit = "";
-                }
-            ); // "empty string"
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+            {
+                range.Unit = null;
+            }); // "<null>"
+            AssertExtensions.Throws<ArgumentException>("value", () =>
+            {
+                range.Unit = "";
+            }); // "empty string"
             Assert.Throws<FormatException>(() =>
             {
                 range.Unit = " x";

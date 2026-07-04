@@ -82,18 +82,14 @@ namespace Microsoft.CodeAnalysis.Host.Mef
         {
             if (!_serviceMap.TryGetValue(serviceType, out service))
             {
-                service = ImmutableInterlocked.GetOrAdd(
-                    ref _serviceMap,
-                    serviceType,
-                    svctype =>
-                    {
-                        // PERF: Hoist AssemblyQualifiedName out of inner lambda to avoid repeated string allocations.
-                        var assemblyQualifiedName = svctype.AssemblyQualifiedName;
-                        return PickLanguageService(
-                            _services.Where(lz => lz.Metadata.ServiceType == assemblyQualifiedName)
-                        );
-                    }
-                );
+                service = ImmutableInterlocked.GetOrAdd(ref _serviceMap, serviceType, svctype =>
+                {
+                    // PERF: Hoist AssemblyQualifiedName out of inner lambda to avoid repeated string allocations.
+                    var assemblyQualifiedName = svctype.AssemblyQualifiedName;
+                    return PickLanguageService(
+                        _services.Where(lz => lz.Metadata.ServiceType == assemblyQualifiedName)
+                    );
+                });
             }
 
             return service != null;

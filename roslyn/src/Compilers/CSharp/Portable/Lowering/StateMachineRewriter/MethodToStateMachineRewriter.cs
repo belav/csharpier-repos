@@ -152,9 +152,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 && F.Compilation.Options.OptimizationLevel == OptimizationLevel.Release
             )
             {
-                BoundExpression thisProxyReplacement = thisProxy.Replacement(
-                    F.Syntax,
-                    frameType => F.This()
+                BoundExpression thisProxyReplacement = thisProxy.Replacement(F.Syntax, frameType =>
+                    F.This()
                 );
                 Debug.Assert(thisProxyReplacement.Type is not null);
                 this.cachedThis = F.SynthesizedLocal(
@@ -960,9 +959,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 instrumentation = (BoundBlockInstrumentation)Visit(node.Instrumentation);
             }
 
-            return PossibleIteratorScope(
-                node.Locals,
-                () => VisitBlock(node, removeInstrumentation: true)
+            return PossibleIteratorScope(node.Locals, () =>
+                VisitBlock(node, removeInstrumentation: true)
             );
         }
 

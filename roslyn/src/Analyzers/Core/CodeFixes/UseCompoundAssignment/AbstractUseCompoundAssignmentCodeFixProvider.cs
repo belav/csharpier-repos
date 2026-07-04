@@ -87,69 +87,58 @@ namespace Microsoft.CodeAnalysis.UseCompoundAssignment
                     .AdditionalLocations[0]
                     .FindNode(getInnermostNodeForTie: true, cancellationToken);
 
-                editor.ReplaceNode(
-                    assignment,
-                    (current, generator) =>
-                    {
-                        if (current is not TAssignmentSyntax currentAssignment)
-                            return current;
+                editor.ReplaceNode(assignment, (current, generator) =>
+                {
+                    if (current is not TAssignmentSyntax currentAssignment)
+                        return current;
 
-                        syntaxFacts.GetPartsOfAssignmentExpressionOrStatement(
-                            currentAssignment,
-                            out var leftOfAssign,
-                            out var equalsToken,
-                            out var rightOfAssign
-                        );
+                    syntaxFacts.GetPartsOfAssignmentExpressionOrStatement(
+                        currentAssignment,
+                        out var leftOfAssign,
+                        out var equalsToken,
+                        out var rightOfAssign
+                    );
 
-                        while (syntaxFacts.IsParenthesizedExpression(rightOfAssign))
-                            rightOfAssign = syntaxFacts.Unparenthesize(rightOfAssign);
+                    while (syntaxFacts.IsParenthesizedExpression(rightOfAssign))
+                        rightOfAssign = syntaxFacts.Unparenthesize(rightOfAssign);
 
-                        syntaxFacts.GetPartsOfBinaryExpression(
-                            rightOfAssign,
-                            out _,
-                            out var opToken,
-                            out var rightExpr
-                        );
+                    syntaxFacts.GetPartsOfBinaryExpression(
+                        rightOfAssign,
+                        out _,
+                        out var opToken,
+                        out var rightExpr
+                    );
 
-                        if (
-                            diagnostic.Properties.ContainsKey(
-                                UseCompoundAssignmentUtilities.Increment
+                    if (diagnostic.Properties.ContainsKey(UseCompoundAssignmentUtilities.Increment))
+                        return Increment(
+                                (TExpressionSyntax)leftOfAssign,
+                                PreferPostfix(syntaxFacts, currentAssignment)
                             )
-                        )
-                            return Increment(
-                                    (TExpressionSyntax)leftOfAssign,
-                                    PreferPostfix(syntaxFacts, currentAssignment)
-                                )
-                                .WithTriviaFrom(currentAssignment);
+                            .WithTriviaFrom(currentAssignment);
 
-                        if (
-                            diagnostic.Properties.ContainsKey(
-                                UseCompoundAssignmentUtilities.Decrement
+                    if (diagnostic.Properties.ContainsKey(UseCompoundAssignmentUtilities.Decrement))
+                        return Decrement(
+                                (TExpressionSyntax)leftOfAssign,
+                                PreferPostfix(syntaxFacts, currentAssignment)
                             )
-                        )
-                            return Decrement(
-                                    (TExpressionSyntax)leftOfAssign,
-                                    PreferPostfix(syntaxFacts, currentAssignment)
-                                )
-                                .WithTriviaFrom(currentAssignment);
+                            .WithTriviaFrom(currentAssignment);
 
-                        var assignmentOpKind = _binaryToAssignmentMap[
-                            syntaxKinds.Convert<TSyntaxKind>(rightOfAssign.RawKind)
-                        ];
-                        var compoundOperator = Token(_assignmentToTokenMap[assignmentOpKind]);
+                    var assignmentOpKind = _binaryToAssignmentMap[
+                        syntaxKinds.Convert<TSyntaxKind>(rightOfAssign.RawKind)
+                    ];
+                    var compoundOperator = Token(_assignmentToTokenMap[assignmentOpKind]);
 
-                        rightExpr = rightExpr.WithLeadingTrivia(
-                            PrepareRightExpressionLeadingTrivia(rightExpr.GetLeadingTrivia())
-                        );
+                    rightExpr = rightExpr.WithLeadingTrivia(
+                        PrepareRightExpressionLeadingTrivia(rightExpr.GetLeadingTrivia())
+                    );
 
-                        return Assignment(
-                            assignmentOpKind,
-                            (TExpressionSyntax)leftOfAssign,
-                            compoundOperator.WithTriviaFrom(equalsToken),
-                            (TExpressionSyntax)rightExpr
-                        );
-                    }
-                );
+                    return Assignment(
+                        assignmentOpKind,
+                        (TExpressionSyntax)leftOfAssign,
+                        compoundOperator.WithTriviaFrom(equalsToken),
+                        (TExpressionSyntax)rightExpr
+                    );
+                });
             }
 
             return Task.CompletedTask;

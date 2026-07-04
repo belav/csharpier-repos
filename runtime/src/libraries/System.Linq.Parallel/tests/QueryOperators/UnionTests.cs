@@ -314,16 +314,13 @@ namespace System.Linq.Parallel.Tests
             ParallelQuery<int> rightQuery = right.Item;
             IntegerRangeSet seenUnordered = new IntegerRangeSet(leftCount, rightCount);
             int seen = 0;
-            Assert.All(
-                leftQuery.Union(rightQuery).ToList(),
-                x =>
-                {
-                    if (x < leftCount)
-                        Assert.Equal(seen++, x);
-                    else
-                        seenUnordered.Add(x);
-                }
-            );
+            Assert.All(leftQuery.Union(rightQuery).ToList(), x =>
+            {
+                if (x < leftCount)
+                    Assert.Equal(seen++, x);
+                else
+                    seenUnordered.Add(x);
+            });
             Assert.Equal(leftCount, seen);
             seenUnordered.AssertComplete();
         }
@@ -354,16 +351,13 @@ namespace System.Linq.Parallel.Tests
             ParallelQuery<int> rightQuery = right.Item;
             IntegerRangeSet seenUnordered = new IntegerRangeSet(0, leftCount);
             int seen = leftCount;
-            Assert.All(
-                leftQuery.Union(rightQuery).ToList(),
-                x =>
-                {
-                    if (x >= leftCount)
-                        Assert.Equal(seen++, x);
-                    else
-                        seenUnordered.Add(x);
-                }
-            );
+            Assert.All(leftQuery.Union(rightQuery).ToList(), x =>
+            {
+                if (x >= leftCount)
+                    Assert.Equal(seen++, x);
+                else
+                    seenUnordered.Add(x);
+            });
             Assert.Equal(leftCount + rightCount, seen);
             seenUnordered.AssertComplete();
         }
@@ -582,9 +576,8 @@ namespace System.Linq.Parallel.Tests
             _ = leftCount;
             _ = rightCount;
             int seen = 0;
-            Assert.All(
-                leftQuery.AsOrdered().Union(rightQuery.AsOrdered()),
-                x => Assert.Equal(seen++, x)
+            Assert.All(leftQuery.AsOrdered().Union(rightQuery.AsOrdered()), x =>
+                Assert.Equal(seen++, x)
             );
             Assert.Equal(count, seen);
         }
@@ -658,26 +651,21 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Union_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "first",
-                () => ((ParallelQuery<int>)null).Union(ParallelEnumerable.Range(0, 1))
+            AssertExtensions.Throws<ArgumentNullException>("first", () =>
+                ((ParallelQuery<int>)null).Union(ParallelEnumerable.Range(0, 1))
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "second",
-                () => ParallelEnumerable.Range(0, 1).Union(null)
+            AssertExtensions.Throws<ArgumentNullException>("second", () =>
+                ParallelEnumerable.Range(0, 1).Union(null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "first",
-                () =>
-                    ((ParallelQuery<int>)null).Union(
-                        ParallelEnumerable.Range(0, 1),
-                        EqualityComparer<int>.Default
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("first", () =>
+                ((ParallelQuery<int>)null).Union(
+                    ParallelEnumerable.Range(0, 1),
+                    EqualityComparer<int>.Default
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "second",
-                () => ParallelEnumerable.Range(0, 1).Union(null, EqualityComparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("second", () =>
+                ParallelEnumerable.Range(0, 1).Union(null, EqualityComparer<int>.Default)
             );
         }
     }

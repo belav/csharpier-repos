@@ -38,26 +38,22 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void CopyTo_NullDestination_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "destination",
-                () => Marshal.Copy(new int[10], 0, IntPtr.Zero, 0)
+            AssertExtensions.Throws<ArgumentNullException>("destination", () =>
+                Marshal.Copy(new int[10], 0, IntPtr.Zero, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "destination",
-                () => Marshal.Copy(new IntPtr(1), (int[])null, 0, 0)
+            AssertExtensions.Throws<ArgumentNullException>("destination", () =>
+                Marshal.Copy(new IntPtr(1), (int[])null, 0, 0)
             );
         }
 
         [Fact]
         public void CopyTo_NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => Marshal.Copy((int[])null, 0, new IntPtr(1), 0)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                Marshal.Copy((int[])null, 0, new IntPtr(1), 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => Marshal.Copy(IntPtr.Zero, new int[10], 0, 0)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                Marshal.Copy(IntPtr.Zero, new int[10], 0, 0)
             );
         }
 
@@ -68,13 +64,11 @@ namespace System.Runtime.InteropServices.Tests
             IntPtr ptr = Marshal.AllocCoTaskMem(sizeof(int) * array.Length);
             try
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    null,
-                    () => Marshal.Copy(array, -1, ptr, 10)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                    Marshal.Copy(array, -1, ptr, 10)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "startIndex",
-                    () => Marshal.Copy(ptr, array, -1, 10)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                    Marshal.Copy(ptr, array, -1, 10)
                 );
             }
             finally
@@ -90,13 +84,11 @@ namespace System.Runtime.InteropServices.Tests
             IntPtr ptr = Marshal.AllocCoTaskMem(sizeof(int) * array.Length);
             try
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    null,
-                    () => Marshal.Copy(array, 0, ptr, -1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                    Marshal.Copy(array, 0, ptr, -1)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "length",
-                    () => Marshal.Copy(ptr, array, 0, -1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () =>
+                    Marshal.Copy(ptr, array, 0, -1)
                 );
             }
             finally
@@ -118,13 +110,11 @@ namespace System.Runtime.InteropServices.Tests
             IntPtr ptr = Marshal.AllocCoTaskMem(sizeof(int) * array.Length);
             try
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    null,
-                    () => Marshal.Copy(array, startIndex, ptr, length)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                    Marshal.Copy(array, startIndex, ptr, length)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    null,
-                    () => Marshal.Copy(ptr, array, startIndex, length)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(null, () =>
+                    Marshal.Copy(ptr, array, startIndex, length)
                 );
             }
             finally

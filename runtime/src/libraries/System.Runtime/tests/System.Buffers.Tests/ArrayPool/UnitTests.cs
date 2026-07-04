@@ -52,9 +52,8 @@ namespace System.Buffers.ArrayPool.Tests
         [InlineData(-1)]
         public static void CreatingAPoolWithInvalidArrayCountThrows(int length)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "maxArraysPerBucket",
-                () => ArrayPool<byte>.Create(maxArraysPerBucket: length, maxArrayLength: 16)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("maxArraysPerBucket", () =>
+                ArrayPool<byte>.Create(maxArraysPerBucket: length, maxArrayLength: 16)
             );
         }
 
@@ -63,9 +62,8 @@ namespace System.Buffers.ArrayPool.Tests
         [InlineData(-1)]
         public static void CreatingAPoolWithInvalidMaximumArraySizeThrows(int length)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "maxArrayLength",
-                () => ArrayPool<byte>.Create(maxArrayLength: length, maxArraysPerBucket: 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("maxArrayLength", () =>
+                ArrayPool<byte>.Create(maxArrayLength: length, maxArraysPerBucket: 1)
             );
         }
 
@@ -85,9 +83,8 @@ namespace System.Buffers.ArrayPool.Tests
         [MemberData(nameof(BytePoolInstances))]
         public static void RentingWithInvalidLengthThrows(ArrayPool<byte> pool)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "minimumLength",
-                () => pool.Rent(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("minimumLength", () =>
+                pool.Rent(-1)
             );
         }
 
@@ -711,20 +708,16 @@ namespace System.Buffers.ArrayPool.Tests
         public static void UsePoolInParallel(ArrayPool<byte> pool)
         {
             int[] sizes = new int[] { 16, 32, 64, 128 };
-            Parallel.For(
-                0,
-                250000,
-                i =>
+            Parallel.For(0, 250000, i =>
+            {
+                foreach (int size in sizes)
                 {
-                    foreach (int size in sizes)
-                    {
-                        byte[] array = pool.Rent(size);
-                        Assert.NotNull(array);
-                        Assert.InRange(array.Length, size, int.MaxValue);
-                        pool.Return(array);
-                    }
+                    byte[] array = pool.Rent(size);
+                    Assert.NotNull(array);
+                    Assert.InRange(array.Length, size, int.MaxValue);
+                    pool.Return(array);
                 }
-            );
+            });
         }
 
         [Fact]

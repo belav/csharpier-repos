@@ -267,9 +267,8 @@ namespace System.Tests
         [InlineData((Base64FormattingOptions)(2))]
         public void ToBase64String_Span_InvalidOptions_Throws(Base64FormattingOptions invalidOption)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () => Convert.ToBase64String(new byte[0].AsSpan(), invalidOption)
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                Convert.ToBase64String(new byte[0].AsSpan(), invalidOption)
             );
         }
 
@@ -307,15 +306,13 @@ namespace System.Tests
         [InlineData((Base64FormattingOptions)(2))]
         public void TryToBase64Chars_InvalidOptions_Throws(Base64FormattingOptions invalidOption)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    Convert.TryToBase64Chars(
-                        new byte[0].AsSpan(),
-                        new char[0].AsSpan(),
-                        out int charsWritten,
-                        invalidOption
-                    )
+            AssertExtensions.Throws<ArgumentException>("options", () =>
+                Convert.TryToBase64Chars(
+                    new byte[0].AsSpan(),
+                    new char[0].AsSpan(),
+                    out int charsWritten,
+                    invalidOption
+                )
             );
         }
 

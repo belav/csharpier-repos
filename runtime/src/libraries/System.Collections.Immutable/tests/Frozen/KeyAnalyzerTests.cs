@@ -30,9 +30,8 @@ namespace System.Collections.Frozen.Tests
             );
 
             Assert.All(values, s => Assert.InRange(s.Length, r.MinimumLength, int.MaxValue));
-            Assert.All(
-                values,
-                s => Assert.InRange(s.Length, 0, r.MinimumLength + r.MaximumLengthDiff)
+            Assert.All(values, s =>
+                Assert.InRange(s.Length, 0, r.MinimumLength + r.MaximumLengthDiff)
             );
 
             return r;

@@ -15,13 +15,10 @@ public class MapFallbackStartup
         app.UseRouting();
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapFallback(
-                "/prefix/{*path:nonfile}",
-                (context) =>
-                {
-                    return context.Response.WriteAsync("FallbackCustomPattern");
-                }
-            );
+            endpoints.MapFallback("/prefix/{*path:nonfile}", (context) =>
+            {
+                return context.Response.WriteAsync("FallbackCustomPattern");
+            });
 
             endpoints.MapFallback(
                 (context) =>

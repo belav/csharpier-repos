@@ -54,11 +54,8 @@ namespace Newtonsoft.Json.Utilities
         public override DynamicMetaObject BindGetMember(GetMemberBinder binder)
         {
             return IsOverridden(nameof(DynamicProxy<T>.TryGetMember))
-                ? CallMethodWithResult(
-                    nameof(DynamicProxy<T>.TryGetMember),
-                    binder,
-                    NoArgs,
-                    e => binder.FallbackGetMember(this, e)
+                ? CallMethodWithResult(nameof(DynamicProxy<T>.TryGetMember), binder, NoArgs, e =>
+                    binder.FallbackGetMember(this, e)
                 )
                 : base.BindGetMember(binder);
         }
@@ -81,11 +78,8 @@ namespace Newtonsoft.Json.Utilities
         public override DynamicMetaObject BindDeleteMember(DeleteMemberBinder binder)
         {
             return IsOverridden(nameof(DynamicProxy<T>.TryDeleteMember))
-                ? CallMethodNoResult(
-                    nameof(DynamicProxy<T>.TryDeleteMember),
-                    binder,
-                    NoArgs,
-                    e => binder.FallbackDeleteMember(this, e)
+                ? CallMethodNoResult(nameof(DynamicProxy<T>.TryDeleteMember), binder, NoArgs, e =>
+                    binder.FallbackDeleteMember(this, e)
                 )
                 : base.BindDeleteMember(binder);
         }
@@ -93,11 +87,8 @@ namespace Newtonsoft.Json.Utilities
         public override DynamicMetaObject BindConvert(ConvertBinder binder)
         {
             return IsOverridden(nameof(DynamicProxy<T>.TryConvert))
-                ? CallMethodWithResult(
-                    nameof(DynamicProxy<T>.TryConvert),
-                    binder,
-                    NoArgs,
-                    e => binder.FallbackConvert(this, e)
+                ? CallMethodWithResult(nameof(DynamicProxy<T>.TryConvert), binder, NoArgs, e =>
+                    binder.FallbackConvert(this, e)
                 )
                 : base.BindConvert(binder);
         }

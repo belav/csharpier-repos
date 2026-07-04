@@ -73,23 +73,15 @@ namespace System.Reflection.PortableExecutable.Tests
         [Fact]
         public void Ctor_Streams()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "peStream",
-                () =>
-                    new PEReader(
-                        new CustomAccessMemoryStream(
-                            canRead: false,
-                            canSeek: false,
-                            canWrite: false
-                        )
-                    )
+            AssertExtensions.Throws<ArgumentException>("peStream", () =>
+                new PEReader(
+                    new CustomAccessMemoryStream(canRead: false, canSeek: false, canWrite: false)
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "peStream",
-                () =>
-                    new PEReader(
-                        new CustomAccessMemoryStream(canRead: true, canSeek: false, canWrite: false)
-                    )
+            AssertExtensions.Throws<ArgumentException>("peStream", () =>
+                new PEReader(
+                    new CustomAccessMemoryStream(canRead: true, canSeek: false, canWrite: false)
+                )
             );
 
             var s = new CustomAccessMemoryStream(canRead: true, canSeek: true, canWrite: false);
@@ -292,21 +284,18 @@ namespace System.Reflection.PortableExecutable.Tests
         [PlatformSpecific(TestPlatforms.Windows)] // Uses P/Invokes to get module handles
         public void GetMethodBody_Loaded()
         {
-            LoaderUtilities.LoadPEAndValidate(
-                Misc.Members,
-                reader =>
-                {
-                    var md = reader.GetMetadataReader();
-                    var il = reader.GetMethodBody(
-                        md.GetMethodDefinition(
-                            MetadataTokens.MethodDefinitionHandle(1)
-                        ).RelativeVirtualAddress
-                    );
+            LoaderUtilities.LoadPEAndValidate(Misc.Members, reader =>
+            {
+                var md = reader.GetMetadataReader();
+                var il = reader.GetMethodBody(
+                    md.GetMethodDefinition(
+                        MetadataTokens.MethodDefinitionHandle(1)
+                    ).RelativeVirtualAddress
+                );
 
-                    Assert.Equal(new byte[] { 0, 42 }, il.GetILBytes());
-                    Assert.Equal(8, il.MaxStack);
-                }
-            );
+                Assert.Equal(new byte[] { 0, 42 }, il.GetILBytes());
+                Assert.Equal(8, il.MaxStack);
+            });
         }
 
         [Fact]
@@ -436,15 +425,13 @@ namespace System.Reflection.PortableExecutable.Tests
                         out pdbPath
                     )
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "peImagePath",
-                    () =>
-                        reader.TryOpenAssociatedPortablePdb(
-                            "C:\\a\\\0\\b",
-                            _ => null,
-                            out pdbProvider,
-                            out pdbPath
-                        )
+                AssertExtensions.Throws<ArgumentException>("peImagePath", () =>
+                    reader.TryOpenAssociatedPortablePdb(
+                        "C:\\a\\\0\\b",
+                        _ => null,
+                        out pdbProvider,
+                        out pdbPath
+                    )
                 );
             }
         }
@@ -1163,18 +1150,16 @@ namespace System.Reflection.PortableExecutable.Tests
                 string pdbPath;
 
                 // pass-thru:
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    () =>
-                        reader.TryOpenAssociatedPortablePdb(
-                            Path.Combine("pedir", "file.exe"),
-                            _ =>
-                            {
-                                throw new ArgumentException();
-                            },
-                            out pdbProvider,
-                            out pdbPath
-                        )
+                AssertExtensions.Throws<ArgumentException>(null, () =>
+                    reader.TryOpenAssociatedPortablePdb(
+                        Path.Combine("pedir", "file.exe"),
+                        _ =>
+                        {
+                            throw new ArgumentException();
+                        },
+                        out pdbProvider,
+                        out pdbPath
+                    )
                 );
 
                 Assert.Throws<InvalidOperationException>(() =>

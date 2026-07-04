@@ -290,27 +290,24 @@ namespace System.Security.AccessControl.Tests
             aceFlag = 0;
             binaryForm = new byte[65536];
 
-            AssertExtensions.Throws<ArgumentException>(
-                "binaryForm",
-                () =>
-                {
-                    revision = 127;
-                    capacity = 1;
-                    rawAcl = new RawAcl(revision, capacity);
-                    rawAcl.GetBinaryForm(binaryForm, 0);
-                    //change the length bytes to 65535
-                    binaryForm[2] = 0xf;
-                    binaryForm[3] = 0xf;
-                    //change the aceCount to 1
-                    binaryForm[4] = 1;
-                    aceType = AceType.MaxDefinedAceType + 1;
-                    aceFlag = (AceFlags)223; //all flags ored together
-                    opaque = new byte[GenericAcl.MaxBinaryLength + 1 - 8 - 4]; //GenericAcl.MaxBinaryLength = 65535, is not multiple of 4
-                    gAce = new CustomAce(aceType, aceFlag, opaque);
-                    gAce.GetBinaryForm(binaryForm, 8);
-                    TestCreateFromBinaryForm(binaryForm, 0, revision, 1, binaryForm.Length);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("binaryForm", () =>
+            {
+                revision = 127;
+                capacity = 1;
+                rawAcl = new RawAcl(revision, capacity);
+                rawAcl.GetBinaryForm(binaryForm, 0);
+                //change the length bytes to 65535
+                binaryForm[2] = 0xf;
+                binaryForm[3] = 0xf;
+                //change the aceCount to 1
+                binaryForm[4] = 1;
+                aceType = AceType.MaxDefinedAceType + 1;
+                aceFlag = (AceFlags)223; //all flags ored together
+                opaque = new byte[GenericAcl.MaxBinaryLength + 1 - 8 - 4]; //GenericAcl.MaxBinaryLength = 65535, is not multiple of 4
+                gAce = new CustomAce(aceType, aceFlag, opaque);
+                gAce.GetBinaryForm(binaryForm, 8);
+                TestCreateFromBinaryForm(binaryForm, 0, revision, 1, binaryForm.Length);
+            });
 
             //case 7, a valid binary representation with revision 255, 256 Access
             //CommonAce to test the correctness of  the process of the AceCount in the header

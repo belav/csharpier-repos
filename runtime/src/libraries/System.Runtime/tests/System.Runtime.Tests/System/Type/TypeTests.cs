@@ -629,9 +629,8 @@ namespace System.Tests
                 Assert.Null(Type.GetType(typeName, throwOnError: false, ignoreCase: false));
             }
 
-            Assert.Throws(
-                expectedException,
-                () => Type.GetType(typeName, throwOnError: true, ignoreCase: false)
+            Assert.Throws(expectedException, () =>
+                Type.GetType(typeName, throwOnError: true, ignoreCase: false)
             );
         }
 

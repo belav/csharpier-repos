@@ -33,16 +33,13 @@ app.MapGet("/hello", ({parameterType} p) => p == null ? "null!" : "Hello world!"
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            results,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-                var p = Assert.Single(endpointModel.Parameters);
-                Assert.Equal(EndpointParameterSource.SpecialType, p.Source);
-                Assert.Equal("p", p.SymbolName);
-            }
-        );
+        VerifyStaticEndpointModel(results, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+            var p = Assert.Single(endpointModel.Parameters);
+            Assert.Equal(EndpointParameterSource.SpecialType, p.Source);
+            Assert.Equal("p", p.SymbolName);
+        });
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
@@ -59,27 +56,24 @@ app.MapGet("/hello", (HttpRequest req, HttpResponse res) => req is null || res i
         );
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            results,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
+        VerifyStaticEndpointModel(results, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
 
-                Assert.Collection(
-                    endpointModel.Parameters,
-                    reqParam =>
-                    {
-                        Assert.Equal(EndpointParameterSource.SpecialType, reqParam.Source);
-                        Assert.Equal("req", reqParam.SymbolName);
-                    },
-                    reqParam =>
-                    {
-                        Assert.Equal(EndpointParameterSource.SpecialType, reqParam.Source);
-                        Assert.Equal("res", reqParam.SymbolName);
-                    }
-                );
-            }
-        );
+            Assert.Collection(
+                endpointModel.Parameters,
+                reqParam =>
+                {
+                    Assert.Equal(EndpointParameterSource.SpecialType, reqParam.Source);
+                    Assert.Equal("req", reqParam.SymbolName);
+                },
+                reqParam =>
+                {
+                    Assert.Equal(EndpointParameterSource.SpecialType, reqParam.Source);
+                    Assert.Equal("res", reqParam.SymbolName);
+                }
+            );
+        });
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
@@ -99,13 +93,10 @@ app.MapGet("/hello", () =>
         var (result, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
-        VerifyStaticEndpointModel(
-            result,
-            endpointModel =>
-            {
-                Assert.Equal("MapGet", endpointModel.HttpMethod);
-            }
-        );
+        VerifyStaticEndpointModel(result, endpointModel =>
+        {
+            Assert.Equal("MapGet", endpointModel.HttpMethod);
+        });
 
         var httpContext = CreateHttpContext();
         await endpoint.RequestDelegate(httpContext);
@@ -138,44 +129,40 @@ app.MapGet("/zh", (HttpRequest req, HttpResponse res) => "你好世界！");
         var endpoints = GetEndpointsFromCompilation(compilation);
 
         await VerifyAgainstBaselineUsingFile(compilation);
-        VerifyStaticEndpointModels(
-            results,
-            endpointModels =>
-                Assert.Collection(
-                    endpointModels,
-                    endpointModel =>
-                    {
-                        Assert.Equal("MapGet", endpointModel.HttpMethod);
-                        var reqParam = Assert.Single(endpointModel.Parameters);
-                        Assert.Equal(EndpointParameterSource.SpecialType, reqParam.Source);
-                        Assert.Equal("req", reqParam.SymbolName);
-                    },
-                    endpointModel =>
-                    {
-                        Assert.Equal("MapGet", endpointModel.HttpMethod);
-                        var reqParam = Assert.Single(endpointModel.Parameters);
-                        Assert.Equal(EndpointParameterSource.SpecialType, reqParam.Source);
-                        Assert.Equal("res", reqParam.SymbolName);
-                    },
-                    endpointModel =>
-                    {
-                        Assert.Equal("MapGet", endpointModel.HttpMethod);
-                        Assert.Collection(
-                            endpointModel.Parameters,
-                            reqParam =>
-                            {
-                                Assert.Equal(EndpointParameterSource.SpecialType, reqParam.Source);
-                                Assert.Equal("req", reqParam.SymbolName);
-                            },
-                            reqParam =>
-                            {
-                                Assert.Equal(EndpointParameterSource.SpecialType, reqParam.Source);
-                                Assert.Equal("res", reqParam.SymbolName);
-                            }
-                        );
-                    }
-                )
-        );
+        VerifyStaticEndpointModels(results, endpointModels => Assert.Collection(
+                endpointModels,
+                endpointModel =>
+                {
+                    Assert.Equal("MapGet", endpointModel.HttpMethod);
+                    var reqParam = Assert.Single(endpointModel.Parameters);
+                    Assert.Equal(EndpointParameterSource.SpecialType, reqParam.Source);
+                    Assert.Equal("req", reqParam.SymbolName);
+                },
+                endpointModel =>
+                {
+                    Assert.Equal("MapGet", endpointModel.HttpMethod);
+                    var reqParam = Assert.Single(endpointModel.Parameters);
+                    Assert.Equal(EndpointParameterSource.SpecialType, reqParam.Source);
+                    Assert.Equal("res", reqParam.SymbolName);
+                },
+                endpointModel =>
+                {
+                    Assert.Equal("MapGet", endpointModel.HttpMethod);
+                    Assert.Collection(
+                        endpointModel.Parameters,
+                        reqParam =>
+                        {
+                            Assert.Equal(EndpointParameterSource.SpecialType, reqParam.Source);
+                            Assert.Equal("req", reqParam.SymbolName);
+                        },
+                        reqParam =>
+                        {
+                            Assert.Equal(EndpointParameterSource.SpecialType, reqParam.Source);
+                            Assert.Equal("res", reqParam.SymbolName);
+                        }
+                    );
+                }
+            ));
 
         Assert.Equal(3, endpoints.Length);
         var httpContext = CreateHttpContext();

@@ -91,14 +91,10 @@ namespace System.Web
                 throw new ArgumentNullException("values");
             var sb = new StringBuilder();
 
-            Render(
-                values,
-                pageType,
-                (string text) =>
-                {
-                    sb.Append(text);
-                }
-            );
+            Render(values, pageType, (string text) =>
+            {
+                sb.Append(text);
+            });
 
             return sb.ToString();
         }
@@ -115,14 +111,10 @@ namespace System.Web
             if (values == null)
                 throw new ArgumentNullException("values");
 
-            Render(
-                values,
-                pageType,
-                (string text) =>
-                {
-                    response.Write(text);
-                }
-            );
+            Render(values, pageType, (string text) =>
+            {
+                response.Write(text);
+            });
         }
 
         void Render(

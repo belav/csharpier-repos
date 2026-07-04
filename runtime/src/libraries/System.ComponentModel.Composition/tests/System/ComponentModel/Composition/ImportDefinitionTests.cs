@@ -39,19 +39,16 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor2_NullAsConstraintArgument_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                "constraint",
-                () =>
-                {
-                    new ImportDefinition(
-                        (Expression<Func<ExportDefinition, bool>>)null,
-                        "",
-                        ImportCardinality.ExactlyOne,
-                        false,
-                        false
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>("constraint", () =>
+            {
+                new ImportDefinition(
+                    (Expression<Func<ExportDefinition, bool>>)null,
+                    "",
+                    ImportCardinality.ExactlyOne,
+                    false,
+                    false
+                );
+            });
         }
 
         [Fact]
@@ -61,13 +58,10 @@ namespace System.ComponentModel.Composition
 
             foreach (var e in expectations)
             {
-                Assert.Throws<ArgumentException>(
-                    "cardinality",
-                    () =>
-                    {
-                        new ImportDefinition(d => true, "", e, false, false);
-                    }
-                );
+                Assert.Throws<ArgumentException>("cardinality", () =>
+                {
+                    new ImportDefinition(d => true, "", e, false, false);
+                });
             }
         }
 

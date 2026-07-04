@@ -238,9 +238,8 @@ namespace System.Buffers.Binary.Tests
             if (original.Length > 0)
             {
                 T[] destination = new T[original.Length - 1];
-                AssertExtensions.Throws<ArgumentException>(
-                    "destination",
-                    () => ReverseEndianness<T>(original, destination)
+                AssertExtensions.Throws<ArgumentException>("destination", () =>
+                    ReverseEndianness<T>(original, destination)
                 );
             }
         }

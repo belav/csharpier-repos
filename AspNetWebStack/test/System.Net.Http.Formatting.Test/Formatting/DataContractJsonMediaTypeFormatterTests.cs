@@ -555,10 +555,8 @@ namespace System.Net.Http.Formatting
                 return false;
             }
 
-            return !Assert.Http.IsKnownUnserializable(
-                type,
-                obj,
-                (t) => typeof(INotJsonSerializable).IsAssignableFrom(t)
+            return !Assert.Http.IsKnownUnserializable(type, obj, (t) =>
+                typeof(INotJsonSerializable).IsAssignableFrom(t)
             );
         }
     }

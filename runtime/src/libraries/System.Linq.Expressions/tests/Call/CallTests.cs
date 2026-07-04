@@ -550,23 +550,19 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void Method_Invalid_Via_Name()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () =>
-                    Expression.Call(
-                        typeof(GenericClass<>),
-                        nameof(GenericClass<string>.NonGenericMethod),
-                        Type.EmptyTypes
-                    )
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                Expression.Call(
+                    typeof(GenericClass<>),
+                    nameof(GenericClass<string>.NonGenericMethod),
+                    Type.EmptyTypes
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () =>
-                    Expression.Call(
-                        typeof(GenericClass<>).MakeGenericType(typeof(GenericClass<>)),
-                        nameof(GenericClass<string>.NonGenericMethod),
-                        Type.EmptyTypes
-                    )
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                Expression.Call(
+                    typeof(GenericClass<>).MakeGenericType(typeof(GenericClass<>)),
+                    nameof(GenericClass<string>.NonGenericMethod),
+                    Type.EmptyTypes
+                )
             );
         }
 
@@ -616,9 +612,8 @@ namespace System.Linq.Expressions.Tests
             MethodInfo method
         )
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.Call(instance, method)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Call(instance, method)
             );
         }
 
@@ -628,54 +623,42 @@ namespace System.Linq.Expressions.Tests
             MethodInfo method = typeof(NonGenericClass).GetMethod(
                 nameof(NonGenericClass.InstanceMethod)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.Call(method, s_valid)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Call(method, s_valid)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.Call(method, s_valid, s_valid)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Call(method, s_valid, s_valid)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.Call(method, s_valid, s_valid, s_valid)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Call(method, s_valid, s_valid, s_valid)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.Call(method, s_valid, s_valid, s_valid, s_valid)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Call(method, s_valid, s_valid, s_valid, s_valid)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.Call(method, s_valid, s_valid, s_valid, s_valid, s_valid)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Call(method, s_valid, s_valid, s_valid, s_valid, s_valid)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.Call(method, new Expression[0])
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Call(method, new Expression[0])
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.Call(method, (IEnumerable<Expression>)new Expression[0])
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Call(method, (IEnumerable<Expression>)new Expression[0])
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.Call(null, method, s_valid)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Call(null, method, s_valid)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.Call(null, method, s_valid, s_valid)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Call(null, method, s_valid, s_valid)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.Call(null, method, s_valid, s_valid, s_valid)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Call(null, method, s_valid, s_valid, s_valid)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.Call(null, method, new Expression[0])
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Call(null, method, new Expression[0])
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.Call(null, method, (IEnumerable<Expression>)new Expression[0])
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Call(null, method, (IEnumerable<Expression>)new Expression[0])
             );
         }
 
@@ -686,25 +669,20 @@ namespace System.Linq.Expressions.Tests
             MethodInfo method = typeof(NonGenericClass).GetMethod(
                 nameof(NonGenericClass.StaticMethod)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.Call(instance, method, s_valid)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Call(instance, method, s_valid)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.Call(instance, method, s_valid, s_valid)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Call(instance, method, s_valid, s_valid)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.Call(instance, method, s_valid, s_valid, s_valid)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Call(instance, method, s_valid, s_valid, s_valid)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.Call(instance, method, new Expression[0])
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Call(instance, method, new Expression[0])
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.Call(instance, method, (IEnumerable<Expression>)new Expression[0])
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Call(instance, method, (IEnumerable<Expression>)new Expression[0])
             );
         }
 
@@ -885,112 +863,93 @@ namespace System.Linq.Expressions.Tests
             if (count != 0)
             {
                 AssertExtensions.Throws<ArgumentException>("method", () => Expression.Call(method));
-                AssertExtensions.Throws<ArgumentException>(
-                    "method",
-                    () => Expression.Call(null, method)
+                AssertExtensions.Throws<ArgumentException>("method", () =>
+                    Expression.Call(null, method)
                 );
             }
             if (count != 1)
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "method",
-                    () => Expression.Call(method, arg)
+                AssertExtensions.Throws<ArgumentException>("method", () =>
+                    Expression.Call(method, arg)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "method",
-                    () => Expression.Call(null, method, arg)
+                AssertExtensions.Throws<ArgumentException>("method", () =>
+                    Expression.Call(null, method, arg)
                 );
             }
             if (count != 2)
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "method",
-                    () => Expression.Call(method, arg, arg)
+                AssertExtensions.Throws<ArgumentException>("method", () =>
+                    Expression.Call(method, arg, arg)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "method",
-                    () => Expression.Call(null, method, arg, arg)
+                AssertExtensions.Throws<ArgumentException>("method", () =>
+                    Expression.Call(null, method, arg, arg)
                 );
             }
             if (count != 3)
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "method",
-                    () => Expression.Call(method, arg, arg, arg)
+                AssertExtensions.Throws<ArgumentException>("method", () =>
+                    Expression.Call(method, arg, arg, arg)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "method",
-                    () => Expression.Call(null, method, arg, arg, arg)
+                AssertExtensions.Throws<ArgumentException>("method", () =>
+                    Expression.Call(null, method, arg, arg, arg)
                 );
             }
             if (count != 4)
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "method",
-                    () => Expression.Call(method, arg, arg, arg, arg)
+                AssertExtensions.Throws<ArgumentException>("method", () =>
+                    Expression.Call(method, arg, arg, arg, arg)
                 );
             }
             if (count != 5)
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "method",
-                    () => Expression.Call(method, arg, arg, arg, arg, arg)
+                AssertExtensions.Throws<ArgumentException>("method", () =>
+                    Expression.Call(method, arg, arg, arg, arg, arg)
                 );
             }
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => Expression.Call(method, Enumerable.Repeat(arg, count + 1).ToArray())
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                Expression.Call(method, Enumerable.Repeat(arg, count + 1).ToArray())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => Expression.Call(method, Enumerable.Repeat(arg, count + 1))
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                Expression.Call(method, Enumerable.Repeat(arg, count + 1))
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => Expression.Call(null, method, Enumerable.Repeat(arg, count + 1).ToArray())
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                Expression.Call(null, method, Enumerable.Repeat(arg, count + 1).ToArray())
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => Expression.Call(null, method, Enumerable.Repeat(arg, count + 1))
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                Expression.Call(null, method, Enumerable.Repeat(arg, count + 1))
             );
         }
 
         [Fact]
         public static void MethodName_NullInstance_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "instance",
-                () =>
-                    Expression.Call((Expression)null, "methodName", new Type[0], new Expression[0])
+            AssertExtensions.Throws<ArgumentNullException>("instance", () =>
+                Expression.Call((Expression)null, "methodName", new Type[0], new Expression[0])
             );
         }
 
         [Fact]
         public static void MethodName_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => Expression.Call((Type)null, "methodName", new Type[0], new Expression[0])
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                Expression.Call((Type)null, "methodName", new Type[0], new Expression[0])
             );
         }
 
         [Fact]
         public static void NullMethodName_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "methodName",
-                () =>
-                    Expression.Call(
-                        Expression.Constant(new NonGenericClass()),
-                        null,
-                        new Type[0],
-                        new Expression[0]
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("methodName", () =>
+                Expression.Call(
+                    Expression.Constant(new NonGenericClass()),
+                    null,
+                    new Type[0],
+                    new Expression[0]
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "methodName",
-                () => Expression.Call(typeof(NonGenericClass), null, new Type[0], new Expression[0])
+            AssertExtensions.Throws<ArgumentNullException>("methodName", () =>
+                Expression.Call(typeof(NonGenericClass), null, new Type[0], new Expression[0])
             );
         }
 
@@ -1037,23 +996,19 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void MethodName_TypeArgsDontMatchConstraints_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    Expression.Call(
-                        Expression.Constant(new NonGenericClass()),
-                        nameof(NonGenericClass.ConstrainedInstanceMethod),
-                        new Type[] { typeof(object) }
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Call(
+                    Expression.Constant(new NonGenericClass()),
+                    nameof(NonGenericClass.ConstrainedInstanceMethod),
+                    new Type[] { typeof(object) }
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    Expression.Call(
-                        typeof(NonGenericClass),
-                        nameof(NonGenericClass.ConstrainedStaticMethod),
-                        new Type[] { typeof(object) }
-                    )
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Call(
+                    typeof(NonGenericClass),
+                    nameof(NonGenericClass.ConstrainedStaticMethod),
+                    new Type[] { typeof(object) }
+                )
             );
         }
 
@@ -1079,48 +1034,40 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void MethodName_TypeArgsHasNullValue_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                null,
-                () =>
-                    Expression.Call(
-                        Expression.Constant(new NonGenericClass()),
-                        nameof(NonGenericClass.GenericInstanceMethod),
-                        new Type[] { null }
-                    )
+            AssertExtensions.Throws<ArgumentNullException>(null, () =>
+                Expression.Call(
+                    Expression.Constant(new NonGenericClass()),
+                    nameof(NonGenericClass.GenericInstanceMethod),
+                    new Type[] { null }
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                null,
-                () =>
-                    Expression.Call(
-                        typeof(NonGenericClass),
-                        nameof(NonGenericClass.GenericStaticMethod),
-                        new Type[] { null }
-                    )
+            AssertExtensions.Throws<ArgumentNullException>(null, () =>
+                Expression.Call(
+                    typeof(NonGenericClass),
+                    nameof(NonGenericClass.GenericStaticMethod),
+                    new Type[] { null }
+                )
             );
         }
 
         [Fact]
         public static void MethodName_ArgumentsHasNullValue_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "arguments",
-                () =>
-                    Expression.Call(
-                        Expression.Constant(new NonGenericClass()),
-                        nameof(NonGenericClass.InstanceMethod1),
-                        new Type[0],
-                        new Expression[] { null }
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("arguments", () =>
+                Expression.Call(
+                    Expression.Constant(new NonGenericClass()),
+                    nameof(NonGenericClass.InstanceMethod1),
+                    new Type[0],
+                    new Expression[] { null }
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "arguments",
-                () =>
-                    Expression.Call(
-                        typeof(NonGenericClass),
-                        nameof(NonGenericClass.StaticMethod1),
-                        new Type[0],
-                        new Expression[] { null }
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("arguments", () =>
+                Expression.Call(
+                    typeof(NonGenericClass),
+                    nameof(NonGenericClass.StaticMethod1),
+                    new Type[0],
+                    new Expression[] { null }
+                )
             );
         }
 
@@ -1333,13 +1280,11 @@ namespace System.Linq.Expressions.Tests
         {
             var args = call.Arguments;
             Assert.Equal(args.Count, call.ArgumentCount);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => call.GetArgument(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                call.GetArgument(-1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => call.GetArgument(args.Count)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                call.GetArgument(args.Count)
             );
             for (int i = 0; i != args.Count; ++i)
             {

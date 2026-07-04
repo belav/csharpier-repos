@@ -1565,31 +1565,27 @@ public class Class1
 }"
             );
 
-            CompileAndVerify(
-                compilation,
-                symbolValidator: module =>
-                {
-                    var peModule = (PEModuleSymbol)module;
-                    var class1 = module.GlobalNamespace.GetTypeMember("Class1");
-                    var field = class1.GetMember<PEFieldSymbol>("d1");
-                    var parameter = (PEParameterSymbol)
-                        class1.GetMethod("M1").GetParameters().Single();
+            CompileAndVerify(compilation, symbolValidator: module =>
+            {
+                var peModule = (PEModuleSymbol)module;
+                var class1 = module.GlobalNamespace.GetTypeMember("Class1");
+                var field = class1.GetMember<PEFieldSymbol>("d1");
+                var parameter = (PEParameterSymbol)class1.GetMethod("M1").GetParameters().Single();
 
-                    Assert.Empty(field.GetAttributes());
-                    Assert.Equal(
-                        "System.Runtime.CompilerServices.DecimalConstantAttribute(0, 128, 0, 0, 7)",
-                        peModule.GetCustomAttributesForToken(field.Handle).Single().ToString()
-                    );
-                    Assert.Equal(field.ConstantValue, -7m);
+                Assert.Empty(field.GetAttributes());
+                Assert.Equal(
+                    "System.Runtime.CompilerServices.DecimalConstantAttribute(0, 128, 0, 0, 7)",
+                    peModule.GetCustomAttributesForToken(field.Handle).Single().ToString()
+                );
+                Assert.Equal(field.ConstantValue, -7m);
 
-                    Assert.Empty(parameter.GetAttributes());
-                    Assert.Equal(
-                        "System.Runtime.CompilerServices.DecimalConstantAttribute(0, 128, 0, 0, 7)",
-                        peModule.GetCustomAttributesForToken(parameter.Handle).Single().ToString()
-                    );
-                    Assert.Equal(parameter.ExplicitDefaultValue, -7m);
-                }
-            );
+                Assert.Empty(parameter.GetAttributes());
+                Assert.Equal(
+                    "System.Runtime.CompilerServices.DecimalConstantAttribute(0, 128, 0, 0, 7)",
+                    peModule.GetCustomAttributesForToken(parameter.Handle).Single().ToString()
+                );
+                Assert.Equal(parameter.ExplicitDefaultValue, -7m);
+            });
         }
 
         [ConditionalFact(typeof(ClrOnly))]
@@ -1804,16 +1800,13 @@ public class Test
                 c.GetTypeByMetadataName("Test").GetAttributes().Single().ToString()
             );
 
-            CompileAndVerify(
-                c,
-                symbolValidator: (m) =>
-                {
-                    Assert.Equal(
-                        expected,
-                        m.GlobalNamespace.GetTypeMember("Test").GetAttributes().Single().ToString()
-                    );
-                }
-            );
+            CompileAndVerify(c, symbolValidator: (m) =>
+            {
+                Assert.Equal(
+                    expected,
+                    m.GlobalNamespace.GetTypeMember("Test").GetAttributes().Single().ToString()
+                );
+            });
         }
     }
 }

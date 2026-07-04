@@ -351,17 +351,11 @@ namespace System.Linq.Parallel.Tests
                         }
                     )
             );
-            AssertThrows.EventuallyCanceled(
-                (source, canceler) =>
-                    source.Aggregate(
-                        0,
-                        (i, j) =>
-                        {
-                            canceler();
-                            return j;
-                        }
-                    )
-            );
+            AssertThrows.EventuallyCanceled((source, canceler) => source.Aggregate(0, (i, j) =>
+                    {
+                        canceler();
+                        return j;
+                    }));
             AssertThrows.EventuallyCanceled(
                 (source, canceler) =>
                     source.Aggregate(
@@ -415,17 +409,11 @@ namespace System.Linq.Parallel.Tests
                         }
                     )
             );
-            AssertThrows.OtherTokenCanceled(
-                (source, canceler) =>
-                    source.Aggregate(
-                        0,
-                        (i, j) =>
-                        {
-                            canceler();
-                            return j;
-                        }
-                    )
-            );
+            AssertThrows.OtherTokenCanceled((source, canceler) => source.Aggregate(0, (i, j) =>
+                    {
+                        canceler();
+                        return j;
+                    }));
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) =>
                     source.Aggregate(
@@ -474,17 +462,11 @@ namespace System.Linq.Parallel.Tests
                         }
                     )
             );
-            AssertThrows.SameTokenNotCanceled(
-                (source, canceler) =>
-                    source.Aggregate(
-                        0,
-                        (i, j) =>
-                        {
-                            canceler();
-                            return j;
-                        }
-                    )
-            );
+            AssertThrows.SameTokenNotCanceled((source, canceler) => source.Aggregate(0, (i, j) =>
+                    {
+                        canceler();
+                        return j;
+                    }));
             AssertThrows.SameTokenNotCanceled(
                 (source, canceler) =>
                     source.Aggregate(
@@ -555,13 +537,10 @@ namespace System.Linq.Parallel.Tests
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 UnorderedSources
                     .Default(2)
-                    .Aggregate(
-                        0,
-                        (i, j) =>
-                        {
-                            throw new DeliberateTestException();
-                        }
-                    )
+                    .Aggregate(0, (i, j) =>
+                    {
+                        throw new DeliberateTestException();
+                    })
             );
             AssertThrows.Wrapped<DeliberateTestException>(() =>
                 UnorderedSources
@@ -686,90 +665,68 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Aggregate_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int>)null).Aggregate((i, j) => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).Aggregate((i, j) => i)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "func",
-                () => UnorderedSources.Default(1).Aggregate(null)
+            AssertExtensions.Throws<ArgumentNullException>("func", () =>
+                UnorderedSources.Default(1).Aggregate(null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int>)null).Aggregate(0, (i, j) => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).Aggregate(0, (i, j) => i)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "func",
-                () => UnorderedSources.Default(1).Aggregate(0, null)
+            AssertExtensions.Throws<ArgumentNullException>("func", () =>
+                UnorderedSources.Default(1).Aggregate(0, null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int>)null).Aggregate(0, (i, j) => i, i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).Aggregate(0, (i, j) => i, i => i)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "func",
-                () => UnorderedSources.Default(1).Aggregate(0, null, i => i)
+            AssertExtensions.Throws<ArgumentNullException>("func", () =>
+                UnorderedSources.Default(1).Aggregate(0, null, i => i)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () => UnorderedSources.Default(1).Aggregate<int, int, int>(0, (i, j) => i, null)
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                UnorderedSources.Default(1).Aggregate<int, int, int>(0, (i, j) => i, null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int>)null).Aggregate(0, (i, j) => i, (i, j) => i, i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).Aggregate(0, (i, j) => i, (i, j) => i, i => i)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "updateAccumulatorFunc",
-                () => UnorderedSources.Default(1).Aggregate(0, null, (i, j) => i, i => i)
+            AssertExtensions.Throws<ArgumentNullException>("updateAccumulatorFunc", () =>
+                UnorderedSources.Default(1).Aggregate(0, null, (i, j) => i, i => i)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "combineAccumulatorsFunc",
-                () => UnorderedSources.Default(1).Aggregate(0, (i, j) => i, null, i => i)
+            AssertExtensions.Throws<ArgumentNullException>("combineAccumulatorsFunc", () =>
+                UnorderedSources.Default(1).Aggregate(0, (i, j) => i, null, i => i)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () =>
-                    UnorderedSources
-                        .Default(1)
-                        .Aggregate<int, int, int>(0, (i, j) => i, (i, j) => i, null)
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                UnorderedSources
+                    .Default(1)
+                    .Aggregate<int, int, int>(0, (i, j) => i, (i, j) => i, null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () =>
-                    ((ParallelQuery<int>)null).Aggregate(
-                        () => 0,
-                        (i, j) => i,
-                        (i, j) => i,
-                        (int i) => i
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).Aggregate(
+                    () => 0,
+                    (i, j) => i,
+                    (i, j) => i,
+                    (int i) => i
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "seedFactory",
-                () =>
-                    UnorderedSources
-                        .Default(1)
-                        .Aggregate<int, int, int>(null, (i, j) => i, (i, j) => i, i => i)
+            AssertExtensions.Throws<ArgumentNullException>("seedFactory", () =>
+                UnorderedSources
+                    .Default(1)
+                    .Aggregate<int, int, int>(null, (i, j) => i, (i, j) => i, i => i)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "updateAccumulatorFunc",
-                () =>
-                    UnorderedSources.Default(1).Aggregate(() => 0, null, (i, j) => i, (int i) => i)
+            AssertExtensions.Throws<ArgumentNullException>("updateAccumulatorFunc", () =>
+                UnorderedSources.Default(1).Aggregate(() => 0, null, (i, j) => i, (int i) => i)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "combineAccumulatorsFunc",
-                () =>
-                    UnorderedSources.Default(1).Aggregate(() => 0, (i, j) => i, null, (int i) => i)
+            AssertExtensions.Throws<ArgumentNullException>("combineAccumulatorsFunc", () =>
+                UnorderedSources.Default(1).Aggregate(() => 0, (i, j) => i, null, (int i) => i)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () =>
-                    UnorderedSources
-                        .Default(1)
-                        .Aggregate<int, int, int>(() => 0, (i, j) => i, (i, j) => i, null)
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                UnorderedSources
+                    .Default(1)
+                    .Aggregate<int, int, int>(() => 0, (i, j) => i, (i, j) => i, null)
             );
         }
     }

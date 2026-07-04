@@ -13,19 +13,16 @@ namespace System.Linq.Tests
         {
             string[] first = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => first.AggregateBy(x => x, string.Empty, (x, y) => x + y)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                first.AggregateBy(x => x, string.Empty, (x, y) => x + y)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () =>
-                    first.AggregateBy(
-                        x => x,
-                        string.Empty,
-                        (x, y) => x + y,
-                        new AnagramEqualityComparer()
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                first.AggregateBy(
+                    x => x,
+                    string.Empty,
+                    (x, y) => x + y,
+                    new AnagramEqualityComparer()
+                )
             );
         }
 
@@ -35,19 +32,16 @@ namespace System.Linq.Tests
             string[] source = { };
             Func<string, string> keySelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.AggregateBy(keySelector, string.Empty, (x, y) => x + y)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.AggregateBy(keySelector, string.Empty, (x, y) => x + y)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    source.AggregateBy(
-                        keySelector,
-                        string.Empty,
-                        (x, y) => x + y,
-                        new AnagramEqualityComparer()
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.AggregateBy(
+                    keySelector,
+                    string.Empty,
+                    (x, y) => x + y,
+                    new AnagramEqualityComparer()
+                )
             );
         }
 
@@ -57,19 +51,16 @@ namespace System.Linq.Tests
             string[] source = { };
             Func<string, string> seedSelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "seedSelector",
-                () => source.AggregateBy(x => x, seedSelector, (x, y) => x + y)
+            AssertExtensions.Throws<ArgumentNullException>("seedSelector", () =>
+                source.AggregateBy(x => x, seedSelector, (x, y) => x + y)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "seedSelector",
-                () =>
-                    source.AggregateBy(
-                        x => x,
-                        seedSelector,
-                        (x, y) => x + y,
-                        new AnagramEqualityComparer()
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("seedSelector", () =>
+                source.AggregateBy(
+                    x => x,
+                    seedSelector,
+                    (x, y) => x + y,
+                    new AnagramEqualityComparer()
+                )
             );
         }
 
@@ -79,13 +70,11 @@ namespace System.Linq.Tests
             string[] source = { };
             Func<string, string, string> func = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "func",
-                () => source.AggregateBy(x => x, string.Empty, func)
+            AssertExtensions.Throws<ArgumentNullException>("func", () =>
+                source.AggregateBy(x => x, string.Empty, func)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "func",
-                () => source.AggregateBy(x => x, string.Empty, func, new AnagramEqualityComparer())
+            AssertExtensions.Throws<ArgumentNullException>("func", () =>
+                source.AggregateBy(x => x, string.Empty, func, new AnagramEqualityComparer())
             );
         }
 

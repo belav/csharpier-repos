@@ -105,14 +105,11 @@ namespace System.Security.Cryptography.Tests
         {
             using (HashAlgorithm hash = new SummingTestHashAlgorithm())
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "inputStream",
-                    () =>
-                    {
-                        // Not returning or awaiting the Task, it never got created.
-                        hash.ComputeHashAsync(null);
-                    }
-                );
+                AssertExtensions.Throws<ArgumentNullException>("inputStream", () =>
+                {
+                    // Not returning or awaiting the Task, it never got created.
+                    hash.ComputeHashAsync(null);
+                });
             }
         }
 

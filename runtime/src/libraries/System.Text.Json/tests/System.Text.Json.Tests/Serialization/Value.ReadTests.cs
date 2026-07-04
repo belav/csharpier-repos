@@ -364,70 +364,54 @@ namespace System.Text.Json.Serialization.Tests
         public static void RangePassFloatingPoint()
         {
             // Verify overflow\underflow.
-            AssertFloatingPointBehavior(
-                netcoreExpectedValue: float.NegativeInfinity,
-                () =>
-                    JsonSerializer.Deserialize<float>(
+            AssertFloatingPointBehavior(netcoreExpectedValue: float.NegativeInfinity, () =>
+                JsonSerializer.Deserialize<float>(
+                    float.MinValue.ToString(CultureInfo.InvariantCulture) + "0"
+                )
+            );
+            AssertFloatingPointBehavior(netcoreExpectedValue: float.PositiveInfinity, () =>
+                JsonSerializer.Deserialize<float>(
+                    float.MaxValue.ToString(CultureInfo.InvariantCulture) + "0"
+                )
+            );
+            AssertFloatingPointBehavior(netcoreExpectedValue: float.NegativeInfinity, () =>
+                JsonSerializer
+                    .Deserialize<float?>(
                         float.MinValue.ToString(CultureInfo.InvariantCulture) + "0"
                     )
+                    .Value
             );
-            AssertFloatingPointBehavior(
-                netcoreExpectedValue: float.PositiveInfinity,
-                () =>
-                    JsonSerializer.Deserialize<float>(
+            AssertFloatingPointBehavior(netcoreExpectedValue: float.PositiveInfinity, () =>
+                JsonSerializer
+                    .Deserialize<float?>(
                         float.MaxValue.ToString(CultureInfo.InvariantCulture) + "0"
                     )
-            );
-            AssertFloatingPointBehavior(
-                netcoreExpectedValue: float.NegativeInfinity,
-                () =>
-                    JsonSerializer
-                        .Deserialize<float?>(
-                            float.MinValue.ToString(CultureInfo.InvariantCulture) + "0"
-                        )
-                        .Value
-            );
-            AssertFloatingPointBehavior(
-                netcoreExpectedValue: float.PositiveInfinity,
-                () =>
-                    JsonSerializer
-                        .Deserialize<float?>(
-                            float.MaxValue.ToString(CultureInfo.InvariantCulture) + "0"
-                        )
-                        .Value
+                    .Value
             );
 
-            AssertFloatingPointBehavior(
-                netcoreExpectedValue: double.NegativeInfinity,
-                () =>
-                    JsonSerializer.Deserialize<double>(
+            AssertFloatingPointBehavior(netcoreExpectedValue: double.NegativeInfinity, () =>
+                JsonSerializer.Deserialize<double>(
+                    double.MinValue.ToString(CultureInfo.InvariantCulture) + "0"
+                )
+            );
+            AssertFloatingPointBehavior(netcoreExpectedValue: double.PositiveInfinity, () =>
+                JsonSerializer.Deserialize<double>(
+                    double.MaxValue.ToString(CultureInfo.InvariantCulture) + "0"
+                )
+            );
+            AssertFloatingPointBehavior(netcoreExpectedValue: double.NegativeInfinity, () =>
+                JsonSerializer
+                    .Deserialize<double?>(
                         double.MinValue.ToString(CultureInfo.InvariantCulture) + "0"
                     )
+                    .Value
             );
-            AssertFloatingPointBehavior(
-                netcoreExpectedValue: double.PositiveInfinity,
-                () =>
-                    JsonSerializer.Deserialize<double>(
+            AssertFloatingPointBehavior(netcoreExpectedValue: double.PositiveInfinity, () =>
+                JsonSerializer
+                    .Deserialize<double?>(
                         double.MaxValue.ToString(CultureInfo.InvariantCulture) + "0"
                     )
-            );
-            AssertFloatingPointBehavior(
-                netcoreExpectedValue: double.NegativeInfinity,
-                () =>
-                    JsonSerializer
-                        .Deserialize<double?>(
-                            double.MinValue.ToString(CultureInfo.InvariantCulture) + "0"
-                        )
-                        .Value
-            );
-            AssertFloatingPointBehavior(
-                netcoreExpectedValue: double.PositiveInfinity,
-                () =>
-                    JsonSerializer
-                        .Deserialize<double?>(
-                            double.MaxValue.ToString(CultureInfo.InvariantCulture) + "0"
-                        )
-                        .Value
+                    .Value
             );
 
             // Verify sign is correct.
@@ -760,16 +744,12 @@ namespace System.Text.Json.Serialization.Tests
             char fillChar = 'x';
 
 #if NETCOREAPP
-            json = string.Create(
-                stringLength,
-                fillChar,
-                (chars, fillChar) =>
-                {
-                    chars.Fill(fillChar);
-                    chars[0] = '"';
-                    chars[chars.Length - 1] = '"';
-                }
-            );
+            json = string.Create(stringLength, fillChar, (chars, fillChar) =>
+            {
+                chars.Fill(fillChar);
+                chars[0] = '"';
+                chars[chars.Length - 1] = '"';
+            });
 #else
             string repeated = new string(fillChar, stringLength - 2);
             json = $"\"{repeated}\"";

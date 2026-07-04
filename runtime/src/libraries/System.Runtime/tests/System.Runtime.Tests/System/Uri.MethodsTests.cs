@@ -231,9 +231,8 @@ namespace System.Tests
         {
             var baseUri = new Uri("http://www.domain.com/");
             var relativeUri = new Uri("/path/", UriKind.Relative);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "uri",
-                () => baseUri.MakeRelativeUri(null)
+            AssertExtensions.Throws<ArgumentNullException>("uri", () =>
+                baseUri.MakeRelativeUri(null)
             ); // Uri is null
 
             Assert.Throws<InvalidOperationException>(() => relativeUri.MakeRelativeUri(baseUri)); // Base uri is relative
@@ -480,9 +479,8 @@ namespace System.Tests
         [Fact]
         public void IsBaseOf_Null_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "uri",
-                () => new Uri("http://domain.com").IsBaseOf(null)
+            AssertExtensions.Throws<ArgumentNullException>("uri", () =>
+                new Uri("http://domain.com").IsBaseOf(null)
             ); // Uri is null
         }
 
@@ -696,27 +694,23 @@ namespace System.Tests
         public void Compare_Invalid()
         {
             var uri = new Uri("http://domain.com");
-            AssertExtensions.Throws<ArgumentException>(
-                "comparisonType",
-                () =>
-                    Uri.Compare(
-                        uri,
-                        uri,
-                        UriComponents.AbsoluteUri,
-                        UriFormat.UriEscaped,
-                        StringComparison.CurrentCulture - 1
-                    )
+            AssertExtensions.Throws<ArgumentException>("comparisonType", () =>
+                Uri.Compare(
+                    uri,
+                    uri,
+                    UriComponents.AbsoluteUri,
+                    UriFormat.UriEscaped,
+                    StringComparison.CurrentCulture - 1
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "comparisonType",
-                () =>
-                    Uri.Compare(
-                        uri,
-                        uri,
-                        UriComponents.AbsoluteUri,
-                        UriFormat.UriEscaped,
-                        StringComparison.OrdinalIgnoreCase + 1
-                    )
+            AssertExtensions.Throws<ArgumentException>("comparisonType", () =>
+                Uri.Compare(
+                    uri,
+                    uri,
+                    UriComponents.AbsoluteUri,
+                    UriFormat.UriEscaped,
+                    StringComparison.OrdinalIgnoreCase + 1
+                )
             );
         }
 
@@ -1074,9 +1068,8 @@ namespace System.Tests
         [Fact]
         public void EscapeDataString_NullArgument()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "stringToEscape",
-                () => Uri.EscapeDataString(null)
+            AssertExtensions.Throws<ArgumentNullException>("stringToEscape", () =>
+                Uri.EscapeDataString(null)
             );
         }
 
@@ -1093,9 +1086,8 @@ namespace System.Tests
         [Fact]
         public void UnescapedDataString_Null_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "stringToUnescape",
-                () => Uri.UnescapeDataString(null)
+            AssertExtensions.Throws<ArgumentNullException>("stringToUnescape", () =>
+                Uri.UnescapeDataString(null)
             ); // StringToUnescape is null
         }
 
@@ -1137,9 +1129,8 @@ namespace System.Tests
         [Fact]
         public void EscapeUriString_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "stringToEscape",
-                () => Uri.EscapeUriString(null)
+            AssertExtensions.Throws<ArgumentNullException>("stringToEscape", () =>
+                Uri.EscapeUriString(null)
             ); // StringToEscape is null
         }
 
@@ -1793,13 +1784,11 @@ namespace System.Tests
                 absoluteUri.GetComponents(UriComponents.AbsoluteUri, UriFormat.SafeUnescaped + 1)
             ); // Format is invalid
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "components",
-                () =>
-                    absoluteUri.GetComponents(
-                        UriComponents.HostAndPort | ~UriComponents.KeepDelimiter,
-                        UriFormat.UriEscaped
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("components", () =>
+                absoluteUri.GetComponents(
+                    UriComponents.HostAndPort | ~UriComponents.KeepDelimiter,
+                    UriFormat.UriEscaped
+                )
             ); // Components is invalid
 
             Assert.Throws<InvalidOperationException>(() =>

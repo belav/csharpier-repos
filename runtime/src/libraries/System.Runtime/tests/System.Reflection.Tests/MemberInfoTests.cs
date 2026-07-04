@@ -512,17 +512,15 @@ namespace System.Reflection.Tests
         [MemberData(nameof(NegativeTypeData))]
         public static void HasSameMetadataDefinitionAs_Negative_Null(Type type)
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "other",
-                () => type.HasSameMetadataDefinitionAs(null)
+            AssertExtensions.Throws<ArgumentNullException>("other", () =>
+                type.HasSameMetadataDefinitionAs(null)
             );
             Assert.All(
                 type.GenerateTestMemberList(),
                 delegate(MemberInfo member)
                 {
-                    AssertExtensions.Throws<ArgumentNullException>(
-                        "other",
-                        () => member.HasSameMetadataDefinitionAs(null)
+                    AssertExtensions.Throws<ArgumentNullException>("other", () =>
+                        member.HasSameMetadataDefinitionAs(null)
                     );
                 }
             );

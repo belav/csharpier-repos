@@ -53,24 +53,18 @@ namespace System.Xml.Linq.Tests
             {
                 TestData.GetDocumentWithContacts().Root.Attribute("*&^%_#@!");
             });
-            AssertExtensions.Throws<ArgumentException>(
-                "expandedName",
-                () =>
-                {
-                    TestData.GetDocumentWithContacts().Root.Attribute("");
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("expandedName", () =>
+            {
+                TestData.GetDocumentWithContacts().Root.Attribute("");
+            });
             Assert.Throws<XmlException>(() =>
             {
                 TestData.GetDocumentWithContacts().Root.Attributes("*&^%_#@!");
             });
-            AssertExtensions.Throws<ArgumentException>(
-                "expandedName",
-                () =>
-                {
-                    TestData.GetDocumentWithContacts().Root.Attributes("");
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("expandedName", () =>
+            {
+                TestData.GetDocumentWithContacts().Root.Attributes("");
+            });
         }
     }
 

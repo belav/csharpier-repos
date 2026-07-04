@@ -73,9 +73,8 @@ namespace System.DirectoryServices.Protocols.Tests
         public void AddRange_NullControls_ThrowsArgumentNullException()
         {
             var collection = new DirectoryControlCollection();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "controls",
-                () => collection.AddRange((DirectoryControl[])null)
+            AssertExtensions.Throws<ArgumentNullException>("controls", () =>
+                collection.AddRange((DirectoryControl[])null)
             );
         }
 
@@ -90,9 +89,8 @@ namespace System.DirectoryServices.Protocols.Tests
             };
             var collection = new DirectoryControlCollection();
 
-            AssertExtensions.Throws<ArgumentException>(
-                "controls",
-                () => collection.AddRange(controls)
+            AssertExtensions.Throws<ArgumentException>("controls", () =>
+                collection.AddRange(controls)
             );
             Assert.Equal(0, collection.Count);
         }
@@ -118,9 +116,8 @@ namespace System.DirectoryServices.Protocols.Tests
         public void AddRange_NullControlCollection_ThrowsArgumentNullException()
         {
             var collection = new DirectoryControlCollection();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "controlCollection",
-                () => collection.AddRange((DirectoryControlCollection)null)
+            AssertExtensions.Throws<ArgumentNullException>("controlCollection", () =>
+                collection.AddRange((DirectoryControlCollection)null)
             );
         }
 
@@ -164,9 +161,8 @@ namespace System.DirectoryServices.Protocols.Tests
         public void Insert_NullValue_ThrowsArgumentNullException()
         {
             var collection = new DirectoryControlCollection();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => collection.Insert(0, null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                collection.Insert(0, null)
             );
         }
 

@@ -41,19 +41,14 @@ public class WebServer
                 {
                     if (options.WebServerUseCors)
                     {
-                        services.AddCors(o =>
-                            o.AddPolicy(
-                                "AnyCors",
-                                builder =>
-                                {
-                                    builder
-                                        .AllowAnyOrigin()
-                                        .AllowAnyMethod()
-                                        .AllowAnyHeader()
-                                        .WithExposedHeaders("*");
-                                }
-                            )
-                        );
+                        services.AddCors(o => o.AddPolicy("AnyCors", builder =>
+                            {
+                                builder
+                                    .AllowAnyOrigin()
+                                    .AllowAnyMethod()
+                                    .AllowAnyHeader()
+                                    .WithExposedHeaders("*");
+                            }));
                     }
                     services.AddSingleton(logger);
                     services.AddSingleton(Options.Create(options));

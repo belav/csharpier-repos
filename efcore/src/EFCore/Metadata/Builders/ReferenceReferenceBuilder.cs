@@ -158,10 +158,8 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
         string dependentEntityTypeName,
         IReadOnlyList<string> foreignKeyPropertyNames
     ) =>
-        HasForeignKeyBuilder(
-            dependentEntityType,
-            dependentEntityTypeName,
-            (b, d) => b.HasForeignKey(foreignKeyPropertyNames, d, ConfigurationSource.Explicit)!
+        HasForeignKeyBuilder(dependentEntityType, dependentEntityTypeName, (b, d) =>
+            b.HasForeignKey(foreignKeyPropertyNames, d, ConfigurationSource.Explicit)!
         );
 
     /// <summary>
@@ -176,10 +174,8 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
         string dependentEntityTypeName,
         IReadOnlyList<MemberInfo> foreignKeyMembers
     ) =>
-        HasForeignKeyBuilder(
-            dependentEntityType,
-            dependentEntityTypeName,
-            (b, d) => b.HasForeignKey(foreignKeyMembers, d, ConfigurationSource.Explicit)!
+        HasForeignKeyBuilder(dependentEntityType, dependentEntityTypeName, (b, d) =>
+            b.HasForeignKey(foreignKeyMembers, d, ConfigurationSource.Explicit)!
         );
 
     private InternalForeignKeyBuilder HasForeignKeyBuilder(
@@ -289,10 +285,8 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
         string principalEntityTypeName,
         IReadOnlyList<string> foreignKeyPropertyNames
     ) =>
-        HasPrincipalKeyBuilder(
-            principalEntityType,
-            principalEntityTypeName,
-            b => b.HasPrincipalKey(foreignKeyPropertyNames, ConfigurationSource.Explicit)!
+        HasPrincipalKeyBuilder(principalEntityType, principalEntityTypeName, b =>
+            b.HasPrincipalKey(foreignKeyPropertyNames, ConfigurationSource.Explicit)!
         );
 
     /// <summary>
@@ -307,10 +301,8 @@ public class ReferenceReferenceBuilder : InvertibleRelationshipBuilderBase
         string principalEntityTypeName,
         IReadOnlyList<MemberInfo> foreignKeyMembers
     ) =>
-        HasPrincipalKeyBuilder(
-            principalEntityType,
-            principalEntityTypeName,
-            b => b.HasPrincipalKey(foreignKeyMembers, ConfigurationSource.Explicit)!
+        HasPrincipalKeyBuilder(principalEntityType, principalEntityTypeName, b =>
+            b.HasPrincipalKey(foreignKeyMembers, ConfigurationSource.Explicit)!
         );
 
     private InternalForeignKeyBuilder HasPrincipalKeyBuilder(

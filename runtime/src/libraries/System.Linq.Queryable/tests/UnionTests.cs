@@ -31,9 +31,8 @@ namespace System.Linq.Tests
             IQueryable<string> first = null;
             string[] second = { "ttaM", "Charlie", "Bbo" };
 
-            var ane = AssertExtensions.Throws<ArgumentNullException>(
-                "source1",
-                () => first.Union(second.AsQueryable(), new AnagramEqualityComparer())
+            var ane = AssertExtensions.Throws<ArgumentNullException>("source1", () =>
+                first.Union(second.AsQueryable(), new AnagramEqualityComparer())
             );
         }
 
@@ -43,9 +42,8 @@ namespace System.Linq.Tests
             string[] first = { "Bob", "Robert", "Tim", "Matt", "miT" };
             IQueryable<string> second = null;
 
-            var ane = AssertExtensions.Throws<ArgumentNullException>(
-                "source2",
-                () => first.AsQueryable().Union(second, new AnagramEqualityComparer())
+            var ane = AssertExtensions.Throws<ArgumentNullException>("source2", () =>
+                first.AsQueryable().Union(second, new AnagramEqualityComparer())
             );
         }
 
@@ -55,9 +53,8 @@ namespace System.Linq.Tests
             IQueryable<string> first = null;
             string[] second = { "ttaM", "Charlie", "Bbo" };
 
-            var ane = AssertExtensions.Throws<ArgumentNullException>(
-                "source1",
-                () => first.Union(second.AsQueryable())
+            var ane = AssertExtensions.Throws<ArgumentNullException>("source1", () =>
+                first.Union(second.AsQueryable())
             );
         }
 
@@ -67,9 +64,8 @@ namespace System.Linq.Tests
             string[] first = { "Bob", "Robert", "Tim", "Matt", "miT" };
             IQueryable<string> second = null;
 
-            var ane = AssertExtensions.Throws<ArgumentNullException>(
-                "source2",
-                () => first.AsQueryable().Union(second)
+            var ane = AssertExtensions.Throws<ArgumentNullException>("source2", () =>
+                first.AsQueryable().Union(second)
             );
         }
 
@@ -108,14 +104,11 @@ namespace System.Linq.Tests
         {
             IQueryable<int> source1 = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source1",
-                () => source1.UnionBy(Enumerable.Empty<int>(), x => x)
+            AssertExtensions.Throws<ArgumentNullException>("source1", () =>
+                source1.UnionBy(Enumerable.Empty<int>(), x => x)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source1",
-                () =>
-                    source1.UnionBy(Enumerable.Empty<int>(), x => x, EqualityComparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("source1", () =>
+                source1.UnionBy(Enumerable.Empty<int>(), x => x, EqualityComparer<int>.Default)
             );
         }
 
@@ -125,13 +118,11 @@ namespace System.Linq.Tests
             IQueryable<int> source1 = Enumerable.Empty<int>().AsQueryable();
             IQueryable<int> source2 = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source2",
-                () => source1.UnionBy(source2, x => x)
+            AssertExtensions.Throws<ArgumentNullException>("source2", () =>
+                source1.UnionBy(source2, x => x)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source2",
-                () => source1.UnionBy(source2, x => x, EqualityComparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("source2", () =>
+                source1.UnionBy(source2, x => x, EqualityComparer<int>.Default)
             );
         }
 
@@ -141,13 +132,11 @@ namespace System.Linq.Tests
             IQueryable<int> source = Enumerable.Empty<int>().AsQueryable();
             Expression<Func<int, int>> keySelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.UnionBy(source, keySelector)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.UnionBy(source, keySelector)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => source.UnionBy(source, keySelector, EqualityComparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                source.UnionBy(source, keySelector, EqualityComparer<int>.Default)
             );
         }
 

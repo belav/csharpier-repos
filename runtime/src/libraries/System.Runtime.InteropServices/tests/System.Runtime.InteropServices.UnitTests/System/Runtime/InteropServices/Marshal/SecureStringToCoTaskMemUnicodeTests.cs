@@ -51,9 +51,8 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void SecureStringToCoTaskMemUnicode_NullString_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "s",
-                () => Marshal.SecureStringToCoTaskMemUnicode(null)
+            AssertExtensions.Throws<ArgumentNullException>("s", () =>
+                Marshal.SecureStringToCoTaskMemUnicode(null)
             );
         }
 

@@ -14,10 +14,8 @@ internal sealed class LoggingDuplexPipe : DuplexPipeStreamAdapter<LoggingStream>
     private static readonly StreamPipeWriterOptions _defaultWriterOptions = new();
 
     public LoggingDuplexPipe(IDuplexPipe transport, ILogger logger)
-        : base(
-            transport,
-            _defaultReaderOptions,
-            _defaultWriterOptions,
-            stream => new LoggingStream(stream, logger)
-        ) { }
+        : base(transport, _defaultReaderOptions, _defaultWriterOptions, stream => new LoggingStream(
+            stream,
+            logger
+        )) { }
 }

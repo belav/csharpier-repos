@@ -6325,9 +6325,8 @@ namespace System.Tests
             // Default provider
             if (provider is null)
             {
-                Assert.Throws(
-                    exceptionType,
-                    () => NumberBaseHelper<short>.Parse(value, style, provider)
+                Assert.Throws(exceptionType, () =>
+                    NumberBaseHelper<short>.Parse(value, style, provider)
                 );
 
                 // Substitute default NumberFormatInfo
@@ -6340,9 +6339,8 @@ namespace System.Tests
                     )
                 );
                 Assert.Equal(default(short), result);
-                Assert.Throws(
-                    exceptionType,
-                    () => NumberBaseHelper<short>.Parse(value, style, new NumberFormatInfo())
+                Assert.Throws(exceptionType, () =>
+                    NumberBaseHelper<short>.Parse(value, style, new NumberFormatInfo())
                 );
             }
 
@@ -6355,9 +6353,8 @@ namespace System.Tests
             // Full overloads
             Assert.False(NumberBaseHelper<short>.TryParse(value, style, provider, out result));
             Assert.Equal(default(short), result);
-            Assert.Throws(
-                exceptionType,
-                () => NumberBaseHelper<short>.Parse(value, style, provider)
+            Assert.Throws(exceptionType, () =>
+                NumberBaseHelper<short>.Parse(value, style, provider)
             );
         }
 
@@ -6431,9 +6428,8 @@ namespace System.Tests
                 Assert.Equal(default(short), result);
             }
 
-            Assert.Throws(
-                exceptionType,
-                () => NumberBaseHelper<short>.Parse(value.AsSpan(), style, provider)
+            Assert.Throws(exceptionType, () =>
+                NumberBaseHelper<short>.Parse(value.AsSpan(), style, provider)
             );
 
             Assert.False(

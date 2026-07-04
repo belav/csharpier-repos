@@ -162,9 +162,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => ic.CopyTo(a, -1));
             Assert.Throws<ArgumentOutOfRangeException>(() => ic.CopyTo(a, 3));
             AssertExtensions.Throws<ArgumentException>(null, () => ic.CopyTo(a, 1));
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => ic.CopyTo(new CryptographicAttributeObject[2, 2], 0)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                ic.CopyTo(new CryptographicAttributeObject[2, 2], 0)
             );
             Assert.Throws<InvalidCastException>(() => ic.CopyTo(new int[10], 0));
 

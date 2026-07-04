@@ -131,20 +131,17 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Navigation_rewrite_on_owned_reference_projecting_scalar(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OwnedPerson>()
-                    .Where(p => p.PersonAddress.Country.Name == "USA")
-                    .Select(p => p.PersonAddress.Country.Name)
+        AssertQuery(async, ss =>
+            ss.Set<OwnedPerson>()
+                .Where(p => p.PersonAddress.Country.Name == "USA")
+                .Select(p => p.PersonAddress.Country.Name)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Navigation_rewrite_on_owned_reference_projecting_entity(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<OwnedPerson>().Where(p => p.PersonAddress.Country.Name == "USA")
+        AssertQuery(async, ss =>
+            ss.Set<OwnedPerson>().Where(p => p.PersonAddress.Country.Name == "USA")
         );
 
     [ConditionalTheory]
@@ -164,14 +161,10 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Navigation_rewrite_on_owned_collection_with_composition(bool async) =>
-        AssertQueryScalar(
-            async,
-            ss =>
-                ss.Set<OwnedPerson>()
-                    .OrderBy(p => p.Id)
-                    .Select(p =>
-                        p.Orders.OrderBy(o => o.Id).Select(o => o.Id != 42).FirstOrDefault()
-                    )
+        AssertQueryScalar(async, ss =>
+            ss.Set<OwnedPerson>()
+                .OrderBy(p => p.Id)
+                .Select(p => p.Orders.OrderBy(o => o.Id).Select(o => o.Id != 42).FirstOrDefault())
         );
 
     [ConditionalTheory]
@@ -179,15 +172,13 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual Task Navigation_rewrite_on_owned_collection_with_composition_complex(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OwnedPerson>()
-                    .Select(p =>
-                        p.Orders.OrderBy(o => o.Id)
-                            .Select(o => o.Client.PersonAddress.Country.Name)
-                            .FirstOrDefault()
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<OwnedPerson>()
+                .Select(p =>
+                    p.Orders.OrderBy(o => o.Id)
+                        .Select(o => o.Client.PersonAddress.Country.Name)
+                        .FirstOrDefault()
+                )
         );
 
     [ConditionalTheory]
@@ -300,9 +291,8 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_property(
         bool async
     ) =>
-        AssertQueryScalar(
-            async,
-            ss => ss.Set<OwnedPerson>().Select(p => p.PersonAddress.Country.Planet.Id)
+        AssertQueryScalar(async, ss =>
+            ss.Set<OwnedPerson>().Select(p => p.PersonAddress.Country.Planet.Id)
         );
 
     [ConditionalTheory]
@@ -325,9 +315,8 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual Task SelectMany_on_owned_reference_followed_by_regular_entity_and_collection(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<OwnedPerson>().SelectMany(p => p.PersonAddress.Country.Planet.Moons)
+        AssertQuery(async, ss =>
+            ss.Set<OwnedPerson>().SelectMany(p => p.PersonAddress.Country.Planet.Moons)
         );
 
     [ConditionalTheory]
@@ -335,11 +324,8 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual Task SelectMany_on_owned_reference_with_entity_in_between_ending_in_owned_collection(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OwnedPerson>()
-                    .SelectMany(p => p.PersonAddress.Country.Planet.Star.Composition)
+        AssertQuery(async, ss =>
+            ss.Set<OwnedPerson>().SelectMany(p => p.PersonAddress.Country.Planet.Star.Composition)
         );
 
     [ConditionalTheory]
@@ -347,9 +333,8 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_collection_count(
         bool async
     ) =>
-        AssertQueryScalar(
-            async,
-            ss => ss.Set<OwnedPerson>().Select(p => p.PersonAddress.Country.Planet.Moons.Count)
+        AssertQueryScalar(async, ss =>
+            ss.Set<OwnedPerson>().Select(p => p.PersonAddress.Country.Planet.Moons.Count)
         );
 
     [ConditionalTheory]
@@ -357,9 +342,8 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<OwnedPerson>().Select(p => p.PersonAddress.Country.Planet.Star)
+        AssertQuery(async, ss =>
+            ss.Set<OwnedPerson>().Select(p => p.PersonAddress.Country.Planet.Star)
         );
 
     [ConditionalTheory]
@@ -378,12 +362,10 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual Task Navigation_rewrite_on_owned_reference_followed_by_regular_entity_and_another_reference_in_predicate_and_projection(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OwnedPerson>()
-                    .Where(p => p.PersonAddress.Country.Planet.Star.Name == "Sol")
-                    .Select(p => p.PersonAddress.Country.Planet.Star)
+        AssertQuery(async, ss =>
+            ss.Set<OwnedPerson>()
+                .Where(p => p.PersonAddress.Country.Planet.Star.Name == "Sol")
+                .Select(p => p.PersonAddress.Country.Planet.Star)
         );
 
     [ConditionalTheory]
@@ -477,38 +459,33 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Unmapped_property_projection_loads_owned_navigations(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OwnedPerson>()
-                    .Where(e => e.Id == 1)
-                    .AsTracking()
-                    .Select(e => new { e.ReadOnlyProperty })
+        AssertQuery(async, ss =>
+            ss.Set<OwnedPerson>()
+                .Where(e => e.Id == 1)
+                .AsTracking()
+                .Select(e => new { e.ReadOnlyProperty })
         );
 
     // Issue#18140
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Client_method_skip_loads_owned_navigations(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<OwnedPerson>().OrderBy(e => e.Id).Select(e => Map(e)).Skip(1)
+        AssertQuery(async, ss =>
+            ss.Set<OwnedPerson>().OrderBy(e => e.Id).Select(e => Map(e)).Skip(1)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Client_method_take_loads_owned_navigations(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<OwnedPerson>().OrderBy(e => e.Id).Select(e => Map(e)).Take(2)
+        AssertQuery(async, ss =>
+            ss.Set<OwnedPerson>().OrderBy(e => e.Id).Select(e => Map(e)).Take(2)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Client_method_skip_take_loads_owned_navigations(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<OwnedPerson>().OrderBy(e => e.Id).Select(e => Map(e)).Skip(1).Take(2)
+        AssertQuery(async, ss =>
+            ss.Set<OwnedPerson>().OrderBy(e => e.Id).Select(e => Map(e)).Skip(1).Take(2)
         );
 
     private static string Map(OwnedPerson person) => person.PersonAddress.Country.Name;
@@ -517,25 +494,22 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Client_method_skip_loads_owned_navigations_variation_2(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<OwnedPerson>().OrderBy(e => e.Id).Select(e => Identity(e)).Skip(1)
+        AssertQuery(async, ss =>
+            ss.Set<OwnedPerson>().OrderBy(e => e.Id).Select(e => Identity(e)).Skip(1)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Client_method_take_loads_owned_navigations_variation_2(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<OwnedPerson>().OrderBy(e => e.Id).Select(e => Identity(e)).Take(2)
+        AssertQuery(async, ss =>
+            ss.Set<OwnedPerson>().OrderBy(e => e.Id).Select(e => Identity(e)).Take(2)
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Client_method_skip_take_loads_owned_navigations_variation_2(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<OwnedPerson>().OrderBy(e => e.Id).Select(e => Identity(e)).Skip(1).Take(2)
+        AssertQuery(async, ss =>
+            ss.Set<OwnedPerson>().OrderBy(e => e.Id).Select(e => Identity(e)).Skip(1).Take(2)
         );
 
     private static OwnedPerson Identity(OwnedPerson person) => person;
@@ -623,12 +597,10 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Can_query_on_owned_indexer_properties(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OwnedPerson>()
-                    .Where(c => (int)c.PersonAddress["ZipCode"] == 38654)
-                    .Select(c => (string)c["Name"])
+        AssertQuery(async, ss =>
+            ss.Set<OwnedPerson>()
+                .Where(c => (int)c.PersonAddress["ZipCode"] == 38654)
+                .Select(c => (string)c["Name"])
         );
 
     [ConditionalTheory]
@@ -636,12 +608,10 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
     public virtual Task Can_query_on_indexer_property_when_property_name_from_closure(bool async)
     {
         var propertyName = "Name";
-        return AssertQuery(
-            async,
-            ss =>
-                ss.Set<OwnedPerson>()
-                    .Where(c => (string)c[propertyName] == "Mona Cy")
-                    .Select(c => (string)c["Name"])
+        return AssertQuery(async, ss =>
+            ss.Set<OwnedPerson>()
+                .Where(c => (string)c[propertyName] == "Mona Cy")
+                .Select(c => (string)c["Name"])
         );
     }
 
@@ -663,9 +633,8 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Can_project_owned_indexer_properties_converted(bool async) =>
-        AssertQuery(
-            async,
-            ss => ss.Set<OwnedPerson>().Select(c => (string)c.PersonAddress["AddressLine"])
+        AssertQuery(async, ss =>
+            ss.Set<OwnedPerson>().Select(c => (string)c.PersonAddress["AddressLine"])
         );
 
     [ConditionalTheory]
@@ -719,101 +688,82 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Can_group_by_indexer_property(bool async) =>
-        AssertQueryScalar(
-            async,
-            ss => ss.Set<OwnedPerson>().GroupBy(c => c["Name"]).Select(g => g.Count())
+        AssertQueryScalar(async, ss =>
+            ss.Set<OwnedPerson>().GroupBy(c => c["Name"]).Select(g => g.Count())
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Can_group_by_converted_indexer_property(bool async) =>
-        AssertQueryScalar(
-            async,
-            ss => ss.Set<OwnedPerson>().GroupBy(c => (string)c["Name"]).Select(g => g.Count())
+        AssertQueryScalar(async, ss =>
+            ss.Set<OwnedPerson>().GroupBy(c => (string)c["Name"]).Select(g => g.Count())
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Can_group_by_owned_indexer_property(bool async) =>
-        AssertQueryScalar(
-            async,
-            ss =>
-                ss.Set<OwnedPerson>()
-                    .GroupBy(c => c.PersonAddress["ZipCode"])
-                    .Select(g => g.Count())
+        AssertQueryScalar(async, ss =>
+            ss.Set<OwnedPerson>().GroupBy(c => c.PersonAddress["ZipCode"]).Select(g => g.Count())
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Can_group_by_converted_owned_indexer_property(bool async) =>
-        AssertQueryScalar(
-            async,
-            ss =>
-                ss.Set<OwnedPerson>()
-                    .GroupBy(c => (int)c.PersonAddress["ZipCode"])
-                    .Select(g => g.Count())
+        AssertQueryScalar(async, ss =>
+            ss.Set<OwnedPerson>()
+                .GroupBy(c => (int)c.PersonAddress["ZipCode"])
+                .Select(g => g.Count())
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Can_join_on_indexer_property_on_query(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                (
-                    from c1 in ss.Set<OwnedPerson>()
-                    join c2 in ss.Set<OwnedPerson>()
-                        on c1.PersonAddress["ZipCode"] equals c2.PersonAddress["ZipCode"]
-                    select new { c1.Id, c2.PersonAddress.Country.Name }
-                )
+        AssertQuery(async, ss =>
+            (
+                from c1 in ss.Set<OwnedPerson>()
+                join c2 in ss.Set<OwnedPerson>()
+                    on c1.PersonAddress["ZipCode"] equals c2.PersonAddress["ZipCode"]
+                select new { c1.Id, c2.PersonAddress.Country.Name }
+            )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Projecting_indexer_property_ignores_include(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<OwnedPerson>().AsTracking()
-                select new { Nation = c.PersonAddress["ZipCode"] }
+        AssertQuery(async, ss =>
+            from c in ss.Set<OwnedPerson>().AsTracking()
+            select new { Nation = c.PersonAddress["ZipCode"] }
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Projecting_indexer_property_ignores_include_converted(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<OwnedPerson>().AsTracking()
-                select new { Nation = (int)c.PersonAddress["ZipCode"] }
+        AssertQuery(async, ss =>
+            from c in ss.Set<OwnedPerson>().AsTracking()
+            select new { Nation = (int)c.PersonAddress["ZipCode"] }
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Indexer_property_is_pushdown_into_subquery(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OwnedPerson>()
-                    .Where(g =>
-                        (string)
-                            ss.Set<OwnedPerson>().Where(c => c.Id == g.Id).FirstOrDefault()["Name"]
-                        == "Mona Cy"
-                    )
-                    .Select(c => (string)c["Name"])
+        AssertQuery(async, ss =>
+            ss.Set<OwnedPerson>()
+                .Where(g =>
+                    (string)ss.Set<OwnedPerson>().Where(c => c.Id == g.Id).FirstOrDefault()["Name"]
+                    == "Mona Cy"
+                )
+                .Select(c => (string)c["Name"])
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Can_query_indexer_property_on_owned_collection(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OwnedPerson>()
-                    .Where(ow =>
-                        ow.Orders.Where(o => ((DateTime)o["OrderDate"]).Year == 2018).Count() == 1
-                    )
-                    .Select(c => (string)c["Name"])
+        AssertQuery(async, ss =>
+            ss.Set<OwnedPerson>()
+                .Where(ow =>
+                    ow.Orders.Where(o => ((DateTime)o["OrderDate"]).Year == 2018).Count() == 1
+                )
+                .Select(c => (string)c["Name"])
         );
 
     [ConditionalTheory]
@@ -881,19 +831,14 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GroupBy_with_multiple_aggregates_on_owned_navigation_properties(
         bool async
-    ) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<OwnedPerson>()
-                    .GroupBy(e => 1, x => x.PersonAddress.Country.Planet.Star)
-                    .Select(e => new
-                    {
-                        p1 = e.Average(x => x.Id),
-                        p2 = e.Sum(x => x.Id),
-                        p3 = e.Max(x => x.Name.Length),
-                    })
-        );
+    ) => AssertQuery(async, ss => ss.Set<OwnedPerson>()
+                .GroupBy(e => 1, x => x.PersonAddress.Country.Planet.Star)
+                .Select(e => new
+                {
+                    p1 = e.Average(x => x.Id),
+                    p2 = e.Sum(x => x.Id),
+                    p3 = e.Max(x => x.Name.Length),
+                }));
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -979,9 +924,8 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
     {
         var zipCode = "ZipCode";
 
-        return AssertQuery(
-            async,
-            ss => ss.Set<OwnedPerson>().Where(p => (int)p.PersonAddress[zipCode] == 38654)
+        return AssertQuery(async, ss =>
+            ss.Set<OwnedPerson>().Where(p => (int)p.PersonAddress[zipCode] == 38654)
         );
     }
 

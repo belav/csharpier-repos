@@ -904,18 +904,16 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void ThrowsOnLeftNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "left",
-                () => Expression.Coalesce(null, Expression.Constant(""))
+            AssertExtensions.Throws<ArgumentNullException>("left", () =>
+                Expression.Coalesce(null, Expression.Constant(""))
             );
         }
 
         [Fact]
         public static void ThrowsOnRightNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "right",
-                () => Expression.Coalesce(Expression.Constant(""), null)
+            AssertExtensions.Throws<ArgumentNullException>("right", () =>
+                Expression.Coalesce(Expression.Constant(""), null)
             );
         }
 
@@ -931,9 +929,8 @@ namespace System.Linq.Expressions.Tests
         public static void ThrowsOnLeftUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<string>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>(
-                "left",
-                () => Expression.Coalesce(value, Expression.Constant(""))
+            AssertExtensions.Throws<ArgumentException>("left", () =>
+                Expression.Coalesce(value, Expression.Constant(""))
             );
         }
 
@@ -941,9 +938,8 @@ namespace System.Linq.Expressions.Tests
         public static void ThrowsOnRightUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<string>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>(
-                "right",
-                () => Expression.Coalesce(Expression.Constant(""), value)
+            AssertExtensions.Throws<ArgumentException>("right", () =>
+                Expression.Coalesce(Expression.Constant(""), value)
             );
         }
 
@@ -1005,9 +1001,8 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void RightLeft_NonEquivalentTypes_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.Coalesce(Expression.Constant("abc"), Expression.Constant(5))
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.Coalesce(Expression.Constant("abc"), Expression.Constant(5))
             );
         }
 
@@ -1021,14 +1016,8 @@ namespace System.Linq.Expressions.Tests
                 Expression.Constant("")
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "conversion",
-                () =>
-                    Expression.Coalesce(
-                        Expression.Constant(""),
-                        Expression.Constant(""),
-                        conversion
-                    )
+            AssertExtensions.Throws<ArgumentException>("conversion", () =>
+                Expression.Coalesce(Expression.Constant(""), Expression.Constant(""), conversion)
             );
         }
 
@@ -1038,23 +1027,11 @@ namespace System.Linq.Expressions.Tests
             Expression<Func<int, int, int>> moreThanOne = (x, y) => x * 2;
             Expression<Func<int>> lessThanOne = () => 2;
 
-            AssertExtensions.Throws<ArgumentException>(
-                "conversion",
-                () =>
-                    Expression.Coalesce(
-                        Expression.Constant(""),
-                        Expression.Constant(""),
-                        moreThanOne
-                    )
+            AssertExtensions.Throws<ArgumentException>("conversion", () =>
+                Expression.Coalesce(Expression.Constant(""), Expression.Constant(""), moreThanOne)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "conversion",
-                () =>
-                    Expression.Coalesce(
-                        Expression.Constant(""),
-                        Expression.Constant(""),
-                        lessThanOne
-                    )
+            AssertExtensions.Throws<ArgumentException>("conversion", () =>
+                Expression.Coalesce(Expression.Constant(""), Expression.Constant(""), lessThanOne)
             );
         }
 

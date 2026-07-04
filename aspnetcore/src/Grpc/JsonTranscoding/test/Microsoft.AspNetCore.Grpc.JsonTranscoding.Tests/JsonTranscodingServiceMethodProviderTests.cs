@@ -190,17 +190,13 @@ public class JsonTranscodingServiceMethodProviderTests
         });
 
         // Assert
-        Assert.Contains(
-            testSink.Writes,
-            c =>
-                c.Message
-                == "Unable to bind GetClientStreaming on transcoding.JsonTranscodingStreaming to gRPC JSON transcoding. Client and bidirectional streaming methods are not supported."
+        Assert.Contains(testSink.Writes, c =>
+            c.Message
+            == "Unable to bind GetClientStreaming on transcoding.JsonTranscodingStreaming to gRPC JSON transcoding. Client and bidirectional streaming methods are not supported."
         );
-        Assert.Contains(
-            testSink.Writes,
-            c =>
-                c.Message
-                == "Unable to bind GetBidiStreaming on transcoding.JsonTranscodingStreaming to gRPC JSON transcoding. Client and bidirectional streaming methods are not supported."
+        Assert.Contains(testSink.Writes, c =>
+            c.Message
+            == "Unable to bind GetBidiStreaming on transcoding.JsonTranscodingStreaming to gRPC JSON transcoding. Client and bidirectional streaming methods are not supported."
         );
 
         var matchedEndpoints = FindGrpcEndpoints(

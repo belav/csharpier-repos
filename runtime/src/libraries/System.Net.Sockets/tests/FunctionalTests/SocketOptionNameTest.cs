@@ -869,9 +869,8 @@ namespace System.Net.Sockets.Tests
         {
             using (var socket = new Socket(family, SocketType.Stream, ProtocolType.Tcp))
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "level",
-                    () => socket.SetIPProtectionLevel(IPProtectionLevel.Unspecified)
+                AssertExtensions.Throws<ArgumentException>("level", () =>
+                    socket.SetIPProtectionLevel(IPProtectionLevel.Unspecified)
                 );
             }
         }

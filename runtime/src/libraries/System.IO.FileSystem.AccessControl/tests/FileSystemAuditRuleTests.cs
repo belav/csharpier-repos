@@ -52,14 +52,8 @@ namespace System.Security.AccessControl
         public void ObjectInitialization_InvalidFileSystemRights()
         {
             var fileSystemRights = (FileSystemRights)(-1);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "fileSystemRights",
-                () =>
-                    new FileSystemAuditRule(
-                        @"MYDOMAIN\MyAccount",
-                        fileSystemRights,
-                        AuditFlags.Failure
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("fileSystemRights", () =>
+                new FileSystemAuditRule(@"MYDOMAIN\MyAccount", fileSystemRights, AuditFlags.Failure)
             );
         }
 

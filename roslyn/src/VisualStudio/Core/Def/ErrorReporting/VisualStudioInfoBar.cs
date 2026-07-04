@@ -104,29 +104,24 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                         return;
 
                     uint? infoBarCookie = null;
-                    var eventSink = new InfoBarEvents(
-                        items,
-                        onClose: () =>
+                    var eventSink = new InfoBarEvents(items, onClose: () =>
+                    {
+                        Contract.ThrowIfFalse(_threadingContext.JoinableTaskContext.IsOnMainThread);
+
+                        // Remove the message from the list that we're keeping track of.  Future identical
+                        // messages can now be shown.
+                        _currentlyShowingMessages.Remove(message);
+
+                        // Run given onClose action if there is one.
+                        items
+                            .FirstOrDefault(i => i.Kind == InfoBarUI.UIKind.Close)
+                            .Action?.Invoke();
+
+                        if (infoBarCookie.HasValue)
                         {
-                            Contract.ThrowIfFalse(
-                                _threadingContext.JoinableTaskContext.IsOnMainThread
-                            );
-
-                            // Remove the message from the list that we're keeping track of.  Future identical
-                            // messages can now be shown.
-                            _currentlyShowingMessages.Remove(message);
-
-                            // Run given onClose action if there is one.
-                            items
-                                .FirstOrDefault(i => i.Kind == InfoBarUI.UIKind.Close)
-                                .Action?.Invoke();
-
-                            if (infoBarCookie.HasValue)
-                            {
-                                infoBarUI.Unadvise(infoBarCookie.Value);
-                            }
+                            infoBarUI.Unadvise(infoBarCookie.Value);
                         }
-                    );
+                    });
 
                     infoBarUI.Advise(eventSink, out var cookie);
                     infoBarCookie = cookie;

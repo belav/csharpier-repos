@@ -284,9 +284,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
                 : Create(compilation, info);
 
             static TDetector Create(Compilation compilation, EmbeddedLanguageInfo info) =>
-                s_compilationToDetector.GetValue(
-                    compilation,
-                    _ => default(TDetectorInfo).Create(compilation, info)
+                s_compilationToDetector.GetValue(compilation, _ =>
+                    default(TDetectorInfo).Create(compilation, info)
                 );
         }
 

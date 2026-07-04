@@ -117,9 +117,8 @@ public class SqlServerBuilderExtensionsTest
         var index = modelBuilder.Model.FindEntityType(typeof(Customer)).GetIndexes().Single();
 
         Assert.NotNull(index.GetIncludeProperties());
-        Assert.Collection(
-            index.GetIncludeProperties(),
-            c => Assert.Equal(nameof(Customer.Offset), c)
+        Assert.Collection(index.GetIncludeProperties(), c =>
+            Assert.Equal(nameof(Customer.Offset), c)
         );
     }
 
@@ -138,9 +137,8 @@ public class SqlServerBuilderExtensionsTest
 
         Assert.True(index.IsUnique);
         Assert.NotNull(index.GetIncludeProperties());
-        Assert.Collection(
-            index.GetIncludeProperties(),
-            c => Assert.Equal(nameof(Customer.Offset), c)
+        Assert.Collection(index.GetIncludeProperties(), c =>
+            Assert.Equal(nameof(Customer.Offset), c)
         );
     }
 
@@ -163,9 +161,8 @@ public class SqlServerBuilderExtensionsTest
         Assert.True(annotation.Value as bool?);
 
         Assert.NotNull(index.GetIncludeProperties());
-        Assert.Collection(
-            index.GetIncludeProperties(),
-            c => Assert.Equal(nameof(Customer.Offset), c)
+        Assert.Collection(index.GetIncludeProperties(), c =>
+            Assert.Equal(nameof(Customer.Offset), c)
         );
     }
 
@@ -182,9 +179,8 @@ public class SqlServerBuilderExtensionsTest
         var index = modelBuilder.Model.FindEntityType(typeof(Customer)).GetIndexes().Single();
 
         Assert.NotNull(index.GetIncludeProperties());
-        Assert.Collection(
-            index.GetIncludeProperties(),
-            c => Assert.Equal(nameof(Customer.Offset), c)
+        Assert.Collection(index.GetIncludeProperties(), c =>
+            Assert.Equal(nameof(Customer.Offset), c)
         );
     }
 
@@ -680,10 +676,8 @@ public class SqlServerBuilderExtensionsTest
         var modelBuilder = CreateConventionModelBuilder();
 
         modelBuilder
-            .HasSequence<int>(
-                "Snook",
-                "Tasty",
-                b => b.IncrementsBy(11).StartsAt(1729).HasMin(111).HasMax(2222)
+            .HasSequence<int>("Snook", "Tasty", b =>
+                b.IncrementsBy(11).StartsAt(1729).HasMin(111).HasMax(2222)
             )
             .Entity<Customer>()
             .Property(e => e.Id)
@@ -737,14 +731,10 @@ public class SqlServerBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.HasSequence<int>(
-            "Snook",
-            "Tasty",
-            b =>
-            {
-                b.IncrementsBy(11).StartsAt(1729).HasMin(111).HasMax(2222);
-            }
-        );
+        modelBuilder.HasSequence<int>("Snook", "Tasty", b =>
+        {
+            b.IncrementsBy(11).StartsAt(1729).HasMin(111).HasMax(2222);
+        });
 
         modelBuilder.Entity<Customer>().Property(e => e.Id).UseHiLo("Snook", "Tasty");
 
@@ -887,10 +877,8 @@ public class SqlServerBuilderExtensionsTest
         var modelBuilder = CreateConventionModelBuilder();
 
         modelBuilder
-            .HasSequence<int>(
-                "Snook",
-                "Tasty",
-                b => b.IncrementsBy(11).StartsAt(1729).HasMin(111).HasMax(2222)
+            .HasSequence<int>("Snook", "Tasty", b =>
+                b.IncrementsBy(11).StartsAt(1729).HasMin(111).HasMax(2222)
             )
             .Entity<Customer>()
             .Property(e => e.Id)
@@ -944,14 +932,10 @@ public class SqlServerBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder.HasSequence<int>(
-            "Snook",
-            "Tasty",
-            b =>
-            {
-                b.IncrementsBy(11).StartsAt(1729).HasMin(111).HasMax(2222);
-            }
-        );
+        modelBuilder.HasSequence<int>("Snook", "Tasty", b =>
+        {
+            b.IncrementsBy(11).StartsAt(1729).HasMin(111).HasMax(2222);
+        });
 
         modelBuilder.Entity<Customer>().Property(e => e.Id).UseSequence("Snook", "Tasty");
 

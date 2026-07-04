@@ -54,22 +54,16 @@ namespace System.Tests
         [MemberData(nameof(DefaultToTypeValues))]
         public static void TestConvertedCopies(object testValue)
         {
-            Assert.All(
-                DefaultToTypeValues(),
-                input =>
+            Assert.All(DefaultToTypeValues(), input =>
+            {
+                try
                 {
-                    try
-                    {
-                        object converted = ((IConvertible)testValue).ToType(
-                            input[0].GetType(),
-                            null
-                        );
-                        Assert.NotSame(testValue, converted);
-                    }
-                    catch (InvalidCastException) { }
-                    catch (OverflowException) { }
+                    object converted = ((IConvertible)testValue).ToType(input[0].GetType(), null);
+                    Assert.NotSame(testValue, converted);
                 }
-            );
+                catch (InvalidCastException) { }
+                catch (OverflowException) { }
+            });
         }
 
         [Theory]

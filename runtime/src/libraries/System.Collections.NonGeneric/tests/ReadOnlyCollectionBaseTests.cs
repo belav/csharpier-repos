@@ -70,16 +70,12 @@ namespace System.Collections.Tests
         {
             MyReadOnlyCollectionBase collection = CreateCollection();
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "destinationArray",
-                "dest",
-                () => collection.CopyTo(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("destinationArray", "dest", () =>
+                collection.CopyTo(null, 0)
             ); // Array is null
 
-            AssertExtensions.Throws<ArgumentException>(
-                "destinationArray",
-                string.Empty,
-                () => collection.CopyTo(new Foo[100], 50)
+            AssertExtensions.Throws<ArgumentException>("destinationArray", string.Empty, () =>
+                collection.CopyTo(new Foo[100], 50)
             ); // Index + collection.Count > array.Length
             AssertExtensions.Throws<ArgumentOutOfRangeException>(
                 "destinationIndex",

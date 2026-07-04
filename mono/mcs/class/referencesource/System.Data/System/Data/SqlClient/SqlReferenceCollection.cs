@@ -54,17 +54,15 @@ namespace System.Data.SqlClient
             if (command == null)
             {
                 // if null == command, will find first live datareader
-                return FindItem<SqlDataReader>(
-                    DataReaderTag,
-                    (dataReader) => (!dataReader.IsClosed)
+                return FindItem<SqlDataReader>(DataReaderTag, (dataReader) =>
+                    (!dataReader.IsClosed)
                 );
             }
             else
             {
                 // else will find live datareader assocated with the command
-                return FindItem<SqlDataReader>(
-                    DataReaderTag,
-                    (dataReader) => ((!dataReader.IsClosed) && (command == dataReader.Command))
+                return FindItem<SqlDataReader>(DataReaderTag, (dataReader) =>
+                    ((!dataReader.IsClosed) && (command == dataReader.Command))
                 );
             }
         }

@@ -38,13 +38,11 @@ namespace System.Diagnostics.TraceSourceTests
             Assert.Equal(TraceLevel.Error, item.Level);
             item.Level = TraceLevel.Info;
             Assert.Equal(TraceLevel.Info, item.Level);
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => item.Level = (TraceLevel)(TraceLevel.Off - 1)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                item.Level = (TraceLevel)(TraceLevel.Off - 1)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => item.Level = (TraceLevel)(TraceLevel.Verbose + 1)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                item.Level = (TraceLevel)(TraceLevel.Verbose + 1)
             );
         }
 

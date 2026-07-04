@@ -162,23 +162,17 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetField_NullName()
         {
-            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () =>
-                {
-                    Module.GetField(null);
-                }
-            );
+            ArgumentNullException ex = AssertExtensions.Throws<ArgumentNullException>("name", () =>
+            {
+                Module.GetField(null);
+            });
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
 
-            ex = AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () =>
-                {
-                    Module.GetField(null, 0);
-                }
-            );
+            ex = AssertExtensions.Throws<ArgumentNullException>("name", () =>
+            {
+                Module.GetField(null, 0);
+            });
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
         }
@@ -220,16 +214,14 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetMethod_NullName()
         {
-            var ex = AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => Module.GetMethod(null)
+            var ex = AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                Module.GetMethod(null)
             );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
 
-            ex = AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => Module.GetMethod(null, Type.EmptyTypes)
+            ex = AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                Module.GetMethod(null, Type.EmptyTypes)
             );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -238,9 +230,8 @@ namespace System.Reflection.Tests
         [Fact]
         public void GetMethod_NullTypes()
         {
-            var ex = AssertExtensions.Throws<ArgumentNullException>(
-                "types",
-                () => Module.GetMethod("TestMethodFoo", null)
+            var ex = AssertExtensions.Throws<ArgumentNullException>("types", () =>
+                Module.GetMethod("TestMethodFoo", null)
             );
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);

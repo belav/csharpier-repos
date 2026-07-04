@@ -235,38 +235,31 @@ namespace System.CodeDom.Tests
         [Fact]
         public void Ctor_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => new CodeArrayCreateExpression((Type)null, new CodePrimitiveExpression())
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                new CodeArrayCreateExpression((Type)null, new CodePrimitiveExpression())
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => new CodeArrayCreateExpression((Type)null, new CodePrimitiveExpression[0])
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                new CodeArrayCreateExpression((Type)null, new CodePrimitiveExpression[0])
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => new CodeArrayCreateExpression((Type)null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                new CodeArrayCreateExpression((Type)null, 0)
             );
         }
 
         [Fact]
         public void Ctor_NullTypeInitializers_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeArrayCreateExpression("", (CodePrimitiveExpression[])null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeArrayCreateExpression("", (CodePrimitiveExpression[])null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeArrayCreateExpression(typeof(void), (CodePrimitiveExpression[])null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeArrayCreateExpression(typeof(void), (CodePrimitiveExpression[])null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () =>
-                    new CodeArrayCreateExpression(
-                        new CodeTypeReference(),
-                        (CodePrimitiveExpression[])null
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeArrayCreateExpression(
+                    new CodeTypeReference(),
+                    (CodePrimitiveExpression[])null
+                )
             );
         }
 
@@ -274,17 +267,14 @@ namespace System.CodeDom.Tests
         public void Ctor_NullTypeInInitializers_ThrowsArgumentNullException()
         {
             CodePrimitiveExpression[] initializers = new CodePrimitiveExpression[] { null };
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeArrayCreateExpression("", initializers)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeArrayCreateExpression("", initializers)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeArrayCreateExpression(typeof(void), initializers)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeArrayCreateExpression(typeof(void), initializers)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeArrayCreateExpression(new CodeTypeReference(), initializers)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeArrayCreateExpression(new CodeTypeReference(), initializers)
             );
         }
 

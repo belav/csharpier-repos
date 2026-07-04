@@ -744,9 +744,8 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     );
                 }
 
-                Array.Sort(
-                    constructors,
-                    (a, b) => b.GetParameters().Length.CompareTo(a.GetParameters().Length)
+                Array.Sort(constructors, (a, b) =>
+                    b.GetParameters().Length.CompareTo(a.GetParameters().Length)
                 );
 
                 ConstructorInfo? bestConstructor = null;

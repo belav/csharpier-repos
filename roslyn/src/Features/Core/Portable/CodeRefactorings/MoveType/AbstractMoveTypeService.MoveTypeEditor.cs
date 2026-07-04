@@ -384,17 +384,14 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.MoveType
                     }
                 }
 
-                documentEditor.ReplaceNode(
-                    State.TypeNode,
-                    (currentNode, generator) =>
-                    {
-                        var currentTypeNode = (TTypeDeclarationSyntax)currentNode;
+                documentEditor.ReplaceNode(State.TypeNode, (currentNode, generator) =>
+                {
+                    var currentTypeNode = (TTypeDeclarationSyntax)currentNode;
 
-                        // Trim leading blank lines from the type so we don't have an
-                        // excessive number of them.
-                        return RemoveLeadingBlankLines(currentTypeNode);
-                    }
-                );
+                    // Trim leading blank lines from the type so we don't have an
+                    // excessive number of them.
+                    return RemoveLeadingBlankLines(currentTypeNode);
+                });
             }
 
             private TTypeDeclarationSyntax RemoveLeadingBlankLines(

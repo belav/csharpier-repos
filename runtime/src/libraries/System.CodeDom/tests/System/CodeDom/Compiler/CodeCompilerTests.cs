@@ -56,9 +56,8 @@ namespace System.CodeDom.Compiler.Tests
         public void CompileAssemblyFromDom_NullOptions_ThrowsArgumentNullException()
         {
             ICodeCompiler compiler = new Compiler();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "options",
-                () => compiler.CompileAssemblyFromDom(null, new CodeCompileUnit())
+            AssertExtensions.Throws<ArgumentNullException>("options", () =>
+                compiler.CompileAssemblyFromDom(null, new CodeCompileUnit())
             );
         }
 
@@ -91,9 +90,8 @@ namespace System.CodeDom.Compiler.Tests
         public void FromDom_NullOptions_ThrowsArgumentNullException()
         {
             var compiler = new Compiler();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "options",
-                () => compiler.FromDomEntryPoint(null, new CodeCompileUnit())
+            AssertExtensions.Throws<ArgumentNullException>("options", () =>
+                compiler.FromDomEntryPoint(null, new CodeCompileUnit())
             );
         }
 
@@ -137,9 +135,8 @@ namespace System.CodeDom.Compiler.Tests
         public void CompileAssemblyFromDomBatch_NullOptions_ThrowsArgumentNullException()
         {
             ICodeCompiler compiler = new Compiler();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "options",
-                () => compiler.CompileAssemblyFromDomBatch(null, new CodeCompileUnit[0])
+            AssertExtensions.Throws<ArgumentNullException>("options", () =>
+                compiler.CompileAssemblyFromDomBatch(null, new CodeCompileUnit[0])
             );
         }
 
@@ -147,9 +144,8 @@ namespace System.CodeDom.Compiler.Tests
         public void CompileAssemblyFromDomBatch_NullCompileUnits_ThrowsArgumentNullException()
         {
             ICodeCompiler compiler = new Compiler();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "ea",
-                () => compiler.CompileAssemblyFromDomBatch(new CompilerParameters(), null)
+            AssertExtensions.Throws<ArgumentNullException>("ea", () =>
+                compiler.CompileAssemblyFromDomBatch(new CompilerParameters(), null)
             );
         }
 
@@ -182,9 +178,8 @@ namespace System.CodeDom.Compiler.Tests
         public void FromDomBatch_NullOptions_ThrowsArgumentNullException()
         {
             var compiler = new Compiler();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "options",
-                () => compiler.FromDomBatchEntryPoint(null, new CodeCompileUnit[0])
+            AssertExtensions.Throws<ArgumentNullException>("options", () =>
+                compiler.FromDomBatchEntryPoint(null, new CodeCompileUnit[0])
             );
         }
 
@@ -192,9 +187,8 @@ namespace System.CodeDom.Compiler.Tests
         public void FromDomBatch_NullCompileUnits_ThrowsArgumentNullException()
         {
             var compiler = new Compiler();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "ea",
-                () => compiler.FromDomBatchEntryPoint(new CompilerParameters(), null)
+            AssertExtensions.Throws<ArgumentNullException>("ea", () =>
+                compiler.FromDomBatchEntryPoint(new CompilerParameters(), null)
             );
         }
 
@@ -225,9 +219,8 @@ namespace System.CodeDom.Compiler.Tests
         public void CompileAssemblyFromFile_NullOptions_ThrowsArgumentNullException()
         {
             ICodeCompiler compiler = new Compiler();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "options",
-                () => compiler.CompileAssemblyFromFile(null, "fileName")
+            AssertExtensions.Throws<ArgumentNullException>("options", () =>
+                compiler.CompileAssemblyFromFile(null, "fileName")
             );
         }
 
@@ -235,9 +228,8 @@ namespace System.CodeDom.Compiler.Tests
         public void CompileAssemblyFromFile_NullFileName_ThrowsArgumentNullException()
         {
             ICodeCompiler compiler = new Compiler();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "fileName",
-                () => compiler.CompileAssemblyFromFile(new CompilerParameters(), null)
+            AssertExtensions.Throws<ArgumentNullException>("fileName", () =>
+                compiler.CompileAssemblyFromFile(new CompilerParameters(), null)
             );
         }
 
@@ -245,10 +237,8 @@ namespace System.CodeDom.Compiler.Tests
         public void CompileAssemblyFromFile_EmptyFileName_ThrowsArgumentException()
         {
             ICodeCompiler compiler = new Compiler();
-            AssertExtensions.Throws<ArgumentException>(
-                "path",
-                null,
-                () => compiler.CompileAssemblyFromFile(new CompilerParameters(), "")
+            AssertExtensions.Throws<ArgumentException>("path", null, () =>
+                compiler.CompileAssemblyFromFile(new CompilerParameters(), "")
             );
         }
 
@@ -278,9 +268,8 @@ namespace System.CodeDom.Compiler.Tests
         public void FromFile_NullOptions_ThrowsArgumentNullException()
         {
             var compiler = new Compiler();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "options",
-                () => compiler.FromFileEntryPoint(null, "fileName")
+            AssertExtensions.Throws<ArgumentNullException>("options", () =>
+                compiler.FromFileEntryPoint(null, "fileName")
             );
         }
 
@@ -288,9 +277,8 @@ namespace System.CodeDom.Compiler.Tests
         public void FromFile_NullFileName_ThrowsArgumentNullException()
         {
             var compiler = new Compiler();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "fileName",
-                () => compiler.FromFileEntryPoint(new CompilerParameters(), null)
+            AssertExtensions.Throws<ArgumentNullException>("fileName", () =>
+                compiler.FromFileEntryPoint(new CompilerParameters(), null)
             );
         }
 
@@ -298,10 +286,8 @@ namespace System.CodeDom.Compiler.Tests
         public void FromFile_EmptyFileName_ThrowsArgumentException()
         {
             var compiler = new Compiler();
-            AssertExtensions.Throws<ArgumentException>(
-                "path",
-                null,
-                () => compiler.FromFileEntryPoint(new CompilerParameters(), "")
+            AssertExtensions.Throws<ArgumentException>("path", null, () =>
+                compiler.FromFileEntryPoint(new CompilerParameters(), "")
             );
         }
 
@@ -349,9 +335,8 @@ namespace System.CodeDom.Compiler.Tests
         public void CompileAssemblyFromFileBatch_NullOptions_ThrowsArgumentNullException()
         {
             ICodeCompiler compiler = new Compiler();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "options",
-                () => compiler.CompileAssemblyFromFileBatch(null, new string[0])
+            AssertExtensions.Throws<ArgumentNullException>("options", () =>
+                compiler.CompileAssemblyFromFileBatch(null, new string[0])
             );
         }
 
@@ -359,9 +344,8 @@ namespace System.CodeDom.Compiler.Tests
         public void CompileAssemblyFromFileBatch_NullFileNames_ThrowsArgumentNullException()
         {
             ICodeCompiler compiler = new Compiler();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "fileNames",
-                () => compiler.CompileAssemblyFromFileBatch(new CompilerParameters(), null)
+            AssertExtensions.Throws<ArgumentNullException>("fileNames", () =>
+                compiler.CompileAssemblyFromFileBatch(new CompilerParameters(), null)
             );
         }
 
@@ -369,13 +353,11 @@ namespace System.CodeDom.Compiler.Tests
         public void CompileAssemblyFromFileBatch_NullFileNameInFileNames_ThrowsArgumentNullException()
         {
             ICodeCompiler compiler = new Compiler();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "path",
-                () =>
-                    compiler.CompileAssemblyFromFileBatch(
-                        new CompilerParameters(),
-                        new string[] { null }
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("path", () =>
+                compiler.CompileAssemblyFromFileBatch(
+                    new CompilerParameters(),
+                    new string[] { null }
+                )
             );
         }
 
@@ -383,14 +365,8 @@ namespace System.CodeDom.Compiler.Tests
         public void CompileAssemblyFromFileBatch_EmptyFileNameInFileNames_ThrowsArgumentException()
         {
             ICodeCompiler compiler = new Compiler();
-            AssertExtensions.Throws<ArgumentException>(
-                "path",
-                null,
-                () =>
-                    compiler.CompileAssemblyFromFileBatch(
-                        new CompilerParameters(),
-                        new string[] { "" }
-                    )
+            AssertExtensions.Throws<ArgumentException>("path", null, () =>
+                compiler.CompileAssemblyFromFileBatch(new CompilerParameters(), new string[] { "" })
             );
         }
 
@@ -431,9 +407,8 @@ namespace System.CodeDom.Compiler.Tests
         public void FromFileBatch_NullOptions_ThrowsArgumentNullException()
         {
             var compiler = new Compiler();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "options",
-                () => compiler.FromFileBatchEntryPoint(null, new string[0])
+            AssertExtensions.Throws<ArgumentNullException>("options", () =>
+                compiler.FromFileBatchEntryPoint(null, new string[0])
             );
         }
 
@@ -441,9 +416,8 @@ namespace System.CodeDom.Compiler.Tests
         public void FromFileBatch_NullFileNames_ThrowsArgumentNullException()
         {
             var compiler = new Compiler();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "fileNames",
-                () => compiler.FromFileBatchEntryPoint(new CompilerParameters(), null)
+            AssertExtensions.Throws<ArgumentNullException>("fileNames", () =>
+                compiler.FromFileBatchEntryPoint(new CompilerParameters(), null)
             );
         }
 
@@ -479,9 +453,8 @@ namespace System.CodeDom.Compiler.Tests
         public void CompileAssemblyFromSource_NullOptions_ThrowsArgumentNullException()
         {
             ICodeCompiler compiler = new Compiler();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "options",
-                () => compiler.CompileAssemblyFromSource(null, "source")
+            AssertExtensions.Throws<ArgumentNullException>("options", () =>
+                compiler.CompileAssemblyFromSource(null, "source")
             );
         }
 
@@ -508,9 +481,8 @@ namespace System.CodeDom.Compiler.Tests
         public void FromSource_NullOptions_ThrowsArgumentNullException()
         {
             var compiler = new Compiler();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "options",
-                () => compiler.FromSourceEntryPoint(null, "source")
+            AssertExtensions.Throws<ArgumentNullException>("options", () =>
+                compiler.FromSourceEntryPoint(null, "source")
             );
         }
 
@@ -547,9 +519,8 @@ namespace System.CodeDom.Compiler.Tests
         public void CompileAssemblyFromSourceBatch_NullOptions_ThrowsArgumentNullException()
         {
             ICodeCompiler compiler = new Compiler();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "options",
-                () => compiler.CompileAssemblyFromSourceBatch(null, new string[] { "source" })
+            AssertExtensions.Throws<ArgumentNullException>("options", () =>
+                compiler.CompileAssemblyFromSourceBatch(null, new string[] { "source" })
             );
         }
 
@@ -557,9 +528,8 @@ namespace System.CodeDom.Compiler.Tests
         public void CompileAssemblyFromSourceBatch_NullSources_ThrowsArgumentNullException()
         {
             ICodeCompiler compiler = new Compiler();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "sources",
-                () => compiler.CompileAssemblyFromSourceBatch(new CompilerParameters(), null)
+            AssertExtensions.Throws<ArgumentNullException>("sources", () =>
+                compiler.CompileAssemblyFromSourceBatch(new CompilerParameters(), null)
             );
         }
 
@@ -588,9 +558,8 @@ namespace System.CodeDom.Compiler.Tests
         public void FromSourceBatch_NullOptions_ThrowsArgumentNullException()
         {
             var compiler = new Compiler();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "options",
-                () => compiler.FromSourceBatchEntryPoint(null, new string[] { "source" })
+            AssertExtensions.Throws<ArgumentNullException>("options", () =>
+                compiler.FromSourceBatchEntryPoint(null, new string[] { "source" })
             );
         }
 
@@ -598,9 +567,8 @@ namespace System.CodeDom.Compiler.Tests
         public void FromSourceBatch_NullSources_ThrowsArgumentNullException()
         {
             var compiler = new Compiler();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "sources",
-                () => compiler.FromSourceBatchEntryPoint(new CompilerParameters(), null)
+            AssertExtensions.Throws<ArgumentNullException>("sources", () =>
+                compiler.FromSourceBatchEntryPoint(new CompilerParameters(), null)
             );
         }
 

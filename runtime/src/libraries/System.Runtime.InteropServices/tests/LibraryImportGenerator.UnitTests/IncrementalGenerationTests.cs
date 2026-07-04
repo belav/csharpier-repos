@@ -52,16 +52,12 @@ namespace LibraryImportGenerator.UnitTests
             GeneratorDriver driver2 = driver.RunGenerators(comp2);
             GeneratorRunResult runResult = driver2.GetRunResult().Results[0];
 
-            Assert.Collection(
-                runResult.TrackedSteps[StepNames.CalculateStubInformation],
-                step =>
-                {
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason)
-                    );
-                }
-            );
+            Assert.Collection(runResult.TrackedSteps[StepNames.CalculateStubInformation], step =>
+            {
+                Assert.Collection(step.Outputs, output =>
+                    Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason)
+                );
+            });
         }
 
         [Fact]
@@ -102,17 +98,13 @@ namespace LibraryImportGenerator.UnitTests
             GeneratorDriver driver2 = driver.RunGenerators(comp2);
             GeneratorRunResult runResult = driver2.GetRunResult().Results[0];
 
-            Assert.Collection(
-                runResult.TrackedSteps[StepNames.GenerateSingleStub],
-                step =>
-                {
-                    // The calculated stub information will differ since we have a new syntax tree for where to report diagnostics.
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason)
-                    );
-                }
-            );
+            Assert.Collection(runResult.TrackedSteps[StepNames.GenerateSingleStub], step =>
+            {
+                // The calculated stub information will differ since we have a new syntax tree for where to report diagnostics.
+                Assert.Collection(step.Outputs, output =>
+                    Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason)
+                );
+            });
         }
 
         [Fact]
@@ -148,16 +140,14 @@ namespace LibraryImportGenerator.UnitTests
                 runResult.TrackedSteps[StepNames.CalculateStubInformation],
                 step =>
                 {
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason)
                     );
                 },
                 step =>
                 {
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(IncrementalStepRunReason.New, output.Reason)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(IncrementalStepRunReason.New, output.Reason)
                     );
                 }
             );
@@ -200,16 +190,14 @@ namespace LibraryImportGenerator.UnitTests
                 runResult.TrackedSteps[StepNames.CalculateStubInformation],
                 step =>
                 {
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(IncrementalStepRunReason.Modified, output.Reason)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(IncrementalStepRunReason.Modified, output.Reason)
                     );
                 },
                 step =>
                 {
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason)
                     );
                 }
             );
@@ -258,27 +246,19 @@ namespace LibraryImportGenerator.UnitTests
             GeneratorDriver driver2 = driver.RunGenerators(comp2);
             GeneratorRunResult runResult = driver2.GetRunResult().Results[0];
 
-            Assert.Collection(
-                runResult.TrackedSteps[StepNames.CalculateStubInformation],
-                step =>
-                {
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(IncrementalStepRunReason.Modified, output.Reason)
-                    );
-                }
-            );
+            Assert.Collection(runResult.TrackedSteps[StepNames.CalculateStubInformation], step =>
+            {
+                Assert.Collection(step.Outputs, output =>
+                    Assert.Equal(IncrementalStepRunReason.Modified, output.Reason)
+                );
+            });
 
-            Assert.Collection(
-                runResult.TrackedSteps[StepNames.GenerateSingleStub],
-                step =>
-                {
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(IncrementalStepRunReason.Modified, output.Reason)
-                    );
-                }
-            );
+            Assert.Collection(runResult.TrackedSteps[StepNames.GenerateSingleStub], step =>
+            {
+                Assert.Collection(step.Outputs, output =>
+                    Assert.Equal(IncrementalStepRunReason.Modified, output.Reason)
+                );
+            });
         }
 
         [Fact]
@@ -319,27 +299,19 @@ namespace LibraryImportGenerator.UnitTests
             GeneratorDriver driver2 = driver.RunGenerators(comp2);
             GeneratorRunResult runResult = driver2.GetRunResult().Results[0];
 
-            Assert.Collection(
-                runResult.TrackedSteps[StepNames.CalculateStubInformation],
-                step =>
-                {
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(IncrementalStepRunReason.Modified, output.Reason)
-                    );
-                }
-            );
+            Assert.Collection(runResult.TrackedSteps[StepNames.CalculateStubInformation], step =>
+            {
+                Assert.Collection(step.Outputs, output =>
+                    Assert.Equal(IncrementalStepRunReason.Modified, output.Reason)
+                );
+            });
 
-            Assert.Collection(
-                runResult.TrackedSteps[StepNames.GenerateSingleStub],
-                step =>
-                {
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason)
-                    );
-                }
-            );
+            Assert.Collection(runResult.TrackedSteps[StepNames.GenerateSingleStub], step =>
+            {
+                Assert.Collection(step.Outputs, output =>
+                    Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason)
+                );
+            });
         }
 
         public static IEnumerable<object[]> CompilationObjectLivenessSources()
@@ -420,26 +392,18 @@ namespace LibraryImportGenerator.UnitTests
                 GeneratorDriver driver2 = driver.RunGenerators(comp3);
 
                 // Assert here that we did use the last result and didn't regenerate.
-                Assert.Collection(
-                    driver2.GetRunResult().Results,
-                    result =>
-                    {
-                        Assert.Collection(
-                            result.TrackedSteps[StepNames.CalculateStubInformation],
-                            step =>
-                            {
-                                Assert.Collection(
-                                    step.Outputs,
-                                    output =>
-                                        Assert.Equal(
-                                            IncrementalStepRunReason.Unchanged,
-                                            output.Reason
-                                        )
-                                );
-                            }
-                        );
-                    }
-                );
+                Assert.Collection(driver2.GetRunResult().Results, result =>
+                {
+                    Assert.Collection(
+                        result.TrackedSteps[StepNames.CalculateStubInformation],
+                        step =>
+                        {
+                            Assert.Collection(step.Outputs, output =>
+                                Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason)
+                            );
+                        }
+                    );
+                });
 
                 // Return a weak reference to the first edited compilation and the driver from the most recent run.
                 // The most recent run with comp3 shouldn't keep anything from comp2 alive.

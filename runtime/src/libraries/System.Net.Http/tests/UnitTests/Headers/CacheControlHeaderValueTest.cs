@@ -51,13 +51,10 @@ namespace System.Net.Http.Tests
 
             // String collection properties
             Assert.NotNull(cacheControl.NoCacheHeaders);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "item",
-                () =>
-                {
-                    cacheControl.NoCacheHeaders.Add(null);
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("item", () =>
+            {
+                cacheControl.NoCacheHeaders.Add(null);
+            });
             Assert.Throws<FormatException>(() =>
             {
                 cacheControl.NoCacheHeaders.Add("invalid token");
@@ -67,13 +64,10 @@ namespace System.Net.Http.Tests
             Assert.Equal("token", cacheControl.NoCacheHeaders.First());
 
             Assert.NotNull(cacheControl.PrivateHeaders);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "item",
-                () =>
-                {
-                    cacheControl.PrivateHeaders.Add(null);
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("item", () =>
+            {
+                cacheControl.PrivateHeaders.Add(null);
+            });
             Assert.Throws<FormatException>(() =>
             {
                 cacheControl.PrivateHeaders.Add("invalid token");

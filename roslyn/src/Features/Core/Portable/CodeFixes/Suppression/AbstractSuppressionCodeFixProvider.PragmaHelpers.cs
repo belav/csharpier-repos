@@ -68,9 +68,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 }
                 else
                 {
-                    newNode = nodeWithTokens.ReplaceTokens(
-                        new[] { startToken, endToken },
-                        (o, n) => o == startToken ? newStartToken : newEndToken
+                    newNode = nodeWithTokens.ReplaceTokens(new[] { startToken, endToken }, (o, n) =>
+                        o == startToken ? newStartToken : newEndToken
                     );
                 }
 

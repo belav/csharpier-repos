@@ -77,10 +77,8 @@ namespace System.CodeDom.Tests
         public void Ctor_NullObjectInParameters_ThrowsArgumentNullException()
         {
             CodeTypeReference[] parameters = new CodeTypeReference[] { null };
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () =>
-                    new CodeMethodReferenceExpression(new CodePrimitiveExpression(), "", parameters)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeMethodReferenceExpression(new CodePrimitiveExpression(), "", parameters)
             );
         }
 

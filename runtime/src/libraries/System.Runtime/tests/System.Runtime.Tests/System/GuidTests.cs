@@ -286,15 +286,11 @@ namespace System.Tests
         [Fact]
         public static void Ctor_Int_Short_Short_ByteArray_InvalidLengthByteArray_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "d",
-                null,
-                () => new Guid(0, 0, 0, new byte[7])
+            AssertExtensions.Throws<ArgumentException>("d", null, () =>
+                new Guid(0, 0, 0, new byte[7])
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "d",
-                null,
-                () => new Guid(0, 0, 0, new byte[9])
+            AssertExtensions.Throws<ArgumentException>("d", null, () =>
+                new Guid(0, 0, 0, new byte[9])
             );
         }
 
@@ -672,10 +668,8 @@ namespace System.Tests
         public static void CompareTo_ValueNotGuid_ThrowsArgumentException()
         {
             IComparable comparable = s_testGuid;
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => comparable.CompareTo("a8a110d5-fc49-43c5-bf46-802db8f843ff")
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                comparable.CompareTo("a8a110d5-fc49-43c5-bf46-802db8f843ff")
             );
         }
 
@@ -2222,10 +2216,8 @@ namespace System.Tests
         [InlineData(17)]
         public static void CtorSpan_InvalidLengthByteArray_ThrowsArgumentException(int length)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "b",
-                null,
-                () => new Guid(new ReadOnlySpan<byte>(new byte[length]))
+            AssertExtensions.Throws<ArgumentException>("b", null, () =>
+                new Guid(new ReadOnlySpan<byte>(new byte[length]))
             );
         }
 

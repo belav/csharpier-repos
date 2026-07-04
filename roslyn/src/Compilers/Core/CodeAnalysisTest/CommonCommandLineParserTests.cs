@@ -169,15 +169,13 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>";
 
-            VerifyRuleSetError(
-                source,
-                () =>
-                    string.Format(
-                        CodeAnalysisResources.RuleSetHasDuplicateRules,
-                        "CA1012",
-                        "Error",
-                        "Warn"
-                    )
+            VerifyRuleSetError(source, () =>
+                string.Format(
+                    CodeAnalysisResources.RuleSetHasDuplicateRules,
+                    "CA1012",
+                    "Error",
+                    "Warn"
+                )
             );
         }
 
@@ -253,9 +251,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            VerifyRuleSetError(
-                source,
-                () => "There are multiple root elements. Line 8, position 2."
+            VerifyRuleSetError(source, () =>
+                "There are multiple root elements. Line 8, position 2."
             );
         }
 
@@ -384,14 +381,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            VerifyRuleSetError(
-                source,
-                () =>
-                    string.Format(
-                        CodeAnalysisResources.RuleSetBadAttributeValue,
-                        "Action",
-                        "Default"
-                    )
+            VerifyRuleSetError(source, () =>
+                string.Format(CodeAnalysisResources.RuleSetBadAttributeValue, "Action", "Default")
             );
         }
 
@@ -407,9 +398,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            VerifyRuleSetError(
-                source,
-                () => string.Format(CodeAnalysisResources.RuleSetMissingAttribute, "Rule", "Id")
+            VerifyRuleSetError(source, () =>
+                string.Format(CodeAnalysisResources.RuleSetMissingAttribute, "Rule", "Id")
             );
         }
 
@@ -425,9 +415,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            VerifyRuleSetError(
-                source,
-                () => string.Format(CodeAnalysisResources.RuleSetMissingAttribute, "Rule", "Action")
+            VerifyRuleSetError(source, () =>
+                string.Format(CodeAnalysisResources.RuleSetMissingAttribute, "Rule", "Action")
             );
         }
 
@@ -443,14 +432,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            VerifyRuleSetError(
-                source,
-                () =>
-                    string.Format(
-                        CodeAnalysisResources.RuleSetMissingAttribute,
-                        "Rules",
-                        "AnalyzerId"
-                    )
+            VerifyRuleSetError(source, () =>
+                string.Format(CodeAnalysisResources.RuleSetMissingAttribute, "Rules", "AnalyzerId")
             );
         }
 
@@ -466,14 +449,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            VerifyRuleSetError(
-                source,
-                () =>
-                    string.Format(
-                        CodeAnalysisResources.RuleSetMissingAttribute,
-                        "Rules",
-                        "RuleNamespace"
-                    )
+            VerifyRuleSetError(source, () =>
+                string.Format(
+                    CodeAnalysisResources.RuleSetMissingAttribute,
+                    "Rules",
+                    "RuleNamespace"
+                )
             );
         }
 
@@ -490,14 +471,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
 </RuleSet>
 ";
 
-            VerifyRuleSetError(
-                source,
-                () =>
-                    string.Format(
-                        CodeAnalysisResources.RuleSetMissingAttribute,
-                        "RuleSet",
-                        "ToolsVersion"
-                    )
+            VerifyRuleSetError(source, () =>
+                string.Format(
+                    CodeAnalysisResources.RuleSetMissingAttribute,
+                    "RuleSet",
+                    "ToolsVersion"
+                )
             );
         }
 
@@ -513,10 +492,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
   </Rules>
 </RuleSet>
 ";
-            VerifyRuleSetError(
-                source,
-                () =>
-                    string.Format(CodeAnalysisResources.RuleSetMissingAttribute, "RuleSet", "Name")
+            VerifyRuleSetError(source, () =>
+                string.Format(CodeAnalysisResources.RuleSetMissingAttribute, "RuleSet", "Name")
             );
         }
 
@@ -564,14 +541,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 </RuleSet>
 ";
 
-            VerifyRuleSetError(
-                source,
-                () =>
-                    string.Format(
-                        CodeAnalysisResources.RuleSetBadAttributeValue,
-                        "Action",
-                        "Default"
-                    )
+            VerifyRuleSetError(source, () =>
+                string.Format(CodeAnalysisResources.RuleSetBadAttributeValue, "Action", "Default")
             );
         }
 

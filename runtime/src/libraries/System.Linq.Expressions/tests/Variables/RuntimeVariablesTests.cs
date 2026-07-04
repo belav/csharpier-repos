@@ -207,22 +207,19 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void NullVariableList()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "variables",
-                () => Expression.RuntimeVariables(default(ParameterExpression[]))
+            AssertExtensions.Throws<ArgumentNullException>("variables", () =>
+                Expression.RuntimeVariables(default(ParameterExpression[]))
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "variables",
-                () => Expression.RuntimeVariables(default(IEnumerable<ParameterExpression>))
+            AssertExtensions.Throws<ArgumentNullException>("variables", () =>
+                Expression.RuntimeVariables(default(IEnumerable<ParameterExpression>))
             );
         }
 
         [Fact]
         public void NullVariableInList()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "variables[1]",
-                () => Expression.RuntimeVariables(Expression.Variable(typeof(int)), null)
+            AssertExtensions.Throws<ArgumentNullException>("variables[1]", () =>
+                Expression.RuntimeVariables(Expression.Variable(typeof(int)), null)
             );
         }
 

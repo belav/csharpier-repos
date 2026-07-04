@@ -26,65 +26,50 @@ namespace System.Tests
         [Fact]
         public static void ValueArgumentNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => BitConverter.ToBoolean(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                BitConverter.ToBoolean(null, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => BitConverter.ToChar(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                BitConverter.ToChar(null, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => BitConverter.ToDouble(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                BitConverter.ToDouble(null, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => BitConverter.ToHalf(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                BitConverter.ToHalf(null, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => BitConverter.ToInt16(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                BitConverter.ToInt16(null, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => BitConverter.ToInt32(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                BitConverter.ToInt32(null, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => BitConverter.ToInt64(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                BitConverter.ToInt64(null, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => BitConverter.ToInt128(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                BitConverter.ToInt128(null, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => BitConverter.ToSingle(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                BitConverter.ToSingle(null, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => BitConverter.ToUInt16(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                BitConverter.ToUInt16(null, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => BitConverter.ToUInt32(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                BitConverter.ToUInt32(null, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => BitConverter.ToUInt64(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                BitConverter.ToUInt64(null, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => BitConverter.ToUInt128(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                BitConverter.ToUInt128(null, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => BitConverter.ToString(null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                BitConverter.ToString(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => BitConverter.ToString(null, 0)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                BitConverter.ToString(null, 0)
             );
             AssertExtensions.Throws<ArgumentNullException>(
                 "value",
@@ -97,278 +82,205 @@ namespace System.Tests
         [Fact]
         public static void StartIndexBeyondLength()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToBoolean(new byte[1], -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToBoolean(new byte[1], -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToBoolean(new byte[1], 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToBoolean(new byte[1], 1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToBoolean(new byte[1], 2)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToBoolean(new byte[1], 2)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToChar(new byte[2], -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToChar(new byte[2], -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToChar(new byte[2], 2)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToChar(new byte[2], 2)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToChar(new byte[2], 3)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToChar(new byte[2], 3)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToDouble(new byte[8], -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToDouble(new byte[8], -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToDouble(new byte[8], 8)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToDouble(new byte[8], 8)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToDouble(new byte[8], 9)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToDouble(new byte[8], 9)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToHalf(new byte[2], -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToHalf(new byte[2], -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToHalf(new byte[2], 2)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToHalf(new byte[2], 2)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToHalf(new byte[2], 3)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToHalf(new byte[2], 3)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToInt16(new byte[2], -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToInt16(new byte[2], -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToInt16(new byte[2], 2)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToInt16(new byte[2], 2)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToInt16(new byte[2], 3)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToInt16(new byte[2], 3)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToInt32(new byte[4], -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToInt32(new byte[4], -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToInt32(new byte[4], 4)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToInt32(new byte[4], 4)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToInt32(new byte[4], 5)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToInt32(new byte[4], 5)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToInt64(new byte[8], -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToInt64(new byte[8], -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToInt64(new byte[8], 8)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToInt64(new byte[8], 8)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToInt64(new byte[8], 9)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToInt64(new byte[8], 9)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToInt128(new byte[16], -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToInt128(new byte[16], -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToInt128(new byte[16], 16)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToInt128(new byte[16], 16)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToInt128(new byte[16], 17)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToInt128(new byte[16], 17)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToSingle(new byte[4], -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToSingle(new byte[4], -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToSingle(new byte[4], 4)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToSingle(new byte[4], 4)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToSingle(new byte[4], 5)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToSingle(new byte[4], 5)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToUInt16(new byte[2], -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToUInt16(new byte[2], -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToUInt16(new byte[2], 2)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToUInt16(new byte[2], 2)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToUInt16(new byte[2], 3)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToUInt16(new byte[2], 3)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToUInt32(new byte[4], -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToUInt32(new byte[4], -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToUInt32(new byte[4], 4)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToUInt32(new byte[4], 4)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToUInt32(new byte[4], 5)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToUInt32(new byte[4], 5)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToUInt64(new byte[8], -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToUInt64(new byte[8], -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToUInt64(new byte[8], 8)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToUInt64(new byte[8], 8)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToUInt64(new byte[8], 9)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToUInt64(new byte[8], 9)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToUInt128(new byte[16], -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToUInt128(new byte[16], -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToUInt128(new byte[16], 16)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToUInt128(new byte[16], 16)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToUInt128(new byte[16], 17)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToUInt128(new byte[16], 17)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToString(new byte[1], -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToString(new byte[1], -1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToString(new byte[1], 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToString(new byte[1], 1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToString(new byte[1], 2)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToString(new byte[1], 2)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToString(new byte[1], -1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToString(new byte[1], -1, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToString(new byte[1], 1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToString(new byte[1], 1, 0)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToString(new byte[1], 2, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToString(new byte[1], 2, 0)
             );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "length",
-                () => BitConverter.ToString(new byte[1], 0, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () =>
+                BitConverter.ToString(new byte[1], 0, -1)
             );
         }
 
         [Fact]
         public static void StartIndexPlusNeededLengthTooLong()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => BitConverter.ToBoolean(new byte[0], 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                BitConverter.ToBoolean(new byte[0], 0)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => BitConverter.ToChar(new byte[2], 1)
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                BitConverter.ToChar(new byte[2], 1)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => BitConverter.ToDouble(new byte[8], 1)
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                BitConverter.ToDouble(new byte[8], 1)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => BitConverter.ToHalf(new byte[2], 1)
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                BitConverter.ToHalf(new byte[2], 1)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => BitConverter.ToInt16(new byte[2], 1)
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                BitConverter.ToInt16(new byte[2], 1)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => BitConverter.ToInt32(new byte[4], 1)
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                BitConverter.ToInt32(new byte[4], 1)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => BitConverter.ToInt64(new byte[8], 1)
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                BitConverter.ToInt64(new byte[8], 1)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => BitConverter.ToInt128(new byte[16], 1)
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                BitConverter.ToInt128(new byte[16], 1)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => BitConverter.ToSingle(new byte[4], 1)
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                BitConverter.ToSingle(new byte[4], 1)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => BitConverter.ToUInt16(new byte[2], 1)
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                BitConverter.ToUInt16(new byte[2], 1)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => BitConverter.ToUInt32(new byte[4], 1)
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                BitConverter.ToUInt32(new byte[4], 1)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => BitConverter.ToUInt64(new byte[8], 1)
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                BitConverter.ToUInt64(new byte[8], 1)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => BitConverter.ToUInt128(new byte[16], 1)
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                BitConverter.ToUInt128(new byte[16], 1)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                null,
-                () => BitConverter.ToString(new byte[2], 1, 2)
+            AssertExtensions.Throws<ArgumentException>("value", null, () =>
+                BitConverter.ToString(new byte[2], 1, 2)
             );
         }
 
@@ -570,9 +482,8 @@ namespace System.Tests
                 return;
             }
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "length",
-                () => BitConverter.ToString(arr)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () =>
+                BitConverter.ToString(arr)
             );
         }
 

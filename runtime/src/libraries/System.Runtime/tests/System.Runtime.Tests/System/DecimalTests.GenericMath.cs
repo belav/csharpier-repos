@@ -3478,9 +3478,8 @@ namespace System.Tests
             Assert.False(NumberBaseHelper<decimal>.TryParse(value, style, provider, out result));
             Assert.Equal(default(decimal), result);
 
-            Assert.Throws(
-                exceptionType,
-                () => NumberBaseHelper<decimal>.Parse(value, style, provider)
+            Assert.Throws(exceptionType, () =>
+                NumberBaseHelper<decimal>.Parse(value, style, provider)
             );
 
             if (isDefaultProvider)
@@ -3496,14 +3495,11 @@ namespace System.Tests
                 );
                 Assert.Equal(default(decimal), result);
 
-                Assert.Throws(
-                    exceptionType,
-                    () => NumberBaseHelper<decimal>.Parse(value, style, null)
+                Assert.Throws(exceptionType, () =>
+                    NumberBaseHelper<decimal>.Parse(value, style, null)
                 );
-                Assert.Throws(
-                    exceptionType,
-                    () =>
-                        NumberBaseHelper<decimal>.Parse(value, style, NumberFormatInfo.CurrentInfo)
+                Assert.Throws(exceptionType, () =>
+                    NumberBaseHelper<decimal>.Parse(value, style, NumberFormatInfo.CurrentInfo)
                 );
             }
         }
@@ -3583,9 +3579,8 @@ namespace System.Tests
         {
             if (value != null)
             {
-                Assert.Throws(
-                    exceptionType,
-                    () => NumberBaseHelper<decimal>.Parse(value.AsSpan(), style, provider)
+                Assert.Throws(exceptionType, () =>
+                    NumberBaseHelper<decimal>.Parse(value.AsSpan(), style, provider)
                 );
 
                 Assert.False(

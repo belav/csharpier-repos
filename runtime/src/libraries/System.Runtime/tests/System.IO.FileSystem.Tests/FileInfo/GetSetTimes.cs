@@ -293,14 +293,11 @@ namespace System.IO.Tests
             string pageFilePath = Directory.EnumerateFiles(@"C:\", "pagefile.sys").FirstOrDefault();
             if (pageFilePath != null)
             {
-                Assert.All(
-                    TimeFunctions(),
-                    (item) =>
-                    {
-                        var time = item.Getter(new FileInfo(pageFilePath));
-                        Assert.NotEqual(DateTime.FromFileTime(0), time);
-                    }
-                );
+                Assert.All(TimeFunctions(), (item) =>
+                {
+                    var time = item.Getter(new FileInfo(pageFilePath));
+                    Assert.NotEqual(DateTime.FromFileTime(0), time);
+                });
             }
         }
     }

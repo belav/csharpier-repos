@@ -19,18 +19,16 @@ namespace System.Runtime.InteropServices.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void GetComObjectData_NullObj_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "obj",
-                () => Marshal.GetComObjectData(null, new object())
+            AssertExtensions.Throws<ArgumentNullException>("obj", () =>
+                Marshal.GetComObjectData(null, new object())
             );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void GetComObjectData_NullKey_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => Marshal.GetComObjectData(new object(), null)
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                Marshal.GetComObjectData(new object(), null)
             );
         }
 

@@ -109,21 +109,17 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void SymbolDocument_NullFileName_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "fileName",
-                () => Expression.SymbolDocument(null)
+            AssertExtensions.Throws<ArgumentNullException>("fileName", () =>
+                Expression.SymbolDocument(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "fileName",
-                () => Expression.SymbolDocument(null, Guid.Empty)
+            AssertExtensions.Throws<ArgumentNullException>("fileName", () =>
+                Expression.SymbolDocument(null, Guid.Empty)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "fileName",
-                () => Expression.SymbolDocument(null, Guid.Empty, Guid.Empty)
+            AssertExtensions.Throws<ArgumentNullException>("fileName", () =>
+                Expression.SymbolDocument(null, Guid.Empty, Guid.Empty)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "fileName",
-                () => Expression.SymbolDocument(null, Guid.Empty, Guid.Empty, Guid.Empty)
+            AssertExtensions.Throws<ArgumentNullException>("fileName", () =>
+                Expression.SymbolDocument(null, Guid.Empty, Guid.Empty, Guid.Empty)
             );
         }
 

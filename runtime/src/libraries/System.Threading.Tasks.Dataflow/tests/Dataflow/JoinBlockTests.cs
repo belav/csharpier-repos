@@ -100,25 +100,21 @@ namespace System.Threading.Tasks.Dataflow.Tests
             Assert.Throws<ArgumentNullException>(() =>
                 new JoinBlock<int, int>().Target1.Fault(null)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "messageHeader",
-                () =>
-                    new JoinBlock<int, int>().Target1.OfferMessage(
-                        default(DataflowMessageHeader),
-                        1,
-                        null,
-                        false
-                    )
+            AssertExtensions.Throws<ArgumentException>("messageHeader", () =>
+                new JoinBlock<int, int>().Target1.OfferMessage(
+                    default(DataflowMessageHeader),
+                    1,
+                    null,
+                    false
+                )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "consumeToAccept",
-                () =>
-                    new JoinBlock<int, int>().Target1.OfferMessage(
-                        new DataflowMessageHeader(1),
-                        1,
-                        null,
-                        true
-                    )
+            AssertExtensions.Throws<ArgumentException>("consumeToAccept", () =>
+                new JoinBlock<int, int>().Target1.OfferMessage(
+                    new DataflowMessageHeader(1),
+                    1,
+                    null,
+                    true
+                )
             );
 
             DataflowTestHelpers.TestArgumentsExceptions<Tuple<int, int>>(new JoinBlock<int, int>());

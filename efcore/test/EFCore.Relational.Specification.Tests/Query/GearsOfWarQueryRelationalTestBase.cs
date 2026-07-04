@@ -20,11 +20,9 @@ public abstract class GearsOfWarQueryRelationalTestBase<TFixture>
     )
     {
         var place = "Ephyra's location";
-        return AssertQuery(
-            async,
-            ss =>
-                ss.Set<City>()
-                    .Where(e => e.Nation == place || e.Location == place || e.Location == place)
+        return AssertQuery(async, ss =>
+            ss.Set<City>()
+                .Where(e => e.Nation == place || e.Location == place || e.Location == place)
         );
     }
 

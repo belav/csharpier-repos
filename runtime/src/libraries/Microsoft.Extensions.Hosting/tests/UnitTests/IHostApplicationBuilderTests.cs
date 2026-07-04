@@ -57,21 +57,18 @@ internal static class HostBuilderExtensions
         Assert.True(builder.Environment.IsDevelopment());
         Assert.NotNull(builder.Environment.ContentRootFileProvider);
 
-        Assert.DoesNotContain(
-            builder.Services,
-            sd => sd.ImplementationType == typeof(ConsoleLoggerProvider)
+        Assert.DoesNotContain(builder.Services, sd =>
+            sd.ImplementationType == typeof(ConsoleLoggerProvider)
         );
         builder.Logging.AddConsole();
-        Assert.Contains(
-            builder.Services,
-            sd => sd.ImplementationType == typeof(ConsoleLoggerProvider)
+        Assert.Contains(builder.Services, sd =>
+            sd.ImplementationType == typeof(ConsoleLoggerProvider)
         );
 
         builder.Services.AddSingleton(typeof(IHostApplicationBuilderTests));
 
-        builder.ConfigureContainer(
-            new FakeServiceProviderFactory(),
-            container => container.State = "Hi!"
+        builder.ConfigureContainer(new FakeServiceProviderFactory(), container =>
+            container.State = "Hi!"
         );
     }
 }

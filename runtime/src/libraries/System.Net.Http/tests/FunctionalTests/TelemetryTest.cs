@@ -777,16 +777,13 @@ namespace System.Net.Http.Functional.Tests
                 .Where(e => e.Event.EventName == "RequestHeadersStart")
                 .ToArray();
             Assert.Equal(count, requestHeadersStarts.Length);
-            Assert.All(
-                requestHeadersStarts,
-                r =>
-                {
-                    EventWrittenEventArgs e = r.Event;
-                    Assert.Equal(1, e.Payload.Count);
-                    Assert.Equal("connectionId", e.PayloadNames.Single());
-                    Assert.Equal(connectionId, (long)e.Payload[0]);
-                }
-            );
+            Assert.All(requestHeadersStarts, r =>
+            {
+                EventWrittenEventArgs e = r.Event;
+                Assert.Equal(1, e.Payload.Count);
+                Assert.Equal("connectionId", e.PayloadNames.Single());
+                Assert.Equal(connectionId, (long)e.Payload[0]);
+            });
 
             (EventWrittenEventArgs Event, Guid ActivityId)[] requestHeadersStops = events
                 .Where(e => e.Event.EventName == "RequestHeadersStop")

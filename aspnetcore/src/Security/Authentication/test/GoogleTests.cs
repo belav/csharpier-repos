@@ -144,9 +144,8 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
         });
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync("https://example.com/challenge");
-        Assert.Contains(
-            transaction.SetCookie,
-            cookie => cookie.StartsWith(".AspNetCore.Correlation.", StringComparison.Ordinal)
+        Assert.Contains(transaction.SetCookie, cookie =>
+            cookie.StartsWith(".AspNetCore.Correlation.", StringComparison.Ordinal)
         );
     }
 
@@ -1506,9 +1505,8 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                         services.AddTransient<IClaimsTransformation, ClaimsTransformer>();
                         services
                             .AddAuthentication(TestExtensions.CookieAuthenticationScheme)
-                            .AddCookie(
-                                TestExtensions.CookieAuthenticationScheme,
-                                o => o.ForwardChallenge = GoogleDefaults.AuthenticationScheme
+                            .AddCookie(TestExtensions.CookieAuthenticationScheme, o =>
+                                o.ForwardChallenge = GoogleDefaults.AuthenticationScheme
                             )
                             .AddGoogle(configureOptions)
                             .AddFacebook(o =>

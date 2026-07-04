@@ -1811,9 +1811,8 @@ namespace Microsoft.Extensions
             Assert.Contains("BinderOptions.BindNonPublicProperties", ex.ToString());
 
             ex = Assert.Throws<NotSupportedException>(() =>
-                config.Get(
-                    typeof(ClassOverridingVirtualProperty),
-                    b => b.BindNonPublicProperties = true
+                config.Get(typeof(ClassOverridingVirtualProperty), b =>
+                    b.BindNonPublicProperties = true
                 )
             );
             Assert.Contains("BinderOptions.BindNonPublicProperties", ex.ToString());
@@ -1824,9 +1823,8 @@ namespace Microsoft.Extensions
             Assert.Equal("a", test.ExposePrivatePropertyValue());
 
             test = (ClassOverridingVirtualProperty)
-                config.Get(
-                    typeof(ClassOverridingVirtualProperty),
-                    b => b.BindNonPublicProperties = true
+                config.Get(typeof(ClassOverridingVirtualProperty), b =>
+                    b.BindNonPublicProperties = true
                 );
             Assert.Equal("a", test.ExposePrivatePropertyValue());
 #endif

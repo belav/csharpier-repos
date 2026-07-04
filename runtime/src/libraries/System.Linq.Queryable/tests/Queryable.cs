@@ -28,18 +28,16 @@ namespace System.Linq.Tests
         [Fact]
         public void NullAsQueryableT()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<int>)null).AsQueryable()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<int>)null).AsQueryable()
             );
         }
 
         [Fact]
         public void NullAsQueryable()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable)null).AsQueryable()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable)null).AsQueryable()
             );
         }
 
@@ -55,10 +53,8 @@ namespace System.Linq.Tests
         [Fact]
         public void NonGenericToQueryable()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                    new NonGenericEnumerableSoWeDontNeedADependencyOnTheAssemblyWithNonGeneric().AsQueryable()
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new NonGenericEnumerableSoWeDontNeedADependencyOnTheAssemblyWithNonGeneric().AsQueryable()
             );
         }
 

@@ -10,20 +10,17 @@ class C
     public static int Main()
     {
         var s = new string[] { "aaa", "bbb" };
-        var foo = Test(
-            s,
-            i =>
+        var foo = Test(s, i =>
+        {
+            try
             {
-                try
-                {
-                    return i;
-                }
-                catch
-                {
-                    return null;
-                }
+                return i;
             }
-        );
+            catch
+            {
+                return null;
+            }
+        });
         if (foo != s[1])
             return 1;
 

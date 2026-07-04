@@ -49,9 +49,8 @@ namespace System.Reflection.Tests
                 Helpers.AllFlags
             );
             Assert.False(property.CanWrite);
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => property.SetValue(new PI_SubClass(), 5)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                property.SetValue(new PI_SubClass(), 5)
             );
         }
 

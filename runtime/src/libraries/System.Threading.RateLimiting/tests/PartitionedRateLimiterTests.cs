@@ -178,16 +178,13 @@ namespace System.Threading.RateLimiting.Tests
             {
                 if (resource == "1")
                 {
-                    return RateLimitPartition.Get(
-                        1,
-                        key =>
-                        {
-                            startedTcs.SetResult(null);
-                            // block the factory method
-                            Assert.True(tcs.Task.Wait(TimeSpan.FromSeconds(10)));
-                            return limiterFactory.GetLimiter(key);
-                        }
-                    );
+                    return RateLimitPartition.Get(1, key =>
+                    {
+                        startedTcs.SetResult(null);
+                        // block the factory method
+                        Assert.True(tcs.Task.Wait(TimeSpan.FromSeconds(10)));
+                        return limiterFactory.GetLimiter(key);
+                    });
                 }
                 return RateLimitPartition.Get(2, key => limiterFactory.GetLimiter(key));
             });
@@ -419,20 +416,17 @@ namespace System.Threading.RateLimiting.Tests
             using var limiter = PartitionedRateLimiter.Create<string, int>(resource =>
             {
                 // Use the non-specific Create method to make sure ReplenishingRateLimiters are still handled properly
-                return RateLimitPartition.Get(
-                    1,
-                    _ => new TokenBucketRateLimiter(
-                        new TokenBucketRateLimiterOptions
-                        {
-                            TokenLimit = 1,
-                            QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                            QueueLimit = 1,
-                            ReplenishmentPeriod = TimeSpan.FromMilliseconds(100),
-                            TokensPerPeriod = 1,
-                            AutoReplenishment = false,
-                        }
-                    )
-                );
+                return RateLimitPartition.Get(1, _ => new TokenBucketRateLimiter(
+                    new TokenBucketRateLimiterOptions
+                    {
+                        TokenLimit = 1,
+                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                        QueueLimit = 1,
+                        ReplenishmentPeriod = TimeSpan.FromMilliseconds(100),
+                        TokensPerPeriod = 1,
+                        AutoReplenishment = false,
+                    }
+                ));
             });
 
             var lease = limiter.AttemptAcquire("");
@@ -526,15 +520,12 @@ namespace System.Threading.RateLimiting.Tests
             var factoryCallCount = 0;
             using var limiter = Utils.CreatePartitionedLimiterWithoutTimer<string, int>(resource =>
             {
-                return RateLimitPartition.Get(
-                    1,
-                    _ =>
-                    {
-                        factoryCallCount++;
-                        innerLimiter = new CustomizableLimiter();
-                        return innerLimiter;
-                    }
-                );
+                return RateLimitPartition.Get(1, _ =>
+                {
+                    factoryCallCount++;
+                    innerLimiter = new CustomizableLimiter();
+                    return innerLimiter;
+                });
             });
 
             var lease = limiter.AttemptAcquire("");
@@ -573,25 +564,19 @@ namespace System.Threading.RateLimiting.Tests
             {
                 if (resource == "1")
                 {
-                    return RateLimitPartition.Get(
-                        1,
-                        _ =>
-                        {
-                            innerLimiter1 = new CustomizableLimiter();
-                            return innerLimiter1;
-                        }
-                    );
+                    return RateLimitPartition.Get(1, _ =>
+                    {
+                        innerLimiter1 = new CustomizableLimiter();
+                        return innerLimiter1;
+                    });
                 }
                 else
                 {
-                    return RateLimitPartition.Get(
-                        2,
-                        _ =>
-                        {
-                            innerLimiter2 = new CustomizableLimiter();
-                            return innerLimiter2;
-                        }
-                    );
+                    return RateLimitPartition.Get(2, _ =>
+                    {
+                        innerLimiter2 = new CustomizableLimiter();
+                        return innerLimiter2;
+                    });
                 }
             });
 
@@ -638,23 +623,17 @@ namespace System.Threading.RateLimiting.Tests
             {
                 if (resource == "1")
                 {
-                    return RateLimitPartition.Get(
-                        1,
-                        _ =>
-                        {
-                            factoryCallCount++;
-                            idleLimiter = new CustomizableLimiter();
-                            return idleLimiter;
-                        }
-                    );
-                }
-                return RateLimitPartition.Get(
-                    2,
-                    _ =>
+                    return RateLimitPartition.Get(1, _ =>
                     {
-                        return replenishLimiter;
-                    }
-                );
+                        factoryCallCount++;
+                        idleLimiter = new CustomizableLimiter();
+                        return idleLimiter;
+                    });
+                }
+                return RateLimitPartition.Get(2, _ =>
+                {
+                    return replenishLimiter;
+                });
             });
 
             // Add the replenishing limiter to the internal storage

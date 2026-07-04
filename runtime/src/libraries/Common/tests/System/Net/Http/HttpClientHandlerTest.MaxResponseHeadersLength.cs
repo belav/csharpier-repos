@@ -37,9 +37,8 @@ namespace System.Net.Http.Functional.Tests
         {
             using (HttpClientHandler handler = CreateHttpClientHandler())
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "value",
-                    () => handler.MaxResponseHeadersLength = invalidValue
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                    handler.MaxResponseHeadersLength = invalidValue
                 );
             }
         }

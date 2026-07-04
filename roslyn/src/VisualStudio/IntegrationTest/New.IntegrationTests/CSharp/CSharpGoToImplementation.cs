@@ -444,15 +444,12 @@ class C
             );
 
             // There are a lot of results, no point transcribing them all into a test
-            Assert.Contains(
-                results,
-                r =>
-                    r.GetText() == "public void Dispose()"
-                    && Path.GetFileName(r.GetDocumentName()) == "FileImplementation.cs"
+            Assert.Contains(results, r =>
+                r.GetText() == "public void Dispose()"
+                && Path.GetFileName(r.GetDocumentName()) == "FileImplementation.cs"
             );
-            Assert.Contains(
-                results,
-                r => r.GetText() == "void Stream.Dispose()" && r.GetDocumentName() == "Stream"
+            Assert.Contains(results, r =>
+                r.GetText() == "void Stream.Dispose()" && r.GetDocumentName() == "Stream"
             );
         }
     }

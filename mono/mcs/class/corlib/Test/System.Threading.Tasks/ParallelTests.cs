@@ -50,15 +50,11 @@ namespace MonoTests.System.Threading.Tasks
                 int[] actual = Enumerable.Range(1, 1000).ToArray();
                 SpinWait sw = new SpinWait();
 
-                Parallel.For(
-                    0,
-                    actual.Length,
-                    (i) =>
-                    {
-                        actual[i] *= 2;
-                        sw.SpinOnce();
-                    }
-                );
+                Parallel.For(0, actual.Length, (i) =>
+                {
+                    actual[i] *= 2;
+                    sw.SpinOnce();
+                });
 
                 Assert.That(actual, new CollectionEquivalentConstraint(expected), "#1, same");
                 Assert.That(actual, new EqualConstraint(expected), "#2, in order");
@@ -143,15 +139,12 @@ namespace MonoTests.System.Threading.Tasks
                 SpinWait sw = new SpinWait();
                 int count = 0;
 
-                Parallel.ForEach(
-                    e,
-                    (element) =>
-                    {
-                        Interlocked.Increment(ref count);
-                        queue.Enqueue(element);
-                        sw.SpinOnce();
-                    }
-                );
+                Parallel.ForEach(e, (element) =>
+                {
+                    Interlocked.Increment(ref count);
+                    queue.Enqueue(element);
+                    sw.SpinOnce();
+                });
 
                 Assert.AreEqual(500, count, "#1");
 
@@ -165,13 +158,10 @@ namespace MonoTests.System.Threading.Tasks
         {
             var list = new List<int> { 0, 1, 2, 3, 4 };
 
-            Parallel.ForEach(
-                list,
-                (l, s, i) =>
-                {
-                    Assert.AreEqual(l, i, "#1");
-                }
-            );
+            Parallel.ForEach(list, (l, s, i) =>
+            {
+                Assert.AreEqual(l, i, "#1");
+            });
         }
 
         class ValueAndSquare

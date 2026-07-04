@@ -81,22 +81,19 @@ public class WindowsIdentityImpersonatedTests : IClassFixture<WindowsIdentityFix
     {
         using WindowsIdentity currentWindowsIdentity = WindowsIdentity.GetCurrent();
 
-        WindowsIdentity.RunImpersonated(
-            _fixture.TestAccount.AccountTokenHandle,
-            () =>
+        WindowsIdentity.RunImpersonated(_fixture.TestAccount.AccountTokenHandle, () =>
+        {
+            using (WindowsIdentity currentIdentity = WindowsIdentity.GetCurrent())
             {
-                using (WindowsIdentity currentIdentity = WindowsIdentity.GetCurrent())
-                {
-                    Assert.Equal(_fixture.TestAccount.AccountName, currentIdentity.Name);
-                }
-
-                IPAddress[] a1 = Dns.GetHostAddressesAsync("").GetAwaiter().GetResult();
-                IPAddress[] a2 = Dns.GetHostAddresses("");
-
-                Assert.True(a1.Length > 0);
-                Assert.True(a1.SequenceEqual(a2));
+                Assert.Equal(_fixture.TestAccount.AccountName, currentIdentity.Name);
             }
-        );
+
+            IPAddress[] a1 = Dns.GetHostAddressesAsync("").GetAwaiter().GetResult();
+            IPAddress[] a2 = Dns.GetHostAddresses("");
+
+            Assert.True(a1.Length > 0);
+            Assert.True(a1.SequenceEqual(a2));
+        });
     }
 
     [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.CanRunImpersonatedTests))]

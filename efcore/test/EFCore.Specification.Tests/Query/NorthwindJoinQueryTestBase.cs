@@ -234,12 +234,10 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Join_complex_condition(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>().Where(c => c.CustomerID == "ALFKI")
-                join o in ss.Set<Order>().Where(o => o.OrderID < 10250) on true equals true
-                select c.CustomerID
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>().Where(c => c.CustomerID == "ALFKI")
+            join o in ss.Set<Order>().Where(o => o.OrderID < 10250) on true equals true
+            select c.CustomerID
         );
 
     [ConditionalTheory]
@@ -247,21 +245,17 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
     public virtual async Task Join_local_collection_int_closure_is_cached_correctly(bool async)
     {
         var ids = new uint[] { 1, 2 };
-        await AssertQueryScalar(
-            async,
-            ss =>
-                from e in ss.Set<Employee>()
-                join id in ids on e.EmployeeID equals id
-                select e.EmployeeID
+        await AssertQueryScalar(async, ss =>
+            from e in ss.Set<Employee>()
+            join id in ids on e.EmployeeID equals id
+            select e.EmployeeID
         );
 
         ids = new uint[] { 3 };
-        await AssertQueryScalar(
-            async,
-            ss =>
-                from e in ss.Set<Employee>()
-                join id in ids on e.EmployeeID equals id
-                select e.EmployeeID
+        await AssertQueryScalar(async, ss =>
+            from e in ss.Set<Employee>()
+            join id in ids on e.EmployeeID equals id
+            select e.EmployeeID
         );
     }
 
@@ -271,23 +265,19 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
     {
         var ids = "12";
         await AssertTranslationFailed(() =>
-            AssertQueryScalar(
-                async,
-                ss =>
-                    from e in ss.Set<Employee>()
-                    join id in ids on e.EmployeeID equals id
-                    select e.EmployeeID
+            AssertQueryScalar(async, ss =>
+                from e in ss.Set<Employee>()
+                join id in ids on e.EmployeeID equals id
+                select e.EmployeeID
             )
         );
 
         ids = "3";
         await AssertTranslationFailed(() =>
-            AssertQueryScalar(
-                async,
-                ss =>
-                    from e in ss.Set<Employee>()
-                    join id in ids on e.EmployeeID equals id
-                    select e.EmployeeID
+            AssertQueryScalar(async, ss =>
+                from e in ss.Set<Employee>()
+                join id in ids on e.EmployeeID equals id
+                select e.EmployeeID
             )
         );
     }
@@ -299,23 +289,19 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
         var ids = new byte[] { 1, 2 };
 
         await AssertTranslationFailed(() =>
-            AssertQueryScalar(
-                async,
-                ss =>
-                    from e in ss.Set<Employee>()
-                    join id in ids on e.EmployeeID equals id
-                    select e.EmployeeID
+            AssertQueryScalar(async, ss =>
+                from e in ss.Set<Employee>()
+                join id in ids on e.EmployeeID equals id
+                select e.EmployeeID
             )
         );
 
         ids = new byte[] { 3 };
         await AssertTranslationFailed(() =>
-            AssertQueryScalar(
-                async,
-                ss =>
-                    from e in ss.Set<Employee>()
-                    join id in ids on e.EmployeeID equals id
-                    select e.EmployeeID
+            AssertQueryScalar(async, ss =>
+                from e in ss.Set<Employee>()
+                join id in ids on e.EmployeeID equals id
+                select e.EmployeeID
             )
         );
     }
@@ -323,22 +309,15 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Join_same_collection_multiple(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Join(
-                        ss.Set<Customer>(),
-                        o => o.CustomerID,
-                        i => i.CustomerID,
-                        (c1, c2) => new { c1, c2 }
-                    )
-                    .Join(
-                        ss.Set<Customer>(),
-                        o => o.c1.CustomerID,
-                        i => i.CustomerID,
-                        (c12, c3) => c3
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Join(
+                    ss.Set<Customer>(),
+                    o => o.CustomerID,
+                    i => i.CustomerID,
+                    (c1, c2) => new { c1, c2 }
+                )
+                .Join(ss.Set<Customer>(), o => o.c1.CustomerID, i => i.CustomerID, (c12, c3) => c3)
         );
 
     [ConditionalTheory]
@@ -425,25 +404,21 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GroupJoin_simple(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>().Where(c => c.CustomerID.StartsWith("F"))
-                join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID into orders
-                from o in orders
-                select o
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>().Where(c => c.CustomerID.StartsWith("F"))
+            join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID into orders
+            from o in orders
+            select o
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GroupJoin_simple2(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>()
-                join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID into orders
-                from o in orders
-                select c
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>()
+            join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID into orders
+            from o in orders
+            select c
         );
 
     [ConditionalTheory]
@@ -462,29 +437,25 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GroupJoin_simple_ordering(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>()
-                    .Where(c => c.CustomerID.StartsWith("F"))
-                    .OrderBy(c => c.City)
-                join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID into orders
-                from o in orders
-                select o
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>()
+                .Where(c => c.CustomerID.StartsWith("F"))
+                .OrderBy(c => c.City)
+            join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID into orders
+            from o in orders
+            select o
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GroupJoin_simple_subquery(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>()
-                join o in ss.Set<Order>().OrderBy(o => o.OrderID).Take(4)
-                    on c.CustomerID equals o.CustomerID
-                    into orders
-                from o in orders
-                select o
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>()
+            join o in ss.Set<Order>().OrderBy(o => o.OrderID).Take(4)
+                on c.CustomerID equals o.CustomerID
+                into orders
+            from o in orders
+            select o
         );
 
     [ConditionalTheory]
@@ -631,85 +602,73 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GroupJoin_DefaultIfEmpty3(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>().OrderBy(c => c.CustomerID).Take(1)
-                join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID into orders
-                from o in orders.DefaultIfEmpty()
-                select o
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>().OrderBy(c => c.CustomerID).Take(1)
+            join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID into orders
+            from o in orders.DefaultIfEmpty()
+            select o
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GroupJoin_Where(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>()
-                join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID into orders
-                from o in orders
-                where o.CustomerID == "ALFKI"
-                select o
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>()
+            join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID into orders
+            from o in orders
+            where o.CustomerID == "ALFKI"
+            select o
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GroupJoin_Where_OrderBy(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>()
-                join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID into orders
-                from o in orders
-                where o.CustomerID == "ALFKI" || c.CustomerID == "ANATR"
-                orderby c.City
-                select o
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>()
+            join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID into orders
+            from o in orders
+            where o.CustomerID == "ALFKI" || c.CustomerID == "ANATR"
+            orderby c.City
+            select o
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GroupJoin_DefaultIfEmpty_Where(bool async)
     {
-        return AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>()
-                join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID into orders
-                from o in orders.DefaultIfEmpty()
+        return AssertQuery(async, ss =>
+            from c in ss.Set<Customer>()
+            join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID into orders
+            from o in orders.DefaultIfEmpty()
 #pragma warning disable RCS1146 // Use conditional access.
-                where o != null && o.CustomerID == "ALFKI"
+            where o != null && o.CustomerID == "ALFKI"
 #pragma warning restore RCS1146 // Use conditional access.
-                select o
+            select o
         );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Join_GroupJoin_DefaultIfEmpty_Where(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>()
-                join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID
-                join o2 in ss.Set<Order>() on c.CustomerID equals o2.CustomerID into orders
-                from o3 in orders.DefaultIfEmpty()
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>()
+            join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID
+            join o2 in ss.Set<Order>() on c.CustomerID equals o2.CustomerID into orders
+            from o3 in orders.DefaultIfEmpty()
 #pragma warning disable RCS1146 // Use conditional access.
-                where o3 != null && o3.CustomerID == "ALFKI"
+            where o3 != null && o3.CustomerID == "ALFKI"
 #pragma warning restore RCS1146 // Use conditional access.
-                select o3
+            select o3
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GroupJoin_DefaultIfEmpty_Project(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>()
-                join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID into orders
-                from o in orders.DefaultIfEmpty()
-                select o != null ? (object)o.OrderID : null
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>()
+            join o in ss.Set<Order>() on c.CustomerID equals o.CustomerID into orders
+            from o in orders.DefaultIfEmpty()
+            select o != null ? (object)o.OrderID : null
         );
 
     [ConditionalTheory]
@@ -769,26 +728,22 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task GroupJoin_Subquery_with_Take_Then_SelectMany_Where(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>()
-                join o in ss.Set<Order>().OrderBy(o => o.OrderID).Take(100)
-                    on c.CustomerID equals o.CustomerID
-                    into lo
-                from o in lo.Where(x => x.CustomerID.StartsWith("A"))
-                select new { c.CustomerID, o.OrderID }
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>()
+            join o in ss.Set<Order>().OrderBy(o => o.OrderID).Take(100)
+                on c.CustomerID equals o.CustomerID
+                into lo
+            from o in lo.Where(x => x.CustomerID.StartsWith("A"))
+            select new { c.CustomerID, o.OrderID }
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Inner_join_with_tautology_predicate_converts_to_cross_join(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>().OrderBy(c => c.CustomerID).Take(10)
-                join o in ss.Set<Order>().OrderBy(o => o.OrderID).Take(10) on 1 equals 1
-                select new { c.CustomerID, o.OrderID }
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>().OrderBy(c => c.CustomerID).Take(10)
+            join o in ss.Set<Order>().OrderBy(o => o.OrderID).Take(10) on 1 equals 1
+            select new { c.CustomerID, o.OrderID }
         );
 
     [ConditionalTheory]
@@ -796,15 +751,13 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
     public virtual Task Left_join_with_tautology_predicate_doesnt_convert_to_cross_join(
         bool async
     ) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>().OrderBy(c => c.CustomerID).Take(10)
-                join o in ss.Set<Order>().OrderBy(o => o.OrderID).Take(10)
-                    on c.CustomerID != null equals true
-                    into grouping
-                from o in grouping.DefaultIfEmpty()
-                select new { c.CustomerID, o.OrderID }
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>().OrderBy(c => c.CustomerID).Take(10)
+            join o in ss.Set<Order>().OrderBy(o => o.OrderID).Take(10)
+                on c.CustomerID != null equals true
+                into grouping
+            from o in grouping.DefaultIfEmpty()
+            select new { c.CustomerID, o.OrderID }
         );
 
     [ConditionalTheory]
@@ -973,12 +926,10 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task SelectMany_with_selecting_outer_element(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Select(e => new { e, Complex = e.CustomerID + e.City })
-                    .SelectMany(c => c.e.Orders.Select(o => c.Complex))
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Select(e => new { e, Complex = e.CustomerID + e.City })
+                .SelectMany(c => c.e.Orders.Select(o => c.Complex))
         );
 
     [ConditionalTheory]
@@ -1002,68 +953,60 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task SelectMany_correlated_subquery_take(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Select(c => new { c.CustomerID })
-                    .SelectMany(c =>
-                        ss.Set<Customer>()
-                            .Where(i => i.CustomerID == c.CustomerID)
-                            .OrderBy(i => i.CustomerID + i.City)
-                            .Take(2)
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Select(c => new { c.CustomerID })
+                .SelectMany(c =>
+                    ss.Set<Customer>()
+                        .Where(i => i.CustomerID == c.CustomerID)
+                        .OrderBy(i => i.CustomerID + i.City)
+                        .Take(2)
+                )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Distinct_SelectMany_correlated_subquery_take(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Select(c => new { c.CustomerID })
-                    .Distinct()
-                    .SelectMany(c =>
-                        ss.Set<Customer>()
-                            .Where(i => i.CustomerID == c.CustomerID)
-                            .OrderBy(i => i.CustomerID + i.City)
-                            .Take(2)
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Select(c => new { c.CustomerID })
+                .Distinct()
+                .SelectMany(c =>
+                    ss.Set<Customer>()
+                        .Where(i => i.CustomerID == c.CustomerID)
+                        .OrderBy(i => i.CustomerID + i.City)
+                        .Take(2)
+                )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Distinct_SelectMany_correlated_subquery_take_2(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Distinct()
-                    .SelectMany(c =>
-                        ss.Set<Customer>()
-                            .Where(i => i.CustomerID == c.CustomerID)
-                            .OrderBy(i => i.CustomerID + i.City)
-                            .Take(2)
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Distinct()
+                .SelectMany(c =>
+                    ss.Set<Customer>()
+                        .Where(i => i.CustomerID == c.CustomerID)
+                        .OrderBy(i => i.CustomerID + i.City)
+                        .Take(2)
+                )
         );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Take_SelectMany_correlated_subquery_take(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                ss.Set<Customer>()
-                    .Select(c => new { c.CustomerID })
-                    .OrderBy(c => c.CustomerID)
-                    .Take(2)
-                    .SelectMany(c =>
-                        ss.Set<Customer>()
-                            .Where(i => i.CustomerID == c.CustomerID)
-                            .OrderBy(i => i.CustomerID + i.City)
-                            .Take(2)
-                    )
+        AssertQuery(async, ss =>
+            ss.Set<Customer>()
+                .Select(c => new { c.CustomerID })
+                .OrderBy(c => c.CustomerID)
+                .Take(2)
+                .SelectMany(c =>
+                    ss.Set<Customer>()
+                        .Where(i => i.CustomerID == c.CustomerID)
+                        .OrderBy(i => i.CustomerID + i.City)
+                        .Take(2)
+                )
         );
 
     [ConditionalTheory]
@@ -1092,14 +1035,12 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Condition_on_entity_with_include(bool async) =>
-        AssertQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>().Where(c => c.CustomerID.StartsWith("F"))
-                join o in ss.Set<Order>().Include(o => o.OrderDetails)
-                    on c.CustomerID equals o.CustomerID
-                    into g
-                from o in g.DefaultIfEmpty()
-                select new { a = o != null ? o.OrderID : -1 }
+        AssertQuery(async, ss =>
+            from c in ss.Set<Customer>().Where(c => c.CustomerID.StartsWith("F"))
+            join o in ss.Set<Order>().Include(o => o.OrderDetails)
+                on c.CustomerID equals o.CustomerID
+                into g
+            from o in g.DefaultIfEmpty()
+            select new { a = o != null ? o.OrderID : -1 }
         );
 }

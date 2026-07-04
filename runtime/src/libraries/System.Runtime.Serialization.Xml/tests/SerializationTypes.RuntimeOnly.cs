@@ -4441,13 +4441,11 @@ public class NativeJsonTestData
 {
     public static NativeJsonTestData[] Json_InvalidTypes = new NativeJsonTestData[]
     {
-        new NativeJsonTestData(
-            typeof(Invalid_Class_No_Parameterless_Ctor),
-            () => new Invalid_Class_No_Parameterless_Ctor("test")
+        new NativeJsonTestData(typeof(Invalid_Class_No_Parameterless_Ctor), () =>
+            new Invalid_Class_No_Parameterless_Ctor("test")
         ),
-        new NativeJsonTestData(
-            typeof(Invalid_Class_Derived_With_DataContract),
-            () => new Invalid_Class_Derived_With_DataContract()
+        new NativeJsonTestData(typeof(Invalid_Class_Derived_With_DataContract), () =>
+            new Invalid_Class_Derived_With_DataContract()
         ),
     };
 

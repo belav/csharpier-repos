@@ -40,15 +40,12 @@ public class DefaultViewComponentHelperTest
         );
 
         // Assert
-        Assert.Collection(
-            argumentDictionary,
-            item =>
-            {
-                Assert.Equal("a", item.Key);
-                Assert.IsType<int>(item.Value);
-                Assert.Equal(0, item.Value);
-            }
-        );
+        Assert.Collection(argumentDictionary, item =>
+        {
+            Assert.Equal("a", item.Key);
+            Assert.IsType<int>(item.Value);
+            Assert.Equal(0, item.Value);
+        });
     }
 
     [Fact]
@@ -62,15 +59,12 @@ public class DefaultViewComponentHelperTest
         var argumentDictionary = DefaultViewComponentHelper.GetArgumentDictionary(descriptor, 0);
 
         // Assert
-        Assert.Collection(
-            argumentDictionary,
-            item =>
-            {
-                Assert.Equal("a", item.Key);
-                Assert.IsType<int>(item.Value);
-                Assert.Equal(0, item.Value);
-            }
-        );
+        Assert.Collection(argumentDictionary, item =>
+        {
+            Assert.Equal("a", item.Key);
+            Assert.IsType<int>(item.Value);
+            Assert.Equal(0, item.Value);
+        });
     }
 
     [Fact]
@@ -119,15 +113,12 @@ public class DefaultViewComponentHelperTest
         );
 
         // Assert
-        Assert.Collection(
-            argumentDictionary,
-            item =>
-            {
-                Assert.Equal("o", item.Key);
-                Assert.IsType<object>(item.Value);
-                Assert.Same(expectedValue, item.Value);
-            }
-        );
+        Assert.Collection(argumentDictionary, item =>
+        {
+            Assert.Equal("o", item.Key);
+            Assert.IsType<object>(item.Value);
+            Assert.Same(expectedValue, item.Value);
+        });
     }
 
     [Fact]
@@ -145,15 +136,12 @@ public class DefaultViewComponentHelperTest
         );
 
         // Assert
-        Assert.Collection(
-            argumentDictionary,
-            item =>
-            {
-                Assert.Equal("a", item.Key);
-                Assert.IsType<int>(item.Value);
-                Assert.Equal(10, item.Value);
-            }
-        );
+        Assert.Collection(argumentDictionary, item =>
+        {
+            Assert.Equal("a", item.Key);
+            Assert.IsType<int>(item.Value);
+            Assert.Equal(10, item.Value);
+        });
     }
 
     private DefaultViewComponentHelper CreateHelper()

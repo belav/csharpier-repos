@@ -2875,9 +2875,8 @@ public abstract partial class LoadTestBase<TFixture>
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
                 Assert.Equal(2, parent.ChildrenShadowFk.Count());
-                Assert.All(
-                    parent.ChildrenShadowFk.Select(e => e.Parent),
-                    p => Assert.Same(parent, p)
+                Assert.All(parent.ChildrenShadowFk.Select(e => e.Parent), p =>
+                    Assert.Same(parent, p)
                 );
             }
 
@@ -3364,9 +3363,8 @@ public abstract partial class LoadTestBase<TFixture>
                 context.ChangeTracker.LazyLoadingEnabled = false;
 
                 Assert.Equal(2, parent.ChildrenCompositeKey.Count());
-                Assert.All(
-                    parent.ChildrenCompositeKey.Select(e => e.Parent),
-                    p => Assert.Same(parent, p)
+                Assert.All(parent.ChildrenCompositeKey.Select(e => e.Parent), p =>
+                    Assert.Same(parent, p)
                 );
             }
 

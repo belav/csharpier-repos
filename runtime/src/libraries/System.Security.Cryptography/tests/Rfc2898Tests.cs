@@ -20,118 +20,100 @@ namespace System.Security.Cryptography
         [Fact]
         public static void Ctor_NullPasswordBytes()
         {
-            Assert.Throws<ArgumentNullException>(
-                "password",
-                () =>
-                    new Rfc2898DeriveBytes(
-                        (byte[])null,
-                        s_testSalt,
-                        DefaultIterationCount,
-                        HashAlgorithmName.SHA1
-                    )
+            Assert.Throws<ArgumentNullException>("password", () =>
+                new Rfc2898DeriveBytes(
+                    (byte[])null,
+                    s_testSalt,
+                    DefaultIterationCount,
+                    HashAlgorithmName.SHA1
+                )
             );
         }
 
         [Fact]
         public static void Ctor_NullPasswordString()
         {
-            Assert.Throws<ArgumentNullException>(
-                "password",
-                () =>
-                    new Rfc2898DeriveBytes(
-                        (string)null,
-                        s_testSalt,
-                        DefaultIterationCount,
-                        HashAlgorithmName.SHA1
-                    )
+            Assert.Throws<ArgumentNullException>("password", () =>
+                new Rfc2898DeriveBytes(
+                    (string)null,
+                    s_testSalt,
+                    DefaultIterationCount,
+                    HashAlgorithmName.SHA1
+                )
             );
         }
 
         [Fact]
         public static void Ctor_NullSalt()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "salt",
-                () =>
-                    new Rfc2898DeriveBytes(
-                        TestPassword,
-                        null,
-                        DefaultIterationCount,
-                        HashAlgorithmName.SHA1
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("salt", () =>
+                new Rfc2898DeriveBytes(
+                    TestPassword,
+                    null,
+                    DefaultIterationCount,
+                    HashAlgorithmName.SHA1
+                )
             );
         }
 
         [Fact]
         public static void Ctor_GenerateNegativeSalt()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "saltSize",
-                () =>
-                    new Rfc2898DeriveBytes(
-                        TestPassword,
-                        -1,
-                        DefaultIterationCount,
-                        HashAlgorithmName.SHA1
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("saltSize", () =>
+                new Rfc2898DeriveBytes(
+                    TestPassword,
+                    -1,
+                    DefaultIterationCount,
+                    HashAlgorithmName.SHA1
+                )
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "saltSize",
-                () =>
-                    new Rfc2898DeriveBytes(
-                        TestPassword,
-                        int.MinValue,
-                        DefaultIterationCount,
-                        HashAlgorithmName.SHA1
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("saltSize", () =>
+                new Rfc2898DeriveBytes(
+                    TestPassword,
+                    int.MinValue,
+                    DefaultIterationCount,
+                    HashAlgorithmName.SHA1
+                )
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "saltSize",
-                () =>
-                    new Rfc2898DeriveBytes(
-                        TestPassword,
-                        int.MinValue / 2,
-                        DefaultIterationCount,
-                        HashAlgorithmName.SHA1
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("saltSize", () =>
+                new Rfc2898DeriveBytes(
+                    TestPassword,
+                    int.MinValue / 2,
+                    DefaultIterationCount,
+                    HashAlgorithmName.SHA1
+                )
             );
         }
 
         [Fact]
         public static void Ctor_TooFewIterations()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "iterations",
-                () => new Rfc2898DeriveBytes(TestPassword, s_testSalt, 0, HashAlgorithmName.SHA1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("iterations", () =>
+                new Rfc2898DeriveBytes(TestPassword, s_testSalt, 0, HashAlgorithmName.SHA1)
             );
         }
 
         [Fact]
         public static void Ctor_NegativeIterations()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "iterations",
-                () => new Rfc2898DeriveBytes(TestPassword, s_testSalt, -1, HashAlgorithmName.SHA1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("iterations", () =>
+                new Rfc2898DeriveBytes(TestPassword, s_testSalt, -1, HashAlgorithmName.SHA1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "iterations",
-                () =>
-                    new Rfc2898DeriveBytes(
-                        TestPassword,
-                        s_testSalt,
-                        int.MinValue,
-                        HashAlgorithmName.SHA1
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("iterations", () =>
+                new Rfc2898DeriveBytes(
+                    TestPassword,
+                    s_testSalt,
+                    int.MinValue,
+                    HashAlgorithmName.SHA1
+                )
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "iterations",
-                () =>
-                    new Rfc2898DeriveBytes(
-                        TestPassword,
-                        s_testSalt,
-                        int.MinValue / 2,
-                        HashAlgorithmName.SHA1
-                    )
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("iterations", () =>
+                new Rfc2898DeriveBytes(
+                    TestPassword,
+                    s_testSalt,
+                    int.MinValue / 2,
+                    HashAlgorithmName.SHA1
+                )
             );
         }
 

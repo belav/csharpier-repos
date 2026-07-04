@@ -250,17 +250,14 @@ namespace Microsoft.CodeAnalysis.CodeGen
             // Create a dedicated mapped field for the array type, separate from the data that'll be stored into that array.
             // Call sites will lazily instantiate the array to cache in this field, rather than forcibly instantiating
             // all of them when the private implementation details class is first used.
-            return _cachedArrayFields.GetOrAdd(
-                (data, (ushort)typeCode),
-                key =>
-                {
-                    // Hash the data to hex, but then tack on _A(ElementType). This is needed both to differentiate the array field from
-                    // the data field, but also to differentiate multiple fields that may have the same raw data but different array types.
-                    string name = $"{HashToHex(key.Data)}_A{key.ElementType}";
+            return _cachedArrayFields.GetOrAdd((data, (ushort)typeCode), key =>
+            {
+                // Hash the data to hex, but then tack on _A(ElementType). This is needed both to differentiate the array field from
+                // the data field, but also to differentiate multiple fields that may have the same raw data but different array types.
+                string name = $"{HashToHex(key.Data)}_A{key.ElementType}";
 
-                    return new CachedArrayField(name, this, arrayType);
-                }
-            );
+                return new CachedArrayField(name, this, arrayType);
+            });
         }
 
         /// <summary>
@@ -316,30 +313,24 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 }
             );
 
-            return _mappedFields.GetOrAdd(
-                (data, alignment),
-                key =>
+            return _mappedFields.GetOrAdd((data, alignment), key =>
+            {
+                // For alignment of 1 (which is used in cases other than in fields for ReadOnlySpan<byte>),
+                // just use the hex value of the data hash.  For other alignments, tack on a '2', '4', or '8'
+                // accordingly.  As every byte will yield two chars, the odd number of chars used for 2/4/8
+                // alignments will never produce a name that conflicts with names for an alignment of 1.
+                Debug.Assert(alignment is 1 or 2 or 4 or 8, $"Unexpected alignment: {alignment}");
+                string hex = HashToHex(key.Data);
+                string name = alignment switch
                 {
-                    // For alignment of 1 (which is used in cases other than in fields for ReadOnlySpan<byte>),
-                    // just use the hex value of the data hash.  For other alignments, tack on a '2', '4', or '8'
-                    // accordingly.  As every byte will yield two chars, the odd number of chars used for 2/4/8
-                    // alignments will never produce a name that conflicts with names for an alignment of 1.
-                    Debug.Assert(
-                        alignment is 1 or 2 or 4 or 8,
-                        $"Unexpected alignment: {alignment}"
-                    );
-                    string hex = HashToHex(key.Data);
-                    string name = alignment switch
-                    {
-                        2 => hex + "2",
-                        4 => hex + "4",
-                        8 => hex + "8",
-                        _ => hex,
-                    };
+                    2 => hex + "2",
+                    4 => hex + "4",
+                    8 => hex + "8",
+                    _ => hex,
+                };
 
-                    return new MappedField(name, this, type, key.Data);
-                }
-            );
+                return new MappedField(name, this, type, key.Data);
+            });
         }
 
         internal Cci.IFieldReference GetModuleVersionId(Cci.ITypeReference mvidType)
@@ -494,10 +485,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
             ImmutableArray<byte> hash = CryptographicHashProvider.ComputeSourceHash(data);
 
 #if NETCOREAPP2_1_OR_GREATER
-            return string.Create(
-                hash.Length * 2,
-                hash,
-                (destination, hash) => toHex(hash, destination)
+            return string.Create(hash.Length * 2, hash, (destination, hash) =>
+                toHex(hash, destination)
             );
 #else
             char[] c = new char[hash.Length * 2];

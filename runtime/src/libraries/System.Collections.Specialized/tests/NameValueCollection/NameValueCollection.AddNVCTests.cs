@@ -123,9 +123,8 @@ namespace System.Collections.Specialized.Tests
         [Fact]
         public void Add_NullNameValueCollection_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "c",
-                () => new NameValueCollection().Add(null)
+            AssertExtensions.Throws<ArgumentNullException>("c", () =>
+                new NameValueCollection().Add(null)
             );
         }
     }

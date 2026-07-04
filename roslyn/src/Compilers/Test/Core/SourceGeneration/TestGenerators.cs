@@ -96,22 +96,18 @@ namespace Roslyn.Test.Utilities.TestGenerators
             Action<GeneratorExecutionContext> onExecute,
             Func<(string hintName, string? source)> computeSource
         )
-            : this(
-                onInit,
-                onExecute,
-                () =>
-                {
-                    var (hint, source) = computeSource();
-                    return ImmutableArray.Create(
-                        (
-                            hint,
-                            string.IsNullOrWhiteSpace(source)
-                                ? null
-                                : SourceText.From(source, Encoding.UTF8)
-                        )
-                    );
-                }
-            ) { }
+            : this(onInit, onExecute, () =>
+            {
+                var (hint, source) = computeSource();
+                return ImmutableArray.Create(
+                    (
+                        hint,
+                        string.IsNullOrWhiteSpace(source)
+                            ? null
+                            : SourceText.From(source, Encoding.UTF8)
+                    )
+                );
+            }) { }
 
         public void Initialize(GeneratorInitializationContext context) => onInit(context);
 

@@ -366,13 +366,10 @@ namespace System.Data.Tests
             // DataSet element cannot be converted into a DataTable.
             // (i.e. cannot be referenced in any other elements)
             var ds = new DataSet();
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    ds.ReadXmlSchema(new StringReader(xs));
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                ds.ReadXmlSchema(new StringReader(xs));
+            });
         }
 
         [ConditionalFact(

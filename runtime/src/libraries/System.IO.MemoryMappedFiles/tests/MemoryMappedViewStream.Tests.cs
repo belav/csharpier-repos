@@ -29,38 +29,31 @@ namespace System.IO.MemoryMappedFiles.Tests
                 using (mmf)
                 {
                     // Offset
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                        "offset",
-                        () => mmf.CreateViewStream(-1, mapLength)
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                        mmf.CreateViewStream(-1, mapLength)
                     );
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                        "offset",
-                        () => mmf.CreateViewStream(-1, mapLength, MemoryMappedFileAccess.ReadWrite)
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                        mmf.CreateViewStream(-1, mapLength, MemoryMappedFileAccess.ReadWrite)
                     );
 
                     // Size
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                        "size",
-                        () => mmf.CreateViewStream(0, -1)
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>("size", () =>
+                        mmf.CreateViewStream(0, -1)
                     );
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                        "size",
-                        () => mmf.CreateViewStream(0, -1, MemoryMappedFileAccess.ReadWrite)
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>("size", () =>
+                        mmf.CreateViewStream(0, -1, MemoryMappedFileAccess.ReadWrite)
                     );
                     if (IntPtr.Size == 4)
                     {
-                        AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                            "size",
-                            () => mmf.CreateViewStream(0, 1 + (long)uint.MaxValue)
+                        AssertExtensions.Throws<ArgumentOutOfRangeException>("size", () =>
+                            mmf.CreateViewStream(0, 1 + (long)uint.MaxValue)
                         );
-                        AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                            "size",
-                            () =>
-                                mmf.CreateViewStream(
-                                    0,
-                                    1 + (long)uint.MaxValue,
-                                    MemoryMappedFileAccess.ReadWrite
-                                )
+                        AssertExtensions.Throws<ArgumentOutOfRangeException>("size", () =>
+                            mmf.CreateViewStream(
+                                0,
+                                1 + (long)uint.MaxValue,
+                                MemoryMappedFileAccess.ReadWrite
+                            )
                         );
                     }
                     else
@@ -86,13 +79,11 @@ namespace System.IO.MemoryMappedFiles.Tests
                     );
 
                     // Access
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                        "access",
-                        () => mmf.CreateViewStream(0, mapLength, (MemoryMappedFileAccess)(-1))
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>("access", () =>
+                        mmf.CreateViewStream(0, mapLength, (MemoryMappedFileAccess)(-1))
                     );
-                    AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                        "access",
-                        () => mmf.CreateViewStream(0, mapLength, (MemoryMappedFileAccess)(42))
+                    AssertExtensions.Throws<ArgumentOutOfRangeException>("access", () =>
+                        mmf.CreateViewStream(0, mapLength, (MemoryMappedFileAccess)(42))
                     );
                 }
             }

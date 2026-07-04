@@ -187,9 +187,8 @@ namespace System.ComponentModel.Composition
             Func<ReflectionContext, AssemblyCatalog> catalogCreator
         )
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "reflectionContext",
-                () => catalogCreator(null)
+            AssertExtensions.Throws<ArgumentNullException>("reflectionContext", () =>
+                catalogCreator(null)
             );
         }
 
@@ -197,9 +196,8 @@ namespace System.ComponentModel.Composition
             Func<ICompositionElement, AssemblyCatalog> catalogCreator
         )
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "definitionOrigin",
-                () => catalogCreator(null)
+            AssertExtensions.Throws<ArgumentNullException>("definitionOrigin", () =>
+                catalogCreator(null)
             );
         }
 
@@ -959,13 +957,10 @@ namespace System.ComponentModel.Composition
             var catalog = CreateAssemblyCatalog();
             catalog.Dispose();
 
-            ExceptionAssert.ThrowsDisposed(
-                catalog,
-                () =>
-                {
-                    var parts = catalog.Parts;
-                }
-            );
+            ExceptionAssert.ThrowsDisposed(catalog, () =>
+            {
+                var parts = catalog.Parts;
+            });
         }
 
         [Fact]
@@ -984,9 +979,8 @@ namespace System.ComponentModel.Composition
         {
             var catalog = CreateAssemblyCatalog();
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "definition",
-                () => catalog.GetExports(null)
+            AssertExtensions.Throws<ArgumentNullException>("definition", () =>
+                catalog.GetExports(null)
             );
         }
 
@@ -1131,45 +1125,30 @@ namespace System.ComponentModel.Composition
             var catalog = new AssemblyCatalog(typeof(AssemblyCatalogTests).Assembly);
             var container = new CompositionContainer(catalog);
 
-            CompositionAssert.ThrowsError(
-                ErrorId.ImportEngine_PartCannotGetExportedValue,
-                () =>
-                {
-                    container.GetExportedValue<DirectCycleNonSharedPart>();
-                }
-            );
+            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotGetExportedValue, () =>
+            {
+                container.GetExportedValue<DirectCycleNonSharedPart>();
+            });
 
-            CompositionAssert.ThrowsError(
-                ErrorId.ImportEngine_PartCannotGetExportedValue,
-                () =>
-                {
-                    container.GetExportedValue<CycleNonSharedPart>();
-                }
-            );
+            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotGetExportedValue, () =>
+            {
+                container.GetExportedValue<CycleNonSharedPart>();
+            });
 
-            CompositionAssert.ThrowsError(
-                ErrorId.ImportEngine_PartCannotGetExportedValue,
-                () =>
-                {
-                    container.GetExportedValue<CycleNonSharedPart1>();
-                }
-            );
+            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotGetExportedValue, () =>
+            {
+                container.GetExportedValue<CycleNonSharedPart1>();
+            });
 
-            CompositionAssert.ThrowsError(
-                ErrorId.ImportEngine_PartCannotGetExportedValue,
-                () =>
-                {
-                    container.GetExportedValue<CycleNonSharedPart2>();
-                }
-            );
+            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotGetExportedValue, () =>
+            {
+                container.GetExportedValue<CycleNonSharedPart2>();
+            });
 
-            CompositionAssert.ThrowsError(
-                ErrorId.ImportEngine_PartCannotGetExportedValue,
-                () =>
-                {
-                    container.GetExportedValue<CycleWithSharedPartAndNonSharedPart>();
-                }
-            );
+            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotGetExportedValue, () =>
+            {
+                container.GetExportedValue<CycleWithSharedPartAndNonSharedPart>();
+            });
 
             Assert.NotNull(container.GetExportedValue<CycleSharedPart>());
             Assert.NotNull(container.GetExportedValue<CycleSharedPart1>());
@@ -1187,45 +1166,30 @@ namespace System.ComponentModel.Composition
                 CompositionOptions.DisableSilentRejection
             );
 
-            CompositionAssert.ThrowsError(
-                ErrorId.ImportEngine_PartCannotGetExportedValue,
-                () =>
-                {
-                    container.GetExportedValue<DirectCycleNonSharedPart>();
-                }
-            );
+            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotGetExportedValue, () =>
+            {
+                container.GetExportedValue<DirectCycleNonSharedPart>();
+            });
 
-            CompositionAssert.ThrowsError(
-                ErrorId.ImportEngine_PartCannotGetExportedValue,
-                () =>
-                {
-                    container.GetExportedValue<CycleNonSharedPart>();
-                }
-            );
+            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotGetExportedValue, () =>
+            {
+                container.GetExportedValue<CycleNonSharedPart>();
+            });
 
-            CompositionAssert.ThrowsError(
-                ErrorId.ImportEngine_PartCannotGetExportedValue,
-                () =>
-                {
-                    container.GetExportedValue<CycleNonSharedPart1>();
-                }
-            );
+            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotGetExportedValue, () =>
+            {
+                container.GetExportedValue<CycleNonSharedPart1>();
+            });
 
-            CompositionAssert.ThrowsError(
-                ErrorId.ImportEngine_PartCannotGetExportedValue,
-                () =>
-                {
-                    container.GetExportedValue<CycleNonSharedPart2>();
-                }
-            );
+            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotGetExportedValue, () =>
+            {
+                container.GetExportedValue<CycleNonSharedPart2>();
+            });
 
-            CompositionAssert.ThrowsError(
-                ErrorId.ImportEngine_PartCannotGetExportedValue,
-                () =>
-                {
-                    container.GetExportedValue<CycleWithSharedPartAndNonSharedPart>();
-                }
-            );
+            CompositionAssert.ThrowsError(ErrorId.ImportEngine_PartCannotGetExportedValue, () =>
+            {
+                container.GetExportedValue<CycleWithSharedPartAndNonSharedPart>();
+            });
 
             Assert.NotNull(container.GetExportedValue<CycleSharedPart>());
             Assert.NotNull(container.GetExportedValue<CycleSharedPart1>());

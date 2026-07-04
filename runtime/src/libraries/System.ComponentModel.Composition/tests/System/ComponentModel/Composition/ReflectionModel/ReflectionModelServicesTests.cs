@@ -348,21 +348,18 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             ICompositionElement expectedOrigin = new MockOrigin();
 
-            Assert.Throws<ArgumentNullException>(
-                "partType",
-                () =>
-                {
-                    ComposablePartDefinition partDefinition =
-                        ReflectionModelServices.CreatePartDefinition(
-                            null,
-                            false,
-                            new Lazy<IEnumerable<ImportDefinition>>(() => expectedImports),
-                            new Lazy<IEnumerable<ExportDefinition>>(() => expectedExports),
-                            expectedMetadata.AsLazy(),
-                            expectedOrigin
-                        );
-                }
-            );
+            Assert.Throws<ArgumentNullException>("partType", () =>
+            {
+                ComposablePartDefinition partDefinition =
+                    ReflectionModelServices.CreatePartDefinition(
+                        null,
+                        false,
+                        new Lazy<IEnumerable<ImportDefinition>>(() => expectedImports),
+                        new Lazy<IEnumerable<ExportDefinition>>(() => expectedExports),
+                        expectedMetadata.AsLazy(),
+                        expectedOrigin
+                    );
+            });
         }
 
         [Fact]
@@ -430,25 +427,19 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [Fact]
         public void GetPartType_NullAsPart_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                "partDefinition",
-                () =>
-                {
-                    ReflectionModelServices.GetPartType(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("partDefinition", () =>
+            {
+                ReflectionModelServices.GetPartType(null);
+            });
         }
 
         [Fact]
         public void GetPartType_InvalidPart_ShouldThrowArgument()
         {
-            Assert.Throws<ArgumentException>(
-                "partDefinition",
-                () =>
-                {
-                    ReflectionModelServices.GetPartType(new InvalidPartDefinition());
-                }
-            );
+            Assert.Throws<ArgumentException>("partDefinition", () =>
+            {
+                ReflectionModelServices.GetPartType(new InvalidPartDefinition());
+            });
         }
 
         [Fact]
@@ -510,25 +501,19 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [Fact]
         public void IsDisposalRequired_NullAsPart_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                "partDefinition",
-                () =>
-                {
-                    ReflectionModelServices.IsDisposalRequired(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("partDefinition", () =>
+            {
+                ReflectionModelServices.IsDisposalRequired(null);
+            });
         }
 
         [Fact]
         public void IsDisposalRequired_InvalidPart_ShouldThrowArgument()
         {
-            Assert.Throws<ArgumentException>(
-                "partDefinition",
-                () =>
-                {
-                    ReflectionModelServices.IsDisposalRequired(new InvalidPartDefinition());
-                }
-            );
+            Assert.Throws<ArgumentException>("partDefinition", () =>
+            {
+                ReflectionModelServices.IsDisposalRequired(new InvalidPartDefinition());
+            });
         }
 
         [Fact]
@@ -575,18 +560,15 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             ICompositionElement expectedOrigin = new MockOrigin();
 
-            Assert.Throws<ArgumentNullException>(
-                "contractName",
-                () =>
-                {
-                    ReflectionModelServices.CreateExportDefinition(
-                        expectedLazyMember,
-                        null,
-                        expectedMetadata.AsLazy(),
-                        expectedOrigin
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>("contractName", () =>
+            {
+                ReflectionModelServices.CreateExportDefinition(
+                    expectedLazyMember,
+                    null,
+                    expectedMetadata.AsLazy(),
+                    expectedOrigin
+                );
+            });
         }
 
         [Fact]
@@ -626,18 +608,15 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             ICompositionElement expectedOrigin = new MockOrigin();
 
-            Assert.Throws<ArgumentException>(
-                "exportingMember",
-                () =>
-                {
-                    ReflectionModelServices.CreateExportDefinition(
-                        expectedLazyMember,
-                        expectedContractName,
-                        expectedMetadata.AsLazy(),
-                        expectedOrigin
-                    );
-                }
-            );
+            Assert.Throws<ArgumentException>("exportingMember", () =>
+            {
+                ReflectionModelServices.CreateExportDefinition(
+                    expectedLazyMember,
+                    expectedContractName,
+                    expectedMetadata.AsLazy(),
+                    expectedOrigin
+                );
+            });
         }
 
         [Fact]
@@ -671,25 +650,19 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [Fact]
         public void GetExportingMember_NullAsExportDefinition_ShouldThrowArhumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                "exportDefinition",
-                () =>
-                {
-                    ReflectionModelServices.GetExportingMember(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("exportDefinition", () =>
+            {
+                ReflectionModelServices.GetExportingMember(null);
+            });
         }
 
         [Fact]
         public void GetExportingMember_InvalidExportDefinition_ShouldThrowArhumentNull()
         {
-            Assert.Throws<ArgumentException>(
-                "exportDefinition",
-                () =>
-                {
-                    ReflectionModelServices.GetExportingMember(new ExportDefinition("Foo", null));
-                }
-            );
+            Assert.Throws<ArgumentException>("exportDefinition", () =>
+            {
+                ReflectionModelServices.GetExportingMember(new ExportDefinition("Foo", null));
+            });
         }
 
         [Fact]
@@ -757,22 +730,19 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             ICompositionElement expectedOrigin = new MockOrigin();
 
-            Assert.Throws<ArgumentException>(
-                "importingMember",
-                () =>
-                {
-                    ReflectionModelServices.CreateImportDefinition(
-                        expectedLazyMember,
-                        expectedContractName,
-                        expectedRequiredTypeIdentity,
-                        expectedRequiredMetadata,
-                        expectedCardinality,
-                        expectedRecomposable,
-                        expectedCreationPolicy,
-                        expectedOrigin
-                    );
-                }
-            );
+            Assert.Throws<ArgumentException>("importingMember", () =>
+            {
+                ReflectionModelServices.CreateImportDefinition(
+                    expectedLazyMember,
+                    expectedContractName,
+                    expectedRequiredTypeIdentity,
+                    expectedRequiredMetadata,
+                    expectedCardinality,
+                    expectedRecomposable,
+                    expectedCreationPolicy,
+                    expectedOrigin
+                );
+            });
         }
 
         [Fact]
@@ -815,35 +785,29 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [Fact]
         public void GetImporingMember_NullAsImport_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                "importDefinition",
-                () =>
-                {
-                    ReflectionModelServices.GetImportingMember(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("importDefinition", () =>
+            {
+                ReflectionModelServices.GetImportingMember(null);
+            });
         }
 
         [Fact]
         public void GetImporingMember_InvalidImport_ShouldThrowArgument()
         {
-            Assert.Throws<ArgumentException>(
-                "importDefinition",
-                () =>
-                {
-                    ReflectionModelServices.GetImportingMember(
-                        new ContractBasedImportDefinition(
-                            "Foo",
-                            "Foo",
-                            null,
-                            ImportCardinality.ZeroOrMore,
-                            false,
-                            false,
-                            CreationPolicy.Any
-                        )
-                    );
-                }
-            );
+            Assert.Throws<ArgumentException>("importDefinition", () =>
+            {
+                ReflectionModelServices.GetImportingMember(
+                    new ContractBasedImportDefinition(
+                        "Foo",
+                        "Foo",
+                        null,
+                        ImportCardinality.ZeroOrMore,
+                        false,
+                        false,
+                        CreationPolicy.Any
+                    )
+                );
+            });
         }
 
         [Fact]
@@ -912,21 +876,18 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             ICompositionElement expectedOrigin = new MockOrigin();
 
-            Assert.Throws<ArgumentNullException>(
-                "parameter",
-                () =>
-                {
-                    ReflectionModelServices.CreateImportDefinition(
-                        null,
-                        expectedContractName,
-                        expectedRequiredTypeIdentity,
-                        expectedRequiredMetadata,
-                        expectedCardinality,
-                        expectedCreationPolicy,
-                        expectedOrigin
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>("parameter", () =>
+            {
+                ReflectionModelServices.CreateImportDefinition(
+                    null,
+                    expectedContractName,
+                    expectedRequiredTypeIdentity,
+                    expectedRequiredMetadata,
+                    expectedCardinality,
+                    expectedCreationPolicy,
+                    expectedOrigin
+                );
+            });
         }
 
         [Fact]
@@ -968,35 +929,29 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [Fact]
         public void GetImportingParameter_NullAsImport_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                "importDefinition",
-                () =>
-                {
-                    ReflectionModelServices.GetImportingParameter(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("importDefinition", () =>
+            {
+                ReflectionModelServices.GetImportingParameter(null);
+            });
         }
 
         [Fact]
         public void GetImportingParameter_InvalidImport_ShouldThrowArgument()
         {
-            Assert.Throws<ArgumentException>(
-                "importDefinition",
-                () =>
-                {
-                    ReflectionModelServices.GetImportingParameter(
-                        new ContractBasedImportDefinition(
-                            "Foo",
-                            "Foo",
-                            null,
-                            ImportCardinality.ZeroOrMore,
-                            false,
-                            false,
-                            CreationPolicy.Any
-                        )
-                    );
-                }
-            );
+            Assert.Throws<ArgumentException>("importDefinition", () =>
+            {
+                ReflectionModelServices.GetImportingParameter(
+                    new ContractBasedImportDefinition(
+                        "Foo",
+                        "Foo",
+                        null,
+                        ImportCardinality.ZeroOrMore,
+                        false,
+                        false,
+                        CreationPolicy.Any
+                    )
+                );
+            });
         }
 
         [Fact]
@@ -1069,43 +1024,36 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [Fact]
         public void IsImportingParameter_NullAsImport_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                "importDefinition",
-                () =>
-                {
-                    ReflectionModelServices.IsImportingParameter(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("importDefinition", () =>
+            {
+                ReflectionModelServices.IsImportingParameter(null);
+            });
         }
 
         [Fact]
         public void IsImportingParameter_InvalidImport_ShouldThrowArgument()
         {
-            Assert.Throws<ArgumentException>(
-                "importDefinition",
-                () =>
-                {
-                    ReflectionModelServices.IsImportingParameter(
-                        new ContractBasedImportDefinition(
-                            "Foo",
-                            "Foo",
-                            null,
-                            ImportCardinality.ZeroOrMore,
-                            false,
-                            false,
-                            CreationPolicy.Any
-                        )
-                    );
-                }
-            );
+            Assert.Throws<ArgumentException>("importDefinition", () =>
+            {
+                ReflectionModelServices.IsImportingParameter(
+                    new ContractBasedImportDefinition(
+                        "Foo",
+                        "Foo",
+                        null,
+                        ImportCardinality.ZeroOrMore,
+                        false,
+                        false,
+                        CreationPolicy.Any
+                    )
+                );
+            });
         }
 
         [Fact]
         public void IsExportFactoryImportDefinition_NullImport_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                "importDefinition",
-                () => ReflectionModelServices.IsExportFactoryImportDefinition(null)
+            Assert.Throws<ArgumentNullException>("importDefinition", () =>
+                ReflectionModelServices.IsExportFactoryImportDefinition(null)
             );
         }
 
@@ -1121,9 +1069,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public void IsExportFactoryImportDefinition_NonPartCreatorImport_ShouldReturnFalse()
         {
             var import = ReflectionModelServices.CreateImportDefinition(
-                new LazyMemberInfo(
-                    MemberTypes.Field,
-                    () => new MemberInfo[] { typeof(ReflectionModelServicesTests) }
+                new LazyMemberInfo(MemberTypes.Field, () =>
+                    new MemberInfo[] { typeof(ReflectionModelServicesTests) }
                 ), // bogus member
                 "Foo",
                 "Foo",
@@ -1141,9 +1088,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public void IsExportFactoryImportDefinition_PartCreatorImport_ShouldReturnTrue()
         {
             var import = ReflectionModelServices.CreateImportDefinition(
-                new LazyMemberInfo(
-                    MemberTypes.Field,
-                    () => new MemberInfo[] { typeof(ReflectionModelServicesTests) }
+                new LazyMemberInfo(MemberTypes.Field, () =>
+                    new MemberInfo[] { typeof(ReflectionModelServicesTests) }
                 ), // bogus member
                 "Foo",
                 "Foo",
@@ -1162,21 +1108,18 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [Fact]
         public void GetExportFactoryProductImportDefinition_NullImport_ShouldThrowArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(
-                "importDefinition",
-                () => ReflectionModelServices.GetExportFactoryProductImportDefinition(null)
+            Assert.Throws<ArgumentNullException>("importDefinition", () =>
+                ReflectionModelServices.GetExportFactoryProductImportDefinition(null)
             );
         }
 
         [Fact]
         public void GetExportFactoryProductImportDefinition_InvalidImport_ShouldThrowArgument()
         {
-            Assert.Throws<ArgumentException>(
-                "importDefinition",
-                () =>
-                    ReflectionModelServices.GetExportFactoryProductImportDefinition(
-                        CreateInvalidImport()
-                    )
+            Assert.Throws<ArgumentException>("importDefinition", () =>
+                ReflectionModelServices.GetExportFactoryProductImportDefinition(
+                    CreateInvalidImport()
+                )
             );
         }
 
@@ -1186,9 +1129,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [Fact]
         public void GetExportFactoryProductImportDefinition_PartCreatorImport_()
         {
-            LazyMemberInfo bogusMember = new LazyMemberInfo(
-                MemberTypes.Field,
-                () => new MemberInfo[] { typeof(ReflectionModelServicesTests) }
+            LazyMemberInfo bogusMember = new LazyMemberInfo(MemberTypes.Field, () =>
+                new MemberInfo[] { typeof(ReflectionModelServicesTests) }
             );
             var import = ReflectionModelServices.CreateImportDefinition(
                 bogusMember,

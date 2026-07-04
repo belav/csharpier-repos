@@ -37,10 +37,8 @@ namespace System.Runtime.InteropServices.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotNativeAot))]
         public void Prelink_NonRuntimeMethod_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "m",
-                null,
-                () => Marshal.Prelink(new NonRuntimeMethodInfo())
+            AssertExtensions.Throws<ArgumentException>("m", null, () =>
+                Marshal.Prelink(new NonRuntimeMethodInfo())
             );
         }
 

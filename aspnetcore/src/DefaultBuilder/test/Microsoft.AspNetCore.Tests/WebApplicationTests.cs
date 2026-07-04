@@ -870,29 +870,22 @@ public class WebApplicationTests
         var webApplication = createBuilder(options).Build();
 
         var config = Assert.IsType<ConfigurationManager>(webApplication.Configuration);
-        Assert.Contains(
-            config.Sources,
-            source =>
-                source is JsonConfigurationSource jsonSource
-                && jsonSource.Path == "appsettings.json"
+        Assert.Contains(config.Sources, source =>
+            source is JsonConfigurationSource jsonSource && jsonSource.Path == "appsettings.json"
         );
 
         if (isDevelopment)
         {
-            Assert.Contains(
-                config.Sources,
-                source =>
-                    source is JsonConfigurationSource jsonSource
-                    && jsonSource.Path == "appsettings.Development.json"
+            Assert.Contains(config.Sources, source =>
+                source is JsonConfigurationSource jsonSource
+                && jsonSource.Path == "appsettings.Development.json"
             );
         }
         else
         {
-            Assert.DoesNotContain(
-                config.Sources,
-                source =>
-                    source is JsonConfigurationSource jsonSource
-                    && jsonSource.Path == "appsettings.Development.json"
+            Assert.DoesNotContain(config.Sources, source =>
+                source is JsonConfigurationSource jsonSource
+                && jsonSource.Path == "appsettings.Development.json"
             );
         }
     }
@@ -910,9 +903,8 @@ public class WebApplicationTests
         var webApplication = CreateEmptyBuilderOptions(options).Build();
 
         var config = Assert.IsType<ConfigurationManager>(webApplication.Configuration);
-        Assert.DoesNotContain(
-            config.Sources,
-            source => source is JsonConfigurationSource jsonSource
+        Assert.DoesNotContain(config.Sources, source =>
+            source is JsonConfigurationSource jsonSource
         );
     }
 
@@ -950,10 +942,8 @@ public class WebApplicationTests
         var webApplication = createBuilder(options).Build();
 
         var config = Assert.IsType<ConfigurationManager>(webApplication.Configuration);
-        Assert.Contains(
-            config.Sources,
-            source =>
-                source is JsonConfigurationSource jsonSource && jsonSource.Path == "secrets.json"
+        Assert.Contains(config.Sources, source =>
+            source is JsonConfigurationSource jsonSource && jsonSource.Path == "secrets.json"
         );
     }
 
@@ -970,9 +960,8 @@ public class WebApplicationTests
 
         var config = Assert.IsType<ConfigurationManager>(webApplication.Configuration);
         // empty builder doesn't contain any Json sources (user secrets or otherwise) by default
-        Assert.DoesNotContain(
-            config.Sources,
-            source => source is JsonConfigurationSource jsonSource
+        Assert.DoesNotContain(config.Sources, source =>
+            source is JsonConfigurationSource jsonSource
         );
     }
 
@@ -998,23 +987,20 @@ public class WebApplicationTests
                 WebRootPath = webRoot,
             };
 
-            var builder = createBuilder(
-                options,
-                bootstrapBuilder =>
-                {
-                    bootstrapBuilder.ConfigureAppConfiguration(
-                        (context, config) =>
-                        {
-                            Assert.Equal(
-                                nameof(WebApplicationTests),
-                                context.HostingEnvironment.ApplicationName
-                            );
-                            Assert.Equal(envName, context.HostingEnvironment.EnvironmentName);
-                            Assert.Equal(contentRoot, context.HostingEnvironment.ContentRootPath);
-                        }
-                    );
-                }
-            );
+            var builder = createBuilder(options, bootstrapBuilder =>
+            {
+                bootstrapBuilder.ConfigureAppConfiguration(
+                    (context, config) =>
+                    {
+                        Assert.Equal(
+                            nameof(WebApplicationTests),
+                            context.HostingEnvironment.ApplicationName
+                        );
+                        Assert.Equal(envName, context.HostingEnvironment.EnvironmentName);
+                        Assert.Equal(contentRoot, context.HostingEnvironment.ContentRootPath);
+                    }
+                );
+            });
 
             Assert.Equal(nameof(WebApplicationTests), builder.Environment.ApplicationName);
             Assert.Equal(envName, builder.Environment.EnvironmentName);
@@ -1056,23 +1042,20 @@ public class WebApplicationTests
                 WebRootPath = webRoot,
             };
 
-            var builder = createBuilder(
-                options,
-                bootstrapBuilder =>
-                {
-                    bootstrapBuilder.ConfigureAppConfiguration(
-                        (context, config) =>
-                        {
-                            Assert.Equal(
-                                nameof(WebApplicationTests),
-                                context.HostingEnvironment.ApplicationName
-                            );
-                            Assert.Equal(envName, context.HostingEnvironment.EnvironmentName);
-                            Assert.Equal(contentRoot, context.HostingEnvironment.ContentRootPath);
-                        }
-                    );
-                }
-            );
+            var builder = createBuilder(options, bootstrapBuilder =>
+            {
+                bootstrapBuilder.ConfigureAppConfiguration(
+                    (context, config) =>
+                    {
+                        Assert.Equal(
+                            nameof(WebApplicationTests),
+                            context.HostingEnvironment.ApplicationName
+                        );
+                        Assert.Equal(envName, context.HostingEnvironment.EnvironmentName);
+                        Assert.Equal(contentRoot, context.HostingEnvironment.ContentRootPath);
+                    }
+                );
+            });
 
             Assert.Equal(nameof(WebApplicationTests), builder.Environment.ApplicationName);
             Assert.Equal(envName, builder.Environment.EnvironmentName);
@@ -1110,23 +1093,20 @@ public class WebApplicationTests
                 },
             };
 
-            var builder = createBuilder(
-                options,
-                bootstrapBuilder =>
-                {
-                    bootstrapBuilder.ConfigureAppConfiguration(
-                        (context, config) =>
-                        {
-                            Assert.Equal(
-                                nameof(WebApplicationTests),
-                                context.HostingEnvironment.ApplicationName
-                            );
-                            Assert.Equal(envName, context.HostingEnvironment.EnvironmentName);
-                            Assert.Equal(contentRoot, context.HostingEnvironment.ContentRootPath);
-                        }
-                    );
-                }
-            );
+            var builder = createBuilder(options, bootstrapBuilder =>
+            {
+                bootstrapBuilder.ConfigureAppConfiguration(
+                    (context, config) =>
+                    {
+                        Assert.Equal(
+                            nameof(WebApplicationTests),
+                            context.HostingEnvironment.ApplicationName
+                        );
+                        Assert.Equal(envName, context.HostingEnvironment.EnvironmentName);
+                        Assert.Equal(contentRoot, context.HostingEnvironment.ContentRootPath);
+                    }
+                );
+            });
 
             Assert.Equal(nameof(WebApplicationTests), builder.Environment.ApplicationName);
             Assert.Equal(envName, builder.Environment.EnvironmentName);
@@ -1147,20 +1127,17 @@ public class WebApplicationTests
     {
         var assemblyName = Assembly.GetEntryAssembly().GetName().Name;
 
-        var builder = createBuilder(
-            new(),
-            bootstrapBuilder =>
-            {
-                // Verify the defaults observed by the boostrap host builder we use internally to populate
-                // the defaults
-                bootstrapBuilder.ConfigureAppConfiguration(
-                    (context, config) =>
-                    {
-                        Assert.Equal(assemblyName, context.HostingEnvironment.ApplicationName);
-                    }
-                );
-            }
-        );
+        var builder = createBuilder(new(), bootstrapBuilder =>
+        {
+            // Verify the defaults observed by the boostrap host builder we use internally to populate
+            // the defaults
+            bootstrapBuilder.ConfigureAppConfiguration(
+                (context, config) =>
+                {
+                    Assert.Equal(assemblyName, context.HostingEnvironment.ApplicationName);
+                }
+            );
+        });
 
         Assert.Equal(assemblyName, builder.Environment.ApplicationName);
         builder.Host.ConfigureAppConfiguration(
@@ -1195,20 +1172,17 @@ public class WebApplicationTests
 
         var options = new WebApplicationOptions { ApplicationName = assemblyName };
 
-        var builder = createBuilder(
-            options,
-            bootstrapBuilder =>
-            {
-                // Verify the defaults observed by the boostrap host builder we use internally to populate
-                // the defaults
-                bootstrapBuilder.ConfigureAppConfiguration(
-                    (context, config) =>
-                    {
-                        Assert.Equal(assemblyName, context.HostingEnvironment.ApplicationName);
-                    }
-                );
-            }
-        );
+        var builder = createBuilder(options, bootstrapBuilder =>
+        {
+            // Verify the defaults observed by the boostrap host builder we use internally to populate
+            // the defaults
+            bootstrapBuilder.ConfigureAppConfiguration(
+                (context, config) =>
+                {
+                    Assert.Equal(assemblyName, context.HostingEnvironment.ApplicationName);
+                }
+            );
+        });
 
         Assert.Equal(assemblyName, builder.Environment.ApplicationName);
         builder.Host.ConfigureAppConfiguration(
@@ -1913,11 +1887,9 @@ public class WebApplicationTests
         logger.LogInformation(guid);
 
         var events = listener.EventData.ToArray();
-        Assert.Contains(
-            events,
-            args =>
-                args.EventSource.Name == "Microsoft-Extensions-Logging"
-                && args.Payload.OfType<string>().Any(p => p.Contains(guid))
+        Assert.Contains(events, args =>
+            args.EventSource.Name == "Microsoft-Extensions-Logging"
+            && args.Payload.OfType<string>().Any(p => p.Contains(guid))
         );
     }
 
@@ -1936,11 +1908,9 @@ public class WebApplicationTests
         logger.LogInformation(guid);
 
         var events = listener.EventData.ToArray();
-        Assert.DoesNotContain(
-            events,
-            args =>
-                args.EventSource.Name == "Microsoft-Extensions-Logging"
-                && args.Payload.OfType<string>().Any(p => p.Contains(guid))
+        Assert.DoesNotContain(events, args =>
+            args.EventSource.Name == "Microsoft-Extensions-Logging"
+            && args.Payload.OfType<string>().Any(p => p.Contains(guid))
         );
     }
 
@@ -1978,14 +1948,11 @@ public class WebApplicationTests
         await using var app = builder.Build();
 
         var chosenEndpoint = string.Empty;
-        app.MapGet(
-                "/",
-                async c =>
-                {
-                    chosenEndpoint = c.GetEndpoint().DisplayName;
-                    await c.Response.WriteAsync("Hello World");
-                }
-            )
+        app.MapGet("/", async c =>
+            {
+                chosenEndpoint = c.GetEndpoint().DisplayName;
+                await c.Response.WriteAsync("Hello World");
+            })
             .WithDisplayName("One");
 
         await app.StartAsync();
@@ -2020,14 +1987,11 @@ public class WebApplicationTests
 
         app.UseRouting();
 
-        app.MapGet(
-                "/1",
-                async c =>
-                {
-                    chosenEndpoint = c.GetEndpoint().DisplayName;
-                    await c.Response.WriteAsync("Hello World");
-                }
-            )
+        app.MapGet("/1", async c =>
+            {
+                chosenEndpoint = c.GetEndpoint().DisplayName;
+                await c.Response.WriteAsync("Hello World");
+            })
             .WithDisplayName("One");
 
         app.UseEndpoints(e => { });
@@ -2329,14 +2293,11 @@ public class WebApplicationTests
         await using var app = builder.Build();
 
         var chosenRoute = string.Empty;
-        app.MapGet(
-                "/",
-                async c =>
-                {
-                    chosenRoute = c.GetEndpoint()?.DisplayName;
-                    await c.Response.WriteAsync("Hello World");
-                }
-            )
+        app.MapGet("/", async c =>
+            {
+                chosenRoute = c.GetEndpoint()?.DisplayName;
+                await c.Response.WriteAsync("Hello World");
+            })
             .WithDisplayName("One");
 
         await app.StartAsync();
@@ -2367,14 +2328,11 @@ public class WebApplicationTests
         app.UseEndpoints(routes =>
         {
             routes
-                .MapGet(
-                    "/hi",
-                    async c =>
-                    {
-                        chosenRoute = c.GetEndpoint()?.DisplayName;
-                        await c.Response.WriteAsync("Hello World");
-                    }
-                )
+                .MapGet("/hi", async c =>
+                {
+                    chosenRoute = c.GetEndpoint()?.DisplayName;
+                    await c.Response.WriteAsync("Hello World");
+                })
                 .WithDisplayName("Two");
             routes.MapGet("/heyo", () => "Heyo World").WithDisplayName("Three");
         });
@@ -2388,24 +2346,18 @@ public class WebApplicationTests
         newBuilder.UseEndpoints(endpoints =>
         {
             endpoints
-                .MapGet(
-                    "/h3",
-                    async c =>
-                    {
-                        chosenRoute = c.GetEndpoint()?.DisplayName;
-                        await c.Response.WriteAsync("Hello World");
-                    }
-                )
+                .MapGet("/h3", async c =>
+                {
+                    chosenRoute = c.GetEndpoint()?.DisplayName;
+                    await c.Response.WriteAsync("Hello World");
+                })
                 .WithDisplayName("Four");
             endpoints
-                .MapGet(
-                    "hi",
-                    async c =>
-                    {
-                        chosenRoute = c.GetEndpoint()?.DisplayName;
-                        await c.Response.WriteAsync("Hi New");
-                    }
-                )
+                .MapGet("hi", async c =>
+                {
+                    chosenRoute = c.GetEndpoint()?.DisplayName;
+                    await c.Response.WriteAsync("Hi New");
+                })
                 .WithDisplayName("Five");
         });
         var branch = newBuilder.Build();
@@ -2888,13 +2840,11 @@ public class WebApplicationTests
     {
         var builder = createBuilder();
 
-        Assert.Contains(
-            builder.Services,
-            service => service.ServiceType == typeof(HostBuilderContext)
+        Assert.Contains(builder.Services, service =>
+            service.ServiceType == typeof(HostBuilderContext)
         );
-        Assert.Contains(
-            builder.Services,
-            service => service.ServiceType == typeof(IHostApplicationLifetime)
+        Assert.Contains(builder.Services, service =>
+            service.ServiceType == typeof(IHostApplicationLifetime)
         );
         Assert.Contains(builder.Services, service => service.ServiceType == typeof(IHostLifetime));
         Assert.Contains(builder.Services, service => service.ServiceType == typeof(IOptions<>));
@@ -2938,14 +2888,11 @@ public class WebApplicationTests
             };
         });
 
-        app.MapGet(
-                "/hello",
-                (ClaimsPrincipal user) =>
-                {
-                    helloEndpointCalled = true;
-                    Assert.Equal(username, user.Identity.Name);
-                }
-            )
+        app.MapGet("/hello", (ClaimsPrincipal user) =>
+            {
+                helloEndpointCalled = true;
+                Assert.Equal(username, user.Identity.Name);
+            })
             .AllowAnonymous();
 
         await app.StartAsync();
@@ -3040,9 +2987,8 @@ public class WebApplicationTests
             }
         );
 
-        app.MapGet(
-                "/products/{productId:regex(^[a-z]{{4}}\\d{{4}}$)}",
-                (string productId) => productId
+        app.MapGet("/products/{productId:regex(^[a-z]{{4}}\\d{{4}}$)}", (string productId) =>
+                productId
             )
             .WithDisplayName("RegexRoute");
 
@@ -3072,9 +3018,8 @@ public class WebApplicationTests
             }
         );
 
-        app.MapGet(
-                "/products/{productId:alpha:minlength(4):maxlength(4)}",
-                (string productId) => productId
+        app.MapGet("/products/{productId:alpha:minlength(4):maxlength(4)}", (string productId) =>
+                productId
             )
             .WithDisplayName("AlphaRoute");
 
@@ -3094,9 +3039,8 @@ public class WebApplicationTests
 
         var app = builder.Build();
 
-        app.MapGet(
-                "/products/{productId:regex(^[a-z]{{4}}\\d{{4}}$)}",
-                (string productId) => productId
+        app.MapGet("/products/{productId:regex(^[a-z]{{4}}\\d{{4}}$)}", (string productId) =>
+                productId
             )
             .WithDisplayName("AlphaRoute");
 
@@ -3136,9 +3080,8 @@ public class WebApplicationTests
             }
         );
 
-        app.MapGet(
-                "/products/{productId:regex(^[a-z]{{4}}\\d{{4}}$)}",
-                (string productId) => productId
+        app.MapGet("/products/{productId:regex(^[a-z]{{4}}\\d{{4}}$)}", (string productId) =>
+                productId
             )
             .WithDisplayName("RegexRoute");
 
@@ -3174,9 +3117,8 @@ public class WebApplicationTests
             }
         );
 
-        app.MapGet(
-                "/products/{productId:regex(^[a-z]{{4}}\\d{{4}}$)}",
-                (string productId) => productId
+        app.MapGet("/products/{productId:regex(^[a-z]{{4}}\\d{{4}}$)}", (string productId) =>
+                productId
             )
             .WithDisplayName("RegexRoute");
 
@@ -3298,9 +3240,8 @@ public class WebApplicationTests
 
         var debugView = new WebApplication.WebApplicationDebugView(app);
 
-        Assert.Collection(
-            debugView.Middleware,
-            m => Assert.Equal("Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware", m)
+        Assert.Collection(debugView.Middleware, m =>
+            Assert.Equal("Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware", m)
         );
     }
 
@@ -3343,25 +3284,21 @@ public class WebApplicationTests
 
         var debugView = new WebApplication.WebApplicationDebugView(app);
 
-        Assert.Collection(
-            debugView.Endpoints,
-            ep =>
-                Assert.Equal(
-                    "/hello",
-                    ep.Metadata.GetRequiredMetadata<IRouteDiagnosticsMetadata>().Route
-                )
+        Assert.Collection(debugView.Endpoints, ep =>
+            Assert.Equal(
+                "/hello",
+                ep.Metadata.GetRequiredMetadata<IRouteDiagnosticsMetadata>().Route
+            )
         );
 
         // Starting the app registers endpoint data sources with routing.
         _ = app.RunAsync();
 
-        Assert.Collection(
-            debugView.Endpoints,
-            ep =>
-                Assert.Equal(
-                    "/hello",
-                    ep.Metadata.GetRequiredMetadata<IRouteDiagnosticsMetadata>().Route
-                )
+        Assert.Collection(debugView.Endpoints, ep =>
+            Assert.Equal(
+                "/hello",
+                ep.Metadata.GetRequiredMetadata<IRouteDiagnosticsMetadata>().Route
+            )
         );
     }
 
@@ -3379,25 +3316,21 @@ public class WebApplicationTests
 
         var debugView = new WebApplication.WebApplicationDebugView(app);
 
-        Assert.Collection(
-            debugView.Endpoints,
-            ep =>
-                Assert.Equal(
-                    "/hello",
-                    ep.Metadata.GetRequiredMetadata<IRouteDiagnosticsMetadata>().Route
-                )
+        Assert.Collection(debugView.Endpoints, ep =>
+            Assert.Equal(
+                "/hello",
+                ep.Metadata.GetRequiredMetadata<IRouteDiagnosticsMetadata>().Route
+            )
         );
 
         // Starting the app registers endpoint data sources with routing.
         _ = app.RunAsync();
 
-        Assert.Collection(
-            debugView.Endpoints,
-            ep =>
-                Assert.Equal(
-                    "/hello",
-                    ep.Metadata.GetRequiredMetadata<IRouteDiagnosticsMetadata>().Route
-                )
+        Assert.Collection(debugView.Endpoints, ep =>
+            Assert.Equal(
+                "/hello",
+                ep.Metadata.GetRequiredMetadata<IRouteDiagnosticsMetadata>().Route
+            )
         );
     }
 
@@ -3736,14 +3669,11 @@ public class WebApplicationTests
                 app.UseEndpoints(endpoints =>
                 {
                     endpoints
-                        .MapGet(
-                            "/1",
-                            async c =>
-                            {
-                                c.Response.StatusCode = 203;
-                                await c.Response.WriteAsync("Hello Filter");
-                            }
-                        )
+                        .MapGet("/1", async c =>
+                        {
+                            c.Response.StatusCode = 203;
+                            await c.Response.WriteAsync("Hello Filter");
+                        })
                         .WithDisplayName("Two");
                 });
             };

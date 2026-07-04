@@ -266,24 +266,21 @@ class C
                 compileReferences,
                 TestOptions.DebugDll
             );
-            WithRuntimeInstance(
-                compilation0,
-                runtimeReferences,
-                runtime =>
-                {
-                    var context = CreateMethodContext(runtime, "C.M");
-                    string error;
-                    var testData = new CompilationTestData();
-                    context.CompileExpression(
-                        "(object)a ?? (object)b ?? (object)t ?? f",
-                        out error,
-                        testData
-                    );
-                    Assert.Null(error);
+            WithRuntimeInstance(compilation0, runtimeReferences, runtime =>
+            {
+                var context = CreateMethodContext(runtime, "C.M");
+                string error;
+                var testData = new CompilationTestData();
+                context.CompileExpression(
+                    "(object)a ?? (object)b ?? (object)t ?? f",
+                    out error,
                     testData
-                        .GetMethodData("<>x.<>m0")
-                        .VerifyIL(
-                            @"{
+                );
+                Assert.Null(error);
+                testData
+                    .GetMethodData("<>x.<>m0")
+                    .VerifyIL(
+                        @"{
   // Code size       17 (0x11)
   .maxstack  2
   IL_0000:  ldarg.0
@@ -301,63 +298,60 @@ class C
   IL_000f:  ldarg.3
   IL_0010:  ret
 }"
-                        );
-                    testData = new CompilationTestData();
-                    var result = context.CompileExpression(
-                        "default(Windows.Storage.StorageFolder)",
-                        out error,
-                        testData
                     );
-                    Assert.Null(error);
-                    var methodData = testData.GetMethodData("<>x.<>m0");
-                    methodData.VerifyIL(
-                        @"{
+                testData = new CompilationTestData();
+                var result = context.CompileExpression(
+                    "default(Windows.Storage.StorageFolder)",
+                    out error,
+                    testData
+                );
+                Assert.Null(error);
+                var methodData = testData.GetMethodData("<>x.<>m0");
+                methodData.VerifyIL(
+                    @"{
   // Code size        2 (0x2)
   .maxstack  1
   IL_0000:  ldnull
   IL_0001:  ret
 }"
-                    );
-                    // Check return type is from runtime assembly.
-                    var assemblyReference = AssemblyMetadata
-                        .CreateFromImage(result.Assembly)
-                        .GetReference();
-                    var compilation = CSharpCompilation.Create(
-                        assemblyName: ExpressionCompilerUtilities.GenerateUniqueName(),
-                        references: runtimeReferences.Concat(
-                            ImmutableArray.Create<MetadataReference>(assemblyReference)
-                        )
-                    );
-                    var assembly = ImmutableArray.CreateRange(result.Assembly);
-                    using (
-                        var metadata = ModuleMetadata.CreateFromImage(
-                            ImmutableArray.CreateRange(assembly)
-                        )
+                );
+                // Check return type is from runtime assembly.
+                var assemblyReference = AssemblyMetadata
+                    .CreateFromImage(result.Assembly)
+                    .GetReference();
+                var compilation = CSharpCompilation.Create(
+                    assemblyName: ExpressionCompilerUtilities.GenerateUniqueName(),
+                    references: runtimeReferences.Concat(
+                        ImmutableArray.Create<MetadataReference>(assemblyReference)
                     )
-                    {
-                        var reader = metadata.MetadataReader;
-                        var typeDef = reader.GetTypeDef("<>x");
-                        var methodHandle = reader.GetMethodDefHandle(typeDef, "<>m0");
-                        var module = (PEModuleSymbol)compilation.GetMember("<>x").ContainingModule;
-                        var metadataDecoder = new MetadataDecoder(module);
-                        SignatureHeader signatureHeader;
-                        BadImageFormatException metadataException;
-                        var parameters = metadataDecoder.GetSignatureForMethod(
-                            methodHandle,
-                            out signatureHeader,
-                            out metadataException
-                        );
-                        Assert.Equal(5, parameters.Length);
-                        var actualReturnType = parameters[0].Type;
-                        Assert.Equal(TypeKind.Class, actualReturnType.TypeKind); // not error
-                        var expectedReturnType = compilation.GetMember(
-                            "Windows.Storage.StorageFolder"
-                        );
-                        Assert.Equal(expectedReturnType, actualReturnType);
-                        Assert.Equal(storageAssemblyName, actualReturnType.ContainingAssembly.Name);
-                    }
+                );
+                var assembly = ImmutableArray.CreateRange(result.Assembly);
+                using (
+                    var metadata = ModuleMetadata.CreateFromImage(
+                        ImmutableArray.CreateRange(assembly)
+                    )
+                )
+                {
+                    var reader = metadata.MetadataReader;
+                    var typeDef = reader.GetTypeDef("<>x");
+                    var methodHandle = reader.GetMethodDefHandle(typeDef, "<>m0");
+                    var module = (PEModuleSymbol)compilation.GetMember("<>x").ContainingModule;
+                    var metadataDecoder = new MetadataDecoder(module);
+                    SignatureHeader signatureHeader;
+                    BadImageFormatException metadataException;
+                    var parameters = metadataDecoder.GetSignatureForMethod(
+                        methodHandle,
+                        out signatureHeader,
+                        out metadataException
+                    );
+                    Assert.Equal(5, parameters.Length);
+                    var actualReturnType = parameters[0].Type;
+                    Assert.Equal(TypeKind.Class, actualReturnType.TypeKind); // not error
+                    var expectedReturnType = compilation.GetMember("Windows.Storage.StorageFolder");
+                    Assert.Equal(expectedReturnType, actualReturnType);
+                    Assert.Equal(storageAssemblyName, actualReturnType.ContainingAssembly.Name);
                 }
-            );
+            });
         }
 
         /// <summary>

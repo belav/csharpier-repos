@@ -459,13 +459,10 @@ namespace Newtonsoft.Json.Tests
 
             Json.Schema.ValidationEventArgs validationEventArgs = null;
 
-            v.Validate(
-                JsonSchema.Parse(schemaJson),
-                (sender, args) =>
-                {
-                    validationEventArgs = args;
-                }
-            );
+            v.Validate(JsonSchema.Parse(schemaJson), (sender, args) =>
+            {
+                validationEventArgs = args;
+            });
 
             Assert.IsNotNull(validationEventArgs);
             Assert.AreEqual(
@@ -880,13 +877,10 @@ namespace Newtonsoft.Json.Tests
 
             ValidationEventArgs validationEventArgs = null;
 
-            a.Validate(
-                JsonSchema.Parse(schemaJson),
-                (sender, args) =>
-                {
-                    validationEventArgs = args;
-                }
-            );
+            a.Validate(JsonSchema.Parse(schemaJson), (sender, args) =>
+            {
+                validationEventArgs = args;
+            });
 
             Assert.IsNull(validationEventArgs);
         }

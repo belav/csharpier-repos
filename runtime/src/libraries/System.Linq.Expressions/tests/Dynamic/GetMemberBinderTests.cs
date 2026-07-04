@@ -79,13 +79,11 @@ namespace System.Dynamic.Tests
         [Fact]
         public void NullName()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => new MinimumOverrideGetMemberBinder(null, false)
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                new MinimumOverrideGetMemberBinder(null, false)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => new MinimumOverrideGetMemberBinder(null, true)
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                new MinimumOverrideGetMemberBinder(null, true)
             );
         }
 

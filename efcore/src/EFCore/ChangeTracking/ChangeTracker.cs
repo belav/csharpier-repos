@@ -306,21 +306,17 @@ public class ChangeTracker : IResettableService
     ///     the <see cref="EntityEntry.State" /> must be set.
     /// </param>
     public virtual void TrackGraph(object rootEntity, Action<EntityEntryGraphNode> callback) =>
-        TrackGraph(
-            rootEntity,
-            callback,
-            n =>
+        TrackGraph(rootEntity, callback, n =>
+        {
+            if (n.Entry.State != EntityState.Detached)
             {
-                if (n.Entry.State != EntityState.Detached)
-                {
-                    return false;
-                }
-
-                n.NodeState!(n);
-
-                return n.Entry.State != EntityState.Detached;
+                return false;
             }
-        );
+
+            n.NodeState!(n);
+
+            return n.Entry.State != EntityState.Detached;
+        });
 
     /// <summary>
     ///     Begins tracking an entity and any entities that are reachable by traversing its navigation properties.

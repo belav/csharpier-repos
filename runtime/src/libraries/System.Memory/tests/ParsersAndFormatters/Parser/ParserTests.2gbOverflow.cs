@@ -52,47 +52,44 @@ namespace System.Buffers.Text.Tests
             IntPtr pMemory
         )
         {
-            Assert.All<ParserTestData<T>>(
-                testDataCollection,
-                (testData) =>
+            Assert.All<ParserTestData<T>>(testDataCollection, (testData) =>
+            {
+                unsafe
                 {
-                    unsafe
+                    Span<byte> buffer = new Span<byte>((void*)pMemory, int.MaxValue);
+                    ref byte memory = ref Unsafe.AsRef<byte>(pMemory.ToPointer());
+                    Span<byte> span = new Span<byte>(pMemory.ToPointer(), TwoGiB);
+                    span.Fill((byte)'0');
+
+                    ReadOnlySpan<byte> utf8Span = testData.Text.ToUtf8Span();
+                    byte sign = utf8Span[0];
+                    if (sign == '-' || sign == '+')
                     {
-                        Span<byte> buffer = new Span<byte>((void*)pMemory, int.MaxValue);
-                        ref byte memory = ref Unsafe.AsRef<byte>(pMemory.ToPointer());
-                        Span<byte> span = new Span<byte>(pMemory.ToPointer(), TwoGiB);
-                        span.Fill((byte)'0');
+                        span[0] = sign;
+                        utf8Span = utf8Span.Slice(1);
+                    }
+                    utf8Span.CopyTo(span.Slice(TwoGiB - utf8Span.Length));
 
-                        ReadOnlySpan<byte> utf8Span = testData.Text.ToUtf8Span();
-                        byte sign = utf8Span[0];
-                        if (sign == '-' || sign == '+')
-                        {
-                            span[0] = sign;
-                            utf8Span = utf8Span.Slice(1);
-                        }
-                        utf8Span.CopyTo(span.Slice(TwoGiB - utf8Span.Length));
-
-                        bool success = TryParseUtf8<T>(
-                            span,
-                            out T value,
-                            out int bytesConsumed,
-                            testData.FormatSymbol
-                        );
-                        if (testData.ExpectedSuccess)
-                        {
-                            Assert.True(success);
-                            Assert.Equal(testData.ExpectedValue, value);
-                            Assert.Equal(testData.ExpectedBytesConsumed, bytesConsumed);
-                        }
-                        else
-                        {
-                            Assert.False(success);
-                            Assert.Equal<T>(default, value);
-                            Assert.Equal(0, bytesConsumed);
-                        }
+                    bool success = TryParseUtf8<T>(
+                        span,
+                        out T value,
+                        out int bytesConsumed,
+                        testData.FormatSymbol
+                    );
+                    if (testData.ExpectedSuccess)
+                    {
+                        Assert.True(success);
+                        Assert.Equal(testData.ExpectedValue, value);
+                        Assert.Equal(testData.ExpectedBytesConsumed, bytesConsumed);
+                    }
+                    else
+                    {
+                        Assert.False(success);
+                        Assert.Equal<T>(default, value);
+                        Assert.Equal(0, bytesConsumed);
                     }
                 }
-            );
+            });
         }
 
         private static IEnumerable<ParserTestData<int>> TwoGiBOverflowInt32TestData

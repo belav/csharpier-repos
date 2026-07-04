@@ -448,9 +448,8 @@ namespace System.Memory.Tests.Span
         [Fact]
         public static void Create_ThrowsOnNullValues()
         {
-            Assert.Throws<ArgumentNullException>(
-                "values",
-                () => SearchValues.Create(new[] { "foo", null, "bar" }, StringComparison.Ordinal)
+            Assert.Throws<ArgumentNullException>("values", () =>
+                SearchValues.Create(new[] { "foo", null, "bar" }, StringComparison.Ordinal)
             );
         }
 
@@ -664,24 +663,20 @@ namespace System.Memory.Tests.Span
                 ExceptionDispatchInfo? exception = null;
                 Stopwatch s = Stopwatch.StartNew();
 
-                Parallel.For(
-                    0,
-                    Environment.ProcessorCount - 1,
-                    _ =>
+                Parallel.For(0, Environment.ProcessorCount - 1, _ =>
+                {
+                    while (s.Elapsed < duration && Volatile.Read(ref exception) is null)
                     {
-                        while (s.Elapsed < duration && Volatile.Read(ref exception) is null)
+                        try
                         {
-                            try
-                            {
-                                TestRandomInputs(iterationCount: 1, rng: new Random());
-                            }
-                            catch (Exception ex)
-                            {
-                                exception = ExceptionDispatchInfo.Capture(ex);
-                            }
+                            TestRandomInputs(iterationCount: 1, rng: new Random());
+                        }
+                        catch (Exception ex)
+                        {
+                            exception = ExceptionDispatchInfo.Capture(ex);
                         }
                     }
-                );
+                });
 
                 exception?.Throw();
             }

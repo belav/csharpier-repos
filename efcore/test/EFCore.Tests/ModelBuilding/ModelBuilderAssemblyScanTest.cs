@@ -44,9 +44,8 @@ public class ModelBuilderAssemblyScanTest : ModelBuilderTest
     public void Should_support_filtering_for_entity_type_configurations()
     {
         var builder = CreateModelBuilder();
-        builder.ApplyConfigurationsFromAssembly(
-            _mockEntityTypeAssembly,
-            type => type.Name == nameof(ScannerCustomerEntityConfiguration)
+        builder.ApplyConfigurationsFromAssembly(_mockEntityTypeAssembly, type =>
+            type.Name == nameof(ScannerCustomerEntityConfiguration)
         );
 
         var entityType = builder.Model.FindEntityType(typeof(ScannerCustomer));
@@ -67,9 +66,8 @@ public class ModelBuilderAssemblyScanTest : ModelBuilderTest
     public void Should_skip_abstract_classes_for_entity_type_configurations()
     {
         var builder = CreateModelBuilder();
-        builder.ApplyConfigurationsFromAssembly(
-            _mockEntityTypeAssembly,
-            type => type.Name == nameof(AbstractCustomerEntityConfiguration)
+        builder.ApplyConfigurationsFromAssembly(_mockEntityTypeAssembly, type =>
+            type.Name == nameof(AbstractCustomerEntityConfiguration)
         );
 
         var entityType = builder.Model.FindEntityType(typeof(ScannerCustomer));

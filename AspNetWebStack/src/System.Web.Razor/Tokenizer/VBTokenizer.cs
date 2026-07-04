@@ -165,14 +165,11 @@ namespace System.Web.Razor.Tokenizer
                 else if (CurrentCharacter == '@')
                 {
                     // Could be escaped comment transition
-                    return Transition(
-                        EndSymbol(VBSymbolType.Transition),
-                        () =>
-                        {
-                            TakeCurrent();
-                            return Transition(EndSymbol(VBSymbolType.Transition), Data);
-                        }
-                    );
+                    return Transition(EndSymbol(VBSymbolType.Transition), () =>
+                    {
+                        TakeCurrent();
+                        return Transition(EndSymbol(VBSymbolType.Transition), Data);
+                    });
                 }
                 else
                 {

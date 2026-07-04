@@ -50,9 +50,8 @@ namespace System.DirectoryServices.Protocols.Tests
         [Fact]
         public void Ctor_NullObjectInAttributes_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new AddRequest("DistinguishedName", new DirectoryAttribute[] { null })
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new AddRequest("DistinguishedName", new DirectoryAttribute[] { null })
             );
         }
 
@@ -74,9 +73,8 @@ namespace System.DirectoryServices.Protocols.Tests
         [Fact]
         public void Ctor_NullObjectClass_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "objectClass",
-                () => new AddRequest("DistinguishedName", (string)null)
+            AssertExtensions.Throws<ArgumentNullException>("objectClass", () =>
+                new AddRequest("DistinguishedName", (string)null)
             );
         }
 

@@ -271,9 +271,8 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void Connect_IPAddresses_EmptyArray_Throws_Argument()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "addresses",
-                () => GetSocket().Connect(new IPAddress[0], 1)
+            AssertExtensions.Throws<ArgumentException>("addresses", () =>
+                GetSocket().Connect(new IPAddress[0], 1)
             );
         }
 
@@ -359,11 +358,8 @@ namespace System.Net.Sockets.Tests
         public void Send_Buffers_EmptyBuffers_Throws_Argument()
         {
             SocketError errorCode;
-            AssertExtensions.Throws<ArgumentException>(
-                "buffers",
-                () =>
-                    GetSocket()
-                        .Send(new List<ArraySegment<byte>>(), SocketFlags.None, out errorCode)
+            AssertExtensions.Throws<ArgumentException>("buffers", () =>
+                GetSocket().Send(new List<ArraySegment<byte>>(), SocketFlags.None, out errorCode)
             );
         }
 
@@ -419,11 +415,8 @@ namespace System.Net.Sockets.Tests
         public void Receive_Buffers_EmptyBuffers_Throws_Argument()
         {
             SocketError errorCode;
-            AssertExtensions.Throws<ArgumentException>(
-                "buffers",
-                () =>
-                    GetSocket()
-                        .Receive(new List<ArraySegment<byte>>(), SocketFlags.None, out errorCode)
+            AssertExtensions.Throws<ArgumentException>("buffers", () =>
+                GetSocket().Receive(new List<ArraySegment<byte>>(), SocketFlags.None, out errorCode)
             );
         }
 
@@ -443,105 +436,89 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SetSocketOption_Linger_NotLingerOption_Throws_Argument()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "optionValue",
-                () =>
-                    GetSocket()
-                        .SetSocketOption(
-                            SocketOptionLevel.Socket,
-                            SocketOptionName.Linger,
-                            new object()
-                        )
+            AssertExtensions.Throws<ArgumentException>("optionValue", () =>
+                GetSocket()
+                    .SetSocketOption(
+                        SocketOptionLevel.Socket,
+                        SocketOptionName.Linger,
+                        new object()
+                    )
             );
         }
 
         [Fact]
         public void SetSocketOption_Linger_InvalidLingerTime_Throws_Argument()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "optionValue",
-                () =>
-                    GetSocket()
-                        .SetSocketOption(
-                            SocketOptionLevel.Socket,
-                            SocketOptionName.Linger,
-                            new LingerOption(true, -1)
-                        )
+            AssertExtensions.Throws<ArgumentException>("optionValue", () =>
+                GetSocket()
+                    .SetSocketOption(
+                        SocketOptionLevel.Socket,
+                        SocketOptionName.Linger,
+                        new LingerOption(true, -1)
+                    )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "optionValue",
-                () =>
-                    GetSocket()
-                        .SetSocketOption(
-                            SocketOptionLevel.Socket,
-                            SocketOptionName.Linger,
-                            new LingerOption(true, (int)ushort.MaxValue + 1)
-                        )
+            AssertExtensions.Throws<ArgumentException>("optionValue", () =>
+                GetSocket()
+                    .SetSocketOption(
+                        SocketOptionLevel.Socket,
+                        SocketOptionName.Linger,
+                        new LingerOption(true, (int)ushort.MaxValue + 1)
+                    )
             );
         }
 
         [Fact]
         public void SetSocketOption_IPMulticast_NotIPMulticastOption_Throws_Argument()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "optionValue",
-                () =>
-                    GetSocket()
-                        .SetSocketOption(
-                            SocketOptionLevel.IP,
-                            SocketOptionName.AddMembership,
-                            new object()
-                        )
+            AssertExtensions.Throws<ArgumentException>("optionValue", () =>
+                GetSocket()
+                    .SetSocketOption(
+                        SocketOptionLevel.IP,
+                        SocketOptionName.AddMembership,
+                        new object()
+                    )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "optionValue",
-                () =>
-                    GetSocket()
-                        .SetSocketOption(
-                            SocketOptionLevel.IP,
-                            SocketOptionName.DropMembership,
-                            new object()
-                        )
+            AssertExtensions.Throws<ArgumentException>("optionValue", () =>
+                GetSocket()
+                    .SetSocketOption(
+                        SocketOptionLevel.IP,
+                        SocketOptionName.DropMembership,
+                        new object()
+                    )
             );
         }
 
         [Fact]
         public void SetSocketOption_IPv6Multicast_NotIPMulticastOption_Throws_Argument()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "optionValue",
-                () =>
-                    GetSocket()
-                        .SetSocketOption(
-                            SocketOptionLevel.IPv6,
-                            SocketOptionName.AddMembership,
-                            new object()
-                        )
+            AssertExtensions.Throws<ArgumentException>("optionValue", () =>
+                GetSocket()
+                    .SetSocketOption(
+                        SocketOptionLevel.IPv6,
+                        SocketOptionName.AddMembership,
+                        new object()
+                    )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "optionValue",
-                () =>
-                    GetSocket()
-                        .SetSocketOption(
-                            SocketOptionLevel.IPv6,
-                            SocketOptionName.DropMembership,
-                            new object()
-                        )
+            AssertExtensions.Throws<ArgumentException>("optionValue", () =>
+                GetSocket()
+                    .SetSocketOption(
+                        SocketOptionLevel.IPv6,
+                        SocketOptionName.DropMembership,
+                        new object()
+                    )
             );
         }
 
         [Fact]
         public void SetSocketOption_Object_InvalidOptionName_Throws_Argument()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "optionValue",
-                () =>
-                    GetSocket()
-                        .SetSocketOption(
-                            SocketOptionLevel.Socket,
-                            SocketOptionName.NoDelay,
-                            new object()
-                        )
+            AssertExtensions.Throws<ArgumentException>("optionValue", () =>
+                GetSocket()
+                    .SetSocketOption(
+                        SocketOptionLevel.Socket,
+                        SocketOptionName.NoDelay,
+                        new object()
+                    )
             );
         }
 
@@ -757,9 +734,8 @@ namespace System.Net.Sockets.Tests
         {
             var eventArgs = new SocketAsyncEventArgs { BufferList = s_buffers };
 
-            AssertExtensions.Throws<ArgumentException>(
-                "e",
-                () => GetSocket().AcceptAsync(eventArgs)
+            AssertExtensions.Throws<ArgumentException>("e", () =>
+                GetSocket().AcceptAsync(eventArgs)
             );
         }
 
@@ -798,9 +774,8 @@ namespace System.Net.Sockets.Tests
         {
             var eventArgs = new SocketAsyncEventArgs { BufferList = s_buffers };
 
-            AssertExtensions.Throws<ArgumentException>(
-                "BufferList",
-                () => GetSocket().ConnectAsync(eventArgs)
+            AssertExtensions.Throws<ArgumentException>("BufferList", () =>
+                GetSocket().ConnectAsync(eventArgs)
             );
         }
 
@@ -863,18 +838,16 @@ namespace System.Net.Sockets.Tests
         {
             var eventArgs = new SocketAsyncEventArgs { BufferList = s_buffers };
 
-            AssertExtensions.Throws<ArgumentException>(
-                "e",
-                () => Socket.ConnectAsync(SocketType.Stream, ProtocolType.Tcp, eventArgs)
+            AssertExtensions.Throws<ArgumentException>("e", () =>
+                Socket.ConnectAsync(SocketType.Stream, ProtocolType.Tcp, eventArgs)
             );
         }
 
         [Fact]
         public void ConnectAsync_Static_NullRemoteEndPoint_Throws_ArgumentException()
         {
-            Assert.Throws<ArgumentException>(
-                "e",
-                () => Socket.ConnectAsync(SocketType.Stream, ProtocolType.Tcp, s_eventArgs)
+            Assert.Throws<ArgumentException>("e", () =>
+                Socket.ConnectAsync(SocketType.Stream, ProtocolType.Tcp, s_eventArgs)
             );
         }
 
@@ -1560,17 +1533,13 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void BeginConnect_IPAddresses_EmptyIPAddresses_Throws_Argument()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "addresses",
-                () => GetSocket().BeginConnect(new IPAddress[0], 1, TheAsyncCallback, null)
+            AssertExtensions.Throws<ArgumentException>("addresses", () =>
+                GetSocket().BeginConnect(new IPAddress[0], 1, TheAsyncCallback, null)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "addresses",
-                () =>
-                {
-                    GetSocket().ConnectAsync(new IPAddress[0], 1);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("addresses", () =>
+            {
+                GetSocket().ConnectAsync(new IPAddress[0], 1);
+            });
         }
 
         [Theory]
@@ -1640,9 +1609,8 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void EndConnect_UnrelatedAsyncResult_Throws_Argument()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "asyncResult",
-                () => GetSocket().EndConnect(Task.CompletedTask)
+            AssertExtensions.Throws<ArgumentException>("asyncResult", () =>
+                GetSocket().EndConnect(Task.CompletedTask)
             );
         }
 
@@ -1756,24 +1724,19 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void BeginSend_Buffers_EmptyBuffers_Throws_Argument()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "buffers",
-                () =>
-                    GetSocket()
-                        .BeginSend(
-                            new List<ArraySegment<byte>>(),
-                            SocketFlags.None,
-                            TheAsyncCallback,
-                            null
-                        )
+            AssertExtensions.Throws<ArgumentException>("buffers", () =>
+                GetSocket()
+                    .BeginSend(
+                        new List<ArraySegment<byte>>(),
+                        SocketFlags.None,
+                        TheAsyncCallback,
+                        null
+                    )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "buffers",
-                () =>
-                {
-                    GetSocket().SendAsync(new List<ArraySegment<byte>>(), SocketFlags.None);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("buffers", () =>
+            {
+                GetSocket().SendAsync(new List<ArraySegment<byte>>(), SocketFlags.None);
+            });
         }
 
         [Fact]
@@ -1785,9 +1748,8 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void EndSend_UnrelatedAsyncResult_Throws_Argument()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "asyncResult",
-                () => GetSocket().EndSend(Task.CompletedTask)
+            AssertExtensions.Throws<ArgumentException>("asyncResult", () =>
+                GetSocket().EndSend(Task.CompletedTask)
             );
         }
 
@@ -1901,24 +1863,19 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void BeginReceive_Buffers_EmptyBuffers_Throws_Argument()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "buffers",
-                () =>
-                    GetSocket()
-                        .BeginReceive(
-                            new List<ArraySegment<byte>>(),
-                            SocketFlags.None,
-                            TheAsyncCallback,
-                            null
-                        )
+            AssertExtensions.Throws<ArgumentException>("buffers", () =>
+                GetSocket()
+                    .BeginReceive(
+                        new List<ArraySegment<byte>>(),
+                        SocketFlags.None,
+                        TheAsyncCallback,
+                        null
+                    )
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "buffers",
-                () =>
-                {
-                    GetSocket().ReceiveAsync(new List<ArraySegment<byte>>(), SocketFlags.None);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("buffers", () =>
+            {
+                GetSocket().ReceiveAsync(new List<ArraySegment<byte>>(), SocketFlags.None);
+            });
         }
 
         [Fact]

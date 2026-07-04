@@ -522,69 +522,60 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 ForegroundThreadAffinitizedObject.ThisCanBeCalledOnAnyThread();
 
                 return _projectSystemProjectFactory
-                    .ApplyChangeToWorkspaceMaybeAsync(
-                        useAsync,
-                        w =>
+                    .ApplyChangeToWorkspaceMaybeAsync(useAsync, w =>
+                    {
+                        foreach (var newFileName in newFileNames)
                         {
-                            foreach (var newFileName in newFileNames)
-                            {
-                                if (
-                                    _openTextBufferProvider.TryGetBufferFromFilePath(
-                                        newFileName,
-                                        out var textBuffer
-                                    )
+                            if (
+                                _openTextBufferProvider.TryGetBufferFromFilePath(
+                                    newFileName,
+                                    out var textBuffer
                                 )
+                            )
+                            {
+                                // If we are on the UI thread, we can just grab the hierarchy and properly wire up to the correct context; if we're off the UI thread we'll instead wire up to some
+                                // document, and then asynchronously jump to the UI thread to pick the correct context. This ensures the workspace has the correct content,
+                                // even if we don't immediately know the right context.
+                                if (_workspace._threadingContext.JoinableTaskContext.IsOnMainThread)
                                 {
-                                    // If we are on the UI thread, we can just grab the hierarchy and properly wire up to the correct context; if we're off the UI thread we'll instead wire up to some
-                                    // document, and then asynchronously jump to the UI thread to pick the correct context. This ensures the workspace has the correct content,
-                                    // even if we don't immediately know the right context.
+                                    var hierarchy = _openTextBufferProvider.GetDocumentHierarchy(
+                                        newFileName
+                                    );
                                     if (
-                                        _workspace
-                                            ._threadingContext
-                                            .JoinableTaskContext
-                                            .IsOnMainThread
+                                        TryOpeningDocumentsForFilePathCore(
+                                            w,
+                                            newFileName,
+                                            textBuffer,
+                                            hierarchy
+                                        )
+                                    )
+                                        EnsureSuggestedActionsSourceProviderEnabled();
+                                }
+                                else
+                                {
+                                    // Since we're not on the UI thread, we can't grab a hierarchy to wire up the correct context. We'll try wire up without a context
+                                    // and if it was actually open, we'll schedule an update asynchronously.
+                                    if (
+                                        TryOpeningDocumentsForFilePathCore(
+                                            w,
+                                            newFileName,
+                                            textBuffer,
+                                            hierarchy: null
+                                        )
                                     )
                                     {
-                                        var hierarchy =
-                                            _openTextBufferProvider.GetDocumentHierarchy(
-                                                newFileName
+                                        // The files are now tied to the buffer, but let's schedule work to correctly update the context.
+                                        var token =
+                                            _asynchronousOperationListener.BeginAsyncOperation(
+                                                nameof(CheckForAddedFileBeingOpenMaybeAsync)
                                             );
-                                        if (
-                                            TryOpeningDocumentsForFilePathCore(
-                                                w,
-                                                newFileName,
-                                                textBuffer,
-                                                hierarchy
-                                            )
-                                        )
-                                            EnsureSuggestedActionsSourceProviderEnabled();
-                                    }
-                                    else
-                                    {
-                                        // Since we're not on the UI thread, we can't grab a hierarchy to wire up the correct context. We'll try wire up without a context
-                                        // and if it was actually open, we'll schedule an update asynchronously.
-                                        if (
-                                            TryOpeningDocumentsForFilePathCore(
-                                                w,
-                                                newFileName,
-                                                textBuffer,
-                                                hierarchy: null
-                                            )
-                                        )
-                                        {
-                                            // The files are now tied to the buffer, but let's schedule work to correctly update the context.
-                                            var token =
-                                                _asynchronousOperationListener.BeginAsyncOperation(
-                                                    nameof(CheckForAddedFileBeingOpenMaybeAsync)
-                                                );
-                                            UpdateContextAfterOpenAsync(newFileName)
-                                                .CompletesAsyncOperation(token);
-                                        }
+                                        UpdateContextAfterOpenAsync(newFileName)
+                                            .CompletesAsyncOperation(token);
                                     }
                                 }
                             }
                         }
-                    )
+                    })
                     .AsTask();
             }
 

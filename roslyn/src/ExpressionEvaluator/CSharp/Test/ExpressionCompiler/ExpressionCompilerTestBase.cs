@@ -532,17 +532,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         internal static void VerifyTypeParameters(MethodSymbol method)
         {
             Assert.True(method.IsContainingSymbolOfAllTypeParameters(method.ReturnType));
-            AssertEx.All(
-                method.TypeParameters,
-                typeParameter => method.IsContainingSymbolOfAllTypeParameters(typeParameter)
+            AssertEx.All(method.TypeParameters, typeParameter =>
+                method.IsContainingSymbolOfAllTypeParameters(typeParameter)
             );
-            AssertEx.All(
-                method.TypeArgumentsWithAnnotations,
-                typeArgument => method.IsContainingSymbolOfAllTypeParameters(typeArgument.Type)
+            AssertEx.All(method.TypeArgumentsWithAnnotations, typeArgument =>
+                method.IsContainingSymbolOfAllTypeParameters(typeArgument.Type)
             );
-            AssertEx.All(
-                method.Parameters,
-                parameter => method.IsContainingSymbolOfAllTypeParameters(parameter.Type)
+            AssertEx.All(method.Parameters, parameter =>
+                method.IsContainingSymbolOfAllTypeParameters(parameter.Type)
             );
             VerifyTypeParameters(method.ContainingType);
         }
@@ -583,13 +580,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         /// </summary>
         internal static void VerifyTypeParameters(NamedTypeSymbol type)
         {
-            AssertEx.All(
-                type.TypeParameters,
-                typeParameter => type.IsContainingSymbolOfAllTypeParameters(typeParameter)
+            AssertEx.All(type.TypeParameters, typeParameter =>
+                type.IsContainingSymbolOfAllTypeParameters(typeParameter)
             );
-            AssertEx.All(
-                type.TypeArguments(),
-                typeArgument => type.IsContainingSymbolOfAllTypeParameters(typeArgument)
+            AssertEx.All(type.TypeArguments(), typeArgument =>
+                type.IsContainingSymbolOfAllTypeParameters(typeArgument)
             );
             var container = type.ContainingType;
             if ((object)container != null)

@@ -226,9 +226,8 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
                 ServiceBrokerClient = new ServiceBrokerClient(ServiceBroker);
 #pragma warning restore
 
-                RegisterInProcBrokeredService(
-                    SolutionAssetProvider.ServiceDescriptor,
-                    () => new SolutionAssetProvider(workspaceServices)
+                RegisterInProcBrokeredService(SolutionAssetProvider.ServiceDescriptor, () =>
+                    new SolutionAssetProvider(workspaceServices)
                 );
                 RegisterRemoteBrokeredService(new RemoteAssetSynchronizationService.Factory());
                 RegisterRemoteBrokeredService(

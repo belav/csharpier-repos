@@ -251,9 +251,8 @@ namespace System.Globalization.Tests
         public void ShortTimePattern_SetNull_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => format.ShortTimePattern = null
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                format.ShortTimePattern = null
             );
         }
 

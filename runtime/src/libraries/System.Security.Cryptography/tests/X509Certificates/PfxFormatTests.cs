@@ -835,26 +835,20 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     {
                         X509Certificate2 cert2WithKey = coll.Collection[0];
 
-                        ReadMultiPfx(
-                            pfxBytes,
-                            pw,
-                            cert2WithKey,
-                            new[] { cert2WithKey, cert },
-                            x =>
+                        ReadMultiPfx(pfxBytes, pw, cert2WithKey, new[] { cert2WithKey, cert }, x =>
+                        {
+                            if (x.Equals(cert))
                             {
-                                if (x.Equals(cert))
-                                {
-                                    CheckMultiBoundKeyConsistency(x);
-                                }
-                                else if (x.HasPrivateKey)
-                                {
-                                    // On macOS cert2WithKey.HasPrivateKey is
-                                    // false because the SecIdentityRef won't
-                                    // bind the mismatched private key.
-                                    CheckMultiBoundKeyConsistencyFails(x);
-                                }
+                                CheckMultiBoundKeyConsistency(x);
                             }
-                        );
+                            else if (x.HasPrivateKey)
+                            {
+                                // On macOS cert2WithKey.HasPrivateKey is
+                                // false because the SecIdentityRef won't
+                                // bind the mismatched private key.
+                                CheckMultiBoundKeyConsistencyFails(x);
+                            }
+                        });
 
                         AssertExtensions.SequenceEqual(cert2.RawData, cert2WithKey.RawData);
                     }

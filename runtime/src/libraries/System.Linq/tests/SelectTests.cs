@@ -175,9 +175,8 @@ namespace System.Linq.Tests
             IEnumerable<int> source = Enumerable.Range(1, 10);
             Func<int, int, int> selector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => source.Select(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                source.Select(selector)
             );
         }
 
@@ -196,9 +195,8 @@ namespace System.Linq.Tests
             IEnumerable<int> source = Enumerable.Range(1, 10);
             Func<int, int> selector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "selector",
-                () => source.Select(selector)
+            AssertExtensions.Throws<ArgumentNullException>("selector", () =>
+                source.Select(selector)
             );
         }
 
@@ -1038,23 +1036,19 @@ namespace System.Linq.Tests
             var source = new[] { 1, 2, 3, 4 }.Select(i => i * 2);
             for (int i = 0; i != 4; ++i)
                 Assert.Equal(i * 2 + 2, source.ElementAt(i));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => source.ElementAt(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                source.ElementAt(-1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => source.ElementAt(4)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                source.ElementAt(4)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => source.ElementAt(40)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                source.ElementAt(40)
             );
 
             Assert.Equal(6, source.Skip(1).ElementAt(1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => source.Skip(2).ElementAt(9)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                source.Skip(2).ElementAt(9)
             );
         }
 
@@ -1064,23 +1058,19 @@ namespace System.Linq.Tests
             var source = new List<int> { 1, 2, 3, 4 }.Select(i => i * 2);
             for (int i = 0; i != 4; ++i)
                 Assert.Equal(i * 2 + 2, source.ElementAt(i));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => source.ElementAt(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                source.ElementAt(-1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => source.ElementAt(4)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                source.ElementAt(4)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => source.ElementAt(40)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                source.ElementAt(40)
             );
 
             Assert.Equal(6, source.Skip(1).ElementAt(1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => source.Skip(2).ElementAt(9)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                source.Skip(2).ElementAt(9)
             );
         }
 
@@ -1092,23 +1082,19 @@ namespace System.Linq.Tests
                 .Select(i => i * 2);
             for (int i = 0; i != 4; ++i)
                 Assert.Equal(i * 2 + 2, source.ElementAt(i));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => source.ElementAt(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                source.ElementAt(-1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => source.ElementAt(4)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                source.ElementAt(4)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => source.ElementAt(40)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                source.ElementAt(40)
             );
 
             Assert.Equal(6, source.Skip(1).ElementAt(1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "index",
-                () => source.Skip(2).ElementAt(9)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () =>
+                source.Skip(2).ElementAt(9)
             );
         }
 

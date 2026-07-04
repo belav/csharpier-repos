@@ -31,9 +31,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             public ComponentSharedTestStateBase()
             {
                 var dotNetBuilder = DotNet("WithNetCoreApp")
-                    .AddMicrosoftNETCoreAppFrameworkMockCoreClr(
-                        "4.0.0",
-                        builder => CustomizeDotNetWithNetCoreAppMicrosoftNETCoreApp(builder)
+                    .AddMicrosoftNETCoreAppFrameworkMockCoreClr("4.0.0", builder =>
+                        CustomizeDotNetWithNetCoreAppMicrosoftNETCoreApp(builder)
                     );
                 CustomizeDotNetWithNetCoreApp(dotNetBuilder);
                 DotNetWithNetCoreApp = dotNetBuilder.Build();

@@ -982,9 +982,8 @@ namespace System.Globalization.Tests
         public void FullDateTimePattern_SetNullValue_ThrowsArgumentNullException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => format.FullDateTimePattern = null
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                format.FullDateTimePattern = null
             );
         }
 

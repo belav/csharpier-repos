@@ -4416,10 +4416,8 @@ class C { int Y => 2; }
             Assert.NotEmpty(delta.MetadataDelta);
             Assert.NotEmpty(delta.PdbDelta);
             Assert.Equal(2, delta.UpdatedMethods.Length);
-            AssertEx.Equal(
-                new[] { 0x02000002, 0x02000003 },
-                delta.UpdatedTypes,
-                itemInspector: t => "0x" + t.ToString("X")
+            AssertEx.Equal(new[] { 0x02000002, 0x02000003 }, delta.UpdatedTypes, itemInspector: t =>
+                "0x" + t.ToString("X")
             );
 
             debuggingSession.DiscardSolutionUpdate();

@@ -71,9 +71,8 @@ public class ZipFile_Create_Stream : ZipFileTestBase
     {
         using MemoryStream ms = new();
         using WrappedStream destination = new(ms, canRead: true, canWrite: false, canSeek: true);
-        Assert.Throws<ArgumentException>(
-            "destination",
-            () => ZipFile.CreateFromDirectory(GetTestFilePath(), destination)
+        Assert.Throws<ArgumentException>("destination", () =>
+            ZipFile.CreateFromDirectory(GetTestFilePath(), destination)
         );
     }
 

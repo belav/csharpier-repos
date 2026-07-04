@@ -205,11 +205,11 @@ namespace Mono.CodeContracts.Rewrite.AstVisitors
 
         protected virtual Expr VisitCall(ExprCall e)
         {
-            return this.VisitCollection(
-                e.Parameters,
-                e,
-                exprs => new ExprCall(e.MethodInfo, e.Method, exprs)
-            );
+            return this.VisitCollection(e.Parameters, e, exprs => new ExprCall(
+                e.MethodInfo,
+                e.Method,
+                exprs
+            ));
         }
 
         protected virtual Expr VisitReturn(ExprReturn e)

@@ -21,20 +21,14 @@ class C
     {
         int[] a = new int[] { 1 };
         Foo(a);
-        Foo(
-            a,
-            (int i) =>
-            {
-                return a;
-            }
-        );
-        Foo(
-            a,
-            (int i, int[] b) =>
-            {
-                return a;
-            }
-        );
+        Foo(a, (int i) =>
+        {
+            return a;
+        });
+        Foo(a, (int i, int[] b) =>
+        {
+            return a;
+        });
         Foo(
             (int[] b) =>
             {

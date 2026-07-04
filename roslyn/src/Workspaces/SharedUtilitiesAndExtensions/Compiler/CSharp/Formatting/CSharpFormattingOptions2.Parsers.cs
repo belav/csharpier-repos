@@ -70,23 +70,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
         internal static SpacePlacementWithinParentheses ParseSpacingWithinParenthesesList(
             string list
         ) =>
-            (SpacePlacementWithinParentheses)ParseEditorConfigFlags(
-                list,
-                static s =>
-                    s_spacingWithinParenthesisOptionsEditorConfigMap.TryGetValue(s, out var v)
-                        ? (int)v
-                        : 0
+            (SpacePlacementWithinParentheses)ParseEditorConfigFlags(list, static s =>
+                s_spacingWithinParenthesisOptionsEditorConfigMap.TryGetValue(s, out var v)
+                    ? (int)v
+                    : 0
             );
 
         internal static string ToEditorConfigValue(SpacePlacementWithinParentheses value) =>
             (value == SpacePlacementWithinParentheses.None)
                 ? "false"
-                : ToEditorConfigFlagList(
-                    (int)value,
-                    static v =>
-                        s_spacingWithinParenthesisOptionsEditorConfigMap[
-                            (SpacePlacementWithinParentheses)v
-                        ]
+                : ToEditorConfigFlagList((int)value, static v =>
+                    s_spacingWithinParenthesisOptionsEditorConfigMap[
+                        (SpacePlacementWithinParentheses)v
+                    ]
                 );
 
         internal static NewLineBeforeOpenBracePlacement ParseNewLineBeforeOpenBracePlacementList(
@@ -108,9 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             {
                 NewLineBeforeOpenBracePlacement.None => "none",
                 NewLineBeforeOpenBracePlacement.All => "all",
-                _ => ToEditorConfigFlagList(
-                    (int)value,
-                    static v => s_newLineOptionsEditorConfigMap[(NewLineBeforeOpenBracePlacement)v]
+                _ => ToEditorConfigFlagList((int)value, static v =>
+                    s_newLineOptionsEditorConfigMap[(NewLineBeforeOpenBracePlacement)v]
                 ),
             };
 

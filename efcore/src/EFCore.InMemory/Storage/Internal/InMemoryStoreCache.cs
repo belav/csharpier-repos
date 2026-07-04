@@ -32,9 +32,8 @@ public class InMemoryStoreCache : IInMemoryStoreCache
 
         if (options?.DatabaseRoot != null)
         {
-            LazyInitializer.EnsureInitialized(
-                ref options.DatabaseRoot.Instance,
-                () => new ConcurrentDictionary<string, IInMemoryStore>()
+            LazyInitializer.EnsureInitialized(ref options.DatabaseRoot.Instance, () =>
+                new ConcurrentDictionary<string, IInMemoryStore>()
             );
 
             _namedStores =

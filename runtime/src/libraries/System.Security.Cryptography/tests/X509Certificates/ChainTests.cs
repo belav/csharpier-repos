@@ -345,9 +345,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 bool valid = chain.Build(testCert);
 
                 Assert.False(valid);
-                Assert.Contains(
-                    chain.ChainStatus,
-                    s => s.Status == X509ChainStatusFlags.UntrustedRoot
+                Assert.Contains(chain.ChainStatus, s =>
+                    s.Status == X509ChainStatusFlags.UntrustedRoot
                 );
             }
         }
@@ -675,9 +674,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     else
                     {
                         // Ensure that NotTimeValid is one of the reasons.
-                        Assert.Contains(
-                            chain.ChainStatus,
-                            s => s.Status == X509ChainStatusFlags.NotTimeValid
+                        Assert.Contains(chain.ChainStatus, s =>
+                            s.Status == X509ChainStatusFlags.NotTimeValid
                         );
                     }
                 }
@@ -729,9 +727,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 X509ChainStatus[] chainElementStatus = chain.ChainElements[0].ChainElementStatus;
                 Assert.InRange(chainElementStatus.Length, 1, int.MaxValue);
-                Assert.Contains(
-                    chainElementStatus,
-                    x => x.Status == X509ChainStatusFlags.NotValidForUsage
+                Assert.Contains(chainElementStatus, x =>
+                    x.Status == X509ChainStatusFlags.NotValidForUsage
                 );
             }
         }
@@ -783,9 +780,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 X509ChainStatus[] chainElementStatus = chain.ChainElements[0].ChainElementStatus;
                 Assert.InRange(chainElementStatus.Length, 1, int.MaxValue);
-                Assert.Contains(
-                    chainElementStatus,
-                    x => x.Status == X509ChainStatusFlags.NotValidForUsage
+                Assert.Contains(chainElementStatus, x =>
+                    x.Status == X509ChainStatusFlags.NotValidForUsage
                 );
             }
         }
@@ -807,9 +803,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 Assert.Equal(
                     X509ChainStatusFlags.NotValidForUsage,
-                    holder.Chain.ChainStatus.Aggregate(
-                        X509ChainStatusFlags.NoError,
-                        (a, status) => a | status.Status
+                    holder.Chain.ChainStatus.Aggregate(X509ChainStatusFlags.NoError, (a, status) =>
+                        a | status.Status
                     )
                 );
 
@@ -828,9 +823,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     X509ChainStatusFlags.NotValidForUsage,
                     holder
                         .Chain.ChainElements[0]
-                        .ChainElementStatus.Aggregate(
-                            X509ChainStatusFlags.NoError,
-                            (a, status) => a | status.Status
+                        .ChainElementStatus.Aggregate(X509ChainStatusFlags.NoError, (a, status) =>
+                            a | status.Status
                         )
                 );
 
@@ -838,9 +832,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     X509ChainStatusFlags.NotValidForUsage,
                     holder
                         .Chain.ChainElements[1]
-                        .ChainElementStatus.Aggregate(
-                            X509ChainStatusFlags.NoError,
-                            (a, status) => a | status.Status
+                        .ChainElementStatus.Aggregate(X509ChainStatusFlags.NoError, (a, status) =>
+                            a | status.Status
                         )
                 );
 
@@ -848,9 +841,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     X509ChainStatusFlags.NotValidForUsage,
                     holder
                         .Chain.ChainElements[2]
-                        .ChainElementStatus.Aggregate(
-                            X509ChainStatusFlags.NoError,
-                            (a, status) => a | status.Status
+                        .ChainElementStatus.Aggregate(X509ChainStatusFlags.NoError, (a, status) =>
+                            a | status.Status
                         )
                 );
             }
@@ -1007,9 +999,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (var chain = X509Chain.Create())
             {
                 AssertExtensions.Throws<ArgumentException>("certificate", () => chain.Build(null));
-                AssertExtensions.Throws<ArgumentException>(
-                    "certificate",
-                    () => chain.Build(new X509Certificate2())
+                AssertExtensions.Throws<ArgumentException>("certificate", () =>
+                    chain.Build(new X509Certificate2())
                 );
             }
         }
@@ -1545,17 +1536,15 @@ LjCvFGJ+RiZCbxIZfUZEuJ5vAH5WOa2S0tYoEAeyfzuLMIqY9xK74nlZ/vzz1cY="
 
         internal static X509ChainStatusFlags AllStatusFlags(this X509Chain chain)
         {
-            return chain.ChainStatus.Aggregate(
-                X509ChainStatusFlags.NoError,
-                (f, s) => f | s.Status
+            return chain.ChainStatus.Aggregate(X509ChainStatusFlags.NoError, (f, s) =>
+                f | s.Status
             );
         }
 
         internal static X509ChainStatusFlags AllStatusFlags(this X509ChainElement chainElement)
         {
-            return chainElement.ChainElementStatus.Aggregate(
-                X509ChainStatusFlags.NoError,
-                (f, s) => f | s.Status
+            return chainElement.ChainElementStatus.Aggregate(X509ChainStatusFlags.NoError, (f, s) =>
+                f | s.Status
             );
         }
 

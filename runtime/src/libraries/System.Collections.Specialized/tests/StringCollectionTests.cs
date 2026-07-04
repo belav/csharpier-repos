@@ -189,9 +189,8 @@ namespace System.Collections.Specialized.Tests
         public static void AddRange_NullTest(StringCollection collection, string[] data)
         {
             _ = data;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => collection.AddRange(null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                collection.AddRange(null)
             );
         }
 
@@ -262,15 +261,11 @@ namespace System.Collections.Specialized.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => collection.CopyTo(data, -1));
             if (data.Length > 0)
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "destinationArray",
-                    "",
-                    () => collection.CopyTo(new string[0], data.Length - 1)
+                AssertExtensions.Throws<ArgumentException>("destinationArray", "", () =>
+                    collection.CopyTo(new string[0], data.Length - 1)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "destinationArray",
-                    "",
-                    () => collection.CopyTo(new string[data.Length - 1], 0)
+                AssertExtensions.Throws<ArgumentException>("destinationArray", "", () =>
+                    collection.CopyTo(new string[data.Length - 1], 0)
                 );
             }
 
@@ -281,15 +276,11 @@ namespace System.Collections.Specialized.Tests
             );
             if (data.Length > 0)
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "destinationArray",
-                    "",
-                    () => ((ICollection)collection).CopyTo(new string[0], data.Length - 1)
+                AssertExtensions.Throws<ArgumentException>("destinationArray", "", () =>
+                    ((ICollection)collection).CopyTo(new string[0], data.Length - 1)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "destinationArray",
-                    "",
-                    () => ((ICollection)collection).CopyTo(new string[data.Length - 1], 0)
+                AssertExtensions.Throws<ArgumentException>("destinationArray", "", () =>
+                    ((ICollection)collection).CopyTo(new string[data.Length - 1], 0)
                 );
             }
         }
@@ -459,14 +450,11 @@ namespace System.Collections.Specialized.Tests
         [MemberData(nameof(StringCollection_Duplicates_Data))]
         public static void IndexOfTest(StringCollection collection, string[] data)
         {
-            Assert.All(
-                data,
-                element => Assert.Equal(Array.IndexOf(data, element), collection.IndexOf(element))
+            Assert.All(data, element =>
+                Assert.Equal(Array.IndexOf(data, element), collection.IndexOf(element))
             );
-            Assert.All(
-                data,
-                element =>
-                    Assert.Equal(Array.IndexOf(data, element), ((IList)collection).IndexOf(element))
+            Assert.All(data, element =>
+                Assert.Equal(Array.IndexOf(data, element), ((IList)collection).IndexOf(element))
             );
             Assert.Equal(-1, collection.IndexOf(ElementNotPresent));
             Assert.Equal(-1, ((IList)collection).IndexOf(ElementNotPresent));
@@ -478,14 +466,11 @@ namespace System.Collections.Specialized.Tests
         {
             // Only the index of the first element will be returned.
             data = data.Distinct().ToArray();
-            Assert.All(
-                data,
-                element => Assert.Equal(Array.IndexOf(data, element), collection.IndexOf(element))
+            Assert.All(data, element =>
+                Assert.Equal(Array.IndexOf(data, element), collection.IndexOf(element))
             );
-            Assert.All(
-                data,
-                element =>
-                    Assert.Equal(Array.IndexOf(data, element), ((IList)collection).IndexOf(element))
+            Assert.All(data, element =>
+                Assert.Equal(Array.IndexOf(data, element), ((IList)collection).IndexOf(element))
             );
             Assert.Equal(-1, collection.IndexOf(ElementNotPresent));
             Assert.Equal(-1, ((IList)collection).IndexOf(ElementNotPresent));
@@ -600,17 +585,14 @@ namespace System.Collections.Specialized.Tests
         [MemberData(nameof(StringCollection_Data))]
         public static void RemoveTest(StringCollection collection, string[] data)
         {
-            Assert.All(
-                data,
-                element =>
-                {
-                    Assert.True(collection.Contains(element));
-                    Assert.True(((IList)collection).Contains(element));
-                    collection.Remove(element);
-                    Assert.False(collection.Contains(element));
-                    Assert.False(((IList)collection).Contains(element));
-                }
-            );
+            Assert.All(data, element =>
+            {
+                Assert.True(collection.Contains(element));
+                Assert.True(((IList)collection).Contains(element));
+                collection.Remove(element);
+                Assert.False(collection.Contains(element));
+                Assert.False(((IList)collection).Contains(element));
+            });
             Assert.Equal(0, collection.Count);
         }
 
@@ -618,17 +600,14 @@ namespace System.Collections.Specialized.Tests
         [MemberData(nameof(StringCollection_Data))]
         public static void Remove_IListTest(StringCollection collection, string[] data)
         {
-            Assert.All(
-                data,
-                element =>
-                {
-                    Assert.True(collection.Contains(element));
-                    Assert.True(((IList)collection).Contains(element));
-                    ((IList)collection).Remove(element);
-                    Assert.False(collection.Contains(element));
-                    Assert.False(((IList)collection).Contains(element));
-                }
-            );
+            Assert.All(data, element =>
+            {
+                Assert.True(collection.Contains(element));
+                Assert.True(((IList)collection).Contains(element));
+                ((IList)collection).Remove(element);
+                Assert.False(collection.Contains(element));
+                Assert.False(((IList)collection).Contains(element));
+            });
             Assert.Equal(0, collection.Count);
         }
 
@@ -649,17 +628,14 @@ namespace System.Collections.Specialized.Tests
         {
             // Only the first element will be removed.
             string[] first = data.Distinct().ToArray();
-            Assert.All(
-                first,
-                element =>
-                {
-                    Assert.True(collection.Contains(element));
-                    Assert.True(((IList)collection).Contains(element));
-                    collection.Remove(element);
-                    Assert.True(collection.Contains(element));
-                    Assert.True(((IList)collection).Contains(element));
-                }
-            );
+            Assert.All(first, element =>
+            {
+                Assert.True(collection.Contains(element));
+                Assert.True(((IList)collection).Contains(element));
+                collection.Remove(element);
+                Assert.True(collection.Contains(element));
+                Assert.True(((IList)collection).Contains(element));
+            });
             Assert.Equal(data.Length - first.Length, collection.Count);
             for (int i = first.Length; i < data.Length; i++)
             {
@@ -708,17 +684,14 @@ namespace System.Collections.Specialized.Tests
         {
             // Only the first element will be removed.
             string[] first = data.Distinct().ToArray();
-            Assert.All(
-                first,
-                element =>
-                {
-                    Assert.True(collection.Contains(element));
-                    Assert.True(((IList)collection).Contains(element));
-                    ((IList)collection).Remove(element);
-                    Assert.True(collection.Contains(element));
-                    Assert.True(((IList)collection).Contains(element));
-                }
-            );
+            Assert.All(first, element =>
+            {
+                Assert.True(collection.Contains(element));
+                Assert.True(((IList)collection).Contains(element));
+                ((IList)collection).Remove(element);
+                Assert.True(collection.Contains(element));
+                Assert.True(((IList)collection).Contains(element));
+            });
             Assert.Equal(data.Length - first.Length, collection.Count);
             for (int i = first.Length; i < data.Length; i++)
             {

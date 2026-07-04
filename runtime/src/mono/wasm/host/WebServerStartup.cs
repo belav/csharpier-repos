@@ -126,73 +126,62 @@ internal sealed class WebServerStartup
         {
             app.UseRouter(router =>
             {
-                router.MapGet(
-                    "/console",
-                    async context =>
+                router.MapGet("/console", async context =>
+                {
+                    if (!context.WebSockets.IsWebSocketRequest)
                     {
-                        if (!context.WebSockets.IsWebSocketRequest)
-                        {
-                            context.Response.StatusCode = 400;
-                            return;
-                        }
-
-                        using WebSocket socket = await context.WebSockets.AcceptWebSocketAsync();
-                        await options.OnConsoleConnected(socket);
+                        context.Response.StatusCode = 400;
+                        return;
                     }
-                );
+
+                    using WebSocket socket = await context.WebSockets.AcceptWebSocketAsync();
+                    await options.OnConsoleConnected(socket);
+                });
             });
         }
 
-        app.Map(
-            "/debug",
-            app =>
-            {
-                app.Run(
-                    async (context) =>
-                    {
-                        //debug from VS
-                        var queryParams = HttpUtility.ParseQueryString(
-                            context.Request.QueryString.Value!
-                        );
-                        var browserParam = queryParams.Get("browser");
-                        Uri? browserUrl = null;
-                        var devToolsHost = "http://localhost:9222";
-                        if (browserParam != null)
-                        {
-                            browserUrl = new Uri(browserParam);
-                            devToolsHost = $"http://{browserUrl.Host}:{browserUrl.Port}";
-                        }
-                        lock (LaunchLock)
-                        {
-                            if (LaunchedDebugProxyUrl == "")
-                            {
-                                LaunchedDebugProxyUrl =
-                                    $"http://localhost:{StartDebugProxy(devToolsHost)}";
-                            }
-                        }
-                        var requestPath = context.Request.Path.ToString();
-                        if (requestPath == string.Empty)
-                        {
-                            requestPath = "/";
-                        }
-                        context.Response.Redirect(
-                            $"{LaunchedDebugProxyUrl}{browserUrl!.PathAndQuery}"
-                        );
-                        await Task.FromResult(0);
-                    }
-                );
-            }
-        );
-        app.UseEndpoints(endpoints =>
+        app.Map("/debug", app =>
         {
-            endpoints.MapGet(
-                "/",
-                context =>
+            app.Run(
+                async (context) =>
                 {
-                    context.Response.Redirect("index.html", permanent: false);
-                    return Task.CompletedTask;
+                    //debug from VS
+                    var queryParams = HttpUtility.ParseQueryString(
+                        context.Request.QueryString.Value!
+                    );
+                    var browserParam = queryParams.Get("browser");
+                    Uri? browserUrl = null;
+                    var devToolsHost = "http://localhost:9222";
+                    if (browserParam != null)
+                    {
+                        browserUrl = new Uri(browserParam);
+                        devToolsHost = $"http://{browserUrl.Host}:{browserUrl.Port}";
+                    }
+                    lock (LaunchLock)
+                    {
+                        if (LaunchedDebugProxyUrl == "")
+                        {
+                            LaunchedDebugProxyUrl =
+                                $"http://localhost:{StartDebugProxy(devToolsHost)}";
+                        }
+                    }
+                    var requestPath = context.Request.Path.ToString();
+                    if (requestPath == string.Empty)
+                    {
+                        requestPath = "/";
+                    }
+                    context.Response.Redirect($"{LaunchedDebugProxyUrl}{browserUrl!.PathAndQuery}");
+                    await Task.FromResult(0);
                 }
             );
+        });
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapGet("/", context =>
+            {
+                context.Response.Redirect("index.html", permanent: false);
+                return Task.CompletedTask;
+            });
         });
 
         ServerURLsProvider.ResolveServerUrlsOnApplicationStarted(

@@ -103,9 +103,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void TestConstructor1()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "length",
-                () => new SegmentedArray<byte>(-1)
+            Assert.Throws<ArgumentOutOfRangeException>("length", () =>
+                new SegmentedArray<byte>(-1)
             );
 
             Assert.Empty(new SegmentedArray<byte>(0));

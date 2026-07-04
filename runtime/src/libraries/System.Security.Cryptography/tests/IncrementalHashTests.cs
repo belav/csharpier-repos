@@ -75,30 +75,25 @@ namespace System.Security.Cryptography.Tests
         [Fact]
         public static void InvalidArguments_Throw()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "hashAlgorithm",
-                () => IncrementalHash.CreateHash(new HashAlgorithmName(null))
+            AssertExtensions.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                IncrementalHash.CreateHash(new HashAlgorithmName(null))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "hashAlgorithm",
-                () => IncrementalHash.CreateHash(new HashAlgorithmName(""))
+            AssertExtensions.Throws<ArgumentException>("hashAlgorithm", () =>
+                IncrementalHash.CreateHash(new HashAlgorithmName(""))
             );
 
             if (PlatformDetection.IsNotBrowser)
             {
                 // HMAC is not supported on Browser
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "hashAlgorithm",
-                    () => IncrementalHash.CreateHMAC(new HashAlgorithmName(null), new byte[1])
+                AssertExtensions.Throws<ArgumentNullException>("hashAlgorithm", () =>
+                    IncrementalHash.CreateHMAC(new HashAlgorithmName(null), new byte[1])
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "hashAlgorithm",
-                    () => IncrementalHash.CreateHMAC(new HashAlgorithmName(""), new byte[1])
+                AssertExtensions.Throws<ArgumentException>("hashAlgorithm", () =>
+                    IncrementalHash.CreateHMAC(new HashAlgorithmName(""), new byte[1])
                 );
 
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "key",
-                    () => IncrementalHash.CreateHMAC(HashAlgorithmName.SHA512, null)
+                AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                    IncrementalHash.CreateHMAC(HashAlgorithmName.SHA512, null)
                 );
             }
 
@@ -108,27 +103,22 @@ namespace System.Security.Cryptography.Tests
                 )
             )
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "data",
-                    () => incrementalHash.AppendData(null)
+                AssertExtensions.Throws<ArgumentNullException>("data", () =>
+                    incrementalHash.AppendData(null)
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "data",
-                    () => incrementalHash.AppendData(null, 0, 0)
+                AssertExtensions.Throws<ArgumentNullException>("data", () =>
+                    incrementalHash.AppendData(null, 0, 0)
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "offset",
-                    () => incrementalHash.AppendData(new byte[1], -1, 1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () =>
+                    incrementalHash.AppendData(new byte[1], -1, 1)
                 );
 
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "count",
-                    () => incrementalHash.AppendData(new byte[1], 0, -1)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    incrementalHash.AppendData(new byte[1], 0, -1)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "count",
-                    () => incrementalHash.AppendData(new byte[1], 0, 2)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                    incrementalHash.AppendData(new byte[1], 0, 2)
                 );
 
                 Assert.Throws<ArgumentException>(() =>
@@ -926,9 +916,8 @@ namespace System.Security.Cryptography.Tests
             Assert.False(trySpanWriter(incremental, Span<byte>.Empty, out int written));
             Assert.Equal(0, written);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "destination",
-                () => spanWriter(incremental, Array.Empty<byte>())
+            AssertExtensions.Throws<ArgumentException>("destination", () =>
+                spanWriter(incremental, Array.Empty<byte>())
             );
 
             // HashLengthInBytes - 1
@@ -937,9 +926,8 @@ namespace System.Security.Cryptography.Tests
             );
             Assert.Equal(0, written);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "destination",
-                () => spanWriter(incremental, comparison.AsSpan(0, comparison.Length - 1))
+            AssertExtensions.Throws<ArgumentException>("destination", () =>
+                spanWriter(incremental, comparison.AsSpan(0, comparison.Length - 1))
             );
 
             // Ensure comparison wasn't overwritten

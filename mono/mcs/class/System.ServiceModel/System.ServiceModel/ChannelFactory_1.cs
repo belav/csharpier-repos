@@ -125,9 +125,8 @@ namespace System.ServiceModel
 
         public static TChannel CreateChannel(Binding binding, EndpointAddress endpointAddress)
         {
-            return CreateChannelCore(
-                new ChannelFactory<TChannel>(binding, endpointAddress),
-                f => f.CreateChannel()
+            return CreateChannelCore(new ChannelFactory<TChannel>(binding, endpointAddress), f =>
+                f.CreateChannel()
             );
         }
 
@@ -137,9 +136,8 @@ namespace System.ServiceModel
             Uri via
         )
         {
-            return CreateChannelCore(
-                new ChannelFactory<TChannel>(binding),
-                f => f.CreateChannel(endpointAddress, via)
+            return CreateChannelCore(new ChannelFactory<TChannel>(binding), f =>
+                f.CreateChannel(endpointAddress, via)
             );
         }
 
@@ -206,9 +204,8 @@ namespace System.ServiceModel
 
         protected static TChannel CreateChannel(string endpointConfigurationName)
         {
-            return CreateChannelCore(
-                new ChannelFactory<TChannel>(endpointConfigurationName),
-                f => f.CreateChannel()
+            return CreateChannelCore(new ChannelFactory<TChannel>(endpointConfigurationName), f =>
+                f.CreateChannel()
             );
         }
 

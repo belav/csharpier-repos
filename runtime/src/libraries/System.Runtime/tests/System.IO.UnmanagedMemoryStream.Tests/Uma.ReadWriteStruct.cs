@@ -23,13 +23,11 @@ namespace System.IO.Tests
                 )
             )
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "position",
-                    () => uma.Write<UmaTestStruct>(-1, ref inStruct)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                    uma.Write<UmaTestStruct>(-1, ref inStruct)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "position",
-                    () => uma.Read<UmaTestStruct>(-1, out inStruct)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                    uma.Read<UmaTestStruct>(-1, out inStruct)
                 );
             }
         }
@@ -114,13 +112,11 @@ namespace System.IO.Tests
                 )
             )
             {
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "position",
-                    () => uma.Write<UmaTestStruct>(capacity, ref inStruct)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                    uma.Write<UmaTestStruct>(capacity, ref inStruct)
                 );
-                AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                    "position",
-                    () => uma.Read<UmaTestStruct>(capacity, out inStruct)
+                AssertExtensions.Throws<ArgumentOutOfRangeException>("position", () =>
+                    uma.Read<UmaTestStruct>(capacity, out inStruct)
                 );
             }
         }
@@ -140,37 +136,23 @@ namespace System.IO.Tests
                 )
             )
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "position",
-                    () =>
-                        uma.Write<UmaTestStruct>(
-                            capacity - UmaTestStruct_UnalignedSize + 1,
-                            ref inStruct
-                        )
+                AssertExtensions.Throws<ArgumentException>("position", () =>
+                    uma.Write<UmaTestStruct>(
+                        capacity - UmaTestStruct_UnalignedSize + 1,
+                        ref inStruct
+                    )
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "position",
-                    () =>
-                        uma.Write<UmaTestStruct>(
-                            capacity - UmaTestStruct_AlignedSize + 1,
-                            ref inStruct
-                        )
+                AssertExtensions.Throws<ArgumentException>("position", () =>
+                    uma.Write<UmaTestStruct>(capacity - UmaTestStruct_AlignedSize + 1, ref inStruct)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "position",
-                    () =>
-                        uma.Read<UmaTestStruct>(
-                            capacity - UmaTestStruct_UnalignedSize + 1,
-                            out inStruct
-                        )
+                AssertExtensions.Throws<ArgumentException>("position", () =>
+                    uma.Read<UmaTestStruct>(
+                        capacity - UmaTestStruct_UnalignedSize + 1,
+                        out inStruct
+                    )
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "position",
-                    () =>
-                        uma.Read<UmaTestStruct>(
-                            capacity - UmaTestStruct_AlignedSize + 1,
-                            out inStruct
-                        )
+                AssertExtensions.Throws<ArgumentException>("position", () =>
+                    uma.Read<UmaTestStruct>(capacity - UmaTestStruct_AlignedSize + 1, out inStruct)
                 );
             }
         }
@@ -186,15 +168,11 @@ namespace System.IO.Tests
             using (var buffer = new TestSafeBuffer(capacity))
             using (var uma = new UnmanagedMemoryAccessor(buffer, 0, capacity, FileAccess.ReadWrite))
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    "type",
-                    () => uma.Write<UmaTestStruct_ContainsReferenceType>(0, ref inStruct)
+                AssertExtensions.Throws<ArgumentException>(null, "type", () =>
+                    uma.Write<UmaTestStruct_ContainsReferenceType>(0, ref inStruct)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    "type",
-                    () => uma.Read<UmaTestStruct_ContainsReferenceType>(0, out inStruct)
+                AssertExtensions.Throws<ArgumentException>(null, "type", () =>
+                    uma.Read<UmaTestStruct_ContainsReferenceType>(0, out inStruct)
                 );
             }
         }
@@ -225,15 +203,11 @@ namespace System.IO.Tests
             using (var buffer = new TestSafeBuffer(capacity))
             using (var uma = new UnmanagedMemoryAccessor(buffer, 0, capacity, FileAccess.ReadWrite))
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    "type",
-                    () => uma.Write<UmaTestStruct_Generic<string>>(0, ref inStruct)
+                AssertExtensions.Throws<ArgumentException>(null, "type", () =>
+                    uma.Write<UmaTestStruct_Generic<string>>(0, ref inStruct)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    null,
-                    "type",
-                    () => uma.Read<UmaTestStruct_Generic<string>>(0, out inStruct)
+                AssertExtensions.Throws<ArgumentException>(null, "type", () =>
+                    uma.Read<UmaTestStruct_Generic<string>>(0, out inStruct)
                 );
             }
         }

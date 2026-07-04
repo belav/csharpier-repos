@@ -135,9 +135,8 @@ namespace System.PrivateUri.Tests
             var baseUri = new Uri("http://www.domain.com/");
             var relativeUri = new Uri("/path/", UriKind.Relative);
 #pragma warning disable 0618
-            AssertExtensions.Throws<ArgumentNullException>(
-                "toUri",
-                () => baseUri.MakeRelative(null)
+            AssertExtensions.Throws<ArgumentNullException>("toUri", () =>
+                baseUri.MakeRelative(null)
             ); // Uri is null
 
             Assert.Throws<InvalidOperationException>(() => relativeUri.MakeRelative(baseUri)); // Base uri is relative

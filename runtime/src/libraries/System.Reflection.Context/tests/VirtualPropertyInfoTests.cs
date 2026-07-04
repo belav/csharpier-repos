@@ -40,9 +40,8 @@ namespace System.Reflection.Context.Tests
         {
             TypeInfo typeInfo = typeof(NullPropertyNameCase).GetTypeInfo();
             TypeInfo customTypeInfo = _customReflectionContext.MapType(typeInfo);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => customTypeInfo.DeclaredProperties
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                customTypeInfo.DeclaredProperties
             );
         }
 
@@ -59,9 +58,8 @@ namespace System.Reflection.Context.Tests
         {
             TypeInfo typeInfo = typeof(NullPropertyTypeCase).GetTypeInfo();
             TypeInfo customTypeInfo = _customReflectionContext.MapType(typeInfo);
-            AssertExtensions.Throws<ArgumentNullException>(
-                "propertyType",
-                () => customTypeInfo.DeclaredProperties
+            AssertExtensions.Throws<ArgumentNullException>("propertyType", () =>
+                customTypeInfo.DeclaredProperties
             );
         }
 

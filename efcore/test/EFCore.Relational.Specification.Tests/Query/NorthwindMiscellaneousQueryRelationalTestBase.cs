@@ -42,11 +42,8 @@ public abstract class NorthwindMiscellaneousQueryRelationalTestBase<TFixture>
                     .Select(c => c.Orders),
             assertOrder: true,
             elementAsserter: (e, a) =>
-                AssertCollection(
-                    e,
-                    a,
-                    elementAsserter: (eo, ao) =>
-                        AssertInclude(eo, ao, new ExpectedInclude<Order>(o => o.OrderDetails))
+                AssertCollection(e, a, elementAsserter: (eo, ao) =>
+                    AssertInclude(eo, ao, new ExpectedInclude<Order>(o => o.OrderDetails))
                 )
         );
 

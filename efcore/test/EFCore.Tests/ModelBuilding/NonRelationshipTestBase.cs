@@ -2604,21 +2604,17 @@ public abstract partial class ModelBuilderTest
         public virtual void Can_add_shared_type_entity_type()
         {
             var modelBuilder = CreateModelBuilder();
-            modelBuilder.SharedTypeEntity<Dictionary<string, object>>(
-                "Shared1",
-                b =>
-                {
-                    b.IndexerProperty<int>("Key");
-                    b.Property<int>("Keys");
-                    b.Property<byte[]>("Values");
-                    b.Property<string>("Count");
-                    b.HasKey("Key");
-                }
-            );
+            modelBuilder.SharedTypeEntity<Dictionary<string, object>>("Shared1", b =>
+            {
+                b.IndexerProperty<int>("Key");
+                b.Property<int>("Keys");
+                b.Property<byte[]>("Values");
+                b.Property<string>("Count");
+                b.HasKey("Key");
+            });
 
-            modelBuilder.SharedTypeEntity<Dictionary<string, object>>(
-                "Shared2",
-                b => b.IndexerProperty<int>("Id")
+            modelBuilder.SharedTypeEntity<Dictionary<string, object>>("Shared2", b =>
+                b.IndexerProperty<int>("Id")
             );
 
             Assert.Equal(

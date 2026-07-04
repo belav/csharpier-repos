@@ -143,9 +143,8 @@ namespace System.CommandLine.Tests
                 result
                     .GetValue(strings)
                     .Should()
-                    .BeEquivalentTo(
-                        new[] { "one", "two" },
-                        options => options.WithStrictOrdering()
+                    .BeEquivalentTo(new[] { "one", "two" }, options =>
+                        options.WithStrictOrdering()
                     );
             }
 

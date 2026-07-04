@@ -28,13 +28,11 @@ namespace System.IO.Tests
         [Fact]
         public void NullArgumentValidation()
         {
-            Assert.Throws<ArgumentNullException>(
-                "fileHandle",
-                static () => File.GetAttributes(default(SafeFileHandle)!)
+            Assert.Throws<ArgumentNullException>("fileHandle", static () =>
+                File.GetAttributes(default(SafeFileHandle)!)
             );
-            Assert.Throws<ArgumentNullException>(
-                "fileHandle",
-                static () => File.SetAttributes(default(SafeFileHandle)!, FileAttributes.None)
+            Assert.Throws<ArgumentNullException>("fileHandle", static () =>
+                File.SetAttributes(default(SafeFileHandle)!, FileAttributes.None)
             );
         }
     }

@@ -134,15 +134,11 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new int[] { 1, 2 },
                 new int[] { 2, 4 }
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "sourceIndex",
-                "srcIndex",
-                () => Utils.CopyArray(array1, array2)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("sourceIndex", "srcIndex", () =>
+                Utils.CopyArray(array1, array2)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "sourceIndex",
-                "srcIndex",
-                () => Utils.CopyArray(array2, array1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("sourceIndex", "srcIndex", () =>
+                Utils.CopyArray(array2, array1)
             );
         }
 

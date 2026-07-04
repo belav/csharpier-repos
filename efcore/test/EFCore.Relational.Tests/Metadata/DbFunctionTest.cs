@@ -422,9 +422,8 @@ public class DbFunctionTest
     {
         var modelBuilder = GetModelBuilder();
 
-        modelBuilder.HasDbFunction(
-            MethodAmi,
-            funcBuilder => funcBuilder.HasName("foo").HasSchema("bar")
+        modelBuilder.HasDbFunction(MethodAmi, funcBuilder =>
+            funcBuilder.HasName("foo").HasSchema("bar")
         );
 
         var dbFunc = modelBuilder.HasDbFunction(MethodAmi).Metadata;
@@ -478,9 +477,8 @@ public class DbFunctionTest
     {
         var modelBuilder = GetModelBuilder();
 
-        modelBuilder.HasDbFunction(
-            MethodBmi,
-            funcBuilder => funcBuilder.HasName(null).HasSchema(null)
+        modelBuilder.HasDbFunction(MethodBmi, funcBuilder =>
+            funcBuilder.HasName(null).HasSchema(null)
         );
 
         var dbFuncBuilder = modelBuilder.HasDbFunction(MethodBmi);

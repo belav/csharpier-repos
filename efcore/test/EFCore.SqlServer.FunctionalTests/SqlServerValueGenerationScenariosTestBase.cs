@@ -2294,9 +2294,8 @@ END"
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder
                 .EnableServiceProviderCaching(false)
-                .UseSqlServer(
-                    SqlServerTestStore.CreateConnectionString(_databaseName),
-                    b => b.UseNetTopologySuite().ApplyConfiguration()
+                .UseSqlServer(SqlServerTestStore.CreateConnectionString(_databaseName), b =>
+                    b.UseNetTopologySuite().ApplyConfiguration()
                 );
     }
 

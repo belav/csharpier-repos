@@ -292,71 +292,49 @@ namespace TaskCoverage
         [Fact]
         public static void Task_WhenAny_TwoTasks_InvalidArgs_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "task1",
-                () => Task.WhenAny(null, Task.CompletedTask)
+            AssertExtensions.Throws<ArgumentNullException>("task1", () =>
+                Task.WhenAny(null, Task.CompletedTask)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "task2",
-                () => Task.WhenAny(Task.CompletedTask, null)
+            AssertExtensions.Throws<ArgumentNullException>("task2", () =>
+                Task.WhenAny(Task.CompletedTask, null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "task1",
-                () => Task.WhenAny(null, Task.FromResult(1))
+            AssertExtensions.Throws<ArgumentNullException>("task1", () =>
+                Task.WhenAny(null, Task.FromResult(1))
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "task2",
-                () => Task.WhenAny(Task.FromResult(2), null)
+            AssertExtensions.Throws<ArgumentNullException>("task2", () =>
+                Task.WhenAny(Task.FromResult(2), null)
             );
         }
 
         [Fact]
         public static void Task_WhenAny_NoTasks_Throws()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "tasks",
-                () =>
-                {
-                    Task.WhenAny(new Task[0]);
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "tasks",
-                () =>
-                {
-                    Task.WhenAny(new List<Task>());
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "tasks",
-                () =>
-                {
-                    Task.WhenAny(EmptyIterator<Task>());
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("tasks", () =>
+            {
+                Task.WhenAny(new Task[0]);
+            });
+            AssertExtensions.Throws<ArgumentException>("tasks", () =>
+            {
+                Task.WhenAny(new List<Task>());
+            });
+            AssertExtensions.Throws<ArgumentException>("tasks", () =>
+            {
+                Task.WhenAny(EmptyIterator<Task>());
+            });
 
-            AssertExtensions.Throws<ArgumentException>(
-                "tasks",
-                () =>
-                {
-                    Task.WhenAny(new Task<int>[0]);
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "tasks",
-                () =>
-                {
-                    Task.WhenAny(new List<Task<int>>());
-                }
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "tasks",
-                () =>
-                {
-                    Task.WhenAny(EmptyIterator<Task<int>>());
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("tasks", () =>
+            {
+                Task.WhenAny(new Task<int>[0]);
+            });
+            AssertExtensions.Throws<ArgumentException>("tasks", () =>
+            {
+                Task.WhenAny(new List<Task<int>>());
+            });
+            AssertExtensions.Throws<ArgumentException>("tasks", () =>
+            {
+                Task.WhenAny(EmptyIterator<Task<int>>());
+            });
 
             static IEnumerable<T> EmptyIterator<T>()
             {

@@ -226,49 +226,39 @@ namespace System.Threading.Tests
         {
             bool createdNew;
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "initialCount",
-                () => new Semaphore(-1, 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("initialCount", () =>
+                new Semaphore(-1, 1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "initialCount",
-                () => new Semaphore(-2, 1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("initialCount", () =>
+                new Semaphore(-2, 1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "maximumCount",
-                () => new Semaphore(0, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("maximumCount", () =>
+                new Semaphore(0, 0)
             );
             AssertExtensions.Throws<ArgumentException>(null, () => new Semaphore(2, 1));
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "initialCount",
-                () => new Semaphore(-1, 1, null)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("initialCount", () =>
+                new Semaphore(-1, 1, null)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "initialCount",
-                () => new Semaphore(-2, 1, null)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("initialCount", () =>
+                new Semaphore(-2, 1, null)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "maximumCount",
-                () => new Semaphore(0, 0, null)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("maximumCount", () =>
+                new Semaphore(0, 0, null)
             );
             AssertExtensions.Throws<ArgumentException>(null, () => new Semaphore(2, 1, null));
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "initialCount",
-                () => new Semaphore(-1, 1, "CtorSemaphoreTest", out createdNew)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("initialCount", () =>
+                new Semaphore(-1, 1, "CtorSemaphoreTest", out createdNew)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "initialCount",
-                () => new Semaphore(-2, 1, "CtorSemaphoreTest", out createdNew)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("initialCount", () =>
+                new Semaphore(-2, 1, "CtorSemaphoreTest", out createdNew)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "maximumCount",
-                () => new Semaphore(0, 0, "CtorSemaphoreTest", out createdNew)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("maximumCount", () =>
+                new Semaphore(0, 0, "CtorSemaphoreTest", out createdNew)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => new Semaphore(2, 1, "CtorSemaphoreTest", out createdNew)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                new Semaphore(2, 1, "CtorSemaphoreTest", out createdNew)
             );
         }
 
@@ -406,14 +396,11 @@ namespace System.Threading.Tests
         [Fact]
         public void OpenExisting_InvalidNames_Windows()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "name",
-                () => Semaphore.OpenExisting(null)
+            AssertExtensions.Throws<ArgumentNullException>("name", () =>
+                Semaphore.OpenExisting(null)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "name",
-                null,
-                () => Semaphore.OpenExisting(string.Empty)
+            AssertExtensions.Throws<ArgumentException>("name", null, () =>
+                Semaphore.OpenExisting(string.Empty)
             );
         }
 

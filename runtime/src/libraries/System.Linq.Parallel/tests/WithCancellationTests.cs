@@ -165,13 +165,10 @@ namespace System.Linq.Parallel.Tests
                     .ForAll(x => { })
             );
             AssertThrows.Wrapped<OperationCanceledException>(() =>
-                left.Zip<int, int, int>(
-                        right,
-                        (x, y) =>
-                        {
-                            throw new OperationCanceledException();
-                        }
-                    )
+                left.Zip<int, int, int>(right, (x, y) =>
+                    {
+                        throw new OperationCanceledException();
+                    })
                     .ForAll(x => { })
             );
         }

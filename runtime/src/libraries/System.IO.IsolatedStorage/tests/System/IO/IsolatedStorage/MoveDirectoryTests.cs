@@ -12,13 +12,11 @@ namespace System.IO.IsolatedStorage
         {
             using (IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForAssembly())
             {
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "sourceDirectoryName",
-                    () => isf.MoveDirectory(null, "bar")
+                AssertExtensions.Throws<ArgumentNullException>("sourceDirectoryName", () =>
+                    isf.MoveDirectory(null, "bar")
                 );
-                AssertExtensions.Throws<ArgumentNullException>(
-                    "destinationDirectoryName",
-                    () => isf.MoveDirectory("foo", null)
+                AssertExtensions.Throws<ArgumentNullException>("destinationDirectoryName", () =>
+                    isf.MoveDirectory("foo", null)
                 );
             }
         }
@@ -28,13 +26,11 @@ namespace System.IO.IsolatedStorage
         {
             using (IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForAssembly())
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "sourceDirectoryName",
-                    () => isf.MoveDirectory(string.Empty, "bar")
+                AssertExtensions.Throws<ArgumentException>("sourceDirectoryName", () =>
+                    isf.MoveDirectory(string.Empty, "bar")
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "destinationDirectoryName",
-                    () => isf.MoveDirectory("foo", string.Empty)
+                AssertExtensions.Throws<ArgumentException>("destinationDirectoryName", () =>
+                    isf.MoveDirectory("foo", string.Empty)
                 );
             }
         }

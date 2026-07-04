@@ -195,9 +195,8 @@ namespace MonoTests.System.ServiceModel.Dispatcher
 
         string ItemsToString(IEnumerable<DataType1> items)
         {
-            return items.Aggregate(
-                (string)null,
-                (result, item) => result == null ? item.Id : result + "," + item.Id
+            return items.Aggregate((string)null, (result, item) =>
+                result == null ? item.Id : result + "," + item.Id
             );
         }
     }

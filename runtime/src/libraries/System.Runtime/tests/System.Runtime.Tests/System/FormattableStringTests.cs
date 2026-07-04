@@ -13,9 +13,8 @@ namespace System.Tests
         [Fact]
         public static void Invariant_Null_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "formattable",
-                () => FormattableString.Invariant(null)
+            AssertExtensions.Throws<ArgumentNullException>("formattable", () =>
+                FormattableString.Invariant(null)
             );
         }
 
@@ -78,9 +77,8 @@ namespace System.Tests
         [Fact]
         public static void CurrentCulture_Null_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "formattable",
-                () => FormattableString.CurrentCulture(null)
+            AssertExtensions.Throws<ArgumentNullException>("formattable", () =>
+                FormattableString.CurrentCulture(null)
             );
         }
 

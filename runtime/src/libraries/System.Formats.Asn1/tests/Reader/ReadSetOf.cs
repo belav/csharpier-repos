@@ -190,9 +190,8 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] inputData = "31020500".HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "expectedTag",
-                () => reader.ReadSetOf(expectedTag: Asn1Tag.Null)
+            AssertExtensions.Throws<ArgumentException>("expectedTag", () =>
+                reader.ReadSetOf(expectedTag: Asn1Tag.Null)
             );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
@@ -217,9 +216,8 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] inputData = "318005000000".HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "expectedTag",
-                () => reader.ReadSetOf(expectedTag: Asn1Tag.Null)
+            AssertExtensions.Throws<ArgumentException>("expectedTag", () =>
+                reader.ReadSetOf(expectedTag: Asn1Tag.Null)
             );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
@@ -244,9 +242,8 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] inputData = "A5020500".HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "expectedTag",
-                () => reader.ReadSetOf(expectedTag: Asn1Tag.Null)
+            AssertExtensions.Throws<ArgumentException>("expectedTag", () =>
+                reader.ReadSetOf(expectedTag: Asn1Tag.Null)
             );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
@@ -281,9 +278,8 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] inputData = "A58005000000".HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "expectedTag",
-                () => reader.ReadSetOf(expectedTag: Asn1Tag.Null)
+            AssertExtensions.Throws<ArgumentException>("expectedTag", () =>
+                reader.ReadSetOf(expectedTag: Asn1Tag.Null)
             );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");

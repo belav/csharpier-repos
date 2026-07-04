@@ -49,24 +49,21 @@ public class Program
                         var useTls = context.Configuration.GetValue("use_tls", false);
 
                         options.Limits.MinRequestBodyDataRate = null;
-                        options.ListenAnyIP(
-                            0,
-                            listenOptions =>
+                        options.ListenAnyIP(0, listenOptions =>
+                        {
+                            Console.WriteLine($"Enabling connection encryption: {useTls}");
+
+                            if (useTls)
                             {
-                                Console.WriteLine($"Enabling connection encryption: {useTls}");
+                                var basePath = Path.GetDirectoryName(
+                                    typeof(Program).Assembly.Location
+                                );
+                                var certPath = Path.Combine(basePath!, "Certs", "server1.pfx");
 
-                                if (useTls)
-                                {
-                                    var basePath = Path.GetDirectoryName(
-                                        typeof(Program).Assembly.Location
-                                    );
-                                    var certPath = Path.Combine(basePath!, "Certs", "server1.pfx");
-
-                                    listenOptions.UseHttps(certPath, "1111");
-                                }
-                                listenOptions.Protocols = HttpProtocols.Http2;
+                                listenOptions.UseHttps(certPath, "1111");
                             }
-                        );
+                            listenOptions.Protocols = HttpProtocols.Http2;
+                        });
                     }
                 );
                 webBuilder.UseStartup<Startup>();

@@ -569,26 +569,23 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
 
                 var nodes = nodesToUpdate[docId];
 
-                var newRoot = root.ReplaceNodes(
-                    nodes,
-                    (originalNode, potentiallyUpdatedNode) =>
-                    {
-                        return updater
-                            .ChangeSignatureAsync(
-                                doc,
+                var newRoot = root.ReplaceNodes(nodes, (originalNode, potentiallyUpdatedNode) =>
+                {
+                    return updater
+                        .ChangeSignatureAsync(
+                            doc,
+                            definitionToUse[originalNode],
+                            potentiallyUpdatedNode,
+                            originalNode,
+                            UpdateSignatureChangeToIncludeExtraParametersFromTheDeclarationSymbol(
                                 definitionToUse[originalNode],
-                                potentiallyUpdatedNode,
-                                originalNode,
-                                UpdateSignatureChangeToIncludeExtraParametersFromTheDeclarationSymbol(
-                                    definitionToUse[originalNode],
-                                    options.UpdatedSignature
-                                ),
-                                context.FallbackOptions,
-                                cancellationToken
-                            )
-                            .WaitAndGetResult_CanCallOnBackground(cancellationToken);
-                    }
-                );
+                                options.UpdatedSignature
+                            ),
+                            context.FallbackOptions,
+                            cancellationToken
+                        )
+                        .WaitAndGetResult_CanCallOnBackground(cancellationToken);
+                });
 
                 var annotatedNodes = newRoot.GetAnnotatedNodes<SyntaxNode>(
                     syntaxAnnotation: changeSignatureFormattingAnnotation

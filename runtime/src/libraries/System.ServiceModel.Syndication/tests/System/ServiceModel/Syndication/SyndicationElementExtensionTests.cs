@@ -84,9 +84,8 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullReader_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "xmlReader",
-                () => new SyndicationElementExtension(null)
+            AssertExtensions.Throws<ArgumentNullException>("xmlReader", () =>
+                new SyndicationElementExtension(null)
             );
         }
 
@@ -277,31 +276,25 @@ namespace System.ServiceModel.Syndication.Tests
         public void Ctor_EmptyOuterName_ThrowsArgumentException()
         {
             var extensionObject = new ExtensionObject { Value = 10 };
-            AssertExtensions.Throws<ArgumentException>(
-                "outerName",
-                null,
-                () => new SyndicationElementExtension("", "outerNamespace", extensionObject)
+            AssertExtensions.Throws<ArgumentException>("outerName", null, () =>
+                new SyndicationElementExtension("", "outerNamespace", extensionObject)
             );
         }
 
         [Fact]
         public void Ctor_NullDataContractExtension_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "dataContractExtension",
-                () => new SyndicationElementExtension((object)null)
+            AssertExtensions.Throws<ArgumentNullException>("dataContractExtension", () =>
+                new SyndicationElementExtension((object)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "dataContractExtension",
-                () =>
-                    new SyndicationElementExtension(
-                        null,
-                        new DataContractSerializer(typeof(ExtensionObject))
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("dataContractExtension", () =>
+                new SyndicationElementExtension(
+                    null,
+                    new DataContractSerializer(typeof(ExtensionObject))
+                )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "dataContractExtension",
-                () => new SyndicationElementExtension("OuterName", "OuterNamespace", null)
+            AssertExtensions.Throws<ArgumentNullException>("dataContractExtension", () =>
+                new SyndicationElementExtension("OuterName", "OuterNamespace", null)
             );
         }
 
@@ -351,13 +344,8 @@ namespace System.ServiceModel.Syndication.Tests
         [Fact]
         public void Ctor_NullXmlContractExtension_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "xmlSerializerExtension",
-                () =>
-                    new SyndicationElementExtension(
-                        null,
-                        new XmlSerializer(typeof(ExtensionObject))
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("xmlSerializerExtension", () =>
+                new SyndicationElementExtension(null, new XmlSerializer(typeof(ExtensionObject)))
             );
         }
 
@@ -409,9 +397,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void GetObject_NullXmlSerializer_ThrowsArgumentNullException()
         {
             var extension = new SyndicationElementExtension(new ExtensionObject());
-            Assert.Throws<ArgumentNullException>(
-                "serializer",
-                () => extension.GetObject<ExtensionObject>((XmlSerializer)null)
+            Assert.Throws<ArgumentNullException>("serializer", () =>
+                extension.GetObject<ExtensionObject>((XmlSerializer)null)
             );
         }
 
@@ -419,9 +406,8 @@ namespace System.ServiceModel.Syndication.Tests
         public void GetObject_NullXmlObjectSerializer_ThrowsArgumentNullException()
         {
             var extension = new SyndicationElementExtension(new ExtensionObject());
-            Assert.Throws<ArgumentNullException>(
-                "serializer",
-                () => extension.GetObject<ExtensionObject>((XmlObjectSerializer)null)
+            Assert.Throws<ArgumentNullException>("serializer", () =>
+                extension.GetObject<ExtensionObject>((XmlObjectSerializer)null)
             );
         }
 

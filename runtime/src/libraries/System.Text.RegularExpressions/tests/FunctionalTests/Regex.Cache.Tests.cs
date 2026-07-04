@@ -33,9 +33,8 @@ namespace System.Text.RegularExpressions.Tests
         [Fact]
         public void CacheSize_Set_NegativeValue_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => Regex.CacheSize = -1
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                Regex.CacheSize = -1
             );
         }
 

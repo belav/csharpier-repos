@@ -188,51 +188,33 @@ namespace Acme
 "
             );
 
-            CheckDeclarationId<IFieldSymbol>(
-                "F:Acme.ValueType.total",
-                compilation,
-                s => s.Name == "total"
+            CheckDeclarationId<IFieldSymbol>("F:Acme.ValueType.total", compilation, s =>
+                s.Name == "total"
             );
-            CheckDeclarationId<IFieldSymbol>(
-                "F:Acme.Widget.NestedClass.value",
-                compilation,
-                s => s.Name == "value"
+            CheckDeclarationId<IFieldSymbol>("F:Acme.Widget.NestedClass.value", compilation, s =>
+                s.Name == "value"
             );
-            CheckDeclarationId<IFieldSymbol>(
-                "F:Acme.Widget.message",
-                compilation,
-                s => s.Name == "message"
+            CheckDeclarationId<IFieldSymbol>("F:Acme.Widget.message", compilation, s =>
+                s.Name == "message"
             );
-            CheckDeclarationId<IFieldSymbol>(
-                "F:Acme.Widget.defaultColor",
-                compilation,
-                s => s.Name == "defaultColor"
+            CheckDeclarationId<IFieldSymbol>("F:Acme.Widget.defaultColor", compilation, s =>
+                s.Name == "defaultColor"
             );
             CheckDeclarationId<IFieldSymbol>("F:Acme.Widget.PI", compilation, s => s.Name == "PI");
-            CheckDeclarationId<IFieldSymbol>(
-                "F:Acme.Widget.monthlyAverage",
-                compilation,
-                s => s.Name == "monthlyAverage"
+            CheckDeclarationId<IFieldSymbol>("F:Acme.Widget.monthlyAverage", compilation, s =>
+                s.Name == "monthlyAverage"
             );
-            CheckDeclarationId<IFieldSymbol>(
-                "F:Acme.Widget.array1",
-                compilation,
-                s => s.Name == "array1"
+            CheckDeclarationId<IFieldSymbol>("F:Acme.Widget.array1", compilation, s =>
+                s.Name == "array1"
             );
-            CheckDeclarationId<IFieldSymbol>(
-                "F:Acme.Widget.array2",
-                compilation,
-                s => s.Name == "array2"
+            CheckDeclarationId<IFieldSymbol>("F:Acme.Widget.array2", compilation, s =>
+                s.Name == "array2"
             );
-            CheckDeclarationId<IFieldSymbol>(
-                "F:Acme.Widget.pCount",
-                compilation,
-                s => s.Name == "pCount"
+            CheckDeclarationId<IFieldSymbol>("F:Acme.Widget.pCount", compilation, s =>
+                s.Name == "pCount"
             );
-            CheckDeclarationId<IFieldSymbol>(
-                "F:Acme.Widget.ppValues",
-                compilation,
-                s => s.Name == "ppValues"
+            CheckDeclarationId<IFieldSymbol>("F:Acme.Widget.ppValues", compilation, s =>
+                s.Name == "ppValues"
             );
         }
 
@@ -254,15 +236,11 @@ namespace Acme
 "
             );
 
-            CheckDeclarationId<IMethodSymbol>(
-                "M:Acme.Widget.#cctor",
-                compilation,
-                s => s.MethodKind == MethodKind.StaticConstructor
+            CheckDeclarationId<IMethodSymbol>("M:Acme.Widget.#cctor", compilation, s =>
+                s.MethodKind == MethodKind.StaticConstructor
             );
-            CheckDeclarationId<IMethodSymbol>(
-                "M:Acme.Widget.#ctor",
-                compilation,
-                s => s.MethodKind == MethodKind.Constructor && s.Parameters.Length == 0
+            CheckDeclarationId<IMethodSymbol>("M:Acme.Widget.#ctor", compilation, s =>
+                s.MethodKind == MethodKind.Constructor && s.Parameters.Length == 0
             );
             CheckDeclarationId<IMethodSymbol>(
                 "M:Acme.Widget.#ctor(System.String)",
@@ -287,10 +265,8 @@ namespace Acme
 "
             );
 
-            CheckDeclarationId<IMethodSymbol>(
-                "M:Acme.Widget.Finalize",
-                compilation,
-                s => s.MethodKind == MethodKind.Destructor
+            CheckDeclarationId<IMethodSymbol>("M:Acme.Widget.Finalize", compilation, s =>
+                s.MethodKind == MethodKind.Destructor
             );
         }
 
@@ -335,20 +311,16 @@ namespace Acme
 "
             );
 
-            CheckDeclarationId<IMethodSymbol>(
-                "M:Acme.ValueType.M(System.Int32)",
-                compilation,
-                s => s.Name == "M" && s.Parameters is [{ Type.Name: "Int32" }]
+            CheckDeclarationId<IMethodSymbol>("M:Acme.ValueType.M(System.Int32)", compilation, s =>
+                s.Name == "M" && s.Parameters is [{ Type.Name: "Int32" }]
             );
             CheckDeclarationId<IMethodSymbol>(
                 "M:Acme.Widget.NestedClass.M(System.Int32)",
                 compilation,
                 s => s.Name == "M" && s.Parameters is [{ Type.Name: "Int32" }]
             );
-            CheckDeclarationId<IMethodSymbol>(
-                "M:Acme.Widget.M0",
-                compilation,
-                s => s.Name == "M0" && s.Parameters.Length == 0
+            CheckDeclarationId<IMethodSymbol>("M:Acme.Widget.M0", compilation, s =>
+                s.Name == "M0" && s.Parameters.Length == 0
             );
             CheckDeclarationId<IMethodSymbol>(
                 "M:Acme.Widget.M1(System.Char,System.Single@,Acme.ValueType@)",
@@ -380,20 +352,16 @@ namespace Acme
                 compilation,
                 s => s.Name == "M6"
             );
-            CheckDeclarationId<IMethodSymbol>(
-                "M:Acme.MyList`1.Test(`0)",
-                compilation,
-                s => s.Name == "Test"
+            CheckDeclarationId<IMethodSymbol>("M:Acme.MyList`1.Test(`0)", compilation, s =>
+                s.Name == "Test"
             );
             CheckDeclarationId<IMethodSymbol>(
                 "M:Acme.UseList.Process(Acme.MyList{System.Int32})",
                 compilation,
                 s => s.Name == "Process"
             );
-            CheckDeclarationId<IMethodSymbol>(
-                "M:Acme.UseList.GetValues``1(``0)",
-                compilation,
-                s => s.Name == "GetValues"
+            CheckDeclarationId<IMethodSymbol>("M:Acme.UseList.GetValues``1(``0)", compilation, s =>
+                s.Name == "GetValues"
             );
             CheckDeclarationId<IMethodSymbol>(
                 "M:Acme.UseList.Process2``1(Acme.MyList{``0})",
@@ -420,10 +388,8 @@ namespace Acme
 "
             );
 
-            CheckDeclarationIdExact<IPropertySymbol>(
-                "P:Acme.Widget.Width",
-                compilation,
-                p => p.Name == "Width"
+            CheckDeclarationIdExact<IPropertySymbol>("P:Acme.Widget.Width", compilation, p =>
+                p.Name == "Width"
             );
             CheckDeclarationIdExact<IPropertySymbol>(
                 "P:Acme.Widget.Item(System.Int32)",
@@ -452,10 +418,8 @@ namespace Acme
 }
 "
             );
-            CheckDeclarationId<IEventSymbol>(
-                "E:Acme.Widget.AnEvent",
-                compilation,
-                e => e.Name == "AnEvent"
+            CheckDeclarationId<IEventSymbol>("E:Acme.Widget.AnEvent", compilation, e =>
+                e.Name == "AnEvent"
             );
         }
 

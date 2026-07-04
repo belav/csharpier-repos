@@ -30,9 +30,8 @@ namespace System.IO.Compression.Tests
         [Fact]
         public void ExtractToDirectoryNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "sourceArchiveFileName",
-                () => ZipFile.ExtractToDirectory(sourceArchiveFileName: null, GetTestFilePath())
+            AssertExtensions.Throws<ArgumentNullException>("sourceArchiveFileName", () =>
+                ZipFile.ExtractToDirectory(sourceArchiveFileName: null, GetTestFilePath())
             );
         }
 

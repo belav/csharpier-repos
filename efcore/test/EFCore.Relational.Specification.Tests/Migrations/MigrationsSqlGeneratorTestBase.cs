@@ -1043,19 +1043,16 @@ public abstract class MigrationsSqlGeneratorTestBase
 
     private static void CreateGotModel(ModelBuilder b) =>
         b.HasDefaultSchema("dbo")
-            .Entity(
-                "Person",
-                pb =>
-                {
-                    pb.ToTable("People");
-                    pb.Property<string>("FirstName").HasColumnName("First Name");
-                    pb.Property<string>("LastName").HasColumnName("Last Name");
-                    pb.Property<string>("Birthplace").HasColumnName("Birthplace");
-                    pb.Property<string>("Allegiance").HasColumnName("House Allegiance");
-                    pb.Property<string>("Culture").HasColumnName("Culture");
-                    pb.HasKey("FirstName", "LastName");
-                }
-            );
+            .Entity("Person", pb =>
+            {
+                pb.ToTable("People");
+                pb.Property<string>("FirstName").HasColumnName("First Name");
+                pb.Property<string>("LastName").HasColumnName("Last Name");
+                pb.Property<string>("Birthplace").HasColumnName("Birthplace");
+                pb.Property<string>("Allegiance").HasColumnName("House Allegiance");
+                pb.Property<string>("Culture").HasColumnName("Culture");
+                pb.HasKey("FirstName", "LastName");
+            });
 
     protected TestHelpers TestHelpers { get; }
     protected DbContextOptions ContextOptions { get; }

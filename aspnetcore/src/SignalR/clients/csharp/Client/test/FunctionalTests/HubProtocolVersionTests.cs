@@ -137,13 +137,10 @@ public class HubProtocolVersionTests : FunctionalTestBase
             connectionBuilder.Services.AddSingleton<IConnectionFactory>(proxyConnectionFactory);
 
             var connection = connectionBuilder.Build();
-            connection.On(
-                "NewProtocolMethodClient",
-                () =>
-                {
-                    tcs.SetResult();
-                }
-            );
+            connection.On("NewProtocolMethodClient", () =>
+            {
+                tcs.SetResult();
+            });
 
             try
             {

@@ -214,13 +214,11 @@ namespace System.Text.RegularExpressions.Tests
 
             // Now comes the tricky part depending on the use locale in ToUpper the results differ
             // Hence the regular expression will not match if different locales were used
-            Assert.All(
-                cultInvariantRegex,
-                rex => Assert.True(rex.IsMatch(input.ToLowerInvariant()))
+            Assert.All(cultInvariantRegex, rex =>
+                Assert.True(rex.IsMatch(input.ToLowerInvariant()))
             );
-            Assert.All(
-                cultInvariantRegex,
-                rex => Assert.False(rex.IsMatch(input.ToLower(turkish)))
+            Assert.All(cultInvariantRegex, rex =>
+                Assert.False(rex.IsMatch(input.ToLower(turkish)))
             );
 
             Assert.All(turkishRegex, rex => Assert.False(rex.IsMatch(input.ToLowerInvariant())));

@@ -52,9 +52,8 @@ namespace System.Formats.Asn1.Tests.Writer
         {
             AsnWriter writer = new AsnWriter(ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "tag",
-                () => writer.WriteBoolean(value, Asn1Tag.Null)
+            AssertExtensions.Throws<ArgumentException>("tag", () =>
+                writer.WriteBoolean(value, Asn1Tag.Null)
             );
         }
 

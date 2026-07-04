@@ -48,9 +48,8 @@ internal sealed partial class CSharpInitializeMemberFromPrimaryConstructorParame
         var currentSolution = document.WithSyntaxRoot(trackedRoot).Project.Solution;
 
         foreach (
-            var (parameter, fieldOrProperty) in parameters.Zip(
-                fieldsOrProperties,
-                static (a, b) => (a, b)
+            var (parameter, fieldOrProperty) in parameters.Zip(fieldsOrProperties, static (a, b) =>
+                (a, b)
             )
         )
         {
@@ -151,34 +150,31 @@ internal sealed partial class CSharpInitializeMemberFromPrimaryConstructorParame
             var editor = await solutionEditor
                 .GetDocumentEditorAsync(editingDocument.Id, cancellationToken)
                 .ConfigureAwait(false);
-            editor.ReplaceNode(
-                preferredTypeDeclaration,
-                (currentTypeDecl, _) =>
+            editor.ReplaceNode(preferredTypeDeclaration, (currentTypeDecl, _) =>
+            {
+                if (fieldOrProperty is IPropertySymbol property)
                 {
-                    if (fieldOrProperty is IPropertySymbol property)
-                    {
-                        return codeGenerator.AddProperty(
-                            currentTypeDecl,
-                            property,
-                            codeGenerator.GetInfo(addContext, options, parseOptions),
-                            cancellationToken
-                        );
-                    }
-                    else if (fieldOrProperty is IFieldSymbol field)
-                    {
-                        return codeGenerator.AddField(
-                            currentTypeDecl,
-                            field,
-                            codeGenerator.GetInfo(addContext, options, parseOptions),
-                            cancellationToken
-                        );
-                    }
-                    else
-                    {
-                        throw ExceptionUtilities.Unreachable();
-                    }
+                    return codeGenerator.AddProperty(
+                        currentTypeDecl,
+                        property,
+                        codeGenerator.GetInfo(addContext, options, parseOptions),
+                        cancellationToken
+                    );
                 }
-            );
+                else if (fieldOrProperty is IFieldSymbol field)
+                {
+                    return codeGenerator.AddField(
+                        currentTypeDecl,
+                        field,
+                        codeGenerator.GetInfo(addContext, options, parseOptions),
+                        cancellationToken
+                    );
+                }
+                else
+                {
+                    throw ExceptionUtilities.Unreachable();
+                }
+            });
 
             return solutionEditor.GetChangedSolution();
         }

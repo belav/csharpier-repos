@@ -208,25 +208,20 @@ namespace System.Data.Mapping.Update.Internal
                 switch (candidateEntry.State)
                 {
                     case EntityState.Unchanged:
-                        findMatch(
-                            candidateEntry.CurrentValues,
-                            (target) =>
-                            {
-                                currentReferenceEnd.Add(endMember, target);
-                                originalReferenceEnd.Add(endMember, target);
-                            }
-                        );
+                        findMatch(candidateEntry.CurrentValues, (target) =>
+                        {
+                            currentReferenceEnd.Add(endMember, target);
+                            originalReferenceEnd.Add(endMember, target);
+                        });
                         break;
                     case EntityState.Added:
-                        findMatch(
-                            candidateEntry.CurrentValues,
-                            (target) => currentReferenceEnd.Add(endMember, target)
+                        findMatch(candidateEntry.CurrentValues, (target) =>
+                            currentReferenceEnd.Add(endMember, target)
                         );
                         break;
                     case EntityState.Deleted:
-                        findMatch(
-                            candidateEntry.OriginalValues,
-                            (target) => originalReferenceEnd.Add(endMember, target)
+                        findMatch(candidateEntry.OriginalValues, (target) =>
+                            originalReferenceEnd.Add(endMember, target)
                         );
                         break;
                     default:

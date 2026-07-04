@@ -809,54 +809,45 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             DriverStateTable.Builder dstBuilder = GetBuilder(DriverStateTable.Empty, true);
             var table = dstBuilder.GetLatestStateTableForNode(batchNode);
 
-            Assert.Collection(
-                table.Steps,
-                step =>
+            Assert.Collection(table.Steps, step =>
+            {
+                Assert.Equal("Batch", step.Name);
+                Assert.Collection(
+                    step.Inputs,
+                    source =>
+                    {
+                        Assert.Equal(0, source.OutputIndex);
+                        Assert.Equal(1, source.Source.Outputs[source.OutputIndex].Value);
+                        Assert.Equal(
+                            IncrementalStepRunReason.New,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        );
+                    },
+                    source =>
+                    {
+                        Assert.Equal(0, source.OutputIndex);
+                        Assert.Equal(2, source.Source.Outputs[source.OutputIndex].Value);
+                        Assert.Equal(
+                            IncrementalStepRunReason.New,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        );
+                    },
+                    source =>
+                    {
+                        Assert.Equal(0, source.OutputIndex);
+                        Assert.Equal(3, source.Source.Outputs[source.OutputIndex].Value);
+                        Assert.Equal(
+                            IncrementalStepRunReason.New,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        );
+                    }
+                );
+                Assert.Collection(step.Outputs, output =>
                 {
-                    Assert.Equal("Batch", step.Name);
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                        {
-                            Assert.Equal(0, source.OutputIndex);
-                            Assert.Equal(1, source.Source.Outputs[source.OutputIndex].Value);
-                            Assert.Equal(
-                                IncrementalStepRunReason.New,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        },
-                        source =>
-                        {
-                            Assert.Equal(0, source.OutputIndex);
-                            Assert.Equal(2, source.Source.Outputs[source.OutputIndex].Value);
-                            Assert.Equal(
-                                IncrementalStepRunReason.New,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        },
-                        source =>
-                        {
-                            Assert.Equal(0, source.OutputIndex);
-                            Assert.Equal(3, source.Source.Outputs[source.OutputIndex].Value);
-                            Assert.Equal(
-                                IncrementalStepRunReason.New,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        }
-                    );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal(
-                                ImmutableArray.Create(1, 2, 3),
-                                (IEnumerable<int>)output.Value
-                            );
-                            Assert.Equal(IncrementalStepRunReason.New, output.Reason);
-                        }
-                    );
-                }
-            );
+                    Assert.Equal(ImmutableArray.Create(1, 2, 3), (IEnumerable<int>)output.Value);
+                    Assert.Equal(IncrementalStepRunReason.New, output.Reason);
+                });
+            });
         }
 
         [Fact]
@@ -927,14 +918,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                     );
                 }
             );
-            Assert.Collection(
-                step.Outputs,
-                output =>
-                {
-                    Assert.Equal(ImmutableArray.Create(1, 2, 3), (IEnumerable<int>)output.Value);
-                    Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
-                }
-            );
+            Assert.Collection(step.Outputs, output =>
+            {
+                Assert.Equal(ImmutableArray.Create(1, 2, 3), (IEnumerable<int>)output.Value);
+                Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
+            });
         }
 
         [Fact]
@@ -987,14 +975,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                     );
                 }
             );
-            Assert.Collection(
-                step.Outputs,
-                output =>
-                {
-                    Assert.Equal(ImmutableArray.Create(1, 2), (IEnumerable<int>)output.Value);
-                    Assert.Equal(IncrementalStepRunReason.Modified, output.Reason);
-                }
-            );
+            Assert.Collection(step.Outputs, output =>
+            {
+                Assert.Equal(ImmutableArray.Create(1, 2), (IEnumerable<int>)output.Value);
+                Assert.Equal(IncrementalStepRunReason.Modified, output.Reason);
+            });
         }
 
         [Fact]
@@ -1036,54 +1021,45 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             dstBuilder = GetBuilder(dstBuilder.ToImmutable(), true);
             var table = dstBuilder.GetLatestStateTableForNode(batchNode);
 
-            Assert.Collection(
-                table.Steps,
-                step =>
+            Assert.Collection(table.Steps, step =>
+            {
+                Assert.Equal("Batch", step.Name);
+                Assert.Collection(
+                    step.Inputs,
+                    source =>
+                    {
+                        Assert.Equal(0, source.OutputIndex);
+                        Assert.Equal(1, source.Source.Outputs[source.OutputIndex].Value);
+                        Assert.Equal(
+                            IncrementalStepRunReason.Cached,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        );
+                    },
+                    source =>
+                    {
+                        Assert.Equal(0, source.OutputIndex);
+                        Assert.Equal(2, source.Source.Outputs[source.OutputIndex].Value);
+                        Assert.Equal(
+                            IncrementalStepRunReason.Cached,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        );
+                    },
+                    source =>
+                    {
+                        Assert.Equal(0, source.OutputIndex);
+                        Assert.Equal(4, source.Source.Outputs[source.OutputIndex].Value);
+                        Assert.Equal(
+                            IncrementalStepRunReason.Modified,
+                            source.Source.Outputs[source.OutputIndex].Reason
+                        );
+                    }
+                );
+                Assert.Collection(step.Outputs, output =>
                 {
-                    Assert.Equal("Batch", step.Name);
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                        {
-                            Assert.Equal(0, source.OutputIndex);
-                            Assert.Equal(1, source.Source.Outputs[source.OutputIndex].Value);
-                            Assert.Equal(
-                                IncrementalStepRunReason.Cached,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        },
-                        source =>
-                        {
-                            Assert.Equal(0, source.OutputIndex);
-                            Assert.Equal(2, source.Source.Outputs[source.OutputIndex].Value);
-                            Assert.Equal(
-                                IncrementalStepRunReason.Cached,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        },
-                        source =>
-                        {
-                            Assert.Equal(0, source.OutputIndex);
-                            Assert.Equal(4, source.Source.Outputs[source.OutputIndex].Value);
-                            Assert.Equal(
-                                IncrementalStepRunReason.Modified,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        }
-                    );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal(
-                                ImmutableArray.Create(1, 2, 4),
-                                (IEnumerable<int>)output.Value
-                            );
-                            Assert.Equal(IncrementalStepRunReason.Modified, output.Reason);
-                        }
-                    );
-                }
-            );
+                    Assert.Equal(ImmutableArray.Create(1, 2, 4), (IEnumerable<int>)output.Value);
+                    Assert.Equal(IncrementalStepRunReason.Modified, output.Reason);
+                });
+            });
         }
 
         [Fact, WorkItem(61162, "https://github.com/dotnet/roslyn/issues/61162")]
@@ -1160,33 +1136,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             DriverStateTable.Builder dstBuilder = GetBuilder(DriverStateTable.Empty, true);
             var table = dstBuilder.GetLatestStateTableForNode(transformNode);
 
-            Assert.Collection(
-                table.Steps,
-                step =>
+            Assert.Collection(table.Steps, step =>
+            {
+                Assert.Equal("Transform", step.Name);
+                Assert.Collection(step.Inputs, source =>
                 {
-                    Assert.Equal("Transform", step.Name);
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                        {
-                            Assert.Equal(0, source.OutputIndex);
-                            Assert.Equal(1, source.Source.Outputs[source.OutputIndex].Value);
-                            Assert.Equal(
-                                IncrementalStepRunReason.New,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        }
+                    Assert.Equal(0, source.OutputIndex);
+                    Assert.Equal(1, source.Source.Outputs[source.OutputIndex].Value);
+                    Assert.Equal(
+                        IncrementalStepRunReason.New,
+                        source.Source.Outputs[source.OutputIndex].Reason
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal(1, output.Value);
-                            Assert.Equal(IncrementalStepRunReason.New, output.Reason);
-                        }
-                    );
-                }
-            );
+                });
+                Assert.Collection(step.Outputs, output =>
+                {
+                    Assert.Equal(1, output.Value);
+                    Assert.Equal(IncrementalStepRunReason.New, output.Reason);
+                });
+            });
         }
 
         [Fact]
@@ -1208,33 +1175,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             dstBuilder = GetBuilder(dstBuilder.ToImmutable(), true);
             var table = dstBuilder.GetLatestStateTableForNode(transformNode);
 
-            Assert.Collection(
-                table.Steps,
-                step =>
+            Assert.Collection(table.Steps, step =>
+            {
+                Assert.Equal("Transform", step.Name);
+                Assert.Collection(step.Inputs, source =>
                 {
-                    Assert.Equal("Transform", step.Name);
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                        {
-                            Assert.Equal(0, source.OutputIndex);
-                            Assert.Equal(1, source.Source.Outputs[source.OutputIndex].Value);
-                            Assert.Equal(
-                                IncrementalStepRunReason.Cached,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        }
+                    Assert.Equal(0, source.OutputIndex);
+                    Assert.Equal(1, source.Source.Outputs[source.OutputIndex].Value);
+                    Assert.Equal(
+                        IncrementalStepRunReason.Cached,
+                        source.Source.Outputs[source.OutputIndex].Reason
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal(1, output.Value);
-                            Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
-                        }
-                    );
-                }
-            );
+                });
+                Assert.Collection(step.Outputs, output =>
+                {
+                    Assert.Equal(1, output.Value);
+                    Assert.Equal(IncrementalStepRunReason.Cached, output.Reason);
+                });
+            });
         }
 
         [Fact]
@@ -1259,33 +1217,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             dstBuilder = GetBuilder(dstBuilder.ToImmutable(), true);
             var table = dstBuilder.GetLatestStateTableForNode(transformNode);
 
-            Assert.Collection(
-                table.Steps,
-                step =>
+            Assert.Collection(table.Steps, step =>
+            {
+                Assert.Equal("Transform", step.Name);
+                Assert.Collection(step.Inputs, source =>
                 {
-                    Assert.Equal("Transform", step.Name);
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                        {
-                            Assert.Equal(0, source.OutputIndex);
-                            Assert.Equal(value, source.Source.Outputs[source.OutputIndex].Value);
-                            Assert.Equal(
-                                IncrementalStepRunReason.Modified,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        }
+                    Assert.Equal(0, source.OutputIndex);
+                    Assert.Equal(value, source.Source.Outputs[source.OutputIndex].Value);
+                    Assert.Equal(
+                        IncrementalStepRunReason.Modified,
+                        source.Source.Outputs[source.OutputIndex].Reason
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal(value, output.Value);
-                            Assert.Equal(IncrementalStepRunReason.Modified, output.Reason);
-                        }
-                    );
-                }
-            );
+                });
+                Assert.Collection(step.Outputs, output =>
+                {
+                    Assert.Equal(value, output.Value);
+                    Assert.Equal(IncrementalStepRunReason.Modified, output.Reason);
+                });
+            });
         }
 
         [Fact]
@@ -1311,33 +1260,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             dstBuilder = GetBuilder(dstBuilder.ToImmutable(), true);
             var table = dstBuilder.GetLatestStateTableForNode(transformNode);
 
-            Assert.Collection(
-                table.Steps,
-                step =>
+            Assert.Collection(table.Steps, step =>
+            {
+                Assert.Equal("Transform", step.Name);
+                Assert.Collection(step.Inputs, source =>
                 {
-                    Assert.Equal("Transform", step.Name);
-                    Assert.Collection(
-                        step.Inputs,
-                        source =>
-                        {
-                            Assert.Equal(0, source.OutputIndex);
-                            Assert.Equal(value, source.Source.Outputs[source.OutputIndex].Value);
-                            Assert.Equal(
-                                IncrementalStepRunReason.Modified,
-                                source.Source.Outputs[source.OutputIndex].Reason
-                            );
-                        }
+                    Assert.Equal(0, source.OutputIndex);
+                    Assert.Equal(value, source.Source.Outputs[source.OutputIndex].Value);
+                    Assert.Equal(
+                        IncrementalStepRunReason.Modified,
+                        source.Source.Outputs[source.OutputIndex].Reason
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output =>
-                        {
-                            Assert.Equal(transformNodeResult, output.Value);
-                            Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason);
-                        }
-                    );
-                }
-            );
+                });
+                Assert.Collection(step.Outputs, output =>
+                {
+                    Assert.Equal(transformNodeResult, output.Value);
+                    Assert.Equal(IncrementalStepRunReason.Unchanged, output.Reason);
+                });
+            });
         }
 
         [Fact]
@@ -1418,9 +1358,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
         {
             ImmutableArray<int> inputNodeValue = ImmutableArray.Create(1, 2, 3);
             var inputNode = new InputNode<int>((_) => inputNodeValue);
-            var transformNode = new TransformNode<int, int>(
-                inputNode,
-                (i, ct) => ImmutableArray.Create(i)
+            var transformNode = new TransformNode<int, int>(inputNode, (i, ct) =>
+                ImmutableArray.Create(i)
             ).WithTrackingName("TestStep");
 
             // first time through will always be added (because it's not been run before)
@@ -1437,34 +1376,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             Assert.Collection(
                 table.Steps,
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal((1, IncrementalStepRunReason.Cached), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal((1, IncrementalStepRunReason.Cached), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal((2, IncrementalStepRunReason.Removed), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal((2, IncrementalStepRunReason.Removed), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal((3, IncrementalStepRunReason.Removed), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal((3, IncrementalStepRunReason.Removed), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal((4, IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal((4, IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal((5, IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal((5, IncrementalStepRunReason.New), output)
                     ),
                 step =>
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal((6, IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal((6, IncrementalStepRunReason.New), output)
                     )
             );
         }
@@ -1500,9 +1433,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                         IncrementalStepRunReason.Cached,
                         step.Inputs[0].Source.Outputs[step.Inputs[0].OutputIndex].Reason
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(((1, 0), IncrementalStepRunReason.Cached), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(((1, 0), IncrementalStepRunReason.Cached), output)
                     );
                 },
                 step =>
@@ -1512,9 +1444,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                         IncrementalStepRunReason.Removed,
                         step.Inputs[0].Source.Outputs[step.Inputs[0].OutputIndex].Reason
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(((2, 0), IncrementalStepRunReason.Removed), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(((2, 0), IncrementalStepRunReason.Removed), output)
                     );
                 },
                 step =>
@@ -1524,9 +1455,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                         IncrementalStepRunReason.Removed,
                         step.Inputs[0].Source.Outputs[step.Inputs[0].OutputIndex].Reason
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(((3, 0), IncrementalStepRunReason.Removed), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(((3, 0), IncrementalStepRunReason.Removed), output)
                     );
                 },
                 step =>
@@ -1536,9 +1466,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                         IncrementalStepRunReason.New,
                         step.Inputs[0].Source.Outputs[step.Inputs[0].OutputIndex].Reason
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(((4, 0), IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(((4, 0), IncrementalStepRunReason.New), output)
                     );
                 },
                 step =>
@@ -1548,9 +1477,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                         IncrementalStepRunReason.New,
                         step.Inputs[0].Source.Outputs[step.Inputs[0].OutputIndex].Reason
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(((5, 0), IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(((5, 0), IncrementalStepRunReason.New), output)
                     );
                 },
                 step =>
@@ -1560,9 +1488,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                         IncrementalStepRunReason.New,
                         step.Inputs[0].Source.Outputs[step.Inputs[0].OutputIndex].Reason
                     );
-                    Assert.Collection(
-                        step.Outputs,
-                        output => Assert.Equal(((6, 0), IncrementalStepRunReason.New), output)
+                    Assert.Collection(step.Outputs, output =>
+                        Assert.Equal(((6, 0), IncrementalStepRunReason.New), output)
                     );
                 }
             );
@@ -1684,13 +1611,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                 input.Source.Outputs[input.OutputIndex].Reason
             );
 
-            Assert.All(
-                step.Outputs,
-                output =>
-                {
-                    Assert.Equal(IncrementalStepRunReason.Removed, output.Reason);
-                }
-            );
+            Assert.All(step.Outputs, output =>
+            {
+                Assert.Equal(IncrementalStepRunReason.Removed, output.Reason);
+            });
         }
 
         [Fact]
@@ -1728,13 +1652,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                 input.Source.Outputs[input.OutputIndex].Reason
             );
 
-            Assert.All(
-                step.Outputs,
-                output =>
-                {
-                    Assert.Equal(IncrementalStepRunReason.New, output.Reason);
-                }
-            );
+            Assert.All(step.Outputs, output =>
+            {
+                Assert.Equal(IncrementalStepRunReason.New, output.Reason);
+            });
         }
 
         [Fact, WorkItem(66451, "https://github.com/dotnet/roslyn/issues/66451")]

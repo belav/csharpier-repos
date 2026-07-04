@@ -171,9 +171,8 @@ namespace System.Globalization
         [InlineData(10000)]
         public static void ToDateTime_WithInvalidYear_Throws(int year)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                nameof(year),
-                () => ISOWeek.ToDateTime(year, 1, DayOfWeek.Friday)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(year), () =>
+                ISOWeek.ToDateTime(year, 1, DayOfWeek.Friday)
             );
         }
 
@@ -182,9 +181,8 @@ namespace System.Globalization
         [InlineData(54)]
         public static void ToDateTime_WithInvalidWeek_Throws(int week)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                nameof(week),
-                () => ISOWeek.ToDateTime(2018, week, DayOfWeek.Friday)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(week), () =>
+                ISOWeek.ToDateTime(2018, week, DayOfWeek.Friday)
             );
         }
 
@@ -193,9 +191,8 @@ namespace System.Globalization
         [InlineData(8)]
         public static void ToDateTime_WithInvalidDayOfWeek_Throws(int dayOfWeek)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                nameof(dayOfWeek),
-                () => ISOWeek.ToDateTime(2018, 1, (DayOfWeek)dayOfWeek)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(dayOfWeek), () =>
+                ISOWeek.ToDateTime(2018, 1, (DayOfWeek)dayOfWeek)
             );
         }
 
@@ -214,9 +211,8 @@ namespace System.Globalization
         [InlineData(10000)]
         public static void GetWeeksInYear_WithInvalidYear_Throws(int year)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                nameof(year),
-                () => ISOWeek.GetWeeksInYear(year)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(year), () =>
+                ISOWeek.GetWeeksInYear(year)
             );
         }
 
@@ -235,9 +231,8 @@ namespace System.Globalization
         [Fact]
         public static void GetYearEnd_ForYear9999_Throws()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => ISOWeek.GetYearEnd(9999)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                ISOWeek.GetYearEnd(9999)
             );
         }
 

@@ -197,9 +197,8 @@ public abstract class NorthwindQueryFiltersQueryTestBase<TFixture> : FilteredQue
             RemoveNewLines(
                 (
                     await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        AssertFilteredQuery(
-                            async,
-                            ss => ss.Set<Product>().Include(p => p.OrderDetails)
+                        AssertFilteredQuery(async, ss =>
+                            ss.Set<Product>().Include(p => p.OrderDetails)
                         )
                     )
                 ).Message
@@ -211,14 +210,12 @@ public abstract class NorthwindQueryFiltersQueryTestBase<TFixture> : FilteredQue
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Navs_query(bool async)
     {
-        return AssertFilteredQuery(
-            async,
-            ss =>
-                from c in ss.Set<Customer>()
-                from o in c.Orders
-                from od in o.OrderDetails
-                where od.Discount < 10
-                select c
+        return AssertFilteredQuery(async, ss =>
+            from c in ss.Set<Customer>()
+            from o in c.Orders
+            from od in o.OrderDetails
+            where od.Discount < 10
+            select c
         );
     }
 

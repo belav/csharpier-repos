@@ -68,17 +68,14 @@ public class CookiePolicyTests
             "/secureAlways",
             new CookiePolicyOptions { Secure = CookieSecurePolicy.Always },
             SecureCookieAppends,
-            new RequestTest(
-                "http://example.com/secureAlways",
-                transaction =>
-                {
-                    Assert.NotNull(transaction.SetCookie);
-                    Assert.Equal("A=A; path=/; secure", transaction.SetCookie[0]);
-                    Assert.Equal("B=B; path=/; secure", transaction.SetCookie[1]);
-                    Assert.Equal("C=C; path=/; secure", transaction.SetCookie[2]);
-                    Assert.Equal("D=D; path=/; secure", transaction.SetCookie[3]);
-                }
-            )
+            new RequestTest("http://example.com/secureAlways", transaction =>
+            {
+                Assert.NotNull(transaction.SetCookie);
+                Assert.Equal("A=A; path=/; secure", transaction.SetCookie[0]);
+                Assert.Equal("B=B; path=/; secure", transaction.SetCookie[1]);
+                Assert.Equal("C=C; path=/; secure", transaction.SetCookie[2]);
+                Assert.Equal("D=D; path=/; secure", transaction.SetCookie[3]);
+            })
         );
     }
 
@@ -89,17 +86,14 @@ public class CookiePolicyTests
             "/secureNone",
             new CookiePolicyOptions { Secure = CookieSecurePolicy.None },
             SecureCookieAppends,
-            new RequestTest(
-                "http://example.com/secureNone",
-                transaction =>
-                {
-                    Assert.NotNull(transaction.SetCookie);
-                    Assert.Equal("A=A; path=/", transaction.SetCookie[0]);
-                    Assert.Equal("B=B; path=/", transaction.SetCookie[1]);
-                    Assert.Equal("C=C; path=/", transaction.SetCookie[2]);
-                    Assert.Equal("D=D; path=/; secure", transaction.SetCookie[3]);
-                }
-            )
+            new RequestTest("http://example.com/secureNone", transaction =>
+            {
+                Assert.NotNull(transaction.SetCookie);
+                Assert.Equal("A=A; path=/", transaction.SetCookie[0]);
+                Assert.Equal("B=B; path=/", transaction.SetCookie[1]);
+                Assert.Equal("C=C; path=/", transaction.SetCookie[2]);
+                Assert.Equal("D=D; path=/; secure", transaction.SetCookie[3]);
+            })
         );
     }
 
@@ -110,28 +104,22 @@ public class CookiePolicyTests
             "/secureSame",
             new CookiePolicyOptions { Secure = CookieSecurePolicy.SameAsRequest },
             SecureCookieAppends,
-            new RequestTest(
-                "http://example.com/secureSame",
-                transaction =>
-                {
-                    Assert.NotNull(transaction.SetCookie);
-                    Assert.Equal("A=A; path=/", transaction.SetCookie[0]);
-                    Assert.Equal("B=B; path=/", transaction.SetCookie[1]);
-                    Assert.Equal("C=C; path=/", transaction.SetCookie[2]);
-                    Assert.Equal("D=D; path=/; secure", transaction.SetCookie[3]);
-                }
-            ),
-            new RequestTest(
-                "https://example.com/secureSame",
-                transaction =>
-                {
-                    Assert.NotNull(transaction.SetCookie);
-                    Assert.Equal("A=A; path=/; secure", transaction.SetCookie[0]);
-                    Assert.Equal("B=B; path=/; secure", transaction.SetCookie[1]);
-                    Assert.Equal("C=C; path=/; secure", transaction.SetCookie[2]);
-                    Assert.Equal("D=D; path=/; secure", transaction.SetCookie[3]);
-                }
-            )
+            new RequestTest("http://example.com/secureSame", transaction =>
+            {
+                Assert.NotNull(transaction.SetCookie);
+                Assert.Equal("A=A; path=/", transaction.SetCookie[0]);
+                Assert.Equal("B=B; path=/", transaction.SetCookie[1]);
+                Assert.Equal("C=C; path=/", transaction.SetCookie[2]);
+                Assert.Equal("D=D; path=/; secure", transaction.SetCookie[3]);
+            }),
+            new RequestTest("https://example.com/secureSame", transaction =>
+            {
+                Assert.NotNull(transaction.SetCookie);
+                Assert.Equal("A=A; path=/; secure", transaction.SetCookie[0]);
+                Assert.Equal("B=B; path=/; secure", transaction.SetCookie[1]);
+                Assert.Equal("C=C; path=/; secure", transaction.SetCookie[2]);
+                Assert.Equal("D=D; path=/; secure", transaction.SetCookie[3]);
+            })
         );
     }
 
@@ -142,17 +130,14 @@ public class CookiePolicyTests
             "/httpOnlyAlways",
             new CookiePolicyOptions { HttpOnly = HttpOnlyPolicy.Always },
             HttpCookieAppends,
-            new RequestTest(
-                "http://example.com/httpOnlyAlways",
-                transaction =>
-                {
-                    Assert.NotNull(transaction.SetCookie);
-                    Assert.Equal("A=A; path=/; httponly", transaction.SetCookie[0]);
-                    Assert.Equal("B=B; path=/; httponly", transaction.SetCookie[1]);
-                    Assert.Equal("C=C; path=/; httponly", transaction.SetCookie[2]);
-                    Assert.Equal("D=D; path=/; httponly", transaction.SetCookie[3]);
-                }
-            )
+            new RequestTest("http://example.com/httpOnlyAlways", transaction =>
+            {
+                Assert.NotNull(transaction.SetCookie);
+                Assert.Equal("A=A; path=/; httponly", transaction.SetCookie[0]);
+                Assert.Equal("B=B; path=/; httponly", transaction.SetCookie[1]);
+                Assert.Equal("C=C; path=/; httponly", transaction.SetCookie[2]);
+                Assert.Equal("D=D; path=/; httponly", transaction.SetCookie[3]);
+            })
         );
     }
 
@@ -163,17 +148,14 @@ public class CookiePolicyTests
             "/httpOnlyNone",
             new CookiePolicyOptions { HttpOnly = HttpOnlyPolicy.None },
             HttpCookieAppends,
-            new RequestTest(
-                "http://example.com/httpOnlyNone",
-                transaction =>
-                {
-                    Assert.NotNull(transaction.SetCookie);
-                    Assert.Equal("A=A; path=/", transaction.SetCookie[0]);
-                    Assert.Equal("B=B; path=/", transaction.SetCookie[1]);
-                    Assert.Equal("C=C; path=/", transaction.SetCookie[2]);
-                    Assert.Equal("D=D; path=/; httponly", transaction.SetCookie[3]);
-                }
-            )
+            new RequestTest("http://example.com/httpOnlyNone", transaction =>
+            {
+                Assert.NotNull(transaction.SetCookie);
+                Assert.Equal("A=A; path=/", transaction.SetCookie[0]);
+                Assert.Equal("B=B; path=/", transaction.SetCookie[1]);
+                Assert.Equal("C=C; path=/", transaction.SetCookie[2]);
+                Assert.Equal("D=D; path=/; httponly", transaction.SetCookie[3]);
+            })
         );
     }
 
@@ -184,18 +166,15 @@ public class CookiePolicyTests
             "/sameSiteStrict",
             new CookiePolicyOptions { MinimumSameSitePolicy = Http.SameSiteMode.Strict },
             SameSiteCookieAppends,
-            new RequestTest(
-                "http://example.com/sameSiteStrict",
-                transaction =>
-                {
-                    Assert.NotNull(transaction.SetCookie);
-                    Assert.Equal("A=A; path=/; samesite=strict", transaction.SetCookie[0]);
-                    Assert.Equal("B=B; path=/; samesite=strict", transaction.SetCookie[1]);
-                    Assert.Equal("C=C; path=/; samesite=strict", transaction.SetCookie[2]);
-                    Assert.Equal("D=D; path=/; samesite=strict", transaction.SetCookie[3]);
-                    Assert.Equal("E=E; path=/; samesite=strict", transaction.SetCookie[4]);
-                }
-            )
+            new RequestTest("http://example.com/sameSiteStrict", transaction =>
+            {
+                Assert.NotNull(transaction.SetCookie);
+                Assert.Equal("A=A; path=/; samesite=strict", transaction.SetCookie[0]);
+                Assert.Equal("B=B; path=/; samesite=strict", transaction.SetCookie[1]);
+                Assert.Equal("C=C; path=/; samesite=strict", transaction.SetCookie[2]);
+                Assert.Equal("D=D; path=/; samesite=strict", transaction.SetCookie[3]);
+                Assert.Equal("E=E; path=/; samesite=strict", transaction.SetCookie[4]);
+            })
         );
     }
 
@@ -206,18 +185,15 @@ public class CookiePolicyTests
             "/sameSiteLax",
             new CookiePolicyOptions { MinimumSameSitePolicy = Http.SameSiteMode.Lax },
             SameSiteCookieAppends,
-            new RequestTest(
-                "http://example.com/sameSiteLax",
-                transaction =>
-                {
-                    Assert.NotNull(transaction.SetCookie);
-                    Assert.Equal("A=A; path=/; samesite=lax", transaction.SetCookie[0]);
-                    Assert.Equal("B=B; path=/; samesite=lax", transaction.SetCookie[1]);
-                    Assert.Equal("C=C; path=/; samesite=lax", transaction.SetCookie[2]);
-                    Assert.Equal("D=D; path=/; samesite=lax", transaction.SetCookie[3]);
-                    Assert.Equal("E=E; path=/; samesite=strict", transaction.SetCookie[4]);
-                }
-            )
+            new RequestTest("http://example.com/sameSiteLax", transaction =>
+            {
+                Assert.NotNull(transaction.SetCookie);
+                Assert.Equal("A=A; path=/; samesite=lax", transaction.SetCookie[0]);
+                Assert.Equal("B=B; path=/; samesite=lax", transaction.SetCookie[1]);
+                Assert.Equal("C=C; path=/; samesite=lax", transaction.SetCookie[2]);
+                Assert.Equal("D=D; path=/; samesite=lax", transaction.SetCookie[3]);
+                Assert.Equal("E=E; path=/; samesite=strict", transaction.SetCookie[4]);
+            })
         );
     }
 
@@ -228,18 +204,15 @@ public class CookiePolicyTests
             "/sameSiteNone",
             new CookiePolicyOptions { MinimumSameSitePolicy = Http.SameSiteMode.None },
             SameSiteCookieAppends,
-            new RequestTest(
-                "http://example.com/sameSiteNone",
-                transaction =>
-                {
-                    Assert.NotNull(transaction.SetCookie);
-                    Assert.Equal("A=A; path=/; samesite=none", transaction.SetCookie[0]);
-                    Assert.Equal("B=B; path=/; samesite=none", transaction.SetCookie[1]);
-                    Assert.Equal("C=C; path=/; samesite=none", transaction.SetCookie[2]);
-                    Assert.Equal("D=D; path=/; samesite=lax", transaction.SetCookie[3]);
-                    Assert.Equal("E=E; path=/; samesite=strict", transaction.SetCookie[4]);
-                }
-            )
+            new RequestTest("http://example.com/sameSiteNone", transaction =>
+            {
+                Assert.NotNull(transaction.SetCookie);
+                Assert.Equal("A=A; path=/; samesite=none", transaction.SetCookie[0]);
+                Assert.Equal("B=B; path=/; samesite=none", transaction.SetCookie[1]);
+                Assert.Equal("C=C; path=/; samesite=none", transaction.SetCookie[2]);
+                Assert.Equal("D=D; path=/; samesite=lax", transaction.SetCookie[3]);
+                Assert.Equal("E=E; path=/; samesite=strict", transaction.SetCookie[4]);
+            })
         );
     }
 
@@ -250,19 +223,16 @@ public class CookiePolicyTests
             "/sameSiteNone",
             new CookiePolicyOptions { MinimumSameSitePolicy = Http.SameSiteMode.Unspecified },
             SameSiteCookieAppends,
-            new RequestTest(
-                "http://example.com/sameSiteNone",
-                transaction =>
-                {
-                    Assert.NotNull(transaction.SetCookie);
-                    Assert.Equal("A=A; path=/", transaction.SetCookie[0]);
-                    Assert.Equal("B=B; path=/", transaction.SetCookie[1]);
-                    Assert.Equal("C=C; path=/; samesite=none", transaction.SetCookie[2]);
-                    Assert.Equal("D=D; path=/; samesite=lax", transaction.SetCookie[3]);
-                    Assert.Equal("E=E; path=/; samesite=strict", transaction.SetCookie[4]);
-                    Assert.Equal("F=F; path=/", transaction.SetCookie[5]);
-                }
-            )
+            new RequestTest("http://example.com/sameSiteNone", transaction =>
+            {
+                Assert.NotNull(transaction.SetCookie);
+                Assert.Equal("A=A; path=/", transaction.SetCookie[0]);
+                Assert.Equal("B=B; path=/", transaction.SetCookie[1]);
+                Assert.Equal("C=C; path=/; samesite=none", transaction.SetCookie[2]);
+                Assert.Equal("D=D; path=/; samesite=lax", transaction.SetCookie[3]);
+                Assert.Equal("E=E; path=/; samesite=strict", transaction.SetCookie[4]);
+                Assert.Equal("F=F; path=/", transaction.SetCookie[5]);
+            })
         );
     }
 
@@ -609,14 +579,11 @@ public class CookiePolicyTests
                 webHostBuilder
                     .Configure(app =>
                     {
-                        app.Map(
-                            path,
-                            map =>
-                            {
-                                map.UseCookiePolicy(cookiePolicy);
-                                map.Run(configureSetup);
-                            }
-                        );
+                        app.Map(path, map =>
+                        {
+                            map.UseCookiePolicy(cookiePolicy);
+                            map.Run(configureSetup);
+                        });
                     })
                     .UseTestServer();
             })

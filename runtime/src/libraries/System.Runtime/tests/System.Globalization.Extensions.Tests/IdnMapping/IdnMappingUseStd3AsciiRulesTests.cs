@@ -55,9 +55,8 @@ namespace System.Globalization.Tests
             if (containsInvalidHyphen && PlatformDetection.IsIcuGlobalization)
             {
                 // ICU always fails on leading/trailing hyphens regardless of the Std3 rules option.
-                AssertExtensions.Throws<ArgumentException>(
-                    "unicode",
-                    () => idnStd3False.GetAscii(unicode)
+                AssertExtensions.Throws<ArgumentException>("unicode", () =>
+                    idnStd3False.GetAscii(unicode)
                 );
             }
             else
@@ -65,9 +64,8 @@ namespace System.Globalization.Tests
                 Assert.Equal(unicode, idnStd3False.GetAscii(unicode));
             }
 
-            AssertExtensions.Throws<ArgumentException>(
-                "unicode",
-                () => idnStd3True.GetAscii(unicode)
+            AssertExtensions.Throws<ArgumentException>("unicode", () =>
+                idnStd3True.GetAscii(unicode)
             );
         }
 

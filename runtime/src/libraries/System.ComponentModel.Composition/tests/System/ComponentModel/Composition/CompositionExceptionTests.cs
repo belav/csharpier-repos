@@ -186,13 +186,10 @@ namespace System.ComponentModel.Composition
         {
             var errors = new CompositionError[] { null };
 
-            Assert.Throws<ArgumentException>(
-                "errors",
-                () =>
-                {
-                    new CompositionException(errors);
-                }
-            );
+            Assert.Throws<ArgumentException>("errors", () =>
+            {
+                new CompositionException(errors);
+            });
         }
 
         [Fact]
@@ -200,13 +197,10 @@ namespace System.ComponentModel.Composition
         {
             var errors = new CompositionError[] { null };
 
-            Assert.Throws<ArgumentException>(
-                "errors",
-                () =>
-                {
-                    new CompositionException("Message", new Exception(), errors);
-                }
-            );
+            Assert.Throws<ArgumentException>("errors", () =>
+            {
+                new CompositionException("Message", new Exception(), errors);
+            });
         }
 
         [Fact]

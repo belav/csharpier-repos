@@ -99,9 +99,8 @@ namespace DbMetal.Generator
             foreach (IImplementation implementation in AllImplementations)
             {
                 if (
-                    Array.Exists(
-                        Parameters.EntityInterfaces,
-                        interfaceName => implementation.InterfaceName == interfaceName
+                    Array.Exists(Parameters.EntityInterfaces, interfaceName =>
+                        implementation.InterfaceName == interfaceName
                     )
                 )
                     yield return implementation;

@@ -784,14 +784,10 @@ namespace System.Web.Http
             IActionFilter filter = filterMock.Object;
 
             // Act & Assert
-            return TestExceptionFilterAsync(
-                controller,
-                expectedException,
-                (configuration) =>
-                {
-                    configuration.Filters.Add(filter);
-                }
-            );
+            return TestExceptionFilterAsync(controller, expectedException, (configuration) =>
+            {
+                configuration.Filters.Add(filter);
+            });
         }
 
         [Fact]
@@ -816,14 +812,10 @@ namespace System.Web.Http
             IAuthorizationFilter filter = filterMock.Object;
 
             // Act & Assert
-            return TestExceptionFilterAsync(
-                controller,
-                expectedException,
-                (configuration) =>
-                {
-                    configuration.Filters.Add(filter);
-                }
-            );
+            return TestExceptionFilterAsync(controller, expectedException, (configuration) =>
+            {
+                configuration.Filters.Add(filter);
+            });
         }
 
         [Fact]
@@ -847,14 +839,10 @@ namespace System.Web.Http
             IAuthenticationFilter filter = filterMock.Object;
 
             // Act & Assert
-            return TestExceptionFilterAsync(
-                controller,
-                expectedException,
-                (configuration) =>
-                {
-                    configuration.Filters.Add(filter);
-                }
-            );
+            return TestExceptionFilterAsync(controller, expectedException, (configuration) =>
+            {
+                configuration.Filters.Add(filter);
+            });
         }
 
         [Fact]
@@ -886,14 +874,10 @@ namespace System.Web.Http
             IAuthenticationFilter filter = filterMock.Object;
 
             // Act & Assert
-            return TestExceptionFilterAsync(
-                controller,
-                expectedException,
-                (configuration) =>
-                {
-                    configuration.Filters.Add(filter);
-                }
-            );
+            return TestExceptionFilterAsync(controller, expectedException, (configuration) =>
+            {
+                configuration.Filters.Add(filter);
+            });
         }
 
         private static async Task TestExceptionFilterAsync(

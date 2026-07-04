@@ -15,17 +15,14 @@ internal class UploadSample
 {
     internal static void Register(CommandLineApplication app)
     {
-        app.Command(
-            "uploading",
-            cmd =>
-            {
-                cmd.Description = "Tests a streaming invocation from client to hub";
+        app.Command("uploading", cmd =>
+        {
+            cmd.Description = "Tests a streaming invocation from client to hub";
 
-                var baseUrlArgument = cmd.Argument("<BASEURL>", "The URL to the Chat Hub to test");
+            var baseUrlArgument = cmd.Argument("<BASEURL>", "The URL to the Chat Hub to test");
 
-                cmd.OnExecute(() => ExecuteAsync(baseUrlArgument.Value));
-            }
-        );
+            cmd.OnExecute(() => ExecuteAsync(baseUrlArgument.Value));
+        });
     }
 
     public static async Task<int> ExecuteAsync(string baseUrl)

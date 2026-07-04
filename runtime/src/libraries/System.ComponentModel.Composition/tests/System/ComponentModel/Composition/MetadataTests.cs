@@ -317,13 +317,10 @@ namespace System.ComponentModel.Composition
                 new ClassWithInvalidDuplicateMetadataOnType()
             );
             var export = part.ExportDefinitions.First();
-            var ex = ExceptionAssert.Throws<InvalidOperationException>(
-                RetryMode.DoNotRetry,
-                () =>
-                {
-                    var metadata = export.Metadata;
-                }
-            );
+            var ex = ExceptionAssert.Throws<InvalidOperationException>(RetryMode.DoNotRetry, () =>
+            {
+                var metadata = export.Metadata;
+            });
 
             Assert.Contains("DuplicateMetadataName", ex.Message);
         }
@@ -345,13 +342,10 @@ namespace System.ComponentModel.Composition
             );
             var export = part.ExportDefinitions.First();
 
-            var ex = ExceptionAssert.Throws<InvalidOperationException>(
-                RetryMode.DoNotRetry,
-                () =>
-                {
-                    var metadata = export.Metadata;
-                }
-            );
+            var ex = ExceptionAssert.Throws<InvalidOperationException>(RetryMode.DoNotRetry, () =>
+            {
+                var metadata = export.Metadata;
+            });
 
             Assert.Contains("DuplicateMetadataName", ex.Message);
         }
@@ -418,13 +412,10 @@ namespace System.ComponentModel.Composition
             var part = AttributedModelServices.CreatePart(new ClassWithReservedMetadataValue());
             var export = part.ExportDefinitions.First();
 
-            var ex = ExceptionAssert.Throws<InvalidOperationException>(
-                RetryMode.DoNotRetry,
-                () =>
-                {
-                    var metadata = export.Metadata;
-                }
-            );
+            var ex = ExceptionAssert.Throws<InvalidOperationException>(RetryMode.DoNotRetry, () =>
+            {
+                var metadata = export.Metadata;
+            });
 
             Assert.Contains(CompositionConstants.PartCreationPolicyMetadataName, ex.Message);
         }

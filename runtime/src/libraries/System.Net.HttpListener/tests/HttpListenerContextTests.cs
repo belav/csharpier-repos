@@ -180,15 +180,12 @@ namespace System.Net.Tests
             string headers
         )
         {
-            await GetSocketContext(
-                new string[] { headers },
-                async context =>
-                {
-                    await Assert.ThrowsAsync<WebSocketException>(() =>
-                        context.AcceptWebSocketAsync(null)
-                    );
-                }
-            );
+            await GetSocketContext(new string[] { headers }, async context =>
+            {
+                await Assert.ThrowsAsync<WebSocketException>(() =>
+                    context.AcceptWebSocketAsync(null)
+                );
+            });
         }
 
         [ConditionalTheory(nameof(IsNotWindows7))]
@@ -218,9 +215,8 @@ namespace System.Net.Tests
         )
         {
             HttpListenerContext context = await GetWebSocketContext();
-            await AssertExtensions.ThrowsAsync<ArgumentException>(
-                "subProtocol",
-                () => context.AcceptWebSocketAsync(subProtocol)
+            await AssertExtensions.ThrowsAsync<ArgumentException>("subProtocol", () =>
+                context.AcceptWebSocketAsync(subProtocol)
             );
         }
 
@@ -244,9 +240,8 @@ namespace System.Net.Tests
             HttpListenerContext context = await GetWebSocketContext();
 
             TimeSpan keepAlive = TimeSpan.FromMilliseconds(-2);
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
-                "keepAliveInterval",
-                () => context.AcceptWebSocketAsync(null, keepAlive)
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>("keepAliveInterval", () =>
+                context.AcceptWebSocketAsync(null, keepAlive)
             );
         }
 
@@ -260,9 +255,8 @@ namespace System.Net.Tests
         )
         {
             HttpListenerContext context = await GetWebSocketContext();
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
-                "receiveBufferSize",
-                () => context.AcceptWebSocketAsync(null, receiveBufferSize, TimeSpan.MaxValue)
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>("receiveBufferSize", () =>
+                context.AcceptWebSocketAsync(null, receiveBufferSize, TimeSpan.MaxValue)
             );
         }
 
@@ -272,9 +266,8 @@ namespace System.Net.Tests
             HttpListenerContext context = await GetWebSocketContext();
 
             ArraySegment<byte> internalBuffer = new FakeArraySegment() { Array = null }.ToActual();
-            await AssertExtensions.ThrowsAsync<ArgumentNullException>(
-                "internalBuffer.Array",
-                () => context.AcceptWebSocketAsync(null, 1024, TimeSpan.MaxValue, internalBuffer)
+            await AssertExtensions.ThrowsAsync<ArgumentNullException>("internalBuffer.Array", () =>
+                context.AcceptWebSocketAsync(null, 1024, TimeSpan.MaxValue, internalBuffer)
             );
         }
 

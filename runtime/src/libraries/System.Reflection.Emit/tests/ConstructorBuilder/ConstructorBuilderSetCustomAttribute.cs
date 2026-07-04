@@ -42,9 +42,8 @@ namespace System.Reflection.Emit.Tests
                 CallingConventions.Standard,
                 new Type[0]
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "con",
-                () => constructor.SetCustomAttribute(null, new byte[0])
+            AssertExtensions.Throws<ArgumentNullException>("con", () =>
+                constructor.SetCustomAttribute(null, new byte[0])
             );
         }
 
@@ -91,9 +90,8 @@ namespace System.Reflection.Emit.Tests
             ILGenerator ilGenerator = constructor.GetILGenerator();
             ilGenerator.Emit(OpCodes.Ldarg_1);
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "customBuilder",
-                () => constructor.SetCustomAttribute(null)
+            AssertExtensions.Throws<ArgumentNullException>("customBuilder", () =>
+                constructor.SetCustomAttribute(null)
             );
         }
 

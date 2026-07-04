@@ -1070,14 +1070,11 @@ public class PageModelTest
         // Assert
         Assert.IsType<RedirectToPageResult>(result);
         Assert.Null(result.PageName);
-        Assert.Collection(
-            result.RouteValues,
-            item =>
-            {
-                Assert.Equal("key", item.Key);
-                Assert.Equal("value", item.Value);
-            }
-        );
+        Assert.Collection(result.RouteValues, item =>
+        {
+            Assert.Equal("key", item.Key);
+            Assert.Equal("value", item.Value);
+        });
     }
 
     [Fact]
@@ -1111,14 +1108,11 @@ public class PageModelTest
         // Assert
         Assert.IsType<RedirectToPageResult>(result);
         Assert.Equal(pageName, result.PageName);
-        Assert.Collection(
-            result.RouteValues,
-            item =>
-            {
-                Assert.Equal("key", item.Key);
-                Assert.Equal("value", item.Value);
-            }
-        );
+        Assert.Collection(result.RouteValues, item =>
+        {
+            Assert.Equal("key", item.Key);
+            Assert.Equal("value", item.Value);
+        });
     }
 
     [Fact]
@@ -1157,14 +1151,11 @@ public class PageModelTest
         Assert.IsType<RedirectToPageResult>(result);
         Assert.Equal(pageName, result.PageName);
         Assert.Equal(pageHandler, result.PageHandler);
-        Assert.Collection(
-            result.RouteValues,
-            item =>
-            {
-                Assert.Equal("key", item.Key);
-                Assert.Equal("value", item.Value);
-            }
-        );
+        Assert.Collection(result.RouteValues, item =>
+        {
+            Assert.Equal("key", item.Key);
+            Assert.Equal("value", item.Value);
+        });
         Assert.Equal(fragment, result.Fragment);
     }
 
@@ -1216,14 +1207,11 @@ public class PageModelTest
         // Assert
         Assert.IsType<RedirectToPageResult>(result);
         Assert.Equal(pageName, result.PageName);
-        Assert.Collection(
-            result.RouteValues,
-            item =>
-            {
-                Assert.Equal("key", item.Key);
-                Assert.Equal("value", item.Value);
-            }
-        );
+        Assert.Collection(result.RouteValues, item =>
+        {
+            Assert.Equal("key", item.Key);
+            Assert.Equal("value", item.Value);
+        });
         Assert.True(result.Permanent);
     }
 
@@ -1243,14 +1231,11 @@ public class PageModelTest
         Assert.IsType<RedirectToPageResult>(result);
         Assert.Equal(pageName, result.PageName);
         Assert.Equal(pageHandler, result.PageHandler);
-        Assert.Collection(
-            result.RouteValues,
-            item =>
-            {
-                Assert.Equal("key", item.Key);
-                Assert.Equal("value", item.Value);
-            }
-        );
+        Assert.Collection(result.RouteValues, item =>
+        {
+            Assert.Equal("key", item.Key);
+            Assert.Equal("value", item.Value);
+        });
         Assert.True(result.Permanent);
     }
 
@@ -1296,14 +1281,11 @@ public class PageModelTest
         Assert.IsType<RedirectToPageResult>(result);
         Assert.Equal(pageName, result.PageName);
         Assert.Equal(pageHandler, result.PageHandler);
-        Assert.Collection(
-            result.RouteValues,
-            item =>
-            {
-                Assert.Equal("key", item.Key);
-                Assert.Equal("value", item.Value);
-            }
-        );
+        Assert.Collection(result.RouteValues, item =>
+        {
+            Assert.Equal("key", item.Key);
+            Assert.Equal("value", item.Value);
+        });
         Assert.Equal(fragment, result.Fragment);
         Assert.True(result.Permanent);
     }
@@ -1951,9 +1933,8 @@ public class PageModelTest
         testPageModel.Setup(p => p.OnPageHandlerExecuted(pageHandlerExecutedContext)).Verifiable();
 
         // Act
-        await testPageModel.Object.OnPageHandlerExecutionAsync(
-            pageHandlerExecutingContext,
-            () => Task.FromResult(pageHandlerExecutedContext)
+        await testPageModel.Object.OnPageHandlerExecutionAsync(pageHandlerExecutingContext, () =>
+            Task.FromResult(pageHandlerExecutedContext)
         );
 
         testPageModel.Verify();
@@ -1994,9 +1975,8 @@ public class PageModelTest
             .Throws(new Exception("Shouldn't be called"));
 
         // Act
-        await testPageModel.Object.OnPageHandlerExecutionAsync(
-            pageHandlerExecutingContext,
-            () => Task.FromResult(pageHandlerExecutedContext)
+        await testPageModel.Object.OnPageHandlerExecutionAsync(pageHandlerExecutingContext, () =>
+            Task.FromResult(pageHandlerExecutedContext)
         );
 
         testPageModel.Verify();

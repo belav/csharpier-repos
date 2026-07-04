@@ -271,9 +271,8 @@ namespace System.Reflection.Emit.Tests
                 null
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "con",
-                () => property.SetCustomAttribute(null, new byte[6])
+            AssertExtensions.Throws<ArgumentNullException>("con", () =>
+                property.SetCustomAttribute(null, new byte[6])
             );
         }
 
@@ -291,21 +290,17 @@ namespace System.Reflection.Emit.Tests
                 null
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "mdBuilder",
-                () => property.SetGetMethod(null)
+            AssertExtensions.Throws<ArgumentNullException>("mdBuilder", () =>
+                property.SetGetMethod(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "mdBuilder",
-                () => property.SetSetMethod(null)
+            AssertExtensions.Throws<ArgumentNullException>("mdBuilder", () =>
+                property.SetSetMethod(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "mdBuilder",
-                () => property.AddOtherMethod(null)
+            AssertExtensions.Throws<ArgumentNullException>("mdBuilder", () =>
+                property.AddOtherMethod(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "customBuilder",
-                () => property.SetCustomAttribute(null)
+            AssertExtensions.Throws<ArgumentNullException>("customBuilder", () =>
+                property.SetCustomAttribute(null)
             );
         }
 

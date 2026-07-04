@@ -105,9 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConstructorInitializerPlacement
                 }
             }
 
-            var newRoot = root.ReplaceTokens(
-                replacementMap.Keys,
-                (original, _) => replacementMap[original]
+            var newRoot = root.ReplaceTokens(replacementMap.Keys, (original, _) =>
+                replacementMap[original]
             );
 
             return document.WithSyntaxRoot(newRoot);

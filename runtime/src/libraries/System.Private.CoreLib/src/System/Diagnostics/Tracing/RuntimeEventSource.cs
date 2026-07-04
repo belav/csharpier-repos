@@ -114,55 +114,43 @@ namespace System.Diagnostics.Tracing
                     DisplayName = "CPU Usage",
                     DisplayUnits = "%",
                 };
-                _workingSetCounter ??= new PollingCounter(
-                    "working-set",
-                    this,
-                    () => ((double)Environment.WorkingSet / 1_000_000)
+                _workingSetCounter ??= new PollingCounter("working-set", this, () =>
+                    ((double)Environment.WorkingSet / 1_000_000)
                 )
                 {
                     DisplayName = "Working Set",
                     DisplayUnits = "MB",
                 };
-                _gcHeapSizeCounter ??= new PollingCounter(
-                    "gc-heap-size",
-                    this,
-                    () => ((double)GC.GetTotalMemory(false) / 1_000_000)
+                _gcHeapSizeCounter ??= new PollingCounter("gc-heap-size", this, () =>
+                    ((double)GC.GetTotalMemory(false) / 1_000_000)
                 )
                 {
                     DisplayName = "GC Heap Size",
                     DisplayUnits = "MB",
                 };
-                _gen0GCCounter ??= new IncrementingPollingCounter(
-                    "gen-0-gc-count",
-                    this,
-                    () => GC.CollectionCount(0)
+                _gen0GCCounter ??= new IncrementingPollingCounter("gen-0-gc-count", this, () =>
+                    GC.CollectionCount(0)
                 )
                 {
                     DisplayName = "Gen 0 GC Count",
                     DisplayRateTimeScale = new TimeSpan(0, 1, 0),
                 };
-                _gen1GCCounter ??= new IncrementingPollingCounter(
-                    "gen-1-gc-count",
-                    this,
-                    () => GC.CollectionCount(1)
+                _gen1GCCounter ??= new IncrementingPollingCounter("gen-1-gc-count", this, () =>
+                    GC.CollectionCount(1)
                 )
                 {
                     DisplayName = "Gen 1 GC Count",
                     DisplayRateTimeScale = new TimeSpan(0, 1, 0),
                 };
-                _gen2GCCounter ??= new IncrementingPollingCounter(
-                    "gen-2-gc-count",
-                    this,
-                    () => GC.CollectionCount(2)
+                _gen2GCCounter ??= new IncrementingPollingCounter("gen-2-gc-count", this, () =>
+                    GC.CollectionCount(2)
                 )
                 {
                     DisplayName = "Gen 2 GC Count",
                     DisplayRateTimeScale = new TimeSpan(0, 1, 0),
                 };
-                _gen0BudgetCounter ??= new PollingCounter(
-                    "gen-0-gc-budget",
-                    this,
-                    () => GC.GetGenerationBudget(0) / 1_000_000
+                _gen0BudgetCounter ??= new PollingCounter("gen-0-gc-budget", this, () =>
+                    GC.GetGenerationBudget(0) / 1_000_000
                 )
                 {
                     DisplayName = "Gen 0 GC Budget",
@@ -202,62 +190,44 @@ namespace System.Diagnostics.Tracing
                     DisplayName = "ThreadPool Completed Work Item Count",
                     DisplayRateTimeScale = new TimeSpan(0, 0, 1),
                 };
-                _allocRateCounter ??= new IncrementingPollingCounter(
-                    "alloc-rate",
-                    this,
-                    () => GC.GetTotalAllocatedBytes()
+                _allocRateCounter ??= new IncrementingPollingCounter("alloc-rate", this, () =>
+                    GC.GetTotalAllocatedBytes()
                 )
                 {
                     DisplayName = "Allocation Rate",
                     DisplayUnits = "B",
                     DisplayRateTimeScale = new TimeSpan(0, 0, 1),
                 };
-                _timerCounter ??= new PollingCounter(
-                    "active-timer-count",
-                    this,
-                    () => Timer.ActiveCount
+                _timerCounter ??= new PollingCounter("active-timer-count", this, () =>
+                    Timer.ActiveCount
                 )
                 {
                     DisplayName = "Number of Active Timers",
                 };
-                _fragmentationCounter ??= new PollingCounter(
-                    "gc-fragmentation",
-                    this,
-                    () =>
-                    {
-                        var gcInfo = GC.GetGCMemoryInfo();
-                        return gcInfo.HeapSizeBytes != 0
-                            ? gcInfo.FragmentedBytes * 100d / gcInfo.HeapSizeBytes
-                            : 0;
-                    }
-                )
+                _fragmentationCounter ??= new PollingCounter("gc-fragmentation", this, () =>
                 {
-                    DisplayName = "GC Fragmentation",
-                    DisplayUnits = "%",
-                };
+                    var gcInfo = GC.GetGCMemoryInfo();
+                    return gcInfo.HeapSizeBytes != 0
+                        ? gcInfo.FragmentedBytes * 100d / gcInfo.HeapSizeBytes
+                        : 0;
+                }) { DisplayName = "GC Fragmentation", DisplayUnits = "%" };
 
-                _committedCounter ??= new PollingCounter(
-                    "gc-committed",
-                    this,
-                    () => ((double)GC.GetGCMemoryInfo().TotalCommittedBytes / 1_000_000)
+                _committedCounter ??= new PollingCounter("gc-committed", this, () =>
+                    ((double)GC.GetGCMemoryInfo().TotalCommittedBytes / 1_000_000)
                 )
                 {
                     DisplayName = "GC Committed Bytes",
                     DisplayUnits = "MB",
                 };
-                _exceptionCounter ??= new IncrementingPollingCounter(
-                    "exception-count",
-                    this,
-                    () => Exception.GetExceptionCount()
+                _exceptionCounter ??= new IncrementingPollingCounter("exception-count", this, () =>
+                    Exception.GetExceptionCount()
                 )
                 {
                     DisplayName = "Exception Count",
                     DisplayRateTimeScale = new TimeSpan(0, 0, 1),
                 };
-                _gcTimeCounter ??= new PollingCounter(
-                    "time-in-gc",
-                    this,
-                    () => GC.GetLastGCPercentTimeInGC()
+                _gcTimeCounter ??= new PollingCounter("time-in-gc", this, () =>
+                    GC.GetLastGCPercentTimeInGC()
                 )
                 {
                     DisplayName = "% Time in GC since last GC",
@@ -272,81 +242,63 @@ namespace System.Diagnostics.Tracing
                     DisplayName = "Time paused by GC",
                     DisplayUnits = "ms",
                 };
-                _gen0SizeCounter ??= new PollingCounter(
-                    "gen-0-size",
-                    this,
-                    () => GC.GetGenerationSize(0)
+                _gen0SizeCounter ??= new PollingCounter("gen-0-size", this, () =>
+                    GC.GetGenerationSize(0)
                 )
                 {
                     DisplayName = "Gen 0 Size",
                     DisplayUnits = "B",
                 };
-                _gen1SizeCounter ??= new PollingCounter(
-                    "gen-1-size",
-                    this,
-                    () => GC.GetGenerationSize(1)
+                _gen1SizeCounter ??= new PollingCounter("gen-1-size", this, () =>
+                    GC.GetGenerationSize(1)
                 )
                 {
                     DisplayName = "Gen 1 Size",
                     DisplayUnits = "B",
                 };
-                _gen2SizeCounter ??= new PollingCounter(
-                    "gen-2-size",
-                    this,
-                    () => GC.GetGenerationSize(2)
+                _gen2SizeCounter ??= new PollingCounter("gen-2-size", this, () =>
+                    GC.GetGenerationSize(2)
                 )
                 {
                     DisplayName = "Gen 2 Size",
                     DisplayUnits = "B",
                 };
-                _lohSizeCounter ??= new PollingCounter(
-                    "loh-size",
-                    this,
-                    () => GC.GetGenerationSize(3)
+                _lohSizeCounter ??= new PollingCounter("loh-size", this, () =>
+                    GC.GetGenerationSize(3)
                 )
                 {
                     DisplayName = "LOH Size",
                     DisplayUnits = "B",
                 };
-                _pohSizeCounter ??= new PollingCounter(
-                    "poh-size",
-                    this,
-                    () => GC.GetGenerationSize(4)
+                _pohSizeCounter ??= new PollingCounter("poh-size", this, () =>
+                    GC.GetGenerationSize(4)
                 )
                 {
                     DisplayName = "POH (Pinned Object Heap) Size",
                     DisplayUnits = "B",
                 };
-                _assemblyCounter ??= new PollingCounter(
-                    "assembly-count",
-                    this,
-                    () => Reflection.Assembly.GetAssemblyCount()
+                _assemblyCounter ??= new PollingCounter("assembly-count", this, () =>
+                    Reflection.Assembly.GetAssemblyCount()
                 )
                 {
                     DisplayName = "Number of Assemblies Loaded",
                 };
 
-                _ilBytesJittedCounter ??= new PollingCounter(
-                    "il-bytes-jitted",
-                    this,
-                    () => Runtime.JitInfo.GetCompiledILBytes()
+                _ilBytesJittedCounter ??= new PollingCounter("il-bytes-jitted", this, () =>
+                    Runtime.JitInfo.GetCompiledILBytes()
                 )
                 {
                     DisplayName = "IL Bytes Jitted",
                     DisplayUnits = "B",
                 };
-                _methodsJittedCounter ??= new PollingCounter(
-                    "methods-jitted-count",
-                    this,
-                    () => Runtime.JitInfo.GetCompiledMethodCount()
+                _methodsJittedCounter ??= new PollingCounter("methods-jitted-count", this, () =>
+                    Runtime.JitInfo.GetCompiledMethodCount()
                 )
                 {
                     DisplayName = "Number of Methods Jitted",
                 };
-                _jitTimeCounter ??= new IncrementingPollingCounter(
-                    "time-in-jit",
-                    this,
-                    () => Runtime.JitInfo.GetCompilationTime().TotalMilliseconds
+                _jitTimeCounter ??= new IncrementingPollingCounter("time-in-jit", this, () =>
+                    Runtime.JitInfo.GetCompilationTime().TotalMilliseconds
                 )
                 {
                     DisplayName = "Time spent in JIT",

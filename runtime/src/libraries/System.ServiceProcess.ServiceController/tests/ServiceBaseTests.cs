@@ -90,9 +90,8 @@ namespace System.ServiceProcess.Tests
         {
             TimeSpan time = TimeSpan.FromMilliseconds(milliseconds);
             using var serviceBase = new ServiceBase();
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "time",
-                () => serviceBase.RequestAdditionalTime(time)
+            Assert.Throws<ArgumentOutOfRangeException>("time", () =>
+                serviceBase.RequestAdditionalTime(time)
             );
         }
 #endif

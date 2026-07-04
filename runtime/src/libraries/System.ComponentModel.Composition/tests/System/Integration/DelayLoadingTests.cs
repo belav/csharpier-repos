@@ -260,14 +260,11 @@ namespace Tests.Integration
 
             private LazyMemberInfo CreateWrapped(LazyMemberInfo lazyMember, Type type)
             {
-                return new LazyMemberInfo(
-                    lazyMember.MemberType,
-                    () =>
-                    {
-                        this.OnTypeLoaded(type);
-                        return lazyMember.GetAccessors();
-                    }
-                );
+                return new LazyMemberInfo(lazyMember.MemberType, () =>
+                {
+                    this.OnTypeLoaded(type);
+                    return lazyMember.GetAccessors();
+                });
             }
 
             private ExportDefinition CreateWrapped(ExportDefinition export, Type type)

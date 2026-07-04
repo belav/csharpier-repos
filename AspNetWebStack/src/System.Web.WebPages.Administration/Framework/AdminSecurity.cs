@@ -175,17 +175,14 @@ namespace System.Web.WebPages.Administration
 
         internal static bool CheckPassword(string password)
         {
-            return CheckPassword(
-                password,
-                () =>
-                {
-                    VirtualFile passwordFile = HostingEnvironment.VirtualPathProvider.GetFile(
-                        AdminPasswordFile
-                    );
-                    Debug.Assert(passwordFile != null, "password file should not be null");
-                    return passwordFile.Open();
-                }
-            );
+            return CheckPassword(password, () =>
+            {
+                VirtualFile passwordFile = HostingEnvironment.VirtualPathProvider.GetFile(
+                    AdminPasswordFile
+                );
+                Debug.Assert(passwordFile != null, "password file should not be null");
+                return passwordFile.Open();
+            });
         }
 
         internal static bool CheckPassword(string password, Func<Stream> getPasswordFileStream)

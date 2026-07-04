@@ -395,10 +395,8 @@ namespace System.Diagnostics.TraceSourceTests
         {
             var list = Create(4);
             var arr = new object[2];
-            AssertExtensions.Throws<ArgumentException>(
-                "destinationArray",
-                "",
-                () => list.CopyTo(arr, 0)
+            AssertExtensions.Throws<ArgumentException>("destinationArray", "", () =>
+                list.CopyTo(arr, 0)
             );
         }
     }

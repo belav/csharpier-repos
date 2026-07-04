@@ -50,19 +50,14 @@ namespace NetCoreServer
                         })
             );
 #endif
-            services.AddCors(o =>
-                o.AddPolicy(
-                    "AnyCors",
-                    builder =>
-                    {
-                        builder
-                            .AllowAnyOrigin()
-                            .AllowAnyMethod()
-                            .AllowAnyHeader()
-                            .WithExposedHeaders("*");
-                    }
-                )
-            );
+            services.AddCors(o => o.AddPolicy("AnyCors", builder =>
+                {
+                    builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .WithExposedHeaders("*");
+                }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

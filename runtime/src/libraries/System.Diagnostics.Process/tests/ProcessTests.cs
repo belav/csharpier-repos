@@ -91,9 +91,8 @@ namespace System.Diagnostics.Tests
         public void TestWaitForExitValidation(long milliseconds)
         {
             CreateDefaultProcess();
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "timeout",
-                () => _process.WaitForExit(TimeSpan.FromMilliseconds(milliseconds))
+            Assert.Throws<ArgumentOutOfRangeException>("timeout", () =>
+                _process.WaitForExit(TimeSpan.FromMilliseconds(milliseconds))
             );
         }
 
@@ -1451,18 +1450,16 @@ namespace System.Diagnostics.Tests
         [Fact]
         public void GetProcesseses_NullMachineName_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "machineName",
-                () => Process.GetProcesses(null)
+            AssertExtensions.Throws<ArgumentNullException>("machineName", () =>
+                Process.GetProcesses(null)
             );
         }
 
         [Fact]
         public void GetProcesses_EmptyMachineName_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "machineName",
-                () => Process.GetProcesses("")
+            AssertExtensions.Throws<ArgumentException>("machineName", () =>
+                Process.GetProcesses("")
             );
         }
 
@@ -1518,9 +1515,8 @@ namespace System.Diagnostics.Tests
 
             int expectedCount = (PlatformDetection.IsMobile) ? 1 : 2;
 
-            Assert.Contains(
-                processes,
-                process => process.ProcessName == currentProcess.ProcessName
+            Assert.Contains(processes, process =>
+                process.ProcessName == currentProcess.ProcessName
             );
             Assert.InRange(processes.Length, expectedCount, int.MaxValue); // should contain current process and some number of additional processes
         }
@@ -1556,9 +1552,8 @@ namespace System.Diagnostics.Tests
                     throw TrueException.ForNonTrueValue(PrintProcesses(currentProcess), false);
                 }
 
-                Assert.All(
-                    processes,
-                    process => Assert.Equal(currentProcess.ProcessName, process.ProcessName)
+                Assert.All(processes, process =>
+                    Assert.Equal(currentProcess.ProcessName, process.ProcessName)
                 );
                 Assert.All(processes, process => Assert.Equal(".", process.MachineName));
             }
@@ -1655,9 +1650,8 @@ namespace System.Diagnostics.Tests
         public void GetProcessesByName_NullMachineName_ThrowsArgumentNullException()
         {
             Process currentProcess = Process.GetCurrentProcess();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "machineName",
-                () => Process.GetProcessesByName(currentProcess.ProcessName, null)
+            AssertExtensions.Throws<ArgumentNullException>("machineName", () =>
+                Process.GetProcessesByName(currentProcess.ProcessName, null)
             );
         }
 
@@ -1669,9 +1663,8 @@ namespace System.Diagnostics.Tests
         public void GetProcessesByName_EmptyMachineName_ThrowsArgumentException()
         {
             Process currentProcess = Process.GetCurrentProcess();
-            AssertExtensions.Throws<ArgumentException>(
-                "machineName",
-                () => Process.GetProcessesByName(currentProcess.ProcessName, "")
+            AssertExtensions.Throws<ArgumentException>("machineName", () =>
+                Process.GetProcessesByName(currentProcess.ProcessName, "")
             );
         }
 
@@ -1850,9 +1843,8 @@ namespace System.Diagnostics.Tests
         [Fact]
         public void Start_NullStartInfo_ThrowsArgumentNullExceptionException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "startInfo",
-                () => Process.Start((ProcessStartInfo)null)
+            AssertExtensions.Throws<ArgumentNullException>("startInfo", () =>
+                Process.Start((ProcessStartInfo)null)
             );
         }
 
@@ -3021,9 +3013,8 @@ namespace System.Diagnostics.Tests
         [Fact]
         public void Start_ThrowsArgumentNullExceptionForNullFileName()
         {
-            Assert.Throws<ArgumentNullException>(
-                "fileName",
-                () => Process.Start(null, Enumerable.Repeat("notNull", 1))
+            Assert.Throws<ArgumentNullException>("fileName", () =>
+                Process.Start(null, Enumerable.Repeat("notNull", 1))
             );
         }
 
@@ -3031,9 +3022,8 @@ namespace System.Diagnostics.Tests
         public void Start_ThrowsArgumentNullExceptionForNullArgumentsList()
         {
             IEnumerable<string> @null = null;
-            Assert.Throws<ArgumentNullException>(
-                "arguments",
-                () => Process.Start("notNull", @null)
+            Assert.Throws<ArgumentNullException>("arguments", () =>
+                Process.Start("notNull", @null)
             );
         }
 

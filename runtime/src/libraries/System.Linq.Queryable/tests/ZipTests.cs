@@ -22,9 +22,8 @@ namespace System.Linq.Tests
         {
             IQueryable<int> first = null;
             int[] second = { 2, 5, 9 };
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source1",
-                () => first.Zip(second.AsQueryable(), (x, y) => x + y)
+            AssertExtensions.Throws<ArgumentNullException>("source1", () =>
+                first.Zip(second.AsQueryable(), (x, y) => x + y)
             );
         }
 
@@ -33,9 +32,8 @@ namespace System.Linq.Tests
         {
             int[] first = { 1, 2, 3 };
             IQueryable<int> second = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source2",
-                () => first.AsQueryable().Zip(second, (x, y) => x + y)
+            AssertExtensions.Throws<ArgumentNullException>("source2", () =>
+                first.AsQueryable().Zip(second, (x, y) => x + y)
             );
         }
 
@@ -45,9 +43,8 @@ namespace System.Linq.Tests
             IQueryable<int> first = new[] { 1, 2, 3 }.AsQueryable();
             IQueryable<int> second = new[] { 2, 4, 6 }.AsQueryable();
             Expression<Func<int, int, int>> func = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () => first.Zip(second, func)
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                first.Zip(second, func)
             );
         }
 
@@ -75,9 +72,8 @@ namespace System.Linq.Tests
         {
             IQueryable<int> first = null;
             int[] second = { 2, 5, 9 };
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source1",
-                () => first.Zip(second.AsQueryable())
+            AssertExtensions.Throws<ArgumentNullException>("source1", () =>
+                first.Zip(second.AsQueryable())
             );
         }
 
@@ -86,9 +82,8 @@ namespace System.Linq.Tests
         {
             int[] first = { 1, 2, 3 };
             IQueryable<int> second = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source2",
-                () => first.AsQueryable().Zip(second)
+            AssertExtensions.Throws<ArgumentNullException>("source2", () =>
+                first.AsQueryable().Zip(second)
             );
         }
 
@@ -131,9 +126,8 @@ namespace System.Linq.Tests
             IQueryable<int> first = null;
             int[] second = { 2, 6, 8 };
             int[] third = { 1, 7, 2 };
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source1",
-                () => first.Zip(second.AsQueryable(), third.AsQueryable())
+            AssertExtensions.Throws<ArgumentNullException>("source1", () =>
+                first.Zip(second.AsQueryable(), third.AsQueryable())
             );
         }
 
@@ -143,9 +137,8 @@ namespace System.Linq.Tests
             int[] first = { 1, 3, 5 };
             IQueryable<int> second = null;
             int[] third = { 1, 7, 2 };
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source2",
-                () => first.AsQueryable().Zip(second, third.AsQueryable())
+            AssertExtensions.Throws<ArgumentNullException>("source2", () =>
+                first.AsQueryable().Zip(second, third.AsQueryable())
             );
         }
 
@@ -155,9 +148,8 @@ namespace System.Linq.Tests
             int[] first = { 1, 3, 5 };
             int[] second = { 2, 6, 8 };
             IQueryable<int> third = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source3",
-                () => first.AsQueryable().Zip(second.AsQueryable(), third)
+            AssertExtensions.Throws<ArgumentNullException>("source3", () =>
+                first.AsQueryable().Zip(second.AsQueryable(), third)
             );
         }
 

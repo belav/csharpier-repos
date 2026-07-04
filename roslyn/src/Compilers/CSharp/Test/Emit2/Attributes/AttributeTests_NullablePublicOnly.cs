@@ -33,15 +33,13 @@ public class B : A<object?>
             CSharpTestSource sources = new[] { NullablePublicOnlyAttributeDefinition, source };
 
             var comp = CreateCompilation(sources, options: options, parseOptions: parseOptions);
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                    AssertNullablePublicOnlyAttribute(
-                        m,
-                        includesAttributeDefinition: true,
-                        includesAttributeUse: false,
-                        publicDefinition: true
-                    )
+            CompileAndVerify(comp, symbolValidator: m =>
+                AssertNullablePublicOnlyAttribute(
+                    m,
+                    includesAttributeDefinition: true,
+                    includesAttributeUse: false,
+                    publicDefinition: true
+                )
             );
 
             comp = CreateCompilation(
@@ -49,15 +47,13 @@ public class B : A<object?>
                 options: options,
                 parseOptions: parseOptions.WithNullablePublicOnly()
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                    AssertNullablePublicOnlyAttribute(
-                        m,
-                        includesAttributeDefinition: true,
-                        includesAttributeUse: true,
-                        publicDefinition: true
-                    )
+            CompileAndVerify(comp, symbolValidator: m =>
+                AssertNullablePublicOnlyAttribute(
+                    m,
+                    includesAttributeDefinition: true,
+                    includesAttributeUse: true,
+                    publicDefinition: true
+                )
             );
         }
 
@@ -87,15 +83,13 @@ public class B : A<object?>
                 options: options,
                 parseOptions: parseOptions
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                    AssertNullablePublicOnlyAttribute(
-                        m,
-                        includesAttributeDefinition: false,
-                        includesAttributeUse: false,
-                        publicDefinition: true
-                    )
+            CompileAndVerify(comp, symbolValidator: m =>
+                AssertNullablePublicOnlyAttribute(
+                    m,
+                    includesAttributeDefinition: false,
+                    includesAttributeUse: false,
+                    publicDefinition: true
+                )
             );
 
             comp = CreateCompilation(
@@ -104,15 +98,13 @@ public class B : A<object?>
                 options: options,
                 parseOptions: parseOptions.WithNullablePublicOnly()
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                    AssertNullablePublicOnlyAttribute(
-                        m,
-                        includesAttributeDefinition: false,
-                        includesAttributeUse: true,
-                        publicDefinition: true
-                    )
+            CompileAndVerify(comp, symbolValidator: m =>
+                AssertNullablePublicOnlyAttribute(
+                    m,
+                    includesAttributeDefinition: false,
+                    includesAttributeUse: true,
+                    publicDefinition: true
+                )
             );
         }
 
@@ -390,15 +382,13 @@ public class Program
             };
 
             var comp = CreateCompilation(sources, options: options, parseOptions: parseOptions);
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                    AssertNullablePublicOnlyAttribute(
-                        m,
-                        includesAttributeDefinition: true,
-                        includesAttributeUse: false,
-                        publicDefinition: true
-                    )
+            CompileAndVerify(comp, symbolValidator: m =>
+                AssertNullablePublicOnlyAttribute(
+                    m,
+                    includesAttributeDefinition: true,
+                    includesAttributeUse: false,
+                    publicDefinition: true
+                )
             );
 
             comp = CreateCompilation(
@@ -406,15 +396,13 @@ public class Program
                 options: options,
                 parseOptions: parseOptions.WithNullablePublicOnly()
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                    AssertNullablePublicOnlyAttribute(
-                        m,
-                        includesAttributeDefinition: true,
-                        includesAttributeUse: false,
-                        publicDefinition: true
-                    )
+            CompileAndVerify(comp, symbolValidator: m =>
+                AssertNullablePublicOnlyAttribute(
+                    m,
+                    includesAttributeDefinition: true,
+                    includesAttributeUse: false,
+                    publicDefinition: true
+                )
             );
         }
 
@@ -439,15 +427,13 @@ public class Program
             };
 
             var comp = CreateCompilation(sources, options: options, parseOptions: parseOptions);
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                    AssertNullablePublicOnlyAttribute(
-                        m,
-                        includesAttributeDefinition: true,
-                        includesAttributeUse: false,
-                        publicDefinition: true
-                    )
+            CompileAndVerify(comp, symbolValidator: m =>
+                AssertNullablePublicOnlyAttribute(
+                    m,
+                    includesAttributeDefinition: true,
+                    includesAttributeUse: false,
+                    publicDefinition: true
+                )
             );
 
             comp = CreateCompilation(
@@ -455,15 +441,13 @@ public class Program
                 options: options,
                 parseOptions: parseOptions.WithNullablePublicOnly()
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                    AssertNullablePublicOnlyAttribute(
-                        m,
-                        includesAttributeDefinition: true,
-                        includesAttributeUse: true,
-                        publicDefinition: true
-                    )
+            CompileAndVerify(comp, symbolValidator: m =>
+                AssertNullablePublicOnlyAttribute(
+                    m,
+                    includesAttributeDefinition: true,
+                    includesAttributeUse: true,
+                    publicDefinition: true
+                )
             );
         }
 
@@ -581,15 +565,13 @@ public class Program
             };
 
             var comp = CreateCompilation(sources, options: options, parseOptions: parseOptions);
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                    AssertNullablePublicOnlyAttribute(
-                        m,
-                        includesAttributeDefinition: true,
-                        includesAttributeUse: false,
-                        publicDefinition: true
-                    )
+            CompileAndVerify(comp, symbolValidator: m =>
+                AssertNullablePublicOnlyAttribute(
+                    m,
+                    includesAttributeDefinition: true,
+                    includesAttributeUse: false,
+                    publicDefinition: true
+                )
             );
 
             comp = CreateCompilation(
@@ -597,15 +579,13 @@ public class Program
                 options: options,
                 parseOptions: parseOptions.WithNullablePublicOnly()
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: m =>
-                    AssertNullablePublicOnlyAttribute(
-                        m,
-                        includesAttributeDefinition: true,
-                        includesAttributeUse: false,
-                        publicDefinition: true
-                    )
+            CompileAndVerify(comp, symbolValidator: m =>
+                AssertNullablePublicOnlyAttribute(
+                    m,
+                    includesAttributeDefinition: true,
+                    includesAttributeUse: false,
+                    publicDefinition: true
+                )
             );
         }
 
@@ -736,20 +716,17 @@ public class Program
                 parseOptions: TestOptions.Regular.WithNullablePublicOnly(),
                 options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.All)
             );
-            CompileAndVerify(
-                comp,
-                symbolValidator: module =>
-                {
-                    var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
-                        "System.Runtime.CompilerServices.NullablePublicOnlyAttribute"
-                    );
-                    AttributeUsageInfo attributeUsage = attributeType.GetAttributeUsageInfo();
-                    Assert.False(attributeUsage.Inherited);
-                    Assert.False(attributeUsage.AllowMultiple);
-                    Assert.True(attributeUsage.HasValidAttributeTargets);
-                    Assert.Equal(AttributeTargets.Module, attributeUsage.ValidTargets);
-                }
-            );
+            CompileAndVerify(comp, symbolValidator: module =>
+            {
+                var attributeType = module.GlobalNamespace.GetMember<NamedTypeSymbol>(
+                    "System.Runtime.CompilerServices.NullablePublicOnlyAttribute"
+                );
+                AttributeUsageInfo attributeUsage = attributeType.GetAttributeUsageInfo();
+                Assert.False(attributeUsage.Inherited);
+                Assert.False(attributeUsage.AllowMultiple);
+                Assert.True(attributeUsage.HasValidAttributeTargets);
+                Assert.Equal(AttributeTargets.Module, attributeUsage.ValidTargets);
+            });
         }
 
         [Fact]
@@ -904,9 +881,8 @@ public class Program
 
         private void AssertNullableAttributes(CSharpCompilation comp, string expected)
         {
-            CompileAndVerify(
-                comp,
-                symbolValidator: module => AssertNullableAttributes(module, expected)
+            CompileAndVerify(comp, symbolValidator: module =>
+                AssertNullableAttributes(module, expected)
             );
         }
 

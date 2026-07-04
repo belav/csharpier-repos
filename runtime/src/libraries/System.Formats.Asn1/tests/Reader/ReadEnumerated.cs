@@ -644,9 +644,8 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] data = { 0x0A, 0x01, 0x00 };
             AsnReader reader = new AsnReader(data, ruleSet);
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "enumType",
-                () => reader.ReadEnumeratedValue(null!)
+            AssertExtensions.Throws<ArgumentNullException>("enumType", () =>
+                reader.ReadEnumeratedValue(null!)
             );
 
             Assert.True(reader.HasData, "reader.HasData");
@@ -673,9 +672,8 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] data = { 0x0A, 0x01, 0x00 };
             AsnReader reader = new AsnReader(data, ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "enumType",
-                () => reader.ReadEnumeratedValue<AssemblyFlags>()
+            AssertExtensions.Throws<ArgumentException>("enumType", () =>
+                reader.ReadEnumeratedValue<AssemblyFlags>()
             );
         }
 
@@ -735,9 +733,8 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] inputData = { 0x0A, 1, 0x7E };
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "expectedTag",
-                () => reader.ReadEnumeratedValue<ShortBacked>(Asn1Tag.Null)
+            AssertExtensions.Throws<ArgumentException>("expectedTag", () =>
+                reader.ReadEnumeratedValue<ShortBacked>(Asn1Tag.Null)
             );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
@@ -762,9 +759,8 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] inputData = { 0x87, 2, 0, 0x80 };
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "expectedTag",
-                () => reader.ReadEnumeratedValue<ShortBacked>(Asn1Tag.Null)
+            AssertExtensions.Throws<ArgumentException>("expectedTag", () =>
+                reader.ReadEnumeratedValue<ShortBacked>(Asn1Tag.Null)
             );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");

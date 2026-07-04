@@ -362,18 +362,16 @@ namespace System.Net.Quic.Tests
             // The third connection attempt fails with ConnectionRefused.
             await using var clientConnection1 = await CreateQuicConnection(listener.LocalEndPoint);
             await using var clientConnection2 = await CreateQuicConnection(listener.LocalEndPoint);
-            await AssertThrowsQuicExceptionAsync(
-                QuicError.ConnectionRefused,
-                async () => await CreateQuicConnection(listener.LocalEndPoint)
+            await AssertThrowsQuicExceptionAsync(QuicError.ConnectionRefused, async () =>
+                await CreateQuicConnection(listener.LocalEndPoint)
             );
 
             // Accept one connection and attempt another one.
             await using var serverConnection = await listener.AcceptConnectionAsync();
             await using var clientConnection3 = await CreateQuicConnection(listener.LocalEndPoint);
             // Third one again, should fail.
-            await AssertThrowsQuicExceptionAsync(
-                QuicError.ConnectionRefused,
-                async () => await CreateQuicConnection(listener.LocalEndPoint)
+            await AssertThrowsQuicExceptionAsync(QuicError.ConnectionRefused, async () =>
+                await CreateQuicConnection(listener.LocalEndPoint)
             );
 
             // Accept the remaining connection to see that failure do not affect them.
@@ -433,21 +431,18 @@ namespace System.Net.Quic.Tests
             // Count the number of successful connections and refused connections.
             int success = 0;
             int failure = 0;
-            await Parallel.ForEachAsync(
-                connectTasks,
-                async (connectTask, cancellationToken) =>
+            await Parallel.ForEachAsync(connectTasks, async (connectTask, cancellationToken) =>
+            {
+                try
                 {
-                    try
-                    {
-                        await connectTask;
-                        Interlocked.Increment(ref success);
-                    }
-                    catch (QuicException qex) when (qex.QuicError == QuicError.ConnectionRefused)
-                    {
-                        Interlocked.Increment(ref failure);
-                    }
+                    await connectTask;
+                    Interlocked.Increment(ref success);
                 }
-            );
+                catch (QuicException qex) when (qex.QuicError == QuicError.ConnectionRefused)
+                {
+                    Interlocked.Increment(ref failure);
+                }
+            });
 
             // Check that the numbers correspond to backlog limit.
             int pendingConnections = 0;
@@ -586,9 +581,8 @@ namespace System.Net.Quic.Tests
         public async Task TwoListenersOnSamePort_SameAlpn_Throws()
         {
             await using QuicListener listener = await CreateQuicListener();
-            await AssertThrowsQuicExceptionAsync(
-                QuicError.AlpnInUse,
-                async () => await CreateQuicListener(listener.LocalEndPoint)
+            await AssertThrowsQuicExceptionAsync(QuicError.AlpnInUse, async () =>
+                await CreateQuicListener(listener.LocalEndPoint)
             );
         }
 

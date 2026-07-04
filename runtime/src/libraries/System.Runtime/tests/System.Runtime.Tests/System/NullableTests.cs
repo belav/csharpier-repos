@@ -91,9 +91,8 @@ namespace System.Tests
         [Fact]
         public static void GetUnderlyingType_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "nullableType",
-                () => Nullable.GetUnderlyingType((Type)null)
+            AssertExtensions.Throws<ArgumentNullException>("nullableType", () =>
+                Nullable.GetUnderlyingType((Type)null)
             );
         }
 

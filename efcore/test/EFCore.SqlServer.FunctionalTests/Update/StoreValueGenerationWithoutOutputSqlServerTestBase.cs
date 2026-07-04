@@ -32,13 +32,11 @@ public abstract class StoreValueGenerationWithoutOutputSqlServerTestBase<TFixtur
             context.SaveChanges();
         }
 
-        Assert.Contains(
-            Fixture.ListLoggerFactory.Log,
-            l => l.Id == RelationalEventId.TransactionStarted
+        Assert.Contains(Fixture.ListLoggerFactory.Log, l =>
+            l.Id == RelationalEventId.TransactionStarted
         );
-        Assert.Contains(
-            Fixture.ListLoggerFactory.Log,
-            l => l.Id == RelationalEventId.TransactionCommitted
+        Assert.Contains(Fixture.ListLoggerFactory.Log, l =>
+            l.Id == RelationalEventId.TransactionCommitted
         );
 
         Assert.Equal(
@@ -85,13 +83,11 @@ public abstract class StoreValueGenerationWithoutOutputSqlServerTestBase<TFixtur
             context.SaveChanges();
         }
 
-        Assert.Contains(
-            Fixture.ListLoggerFactory.Log,
-            l => l.Id == RelationalEventId.TransactionStarted
+        Assert.Contains(Fixture.ListLoggerFactory.Log, l =>
+            l.Id == RelationalEventId.TransactionStarted
         );
-        Assert.Contains(
-            Fixture.ListLoggerFactory.Log,
-            l => l.Id == RelationalEventId.TransactionCommitted
+        Assert.Contains(Fixture.ListLoggerFactory.Log, l =>
+            l.Id == RelationalEventId.TransactionCommitted
         );
 
         Assert.Equal(

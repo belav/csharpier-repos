@@ -21,9 +21,8 @@ namespace Microsoft.Extensions.Configuration.EnvironmentVariables.Test
 
             var provider = new EnvironmentVariablesConfigurationProvider(null);
 
-            return (
-                provider,
-                () => provider.Load(new Hashtable(values.ToDictionary(e => e.Key, e => e.Value)))
+            return (provider, () =>
+                provider.Load(new Hashtable(values.ToDictionary(e => e.Key, e => e.Value)))
             );
         }
 

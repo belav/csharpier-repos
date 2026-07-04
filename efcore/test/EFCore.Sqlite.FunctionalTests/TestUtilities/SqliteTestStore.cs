@@ -50,16 +50,12 @@ public class SqliteTestStore : RelationalTestStore
     public virtual DbContextOptionsBuilder AddProviderOptions(
         DbContextOptionsBuilder builder,
         Action<SqliteDbContextOptionsBuilder> configureSqlite
-    ) =>
-        builder.UseSqlite(
-            Connection,
-            b =>
-            {
-                b.CommandTimeout(CommandTimeout);
-                b.UseQuerySplittingBehavior(QuerySplittingBehavior.SingleQuery);
-                configureSqlite?.Invoke(b);
-            }
-        );
+    ) => builder.UseSqlite(Connection, b =>
+        {
+            b.CommandTimeout(CommandTimeout);
+            b.UseQuerySplittingBehavior(QuerySplittingBehavior.SingleQuery);
+            configureSqlite?.Invoke(b);
+        });
 
     public override DbContextOptionsBuilder AddProviderOptions(DbContextOptionsBuilder builder) =>
         AddProviderOptions(builder, configureSqlite: null);

@@ -111,17 +111,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // One netstandard.dll should resolve from Facades on Mono
             names = gac.GetAssemblyIdentities(new AssemblyName("netstandard")).ToArray();
-            Assert.Collection(
-                names,
-                name =>
-                {
-                    Assert.Equal("netstandard", name.Name);
-                    Assert.True(
-                        name.Version >= new Version("2.0.0.0"),
-                        "netstandard version must be >= 2.0.0.0"
-                    );
-                }
-            );
+            Assert.Collection(names, name =>
+            {
+                Assert.Equal("netstandard", name.Name);
+                Assert.True(
+                    name.Version >= new Version("2.0.0.0"),
+                    "netstandard version must be >= 2.0.0.0"
+                );
+            });
         }
 
         [ClrOnlyFact(ClrOnlyReason.Fusion)]

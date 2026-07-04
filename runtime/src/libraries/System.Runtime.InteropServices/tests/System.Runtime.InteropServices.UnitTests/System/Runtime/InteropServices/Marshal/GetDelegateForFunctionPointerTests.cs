@@ -128,13 +128,11 @@ namespace System.Runtime.InteropServices.Tests
         public void GetDelegateForFunctionPointer_MulticastDelegate_ThrowsMustBeDelegate()
         {
             IntPtr ptr = Marshal.AllocHGlobal(16);
-            AssertExtensions.Throws<ArgumentException>(
-                "t",
-                () => Marshal.GetDelegateForFunctionPointer(ptr, typeof(MulticastDelegate))
+            AssertExtensions.Throws<ArgumentException>("t", () =>
+                Marshal.GetDelegateForFunctionPointer(ptr, typeof(MulticastDelegate))
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "t",
-                () => Marshal.GetDelegateForFunctionPointer<MulticastDelegate>(ptr)
+            AssertExtensions.Throws<ArgumentException>("t", () =>
+                Marshal.GetDelegateForFunctionPointer<MulticastDelegate>(ptr)
             );
             Marshal.FreeHGlobal(ptr);
         }
@@ -149,22 +147,19 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void GetDelegateForFunctionPointer_ZeroPointer_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "ptr",
-                () => Marshal.GetDelegateForFunctionPointer(IntPtr.Zero, typeof(NonGenericDelegate))
+            AssertExtensions.Throws<ArgumentNullException>("ptr", () =>
+                Marshal.GetDelegateForFunctionPointer(IntPtr.Zero, typeof(NonGenericDelegate))
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "ptr",
-                () => Marshal.GetDelegateForFunctionPointer<string>(IntPtr.Zero)
+            AssertExtensions.Throws<ArgumentNullException>("ptr", () =>
+                Marshal.GetDelegateForFunctionPointer<string>(IntPtr.Zero)
             );
         }
 
         [Fact]
         public void GetDelegateForFunctionPointer_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "t",
-                () => Marshal.GetDelegateForFunctionPointer((IntPtr)1, null)
+            AssertExtensions.Throws<ArgumentNullException>("t", () =>
+                Marshal.GetDelegateForFunctionPointer((IntPtr)1, null)
             );
         }
 
@@ -208,9 +203,8 @@ namespace System.Runtime.InteropServices.Tests
         [MemberData(nameof(GetDelegateForFunctionPointer_InvalidType_TestData))]
         public void GetDelegateForFunctionPointer_InvalidType_ThrowsArgumentException(Type t)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "t",
-                () => Marshal.GetDelegateForFunctionPointer((IntPtr)1, t)
+            AssertExtensions.Throws<ArgumentException>("t", () =>
+                Marshal.GetDelegateForFunctionPointer((IntPtr)1, t)
             );
         }
 

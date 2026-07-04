@@ -1102,9 +1102,8 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
             var bookId = alternateTable.FindColumn("BookId2")!;
 
             Assert.Equal(4, bookId.PropertyMappings.Count());
-            Assert.All(
-                bookId.PropertyMappings,
-                m => Assert.Equal(ValueGenerated.OnUpdateSometimes, m.Property.ValueGenerated)
+            Assert.All(bookId.PropertyMappings, m =>
+                Assert.Equal(ValueGenerated.OnUpdateSometimes, m.Property.ValueGenerated)
             );
         }
 
@@ -1116,17 +1115,13 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
 
             modelBuilder.Entity<Book>(bb =>
             {
-                bb.ToTable(
-                    "BT",
-                    "BS",
-                    t =>
-                    {
-                        t.ExcludeFromMigrations();
+                bb.ToTable("BT", "BS", t =>
+                {
+                    t.ExcludeFromMigrations();
 
-                        Assert.Equal("BT", t.Name);
-                        Assert.Equal("BS", t.Schema);
-                    }
-                );
+                    Assert.Equal("BT", t.Name);
+                    Assert.Equal("BS", t.Schema);
+                });
                 bb.OwnsOne(
                     b => b.AlternateLabel,
                     tb =>
@@ -1139,17 +1134,13 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
                             ab =>
                             {
                                 ab.Ignore(l => l.Book);
-                                ab.ToTable(
-                                    "AT1",
-                                    "AS1",
-                                    t =>
-                                    {
-                                        t.ExcludeFromMigrations(false);
+                                ab.ToTable("AT1", "AS1", t =>
+                                {
+                                    t.ExcludeFromMigrations(false);
 
-                                        Assert.Equal("AT1", t.Name);
-                                        Assert.Equal("AS1", t.Schema);
-                                    }
-                                );
+                                    Assert.Equal("AT1", t.Name);
+                                    Assert.Equal("AS1", t.Schema);
+                                });
                                 ab.OwnsOne(s => s.SpecialBookLabel)
                                     .ToTable("ST11", "SS11")
                                     .Ignore(l => l.Book)
@@ -1556,11 +1547,9 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
             var ownedBuilder = modelBuilder
                 .Entity<OtherCustomer>()
                 .OwnsOne(c => c.Details)
-                .ToTable(
-                    "OtherCustomerDetails",
-                    tb =>
-                        tb.HasCheckConstraint("CK_CustomerDetails_T", "AlternateKey <> 0")
-                            .HasName("CK_Guid")
+                .ToTable("OtherCustomerDetails", tb =>
+                    tb.HasCheckConstraint("CK_CustomerDetails_T", "AlternateKey <> 0")
+                        .HasName("CK_Guid")
                 );
             ownedBuilder.Property(d => d.CustomerId);
             ownedBuilder.HasIndex(d => d.CustomerId);
@@ -1574,11 +1563,9 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
                     c => c.Details,
                     b =>
                     {
-                        b.ToTable(
-                            "SpecialCustomerDetails",
-                            tb =>
-                                tb.HasCheckConstraint("CK_CustomerDetails_T", "AlternateKey <> 0")
-                                    .HasName("CK_Guid")
+                        b.ToTable("SpecialCustomerDetails", tb =>
+                            tb.HasCheckConstraint("CK_CustomerDetails_T", "AlternateKey <> 0")
+                                .HasName("CK_Guid")
                         );
                         b.Property(d => d.CustomerId);
                         b.HasIndex(d => d.CustomerId);

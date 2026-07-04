@@ -51,9 +51,8 @@ namespace System.Reflection.Tests
                 }
             );
 
-            Type projectedType = s_typeDict.GetOrAdd(
-                type,
-                (t) => projectedAssembly.GetType(t.FullName, throwOnError: true, ignoreCase: false)
+            Type projectedType = s_typeDict.GetOrAdd(type, (t) =>
+                projectedAssembly.GetType(t.FullName, throwOnError: true, ignoreCase: false)
             );
 
             if (s_useRuntimeTypesForTests.Value)

@@ -243,9 +243,8 @@ namespace System.Net.Tests
         public async Task AppendCookie_NullCookie_ThrowsArgumentNullException()
         {
             HttpListenerResponse response = await GetResponse();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "cookie",
-                () => response.AppendCookie(null)
+            AssertExtensions.Throws<ArgumentNullException>("cookie", () =>
+                response.AppendCookie(null)
             );
         }
 
@@ -278,9 +277,8 @@ namespace System.Net.Tests
         public async Task SetCookie_NullCookie_ThrowsArgumentNullException()
         {
             HttpListenerResponse response = await GetResponse();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "cookie",
-                () => response.SetCookie(null)
+            AssertExtensions.Throws<ArgumentNullException>("cookie", () =>
+                response.SetCookie(null)
             );
         }
 

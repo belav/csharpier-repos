@@ -68,10 +68,8 @@ namespace System.Globalization.Tests
         public void CurrencyGroupSizes_SetNull_ThrowsArgumentNullException()
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                "CurrencyGroupSizes",
-                () => format.CurrencyGroupSizes = null
+            AssertExtensions.Throws<ArgumentNullException>("value", "CurrencyGroupSizes", () =>
+                format.CurrencyGroupSizes = null
             );
         }
 
@@ -82,10 +80,8 @@ namespace System.Globalization.Tests
         public void CurrencyGroupSizes_SetInvalid_ThrowsArgumentException(int[] value)
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentException>(
-                "value",
-                "CurrencyGroupSizes",
-                () => format.CurrencyGroupSizes = value
+            AssertExtensions.Throws<ArgumentException>("value", "CurrencyGroupSizes", () =>
+                format.CurrencyGroupSizes = value
             );
         }
 

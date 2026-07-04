@@ -127,15 +127,12 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         {
             using var handler = new WinHttpHandler();
 
-            SendRequestHelper.Send(
-                handler,
-                () =>
-                {
-                    handler.TcpKeepAliveEnabled = true;
-                    handler.TcpKeepAliveTime = TimeSpan.FromMinutes(13);
-                    handler.TcpKeepAliveInterval = TimeSpan.FromSeconds(42);
-                }
-            );
+            SendRequestHelper.Send(handler, () =>
+            {
+                handler.TcpKeepAliveEnabled = true;
+                handler.TcpKeepAliveTime = TimeSpan.FromMinutes(13);
+                handler.TcpKeepAliveInterval = TimeSpan.FromSeconds(42);
+            });
 
             (uint onOff, uint keepAliveTime, uint keepAliveInterval) = APICallHistory
                 .WinHttpOptionTcpKeepAlive
@@ -151,15 +148,12 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         {
             using var handler = new WinHttpHandler();
 
-            SendRequestHelper.Send(
-                handler,
-                () =>
-                {
-                    handler.TcpKeepAliveEnabled = true;
-                    handler.TcpKeepAliveTime = Timeout.InfiniteTimeSpan;
-                    handler.TcpKeepAliveInterval = Timeout.InfiniteTimeSpan;
-                }
-            );
+            SendRequestHelper.Send(handler, () =>
+            {
+                handler.TcpKeepAliveEnabled = true;
+                handler.TcpKeepAliveTime = Timeout.InfiniteTimeSpan;
+                handler.TcpKeepAliveInterval = Timeout.InfiniteTimeSpan;
+            });
 
             (uint onOff, uint keepAliveTime, uint keepAliveInterval) = APICallHistory
                 .WinHttpOptionTcpKeepAlive
@@ -547,9 +541,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         {
             var handler = new WinHttpHandler();
 
-            SendRequestHelper.Send(
-                handler,
-                () => handler.ReceiveDataTimeout = TimeSpan.FromSeconds(13)
+            SendRequestHelper.Send(handler, () =>
+                handler.ReceiveDataTimeout = TimeSpan.FromSeconds(13)
             );
 
             Assert.Equal(13_000u, APICallHistory.WinHttpOptionReceiveTimeout.Value);
@@ -593,9 +586,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         {
             var handler = new WinHttpHandler();
 
-            SendRequestHelper.Send(
-                handler,
-                () => handler.ReceiveDataTimeout = Timeout.InfiniteTimeSpan
+            SendRequestHelper.Send(handler, () =>
+                handler.ReceiveDataTimeout = Timeout.InfiniteTimeSpan
             );
 
             Assert.Equal(uint.MaxValue, APICallHistory.WinHttpOptionReceiveTimeout.Value);

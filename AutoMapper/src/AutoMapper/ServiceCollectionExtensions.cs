@@ -163,9 +163,8 @@ public static class ServiceCollectionExtensions
                         .Where(type =>
                             type.IsClass
                             && !type.IsAbstract
-                            && Array.Exists(
-                                openTypes,
-                                openType => type.GetGenericInterface(openType) != null
+                            && Array.Exists(openTypes, openType =>
+                                type.GetGenericInterface(openType) != null
                             )
                         )
                 )

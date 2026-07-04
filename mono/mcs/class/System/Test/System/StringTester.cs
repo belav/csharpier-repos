@@ -167,12 +167,8 @@ namespace MonoTests.System
                 for (int i = 0; i < escapes.Length; i++)
                     str = str.Replace(unescapes.Substring(i * 2, 2), "" + escapes[i]);
 
-                return regex.Replace(
-                    str,
-                    m =>
-                        (
-                            (char)int.Parse(m.Groups["Value"].Value, NumberStyles.HexNumber)
-                        ).ToString()
+                return regex.Replace(str, m =>
+                    ((char)int.Parse(m.Groups["Value"].Value, NumberStyles.HexNumber)).ToString()
                 );
             }
         }

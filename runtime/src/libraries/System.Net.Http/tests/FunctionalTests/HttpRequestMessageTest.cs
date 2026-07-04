@@ -302,9 +302,8 @@ namespace System.Net.Http.Functional.Tests
                             requestData = await connection.HandleCORSPreFlight(requestData);
 #endif
 
-                            Assert.DoesNotContain(
-                                requestData.Headers,
-                                line => line.Name.StartsWith("Content-length")
+                            Assert.DoesNotContain(requestData.Headers, line =>
+                                line.Name.StartsWith("Content-length")
                             );
 
                             await connection.SendResponseAsync();
@@ -340,9 +339,8 @@ namespace System.Net.Http.Functional.Tests
                             requestData = await connection.HandleCORSPreFlight(requestData);
 #endif
 
-                            Assert.DoesNotContain(
-                                requestData.Headers,
-                                line => line.Name.StartsWith("Content-Type")
+                            Assert.DoesNotContain(requestData.Headers, line =>
+                                line.Name.StartsWith("Content-Type")
                             );
 
                             await connection.SendResponseAsync();

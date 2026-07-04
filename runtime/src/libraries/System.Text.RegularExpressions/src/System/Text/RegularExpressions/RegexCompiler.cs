@@ -6796,21 +6796,17 @@ namespace System.Text.RegularExpressions
 
             // Generate the lookup table to store 128 answers as bits. We use a const string instead of a byte[] / static
             // data property because it lets IL emit handle all the details for us.
-            string bitVectorString = string.Create(
-                8,
-                charClass,
-                static (dest, charClass) => // String length is 8 chars == 16 bytes == 128 bits.
+            string bitVectorString = string.Create(8, charClass, static (dest, charClass) => // String length is 8 chars == 16 bytes == 128 bits.
+            {
+                for (int i = 0; i < 128; i++)
                 {
-                    for (int i = 0; i < 128; i++)
+                    char c = (char)i;
+                    if (RegexCharClass.CharInClass(c, charClass))
                     {
-                        char c = (char)i;
-                        if (RegexCharClass.CharInClass(c, charClass))
-                        {
-                            dest[i >> 4] |= (char)(1 << (i & 0xF));
-                        }
+                        dest[i >> 4] |= (char)(1 << (i & 0xF));
                     }
                 }
-            );
+            });
 
             // There's a chance that the class contains either no ASCII characters or all of them,
             // and the analysis could not find it (for example if the class has a subtraction).

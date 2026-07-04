@@ -20,26 +20,20 @@ public class MainClass
 
     public static void Main()
     {
-        int? sum = X<int>(
-            1,
-            i =>
-            {
-                if (i > 0)
-                    return i;
+        int? sum = X<int>(1, i =>
+        {
+            if (i > 0)
+                return i;
 
-                return null;
-            }
-        );
+            return null;
+        });
 
-        int? sum2 = X(
-            1,
-            i =>
-            {
-                if (i > 0)
-                    return i;
+        int? sum2 = X(1, i =>
+        {
+            if (i > 0)
+                return i;
 
-                return null;
-            }
-        );
+            return null;
+        });
     }
 }

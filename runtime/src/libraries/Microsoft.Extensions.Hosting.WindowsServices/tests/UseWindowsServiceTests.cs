@@ -72,11 +72,9 @@ namespace Microsoft.Extensions.Hosting
             // Emulate calling builder.Services.AddWindowsService() from inside a Windows service.
             AddWindowsServiceLifetime(builder.Services);
 
-            Assert.Single(
-                builder.Services,
-                serviceDescriptor =>
-                    serviceDescriptor.ServiceType == typeof(IHostLifetime)
-                    && serviceDescriptor.ImplementationType == typeof(WindowsServiceLifetime)
+            Assert.Single(builder.Services, serviceDescriptor =>
+                serviceDescriptor.ServiceType == typeof(IHostLifetime)
+                && serviceDescriptor.ImplementationType == typeof(WindowsServiceLifetime)
             );
         }
 

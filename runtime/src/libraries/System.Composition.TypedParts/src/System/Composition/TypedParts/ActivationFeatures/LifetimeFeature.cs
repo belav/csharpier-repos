@@ -43,9 +43,8 @@ namespace System.Composition.TypedParts.ActivationFeatures
                 if (object.ReferenceEquals(scope, c))
                     return scope.GetOrCreate(sharingKey, o, activatorBody);
                 else
-                    return CompositionOperation.Run(
-                        scope,
-                        (c1, o1) => c1.GetOrCreate(sharingKey, o1, activatorBody)
+                    return CompositionOperation.Run(scope, (c1, o1) =>
+                        c1.GetOrCreate(sharingKey, o1, activatorBody)
                     );
             };
         }

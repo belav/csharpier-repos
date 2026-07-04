@@ -89,13 +89,11 @@ namespace System.Linq.Tests
         [Fact]
         public void NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<int>)null).LongCount()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<int>)null).LongCount()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<int>)null).LongCount(i => i != 0)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<int>)null).LongCount(i => i != 0)
             );
         }
 
@@ -103,9 +101,8 @@ namespace System.Linq.Tests
         public void NullPredicate_ThrowsArgumentNullException()
         {
             Func<int, bool> predicate = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => Enumerable.Range(0, 3).LongCount(predicate)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                Enumerable.Range(0, 3).LongCount(predicate)
             );
         }
     }

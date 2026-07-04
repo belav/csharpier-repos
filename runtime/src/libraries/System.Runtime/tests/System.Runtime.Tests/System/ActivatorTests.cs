@@ -170,13 +170,11 @@ namespace System.Tests
         [Fact]
         public void CreateInstance_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => Activator.CreateInstance((Type)null)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                Activator.CreateInstance((Type)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => Activator.CreateInstance(null, new object[0])
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                Activator.CreateInstance(null, new object[0])
             );
         }
 
@@ -194,13 +192,11 @@ namespace System.Tests
             // This cannot be a [Theory] due to https://github.com/xunit/xunit/issues/1325.
             foreach (Type nonRuntimeType in Helpers.NonRuntimeTypes)
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "type",
-                    () => Activator.CreateInstance(nonRuntimeType)
+                AssertExtensions.Throws<ArgumentException>("type", () =>
+                    Activator.CreateInstance(nonRuntimeType)
                 );
-                AssertExtensions.Throws<ArgumentException>(
-                    "type",
-                    () => Activator.CreateInstance(nonRuntimeType, new object[0])
+                AssertExtensions.Throws<ArgumentException>("type", () =>
+                    Activator.CreateInstance(nonRuntimeType, new object[0])
                 );
             }
         }
@@ -216,9 +212,8 @@ namespace System.Tests
         public void CreateInstance_ContainsGenericParameters_ThrowsArgumentException(Type type)
         {
             AssertExtensions.Throws<ArgumentException>(null, () => Activator.CreateInstance(type));
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Activator.CreateInstance(type, new object[0])
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Activator.CreateInstance(type, new object[0])
             );
         }
 
@@ -1091,9 +1086,8 @@ namespace System.Tests
             ObjectHandle oh = null;
             if (exceptionType != null)
             {
-                Assert.Throws(
-                    exceptionType,
-                    () => Activator.CreateInstanceFrom(assemblyFile: assemblyFile, typeName: type)
+                Assert.Throws(exceptionType, () =>
+                    Activator.CreateInstanceFrom(assemblyFile: assemblyFile, typeName: type)
                 );
             }
             else
@@ -1104,14 +1098,8 @@ namespace System.Tests
 
             if (exceptionType != null)
             {
-                Assert.Throws(
-                    exceptionType,
-                    () =>
-                        Activator.CreateInstanceFrom(
-                            assemblyFile: assemblyFile,
-                            typeName: type,
-                            null
-                        )
+                Assert.Throws(exceptionType, () =>
+                    Activator.CreateInstanceFrom(assemblyFile: assemblyFile, typeName: type, null)
                 );
             }
             else
@@ -1181,9 +1169,8 @@ namespace System.Tests
 
             if (exceptionType != null)
             {
-                Assert.Throws(
-                    exceptionType,
-                    () => Activator.CreateInstance(assemblyName: assemblyName, typeName: type)
+                Assert.Throws(exceptionType, () =>
+                    Activator.CreateInstance(assemblyName: assemblyName, typeName: type)
                 );
             }
             else
@@ -1201,9 +1188,8 @@ namespace System.Tests
 
             if (exceptionType != null)
             {
-                Assert.Throws(
-                    exceptionType,
-                    () => Activator.CreateInstance(assemblyName: assemblyName, typeName: type, null)
+                Assert.Throws(exceptionType, () =>
+                    Activator.CreateInstance(assemblyName: assemblyName, typeName: type, null)
                 );
             }
             else

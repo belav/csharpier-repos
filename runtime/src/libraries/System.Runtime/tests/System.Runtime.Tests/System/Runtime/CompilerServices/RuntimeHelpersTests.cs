@@ -367,9 +367,8 @@ namespace System.Runtime.CompilerServices.Tests
             Type expectedExceptionType
         )
         {
-            Assert.Throws(
-                expectedExceptionType,
-                () => RuntimeHelpers.GetUninitializedObject(typeToInstantiate)
+            Assert.Throws(expectedExceptionType, () =>
+                RuntimeHelpers.GetUninitializedObject(typeToInstantiate)
             );
         }
 

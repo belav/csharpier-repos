@@ -105,13 +105,11 @@ namespace System.Dynamic.Tests
         [Fact]
         public void NullType()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => new MinimumOverrideConvertBinder(null, true)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                new MinimumOverrideConvertBinder(null, true)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "type",
-                () => new MinimumOverrideConvertBinder(null, false)
+            AssertExtensions.Throws<ArgumentNullException>("type", () =>
+                new MinimumOverrideConvertBinder(null, false)
             );
         }
 
@@ -143,9 +141,8 @@ namespace System.Dynamic.Tests
                 BindingRestrictions.Empty
             );
             var binder = new MinimumOverrideConvertBinder(typeof(int), false);
-            AssertExtensions.Throws<ArgumentException>(
-                "args",
-                () => binder.Bind(target, new[] { arg })
+            AssertExtensions.Throws<ArgumentException>("args", () =>
+                binder.Bind(target, new[] { arg })
             );
         }
     }

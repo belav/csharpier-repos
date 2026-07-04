@@ -33,13 +33,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [Fact]
         public void Constructor_PassNullMember()
         {
-            Assert.Throws<ArgumentNullException>(
-                "member",
-                () =>
-                {
-                    LazyMemberInfo lazy = new LazyMemberInfo((MemberInfo)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("member", () =>
+            {
+                LazyMemberInfo lazy = new LazyMemberInfo((MemberInfo)null);
+            });
         }
 
         [Fact]
@@ -77,13 +74,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     {
                         continue;
                     }
-                    Assert.Throws<ArgumentException>(
-                        "accessors",
-                        () =>
-                        {
-                            LazyMemberInfo lazy = new LazyMemberInfo(wrongMemberType, accessors);
-                        }
-                    );
+                    Assert.Throws<ArgumentException>("accessors", () =>
+                    {
+                        LazyMemberInfo lazy = new LazyMemberInfo(wrongMemberType, accessors);
+                    });
                 }
             }
         }
@@ -96,16 +90,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
             {
                 if (!validMemberTypes.Contains(memberType))
                 {
-                    Assert.Throws<ArgumentException>(
-                        "memberType",
-                        () =>
-                        {
-                            LazyMemberInfo lazy = new LazyMemberInfo(
-                                memberType,
-                                typeof(LazyMemberTestClass)
-                            );
-                        }
-                    );
+                    Assert.Throws<ArgumentException>("memberType", () =>
+                    {
+                        LazyMemberInfo lazy = new LazyMemberInfo(
+                            memberType,
+                            typeof(LazyMemberTestClass)
+                        );
+                    });
                 }
             }
         }
@@ -113,28 +104,22 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [Fact]
         public void Constructor_PassNullAccessors()
         {
-            Assert.Throws<ArgumentNullException>(
-                "accessors",
-                () =>
-                {
-                    LazyMemberInfo lazy = new LazyMemberInfo(MemberTypes.Field, (MemberInfo[])null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>("accessors", () =>
+            {
+                LazyMemberInfo lazy = new LazyMemberInfo(MemberTypes.Field, (MemberInfo[])null);
+            });
         }
 
         [Fact]
         public void Constructor_PassAccessorsWithNulls()
         {
-            Assert.Throws<ArgumentException>(
-                "accessors",
-                () =>
-                {
-                    LazyMemberInfo lazy = new LazyMemberInfo(
-                        MemberTypes.Field,
-                        new MemberInfo[] { null, null }
-                    );
-                }
-            );
+            Assert.Throws<ArgumentException>("accessors", () =>
+            {
+                LazyMemberInfo lazy = new LazyMemberInfo(
+                    MemberTypes.Field,
+                    new MemberInfo[] { null, null }
+                );
+            });
         }
 
         [Fact]
@@ -189,16 +174,12 @@ namespace System.ComponentModel.Composition.ReflectionModel
             {
                 if (!validMemberTypes.Contains(memberType))
                 {
-                    Assert.Throws<ArgumentException>(
-                        "memberType",
-                        () =>
-                        {
-                            LazyMemberInfo lazy = new LazyMemberInfo(
-                                memberType,
-                                () => new MemberInfo[] { typeof(LazyMemberTestClass) }
-                            );
-                        }
-                    );
+                    Assert.Throws<ArgumentException>("memberType", () =>
+                    {
+                        LazyMemberInfo lazy = new LazyMemberInfo(memberType, () =>
+                            new MemberInfo[] { typeof(LazyMemberTestClass) }
+                        );
+                    });
                 }
             }
         }
@@ -206,16 +187,13 @@ namespace System.ComponentModel.Composition.ReflectionModel
         [Fact]
         public void Constructor_PassNullAccessorCreators()
         {
-            Assert.Throws<ArgumentNullException>(
-                "accessorsCreator",
-                () =>
-                {
-                    LazyMemberInfo lazy = new LazyMemberInfo(
-                        MemberTypes.Field,
-                        (Func<MemberInfo[]>)null
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>("accessorsCreator", () =>
+            {
+                LazyMemberInfo lazy = new LazyMemberInfo(
+                    MemberTypes.Field,
+                    (Func<MemberInfo[]>)null
+                );
+            });
         }
 
         [Fact]

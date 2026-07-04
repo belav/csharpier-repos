@@ -20,9 +20,8 @@ namespace System.Reflection.Tests
         [MemberData(nameof(RefReturnInvokeTestData))]
         public static void TestRefReturnMethodInvoke<T>(T value)
         {
-            TestRefReturnInvoke<T>(
-                value,
-                (p, t) => p.GetGetMethod().Invoke(t, Array.Empty<object>())
+            TestRefReturnInvoke<T>(value, (p, t) =>
+                p.GetGetMethod().Invoke(t, Array.Empty<object>())
             );
         }
 

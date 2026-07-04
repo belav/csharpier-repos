@@ -260,14 +260,11 @@ namespace System.IO.Tests
         public void DirectoryLongerThanMaxPath_Succeeds()
         {
             var paths = IOInputs.GetPathsLongerThanMaxPath(GetTestFilePath());
-            Assert.All(
-                paths,
-                (path) =>
-                {
-                    DirectoryInfo result = Create(path);
-                    Assert.True(Directory.Exists(result.FullName));
-                }
-            );
+            Assert.All(paths, (path) =>
+            {
+                DirectoryInfo result = Create(path);
+                Assert.True(Directory.Exists(result.FullName));
+            });
         }
 
         [Fact]
@@ -275,13 +272,10 @@ namespace System.IO.Tests
         public void DirectoryLongerThanMaxLongPath_ThrowsPathTooLongException()
         {
             var paths = IOInputs.GetPathsLongerThanMaxLongPath(GetTestFilePath());
-            Assert.All(
-                paths,
-                (path) =>
-                {
-                    Assert.Throws<PathTooLongException>(() => Create(path));
-                }
-            );
+            Assert.All(paths, (path) =>
+            {
+                Assert.Throws<PathTooLongException>(() => Create(path));
+            });
         }
 
         [ConditionalFact(nameof(LongPathsAreNotBlocked), nameof(UsingNewNormalization))]
@@ -295,14 +289,12 @@ namespace System.IO.Tests
 
             // Ideally this should be PathTooLongException or DirectoryNotFoundException but on some machines
             // windows gives us ERROR_INVALID_NAME, producing IOException.
-            Assert.All(
-                paths,
-                path =>
-                    AssertExtensions.ThrowsAny<
-                        PathTooLongException,
-                        DirectoryNotFoundException,
-                        IOException
-                    >(() => Create(path))
+            Assert.All(paths, path =>
+                AssertExtensions.ThrowsAny<
+                    PathTooLongException,
+                    DirectoryNotFoundException,
+                    IOException
+                >(() => Create(path))
             );
         }
 
@@ -314,13 +306,10 @@ namespace System.IO.Tests
                 GetTestFilePath(),
                 useExtendedSyntax: true
             );
-            Assert.All(
-                paths,
-                (path) =>
-                {
-                    Assert.True(Create(path).Exists);
-                }
-            );
+            Assert.All(paths, (path) =>
+            {
+                Assert.True(Create(path).Exists);
+            });
         }
 
         [ConditionalFact(nameof(AreAllLongPathsAvailable))]
@@ -328,14 +317,11 @@ namespace System.IO.Tests
         public void DirectoryLongerThanMaxDirectoryAsPath_Succeeds()
         {
             var paths = IOInputs.GetPathsLongerThanMaxDirectory(GetTestFilePath());
-            Assert.All(
-                paths,
-                (path) =>
-                {
-                    var result = Create(path);
-                    Assert.True(Directory.Exists(result.FullName));
-                }
-            );
+            Assert.All(paths, (path) =>
+            {
+                var result = Create(path);
+                Assert.True(Directory.Exists(result.FullName));
+            });
         }
 
         [Fact]

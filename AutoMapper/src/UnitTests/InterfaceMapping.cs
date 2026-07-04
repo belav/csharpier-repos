@@ -170,9 +170,8 @@ public class When_mapping_generic_interface : AutoMapperSpecBase
     protected override MapperConfiguration CreateConfiguration() =>
         new(cfg =>
             cfg.CreateMap(typeof(IList<>), typeof(IDestinationBase<>))
-                .ForMember(
-                    nameof(IDestinationBase<Object>.Items),
-                    p_Expression => p_Expression.MapFrom(p_Source => p_Source)
+                .ForMember(nameof(IDestinationBase<Object>.Items), p_Expression =>
+                    p_Expression.MapFrom(p_Source => p_Source)
                 )
                 .ForMember("PropertyToMap", o => o.Ignore())
                 .AsProxy()

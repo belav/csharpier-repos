@@ -47,17 +47,14 @@ namespace System.Security.Cryptography.Tests
         public static void GetCiphertextLength_ThrowsForNegativeInput(PaddingMode mode)
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = 128 };
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "plaintextLength",
-                () => alg.GetCiphertextLengthCbc(-1, mode)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("plaintextLength", () =>
+                alg.GetCiphertextLengthCbc(-1, mode)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "plaintextLength",
-                () => alg.GetCiphertextLengthEcb(-1, mode)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("plaintextLength", () =>
+                alg.GetCiphertextLengthEcb(-1, mode)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "plaintextLength",
-                () => alg.GetCiphertextLengthCfb(-1, mode)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("plaintextLength", () =>
+                alg.GetCiphertextLengthCfb(-1, mode)
             );
         }
 
@@ -69,13 +66,11 @@ namespace System.Security.Cryptography.Tests
         public static void GetCiphertextLengthBlock_ThrowsForOverflow(PaddingMode mode)
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = 128 };
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "plaintextLength",
-                () => alg.GetCiphertextLengthCbc(0x7FFFFFF1, mode)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("plaintextLength", () =>
+                alg.GetCiphertextLengthCbc(0x7FFFFFF1, mode)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "plaintextLength",
-                () => alg.GetCiphertextLengthEcb(0x7FFFFFF1, mode)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("plaintextLength", () =>
+                alg.GetCiphertextLengthEcb(0x7FFFFFF1, mode)
             );
         }
 
@@ -87,9 +82,8 @@ namespace System.Security.Cryptography.Tests
         public static void GetCiphertextLengthCfb_ThrowsForOverflow(PaddingMode mode)
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "plaintextLength",
-                () => alg.GetCiphertextLengthCfb(0x7FFFFFFF, mode, feedbackSizeInBits: 128)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("plaintextLength", () =>
+                alg.GetCiphertextLengthCfb(0x7FFFFFFF, mode, feedbackSizeInBits: 128)
             );
         }
 
@@ -107,9 +101,8 @@ namespace System.Security.Cryptography.Tests
         public static void GetCiphertextLengthCfb_ThrowsForNonByteFeedbackSize(PaddingMode mode)
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm();
-            AssertExtensions.Throws<ArgumentException>(
-                "feedbackSizeInBits",
-                () => alg.GetCiphertextLengthCfb(16, mode, 7)
+            AssertExtensions.Throws<ArgumentException>("feedbackSizeInBits", () =>
+                alg.GetCiphertextLengthCfb(16, mode, 7)
             );
         }
 
@@ -127,9 +120,8 @@ namespace System.Security.Cryptography.Tests
         public static void GetCiphertextLengthCfb_ThrowsForZeroFeedbackSize(PaddingMode mode)
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "feedbackSizeInBits",
-                () => alg.GetCiphertextLengthCfb(16, mode, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("feedbackSizeInBits", () =>
+                alg.GetCiphertextLengthCfb(16, mode, 0)
             );
         }
 
@@ -138,17 +130,14 @@ namespace System.Security.Cryptography.Tests
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = 128 };
             PaddingMode mode = (PaddingMode)(-1);
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "paddingMode",
-                () => alg.GetCiphertextLengthCbc(16, mode)
+            Assert.Throws<ArgumentOutOfRangeException>("paddingMode", () =>
+                alg.GetCiphertextLengthCbc(16, mode)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "paddingMode",
-                () => alg.GetCiphertextLengthEcb(16, mode)
+            Assert.Throws<ArgumentOutOfRangeException>("paddingMode", () =>
+                alg.GetCiphertextLengthEcb(16, mode)
             );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                "paddingMode",
-                () => alg.GetCiphertextLengthCfb(16, mode)
+            Assert.Throws<ArgumentOutOfRangeException>("paddingMode", () =>
+                alg.GetCiphertextLengthCfb(16, mode)
             );
         }
 
@@ -156,13 +145,11 @@ namespace System.Security.Cryptography.Tests
         public static void GetCiphertextLengthBlock_NoPaddingAndPlaintextSizeNotBlockAligned()
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = 128 };
-            Assert.Throws<ArgumentException>(
-                "plaintextLength",
-                () => alg.GetCiphertextLengthCbc(17, PaddingMode.None)
+            Assert.Throws<ArgumentException>("plaintextLength", () =>
+                alg.GetCiphertextLengthCbc(17, PaddingMode.None)
             );
-            Assert.Throws<ArgumentException>(
-                "plaintextLength",
-                () => alg.GetCiphertextLengthEcb(17, PaddingMode.None)
+            Assert.Throws<ArgumentException>("plaintextLength", () =>
+                alg.GetCiphertextLengthEcb(17, PaddingMode.None)
             );
         }
 
@@ -170,9 +157,8 @@ namespace System.Security.Cryptography.Tests
         public static void GetCiphertextLengthCfb_NoPaddingAndPlaintextSizeNotFeedbackAligned()
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm();
-            Assert.Throws<ArgumentException>(
-                "plaintextLength",
-                () => alg.GetCiphertextLengthCfb(17, PaddingMode.None, feedbackSizeInBits: 128)
+            Assert.Throws<ArgumentException>("plaintextLength", () =>
+                alg.GetCiphertextLengthCfb(17, PaddingMode.None, feedbackSizeInBits: 128)
             );
         }
 
@@ -549,26 +535,16 @@ namespace System.Security.Cryptography.Tests
             byte[] badIv = new byte[alg.BlockSize / 8 + 1];
             byte[] destination = new byte[alg.BlockSize / 8];
 
-            AssertExtensions.Throws<ArgumentException>(
-                "iv",
-                () => alg.DecryptCbc(Array.Empty<byte>(), badIv, PaddingMode.None)
+            AssertExtensions.Throws<ArgumentException>("iv", () =>
+                alg.DecryptCbc(Array.Empty<byte>(), badIv, PaddingMode.None)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "iv",
-                () => alg.DecryptCbc(Array.Empty<byte>(), badIv, destination, PaddingMode.None)
+            AssertExtensions.Throws<ArgumentException>("iv", () =>
+                alg.DecryptCbc(Array.Empty<byte>(), badIv, destination, PaddingMode.None)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "iv",
-                () =>
-                    alg.TryDecryptCbc(
-                        Array.Empty<byte>(),
-                        badIv,
-                        destination,
-                        out _,
-                        PaddingMode.None
-                    )
+            AssertExtensions.Throws<ArgumentException>("iv", () =>
+                alg.TryDecryptCbc(Array.Empty<byte>(), badIv, destination, out _, PaddingMode.None)
             );
         }
 
@@ -599,26 +575,16 @@ namespace System.Security.Cryptography.Tests
             byte[] badIv = new byte[alg.BlockSize / 8 + 1];
             byte[] destination = new byte[alg.BlockSize / 8];
 
-            AssertExtensions.Throws<ArgumentException>(
-                "iv",
-                () => alg.EncryptCbc(Array.Empty<byte>(), badIv, PaddingMode.None)
+            AssertExtensions.Throws<ArgumentException>("iv", () =>
+                alg.EncryptCbc(Array.Empty<byte>(), badIv, PaddingMode.None)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "iv",
-                () => alg.EncryptCbc(Array.Empty<byte>(), badIv, destination, PaddingMode.None)
+            AssertExtensions.Throws<ArgumentException>("iv", () =>
+                alg.EncryptCbc(Array.Empty<byte>(), badIv, destination, PaddingMode.None)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "iv",
-                () =>
-                    alg.TryEncryptCbc(
-                        Array.Empty<byte>(),
-                        badIv,
-                        destination,
-                        out _,
-                        PaddingMode.None
-                    )
+            AssertExtensions.Throws<ArgumentException>("iv", () =>
+                alg.TryEncryptCbc(Array.Empty<byte>(), badIv, destination, out _, PaddingMode.None)
             );
         }
 
@@ -832,27 +798,22 @@ namespace System.Security.Cryptography.Tests
             byte[] badIv = new byte[alg.BlockSize / 8 + 1];
             byte[] destination = new byte[128 / 8];
 
-            AssertExtensions.Throws<ArgumentException>(
-                "iv",
-                () => alg.DecryptCfb(Array.Empty<byte>(), badIv, feedbackSizeInBits: 128)
+            AssertExtensions.Throws<ArgumentException>("iv", () =>
+                alg.DecryptCfb(Array.Empty<byte>(), badIv, feedbackSizeInBits: 128)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "iv",
-                () =>
-                    alg.DecryptCfb(Array.Empty<byte>(), badIv, destination, feedbackSizeInBits: 128)
+            AssertExtensions.Throws<ArgumentException>("iv", () =>
+                alg.DecryptCfb(Array.Empty<byte>(), badIv, destination, feedbackSizeInBits: 128)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "iv",
-                () =>
-                    alg.TryDecryptCfb(
-                        Array.Empty<byte>(),
-                        badIv,
-                        destination,
-                        out _,
-                        feedbackSizeInBits: 128
-                    )
+            AssertExtensions.Throws<ArgumentException>("iv", () =>
+                alg.TryDecryptCfb(
+                    Array.Empty<byte>(),
+                    badIv,
+                    destination,
+                    out _,
+                    feedbackSizeInBits: 128
+                )
             );
         }
 
@@ -884,27 +845,22 @@ namespace System.Security.Cryptography.Tests
             byte[] badIv = new byte[alg.BlockSize / 8 + 1];
             byte[] destination = new byte[128 / 8];
 
-            AssertExtensions.Throws<ArgumentException>(
-                "iv",
-                () => alg.EncryptCfb(Array.Empty<byte>(), badIv, feedbackSizeInBits: 128)
+            AssertExtensions.Throws<ArgumentException>("iv", () =>
+                alg.EncryptCfb(Array.Empty<byte>(), badIv, feedbackSizeInBits: 128)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "iv",
-                () =>
-                    alg.EncryptCfb(Array.Empty<byte>(), badIv, destination, feedbackSizeInBits: 128)
+            AssertExtensions.Throws<ArgumentException>("iv", () =>
+                alg.EncryptCfb(Array.Empty<byte>(), badIv, destination, feedbackSizeInBits: 128)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "iv",
-                () =>
-                    alg.TryEncryptCfb(
-                        Array.Empty<byte>(),
-                        badIv,
-                        destination,
-                        out _,
-                        feedbackSizeInBits: 128
-                    )
+            AssertExtensions.Throws<ArgumentException>("iv", () =>
+                alg.TryEncryptCfb(
+                    Array.Empty<byte>(),
+                    badIv,
+                    destination,
+                    out _,
+                    feedbackSizeInBits: 128
+                )
             );
         }
 
@@ -938,32 +894,27 @@ namespace System.Security.Cryptography.Tests
             byte[] iv = new byte[alg.BlockSize / 8];
             byte[] destination = Array.Empty<byte>();
 
-            AssertExtensions.Throws<ArgumentException>(
-                "feedbackSizeInBits",
-                () => alg.DecryptCfb(Array.Empty<byte>(), iv, feedbackSizeInBits: feedbackSize)
+            AssertExtensions.Throws<ArgumentException>("feedbackSizeInBits", () =>
+                alg.DecryptCfb(Array.Empty<byte>(), iv, feedbackSizeInBits: feedbackSize)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "feedbackSizeInBits",
-                () =>
-                    alg.DecryptCfb(
-                        Array.Empty<byte>(),
-                        iv,
-                        destination,
-                        feedbackSizeInBits: feedbackSize
-                    )
+            AssertExtensions.Throws<ArgumentException>("feedbackSizeInBits", () =>
+                alg.DecryptCfb(
+                    Array.Empty<byte>(),
+                    iv,
+                    destination,
+                    feedbackSizeInBits: feedbackSize
+                )
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "feedbackSizeInBits",
-                () =>
-                    alg.TryDecryptCfb(
-                        Array.Empty<byte>(),
-                        iv,
-                        destination,
-                        out _,
-                        feedbackSizeInBits: feedbackSize
-                    )
+            AssertExtensions.Throws<ArgumentException>("feedbackSizeInBits", () =>
+                alg.TryDecryptCfb(
+                    Array.Empty<byte>(),
+                    iv,
+                    destination,
+                    out _,
+                    feedbackSizeInBits: feedbackSize
+                )
             );
         }
 
@@ -997,32 +948,27 @@ namespace System.Security.Cryptography.Tests
             byte[] iv = new byte[alg.BlockSize / 8];
             byte[] destination = Array.Empty<byte>();
 
-            AssertExtensions.Throws<ArgumentException>(
-                "feedbackSizeInBits",
-                () => alg.DecryptCfb(Array.Empty<byte>(), iv, feedbackSizeInBits: feedbackSize)
+            AssertExtensions.Throws<ArgumentException>("feedbackSizeInBits", () =>
+                alg.DecryptCfb(Array.Empty<byte>(), iv, feedbackSizeInBits: feedbackSize)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "feedbackSizeInBits",
-                () =>
-                    alg.DecryptCfb(
-                        Array.Empty<byte>(),
-                        iv,
-                        destination,
-                        feedbackSizeInBits: feedbackSize
-                    )
+            AssertExtensions.Throws<ArgumentException>("feedbackSizeInBits", () =>
+                alg.DecryptCfb(
+                    Array.Empty<byte>(),
+                    iv,
+                    destination,
+                    feedbackSizeInBits: feedbackSize
+                )
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "feedbackSizeInBits",
-                () =>
-                    alg.TryDecryptCfb(
-                        Array.Empty<byte>(),
-                        iv,
-                        destination,
-                        out _,
-                        feedbackSizeInBits: feedbackSize
-                    )
+            AssertExtensions.Throws<ArgumentException>("feedbackSizeInBits", () =>
+                alg.TryDecryptCfb(
+                    Array.Empty<byte>(),
+                    iv,
+                    destination,
+                    out _,
+                    feedbackSizeInBits: feedbackSize
+                )
             );
         }
 

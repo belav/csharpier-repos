@@ -13,26 +13,20 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_ContentDispositionNull_Throw()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "dispositionType",
-                () =>
-                {
-                    new ContentDispositionHeaderValue(null);
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("dispositionType", () =>
+            {
+                new ContentDispositionHeaderValue(null);
+            });
         }
 
         [Fact]
         public void Ctor_ContentDispositionEmpty_Throw()
         {
             // null and empty should be treated the same. So we also throw for empty strings.
-            AssertExtensions.Throws<ArgumentException>(
-                "dispositionType",
-                () =>
-                {
-                    new ContentDispositionHeaderValue(string.Empty);
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>("dispositionType", () =>
+            {
+                new ContentDispositionHeaderValue(string.Empty);
+            });
         }
 
         [Fact]

@@ -283,9 +283,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             wasFullyInferred = typeArgs.All(static t => t.HasType);
             if (!wasFullyInferred)
             {
-                typeArgsForConstruct = typeArgs.ZipAsArray(
-                    method.TypeParameters,
-                    (t, tp) => t.HasType ? t : TypeWithAnnotations.Create(tp)
+                typeArgsForConstruct = typeArgs.ZipAsArray(method.TypeParameters, (t, tp) =>
+                    t.HasType ? t : TypeWithAnnotations.Create(tp)
                 );
             }
 

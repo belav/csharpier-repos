@@ -48,9 +48,8 @@ namespace System.Web.Mvc.Test
                     Mock<DataTypeAttribute> dataType = new Mock<DataTypeAttribute>(dataTypeValue);
 
                     // Act
-                    string actualTypeName = DataTypeUtil.ToDataTypeName(
-                        dataType.Object,
-                        dta => dta as DataTypeAttribute != null
+                    string actualTypeName = DataTypeUtil.ToDataTypeName(dataType.Object, dta =>
+                        dta as DataTypeAttribute != null
                     );
 
                     // Assert

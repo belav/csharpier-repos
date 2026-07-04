@@ -10,14 +10,10 @@ public static class IEnumerableRocks
         Func<TSource, TResult> selector
     )
     {
-        return Implode(
-            self,
-            separator,
-            (b, e) =>
-            {
-                b.Append(selector(e).ToString());
-            }
-        );
+        return Implode(self, separator, (b, e) =>
+        {
+            b.Append(selector(e).ToString());
+        });
     }
 
     public static string Implode<TSource>(

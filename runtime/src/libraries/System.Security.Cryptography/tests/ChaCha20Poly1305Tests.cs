@@ -69,9 +69,8 @@ namespace System.Security.Cryptography.Tests
 
             using (var chaChaPoly = new ChaCha20Poly1305(key))
             {
-                Assert.Throws<ArgumentException>(
-                    "nonce",
-                    () => chaChaPoly.Encrypt(nonce, plaintext, ciphertext, tag)
+                Assert.Throws<ArgumentException>("nonce", () =>
+                    chaChaPoly.Encrypt(nonce, plaintext, ciphertext, tag)
                 );
             }
         }
@@ -89,9 +88,8 @@ namespace System.Security.Cryptography.Tests
 
             using (var chaChaPoly = new ChaCha20Poly1305(key))
             {
-                Assert.Throws<ArgumentException>(
-                    "tag",
-                    () => chaChaPoly.Encrypt(nonce, plaintext, ciphertext, tag)
+                Assert.Throws<ArgumentException>("tag", () =>
+                    chaChaPoly.Encrypt(nonce, plaintext, ciphertext, tag)
                 );
             }
         }

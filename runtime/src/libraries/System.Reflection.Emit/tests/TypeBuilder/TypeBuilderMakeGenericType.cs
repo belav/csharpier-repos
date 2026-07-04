@@ -72,9 +72,8 @@ namespace System.Reflection.Emit.Tests
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
             type.DefineGenericParameters("T", "U");
-            AssertExtensions.Throws<ArgumentNullException>(
-                "typeArguments",
-                () => type.MakeGenericType(null)
+            AssertExtensions.Throws<ArgumentNullException>("typeArguments", () =>
+                type.MakeGenericType(null)
             );
         }
 
@@ -83,9 +82,8 @@ namespace System.Reflection.Emit.Tests
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
             type.DefineGenericParameters("T", "U");
-            AssertExtensions.Throws<ArgumentNullException>(
-                "typeArguments",
-                () => type.MakeGenericType(new Type[] { null, null })
+            AssertExtensions.Throws<ArgumentNullException>("typeArguments", () =>
+                type.MakeGenericType(new Type[] { null, null })
             );
         }
     }

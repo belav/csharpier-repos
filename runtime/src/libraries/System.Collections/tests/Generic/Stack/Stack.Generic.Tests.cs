@@ -131,13 +131,11 @@ namespace System.Collections.Tests
         [Fact]
         public void Stack_Generic_Constructor_int_Negative_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => new Stack<T>(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new Stack<T>(-1)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => new Stack<T>(int.MinValue)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new Stack<T>(int.MinValue)
             );
         }
 
@@ -392,9 +390,8 @@ namespace System.Collections.Tests
         public void Stack_Generic_EnsureCapacity_NegativeCapacityRequested_Throws()
         {
             var stack = GenericStackFactory();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => stack.EnsureCapacity(-1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                stack.EnsureCapacity(-1)
             );
         }
 

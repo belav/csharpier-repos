@@ -50,9 +50,8 @@ namespace System.DirectoryServices.Protocols.Tests
         [InlineData(ExtendedDNFlag.StandardString + 1)]
         public void Ctor_InvalidFlag_ThrowsInvalidEnumArgumentException(ExtendedDNFlag flag)
         {
-            AssertExtensions.Throws<InvalidEnumArgumentException>(
-                "value",
-                () => new ExtendedDNControl(flag)
+            AssertExtensions.Throws<InvalidEnumArgumentException>("value", () =>
+                new ExtendedDNControl(flag)
             );
         }
     }

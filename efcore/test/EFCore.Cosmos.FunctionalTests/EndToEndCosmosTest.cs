@@ -683,11 +683,8 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
-            optionsBuilder.UseCosmos(
-                _connectionUri,
-                _authToken,
-                _name,
-                b => b.ApplyConfiguration()
+            optionsBuilder.UseCosmos(_connectionUri, _authToken, _name, b =>
+                b.ApplyConfiguration()
             );
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) { }

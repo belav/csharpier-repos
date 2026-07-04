@@ -12,30 +12,22 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override void InvalidOptionsThrows()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    new ConcurrencyLimiter(
-                        new ConcurrencyLimiterOptions
-                        {
-                            PermitLimit = -1,
-                            QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                            QueueLimit = 1,
-                        }
-                    )
-            );
-            AssertExtensions.Throws<ArgumentException>(
-                "options",
-                () =>
-                    new ConcurrencyLimiter(
-                        new ConcurrencyLimiterOptions
-                        {
-                            PermitLimit = 1,
-                            QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                            QueueLimit = -1,
-                        }
-                    )
-            );
+            AssertExtensions.Throws<ArgumentException>("options", () => new ConcurrencyLimiter(
+                    new ConcurrencyLimiterOptions
+                    {
+                        PermitLimit = -1,
+                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                        QueueLimit = 1,
+                    }
+                ));
+            AssertExtensions.Throws<ArgumentException>("options", () => new ConcurrencyLimiter(
+                    new ConcurrencyLimiterOptions
+                    {
+                        PermitLimit = 1,
+                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                        QueueLimit = -1,
+                    }
+                ));
         }
 
         [Fact]
@@ -188,14 +180,11 @@ namespace System.Threading.RateLimiting.Test
 
             var cts = new CancellationTokenSource();
             _ = limiter.AcquireAsync(1, cts.Token);
-            attachHook(
-                limiter,
-                () =>
-                {
-                    Task.Run(cts.Cancel);
-                    Thread.Sleep(1);
-                }
-            );
+            attachHook(limiter, () =>
+            {
+                Task.Run(cts.Cancel);
+                Thread.Sleep(1);
+            });
 
             var task1 = Task.Delay(1000);
             var task2 = Task.Run(lease.Dispose);
@@ -845,9 +834,8 @@ namespace System.Threading.RateLimiting.Test
                 }
             );
             using var lease = limiter.AttemptAcquire(1);
-            Assert.Collection(
-                lease.MetadataNames,
-                metadataName => Assert.Equal(metadataName, MetadataName.ReasonPhrase.Name)
+            Assert.Collection(lease.MetadataNames, metadataName =>
+                Assert.Equal(metadataName, MetadataName.ReasonPhrase.Name)
             );
         }
 
@@ -951,9 +939,8 @@ namespace System.Threading.RateLimiting.Test
                 failedLease.TryGetMetadata(MetadataName.ReasonPhrase, out var typedMetadata)
             );
             Assert.Equal("Queue limit reached", typedMetadata);
-            Assert.Collection(
-                failedLease.MetadataNames,
-                item => item.Equals(MetadataName.ReasonPhrase.Name)
+            Assert.Collection(failedLease.MetadataNames, item =>
+                item.Equals(MetadataName.ReasonPhrase.Name)
             );
         }
 

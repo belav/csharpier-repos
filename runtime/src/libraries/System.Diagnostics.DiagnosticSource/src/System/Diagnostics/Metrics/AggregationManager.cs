@@ -446,13 +446,10 @@ namespace System.Diagnostics.Metrics
 
             foreach (KeyValuePair<Instrument, InstrumentState> kv in _instrumentStates)
             {
-                kv.Value.Collect(
-                    kv.Key,
-                    (LabeledAggregationStatistics labeledAggStats) =>
-                    {
-                        _collectMeasurement(kv.Key, labeledAggStats);
-                    }
-                );
+                kv.Value.Collect(kv.Key, (LabeledAggregationStatistics labeledAggStats) =>
+                {
+                    _collectMeasurement(kv.Key, labeledAggStats);
+                });
             }
         }
     }

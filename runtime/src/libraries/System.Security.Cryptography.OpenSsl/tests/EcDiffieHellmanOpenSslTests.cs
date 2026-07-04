@@ -229,9 +229,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.OpenSsl.Tests
 
                 using (pkey) { }
 
-                AssertExtensions.Throws<ArgumentException>(
-                    "pkeyHandle",
-                    () => new ECDiffieHellmanOpenSsl(pkey)
+                AssertExtensions.Throws<ArgumentException>("pkeyHandle", () =>
+                    new ECDiffieHellmanOpenSsl(pkey)
                 );
             }
         }
@@ -241,9 +240,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.OpenSsl.Tests
         {
             using (SafeEvpPKeyHandle pkey = new SafeEvpPKeyHandle(IntPtr.Zero, false))
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "pkeyHandle",
-                    () => new ECDiffieHellmanOpenSsl(pkey)
+                AssertExtensions.Throws<ArgumentException>("pkeyHandle", () =>
+                    new ECDiffieHellmanOpenSsl(pkey)
                 );
             }
         }

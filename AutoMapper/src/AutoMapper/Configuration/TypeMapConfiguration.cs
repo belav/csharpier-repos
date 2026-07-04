@@ -125,9 +125,8 @@ public abstract class TypeMapConfiguration
         }
         foreach (var destProperty in typeMap.PropertyMaps.Where(pm => pm.Ignored))
         {
-            ReverseMapExpression.ForSourceMemberCore(
-                destProperty.DestinationName,
-                opt => opt.DoNotValidate()
+            ReverseMapExpression.ForSourceMemberCore(destProperty.DestinationName, opt =>
+                opt.DoNotValidate()
             );
         }
         foreach (var includedDerivedType in typeMap.IncludedDerivedTypes)

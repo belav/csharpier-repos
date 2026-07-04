@@ -107,17 +107,14 @@ namespace System.CodeDom.Tests
         [Fact]
         public void Ctor_NullParameters_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeObjectCreateExpression(new CodeTypeReference(), null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeObjectCreateExpression(new CodeTypeReference(), null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeObjectCreateExpression("System.Int32", null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeObjectCreateExpression("System.Int32", null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeObjectCreateExpression(typeof(int), null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeObjectCreateExpression(typeof(int), null)
             );
         }
 
@@ -126,17 +123,14 @@ namespace System.CodeDom.Tests
         {
             CodeExpression[] parameters = new CodeExpression[] { null };
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeObjectCreateExpression(new CodeTypeReference(), parameters)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeObjectCreateExpression(new CodeTypeReference(), parameters)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeObjectCreateExpression("System.Int32", parameters)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeObjectCreateExpression("System.Int32", parameters)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeObjectCreateExpression(typeof(int), parameters)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeObjectCreateExpression(typeof(int), parameters)
             );
         }
 

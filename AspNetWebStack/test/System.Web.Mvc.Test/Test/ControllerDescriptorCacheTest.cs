@@ -15,13 +15,11 @@ namespace System.Web.Mvc.Test
             ControllerDescriptorCache cache = new ControllerDescriptorCache();
 
             // Act
-            ControllerDescriptor descriptor1 = cache.GetDescriptor(
-                controllerType,
-                () => new ReflectedControllerDescriptor(controllerType)
+            ControllerDescriptor descriptor1 = cache.GetDescriptor(controllerType, () =>
+                new ReflectedControllerDescriptor(controllerType)
             );
-            ControllerDescriptor descriptor2 = cache.GetDescriptor(
-                controllerType,
-                () => new ReflectedControllerDescriptor(controllerType)
+            ControllerDescriptor descriptor2 = cache.GetDescriptor(controllerType, () =>
+                new ReflectedControllerDescriptor(controllerType)
             );
 
             // Assert

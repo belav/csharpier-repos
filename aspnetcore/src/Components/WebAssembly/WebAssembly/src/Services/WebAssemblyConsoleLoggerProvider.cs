@@ -27,10 +27,10 @@ internal sealed class WebAssemblyConsoleLoggerProvider : ILoggerProvider
     /// <inheritdoc />
     public ILogger CreateLogger(string name)
     {
-        return _loggers.GetOrAdd(
+        return _loggers.GetOrAdd(name, loggerName => new WebAssemblyConsoleLogger<object>(
             name,
-            loggerName => new WebAssemblyConsoleLogger<object>(name, _jsRuntime)
-        );
+            _jsRuntime
+        ));
     }
 
     /// <inheritdoc />

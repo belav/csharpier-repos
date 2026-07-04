@@ -341,10 +341,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateConstructor
             var syntaxFacts = document.Document.GetRequiredLanguageService<ISyntaxFactsService>();
             var comparer = syntaxFacts.StringComparer;
             return NameGenerator
-                .EnsureUniqueness(
-                    parameterNames,
-                    isFixed,
-                    canUse: s => !reservedNames.Any(n => comparer.Equals(s, n))
+                .EnsureUniqueness(parameterNames, isFixed, canUse: s =>
+                    !reservedNames.Any(n => comparer.Equals(s, n))
                 )
                 .Select(
                     (name, index) => new ParameterName(name, isFixed[index], parameterNamingRule)

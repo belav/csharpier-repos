@@ -238,13 +238,10 @@ public class HttpsConfigurationTests
                     "testPassword"
                 );
 
-                serverOptions.ListenAnyIP(
-                    0,
-                    listenOptions =>
-                    {
-                        listenOptions.UseHttps();
-                    }
-                );
+                serverOptions.ListenAnyIP(0, listenOptions =>
+                {
+                    listenOptions.UseHttps();
+                });
             })
             .Configure(app => { });
 
@@ -264,21 +261,18 @@ public class HttpsConfigurationTests
             .UseKestrelCore()
             .ConfigureKestrel(serverOptions =>
             {
-                serverOptions.ListenAnyIP(
-                    0,
-                    listenOptions =>
-                    {
-                        listenOptions.UseHttps(
-                            new HttpsConnectionAdapterOptions()
-                            {
-                                ServerCertificate = new X509Certificate2(
-                                    Path.Combine("shared", "TestCertificates", "aspnetdevcert.pfx"),
-                                    "testPassword"
-                                ),
-                            }
-                        );
-                    }
-                );
+                serverOptions.ListenAnyIP(0, listenOptions =>
+                {
+                    listenOptions.UseHttps(
+                        new HttpsConnectionAdapterOptions()
+                        {
+                            ServerCertificate = new X509Certificate2(
+                                Path.Combine("shared", "TestCertificates", "aspnetdevcert.pfx"),
+                                "testPassword"
+                            ),
+                        }
+                    );
+                });
             })
             .Configure(app => { });
 

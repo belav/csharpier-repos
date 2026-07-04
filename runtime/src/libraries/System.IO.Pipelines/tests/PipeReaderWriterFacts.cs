@@ -230,9 +230,8 @@ namespace System.IO.Pipelines.Tests
         )]
         public async Task ReadAsync_ThrowsIfWriterCompletedWithException()
         {
-            ThrowTestException(
-                new InvalidOperationException("Writer exception"),
-                e => _pipe.Writer.Complete(e)
+            ThrowTestException(new InvalidOperationException("Writer exception"), e =>
+                _pipe.Writer.Complete(e)
             );
 
             InvalidOperationException invalidOperationException =
@@ -260,9 +259,8 @@ namespace System.IO.Pipelines.Tests
         )]
         public async Task WriteAsync_ThrowsIfReaderCompletedWithException()
         {
-            ThrowTestException(
-                new InvalidOperationException("Reader exception"),
-                e => _pipe.Reader.Complete(e)
+            ThrowTestException(new InvalidOperationException("Reader exception"), e =>
+                _pipe.Reader.Complete(e)
             );
 
             InvalidOperationException invalidOperationException =

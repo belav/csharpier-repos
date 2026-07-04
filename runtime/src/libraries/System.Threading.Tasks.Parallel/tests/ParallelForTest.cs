@@ -1019,9 +1019,8 @@ namespace System.Threading.Tasks.Tests
 
             // If result[i] != 0 then the body for that index was executed.
             // We expect the threadlocal list to also contain the same index
-            Assert.All(
-                Enumerable.Range(0, _parameters.Count),
-                idx => Assert.Equal(processedIndexes.Contains(idx), _results[idx] != 0)
+            Assert.All(Enumerable.Range(0, _parameters.Count), idx =>
+                Assert.Equal(processedIndexes.Contains(idx), _results[idx] != 0)
             );
         }
 

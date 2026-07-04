@@ -82,25 +82,20 @@ namespace System.Security.Cryptography.Cose.Tests
         {
             var map = new CoseHeaderMap();
             // only accepts int or tstr
-            Assert.Throws<ArgumentException>(
-                "value",
-                () => SetValue(map, CoseHeaderLabel.Algorithm, ReadOnlySpan<byte>.Empty, method)
+            Assert.Throws<ArgumentException>("value", () =>
+                SetValue(map, CoseHeaderLabel.Algorithm, ReadOnlySpan<byte>.Empty, method)
             );
             // [ +label ] (non-empty array)
-            Assert.Throws<ArgumentException>(
-                "value",
-                () =>
-                    SetValue(map, CoseHeaderLabel.CriticalHeaders, ReadOnlySpan<byte>.Empty, method)
+            Assert.Throws<ArgumentException>("value", () =>
+                SetValue(map, CoseHeaderLabel.CriticalHeaders, ReadOnlySpan<byte>.Empty, method)
             );
             // tstr / uint
-            Assert.Throws<ArgumentException>(
-                "value",
-                () => SetValue(map, CoseHeaderLabel.ContentType, -1, method)
+            Assert.Throws<ArgumentException>("value", () =>
+                SetValue(map, CoseHeaderLabel.ContentType, -1, method)
             );
             // bstr
-            Assert.Throws<ArgumentException>(
-                "value",
-                () => SetValue(map, CoseHeaderLabel.KeyIdentifier, "foo", method)
+            Assert.Throws<ArgumentException>("value", () =>
+                SetValue(map, CoseHeaderLabel.KeyIdentifier, "foo", method)
             );
         }
 
@@ -119,32 +114,26 @@ namespace System.Security.Cryptography.Cose.Tests
 
             var map = new CoseHeaderMap();
             // only accepts int or tstr
-            Assert.Throws<ArgumentException>(
-                "value",
-                () => SetEncodedValue(map, CoseHeaderLabel.Algorithm, encodedNullValue, method)
+            Assert.Throws<ArgumentException>("value", () =>
+                SetEncodedValue(map, CoseHeaderLabel.Algorithm, encodedNullValue, method)
             );
             // [ +label ] (non-empty array)
-            Assert.Throws<ArgumentException>(
-                "value",
-                () =>
-                    SetEncodedValue(map, CoseHeaderLabel.CriticalHeaders, encodedNullValue, method)
+            Assert.Throws<ArgumentException>("value", () =>
+                SetEncodedValue(map, CoseHeaderLabel.CriticalHeaders, encodedNullValue, method)
             );
             writer.Reset();
             writer.WriteStartArray(0);
             writer.WriteEndArray();
-            Assert.Throws<ArgumentException>(
-                "value",
-                () => SetEncodedValue(map, CoseHeaderLabel.CriticalHeaders, writer.Encode(), method)
+            Assert.Throws<ArgumentException>("value", () =>
+                SetEncodedValue(map, CoseHeaderLabel.CriticalHeaders, writer.Encode(), method)
             );
             // tstr / uint
-            Assert.Throws<ArgumentException>(
-                "value",
-                () => SetEncodedValue(map, CoseHeaderLabel.ContentType, encodedNullValue, method)
+            Assert.Throws<ArgumentException>("value", () =>
+                SetEncodedValue(map, CoseHeaderLabel.ContentType, encodedNullValue, method)
             );
             // bstr
-            Assert.Throws<ArgumentException>(
-                "value",
-                () => SetEncodedValue(map, CoseHeaderLabel.KeyIdentifier, encodedNullValue, method)
+            Assert.Throws<ArgumentException>("value", () =>
+                SetEncodedValue(map, CoseHeaderLabel.KeyIdentifier, encodedNullValue, method)
             );
         }
 
@@ -165,19 +154,16 @@ namespace System.Security.Cryptography.Cose.Tests
             {
                 var map = new CoseHeaderMap();
 
-                Assert.Throws<ArgumentException>(
-                    "value",
-                    () => map.Add(label, new CoseHeaderValue())
+                Assert.Throws<ArgumentException>("value", () =>
+                    map.Add(label, new CoseHeaderValue())
                 );
                 Assert.Throws<ArgumentException>("value", () => map[label] = new CoseHeaderValue());
 
-                Assert.Throws<ArgumentException>(
-                    "value",
-                    () => map.Add(label, default(CoseHeaderValue))
+                Assert.Throws<ArgumentException>("value", () =>
+                    map.Add(label, default(CoseHeaderValue))
                 );
-                Assert.Throws<ArgumentException>(
-                    "value",
-                    () => map[label] = default(CoseHeaderValue)
+                Assert.Throws<ArgumentException>("value", () =>
+                    map[label] = default(CoseHeaderValue)
                 );
             }
         }

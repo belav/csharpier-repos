@@ -555,9 +555,8 @@ namespace System.Net.Primitives.Unit.Tests
         [Fact]
         public void Ctor_Capacity_Invalid()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => new CookieContainer(0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new CookieContainer(0)
             ); // Capacity <= 0
         }
 
@@ -667,9 +666,8 @@ namespace System.Net.Primitives.Unit.Tests
         {
             CookieContainer cc = new CookieContainer();
             Assert.Throws<ArgumentNullException>(() => cc.Add((Cookie)null)); // Null cookie
-            AssertExtensions.Throws<ArgumentException>(
-                "cookie",
-                () => cc.Add(new Cookie("name", "value", "", ""))
+            AssertExtensions.Throws<ArgumentException>("cookie", () =>
+                cc.Add(new Cookie("name", "value", "", ""))
             ); // Empty domain
 
             cc.MaxCookieSize = 1;
@@ -702,16 +700,14 @@ namespace System.Net.Primitives.Unit.Tests
         [Fact]
         public void Ctor_CapacityPerDomainCapacityMaxCookieSize_Invalid()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "capacity",
-                () => new CookieContainer(0, 10, 5)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () =>
+                new CookieContainer(0, 10, 5)
             ); // Capacity <= 0
             Assert.Throws<ArgumentOutOfRangeException>(() => new CookieContainer(5, 0, 5)); // Per domain capacity <= 0
             Assert.Throws<ArgumentOutOfRangeException>(() => new CookieContainer(5, 10, 5)); // Per domain capacity > Capacity
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "maxCookieSize",
-                () => new CookieContainer(15, 10, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("maxCookieSize", () =>
+                new CookieContainer(15, 10, 0)
             ); // Max cookie size <= 0
         }
 

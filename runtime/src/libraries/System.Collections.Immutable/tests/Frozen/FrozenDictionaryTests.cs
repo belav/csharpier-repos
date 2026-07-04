@@ -81,59 +81,41 @@ namespace System.Collections.Frozen.Tests
         [Fact]
         public void NullSource_ThrowsException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((Dictionary<TKey, TValue>)null).ToFrozenDictionary()
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((Dictionary<TKey, TValue>)null).ToFrozenDictionary()
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((Dictionary<TKey, TValue>)null).ToFrozenDictionary(null)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((Dictionary<TKey, TValue>)null).ToFrozenDictionary(null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () =>
-                    ((Dictionary<TKey, TValue>)null).ToFrozenDictionary(
-                        EqualityComparer<TKey>.Default
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((Dictionary<TKey, TValue>)null).ToFrozenDictionary(EqualityComparer<TKey>.Default)
+            );
+
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                Enumerable.Empty<int>().ToFrozenDictionary((Func<int, int>)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                Enumerable
+                    .Empty<int>()
+                    .ToFrozenDictionary((Func<int, int>)null, EqualityComparer<int>.Default)
+            );
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                Enumerable
+                    .Empty<int>()
+                    .ToFrozenDictionary(
+                        (Func<int, int>)null,
+                        (Func<int, int>)null,
+                        EqualityComparer<int>.Default
                     )
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => Enumerable.Empty<int>().ToFrozenDictionary((Func<int, int>)null)
+            AssertExtensions.Throws<ArgumentNullException>("elementSelector", () =>
+                Enumerable.Empty<int>().ToFrozenDictionary(i => i, (Func<int, int>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    Enumerable
-                        .Empty<int>()
-                        .ToFrozenDictionary((Func<int, int>)null, EqualityComparer<int>.Default)
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    Enumerable
-                        .Empty<int>()
-                        .ToFrozenDictionary(
-                            (Func<int, int>)null,
-                            (Func<int, int>)null,
-                            EqualityComparer<int>.Default
-                        )
-            );
-
-            AssertExtensions.Throws<ArgumentNullException>(
-                "elementSelector",
-                () => Enumerable.Empty<int>().ToFrozenDictionary(i => i, (Func<int, int>)null)
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "elementSelector",
-                () =>
-                    Enumerable
-                        .Empty<int>()
-                        .ToFrozenDictionary(
-                            i => i,
-                            (Func<int, int>)null,
-                            EqualityComparer<int>.Default
-                        )
+            AssertExtensions.Throws<ArgumentNullException>("elementSelector", () =>
+                Enumerable
+                    .Empty<int>()
+                    .ToFrozenDictionary(i => i, (Func<int, int>)null, EqualityComparer<int>.Default)
             );
         }
 
@@ -374,9 +356,8 @@ namespace System.Collections.Frozen.Tests
             );
             Assert.All(originalPairs, p => Assert.True(frozen.ContainsKey(p.Key)));
             Assert.All(originalPairs, p => Assert.Equal(p.Value, frozen[p.Key]));
-            Assert.All(
-                originalPairs,
-                p => Assert.Equal(p.Value, frozen.GetValueRefOrNullRef(p.Key))
+            Assert.All(originalPairs, p =>
+                Assert.Equal(p.Value, frozen.GetValueRefOrNullRef(p.Key))
             );
             Assert.Equal(originalPairs.Length, frozen.Keys.Length);
             Assert.Equal(originalPairs.Length, frozen.Values.Length);
@@ -498,14 +479,11 @@ namespace System.Collections.Frozen.Tests
                 Assert.Equal(dictionary[pair.Key], rod[pair.Key]);
             }
 
-            Assert.All(
-                dictionary,
-                pair =>
-                {
-                    Assert.True(rod.TryGetValue(pair.Key, out TValue value));
-                    Assert.Equal(pair.Value, value);
-                }
-            );
+            Assert.All(dictionary, pair =>
+            {
+                Assert.True(rod.TryGetValue(pair.Key, out TValue value));
+                Assert.Equal(pair.Value, value);
+            });
         }
     }
 

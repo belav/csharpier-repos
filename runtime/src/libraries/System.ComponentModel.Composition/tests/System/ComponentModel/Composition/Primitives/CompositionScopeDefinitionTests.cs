@@ -121,16 +121,13 @@ namespace System.ComponentModel.Composition.Hosting
         [Fact]
         public void Constructor_NullCatalog_ShowThrowNullArgument()
         {
-            var ex = ExceptionAssert.Throws<ArgumentNullException>(
-                RetryMode.DoNotRetry,
-                () =>
-                {
-                    CompositionScopeDefinition scope = new CompositionScopeDefinition(
-                        null,
-                        Enumerable.Empty<CompositionScopeDefinition>()
-                    );
-                }
-            );
+            var ex = ExceptionAssert.Throws<ArgumentNullException>(RetryMode.DoNotRetry, () =>
+            {
+                CompositionScopeDefinition scope = new CompositionScopeDefinition(
+                    null,
+                    Enumerable.Empty<CompositionScopeDefinition>()
+                );
+            });
         }
 
         [Fact]
@@ -247,38 +244,26 @@ namespace System.ComponentModel.Composition.Hosting
             CompositionScopeDefinition scope = new CompositionScopeDefinition(catalog, null);
 
             scope.Dispose();
-            var ex = ExceptionAssert.Throws<ObjectDisposedException>(
-                RetryMode.DoNotRetry,
-                () =>
-                {
-                    var ps = scope.Parts;
-                }
-            );
+            var ex = ExceptionAssert.Throws<ObjectDisposedException>(RetryMode.DoNotRetry, () =>
+            {
+                var ps = scope.Parts;
+            });
 
-            ex = ExceptionAssert.Throws<ObjectDisposedException>(
-                RetryMode.DoNotRetry,
-                () =>
-                {
-                    var es = scope.GetExports(import);
-                }
-            );
+            ex = ExceptionAssert.Throws<ObjectDisposedException>(RetryMode.DoNotRetry, () =>
+            {
+                var es = scope.GetExports(import);
+            });
 
             scope.Dispose();
-            ex = ExceptionAssert.Throws<ObjectDisposedException>(
-                RetryMode.DoNotRetry,
-                () =>
-                {
-                    var ps = scope.Parts;
-                }
-            );
+            ex = ExceptionAssert.Throws<ObjectDisposedException>(RetryMode.DoNotRetry, () =>
+            {
+                var ps = scope.Parts;
+            });
 
-            ex = ExceptionAssert.Throws<ObjectDisposedException>(
-                RetryMode.DoNotRetry,
-                () =>
-                {
-                    var es = scope.GetExports(import);
-                }
-            );
+            ex = ExceptionAssert.Throws<ObjectDisposedException>(RetryMode.DoNotRetry, () =>
+            {
+                var es = scope.GetExports(import);
+            });
         }
 
         [Fact]

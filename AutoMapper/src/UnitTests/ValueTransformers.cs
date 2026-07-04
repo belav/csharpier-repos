@@ -78,9 +78,8 @@
                 {
                     cfg.CreateMap<Source, Dest>();
                     cfg.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
-                    cfg.CreateProfile(
-                        "Other",
-                        p => p.ValueTransformers.Add<string>(dest => dest + "! No joke!")
+                    cfg.CreateProfile("Other", p =>
+                        p.ValueTransformers.Add<string>(dest => dest + "! No joke!")
                     );
                 });
 
@@ -110,14 +109,11 @@
                 new(cfg =>
                 {
                     cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
-                    cfg.CreateProfile(
-                        "Other",
-                        p =>
-                        {
-                            p.CreateMap<Source, Dest>();
-                            p.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
-                        }
-                    );
+                    cfg.CreateProfile("Other", p =>
+                    {
+                        p.CreateMap<Source, Dest>();
+                        p.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                    });
                 });
 
             [Fact]
@@ -146,14 +142,11 @@
                 new(cfg =>
                 {
                     cfg.ValueTransformers.Add<int>(dest => dest * 2);
-                    cfg.CreateProfile(
-                        "Other",
-                        p =>
-                        {
-                            p.CreateMap<Source, Dest>();
-                            p.ValueTransformers.Add<int>(dest => dest + 3);
-                        }
-                    );
+                    cfg.CreateProfile("Other", p =>
+                    {
+                        p.CreateMap<Source, Dest>();
+                        p.ValueTransformers.Add<int>(dest => dest + 3);
+                    });
                 });
 
             [Fact]
@@ -182,15 +175,12 @@
                 new(cfg =>
                 {
                     cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
-                    cfg.CreateProfile(
-                        "Other",
-                        p =>
-                        {
-                            p.CreateMap<Source, Dest>()
-                                .ValueTransformers.Add<string>(dest => dest + ", for real,");
-                            p.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
-                        }
-                    );
+                    cfg.CreateProfile("Other", p =>
+                    {
+                        p.CreateMap<Source, Dest>()
+                            .ValueTransformers.Add<string>(dest => dest + ", for real,");
+                        p.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                    });
                 });
 
             [Fact]
@@ -219,19 +209,16 @@
                 new(cfg =>
                 {
                     cfg.ValueTransformers.Add<string>(dest => dest + "! No joke!");
-                    cfg.CreateProfile(
-                        "Other",
-                        p =>
-                        {
-                            p.CreateMap<Source, Dest>()
-                                .AddTransform<string>(dest => dest + ", for real,")
-                                .ForMember(
-                                    d => d.Value,
-                                    opt => opt.AddTransform(d => d + ", seriously")
-                                );
-                            p.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
-                        }
-                    );
+                    cfg.CreateProfile("Other", p =>
+                    {
+                        p.CreateMap<Source, Dest>()
+                            .AddTransform<string>(dest => dest + ", for real,")
+                            .ForMember(
+                                d => d.Value,
+                                opt => opt.AddTransform(d => d + ", seriously")
+                            );
+                        p.ValueTransformers.Add<string>(dest => dest + " is straight up dope");
+                    });
                 });
 
             [Fact]

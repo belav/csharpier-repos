@@ -34,9 +34,8 @@ public class EventCustomArgsTest : ServerTestBase<ToggleExecutionModeServerFixtu
         // registered with the Razor compiler but no way to register them with the runtime, so
         // you could only receive empty eventargs.
         Browser.Exists(By.Id("trigger-testevent-directly")).Click();
-        Browser.Equal(
-            "Received testevent with args '{ MyProp=null }'",
-            () => GetLogLines().Single()
+        Browser.Equal("Received testevent with args '{ MyProp=null }'", () =>
+            GetLogLines().Single()
         );
     }
 
@@ -45,9 +44,8 @@ public class EventCustomArgsTest : ServerTestBase<ToggleExecutionModeServerFixtu
     {
         Browser.Exists(By.Id("register-testevent-with-no-createventargs")).Click();
         Browser.FindElement(By.Id("trigger-testevent-directly")).Click();
-        Browser.Equal(
-            "Received testevent with args '{ MyProp=null }'",
-            () => GetLogLines().Single()
+        Browser.Equal("Received testevent with args '{ MyProp=null }'", () =>
+            GetLogLines().Single()
         );
     }
 

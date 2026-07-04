@@ -469,9 +469,8 @@ namespace System.Tests
             Assert.Throws(exceptionType, () => new Uri(baseUri, relativeUri));
             if (createUri)
             {
-                Assert.Throws(
-                    exceptionType,
-                    () => new Uri(baseUri, new Uri(relativeUri, UriKind.RelativeOrAbsolute))
+                Assert.Throws(exceptionType, () =>
+                    new Uri(baseUri, new Uri(relativeUri, UriKind.RelativeOrAbsolute))
                 );
             }
 

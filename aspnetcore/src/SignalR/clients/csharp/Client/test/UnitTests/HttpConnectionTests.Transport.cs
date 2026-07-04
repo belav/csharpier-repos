@@ -281,17 +281,14 @@ public partial class HttpConnectionTests
                 (_, __) => ResponseUtils.CreateResponse(HttpStatusCode.Accepted)
             );
 
-            await WithConnectionAsync(
-                CreateConnection(testHttpHandler),
-                async (connection) =>
-                {
-                    await connection.StartAsync().DefaultTimeout();
-                    Assert.Contains(
-                        "This is a test",
-                        Encoding.UTF8.GetString(await connection.Transport.Input.ReadAllAsync())
-                    );
-                }
-            );
+            await WithConnectionAsync(CreateConnection(testHttpHandler), async (connection) =>
+            {
+                await connection.StartAsync().DefaultTimeout();
+                Assert.Contains(
+                    "This is a test",
+                    Encoding.UTF8.GetString(await connection.Transport.Input.ReadAllAsync())
+                );
+            });
         }
 
         [Fact]
@@ -314,75 +311,61 @@ public partial class HttpConnectionTests
                 }
             );
 
-            await WithConnectionAsync(
-                CreateConnection(testHttpHandler),
-                async (connection) =>
-                {
-                    await connection.StartAsync().DefaultTimeout();
+            await WithConnectionAsync(CreateConnection(testHttpHandler), async (connection) =>
+            {
+                await connection.StartAsync().DefaultTimeout();
 
-                    await connection.Transport.Output.WriteAsync(data).DefaultTimeout();
+                await connection.Transport.Output.WriteAsync(data).DefaultTimeout();
 
-                    Assert.Equal(data, await sendTcs.Task.DefaultTimeout());
+                Assert.Equal(data, await sendTcs.Task.DefaultTimeout());
 
-                    longPollTcs.TrySetResult(
-                        ResponseUtils.CreateResponse(HttpStatusCode.NoContent)
-                    );
-                }
-            );
+                longPollTcs.TrySetResult(ResponseUtils.CreateResponse(HttpStatusCode.NoContent));
+            });
         }
 
         [Fact]
         public Task SendThrowsIfConnectionIsNotStarted()
         {
-            return WithConnectionAsync(
-                CreateConnection(),
-                async (connection) =>
-                {
-                    var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
-                        connection.Transport.Output.WriteAsync(new byte[0]).DefaultTimeout()
-                    );
-                    Assert.Equal(
-                        $"Cannot access the {nameof(Transport)} pipe before the connection has started.",
-                        exception.Message
-                    );
-                }
-            );
+            return WithConnectionAsync(CreateConnection(), async (connection) =>
+            {
+                var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    connection.Transport.Output.WriteAsync(new byte[0]).DefaultTimeout()
+                );
+                Assert.Equal(
+                    $"Cannot access the {nameof(Transport)} pipe before the connection has started.",
+                    exception.Message
+                );
+            });
         }
 
         [Fact]
         public Task TransportPipeCannotBeAccessedAfterConnectionIsDisposed()
         {
-            return WithConnectionAsync(
-                CreateConnection(),
-                async (connection) =>
-                {
-                    await connection.StartAsync().DefaultTimeout();
-                    await connection.DisposeAsync().DefaultTimeout();
+            return WithConnectionAsync(CreateConnection(), async (connection) =>
+            {
+                await connection.StartAsync().DefaultTimeout();
+                await connection.DisposeAsync().DefaultTimeout();
 
-                    var exception = await Assert.ThrowsAsync<ObjectDisposedException>(() =>
-                        connection.Transport.Output.WriteAsync(new byte[0]).DefaultTimeout()
-                    );
-                    Assert.Equal(typeof(HttpConnection).FullName, exception.ObjectName);
-                }
-            );
+                var exception = await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                    connection.Transport.Output.WriteAsync(new byte[0]).DefaultTimeout()
+                );
+                Assert.Equal(typeof(HttpConnection).FullName, exception.ObjectName);
+            });
         }
 
         [Fact]
         public Task TransportIsShutDownAfterDispose()
         {
             var transport = new TestTransport();
-            return WithConnectionAsync(
-                CreateConnection(transport: transport),
-                async (connection) =>
-                {
-                    await connection.StartAsync().DefaultTimeout();
-                    await connection.DisposeAsync().DefaultTimeout();
+            return WithConnectionAsync(CreateConnection(transport: transport), async (connection) =>
+            {
+                await connection.StartAsync().DefaultTimeout();
+                await connection.DisposeAsync().DefaultTimeout();
 
-                    // This will throw OperationCanceledException if it's forcibly terminated
-                    // which we don't want
-                    await transport.Receiving.DefaultTimeout();
-                }
-            );
+                // This will throw OperationCanceledException if it's forcibly terminated
+                // which we don't want
+                await transport.Receiving.DefaultTimeout();
+            });
         }
 
         [Fact]

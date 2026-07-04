@@ -623,9 +623,8 @@ class C {
             var myAnnotation = new SyntaxAnnotation();
 
             var identifierNodes = expr.DescendantNodes().OfType<IdentifierNameSyntax>().ToList();
-            var exprWithAnnotations = expr.ReplaceNodes(
-                identifierNodes,
-                (e, e2) => e2.WithAdditionalAnnotations(myAnnotation)
+            var exprWithAnnotations = expr.ReplaceNodes(identifierNodes, (e, e2) =>
+                e2.WithAdditionalAnnotations(myAnnotation)
             );
 
             var nodesWithMyAnnotations = exprWithAnnotations
@@ -3248,21 +3247,17 @@ class C
 #endregion
 }";
 
-            TestWithWindowsAndUnixEndOfLines(
-                inputText,
-                expectedText,
-                (cu, expected) =>
-                {
-                    var m = cu.DescendantNodes().OfType<MethodDeclarationSyntax>().FirstOrDefault();
-                    Assert.NotNull(m);
+            TestWithWindowsAndUnixEndOfLines(inputText, expectedText, (cu, expected) =>
+            {
+                var m = cu.DescendantNodes().OfType<MethodDeclarationSyntax>().FirstOrDefault();
+                Assert.NotNull(m);
 
-                    var cu2 = cu.RemoveNode(m, SyntaxRemoveOptions.KeepUnbalancedDirectives);
+                var cu2 = cu.RemoveNode(m, SyntaxRemoveOptions.KeepUnbalancedDirectives);
 
-                    var text = cu2.ToFullString();
+                var text = cu2.ToFullString();
 
-                    Assert.Equal(expected, text);
-                }
-            );
+                Assert.Equal(expected, text);
+            });
         }
 
         [Fact]
@@ -3294,21 +3289,17 @@ class C
 #endregion
 }";
 
-            TestWithWindowsAndUnixEndOfLines(
-                inputText,
-                expectedText,
-                (cu, expected) =>
-                {
-                    var m = cu.DescendantNodes().OfType<MethodDeclarationSyntax>().FirstOrDefault();
-                    Assert.NotNull(m);
+            TestWithWindowsAndUnixEndOfLines(inputText, expectedText, (cu, expected) =>
+            {
+                var m = cu.DescendantNodes().OfType<MethodDeclarationSyntax>().FirstOrDefault();
+                Assert.NotNull(m);
 
-                    var cu2 = cu.RemoveNode(m, SyntaxRemoveOptions.KeepDirectives);
+                var cu2 = cu.RemoveNode(m, SyntaxRemoveOptions.KeepDirectives);
 
-                    var text = cu2.ToFullString();
+                var text = cu2.ToFullString();
 
-                    Assert.Equal(expected, text);
-                }
-            );
+                Assert.Equal(expected, text);
+            });
         }
 
         [Fact]
@@ -3332,21 +3323,17 @@ class C
 
 }";
 
-            TestWithWindowsAndUnixEndOfLines(
-                inputText,
-                expectedText,
-                (cu, expected) =>
-                {
-                    var m = cu.DescendantNodes().OfType<MethodDeclarationSyntax>().FirstOrDefault();
-                    Assert.NotNull(m);
+            TestWithWindowsAndUnixEndOfLines(inputText, expectedText, (cu, expected) =>
+            {
+                var m = cu.DescendantNodes().OfType<MethodDeclarationSyntax>().FirstOrDefault();
+                Assert.NotNull(m);
 
-                    var cu2 = cu.RemoveNode(m, SyntaxRemoveOptions.KeepEndOfLine);
+                var cu2 = cu.RemoveNode(m, SyntaxRemoveOptions.KeepEndOfLine);
 
-                    var text = cu2.ToFullString();
+                var text = cu2.ToFullString();
 
-                    Assert.Equal(expected, text);
-                }
-            );
+                Assert.Equal(expected, text);
+            });
         }
 
         [Fact]
@@ -3435,21 +3422,17 @@ int b
 }
 }";
 
-            TestWithWindowsAndUnixEndOfLines(
-                inputText,
-                expectedText,
-                (cu, expected) =>
-                {
-                    var m = cu.DescendantNodes().OfType<ParameterSyntax>().FirstOrDefault();
-                    Assert.NotNull(m);
+            TestWithWindowsAndUnixEndOfLines(inputText, expectedText, (cu, expected) =>
+            {
+                var m = cu.DescendantNodes().OfType<ParameterSyntax>().FirstOrDefault();
+                Assert.NotNull(m);
 
-                    var cu2 = cu.RemoveNode(m, SyntaxRemoveOptions.KeepEndOfLine);
+                var cu2 = cu.RemoveNode(m, SyntaxRemoveOptions.KeepEndOfLine);
 
-                    var text = cu2.ToFullString();
+                var text = cu2.ToFullString();
 
-                    Assert.Equal(expected, text);
-                }
-            );
+                Assert.Equal(expected, text);
+            });
         }
 
         [Fact]
@@ -3482,21 +3465,17 @@ int b
 }
 }";
 
-            TestWithWindowsAndUnixEndOfLines(
-                inputText,
-                expectedText,
-                (cu, expected) =>
-                {
-                    var m = cu.DescendantNodes().OfType<ParameterSyntax>().FirstOrDefault();
-                    Assert.NotNull(m);
+            TestWithWindowsAndUnixEndOfLines(inputText, expectedText, (cu, expected) =>
+            {
+                var m = cu.DescendantNodes().OfType<ParameterSyntax>().FirstOrDefault();
+                Assert.NotNull(m);
 
-                    var cu2 = cu.RemoveNode(m, SyntaxRemoveOptions.KeepEndOfLine);
+                var cu2 = cu.RemoveNode(m, SyntaxRemoveOptions.KeepEndOfLine);
 
-                    var text = cu2.ToFullString();
+                var text = cu2.ToFullString();
 
-                    Assert.Equal(expected, text);
-                }
-            );
+                Assert.Equal(expected, text);
+            });
         }
 
         [Fact]
@@ -3532,21 +3511,17 @@ int b
 }
 }";
 
-            TestWithWindowsAndUnixEndOfLines(
-                inputText,
-                expectedText,
-                (cu, expected) =>
-                {
-                    var m = cu.DescendantNodes().OfType<ParameterSyntax>().FirstOrDefault();
-                    Assert.NotNull(m);
+            TestWithWindowsAndUnixEndOfLines(inputText, expectedText, (cu, expected) =>
+            {
+                var m = cu.DescendantNodes().OfType<ParameterSyntax>().FirstOrDefault();
+                Assert.NotNull(m);
 
-                    var cu2 = cu.RemoveNode(m, SyntaxRemoveOptions.KeepEndOfLine);
+                var cu2 = cu.RemoveNode(m, SyntaxRemoveOptions.KeepEndOfLine);
 
-                    var text = cu2.ToFullString();
+                var text = cu2.ToFullString();
 
-                    Assert.Equal(expected, text);
-                }
-            );
+                Assert.Equal(expected, text);
+            });
         }
 
         [Fact]
@@ -3625,21 +3600,17 @@ int a
 }
 }";
 
-            TestWithWindowsAndUnixEndOfLines(
-                inputText,
-                expectedText,
-                (cu, expected) =>
-                {
-                    var m = cu.DescendantNodes().OfType<ParameterSyntax>().LastOrDefault();
-                    Assert.NotNull(m);
+            TestWithWindowsAndUnixEndOfLines(inputText, expectedText, (cu, expected) =>
+            {
+                var m = cu.DescendantNodes().OfType<ParameterSyntax>().LastOrDefault();
+                Assert.NotNull(m);
 
-                    var cu2 = cu.RemoveNode(m, SyntaxRemoveOptions.KeepEndOfLine);
+                var cu2 = cu.RemoveNode(m, SyntaxRemoveOptions.KeepEndOfLine);
 
-                    var text = cu2.ToFullString();
+                var text = cu2.ToFullString();
 
-                    Assert.Equal(expected, text);
-                }
-            );
+                Assert.Equal(expected, text);
+            });
         }
 
         [Fact]
@@ -3671,21 +3642,17 @@ int a
 }
 }";
 
-            TestWithWindowsAndUnixEndOfLines(
-                inputText,
-                expectedText,
-                (cu, expected) =>
-                {
-                    var m = cu.DescendantNodes().OfType<ParameterSyntax>().LastOrDefault();
-                    Assert.NotNull(m);
+            TestWithWindowsAndUnixEndOfLines(inputText, expectedText, (cu, expected) =>
+            {
+                var m = cu.DescendantNodes().OfType<ParameterSyntax>().LastOrDefault();
+                Assert.NotNull(m);
 
-                    var cu2 = cu.RemoveNode(m, SyntaxRemoveOptions.KeepEndOfLine);
+                var cu2 = cu.RemoveNode(m, SyntaxRemoveOptions.KeepEndOfLine);
 
-                    var text = cu2.ToFullString();
+                var text = cu2.ToFullString();
 
-                    Assert.Equal(expected, text);
-                }
-            );
+                Assert.Equal(expected, text);
+            });
         }
 
         [Fact]
@@ -3720,21 +3687,17 @@ int a
 }
 }";
 
-            TestWithWindowsAndUnixEndOfLines(
-                inputText,
-                expectedText,
-                (cu, expected) =>
-                {
-                    var m = cu.DescendantNodes().OfType<ParameterSyntax>().LastOrDefault();
-                    Assert.NotNull(m);
+            TestWithWindowsAndUnixEndOfLines(inputText, expectedText, (cu, expected) =>
+            {
+                var m = cu.DescendantNodes().OfType<ParameterSyntax>().LastOrDefault();
+                Assert.NotNull(m);
 
-                    var cu2 = cu.RemoveNode(m, SyntaxRemoveOptions.KeepEndOfLine);
+                var cu2 = cu.RemoveNode(m, SyntaxRemoveOptions.KeepEndOfLine);
 
-                    var text = cu2.ToFullString();
+                var text = cu2.ToFullString();
 
-                    Assert.Equal(expected, text);
-                }
-            );
+                Assert.Equal(expected, text);
+            });
         }
 
         [Fact]
@@ -3794,24 +3757,20 @@ class A { } #endregion";
 #region A
 #endregion";
 
-            TestWithWindowsAndUnixEndOfLines(
-                inputText,
-                expectedText,
-                (cu, expected) =>
-                {
-                    var m = cu.DescendantNodes().OfType<TypeDeclarationSyntax>().FirstOrDefault();
-                    Assert.NotNull(m);
+            TestWithWindowsAndUnixEndOfLines(inputText, expectedText, (cu, expected) =>
+            {
+                var m = cu.DescendantNodes().OfType<TypeDeclarationSyntax>().FirstOrDefault();
+                Assert.NotNull(m);
 
-                    var cu2 = cu.RemoveNode(
-                        m,
-                        SyntaxRemoveOptions.KeepEndOfLine | SyntaxRemoveOptions.KeepDirectives
-                    );
+                var cu2 = cu.RemoveNode(
+                    m,
+                    SyntaxRemoveOptions.KeepEndOfLine | SyntaxRemoveOptions.KeepDirectives
+                );
 
-                    var text = cu2.ToFullString();
+                var text = cu2.ToFullString();
 
-                    Assert.Equal(expected, text);
-                }
-            );
+                Assert.Equal(expected, text);
+            });
         }
 
         [Fact]

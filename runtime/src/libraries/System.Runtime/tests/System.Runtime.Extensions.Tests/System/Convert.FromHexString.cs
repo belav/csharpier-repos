@@ -52,9 +52,8 @@ namespace System.Tests
         public static void InvalidInputString_Null()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => Convert.FromHexString(null));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => Convert.FromHexString(null, default, out _, out _)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                Convert.FromHexString(null, default, out _, out _)
             );
         }
 

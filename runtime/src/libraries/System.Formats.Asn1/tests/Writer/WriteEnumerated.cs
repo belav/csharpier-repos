@@ -347,32 +347,26 @@ namespace System.Formats.Asn1.Tests.Writer
         {
             AsnWriter writer = new AsnWriter(ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "tEnum",
-                () => writer.WriteEnumeratedValue(OpenFlags.IncludeArchived)
+            AssertExtensions.Throws<ArgumentException>("tEnum", () =>
+                writer.WriteEnumeratedValue(OpenFlags.IncludeArchived)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "tEnum",
-                () =>
-                    writer.WriteEnumeratedValue(
-                        OpenFlags.IncludeArchived,
-                        new Asn1Tag(TagClass.ContextSpecific, 13)
-                    )
+            AssertExtensions.Throws<ArgumentException>("tEnum", () =>
+                writer.WriteEnumeratedValue(
+                    OpenFlags.IncludeArchived,
+                    new Asn1Tag(TagClass.ContextSpecific, 13)
+                )
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "tEnum",
-                () => writer.WriteEnumeratedValue((Enum)OpenFlags.IncludeArchived)
+            AssertExtensions.Throws<ArgumentException>("tEnum", () =>
+                writer.WriteEnumeratedValue((Enum)OpenFlags.IncludeArchived)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "tEnum",
-                () =>
-                    writer.WriteEnumeratedValue(
-                        (Enum)OpenFlags.IncludeArchived,
-                        new Asn1Tag(TagClass.ContextSpecific, 13)
-                    )
+            AssertExtensions.Throws<ArgumentException>("tEnum", () =>
+                writer.WriteEnumeratedValue(
+                    (Enum)OpenFlags.IncludeArchived,
+                    new Asn1Tag(TagClass.ContextSpecific, 13)
+                )
             );
         }
 
@@ -384,15 +378,12 @@ namespace System.Formats.Asn1.Tests.Writer
         {
             AsnWriter writer = new AsnWriter(ruleSet);
 
-            AssertExtensions.Throws<ArgumentException>(
-                "tag",
-                () => writer.WriteEnumeratedValue(ReadEnumerated.IntBacked.Pillow, Asn1Tag.Null)
+            AssertExtensions.Throws<ArgumentException>("tag", () =>
+                writer.WriteEnumeratedValue(ReadEnumerated.IntBacked.Pillow, Asn1Tag.Null)
             );
 
-            AssertExtensions.Throws<ArgumentException>(
-                "tag",
-                () =>
-                    writer.WriteEnumeratedValue((Enum)ReadEnumerated.IntBacked.Pillow, Asn1Tag.Null)
+            AssertExtensions.Throws<ArgumentException>("tag", () =>
+                writer.WriteEnumeratedValue((Enum)ReadEnumerated.IntBacked.Pillow, Asn1Tag.Null)
             );
         }
 
@@ -404,14 +395,12 @@ namespace System.Formats.Asn1.Tests.Writer
         {
             AsnWriter writer = new AsnWriter(ruleSet);
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => writer.WriteEnumeratedValue(null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                writer.WriteEnumeratedValue(null)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => writer.WriteEnumeratedValue(null, new Asn1Tag(TagClass.ContextSpecific, 1))
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                writer.WriteEnumeratedValue(null, new Asn1Tag(TagClass.ContextSpecific, 1))
             );
         }
 

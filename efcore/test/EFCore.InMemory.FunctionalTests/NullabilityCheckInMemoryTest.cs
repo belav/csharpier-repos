@@ -32,9 +32,8 @@ public class NullabilityCheckInMemoryTest : IClassFixture<InMemoryFixture>
 
                     var optionsBuilder = new DbContextOptionsBuilder()
                         .UseModel(modelBuilder.FinalizeModel())
-                        .UseInMemoryDatabase(
-                            nameof(NullabilityCheckInMemoryTest),
-                            b => b.EnableNullChecks()
+                        .UseInMemoryDatabase(nameof(NullabilityCheckInMemoryTest), b =>
+                            b.EnableNullChecks()
                         )
                         .UseInternalServiceProvider(Fixture.ServiceProvider);
 
@@ -63,9 +62,8 @@ public class NullabilityCheckInMemoryTest : IClassFixture<InMemoryFixture>
 
                     var optionsBuilder = new DbContextOptionsBuilder()
                         .UseModel(modelBuilder.FinalizeModel())
-                        .UseInMemoryDatabase(
-                            nameof(NullabilityCheckInMemoryTest),
-                            b => b.EnableNullChecks()
+                        .UseInMemoryDatabase(nameof(NullabilityCheckInMemoryTest), b =>
+                            b.EnableNullChecks()
                         )
                         .UseInternalServiceProvider(
                             InMemoryFixture.DefaultNullabilitySensitiveCheckProvider
@@ -99,9 +97,8 @@ public class NullabilityCheckInMemoryTest : IClassFixture<InMemoryFixture>
 
                     var optionsBuilder = new DbContextOptionsBuilder()
                         .UseModel(modelBuilder.FinalizeModel())
-                        .UseInMemoryDatabase(
-                            nameof(NullabilityCheckInMemoryTest),
-                            b => b.EnableNullChecks()
+                        .UseInMemoryDatabase(nameof(NullabilityCheckInMemoryTest), b =>
+                            b.EnableNullChecks()
                         )
                         .UseInternalServiceProvider(
                             InMemoryFixture.DefaultNullabilitySensitiveCheckProvider
@@ -130,9 +127,8 @@ public class NullabilityCheckInMemoryTest : IClassFixture<InMemoryFixture>
 
                     var optionsBuilder = new DbContextOptionsBuilder()
                         .UseModel(modelBuilder.FinalizeModel())
-                        .UseInMemoryDatabase(
-                            nameof(NullabilityCheckInMemoryTest),
-                            b => b.EnableNullChecks()
+                        .UseInMemoryDatabase(nameof(NullabilityCheckInMemoryTest), b =>
+                            b.EnableNullChecks()
                         )
                         .UseInternalServiceProvider(Fixture.ServiceProvider);
 
@@ -160,9 +156,8 @@ public class NullabilityCheckInMemoryTest : IClassFixture<InMemoryFixture>
 
                     var optionsBuilder = new DbContextOptionsBuilder()
                         .UseModel(modelBuilder.FinalizeModel())
-                        .UseInMemoryDatabase(
-                            nameof(NullabilityCheckInMemoryTest),
-                            b => b.EnableNullChecks()
+                        .UseInMemoryDatabase(nameof(NullabilityCheckInMemoryTest), b =>
+                            b.EnableNullChecks()
                         )
                         .UseInternalServiceProvider(Fixture.ServiceProvider);
 
@@ -199,9 +194,8 @@ public class NullabilityCheckInMemoryTest : IClassFixture<InMemoryFixture>
 
         var optionsBuilder = new DbContextOptionsBuilder()
             .UseModel(modelBuilder.FinalizeModel())
-            .UseInMemoryDatabase(
-                nameof(NullabilityCheckInMemoryTest),
-                b => b.EnableNullChecks(false)
+            .UseInMemoryDatabase(nameof(NullabilityCheckInMemoryTest), b =>
+                b.EnableNullChecks(false)
             )
             .UseInternalServiceProvider(InMemoryFixture.DefaultNullabilityCheckProvider);
 
@@ -222,9 +216,8 @@ public class NullabilityCheckInMemoryTest : IClassFixture<InMemoryFixture>
 
         var optionsBuilder = new DbContextOptionsBuilder()
             .UseModel(modelBuilder.FinalizeModel())
-            .UseInMemoryDatabase(
-                nameof(NullabilityCheckInMemoryTest),
-                b => b.EnableNullChecks(false)
+            .UseInMemoryDatabase(nameof(NullabilityCheckInMemoryTest), b =>
+                b.EnableNullChecks(false)
             )
             .UseInternalServiceProvider(InMemoryFixture.DefaultNullabilityCheckProvider);
 

@@ -66,9 +66,8 @@ namespace System.Text.Json.SourceGeneration.Tests
     public sealed class MetadataAndSerializationContextTests : RealWorldContextTests
     {
         public MetadataAndSerializationContextTests()
-            : base(
-                MetadataAndSerializationContext.Default,
-                (options) => new MetadataAndSerializationContext(options)
+            : base(MetadataAndSerializationContext.Default, (options) =>
+                new MetadataAndSerializationContext(options)
             ) { }
 
         [Fact]

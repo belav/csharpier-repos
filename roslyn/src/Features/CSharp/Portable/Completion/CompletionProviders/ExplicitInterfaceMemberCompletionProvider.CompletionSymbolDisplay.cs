@@ -90,30 +90,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 StringBuilder builder
             )
             {
-                builder.AppendJoinedValues(
-                    ", ",
-                    parameters,
-                    static (parameter, builder) =>
-                    {
-                        builder.Append(
-                            parameter.RefKind switch
-                            {
-                                RefKind.Out => "out ",
-                                RefKind.Ref => "ref ",
-                                RefKind.In => "in ",
-                                _ => "",
-                            }
-                        );
-
-                        if (parameter.IsParams)
+                builder.AppendJoinedValues(", ", parameters, static (parameter, builder) =>
+                {
+                    builder.Append(
+                        parameter.RefKind switch
                         {
-                            builder.Append("params ");
+                            RefKind.Out => "out ",
+                            RefKind.Ref => "ref ",
+                            RefKind.In => "in ",
+                            _ => "",
                         }
+                    );
 
-                        AddType(parameter.Type, builder);
-                        builder.Append($" {parameter.Name.EscapeIdentifier()}");
+                    if (parameter.IsParams)
+                    {
+                        builder.Append("params ");
                     }
-                );
+
+                    AddType(parameter.Type, builder);
+                    builder.Append($" {parameter.Name.EscapeIdentifier()}");
+                });
             }
 
             private static void AddTypeArguments(IMethodSymbol symbol, StringBuilder builder)

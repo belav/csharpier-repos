@@ -1947,13 +1947,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 cancellationToken
             );
 
-            var uiContext = _languageToProjectExistsUIContext.GetOrAdd(
-                language,
-                language =>
-                    Services
-                        .GetLanguageServices(language)
-                        .GetService<IProjectExistsUIContextProviderLanguageService>()
-                        ?.GetUIContext()
+            var uiContext = _languageToProjectExistsUIContext.GetOrAdd(language, language =>
+                Services
+                    .GetLanguageServices(language)
+                    .GetService<IProjectExistsUIContextProviderLanguageService>()
+                    ?.GetUIContext()
             );
 
             // UIContexts can be "zombied" if UIContexts aren't supported because we're in a command line build or in

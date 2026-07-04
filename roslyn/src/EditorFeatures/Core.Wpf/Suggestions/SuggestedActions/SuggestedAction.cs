@@ -183,9 +183,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 // ConfigureAwait(true) so that CaretPositionRestorer.Dispose runs on the UI thread.
                 await Workspace
                     .Services.GetService<IExtensionManager>()
-                    .PerformActionAsync(
-                        Provider,
-                        () => InvokeWorkerAsync(progressTracker, cancellationToken)
+                    .PerformActionAsync(Provider, () =>
+                        InvokeWorkerAsync(progressTracker, cancellationToken)
                     )
                     .ConfigureAwait(true);
             }

@@ -855,17 +855,14 @@ public partial class HttpConnectionTests
                     ResponseUtils.CreateResponse(HttpStatusCode.OK, negotiatePayload)
             );
 
-            await WithConnectionAsync(
-                CreateConnection(testHttpHandler),
-                async (connection) =>
-                {
-                    var exception = await Assert.ThrowsAsync<TException>(() =>
-                        connection.StartAsync().DefaultTimeout()
-                    );
+            await WithConnectionAsync(CreateConnection(testHttpHandler), async (connection) =>
+            {
+                var exception = await Assert.ThrowsAsync<TException>(() =>
+                    connection.StartAsync().DefaultTimeout()
+                );
 
-                    Assert.Equal(expectedExceptionMessage, exception.Message);
-                }
-            );
+                Assert.Equal(expectedExceptionMessage, exception.Message);
+            });
         }
     }
 }

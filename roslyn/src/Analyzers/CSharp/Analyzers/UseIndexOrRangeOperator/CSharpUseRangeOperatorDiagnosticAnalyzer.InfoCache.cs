@@ -97,9 +97,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
                     return false;
                 }
 
-                memberInfo = _methodToMemberInfo.GetOrAdd(
-                    method,
-                    m => ComputeMemberInfo(m, requireRangeMember: true)
+                memberInfo = _methodToMemberInfo.GetOrAdd(method, m =>
+                    ComputeMemberInfo(m, requireRangeMember: true)
                 );
                 return memberInfo.LengthLikeProperty != null;
             }
@@ -131,9 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
                     // Since the search is expensive, we keep both the original one-argument and
                     // two-arguments overload as keys in the cache, pointing to the same
                     // member information object.
-                    var newMemberInfo = _methodToMemberInfo.GetOrAdd(
-                        overloadWithTwoArguments,
-                        _ => ComputeMemberInfo(overloadWithTwoArguments, requireRangeMember: true)
+                    var newMemberInfo = _methodToMemberInfo.GetOrAdd(overloadWithTwoArguments, _ =>
+                        ComputeMemberInfo(overloadWithTwoArguments, requireRangeMember: true)
                     );
                     _methodToMemberInfo.GetOrAdd(method, _ => newMemberInfo);
                     memberInfo = newMemberInfo;

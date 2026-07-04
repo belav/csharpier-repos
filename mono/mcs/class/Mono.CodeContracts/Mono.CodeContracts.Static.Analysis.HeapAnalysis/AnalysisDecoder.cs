@@ -467,9 +467,8 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
         )
         {
             AnalysisDecoder it = this;
-            return DoWithBothDomains(
-                data,
-                d => it.BinaryEffect(pc, op, dest, operand1, operand2, d)
+            return DoWithBothDomains(data, d =>
+                it.BinaryEffect(pc, op, dest, operand1, operand2, d)
             );
         }
 
@@ -492,9 +491,8 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
         public Domain Sizeof(APC pc, TypeNode type, int dest, Domain data)
         {
             AnalysisDecoder it = this;
-            return DoWithBothDomains(
-                data,
-                d => d.AssignValue(dest, it.MetaDataProvider.System_Int32)
+            return DoWithBothDomains(data, d =>
+                d.AssignValue(dest, it.MetaDataProvider.System_Int32)
             );
         }
 
@@ -1036,9 +1034,8 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
         public Domain LoadFieldAddress(APC pc, Field field, int dest, int obj, Domain data)
         {
             AnalysisDecoder it = this;
-            return DoWithBothDomains(
-                data,
-                domain => it.LoadFieldAddressEffect(pc, field, dest, obj, domain)
+            return DoWithBothDomains(data, domain =>
+                it.LoadFieldAddressEffect(pc, field, dest, obj, domain)
             );
         }
 
@@ -1063,9 +1060,8 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
         public Domain LoadStaticFieldAddress(APC pc, Field field, int dest, Domain data)
         {
             AnalysisDecoder it = this;
-            return DoWithBothDomains(
-                data,
-                domain => it.LoadStaticFieldAddressEffect(field, dest, domain)
+            return DoWithBothDomains(data, domain =>
+                it.LoadStaticFieldAddressEffect(field, dest, domain)
             );
         }
 
@@ -1134,9 +1130,8 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
         )
         {
             AnalysisDecoder it = this;
-            return DoWithBothDomains(
-                data,
-                d => it.StoreElementEffect(type, array, index, value, d)
+            return DoWithBothDomains(data, d =>
+                it.StoreElementEffect(type, array, index, value, d)
             );
         }
 
@@ -1166,9 +1161,8 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
         public Domain Unbox(APC pc, TypeNode type, int dest, int obj, Domain data)
         {
             AnalysisDecoder it = this;
-            return DoWithBothDomains(
-                data,
-                d => d.AssignValue(dest, it.MetaDataProvider.ManagedPointer(type))
+            return DoWithBothDomains(data, d =>
+                d.AssignValue(dest, it.MetaDataProvider.ManagedPointer(type))
             );
         }
 

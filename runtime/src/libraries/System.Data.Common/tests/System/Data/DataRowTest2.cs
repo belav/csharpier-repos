@@ -2639,13 +2639,10 @@ namespace System.Data.Tests
             Assert.Equal(2, (int)dr.ItemArray[0]);
             Assert.Equal("Oren", (string)dr.ItemArray[1]);
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () =>
-                {
-                    dt.Rows[0].ItemArray = new object[] { 2, "Oren", "some1else" };
-                }
-            );
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+            {
+                dt.Rows[0].ItemArray = new object[] { 2, "Oren", "some1else" };
+            });
         }
 
         [Fact]

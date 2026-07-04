@@ -1867,43 +1867,38 @@ namespace System.Xml.Serialization
         // It's OK to suppress the SxS warning.
         internal static bool IsTypeDynamic(Type type)
         {
-            object oIsTypeDynamic = s_tableIsTypeDynamic.GetOrCreateValue(
-                type,
-                static type =>
+            object oIsTypeDynamic = s_tableIsTypeDynamic.GetOrCreateValue(type, static type =>
+            {
+                Assembly assembly = type.Assembly;
+                bool isTypeDynamic =
+                    assembly.IsDynamic /*|| string.IsNullOrEmpty(assembly.Location)*/
+                ;
+                if (!isTypeDynamic)
                 {
-                    Assembly assembly = type.Assembly;
-                    bool isTypeDynamic =
-                        assembly.IsDynamic /*|| string.IsNullOrEmpty(assembly.Location)*/
-                    ;
-                    if (!isTypeDynamic)
+                    if (type.IsArray)
                     {
-                        if (type.IsArray)
+                        isTypeDynamic = IsTypeDynamic(type.GetElementType()!);
+                    }
+                    else if (type.IsGenericType)
+                    {
+                        Type[] parameterTypes = type.GetGenericArguments();
+                        if (parameterTypes != null)
                         {
-                            isTypeDynamic = IsTypeDynamic(type.GetElementType()!);
-                        }
-                        else if (type.IsGenericType)
-                        {
-                            Type[] parameterTypes = type.GetGenericArguments();
-                            if (parameterTypes != null)
+                            for (int i = 0; i < parameterTypes.Length; i++)
                             {
-                                for (int i = 0; i < parameterTypes.Length; i++)
+                                Type parameterType = parameterTypes[i];
+                                if (!(parameterType == null || parameterType.IsGenericParameter))
                                 {
-                                    Type parameterType = parameterTypes[i];
-                                    if (
-                                        !(parameterType == null || parameterType.IsGenericParameter)
-                                    )
-                                    {
-                                        isTypeDynamic = IsTypeDynamic(parameterType);
-                                        if (isTypeDynamic)
-                                            break;
-                                    }
+                                    isTypeDynamic = IsTypeDynamic(parameterType);
+                                    if (isTypeDynamic)
+                                        break;
                                 }
                             }
                         }
                     }
-                    return isTypeDynamic;
                 }
-            );
+                return isTypeDynamic;
+            });
             return (bool)oIsTypeDynamic;
         }
 

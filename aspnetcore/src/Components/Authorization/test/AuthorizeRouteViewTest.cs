@@ -91,10 +91,8 @@ public class AuthorizeRouteViewTest
 
         // Assert: renders page
         var pageDiff = batch.GetComponentDiffs<TestPageRequiringAuthorization>().Single();
-        Assert.Collection(
-            pageDiff.Edits,
-            edit =>
-                AssertPrependText(batch, edit, "Hello from the page with message: Hello, world!")
+        Assert.Collection(pageDiff.Edits, edit =>
+            AssertPrependText(batch, edit, "Hello from the page with message: Hello, world!")
         );
     }
 
@@ -143,20 +141,15 @@ public class AuthorizeRouteViewTest
 
         // Assert: renders page
         var pageDiff = batch.GetComponentDiffs<TestPageRequiringAuthorization>().Single();
-        Assert.Collection(
-            pageDiff.Edits,
-            edit =>
-                AssertPrependText(batch, edit, "Hello from the page with message: Hello, world!")
+        Assert.Collection(pageDiff.Edits, edit =>
+            AssertPrependText(batch, edit, "Hello from the page with message: Hello, world!")
         );
 
         // Assert: Asserts that the Resource is present and set to "foo"
-        Assert.Collection(
-            _testAuthorizationService.AuthorizeCalls,
-            call =>
-            {
-                Assert.Equal(resource, call.resource.ToString());
-            }
-        );
+        Assert.Collection(_testAuthorizationService.AuthorizeCalls, call =>
+        {
+            Assert.Equal(resource, call.resource.ToString());
+        });
     }
 
     [Fact]
@@ -192,13 +185,10 @@ public class AuthorizeRouteViewTest
         );
 
         // Assert: Asserts that the Resource is Null
-        Assert.Collection(
-            _testAuthorizationService.AuthorizeCalls,
-            call =>
-            {
-                Assert.Null(call.resource);
-            }
-        );
+        Assert.Collection(_testAuthorizationService.AuthorizeCalls, call =>
+        {
+            Assert.Null(call.resource);
+        });
     }
 
     [Fact]
@@ -320,15 +310,12 @@ public class AuthorizeRouteViewTest
         batch = _renderer.Batches.Skip(1).Single();
         var nonEmptyDiff = batch.DiffsInOrder.Where(d => d.Edits.Any()).Single();
         Assert.Equal(layoutDiff.ComponentId, nonEmptyDiff.ComponentId);
-        Assert.Collection(
-            nonEmptyDiff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
-                Assert.Equal(1, edit.SiblingIndex);
-                AssertFrame.Text(batch.ReferenceFrames[edit.ReferenceFrameIndex], "Go away, Bert");
-            }
-        );
+        Assert.Collection(nonEmptyDiff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
+            Assert.Equal(1, edit.SiblingIndex);
+            AssertFrame.Text(batch.ReferenceFrames[edit.ReferenceFrameIndex], "Go away, Bert");
+        });
     }
 
     [Fact]

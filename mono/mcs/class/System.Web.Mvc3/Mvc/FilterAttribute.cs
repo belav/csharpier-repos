@@ -18,13 +18,11 @@
 
         private static bool AllowsMultiple(Type attributeType)
         {
-            return _multiuseAttributeCache.GetOrAdd(
-                attributeType,
-                type =>
-                    type.GetCustomAttributes(typeof(AttributeUsageAttribute), true)
-                        .Cast<AttributeUsageAttribute>()
-                        .First()
-                        .AllowMultiple
+            return _multiuseAttributeCache.GetOrAdd(attributeType, type =>
+                type.GetCustomAttributes(typeof(AttributeUsageAttribute), true)
+                    .Cast<AttributeUsageAttribute>()
+                    .First()
+                    .AllowMultiple
             );
         }
 

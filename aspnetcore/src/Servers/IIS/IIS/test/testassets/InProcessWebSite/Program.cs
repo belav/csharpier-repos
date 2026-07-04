@@ -144,9 +144,8 @@ public static class Program
                             (_, factory) =>
                             {
                                 factory.AddConsole();
-                                factory.AddFilter(
-                                    "Console",
-                                    level => level >= LogLevel.Information
+                                factory.AddFilter("Console", level =>
+                                    level >= LogLevel.Information
                                 );
                             }
                         )
@@ -168,9 +167,8 @@ public static class Program
                                 (_, factory) =>
                                 {
                                     factory.AddConsole();
-                                    factory.AddFilter(
-                                        "Console",
-                                        level => level >= LogLevel.Information
+                                    factory.AddFilter("Console", level =>
+                                        level >= LogLevel.Information
                                     );
                                 }
                             )
@@ -195,9 +193,8 @@ public static class Program
                                 (_, factory) =>
                                 {
                                     factory.AddConsole();
-                                    factory.AddFilter(
-                                        "Console",
-                                        level => level >= LogLevel.Information
+                                    factory.AddFilter("Console", level =>
+                                        level >= LogLevel.Information
                                     );
                                 }
                             )

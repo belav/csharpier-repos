@@ -88,15 +88,12 @@ CREATE SEQUENCE [BigIntSequence] AS bigint;",
             Enumerable.Empty<string>(),
             dbModel =>
             {
-                Assert.All(
-                    dbModel.Sequences,
-                    s =>
-                    {
-                        Assert.Null(s.StartValue);
-                        Assert.Null(s.MinValue);
-                        Assert.Null(s.MaxValue);
-                    }
-                );
+                Assert.All(dbModel.Sequences, s =>
+                {
+                    Assert.Null(s.StartValue);
+                    Assert.Null(s.MinValue);
+                    Assert.Null(s.MaxValue);
+                });
             },
             @"
 DROP SEQUENCE [TinyIntSequence];
@@ -119,15 +116,12 @@ CREATE SEQUENCE [NumericSequence] AS numeric;",
             Enumerable.Empty<string>(),
             dbModel =>
             {
-                Assert.All(
-                    dbModel.Sequences,
-                    s =>
-                    {
-                        Assert.NotNull(s.StartValue);
-                        Assert.NotNull(s.MinValue);
-                        Assert.NotNull(s.MaxValue);
-                    }
-                );
+                Assert.All(dbModel.Sequences, s =>
+                {
+                    Assert.NotNull(s.StartValue);
+                    Assert.NotNull(s.MinValue);
+                    Assert.NotNull(s.MaxValue);
+                });
             },
             @"
 DROP SEQUENCE [DecimalSequence];
@@ -150,18 +144,15 @@ CREATE SEQUENCE [dbo].[HighDecimalSequence]
             Enumerable.Empty<string>(),
             dbModel =>
             {
-                Assert.All(
-                    dbModel.Sequences,
-                    s =>
-                    {
-                        Assert.NotNull(s.StartValue);
-                        Assert.Equal(long.MinValue, s.StartValue);
-                        Assert.NotNull(s.MinValue);
-                        Assert.Equal(long.MinValue, s.MinValue);
-                        Assert.NotNull(s.MaxValue);
-                        Assert.Equal(long.MaxValue, s.MaxValue);
-                    }
-                );
+                Assert.All(dbModel.Sequences, s =>
+                {
+                    Assert.NotNull(s.StartValue);
+                    Assert.Equal(long.MinValue, s.StartValue);
+                    Assert.NotNull(s.MinValue);
+                    Assert.Equal(long.MinValue, s.MinValue);
+                    Assert.NotNull(s.MaxValue);
+                    Assert.Equal(long.MaxValue, s.MaxValue);
+                });
             },
             @"
 DROP SEQUENCE [HighDecimalSequence];"
@@ -728,19 +719,16 @@ EXECUTE sys.sp_addextendedproperty @name = N'MS_Description', @value = N'Blog.Id
                 var table = dbModel.Tables.Single();
 
                 Assert.Equal(2, table.Columns.Count);
-                Assert.All(
-                    table.Columns,
-                    c =>
-                    {
-                        Assert.Equal("dbo", c.Table.Schema);
-                        Assert.Equal("Blogs", c.Table.Name);
-                        Assert.Equal(
-                            @"Blog table comment.
+                Assert.All(table.Columns, c =>
+                {
+                    Assert.Equal("dbo", c.Table.Schema);
+                    Assert.Equal("Blogs", c.Table.Name);
+                    Assert.Equal(
+                        @"Blog table comment.
 On multiple lines.",
-                            c.Table.Comment
-                        );
-                    }
-                );
+                        c.Table.Comment
+                    );
+                });
 
                 Assert.Single(table.Columns.Where(c => c.Name == "Id"));
                 Assert.Single(table.Columns.Where(c => c.Name == "Name"));
@@ -767,14 +755,11 @@ SELECT
 
                 Assert.Equal(2, table.Columns.Count);
                 Assert.Null(table.PrimaryKey);
-                Assert.All(
-                    table.Columns,
-                    c =>
-                    {
-                        Assert.Equal("dbo", c.Table.Schema);
-                        Assert.Equal("BlogsView", c.Table.Name);
-                    }
-                );
+                Assert.All(table.Columns, c =>
+                {
+                    Assert.Equal("dbo", c.Table.Schema);
+                    Assert.Equal("BlogsView", c.Table.Name);
+                });
 
                 Assert.Single(table.Columns.Where(c => c.Name == "Id"));
                 Assert.Single(table.Columns.Where(c => c.Name == "Name"));
@@ -853,14 +838,11 @@ CREATE INDEX IX_INDEX on IndexTable ( IndexProperty );",
                 var table = dbModel.Tables.Single();
 
                 Assert.Equal(2, table.Indexes.Count);
-                Assert.All(
-                    table.Indexes,
-                    c =>
-                    {
-                        Assert.Equal("dbo", c.Table!.Schema);
-                        Assert.Equal("IndexTable", c.Table.Name);
-                    }
-                );
+                Assert.All(table.Indexes, c =>
+                {
+                    Assert.Equal("dbo", c.Table!.Schema);
+                    Assert.Equal("IndexTable", c.Table.Name);
+                });
 
                 Assert.Single(table.Indexes.Where(c => c.Name == "IX_NAME"));
                 Assert.Single(table.Indexes.Where(c => c.Name == "IX_INDEX"));
@@ -886,14 +868,11 @@ CREATE INDEX IX_Two on IndexTable ( IndexProperty ) WITH (FILLFACTOR = 50);",
                 var table = dbModel.Tables.Single();
 
                 Assert.Equal(2, table.Indexes.Count);
-                Assert.All(
-                    table.Indexes,
-                    c =>
-                    {
-                        Assert.Equal("dbo", c.Table!.Schema);
-                        Assert.Equal("IndexTable", c.Table.Name);
-                    }
-                );
+                Assert.All(table.Indexes, c =>
+                {
+                    Assert.Equal("dbo", c.Table!.Schema);
+                    Assert.Equal("IndexTable", c.Table.Name);
+                });
 
                 Assert.Collection(
                     table.Indexes.OrderBy(i => i.Name),

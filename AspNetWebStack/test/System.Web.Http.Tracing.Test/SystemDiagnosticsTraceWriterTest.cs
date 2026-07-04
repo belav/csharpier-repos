@@ -192,15 +192,10 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            writer.Trace(
-                request,
-                "TestCategory",
-                level,
-                (tr) =>
-                {
-                    tr.Message = "TestMessage";
-                }
-            );
+            writer.Trace(request, "TestCategory", level, (tr) =>
+            {
+                tr.Message = "TestMessage";
+            });
 
             // Assert
             Assert.Equal(
@@ -233,19 +228,14 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             InvalidOperationException exception = new InvalidOperationException("TestException");
 
             // Act
-            writer.Trace(
-                request,
-                "TestCategory",
-                level,
-                (tr) =>
-                {
-                    tr.Message = "TestMessage";
-                    tr.Operation = "TestOperation";
-                    tr.Operator = "TestOperator";
-                    tr.Status = HttpStatusCode.Accepted;
-                    tr.Exception = exception;
-                }
-            );
+            writer.Trace(request, "TestCategory", level, (tr) =>
+            {
+                tr.Message = "TestMessage";
+                tr.Operation = "TestOperation";
+                tr.Operator = "TestOperator";
+                tr.Status = HttpStatusCode.Accepted;
+                tr.Exception = exception;
+            });
 
             // Assert
             string expected = String.Format(
@@ -284,19 +274,14 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             InvalidOperationException exception = new InvalidOperationException("TestException");
 
             // Act
-            writer.Trace(
-                request,
-                "TestCategory",
-                level,
-                (tr) =>
-                {
-                    tr.Message = "TestMessage";
-                    tr.Operation = "TestOperation";
-                    tr.Operator = "TestOperator";
-                    tr.Status = HttpStatusCode.Accepted;
-                    tr.Exception = exception;
-                }
-            );
+            writer.Trace(request, "TestCategory", level, (tr) =>
+            {
+                tr.Message = "TestMessage";
+                tr.Operation = "TestOperation";
+                tr.Operator = "TestOperator";
+                tr.Status = HttpStatusCode.Accepted;
+                tr.Exception = exception;
+            });
 
             // Assert
             string expected =
@@ -393,16 +378,11 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             InvalidOperationException exception = new InvalidOperationException("TestException");
 
             // Act
-            writer.Trace(
-                request,
-                "TestCategory",
-                TraceLevel.Info,
-                (tr) =>
-                {
-                    tr.Kind = TraceKind.Begin;
-                    tr.Message = "TestMessage";
-                }
-            );
+            writer.Trace(request, "TestCategory", TraceLevel.Info, (tr) =>
+            {
+                tr.Kind = TraceKind.Begin;
+                tr.Message = "TestMessage";
+            });
 
             // Assert
             Assert.Equal(0, ((TestTraceListener)writer.TraceSource.Listeners[0]).Messages.Count);

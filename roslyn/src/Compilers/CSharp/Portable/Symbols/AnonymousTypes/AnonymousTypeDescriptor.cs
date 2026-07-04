@@ -75,10 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             // Compare field types
-            return Fields.SequenceEqual(
-                other.Fields,
-                comparison,
-                static (x, y, comparison) => AnonymousTypeField.Equals(x, y, comparison)
+            return Fields.SequenceEqual(other.Fields, comparison, static (x, y, comparison) =>
+                AnonymousTypeField.Equals(x, y, comparison)
             );
         }
 
@@ -107,9 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Debug.Assert(!newFieldTypes.IsDefault);
             Debug.Assert(newFieldTypes.Length == this.Fields.Length);
 
-            var newFields = Fields.ZipAsArray(
-                newFieldTypes,
-                static (field, type) => field.WithType(type)
+            var newFields = Fields.ZipAsArray(newFieldTypes, static (field, type) =>
+                field.WithType(type)
             );
             return new AnonymousTypeDescriptor(newFields, this.Location);
         }

@@ -324,17 +324,13 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
         }
         else
         {
-            builder.ToTable(
-                table.Name,
-                table.Schema,
-                tb =>
+            builder.ToTable(table.Name, table.Schema, tb =>
+            {
+                if (table.Comment != null)
                 {
-                    if (table.Comment != null)
-                    {
-                        tb.HasComment(table.Comment);
-                    }
+                    tb.HasComment(table.Comment);
                 }
-            );
+            });
         }
 
         VisitColumns(builder, table.Columns);
@@ -363,10 +359,8 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
 
         foreach (var trigger in table.Triggers)
         {
-            builder.ToTable(
-                table.Name,
-                table.Schema,
-                tb => tb.HasTrigger(trigger.Name).Metadata.AddAnnotations(trigger.GetAnnotations())
+            builder.ToTable(table.Name, table.Schema, tb =>
+                tb.HasTrigger(trigger.Name).Metadata.AddAnnotations(trigger.GetAnnotations())
             );
         }
 

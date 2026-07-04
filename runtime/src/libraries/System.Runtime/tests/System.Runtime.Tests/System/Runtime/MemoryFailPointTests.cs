@@ -23,9 +23,8 @@ namespace System.Runtime.Tests
         [InlineData(0)]
         public void Ctor_Negative_ThrowsArgumentOutOfRangeException(int sizeInMegabytes)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "sizeInMegabytes",
-                () => new MemoryFailPoint(sizeInMegabytes)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("sizeInMegabytes", () =>
+                new MemoryFailPoint(sizeInMegabytes)
             );
         }
 

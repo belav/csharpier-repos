@@ -60,9 +60,8 @@ LIMIT -1 OFFSET @__p_1
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Select_datetime_millisecond_component_composed(bool async)
     {
-        await AssertQueryScalar(
-            async,
-            ss => ss.Set<Order>().Select(o => o.OrderDate.Value.AddYears(1).Millisecond)
+        await AssertQueryScalar(async, ss =>
+            ss.Set<Order>().Select(o => o.OrderDate.Value.AddYears(1).Millisecond)
         );
 
         AssertSql(
@@ -77,9 +76,8 @@ FROM "Orders" AS "o"
     [MemberData(nameof(IsAsyncData))]
     public virtual async Task Select_datetime_TimeOfDay_component_composed(bool async)
     {
-        await AssertQueryScalar(
-            async,
-            ss => ss.Set<Order>().Select(o => o.OrderDate.Value.AddYears(1).TimeOfDay)
+        await AssertQueryScalar(async, ss =>
+            ss.Set<Order>().Select(o => o.OrderDate.Value.AddYears(1).TimeOfDay)
         );
 
         AssertSql(

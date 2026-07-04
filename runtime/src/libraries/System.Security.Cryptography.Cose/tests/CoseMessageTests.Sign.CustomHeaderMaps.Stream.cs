@@ -63,9 +63,8 @@ namespace System.Security.Cryptography.Cose.Tests
         public async Task SignAsyncWithUnseekableStream()
         {
             using Stream stream = GetTestStream(s_sampleContent, StreamKind.Unseekable);
-            await Assert.ThrowsAsync<ArgumentException>(
-                "detachedContent",
-                () => SignDetachedAsync(stream, GetCoseSigner(DefaultKey, DefaultHash))
+            await Assert.ThrowsAsync<ArgumentException>("detachedContent", () =>
+                SignDetachedAsync(stream, GetCoseSigner(DefaultKey, DefaultHash))
             );
         }
 
@@ -73,9 +72,8 @@ namespace System.Security.Cryptography.Cose.Tests
         public async Task SignAsyncWithUnreadableStream()
         {
             using Stream stream = GetTestStream(s_sampleContent, StreamKind.Unreadable);
-            await Assert.ThrowsAsync<ArgumentException>(
-                "detachedContent",
-                () => SignDetachedAsync(stream, GetCoseSigner(DefaultKey, DefaultHash))
+            await Assert.ThrowsAsync<ArgumentException>("detachedContent", () =>
+                SignDetachedAsync(stream, GetCoseSigner(DefaultKey, DefaultHash))
             );
         }
     }
@@ -126,9 +124,8 @@ namespace System.Security.Cryptography.Cose.Tests
         public void SignWithUnseekableStream()
         {
             using Stream stream = GetTestStream(s_sampleContent, StreamKind.Unseekable);
-            Assert.Throws<ArgumentException>(
-                "detachedContent",
-                () => SignDetached(stream, GetCoseSigner(DefaultKey, DefaultHash))
+            Assert.Throws<ArgumentException>("detachedContent", () =>
+                SignDetached(stream, GetCoseSigner(DefaultKey, DefaultHash))
             );
         }
 
@@ -136,9 +133,8 @@ namespace System.Security.Cryptography.Cose.Tests
         public void SignWithUnreadableStream()
         {
             using Stream stream = GetTestStream(s_sampleContent, StreamKind.Unreadable);
-            Assert.Throws<ArgumentException>(
-                "detachedContent",
-                () => SignDetached(stream, GetCoseSigner(DefaultKey, DefaultHash))
+            Assert.Throws<ArgumentException>("detachedContent", () =>
+                SignDetached(stream, GetCoseSigner(DefaultKey, DefaultHash))
             );
         }
     }

@@ -96,14 +96,10 @@ namespace System.Net.Http.Functional.Tests
         {
             var transport = new MockTransportHandler();
             // ProcessRequest() throws exception.
-            var handler = new MockHandler(
-                transport,
-                true,
-                () =>
-                {
-                    throw new MockException();
-                }
-            );
+            var handler = new MockHandler(transport, true, () =>
+            {
+                throw new MockException();
+            });
 
             // Note that ProcessRequest() is called by SendAsync(). However, the exception is not thrown
             // by SendAsync(). Instead, the returned Task is marked as faulted and contains the exception.
@@ -121,14 +117,10 @@ namespace System.Net.Http.Functional.Tests
         {
             var transport = new MockTransportHandler();
             // ProcessResponse() throws exception.
-            var handler = new MockHandler(
-                transport,
-                false,
-                () =>
-                {
-                    throw new MockException();
-                }
-            );
+            var handler = new MockHandler(transport, false, () =>
+            {
+                throw new MockException();
+            });
 
             // Throwing an exception in ProcessResponse() will cause the Task to complete as 'faulted'.
             await Assert.ThrowsAsync<MockException>(() =>
@@ -162,15 +154,11 @@ namespace System.Net.Http.Functional.Tests
             var cts = new CancellationTokenSource();
             var transport = new MockTransportHandler();
             // ProcessRequest will cancel.
-            var handler = new MockHandler(
-                transport,
-                true,
-                () =>
-                {
-                    cts.Cancel();
-                    cts.Token.ThrowIfCancellationRequested();
-                }
-            );
+            var handler = new MockHandler(transport, true, () =>
+            {
+                cts.Cancel();
+                cts.Token.ThrowIfCancellationRequested();
+            });
 
             // Note that even ProcessMessage() is called on the same thread, we don't expect SendAsync() to throw.
             // SendAsync() must complete successfully, but the Task will be canceled.
@@ -186,15 +174,11 @@ namespace System.Net.Http.Functional.Tests
             var cts = new CancellationTokenSource();
             var transport = new MockTransportHandler();
             // ProcessResponse will cancel.
-            var handler = new MockHandler(
-                transport,
-                false,
-                () =>
-                {
-                    cts.Cancel();
-                    cts.Token.ThrowIfCancellationRequested();
-                }
-            );
+            var handler = new MockHandler(transport, false, () =>
+            {
+                cts.Cancel();
+                cts.Token.ThrowIfCancellationRequested();
+            });
 
             await Assert.ThrowsAsync<TaskCanceledException>(() =>
                 handler.TestSendAsync(new HttpRequestMessage(), cts.Token)
@@ -209,15 +193,11 @@ namespace System.Net.Http.Functional.Tests
             // ProcessRequest will throw a random OperationCanceledException() not related to cts. We also cancel
             // the cts to make sure the code behaves correctly even if cts is canceled & an OperationCanceledException
             // was thrown.
-            var handler = new MockHandler(
-                transport,
-                true,
-                () =>
-                {
-                    cts.Cancel();
-                    throw new OperationCanceledException("custom");
-                }
-            );
+            var handler = new MockHandler(transport, true, () =>
+            {
+                cts.Cancel();
+                throw new OperationCanceledException("custom");
+            });
 
             await Assert.ThrowsAsync<OperationCanceledException>(() =>
                 handler.TestSendAsync(new HttpRequestMessage(), cts.Token)
@@ -234,15 +214,11 @@ namespace System.Net.Http.Functional.Tests
             // ProcessResponse will throw a random OperationCanceledException() not related to cts. We also cancel
             // the cts to make sure the code behaves correctly even if cts is canceled & an OperationCanceledException
             // was thrown.
-            var handler = new MockHandler(
-                transport,
-                false,
-                () =>
-                {
-                    cts.Cancel();
-                    throw new OperationCanceledException("custom");
-                }
-            );
+            var handler = new MockHandler(transport, false, () =>
+            {
+                cts.Cancel();
+                throw new OperationCanceledException("custom");
+            });
 
             await Assert.ThrowsAsync<OperationCanceledException>(() =>
                 handler.TestSendAsync(new HttpRequestMessage(), cts.Token)
@@ -260,15 +236,11 @@ namespace System.Net.Http.Functional.Tests
             // ProcessRequest will throw a random OperationCanceledException() not related to cts. We also cancel
             // the cts to make sure the code behaves correctly even if cts is canceled & an OperationCanceledException
             // was thrown.
-            var handler = new MockHandler(
-                transport,
-                true,
-                () =>
-                {
-                    cts.Cancel();
-                    throw new OperationCanceledException("custom", otherCts.Token);
-                }
-            );
+            var handler = new MockHandler(transport, true, () =>
+            {
+                cts.Cancel();
+                throw new OperationCanceledException("custom", otherCts.Token);
+            });
 
             await Assert.ThrowsAsync<OperationCanceledException>(() =>
                 handler.TestSendAsync(new HttpRequestMessage(), cts.Token)
@@ -286,15 +258,11 @@ namespace System.Net.Http.Functional.Tests
             // ProcessResponse will throw a random OperationCanceledException() not related to cts. We also cancel
             // the cts to make sure the code behaves correctly even if cts is canceled & an OperationCanceledException
             // was thrown.
-            var handler = new MockHandler(
-                transport,
-                false,
-                () =>
-                {
-                    cts.Cancel();
-                    throw new OperationCanceledException("custom", otherCts.Token);
-                }
-            );
+            var handler = new MockHandler(transport, false, () =>
+            {
+                cts.Cancel();
+                throw new OperationCanceledException("custom", otherCts.Token);
+            });
 
             await Assert.ThrowsAsync<OperationCanceledException>(() =>
                 handler.TestSendAsync(new HttpRequestMessage(), cts.Token)

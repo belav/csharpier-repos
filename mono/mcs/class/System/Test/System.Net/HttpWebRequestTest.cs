@@ -114,9 +114,8 @@ namespace MonoTests.System.Net
         public void CloseRequestStreamAfterReadingResponse()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    EchoRequestHandler(s)
                 )
             )
             {
@@ -253,9 +252,8 @@ namespace MonoTests.System.Net
             foreach (DictionaryEntry de in methods)
             {
                 using (
-                    SocketResponder responder = new SocketResponder(
-                        out var ep,
-                        s => EchoRequestHandler(s)
+                    SocketResponder responder = new SocketResponder(out var ep, s =>
+                        EchoRequestHandler(s)
                     )
                 )
                 {
@@ -286,9 +284,8 @@ namespace MonoTests.System.Net
         public void BeginGetRequestStream_Body_NotAllowed()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    EchoRequestHandler(s)
                 )
             )
             {
@@ -338,9 +335,8 @@ namespace MonoTests.System.Net
         public void BeginGetRequestStream_NoBuffering()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    EchoRequestHandler(s)
                 )
             )
             {
@@ -400,9 +396,8 @@ namespace MonoTests.System.Net
         public void BeginGetResponse()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    EchoRequestHandler(s)
                 )
             )
             {
@@ -502,9 +497,8 @@ namespace MonoTests.System.Net
         public void BeginGetRequestStream_Request_Aborted()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    EchoRequestHandler(s)
                 )
             )
             {
@@ -537,9 +531,8 @@ namespace MonoTests.System.Net
         public void BeginGetResponse_Request_Aborted()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    EchoRequestHandler(s)
                 )
             )
             {
@@ -572,9 +565,8 @@ namespace MonoTests.System.Net
         public void EndGetRequestStream_AsyncResult_Null()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    EchoRequestHandler(s)
                 )
             )
             {
@@ -607,9 +599,8 @@ namespace MonoTests.System.Net
         public void EndGetRequestStream_Request_Aborted()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    EchoRequestHandler(s)
                 )
             )
             {
@@ -642,9 +633,8 @@ namespace MonoTests.System.Net
         public void EndGetResponse_AsyncResult_Invalid()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    EchoRequestHandler(s)
                 )
             )
             {
@@ -676,9 +666,8 @@ namespace MonoTests.System.Net
         public void EndGetResponse_AsyncResult_Null()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    EchoRequestHandler(s)
                 )
             )
             {
@@ -719,9 +708,8 @@ namespace MonoTests.System.Net
         public void GetRequestStream()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    EchoRequestHandler(s)
                 )
             )
             {
@@ -748,9 +736,8 @@ namespace MonoTests.System.Net
         public void GetRequestStream_Request_Aborted()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    EchoRequestHandler(s)
                 )
             )
             {
@@ -781,9 +768,8 @@ namespace MonoTests.System.Net
         public void GetRequestStream_Close_NotAllBytesWritten()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    EchoRequestHandler(s)
                 )
             )
             {
@@ -858,9 +844,8 @@ namespace MonoTests.System.Net
         {
             // buffered, non-chunked
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    EchoRequestHandler(s)
                 )
             )
             {
@@ -925,9 +910,8 @@ namespace MonoTests.System.Net
 
             // buffered, chunked
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    EchoRequestHandler(s)
                 )
             )
             {
@@ -968,9 +952,8 @@ namespace MonoTests.System.Net
 
             // non-buffered, non-chunked
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    EchoRequestHandler(s)
                 )
             )
             {
@@ -1037,9 +1020,8 @@ namespace MonoTests.System.Net
 
             // non-buffered, chunked
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    EchoRequestHandler(s)
                 )
             )
             {
@@ -1114,9 +1096,8 @@ namespace MonoTests.System.Net
         public void GetResponse_Request_Aborted()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    EchoRequestHandler(s)
                 )
             )
             {
@@ -1147,9 +1128,8 @@ namespace MonoTests.System.Net
         public void ReadTimeout()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var localEP,
-                    s => RedirectRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var localEP, s =>
+                    RedirectRequestHandler(s)
                 )
             )
             {
@@ -1189,9 +1169,8 @@ namespace MonoTests.System.Net
         {
             // allow autoredirect
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var localEP,
-                    s => RedirectRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var localEP, s =>
+                    RedirectRequestHandler(s)
                 )
             )
             {
@@ -1221,9 +1200,8 @@ namespace MonoTests.System.Net
 
             // do not allow autoredirect
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var localEP,
-                    s => RedirectRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var localEP, s =>
+                    RedirectRequestHandler(s)
                 )
             )
             {
@@ -1252,9 +1230,8 @@ namespace MonoTests.System.Net
         public void PostAndRedirect_NoCL()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var localEP,
-                    s => RedirectRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var localEP, s =>
+                    RedirectRequestHandler(s)
                 )
             )
             {
@@ -1290,9 +1267,8 @@ namespace MonoTests.System.Net
         public void PostAndRedirect_CL()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var localEP,
-                    s => RedirectRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var localEP, s =>
+                    RedirectRequestHandler(s)
                 )
             )
             {
@@ -1328,9 +1304,8 @@ namespace MonoTests.System.Net
         public void PostAnd401()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var localEP,
-                    s => RedirectRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var localEP, s =>
+                    RedirectRequestHandler(s)
                 )
             )
             {
@@ -1365,9 +1340,8 @@ namespace MonoTests.System.Net
         {
             // POST
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var localEP,
-                    s => InternalErrorHandler(s)
+                SocketResponder responder = new SocketResponder(out var localEP, s =>
+                    InternalErrorHandler(s)
                 )
             )
             {
@@ -1401,9 +1375,8 @@ namespace MonoTests.System.Net
 
             // GET
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var localEP,
-                    s => InternalErrorHandler(s)
+                SocketResponder responder = new SocketResponder(out var localEP, s =>
+                    InternalErrorHandler(s)
                 )
             )
             {
@@ -1439,9 +1412,8 @@ namespace MonoTests.System.Net
         {
             // POST
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var localEP,
-                    s => NoContentLengthHandler(s)
+                SocketResponder responder = new SocketResponder(out var localEP, s =>
+                    NoContentLengthHandler(s)
                 )
             )
             {
@@ -1492,9 +1464,8 @@ namespace MonoTests.System.Net
 
             // GET
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var localEP,
-                    s => NoContentLengthHandler(s)
+                SocketResponder responder = new SocketResponder(out var localEP, s =>
+                    NoContentLengthHandler(s)
                 )
             )
             {
@@ -1568,9 +1539,8 @@ namespace MonoTests.System.Net
         public void NotModifiedSince()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => NotModifiedSinceHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    NotModifiedSinceHandler(s)
                 )
             )
             {
@@ -2750,15 +2720,10 @@ namespace MonoTests.System.Net
             ExceptionDispatchInfo edi = null;
 
             using (
-                ListenerScope scope = new ListenerScope(
-                    processor,
-                    out var port,
-                    completed[0],
-                    e =>
-                    {
-                        edi = ExceptionDispatchInfo.Capture(e);
-                    }
-                )
+                ListenerScope scope = new ListenerScope(processor, out var port, completed[0], e =>
+                {
+                    edi = ExceptionDispatchInfo.Capture(e);
+                })
             )
             {
                 Uri address = new Uri(string.Format("http://localhost:{0}", port));
@@ -4152,9 +4117,8 @@ namespace MonoTests.System.Net
         public void CookieContainerTest()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => CookieRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    CookieRequestHandler(s)
                 )
             )
             {
@@ -4177,9 +4141,8 @@ namespace MonoTests.System.Net
             }
 
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => CookieRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    CookieRequestHandler(s)
                 )
             )
             {
@@ -4261,9 +4224,8 @@ namespace MonoTests.System.Net
         public void BeginRead()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebRequestTest.EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebRequestTest.EchoRequestHandler(s)
                 )
             )
             {
@@ -4299,9 +4261,8 @@ namespace MonoTests.System.Net
         public void BeginWrite_Request_Aborted()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebRequestTest.EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebRequestTest.EchoRequestHandler(s)
                 )
             )
             {
@@ -4337,9 +4298,8 @@ namespace MonoTests.System.Net
         public void CanRead()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebRequestTest.EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebRequestTest.EchoRequestHandler(s)
                 )
             )
             {
@@ -4369,9 +4329,8 @@ namespace MonoTests.System.Net
         public void CanSeek()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebRequestTest.EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebRequestTest.EchoRequestHandler(s)
                 )
             )
             {
@@ -4401,9 +4360,8 @@ namespace MonoTests.System.Net
         public void CanTimeout()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebRequestTest.EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebRequestTest.EchoRequestHandler(s)
                 )
             )
             {
@@ -4433,9 +4391,8 @@ namespace MonoTests.System.Net
         public void CanWrite()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebRequestTest.EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebRequestTest.EchoRequestHandler(s)
                 )
             )
             {
@@ -4466,9 +4423,8 @@ namespace MonoTests.System.Net
         public void Read()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebRequestTest.EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebRequestTest.EchoRequestHandler(s)
                 )
             )
             {
@@ -4506,9 +4462,8 @@ namespace MonoTests.System.Net
         public void ReadByte()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebRequestTest.EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebRequestTest.EchoRequestHandler(s)
                 )
             )
             {
@@ -4545,9 +4500,8 @@ namespace MonoTests.System.Net
         public void ReadTimeout()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebRequestTest.EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebRequestTest.EchoRequestHandler(s)
                 )
             )
             {
@@ -4577,9 +4531,8 @@ namespace MonoTests.System.Net
         public void Seek()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebRequestTest.EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebRequestTest.EchoRequestHandler(s)
                 )
             )
             {
@@ -4616,9 +4569,8 @@ namespace MonoTests.System.Net
         public void Write_Buffer_Null()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebRequestTest.EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebRequestTest.EchoRequestHandler(s)
                 )
             )
             {
@@ -4653,9 +4605,8 @@ namespace MonoTests.System.Net
         public void Write_Count_Negative()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebRequestTest.EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebRequestTest.EchoRequestHandler(s)
                 )
             )
             {
@@ -4692,9 +4643,8 @@ namespace MonoTests.System.Net
         public void Write_Count_Overflow()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebRequestTest.EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebRequestTest.EchoRequestHandler(s)
                 )
             )
             {
@@ -4731,9 +4681,8 @@ namespace MonoTests.System.Net
         public void Write_Offset_Negative()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebRequestTest.EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebRequestTest.EchoRequestHandler(s)
                 )
             )
             {
@@ -4770,9 +4719,8 @@ namespace MonoTests.System.Net
         public void Write_Offset_Overflow()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebRequestTest.EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebRequestTest.EchoRequestHandler(s)
                 )
             )
             {
@@ -4809,9 +4757,8 @@ namespace MonoTests.System.Net
         public void Write_Request_Aborted()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebRequestTest.EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebRequestTest.EchoRequestHandler(s)
                 )
             )
             {
@@ -4845,9 +4792,8 @@ namespace MonoTests.System.Net
         public void Write_Stream_Closed()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebRequestTest.EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebRequestTest.EchoRequestHandler(s)
                 )
             )
             {
@@ -4883,9 +4829,8 @@ namespace MonoTests.System.Net
         public void WriteByte_Request_Aborted()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebRequestTest.EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebRequestTest.EchoRequestHandler(s)
                 )
             )
             {
@@ -4921,9 +4866,8 @@ namespace MonoTests.System.Net
         public void WriteTimeout()
         {
             using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    s => HttpWebRequestTest.EchoRequestHandler(s)
+                SocketResponder responder = new SocketResponder(out var ep, s =>
+                    HttpWebRequestTest.EchoRequestHandler(s)
                 )
             )
             {
@@ -4970,38 +4914,33 @@ namespace MonoTests.System.Net
         public void Read_ErrorResponse_After_Abort()
         {
             const string message = "Hello World!";
-            using (
-                SocketResponder responder = new SocketResponder(
-                    out var ep,
-                    socket =>
+            using (SocketResponder responder = new SocketResponder(out var ep, socket =>
+                {
+                    var buffer = new byte[4096];
+                    var bytesReceived = socket.Receive(buffer);
+                    while (bytesReceived > 0)
                     {
-                        var buffer = new byte[4096];
-                        var bytesReceived = socket.Receive(buffer);
-                        while (bytesReceived > 0)
+                        // We don't check for Content-Length or anything else here, so we give the client a little time to write
+                        // after sending the headers
+                        Thread.Sleep(200);
+                        if (socket.Available > 0)
                         {
-                            // We don't check for Content-Length or anything else here, so we give the client a little time to write
-                            // after sending the headers
-                            Thread.Sleep(200);
-                            if (socket.Available > 0)
-                            {
-                                bytesReceived = socket.Receive(buffer);
-                            }
-                            else
-                            {
-                                bytesReceived = 0;
-                            }
+                            bytesReceived = socket.Receive(buffer);
                         }
-                        var sw = new StringWriter();
-                        sw.WriteLine("HTTP/1.1 500 Too Lazy");
-                        sw.WriteLine($"Content-Length: {message.Length}");
-                        sw.WriteLine();
-                        sw.Write(message);
-                        sw.Flush();
-
-                        return Encoding.UTF8.GetBytes(sw.ToString());
+                        else
+                        {
+                            bytesReceived = 0;
+                        }
                     }
-                )
-            )
+                    var sw = new StringWriter();
+                    sw.WriteLine("HTTP/1.1 500 Too Lazy");
+                    sw.WriteLine($"Content-Length: {message.Length}");
+                    sw.WriteLine();
+                    sw.Write(message);
+                    sw.Flush();
+
+                    return Encoding.UTF8.GetBytes(sw.ToString());
+                }))
             {
                 string url = $"http://{ep}/test/";
                 HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);

@@ -22,94 +22,77 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void FromBytes_ArgumentErrors()
         {
-            Assert.Throws<ArgumentNullException>(
-                "filePath",
-                () => EmbeddedText.FromBytes(null, default(ArraySegment<byte>))
+            Assert.Throws<ArgumentNullException>("filePath", () =>
+                EmbeddedText.FromBytes(null, default(ArraySegment<byte>))
             );
-            Assert.Throws<ArgumentException>(
-                "filePath",
-                () => EmbeddedText.FromBytes("", default(ArraySegment<byte>))
+            Assert.Throws<ArgumentException>("filePath", () =>
+                EmbeddedText.FromBytes("", default(ArraySegment<byte>))
             );
-            Assert.Throws<ArgumentNullException>(
-                "bytes",
-                () => EmbeddedText.FromBytes("path", default(ArraySegment<byte>))
+            Assert.Throws<ArgumentNullException>("bytes", () =>
+                EmbeddedText.FromBytes("path", default(ArraySegment<byte>))
             );
-            Assert.Throws<ArgumentException>(
-                "checksumAlgorithm",
-                () =>
-                    EmbeddedText.FromBytes(
-                        "path",
-                        new ArraySegment<byte>(new byte[0], 0, 0),
-                        SourceHashAlgorithm.None
-                    )
+            Assert.Throws<ArgumentException>("checksumAlgorithm", () =>
+                EmbeddedText.FromBytes(
+                    "path",
+                    new ArraySegment<byte>(new byte[0], 0, 0),
+                    SourceHashAlgorithm.None
+                )
             );
         }
 
         [Fact]
         public void FromSource_ArgumentErrors()
         {
-            Assert.Throws<ArgumentNullException>(
-                "filePath",
-                () => EmbeddedText.FromSource(null, null)
+            Assert.Throws<ArgumentNullException>("filePath", () =>
+                EmbeddedText.FromSource(null, null)
             );
             Assert.Throws<ArgumentException>("filePath", () => EmbeddedText.FromSource("", null));
-            Assert.Throws<ArgumentNullException>(
-                "text",
-                () => EmbeddedText.FromSource("path", null)
+            Assert.Throws<ArgumentNullException>("text", () =>
+                EmbeddedText.FromSource("path", null)
             );
 
             // no encoding
-            Assert.Throws<ArgumentException>(
-                "text",
-                () => EmbeddedText.FromSource("path", SourceText.From("source"))
+            Assert.Throws<ArgumentException>("text", () =>
+                EmbeddedText.FromSource("path", SourceText.From("source"))
             );
 
             // embedding not allowed
-            Assert.Throws<ArgumentException>(
-                "text",
-                () =>
-                    EmbeddedText.FromSource(
-                        "path",
-                        SourceText.From(new byte[0], 0, Encoding.UTF8, canBeEmbedded: false)
-                    )
+            Assert.Throws<ArgumentException>("text", () =>
+                EmbeddedText.FromSource(
+                    "path",
+                    SourceText.From(new byte[0], 0, Encoding.UTF8, canBeEmbedded: false)
+                )
             );
-            Assert.Throws<ArgumentException>(
-                "text",
-                () =>
-                    EmbeddedText.FromSource(
-                        "path",
-                        SourceText.From(
-                            new MemoryStream(new byte[0]),
-                            Encoding.UTF8,
-                            canBeEmbedded: false
-                        )
+            Assert.Throws<ArgumentException>("text", () =>
+                EmbeddedText.FromSource(
+                    "path",
+                    SourceText.From(
+                        new MemoryStream(new byte[0]),
+                        Encoding.UTF8,
+                        canBeEmbedded: false
                     )
+                )
             );
         }
 
         [Fact]
         public void FromStream_ArgumentErrors()
         {
-            Assert.Throws<ArgumentNullException>(
-                "filePath",
-                () => EmbeddedText.FromStream(null, null)
+            Assert.Throws<ArgumentNullException>("filePath", () =>
+                EmbeddedText.FromStream(null, null)
             );
             Assert.Throws<ArgumentException>("filePath", () => EmbeddedText.FromStream("", null));
-            Assert.Throws<ArgumentNullException>(
-                "stream",
-                () => EmbeddedText.FromStream("path", null)
+            Assert.Throws<ArgumentNullException>("stream", () =>
+                EmbeddedText.FromStream("path", null)
             );
-            Assert.Throws<ArgumentException>(
-                "stream",
-                () => EmbeddedText.FromStream("path", new CannotReadStream())
+            Assert.Throws<ArgumentException>("stream", () =>
+                EmbeddedText.FromStream("path", new CannotReadStream())
             );
-            Assert.Throws<ArgumentException>(
-                "stream",
-                () => EmbeddedText.FromStream("path", new CannotSeekStream())
+            Assert.Throws<ArgumentException>("stream", () =>
+                EmbeddedText.FromStream("path", new CannotSeekStream())
             );
-            Assert.Throws<ArgumentException>(
-                "checksumAlgorithm",
-                () => EmbeddedText.FromStream("path", new MemoryStream(), SourceHashAlgorithm.None)
+            Assert.Throws<ArgumentException>("checksumAlgorithm", () =>
+                EmbeddedText.FromStream("path", new MemoryStream(), SourceHashAlgorithm.None)
             );
         }
 

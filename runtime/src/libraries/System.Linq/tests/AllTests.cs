@@ -67,9 +67,8 @@ namespace System.Linq.Tests
         [Fact]
         public void NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((IEnumerable<int>)null).All(i => i != 0)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((IEnumerable<int>)null).All(i => i != 0)
             );
         }
 
@@ -77,9 +76,8 @@ namespace System.Linq.Tests
         public void NullPredicate_ThrowsArgumentNullException()
         {
             Func<int, bool> predicate = null;
-            AssertExtensions.Throws<ArgumentNullException>(
-                "predicate",
-                () => Enumerable.Range(0, 3).All(predicate)
+            AssertExtensions.Throws<ArgumentNullException>("predicate", () =>
+                Enumerable.Range(0, 3).All(predicate)
             );
         }
     }

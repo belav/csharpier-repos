@@ -12,13 +12,11 @@ public partial class ThreadPoolBoundHandleTests
     [ActiveIssue("https://github.com/mono/mono/issues/15313", TestRuntimes.Mono)]
     public unsafe void PreAllocatedOverlapped_NullAsCallback_ThrowsArgumentNullException()
     {
-        AssertExtensions.Throws<ArgumentNullException>(
-            "callback",
-            () => new PreAllocatedOverlapped(null, new object(), new byte[256])
+        AssertExtensions.Throws<ArgumentNullException>("callback", () =>
+            new PreAllocatedOverlapped(null, new object(), new byte[256])
         );
-        AssertExtensions.Throws<ArgumentNullException>(
-            "callback",
-            () => PreAllocatedOverlapped.UnsafeCreate(null, new object(), new byte[256])
+        AssertExtensions.Throws<ArgumentNullException>("callback", () =>
+            PreAllocatedOverlapped.UnsafeCreate(null, new object(), new byte[256])
         );
 
         // Make sure the PreAllocatedOverlapped finalizer does the right thing in the case where the .ctor failed.

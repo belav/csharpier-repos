@@ -96,9 +96,8 @@ namespace System.CodeDom.Tests
         [Fact]
         public void Ctor_NullStatements_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeCatchClause("name", new CodeTypeReference(typeof(void)), null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeCatchClause("name", new CodeTypeReference(typeof(void)), null)
             );
         }
 
@@ -106,9 +105,8 @@ namespace System.CodeDom.Tests
         public void Ctor_NullObjectInStatements_ThrowsArgumentNullException()
         {
             CodeStatement[] statements = new CodeStatement[] { null };
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => new CodeCatchClause("name", new CodeTypeReference(typeof(void)), statements)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                new CodeCatchClause("name", new CodeTypeReference(typeof(void)), statements)
             );
         }
 

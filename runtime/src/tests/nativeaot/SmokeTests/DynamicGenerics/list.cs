@@ -408,9 +408,8 @@ public class DynamicListTests
                 Assert.AreEqual(item1, accessor.GetItem(list, 1));
                 Assert.AreEqual(item1, accessor.GetItem(list, 2));
 
-                int numRemoved = accessor.CallRemoveAll(
-                    list,
-                    x => item1.GetHashCode() == x.GetHashCode() && Object.ReferenceEquals(item1, x)
+                int numRemoved = accessor.CallRemoveAll(list, x =>
+                    item1.GetHashCode() == x.GetHashCode() && Object.ReferenceEquals(item1, x)
                 );
                 Assert.AreEqual(2, numRemoved);
                 Assert.AreEqual(1, accessor.GetCount(list));

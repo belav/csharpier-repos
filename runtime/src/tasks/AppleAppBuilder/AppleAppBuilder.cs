@@ -313,14 +313,12 @@ public class AppleAppBuilderTask : Task
 
         if (
             !string.IsNullOrEmpty(DiagnosticPorts)
-            && !Array.Exists(
-                RuntimeComponents,
-                runtimeComponent =>
-                    string.Equals(
-                        runtimeComponent,
-                        "diagnostics_tracing",
-                        StringComparison.OrdinalIgnoreCase
-                    )
+            && !Array.Exists(RuntimeComponents, runtimeComponent =>
+                string.Equals(
+                    runtimeComponent,
+                    "diagnostics_tracing",
+                    StringComparison.OrdinalIgnoreCase
+                )
             )
         )
         {

@@ -157,20 +157,17 @@ namespace System.Threading.Tests
             }
             else
             {
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    "mode",
-                    () =>
-                    {
-                        CreateEventWaitHandle(
-                                initialState: true,
-                                mode,
-                                GetRandomName(),
-                                GetBasicEventWaitHandleSecurity(),
-                                expectedCreatedNew: true
-                            )
-                            .Dispose();
-                    }
-                );
+                Assert.Throws<ArgumentOutOfRangeException>("mode", () =>
+                {
+                    CreateEventWaitHandle(
+                            initialState: true,
+                            mode,
+                            GetRandomName(),
+                            GetBasicEventWaitHandleSecurity(),
+                            expectedCreatedNew: true
+                        )
+                        .Dispose();
+                });
             }
         }
 
@@ -474,16 +471,13 @@ namespace System.Threading.Tests
             Assert.Equal(expectedAccessRules.Count, actualAccessRules.Count);
             if (expectedAccessRules.Count > 0)
             {
-                Assert.All(
-                    expectedAccessRules,
-                    actualAccessRule =>
-                    {
-                        int count = expectedAccessRules.Count(expectedAccessRule =>
-                            AreAccessRulesEqual(expectedAccessRule, actualAccessRule)
-                        );
-                        Assert.True(count > 0);
-                    }
-                );
+                Assert.All(expectedAccessRules, actualAccessRule =>
+                {
+                    int count = expectedAccessRules.Count(expectedAccessRule =>
+                        AreAccessRulesEqual(expectedAccessRule, actualAccessRule)
+                    );
+                    Assert.True(count > 0);
+                });
             }
         }
 

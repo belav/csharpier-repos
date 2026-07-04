@@ -376,9 +376,8 @@ namespace System.Collections.Immutable.Tests
                 .Add("a", "1")
                 .Add("A", "2")
                 .Add("b", "3");
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => map.WithComparers(StringComparer.OrdinalIgnoreCase)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                map.WithComparers(StringComparer.OrdinalIgnoreCase)
             );
 
             // Force all values to be considered equal.
@@ -400,9 +399,8 @@ namespace System.Collections.Immutable.Tests
                 .Create<string, string>()
                 .Add("firstKey", "1")
                 .Add("secondKey", "2");
-            ArgumentException exception = AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => map.Add("firstKey", "3")
+            ArgumentException exception = AssertExtensions.Throws<ArgumentException>(null, () =>
+                map.Add("firstKey", "3")
             );
             Assert.Contains("firstKey", exception.Message);
         }

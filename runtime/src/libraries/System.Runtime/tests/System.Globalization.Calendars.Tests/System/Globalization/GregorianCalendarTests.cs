@@ -12,9 +12,8 @@ namespace System.Globalization.Tests
         [InlineData(GregorianCalendarTypes.TransliteratedFrench + 1)]
         public void Ctor_InvalidType_ThrowsArgumentOutOfRangeException(GregorianCalendarTypes type)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "type",
-                () => new GregorianCalendar(type)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("type", () =>
+                new GregorianCalendar(type)
             );
         }
     }
@@ -54,10 +53,8 @@ namespace System.Globalization.Tests
         )
         {
             GregorianCalendar calendar = ((GregorianCalendar)Calendar);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                "m_type",
-                () => calendar.CalendarType = type
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", "m_type", () =>
+                calendar.CalendarType = type
             );
         }
     }

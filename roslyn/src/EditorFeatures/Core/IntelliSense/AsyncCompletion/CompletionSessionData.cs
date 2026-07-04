@@ -47,9 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         public static CompletionSessionData GetOrCreateSessionData(
             IAsyncCompletionSession session
         ) =>
-            session.Properties.GetOrCreateSingletonProperty(
-                RoslynCompletionSessionData,
-                () => new CompletionSessionData(session)
+            session.Properties.GetOrCreateSingletonProperty(RoslynCompletionSessionData, () =>
+                new CompletionSessionData(session)
             );
     }
 }

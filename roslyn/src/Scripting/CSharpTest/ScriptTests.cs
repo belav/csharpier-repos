@@ -350,9 +350,8 @@ throw e;",
             var script = CSharpScript.Create("X + Y");
 
             // Global variables passed to a script without a global type
-            await Assert.ThrowsAsync<ArgumentException>(
-                "globals",
-                () => script.RunAsync(new Globals { X = 1, Y = 2 })
+            await Assert.ThrowsAsync<ArgumentException>("globals", () =>
+                script.RunAsync(new Globals { X = 1, Y = 2 })
             );
         }
 
@@ -371,9 +370,8 @@ throw e;",
             var script = CSharpScript.Create("X + Y", globalsType: typeof(Globals));
 
             //  The globals of type 'System.Object' is not assignable to 'Microsoft.CodeAnalysis.CSharp.Scripting.Test.ScriptTests+Globals'
-            await Assert.ThrowsAsync<ArgumentException>(
-                "globals",
-                () => script.RunAsync(new object())
+            await Assert.ThrowsAsync<ArgumentException>("globals", () =>
+                script.RunAsync(new object())
             );
         }
 
@@ -382,9 +380,8 @@ throw e;",
         {
             var state = await CSharpScript.RunAsync("X + Y", globals: new Globals());
 
-            await Assert.ThrowsAsync<ArgumentNullException>(
-                "previousState",
-                () => state.Script.RunFromAsync(null)
+            await Assert.ThrowsAsync<ArgumentNullException>("previousState", () =>
+                state.Script.RunFromAsync(null)
             );
         }
 
@@ -394,9 +391,8 @@ throw e;",
             var state1 = await CSharpScript.RunAsync("X + Y + 1", globals: new Globals());
             var state2 = await CSharpScript.RunAsync("X + Y + 2", globals: new Globals());
 
-            await Assert.ThrowsAsync<ArgumentException>(
-                "previousState",
-                () => state1.Script.RunFromAsync(state2)
+            await Assert.ThrowsAsync<ArgumentException>("previousState", () =>
+                state1.Script.RunFromAsync(state2)
             );
         }
 

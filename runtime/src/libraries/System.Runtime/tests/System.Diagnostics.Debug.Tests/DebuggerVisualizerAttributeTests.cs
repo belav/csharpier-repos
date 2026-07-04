@@ -115,30 +115,25 @@ namespace System.Diagnostics.Tests
         [Fact]
         public void Ctor_NullVisualizerType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "visualizer",
-                () => new DebuggerVisualizerAttribute((Type)null)
+            AssertExtensions.Throws<ArgumentNullException>("visualizer", () =>
+                new DebuggerVisualizerAttribute((Type)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "visualizer",
-                () => new DebuggerVisualizerAttribute((Type)null, "VisualizerObjectSourceTypeName")
+            AssertExtensions.Throws<ArgumentNullException>("visualizer", () =>
+                new DebuggerVisualizerAttribute((Type)null, "VisualizerObjectSourceTypeName")
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "visualizer",
-                () => new DebuggerVisualizerAttribute((Type)null, typeof(int))
+            AssertExtensions.Throws<ArgumentNullException>("visualizer", () =>
+                new DebuggerVisualizerAttribute((Type)null, typeof(int))
             );
         }
 
         [Fact]
         public void Ctor_NullVisualizerObjectSourceType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "visualizerObjectSource",
-                () => new DebuggerVisualizerAttribute("VisualizerTypeName", (Type)null)
+            AssertExtensions.Throws<ArgumentNullException>("visualizerObjectSource", () =>
+                new DebuggerVisualizerAttribute("VisualizerTypeName", (Type)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "visualizerObjectSource",
-                () => new DebuggerVisualizerAttribute(typeof(string), (Type)null)
+            AssertExtensions.Throws<ArgumentNullException>("visualizerObjectSource", () =>
+                new DebuggerVisualizerAttribute(typeof(string), (Type)null)
             );
         }
 

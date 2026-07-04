@@ -19,9 +19,8 @@ namespace System.ComponentModel.Design.Serialization.Tests
         [Fact]
         public void Ctor_NullProviderType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "providerType",
-                () => new DefaultSerializationProviderAttribute((Type)null)
+            AssertExtensions.Throws<ArgumentNullException>("providerType", () =>
+                new DefaultSerializationProviderAttribute((Type)null)
             );
         }
 
@@ -37,9 +36,8 @@ namespace System.ComponentModel.Design.Serialization.Tests
         [Fact]
         public void Ctor_NullProviderTypeName_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "providerTypeName",
-                () => new DefaultSerializationProviderAttribute((string)null)
+            AssertExtensions.Throws<ArgumentNullException>("providerTypeName", () =>
+                new DefaultSerializationProviderAttribute((string)null)
             );
         }
     }

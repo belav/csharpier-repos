@@ -40,34 +40,31 @@ using System.Runtime.InteropServices;
             const TypeAttributes typeDefMask =
                 TypeAttributes.StringFormatMask | TypeAttributes.LayoutMask;
 
-            CompileAndVerify(
-                source,
-                assemblyValidator: (assembly) =>
+            CompileAndVerify(source, assemblyValidator: (assembly) =>
+            {
+                var metadataReader = assembly.GetMetadataReader();
+
+                Assert.Equal(9, metadataReader.GetTableRowCount(TableIndex.ClassLayout));
+
+                foreach (var typeHandle in metadataReader.TypeDefinitions)
                 {
-                    var metadataReader = assembly.GetMetadataReader();
+                    var type = metadataReader.GetTypeDefinition(typeHandle);
 
-                    Assert.Equal(9, metadataReader.GetTableRowCount(TableIndex.ClassLayout));
-
-                    foreach (var typeHandle in metadataReader.TypeDefinitions)
+                    var layout = type.GetLayout();
+                    if (!layout.IsDefault)
                     {
-                        var type = metadataReader.GetTypeDefinition(typeHandle);
+                        Assert.Equal(
+                            TypeAttributes.SequentialLayout,
+                            type.Attributes & typeDefMask
+                        );
+                        string typeName = metadataReader.GetString(type.Name);
 
-                        var layout = type.GetLayout();
-                        if (!layout.IsDefault)
-                        {
-                            Assert.Equal(
-                                TypeAttributes.SequentialLayout,
-                                type.Attributes & typeDefMask
-                            );
-                            string typeName = metadataReader.GetString(type.Name);
-
-                            int expectedAlignment = int.Parse(typeName.Substring("Pack".Length));
-                            Assert.Equal(expectedAlignment, layout.PackingSize);
-                            Assert.Equal(1, layout.Size);
-                        }
+                        int expectedAlignment = int.Parse(typeName.Substring("Pack".Length));
+                        Assert.Equal(expectedAlignment, layout.PackingSize);
+                        Assert.Equal(1, layout.Size);
                     }
                 }
-            );
+            });
         }
 
         [Fact]
@@ -780,36 +777,30 @@ partial struct C
 
         private void VerifyStructLayout(string source, bool hasInstanceFields)
         {
-            CompileAndVerify(
-                source,
-                assemblyValidator: (assembly) =>
+            CompileAndVerify(source, assemblyValidator: (assembly) =>
+            {
+                var reader = assembly.GetMetadataReader();
+                var type = reader
+                    .TypeDefinitions.Select(handle => reader.GetTypeDefinition(handle))
+                    .Where(typeDef => reader.GetString(typeDef.Name) == "S")
+                    .Single();
+
+                var layout = type.GetLayout();
+                if (!hasInstanceFields)
                 {
-                    var reader = assembly.GetMetadataReader();
-                    var type = reader
-                        .TypeDefinitions.Select(handle => reader.GetTypeDefinition(handle))
-                        .Where(typeDef => reader.GetString(typeDef.Name) == "S")
-                        .Single();
+                    const TypeAttributes typeDefMask =
+                        TypeAttributes.StringFormatMask | TypeAttributes.LayoutMask;
 
-                    var layout = type.GetLayout();
-                    if (!hasInstanceFields)
-                    {
-                        const TypeAttributes typeDefMask =
-                            TypeAttributes.StringFormatMask | TypeAttributes.LayoutMask;
-
-                        Assert.False(layout.IsDefault);
-                        Assert.Equal(
-                            TypeAttributes.SequentialLayout,
-                            type.Attributes & typeDefMask
-                        );
-                        Assert.Equal(0, layout.PackingSize);
-                        Assert.Equal(1, layout.Size);
-                    }
-                    else
-                    {
-                        Assert.True(layout.IsDefault);
-                    }
+                    Assert.False(layout.IsDefault);
+                    Assert.Equal(TypeAttributes.SequentialLayout, type.Attributes & typeDefMask);
+                    Assert.Equal(0, layout.PackingSize);
+                    Assert.Equal(1, layout.Size);
                 }
-            );
+                else
+                {
+                    Assert.True(layout.IsDefault);
+                }
+            });
         }
 
         [Fact]

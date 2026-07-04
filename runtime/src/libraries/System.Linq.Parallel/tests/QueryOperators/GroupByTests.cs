@@ -110,14 +110,11 @@ namespace System.Linq.Parallel.Tests
                     0,
                     1 + (count - (group.Key + 1)) / GroupFactor
                 );
-                Assert.All(
-                    group,
-                    x =>
-                    {
-                        Assert.Equal(group.Key, x % GroupFactor);
-                        elementsSeen.Add(x / GroupFactor);
-                    }
-                );
+                Assert.All(group, x =>
+                {
+                    Assert.Equal(group.Key, x % GroupFactor);
+                    elementsSeen.Add(x / GroupFactor);
+                });
                 elementsSeen.AssertComplete();
             }
             groupsSeen.AssertComplete();
@@ -145,14 +142,11 @@ namespace System.Linq.Parallel.Tests
                 Assert.Equal(groupsSeen++, group.Key);
 
                 int elementsSeen = group.Key;
-                Assert.All(
-                    group,
-                    x =>
-                    {
-                        Assert.Equal(elementsSeen, x);
-                        elementsSeen += GroupFactor;
-                    }
-                );
+                Assert.All(group, x =>
+                {
+                    Assert.Equal(elementsSeen, x);
+                    elementsSeen += GroupFactor;
+                });
                 Assert.Equal(
                     group.Key + (1 + (count - (group.Key + 1)) / GroupFactor) * GroupFactor,
                     elementsSeen
@@ -278,14 +272,11 @@ namespace System.Linq.Parallel.Tests
 
                 int expected = 1 + (count - (group.Key + 1)) / GroupFactor;
                 IntegerRangeSet elementsSeen = new IntegerRangeSet(1 - expected, expected);
-                Assert.All(
-                    group,
-                    x =>
-                    {
-                        Assert.Equal(group.Key, -x % GroupFactor);
-                        elementsSeen.Add(x / GroupFactor);
-                    }
-                );
+                Assert.All(group, x =>
+                {
+                    Assert.Equal(group.Key, -x % GroupFactor);
+                    elementsSeen.Add(x / GroupFactor);
+                });
                 elementsSeen.AssertComplete();
             }
             groupsSeen.AssertComplete();
@@ -313,14 +304,11 @@ namespace System.Linq.Parallel.Tests
                 Assert.Equal(groupsSeen++, group.Key);
 
                 int elementsSeen = -group.Key;
-                Assert.All(
-                    group,
-                    x =>
-                    {
-                        Assert.Equal(elementsSeen, x);
-                        elementsSeen -= GroupFactor;
-                    }
-                );
+                Assert.All(group, x =>
+                {
+                    Assert.Equal(elementsSeen, x);
+                    elementsSeen -= GroupFactor;
+                });
                 Assert.Equal(
                     -group.Key - (1 + (count - (group.Key + 1)) / GroupFactor) * GroupFactor,
                     elementsSeen
@@ -362,14 +350,11 @@ namespace System.Linq.Parallel.Tests
 
                 int expected = 1 + (count - (group.Key + 1)) / GroupFactor;
                 IntegerRangeSet elementsSeen = new IntegerRangeSet(1 - expected, expected);
-                Assert.All(
-                    group,
-                    x =>
-                    {
-                        Assert.Equal(group.Key, -x % GroupFactor);
-                        elementsSeen.Add(x / GroupFactor);
-                    }
-                );
+                Assert.All(group, x =>
+                {
+                    Assert.Equal(group.Key, -x % GroupFactor);
+                    elementsSeen.Add(x / GroupFactor);
+                });
                 elementsSeen.AssertComplete();
             }
             groupsSeen.AssertComplete();
@@ -402,14 +387,11 @@ namespace System.Linq.Parallel.Tests
                 Assert.Equal(groupsSeen++, group.Key);
 
                 int elementsSeen = -group.Key;
-                Assert.All(
-                    group,
-                    x =>
-                    {
-                        Assert.Equal(elementsSeen, x);
-                        elementsSeen -= GroupFactor;
-                    }
-                );
+                Assert.All(group, x =>
+                {
+                    Assert.Equal(elementsSeen, x);
+                    elementsSeen -= GroupFactor;
+                });
                 Assert.Equal(
                     -group.Key - (1 + (count - (group.Key + 1)) / GroupFactor) * GroupFactor,
                     elementsSeen
@@ -454,14 +436,11 @@ namespace System.Linq.Parallel.Tests
                     0,
                     1 + (count - (group.Key + 1)) / GroupFactor
                 );
-                Assert.All(
-                    group.Value,
-                    x =>
-                    {
-                        Assert.Equal(group.Key, x % GroupFactor);
-                        elementsSeen.Add(x / GroupFactor);
-                    }
-                );
+                Assert.All(group.Value, x =>
+                {
+                    Assert.Equal(group.Key, x % GroupFactor);
+                    elementsSeen.Add(x / GroupFactor);
+                });
                 elementsSeen.AssertComplete();
             }
             groupsSeen.AssertComplete();
@@ -493,14 +472,11 @@ namespace System.Linq.Parallel.Tests
             {
                 Assert.Equal(groupsSeen++, group.Key);
                 int elementsSeen = group.Key;
-                Assert.All(
-                    group.Value,
-                    x =>
-                    {
-                        Assert.Equal(elementsSeen, x);
-                        elementsSeen += GroupFactor;
-                    }
-                );
+                Assert.All(group.Value, x =>
+                {
+                    Assert.Equal(elementsSeen, x);
+                    elementsSeen += GroupFactor;
+                });
                 Assert.Equal(
                     group.Key + (1 + (count - (group.Key + 1)) / GroupFactor) * GroupFactor,
                     elementsSeen
@@ -546,14 +522,11 @@ namespace System.Linq.Parallel.Tests
                     0,
                     1 + (count - (group.Key % GroupFactor + 1)) / GroupFactor
                 );
-                Assert.All(
-                    group.Value,
-                    x =>
-                    {
-                        Assert.Equal(group.Key % GroupFactor, x % GroupFactor);
-                        elementsSeen.Add(x / GroupFactor);
-                    }
-                );
+                Assert.All(group.Value, x =>
+                {
+                    Assert.Equal(group.Key % GroupFactor, x % GroupFactor);
+                    elementsSeen.Add(x / GroupFactor);
+                });
                 elementsSeen.AssertComplete();
             }
             groupsSeen.AssertComplete();
@@ -589,14 +562,11 @@ namespace System.Linq.Parallel.Tests
             {
                 int elementsSeen = groupsSeen;
                 Assert.Equal(groupsSeen++, group.Key % GroupFactor);
-                Assert.All(
-                    group.Value,
-                    x =>
-                    {
-                        Assert.Equal(elementsSeen, x);
-                        elementsSeen += GroupFactor;
-                    }
-                );
+                Assert.All(group.Value, x =>
+                {
+                    Assert.Equal(elementsSeen, x);
+                    elementsSeen += GroupFactor;
+                });
                 Assert.Equal(
                     group.Key + (1 + (count - (group.Key + 1)) / GroupFactor) * GroupFactor,
                     elementsSeen
@@ -640,14 +610,11 @@ namespace System.Linq.Parallel.Tests
                 groupsSeen.Add(group.Key);
                 int expected = 1 + (count - (group.Key + 1)) / GroupFactor;
                 IntegerRangeSet elementsSeen = new IntegerRangeSet(1 - expected, expected);
-                Assert.All(
-                    group.Value,
-                    x =>
-                    {
-                        Assert.Equal(group.Key, -x % GroupFactor);
-                        elementsSeen.Add(x / GroupFactor);
-                    }
-                );
+                Assert.All(group.Value, x =>
+                {
+                    Assert.Equal(group.Key, -x % GroupFactor);
+                    elementsSeen.Add(x / GroupFactor);
+                });
                 elementsSeen.AssertComplete();
             }
             groupsSeen.AssertComplete();
@@ -683,14 +650,11 @@ namespace System.Linq.Parallel.Tests
             {
                 Assert.Equal(groupsSeen++, group.Key);
                 int elementsSeen = -group.Key;
-                Assert.All(
-                    group.Value,
-                    x =>
-                    {
-                        Assert.Equal(elementsSeen, x);
-                        elementsSeen -= GroupFactor;
-                    }
-                );
+                Assert.All(group.Value, x =>
+                {
+                    Assert.Equal(elementsSeen, x);
+                    elementsSeen -= GroupFactor;
+                });
                 Assert.Equal(
                     -group.Key - (1 + (count - (group.Key + 1)) / GroupFactor) * GroupFactor,
                     elementsSeen
@@ -713,175 +677,128 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void GroupBy_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int>)null).GroupBy(i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).GroupBy(i => i)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => ParallelEnumerable.Range(0, 1).GroupBy((Func<int, int>)null)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                ParallelEnumerable.Range(0, 1).GroupBy((Func<int, int>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int>)null).GroupBy(i => i, EqualityComparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).GroupBy(i => i, EqualityComparer<int>.Default)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .GroupBy((Func<int, int>)null, EqualityComparer<int>.Default)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .GroupBy((Func<int, int>)null, EqualityComparer<int>.Default)
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int>)null).GroupBy(i => i, i => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).GroupBy(i => i, i => i)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => ParallelEnumerable.Range(0, 1).GroupBy((Func<int, int>)null, i => i)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                ParallelEnumerable.Range(0, 1).GroupBy((Func<int, int>)null, i => i)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "elementSelector",
-                () => ParallelEnumerable.Range(0, 1).GroupBy(i => i, (Func<int, int>)null)
+            AssertExtensions.Throws<ArgumentNullException>("elementSelector", () =>
+                ParallelEnumerable.Range(0, 1).GroupBy(i => i, (Func<int, int>)null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () =>
-                    ((ParallelQuery<int>)null).GroupBy(
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).GroupBy(i => i, i => i, EqualityComparer<int>.Default)
+            );
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .GroupBy((Func<int, int>)null, i => i, EqualityComparer<int>.Default)
+            );
+            AssertExtensions.Throws<ArgumentNullException>("elementSelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .GroupBy(i => i, (Func<int, int>)null, EqualityComparer<int>.Default)
+            );
+
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).GroupBy(i => i, (i, j) => i)
+            );
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                ParallelEnumerable.Range(0, 1).GroupBy((Func<int, int>)null, (i, j) => i)
+            );
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .GroupBy(i => i, (Func<int, IEnumerable<int>, int>)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).GroupBy(
+                    i => i,
+                    (i, j) => i,
+                    EqualityComparer<int>.Default
+                )
+            );
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .GroupBy((Func<int, int>)null, (i, j) => i, EqualityComparer<int>.Default)
+            );
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .GroupBy(
                         i => i,
-                        i => i,
+                        (Func<int, IEnumerable<int>, int>)null,
                         EqualityComparer<int>.Default
                     )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .GroupBy((Func<int, int>)null, i => i, EqualityComparer<int>.Default)
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "elementSelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .GroupBy(i => i, (Func<int, int>)null, EqualityComparer<int>.Default)
-            );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int>)null).GroupBy(i => i, (i, j) => i)
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).GroupBy(i => i, i => i, (i, j) => i)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () => ParallelEnumerable.Range(0, 1).GroupBy((Func<int, int>)null, (i, j) => i)
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                ParallelEnumerable.Range(0, 1).GroupBy((Func<int, int>)null, i => i, (i, j) => i)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .GroupBy(i => i, (Func<int, IEnumerable<int>, int>)null)
+            AssertExtensions.Throws<ArgumentNullException>("elementSelector", () =>
+                ParallelEnumerable.Range(0, 1).GroupBy(i => i, (Func<int, int>)null, (i, j) => i)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () =>
-                    ((ParallelQuery<int>)null).GroupBy(
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .GroupBy(i => i, i => i, (Func<int, IEnumerable<int>, int>)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>("source", () =>
+                ((ParallelQuery<int>)null).GroupBy(
+                    i => i,
+                    i => i,
+                    (i, j) => i,
+                    EqualityComparer<int>.Default
+                )
+            );
+            AssertExtensions.Throws<ArgumentNullException>("keySelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .GroupBy(
+                        (Func<int, int>)null,
                         i => i,
                         (i, j) => i,
                         EqualityComparer<int>.Default
                     )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .GroupBy((Func<int, int>)null, (i, j) => i, EqualityComparer<int>.Default)
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .GroupBy(
-                            i => i,
-                            (Func<int, IEnumerable<int>, int>)null,
-                            EqualityComparer<int>.Default
-                        )
-            );
-
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () => ((ParallelQuery<int>)null).GroupBy(i => i, i => i, (i, j) => i)
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .GroupBy((Func<int, int>)null, i => i, (i, j) => i)
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "elementSelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .GroupBy(i => i, (Func<int, int>)null, (i, j) => i)
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .GroupBy(i => i, i => i, (Func<int, IEnumerable<int>, int>)null)
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "source",
-                () =>
-                    ((ParallelQuery<int>)null).GroupBy(
+            AssertExtensions.Throws<ArgumentNullException>("elementSelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .GroupBy(
                         i => i,
-                        i => i,
+                        (Func<int, int>)null,
                         (i, j) => i,
                         EqualityComparer<int>.Default
                     )
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "keySelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .GroupBy(
-                            (Func<int, int>)null,
-                            i => i,
-                            (i, j) => i,
-                            EqualityComparer<int>.Default
-                        )
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "elementSelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .GroupBy(
-                            i => i,
-                            (Func<int, int>)null,
-                            (i, j) => i,
-                            EqualityComparer<int>.Default
-                        )
-            );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "resultSelector",
-                () =>
-                    ParallelEnumerable
-                        .Range(0, 1)
-                        .GroupBy(
-                            i => i,
-                            i => i,
-                            (Func<int, IEnumerable<int>, int>)null,
-                            EqualityComparer<int>.Default
-                        )
+            AssertExtensions.Throws<ArgumentNullException>("resultSelector", () =>
+                ParallelEnumerable
+                    .Range(0, 1)
+                    .GroupBy(
+                        i => i,
+                        i => i,
+                        (Func<int, IEnumerable<int>, int>)null,
+                        EqualityComparer<int>.Default
+                    )
             );
         }
 

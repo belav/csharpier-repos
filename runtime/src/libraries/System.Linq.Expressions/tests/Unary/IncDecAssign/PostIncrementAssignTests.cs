@@ -221,9 +221,8 @@ namespace System.Linq.Expressions.Tests
         {
             Expression variable = Expression.Variable(typeof(string));
             MethodInfo method = typeof(object).GetTypeInfo().GetDeclaredMethod("ReferenceEquals");
-            AssertExtensions.Throws<ArgumentException>(
-                "method",
-                () => Expression.PostIncrementAssign(variable, method)
+            AssertExtensions.Throws<ArgumentException>("method", () =>
+                Expression.PostIncrementAssign(variable, method)
             );
         }
 
@@ -234,9 +233,8 @@ namespace System.Linq.Expressions.Tests
             MethodInfo method = typeof(IncDecAssignTests)
                 .GetTypeInfo()
                 .GetDeclaredMethod("GetString");
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => Expression.PostIncrementAssign(variable, method)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                Expression.PostIncrementAssign(variable, method)
             );
         }
 
@@ -315,18 +313,16 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void NullOperand()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "expression",
-                () => Expression.PostIncrementAssign(null)
+            AssertExtensions.Throws<ArgumentNullException>("expression", () =>
+                Expression.PostIncrementAssign(null)
             );
         }
 
         [Fact]
         public void UnwritableOperand()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "expression",
-                () => Expression.PostIncrementAssign(Expression.Constant(1))
+            AssertExtensions.Throws<ArgumentException>("expression", () =>
+                Expression.PostIncrementAssign(Expression.Constant(1))
             );
         }
 
@@ -334,9 +330,8 @@ namespace System.Linq.Expressions.Tests
         public void UnreadableOperand()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>(
-                "expression",
-                () => Expression.PostIncrementAssign(value)
+            AssertExtensions.Throws<ArgumentException>("expression", () =>
+                Expression.PostIncrementAssign(value)
             );
         }
 

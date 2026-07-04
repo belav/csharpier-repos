@@ -26,9 +26,8 @@ namespace System.Composition.Hosting.Core.Tests
         [Fact]
         public void Missing_NullContract_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "contract",
-                () => CompositionDependency.Missing(null, new object())
+            AssertExtensions.Throws<ArgumentNullException>("contract", () =>
+                CompositionDependency.Missing(null, new object())
             );
         }
 
@@ -36,9 +35,8 @@ namespace System.Composition.Hosting.Core.Tests
         public void Missing_NullSite_ThrowsArgumentNullException()
         {
             var contract = new CompositionContract(typeof(int));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "site",
-                () => CompositionDependency.Missing(contract, null)
+            AssertExtensions.Throws<ArgumentNullException>("site", () =>
+                CompositionDependency.Missing(contract, null)
             );
         }
 
@@ -87,9 +85,8 @@ namespace System.Composition.Hosting.Core.Tests
                 }
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "contract",
-                () => CompositionDependency.Satisfied(null, target, false, new object())
+            AssertExtensions.Throws<ArgumentNullException>("contract", () =>
+                CompositionDependency.Satisfied(null, target, false, new object())
             );
         }
 
@@ -97,9 +94,8 @@ namespace System.Composition.Hosting.Core.Tests
         public void Satisfied_NullTarget_ThrowsArgumentNullException()
         {
             var contract = new CompositionContract(typeof(int));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "target",
-                () => CompositionDependency.Satisfied(contract, null, false, new object())
+            AssertExtensions.Throws<ArgumentNullException>("target", () =>
+                CompositionDependency.Satisfied(contract, null, false, new object())
             );
         }
 
@@ -119,9 +115,8 @@ namespace System.Composition.Hosting.Core.Tests
                 }
             );
 
-            AssertExtensions.Throws<ArgumentNullException>(
-                "site",
-                () => CompositionDependency.Satisfied(contract, target, false, null)
+            AssertExtensions.Throws<ArgumentNullException>("site", () =>
+                CompositionDependency.Satisfied(contract, target, false, null)
             );
         }
 
@@ -168,14 +163,12 @@ namespace System.Composition.Hosting.Core.Tests
         [Fact]
         public void Oversupplied_NullContract_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "contract",
-                () =>
-                    CompositionDependency.Oversupplied(
-                        null,
-                        Enumerable.Empty<ExportDescriptorPromise>(),
-                        new object()
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("contract", () =>
+                CompositionDependency.Oversupplied(
+                    null,
+                    Enumerable.Empty<ExportDescriptorPromise>(),
+                    new object()
+                )
             );
         }
 
@@ -183,9 +176,8 @@ namespace System.Composition.Hosting.Core.Tests
         public void Oversupplied_NullTargets_ThrowsArgumentNullException()
         {
             var contract = new CompositionContract(typeof(int));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "targets",
-                () => CompositionDependency.Oversupplied(contract, null, new object())
+            AssertExtensions.Throws<ArgumentNullException>("targets", () =>
+                CompositionDependency.Oversupplied(contract, null, new object())
             );
         }
 
@@ -193,14 +185,12 @@ namespace System.Composition.Hosting.Core.Tests
         public void Oversupplied_NullSite_ThrowsArgumentNullException()
         {
             var contract = new CompositionContract(typeof(int));
-            AssertExtensions.Throws<ArgumentNullException>(
-                "site",
-                () =>
-                    CompositionDependency.Oversupplied(
-                        contract,
-                        Enumerable.Empty<ExportDescriptorPromise>(),
-                        null
-                    )
+            AssertExtensions.Throws<ArgumentNullException>("site", () =>
+                CompositionDependency.Oversupplied(
+                    contract,
+                    Enumerable.Empty<ExportDescriptorPromise>(),
+                    null
+                )
             );
         }
 

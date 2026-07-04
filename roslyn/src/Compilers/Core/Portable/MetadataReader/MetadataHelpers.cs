@@ -662,19 +662,15 @@ namespace Microsoft.CodeAnalysis
         > s_splitQualifiedNameSystemMemory = ImmutableArray.Create(SystemString.AsMemory());
 
         internal static ImmutableArray<string> SplitQualifiedName(string name) =>
-            SplitQualifiedNameWorker(
-                name.AsMemory(),
-                s_splitQualifiedNameSystem,
-                static memory => memory.ToString()
+            SplitQualifiedNameWorker(name.AsMemory(), s_splitQualifiedNameSystem, static memory =>
+                memory.ToString()
             );
 
         internal static ImmutableArray<ReadOnlyMemory<char>> SplitQualifiedName(
             ReadOnlyMemory<char> name
         ) =>
-            SplitQualifiedNameWorker(
-                name,
-                s_splitQualifiedNameSystemMemory,
-                static memory => memory
+            SplitQualifiedNameWorker(name, s_splitQualifiedNameSystemMemory, static memory =>
+                memory
             );
 
         internal static ImmutableArray<T> SplitQualifiedNameWorker<T>(

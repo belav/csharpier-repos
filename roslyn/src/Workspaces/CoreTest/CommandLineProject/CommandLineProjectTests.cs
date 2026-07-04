@@ -253,9 +253,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
 
             // The compiler may add other references automatically, so we'll only assert a single reference for the one we're interested in
-            Assert.Single(
-                info.MetadataReferences.OfType<PortableExecutableReference>(),
-                r => r.FilePath == pathToAssembly
+            Assert.Single(info.MetadataReferences.OfType<PortableExecutableReference>(), r =>
+                r.FilePath == pathToAssembly
             );
         }
 
@@ -273,9 +272,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             );
 
             // The compiler may add other references automatically, so we'll only assert a single reference for the one we're interested in
-            Assert.Single(
-                info.MetadataReferences.OfType<PortableExecutableReference>(),
-                r => r.FilePath == pathToAssembly
+            Assert.Single(info.MetadataReferences.OfType<PortableExecutableReference>(), r =>
+                r.FilePath == pathToAssembly
             );
         }
     }

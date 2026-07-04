@@ -86,21 +86,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
 
             foreach (var parentScope in statementParentScopes)
             {
-                editor.ReplaceNode(
-                    parentScope,
-                    (newParentScope, syntaxGenerator) =>
-                    {
-                        var firstStatement =
-                            newParentScope is BlockSyntax
-                                ? ((BlockSyntax)newParentScope).Statements.First()
-                                : ((SwitchSectionSyntax)newParentScope).Statements.First();
-                        return syntaxGenerator.ReplaceNode(
-                            newParentScope,
-                            firstStatement,
-                            firstStatement.WithoutLeadingBlankLinesInTrivia()
-                        );
-                    }
-                );
+                editor.ReplaceNode(parentScope, (newParentScope, syntaxGenerator) =>
+                {
+                    var firstStatement =
+                        newParentScope is BlockSyntax
+                            ? ((BlockSyntax)newParentScope).Statements.First()
+                            : ((SwitchSectionSyntax)newParentScope).Statements.First();
+                    return syntaxGenerator.ReplaceNode(
+                        newParentScope,
+                        firstStatement,
+                        firstStatement.WithoutLeadingBlankLinesInTrivia()
+                    );
+                });
             }
 
             return;
@@ -162,9 +159,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
                 // Trivia on the local declaration will move to the next statement.
                 // use the callback form as the next statement may be the place where we're
                 // inlining the declaration, and thus need to see the effects of that change.
-                editor.ReplaceNode(
-                    localDeclaration.GetNextStatement()!,
-                    (s, g) => s.WithPrependedNonIndentationTriviaFrom(localDeclaration)
+                editor.ReplaceNode(localDeclaration.GetNextStatement()!, (s, g) =>
+                    s.WithPrependedNonIndentationTriviaFrom(localDeclaration)
                 );
 
                 removeStatement(localDeclaration);

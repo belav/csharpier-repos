@@ -89,9 +89,8 @@ namespace System.Globalization.Tests
         )
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "month",
-                () => format.GetAbbreviatedMonthName(month)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("month", () =>
+                format.GetAbbreviatedMonthName(month)
             );
         }
     }

@@ -58,17 +58,14 @@ public class CascadingAuthenticationStateTest
             .Single()
             .ComponentId;
         var receiveAuthStateDiff = batch.DiffsByComponentId[receiveAuthStateId].Single();
-        Assert.Collection(
-            receiveAuthStateDiff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                AssertFrame.Text(
-                    batch.ReferenceFrames[edit.ReferenceFrameIndex],
-                    "Authenticated: True; Name: Bert; Pending: False; Renders: 1"
-                );
-            }
-        );
+        Assert.Collection(receiveAuthStateDiff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
+            AssertFrame.Text(
+                batch.ReferenceFrames[edit.ReferenceFrameIndex],
+                "Authenticated: True; Name: Bert; Pending: False; Renders: 1"
+            );
+        });
     }
 
     [Fact]
@@ -97,17 +94,14 @@ public class CascadingAuthenticationStateTest
         var receiveAuthStateId = receiveAuthStateFrame.ComponentId;
         var receiveAuthStateComponent = (ReceiveAuthStateComponent)receiveAuthStateFrame.Component;
         var receiveAuthStateDiff1 = batch1.DiffsByComponentId[receiveAuthStateId].Single();
-        Assert.Collection(
-            receiveAuthStateDiff1.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
-                AssertFrame.Text(
-                    batch1.ReferenceFrames[edit.ReferenceFrameIndex],
-                    "Authenticated: False; Name: ; Pending: True; Renders: 1"
-                );
-            }
-        );
+        Assert.Collection(receiveAuthStateDiff1.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.PrependFrame, edit.Type);
+            AssertFrame.Text(
+                batch1.ReferenceFrames[edit.ReferenceFrameIndex],
+                "Authenticated: False; Name: ; Pending: True; Renders: 1"
+            );
+        });
 
         // Act/Assert 2: Auth state fetch task completes in background
         // No new renders yet, because the cascading parameter itself hasn't changed
@@ -119,17 +113,14 @@ public class CascadingAuthenticationStateTest
         Assert.Equal(2, renderer.Batches.Count);
         var batch2 = renderer.Batches.Last();
         var receiveAuthStateDiff2 = batch2.DiffsByComponentId[receiveAuthStateId].Single();
-        Assert.Collection(
-            receiveAuthStateDiff2.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
-                AssertFrame.Text(
-                    batch2.ReferenceFrames[edit.ReferenceFrameIndex],
-                    "Authenticated: True; Name: Bert; Pending: False; Renders: 2"
-                );
-            }
-        );
+        Assert.Collection(receiveAuthStateDiff2.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
+            AssertFrame.Text(
+                batch2.ReferenceFrames[edit.ReferenceFrameIndex],
+                "Authenticated: True; Name: Bert; Pending: False; Renders: 2"
+            );
+        });
     }
 
     [Fact]
@@ -163,17 +154,14 @@ public class CascadingAuthenticationStateTest
         Assert.Equal(2, renderer.Batches.Count);
         var batch = renderer.Batches.Last();
         var receiveAuthStateDiff = batch.DiffsByComponentId[receiveAuthStateId].Single();
-        Assert.Collection(
-            receiveAuthStateDiff.Edits,
-            edit =>
-            {
-                Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
-                AssertFrame.Text(
-                    batch.ReferenceFrames[edit.ReferenceFrameIndex],
-                    "Authenticated: True; Name: Bert; Pending: False; Renders: 2"
-                );
-            }
-        );
+        Assert.Collection(receiveAuthStateDiff.Edits, edit =>
+        {
+            Assert.Equal(RenderTreeEditType.UpdateText, edit.Type);
+            AssertFrame.Text(
+                batch.ReferenceFrames[edit.ReferenceFrameIndex],
+                "Authenticated: True; Name: Bert; Pending: False; Renders: 2"
+            );
+        });
     }
 
     class ReceiveAuthStateComponent : AutoRenderComponent

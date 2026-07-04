@@ -104,30 +104,22 @@ public abstract class RuntimePropertyBase : RuntimeAnnotatableBase, IRuntimeProp
 
     /// <inheritdoc />
     PropertyAccessors IRuntimePropertyBase.Accessors =>
-        NonCapturingLazyInitializer.EnsureInitialized(
-            ref _accessors,
-            this,
-            static property =>
-                RuntimeFeature.IsDynamicCodeSupported
-                    ? new PropertyAccessorsFactory().Create(property)
-                    : throw new InvalidOperationException(CoreStrings.NativeAotNoCompiledModel)
+        NonCapturingLazyInitializer.EnsureInitialized(ref _accessors, this, static property =>
+            RuntimeFeature.IsDynamicCodeSupported
+                ? new PropertyAccessorsFactory().Create(property)
+                : throw new InvalidOperationException(CoreStrings.NativeAotNoCompiledModel)
         );
 
     /// <inheritdoc />
     PropertyIndexes IRuntimePropertyBase.PropertyIndexes
     {
-        get =>
-            NonCapturingLazyInitializer.EnsureInitialized(
-                ref _indexes,
-                this,
-                static property =>
-                {
-                    _ = (
-                        (IRuntimeEntityType)
-                            ((IRuntimeTypeBase)property.DeclaringType).ContainingEntityType
-                    ).Counts;
-                }
-            );
+        get => NonCapturingLazyInitializer.EnsureInitialized(ref _indexes, this, static property =>
+            {
+                _ = (
+                    (IRuntimeEntityType)
+                        ((IRuntimeTypeBase)property.DeclaringType).ContainingEntityType
+                ).Counts;
+            });
         set => NonCapturingLazyInitializer.EnsureInitialized(ref _indexes, value);
     }
 
@@ -181,18 +173,14 @@ public abstract class RuntimePropertyBase : RuntimeAnnotatableBase, IRuntimeProp
 
     /// <inheritdoc />
     IClrPropertySetter IRuntimePropertyBase.GetSetter() =>
-        NonCapturingLazyInitializer.EnsureInitialized(
-            ref _setter,
-            this,
-            static property => new ClrPropertySetterFactory().Create(property)
+        NonCapturingLazyInitializer.EnsureInitialized(ref _setter, this, static property =>
+            new ClrPropertySetterFactory().Create(property)
         );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
     IClrPropertyGetter IPropertyBase.GetGetter() =>
-        NonCapturingLazyInitializer.EnsureInitialized(
-            ref _getter,
-            this,
-            static property => new ClrPropertyGetterFactory().Create(property)
+        NonCapturingLazyInitializer.EnsureInitialized(ref _getter, this, static property =>
+            new ClrPropertyGetterFactory().Create(property)
         );
 }

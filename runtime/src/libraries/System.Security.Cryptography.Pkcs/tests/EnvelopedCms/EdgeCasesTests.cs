@@ -606,16 +606,10 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             var oid = new Oid(Oids.Sha1);
             var asnEncodedData = new AsnEncodedData(new byte[] { 1, 2, 3 });
 
-            AssertExtensions.Throws<ArgumentException, NullReferenceException>(
-                "values",
-                () =>
-                {
-                    new CryptographicAttributeObject(
-                        oid,
-                        new AsnEncodedDataCollection(asnEncodedData)
-                    );
-                }
-            );
+            AssertExtensions.Throws<ArgumentException, NullReferenceException>("values", () =>
+            {
+                new CryptographicAttributeObject(oid, new AsnEncodedDataCollection(asnEncodedData));
+            });
         }
 
         [Fact]

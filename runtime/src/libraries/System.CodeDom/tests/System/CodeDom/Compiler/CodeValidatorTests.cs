@@ -4821,9 +4821,8 @@ namespace System.CodeDom.Compiler.Tests
         )]
         public void ValidateIdentifiers_InvalidE_ThrowsArgumentException(CodeObject e)
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "e",
-                () => CodeGenerator.ValidateIdentifiers(e)
+            AssertExtensions.Throws<ArgumentException>("e", () =>
+                CodeGenerator.ValidateIdentifiers(e)
             );
         }
 
@@ -4951,9 +4950,8 @@ namespace System.CodeDom.Compiler.Tests
         )]
         public void ValidateIdentifiers_NullE_ThrowsArgumentNullException(CodeObject e)
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "e",
-                () => CodeGenerator.ValidateIdentifiers(e)
+            AssertExtensions.Throws<ArgumentNullException>("e", () =>
+                CodeGenerator.ValidateIdentifiers(e)
             );
         }
 

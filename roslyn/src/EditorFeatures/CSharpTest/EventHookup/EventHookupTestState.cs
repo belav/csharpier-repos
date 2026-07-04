@@ -99,10 +99,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EventHookup
 
         public void SendTypeChar(char ch)
         {
-            SendTypeChar(
-                ch,
-                _commandHandler.ExecuteCommand,
-                () => EditorOperations.InsertText(ch.ToString())
+            SendTypeChar(ch, _commandHandler.ExecuteCommand, () =>
+                EditorOperations.InsertText(ch.ToString())
             );
         }
 

@@ -15,9 +15,8 @@ namespace System.Collections.Generic.Tests
             ConstructorInfo[] ctors = typeof(ReferenceEqualityComparer).GetConstructors(
                 BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
             );
-            Assert.DoesNotContain(
-                ctors,
-                ctor => ctor.IsPublic || ctor.IsFamily || ctor.IsFamilyOrAssembly
+            Assert.DoesNotContain(ctors, ctor =>
+                ctor.IsPublic || ctor.IsFamily || ctor.IsFamilyOrAssembly
             );
         }
 

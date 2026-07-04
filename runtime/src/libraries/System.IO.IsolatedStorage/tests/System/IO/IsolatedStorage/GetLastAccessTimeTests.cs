@@ -50,10 +50,8 @@ namespace System.IO.IsolatedStorage
         {
             using (IsolatedStorageFile isf = IsolatedStorageFile.GetUserStoreForAssembly())
             {
-                AssertExtensions.Throws<ArgumentException>(
-                    "path",
-                    null,
-                    () => isf.GetLastAccessTime("\0bad")
+                AssertExtensions.Throws<ArgumentException>("path", null, () =>
+                    isf.GetLastAccessTime("\0bad")
                 );
             }
         }

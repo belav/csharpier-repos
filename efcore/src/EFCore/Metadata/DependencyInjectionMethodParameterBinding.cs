@@ -118,78 +118,72 @@ public class DependencyInjectionMethodParameterBinding : DependencyInjectionPara
     ///     A delegate to set a CLR service property on an entity instance.
     /// </summary>
     public override Func<MaterializationContext, IEntityType, object, object?> ServiceDelegate =>
-        NonCapturingLazyInitializer.EnsureInitialized(
-            ref _serviceDelegate,
-            this,
-            static b =>
-            {
-                var materializationContextParam = Expression.Parameter(
-                    typeof(MaterializationContext)
+        NonCapturingLazyInitializer.EnsureInitialized(ref _serviceDelegate, this, static b =>
+        {
+            var materializationContextParam = Expression.Parameter(typeof(MaterializationContext));
+            var entityTypeParam = Expression.Parameter(typeof(IEntityType));
+            var entityParam = Expression.Parameter(typeof(object));
+
+            var parameters = b
+                .Method.GetParameters()
+                .Select((p, i) => Expression.Parameter(p.ParameterType, "param" + i))
+                .ToArray();
+
+            var entityType = (IEntityType)b.ConsumedProperties.First().DeclaringType;
+            var serviceStateProperty = entityType
+                .GetServiceProperties()
+                .FirstOrDefault(p =>
+                    p.ParameterBinding != b && p.ParameterBinding.ServiceType == b.ServiceType
                 );
-                var entityTypeParam = Expression.Parameter(typeof(IEntityType));
-                var entityParam = Expression.Parameter(typeof(object));
 
-                var parameters = b
-                    .Method.GetParameters()
-                    .Select((p, i) => Expression.Parameter(p.ParameterType, "param" + i))
-                    .ToArray();
-
-                var entityType = (IEntityType)b.ConsumedProperties.First().DeclaringType;
-                var serviceStateProperty = entityType
-                    .GetServiceProperties()
-                    .FirstOrDefault(p =>
-                        p.ParameterBinding != b && p.ParameterBinding.ServiceType == b.ServiceType
-                    );
-
-                var serviceVariable = Expression.Variable(b.ServiceType, "service");
-                var serviceExpression = Expression.Block(
-                    new[] { serviceVariable },
-                    new List<Expression>
-                    {
-                        Expression.Assign(
-                            serviceVariable,
-                            Expression.Convert(
-                                serviceStateProperty == null
-                                    ? Expression.Call(
-                                        CreateServiceMethod,
-                                        materializationContextParam,
-                                        Expression.Constant(b.ServiceType),
-                                        entityTypeParam,
-                                        entityParam
-                                    )
-                                    : Expression.Call(
-                                        GetServiceFromPropertyMethod,
-                                        materializationContextParam,
-                                        Expression.Constant(
-                                            serviceStateProperty,
-                                            typeof(IPropertyBase)
-                                        ),
-                                        entityParam
+            var serviceVariable = Expression.Variable(b.ServiceType, "service");
+            var serviceExpression = Expression.Block(
+                new[] { serviceVariable },
+                new List<Expression>
+                {
+                    Expression.Assign(
+                        serviceVariable,
+                        Expression.Convert(
+                            serviceStateProperty == null
+                                ? Expression.Call(
+                                    CreateServiceMethod,
+                                    materializationContextParam,
+                                    Expression.Constant(b.ServiceType),
+                                    entityTypeParam,
+                                    entityParam
+                                )
+                                : Expression.Call(
+                                    GetServiceFromPropertyMethod,
+                                    materializationContextParam,
+                                    Expression.Constant(
+                                        serviceStateProperty,
+                                        typeof(IPropertyBase)
                                     ),
-                                typeof(ILazyLoader)
-                            )
-                        ),
-                        Expression.Condition(
-                            Expression.ReferenceEqual(serviceVariable, Expression.Constant(null)),
-                            Expression.Constant(null, b.ParameterType),
-                            Expression.Lambda(
-                                Expression.Call(serviceVariable, b.Method, parameters),
-                                parameters
-                            )
-                        ),
-                    }
-                );
+                                    entityParam
+                                ),
+                            typeof(ILazyLoader)
+                        )
+                    ),
+                    Expression.Condition(
+                        Expression.ReferenceEqual(serviceVariable, Expression.Constant(null)),
+                        Expression.Constant(null, b.ParameterType),
+                        Expression.Lambda(
+                            Expression.Call(serviceVariable, b.Method, parameters),
+                            parameters
+                        )
+                    ),
+                }
+            );
 
-                return Expression
-                    .Lambda<Func<MaterializationContext, IEntityType, object, object>>(
-                        serviceExpression,
-                        materializationContextParam,
-                        entityTypeParam,
-                        entityParam
-                    )
-                    .Compile();
-            }
-        );
+            return Expression
+                .Lambda<Func<MaterializationContext, IEntityType, object, object>>(
+                    serviceExpression,
+                    materializationContextParam,
+                    entityTypeParam,
+                    entityParam
+                )
+                .Compile();
+        });
 
     /// <summary>
     ///     Creates a copy that contains the given consumed properties.

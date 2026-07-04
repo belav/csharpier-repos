@@ -70,9 +70,8 @@ public class InMemoryModelBuilderGenericTest : ModelBuilderGenericTest
             var contextOptions = new DbContextOptionsBuilder()
                 .UseModel(modelBuilder.Model.FinalizeModel())
                 .UseInternalServiceProvider(InMemoryFixture.DefaultNullabilityCheckProvider)
-                .UseInMemoryDatabase(
-                    "Can_use_self_referencing_overlapping_FK_PK",
-                    b => b.EnableNullChecks(false)
+                .UseInMemoryDatabase("Can_use_self_referencing_overlapping_FK_PK", b =>
+                    b.EnableNullChecks(false)
                 )
                 .Options;
 

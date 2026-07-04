@@ -137,9 +137,8 @@ namespace System.Collections.Tests
         public static void Indexer_Set_NullKey_ThrowsArgumentNullException()
         {
             var dictBase = new MyDictionary();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "key",
-                () => dictBase[null] = new FooValue()
+            AssertExtensions.Throws<ArgumentNullException>("key", () =>
+                dictBase[null] = new FooValue()
             );
         }
 
@@ -186,24 +185,19 @@ namespace System.Collections.Tests
             MyDictionary dictBase = CreateDictionary(100);
             AssertExtensions.Throws<ArgumentNullException>("array", () => dictBase.CopyTo(null, 0)); // Array is null
 
-            AssertExtensions.Throws<ArgumentException>(
-                "array",
-                null,
-                () => dictBase.CopyTo(new object[100, 100], 0)
+            AssertExtensions.Throws<ArgumentException>("array", null, () =>
+                dictBase.CopyTo(new object[100, 100], 0)
             ); // Array is multidimensional
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "arrayIndex",
-                () => dictBase.CopyTo(new DictionaryEntry[100], -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("arrayIndex", () =>
+                dictBase.CopyTo(new DictionaryEntry[100], -1)
             ); // Index < 0
 
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => dictBase.CopyTo(new DictionaryEntry[100], 100)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                dictBase.CopyTo(new DictionaryEntry[100], 100)
             ); // Index >= count
-            AssertExtensions.Throws<ArgumentException>(
-                null,
-                () => dictBase.CopyTo(new DictionaryEntry[100], 50)
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                dictBase.CopyTo(new DictionaryEntry[100], 50)
             ); // Index + array.Count >= count
         }
 

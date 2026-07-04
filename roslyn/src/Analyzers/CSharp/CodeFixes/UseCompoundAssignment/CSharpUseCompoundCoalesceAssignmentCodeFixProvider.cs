@@ -144,30 +144,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
                     // Simplification engine can then remove it if it's not necessary.
                     var type = semanticModel.GetTypeInfo(coalesce, cancellationToken).Type;
 
-                    editor.ReplaceNode(
-                        coalesce,
-                        (currentCoalesceNode, generator) =>
-                        {
-                            var currentCoalesce = (BinaryExpressionSyntax)currentCoalesceNode;
-                            var coalesceRight = (ParenthesizedExpressionSyntax)
-                                currentCoalesce.Right;
-                            var assignment = (AssignmentExpressionSyntax)coalesceRight.Expression;
+                    editor.ReplaceNode(coalesce, (currentCoalesceNode, generator) =>
+                    {
+                        var currentCoalesce = (BinaryExpressionSyntax)currentCoalesceNode;
+                        var coalesceRight = (ParenthesizedExpressionSyntax)currentCoalesce.Right;
+                        var assignment = (AssignmentExpressionSyntax)coalesceRight.Expression;
 
-                            var compoundOperator = SyntaxFactory.Token(
-                                SyntaxKind.QuestionQuestionEqualsToken
-                            );
-                            var finalAssignment = SyntaxFactory.AssignmentExpression(
-                                SyntaxKind.CoalesceAssignmentExpression,
-                                assignment.Left,
-                                compoundOperator.WithTriviaFrom(assignment.OperatorToken),
-                                assignment.Right
-                            );
+                        var compoundOperator = SyntaxFactory.Token(
+                            SyntaxKind.QuestionQuestionEqualsToken
+                        );
+                        var finalAssignment = SyntaxFactory.AssignmentExpression(
+                            SyntaxKind.CoalesceAssignmentExpression,
+                            assignment.Left,
+                            compoundOperator.WithTriviaFrom(assignment.OperatorToken),
+                            assignment.Right
+                        );
 
-                            return type == null || type.IsErrorType()
-                                ? finalAssignment
-                                : generator.CastExpression(type, finalAssignment);
-                        }
-                    );
+                        return type == null || type.IsErrorType()
+                            ? finalAssignment
+                            : generator.CastExpression(type, finalAssignment);
+                    });
                 }
             }
         }

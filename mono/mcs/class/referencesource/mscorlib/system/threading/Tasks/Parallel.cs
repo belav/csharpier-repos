@@ -325,13 +325,10 @@ namespace System.Threading.Tasks
                                     {
                                         LazyInitializer.EnsureInitialized<
                                             ConcurrentQueue<Exception>
-                                        >(
-                                            ref exceptionQ,
-                                            () =>
-                                            {
-                                                return new ConcurrentQueue<Exception>();
-                                            }
-                                        );
+                                        >(ref exceptionQ, () =>
+                                        {
+                                            return new ConcurrentQueue<Exception>();
+                                        });
                                         exceptionQ.Enqueue(e);
                                     }
 

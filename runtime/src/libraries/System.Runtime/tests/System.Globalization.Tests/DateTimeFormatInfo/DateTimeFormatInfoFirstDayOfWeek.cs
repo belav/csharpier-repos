@@ -267,9 +267,8 @@ namespace System.Globalization.Tests
         public void FirstDayOfWeek_SetInvalid_ThrowsArgumentOutOfRangeException(DayOfWeek value)
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "value",
-                () => format.FirstDayOfWeek = value
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () =>
+                format.FirstDayOfWeek = value
             );
         }
 

@@ -382,13 +382,10 @@ namespace System.IO.Tests
         public void CopyToAsync_StreamToken_InvalidArgsThrows()
         {
             Stream s = new MemoryStream();
-            AssertExtensions.Throws<ArgumentNullException>(
-                "destination",
-                () =>
-                {
-                    s.CopyToAsync(null, default(CancellationToken));
-                }
-            );
+            AssertExtensions.Throws<ArgumentNullException>("destination", () =>
+            {
+                s.CopyToAsync(null, default(CancellationToken));
+            });
         }
 
         [Theory]

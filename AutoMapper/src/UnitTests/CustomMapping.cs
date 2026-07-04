@@ -1398,9 +1398,8 @@ public class When_specifying_member_and_member_resolver_using_string_property_na
             cfg.ConstructServicesUsing(type => new CustomValueResolver());
 
             cfg.CreateMap<Source, Destination>()
-                .ForMember(
-                    "DestinationValue",
-                    opt => opt.MapFrom<CustomValueResolver, int>("SourceValue")
+                .ForMember("DestinationValue", opt =>
+                    opt.MapFrom<CustomValueResolver, int>("SourceValue")
                 );
         });
 

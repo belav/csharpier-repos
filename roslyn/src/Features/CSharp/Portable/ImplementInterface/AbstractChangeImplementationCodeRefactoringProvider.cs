@@ -349,12 +349,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
 
                 foreach (var (decl, implMember, interfaceMembers) in declsAndSymbol)
                 {
-                    editor.ReplaceNode(
-                        decl,
-                        (currentDecl, g) =>
-                            interfaceMembers.Select(s =>
-                                ChangeImplementation(g, currentDecl, implMember, s)
-                            )
+                    editor.ReplaceNode(decl, (currentDecl, g) =>
+                        interfaceMembers.Select(s =>
+                            ChangeImplementation(g, currentDecl, implMember, s)
+                        )
                     );
                 }
             }

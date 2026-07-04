@@ -111,13 +111,11 @@ namespace System.Tests
         [Fact]
         public static void Create_InvalidArguments_Throw()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "action",
-                () => string.Create(-1, 0, null)
+            AssertExtensions.Throws<ArgumentNullException>("action", () =>
+                string.Create(-1, 0, null)
             );
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "length",
-                () => string.Create(-1, 0, (span, state) => { })
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () =>
+                string.Create(-1, 0, (span, state) => { })
             );
         }
 
@@ -132,15 +130,11 @@ namespace System.Tests
         [Fact]
         public static void Create_NullState_Allowed()
         {
-            string result = string.Create(
-                1,
-                (object)null,
-                (span, state) =>
-                {
-                    span[0] = 'a';
-                    Assert.Null(state);
-                }
-            );
+            string result = string.Create(1, (object)null, (span, state) =>
+            {
+                span[0] = 'a';
+                Assert.Null(state);
+            });
             Assert.Equal("a", result);
         }
 
@@ -148,17 +142,13 @@ namespace System.Tests
         public static void Create_ClearsMemory()
         {
             const int Length = 10;
-            string result = string.Create(
-                Length,
-                (object)null,
-                (span, state) =>
+            string result = string.Create(Length, (object)null, (span, state) =>
+            {
+                for (int i = 0; i < span.Length; i++)
                 {
-                    for (int i = 0; i < span.Length; i++)
-                    {
-                        Assert.Equal('\0', span[i]);
-                    }
+                    Assert.Equal('\0', span[i]);
                 }
-            );
+            });
             Assert.Equal(new string('\0', Length), result);
         }
 
@@ -169,18 +159,14 @@ namespace System.Tests
         public static void Create_ReturnsExpectedString(string expected)
         {
             char[] input = expected.ToCharArray();
-            string result = string.Create(
-                input.Length,
-                input,
-                (span, state) =>
+            string result = string.Create(input.Length, input, (span, state) =>
+            {
+                Assert.Same(input, state);
+                for (int i = 0; i < state.Length; i++)
                 {
-                    Assert.Same(input, state);
-                    for (int i = 0; i < state.Length; i++)
-                    {
-                        span[i] = state[i];
-                    }
+                    span[i] = state[i];
                 }
-            );
+            });
             Assert.Equal(expected, result);
         }
 
@@ -734,9 +720,8 @@ namespace System.Tests
             StringComparison comparisonType
         )
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => "foo".Contains(null, comparisonType)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                "foo".Contains(null, comparisonType)
             );
         }
 
@@ -747,9 +732,8 @@ namespace System.Tests
             StringComparison comparisonType
         )
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "comparisonType",
-                () => "ab".Contains("a", comparisonType)
+            AssertExtensions.Throws<ArgumentException>("comparisonType", () =>
+                "ab".Contains("a", comparisonType)
             );
         }
 
@@ -810,9 +794,8 @@ namespace System.Tests
         [Fact]
         public static void ReplaceLineEndings_NullReplacementText_Throws()
         {
-            Assert.Throws<ArgumentNullException>(
-                "replacementText",
-                () => "Hello!".ReplaceLineEndings(null)
+            Assert.Throws<ArgumentNullException>("replacementText", () =>
+                "Hello!".ReplaceLineEndings(null)
             );
         }
 
@@ -970,39 +953,33 @@ namespace System.Tests
         [Fact]
         public static void Join_Char_NullValues_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => string.Join('|', (string[])null)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                string.Join('|', (string[])null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "value",
-                () => string.Join('|', (string[])null, 0, 0)
+            AssertExtensions.Throws<ArgumentNullException>("value", () =>
+                string.Join('|', (string[])null, 0, 0)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "values",
-                () => string.Join('|', (object[])null)
+            AssertExtensions.Throws<ArgumentNullException>("values", () =>
+                string.Join('|', (object[])null)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "values",
-                () => string.Join('|', (IEnumerable<object>)null)
+            AssertExtensions.Throws<ArgumentNullException>("values", () =>
+                string.Join('|', (IEnumerable<object>)null)
             );
         }
 
         [Fact]
         public static void Join_Char_NegativeStartIndex_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => string.Join('|', new string[] { "Foo" }, -1, 0)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                string.Join('|', new string[] { "Foo" }, -1, 0)
             );
         }
 
         [Fact]
         public static void Join_Char_NegativeCount_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "count",
-                () => string.Join('|', new string[] { "Foo" }, 0, -1)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
+                string.Join('|', new string[] { "Foo" }, 0, -1)
             );
         }
 
@@ -1018,9 +995,8 @@ namespace System.Tests
             int count
         )
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(
-                "startIndex",
-                () => string.Join('|', new string[] { "Foo" }, startIndex, count)
+            AssertExtensions.Throws<ArgumentOutOfRangeException>("startIndex", () =>
+                string.Join('|', new string[] { "Foo" }, startIndex, count)
             );
         }
 
@@ -1571,26 +1547,22 @@ namespace System.Tests
         [Fact]
         public void Replace_StringComparison_NullOldValue_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "oldValue",
-                () => "abc".Replace(null, "def", StringComparison.CurrentCulture)
+            AssertExtensions.Throws<ArgumentNullException>("oldValue", () =>
+                "abc".Replace(null, "def", StringComparison.CurrentCulture)
             );
-            AssertExtensions.Throws<ArgumentNullException>(
-                "oldValue",
-                () => "abc".Replace(null, "def", true, CultureInfo.CurrentCulture)
+            AssertExtensions.Throws<ArgumentNullException>("oldValue", () =>
+                "abc".Replace(null, "def", true, CultureInfo.CurrentCulture)
             );
         }
 
         [Fact]
         public void Replace_StringComparison_EmptyOldValue_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "oldValue",
-                () => "abc".Replace("", "def", StringComparison.CurrentCulture)
+            AssertExtensions.Throws<ArgumentException>("oldValue", () =>
+                "abc".Replace("", "def", StringComparison.CurrentCulture)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "oldValue",
-                () => "abc".Replace("", "def", true, CultureInfo.CurrentCulture)
+            AssertExtensions.Throws<ArgumentException>("oldValue", () =>
+                "abc".Replace("", "def", true, CultureInfo.CurrentCulture)
             );
         }
 
@@ -1647,9 +1619,8 @@ namespace System.Tests
             StringComparison comparisonType
         )
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "comparisonType",
-                () => "abc".Replace("abc", "def", comparisonType)
+            AssertExtensions.Throws<ArgumentException>("comparisonType", () =>
+                "abc".Replace("abc", "def", comparisonType)
             );
         }
 
@@ -1833,13 +1804,11 @@ namespace System.Tests
             StringComparison comparisonType
         )
         {
-            AssertExtensions.Throws<ArgumentException>(
-                "comparisonType",
-                () => "abc".GetHashCode(comparisonType)
+            AssertExtensions.Throws<ArgumentException>("comparisonType", () =>
+                "abc".GetHashCode(comparisonType)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "comparisonType",
-                () => string.GetHashCode("abc".AsSpan(), comparisonType)
+            AssertExtensions.Throws<ArgumentException>("comparisonType", () =>
+                string.GetHashCode("abc".AsSpan(), comparisonType)
             );
         }
 
@@ -2183,13 +2152,11 @@ namespace System.Tests
         public static void IndexOf_Invalid_Char()
         {
             // Invalid comparison type
-            AssertExtensions.Throws<ArgumentException>(
-                "comparisonType",
-                () => "foo".IndexOf('o', StringComparison.CurrentCulture - 1)
+            AssertExtensions.Throws<ArgumentException>("comparisonType", () =>
+                "foo".IndexOf('o', StringComparison.CurrentCulture - 1)
             );
-            AssertExtensions.Throws<ArgumentException>(
-                "comparisonType",
-                () => "foo".IndexOf('o', StringComparison.OrdinalIgnoreCase + 1)
+            AssertExtensions.Throws<ArgumentException>("comparisonType", () =>
+                "foo".IndexOf('o', StringComparison.OrdinalIgnoreCase + 1)
             );
         }
 

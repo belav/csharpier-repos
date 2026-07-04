@@ -406,13 +406,10 @@ public class LinkGenerationDecisionTreeTest
 
         // Assert
         // Assert
-        Assert.Collection(
-            matches,
-            m =>
-            {
-                Assert.Same(entry2, m);
-            }
-        );
+        Assert.Collection(matches, m =>
+        {
+            Assert.Same(entry2, m);
+        });
     }
 
     [Fact]
@@ -552,13 +549,10 @@ public class LinkGenerationDecisionTreeTest
             .ToList();
 
         // Assert
-        Assert.Collection(
-            matches,
-            m =>
-            {
-                Assert.Same(entry2, m);
-            }
-        );
+        Assert.Collection(matches, m =>
+        {
+            Assert.Same(entry2, m);
+        });
     }
 
     [Fact]
@@ -678,13 +672,10 @@ public class LinkGenerationDecisionTreeTest
             .ToList();
 
         // Assert
-        Assert.Collection(
-            matches,
-            m =>
-            {
-                Assert.Same(entry1, m);
-            }
-        );
+        Assert.Collection(matches, m =>
+        {
+            Assert.Same(entry1, m);
+        });
     }
 
     [Fact]
@@ -730,13 +721,10 @@ public class LinkGenerationDecisionTreeTest
             .ToList();
 
         // Assert
-        Assert.Collection(
-            matches,
-            m =>
-            {
-                Assert.Same(entry1, m);
-            }
-        );
+        Assert.Collection(matches, m =>
+        {
+            Assert.Same(entry1, m);
+        });
     }
 
     [Fact]
@@ -884,13 +872,10 @@ public class LinkGenerationDecisionTreeTest
             .ToList();
 
         // Assert
-        Assert.Collection(
-            matches,
-            m =>
-            {
-                Assert.Same(entry2, m);
-            }
-        );
+        Assert.Collection(matches, m =>
+        {
+            Assert.Same(entry2, m);
+        });
     }
 
     [Fact]
@@ -941,13 +926,10 @@ public class LinkGenerationDecisionTreeTest
             .ToList();
 
         // Assert
-        Assert.Collection(
-            matches,
-            m =>
-            {
-                Assert.Same(entry2, m);
-            }
-        );
+        Assert.Collection(matches, m =>
+        {
+            Assert.Same(entry2, m);
+        });
     }
 
     [Fact]

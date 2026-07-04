@@ -13,15 +13,12 @@ public class CSharpDbContextGeneratorTest : ModelCodeGeneratorTestBase
         Test(
             modelBuilder =>
             {
-                modelBuilder.Entity(
-                    "Patriarch",
-                    b =>
-                    {
-                        b.Property<HierarchyId>("Id");
-                        b.HasKey("Id");
-                        b.Property<string>("Name");
-                    }
-                );
+                modelBuilder.Entity("Patriarch", b =>
+                {
+                    b.Property<HierarchyId>("Id");
+                    b.HasKey("Id");
+                    b.Property<string>("Name");
+                });
             },
             new ModelCodeGenerationOptions { UseDataAnnotations = false },
             code =>

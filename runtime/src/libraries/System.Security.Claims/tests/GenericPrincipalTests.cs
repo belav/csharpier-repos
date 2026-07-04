@@ -42,9 +42,8 @@ namespace System.Security.Claims
         [Fact]
         public void Ctor_ArgumentValidation()
         {
-            AssertExtensions.Throws<ArgumentNullException>(
-                "identity",
-                () => new GenericPrincipal(null, new string[5])
+            AssertExtensions.Throws<ArgumentNullException>("identity", () =>
+                new GenericPrincipal(null, new string[5])
             );
         }
     }
