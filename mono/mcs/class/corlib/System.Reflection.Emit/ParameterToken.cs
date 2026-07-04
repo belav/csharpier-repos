@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,75 +28,71 @@
 #if MONO_FEATURE_SRE
 using System.Runtime.InteropServices;
 
-namespace System.Reflection.Emit {
+namespace System.Reflection.Emit
+{
+    /// <summary>
+    ///  Represents the Token returned by the metadata to represent a Parameter.
+    /// </summary>
+    [ComVisible(true)]
+    [Serializable]
+    public readonly struct ParameterToken : IEquatable<ParameterToken>
+    {
+        internal readonly int tokValue;
 
+        public static readonly ParameterToken Empty = new ParameterToken();
 
-	/// <summary>
-	///  Represents the Token returned by the metadata to represent a Parameter.
-	/// </summary>
-	[ComVisible (true)]
-	[Serializable]
-	public readonly struct ParameterToken : IEquatable<ParameterToken> {
+        internal ParameterToken(int val)
+        {
+            tokValue = val;
+        }
 
-		internal readonly int tokValue;
+        /// <summary>
+        /// </summary>
+        public override bool Equals(object obj)
+        {
+            bool res = obj is ParameterToken;
 
-		public static readonly ParameterToken Empty = new ParameterToken ();
+            if (res)
+            {
+                ParameterToken that = (ParameterToken)obj;
+                res = (this.tokValue == that.tokValue);
+            }
 
-		internal ParameterToken (int val)
-		{
-			tokValue = val;
-		}
+            return res;
+        }
 
-		/// <summary>
-		/// </summary>
-		public override bool Equals (object obj)
-		{
-			bool res = obj is ParameterToken;
+        public bool Equals(ParameterToken obj)
+        {
+            return (this.tokValue == obj.tokValue);
+        }
 
-			if (res) {
-				ParameterToken that = (ParameterToken) obj;
-				res = (this.tokValue == that.tokValue);
-			}
+        public static bool operator ==(ParameterToken a, ParameterToken b)
+        {
+            return Equals(a, b);
+        }
 
-			return res;
-		}
+        public static bool operator !=(ParameterToken a, ParameterToken b)
+        {
+            return !Equals(a, b);
+        }
 
-		public bool Equals (ParameterToken obj)
-		{
-			return (this.tokValue == obj.tokValue);
-		}
+        /// <summary>
+        ///  Tests whether the given object is an instance of
+        ///  ParameterToken and has the same token value.
+        /// </summary>
+        public override int GetHashCode()
+        {
+            return tokValue;
+        }
 
-		public static bool operator == (ParameterToken a, ParameterToken b)
-		{
-			return Equals (a, b);
-		}
-
-		public static bool operator != (ParameterToken a, ParameterToken b)
-		{
-			return !Equals (a, b);
-		}
-
-		/// <summary>
-		///  Tests whether the given object is an instance of
-		///  ParameterToken and has the same token value.
-		/// </summary>
-		public override int GetHashCode ()
-		{
-			return tokValue;
-		}
-
-
-		/// <summary>
-		///  Returns the metadata token for this Parameter.
-		/// </summary>
-		public int Token {
-			get {
-				return tokValue;
-			}
-		}
-
-	}
-
+        /// <summary>
+        ///  Returns the metadata token for this Parameter.
+        /// </summary>
+        public int Token
+        {
+            get { return tokValue; }
+        }
+    }
 }
 
 #endif

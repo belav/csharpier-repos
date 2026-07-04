@@ -14,22 +14,75 @@ namespace System.Linq.Tests.LegacyTests
         {
             var source = new[]
             {
-                new { Name = "Jim", City = "Minneapolis", Country = "USA" },
-                new { Name = "Tim", City = "Seattle", Country = "USA" },
-                new { Name = "Philip", City = "Orlando", Country = "USA" },
-                new { Name = "Chris", City = "London", Country = "UK" },
-                new { Name = "Rob", City = "Kent", Country = "UK" }
+                new
+                {
+                    Name = "Jim",
+                    City = "Minneapolis",
+                    Country = "USA",
+                },
+                new
+                {
+                    Name = "Tim",
+                    City = "Seattle",
+                    Country = "USA",
+                },
+                new
+                {
+                    Name = "Philip",
+                    City = "Orlando",
+                    Country = "USA",
+                },
+                new
+                {
+                    Name = "Chris",
+                    City = "London",
+                    Country = "UK",
+                },
+                new
+                {
+                    Name = "Rob",
+                    City = "Kent",
+                    Country = "UK",
+                },
             };
             var expected = new[]
             {
-                new { Name = "Rob", City = "Kent", Country = "UK" },
-                new { Name = "Chris", City = "London", Country = "UK" },
-                new { Name = "Jim", City = "Minneapolis", Country = "USA" },
-                new { Name = "Philip", City = "Orlando", Country = "USA" },
-                new { Name = "Tim", City = "Seattle", Country = "USA" }
+                new
+                {
+                    Name = "Rob",
+                    City = "Kent",
+                    Country = "UK",
+                },
+                new
+                {
+                    Name = "Chris",
+                    City = "London",
+                    Country = "UK",
+                },
+                new
+                {
+                    Name = "Jim",
+                    City = "Minneapolis",
+                    Country = "USA",
+                },
+                new
+                {
+                    Name = "Philip",
+                    City = "Orlando",
+                    Country = "USA",
+                },
+                new
+                {
+                    Name = "Tim",
+                    City = "Seattle",
+                    Country = "USA",
+                },
             };
 
-            Assert.Equal(expected, source.AsQueryable().OrderBy(e => e.Country).ThenBy(e => e.City));
+            Assert.Equal(
+                expected,
+                source.AsQueryable().OrderBy(e => e.Country).ThenBy(e => e.City)
+            );
         }
 
         [Fact]
@@ -43,21 +96,35 @@ namespace System.Linq.Tests.LegacyTests
         public void NullKeySelector()
         {
             Expression<Func<DateTime, int>> keySelector = null;
-            AssertExtensions.Throws<ArgumentNullException>("keySelector", () => Enumerable.Empty<DateTime>().AsQueryable().OrderBy(e => e).ThenBy(keySelector));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "keySelector",
+                () => Enumerable.Empty<DateTime>().AsQueryable().OrderBy(e => e).ThenBy(keySelector)
+            );
         }
 
         [Fact]
         public void NullSourceComparer()
         {
             IOrderedQueryable<int> source = null;
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.ThenBy(i => i, null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.ThenBy(i => i, null)
+            );
         }
 
         [Fact]
         public void NullKeySelectorComparer()
         {
             Expression<Func<DateTime, int>> keySelector = null;
-            AssertExtensions.Throws<ArgumentNullException>("keySelector", () => Enumerable.Empty<DateTime>().AsQueryable().OrderBy(e => e).ThenBy(keySelector, null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "keySelector",
+                () =>
+                    Enumerable
+                        .Empty<DateTime>()
+                        .AsQueryable()
+                        .OrderBy(e => e)
+                        .ThenBy(keySelector, null)
+            );
         }
 
         [Fact]
@@ -70,7 +137,11 @@ namespace System.Linq.Tests.LegacyTests
         [Fact]
         public void ThenBy2()
         {
-            var count = new[] { 0, 1, 2 }.AsQueryable().OrderBy(n => n).ThenBy(n => n, Comparer<int>.Default).Count();
+            var count = new[] { 0, 1, 2 }
+                .AsQueryable()
+                .OrderBy(n => n)
+                .ThenBy(n => n, Comparer<int>.Default)
+                .Count();
             Assert.Equal(3, count);
         }
     }

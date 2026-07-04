@@ -95,21 +95,21 @@ namespace System.Linq
     public class ParallelQuery<TSource> : ParallelQuery, IEnumerable<TSource>
     {
         internal ParallelQuery(QuerySettings settings)
-            : base(settings)
-        {
-        }
+            : base(settings) { }
 
         internal sealed override ParallelQuery<TCastTo> Cast<TCastTo>()
         {
-            return ParallelEnumerable.Select<TSource, TCastTo>(this, elem => (TCastTo)(object)elem!);
+            return ParallelEnumerable.Select<TSource, TCastTo>(
+                this,
+                elem => (TCastTo)(object)elem!
+            );
         }
 
         internal sealed override ParallelQuery<TCastTo> OfType<TCastTo>()
         {
             // @PERF: Currently defined in terms of other operators. This isn't the most performant
             //      solution (because it results in two operators) but is simple to implement.
-            return this
-                .Where<TSource>(elem => elem is TCastTo)
+            return this.Where<TSource>(elem => elem is TCastTo)
                 .Select<TSource, TCastTo>(elem => (TCastTo)(object)elem!);
         }
 

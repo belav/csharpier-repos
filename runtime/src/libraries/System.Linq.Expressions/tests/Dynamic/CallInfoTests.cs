@@ -13,24 +13,41 @@ namespace System.Dynamic.Tests
         [Fact]
         public void Ctor_NullNames_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("argNames", () => new CallInfo(0, default(IEnumerable<string>)));
-            AssertExtensions.Throws<ArgumentNullException>("argNames", () => new CallInfo(0, default(string[])));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "argNames",
+                () => new CallInfo(0, default(IEnumerable<string>))
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "argNames",
+                () => new CallInfo(0, default(string[]))
+            );
         }
 
         [Theory]
         [InlineData(-1, new string[0])]
         [InlineData(2, new string[] { "foo", "bar", "baz", "quux", "quuux" })]
-        public void Ctor_CountLessThanArgNamesCount_ThrowsArgumentException(int argCount, string[] argNames)
+        public void Ctor_CountLessThanArgNamesCount_ThrowsArgumentException(
+            int argCount,
+            string[] argNames
+        )
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => new CallInfo(argCount, argNames));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => new CallInfo(argCount, argNames)
+            );
         }
 
         [Fact]
         public void Ctor_NullItemInArgNames_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("argNames[1]", () => new CallInfo(3, "foo", null, "bar"));
             AssertExtensions.Throws<ArgumentNullException>(
-                "argNames[0]", () => new CallInfo(3, Enumerable.Repeat(default(string), 2)));
+                "argNames[1]",
+                () => new CallInfo(3, "foo", null, "bar")
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "argNames[0]",
+                () => new CallInfo(3, Enumerable.Repeat(default(string), 2))
+            );
         }
 
         [Theory]
@@ -54,11 +71,31 @@ namespace System.Dynamic.Tests
             yield return new object[] { basicCallInfo, new CallInfo(1, new string[0]), true };
             yield return new object[] { basicCallInfo, basicCallInfo, true };
             yield return new object[] { basicCallInfo, new CallInfo(0, new string[0]), false };
-            yield return new object[] { basicCallInfo, new CallInfo(1, new string[] { "foo" }), false };
+            yield return new object[]
+            {
+                basicCallInfo,
+                new CallInfo(1, new string[] { "foo" }),
+                false,
+            };
 
-            yield return new object[] { new CallInfo(2, new string[] { "foo", "bar" }), new CallInfo(2, new string[] { "foo", "bar" }), true};
-            yield return new object[] { new CallInfo(2, new string[] { "foo", "bar" }), new CallInfo(2, new string[] { "foo", "baz" }), false };
-            yield return new object[] { new CallInfo(2, new string[] { "foo", "bar" }), new CallInfo(3, new string[] { "foo", "bar" }), false };
+            yield return new object[]
+            {
+                new CallInfo(2, new string[] { "foo", "bar" }),
+                new CallInfo(2, new string[] { "foo", "bar" }),
+                true,
+            };
+            yield return new object[]
+            {
+                new CallInfo(2, new string[] { "foo", "bar" }),
+                new CallInfo(2, new string[] { "foo", "baz" }),
+                false,
+            };
+            yield return new object[]
+            {
+                new CallInfo(2, new string[] { "foo", "bar" }),
+                new CallInfo(3, new string[] { "foo", "bar" }),
+                false,
+            };
 
             yield return new object[] { basicCallInfo, "CallInfo", false };
             yield return new object[] { basicCallInfo, new object(), false };
@@ -67,7 +104,11 @@ namespace System.Dynamic.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public static void Equals_GetHashCode_ReturnsExpected(CallInfo info, object obj, bool expected)
+        public static void Equals_GetHashCode_ReturnsExpected(
+            CallInfo info,
+            object obj,
+            bool expected
+        )
         {
             Assert.Equal(expected, info.Equals(obj));
 
@@ -83,23 +124,23 @@ namespace System.Dynamic.Tests
         [Fact]
         public void Ctor_Enumerable_MakesReadOnlyCopy()
         {
-            List<string> nameList = new List<string> {"foo", "bar"};
+            List<string> nameList = new List<string> { "foo", "bar" };
             ReadOnlyCollection<string> nameReadOnly = nameList.AsReadOnly();
             var info = new CallInfo(2, nameReadOnly);
             nameList[0] = "baz";
             nameList[1] = "qux";
-            Assert.Equal(new[] {"foo", "bar"}, info.ArgumentNames);
+            Assert.Equal(new[] { "foo", "bar" }, info.ArgumentNames);
         }
 
         [Fact]
         public void Ctor_Array_MakesReadOnlyCopy()
         {
-            string[] nameArray = {"foo", "bar"};
+            string[] nameArray = { "foo", "bar" };
             var nameReadOnly = new ReadOnlyCollection<string>(nameArray);
             var info = new CallInfo(2, nameReadOnly);
             nameArray[0] = "baz";
             nameArray[1] = "qux";
-            Assert.Equal(new[] {"foo", "bar"}, info.ArgumentNames);
+            Assert.Equal(new[] { "foo", "bar" }, info.ArgumentNames);
         }
     }
 }

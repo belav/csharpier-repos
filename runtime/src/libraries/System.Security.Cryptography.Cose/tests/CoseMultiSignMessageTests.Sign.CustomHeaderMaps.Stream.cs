@@ -13,14 +13,21 @@ namespace System.Security.Cryptography.Cose.Tests
     {
         internal override CoseMessageKind MessageKind => CoseMessageKind.MultiSign;
 
-        internal override void AddSignature(CoseMultiSignMessage msg, byte[] content, CoseSigner signer, byte[]? associatedData = null)
+        internal override void AddSignature(
+            CoseMultiSignMessage msg,
+            byte[] content,
+            CoseSigner signer,
+            byte[]? associatedData = null
+        )
         {
             using Stream stream = GetTestStream(content);
-            msg.AddSignatureForDetachedAsync(stream, signer, associatedData).GetAwaiter().GetResult();
+            msg.AddSignatureForDetachedAsync(stream, signer, associatedData)
+                .GetAwaiter()
+                .GetResult();
         }
 
-        internal override CoseMessage Decode(ReadOnlySpan<byte> cborPayload)
-            => CoseMessage.DecodeMultiSign(cborPayload);
+        internal override CoseMessage Decode(ReadOnlySpan<byte> cborPayload) =>
+            CoseMessage.DecodeMultiSign(cborPayload);
 
         internal override CoseHeaderMap GetSigningHeaderMap(CoseMessage msg, bool getProtectedMap)
         {
@@ -31,10 +38,27 @@ namespace System.Security.Cryptography.Cose.Tests
             return getProtectedMap ? signature.ProtectedHeaders : signature.UnprotectedHeaders;
         }
 
-        internal override Task<byte[]> SignDetachedAsync(Stream detachedContent, CoseSigner signer, CoseHeaderMap? protectedHeaders = null, CoseHeaderMap? unprotectedHeaders = null, byte[]? associatedData = null)
-            => CoseMultiSignMessage.SignDetachedAsync(detachedContent, signer, protectedHeaders, unprotectedHeaders, associatedData);
+        internal override Task<byte[]> SignDetachedAsync(
+            Stream detachedContent,
+            CoseSigner signer,
+            CoseHeaderMap? protectedHeaders = null,
+            CoseHeaderMap? unprotectedHeaders = null,
+            byte[]? associatedData = null
+        ) =>
+            CoseMultiSignMessage.SignDetachedAsync(
+                detachedContent,
+                signer,
+                protectedHeaders,
+                unprotectedHeaders,
+                associatedData
+            );
 
-        internal override bool Verify(CoseMessage msg, AsymmetricAlgorithm key, byte[] content, byte[]? associatedData = null)
+        internal override bool Verify(
+            CoseMessage msg,
+            AsymmetricAlgorithm key,
+            byte[] content,
+            byte[]? associatedData = null
+        )
         {
             Assert.True(!OnlySupportsDetachedContent || msg.Content == null);
             CoseMultiSignMessage multiSignMsg = Assert.IsType<CoseMultiSignMessage>(msg);
@@ -43,7 +67,10 @@ namespace System.Security.Cryptography.Cose.Tests
             Assert.Equal(1, signatures.Count);
 
             using Stream stream = GetTestStream(content);
-            return signatures[0].VerifyDetachedAsync(key, stream, associatedData).GetAwaiter().GetResult();
+            return signatures[0]
+                .VerifyDetachedAsync(key, stream, associatedData)
+                .GetAwaiter()
+                .GetResult();
         }
     }
 
@@ -51,14 +78,19 @@ namespace System.Security.Cryptography.Cose.Tests
     {
         internal override CoseMessageKind MessageKind => CoseMessageKind.MultiSign;
 
-        internal override void AddSignature(CoseMultiSignMessage msg, byte[] content, CoseSigner signer, byte[]? associatedData = null)
+        internal override void AddSignature(
+            CoseMultiSignMessage msg,
+            byte[] content,
+            CoseSigner signer,
+            byte[]? associatedData = null
+        )
         {
             using Stream stream = GetTestStream(content);
             msg.AddSignatureForDetached(stream, signer, associatedData);
         }
 
-        internal override CoseMessage Decode(ReadOnlySpan<byte> cborPayload)
-            => CoseMessage.DecodeMultiSign(cborPayload);
+        internal override CoseMessage Decode(ReadOnlySpan<byte> cborPayload) =>
+            CoseMessage.DecodeMultiSign(cborPayload);
 
         internal override CoseHeaderMap GetSigningHeaderMap(CoseMessage msg, bool getProtectedMap)
         {
@@ -69,10 +101,27 @@ namespace System.Security.Cryptography.Cose.Tests
             return getProtectedMap ? signature.ProtectedHeaders : signature.UnprotectedHeaders;
         }
 
-        internal override byte[] SignDetached(Stream detachedContent, CoseSigner signer, CoseHeaderMap? protectedHeaders = null, CoseHeaderMap? unprotectedHeaders = null, byte[]? associatedData = null)
-            => CoseMultiSignMessage.SignDetached(detachedContent, signer, protectedHeaders, unprotectedHeaders, associatedData);
+        internal override byte[] SignDetached(
+            Stream detachedContent,
+            CoseSigner signer,
+            CoseHeaderMap? protectedHeaders = null,
+            CoseHeaderMap? unprotectedHeaders = null,
+            byte[]? associatedData = null
+        ) =>
+            CoseMultiSignMessage.SignDetached(
+                detachedContent,
+                signer,
+                protectedHeaders,
+                unprotectedHeaders,
+                associatedData
+            );
 
-        internal override bool Verify(CoseMessage msg, AsymmetricAlgorithm key, byte[] content, byte[]? associatedData = null)
+        internal override bool Verify(
+            CoseMessage msg,
+            AsymmetricAlgorithm key,
+            byte[] content,
+            byte[]? associatedData = null
+        )
         {
             Assert.True(!OnlySupportsDetachedContent || msg.Content == null);
             CoseMultiSignMessage multiSignMsg = Assert.IsType<CoseMultiSignMessage>(msg);

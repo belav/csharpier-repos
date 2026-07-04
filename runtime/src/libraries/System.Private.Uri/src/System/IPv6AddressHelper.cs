@@ -9,7 +9,12 @@ namespace System
     // The idea is to stay with static helper methods and strings
     internal static partial class IPv6AddressHelper
     {
-        internal static unsafe string ParseCanonicalName(string str, int start, ref bool isLoopback, ref string? scopeId)
+        internal static unsafe string ParseCanonicalName(
+            string str,
+            int start,
+            ref bool isLoopback,
+            ref string? scopeId
+        )
         {
             Span<ushort> numbers = stackalloc ushort[NumberOfLabels];
             numbers.Clear();
@@ -39,17 +44,26 @@ namespace System
                     pos += charsWritten;
 
                     stackSpace[pos++] = '.';
-                    success = (numbers[i] & 0xFF).TryFormat(stackSpace.Slice(pos), out charsWritten);
+                    success = (numbers[i] & 0xFF).TryFormat(
+                        stackSpace.Slice(pos),
+                        out charsWritten
+                    );
                     Debug.Assert(success);
                     pos += charsWritten;
 
                     stackSpace[pos++] = '.';
-                    success = (numbers[i + 1] >> 8).TryFormat(stackSpace.Slice(pos), out charsWritten);
+                    success = (numbers[i + 1] >> 8).TryFormat(
+                        stackSpace.Slice(pos),
+                        out charsWritten
+                    );
                     Debug.Assert(success);
                     pos += charsWritten;
 
                     stackSpace[pos++] = '.';
-                    success = (numbers[i + 1] & 0xFF).TryFormat(stackSpace.Slice(pos), out charsWritten);
+                    success = (numbers[i + 1] & 0xFF).TryFormat(
+                        stackSpace.Slice(pos),
+                        out charsWritten
+                    );
                     Debug.Assert(success);
                     pos += charsWritten;
                     break;
@@ -78,7 +92,8 @@ namespace System
                 {
                     stackSpace[pos++] = ':';
                 }
-                success = numbers[i].TryFormat(stackSpace.Slice(pos), out charsWritten, format: "x");
+                success = numbers[i]
+                    .TryFormat(stackSpace.Slice(pos), out charsWritten, format: "x");
                 Debug.Assert(success);
                 pos += charsWritten;
             }
@@ -97,18 +112,20 @@ namespace System
             //  0:0:0:0:0:FFFF:127.0.0.1    == 0:0:0:0:0:FFFF:7F00:0001
             //
 
-            return ((numbers[0] == 0)
-                            && (numbers[1] == 0)
-                            && (numbers[2] == 0)
-                            && (numbers[3] == 0)
-                            && (numbers[4] == 0))
-                           && (((numbers[5] == 0)
-                                && (numbers[6] == 0)
-                                && (numbers[7] == 1))
-                               || (((numbers[6] == 0x7F00)
-                                    && (numbers[7] == 0x0001))
-                                   && ((numbers[5] == 0)
-                                       || (numbers[5] == 0xFFFF))));
+            return (
+                    (numbers[0] == 0)
+                    && (numbers[1] == 0)
+                    && (numbers[2] == 0)
+                    && (numbers[3] == 0)
+                    && (numbers[4] == 0)
+                )
+                && (
+                    ((numbers[5] == 0) && (numbers[6] == 0) && (numbers[7] == 1))
+                    || (
+                        ((numbers[6] == 0x7F00) && (numbers[7] == 0x0001))
+                        && ((numbers[5] == 0) || (numbers[5] == 0xFFFF))
+                    )
+                );
         }
 
         //
@@ -144,7 +161,12 @@ namespace System
 
         //  Remarks: MUST NOT be used unless all input indexes are verified and trusted.
         //           start must be next to '[' position, or error is reported
-        private static unsafe bool InternalIsValid(char* name, int start, ref int end, bool validateStrictAddress)
+        private static unsafe bool InternalIsValid(
+            char* name,
+            int start,
+            ref int end,
+            bool validateStrictAddress
+        )
         {
             int sequenceCount = 0;
             int sequenceLength = 0;
@@ -244,14 +266,23 @@ namespace System
                             }
 
                             i = end;
-                            if (!IPv4AddressHelper.IsValid(name, lastSequence, ref i, true, false, false))
+                            if (
+                                !IPv4AddressHelper.IsValid(
+                                    name,
+                                    lastSequence,
+                                    ref i,
+                                    true,
+                                    false,
+                                    false
+                                )
+                            )
                             {
                                 return false;
                             }
                             // ipv4 address takes 2 slots in ipv6 address, one was just counted meeting the '.'
                             ++sequenceCount;
                             haveIPv4Address = true;
-                            --i;            // it will be incremented back on the next loop
+                            --i; // it will be incremented back on the next loop
                             break;
 
                         default:
@@ -276,7 +307,15 @@ namespace System
 
             int expectedSequenceCount = 8 + (havePrefix ? 1 : 0);
 
-            if (!expectingNumber && (sequenceLength <= 4) && (haveCompressor ? (sequenceCount < expectedSequenceCount) : (sequenceCount == expectedSequenceCount)))
+            if (
+                !expectingNumber
+                && (sequenceLength <= 4)
+                && (
+                    haveCompressor
+                        ? (sequenceCount < expectedSequenceCount)
+                        : (sequenceCount == expectedSequenceCount)
+                )
+            )
             {
                 if (i == end + 1)
                 {

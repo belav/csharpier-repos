@@ -37,7 +37,13 @@ namespace System.IO.Compression.Tests
             using (var stream = await StreamHelpers.CreateTempCopyStream(zfile(zipFile)))
             {
                 Stream wrapped = new WrappedStream(stream, true, false, false, null);
-                IsZipSameAsDir(wrapped, zfolder(zipFolder), ZipArchiveMode.Read, requireExplicit: true, checkTimes: true);
+                IsZipSameAsDir(
+                    wrapped,
+                    zfolder(zipFolder),
+                    ZipArchiveMode.Read,
+                    requireExplicit: true,
+                    checkTimes: true
+                );
                 Assert.False(wrapped.CanRead, "Wrapped stream should be closed at this point"); //check that it was closed
             }
         }
@@ -45,7 +51,12 @@ namespace System.IO.Compression.Tests
         [Fact]
         public static async Task ReadStreamOps()
         {
-            using (ZipArchive archive = new ZipArchive(await StreamHelpers.CreateTempCopyStream(zfile("normal.zip")), ZipArchiveMode.Read))
+            using (
+                ZipArchive archive = new ZipArchive(
+                    await StreamHelpers.CreateTempCopyStream(zfile("normal.zip")),
+                    ZipArchiveMode.Read
+                )
+            )
             {
                 foreach (ZipArchiveEntry e in archive.Entries)
                 {
@@ -63,7 +74,11 @@ namespace System.IO.Compression.Tests
         [Fact]
         public static async Task ReadInterleaved()
         {
-            using (ZipArchive archive = new ZipArchive(await StreamHelpers.CreateTempCopyStream(zfile("normal.zip"))))
+            using (
+                ZipArchive archive = new ZipArchive(
+                    await StreamHelpers.CreateTempCopyStream(zfile("normal.zip"))
+                )
+            )
             {
                 ZipArchiveEntry e1 = archive.GetEntry("first.txt");
                 ZipArchiveEntry e2 = archive.GetEntry("notempty/second.txt");
@@ -86,7 +101,10 @@ namespace System.IO.Compression.Tests
                 //now read interleaved, assume we are working with < 4gb files
                 const int bytesAtATime = 15;
 
-                using (Stream e1s = e1.Open(), e2s = e2.Open())
+                using (
+                    Stream e1s = e1.Open(),
+                        e2s = e2.Open()
+                )
                 {
                     int e1pos = 0;
                     int e2pos = 0;
@@ -95,15 +113,25 @@ namespace System.IO.Compression.Tests
                     {
                         if (e1pos < e1.Length)
                         {
-                            int e1bytesRead = e1s.Read(e1interleaved, e1pos,
-                                bytesAtATime + e1pos > e1.Length ? (int)e1.Length - e1pos : bytesAtATime);
+                            int e1bytesRead = e1s.Read(
+                                e1interleaved,
+                                e1pos,
+                                bytesAtATime + e1pos > e1.Length
+                                    ? (int)e1.Length - e1pos
+                                    : bytesAtATime
+                            );
                             e1pos += e1bytesRead;
                         }
 
                         if (e2pos < e2.Length)
                         {
-                            int e2bytesRead = e2s.Read(e2interleaved, e2pos,
-                                bytesAtATime + e2pos > e2.Length ? (int)e2.Length - e2pos : bytesAtATime);
+                            int e2bytesRead = e2s.Read(
+                                e2interleaved,
+                                e2pos,
+                                bytesAtATime + e2pos > e2.Length
+                                    ? (int)e2.Length - e2pos
+                                    : bytesAtATime
+                            );
                             e2pos += e2bytesRead;
                         }
                     }
@@ -117,8 +145,10 @@ namespace System.IO.Compression.Tests
                 byte[] e1selfInterleaved1 = new byte[e1.Length];
                 byte[] e1selfInterleaved2 = new byte[e2.Length];
 
-
-                using (Stream s1 = e1.Open(), s2 = e1.Open())
+                using (
+                    Stream s1 = e1.Open(),
+                        s2 = e1.Open()
+                )
                 {
                     int s1pos = 0;
                     int s2pos = 0;
@@ -127,15 +157,25 @@ namespace System.IO.Compression.Tests
                     {
                         if (s1pos < e1.Length)
                         {
-                            int s1bytesRead = s1.Read(e1interleaved, s1pos,
-                                bytesAtATime + s1pos > e1.Length ? (int)e1.Length - s1pos : bytesAtATime);
+                            int s1bytesRead = s1.Read(
+                                e1interleaved,
+                                s1pos,
+                                bytesAtATime + s1pos > e1.Length
+                                    ? (int)e1.Length - s1pos
+                                    : bytesAtATime
+                            );
                             s1pos += s1bytesRead;
                         }
 
                         if (s2pos < e1.Length)
                         {
-                            int s2bytesRead = s2.Read(e2interleaved, s2pos,
-                                bytesAtATime + s2pos > e1.Length ? (int)e1.Length - s2pos : bytesAtATime);
+                            int s2bytesRead = s2.Read(
+                                e2interleaved,
+                                s2pos,
+                                bytesAtATime + s2pos > e1.Length
+                                    ? (int)e1.Length - s2pos
+                                    : bytesAtATime
+                            );
                             s2pos += s2bytesRead;
                         }
                     }
@@ -146,10 +186,14 @@ namespace System.IO.Compression.Tests
                 ArraysEqual<byte>(e1readnormal, e1selfInterleaved2, e1readnormal.Length);
             }
         }
+
         [Fact]
         public static async Task ReadModeInvalidOpsTest()
         {
-            ZipArchive archive = new ZipArchive(await StreamHelpers.CreateTempCopyStream(zfile("normal.zip")), ZipArchiveMode.Read);
+            ZipArchive archive = new ZipArchive(
+                await StreamHelpers.CreateTempCopyStream(zfile("normal.zip")),
+                ZipArchiveMode.Read
+            );
             ZipArchiveEntry e = archive.GetEntry("first.txt");
 
             //should also do it on deflated stream
@@ -173,12 +217,18 @@ namespace System.IO.Compression.Tests
             archive.Dispose();
 
             //after disposed
-            Assert.Throws<ObjectDisposedException>(() => { var x = archive.Entries; }); //"Should not be able to get entries on disposed archive"
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                var x = archive.Entries;
+            }); //"Should not be able to get entries on disposed archive"
             Assert.Throws<NotSupportedException>(() => archive.CreateEntry("dirka")); //"should not be able to create on disposed archive"
 
             Assert.Throws<ObjectDisposedException>(() => e.Open()); //"should not be able to open on disposed archive"
             Assert.Throws<NotSupportedException>(() => e.Delete()); //"should not be able to delete on disposed archive"
-            Assert.Throws<ObjectDisposedException>(() => { e.LastWriteTime = new DateTimeOffset(); }); //"Should not be able to update on disposed archive"
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                e.LastWriteTime = new DateTimeOffset();
+            }); //"Should not be able to update on disposed archive"
 
             Assert.Throws<NotSupportedException>(() => s.ReadByte()); //"should not be able to read on disposed archive"
 
@@ -189,10 +239,12 @@ namespace System.IO.Compression.Tests
         public static void TestEmptyLastModifiedEntryValueNotThrowingInternalException()
         {
             var emptyDateIndicator = new DateTimeOffset(new DateTime(1980, 1, 1, 0, 0, 0));
-            var buffer = new byte[100];//empty archive we will make will have exact this size
+            var buffer = new byte[100]; //empty archive we will make will have exact this size
             using var memoryStream = new MemoryStream(buffer);
 
-            using (var singleEntryArchive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
+            using (
+                var singleEntryArchive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true)
+            )
             {
                 singleEntryArchive.CreateEntry("1");
             }
@@ -214,7 +266,12 @@ namespace System.IO.Compression.Tests
         [InlineData("small.zip")]
         public static async Task EntriesNotEncryptedByDefault(string zipFile)
         {
-            using (ZipArchive archive = new ZipArchive(await StreamHelpers.CreateTempCopyStream(zfile(zipFile)), ZipArchiveMode.Read))
+            using (
+                ZipArchive archive = new ZipArchive(
+                    await StreamHelpers.CreateTempCopyStream(zfile(zipFile)),
+                    ZipArchiveMode.Read
+                )
+            )
             {
                 foreach (ZipArchiveEntry entry in archive.Entries)
                 {
@@ -231,7 +288,12 @@ namespace System.IO.Compression.Tests
         {
             var entriesEncrypted = new Dictionary<string, bool>();
 
-            using (ZipArchive archive = new ZipArchive(await StreamHelpers.CreateTempCopyStream(zfile(zipFile)), ZipArchiveMode.Read))
+            using (
+                ZipArchive archive = new ZipArchive(
+                    await StreamHelpers.CreateTempCopyStream(zfile(zipFile)),
+                    ZipArchiveMode.Read
+                )
+            )
             {
                 foreach (ZipArchiveEntry entry in archive.Entries)
                 {
@@ -253,7 +315,10 @@ namespace System.IO.Compression.Tests
         [Theory]
         [InlineData(true, 0)]
         [InlineData(false, 1)]
-        public static async Task EnsureDisposeIsCalledAsExpectedOnTheUnderlyingStream(bool leaveOpen, int expectedDisposeCalls)
+        public static async Task EnsureDisposeIsCalledAsExpectedOnTheUnderlyingStream(
+            bool leaveOpen,
+            int expectedDisposeCalls
+        )
         {
             var disposeCallCountingStream = new DisposeCallCountingStream();
             using (var tempStream = await StreamHelpers.CreateTempCopyStream(zfile("small.zip")))
@@ -261,7 +326,13 @@ namespace System.IO.Compression.Tests
                 tempStream.CopyTo(disposeCallCountingStream);
             }
 
-            using (ZipArchive archive = new ZipArchive(disposeCallCountingStream, ZipArchiveMode.Read, leaveOpen))
+            using (
+                ZipArchive archive = new ZipArchive(
+                    disposeCallCountingStream,
+                    ZipArchiveMode.Read,
+                    leaveOpen
+                )
+            )
             {
                 // Iterate through entries to ensure read of zip file
                 foreach (ZipArchiveEntry entry in archive.Entries)

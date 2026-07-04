@@ -4,6 +4,7 @@
 using System;
 using System.Runtime.InteropServices;
 using Xunit;
+
 namespace DefaultNamespace
 {
     public class RootMem
@@ -42,8 +43,6 @@ namespace DefaultNamespace
             }
         }
 
-        ~RootMem()
-        {
-        }
+        ~RootMem() { }
     }
 }

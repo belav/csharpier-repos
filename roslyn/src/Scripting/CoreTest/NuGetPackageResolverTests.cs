@@ -39,11 +39,17 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
             ParseValidPackageReference("nuget:A\t/\n1.0\r ", "A\t", "\n1.0\r ");
         }
 
-        private static void ParseValidPackageReference(string reference, string expectedName, string expectedVersion)
+        private static void ParseValidPackageReference(
+            string reference,
+            string expectedName,
+            string expectedVersion
+        )
         {
             string name;
             string version;
-            Assert.True(NuGetPackageResolver.TryParsePackageReference(reference, out name, out version));
+            Assert.True(
+                NuGetPackageResolver.TryParsePackageReference(reference, out name, out version)
+            );
             Assert.Equal(expectedName, name);
             Assert.Equal(expectedVersion, version);
         }
@@ -52,7 +58,9 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
         {
             string name;
             string version;
-            Assert.False(NuGetPackageResolver.TryParsePackageReference(reference, out name, out version));
+            Assert.False(
+                NuGetPackageResolver.TryParsePackageReference(reference, out name, out version)
+            );
             Assert.Null(name);
             Assert.Null(version);
         }

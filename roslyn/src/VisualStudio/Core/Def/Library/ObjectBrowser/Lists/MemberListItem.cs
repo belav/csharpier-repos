@@ -14,7 +14,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         private readonly MemberKind _kind;
         private readonly bool _isInherited;
 
-        internal MemberListItem(ProjectId projectId, ISymbol symbol, string displayText, string fullNameText, string searchText, bool isHidden, bool isInherited)
+        internal MemberListItem(
+            ProjectId projectId,
+            ISymbol symbol,
+            string displayText,
+            string fullNameText,
+            string searchText,
+            bool isHidden,
+            bool isInherited
+        )
             : base(projectId, symbol, displayText, fullNameText, searchText, isHidden)
         {
             _isInherited = isInherited;
@@ -33,17 +41,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
                     }
                     else
                     {
-                        _kind = fieldSymbol.IsConst
-                            ? MemberKind.Constant
-                            : MemberKind.Field;
+                        _kind = fieldSymbol.IsConst ? MemberKind.Constant : MemberKind.Field;
                     }
 
                     break;
 
                 case SymbolKind.Method:
                     var methodSymbol = (IMethodSymbol)symbol;
-                    _kind = methodSymbol.MethodKind is MethodKind.Conversion or
-                                      MethodKind.UserDefinedOperator
+                    _kind = methodSymbol.MethodKind
+                        is MethodKind.Conversion
+                            or MethodKind.UserDefinedOperator
                         ? MemberKind.Operator
                         : MemberKind.Method;
 

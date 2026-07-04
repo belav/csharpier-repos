@@ -51,6 +51,6 @@ public class ModelCustomizer : IModelCustomizer
     /// <param name="context">
     ///     The context instance that the model is being created for.
     /// </param>
-    public virtual void Customize(ModelBuilder modelBuilder, DbContext context)
-        => context.OnModelCreating(modelBuilder);
+    public virtual void Customize(ModelBuilder modelBuilder, DbContext context) =>
+        context.OnModelCreating(modelBuilder);
 }

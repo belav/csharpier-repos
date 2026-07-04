@@ -8,11 +8,13 @@ namespace System.IdentityModel.Tokens
         XmlElement referenceXml;
 
         public GenericXmlSecurityKeyIdentifierClause(XmlElement referenceXml)
-            : this(referenceXml, null, 0)
-        {
-        }
+            : this(referenceXml, null, 0) { }
 
-        public GenericXmlSecurityKeyIdentifierClause(XmlElement referenceXml, byte[] derivationNonce, int derivationLength)
+        public GenericXmlSecurityKeyIdentifierClause(
+            XmlElement referenceXml,
+            byte[] derivationNonce,
+            int derivationLength
+        )
             : base(null, derivationNonce, derivationLength)
         {
             if (referenceXml == null)
@@ -29,7 +31,8 @@ namespace System.IdentityModel.Tokens
 
         public override bool Matches(SecurityKeyIdentifierClause keyIdentifierClause)
         {
-            GenericXmlSecurityKeyIdentifierClause that = keyIdentifierClause as GenericXmlSecurityKeyIdentifierClause;
+            GenericXmlSecurityKeyIdentifierClause that =
+                keyIdentifierClause as GenericXmlSecurityKeyIdentifierClause;
 
             // PreSharp Bug: Parameter 'that' to this public method must be validated: A null-dereference can occur here.
 #pragma warning suppress 56506
@@ -49,7 +52,10 @@ namespace System.IdentityModel.Tokens
             if (originalNode.OuterXml == newNode.OuterXml)
                 return true;
 
-            if (originalNode.LocalName != newNode.LocalName || originalNode.InnerText != newNode.InnerText)
+            if (
+                originalNode.LocalName != newNode.LocalName
+                || originalNode.InnerText != newNode.InnerText
+            )
                 return false;
 
             if (originalNode.InnerXml == newNode.InnerXml)
@@ -57,13 +63,18 @@ namespace System.IdentityModel.Tokens
 
             if (originalNode.HasChildNodes)
             {
-                if (!newNode.HasChildNodes || originalNode.ChildNodes.Count != newNode.ChildNodes.Count)
+                if (
+                    !newNode.HasChildNodes
+                    || originalNode.ChildNodes.Count != newNode.ChildNodes.Count
+                )
                     return false;
 
                 bool childrenStatus = true;
                 for (int i = 0; i < originalNode.ChildNodes.Count; i++)
                 {
-                    childrenStatus = childrenStatus & CompareNodes(originalNode.ChildNodes[i], newNode.ChildNodes[i]);
+                    childrenStatus =
+                        childrenStatus
+                        & CompareNodes(originalNode.ChildNodes[i], newNode.ChildNodes[i]);
                 }
 
                 return childrenStatus;

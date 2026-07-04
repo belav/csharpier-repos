@@ -18,14 +18,26 @@ namespace System.Text.Tests
         public void GetMaxByteCount(int charCount)
         {
             int expected = (charCount + 1) * 4;
-            Assert.Equal(expected, new UTF32Encoding(true, false, false).GetMaxByteCount(charCount));
+            Assert.Equal(
+                expected,
+                new UTF32Encoding(true, false, false).GetMaxByteCount(charCount)
+            );
             Assert.Equal(expected, new UTF32Encoding(true, true, false).GetMaxByteCount(charCount));
             Assert.Equal(expected, new UTF32Encoding(true, false, true).GetMaxByteCount(charCount));
             Assert.Equal(expected, new UTF32Encoding(true, true, true).GetMaxByteCount(charCount));
             Assert.Equal(expected, new UTF32Encoding(false, true, true).GetMaxByteCount(charCount));
-            Assert.Equal(expected, new UTF32Encoding(false, true, false).GetMaxByteCount(charCount));
-            Assert.Equal(expected, new UTF32Encoding(false, false, true).GetMaxByteCount(charCount));
-            Assert.Equal(expected, new UTF32Encoding(false, false, false).GetMaxByteCount(charCount));
+            Assert.Equal(
+                expected,
+                new UTF32Encoding(false, true, false).GetMaxByteCount(charCount)
+            );
+            Assert.Equal(
+                expected,
+                new UTF32Encoding(false, false, true).GetMaxByteCount(charCount)
+            );
+            Assert.Equal(
+                expected,
+                new UTF32Encoding(false, false, false).GetMaxByteCount(charCount)
+            );
         }
     }
 }

@@ -21,9 +21,7 @@ namespace System.ServiceModel.Discovery
         NonNullItemCollection<XElement> extensions;
 
         public ResolveCriteria()
-            : this(new EndpointAddress(EndpointAddress.AnonymousUri))
-        {
-        }
+            : this(new EndpointAddress(EndpointAddress.AnonymousUri)) { }
 
         public ResolveCriteria(EndpointAddress address)
         {
@@ -38,11 +36,7 @@ namespace System.ServiceModel.Discovery
 
         public EndpointAddress Address
         {
-            get
-            {
-                return this.endpointAddress;
-            }
-
+            get { return this.endpointAddress; }
             set
             {
                 if (value == null)
@@ -56,15 +50,16 @@ namespace System.ServiceModel.Discovery
 
         public TimeSpan Duration
         {
-            get
-            {
-                return this.duration;
-            }
+            get { return this.duration; }
             set
             {
                 if (value.CompareTo(TimeSpan.Zero) <= 0)
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange("value", value, SR2.DiscoveryResolveDurationLessThanZero);
+                    throw FxTrace.Exception.ArgumentOutOfRange(
+                        "value",
+                        value,
+                        SR2.DiscoveryResolveDurationLessThanZero
+                    );
                 }
                 this.duration = value;
             }
@@ -105,7 +100,10 @@ namespace System.ServiceModel.Discovery
             int startDepth = reader.Depth;
             reader.ReadStartElement();
 
-            this.endpointAddress = SerializationUtility.ReadEndpointAddress(discoveryVersion, reader);
+            this.endpointAddress = SerializationUtility.ReadEndpointAddress(
+                discoveryVersion,
+                reader
+            );
 
             this.extensions = null;
             this.duration = TimeSpan.MaxValue;
@@ -117,7 +115,12 @@ namespace System.ServiceModel.Discovery
                 {
                     break;
                 }
-                else if (reader.IsStartElement(ProtocolStrings.SchemaNames.DurationElement, ProtocolStrings.VersionInternal.Namespace))
+                else if (
+                    reader.IsStartElement(
+                        ProtocolStrings.SchemaNames.DurationElement,
+                        ProtocolStrings.VersionInternal.Namespace
+                    )
+                )
                 {
                     this.duration = SerializationUtility.ReadDuration(reader);
                 }
@@ -144,14 +147,19 @@ namespace System.ServiceModel.Discovery
                 throw FxTrace.Exception.ArgumentNull("writer");
             }
 
-            SerializationUtility.WriteEndPointAddress(discoveryVersion, this.endpointAddress, writer);
+            SerializationUtility.WriteEndPointAddress(
+                discoveryVersion,
+                this.endpointAddress,
+                writer
+            );
 
             if (this.duration != TimeSpan.MaxValue)
             {
                 writer.WriteElementString(
-                    ProtocolStrings.SchemaNames.DurationElement, 
-                    ProtocolStrings.VersionInternal.Namespace, 
-                    XmlConvert.ToString(this.duration));
+                    ProtocolStrings.SchemaNames.DurationElement,
+                    ProtocolStrings.VersionInternal.Namespace,
+                    XmlConvert.ToString(this.duration)
+                );
             }
 
             if (this.extensions != null)

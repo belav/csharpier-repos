@@ -20,89 +20,165 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void ExplicitAttribute_FromSource()
         {
             var source =
-@"public class A
+                @"public class A
 {
     public static ref T F<T>(out T t) => throw null;
 }";
 
-            var comp = CreateCompilation(new[] { source, RefSafetyRulesAttributeDefinition }, parseOptions: TestOptions.Regular10);
-            CompileAndVerify(comp, symbolValidator: m => AssertRefSafetyRulesAttribute(m, includesAttributeDefinition: true, includesAttributeUse: false, publicDefinition: true));
+            var comp = CreateCompilation(
+                new[] { source, RefSafetyRulesAttributeDefinition },
+                parseOptions: TestOptions.Regular10
+            );
+            CompileAndVerify(
+                comp,
+                symbolValidator: m =>
+                    AssertRefSafetyRulesAttribute(
+                        m,
+                        includesAttributeDefinition: true,
+                        includesAttributeUse: false,
+                        publicDefinition: true
+                    )
+            );
 
             comp = CreateCompilation(new[] { source, RefSafetyRulesAttributeDefinition });
-            CompileAndVerify(comp, symbolValidator: m => AssertRefSafetyRulesAttribute(m, includesAttributeDefinition: true, includesAttributeUse: true, publicDefinition: true));
+            CompileAndVerify(
+                comp,
+                symbolValidator: m =>
+                    AssertRefSafetyRulesAttribute(
+                        m,
+                        includesAttributeDefinition: true,
+                        includesAttributeUse: true,
+                        publicDefinition: true
+                    )
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public void ExplicitAttribute_FromMetadata(bool useCompilationReference)
         {
-            var comp = CreateCompilation(RefSafetyRulesAttributeDefinition, parseOptions: TestOptions.Regular10);
-            CompileAndVerify(comp, symbolValidator: m => AssertRefSafetyRulesAttribute(m, includesAttributeDefinition: true, includesAttributeUse: false, publicDefinition: true));
+            var comp = CreateCompilation(
+                RefSafetyRulesAttributeDefinition,
+                parseOptions: TestOptions.Regular10
+            );
+            CompileAndVerify(
+                comp,
+                symbolValidator: m =>
+                    AssertRefSafetyRulesAttribute(
+                        m,
+                        includesAttributeDefinition: true,
+                        includesAttributeUse: false,
+                        publicDefinition: true
+                    )
+            );
             var ref1 = AsReference(comp, useCompilationReference);
 
             var source =
-@"public class A
+                @"public class A
 {
     public static ref T F<T>(out T t) => throw null;
 }";
 
-            comp = CreateCompilation(source, references: new[] { ref1 }, parseOptions: TestOptions.Regular10);
-            CompileAndVerify(comp, symbolValidator: m => AssertRefSafetyRulesAttribute(m, includesAttributeDefinition: false, includesAttributeUse: false, publicDefinition: true));
+            comp = CreateCompilation(
+                source,
+                references: new[] { ref1 },
+                parseOptions: TestOptions.Regular10
+            );
+            CompileAndVerify(
+                comp,
+                symbolValidator: m =>
+                    AssertRefSafetyRulesAttribute(
+                        m,
+                        includesAttributeDefinition: false,
+                        includesAttributeUse: false,
+                        publicDefinition: true
+                    )
+            );
 
             comp = CreateCompilation(source, references: new[] { ref1 });
-            CompileAndVerify(comp, symbolValidator: m => AssertRefSafetyRulesAttribute(m, includesAttributeDefinition: false, includesAttributeUse: true, publicDefinition: true));
+            CompileAndVerify(
+                comp,
+                symbolValidator: m =>
+                    AssertRefSafetyRulesAttribute(
+                        m,
+                        includesAttributeDefinition: false,
+                        includesAttributeUse: true,
+                        publicDefinition: true
+                    )
+            );
         }
 
         [Fact]
         public void ExplicitAttribute_MissingConstructor()
         {
             var source1 =
-@"namespace System.Runtime.CompilerServices
+                @"namespace System.Runtime.CompilerServices
 {
     public sealed class RefSafetyRulesAttribute : Attribute { }
 }";
             var source2 =
-@"public class A
+                @"public class A
 {
     public static ref T F<T>(out T t) => throw null;
 }";
 
-            var comp = CreateCompilation(new[] { source1, source2 }, parseOptions: TestOptions.Regular10);
+            var comp = CreateCompilation(
+                new[] { source1, source2 },
+                parseOptions: TestOptions.Regular10
+            );
             comp.VerifyEmitDiagnostics();
 
             comp = CreateCompilation(new[] { source1, source2 });
             comp.VerifyEmitDiagnostics(
                 // error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.RefSafetyRulesAttribute..ctor'
-                Diagnostic(ErrorCode.ERR_MissingPredefinedMember).WithArguments("System.Runtime.CompilerServices.RefSafetyRulesAttribute", ".ctor").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
+                    .WithArguments(
+                        "System.Runtime.CompilerServices.RefSafetyRulesAttribute",
+                        ".ctor"
+                    )
+                    .WithLocation(1, 1)
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public void ExplicitAttribute_ReferencedInSource(
-            [CombinatorialValues(LanguageVersion.CSharp10, LanguageVersion.CSharp11)] LanguageVersion languageVersion,
-            bool useCompilationReference)
+            [CombinatorialValues(LanguageVersion.CSharp10, LanguageVersion.CSharp11)]
+                LanguageVersion languageVersion,
+            bool useCompilationReference
+        )
         {
             var comp = CreateCompilation(RefSafetyRulesAttributeDefinition);
             comp.VerifyDiagnostics();
             var ref1 = AsReference(comp, useCompilationReference);
 
             var source =
-@"using System.Runtime.CompilerServices;
+                @"using System.Runtime.CompilerServices;
 [assembly: RefSafetyRules(11)]
 [module: RefSafetyRules(11)]
 ";
 
-            comp = CreateCompilation(source, references: new[] { ref1 }, parseOptions: TestOptions.Regular.WithLanguageVersion(languageVersion));
+            comp = CreateCompilation(
+                source,
+                references: new[] { ref1 },
+                parseOptions: TestOptions.Regular.WithLanguageVersion(languageVersion)
+            );
             comp.VerifyDiagnostics(
                 // (3,10): error CS8335: Do not use 'System.Runtime.CompilerServices.RefSafetyRulesAttribute'. This is reserved for compiler usage.
                 // [module: RefSafetyRules(11)]
-                Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "RefSafetyRules(11)").WithArguments("System.Runtime.CompilerServices.RefSafetyRulesAttribute").WithLocation(3, 10));
+                Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "RefSafetyRules(11)")
+                    .WithArguments("System.Runtime.CompilerServices.RefSafetyRulesAttribute")
+                    .WithLocation(3, 10)
+            );
         }
 
         [WorkItem(63692, "https://github.com/dotnet/roslyn/issues/63692")]
         [Theory]
         [InlineData("", false)]
-        [InlineData("[assembly: System.Reflection.AssemblyDescriptionAttribute(null)] [assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(string))]", false)]
+        [InlineData(
+            "[assembly: System.Reflection.AssemblyDescriptionAttribute(null)] [assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(string))]",
+            false
+        )]
         [InlineData("using System;", false)]
         [InlineData("using S = System.String;", false)]
         [InlineData("namespace N { namespace M { } }", false)]
@@ -123,10 +199,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void EmitAttribute_01(string source, bool expectedIncludesAttributeUse)
         {
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
-            CompileAndVerify(comp, symbolValidator: m => AssertRefSafetyRulesAttribute(m, includesAttributeDefinition: false, includesAttributeUse: false, publicDefinition: false));
+            CompileAndVerify(
+                comp,
+                symbolValidator: m =>
+                    AssertRefSafetyRulesAttribute(
+                        m,
+                        includesAttributeDefinition: false,
+                        includesAttributeUse: false,
+                        publicDefinition: false
+                    )
+            );
 
             comp = CreateCompilation(source);
-            CompileAndVerify(comp, symbolValidator: m => AssertRefSafetyRulesAttribute(m, includesAttributeDefinition: expectedIncludesAttributeUse, includesAttributeUse: expectedIncludesAttributeUse, publicDefinition: false));
+            CompileAndVerify(
+                comp,
+                symbolValidator: m =>
+                    AssertRefSafetyRulesAttribute(
+                        m,
+                        includesAttributeDefinition: expectedIncludesAttributeUse,
+                        includesAttributeUse: expectedIncludesAttributeUse,
+                        publicDefinition: false
+                    )
+            );
         }
 
         [WorkItem(63692, "https://github.com/dotnet/roslyn/issues/63692")]
@@ -144,50 +238,106 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void EmitAttribute_02(string source)
         {
             var sourceA =
-@"public interface I { }
+                @"public interface I { }
 public class A { }
 public struct S { }
 public ref struct R { }
 ";
-            var refA = CreateCompilation(sourceA, parseOptions: TestOptions.Regular10).EmitToImageReference();
+            var refA = CreateCompilation(sourceA, parseOptions: TestOptions.Regular10)
+                .EmitToImageReference();
 
-            var comp = CreateCompilation(source, references: new[] { refA }, parseOptions: TestOptions.Regular10);
-            CompileAndVerify(comp, verify: Verification.Skipped, symbolValidator: m => AssertRefSafetyRulesAttribute(m, includesAttributeDefinition: false, includesAttributeUse: false, publicDefinition: false));
+            var comp = CreateCompilation(
+                source,
+                references: new[] { refA },
+                parseOptions: TestOptions.Regular10
+            );
+            CompileAndVerify(
+                comp,
+                verify: Verification.Skipped,
+                symbolValidator: m =>
+                    AssertRefSafetyRulesAttribute(
+                        m,
+                        includesAttributeDefinition: false,
+                        includesAttributeUse: false,
+                        publicDefinition: false
+                    )
+            );
 
             comp = CreateCompilation(source, references: new[] { refA });
-            CompileAndVerify(comp, verify: Verification.Skipped, symbolValidator: m => AssertRefSafetyRulesAttribute(m, includesAttributeDefinition: true, includesAttributeUse: true, publicDefinition: false));
+            CompileAndVerify(
+                comp,
+                verify: Verification.Skipped,
+                symbolValidator: m =>
+                    AssertRefSafetyRulesAttribute(
+                        m,
+                        includesAttributeDefinition: true,
+                        includesAttributeUse: true,
+                        publicDefinition: false
+                    )
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public void EmitAttribute_TypeForwardedTo(
-            [CombinatorialValues(LanguageVersion.CSharp10, LanguageVersion.CSharp11)] LanguageVersion languageVersionA,
-            [CombinatorialValues(LanguageVersion.CSharp10, LanguageVersion.CSharp11)] LanguageVersion languageVersionB,
-            bool useCompilationReference)
+            [CombinatorialValues(LanguageVersion.CSharp10, LanguageVersion.CSharp11)]
+                LanguageVersion languageVersionA,
+            [CombinatorialValues(LanguageVersion.CSharp10, LanguageVersion.CSharp11)]
+                LanguageVersion languageVersionB,
+            bool useCompilationReference
+        )
         {
             var sourceA =
-@"public class A { }
+                @"public class A { }
 ";
-            var comp = CreateCompilation(sourceA, parseOptions: TestOptions.Regular.WithLanguageVersion(languageVersionA));
+            var comp = CreateCompilation(
+                sourceA,
+                parseOptions: TestOptions.Regular.WithLanguageVersion(languageVersionA)
+            );
             var refA = AsReference(comp, useCompilationReference);
             bool useUpdatedEscapeRulesA = languageVersionA == LanguageVersion.CSharp11;
             Assert.Equal(useUpdatedEscapeRulesA, comp.SourceModule.UseUpdatedEscapeRules);
-            CompileAndVerify(comp, symbolValidator: m => AssertRefSafetyRulesAttribute(m, includesAttributeDefinition: useUpdatedEscapeRulesA, includesAttributeUse: useUpdatedEscapeRulesA, publicDefinition: false));
+            CompileAndVerify(
+                comp,
+                symbolValidator: m =>
+                    AssertRefSafetyRulesAttribute(
+                        m,
+                        includesAttributeDefinition: useUpdatedEscapeRulesA,
+                        includesAttributeUse: useUpdatedEscapeRulesA,
+                        publicDefinition: false
+                    )
+            );
 
             var sourceB =
-@"using System.Runtime.CompilerServices;
+                @"using System.Runtime.CompilerServices;
 [assembly: TypeForwardedTo(typeof(A))]
 ";
-            comp = CreateCompilation(sourceB, references: new[] { refA }, parseOptions: TestOptions.Regular.WithLanguageVersion(languageVersionB));
-            Assert.Equal(languageVersionB == LanguageVersion.CSharp11, comp.SourceModule.UseUpdatedEscapeRules);
-            CompileAndVerify(comp, symbolValidator: m => AssertRefSafetyRulesAttribute(m, includesAttributeDefinition: false, includesAttributeUse: false, publicDefinition: false));
+            comp = CreateCompilation(
+                sourceB,
+                references: new[] { refA },
+                parseOptions: TestOptions.Regular.WithLanguageVersion(languageVersionB)
+            );
+            Assert.Equal(
+                languageVersionB == LanguageVersion.CSharp11,
+                comp.SourceModule.UseUpdatedEscapeRules
+            );
+            CompileAndVerify(
+                comp,
+                symbolValidator: m =>
+                    AssertRefSafetyRulesAttribute(
+                        m,
+                        includesAttributeDefinition: false,
+                        includesAttributeUse: false,
+                        publicDefinition: false
+                    )
+            );
         }
 
         [Fact]
         public void AttributeField()
         {
             var sourceA =
-@"using System;
+                @"using System;
 using System.Linq;
 using System.Reflection;
 public class A
@@ -203,7 +353,7 @@ public class A
             var refA = CreateCompilation(sourceA).EmitToImageReference();
 
             var sourceB =
-@"using System;
+                @"using System;
 class B : A
 {
     static void Main()
@@ -215,7 +365,12 @@ class B : A
             CompileAndVerify(sourceB, references: new[] { refA }, expectedOutput: "11");
         }
 
-        private static void AssertRefSafetyRulesAttribute(ModuleSymbol module, bool includesAttributeDefinition, bool includesAttributeUse, bool publicDefinition)
+        private static void AssertRefSafetyRulesAttribute(
+            ModuleSymbol module,
+            bool includesAttributeDefinition,
+            bool includesAttributeUse,
+            bool publicDefinition
+        )
         {
             const string attributeName = "System.Runtime.CompilerServices.RefSafetyRulesAttribute";
             var type = (NamedTypeSymbol)module.GlobalNamespace.GetMember(attributeName);
@@ -234,7 +389,10 @@ class B : A
             }
             if (type is { })
             {
-                Assert.Equal(publicDefinition ? Accessibility.Public : Accessibility.Internal, type.DeclaredAccessibility);
+                Assert.Equal(
+                    publicDefinition ? Accessibility.Public : Accessibility.Internal,
+                    type.DeclaredAccessibility
+                );
             }
             if (includesAttributeUse)
             {

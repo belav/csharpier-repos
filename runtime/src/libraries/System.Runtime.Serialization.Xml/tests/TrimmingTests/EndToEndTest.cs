@@ -14,12 +14,15 @@ class Program
     [DynamicDependency(DynamicallyAccessedMemberTypes.All, typeof(AuthState))]
     static int Main(string[] args)
     {
-        string data = @"<AuthState xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MyApplication.Shared.Types""> <GivenName>Admin User</GivenName> <IsAuthenticated>true</IsAuthenticated> <Name>admin@fmdevsql.onmicrosoft.com</Name> </AuthState>";
+        string data =
+            @"<AuthState xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/MyApplication.Shared.Types""> <GivenName>Admin User</GivenName> <IsAuthenticated>true</IsAuthenticated> <Name>admin@fmdevsql.onmicrosoft.com</Name> </AuthState>";
 
         var s = DeserializeDataContract<AuthState>(data);
-        if (s.GivenName != "Admin User" ||
-            s.Name != "admin@fmdevsql.onmicrosoft.com" ||
-            !s.IsAuthenticated)
+        if (
+            s.GivenName != "Admin User"
+            || s.Name != "admin@fmdevsql.onmicrosoft.com"
+            || !s.IsAuthenticated
+        )
         {
             return -1;
         }
@@ -41,9 +44,7 @@ namespace MyApplication.Shared.Types
 {
     public class AuthState
     {
-        public AuthState()
-        {
-        }
+        public AuthState() { }
 
         public bool IsAuthenticated { get; set; }
         public string Name { get; set; }

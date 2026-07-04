@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.RegistrationErrorInfo.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,56 +30,62 @@
 
 using System;
 
-namespace System.EnterpriseServices {
-	[Serializable]
-	public sealed class RegistrationErrorInfo {
-
-		#region Fields
+namespace System.EnterpriseServices
+{
+    [Serializable]
+    public sealed class RegistrationErrorInfo
+    {
+        #region Fields
 #pragma warning disable 649
-		int errorCode;
-		string errorString;
-		string majorRef;
-		string minorRef;
-		string name;
+        int errorCode;
+        string errorString;
+        string majorRef;
+        string minorRef;
+        string name;
 #pragma warning restore 649
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		[MonoTODO]
-		internal RegistrationErrorInfo (string name, string majorRef, string minorRef, int errorCode) 
-		{
-			this.name = name;
-			this.majorRef = majorRef;
-			this.minorRef = minorRef;
-			this.errorCode = errorCode;
-		}
+        [MonoTODO]
+        internal RegistrationErrorInfo(string name, string majorRef, string minorRef, int errorCode)
+        {
+            this.name = name;
+            this.majorRef = majorRef;
+            this.minorRef = minorRef;
+            this.errorCode = errorCode;
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		public int ErrorCode {
-			get { return errorCode; }
-		}
+        public int ErrorCode
+        {
+            get { return errorCode; }
+        }
 
-		public string ErrorString {
-			get { return errorString; }
-		}
+        public string ErrorString
+        {
+            get { return errorString; }
+        }
 
-		public string MajorRef {
-			get { return majorRef; }
-		}
+        public string MajorRef
+        {
+            get { return majorRef; }
+        }
 
-		public string MinorRef {
-			get { return minorRef; }
-		}
+        public string MinorRef
+        {
+            get { return minorRef; }
+        }
 
-		public string Name {
-			get { return name; }
-		}
+        public string Name
+        {
+            get { return name; }
+        }
 
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }

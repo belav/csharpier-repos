@@ -27,10 +27,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override LocalSymbol LocalInProgress
         {
-            get
-            {
-                return _inProgress;
-            }
+            get { return _inProgress; }
         }
     }
 }

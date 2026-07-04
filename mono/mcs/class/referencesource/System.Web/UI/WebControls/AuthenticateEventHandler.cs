@@ -4,9 +4,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
-
+namespace System.Web.UI.WebControls
+{
     public delegate void AuthenticateEventHandler(object sender, AuthenticateEventArgs e);
-
 }

@@ -43,28 +43,14 @@ internal sealed class StubSettingsManagerHost : ISettingsManagerHost5
 
     event EventHandler<IdleStateChangedEventArgs> ISettingsManagerHost.IdleStateChanged
     {
-        add
-        {
-            throw new NotImplementedException();
-        }
-
-        remove
-        {
-            throw new NotImplementedException();
-        }
+        add { throw new NotImplementedException(); }
+        remove { throw new NotImplementedException(); }
     }
 
     event AsyncEventHandler ISettingsManagerHost.HostShuttingDown
     {
-        add
-        {
-            throw new NotImplementedException();
-        }
-
-        remove
-        {
-            throw new NotImplementedException();
-        }
+        add { throw new NotImplementedException(); }
+        remove { throw new NotImplementedException(); }
     }
 
     bool ISettingsManagerHost.IsSharedOrRoamedSetting(string settingName)
@@ -78,14 +64,20 @@ internal sealed class StubSettingsManagerHost : ISettingsManagerHost5
         throw new NotImplementedException();
     }
 
-    Task<Stream> ISettingsManagerHost5.GetServiceStreamAsync(string serviceMoniker, CancellationToken cancellationToken)
+    Task<Stream> ISettingsManagerHost5.GetServiceStreamAsync(
+        string serviceMoniker,
+        CancellationToken cancellationToken
+    )
     {
         throw new NotImplementedException();
     }
 
     private sealed class StringStorage : IStringStorage, IAsyncStringStorage
     {
-        private ImmutableDictionary<string, VersionedString> _values = ImmutableDictionary<string, VersionedString>.Empty;
+        private ImmutableDictionary<string, VersionedString> _values = ImmutableDictionary<
+            string,
+            VersionedString
+        >.Empty;
         private PropertyChangedEventHandler? _propertyChanged;
         private PropertyChangedAsyncEventHandler? _propertyChangedAsync;
 
@@ -109,21 +101,17 @@ internal sealed class StubSettingsManagerHost : ISettingsManagerHost5
 
         event StoreUpdatedEventHandler IAsyncStringStorage.StoreUpdated
         {
-            add
-            {
-                throw new NotImplementedException();
-            }
-
-            remove
-            {
-                throw new NotImplementedException();
-            }
+            add { throw new NotImplementedException(); }
+            remove { throw new NotImplementedException(); }
         }
 
         private async Task FireChangeEventAsync(string name)
         {
             _propertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-            await (_propertyChangedAsync?.RaiseEventAsync(this, new PropertyChangedEventArgs(name)) ?? Task.CompletedTask);
+            await (
+                _propertyChangedAsync?.RaiseEventAsync(this, new PropertyChangedEventArgs(name))
+                ?? Task.CompletedTask
+            );
         }
 
         Task IStringStorage.ClearAsync(CancellationToken cancellationToken)
@@ -131,10 +119,13 @@ internal sealed class StubSettingsManagerHost : ISettingsManagerHost5
             throw new NotImplementedException();
         }
 
-        Task IAsyncStringStorage.ClearAsync(CancellationToken cancellationToken)
-            => ((IStringStorage)this).ClearAsync(cancellationToken);
+        Task IAsyncStringStorage.ClearAsync(CancellationToken cancellationToken) =>
+            ((IStringStorage)this).ClearAsync(cancellationToken);
 
-        async Task IStringStorage.DeleteIfExistsAsync(string name, CancellationToken cancellationToken)
+        async Task IStringStorage.DeleteIfExistsAsync(
+            string name,
+            CancellationToken cancellationToken
+        )
         {
             if (ImmutableInterlocked.TryRemove(ref _values, name, out _))
             {
@@ -142,20 +133,28 @@ internal sealed class StubSettingsManagerHost : ISettingsManagerHost5
             }
         }
 
-        Task IAsyncStringStorage.DeleteIfExistsAsync(string name, CancellationToken cancellationToken)
-            => ((IStringStorage)this).DeleteIfExistsAsync(name, cancellationToken);
+        Task IAsyncStringStorage.DeleteIfExistsAsync(
+            string name,
+            CancellationToken cancellationToken
+        ) => ((IStringStorage)this).DeleteIfExistsAsync(name, cancellationToken);
 
         StringWithMachineLocalFlag? IStringStorage.Get(string name)
         {
             return _values.GetValueOrDefault(name);
         }
 
-        Task<IEnumerable<NamedVersionedString>> IAsyncStringStorage.GetAllSinceVersionAsync(int modifiedAfterRevision, CancellationToken cancellationToken)
+        Task<IEnumerable<NamedVersionedString>> IAsyncStringStorage.GetAllSinceVersionAsync(
+            int modifiedAfterRevision,
+            CancellationToken cancellationToken
+        )
         {
             throw new NotImplementedException();
         }
 
-        Task<VersionedString?> IAsyncStringStorage.GetAsync(string name, CancellationToken cancellationToken)
+        Task<VersionedString?> IAsyncStringStorage.GetAsync(
+            string name,
+            CancellationToken cancellationToken
+        )
         {
             return Task.FromResult(_values.GetValueOrDefault(name));
         }
@@ -170,12 +169,20 @@ internal sealed class StubSettingsManagerHost : ISettingsManagerHost5
             throw new NotImplementedException();
         }
 
-        Task IStringStorage.SetAsync(string name, StringWithMachineLocalFlag value, Action onBeforePropertyChanged, CancellationToken cancellationToken)
+        Task IStringStorage.SetAsync(
+            string name,
+            StringWithMachineLocalFlag value,
+            Action onBeforePropertyChanged,
+            CancellationToken cancellationToken
+        )
         {
             throw new NotImplementedException();
         }
 
-        Task<ServiceUploadResult> IAsyncStringStorage.SetAsync(NamedVersionedString value, CancellationToken cancellationToken)
+        Task<ServiceUploadResult> IAsyncStringStorage.SetAsync(
+            NamedVersionedString value,
+            CancellationToken cancellationToken
+        )
         {
             throw new NotImplementedException();
         }

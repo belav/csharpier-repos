@@ -21,7 +21,8 @@ namespace System.Security.Cryptography
         public static UniversalCryptoTransform Create(
             PaddingMode paddingMode,
             BasicSymmetricCipher cipher,
-            bool encrypting)
+            bool encrypting
+        )
         {
             if (encrypting)
                 return new UniversalCryptoEncryptor(paddingMode, cipher);
@@ -29,7 +30,10 @@ namespace System.Security.Cryptography
                 return new UniversalCryptoDecryptor(paddingMode, cipher);
         }
 
-        protected UniversalCryptoTransform(PaddingMode paddingMode, BasicSymmetricCipher basicSymmetricCipher)
+        protected UniversalCryptoTransform(
+            PaddingMode paddingMode,
+            BasicSymmetricCipher basicSymmetricCipher
+        )
         {
             PaddingMode = paddingMode;
             BasicSymmetricCipher = basicSymmetricCipher;
@@ -66,23 +70,44 @@ namespace System.Security.Cryptography
             GC.SuppressFinalize(this);
         }
 
-        public int TransformBlock(byte[] inputBuffer, int inputOffset, int inputCount, byte[] outputBuffer, int outputOffset)
+        public int TransformBlock(
+            byte[] inputBuffer,
+            int inputOffset,
+            int inputCount,
+            byte[] outputBuffer,
+            int outputOffset
+        )
         {
             ArgumentNullException.ThrowIfNull(inputBuffer);
             ArgumentOutOfRangeException.ThrowIfNegative(inputOffset);
             ArgumentOutOfRangeException.ThrowIfGreaterThan(inputOffset, inputBuffer.Length);
             ArgumentOutOfRangeException.ThrowIfNegativeOrZero(inputCount);
             if (inputCount % InputBlockSize != 0)
-                throw new ArgumentOutOfRangeException(nameof(inputCount), SR.Cryptography_MustTransformWholeBlock);
+                throw new ArgumentOutOfRangeException(
+                    nameof(inputCount),
+                    SR.Cryptography_MustTransformWholeBlock
+                );
             if (inputCount > inputBuffer.Length - inputOffset)
-                throw new ArgumentOutOfRangeException(nameof(inputCount), SR.Argument_InvalidOffLen);
+                throw new ArgumentOutOfRangeException(
+                    nameof(inputCount),
+                    SR.Argument_InvalidOffLen
+                );
 
             ArgumentNullException.ThrowIfNull(outputBuffer);
             ArgumentOutOfRangeException.ThrowIfGreaterThan(outputOffset, outputBuffer.Length);
             if (inputCount > outputBuffer.Length - outputOffset)
-                throw new ArgumentOutOfRangeException(nameof(outputOffset), SR.Argument_InvalidOffLen);
+                throw new ArgumentOutOfRangeException(
+                    nameof(outputOffset),
+                    SR.Argument_InvalidOffLen
+                );
 
-            int numBytesWritten = UncheckedTransformBlock(inputBuffer, inputOffset, inputCount, outputBuffer, outputOffset);
+            int numBytesWritten = UncheckedTransformBlock(
+                inputBuffer,
+                inputOffset,
+                inputCount,
+                outputBuffer,
+                outputOffset
+            );
             Debug.Assert(numBytesWritten >= 0 && numBytesWritten <= inputCount);
             return numBytesWritten;
         }
@@ -95,7 +120,10 @@ namespace System.Security.Cryptography
             ArgumentOutOfRangeException.ThrowIfNegative(inputCount);
             ArgumentOutOfRangeException.ThrowIfGreaterThan(inputOffset, inputBuffer.Length);
             if (inputCount > inputBuffer.Length - inputOffset)
-                throw new ArgumentOutOfRangeException(nameof(inputCount), SR.Argument_InvalidOffLen);
+                throw new ArgumentOutOfRangeException(
+                    nameof(inputCount),
+                    SR.Argument_InvalidOffLen
+                );
 
             byte[] output = UncheckedTransformFinalBlock(inputBuffer, inputOffset, inputCount);
             return output;
@@ -109,17 +137,36 @@ namespace System.Security.Cryptography
             }
         }
 
-        protected int UncheckedTransformBlock(byte[] inputBuffer, int inputOffset, int inputCount, byte[] outputBuffer, int outputOffset)
+        protected int UncheckedTransformBlock(
+            byte[] inputBuffer,
+            int inputOffset,
+            int inputCount,
+            byte[] outputBuffer,
+            int outputOffset
+        )
         {
-            return UncheckedTransformBlock(inputBuffer.AsSpan(inputOffset, inputCount), outputBuffer.AsSpan(outputOffset));
+            return UncheckedTransformBlock(
+                inputBuffer.AsSpan(inputOffset, inputCount),
+                outputBuffer.AsSpan(outputOffset)
+            );
         }
 
-        protected abstract int UncheckedTransformBlock(ReadOnlySpan<byte> inputBuffer, Span<byte> outputBuffer);
+        protected abstract int UncheckedTransformBlock(
+            ReadOnlySpan<byte> inputBuffer,
+            Span<byte> outputBuffer
+        );
 
         // For final block, encryption and decryption can give better context for the returning byte size, so we
         // don't provide an implementation here.
-        protected abstract byte[] UncheckedTransformFinalBlock(byte[] inputBuffer, int inputOffset, int inputCount);
-        protected abstract int UncheckedTransformFinalBlock(ReadOnlySpan<byte> inputBuffer, Span<byte> outputBuffer);
+        protected abstract byte[] UncheckedTransformFinalBlock(
+            byte[] inputBuffer,
+            int inputOffset,
+            int inputCount
+        );
+        protected abstract int UncheckedTransformFinalBlock(
+            ReadOnlySpan<byte> inputBuffer,
+            Span<byte> outputBuffer
+        );
 
         protected PaddingMode PaddingMode { get; private set; }
         protected BasicSymmetricCipher BasicSymmetricCipher { get; private set; }

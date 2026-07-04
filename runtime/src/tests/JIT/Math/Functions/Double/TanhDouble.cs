@@ -16,7 +16,8 @@ namespace System.MathBenchmarks
 
         public static void TanhTest()
         {
-            double result = 0.0, value = -1.0;
+            double result = 0.0,
+                value = -1.0;
 
             for (int iteration = 0; iteration < MathTests.Iterations; iteration++)
             {
@@ -28,7 +29,9 @@ namespace System.MathBenchmarks
 
             if (diff > MathTests.DoubleEpsilon)
             {
-                throw new Exception($"Expected Result {tanhExpectedResult,20:g17}; Actual Result {result,20:g17}");
+                throw new Exception(
+                    $"Expected Result {tanhExpectedResult, 20:g17}; Actual Result {result, 20:g17}"
+                );
             }
         }
     }

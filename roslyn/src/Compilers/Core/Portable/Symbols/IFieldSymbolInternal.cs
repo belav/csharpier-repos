@@ -8,13 +8,13 @@ namespace Microsoft.CodeAnalysis.Symbols
     {
         /// <summary>
         /// If this field serves as a backing variable for an automatically generated
-        /// property or a field-like event, returns that 
+        /// property or a field-like event, returns that
         /// property/event. Otherwise returns null.
         /// </summary>
         ISymbolInternal? AssociatedSymbol { get; }
 
         /// <summary>
-        /// Returns true if this field was declared as "volatile". 
+        /// Returns true if this field was declared as "volatile".
         /// </summary>
         bool IsVolatile { get; }
     }

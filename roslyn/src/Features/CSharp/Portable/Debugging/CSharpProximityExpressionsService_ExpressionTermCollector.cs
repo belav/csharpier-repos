@@ -35,7 +35,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             AddIfValidTerm(expression, expressionType, terms);
         }
 
-        private static void AddIfValidTerm(ExpressionSyntax expression, ExpressionType type, IList<string> terms)
+        private static void AddIfValidTerm(
+            ExpressionSyntax expression,
+            ExpressionType type,
+            IList<string> terms
+        )
         {
             if (IsValidTerm(type))
             {
@@ -45,13 +49,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             }
         }
 
-        private static bool IsValidTerm(ExpressionType type)
-            => (type & ExpressionType.ValidTerm) == ExpressionType.ValidTerm;
+        private static bool IsValidTerm(ExpressionType type) =>
+            (type & ExpressionType.ValidTerm) == ExpressionType.ValidTerm;
 
-        private static bool IsValidExpression(ExpressionType type)
-            => (type & ExpressionType.ValidExpression) == ExpressionType.ValidExpression;
+        private static bool IsValidExpression(ExpressionType type) =>
+            (type & ExpressionType.ValidExpression) == ExpressionType.ValidExpression;
 
-        private static void AddSubExpressionTerms(ExpressionSyntax expression, IList<string> terms, ref ExpressionType expressionType)
+        private static void AddSubExpressionTerms(
+            ExpressionSyntax expression,
+            IList<string> terms,
+            ref ExpressionType expressionType
+        )
         {
             // Check here rather than at all the call sites...
             if (expression == null)
@@ -87,24 +95,44 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                     return;
 
                 case SyntaxKind.CastExpression:
-                    AddCastExpressionTerms((CastExpressionSyntax)expression, terms, ref expressionType);
+                    AddCastExpressionTerms(
+                        (CastExpressionSyntax)expression,
+                        terms,
+                        ref expressionType
+                    );
                     return;
 
                 case SyntaxKind.SimpleMemberAccessExpression:
                 case SyntaxKind.PointerMemberAccessExpression:
-                    AddMemberAccessExpressionTerms((MemberAccessExpressionSyntax)expression, terms, ref expressionType);
+                    AddMemberAccessExpressionTerms(
+                        (MemberAccessExpressionSyntax)expression,
+                        terms,
+                        ref expressionType
+                    );
                     return;
 
                 case SyntaxKind.ObjectCreationExpression:
-                    AddObjectCreationExpressionTerms((ObjectCreationExpressionSyntax)expression, terms, ref expressionType);
+                    AddObjectCreationExpressionTerms(
+                        (ObjectCreationExpressionSyntax)expression,
+                        terms,
+                        ref expressionType
+                    );
                     return;
 
                 case SyntaxKind.ArrayCreationExpression:
-                    AddArrayCreationExpressionTerms((ArrayCreationExpressionSyntax)expression, terms, ref expressionType);
+                    AddArrayCreationExpressionTerms(
+                        (ArrayCreationExpressionSyntax)expression,
+                        terms,
+                        ref expressionType
+                    );
                     return;
 
                 case SyntaxKind.InvocationExpression:
-                    AddInvocationExpressionTerms((InvocationExpressionSyntax)expression, terms, ref expressionType);
+                    AddInvocationExpressionTerms(
+                        (InvocationExpressionSyntax)expression,
+                        terms,
+                        ref expressionType
+                    );
                     return;
             }
 
@@ -131,13 +159,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
 
             if (expression is BinaryExpressionSyntax binaryExpression)
             {
-                AddBinaryExpressionTerms(expression, binaryExpression.Left, binaryExpression.Right, terms, ref expressionType);
+                AddBinaryExpressionTerms(
+                    expression,
+                    binaryExpression.Left,
+                    binaryExpression.Right,
+                    terms,
+                    ref expressionType
+                );
                 return;
             }
 
             if (expression is AssignmentExpressionSyntax assignmentExpression)
             {
-                AddBinaryExpressionTerms(expression, assignmentExpression.Left, assignmentExpression.Right, terms, ref expressionType);
+                AddBinaryExpressionTerms(
+                    expression,
+                    assignmentExpression.Left,
+                    assignmentExpression.Right,
+                    terms,
+                    ref expressionType
+                );
                 return;
             }
 
@@ -149,13 +189,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
 
             if (expression is ParenthesizedExpressionSyntax parenthesizedExpression)
             {
-                AddSubExpressionTerms(parenthesizedExpression.Expression, terms, ref expressionType);
+                AddSubExpressionTerms(
+                    parenthesizedExpression.Expression,
+                    terms,
+                    ref expressionType
+                );
             }
 
             expressionType = ExpressionType.Invalid;
         }
 
-        private static void AddCastExpressionTerms(CastExpressionSyntax castExpression, IList<string> terms, ref ExpressionType expressionType)
+        private static void AddCastExpressionTerms(
+            CastExpressionSyntax castExpression,
+            IList<string> terms,
+            ref ExpressionType expressionType
+        )
         {
             // For a cast, just add the nested expression.  Note: this is technically
             // unsafe as the cast *may* have side effects.  However, in practice this is
@@ -173,7 +221,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             expressionType = flags;
         }
 
-        private static void AddMemberAccessExpressionTerms(MemberAccessExpressionSyntax memberAccessExpression, IList<string> terms, ref ExpressionType expressionType)
+        private static void AddMemberAccessExpressionTerms(
+            MemberAccessExpressionSyntax memberAccessExpression,
+            IList<string> terms,
+            ref ExpressionType expressionType
+        )
         {
             var flags = ExpressionType.Invalid;
 
@@ -185,16 +237,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             // If the LHS says it's a valid term, then we add it ONLY if our PARENT
             // is NOT another dot/arrow.  This allows the expression 'a.b.c.d' to
             // add both 'a.b.c.d' and 'a.b.c', but not 'a.b' and 'a'.
-            if (IsValidTerm(flags) &&
-                memberAccessExpression.Parent?.Kind() is not SyntaxKind.SimpleMemberAccessExpression and not SyntaxKind.PointerMemberAccessExpression)
+            if (
+                IsValidTerm(flags)
+                && memberAccessExpression.Parent?.Kind()
+                    is not SyntaxKind.SimpleMemberAccessExpression
+                        and not SyntaxKind.PointerMemberAccessExpression
+            )
             {
                 terms.Add(ConvertToString(memberAccessExpression.Expression));
             }
 
             // And this expression itself is a valid term if the LHS is a valid
             // expression, and its PARENT is not an invocation.
-            if (IsValidExpression(flags) &&
-                !memberAccessExpression.IsParentKind(SyntaxKind.InvocationExpression))
+            if (
+                IsValidExpression(flags)
+                && !memberAccessExpression.IsParentKind(SyntaxKind.InvocationExpression)
+            )
             {
                 expressionType = ExpressionType.ValidTerm;
             }
@@ -204,7 +262,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             }
         }
 
-        private static void AddObjectCreationExpressionTerms(ObjectCreationExpressionSyntax objectionCreationExpression, IList<string> terms, ref ExpressionType expressionType)
+        private static void AddObjectCreationExpressionTerms(
+            ObjectCreationExpressionSyntax objectionCreationExpression,
+            IList<string> terms,
+            ref ExpressionType expressionType
+        )
         {
             // Object creation can *definitely* cause side effects.  So we initially
             // mark this as something invalid.  We allow it as a valid expr if all
@@ -228,14 +290,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
         private static void AddArrayCreationExpressionTerms(
             ArrayCreationExpressionSyntax arrayCreationExpression,
             IList<string> terms,
-            ref ExpressionType expressionType)
+            ref ExpressionType expressionType
+        )
         {
             var validTerm = true;
 
             if (arrayCreationExpression.Initializer != null)
             {
                 var flags = ExpressionType.Invalid;
-                arrayCreationExpression.Initializer.Expressions.Do(e => AddSubExpressionTerms(e, terms, ref flags));
+                arrayCreationExpression.Initializer.Expressions.Do(e =>
+                    AddSubExpressionTerms(e, terms, ref flags)
+                );
 
                 validTerm &= IsValidTerm(flags);
             }
@@ -250,14 +315,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             }
         }
 
-        private static void AddInvocationExpressionTerms(InvocationExpressionSyntax invocationExpression, IList<string> terms, ref ExpressionType expressionType)
+        private static void AddInvocationExpressionTerms(
+            InvocationExpressionSyntax invocationExpression,
+            IList<string> terms,
+            ref ExpressionType expressionType
+        )
         {
 #pragma warning disable IDE0059 // Unnecessary assignment of a value
             // Invocations definitely have side effects.  So we assume this
             // is invalid initially;
             expressionType = ExpressionType.Invalid;
 #pragma warning restore IDE0059 // Unnecessary assignment of a value
-            ExpressionType leftFlags = ExpressionType.Invalid, rightFlags = ExpressionType.Invalid;
+            ExpressionType leftFlags = ExpressionType.Invalid,
+                rightFlags = ExpressionType.Invalid;
 
             AddSubExpressionTerms(invocationExpression.Expression, terms, ref leftFlags);
             AddArgumentTerms(invocationExpression.ArgumentList, terms, ref rightFlags);
@@ -268,7 +338,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             expressionType = (leftFlags & rightFlags) & ExpressionType.ValidExpression;
         }
 
-        private static void AddPrefixUnaryExpressionTerms(PrefixUnaryExpressionSyntax prefixUnaryExpression, IList<string> terms, ref ExpressionType expressionType)
+        private static void AddPrefixUnaryExpressionTerms(
+            PrefixUnaryExpressionSyntax prefixUnaryExpression,
+            IList<string> terms,
+            ref ExpressionType expressionType
+        )
         {
             expressionType = ExpressionType.Invalid;
             var flags = ExpressionType.Invalid;
@@ -279,14 +353,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             // Is our expression a valid term?
             AddIfValidTerm(prefixUnaryExpression.Operand, flags, terms);
 
-            if (prefixUnaryExpression.Kind() is SyntaxKind.LogicalNotExpression or SyntaxKind.BitwiseNotExpression or SyntaxKind.UnaryMinusExpression or SyntaxKind.UnaryPlusExpression)
+            if (
+                prefixUnaryExpression.Kind()
+                is SyntaxKind.LogicalNotExpression
+                    or SyntaxKind.BitwiseNotExpression
+                    or SyntaxKind.UnaryMinusExpression
+                    or SyntaxKind.UnaryPlusExpression
+            )
             {
                 // We're a valid expression if our subexpression is...
                 expressionType = flags & ExpressionType.ValidExpression;
             }
         }
 
-        private static void AddAwaitExpressionTerms(AwaitExpressionSyntax awaitExpression, IList<string> terms, ref ExpressionType expressionType)
+        private static void AddAwaitExpressionTerms(
+            AwaitExpressionSyntax awaitExpression,
+            IList<string> terms,
+            ref ExpressionType expressionType
+        )
         {
             expressionType = ExpressionType.Invalid;
             var flags = ExpressionType.Invalid;
@@ -298,7 +382,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             AddIfValidTerm(awaitExpression.Expression, flags, terms);
         }
 
-        private static void AddPostfixUnaryExpressionTerms(PostfixUnaryExpressionSyntax postfixUnaryExpression, IList<string> terms, ref ExpressionType expressionType)
+        private static void AddPostfixUnaryExpressionTerms(
+            PostfixUnaryExpressionSyntax postfixUnaryExpression,
+            IList<string> terms,
+            ref ExpressionType expressionType
+        )
         {
             // ++ and -- are the only postfix operators.  Since they always have side
             // effects, we never consider this an expression.
@@ -313,9 +401,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             AddIfValidTerm(postfixUnaryExpression.Operand, flags, terms);
         }
 
-        private static void AddConditionalExpressionTerms(ConditionalExpressionSyntax conditionalExpression, IList<string> terms, ref ExpressionType expressionType)
+        private static void AddConditionalExpressionTerms(
+            ConditionalExpressionSyntax conditionalExpression,
+            IList<string> terms,
+            ref ExpressionType expressionType
+        )
         {
-            ExpressionType conditionFlags = ExpressionType.Invalid, trueFlags = ExpressionType.Invalid, falseFlags = ExpressionType.Invalid;
+            ExpressionType conditionFlags = ExpressionType.Invalid,
+                trueFlags = ExpressionType.Invalid,
+                falseFlags = ExpressionType.Invalid;
 
             AddSubExpressionTerms(conditionalExpression.Condition, terms, ref conditionFlags);
             AddSubExpressionTerms(conditionalExpression.WhenTrue, terms, ref trueFlags);
@@ -326,12 +420,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             AddIfValidTerm(conditionalExpression.WhenFalse, falseFlags, terms);
 
             // We're valid if all children are...
-            expressionType = (conditionFlags & trueFlags & falseFlags) & ExpressionType.ValidExpression;
+            expressionType =
+                (conditionFlags & trueFlags & falseFlags) & ExpressionType.ValidExpression;
         }
 
-        private static void AddBinaryExpressionTerms(ExpressionSyntax binaryExpression, ExpressionSyntax left, ExpressionSyntax right, IList<string> terms, ref ExpressionType expressionType)
+        private static void AddBinaryExpressionTerms(
+            ExpressionSyntax binaryExpression,
+            ExpressionSyntax left,
+            ExpressionSyntax right,
+            IList<string> terms,
+            ref ExpressionType expressionType
+        )
         {
-            ExpressionType leftFlags = ExpressionType.Invalid, rightFlags = ExpressionType.Invalid;
+            ExpressionType leftFlags = ExpressionType.Invalid,
+                rightFlags = ExpressionType.Invalid;
 
             AddSubExpressionTerms(left, terms, ref leftFlags);
             AddSubExpressionTerms(right, terms, ref rightFlags);
@@ -382,7 +484,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             }
         }
 
-        private static void AddArgumentTerms(ArgumentListSyntax argumentList, IList<string> terms, ref ExpressionType expressionType)
+        private static void AddArgumentTerms(
+            ArgumentListSyntax argumentList,
+            IList<string> terms,
+            ref ExpressionType expressionType
+        )
         {
             var validExpr = true;
             var validTerm = true;
@@ -405,10 +511,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
 
             // We're never a valid term if all arguments were valid terms.  If not, we're a valid
             // expression if all arguments where.  Otherwise, we're just invalid.
-            expressionType = validTerm
-                ? ExpressionType.ValidTerm
-                : validExpr
-                    ? ExpressionType.ValidExpression : ExpressionType.Invalid;
+            expressionType =
+                validTerm ? ExpressionType.ValidTerm
+                : validExpr ? ExpressionType.ValidExpression
+                : ExpressionType.Invalid;
         }
     }
 }

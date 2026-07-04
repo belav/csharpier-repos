@@ -11,13 +11,16 @@ namespace Microsoft.CodeAnalysis.Progress;
 
 internal static class IUIThreadOperationContextExtensions
 {
-    public static IProgress<CodeAnalysisProgress> GetCodeAnalysisProgress(this IUIThreadOperationContext context)
-        => context.Scopes.LastOrDefault().GetCodeAnalysisProgress();
+    public static IProgress<CodeAnalysisProgress> GetCodeAnalysisProgress(
+        this IUIThreadOperationContext context
+    ) => context.Scopes.LastOrDefault().GetCodeAnalysisProgress();
 
-    public static IProgress<CodeAnalysisProgress> GetCodeAnalysisProgress(this IUIThreadOperationScope? scope)
-        => scope is null ? CodeAnalysisProgress.None : new UIThreadOperationScopeProgress(scope);
+    public static IProgress<CodeAnalysisProgress> GetCodeAnalysisProgress(
+        this IUIThreadOperationScope? scope
+    ) => scope is null ? CodeAnalysisProgress.None : new UIThreadOperationScopeProgress(scope);
 
-    private sealed class UIThreadOperationScopeProgress(IUIThreadOperationScope scope) : IProgress<CodeAnalysisProgress>
+    private sealed class UIThreadOperationScopeProgress(IUIThreadOperationScope scope)
+        : IProgress<CodeAnalysisProgress>
     {
         private int _completedItems;
         private int _totalItems;
@@ -34,7 +37,6 @@ internal static class IUIThreadOperationContextExtensions
                 Interlocked.Add(ref _completedItems, value.CompleteItemValue.Value);
 
             scope.Progress.Report(new ProgressInfo(_completedItems, _totalItems));
-
         }
     }
 }

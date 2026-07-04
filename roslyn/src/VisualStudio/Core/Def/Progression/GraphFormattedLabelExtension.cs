@@ -23,7 +23,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 graphObject,
                 graphCommandDefinitionIdentifier,
                 RoslynGraphProperties.Description,
-                RoslynGraphProperties.DescriptionWithContainingSymbol);
+                RoslynGraphProperties.DescriptionWithContainingSymbol
+            );
         }
 
         public string Label(GraphObject graphObject, string graphCommandDefinitionIdentifier)
@@ -32,12 +33,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 graphObject,
                 graphCommandDefinitionIdentifier,
                 RoslynGraphProperties.FormattedLabelWithoutContainingSymbol,
-                RoslynGraphProperties.FormattedLabelWithContainingSymbol);
+                RoslynGraphProperties.FormattedLabelWithContainingSymbol
+            );
         }
 
-        private static string GetStringPropertyForGraphObject(GraphObject graphObject, string graphCommandDefinitionIdentifier, GraphProperty propertyWithoutContainingSymbol, GraphProperty propertyWithContainingSymbol)
+        private static string GetStringPropertyForGraphObject(
+            GraphObject graphObject,
+            string graphCommandDefinitionIdentifier,
+            GraphProperty propertyWithoutContainingSymbol,
+            GraphProperty propertyWithContainingSymbol
+        )
         {
-
             if (graphObject is GraphNode graphNode)
             {
                 if (graphCommandDefinitionIdentifier != GraphCommandDefinition.Contains.Id)

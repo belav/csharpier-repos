@@ -5,41 +5,33 @@
 namespace System.Xaml.Hosting.Configuration
 {
     using System;
-    using System.Configuration;
     using System.Collections.Generic;
-    using System.Web;
+    using System.Configuration;
     using System.Runtime;
+    using System.Web;
 
-    [ConfigurationCollection(typeof(HandlerElement), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMapAlternate)]
+    [ConfigurationCollection(
+        typeof(HandlerElement),
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMapAlternate
+    )]
     public sealed class HandlerElementCollection : ConfigurationElementCollection
     {
         public HandlerElementCollection()
-            : base(StringComparer.OrdinalIgnoreCase)
-        {
-        }
+            : base(StringComparer.OrdinalIgnoreCase) { }
 
         public override ConfigurationElementCollectionType CollectionType
         {
-            get
-            {
-                return ConfigurationElementCollectionType.AddRemoveClearMapAlternate;
-            }
+            get { return ConfigurationElementCollectionType.AddRemoveClearMapAlternate; }
         }
 
         protected override bool ThrowOnDuplicate
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public HandlerElement this[int index]
         {
-            get
-            {
-                return (HandlerElement)base.BaseGet(index);
-            }
+            get { return (HandlerElement)base.BaseGet(index); }
             set
             {
                 if (base.BaseGet(index) != null)
@@ -128,4 +120,3 @@ namespace System.Xaml.Hosting.Configuration
         }
     }
 }
-

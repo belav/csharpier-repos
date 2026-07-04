@@ -19,20 +19,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
     [Trait(Traits.Feature, Traits.Features.ValidateJsonString)]
     public class ValidateJsonStringTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public ValidateJsonStringTests(ITestOutputHelper logger) : base(logger)
-        {
-        }
+        public ValidateJsonStringTests(ITestOutputHelper logger)
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider?) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpJsonDiagnosticAnalyzer(), null);
+        internal override (DiagnosticAnalyzer, CodeFixProvider?) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (new CSharpJsonDiagnosticAnalyzer(), null);
 
-        private OptionsCollection OptionOn()
-            => Option(IdeAnalyzerOptionsStorage.ReportInvalidJsonPatterns, true);
+        private OptionsCollection OptionOn() =>
+            Option(IdeAnalyzerOptionsStorage.ReportInvalidJsonPatterns, true);
 
         [Fact]
         public async Task TestWarning1()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 class Program
                 {
                     void Main()
@@ -44,13 +45,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
                 globalOptions: OptionOn(),
                 diagnosticId: AbstractJsonDiagnosticAnalyzer.DiagnosticId,
                 diagnosticSeverity: DiagnosticSeverity.Warning,
-                diagnosticMessage: string.Format(FeaturesResources.JSON_issue_0, FeaturesResources.Constructors_not_allowed));
+                diagnosticMessage: string.Format(
+                    FeaturesResources.JSON_issue_0,
+                    FeaturesResources.Constructors_not_allowed
+                )
+            );
         }
 
         [Fact]
         public async Task TestWarningInRawString1()
         {
-            await TestDiagnosticInfoAsync(""""
+            await TestDiagnosticInfoAsync(
+                """"
                 class Program
                 {
                     void Main()
@@ -62,13 +68,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
                 globalOptions: OptionOn(),
                 diagnosticId: AbstractJsonDiagnosticAnalyzer.DiagnosticId,
                 diagnosticSeverity: DiagnosticSeverity.Warning,
-                diagnosticMessage: string.Format(FeaturesResources.JSON_issue_0, FeaturesResources.Constructors_not_allowed));
+                diagnosticMessage: string.Format(
+                    FeaturesResources.JSON_issue_0,
+                    FeaturesResources.Constructors_not_allowed
+                )
+            );
         }
 
         [Fact]
         public async Task TestWarning2()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 class Program
                 {
                     void Main()
@@ -80,14 +91,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
                 globalOptions: OptionOn(),
                 diagnosticId: AbstractJsonDiagnosticAnalyzer.DiagnosticId,
                 diagnosticSeverity: DiagnosticSeverity.Warning,
-                diagnosticMessage: string.Format(FeaturesResources.JSON_issue_0,
-                    string.Format(FeaturesResources._0_unexpected, '}')));
+                diagnosticMessage: string.Format(
+                    FeaturesResources.JSON_issue_0,
+                    string.Format(FeaturesResources._0_unexpected, '}')
+                )
+            );
         }
 
         [Fact]
         public async Task TestJsonDocumentWithTrailingComma()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 <Workspace>
                     <Project Language="C#" CommonReferencesNet6="true">
                         <Document>
@@ -107,14 +122,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
                 globalOptions: OptionOn(),
                 diagnosticId: AbstractJsonDiagnosticAnalyzer.DiagnosticId,
                 diagnosticSeverity: DiagnosticSeverity.Warning,
-                diagnosticMessage: string.Format(FeaturesResources.JSON_issue_0,
-                    FeaturesResources.Trailing_comma_not_allowed));
+                diagnosticMessage: string.Format(
+                    FeaturesResources.JSON_issue_0,
+                    FeaturesResources.Trailing_comma_not_allowed
+                )
+            );
         }
 
         [Fact]
         public async Task TestJsonDocumentTrailingCommaDisallowed()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 <Workspace>
                     <Project Language="C#" CommonReferencesNet6="true">
                         <Document>
@@ -134,14 +153,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
                 globalOptions: OptionOn(),
                 diagnosticId: AbstractJsonDiagnosticAnalyzer.DiagnosticId,
                 diagnosticSeverity: DiagnosticSeverity.Warning,
-                diagnosticMessage: string.Format(FeaturesResources.JSON_issue_0,
-                    FeaturesResources.Trailing_comma_not_allowed));
+                diagnosticMessage: string.Format(
+                    FeaturesResources.JSON_issue_0,
+                    FeaturesResources.Trailing_comma_not_allowed
+                )
+            );
         }
 
         [Fact]
         public async Task TestJsonDocumentTrailingCommaAllowed()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 <Workspace>
                     <Project Language="C#" CommonReferencesNet6="true">
                         <Document>
@@ -157,13 +180,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestJsonDocumentTrailingCommaAllowedImplicitObject()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 <Workspace>
                     <Project Language="C#" CommonReferencesNet6="true">
                         <Document>
@@ -179,13 +204,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestJsonDocumentWithComments()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 <Workspace>
                     <Project Language="C#" CommonReferencesNet6="true">
                         <Document>
@@ -205,14 +232,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
                 globalOptions: OptionOn(),
                 diagnosticId: AbstractJsonDiagnosticAnalyzer.DiagnosticId,
                 diagnosticSeverity: DiagnosticSeverity.Warning,
-                diagnosticMessage: string.Format(FeaturesResources.JSON_issue_0,
-                    FeaturesResources.Comments_not_allowed));
+                diagnosticMessage: string.Format(
+                    FeaturesResources.JSON_issue_0,
+                    FeaturesResources.Comments_not_allowed
+                )
+            );
         }
 
         [Fact]
         public async Task TestJsonDocumentCommentsDisallowed()
         {
-            await TestDiagnosticInfoAsync("""
+            await TestDiagnosticInfoAsync(
+                """
                 <Workspace>
                     <Project Language="C#" CommonReferencesNet6="true">
                         <Document>
@@ -232,14 +263,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
                 globalOptions: OptionOn(),
                 diagnosticId: AbstractJsonDiagnosticAnalyzer.DiagnosticId,
                 diagnosticSeverity: DiagnosticSeverity.Warning,
-                diagnosticMessage: string.Format(FeaturesResources.JSON_issue_0,
-                    FeaturesResources.Comments_not_allowed));
+                diagnosticMessage: string.Format(
+                    FeaturesResources.JSON_issue_0,
+                    FeaturesResources.Comments_not_allowed
+                )
+            );
         }
 
         [Fact]
         public async Task TestJsonDocumentCommentsAllowed()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 <Workspace>
                     <Project Language="C#" CommonReferencesNet6="true">
                         <Document>
@@ -255,13 +290,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestJsonDocumentCommentsAllowedImplicitObject()
         {
-            await TestDiagnosticMissingAsync("""
+            await TestDiagnosticMissingAsync(
+                """
                 <Workspace>
                     <Project Language="C#" CommonReferencesNet6="true">
                         <Document>
@@ -277,13 +314,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestJsonDocumentCommentsDisallowed_StringSyntaxAttribute_NoOptionsProvided()
         {
-            await TestDiagnosticInfoAsync($@"<Workspace>
+            await TestDiagnosticInfoAsync(
+                $@"<Workspace>
     <Project Language=""C#"" CommonReferencesNet6=""true"">
         <Document>
 using System.Diagnostics.CodeAnalysis;
@@ -307,14 +346,18 @@ class Program
                 globalOptions: OptionOn(),
                 diagnosticId: AbstractJsonDiagnosticAnalyzer.DiagnosticId,
                 diagnosticSeverity: DiagnosticSeverity.Warning,
-                diagnosticMessage: string.Format(FeaturesResources.JSON_issue_0,
-                    FeaturesResources.Comments_not_allowed));
+                diagnosticMessage: string.Format(
+                    FeaturesResources.JSON_issue_0,
+                    FeaturesResources.Comments_not_allowed
+                )
+            );
         }
 
         [Fact]
         public async Task TestJsonDocumentCommentsDisallowed_StringSyntaxAttribute_OptionsProvided()
         {
-            await TestDiagnosticInfoAsync($@"<Workspace>
+            await TestDiagnosticInfoAsync(
+                $@"<Workspace>
     <Project Language=""C#"" CommonReferencesNet6=""true"">
         <Document>
 using System.Diagnostics.CodeAnalysis;
@@ -338,14 +381,18 @@ class Program
                 globalOptions: OptionOn(),
                 diagnosticId: AbstractJsonDiagnosticAnalyzer.DiagnosticId,
                 diagnosticSeverity: DiagnosticSeverity.Warning,
-                diagnosticMessage: string.Format(FeaturesResources.JSON_issue_0,
-                    FeaturesResources.Comments_not_allowed));
+                diagnosticMessage: string.Format(
+                    FeaturesResources.JSON_issue_0,
+                    FeaturesResources.Comments_not_allowed
+                )
+            );
         }
 
         [Fact]
         public async Task TestJsonDocumentCommentsAllowed_StringSyntaxAttribute_OptionsProvided()
         {
-            await TestDiagnosticMissingAsync($@"<Workspace>
+            await TestDiagnosticMissingAsync(
+                $@"<Workspace>
     <Project Language=""C#"" CommonReferencesNet6=""true"">
         <Document>
 using System.Diagnostics.CodeAnalysis;
@@ -365,13 +412,15 @@ class Program
 {EmbeddedLanguagesTestConstants.StringSyntaxAttributeCodeCSharpXml}
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [Fact]
         public async Task TestNotOnUnlikelyJson()
         {
-            await TestDiagnosticMissingAsync($@"
+            await TestDiagnosticMissingAsync(
+                $@"
 <Workspace>
     <Project Language=""C#"" CommonReferencesNet6=""true"">
         <Document>
@@ -387,13 +436,15 @@ class Program
 }}
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
 
         [Fact]
         public async Task TestNotOnLikelyJson()
         {
-            await TestDiagnosticMissingAsync($@"
+            await TestDiagnosticMissingAsync(
+                $@"
 <Workspace>
     <Project Language=""C#"" CommonReferencesNet6=""true"">
         <Document>
@@ -409,7 +460,8 @@ class Program
 }}
         </Document>
     </Project>
-</Workspace>");
+</Workspace>"
+            );
         }
     }
 }

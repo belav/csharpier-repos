@@ -7,18 +7,27 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Reflection;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Data.Common.Utils;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace System.Data.Metadata.Edm
 {
     internal static class MetadataAssemblyHelper
     {
-        static byte [] EcmaPublicKeyToken = System.Data.EntityModel.SchemaObjectModel.ScalarType.ConvertToByteArray(AssemblyRef.EcmaPublicKey);
-        static byte [] MsPublicKeyToken = System.Data.EntityModel.SchemaObjectModel.ScalarType.ConvertToByteArray(AssemblyRef.MicrosoftPublicKey);
-        private static Memoizer<Assembly, bool> _filterAssemblyCacheByAssembly = new Memoizer<Assembly, bool>(MetadataAssemblyHelper.ComputeShouldFilterAssembly, EqualityComparer<Assembly>.Default);
+        static byte[] EcmaPublicKeyToken =
+            System.Data.EntityModel.SchemaObjectModel.ScalarType.ConvertToByteArray(
+                AssemblyRef.EcmaPublicKey
+            );
+        static byte[] MsPublicKeyToken =
+            System.Data.EntityModel.SchemaObjectModel.ScalarType.ConvertToByteArray(
+                AssemblyRef.MicrosoftPublicKey
+            );
+        private static Memoizer<Assembly, bool> _filterAssemblyCacheByAssembly = new Memoizer<
+            Assembly,
+            bool
+        >(MetadataAssemblyHelper.ComputeShouldFilterAssembly, EqualityComparer<Assembly>.Default);
 
         internal static Assembly SafeLoadReferencedAssembly(AssemblyName assemblyName)
         {
@@ -41,7 +50,7 @@ namespace System.Data.Metadata.Edm
             AssemblyName assemblyName = new AssemblyName(assembly.FullName);
             return ShouldFilterAssembly(assemblyName);
         }
-        
+
         internal static bool ShouldFilterAssembly(Assembly assembly)
         {
             return _filterAssemblyCacheByAssembly.Evaluate(assembly);
@@ -50,11 +59,13 @@ namespace System.Data.Metadata.Edm
         /// <summary>Is the assembly and its referened assemblies not expected to have any metadata</summary>
         private static bool ShouldFilterAssembly(AssemblyName assemblyName)
         {
-            return (ArePublicKeyTokensEqual(assemblyName.GetPublicKeyToken(), EcmaPublicKeyToken) ||
-                    ArePublicKeyTokensEqual(assemblyName.GetPublicKeyToken(), MsPublicKeyToken));
+            return (
+                ArePublicKeyTokensEqual(assemblyName.GetPublicKeyToken(), EcmaPublicKeyToken)
+                || ArePublicKeyTokensEqual(assemblyName.GetPublicKeyToken(), MsPublicKeyToken)
+            );
         }
 
-        private static bool ArePublicKeyTokensEqual(byte [] left, byte [] right)
+        private static bool ArePublicKeyTokensEqual(byte[] left, byte[] right)
         {
             // some assemblies don't have public keys
             if (left.Length != right.Length)
@@ -79,12 +90,12 @@ namespace System.Data.Metadata.Edm
                 if (!ShouldFilterAssembly(name))
                 {
                     Assembly referenceAssembly = SafeLoadReferencedAssembly(name);
-                    if(referenceAssembly != null )
+                    if (referenceAssembly != null)
                     {
                         yield return referenceAssembly;
                     }
                 }
             }
         }
-     }
+    }
 }

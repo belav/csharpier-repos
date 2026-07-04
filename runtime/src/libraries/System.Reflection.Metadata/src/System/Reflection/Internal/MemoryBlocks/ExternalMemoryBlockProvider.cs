@@ -22,10 +22,7 @@ namespace System.Reflection.Internal
 
         public override int Size
         {
-            get
-            {
-                return _size;
-            }
+            get { return _size; }
         }
 
         protected override AbstractMemoryBlock GetMemoryBlockImpl(int start, int size)
@@ -50,10 +47,7 @@ namespace System.Reflection.Internal
 
         public byte* Pointer
         {
-            get
-            {
-                return _memory;
-            }
+            get { return _memory; }
         }
     }
 }

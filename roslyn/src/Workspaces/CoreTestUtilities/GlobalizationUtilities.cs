@@ -5,6 +5,7 @@
 using System.Globalization;
 
 namespace Microsoft.CodeAnalysis.UnitTests;
+
 internal class GlobalizationUtilities
 {
     /// <summary>
@@ -12,7 +13,7 @@ internal class GlobalizationUtilities
     /// On .net framework it is NLS, but on .net core + newer versions of windows, it defers to ICU
     /// See https://docs.microsoft.com/en-us/dotnet/core/extensions/globalization-icu
     /// and https://github.com/dotnet/runtime/blob/78065413b2d1b4f0ed26343567379e992a3e26ee/src/libraries/System.Globalization/tests/CompareInfo/CompareInfoTests.cs#L100
-    /// 
+    ///
     /// This helper allows us to figure out at runtime which mode is being used so tests can behave accordingly.
     /// </summary>
     public static bool ICUMode()

@@ -24,8 +24,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
     /// <summary>
     /// The class to represent all properties imported from a PE/module.
     /// </summary>
-    internal class PEPropertySymbol
-        : PropertySymbol
+    internal class PEPropertySymbol : PropertySymbol
     {
         private readonly string _name;
         private readonly PENamedTypeSymbol _containingType;
@@ -37,9 +36,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         private readonly PEMethodSymbol _setMethod;
         private ImmutableArray<CSharpAttributeData> _lazyCustomAttributes;
         private Tuple<CultureInfo, string> _lazyDocComment;
-        private CachedUseSiteInfo<AssemblySymbol> _lazyCachedUseSiteInfo = CachedUseSiteInfo<AssemblySymbol>.Uninitialized;
+        private CachedUseSiteInfo<AssemblySymbol> _lazyCachedUseSiteInfo =
+            CachedUseSiteInfo<AssemblySymbol>.Uninitialized;
 
-        private ObsoleteAttributeData _lazyObsoleteAttributeData = ObsoleteAttributeData.Uninitialized;
+        private ObsoleteAttributeData _lazyObsoleteAttributeData =
+            ObsoleteAttributeData.Uninitialized;
 
         // CONSIDER: the parameters could be computed lazily (as in PEMethodSymbol).
         // CONSIDER: if the parameters were computed lazily, ParameterCount could be overridden to fall back on the signature (as in PEMethodSymbol).
@@ -70,16 +71,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             private int _bits;
 
-            public PackedFlags(bool isSpecialName, bool isRuntimeSpecialName, bool callMethodsDirectly)
+            public PackedFlags(
+                bool isSpecialName,
+                bool isRuntimeSpecialName,
+                bool callMethodsDirectly
+            )
             {
-                _bits = (isSpecialName ? IsSpecialNameFlag : 0)
-                        | (isRuntimeSpecialName ? IsRuntimeSpecialNameFlag : 0)
-                        | (callMethodsDirectly ? CallMethodsDirectlyFlag : 0);
+                _bits =
+                    (isSpecialName ? IsSpecialNameFlag : 0)
+                    | (isRuntimeSpecialName ? IsRuntimeSpecialNameFlag : 0)
+                    | (callMethodsDirectly ? CallMethodsDirectlyFlag : 0);
             }
 
             public void SetHasRequiredMemberAttribute(bool isRequired)
             {
-                var bitsToSet = (isRequired ? HasRequiredMemberAttribute : 0) | RequiredMemberCompletionBit;
+                var bitsToSet =
+                    (isRequired ? HasRequiredMemberAttribute : 0) | RequiredMemberCompletionBit;
                 ThreadSafeFlagOperations.Set(ref _bits, bitsToSet);
             }
 
@@ -97,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             public void SetHasUnscopedRefAttribute(bool unscopedRef)
             {
-                var bitsToSet = (unscopedRef ? HasUnscopedRefAttribute : 0) | UnscopedRefCompletionBit;
+                var bitsToSet =
+                    (unscopedRef ? HasUnscopedRefAttribute : 0) | UnscopedRefCompletionBit;
                 ThreadSafeFlagOperations.Set(ref _bits, bitsToSet);
             }
 
@@ -123,7 +131,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             PENamedTypeSymbol containingType,
             PropertyDefinitionHandle handle,
             PEMethodSymbol getMethod,
-            PEMethodSymbol setMethod)
+            PEMethodSymbol setMethod
+        )
         {
             Debug.Assert((object)moduleSymbol != null);
             Debug.Assert((object)containingType != null);
@@ -132,21 +141,47 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             var metadataDecoder = new MetadataDecoder(moduleSymbol, containingType);
             SignatureHeader callingConvention;
             BadImageFormatException propEx;
-            var propertyParams = metadataDecoder.GetSignatureForProperty(handle, out callingConvention, out propEx);
+            var propertyParams = metadataDecoder.GetSignatureForProperty(
+                handle,
+                out callingConvention,
+                out propEx
+            );
             Debug.Assert(propertyParams.Length > 0);
 
             var returnInfo = propertyParams[0];
 
-            PEPropertySymbol result = returnInfo.CustomModifiers.IsDefaultOrEmpty && returnInfo.RefCustomModifiers.IsDefaultOrEmpty
-                ? new PEPropertySymbol(moduleSymbol, containingType, handle, getMethod, setMethod, propertyParams, metadataDecoder)
-                : new PEPropertySymbolWithCustomModifiers(moduleSymbol, containingType, handle, getMethod, setMethod, propertyParams, metadataDecoder);
+            PEPropertySymbol result =
+                returnInfo.CustomModifiers.IsDefaultOrEmpty
+                && returnInfo.RefCustomModifiers.IsDefaultOrEmpty
+                    ? new PEPropertySymbol(
+                        moduleSymbol,
+                        containingType,
+                        handle,
+                        getMethod,
+                        setMethod,
+                        propertyParams,
+                        metadataDecoder
+                    )
+                    : new PEPropertySymbolWithCustomModifiers(
+                        moduleSymbol,
+                        containingType,
+                        handle,
+                        getMethod,
+                        setMethod,
+                        propertyParams,
+                        metadataDecoder
+                    );
 
             // A property should always have this modreq, and vice versa.
-            var isBad = (result.RefKind == RefKind.In) != result.RefCustomModifiers.HasInAttributeModifier();
+            var isBad =
+                (result.RefKind == RefKind.In)
+                != result.RefCustomModifiers.HasInAttributeModifier();
 
             if (propEx != null || isBad)
             {
-                result._lazyCachedUseSiteInfo.Initialize(new CSDiagnosticInfo(ErrorCode.ERR_BindToBogus, result));
+                result._lazyCachedUseSiteInfo.Initialize(
+                    new CSDiagnosticInfo(ErrorCode.ERR_BindToBogus, result)
+                );
             }
 
             return result;
@@ -159,7 +194,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             PEMethodSymbol getMethod,
             PEMethodSymbol setMethod,
             ParamInfo<TypeSymbol>[] propertyParams,
-            MetadataDecoder metadataDecoder)
+            MetadataDecoder metadataDecoder
+        )
         {
             _containingType = containingType;
             var module = moduleSymbol.Module;
@@ -186,9 +222,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
             SignatureHeader unusedCallingConvention;
             BadImageFormatException getEx = null;
-            var getMethodParams = (object)getMethod == null ? null : metadataDecoder.GetSignatureForMethod(getMethod.Handle, out unusedCallingConvention, out getEx);
+            var getMethodParams =
+                (object)getMethod == null
+                    ? null
+                    : metadataDecoder.GetSignatureForMethod(
+                        getMethod.Handle,
+                        out unusedCallingConvention,
+                        out getEx
+                    );
             BadImageFormatException setEx = null;
-            var setMethodParams = (object)setMethod == null ? null : metadataDecoder.GetSignatureForMethod(setMethod.Handle, out unusedCallingConvention, out setEx);
+            var setMethodParams =
+                (object)setMethod == null
+                    ? null
+                    : metadataDecoder.GetSignatureForMethod(
+                        setMethod.Handle,
+                        out unusedCallingConvention,
+                        out setEx
+                    );
 
             // NOTE: property parameter names are not recorded in metadata, so we have to
             // use the parameter names from one of the indexers
@@ -196,12 +246,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             bool isBad;
 
             _parameters = setMethodParams is null
-                ? GetParameters(moduleSymbol, this, getMethod, propertyParams, getMethodParams, out isBad)
-                : GetParameters(moduleSymbol, this, setMethod, propertyParams, setMethodParams, out isBad);
+                ? GetParameters(
+                    moduleSymbol,
+                    this,
+                    getMethod,
+                    propertyParams,
+                    getMethodParams,
+                    out isBad
+                )
+                : GetParameters(
+                    moduleSymbol,
+                    this,
+                    setMethod,
+                    propertyParams,
+                    setMethodParams,
+                    out isBad
+                );
 
             if (getEx != null || setEx != null || mrEx != null || isBad)
             {
-                _lazyCachedUseSiteInfo.Initialize(new CSDiagnosticInfo(ErrorCode.ERR_BindToBogus, this));
+                _lazyCachedUseSiteInfo.Initialize(
+                    new CSDiagnosticInfo(ErrorCode.ERR_BindToBogus, this)
+                );
             }
 
             var returnInfo = propertyParams[0];
@@ -226,31 +292,64 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             // CONSIDER: Can we make parameter type computation lazy?
             TypeSymbol originalPropertyType = returnInfo.Type;
 
-            originalPropertyType = DynamicTypeDecoder.TransformType(originalPropertyType, typeCustomModifiers.Length, handle, moduleSymbol, _refKind);
-            originalPropertyType = NativeIntegerTypeDecoder.TransformType(originalPropertyType, handle, moduleSymbol, _containingType);
+            originalPropertyType = DynamicTypeDecoder.TransformType(
+                originalPropertyType,
+                typeCustomModifiers.Length,
+                handle,
+                moduleSymbol,
+                _refKind
+            );
+            originalPropertyType = NativeIntegerTypeDecoder.TransformType(
+                originalPropertyType,
+                handle,
+                moduleSymbol,
+                _containingType
+            );
 
             // Dynamify object type if necessary
             originalPropertyType = originalPropertyType.AsDynamicIfNoPia(_containingType);
 
             // We start without annotation (they will be decoded below)
-            var propertyTypeWithAnnotations = TypeWithAnnotations.Create(originalPropertyType, customModifiers: typeCustomModifiers);
+            var propertyTypeWithAnnotations = TypeWithAnnotations.Create(
+                originalPropertyType,
+                customModifiers: typeCustomModifiers
+            );
 
             // Decode nullable before tuple types to avoid converting between
             // NamedTypeSymbol and TupleTypeSymbol unnecessarily.
 
             // The containing type is passed to NullableTypeDecoder.TransformType to determine access
             // because the property does not have explicit accessibility in metadata.
-            propertyTypeWithAnnotations = NullableTypeDecoder.TransformType(propertyTypeWithAnnotations, handle, moduleSymbol, accessSymbol: _containingType, nullableContext: _containingType);
-            propertyTypeWithAnnotations = TupleTypeDecoder.DecodeTupleTypesIfApplicable(propertyTypeWithAnnotations, handle, moduleSymbol);
+            propertyTypeWithAnnotations = NullableTypeDecoder.TransformType(
+                propertyTypeWithAnnotations,
+                handle,
+                moduleSymbol,
+                accessSymbol: _containingType,
+                nullableContext: _containingType
+            );
+            propertyTypeWithAnnotations = TupleTypeDecoder.DecodeTupleTypesIfApplicable(
+                propertyTypeWithAnnotations,
+                handle,
+                moduleSymbol
+            );
 
             _propertyTypeWithAnnotations = propertyTypeWithAnnotations;
 
             // A property is bogus and must be accessed by calling its accessors directly if the
             // accessor signatures do not agree, both with each other and with the property,
             // or if it has parameters and is not an indexer or indexed property.
-            bool callMethodsDirectly = !DoSignaturesMatch(module, metadataDecoder, propertyParams, _getMethod, getMethodParams, _setMethod, setMethodParams) ||
-                MustCallMethodsDirectlyCore() ||
-                anyUnexpectedRequiredModifiers(propertyParams);
+            bool callMethodsDirectly =
+                !DoSignaturesMatch(
+                    module,
+                    metadataDecoder,
+                    propertyParams,
+                    _getMethod,
+                    getMethodParams,
+                    _setMethod,
+                    setMethodParams
+                )
+                || MustCallMethodsDirectlyCore()
+                || anyUnexpectedRequiredModifiers(propertyParams);
 
             if (!callMethodsDirectly)
             {
@@ -268,12 +367,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             _flags = new PackedFlags(
                 isSpecialName: (mdFlags & PropertyAttributes.SpecialName) != 0,
                 isRuntimeSpecialName: (mdFlags & PropertyAttributes.RTSpecialName) != 0,
-                callMethodsDirectly);
+                callMethodsDirectly
+            );
 
             static bool anyUnexpectedRequiredModifiers(ParamInfo<TypeSymbol>[] propertyParams)
             {
-                return propertyParams.Any(p => (!p.RefCustomModifiers.IsDefaultOrEmpty && p.RefCustomModifiers.Any(static m => !m.IsOptional && !m.Modifier.IsWellKnownTypeInAttribute())) ||
-                                               p.CustomModifiers.AnyRequired());
+                return propertyParams.Any(p =>
+                    (
+                        !p.RefCustomModifiers.IsDefaultOrEmpty
+                        && p.RefCustomModifiers.Any(static m =>
+                            !m.IsOptional && !m.Modifier.IsWellKnownTypeInAttribute()
+                        )
+                    ) || p.CustomModifiers.AnyRequired()
+                );
             }
         }
 
@@ -303,18 +409,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         public override Symbol ContainingSymbol
         {
-            get
-            {
-                return _containingType;
-            }
+            get { return _containingType; }
         }
 
         public override NamedTypeSymbol ContainingType
         {
-            get
-            {
-                return _containingType;
-            }
+            get { return _containingType; }
         }
 
         /// <remarks>
@@ -333,10 +433,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         public override string MetadataName
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
         public override int MetadataToken
@@ -346,10 +443,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
         internal PropertyDefinitionHandle Handle
         {
-            get
-            {
-                return _handle;
-            }
+            get { return _handle; }
         }
 
         public override Accessibility DeclaredAccessibility
@@ -366,16 +460,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                         // not override both accessors.  As a result, we may need to look at the accessors
                         // of an overridden method.
                         //
-                        // One might assume that we could just go straight to the least-derived 
+                        // One might assume that we could just go straight to the least-derived
                         // property (i.e. the original virtual property) and check its accessors, but
                         // that can yield incorrect results if the least-derived property is in a
                         // different assembly.  For any overridden and (directly) overriding members, M and M',
-                        // in different assemblies, A1 and A2, if M is protected internal, then M' must be 
+                        // in different assemblies, A1 and A2, if M is protected internal, then M' must be
                         // protected internal if the internals of A1 are visible to A2 and protected otherwise.
                         //
                         // Therefore, if we cross an assembly boundary in the course of walking up the
                         // override chain, and if the overriding assembly cannot see the internals of the
-                        // overridden assembly, then any protected internal accessors we find should be 
+                        // overridden assembly, then any protected internal accessors we find should be
                         // treated as protected, for the purposes of determining property accessibility.
                         //
                         // NOTE: This process has no effect on accessor accessibility - a protected internal
@@ -394,10 +488,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                                 MethodSymbol getMethod = curr.GetMethod;
                                 if ((object)getMethod != null)
                                 {
-                                    Accessibility overriddenAccessibility = getMethod.DeclaredAccessibility;
-                                    getAccessibility = overriddenAccessibility == Accessibility.ProtectedOrInternal && crossedAssemblyBoundaryWithoutInternalsVisibleTo
-                                        ? Accessibility.Protected
-                                        : overriddenAccessibility;
+                                    Accessibility overriddenAccessibility =
+                                        getMethod.DeclaredAccessibility;
+                                    getAccessibility =
+                                        overriddenAccessibility == Accessibility.ProtectedOrInternal
+                                        && crossedAssemblyBoundaryWithoutInternalsVisibleTo
+                                            ? Accessibility.Protected
+                                            : overriddenAccessibility;
                                 }
                             }
 
@@ -406,14 +503,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                                 MethodSymbol setMethod = curr.SetMethod;
                                 if ((object)setMethod != null)
                                 {
-                                    Accessibility overriddenAccessibility = setMethod.DeclaredAccessibility;
-                                    setAccessibility = overriddenAccessibility == Accessibility.ProtectedOrInternal && crossedAssemblyBoundaryWithoutInternalsVisibleTo
-                                        ? Accessibility.Protected
-                                        : overriddenAccessibility;
+                                    Accessibility overriddenAccessibility =
+                                        setMethod.DeclaredAccessibility;
+                                    setAccessibility =
+                                        overriddenAccessibility == Accessibility.ProtectedOrInternal
+                                        && crossedAssemblyBoundaryWithoutInternalsVisibleTo
+                                            ? Accessibility.Protected
+                                            : overriddenAccessibility;
                                 }
                             }
 
-                            if (getAccessibility != Accessibility.NotApplicable && setAccessibility != Accessibility.NotApplicable)
+                            if (
+                                getAccessibility != Accessibility.NotApplicable
+                                && setAccessibility != Accessibility.NotApplicable
+                            )
                             {
                                 break;
                             }
@@ -425,7 +528,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                                 break;
                             }
 
-                            if (!crossedAssemblyBoundaryWithoutInternalsVisibleTo && !curr.ContainingAssembly.HasInternalAccessTo(next.ContainingAssembly))
+                            if (
+                                !crossedAssemblyBoundaryWithoutInternalsVisibleTo
+                                && !curr.ContainingAssembly.HasInternalAccessTo(
+                                    next.ContainingAssembly
+                                )
+                            )
                             {
                                 crossedAssemblyBoundaryWithoutInternalsVisibleTo = true;
                             }
@@ -433,14 +541,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                             curr = next;
                         }
 
-                        accessibility = PEPropertyOrEventHelpers.GetDeclaredAccessibilityFromAccessors(getAccessibility, setAccessibility);
+                        accessibility =
+                            PEPropertyOrEventHelpers.GetDeclaredAccessibilityFromAccessors(
+                                getAccessibility,
+                                setAccessibility
+                            );
                     }
                     else
                     {
-                        accessibility = PEPropertyOrEventHelpers.GetDeclaredAccessibilityFromAccessors(this.GetMethod, this.SetMethod);
+                        accessibility =
+                            PEPropertyOrEventHelpers.GetDeclaredAccessibilityFromAccessors(
+                                this.GetMethod,
+                                this.SetMethod
+                            );
                     }
 
-                    Interlocked.CompareExchange(ref _declaredAccessibility, (int)accessibility, UnsetAccessibility);
+                    Interlocked.CompareExchange(
+                        ref _declaredAccessibility,
+                        (int)accessibility,
+                        UnsetAccessibility
+                    );
                 }
 
                 return (Accessibility)_declaredAccessibility;
@@ -452,9 +572,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             get
             {
                 // Some accessor extern.
-                return
-                    ((object)_getMethod != null && _getMethod.IsExtern) ||
-                    ((object)_setMethod != null && _setMethod.IsExtern);
+                return ((object)_getMethod != null && _getMethod.IsExtern)
+                    || ((object)_setMethod != null && _setMethod.IsExtern);
             }
         }
 
@@ -463,9 +582,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             get
             {
                 // Some accessor abstract.
-                return
-                    ((object)_getMethod != null && _getMethod.IsAbstract) ||
-                    ((object)_setMethod != null && _setMethod.IsAbstract);
+                return ((object)_getMethod != null && _getMethod.IsAbstract)
+                    || ((object)_setMethod != null && _setMethod.IsAbstract);
             }
         }
 
@@ -474,9 +592,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             get
             {
                 // All accessors sealed.
-                return
-                    ((object)_getMethod == null || _getMethod.IsSealed) &&
-                    ((object)_setMethod == null || _setMethod.IsSealed);
+                return ((object)_getMethod == null || _getMethod.IsSealed)
+                    && ((object)_setMethod == null || _setMethod.IsSealed);
             }
         }
 
@@ -485,9 +602,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             get
             {
                 // Some accessor virtual (as long as another isn't override or abstract).
-                return !IsOverride && !IsAbstract &&
-                    (((object)_getMethod != null && _getMethod.IsVirtual) ||
-                     ((object)_setMethod != null && _setMethod.IsVirtual));
+                return !IsOverride
+                    && !IsAbstract
+                    && (
+                        ((object)_getMethod != null && _getMethod.IsVirtual)
+                        || ((object)_setMethod != null && _setMethod.IsVirtual)
+                    );
             }
         }
 
@@ -496,9 +616,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             get
             {
                 // Some accessor override.
-                return
-                    ((object)_getMethod != null && _getMethod.IsOverride) ||
-                    ((object)_setMethod != null && _setMethod.IsOverride);
+                return ((object)_getMethod != null && _getMethod.IsOverride)
+                    || ((object)_setMethod != null && _setMethod.IsOverride);
             }
         }
 
@@ -507,9 +626,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             get
             {
                 // All accessors static.
-                return
-                    ((object)_getMethod == null || _getMethod.IsStatic) &&
-                    ((object)_setMethod == null || _setMethod.IsStatic);
+                return ((object)_getMethod == null || _getMethod.IsStatic)
+                    && ((object)_setMethod == null || _setMethod.IsStatic);
             }
         }
 
@@ -520,7 +638,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 if (!_flags.TryGetHasRequiredMemberAttribute(out bool hasRequiredMemberAttribute))
                 {
                     var containingPEModuleSymbol = (PEModuleSymbol)this.ContainingModule;
-                    hasRequiredMemberAttribute = containingPEModuleSymbol.Module.HasAttribute(_handle, AttributeDescription.RequiredMemberAttribute);
+                    hasRequiredMemberAttribute = containingPEModuleSymbol.Module.HasAttribute(
+                        _handle,
+                        AttributeDescription.RequiredMemberAttribute
+                    );
                     _flags.SetHasRequiredMemberAttribute(hasRequiredMemberAttribute);
                 }
 
@@ -535,7 +656,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 if (!_flags.TryGetHasUnscopedRefAttribute(out bool hasUnscopedRefAttribute))
                 {
                     var containingPEModuleSymbol = (PEModuleSymbol)this.ContainingModule;
-                    hasUnscopedRefAttribute = containingPEModuleSymbol.Module.HasUnscopedRefAttribute(_handle);
+                    hasUnscopedRefAttribute =
+                        containingPEModuleSymbol.Module.HasUnscopedRefAttribute(_handle);
                     _flags.SetHasUnscopedRefAttribute(hasUnscopedRefAttribute);
                 }
 
@@ -558,15 +680,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             get
             {
-                // NOTE: Dev10 appears to include static indexers in overload resolution 
+                // NOTE: Dev10 appears to include static indexers in overload resolution
                 // for an array access expression, so it stands to reason that it considers
                 // them indexers.
                 if (this.ParameterCount > 0)
                 {
                     string defaultMemberName = _containingType.DefaultMemberName;
-                    return _name == defaultMemberName || //NB: not Name property (break mutual recursion)
-                        ((object)this.GetMethod != null && this.GetMethod.Name == defaultMemberName) ||
-                        ((object)this.SetMethod != null && this.SetMethod.Name == defaultMemberName);
+                    return _name == defaultMemberName
+                        || //NB: not Name property (break mutual recursion)
+                        ((object)this.GetMethod != null && this.GetMethod.Name == defaultMemberName)
+                        || (
+                            (object)this.SetMethod != null
+                            && this.SetMethod.Name == defaultMemberName
+                        );
                 }
                 return false;
             }
@@ -612,8 +738,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             get
             {
-                var metadataDecoder = new MetadataDecoder(_containingType.ContainingPEModule, _containingType);
-                return (Microsoft.Cci.CallingConvention)(metadataDecoder.GetSignatureHeaderForProperty(_handle).RawValue);
+                var metadataDecoder = new MetadataDecoder(
+                    _containingType.ContainingPEModule,
+                    _containingType
+                );
+                return (Microsoft.Cci.CallingConvention)(
+                    metadataDecoder.GetSignatureHeaderForProperty(_handle).RawValue
+                );
             }
         }
 
@@ -621,16 +752,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             get
             {
-                return _containingType.ContainingPEModule.MetadataLocation.Cast<MetadataLocation, Location>();
+                return _containingType.ContainingPEModule.MetadataLocation.Cast<
+                    MetadataLocation,
+                    Location
+                >();
             }
         }
 
         public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
         {
-            get
-            {
-                return ImmutableArray<SyntaxReference>.Empty;
-            }
+            get { return ImmutableArray<SyntaxReference>.Empty; }
         }
 
         public override ImmutableArray<CSharpAttributeData> GetAttributes()
@@ -639,12 +770,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             {
                 var containingPEModuleSymbol = (PEModuleSymbol)this.ContainingModule;
 
-                ImmutableArray<CSharpAttributeData> attributes = containingPEModuleSymbol.GetCustomAttributesForToken(
-                      _handle,
-                      out _,
-                      this.RefKind == RefKind.RefReadOnly ? AttributeDescription.IsReadOnlyAttribute : default,
-                      out CustomAttributeHandle required,
-                      AttributeDescription.RequiredMemberAttribute);
+                ImmutableArray<CSharpAttributeData> attributes =
+                    containingPEModuleSymbol.GetCustomAttributesForToken(
+                        _handle,
+                        out _,
+                        this.RefKind == RefKind.RefReadOnly
+                            ? AttributeDescription.IsReadOnlyAttribute
+                            : default,
+                        out CustomAttributeHandle required,
+                        AttributeDescription.RequiredMemberAttribute
+                    );
 
                 ImmutableInterlocked.InterlockedInitialize(ref _lazyCustomAttributes, attributes);
                 _flags.SetHasRequiredMemberAttribute(!required.IsNil);
@@ -652,19 +787,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             return _lazyCustomAttributes;
         }
 
-        internal override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(PEModuleBuilder moduleBuilder)
+        internal override IEnumerable<CSharpAttributeData> GetCustomAttributesToEmit(
+            PEModuleBuilder moduleBuilder
+        )
         {
             return GetAttributes();
         }
 
         /// <summary>
-        /// Intended behavior: this property, P, explicitly implements an interface property, IP, 
+        /// Intended behavior: this property, P, explicitly implements an interface property, IP,
         /// if any of the following is true:
-        /// 
+        ///
         /// 1) P.get explicitly implements IP.get and P.set explicitly implements IP.set
         /// 2) P.get explicitly implements IP.get and there is no IP.set
         /// 3) P.set explicitly implements IP.set and there is no IP.get
-        /// 
+        ///
         /// Extra or missing accessors will not result in errors, P will simply not report that
         /// it explicitly implements IP.
         /// </summary>
@@ -672,20 +809,37 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             get
             {
-                if (((object)_getMethod == null || _getMethod.ExplicitInterfaceImplementations.Length == 0) &&
-                    ((object)_setMethod == null || _setMethod.ExplicitInterfaceImplementations.Length == 0))
+                if (
+                    (
+                        (object)_getMethod == null
+                        || _getMethod.ExplicitInterfaceImplementations.Length == 0
+                    )
+                    && (
+                        (object)_setMethod == null
+                        || _setMethod.ExplicitInterfaceImplementations.Length == 0
+                    )
+                )
                 {
                     return ImmutableArray<PropertySymbol>.Empty;
                 }
 
-                var propertiesWithImplementedGetters = PEPropertyOrEventHelpers.GetPropertiesForExplicitlyImplementedAccessor(_getMethod);
-                var propertiesWithImplementedSetters = PEPropertyOrEventHelpers.GetPropertiesForExplicitlyImplementedAccessor(_setMethod);
+                var propertiesWithImplementedGetters =
+                    PEPropertyOrEventHelpers.GetPropertiesForExplicitlyImplementedAccessor(
+                        _getMethod
+                    );
+                var propertiesWithImplementedSetters =
+                    PEPropertyOrEventHelpers.GetPropertiesForExplicitlyImplementedAccessor(
+                        _setMethod
+                    );
 
                 var builder = ArrayBuilder<PropertySymbol>.GetInstance();
 
                 foreach (var prop in propertiesWithImplementedGetters)
                 {
-                    if (!prop.SetMethod.IsImplementable() || propertiesWithImplementedSetters.Contains(prop))
+                    if (
+                        !prop.SetMethod.IsImplementable()
+                        || propertiesWithImplementedSetters.Contains(prop)
+                    )
                     {
                         builder.Add(prop);
                     }
@@ -717,7 +871,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             PEMethodSymbol getMethod,
             ParamInfo<TypeSymbol>[] getMethodParams,
             PEMethodSymbol setMethod,
-            ParamInfo<TypeSymbol>[] setMethodParams)
+            ParamInfo<TypeSymbol>[] setMethodParams
+        )
         {
             Debug.Assert((getMethodParams == null) == ((object)getMethod == null));
             Debug.Assert((setMethodParams == null) == ((object)setMethod == null));
@@ -725,12 +880,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             bool hasGetMethod = getMethodParams != null;
             bool hasSetMethod = setMethodParams != null;
 
-            if (hasGetMethod && !metadataDecoder.DoPropertySignaturesMatch(propertyParams, getMethodParams, comparingToSetter: false, compareParamByRef: true, compareReturnType: true))
+            if (
+                hasGetMethod
+                && !metadataDecoder.DoPropertySignaturesMatch(
+                    propertyParams,
+                    getMethodParams,
+                    comparingToSetter: false,
+                    compareParamByRef: true,
+                    compareReturnType: true
+                )
+            )
             {
                 return false;
             }
 
-            if (hasSetMethod && !metadataDecoder.DoPropertySignaturesMatch(propertyParams, setMethodParams, comparingToSetter: true, compareParamByRef: true, compareReturnType: true))
+            if (
+                hasSetMethod
+                && !metadataDecoder.DoPropertySignaturesMatch(
+                    propertyParams,
+                    setMethodParams,
+                    comparingToSetter: true,
+                    compareParamByRef: true,
+                    compareReturnType: true
+                )
+            )
             {
                 return false;
             }
@@ -747,11 +920,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     return false;
                 }
 
-                if ((getMethod.IsExtern != setMethod.IsExtern) ||
+                if (
+                    (getMethod.IsExtern != setMethod.IsExtern)
+                    ||
                     // (getMethod.IsAbstract != setMethod.IsAbstract) || // NOTE: Dev10 accepts one abstract accessor
-                    (getMethod.IsSealed != setMethod.IsSealed) ||
-                    (getMethod.IsOverride != setMethod.IsOverride) ||
-                    (getMethod.IsStatic != setMethod.IsStatic))
+                    (getMethod.IsSealed != setMethod.IsSealed)
+                    || (getMethod.IsOverride != setMethod.IsOverride)
+                    || (getMethod.IsStatic != setMethod.IsStatic)
+                )
                 {
                     return false;
                 }
@@ -766,7 +942,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             PEMethodSymbol accessor,
             ParamInfo<TypeSymbol>[] propertyParams,
             ParamInfo<TypeSymbol>[] accessorParams,
-            out bool anyParameterIsBad)
+            out bool anyParameterIsBad
+        )
         {
             anyParameterIsBad = false;
 
@@ -799,7 +976,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 var ordinal = i - 1;
                 bool isBad;
 
-                parameters[ordinal] = PEParameterSymbol.Create(moduleSymbol, property, accessor.IsMetadataVirtual(), ordinal, paramHandle, propertyParam, nullableContext, out isBad);
+                parameters[ordinal] = PEParameterSymbol.Create(
+                    moduleSymbol,
+                    property,
+                    accessor.IsMetadataVirtual(),
+                    ordinal,
+                    paramHandle,
+                    propertyParam,
+                    nullableContext,
+                    out isBad
+                );
 
                 if (isBad)
                 {
@@ -810,9 +996,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             return parameters.AsImmutableOrNull();
         }
 
-        public override string GetDocumentationCommentXml(CultureInfo preferredCulture = null, bool expandIncludes = false, CancellationToken cancellationToken = default(CancellationToken))
+        public override string GetDocumentationCommentXml(
+            CultureInfo preferredCulture = null,
+            bool expandIncludes = false,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return PEDocumentationCommentUtils.GetDocumentationComment(this, _containingType.ContainingPEModule, preferredCulture, cancellationToken, ref _lazyDocComment);
+            return PEDocumentationCommentUtils.GetDocumentationComment(
+                this,
+                _containingType.ContainingPEModule,
+                preferredCulture,
+                cancellationToken,
+                ref _lazyDocComment
+            );
         }
 
         internal override UseSiteInfo<AssemblySymbol> GetUseSiteInfo()
@@ -841,7 +1037,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     containingPEModule,
                     Handle,
                     allowedFeatures: CompilerFeatureRequiredFeatures.None,
-                    decoder);
+                    decoder
+                );
 
                 if (diag != null)
                 {
@@ -850,7 +1047,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
                 foreach (var param in Parameters)
                 {
-                    diag = ((PEParameterSymbol)param).DeriveCompilerFeatureRequiredDiagnostic(decoder);
+                    diag = ((PEParameterSymbol)param).DeriveCompilerFeatureRequiredDiagnostic(
+                        decoder
+                    );
                     if (diag != null)
                     {
                         return diag;
@@ -865,17 +1064,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         {
             get
             {
-                ObsoleteAttributeHelpers.InitializeObsoleteDataFromMetadata(ref _lazyObsoleteAttributeData, _handle, (PEModuleSymbol)(this.ContainingModule), ignoreByRefLikeMarker: false, ignoreRequiredMemberMarker: false);
+                ObsoleteAttributeHelpers.InitializeObsoleteDataFromMetadata(
+                    ref _lazyObsoleteAttributeData,
+                    _handle,
+                    (PEModuleSymbol)(this.ContainingModule),
+                    ignoreByRefLikeMarker: false,
+                    ignoreRequiredMemberMarker: false
+                );
                 return _lazyObsoleteAttributeData;
             }
         }
 
         internal override bool HasRuntimeSpecialName
         {
-            get
-            {
-                return _flags.IsRuntimeSpecialName;
-            }
+            get { return _flags.IsRuntimeSpecialName; }
         }
 
         internal sealed override CSharpCompilation DeclaringCompilation // perf, not correctness
@@ -894,10 +1096,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 PEMethodSymbol getMethod,
                 PEMethodSymbol setMethod,
                 ParamInfo<TypeSymbol>[] propertyParams,
-                MetadataDecoder metadataDecoder)
-                : base(moduleSymbol, containingType, handle, getMethod, setMethod,
+                MetadataDecoder metadataDecoder
+            )
+                : base(
+                    moduleSymbol,
+                    containingType,
+                    handle,
+                    getMethod,
+                    setMethod,
                     propertyParams,
-                    metadataDecoder)
+                    metadataDecoder
+                )
             {
                 var returnInfo = propertyParams[0];
                 _refCustomModifiers = CSharpCustomModifier.Convert(returnInfo.RefCustomModifiers);

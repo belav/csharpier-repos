@@ -16,11 +16,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         /// Creates a new command handler that is attached to an IVsTextView.
         /// </summary>
         /// <param name="wpfTextView">The IWpfTextView of the view.</param>
-        internal StandaloneCommandFilter(
-            IWpfTextView wpfTextView,
-            IComponentModel componentModel)
-            : base(wpfTextView, componentModel)
-        {
-        }
+        internal StandaloneCommandFilter(IWpfTextView wpfTextView, IComponentModel componentModel)
+            : base(wpfTextView, componentModel) { }
     }
 }

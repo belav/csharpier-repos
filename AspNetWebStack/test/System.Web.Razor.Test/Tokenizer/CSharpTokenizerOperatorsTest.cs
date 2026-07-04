@@ -125,9 +125,11 @@ namespace System.Web.Razor.Test.Tokenizer
         [Fact]
         public void LeftShift_Is_Not_Specially_Recognized()
         {
-            TestTokenizer("<<",
+            TestTokenizer(
+                "<<",
                 new CSharpSymbol(0, 0, 0, "<", CSharpSymbolType.LessThan),
-                new CSharpSymbol(1, 0, 1, "<", CSharpSymbolType.LessThan));
+                new CSharpSymbol(1, 0, 1, "<", CSharpSymbolType.LessThan)
+            );
         }
 
         [Fact]
@@ -283,9 +285,11 @@ namespace System.Web.Razor.Test.Tokenizer
         [Fact]
         public void RightShift_Is_Not_Specially_Recognized()
         {
-            TestTokenizer(">>",
+            TestTokenizer(
+                ">>",
                 new CSharpSymbol(0, 0, 0, ">", CSharpSymbolType.GreaterThan),
-                new CSharpSymbol(1, 0, 1, ">", CSharpSymbolType.GreaterThan));
+                new CSharpSymbol(1, 0, 1, ">", CSharpSymbolType.GreaterThan)
+            );
         }
 
         [Fact]

@@ -16,8 +16,12 @@ namespace System.IO
         // Checks if the given path is available for use.
         private static bool ExistsCore(string fullPath, out bool isDirectory)
         {
-            bool result = Interop.Sys.LStat(fullPath, out Interop.Sys.FileStatus fileInfo) == Interop.Errors.ERROR_SUCCESS;
-            isDirectory = result && (fileInfo.Mode & Interop.Sys.FileTypes.S_IFMT) == Interop.Sys.FileTypes.S_IFDIR;
+            bool result =
+                Interop.Sys.LStat(fullPath, out Interop.Sys.FileStatus fileInfo)
+                == Interop.Errors.ERROR_SUCCESS;
+            isDirectory =
+                result
+                && (fileInfo.Mode & Interop.Sys.FileTypes.S_IFMT) == Interop.Sys.FileTypes.S_IFDIR;
 
             return result;
         }
@@ -63,12 +67,20 @@ namespace System.IO
             }
 
             // We would ideally use realpath to do this, but it resolves symlinks and requires that the file actually exist.
-            string collapsedString = PathInternal.RemoveRelativeSegments(path, PathInternal.GetRootLength(path));
+            string collapsedString = PathInternal.RemoveRelativeSegments(
+                path,
+                PathInternal.GetRootLength(path)
+            );
 
-            Debug.Assert(collapsedString.Length < path.Length || collapsedString.ToString() == path,
-                "Either we've removed characters, or the string should be unmodified from the input path.");
+            Debug.Assert(
+                collapsedString.Length < path.Length || collapsedString.ToString() == path,
+                "Either we've removed characters, or the string should be unmodified from the input path."
+            );
 
-            string result = collapsedString.Length == 0 ? PathInternal.DirectorySeparatorCharAsString : collapsedString;
+            string result =
+                collapsedString.Length == 0
+                    ? PathInternal.DirectorySeparatorCharAsString
+                    : collapsedString;
 
             return result;
         }
@@ -86,10 +98,9 @@ namespace System.IO
             // If it's not set, just return the default path.
             // If it is, return it, ensuring it ends with a slash.
             string? path = Environment.GetEnvironmentVariable(TempEnvVar);
-            return
-                string.IsNullOrEmpty(path) ? DefaultTempPath :
-                PathInternal.IsDirectorySeparator(path[path.Length - 1]) ? path :
-                path + PathInternal.DirectorySeparatorChar;
+            return string.IsNullOrEmpty(path) ? DefaultTempPath
+                : PathInternal.IsDirectorySeparator(path[path.Length - 1]) ? path
+                : path + PathInternal.DirectorySeparatorChar;
         }
 
         public static unsafe string GetTempFileName()
@@ -108,7 +119,10 @@ namespace System.IO
             // The emscripten implementation of __randname uses pointer address as another entry into the randomness.
             Span<byte> path = new byte[totalByteCount];
 #else
-            Span<byte> path = totalByteCount <= 256 ? stackalloc byte[256].Slice(0, totalByteCount) : new byte[totalByteCount];
+            Span<byte> path =
+                totalByteCount <= 256
+                    ? stackalloc byte[256].Slice(0, totalByteCount)
+                    : new byte[totalByteCount];
 #endif
             int pos = Encoding.UTF8.GetBytes(tempPath, path);
             fileTemplate.CopyTo(path.Slice(pos));
@@ -118,7 +132,11 @@ namespace System.IO
             fixed (byte* pPath = path)
             {
                 // if this returns ENOENT it's because TMPDIR doesn't exist, so isDirError:true
-                IntPtr fd = Interop.CheckIo(Interop.Sys.MksTemps(pPath, SuffixByteLength), tempPath, isDirError:true);
+                IntPtr fd = Interop.CheckIo(
+                    Interop.Sys.MksTemps(pPath, SuffixByteLength),
+                    tempPath,
+                    isDirError: true
+                );
                 Interop.Sys.Close(fd); // ignore any errors from close; nothing to do if cleanup isn't possible
             }
 
@@ -145,14 +163,16 @@ namespace System.IO
         /// </summary>
         public static string? GetPathRoot(string? path)
         {
-            if (PathInternal.IsEffectivelyEmpty(path)) return null;
+            if (PathInternal.IsEffectivelyEmpty(path))
+                return null;
             return IsPathRooted(path) ? PathInternal.DirectorySeparatorCharAsString : string.Empty;
         }
 
         public static ReadOnlySpan<char> GetPathRoot(ReadOnlySpan<char> path)
         {
-            return IsPathRooted(path) ? PathInternal.DirectorySeparatorCharAsString.AsSpan() : ReadOnlySpan<char>.Empty;
+            return IsPathRooted(path)
+                ? PathInternal.DirectorySeparatorCharAsString.AsSpan()
+                : ReadOnlySpan<char>.Empty;
         }
-
     }
 }

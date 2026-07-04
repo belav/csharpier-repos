@@ -4,17 +4,17 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Test.Utilities;
 using Xunit;
-using System;
-using System.Threading;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             return new CSharpParseOptions(
                 languageVersion: LanguageVersion.CSharp3,
                 documentationMode: DocumentationMode.Diagnose,
-                preprocessorSymbols: defines);
+                preprocessorSymbols: defines
+            );
         }
 
         private SyntaxTree Parse(string text, params string[] defines)
@@ -38,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void DocCommentWriteException()
         {
-            var comp = CreateCompilation(@"
+            var comp = CreateCompilation(
+                @"
 /// <summary>
 /// Doc comment for <see href=""C"" />
 /// </summary>
@@ -48,10 +50,14 @@ public class C
     /// Doc comment for method M
     /// </summary>
     public void M() { }
-}");
+}"
+            );
             using (new EnsureEnglishUICulture())
             {
-                var diags = BindingDiagnosticBag.GetInstance(withDiagnostics: true, withDependencies: false);
+                var diags = BindingDiagnosticBag.GetInstance(
+                    withDiagnostics: true,
+                    withDependencies: false
+                );
                 var badStream = new BrokenStream();
                 badStream.BreakHow = BrokenStream.BreakHowType.ThrowOnWrite;
 
@@ -60,11 +66,15 @@ public class C
                     null,
                     badStream,
                     diags,
-                    default(CancellationToken));
+                    default(CancellationToken)
+                );
 
                 diags.DiagnosticBag.Verify(
                     // error CS1569: Error writing to XML documentation file: I/O error occurred.
-                    Diagnostic(ErrorCode.ERR_DocFileGen).WithArguments("I/O error occurred.").WithLocation(1, 1));
+                    Diagnostic(ErrorCode.ERR_DocFileGen)
+                        .WithArguments("I/O error occurred.")
+                        .WithLocation(1, 1)
+                );
                 diags.Free();
             }
         }
@@ -107,7 +117,8 @@ public class C
         [Fact]
         public void TestFourOrMoreSlashesInsideXmlCommentIsNotXmlComment()
         {
-            var text = @"/// <goo>
+            var text =
+                @"/// <goo>
 //// </goo>
 ";
             var tree = Parse(text);
@@ -139,13 +150,16 @@ public class C
         public void TestEmptyElementNoAttributesPrecedingClass()
         {
             var text =
-@"/// <goo />
+                @"/// <goo />
 class C { }";
             var tree = Parse(text);
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
             Assert.Equal(0, tree.GetCompilationUnitRoot().Errors().Length);
-            Assert.Equal(SyntaxKind.ClassDeclaration, tree.GetCompilationUnitRoot().Members[0].Kind());
+            Assert.Equal(
+                SyntaxKind.ClassDeclaration,
+                tree.GetCompilationUnitRoot().Members[0].Kind()
+            );
             var leading = tree.GetCompilationUnitRoot().Members[0].GetLeadingTrivia();
             Assert.Equal(1, leading.Count);
             var node = leading[0];
@@ -184,14 +198,17 @@ class C { }";
         public void TestEmptyElementNoAttributesDelimitedPrecedingClass()
         {
             var text =
-@"/** <goo /> */
+                @"/** <goo /> */
 class C { }";
 
             var tree = Parse(text);
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
             Assert.Equal(0, tree.GetCompilationUnitRoot().Errors().Length);
-            Assert.Equal(SyntaxKind.ClassDeclaration, tree.GetCompilationUnitRoot().Members[0].Kind());
+            Assert.Equal(
+                SyntaxKind.ClassDeclaration,
+                tree.GetCompilationUnitRoot().Members[0].Kind()
+            );
             var leading = tree.GetCompilationUnitRoot().Members[0].GetLeadingTrivia();
             Assert.Equal(2, leading.Count); // a new line follows the comment
             var node = leading[0];
@@ -208,8 +225,7 @@ class C { }";
         [Fact]
         public void TestEmptyElementWithAttributes()
         {
-            var text =
-@"/// <goo a=""xyz""/>";
+            var text = @"/// <goo a=""xyz""/>";
             var tree = Parse(text);
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
@@ -231,8 +247,7 @@ class C { }";
         [Fact]
         public void TestEmptyElementWithAttributesSingleQuoted()
         {
-            var text =
-@"/// <goo a='xyz'/>";
+            var text = @"/// <goo a='xyz'/>";
             var tree = Parse(text);
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
@@ -254,8 +269,7 @@ class C { }";
         [Fact]
         public void TestEmptyElementWithAttributesNestedQuote()
         {
-            var text =
-@"/// <goo a=""x'y'z""/>";
+            var text = @"/// <goo a=""x'y'z""/>";
             var tree = Parse(text);
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
@@ -281,8 +295,7 @@ class C { }";
         [Fact]
         public void TestEmptyElementWithAttributesNestedQuoteSingleQuoted()
         {
-            var text =
-@"/// <goo a='x""y""z'/>";
+            var text = @"/// <goo a='x""y""z'/>";
             var tree = Parse(text);
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
@@ -309,7 +322,7 @@ class C { }";
         public void TestEmptyElementNoAttributesMultipleLines()
         {
             var text =
-@"/// <goo 
+                @"/// <goo 
 /// />";
             var tree = Parse(text);
             Assert.NotNull(tree);
@@ -332,7 +345,7 @@ class C { }";
         public void TestEmptyElementNoAttributesMultipleLinesPrecedingClass()
         {
             var text =
-@"/// <goo 
+                @"/// <goo 
 /// />
 class C { }";
             var tree = Parse(text);
@@ -343,7 +356,10 @@ class C { }";
             Assert.Equal(1, leading.Count);
             var node = leading[0];
             Assert.Equal(SyntaxKind.SingleLineDocumentationCommentTrivia, node.Kind());
-            Assert.Equal($"/// <goo {Environment.NewLine}/// />{Environment.NewLine}", node.ToFullString());
+            Assert.Equal(
+                $"/// <goo {Environment.NewLine}/// />{Environment.NewLine}",
+                node.ToFullString()
+            );
             var doc = (DocumentationCommentTriviaSyntax)node.GetStructure();
             Assert.Equal(3, doc.Content.Count);
             Assert.Equal(SyntaxKind.XmlText, doc.Content[0].Kind());
@@ -357,7 +373,7 @@ class C { }";
         public void TestEmptyElementNoAttributesMultipleLinesDelimited()
         {
             var text =
-@"/** <goo 
+                @"/** <goo 
   * />
   */";
             var tree = Parse(text);
@@ -382,7 +398,7 @@ class C { }";
         public void TestEmptyElementNoAttributesMultipleLinesDelimitedPrecedingClass()
         {
             var text =
-@"/** <goo 
+                @"/** <goo 
   * />
   */
 class C { }";
@@ -394,7 +410,10 @@ class C { }";
             Assert.Equal(2, leading.Count);
             var node = leading[0];
             Assert.Equal(SyntaxKind.MultiLineDocumentationCommentTrivia, node.Kind());
-            Assert.Equal($"/** <goo {Environment.NewLine}  * />{Environment.NewLine}  */", node.ToFullString());
+            Assert.Equal(
+                $"/** <goo {Environment.NewLine}  * />{Environment.NewLine}  */",
+                node.ToFullString()
+            );
             var doc = (DocumentationCommentTriviaSyntax)node.GetStructure();
             Assert.Equal(3, doc.Content.Count);
             Assert.Equal(SyntaxKind.XmlText, doc.Content[0].Kind());
@@ -408,7 +427,7 @@ class C { }";
         public void TestEmptyElementWithAttributesDoubleQuoteMultipleLines()
         {
             var text =
-@"/// <goo 
+                @"/// <goo 
 /// a
 /// =
 /// ""xyz""
@@ -435,7 +454,7 @@ class C { }";
         public void TestEmptyElementWithAttributesQuoteMultipleLines()
         {
             var text =
-@"/// <goo 
+                @"/// <goo 
 /// a
 /// =
 /// 'xyz'
@@ -462,7 +481,7 @@ class C { }";
         public void TestEmptyElementWithAttributesQuoteMultipleLinesDelimited()
         {
             var text =
-@"/** <goo 
+                @"/** <goo 
   * a
   * =
   * 'xyz'
@@ -491,7 +510,7 @@ class C { }";
         public void TestEmptyElementWithAttributesDoubleQuoteMultipleLinesDelimited()
         {
             var text =
-@"/** <goo 
+                @"/** <goo 
   * a
   * =
   * ""xyz""
@@ -520,7 +539,7 @@ class C { }";
         public void TestEmptyElementWithAttributeQuoteAndAttributeTextOnMultipleLines()
         {
             var text =
-@"/// <goo 
+                @"/// <goo 
 /// a
 /// =
 /// '
@@ -549,7 +568,7 @@ class C { }";
         public void TestEmptyElementWithAttributeDoubleQuoteAndAttributeTextOnMultipleLines()
         {
             var text =
-@"/// <goo 
+                @"/// <goo 
 /// a
 /// =
 /// ""
@@ -578,7 +597,7 @@ class C { }";
         public void TestEmptyElementWithAttributeDoubleQuoteAndAttributeTextOnMultipleLinesDelimited()
         {
             var text =
-@"/** <goo 
+                @"/** <goo 
   * a
   * =
   * ""
@@ -609,7 +628,7 @@ class C { }";
         public void TestEmptyElementWithAttributeQuoteAndAttributeTextOnMultipleLinesDelimited()
         {
             var text =
-@"/** <goo 
+                @"/** <goo 
   * a
   * =
   * '
@@ -745,7 +764,7 @@ class C { }";
         public void TestNonEmptyElementNoAttributes()
         {
             var text =
-@"/// <goo>
+                @"/// <goo>
 /// bar
 /// </goo>";
             var tree = Parse(text);
@@ -778,7 +797,7 @@ class C { }";
         public void TestNonEmptyElementNoAttributesDelimited()
         {
             var text =
-@"/** <goo>
+                @"/** <goo>
   * bar
   * </goo>
   */";
@@ -812,7 +831,7 @@ class C { }";
         public void TestCDataSection()
         {
             var text =
-@"/// <![CDATA[ this is a test
+                @"/// <![CDATA[ this is a test
 /// of &some; cdata /// */ /**
 /// ""']]<>/></text]]>";
             var tree = Parse(text);
@@ -842,7 +861,7 @@ class C { }";
         public void TestCDataSectionDelimited()
         {
             var text =
-@"/** <![CDATA[ this is a test
+                @"/** <![CDATA[ this is a test
   * of &some; cdata
   * ""']]<>/></text]]>
   */";
@@ -897,7 +916,8 @@ class C { }";
         [Fact]
         public void TestIncompleteEOLCDataSection()
         {
-            var text = @"/// <![CDATA[ incomplete
+            var text =
+                @"/// <![CDATA[ incomplete
 class C { }"; // end of line/comment
             var tree = Parse(text);
             Assert.NotNull(tree);
@@ -974,7 +994,7 @@ class C { }"; // end of line/comment
         public void TestComment()
         {
             var text =
-@"/// <!-- this is a test
+                @"/// <!-- this is a test
 /// of &some; comment
 /// ""']]<>/></text-->";
             var tree = Parse(text);
@@ -1004,7 +1024,7 @@ class C { }"; // end of line/comment
         public void TestCommentDelimited()
         {
             var text =
-@"/** <!-- this is a test
+                @"/** <!-- this is a test
   * of &some; comment
   * ""']]<>/></text-->
   */";
@@ -1059,7 +1079,8 @@ class C { }"; // end of line/comment
         [Fact]
         public void TestIncompleteEOLComment()
         {
-            var text = @"/// <!-- incomplete
+            var text =
+                @"/// <!-- incomplete
 class C { }"; // end of line/comment
             var tree = Parse(text);
             Assert.NotNull(tree);
@@ -1110,7 +1131,7 @@ class C { }"; // end of line/comment
         public void TestProcessingInstruction()
         {
             var text =
-@"/// <?ProcessingInstruction this is a test
+                @"/// <?ProcessingInstruction this is a test
 /// of &a; ProcessingInstruction /// */ /**
 /// ""']]>/>?</text?>";
             var tree = Parse(text);
@@ -1133,7 +1154,10 @@ class C { }"; // end of line/comment
             Assert.Equal(5, ProcessingInstruction.TextTokens.Count);
             Assert.Equal(" this is a test", ProcessingInstruction.TextTokens[0].ToString());
             Assert.Equal(Environment.NewLine, ProcessingInstruction.TextTokens[1].ToString());
-            Assert.Equal(" of &a; ProcessingInstruction /// */ /**", ProcessingInstruction.TextTokens[2].ToString());
+            Assert.Equal(
+                " of &a; ProcessingInstruction /// */ /**",
+                ProcessingInstruction.TextTokens[2].ToString()
+            );
             Assert.Equal(Environment.NewLine, ProcessingInstruction.TextTokens[3].ToString());
             Assert.Equal(" \"']]>/>?</text", ProcessingInstruction.TextTokens[4].ToString());
         }
@@ -1142,7 +1166,7 @@ class C { }"; // end of line/comment
         public void TestProcessingInstructionDelimited()
         {
             var text =
-@"/** <?prefix:localname this is a test <!--
+                @"/** <?prefix:localname this is a test <!--
   * of &a; ProcessingInstruction
   * ""']]>/></text>]]>?>
   */";
@@ -1167,7 +1191,10 @@ class C { }"; // end of line/comment
             Assert.Equal(5, ProcessingInstruction.TextTokens.Count);
             Assert.Equal(" this is a test <!--", ProcessingInstruction.TextTokens[0].ToString());
             Assert.Equal(Environment.NewLine, ProcessingInstruction.TextTokens[1].ToString());
-            Assert.Equal(" of &a; ProcessingInstruction", ProcessingInstruction.TextTokens[2].ToString());
+            Assert.Equal(
+                " of &a; ProcessingInstruction",
+                ProcessingInstruction.TextTokens[2].ToString()
+            );
             Assert.Equal(Environment.NewLine, ProcessingInstruction.TextTokens[3].ToString());
             Assert.Equal(" \"']]>/></text>]]>", ProcessingInstruction.TextTokens[4].ToString());
             Assert.Equal(SyntaxKind.XmlText, doc.Content[2].Kind());
@@ -1277,7 +1304,7 @@ class C { }"; // end of line/comment
         public void TestEarlyTerminationOfXmlParse()
         {
             var text =
-@"/// <goo>
+                @"/// <goo>
 /// bar
 /// </goo>
 /// </uhoh>
@@ -1287,22 +1314,28 @@ class C { }";
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
             Assert.Equal(2, tree.GetCompilationUnitRoot().ChildNodesAndTokens().Count);
-            Assert.Equal(SyntaxKind.ClassDeclaration, tree.GetCompilationUnitRoot().ChildNodesAndTokens()[0].Kind());
-            var classdecl = (TypeDeclarationSyntax)tree.GetCompilationUnitRoot().ChildNodesAndTokens()[0].AsNode();
+            Assert.Equal(
+                SyntaxKind.ClassDeclaration,
+                tree.GetCompilationUnitRoot().ChildNodesAndTokens()[0].Kind()
+            );
+            var classdecl = (TypeDeclarationSyntax)
+                tree.GetCompilationUnitRoot().ChildNodesAndTokens()[0].AsNode();
             Assert.Equal("class C { }", classdecl.ToString());
             Assert.True(classdecl.HasLeadingTrivia);
             var leading = classdecl.GetLeadingTrivia();
             Assert.Equal(1, leading.Count);
             var node = leading[0];
             Assert.NotEqual(0, node.ErrorsAndWarnings().Length);
-            Assert.Equal(SyntaxKind.EndOfFileToken, tree.GetCompilationUnitRoot().ChildNodesAndTokens()[1].Kind());
+            Assert.Equal(
+                SyntaxKind.EndOfFileToken,
+                tree.GetCompilationUnitRoot().ChildNodesAndTokens()[1].Kind()
+            );
         }
 
         [Fact]
         public void TestPredefinedXmlEntity()
         {
-            var text =
-@"/// &lt;";
+            var text = @"/// &lt;";
             var tree = Parse(text);
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
@@ -1325,8 +1358,7 @@ class C { }";
         [Fact]
         public void TestPredefinedXmlEntityDelimited()
         {
-            var text =
-@"/** &lt; */";
+            var text = @"/** &lt; */";
             var tree = Parse(text);
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
@@ -1350,8 +1382,7 @@ class C { }";
         [Fact]
         public void TestHexCharacterXmlEntity()
         {
-            var text =
-@"/// &#x41;";
+            var text = @"/// &#x41;";
             var tree = Parse(text);
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
@@ -1374,8 +1405,7 @@ class C { }";
         [Fact]
         public void TestHexCharacterXmlEntityDelimited()
         {
-            var text =
-@"/** &#x41; */";
+            var text = @"/** &#x41; */";
             var tree = Parse(text);
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
@@ -1399,8 +1429,7 @@ class C { }";
         [Fact]
         public void TestDecCharacterXmlEntity()
         {
-            var text =
-@"/// &#65;";
+            var text = @"/// &#65;";
             var tree = Parse(text);
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
@@ -1423,8 +1452,7 @@ class C { }";
         [Fact]
         public void TestDecCharacterXmlEntityDelimited()
         {
-            var text =
-@"/** &#65; */";
+            var text = @"/** &#65; */";
             var tree = Parse(text);
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
@@ -1448,8 +1476,7 @@ class C { }";
         [Fact]
         public void TestLargeHexCharacterXmlEntity()
         {
-            var text =
-@"/// &#x1d11e;";
+            var text = @"/// &#x1d11e;";
             var tree = Parse(text);
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
@@ -1472,8 +1499,7 @@ class C { }";
         [Fact]
         public void TestLargeHexCharacterXmlEntityDelimited()
         {
-            var text =
-@"/** &#x1D11E; */";
+            var text = @"/** &#x1D11E; */";
             var tree = Parse(text);
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
@@ -1497,8 +1523,7 @@ class C { }";
         [Fact]
         public void TestXmlEntityUndefined()
         {
-            var text =
-@"///&#abcdef;";
+            var text = @"///&#abcdef;";
             var tree = Parse(text);
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
@@ -1508,8 +1533,7 @@ class C { }";
         [Fact]
         public void TestXmlAttributeLessThan()
         {
-            var text =
-@"///<goo attr=""less<than"" />";
+            var text = @"///<goo attr=""less<than"" />";
             var tree = Parse(text);
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
@@ -1519,8 +1543,7 @@ class C { }";
         [Fact]
         public void TestXmlCommentDashDash()
         {
-            var text =
-@"///<!-- A Comment with -- -->";
+            var text = @"///<!-- A Comment with -- -->";
             var tree = Parse(text);
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
@@ -1530,8 +1553,7 @@ class C { }";
         [Fact]
         public void TestXmlElementMismatch()
         {
-            var text =
-@"///< goo > </ bar >";
+            var text = @"///< goo > </ bar >";
             var tree = Parse(text);
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
@@ -1541,8 +1563,7 @@ class C { }";
         [Fact]
         public void TestXmlElementDuplicateAttributes()
         {
-            var text =
-@"///< goo x = ""bar"" x = ""baz"" ";
+            var text = @"///< goo x = ""bar"" x = ""baz"" ";
             var tree = Parse(text);
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
@@ -1552,8 +1573,7 @@ class C { }";
         [Fact]
         public void TestPredefinedXmlEntityInAttribute()
         {
-            var text =
-@"/// <goo a="" &lt; ""/>";
+            var text = @"/// <goo a="" &lt; ""/>";
             var tree = Parse(text);
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
@@ -1580,8 +1600,7 @@ class C { }";
         [Fact]
         public void TestPredefinedXmlEntityInAttributeDelimited()
         {
-            var text =
-@"/** <goo a="" &lt; ""/>*/";
+            var text = @"/** <goo a="" &lt; ""/>*/";
             var tree = Parse(text);
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
@@ -1633,7 +1652,7 @@ class C { }";
         public void TestNoZeroWidthTrivia()
         {
             var text =
-@"/**
+                @"/**
 x
 */";
             var tree = Parse(text);
@@ -1650,13 +1669,19 @@ x
             Assert.Equal(SyntaxKind.XmlText, doc.Content[0].Kind());
             var xmltext = (XmlTextSyntax)doc.Content[0];
             Assert.Equal(3, xmltext.ChildNodesAndTokens().Count);
-            Assert.Equal(SyntaxKind.XmlTextLiteralNewLineToken, xmltext.ChildNodesAndTokens()[0].Kind());
+            Assert.Equal(
+                SyntaxKind.XmlTextLiteralNewLineToken,
+                xmltext.ChildNodesAndTokens()[0].Kind()
+            );
             Assert.True(xmltext.ChildNodesAndTokens()[0].HasLeadingTrivia);
             Assert.Equal(Environment.NewLine, xmltext.ChildNodesAndTokens()[0].ToString());
             Assert.Equal(SyntaxKind.XmlTextLiteralToken, xmltext.ChildNodesAndTokens()[1].Kind());
             Assert.False(xmltext.ChildNodesAndTokens()[1].HasLeadingTrivia);
             Assert.Equal("x", xmltext.ChildNodesAndTokens()[1].ToString());
-            Assert.Equal(SyntaxKind.XmlTextLiteralNewLineToken, xmltext.ChildNodesAndTokens()[2].Kind());
+            Assert.Equal(
+                SyntaxKind.XmlTextLiteralNewLineToken,
+                xmltext.ChildNodesAndTokens()[2].Kind()
+            );
             Assert.False(xmltext.ChildNodesAndTokens()[2].HasLeadingTrivia);
             Assert.Equal(Environment.NewLine, xmltext.ChildNodesAndTokens()[2].ToString());
         }
@@ -1675,7 +1700,10 @@ x
             Assert.Equal(1, tree.GetCompilationUnitRoot().Warnings().Length);
 
             // we expect one warning
-            VerifyDiagnostics(tree.GetCompilationUnitRoot(), new List<TestError>() { new TestError(1570, true) });
+            VerifyDiagnostics(
+                tree.GetCompilationUnitRoot(),
+                new List<TestError>() { new TestError(1570, true) }
+            );
         }
 
         [WorkItem(906367, "DevDiv/Personal")]
@@ -1692,13 +1720,17 @@ x
             Assert.Equal(1, tree.GetCompilationUnitRoot().Warnings().Length);
 
             // we expect one warning
-            VerifyDiagnostics(tree.GetCompilationUnitRoot(), new List<TestError>() { new TestError(1570, true) });
+            VerifyDiagnostics(
+                tree.GetCompilationUnitRoot(),
+                new List<TestError>() { new TestError(1570, true) }
+            );
         }
 
         [Fact]
         public void TestSingleLineXmlCommentBetweenRegularComments()
         {
-            var text = @"//Comment
+            var text =
+                @"//Comment
 /// <goo a=""as""> </goo>
 //Comment
 ";
@@ -1720,7 +1752,10 @@ x
 
             // the 3rd one should be XmlDocComment
             Assert.True(trivias[2].HasStructure);
-            Assert.Equal(typeof(DocumentationCommentTriviaSyntax), trivias[2].GetStructure().GetType());
+            Assert.Equal(
+                typeof(DocumentationCommentTriviaSyntax),
+                trivias[2].GetStructure().GetType()
+            );
             var doc = trivias[2].GetStructure() as DocumentationCommentTriviaSyntax;
 
             // we validate the xml comment
@@ -1728,13 +1763,17 @@ x
 
             // we verify the content of the tag
             VerifyXmlElement(xmlElement, "goo", " ");
-            VerifyXmlAttributes(xmlElement.StartTag.Attributes, new Dictionary<string, string>() { { "a", "as" } });
+            VerifyXmlAttributes(
+                xmlElement.StartTag.Attributes,
+                new Dictionary<string, string>() { { "a", "as" } }
+            );
         }
 
         [Fact]
         public void TestSingleLineXmlCommentAfterMultilineXmlComment()
         {
-            var text = @"/** <bar a='val'> 
+            var text =
+                @"/** <bar a='val'> 
 * text
 * </bar>
 */
@@ -1754,27 +1793,44 @@ x
             Assert.Equal(4, trivias.Count);
 
             // we should also have two xml comments
-            Assert.Equal(typeof(DocumentationCommentTriviaSyntax), trivias[0].GetStructure().GetType());
-            Assert.Equal(typeof(DocumentationCommentTriviaSyntax), trivias[3].GetStructure().GetType());
+            Assert.Equal(
+                typeof(DocumentationCommentTriviaSyntax),
+                trivias[0].GetStructure().GetType()
+            );
+            Assert.Equal(
+                typeof(DocumentationCommentTriviaSyntax),
+                trivias[3].GetStructure().GetType()
+            );
 
             // we grab the xml comments
             var firstComment = trivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
             var secondComment = trivias[3].GetStructure() as DocumentationCommentTriviaSyntax;
 
             // verify that the xml elements contain the right info
-            VerifyXmlElement(firstComment.Content[1] as XmlElementSyntax, "bar", @" 
+            VerifyXmlElement(
+                firstComment.Content[1] as XmlElementSyntax,
+                "bar",
+                @" 
 * text
-* ");
-            VerifyXmlAttributes((firstComment.Content[1] as XmlElementSyntax).StartTag.Attributes, new Dictionary<string, string>() { { "a", "val" } });
+* "
+            );
+            VerifyXmlAttributes(
+                (firstComment.Content[1] as XmlElementSyntax).StartTag.Attributes,
+                new Dictionary<string, string>() { { "a", "val" } }
+            );
 
             VerifyXmlElement(secondComment.Content[1] as XmlElementSyntax, "goo", " ");
-            VerifyXmlAttributes((secondComment.Content[1] as XmlElementSyntax).StartTag.Attributes, new Dictionary<string, string>() { { "a", "as" } });
+            VerifyXmlAttributes(
+                (secondComment.Content[1] as XmlElementSyntax).StartTag.Attributes,
+                new Dictionary<string, string>() { { "a", "as" } }
+            );
         }
 
         [Fact]
         public void TestSingleLineXmlCommentAfterInvalidMultilineXmlComment()
         {
-            var text = @"/** <bar a='val'> 
+            var text =
+                @"/** <bar a='val'> 
 * text
 */
 
@@ -1796,28 +1852,41 @@ x
             Assert.Equal(4, trivias.Count);
 
             // we should also have two xml comments
-            Assert.Equal(typeof(DocumentationCommentTriviaSyntax), trivias[0].GetStructure().GetType());
-            Assert.Equal(typeof(DocumentationCommentTriviaSyntax), trivias[3].GetStructure().GetType());
+            Assert.Equal(
+                typeof(DocumentationCommentTriviaSyntax),
+                trivias[0].GetStructure().GetType()
+            );
+            Assert.Equal(
+                typeof(DocumentationCommentTriviaSyntax),
+                trivias[3].GetStructure().GetType()
+            );
 
             // we grab the xml comments
             var firstComment = trivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
             var secondComment = trivias[3].GetStructure() as DocumentationCommentTriviaSyntax;
 
             // we validate that the error is on the firstComment node
-            firstComment.GetDiagnostics().Verify(
-                // (3,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'bar'.'
-                // */
-                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("bar"));
+            firstComment
+                .GetDiagnostics()
+                .Verify(
+                    // (3,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'bar'.'
+                    // */
+                    Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("bar")
+                );
 
             // verify that the xml elements contain the right info
             VerifyXmlElement(secondComment.Content[1] as XmlElementSyntax, "goo", " ");
-            VerifyXmlAttributes((secondComment.Content[1] as XmlElementSyntax).StartTag.Attributes, new Dictionary<string, string>() { { "a", "as" } });
+            VerifyXmlAttributes(
+                (secondComment.Content[1] as XmlElementSyntax).StartTag.Attributes,
+                new Dictionary<string, string>() { { "a", "as" } }
+            );
         }
 
         [Fact]
         public void TestSingleLineXmlCommentBeforeMethodDecl()
         {
-            var text = @"class C{
+            var text =
+                @"class C{
 ///<goo a=""val""/>
   void Goo(){}
 }";
@@ -1829,9 +1898,17 @@ x
             Assert.Equal(0, tree.GetCompilationUnitRoot().Errors().Length);
 
             // we grab the void keyword
-            Assert.Equal(typeof(MethodDeclarationSyntax), (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0].GetType());
+            Assert.Equal(
+                typeof(MethodDeclarationSyntax),
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                    .Members[0]
+                    .GetType()
+            );
 
-            var keyword = ((tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0] as MethodDeclarationSyntax).ReturnType;
+            var keyword = (
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0]
+                as MethodDeclarationSyntax
+            ).ReturnType;
 
             var trivias = keyword.GetLeadingTrivia();
 
@@ -1839,20 +1916,27 @@ x
             Assert.Equal(2, trivias.Count);
 
             // we should also have one comment
-            Assert.Equal(typeof(DocumentationCommentTriviaSyntax), trivias[0].GetStructure().GetType());
+            Assert.Equal(
+                typeof(DocumentationCommentTriviaSyntax),
+                trivias[0].GetStructure().GetType()
+            );
 
             // we grab the xml comments
             var firstComment = trivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
 
             // verify that the xml elements contain the right info
             VerifyXmlElement(firstComment.Content[0] as XmlEmptyElementSyntax, "goo");
-            VerifyXmlAttributes((firstComment.Content[0] as XmlEmptyElementSyntax).Attributes, new Dictionary<string, string>() { { "a", "val" } });
+            VerifyXmlAttributes(
+                (firstComment.Content[0] as XmlEmptyElementSyntax).Attributes,
+                new Dictionary<string, string>() { { "a", "val" } }
+            );
         }
 
         [Fact]
         public void TestSingleLineXmlCommentBeforeGenericMethodDecl()
         {
-            var text = @"class C{
+            var text =
+                @"class C{
 ///<goo a=""val""> </goo>
   void Goo<T>(){}
 }";
@@ -1864,9 +1948,17 @@ x
             Assert.Equal(0, tree.GetCompilationUnitRoot().Errors().Length);
 
             // we grab the void keyword
-            Assert.Equal(typeof(MethodDeclarationSyntax), (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0].GetType());
+            Assert.Equal(
+                typeof(MethodDeclarationSyntax),
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                    .Members[0]
+                    .GetType()
+            );
 
-            var keyword = ((tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0] as MethodDeclarationSyntax).ReturnType;
+            var keyword = (
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0]
+                as MethodDeclarationSyntax
+            ).ReturnType;
 
             var trivias = keyword.GetLeadingTrivia();
 
@@ -1874,20 +1966,27 @@ x
             Assert.Equal(2, trivias.Count);
 
             // we should also have one comment
-            Assert.Equal(typeof(DocumentationCommentTriviaSyntax), trivias[0].GetStructure().GetType());
+            Assert.Equal(
+                typeof(DocumentationCommentTriviaSyntax),
+                trivias[0].GetStructure().GetType()
+            );
 
             // we grab the xml comments
             var firstComment = trivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
 
             // verify that the xml elements contain the right info
             VerifyXmlElement(firstComment.Content[0] as XmlElementSyntax, "goo", " ");
-            VerifyXmlAttributes((firstComment.Content[0] as XmlElementSyntax).StartTag.Attributes, new Dictionary<string, string>() { { "a", "val" } });
+            VerifyXmlAttributes(
+                (firstComment.Content[0] as XmlElementSyntax).StartTag.Attributes,
+                new Dictionary<string, string>() { { "a", "val" } }
+            );
         }
 
         [Fact]
         public void TestSingleLineXmlCommentBeforePropertyDecl()
         {
-            var text = @"class C{
+            var text =
+                @"class C{
 ///<goo a=""val""/>
   int Goo{get;set;}
 }";
@@ -1899,9 +1998,17 @@ x
             Assert.Equal(0, tree.GetCompilationUnitRoot().Errors().Length);
 
             // we grab the void keyword
-            Assert.Equal(typeof(PropertyDeclarationSyntax), (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0].GetType());
+            Assert.Equal(
+                typeof(PropertyDeclarationSyntax),
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                    .Members[0]
+                    .GetType()
+            );
 
-            var keyword = ((tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0] as PropertyDeclarationSyntax).Type;
+            var keyword = (
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0]
+                as PropertyDeclarationSyntax
+            ).Type;
 
             var trivias = keyword.GetLeadingTrivia();
 
@@ -1909,20 +2016,27 @@ x
             Assert.Equal(2, trivias.Count);
 
             // we should also have one comment
-            Assert.Equal(typeof(DocumentationCommentTriviaSyntax), trivias[0].GetStructure().GetType());
+            Assert.Equal(
+                typeof(DocumentationCommentTriviaSyntax),
+                trivias[0].GetStructure().GetType()
+            );
 
             // we grab the xml comments
             var firstComment = trivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
 
             // verify that the xml elements contain the right info
             VerifyXmlElement(firstComment.Content[0] as XmlEmptyElementSyntax, "goo");
-            VerifyXmlAttributes((firstComment.Content[0] as XmlEmptyElementSyntax).Attributes, new Dictionary<string, string>() { { "a", "val" } });
+            VerifyXmlAttributes(
+                (firstComment.Content[0] as XmlEmptyElementSyntax).Attributes,
+                new Dictionary<string, string>() { { "a", "val" } }
+            );
         }
 
         [Fact]
         public void TestSingleLineXmlCommentBeforeIndexerDecl()
         {
-            var text = @"class C{
+            var text =
+                @"class C{
 ///<goo a=""val""/>
   int this[int x] { get { return 1; } set { } }
 }";
@@ -1934,9 +2048,17 @@ x
             Assert.Equal(0, tree.GetCompilationUnitRoot().Errors().Length);
 
             // we grab the void keyword
-            Assert.Equal(typeof(IndexerDeclarationSyntax), (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0].GetType());
+            Assert.Equal(
+                typeof(IndexerDeclarationSyntax),
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                    .Members[0]
+                    .GetType()
+            );
 
-            var keyword = ((tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0] as IndexerDeclarationSyntax).Type;
+            var keyword = (
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0]
+                as IndexerDeclarationSyntax
+            ).Type;
 
             var trivias = keyword.GetLeadingTrivia();
 
@@ -1944,21 +2066,28 @@ x
             Assert.Equal(2, trivias.Count);
 
             // we should also have one comment
-            Assert.Equal(typeof(DocumentationCommentTriviaSyntax), trivias[0].GetStructure().GetType());
+            Assert.Equal(
+                typeof(DocumentationCommentTriviaSyntax),
+                trivias[0].GetStructure().GetType()
+            );
 
             // we grab the xml comments
             var firstComment = trivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
 
             // verify that the xml elements contain the right info
             VerifyXmlElement(firstComment.Content[0] as XmlEmptyElementSyntax, "goo");
-            VerifyXmlAttributes((firstComment.Content[0] as XmlEmptyElementSyntax).Attributes, new Dictionary<string, string>() { { "a", "val" } });
+            VerifyXmlAttributes(
+                (firstComment.Content[0] as XmlEmptyElementSyntax).Attributes,
+                new Dictionary<string, string>() { { "a", "val" } }
+            );
         }
 
         [WorkItem(906381, "DevDiv/Personal")]
         [Fact]
         public void TestMultiLineXmlCommentBeforeGenericTypeParameterOnMethodDecl()
         {
-            var text = @"class C {
+            var text =
+                @"class C {
     void Goo</**<goo>test</goo>*/T>() { }
 }";
 
@@ -1969,10 +2098,17 @@ x
             Assert.Equal(0, tree.GetCompilationUnitRoot().Errors().Length);
 
             // do we parsed a method?
-            Assert.Equal(typeof(MethodDeclarationSyntax), (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0].GetType());
+            Assert.Equal(
+                typeof(MethodDeclarationSyntax),
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                    .Members[0]
+                    .GetType()
+            );
 
             // we grab the open bracket for the Goo method decl
-            var method = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0] as MethodDeclarationSyntax;
+            var method =
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0]
+                as MethodDeclarationSyntax;
             var typeParameter = method.TypeParameterList.Parameters.Single();
 
             var trivias = typeParameter.GetLeadingTrivia();
@@ -1981,7 +2117,10 @@ x
             Assert.Equal(1, trivias.Count);
 
             // we should also have one XML comment
-            Assert.Equal(typeof(DocumentationCommentTriviaSyntax), trivias[0].GetStructure().GetType());
+            Assert.Equal(
+                typeof(DocumentationCommentTriviaSyntax),
+                trivias[0].GetStructure().GetType()
+            );
 
             // we grab the xml comments
             var firstComment = trivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
@@ -1990,7 +2129,10 @@ x
             VerifyXmlElement(firstComment.Content[0] as XmlElementSyntax, "goo", "test");
 
             // we don't have any attributes
-            Assert.Equal(0, (firstComment.Content[0] as XmlElementSyntax).StartTag.Attributes.Count);
+            Assert.Equal(
+                0,
+                (firstComment.Content[0] as XmlElementSyntax).StartTag.Attributes.Count
+            );
         }
 
         [WorkItem(906381, "DevDiv/Personal")]
@@ -2006,10 +2148,15 @@ x
             Assert.Equal(0, tree.GetCompilationUnitRoot().Errors().Length);
 
             // do we parsed a method?
-            Assert.Equal(typeof(ClassDeclarationSyntax), tree.GetCompilationUnitRoot().Members[0].GetType());
+            Assert.Equal(
+                typeof(ClassDeclarationSyntax),
+                tree.GetCompilationUnitRoot().Members[0].GetType()
+            );
 
             // we grab the open bracket for the Goo method decl
-            var typeParameter = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).TypeParameterList.Parameters.Single();
+            var typeParameter = (
+                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
+            ).TypeParameterList.Parameters.Single();
 
             var trivias = typeParameter.GetLeadingTrivia();
 
@@ -2017,7 +2164,10 @@ x
             Assert.Equal(1, trivias.Count);
 
             // we should also have one XML comment
-            Assert.Equal(typeof(DocumentationCommentTriviaSyntax), trivias[0].GetStructure().GetType());
+            Assert.Equal(
+                typeof(DocumentationCommentTriviaSyntax),
+                trivias[0].GetStructure().GetType()
+            );
 
             // we grab the xml comments
             var firstComment = trivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
@@ -2026,13 +2176,17 @@ x
             VerifyXmlElement(firstComment.Content[0] as XmlElementSyntax, "goo", "test");
 
             // we don't have any attributes
-            Assert.Equal(0, (firstComment.Content[0] as XmlElementSyntax).StartTag.Attributes.Count);
+            Assert.Equal(
+                0,
+                (firstComment.Content[0] as XmlElementSyntax).StartTag.Attributes.Count
+            );
         }
 
         [Fact]
         public void TestSingleLineXmlCommentBeforeIncompleteGenericMethodDecl()
         {
-            var text = @"class C{
+            var text =
+                @"class C{
 ///<goo a=""val""> </goo>
   void Goo<T(){}
 }";
@@ -2044,9 +2198,17 @@ x
             Assert.Equal(1, tree.GetCompilationUnitRoot().Errors().Length); // 4 errors because of the incomplete class decl
 
             // we grab the void keyword
-            Assert.Equal(typeof(MethodDeclarationSyntax), (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0].GetType());
+            Assert.Equal(
+                typeof(MethodDeclarationSyntax),
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax)
+                    .Members[0]
+                    .GetType()
+            );
 
-            var keyword = ((tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0] as MethodDeclarationSyntax).ReturnType;
+            var keyword = (
+                (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Members[0]
+                as MethodDeclarationSyntax
+            ).ReturnType;
 
             var trivias = keyword.GetLeadingTrivia();
 
@@ -2055,20 +2217,27 @@ x
 
             // we should also have one comment
             Assert.Equal(0, trivias[0].Errors().Length);
-            Assert.Equal(typeof(DocumentationCommentTriviaSyntax), trivias[0].GetStructure().GetType());
+            Assert.Equal(
+                typeof(DocumentationCommentTriviaSyntax),
+                trivias[0].GetStructure().GetType()
+            );
 
             // we grab the xml comments
             var firstComment = trivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
 
             // verify that the xml elements contain the right info
             VerifyXmlElement(firstComment.Content[0] as XmlElementSyntax, "goo", " ");
-            VerifyXmlAttributes((firstComment.Content[0] as XmlElementSyntax).StartTag.Attributes, new Dictionary<string, string>() { { "a", "val" } });
+            VerifyXmlAttributes(
+                (firstComment.Content[0] as XmlElementSyntax).StartTag.Attributes,
+                new Dictionary<string, string>() { { "a", "val" } }
+            );
         }
 
         [Fact]
         public void TestSingleLineXmlCommentAfterMethodDecl()
         {
-            var text = @"class C{
+            var text =
+                @"class C{
   void Goo(){}
 ///<goo a=""val""/>
 }";
@@ -2079,7 +2248,9 @@ x
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
             Assert.Equal(0, tree.GetCompilationUnitRoot().Errors().Length);
 
-            var bracket = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).CloseBraceToken;
+            var bracket = (
+                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
+            ).CloseBraceToken;
 
             var trivias = bracket.GetLeadingTrivia();
 
@@ -2087,20 +2258,27 @@ x
             Assert.Equal(1, trivias.Count);
 
             // we should also have one comment
-            Assert.Equal(typeof(DocumentationCommentTriviaSyntax), trivias[0].GetStructure().GetType());
+            Assert.Equal(
+                typeof(DocumentationCommentTriviaSyntax),
+                trivias[0].GetStructure().GetType()
+            );
 
             // we grab the xml comments
             var firstComment = trivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
 
             // verify that the xml elements contain the right info
             VerifyXmlElement(firstComment.Content[0] as XmlEmptyElementSyntax, "goo");
-            VerifyXmlAttributes((firstComment.Content[0] as XmlEmptyElementSyntax).Attributes, new Dictionary<string, string>() { { "a", "val" } });
+            VerifyXmlAttributes(
+                (firstComment.Content[0] as XmlEmptyElementSyntax).Attributes,
+                new Dictionary<string, string>() { { "a", "val" } }
+            );
         }
 
         [Fact]
         public void TestSingleLineXmlCommentAfterIncompleteMethodDecl()
         {
-            var text = @"class C{
+            var text =
+                @"class C{
   void Goo({}
 ///<goo a=""val""> </goo>
 }";
@@ -2121,20 +2299,27 @@ x
 
             // we should also have one comment
             Assert.Equal(0, trivias[0].Errors().Length);
-            Assert.Equal(typeof(DocumentationCommentTriviaSyntax), trivias[0].GetStructure().GetType());
+            Assert.Equal(
+                typeof(DocumentationCommentTriviaSyntax),
+                trivias[0].GetStructure().GetType()
+            );
 
             // we grab the xml comments
             var firstComment = trivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
 
             // verify that the xml elements contain the right info
             VerifyXmlElement(firstComment.Content[0] as XmlElementSyntax, "goo", " ");
-            VerifyXmlAttributes((firstComment.Content[0] as XmlElementSyntax).StartTag.Attributes, new Dictionary<string, string>() { { "a", "val" } });
+            VerifyXmlAttributes(
+                (firstComment.Content[0] as XmlElementSyntax).StartTag.Attributes,
+                new Dictionary<string, string>() { { "a", "val" } }
+            );
         }
 
         [Fact]
         public void TestSingleLineXmlCommentBeforePreprocessorDirective()
         {
-            var text = @"///<goo></goo>
+            var text =
+                @"///<goo></goo>
 # if DOODAD
 # endif";
             var tree = Parse(text);
@@ -2152,7 +2337,10 @@ x
             Assert.Equal(3, trivias.Count);
 
             Assert.Equal(0, trivias[0].Errors().Length);
-            Assert.Equal(typeof(DocumentationCommentTriviaSyntax), trivias[0].GetStructure().GetType());
+            Assert.Equal(
+                typeof(DocumentationCommentTriviaSyntax),
+                trivias[0].GetStructure().GetType()
+            );
 
             // we grab the xml comments
             var firstComment = trivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
@@ -2164,7 +2352,8 @@ x
         [Fact]
         public void TestSingleLineXmlCommentAfterPreprocessorDirective()
         {
-            var text = @"# if DOODAD
+            var text =
+                @"# if DOODAD
 # endif
 ///<goo></goo>";
             var tree = Parse(text);
@@ -2182,7 +2371,10 @@ x
             Assert.Equal(3, trivias.Count);
 
             Assert.Equal(0, trivias[0].Errors().Length);
-            Assert.Equal(typeof(DocumentationCommentTriviaSyntax), trivias[2].GetStructure().GetType());
+            Assert.Equal(
+                typeof(DocumentationCommentTriviaSyntax),
+                trivias[2].GetStructure().GetType()
+            );
 
             // we grab the xml comments
             var firstComment = trivias[2].GetStructure() as DocumentationCommentTriviaSyntax;
@@ -2194,7 +2386,8 @@ x
         [Fact]
         public void TestSingleLineXmlCommentInsideMultiLineXmlComment()
         {
-            var text = @"/** <goo> 
+            var text =
+                @"/** <goo> 
 * /// <bar> </bar>
 * </goo>
 */";
@@ -2214,16 +2407,25 @@ x
             Assert.Equal(0, trivias[0].Errors().Length);
 
             // make sure that the external node exists
-            Assert.Equal(typeof(DocumentationCommentTriviaSyntax), trivias[0].GetStructure().GetType());
+            Assert.Equal(
+                typeof(DocumentationCommentTriviaSyntax),
+                trivias[0].GetStructure().GetType()
+            );
 
             // we grab the xml comments
-            var outerComment = (trivias[0].GetStructure() as DocumentationCommentTriviaSyntax).Content[1] as XmlElementSyntax;
+            var outerComment =
+                (trivias[0].GetStructure() as DocumentationCommentTriviaSyntax).Content[1]
+                as XmlElementSyntax;
             var innerComment = outerComment.Content[1] as XmlElementSyntax;
 
             // verify that the xml elements contain the right info
-            VerifyXmlElement(outerComment, "goo", @" 
+            VerifyXmlElement(
+                outerComment,
+                "goo",
+                @" 
 * /// <bar> </bar>
-* ");
+* "
+            );
 
             VerifyXmlElement(innerComment, "bar", " ");
         }
@@ -2240,13 +2442,17 @@ x
 
             // we expect one warning
             Assert.Equal(1, tree.GetCompilationUnitRoot().Errors().Length);
-            VerifyDiagnostics(tree.GetCompilationUnitRoot(), new List<TestError>() { new TestError(1035, false) });
+            VerifyDiagnostics(
+                tree.GetCompilationUnitRoot(),
+                new List<TestError>() { new TestError(1035, false) }
+            );
         }
 
         [Fact]
         public void TestSingleLineXmlCommentWithMultipleAttributes()
         {
-            var text = @"///<goo attr1=""a"" attr2=""b"" attr3=""test""> </goo>
+            var text =
+                @"///<goo attr1=""a"" attr2=""b"" attr3=""test""> </goo>
 class C{}";
             var tree = Parse(text);
 
@@ -2254,23 +2460,43 @@ class C{}";
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
             Assert.Equal(0, tree.GetCompilationUnitRoot().Errors().Length);
 
-            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Keyword;
+            var classKeyword = (
+                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
+            ).Keyword;
 
             var trivias = classKeyword.GetLeadingTrivia();
 
             Assert.Equal(1, trivias.Count);
 
             // we verify that we parsed a correct XML element
-            VerifyXmlElement((trivias[0].GetStructure() as DocumentationCommentTriviaSyntax).Content[0] as XmlElementSyntax, "goo", " ");
+            VerifyXmlElement(
+                (trivias[0].GetStructure() as DocumentationCommentTriviaSyntax).Content[0]
+                    as XmlElementSyntax,
+                "goo",
+                " "
+            );
 
-            VerifyXmlAttributes(((trivias[0].GetStructure() as DocumentationCommentTriviaSyntax).Content[0] as XmlElementSyntax).StartTag.Attributes,
-                new Dictionary<string, string>() { { "attr1", "a" }, { "attr2", "b" }, { "attr3", "test" } });
+            VerifyXmlAttributes(
+                (
+                    (trivias[0].GetStructure() as DocumentationCommentTriviaSyntax).Content[0]
+                    as XmlElementSyntax
+                )
+                    .StartTag
+                    .Attributes,
+                new Dictionary<string, string>()
+                {
+                    { "attr1", "a" },
+                    { "attr2", "b" },
+                    { "attr3", "test" },
+                }
+            );
         }
 
         [Fact]
         public void TestNestedXmlTagsInsideSingleLineXmlDocComment()
         {
-            var text = @"///<goo>
+            var text =
+                @"///<goo>
 /// <bar>
 ///  <baz attr=""a"">
 ///  </baz>
@@ -2291,28 +2517,44 @@ class C{}";
             var doc = topTrivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
 
             var topTriviaElement = doc.Content[0] as XmlElementSyntax;
-            VerifyXmlElement(topTriviaElement, "goo", @"
+            VerifyXmlElement(
+                topTriviaElement,
+                "goo",
+                @"
 /// <bar>
 ///  <baz attr=""a"">
 ///  </baz>
 /// </bar>
-");
+"
+            );
             var secondLevelTrivia = topTriviaElement.Content[1] as XmlElementSyntax;
-            VerifyXmlElement(secondLevelTrivia, "bar", @"
+            VerifyXmlElement(
+                secondLevelTrivia,
+                "bar",
+                @"
 ///  <baz attr=""a"">
 ///  </baz>
-/// ");
+/// "
+            );
 
             var thirdLevelTrivia = secondLevelTrivia.Content[1] as XmlElementSyntax;
-            VerifyXmlElement(thirdLevelTrivia, "baz", @"
-///  ");
-            VerifyXmlAttributes(thirdLevelTrivia.StartTag.Attributes, new Dictionary<string, string>() { { "attr", "a" } });
+            VerifyXmlElement(
+                thirdLevelTrivia,
+                "baz",
+                @"
+///  "
+            );
+            VerifyXmlAttributes(
+                thirdLevelTrivia.StartTag.Attributes,
+                new Dictionary<string, string>() { { "attr", "a" } }
+            );
         }
 
         [Fact]
         public void TestMultiLineXmlCommentWithNestedTagThatContainsCDATA()
         {
-            var text = @"/**
+            var text =
+                @"/**
 <goo>
   <bar> <![CDATA[ Some text
  ]]> </bar>
@@ -2331,19 +2573,30 @@ class C{}";
             var doc = trivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
 
             var topNode = doc.Content[1] as XmlElementSyntax;
-            VerifyXmlElement(topNode, "goo", @"
+            VerifyXmlElement(
+                topNode,
+                "goo",
+                @"
   <bar> <![CDATA[ Some text
  ]]> </bar>
-");
+"
+            );
             var secondLevel = topNode.Content[1] as XmlElementSyntax;
-            VerifyXmlElement(secondLevel, "bar", @" <![CDATA[ Some text
- ]]> ");
+            VerifyXmlElement(
+                secondLevel,
+                "bar",
+                @" <![CDATA[ Some text
+ ]]> "
+            );
 
             // verify the CDATA content
             var cdata = secondLevel.Content[1];
             var actual = (cdata as XmlCDataSectionSyntax).TextTokens.ToFullString();
-            Assert.Equal(@" Some text
-", actual);
+            Assert.Equal(
+                @" Some text
+",
+                actual
+            );
         }
 
         [Fact]
@@ -2372,7 +2625,8 @@ class C{}";
         [Fact]
         public void TestSingleLineXmlCommentWithMissingStartTag()
         {
-            var text = @"///</Goo>
+            var text =
+                @"///</Goo>
 class C{}";
             var tree = Parse(text);
 
@@ -2381,10 +2635,14 @@ class C{}";
             Assert.Equal(1, tree.GetCompilationUnitRoot().ErrorsAndWarnings().Length);
 
             // we get to the xml trivia
-            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Keyword;
+            var classKeyword = (
+                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
+            ).Keyword;
 
             // we get the xmldoc comment
-            var doc = classKeyword.GetLeadingTrivia()[0].GetStructure() as DocumentationCommentTriviaSyntax;
+            var doc =
+                classKeyword.GetLeadingTrivia()[0].GetStructure()
+                as DocumentationCommentTriviaSyntax;
 
             // we get the xmlText
             var xmlText = doc.Content[0] as XmlTextSyntax;
@@ -2402,7 +2660,8 @@ class C{}";
         [Fact]
         public void TestMultiLineXmlCommentWithMissingStartTag()
         {
-            var text = @"/**</Goo>*/
+            var text =
+                @"/**</Goo>*/
 class C{}";
             var tree = Parse(text);
 
@@ -2411,10 +2670,14 @@ class C{}";
             Assert.Equal(1, tree.GetCompilationUnitRoot().ErrorsAndWarnings().Length);
 
             // we get to the xml trivia
-            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Keyword;
+            var classKeyword = (
+                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
+            ).Keyword;
 
             // we get the xmldoc comment
-            var doc = classKeyword.GetLeadingTrivia()[0].GetStructure() as DocumentationCommentTriviaSyntax;
+            var doc =
+                classKeyword.GetLeadingTrivia()[0].GetStructure()
+                as DocumentationCommentTriviaSyntax;
 
             // we get the xmlText
             var xmlText = doc.Content[0] as XmlTextSyntax;
@@ -2431,30 +2694,36 @@ class C{}";
         [Fact]
         public void TestSingleLineXmlCommentWithMissingEndTag()
         {
-            var text = @"///<Goo>
+            var text =
+                @"///<Goo>
 class C{}";
             var tree = Parse(text);
 
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
 
-            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Keyword;
+            var classKeyword = (
+                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
+            ).Keyword;
 
             var trivias = classKeyword.GetLeadingTrivia();
 
             var doc = trivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
 
-            doc.GetDiagnostics().Verify(
-                // (2,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'Goo'.'
-                // class C{}
-                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("Goo"));
+            doc.GetDiagnostics()
+                .Verify(
+                    // (2,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'Goo'.'
+                    // class C{}
+                    Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("Goo")
+                );
         }
 
         [WorkItem(906752, "DevDiv/Personal")]
         [Fact]
         public void TestMultiLineXmlCommentWithMissingEndTag()
         {
-            var text = @"/**<Goo>*/
+            var text =
+                @"/**<Goo>*/
 class C{}";
             var tree = Parse(text);
 
@@ -2464,22 +2733,27 @@ class C{}";
             // we should get 1 warning
             Assert.Equal(1, tree.GetCompilationUnitRoot().Warnings().Length);
 
-            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Keyword;
+            var classKeyword = (
+                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
+            ).Keyword;
 
             var trivias = classKeyword.GetLeadingTrivia();
 
             var doc = trivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
 
-            doc.GetDiagnostics().Verify(
-                // (1,9): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'Goo'.'
-                // /**<Goo>*/
-                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("Goo"));
+            doc.GetDiagnostics()
+                .Verify(
+                    // (1,9): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'Goo'.'
+                    // /**<Goo>*/
+                    Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("Goo")
+                );
         }
 
         [Fact]
         public void TestMultiLineXmlCommentWithInterleavedTags()
         {
-            var text = @"/**<goo>
+            var text =
+                @"/**<goo>
 <bar></goo>
 </bar>*/
 class C{}";
@@ -2491,20 +2765,26 @@ class C{}";
             // we should get 2 warnings
             Assert.Equal(2, tree.GetCompilationUnitRoot().ErrorsAndWarnings().Length);
 
-            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Keyword;
+            var classKeyword = (
+                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
+            ).Keyword;
 
             var trivias = classKeyword.GetLeadingTrivia();
 
             var doc = trivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
 
             // we have an error on that node
-            VerifyDiagnostics(doc, new List<TestError>() { new TestError(1570, true), new TestError(1570, true) });
+            VerifyDiagnostics(
+                doc,
+                new List<TestError>() { new TestError(1570, true), new TestError(1570, true) }
+            );
         }
 
         [Fact]
         public void TestSingleLineXmlCommentWithInterleavedTags()
         {
-            var text = @"///<goo>
+            var text =
+                @"///<goo>
 ///<bar></goo>
 ///</bar>
 class C{}";
@@ -2516,20 +2796,26 @@ class C{}";
             // we should get 2 warnings
             Assert.Equal(2, tree.GetCompilationUnitRoot().Warnings().Length);
 
-            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Keyword;
+            var classKeyword = (
+                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
+            ).Keyword;
 
             var trivias = classKeyword.GetLeadingTrivia();
 
             var doc = trivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
 
             // we have an error on that node
-            VerifyDiagnostics(doc, new List<TestError>() { new TestError(1570, true), new TestError(1570, true) });
+            VerifyDiagnostics(
+                doc,
+                new List<TestError>() { new TestError(1570, true), new TestError(1570, true) }
+            );
         }
 
         [Fact]
         public void TestMultiLineXmlCommentWithIncompleteInterleavedTags()
         {
-            var text = @"/**<goo>
+            var text =
+                @"/**<goo>
 <bar></goo>
 */
 class C{}";
@@ -2538,25 +2824,30 @@ class C{}";
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
 
-            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Keyword;
+            var classKeyword = (
+                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
+            ).Keyword;
 
             var trivias = classKeyword.LeadingTrivia;
 
             var doc = trivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
 
-            doc.GetDiagnostics().Verify(
-                // (2,8): warning CS1570: XML comment has badly formed XML -- 'End tag 'goo' does not match the start tag 'bar'.'
-                // <bar></goo>
-                Diagnostic(ErrorCode.WRN_XMLParseError, "goo").WithArguments("goo", "bar"),
-                // (3,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'goo'.'
-                // */
-                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("goo"));
+            doc.GetDiagnostics()
+                .Verify(
+                    // (2,8): warning CS1570: XML comment has badly formed XML -- 'End tag 'goo' does not match the start tag 'bar'.'
+                    // <bar></goo>
+                    Diagnostic(ErrorCode.WRN_XMLParseError, "goo").WithArguments("goo", "bar"),
+                    // (3,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'goo'.'
+                    // */
+                    Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("goo")
+                );
         }
 
         [Fact]
         public void TestSingleLineXmlCommentWithIncompleteInterleavedTags()
         {
-            var text = @"///<goo>
+            var text =
+                @"///<goo>
 ///<bar></goo>
 class C{}";
             var tree = Parse(text);
@@ -2564,25 +2855,30 @@ class C{}";
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
 
-            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Keyword;
+            var classKeyword = (
+                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
+            ).Keyword;
 
             var trivias = classKeyword.GetLeadingTrivia();
 
             var doc = trivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
 
-            doc.GetDiagnostics().Verify(
-                // (2,11): warning CS1570: XML comment has badly formed XML -- 'End tag 'goo' does not match the start tag 'bar'.'
-                // ///<bar></goo>
-                Diagnostic(ErrorCode.WRN_XMLParseError, "goo").WithArguments("goo", "bar"),
-                // (3,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'goo'.'
-                // class C{}
-                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("goo"));
+            doc.GetDiagnostics()
+                .Verify(
+                    // (2,11): warning CS1570: XML comment has badly formed XML -- 'End tag 'goo' does not match the start tag 'bar'.'
+                    // ///<bar></goo>
+                    Diagnostic(ErrorCode.WRN_XMLParseError, "goo").WithArguments("goo", "bar"),
+                    // (3,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'goo'.'
+                    // class C{}
+                    Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("goo")
+                );
         }
 
         [Fact]
         public void TestMultiLineXmlCommentWithMultipleStartTokens()
         {
-            var text = @"/** <a 
+            var text =
+                @"/** <a 
 <b 
 */";
             var tree = Parse(text);
@@ -2597,7 +2893,8 @@ class C{}";
         [Fact]
         public void TestMultiLineXmlCommentWithMultipleEndTags()
         {
-            var text = @"/** <a> </a> </a> 
+            var text =
+                @"/** <a> </a> </a> 
 
 */";
             var tree = Parse(text);
@@ -2612,7 +2909,8 @@ class C{}";
         [Fact]
         public void TestMultiLineXmlCommentWithMultipleEndTags2()
         {
-            var text = @"/** <a> </b> </a> 
+            var text =
+                @"/** <a> </b> </a> 
 */";
             var tree = Parse(text);
 
@@ -2627,16 +2925,21 @@ class C{}";
         [Fact]
         public void TestSingleLineXmlCommentWithInvalidStringAttributeValue()
         {
-            var text = @"///<goo a=""</>""> </goo> 
+            var text =
+                @"///<goo a=""</>""> </goo> 
 class C{}";
             var tree = Parse(text);
 
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
 
-            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Keyword;
+            var classKeyword = (
+                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
+            ).Keyword;
 
-            var doc = classKeyword.GetLeadingTrivia()[0].GetStructure() as DocumentationCommentTriviaSyntax;
+            var doc =
+                classKeyword.GetLeadingTrivia()[0].GetStructure()
+                as DocumentationCommentTriviaSyntax;
 
             Assert.Equal(typeof(XmlElementSyntax), doc.Content[0].GetType());
         }
@@ -2645,16 +2948,21 @@ class C{}";
         [Fact]
         public void TestSingleLineXmlCommentWithAttributeWithoutQuotes()
         {
-            var text = @"///<goo a=4></goo>
+            var text =
+                @"///<goo a=4></goo>
 class C{}";
             var tree = Parse(text);
 
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
 
-            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Keyword;
+            var classKeyword = (
+                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
+            ).Keyword;
 
-            var doc = classKeyword.GetLeadingTrivia()[0].GetStructure() as DocumentationCommentTriviaSyntax;
+            var doc =
+                classKeyword.GetLeadingTrivia()[0].GetStructure()
+                as DocumentationCommentTriviaSyntax;
 
             // we should still get an XmlElement
             Assert.IsType<XmlElementSyntax>(doc.Content[0]);
@@ -2664,7 +2972,8 @@ class C{}";
         [Fact]
         public void TestSomeXmlEntities()
         {
-            var text = @"/// <doc>
+            var text =
+                @"/// <doc>
 /// <line>&#1631;</line>
 /// <line>&#x65f;</line>
 /// </doc>
@@ -2681,7 +2990,8 @@ class A {}";
         [Fact]
         public void TestSomeBadXmlEntities()
         {
-            var text = @"/// &#1;<doc1>&#2;</doc1>
+            var text =
+                @"/// &#1;<doc1>&#2;</doc1>
 /// <doc2><![CDATA[&#5;&#31;]]></doc2>
 /// <doc3 x = ""&#14;""></doc3>&#xffff;
 /// <!-- &#xfffe; -->
@@ -2693,20 +3003,24 @@ class A {}
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
             Assert.Equal(4, tree.GetCompilationUnitRoot().ErrorsAndWarnings().Length);
-            VerifyDiagnostics(tree.GetCompilationUnitRoot(), new List<TestError>
-            {
+            VerifyDiagnostics(
+                tree.GetCompilationUnitRoot(),
+                new List<TestError>
+                {
                     new TestError(1570, true),
                     new TestError(1570, true),
                     new TestError(1570, true),
-                    new TestError(1570, true)
-            });
+                    new TestError(1570, true),
+                }
+            );
         }
 
         [WorkItem(926804, "DevDiv/Personal")]
         [Fact]
         public void TestSomeBadWhitespaceInTags()
         {
-            var text = @"/// < doc></doc>
+            var text =
+                @"/// < doc></doc>
 /// <abc> </ abc>
 /// < a/>
 /// <
@@ -2719,20 +3033,24 @@ class A {}
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
             Assert.Equal(4, tree.GetCompilationUnitRoot().ErrorsAndWarnings().Length);
-            VerifyDiagnostics(tree.GetCompilationUnitRoot(), new List<TestError>
-            {
+            VerifyDiagnostics(
+                tree.GetCompilationUnitRoot(),
+                new List<TestError>
+                {
                     new TestError(1570, true),
                     new TestError(1570, true),
                     new TestError(1570, true),
-                    new TestError(1570, true)
-            });
+                    new TestError(1570, true),
+                }
+            );
         }
 
         [WorkItem(926807, "DevDiv/Personal")]
         [Fact]
         public void TestCDataEndTagInXmlText()
         {
-            var text = @"/// <doc> ]]> </doc>
+            var text =
+                @"/// <doc> ]]> </doc>
 /// <a>abc]]]>def</a>
 /// <a attr=""]]>""></a>
 class A {}";
@@ -2742,19 +3060,25 @@ class A {}";
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
 
-            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Keyword;
+            var classKeyword = (
+                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
+            ).Keyword;
             var trivias = classKeyword.GetLeadingTrivia();
             var doc = trivias[0].GetStructure() as DocumentationCommentTriviaSyntax;
 
             Assert.Equal(2, doc.ErrorsAndWarnings().Length);
-            VerifyDiagnostics(doc, new List<TestError>() { new TestError(1570, true), new TestError(1570, true) });
+            VerifyDiagnostics(
+                doc,
+                new List<TestError>() { new TestError(1570, true), new TestError(1570, true) }
+            );
         }
 
         [WorkItem(536748, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/536748")]
         [Fact]
         public void AttributesInEndTag()
         {
-            var text = @"
+            var text =
+                @"
 /// <summary attr=""A"">
 /// </summary attr=""A"">
 class A
@@ -2766,7 +3090,9 @@ class A
             Assert.NotNull(tree);
             Assert.Equal(text, tree.GetCompilationUnitRoot().ToFullString());
 
-            var classKeyword = (tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax).Keyword;
+            var classKeyword = (
+                tree.GetCompilationUnitRoot().Members[0] as TypeDeclarationSyntax
+            ).Keyword;
             var trivias = classKeyword.GetLeadingTrivia();
             var doc = trivias[1].GetStructure() as DocumentationCommentTriviaSyntax;
 
@@ -2780,7 +3106,8 @@ class A
         [Fact]
         public void NonAsciiQuotationMarks()
         {
-            var text = @"
+            var text =
+                @"
 class A
 {
     /// <see cref=”A()”/>
@@ -2790,40 +3117,41 @@ class A
 }";
 
             var tree = Parse(text);
-            tree.GetDiagnostics().Verify(
-                // (4,19): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                //     /// <see cref=”A()”/>
-                Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-                // (4,23): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                //     /// <see cref=”A()”/>
-                Diagnostic(ErrorCode.WRN_XMLParseError, ""),
+            tree.GetDiagnostics()
+                .Verify(
+                    // (4,19): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
+                    //     /// <see cref=”A()”/>
+                    Diagnostic(ErrorCode.WRN_XMLParseError, ""),
+                    // (4,23): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
+                    //     /// <see cref=”A()”/>
+                    Diagnostic(ErrorCode.WRN_XMLParseError, ""),
+                    // (5,21): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
+                    //     /// <param name=”x”/>
+                    Diagnostic(ErrorCode.WRN_XMLParseError, ""),
+                    // (5,23): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
+                    //     /// <param name=”x”/>
+                    Diagnostic(ErrorCode.WRN_XMLParseError, ""),
+                    // What's happening with the text attribute is that "”/>" is correctly (if unintuitively) being consumed as part of the
+                    // attribute value.  It then complains about the missing closing quotation mark and '/>'.
 
-                // (5,21): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                //     /// <param name=”x”/>
-                Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-                // (5,23): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                //     /// <param name=”x”/>
-                Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-
-                // What's happening with the text attribute is that "”/>" is correctly (if unintuitively) being consumed as part of the
-                // attribute value.  It then complains about the missing closing quotation mark and '/>'.
-
-                // (6,21): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                //     /// <other attr=”value”/>
-                Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-                // (7,1): warning CS1570: XML comment has badly formed XML -- 'Missing closing quotation mark for string literal.'
-                //     void M(int x) { }
-                Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-                // (7,1): warning CS1570: XML comment has badly formed XML -- 'Expected '>' or '/>' to close tag 'other'.'
-                //     void M(int x) { }
-                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("other"));
+                    // (6,21): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
+                    //     /// <other attr=”value”/>
+                    Diagnostic(ErrorCode.WRN_XMLParseError, ""),
+                    // (7,1): warning CS1570: XML comment has badly formed XML -- 'Missing closing quotation mark for string literal.'
+                    //     void M(int x) { }
+                    Diagnostic(ErrorCode.WRN_XMLParseError, ""),
+                    // (7,1): warning CS1570: XML comment has badly formed XML -- 'Expected '>' or '/>' to close tag 'other'.'
+                    //     void M(int x) { }
+                    Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("other")
+                );
         }
 
         [WorkItem(546989, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546989")]
         [Fact]
         public void Microsoft_TeamFoundation_Client_Dll()
         {
-            var text = @"
+            var text =
+                @"
 /// <summary></summary>
 public class Program
 {
@@ -2842,41 +3170,45 @@ public class Program
 }";
 
             var tree = Parse(text);
-            tree.GetDiagnostics().Verify(
-                // (8,44): warning CS1570: XML comment has badly formed XML -- 'Missing equals sign between attribute and attribute value.'
-                //     /// path is of the format <project name>\<nodename>\<nodename>
-                Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-                // (9,11): warning CS1570: XML comment has badly formed XML -- 'End tag 'summary' does not match the start tag 'nodename'.'
-                //     /// </summary>
-                Diagnostic(ErrorCode.WRN_XMLParseError, "summary").WithArguments("summary", "nodename"),
-                // (10,21): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                //     /// <param name=”metadata”></param>
-                Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-                // (10,30): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                //     /// <param name=”metadata”></param>
-                Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-                // (11,21): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                //     /// <param name=”provider”></param>
-                Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-                // (11,30): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
-                //     /// <param name=”provider”></param>
-                Diagnostic(ErrorCode.WRN_XMLParseError, ""),
-                // (12,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'nodename'.'
-                //     protected void GetEntityConnectionString(
-                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("nodename"),
-                // (12,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'project'.'
-                //     protected void GetEntityConnectionString(
-                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("project"),
-                // (12,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
-                //     protected void GetEntityConnectionString(
-                Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("summary"));
+            tree.GetDiagnostics()
+                .Verify(
+                    // (8,44): warning CS1570: XML comment has badly formed XML -- 'Missing equals sign between attribute and attribute value.'
+                    //     /// path is of the format <project name>\<nodename>\<nodename>
+                    Diagnostic(ErrorCode.WRN_XMLParseError, ""),
+                    // (9,11): warning CS1570: XML comment has badly formed XML -- 'End tag 'summary' does not match the start tag 'nodename'.'
+                    //     /// </summary>
+                    Diagnostic(ErrorCode.WRN_XMLParseError, "summary")
+                        .WithArguments("summary", "nodename"),
+                    // (10,21): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
+                    //     /// <param name=”metadata”></param>
+                    Diagnostic(ErrorCode.WRN_XMLParseError, ""),
+                    // (10,30): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
+                    //     /// <param name=”metadata”></param>
+                    Diagnostic(ErrorCode.WRN_XMLParseError, ""),
+                    // (11,21): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
+                    //     /// <param name=”provider”></param>
+                    Diagnostic(ErrorCode.WRN_XMLParseError, ""),
+                    // (11,30): warning CS1570: XML comment has badly formed XML -- 'Non-ASCII quotations marks may not be used around string literals.'
+                    //     /// <param name=”provider”></param>
+                    Diagnostic(ErrorCode.WRN_XMLParseError, ""),
+                    // (12,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'nodename'.'
+                    //     protected void GetEntityConnectionString(
+                    Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("nodename"),
+                    // (12,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'project'.'
+                    //     protected void GetEntityConnectionString(
+                    Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("project"),
+                    // (12,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
+                    //     protected void GetEntityConnectionString(
+                    Diagnostic(ErrorCode.WRN_XMLParseError, "").WithArguments("summary")
+                );
         }
 
         [WorkItem(547188, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/547188")]
         [Fact]
         public void WhitespaceInXmlName()
         {
-            var text = @"
+            var text =
+                @"
 /// <A:B/>
 /// <A: B/>
 /// <A :B/>
@@ -2886,25 +3218,28 @@ public class Program
 }";
 
             var tree = Parse(text);
-            tree.GetDiagnostics().Verify(
-                // (3,8): warning CS1570: XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
-                // /// <A: B/>
-                Diagnostic(ErrorCode.WRN_XMLParseError, " "),
-                // (4,7): warning CS1570: XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
-                // /// <A :B/>
-                Diagnostic(ErrorCode.WRN_XMLParseError, " "),
-                // (5,7): warning CS1570: XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
-                // /// <A : B/>
-                Diagnostic(ErrorCode.WRN_XMLParseError, " "),
-                // (5,9): warning CS1570: XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
-                // /// <A : B/>
-                Diagnostic(ErrorCode.WRN_XMLParseError, " "));
+            tree.GetDiagnostics()
+                .Verify(
+                    // (3,8): warning CS1570: XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
+                    // /// <A: B/>
+                    Diagnostic(ErrorCode.WRN_XMLParseError, " "),
+                    // (4,7): warning CS1570: XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
+                    // /// <A :B/>
+                    Diagnostic(ErrorCode.WRN_XMLParseError, " "),
+                    // (5,7): warning CS1570: XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
+                    // /// <A : B/>
+                    Diagnostic(ErrorCode.WRN_XMLParseError, " "),
+                    // (5,9): warning CS1570: XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
+                    // /// <A : B/>
+                    Diagnostic(ErrorCode.WRN_XMLParseError, " ")
+                );
         }
 
         [Fact]
         public void WhitespaceInXmlEndName()
         {
-            var text = @"
+            var text =
+                @"
 /// <A:B>
 ///   good
 /// </A:B>
@@ -2919,19 +3254,24 @@ public class Program
 }";
 
             var tree = Parse(text);
-            tree.GetDiagnostics().Verify(
-                // (7,7): warning CS1570: XML comment has badly formed XML -- 'End tag 'A :B' does not match the start tag 'A:B'.'
-                // /// </A :B>
-                Diagnostic(ErrorCode.WRN_XMLParseError, "A :B").WithArguments("A :B", "A:B").WithLocation(7, 7),
-                // (7,8): warning CS1570: XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
-                // /// </A :B>
-                Diagnostic(ErrorCode.WRN_XMLParseError, " ").WithLocation(7, 8),
-                // (10,7): warning CS1570: XML comment has badly formed XML -- 'End tag 'A: B' does not match the start tag 'A:B'.'
-                // /// </A: B>
-                Diagnostic(ErrorCode.WRN_XMLParseError, "A: B").WithArguments("A: B", "A:B").WithLocation(10, 7),
-                // (10,9): warning CS1570: XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
-                // /// </A: B>
-                Diagnostic(ErrorCode.WRN_XMLParseError, " ").WithLocation(10, 9)
+            tree.GetDiagnostics()
+                .Verify(
+                    // (7,7): warning CS1570: XML comment has badly formed XML -- 'End tag 'A :B' does not match the start tag 'A:B'.'
+                    // /// </A :B>
+                    Diagnostic(ErrorCode.WRN_XMLParseError, "A :B")
+                        .WithArguments("A :B", "A:B")
+                        .WithLocation(7, 7),
+                    // (7,8): warning CS1570: XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
+                    // /// </A :B>
+                    Diagnostic(ErrorCode.WRN_XMLParseError, " ").WithLocation(7, 8),
+                    // (10,7): warning CS1570: XML comment has badly formed XML -- 'End tag 'A: B' does not match the start tag 'A:B'.'
+                    // /// </A: B>
+                    Diagnostic(ErrorCode.WRN_XMLParseError, "A: B")
+                        .WithArguments("A: B", "A:B")
+                        .WithLocation(10, 7),
+                    // (10,9): warning CS1570: XML comment has badly formed XML -- 'Whitespace is not allowed at this location.'
+                    // /// </A: B>
+                    Diagnostic(ErrorCode.WRN_XMLParseError, " ").WithLocation(10, 9)
                 );
         }
 
@@ -2939,24 +3279,29 @@ public class Program
         [Trait("Feature", "Xml Documentation Comments")]
         public void TestDocumentationComment()
         {
-            var expected = @"/// <summary>
+            var expected =
+                @"/// <summary>
 /// This class provides extension methods for the <see cref=""TypeName""/> class.
 /// </summary>
 /// <threadsafety static=""true"" instance=""false""/>
 /// <preliminary/>";
 
-            DocumentationCommentTriviaSyntax documentationComment = SyntaxFactory.DocumentationComment(
-                SyntaxFactory.XmlSummaryElement(
+            DocumentationCommentTriviaSyntax documentationComment =
+                SyntaxFactory.DocumentationComment(
+                    SyntaxFactory.XmlSummaryElement(
+                        SyntaxFactory.XmlNewLine(Environment.NewLine),
+                        SyntaxFactory.XmlText("This class provides extension methods for the "),
+                        SyntaxFactory.XmlSeeElement(
+                            SyntaxFactory.TypeCref(SyntaxFactory.ParseTypeName("TypeName"))
+                        ),
+                        SyntaxFactory.XmlText(" class."),
+                        SyntaxFactory.XmlNewLine(Environment.NewLine)
+                    ),
                     SyntaxFactory.XmlNewLine(Environment.NewLine),
-                    SyntaxFactory.XmlText("This class provides extension methods for the "),
-                    SyntaxFactory.XmlSeeElement(
-                        SyntaxFactory.TypeCref(SyntaxFactory.ParseTypeName("TypeName"))),
-                    SyntaxFactory.XmlText(" class."),
-                    SyntaxFactory.XmlNewLine(Environment.NewLine)),
-                SyntaxFactory.XmlNewLine(Environment.NewLine),
-                SyntaxFactory.XmlThreadSafetyElement(),
-                SyntaxFactory.XmlNewLine(Environment.NewLine),
-                SyntaxFactory.XmlPreliminaryElement());
+                    SyntaxFactory.XmlThreadSafetyElement(),
+                    SyntaxFactory.XmlNewLine(Environment.NewLine),
+                    SyntaxFactory.XmlPreliminaryElement()
+                );
 
             var actual = documentationComment.ToFullString();
 
@@ -2968,15 +3313,18 @@ public class Program
         public void TestXmlSummaryElement()
         {
             var expected =
-@"/// <summary>
+                @"/// <summary>
 /// This class provides extension methods.
 /// </summary>";
 
-            DocumentationCommentTriviaSyntax documentationComment = SyntaxFactory.DocumentationComment(
-                SyntaxFactory.XmlSummaryElement(
-                    SyntaxFactory.XmlNewLine(Environment.NewLine),
-                    SyntaxFactory.XmlText("This class provides extension methods."),
-                    SyntaxFactory.XmlNewLine(Environment.NewLine)));
+            DocumentationCommentTriviaSyntax documentationComment =
+                SyntaxFactory.DocumentationComment(
+                    SyntaxFactory.XmlSummaryElement(
+                        SyntaxFactory.XmlNewLine(Environment.NewLine),
+                        SyntaxFactory.XmlText("This class provides extension methods."),
+                        SyntaxFactory.XmlNewLine(Environment.NewLine)
+                    )
+                );
 
             var actual = documentationComment.ToFullString();
 
@@ -2988,21 +3336,26 @@ public class Program
         public void TestXmlSeeElementAndXmlSeeAlsoElement()
         {
             var expected =
-@"/// <summary>
+                @"/// <summary>
 /// This class provides extension methods for the <see cref=""TypeName""/> class and the <seealso cref=""TypeName2""/> class.
 /// </summary>";
 
-            DocumentationCommentTriviaSyntax documentationComment = SyntaxFactory.DocumentationComment(
-                SyntaxFactory.XmlSummaryElement(
-                    SyntaxFactory.XmlNewLine(Environment.NewLine),
-                    SyntaxFactory.XmlText("This class provides extension methods for the "),
-                    SyntaxFactory.XmlSeeElement(
-                        SyntaxFactory.TypeCref(SyntaxFactory.ParseTypeName("TypeName"))),
-                    SyntaxFactory.XmlText(" class and the "),
-                    SyntaxFactory.XmlSeeAlsoElement(
-                        SyntaxFactory.TypeCref(SyntaxFactory.ParseTypeName("TypeName2"))),
-                    SyntaxFactory.XmlText(" class."),
-                    SyntaxFactory.XmlNewLine(Environment.NewLine)));
+            DocumentationCommentTriviaSyntax documentationComment =
+                SyntaxFactory.DocumentationComment(
+                    SyntaxFactory.XmlSummaryElement(
+                        SyntaxFactory.XmlNewLine(Environment.NewLine),
+                        SyntaxFactory.XmlText("This class provides extension methods for the "),
+                        SyntaxFactory.XmlSeeElement(
+                            SyntaxFactory.TypeCref(SyntaxFactory.ParseTypeName("TypeName"))
+                        ),
+                        SyntaxFactory.XmlText(" class and the "),
+                        SyntaxFactory.XmlSeeAlsoElement(
+                            SyntaxFactory.TypeCref(SyntaxFactory.ParseTypeName("TypeName2"))
+                        ),
+                        SyntaxFactory.XmlText(" class."),
+                        SyntaxFactory.XmlNewLine(Environment.NewLine)
+                    )
+                );
 
             var actual = documentationComment.ToFullString();
 
@@ -3014,7 +3367,7 @@ public class Program
         public void TestXmlNewLineElement()
         {
             var expected =
-@"/// <summary>
+                @"/// <summary>
 /// This is a summary.
 /// </summary>
 /// 
@@ -3023,17 +3376,21 @@ public class Program
 /// 
 /// </remarks>";
 
-            DocumentationCommentTriviaSyntax documentationComment = SyntaxFactory.DocumentationComment(
-                SyntaxFactory.XmlSummaryElement(
+            DocumentationCommentTriviaSyntax documentationComment =
+                SyntaxFactory.DocumentationComment(
+                    SyntaxFactory.XmlSummaryElement(
+                        SyntaxFactory.XmlNewLine(Environment.NewLine),
+                        SyntaxFactory.XmlText("This is a summary."),
+                        SyntaxFactory.XmlNewLine(Environment.NewLine)
+                    ),
                     SyntaxFactory.XmlNewLine(Environment.NewLine),
-                    SyntaxFactory.XmlText("This is a summary."),
-                    SyntaxFactory.XmlNewLine(Environment.NewLine)),
-                SyntaxFactory.XmlNewLine(Environment.NewLine),
-                SyntaxFactory.XmlNewLine(Environment.NewLine),
-                SyntaxFactory.XmlNewLine(Environment.NewLine),
-                SyntaxFactory.XmlRemarksElement(
                     SyntaxFactory.XmlNewLine(Environment.NewLine),
-                    SyntaxFactory.XmlNewLine(Environment.NewLine)));
+                    SyntaxFactory.XmlNewLine(Environment.NewLine),
+                    SyntaxFactory.XmlRemarksElement(
+                        SyntaxFactory.XmlNewLine(Environment.NewLine),
+                        SyntaxFactory.XmlNewLine(Environment.NewLine)
+                    )
+                );
 
             var actual = documentationComment.ToFullString();
 
@@ -3045,21 +3402,24 @@ public class Program
         public void TestXmlParamAndParamRefElement()
         {
             var expected =
-@"/// <summary>
+                @"/// <summary>
 /// <paramref name=""b""/>
 /// </summary>
 /// <param name=""a""></param>
 /// <param name=""b""></param>";
 
-            DocumentationCommentTriviaSyntax documentationComment = SyntaxFactory.DocumentationComment(
-                SyntaxFactory.XmlSummaryElement(
+            DocumentationCommentTriviaSyntax documentationComment =
+                SyntaxFactory.DocumentationComment(
+                    SyntaxFactory.XmlSummaryElement(
+                        SyntaxFactory.XmlNewLine(Environment.NewLine),
+                        SyntaxFactory.XmlParamRefElement("b"),
+                        SyntaxFactory.XmlNewLine(Environment.NewLine)
+                    ),
                     SyntaxFactory.XmlNewLine(Environment.NewLine),
-                    SyntaxFactory.XmlParamRefElement("b"),
-                    SyntaxFactory.XmlNewLine(Environment.NewLine)),
-                SyntaxFactory.XmlNewLine(Environment.NewLine),
-                SyntaxFactory.XmlParamElement("a"),
-                SyntaxFactory.XmlNewLine(Environment.NewLine),
-                SyntaxFactory.XmlParamElement("b"));
+                    SyntaxFactory.XmlParamElement("a"),
+                    SyntaxFactory.XmlNewLine(Environment.NewLine),
+                    SyntaxFactory.XmlParamElement("b")
+                );
 
             var actual = documentationComment.ToFullString();
 
@@ -3071,22 +3431,26 @@ public class Program
         public void TestXmlReturnsElement()
         {
             var expected =
-@"/// <summary>
+                @"/// <summary>
 /// 
 /// </summary>
 /// <returns>
 /// Returns a value.
 /// </returns>";
 
-            DocumentationCommentTriviaSyntax documentationComment = SyntaxFactory.DocumentationComment(
-                SyntaxFactory.XmlSummaryElement(
+            DocumentationCommentTriviaSyntax documentationComment =
+                SyntaxFactory.DocumentationComment(
+                    SyntaxFactory.XmlSummaryElement(
+                        SyntaxFactory.XmlNewLine(Environment.NewLine),
+                        SyntaxFactory.XmlNewLine(Environment.NewLine)
+                    ),
                     SyntaxFactory.XmlNewLine(Environment.NewLine),
-                    SyntaxFactory.XmlNewLine(Environment.NewLine)),
-                SyntaxFactory.XmlNewLine(Environment.NewLine),
-                SyntaxFactory.XmlReturnsElement(
-                    SyntaxFactory.XmlNewLine(Environment.NewLine),
-                    SyntaxFactory.XmlText("Returns a value."),
-                    SyntaxFactory.XmlNewLine(Environment.NewLine)));
+                    SyntaxFactory.XmlReturnsElement(
+                        SyntaxFactory.XmlNewLine(Environment.NewLine),
+                        SyntaxFactory.XmlText("Returns a value."),
+                        SyntaxFactory.XmlNewLine(Environment.NewLine)
+                    )
+                );
 
             var actual = documentationComment.ToFullString();
 
@@ -3098,24 +3462,30 @@ public class Program
         public void TestXmlRemarksElement()
         {
             var expected =
-@"/// <summary>
+                @"/// <summary>
 /// 
 /// </summary>
 /// <remarks>
 /// Same as in class <see cref=""TypeName""/>.
 /// </remarks>";
 
-            DocumentationCommentTriviaSyntax documentationComment = SyntaxFactory.DocumentationComment(
-                SyntaxFactory.XmlSummaryElement(
+            DocumentationCommentTriviaSyntax documentationComment =
+                SyntaxFactory.DocumentationComment(
+                    SyntaxFactory.XmlSummaryElement(
+                        SyntaxFactory.XmlNewLine(Environment.NewLine),
+                        SyntaxFactory.XmlNewLine(Environment.NewLine)
+                    ),
                     SyntaxFactory.XmlNewLine(Environment.NewLine),
-                    SyntaxFactory.XmlNewLine(Environment.NewLine)),
-                SyntaxFactory.XmlNewLine(Environment.NewLine),
-                SyntaxFactory.XmlRemarksElement(
-                    SyntaxFactory.XmlNewLine(Environment.NewLine),
-                    SyntaxFactory.XmlText("Same as in class "),
-                    SyntaxFactory.XmlSeeElement(SyntaxFactory.TypeCref(SyntaxFactory.ParseTypeName("TypeName"))),
-                    SyntaxFactory.XmlText("."),
-                    SyntaxFactory.XmlNewLine(Environment.NewLine)));
+                    SyntaxFactory.XmlRemarksElement(
+                        SyntaxFactory.XmlNewLine(Environment.NewLine),
+                        SyntaxFactory.XmlText("Same as in class "),
+                        SyntaxFactory.XmlSeeElement(
+                            SyntaxFactory.TypeCref(SyntaxFactory.ParseTypeName("TypeName"))
+                        ),
+                        SyntaxFactory.XmlText("."),
+                        SyntaxFactory.XmlNewLine(Environment.NewLine)
+                    )
+                );
 
             var actual = documentationComment.ToFullString();
 
@@ -3127,20 +3497,27 @@ public class Program
         public void TestXmlExceptionElement()
         {
             var expected =
-@"/// <summary>
+                @"/// <summary>
 /// 
 /// </summary>
 /// <exception cref=""InvalidOperationException"">This exception will be thrown if the object is in an invalid state when calling this method.</exception>";
 
-            DocumentationCommentTriviaSyntax documentationComment = SyntaxFactory.DocumentationComment(
-                SyntaxFactory.XmlSummaryElement(
+            DocumentationCommentTriviaSyntax documentationComment =
+                SyntaxFactory.DocumentationComment(
+                    SyntaxFactory.XmlSummaryElement(
+                        SyntaxFactory.XmlNewLine(Environment.NewLine),
+                        SyntaxFactory.XmlNewLine(Environment.NewLine)
+                    ),
                     SyntaxFactory.XmlNewLine(Environment.NewLine),
-                    SyntaxFactory.XmlNewLine(Environment.NewLine)),
-                SyntaxFactory.XmlNewLine(Environment.NewLine),
-                SyntaxFactory.XmlExceptionElement(
-                    SyntaxFactory.TypeCref(
-                        SyntaxFactory.ParseTypeName("InvalidOperationException")),
-                        SyntaxFactory.XmlText("This exception will be thrown if the object is in an invalid state when calling this method.")));
+                    SyntaxFactory.XmlExceptionElement(
+                        SyntaxFactory.TypeCref(
+                            SyntaxFactory.ParseTypeName("InvalidOperationException")
+                        ),
+                        SyntaxFactory.XmlText(
+                            "This exception will be thrown if the object is in an invalid state when calling this method."
+                        )
+                    )
+                );
 
             var actual = documentationComment.ToFullString();
 
@@ -3152,20 +3529,23 @@ public class Program
         public void TestXmlPermissionElement()
         {
             var expected =
-@"/// <summary>
+                @"/// <summary>
 /// 
 /// </summary>
 /// <permission cref=""MyPermission"">Needs MyPermission to execute.</permission>";
 
-            DocumentationCommentTriviaSyntax documentationComment = SyntaxFactory.DocumentationComment(
-                SyntaxFactory.XmlSummaryElement(
+            DocumentationCommentTriviaSyntax documentationComment =
+                SyntaxFactory.DocumentationComment(
+                    SyntaxFactory.XmlSummaryElement(
+                        SyntaxFactory.XmlNewLine(Environment.NewLine),
+                        SyntaxFactory.XmlNewLine(Environment.NewLine)
+                    ),
                     SyntaxFactory.XmlNewLine(Environment.NewLine),
-                    SyntaxFactory.XmlNewLine(Environment.NewLine)),
-                SyntaxFactory.XmlNewLine(Environment.NewLine),
-                SyntaxFactory.XmlPermissionElement(
-                    SyntaxFactory.TypeCref(
-                        SyntaxFactory.ParseTypeName("MyPermission")),
-                    SyntaxFactory.XmlText("Needs MyPermission to execute.")));
+                    SyntaxFactory.XmlPermissionElement(
+                        SyntaxFactory.TypeCref(SyntaxFactory.ParseTypeName("MyPermission")),
+                        SyntaxFactory.XmlText("Needs MyPermission to execute.")
+                    )
+                );
 
             var actual = documentationComment.ToFullString();
 
@@ -3176,18 +3556,29 @@ public class Program
         [WorkItem(39315, "https://github.com/dotnet/roslyn/issues/39315")]
         public void WriteDocumentationCommentXml_01()
         {
-            var comp = CreateCompilation(new[] {
-                Parse(@"
+            var comp = CreateCompilation(
+                new[]
+                {
+                    Parse(
+                        @"
 /// <summary> a
 /// </summary>
-"),
-                Parse(@"
+"
+                    ),
+                    Parse(
+                        @"
 
 /// <summary> b
 /// </summary>
-")});
+"
+                    ),
+                }
+            );
 
-            var diags = BindingDiagnosticBag.GetInstance(withDiagnostics: true, withDependencies: false);
+            var diags = BindingDiagnosticBag.GetInstance(
+                withDiagnostics: true,
+                withDependencies: false
+            );
 
             DocumentationCommentCompiler.WriteDocumentationCommentXml(
                 comp,
@@ -3195,15 +3586,21 @@ public class Program
                 xmlDocStream: null,
                 diags,
                 default(CancellationToken),
-                filterTree: comp.SyntaxTrees[0]);
+                filterTree: comp.SyntaxTrees[0]
+            );
 
-            diags.ToReadOnlyAndFree().Verify(
-                // (2,1): warning CS1587: XML comment is not placed on a valid language element
-                // /// <summary> a
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/").WithLocation(2, 1)
+            diags
+                .ToReadOnlyAndFree()
+                .Verify(
+                    // (2,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /// <summary> a
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/").WithLocation(2, 1)
                 );
 
-            diags = BindingDiagnosticBag.GetInstance(withDiagnostics: true, withDependencies: false);
+            diags = BindingDiagnosticBag.GetInstance(
+                withDiagnostics: true,
+                withDependencies: false
+            );
 
             DocumentationCommentCompiler.WriteDocumentationCommentXml(
                 comp,
@@ -3212,11 +3609,15 @@ public class Program
                 diags,
                 default(CancellationToken),
                 filterTree: comp.SyntaxTrees[0],
-                filterSpanWithinTree: new TextSpan(0, 0));
+                filterSpanWithinTree: new TextSpan(0, 0)
+            );
 
             diags.ToReadOnlyAndFree().Verify();
 
-            diags = BindingDiagnosticBag.GetInstance(withDiagnostics: true, withDependencies: false);
+            diags = BindingDiagnosticBag.GetInstance(
+                withDiagnostics: true,
+                withDependencies: false
+            );
 
             DocumentationCommentCompiler.WriteDocumentationCommentXml(
                 comp,
@@ -3224,15 +3625,21 @@ public class Program
                 xmlDocStream: null,
                 diags,
                 default(CancellationToken),
-                filterTree: comp.SyntaxTrees[1]);
+                filterTree: comp.SyntaxTrees[1]
+            );
 
-            diags.ToReadOnlyAndFree().Verify(
-                // (3,1): warning CS1587: XML comment is not placed on a valid language element
-                // /// <summary> b
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/").WithLocation(3, 1)
+            diags
+                .ToReadOnlyAndFree()
+                .Verify(
+                    // (3,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /// <summary> b
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/").WithLocation(3, 1)
                 );
 
-            diags = BindingDiagnosticBag.GetInstance(withDiagnostics: true, withDependencies: false);
+            diags = BindingDiagnosticBag.GetInstance(
+                withDiagnostics: true,
+                withDependencies: false
+            );
 
             DocumentationCommentCompiler.WriteDocumentationCommentXml(
                 comp,
@@ -3240,18 +3647,24 @@ public class Program
                 xmlDocStream: null,
                 diags,
                 default(CancellationToken),
-                filterTree: null);
+                filterTree: null
+            );
 
-            diags.ToReadOnlyAndFree().Verify(
-                // (2,1): warning CS1587: XML comment is not placed on a valid language element
-                // /// <summary> a
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/").WithLocation(2, 1),
-                // (3,1): warning CS1587: XML comment is not placed on a valid language element
-                // /// <summary> b
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/").WithLocation(3, 1)
+            diags
+                .ToReadOnlyAndFree()
+                .Verify(
+                    // (2,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /// <summary> a
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/").WithLocation(2, 1),
+                    // (3,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /// <summary> b
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/").WithLocation(3, 1)
                 );
 
-            diags = BindingDiagnosticBag.GetInstance(withDiagnostics: true, withDependencies: false);
+            diags = BindingDiagnosticBag.GetInstance(
+                withDiagnostics: true,
+                withDependencies: false
+            );
 
             DocumentationCommentCompiler.WriteDocumentationCommentXml(
                 comp,
@@ -3260,15 +3673,18 @@ public class Program
                 diags,
                 default(CancellationToken),
                 filterTree: null,
-                filterSpanWithinTree: new TextSpan(0, 0));
+                filterSpanWithinTree: new TextSpan(0, 0)
+            );
 
-            diags.ToReadOnlyAndFree().Verify(
-                // (2,1): warning CS1587: XML comment is not placed on a valid language element
-                // /// <summary> a
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/").WithLocation(2, 1),
-                // (3,1): warning CS1587: XML comment is not placed on a valid language element
-                // /// <summary> b
-                Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/").WithLocation(3, 1)
+            diags
+                .ToReadOnlyAndFree()
+                .Verify(
+                    // (2,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /// <summary> a
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/").WithLocation(2, 1),
+                    // (3,1): warning CS1587: XML comment is not placed on a valid language element
+                    // /// <summary> b
+                    Diagnostic(ErrorCode.WRN_UnprocessedXMLComment, "/").WithLocation(3, 1)
                 );
         }
 
@@ -3293,12 +3709,16 @@ public class Program
         {
             Assert.Equal(actual.Count(), expected.Count);
 
-            var actualErrors = (from e in actual
-                                orderby e.Code
-                                select new TestError(e.Code, e.Severity == DiagnosticSeverity.Warning)).ToList();
-            var expectedErrors = (from e in expected
-                                  orderby e.ErrorCode
-                                  select new TestError(e.ErrorCode, e.IsWarning)).ToList();
+            var actualErrors = (
+                from e in actual
+                orderby e.Code
+                select new TestError(e.Code, e.Severity == DiagnosticSeverity.Warning)
+            ).ToList();
+            var expectedErrors = (
+                from e in expected
+                orderby e.ErrorCode
+                select new TestError(e.ErrorCode, e.IsWarning)
+            ).ToList();
 
             for (int i = 0; i < expected.Count; i++)
             {
@@ -3313,7 +3733,7 @@ public class Program
         /// <param name="xmlElement">The XmlElement object to validate</param>
         /// <param name="tagName">The name of the tag the XML element should have</param>
         /// <param name="innerText">The text inside the XmlElement</param>
-        /// 
+        ///
         private void VerifyXmlElement(XmlElementSyntax xmlElement, string tagName, string innerText)
         {
             // if the innerText is empty, then the content has no nodes.
@@ -3376,7 +3796,10 @@ public class Program
         /// </summary>
         /// <param name="xmlAttributes">The list of attributes to verify</param>
         /// <param name="attributes">The dictionary contains the key-value pair for the expected attribute values</param>
-        private void VerifyXmlAttributes(SyntaxList<XmlAttributeSyntax> xmlAttributes, Dictionary<string, string> attributes)
+        private void VerifyXmlAttributes(
+            SyntaxList<XmlAttributeSyntax> xmlAttributes,
+            Dictionary<string, string> attributes
+        )
         {
             // we have the same number of attributes
             Assert.Equal(attributes.Keys.Count, xmlAttributes.Count);
@@ -3386,7 +3809,10 @@ public class Program
                 Assert.True(attributes.ContainsKey(attribute.Name.LocalName.Value as string));
 
                 // we make sure that the value for the attribute is the right one.
-                Assert.Equal(attributes[attribute.Name.LocalName.Value as string], attribute.TextTokens.ToString());
+                Assert.Equal(
+                    attributes[attribute.Name.LocalName.Value as string],
+                    attribute.TextTokens.ToString()
+                );
             }
         }
 

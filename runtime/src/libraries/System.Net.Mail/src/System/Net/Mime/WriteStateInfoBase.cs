@@ -27,12 +27,21 @@ namespace System.Net.Mime
             _currentBufferUsed = 0;
         }
 
-        internal WriteStateInfoBase(int bufferSize, byte[]? header, byte[]? footer, int maxLineLength)
-            : this(bufferSize, header, footer, maxLineLength, 0)
-        {
-        }
+        internal WriteStateInfoBase(
+            int bufferSize,
+            byte[]? header,
+            byte[]? footer,
+            int maxLineLength
+        )
+            : this(bufferSize, header, footer, maxLineLength, 0) { }
 
-        internal WriteStateInfoBase(int bufferSize, byte[]? header, byte[]? footer, int maxLineLength, int mimeHeaderLength)
+        internal WriteStateInfoBase(
+            int bufferSize,
+            byte[]? header,
+            byte[]? footer,
+            int maxLineLength,
+            int mimeHeaderLength
+        )
         {
             _buffer = new byte[bufferSize];
             _header = header;

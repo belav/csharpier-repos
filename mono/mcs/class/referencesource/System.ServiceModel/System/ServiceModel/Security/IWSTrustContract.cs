@@ -113,6 +113,5 @@ namespace System.ServiceModel.Security
         /// <param name="asyncResult">A reference to the outstanding asynchronous send request.</param>
         /// <returns>Response message containing the RSTR.</returns>
         Message EndValidate(IAsyncResult asyncResult);
-
     }
 }

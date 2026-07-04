@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
             }
         }
 
-        public static bool SupportsIsNotPattern(ParseOptions options)
-            => options.LanguageVersion() >= LanguageVersion.CSharp9;
+        public static bool SupportsIsNotPattern(ParseOptions options) =>
+            options.LanguageVersion() >= LanguageVersion.CSharp9;
     }
 }

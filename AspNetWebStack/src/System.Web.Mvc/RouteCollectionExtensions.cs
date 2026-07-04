@@ -15,7 +15,11 @@ namespace System.Web.Mvc
     {
         // This method returns a new RouteCollection containing only routes that matched a particular area.
         // The Boolean out parameter is just a flag specifying whether any registered routes were area-aware.
-        private static RouteCollection FilterRouteCollectionByArea(RouteCollection routes, string areaName, out bool usingAreas)
+        private static RouteCollection FilterRouteCollectionByArea(
+            RouteCollection routes,
+            string areaName,
+            out bool usingAreas
+        )
         {
             if (areaName == null)
             {
@@ -30,7 +34,7 @@ namespace System.Web.Mvc
             {
                 AppendTrailingSlash = routes.AppendTrailingSlash,
                 LowercaseUrls = routes.LowercaseUrls,
-                RouteExistingFiles = routes.RouteExistingFiles
+                RouteExistingFiles = routes.RouteExistingFiles,
             };
 
             using (routes.GetReadLock())
@@ -50,18 +54,39 @@ namespace System.Web.Mvc
             return (usingAreas) ? filteredRoutes : routes;
         }
 
-        public static VirtualPathData GetVirtualPathForArea(this RouteCollection routes, RequestContext requestContext, RouteValueDictionary values)
+        public static VirtualPathData GetVirtualPathForArea(
+            this RouteCollection routes,
+            RequestContext requestContext,
+            RouteValueDictionary values
+        )
         {
-            return GetVirtualPathForArea(routes, requestContext, null /* name */, values);
+            return GetVirtualPathForArea(
+                routes,
+                requestContext,
+                null /* name */
+                ,
+                values
+            );
         }
 
-        public static VirtualPathData GetVirtualPathForArea(this RouteCollection routes, RequestContext requestContext, string name, RouteValueDictionary values)
+        public static VirtualPathData GetVirtualPathForArea(
+            this RouteCollection routes,
+            RequestContext requestContext,
+            string name,
+            RouteValueDictionary values
+        )
         {
             bool usingAreas; // don't care about this value
             return GetVirtualPathForArea(routes, requestContext, name, values, out usingAreas);
         }
 
-        internal static VirtualPathData GetVirtualPathForArea(this RouteCollection routes, RequestContext requestContext, string name, RouteValueDictionary values, out bool usingAreas)
+        internal static VirtualPathData GetVirtualPathForArea(
+            this RouteCollection routes,
+            RequestContext requestContext,
+            string name,
+            RouteValueDictionary values,
+            out bool usingAreas
+        )
         {
             if (routes == null)
             {
@@ -95,7 +120,11 @@ namespace System.Web.Mvc
 
             // need to apply a correction to the RVD if areas are in use
             RouteValueDictionary correctedValues = values;
-            RouteCollection filteredRoutes = FilterRouteCollectionByArea(routes, targetArea, out usingAreas);
+            RouteCollection filteredRoutes = FilterRouteCollectionByArea(
+                routes,
+                targetArea,
+                out usingAreas
+            );
             if (usingAreas)
             {
                 correctedValues = new RouteValueDictionary(values);
@@ -106,13 +135,27 @@ namespace System.Web.Mvc
             return vpd;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "This is not a regular URL as it may contain special routing characters.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "This is not a regular URL as it may contain special routing characters."
+        )]
         public static void IgnoreRoute(this RouteCollection routes, string url)
         {
-            IgnoreRoute(routes, url, null /* constraints */);
+            IgnoreRoute(
+                routes,
+                url,
+                null /* constraints */
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "1#", Justification = "This is not a regular URL as it may contain special routing characters.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "1#",
+            Justification = "This is not a regular URL as it may contain special routing characters."
+        )]
         public static void IgnoreRoute(this RouteCollection routes, string url, object constraints)
         {
             if (routes == null)
@@ -126,7 +169,7 @@ namespace System.Web.Mvc
 
             IgnoreRouteInternal route = new IgnoreRouteInternal(url)
             {
-                Constraints = CreateRouteValueDictionaryUncached(constraints)
+                Constraints = CreateRouteValueDictionaryUncached(constraints),
             };
 
             ConstraintValidation.Validate(route);
@@ -134,38 +177,134 @@ namespace System.Web.Mvc
             routes.Add(route);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "2#", Justification = "This is not a regular URL as it may contain special routing characters.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "2#",
+            Justification = "This is not a regular URL as it may contain special routing characters."
+        )]
         public static Route MapRoute(this RouteCollection routes, string name, string url)
         {
-            return MapRoute(routes, name, url, null /* defaults */, (object)null /* constraints */);
+            return MapRoute(
+                routes,
+                name,
+                url,
+                null /* defaults */
+                ,
+                (object)null /* constraints */
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "2#", Justification = "This is not a regular URL as it may contain special routing characters.")]
-        public static Route MapRoute(this RouteCollection routes, string name, string url, object defaults)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "2#",
+            Justification = "This is not a regular URL as it may contain special routing characters."
+        )]
+        public static Route MapRoute(
+            this RouteCollection routes,
+            string name,
+            string url,
+            object defaults
+        )
         {
-            return MapRoute(routes, name, url, defaults, (object)null /* constraints */);
+            return MapRoute(
+                routes,
+                name,
+                url,
+                defaults,
+                (object)null /* constraints */
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "2#", Justification = "This is not a regular URL as it may contain special routing characters.")]
-        public static Route MapRoute(this RouteCollection routes, string name, string url, object defaults, object constraints)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "2#",
+            Justification = "This is not a regular URL as it may contain special routing characters."
+        )]
+        public static Route MapRoute(
+            this RouteCollection routes,
+            string name,
+            string url,
+            object defaults,
+            object constraints
+        )
         {
-            return MapRoute(routes, name, url, defaults, constraints, null /* namespaces */);
+            return MapRoute(
+                routes,
+                name,
+                url,
+                defaults,
+                constraints,
+                null /* namespaces */
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "2#", Justification = "This is not a regular URL as it may contain special routing characters.")]
-        public static Route MapRoute(this RouteCollection routes, string name, string url, string[] namespaces)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "2#",
+            Justification = "This is not a regular URL as it may contain special routing characters."
+        )]
+        public static Route MapRoute(
+            this RouteCollection routes,
+            string name,
+            string url,
+            string[] namespaces
+        )
         {
-            return MapRoute(routes, name, url, null /* defaults */, null /* constraints */, namespaces);
+            return MapRoute(
+                routes,
+                name,
+                url,
+                null /* defaults */
+                ,
+                null /* constraints */
+                ,
+                namespaces
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "2#", Justification = "This is not a regular URL as it may contain special routing characters.")]
-        public static Route MapRoute(this RouteCollection routes, string name, string url, object defaults, string[] namespaces)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "2#",
+            Justification = "This is not a regular URL as it may contain special routing characters."
+        )]
+        public static Route MapRoute(
+            this RouteCollection routes,
+            string name,
+            string url,
+            object defaults,
+            string[] namespaces
+        )
         {
-            return MapRoute(routes, name, url, defaults, null /* constraints */, namespaces);
+            return MapRoute(
+                routes,
+                name,
+                url,
+                defaults,
+                null /* constraints */
+                ,
+                namespaces
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "2#", Justification = "This is not a regular URL as it may contain special routing characters.")]
-        public static Route MapRoute(this RouteCollection routes, string name, string url, object defaults, object constraints, string[] namespaces)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1054:UriParametersShouldNotBeStrings",
+            MessageId = "2#",
+            Justification = "This is not a regular URL as it may contain special routing characters."
+        )]
+        public static Route MapRoute(
+            this RouteCollection routes,
+            string name,
+            string url,
+            object defaults,
+            object constraints,
+            string[] namespaces
+        )
         {
             if (routes == null)
             {
@@ -180,7 +319,7 @@ namespace System.Web.Mvc
             {
                 Defaults = CreateRouteValueDictionaryUncached(defaults),
                 Constraints = CreateRouteValueDictionaryUncached(constraints),
-                DataTokens = new RouteValueDictionary()
+                DataTokens = new RouteValueDictionary(),
             };
 
             ConstraintValidation.Validate(route);
@@ -214,11 +353,12 @@ namespace System.Web.Mvc
         private sealed class IgnoreRouteInternal : Route
         {
             public IgnoreRouteInternal(string url)
-                : base(url, new StopRoutingHandler())
-            {
-            }
+                : base(url, new StopRoutingHandler()) { }
 
-            public override VirtualPathData GetVirtualPath(RequestContext requestContext, RouteValueDictionary routeValues)
+            public override VirtualPathData GetVirtualPath(
+                RequestContext requestContext,
+                RouteValueDictionary routeValues
+            )
             {
                 // Never match during route generation. This avoids the scenario where an IgnoreRoute with
                 // fairly relaxed constraints ends up eagerly matching all generated URLs.

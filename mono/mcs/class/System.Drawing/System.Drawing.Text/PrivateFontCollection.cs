@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,55 +32,56 @@
 using System.IO;
 using System.Runtime.InteropServices;
 
-namespace System.Drawing.Text {
+namespace System.Drawing.Text
+{
+    public sealed class PrivateFontCollection : FontCollection
+    {
+        // constructors
 
-	public sealed class PrivateFontCollection : FontCollection {
+        public PrivateFontCollection()
+        {
+            Status status = GDIPlus.GdipNewPrivateFontCollection(out _nativeFontCollection);
+            GDIPlus.CheckStatus(status);
+        }
 
-		// constructors
+        // methods
+        public void AddFontFile(string filename)
+        {
+            if (filename == null)
+                throw new ArgumentNullException("filename");
 
-		public PrivateFontCollection ()
-		{
-			Status status = GDIPlus.GdipNewPrivateFontCollection (out _nativeFontCollection);
-			GDIPlus.CheckStatus (status);
-		}
-		
-		// methods
-		public void AddFontFile (string filename) 
-		{
-			if (filename == null)
-				throw new ArgumentNullException ("filename");
+            // this ensure the filename is valid (or throw the correct exception)
+            string fname = Path.GetFullPath(filename);
 
-			// this ensure the filename is valid (or throw the correct exception)
-			string fname = Path.GetFullPath (filename);
+            if (!File.Exists(fname))
+                throw new FileNotFoundException();
 
-			if (!File.Exists (fname))
-				throw new FileNotFoundException ();
+            // note: MS throw the same exception FileNotFoundException if the file exists but isn't a valid font file
+            Status status = GDIPlus.GdipPrivateAddFontFile(_nativeFontCollection, fname);
+            GDIPlus.CheckStatus(status);
+        }
 
-			// note: MS throw the same exception FileNotFoundException if the file exists but isn't a valid font file
-			Status status = GDIPlus.GdipPrivateAddFontFile (_nativeFontCollection, fname);
-			GDIPlus.CheckStatus (status);			
-		}
+        public void AddMemoryFont(IntPtr memory, int length)
+        {
+            // note: MS throw FileNotFoundException if something is bad with the data (except for a null pointer)
+            Status status = GDIPlus.GdipPrivateAddMemoryFont(_nativeFontCollection, memory, length);
+            GDIPlus.CheckStatus(status);
+        }
 
-		public void AddMemoryFont (IntPtr memory, int length) 
-		{
-			// note: MS throw FileNotFoundException if something is bad with the data (except for a null pointer)
-			Status status = GDIPlus.GdipPrivateAddMemoryFont (_nativeFontCollection, memory, length);
-			GDIPlus.CheckStatus (status);						
-		}
-		
-		// methods	
-		protected override void Dispose (bool disposing)
-		{
-			if (_nativeFontCollection!=IntPtr.Zero) {
-				GDIPlus.GdipDeletePrivateFontCollection (ref _nativeFontCollection);							
+        // methods
+        protected override void Dispose(bool disposing)
+        {
+            if (_nativeFontCollection != IntPtr.Zero)
+            {
+                GDIPlus.GdipDeletePrivateFontCollection(ref _nativeFontCollection);
 
-				// This must be zeroed out, otherwise our base will also call
-				// the GDI+ delete method on unix platforms. We're keeping the
-				// base.Dispose() call in case other cleanup ever gets added there
-				_nativeFontCollection = IntPtr.Zero;
-			}
-			
-			base.Dispose (disposing);
-		}		
-	}
+                // This must be zeroed out, otherwise our base will also call
+                // the GDI+ delete method on unix platforms. We're keeping the
+                // base.Dispose() call in case other cleanup ever gets added there
+                _nativeFontCollection = IntPtr.Zero;
+            }
+
+            base.Dispose(disposing);
+        }
+    }
 }

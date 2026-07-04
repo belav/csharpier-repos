@@ -25,11 +25,11 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Xunit;
-using System.Xml;
 using System.Data.SqlTypes;
-using System.Xml.Serialization;
 using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
+using Xunit;
 
 namespace System.Data.Tests.SqlTypes
 {
@@ -256,7 +256,9 @@ namespace System.Data.Tests.SqlTypes
 
             Assert.Throws<FormatException>(() => SqlInt16.Parse("not-a-number"));
 
-            Assert.Throws<OverflowException>(() => SqlInt16.Parse(((int)SqlInt16.MaxValue + 1).ToString()));
+            Assert.Throws<OverflowException>(() =>
+                SqlInt16.Parse(((int)SqlInt16.MaxValue + 1).ToString())
+            );
 
             Assert.Equal((short)150, SqlInt16.Parse("150").Value);
         }
@@ -516,7 +518,7 @@ namespace System.Data.Tests.SqlTypes
 
             Assert.Equal((short)64, ((SqlInt16)test64).Value);
 
-            Assert.Throws<OverflowException>(() =>(SqlInt16)test900);
+            Assert.Throws<OverflowException>(() => (SqlInt16)test900);
         }
 
         [Fact]
@@ -572,6 +574,7 @@ namespace System.Data.Tests.SqlTypes
             short testShort = 14;
             Assert.Equal((short)14, ((SqlInt16)testShort).Value);
         }
+
         [Fact]
         public void GetXsdTypeTest()
         {
@@ -579,9 +582,7 @@ namespace System.Data.Tests.SqlTypes
             Assert.Equal("short", qualifiedName.Name);
         }
 
-        internal void ReadWriteXmlTestInternal(string xml,
-                               short testval,
-                               string unit_test_id)
+        internal void ReadWriteXmlTestInternal(string xml, short testval, string unit_test_id)
         {
             SqlInt16 test;
             SqlInt16 test1;
@@ -613,7 +614,8 @@ namespace System.Data.Tests.SqlTypes
         {
             string xml1 = "<?xml version=\"1.0\" encoding=\"utf-16\"?><short>4556</short>";
             string xml2 = "<?xml version=\"1.0\" encoding=\"utf-16\"?><short>-6445</short>";
-            string xml3 = "<?xml version=\"1.0\" encoding=\"utf-16\"?><short>0x455687AB3E4D56F</short>";
+            string xml3 =
+                "<?xml version=\"1.0\" encoding=\"utf-16\"?><short>0x455687AB3E4D56F</short>";
             short test1 = 4556;
             short test2 = -6445;
             short test3 = 0x4F56;
@@ -621,8 +623,9 @@ namespace System.Data.Tests.SqlTypes
             ReadWriteXmlTestInternal(xml1, test1, "BA01");
             ReadWriteXmlTestInternal(xml2, test2, "BA02");
 
-            InvalidOperationException ex =
-                Assert.Throws<InvalidOperationException>(() => ReadWriteXmlTestInternal(xml3, test3, "BA03"));
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
+                ReadWriteXmlTestInternal(xml3, test3, "BA03")
+            );
             Assert.Equal(typeof(FormatException), ex.InnerException.GetType());
         }
     }

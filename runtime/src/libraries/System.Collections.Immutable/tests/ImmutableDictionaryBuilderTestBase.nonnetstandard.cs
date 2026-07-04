@@ -13,7 +13,8 @@ namespace System.Collections.Immutable.Tests
         public void TryGetKey()
         {
             IDictionary<string, int> builder = Empty<int>(StringComparer.OrdinalIgnoreCase)
-                .Add("a", 1).ToBuilder();
+                .Add("a", 1)
+                .ToBuilder();
             string actualKey;
             Assert.True(TryGetKeyHelper(builder, "a", out actualKey));
             Assert.Equal("a", actualKey);

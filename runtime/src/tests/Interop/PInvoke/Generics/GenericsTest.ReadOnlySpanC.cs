@@ -17,10 +17,16 @@ unsafe partial class GenericsNative
     public static extern ref readonly ReadOnlySpan<char> GetReadOnlySpanCRef(char e00);
 
     [DllImport(nameof(GenericsNative), EntryPoint = "AddSpanC")]
-    public static extern ReadOnlySpan<char> AddReadOnlySpanC(ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs);
+    public static extern ReadOnlySpan<char> AddReadOnlySpanC(
+        ReadOnlySpan<char> lhs,
+        ReadOnlySpan<char> rhs
+    );
 
     [DllImport(nameof(GenericsNative), EntryPoint = "AddSpanCs")]
-    public static extern ReadOnlySpan<char> AddReadOnlySpanCs(in ReadOnlySpan<char> pValues, int count);
+    public static extern ReadOnlySpan<char> AddReadOnlySpanCs(
+        in ReadOnlySpan<char> pValues,
+        int count
+    );
 }
 
 unsafe partial class GenericsTest
@@ -29,13 +35,18 @@ unsafe partial class GenericsTest
     {
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetReadOnlySpanC('1'));
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetReadOnlySpanCOut('1', out ReadOnlySpan<char> value3));
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.GetReadOnlySpanCOut('1', out ReadOnlySpan<char> value3)
+        );
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetReadOnlySpanCRef('1'));
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddReadOnlySpanC(default, default));
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddReadOnlySpanC(default, default)
+        );
 
-        Assert.Throws<MarshalDirectiveException>(() => {
+        Assert.Throws<MarshalDirectiveException>(() =>
+        {
             ReadOnlySpan<char> value = default;
             GenericsNative.AddReadOnlySpanCs(in value, 1);
         });

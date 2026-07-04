@@ -22,10 +22,7 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
 
         public int Count
         {
-            get
-            {
-                return _node == null ? 0 : (_node.IsList ? _node.SlotCount : 1);
-            }
+            get { return _node == null ? 0 : (_node.IsList ? _node.SlotCount : 1); }
         }
 
         public TNode? this[int index]
@@ -125,7 +122,12 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             return new Enumerator(this);
         }
 
-        internal void CopyTo(int offset, ArrayElement<GreenNode>[] array, int arrayOffset, int count)
+        internal void CopyTo(
+            int offset,
+            ArrayElement<GreenNode>[] array,
+            int arrayOffset,
+            int count
+        )
         {
             for (int i = 0; i < count; i++)
             {
@@ -158,7 +160,8 @@ namespace Microsoft.CodeAnalysis.Syntax.InternalSyntax
             return _node != null ? _node.GetHashCode() : 0;
         }
 
-        public SeparatedSyntaxList<TOther> AsSeparatedList<TOther>() where TOther : GreenNode
+        public SeparatedSyntaxList<TOther> AsSeparatedList<TOther>()
+            where TOther : GreenNode
         {
             return new SeparatedSyntaxList<TOther>(this);
         }

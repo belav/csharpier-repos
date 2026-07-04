@@ -33,10 +33,14 @@ namespace System.Text.Unicode.Tests
         private const string GRINNING_FACE_UTF8 = "F09F9880"; // U+1F600 GRINNING FACE, 4 bytes
         private const string GRINNING_FACE_UTF16 = "\U0001F600";
 
-        private const string WOMAN_CARTWHEELING_MEDSKIN_UTF16 = "\U0001F938\U0001F3FD\u200D\u2640\uFE0F"; // U+1F938 U+1F3FD U+200D U+2640 U+FE0F WOMAN CARTWHEELING: MEDIUM SKIN TONE
+        private const string WOMAN_CARTWHEELING_MEDSKIN_UTF16 =
+            "\U0001F938\U0001F3FD\u200D\u2640\uFE0F"; // U+1F938 U+1F3FD U+200D U+2640 U+FE0F WOMAN CARTWHEELING: MEDIUM SKIN TONE
 
         // All valid scalars [ U+0000 .. U+D7FF ] and [ U+E000 .. U+10FFFF ].
-        private static readonly IEnumerable<Rune> s_allValidScalars = Enumerable.Range(0x0000, 0xD800).Concat(Enumerable.Range(0xE000, 0x110000 - 0xE000)).Select(value => new Rune(value));
+        private static readonly IEnumerable<Rune> s_allValidScalars = Enumerable
+            .Range(0x0000, 0xD800)
+            .Concat(Enumerable.Range(0xE000, 0x110000 - 0xE000))
+            .Select(value => new Rune(value));
 
         private static readonly ReadOnlyMemory<char> s_allScalarsAsUtf16;
         private static readonly ReadOnlyMemory<byte> s_allScalarsAsUtf8;
@@ -72,21 +76,21 @@ namespace System.Text.Unicode.Tests
         // transcoding logic is correct.
         public static byte[] ToUtf8(Rune rune)
         {
-            Assert.True(Rune.IsValid(rune.Value), $"Rune with value U+{(uint)rune.Value:X4} is not well-formed.");
+            Assert.True(
+                Rune.IsValid(rune.Value),
+                $"Rune with value U+{(uint)rune.Value:X4} is not well-formed."
+            );
 
             if (rune.Value < 0x80)
             {
-                return new[]
-                {
-                    (byte)rune.Value
-                };
+                return new[] { (byte)rune.Value };
             }
             else if (rune.Value < 0x0800)
             {
                 return new[]
                 {
                     (byte)((rune.Value >> 6) | 0xC0),
-                    (byte)((rune.Value & 0x3F) | 0x80)
+                    (byte)((rune.Value & 0x3F) | 0x80),
                 };
             }
             else if (rune.Value < 0x10000)
@@ -95,7 +99,7 @@ namespace System.Text.Unicode.Tests
                 {
                     (byte)((rune.Value >> 12) | 0xE0),
                     (byte)(((rune.Value >> 6) & 0x3F) | 0x80),
-                    (byte)((rune.Value & 0x3F) | 0x80)
+                    (byte)((rune.Value & 0x3F) | 0x80),
                 };
             }
             else
@@ -105,7 +109,7 @@ namespace System.Text.Unicode.Tests
                     (byte)((rune.Value >> 18) | 0xF0),
                     (byte)(((rune.Value >> 12) & 0x3F) | 0x80),
                     (byte)(((rune.Value >> 6) & 0x3F) | 0x80),
-                    (byte)((rune.Value & 0x3F) | 0x80)
+                    (byte)((rune.Value & 0x3F) | 0x80),
                 };
             }
         }
@@ -115,21 +119,21 @@ namespace System.Text.Unicode.Tests
         // transcoding logic is correct.
         private static char[] ToUtf16(Rune rune)
         {
-            Assert.True(Rune.IsValid(rune.Value), $"Rune with value U+{(uint)rune.Value:X4} is not well-formed.");
+            Assert.True(
+                Rune.IsValid(rune.Value),
+                $"Rune with value U+{(uint)rune.Value:X4} is not well-formed."
+            );
 
             if (rune.IsBmp)
             {
-                return new[]
-                {
-                    (char)rune.Value
-                };
+                return new[] { (char)rune.Value };
             }
             else
             {
                 return new[]
                 {
                     (char)((rune.Value >> 10) + 0xD800 - 0x40),
-                    (char)((rune.Value & 0x03FF) + 0xDC00)
+                    (char)((rune.Value & 0x03FF) + 0xDC00),
                 };
             }
         }
@@ -139,7 +143,10 @@ namespace System.Text.Unicode.Tests
         [InlineData(X_UTF16, X_UTF8)]
         [InlineData(E_ACUTE_UTF16, E_ACUTE_UTF8)]
         [InlineData(EURO_SYMBOL_UTF16, EURO_SYMBOL_UTF8)]
-        public void ToBytes_WithSmallValidBuffers(string utf16Input, string expectedUtf8TranscodingHex)
+        public void ToBytes_WithSmallValidBuffers(
+            string utf16Input,
+            string expectedUtf8TranscodingHex
+        )
         {
             // These test cases are for the "slow processing" code path at the end of TranscodeToUtf8,
             // so inputs should be less than 2 chars.
@@ -153,7 +160,8 @@ namespace System.Text.Unicode.Tests
                 isFinalChunk: false,
                 expectedOperationStatus: OperationStatus.Done,
                 expectedNumCharsRead: utf16Input.Length,
-                expectedUtf8Transcoding: DecodeHex(expectedUtf8TranscodingHex));
+                expectedUtf8Transcoding: DecodeHex(expectedUtf8TranscodingHex)
+            );
         }
 
         [Theory]
@@ -179,8 +187,22 @@ namespace System.Text.Unicode.Tests
         [InlineData(EURO_SYMBOL_UTF16 + X_UTF16 + X_UTF16)] // 3-byte processing loop consumes trailing ASCII char, but can't read next DWORD, falls down to slow drain loop
         [InlineData(EURO_SYMBOL_UTF16 + E_ACUTE_UTF16)] // 3-byte processing loop can't consume next ASCII char, can't read DWORD, falls down to slow drain loop
         [InlineData(EURO_SYMBOL_UTF16 + EURO_SYMBOL_UTF16 + EURO_SYMBOL_UTF16 + EURO_SYMBOL_UTF16)] // stay within 2x 3-byte sequence processing loop
-        [InlineData(EURO_SYMBOL_UTF16 + EURO_SYMBOL_UTF16 + X_UTF16 + EURO_SYMBOL_UTF16 + EURO_SYMBOL_UTF16 + EURO_SYMBOL_UTF16)] // consume stray ASCII char at beginning of DWORD after 2x 3-byte sequence
-        [InlineData(EURO_SYMBOL_UTF16 + EURO_SYMBOL_UTF16 + EURO_SYMBOL_UTF16 + X_UTF16 + EURO_SYMBOL_UTF16 + EURO_SYMBOL_UTF16)] // consume stray ASCII char at end of DWORD after 2x 3-byte sequence
+        [InlineData(
+            EURO_SYMBOL_UTF16
+                + EURO_SYMBOL_UTF16
+                + X_UTF16
+                + EURO_SYMBOL_UTF16
+                + EURO_SYMBOL_UTF16
+                + EURO_SYMBOL_UTF16
+        )] // consume stray ASCII char at beginning of DWORD after 2x 3-byte sequence
+        [InlineData(
+            EURO_SYMBOL_UTF16
+                + EURO_SYMBOL_UTF16
+                + EURO_SYMBOL_UTF16
+                + X_UTF16
+                + EURO_SYMBOL_UTF16
+                + EURO_SYMBOL_UTF16
+        )] // consume stray ASCII char at end of DWORD after 2x 3-byte sequence
         [InlineData(EURO_SYMBOL_UTF16 + E_ACUTE_UTF16 + X_UTF16)] // consume 2-byte sequence as second char in DWORD which begins with 3-byte encoded char
         [InlineData(EURO_SYMBOL_UTF16 + GRINNING_FACE_UTF16)] // 3-byte sequence followed by 4-byte sequence
         [InlineData(EURO_SYMBOL_UTF16 + EURO_SYMBOL_UTF16 + GRINNING_FACE_UTF16)] // 2x 3-byte sequence followed by 4-byte sequence
@@ -207,7 +229,8 @@ namespace System.Text.Unicode.Tests
                 isFinalChunk: false,
                 expectedOperationStatus: OperationStatus.DestinationTooSmall,
                 expectedNumCharsRead: 0,
-                expectedUtf8Transcoding: ReadOnlySpan<byte>.Empty);
+                expectedUtf8Transcoding: ReadOnlySpan<byte>.Empty
+            );
 
             int expectedNumCharsConsumed = 0;
             byte[] concatenatedUtf8 = Array.Empty<byte>();
@@ -226,7 +249,8 @@ namespace System.Text.Unicode.Tests
                         isFinalChunk: false,
                         expectedOperationStatus: OperationStatus.DestinationTooSmall,
                         expectedNumCharsRead: expectedNumCharsConsumed,
-                        expectedUtf8Transcoding: concatenatedUtf8);
+                        expectedUtf8Transcoding: concatenatedUtf8
+                    );
                 }
 
                 // now provide a destination buffer large enough to hold the next full scalar encoding
@@ -235,13 +259,16 @@ namespace System.Text.Unicode.Tests
                 concatenatedUtf8 = concatenatedUtf8.Concat(ToUtf8(thisScalar)).ToArray();
 
                 ToBytes_Test_Core(
-                   utf16Input: utf16Input,
-                   destinationSize: concatenatedUtf8.Length,
-                   replaceInvalidSequences: false,
-                   isFinalChunk: false,
-                   expectedOperationStatus: (i == enumeratedScalars.Length - 1) ? OperationStatus.Done : OperationStatus.DestinationTooSmall,
-                   expectedNumCharsRead: expectedNumCharsConsumed,
-                   expectedUtf8Transcoding: concatenatedUtf8);
+                    utf16Input: utf16Input,
+                    destinationSize: concatenatedUtf8.Length,
+                    replaceInvalidSequences: false,
+                    isFinalChunk: false,
+                    expectedOperationStatus: (i == enumeratedScalars.Length - 1)
+                        ? OperationStatus.Done
+                        : OperationStatus.DestinationTooSmall,
+                    expectedNumCharsRead: expectedNumCharsConsumed,
+                    expectedUtf8Transcoding: concatenatedUtf8
+                );
             }
 
             // now throw lots of ASCII data at the beginning so that we exercise the vectorized code paths
@@ -256,7 +283,8 @@ namespace System.Text.Unicode.Tests
                 isFinalChunk: true,
                 expectedOperationStatus: OperationStatus.Done,
                 expectedNumCharsRead: utf16Input.Length,
-                expectedUtf8Transcoding: concatenatedUtf8);
+                expectedUtf8Transcoding: concatenatedUtf8
+            );
 
             // now throw some non-ASCII data at the beginning so that we *don't* exercise the vectorized code paths
 
@@ -270,13 +298,17 @@ namespace System.Text.Unicode.Tests
                 isFinalChunk: true,
                 expectedOperationStatus: OperationStatus.Done,
                 expectedNumCharsRead: utf16Input.Length,
-                expectedUtf8Transcoding: concatenatedUtf8);
+                expectedUtf8Transcoding: concatenatedUtf8
+            );
         }
 
         [Theory]
         [InlineData('\uD800', OperationStatus.NeedMoreData)] // standalone high surrogate
         [InlineData('\uDFFF', OperationStatus.InvalidData)] // standalone low surrogate
-        public void ToBytes_WithOnlyStandaloneSurrogates(char charValue, OperationStatus expectedOperationStatus)
+        public void ToBytes_WithOnlyStandaloneSurrogates(
+            char charValue,
+            OperationStatus expectedOperationStatus
+        )
         {
             ToBytes_Test_Core(
                 utf16Input: new[] { charValue },
@@ -285,7 +317,8 @@ namespace System.Text.Unicode.Tests
                 isFinalChunk: false,
                 expectedOperationStatus: expectedOperationStatus,
                 expectedNumCharsRead: 0,
-                expectedUtf8Transcoding: Span<byte>.Empty);
+                expectedUtf8Transcoding: Span<byte>.Empty
+            );
         }
 
         [Theory]
@@ -295,7 +328,11 @@ namespace System.Text.Unicode.Tests
         [InlineData("A<LOW>B", 1, "41")] // consume standalone ASCII char, then standalone low surrogate char
         [InlineData("AB<HIGH><HIGH>", 2, "4142")] // consume two ASCII chars, then standalone high surrogate char
         [InlineData("AB<LOW><LOW>", 2, "4142")] // consume two ASCII chars, then standalone low surrogate char
-        public void ToBytes_WithInvalidSurrogates(string utf16Input, int expectedNumCharsConsumed, string expectedUtf8TranscodingHex)
+        public void ToBytes_WithInvalidSurrogates(
+            string utf16Input,
+            int expectedNumCharsConsumed,
+            string expectedUtf8TranscodingHex
+        )
         {
             // xUnit can't handle ill-formed strings in [InlineData], so we replace here.
 
@@ -313,7 +350,8 @@ namespace System.Text.Unicode.Tests
                 isFinalChunk: false,
                 expectedOperationStatus: OperationStatus.InvalidData,
                 expectedNumCharsRead: expectedNumCharsConsumed,
-                expectedUtf8Transcoding: DecodeHex(expectedUtf8TranscodingHex));
+                expectedUtf8Transcoding: DecodeHex(expectedUtf8TranscodingHex)
+            );
 
             // Now try the tests again with a larger buffer.
             // This ensures that running out of destination space wasn't the reason we failed.
@@ -325,14 +363,24 @@ namespace System.Text.Unicode.Tests
                 isFinalChunk: false,
                 expectedOperationStatus: OperationStatus.InvalidData,
                 expectedNumCharsRead: expectedNumCharsConsumed,
-                expectedUtf8Transcoding: DecodeHex(expectedUtf8TranscodingHex));
+                expectedUtf8Transcoding: DecodeHex(expectedUtf8TranscodingHex)
+            );
         }
 
         [Theory]
         [InlineData("<LOW><HIGH>", REPLACEMENT_CHAR_UTF8)] // standalone low surr. and incomplete high surr.
         [InlineData("<HIGH><HIGH>", REPLACEMENT_CHAR_UTF8)] // standalone high surr. and incomplete high surr.
         [InlineData("<LOW><LOW>", REPLACEMENT_CHAR_UTF8 + REPLACEMENT_CHAR_UTF8)] // standalone low surr. and incomplete low surr.
-        [InlineData("A<LOW>B<LOW>C<HIGH>D", "41" + REPLACEMENT_CHAR_UTF8 + "42" + REPLACEMENT_CHAR_UTF8 + "43" + REPLACEMENT_CHAR_UTF8 + "44")] // standalone low, low, high surrounded by other data
+        [InlineData(
+            "A<LOW>B<LOW>C<HIGH>D",
+            "41"
+                + REPLACEMENT_CHAR_UTF8
+                + "42"
+                + REPLACEMENT_CHAR_UTF8
+                + "43"
+                + REPLACEMENT_CHAR_UTF8
+                + "44"
+        )] // standalone low, low, high surrounded by other data
         public void ToBytes_WithReplacements(string utf16Input, string expectedUtf8TranscodingHex)
         {
             // xUnit can't handle ill-formed strings in [InlineData], so we replace here.
@@ -346,35 +394,99 @@ namespace System.Text.Unicode.Tests
                 destinationSize: expectedUtf8TranscodingHex.Length / 2,
                 replaceInvalidSequences: true,
                 isFinalChunk: false,
-                expectedOperationStatus: (isFinalCharHighSurrogate) ? OperationStatus.NeedMoreData : OperationStatus.Done,
-                expectedNumCharsRead: (isFinalCharHighSurrogate) ? (utf16Input.Length - 1) : utf16Input.Length,
-                expectedUtf8Transcoding: DecodeHex(expectedUtf8TranscodingHex));
+                expectedOperationStatus: (isFinalCharHighSurrogate)
+                    ? OperationStatus.NeedMoreData
+                    : OperationStatus.Done,
+                expectedNumCharsRead: (isFinalCharHighSurrogate)
+                    ? (utf16Input.Length - 1)
+                    : utf16Input.Length,
+                expectedUtf8Transcoding: DecodeHex(expectedUtf8TranscodingHex)
+            );
 
             if (isFinalCharHighSurrogate)
             {
                 // Also test with isFinalChunk = true
                 ToBytes_Test_Core(
                     utf16Input: utf16Input,
-                    destinationSize: expectedUtf8TranscodingHex.Length / 2 + Rune.ReplacementChar.Utf8SequenceLength /* for replacement char */,
+                    destinationSize: expectedUtf8TranscodingHex.Length / 2
+                        + Rune.ReplacementChar.Utf8SequenceLength /* for replacement char */
+                    ,
                     replaceInvalidSequences: true,
                     isFinalChunk: true,
                     expectedOperationStatus: OperationStatus.Done,
                     expectedNumCharsRead: utf16Input.Length,
-                    expectedUtf8Transcoding: DecodeHex(expectedUtf8TranscodingHex + REPLACEMENT_CHAR_UTF8));
+                    expectedUtf8Transcoding: DecodeHex(
+                        expectedUtf8TranscodingHex + REPLACEMENT_CHAR_UTF8
+                    )
+                );
             }
         }
 
         [Theory]
-        [InlineData(E_ACUTE_UTF16 + "<LOW>", true, 1, OperationStatus.DestinationTooSmall, E_ACUTE_UTF8)] // not enough output buffer to hold U+FFFD
-        [InlineData(E_ACUTE_UTF16 + "<LOW>", true, 2, OperationStatus.Done, E_ACUTE_UTF8 + REPLACEMENT_CHAR_UTF8)] // replace standalone low surr. at end
-        [InlineData(E_ACUTE_UTF16 + "<HIGH>", true, 1, OperationStatus.DestinationTooSmall, E_ACUTE_UTF8)] // not enough output buffer to hold U+FFFD
-        [InlineData(E_ACUTE_UTF16 + "<HIGH>", true, 2, OperationStatus.Done, E_ACUTE_UTF8 + REPLACEMENT_CHAR_UTF8)] // replace standalone high surr. at end
+        [InlineData(
+            E_ACUTE_UTF16 + "<LOW>",
+            true,
+            1,
+            OperationStatus.DestinationTooSmall,
+            E_ACUTE_UTF8
+        )] // not enough output buffer to hold U+FFFD
+        [InlineData(
+            E_ACUTE_UTF16 + "<LOW>",
+            true,
+            2,
+            OperationStatus.Done,
+            E_ACUTE_UTF8 + REPLACEMENT_CHAR_UTF8
+        )] // replace standalone low surr. at end
+        [InlineData(
+            E_ACUTE_UTF16 + "<HIGH>",
+            true,
+            1,
+            OperationStatus.DestinationTooSmall,
+            E_ACUTE_UTF8
+        )] // not enough output buffer to hold U+FFFD
+        [InlineData(
+            E_ACUTE_UTF16 + "<HIGH>",
+            true,
+            2,
+            OperationStatus.Done,
+            E_ACUTE_UTF8 + REPLACEMENT_CHAR_UTF8
+        )] // replace standalone high surr. at end
         [InlineData(E_ACUTE_UTF16 + "<HIGH>", false, 1, OperationStatus.NeedMoreData, E_ACUTE_UTF8)] // don't replace standalone high surr. at end
-        [InlineData(E_ACUTE_UTF16 + "<HIGH>" + X_UTF16, true, 2, OperationStatus.DestinationTooSmall, E_ACUTE_UTF8 + REPLACEMENT_CHAR_UTF8)] // not enough output buffer to hold 'X'
-        [InlineData(E_ACUTE_UTF16 + "<HIGH>" + X_UTF16, false, 2, OperationStatus.DestinationTooSmall, E_ACUTE_UTF8 + REPLACEMENT_CHAR_UTF8)] // not enough output buffer to hold 'X'
-        [InlineData(E_ACUTE_UTF16 + "<HIGH>" + X_UTF16, true, 3, OperationStatus.Done, E_ACUTE_UTF8 + REPLACEMENT_CHAR_UTF8 + X_UTF8)] // replacement followed by 'X'
-        [InlineData(E_ACUTE_UTF16 + "<HIGH>" + X_UTF16, false, 3, OperationStatus.Done, E_ACUTE_UTF8 + REPLACEMENT_CHAR_UTF8 + X_UTF8)] // replacement followed by 'X'
-        public void ToBytes_WithReplacements_AndCustomBufferSizes(string utf16Input, bool isFinalChunk, int expectedNumCharsConsumed, OperationStatus expectedOperationStatus, string expectedUtf8TranscodingHex)
+        [InlineData(
+            E_ACUTE_UTF16 + "<HIGH>" + X_UTF16,
+            true,
+            2,
+            OperationStatus.DestinationTooSmall,
+            E_ACUTE_UTF8 + REPLACEMENT_CHAR_UTF8
+        )] // not enough output buffer to hold 'X'
+        [InlineData(
+            E_ACUTE_UTF16 + "<HIGH>" + X_UTF16,
+            false,
+            2,
+            OperationStatus.DestinationTooSmall,
+            E_ACUTE_UTF8 + REPLACEMENT_CHAR_UTF8
+        )] // not enough output buffer to hold 'X'
+        [InlineData(
+            E_ACUTE_UTF16 + "<HIGH>" + X_UTF16,
+            true,
+            3,
+            OperationStatus.Done,
+            E_ACUTE_UTF8 + REPLACEMENT_CHAR_UTF8 + X_UTF8
+        )] // replacement followed by 'X'
+        [InlineData(
+            E_ACUTE_UTF16 + "<HIGH>" + X_UTF16,
+            false,
+            3,
+            OperationStatus.Done,
+            E_ACUTE_UTF8 + REPLACEMENT_CHAR_UTF8 + X_UTF8
+        )] // replacement followed by 'X'
+        public void ToBytes_WithReplacements_AndCustomBufferSizes(
+            string utf16Input,
+            bool isFinalChunk,
+            int expectedNumCharsConsumed,
+            OperationStatus expectedOperationStatus,
+            string expectedUtf8TranscodingHex
+        )
         {
             // xUnit can't handle ill-formed strings in [InlineData], so we replace here.
 
@@ -387,7 +499,8 @@ namespace System.Text.Unicode.Tests
                 isFinalChunk: isFinalChunk,
                 expectedOperationStatus: expectedOperationStatus,
                 expectedNumCharsRead: expectedNumCharsConsumed,
-                expectedUtf8Transcoding: DecodeHex(expectedUtf8TranscodingHex));
+                expectedUtf8Transcoding: DecodeHex(expectedUtf8TranscodingHex)
+            );
         }
 
         [Fact]
@@ -400,28 +513,55 @@ namespace System.Text.Unicode.Tests
                 isFinalChunk: false,
                 expectedOperationStatus: OperationStatus.Done,
                 expectedNumCharsRead: s_allScalarsAsUtf16.Length,
-                expectedUtf8Transcoding: s_allScalarsAsUtf8.Span);
+                expectedUtf8Transcoding: s_allScalarsAsUtf8.Span
+            );
         }
 
-        private static void ToBytes_Test_Core(ReadOnlySpan<char> utf16Input, int destinationSize, bool replaceInvalidSequences, bool isFinalChunk, OperationStatus expectedOperationStatus, int expectedNumCharsRead, ReadOnlySpan<byte> expectedUtf8Transcoding)
+        private static void ToBytes_Test_Core(
+            ReadOnlySpan<char> utf16Input,
+            int destinationSize,
+            bool replaceInvalidSequences,
+            bool isFinalChunk,
+            OperationStatus expectedOperationStatus,
+            int expectedNumCharsRead,
+            ReadOnlySpan<byte> expectedUtf8Transcoding
+        )
         {
             // Arrange
 
-            using (BoundedMemory<char> boundedSource = BoundedMemory.AllocateFromExistingData(utf16Input))
-            using (BoundedMemory<byte> boundedDestination = BoundedMemory.Allocate<byte>(destinationSize))
+            using (
+                BoundedMemory<char> boundedSource = BoundedMemory.AllocateFromExistingData(
+                    utf16Input
+                )
+            )
+            using (
+                BoundedMemory<byte> boundedDestination = BoundedMemory.Allocate<byte>(
+                    destinationSize
+                )
+            )
             {
                 boundedSource.MakeReadonly();
 
                 // Act
 
-                OperationStatus actualOperationStatus = Utf8.FromUtf16(boundedSource.Span, boundedDestination.Span, out int actualNumCharsRead, out int actualNumBytesWritten, replaceInvalidSequences, isFinalChunk);
+                OperationStatus actualOperationStatus = Utf8.FromUtf16(
+                    boundedSource.Span,
+                    boundedDestination.Span,
+                    out int actualNumCharsRead,
+                    out int actualNumBytesWritten,
+                    replaceInvalidSequences,
+                    isFinalChunk
+                );
 
                 // Assert
 
                 Assert.Equal(expectedOperationStatus, actualOperationStatus);
                 Assert.Equal(expectedNumCharsRead, actualNumCharsRead);
                 Assert.Equal(expectedUtf8Transcoding.Length, actualNumBytesWritten);
-                Assert.Equal(expectedUtf8Transcoding.ToArray(), boundedDestination.Span.Slice(0, actualNumBytesWritten).ToArray());
+                Assert.Equal(
+                    expectedUtf8Transcoding.ToArray(),
+                    boundedDestination.Span.Slice(0, actualNumBytesWritten).ToArray()
+                );
             }
         }
 
@@ -442,7 +582,11 @@ namespace System.Text.Unicode.Tests
         [InlineData("E0C080", 0, "")] // [ E0 ] is improperly terminated
         [InlineData("ED7F80", 0, "")] // [ ED ] is improperly terminated
         [InlineData("EDA080", 0, "")] // [ ED A0 ... ] is surrogate
-        public void ToChars_WithSmallInvalidBuffers(string utf8HexInput, int expectedNumBytesConsumed, string expectedUtf16Transcoding)
+        public void ToChars_WithSmallInvalidBuffers(
+            string utf8HexInput,
+            int expectedNumBytesConsumed,
+            string expectedUtf16Transcoding
+        )
         {
             // These test cases are for the "slow processing" code path at the end of TranscodeToUtf16,
             // so inputs should be less than 4 bytes.
@@ -450,25 +594,27 @@ namespace System.Text.Unicode.Tests
             Assert.InRange(utf8HexInput.Length, 0, 6);
 
             ToChars_Test_Core(
-              utf8Input: DecodeHex(utf8HexInput),
-              destinationSize: expectedUtf16Transcoding.Length,
-              replaceInvalidSequences: false,
-              isFinalChunk: false,
-              expectedOperationStatus: OperationStatus.InvalidData,
-              expectedNumBytesRead: expectedNumBytesConsumed,
-              expectedUtf16Transcoding: expectedUtf16Transcoding);
+                utf8Input: DecodeHex(utf8HexInput),
+                destinationSize: expectedUtf16Transcoding.Length,
+                replaceInvalidSequences: false,
+                isFinalChunk: false,
+                expectedOperationStatus: OperationStatus.InvalidData,
+                expectedNumBytesRead: expectedNumBytesConsumed,
+                expectedUtf16Transcoding: expectedUtf16Transcoding
+            );
 
             // Now try the tests again with a larger buffer.
             // This ensures that running out of destination space wasn't the reason we failed.
 
             ToChars_Test_Core(
-              utf8Input: DecodeHex(utf8HexInput),
-              destinationSize: expectedUtf16Transcoding.Length + 16,
-              replaceInvalidSequences: false,
-              isFinalChunk: false,
-              expectedOperationStatus: OperationStatus.InvalidData,
-              expectedNumBytesRead: expectedNumBytesConsumed,
-              expectedUtf16Transcoding: expectedUtf16Transcoding);
+                utf8Input: DecodeHex(utf8HexInput),
+                destinationSize: expectedUtf16Transcoding.Length + 16,
+                replaceInvalidSequences: false,
+                isFinalChunk: false,
+                expectedOperationStatus: OperationStatus.InvalidData,
+                expectedNumBytesRead: expectedNumBytesConsumed,
+                expectedUtf16Transcoding: expectedUtf16Transcoding
+            );
         }
 
         [Theory]
@@ -488,31 +634,37 @@ namespace System.Text.Unicode.Tests
         [InlineData(EURO_SYMBOL_UTF8 + "C2", 3, EURO_SYMBOL_UTF16)] // [ C2 ] is an incomplete sequence
         [InlineData(EURO_SYMBOL_UTF8 + "E0", 3, EURO_SYMBOL_UTF16)] // [ E0 ] is an incomplete sequence
         [InlineData(EURO_SYMBOL_UTF8 + "F0", 3, EURO_SYMBOL_UTF16)] // [ F0 ] is an incomplete sequence
-        public void ToChars_WithVariousIncompleteBuffers(string utf8HexInput, int expectedNumBytesConsumed, string expectedUtf16Transcoding)
+        public void ToChars_WithVariousIncompleteBuffers(
+            string utf8HexInput,
+            int expectedNumBytesConsumed,
+            string expectedUtf16Transcoding
+        )
         {
             // These test cases are for the "slow processing" code path at the end of TranscodeToUtf16,
             // so inputs should be less than 4 bytes.
 
             ToChars_Test_Core(
-              utf8Input: DecodeHex(utf8HexInput),
-              destinationSize: expectedUtf16Transcoding.Length,
-              replaceInvalidSequences: false,
-              isFinalChunk: false,
-              expectedOperationStatus: OperationStatus.NeedMoreData,
-              expectedNumBytesRead: expectedNumBytesConsumed,
-              expectedUtf16Transcoding: expectedUtf16Transcoding);
+                utf8Input: DecodeHex(utf8HexInput),
+                destinationSize: expectedUtf16Transcoding.Length,
+                replaceInvalidSequences: false,
+                isFinalChunk: false,
+                expectedOperationStatus: OperationStatus.NeedMoreData,
+                expectedNumBytesRead: expectedNumBytesConsumed,
+                expectedUtf16Transcoding: expectedUtf16Transcoding
+            );
 
             // Now try the tests again with a larger buffer.
             // This ensures that running out of destination space wasn't the reason we failed.
 
             ToChars_Test_Core(
-             utf8Input: DecodeHex(utf8HexInput),
-             destinationSize: expectedUtf16Transcoding.Length + 16,
-             replaceInvalidSequences: false,
-             isFinalChunk: false,
-             expectedOperationStatus: OperationStatus.NeedMoreData,
-             expectedNumBytesRead: expectedNumBytesConsumed,
-             expectedUtf16Transcoding: expectedUtf16Transcoding);
+                utf8Input: DecodeHex(utf8HexInput),
+                destinationSize: expectedUtf16Transcoding.Length + 16,
+                replaceInvalidSequences: false,
+                isFinalChunk: false,
+                expectedOperationStatus: OperationStatus.NeedMoreData,
+                expectedNumBytesRead: expectedNumBytesConsumed,
+                expectedUtf16Transcoding: expectedUtf16Transcoding
+            );
         }
 
         [Theory]
@@ -527,7 +679,9 @@ namespace System.Text.Unicode.Tests
         [InlineData(EURO_SYMBOL_UTF16)]
         /* LARGE VALID BUFFERS - test main loop at beginning of method */
         [InlineData(E_ACUTE_UTF16 + "ABCD" + "0123456789:;<=>?")] // Loop unrolling at end of buffer
-        [InlineData(E_ACUTE_UTF16 + "ABCD" + "0123456789:;<=>?" + "01234567" + E_ACUTE_UTF16 + "89:;<=>?")] // Loop unrolling interrupted by non-ASCII
+        [InlineData(
+            E_ACUTE_UTF16 + "ABCD" + "0123456789:;<=>?" + "01234567" + E_ACUTE_UTF16 + "89:;<=>?"
+        )] // Loop unrolling interrupted by non-ASCII
         [InlineData("ABC" + E_ACUTE_UTF16 + "0123")] // 3 ASCII bytes followed by non-ASCII
         [InlineData("AB" + E_ACUTE_UTF16 + "0123")] // 2 ASCII bytes followed by non-ASCII
         [InlineData("A" + E_ACUTE_UTF16 + "0123")] // 1 ASCII byte followed by non-ASCII
@@ -540,7 +694,14 @@ namespace System.Text.Unicode.Tests
         [InlineData(EURO_SYMBOL_UTF16 + EURO_SYMBOL_UTF16 + EURO_SYMBOL_UTF16)] // 3x 3-byte sequences, exercises "stay within 3-byte loop" logic in 3-byte sequence processing
         [InlineData(EURO_SYMBOL_UTF16 + EURO_SYMBOL_UTF16 + EURO_SYMBOL_UTF16 + EURO_SYMBOL_UTF16)] // 4x 3-byte sequences, exercises "consume multiple bytes at a time" logic in 3-byte sequence processing
         [InlineData(EURO_SYMBOL_UTF16 + EURO_SYMBOL_UTF16 + EURO_SYMBOL_UTF16 + E_ACUTE_UTF16)] // 3x 3-byte sequences + single 2-byte sequence, exercises "consume multiple bytes at a time" logic in 3-byte sequence processing
-        [InlineData(EURO_SYMBOL_UTF16 + EURO_SYMBOL_UTF16 + E_ACUTE_UTF16 + E_ACUTE_UTF16 + E_ACUTE_UTF16 + E_ACUTE_UTF16)] // 2x 3-byte sequences + 4x 2-byte sequences, exercises "consume multiple bytes at a time" logic in 3-byte sequence processing
+        [InlineData(
+            EURO_SYMBOL_UTF16
+                + EURO_SYMBOL_UTF16
+                + E_ACUTE_UTF16
+                + E_ACUTE_UTF16
+                + E_ACUTE_UTF16
+                + E_ACUTE_UTF16
+        )] // 2x 3-byte sequences + 4x 2-byte sequences, exercises "consume multiple bytes at a time" logic in 3-byte sequence processing
         [InlineData(GRINNING_FACE_UTF16 + GRINNING_FACE_UTF16)] // 2x 4-byte sequences, exercises 4-byte sequence processing
         [InlineData(GRINNING_FACE_UTF16 + "@AB")] // single 4-byte sequence + 3 ASCII bytes, exercises 4-byte sequence processing and draining logic
         [InlineData(WOMAN_CARTWHEELING_MEDSKIN_UTF16)] // exercises switching between multiple sequence lengths
@@ -562,9 +723,12 @@ namespace System.Text.Unicode.Tests
                 destinationSize: 0,
                 replaceInvalidSequences: false,
                 isFinalChunk: false,
-                expectedOperationStatus: (utf8Input.Length == 0) ? OperationStatus.Done : OperationStatus.DestinationTooSmall,
+                expectedOperationStatus: (utf8Input.Length == 0)
+                    ? OperationStatus.Done
+                    : OperationStatus.DestinationTooSmall,
                 expectedNumBytesRead: 0,
-                expectedUtf16Transcoding: ReadOnlySpan<char>.Empty);
+                expectedUtf16Transcoding: ReadOnlySpan<char>.Empty
+            );
 
             int expectedNumBytesConsumed = 0;
             char[] concatenatedUtf16 = Array.Empty<char>();
@@ -584,7 +748,8 @@ namespace System.Text.Unicode.Tests
                         isFinalChunk: false,
                         expectedOperationStatus: OperationStatus.DestinationTooSmall,
                         expectedNumBytesRead: expectedNumBytesConsumed,
-                        expectedUtf16Transcoding: concatenatedUtf16);
+                        expectedUtf16Transcoding: concatenatedUtf16
+                    );
                 }
 
                 // now provide a destination buffer large enough to hold the next full scalar encoding
@@ -597,9 +762,12 @@ namespace System.Text.Unicode.Tests
                     destinationSize: concatenatedUtf16.Length,
                     replaceInvalidSequences: false,
                     isFinalChunk: false,
-                    expectedOperationStatus: (i == enumeratedScalars.Length - 1) ? OperationStatus.Done : OperationStatus.DestinationTooSmall,
+                    expectedOperationStatus: (i == enumeratedScalars.Length - 1)
+                        ? OperationStatus.Done
+                        : OperationStatus.DestinationTooSmall,
                     expectedNumBytesRead: expectedNumBytesConsumed,
-                    expectedUtf16Transcoding: concatenatedUtf16);
+                    expectedUtf16Transcoding: concatenatedUtf16
+                );
             }
 
             // now throw lots of ASCII data at the beginning so that we exercise the vectorized code paths
@@ -614,7 +782,8 @@ namespace System.Text.Unicode.Tests
                 isFinalChunk: true,
                 expectedOperationStatus: OperationStatus.Done,
                 expectedNumBytesRead: utf8Input.Length,
-                expectedUtf16Transcoding: utf16Input);
+                expectedUtf16Transcoding: utf16Input
+            );
 
             // now throw some non-ASCII data at the beginning so that we *don't* exercise the vectorized code paths
 
@@ -628,7 +797,8 @@ namespace System.Text.Unicode.Tests
                 isFinalChunk: true,
                 expectedOperationStatus: OperationStatus.Done,
                 expectedNumBytesRead: utf8Input.Length,
-                expectedUtf16Transcoding: utf16Input);
+                expectedUtf16Transcoding: utf16Input
+            );
         }
 
         [Theory]
@@ -661,7 +831,11 @@ namespace System.Text.Unicode.Tests
         [InlineData("3031" + "FD808080", 2, "01")] // [ FD ] is always invalid
         [InlineData("3031" + "FE808080", 2, "01")] // [ FE ] is always invalid
         [InlineData("3031" + "FF808080", 2, "01")] // [ FF ] is always invalid
-        public void ToChars_WithLargeInvalidBuffers(string utf8HexInput, int expectedNumBytesConsumed, string expectedUtf16Transcoding)
+        public void ToChars_WithLargeInvalidBuffers(
+            string utf8HexInput,
+            int expectedNumBytesConsumed,
+            string expectedUtf16Transcoding
+        )
         {
             // These test cases are for the "fast processing" code which is the main loop of TranscodeToUtf16,
             // so inputs should be less >= 4 bytes.
@@ -675,7 +849,8 @@ namespace System.Text.Unicode.Tests
                 isFinalChunk: false,
                 expectedOperationStatus: OperationStatus.InvalidData,
                 expectedNumBytesRead: expectedNumBytesConsumed,
-                expectedUtf16Transcoding: expectedUtf16Transcoding);
+                expectedUtf16Transcoding: expectedUtf16Transcoding
+            );
 
             // Now try the tests again with a larger buffer.
             // This ensures that running out of destination space wasn't the reason we failed.
@@ -687,21 +862,64 @@ namespace System.Text.Unicode.Tests
                 isFinalChunk: false,
                 expectedOperationStatus: OperationStatus.InvalidData,
                 expectedNumBytesRead: expectedNumBytesConsumed,
-                expectedUtf16Transcoding: expectedUtf16Transcoding);
+                expectedUtf16Transcoding: expectedUtf16Transcoding
+            );
         }
 
         [Theory]
         [InlineData(X_UTF8 + "80" + X_UTF8, X_UTF16 + REPLACEMENT_CHAR_UTF16 + X_UTF16)] // stray continuation byte [ 80 ]
         [InlineData(X_UTF8 + "FF" + X_UTF8, X_UTF16 + REPLACEMENT_CHAR_UTF16 + X_UTF16)] // invalid UTF-8 byte [ FF ]
         [InlineData(X_UTF8 + "C2" + X_UTF8, X_UTF16 + REPLACEMENT_CHAR_UTF16 + X_UTF16)] // 2-byte sequence starter [ C2 ] not followed by continuation byte
-        [InlineData(X_UTF8 + "C1C180" + X_UTF8, X_UTF16 + REPLACEMENT_CHAR_UTF16 + REPLACEMENT_CHAR_UTF16 + REPLACEMENT_CHAR_UTF16 + X_UTF16)] // [ C1 80 ] is overlong but consists of two maximal invalid subsequences, each of length 1 byte
-        [InlineData(X_UTF8 + E_ACUTE_UTF8 + "E08080", X_UTF16 + E_ACUTE_UTF16 + REPLACEMENT_CHAR_UTF16 + REPLACEMENT_CHAR_UTF16 + REPLACEMENT_CHAR_UTF16)] // [ E0 80 ] is overlong 2-byte sequence (1 byte maximal invalid subsequence), and following [ 80 ] is stray continuation byte
-        [InlineData(GRINNING_FACE_UTF8 + "F08F8080" + GRINNING_FACE_UTF8, GRINNING_FACE_UTF16 + REPLACEMENT_CHAR_UTF16 + REPLACEMENT_CHAR_UTF16 + REPLACEMENT_CHAR_UTF16 + REPLACEMENT_CHAR_UTF16 + GRINNING_FACE_UTF16)] // [ F0 8F ] is overlong 4-byte sequence (1 byte maximal invalid subsequence), and following [ 80 ] instances are stray continuation bytes
-        [InlineData(GRINNING_FACE_UTF8 + "F4908080" + GRINNING_FACE_UTF8, GRINNING_FACE_UTF16 + REPLACEMENT_CHAR_UTF16 + REPLACEMENT_CHAR_UTF16 + REPLACEMENT_CHAR_UTF16 + REPLACEMENT_CHAR_UTF16 + GRINNING_FACE_UTF16)] // [ F4 90 ] is out-of-range 4-byte sequence (1 byte maximal invalid subsequence), and following [ 80 ] instances are stray continuation bytes
-        [InlineData(E_ACUTE_UTF8 + "EDA0" + X_UTF8, E_ACUTE_UTF16 + REPLACEMENT_CHAR_UTF16 + REPLACEMENT_CHAR_UTF16 + X_UTF16)] // [ ED A0 ] is encoding of UTF-16 surrogate code point, so consists of two maximal invalid subsequences, each of length 1 byte
-        [InlineData(E_ACUTE_UTF8 + "ED80" + X_UTF8, E_ACUTE_UTF16 + REPLACEMENT_CHAR_UTF16 + X_UTF16)] // [ ED 80 ] is incomplete 3-byte sequence, so is 2-byte maximal invalid subsequence
-        [InlineData(E_ACUTE_UTF8 + "F380" + X_UTF8, E_ACUTE_UTF16 + REPLACEMENT_CHAR_UTF16 + X_UTF16)] // [ F3 80 ] is incomplete 4-byte sequence, so is 2-byte maximal invalid subsequence
-        [InlineData(E_ACUTE_UTF8 + "F38080" + X_UTF8, E_ACUTE_UTF16 + REPLACEMENT_CHAR_UTF16 + X_UTF16)] // [ F3 80 80 ] is incomplete 4-byte sequence, so is 3-byte maximal invalid subsequence
+        [InlineData(
+            X_UTF8 + "C1C180" + X_UTF8,
+            X_UTF16
+                + REPLACEMENT_CHAR_UTF16
+                + REPLACEMENT_CHAR_UTF16
+                + REPLACEMENT_CHAR_UTF16
+                + X_UTF16
+        )] // [ C1 80 ] is overlong but consists of two maximal invalid subsequences, each of length 1 byte
+        [InlineData(
+            X_UTF8 + E_ACUTE_UTF8 + "E08080",
+            X_UTF16
+                + E_ACUTE_UTF16
+                + REPLACEMENT_CHAR_UTF16
+                + REPLACEMENT_CHAR_UTF16
+                + REPLACEMENT_CHAR_UTF16
+        )] // [ E0 80 ] is overlong 2-byte sequence (1 byte maximal invalid subsequence), and following [ 80 ] is stray continuation byte
+        [InlineData(
+            GRINNING_FACE_UTF8 + "F08F8080" + GRINNING_FACE_UTF8,
+            GRINNING_FACE_UTF16
+                + REPLACEMENT_CHAR_UTF16
+                + REPLACEMENT_CHAR_UTF16
+                + REPLACEMENT_CHAR_UTF16
+                + REPLACEMENT_CHAR_UTF16
+                + GRINNING_FACE_UTF16
+        )] // [ F0 8F ] is overlong 4-byte sequence (1 byte maximal invalid subsequence), and following [ 80 ] instances are stray continuation bytes
+        [InlineData(
+            GRINNING_FACE_UTF8 + "F4908080" + GRINNING_FACE_UTF8,
+            GRINNING_FACE_UTF16
+                + REPLACEMENT_CHAR_UTF16
+                + REPLACEMENT_CHAR_UTF16
+                + REPLACEMENT_CHAR_UTF16
+                + REPLACEMENT_CHAR_UTF16
+                + GRINNING_FACE_UTF16
+        )] // [ F4 90 ] is out-of-range 4-byte sequence (1 byte maximal invalid subsequence), and following [ 80 ] instances are stray continuation bytes
+        [InlineData(
+            E_ACUTE_UTF8 + "EDA0" + X_UTF8,
+            E_ACUTE_UTF16 + REPLACEMENT_CHAR_UTF16 + REPLACEMENT_CHAR_UTF16 + X_UTF16
+        )] // [ ED A0 ] is encoding of UTF-16 surrogate code point, so consists of two maximal invalid subsequences, each of length 1 byte
+        [InlineData(
+            E_ACUTE_UTF8 + "ED80" + X_UTF8,
+            E_ACUTE_UTF16 + REPLACEMENT_CHAR_UTF16 + X_UTF16
+        )] // [ ED 80 ] is incomplete 3-byte sequence, so is 2-byte maximal invalid subsequence
+        [InlineData(
+            E_ACUTE_UTF8 + "F380" + X_UTF8,
+            E_ACUTE_UTF16 + REPLACEMENT_CHAR_UTF16 + X_UTF16
+        )] // [ F3 80 ] is incomplete 4-byte sequence, so is 2-byte maximal invalid subsequence
+        [InlineData(
+            E_ACUTE_UTF8 + "F38080" + X_UTF8,
+            E_ACUTE_UTF16 + REPLACEMENT_CHAR_UTF16 + X_UTF16
+        )] // [ F3 80 80 ] is incomplete 4-byte sequence, so is 3-byte maximal invalid subsequence
         public void ToChars_WithReplacement(string utf8HexInput, string expectedUtf16Transcoding)
         {
             // First run the test with isFinalBlock = false,
@@ -714,36 +932,46 @@ namespace System.Text.Unicode.Tests
                 isFinalChunk: false,
                 expectedOperationStatus: OperationStatus.Done,
                 expectedNumBytesRead: utf8HexInput.Length / 2,
-                expectedUtf16Transcoding: expectedUtf16Transcoding);
+                expectedUtf16Transcoding: expectedUtf16Transcoding
+            );
 
             ToChars_Test_Core(
-                utf8Input: DecodeHex(utf8HexInput + "E0BF" /* trailing data */),
+                utf8Input: DecodeHex(
+                    utf8HexInput + "E0BF" /* trailing data */
+                ),
                 destinationSize: expectedUtf16Transcoding.Length,
                 replaceInvalidSequences: true,
                 isFinalChunk: false,
                 expectedOperationStatus: OperationStatus.NeedMoreData,
                 expectedNumBytesRead: utf8HexInput.Length / 2,
-                expectedUtf16Transcoding: expectedUtf16Transcoding);
+                expectedUtf16Transcoding: expectedUtf16Transcoding
+            );
 
             // Then run the test with isFinalBlock = true, with incomplete trailing data.
 
             ToChars_Test_Core(
-                utf8Input: DecodeHex(utf8HexInput + "E0BF" /* trailing data */),
+                utf8Input: DecodeHex(
+                    utf8HexInput + "E0BF" /* trailing data */
+                ),
                 destinationSize: expectedUtf16Transcoding.Length,
                 replaceInvalidSequences: true,
                 isFinalChunk: true,
                 expectedOperationStatus: OperationStatus.DestinationTooSmall,
                 expectedNumBytesRead: utf8HexInput.Length / 2,
-                expectedUtf16Transcoding: expectedUtf16Transcoding);
+                expectedUtf16Transcoding: expectedUtf16Transcoding
+            );
 
             ToChars_Test_Core(
-                 utf8Input: DecodeHex(utf8HexInput + "E0BF" /* trailing data */),
-                 destinationSize: expectedUtf16Transcoding.Length + 1, // allow room for U+FFFD
-                 replaceInvalidSequences: true,
-                 isFinalChunk: true,
-                 expectedOperationStatus: OperationStatus.Done,
-                 expectedNumBytesRead: utf8HexInput.Length / 2 + 2,
-                 expectedUtf16Transcoding: expectedUtf16Transcoding + REPLACEMENT_CHAR_UTF16);
+                utf8Input: DecodeHex(
+                    utf8HexInput + "E0BF" /* trailing data */
+                ),
+                destinationSize: expectedUtf16Transcoding.Length + 1, // allow room for U+FFFD
+                replaceInvalidSequences: true,
+                isFinalChunk: true,
+                expectedOperationStatus: OperationStatus.Done,
+                expectedNumBytesRead: utf8HexInput.Length / 2 + 2,
+                expectedUtf16Transcoding: expectedUtf16Transcoding + REPLACEMENT_CHAR_UTF16
+            );
         }
 
         [Fact]
@@ -756,28 +984,55 @@ namespace System.Text.Unicode.Tests
                 isFinalChunk: false,
                 expectedOperationStatus: OperationStatus.Done,
                 expectedNumBytesRead: s_allScalarsAsUtf8.Length,
-                expectedUtf16Transcoding: s_allScalarsAsUtf16.Span);
+                expectedUtf16Transcoding: s_allScalarsAsUtf16.Span
+            );
         }
 
-        private static void ToChars_Test_Core(ReadOnlySpan<byte> utf8Input, int destinationSize, bool replaceInvalidSequences, bool isFinalChunk, OperationStatus expectedOperationStatus, int expectedNumBytesRead, ReadOnlySpan<char> expectedUtf16Transcoding)
+        private static void ToChars_Test_Core(
+            ReadOnlySpan<byte> utf8Input,
+            int destinationSize,
+            bool replaceInvalidSequences,
+            bool isFinalChunk,
+            OperationStatus expectedOperationStatus,
+            int expectedNumBytesRead,
+            ReadOnlySpan<char> expectedUtf16Transcoding
+        )
         {
             // Arrange
 
-            using (BoundedMemory<byte> boundedSource = BoundedMemory.AllocateFromExistingData(utf8Input))
-            using (BoundedMemory<char> boundedDestination = BoundedMemory.Allocate<char>(destinationSize))
+            using (
+                BoundedMemory<byte> boundedSource = BoundedMemory.AllocateFromExistingData(
+                    utf8Input
+                )
+            )
+            using (
+                BoundedMemory<char> boundedDestination = BoundedMemory.Allocate<char>(
+                    destinationSize
+                )
+            )
             {
                 boundedSource.MakeReadonly();
 
                 // Act
 
-                OperationStatus actualOperationStatus = Utf8.ToUtf16(boundedSource.Span, boundedDestination.Span, out int actualNumBytesRead, out int actualNumCharsWritten, replaceInvalidSequences, isFinalChunk);
+                OperationStatus actualOperationStatus = Utf8.ToUtf16(
+                    boundedSource.Span,
+                    boundedDestination.Span,
+                    out int actualNumBytesRead,
+                    out int actualNumCharsWritten,
+                    replaceInvalidSequences,
+                    isFinalChunk
+                );
 
                 // Assert
 
                 Assert.Equal(expectedOperationStatus, actualOperationStatus);
                 Assert.Equal(expectedNumBytesRead, actualNumBytesRead);
                 Assert.Equal(expectedUtf16Transcoding.Length, actualNumCharsWritten);
-                Assert.Equal(expectedUtf16Transcoding.ToString(), boundedDestination.Span.Slice(0, actualNumCharsWritten).ToString());
+                Assert.Equal(
+                    expectedUtf16Transcoding.ToString(),
+                    boundedDestination.Span.Slice(0, actualNumCharsWritten).ToString()
+                );
             }
         }
     }

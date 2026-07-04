@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.Operations
         /// <summary>
         /// Helper function to simplify the access to the function pointer signature of an FunctionPointerInvocationOperation
         /// </summary>
-        public static IMethodSymbol GetFunctionPointerSignature(this IFunctionPointerInvocationOperation functionPointer)
+        public static IMethodSymbol GetFunctionPointerSignature(
+            this IFunctionPointerInvocationOperation functionPointer
+        )
         {
             return ((IFunctionPointerTypeSymbol)functionPointer.Target.Type!).Signature;
         }
@@ -25,7 +27,11 @@ namespace Microsoft.CodeAnalysis.Operations
         /// <summary>
         /// This will check whether context around the operation has any error such as syntax or semantic error
         /// </summary>
-        internal static bool HasErrors(this IOperation operation, Compilation compilation, CancellationToken cancellationToken = default(CancellationToken))
+        internal static bool HasErrors(
+            this IOperation operation,
+            Compilation compilation,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             if (operation == null)
             {
@@ -60,7 +66,9 @@ namespace Microsoft.CodeAnalysis.Operations
                 return false;
             }
 
-            return model.GetDiagnostics(operation.Syntax.Span, cancellationToken).Any(static d => d.DefaultSeverity == DiagnosticSeverity.Error);
+            return model
+                .GetDiagnostics(operation.Syntax.Span, cancellationToken)
+                .Any(static d => d.DefaultSeverity == DiagnosticSeverity.Error);
         }
 
         /// <summary>
@@ -125,7 +133,9 @@ namespace Microsoft.CodeAnalysis.Operations
         /// Gets all the declared local variables in the given <paramref name="declarationGroup"/>.
         /// </summary>
         /// <param name="declarationGroup">Variable declaration group</param>
-        public static ImmutableArray<ILocalSymbol> GetDeclaredVariables(this IVariableDeclarationGroupOperation declarationGroup)
+        public static ImmutableArray<ILocalSymbol> GetDeclaredVariables(
+            this IVariableDeclarationGroupOperation declarationGroup
+        )
         {
             if (declarationGroup == null)
             {
@@ -145,7 +155,9 @@ namespace Microsoft.CodeAnalysis.Operations
         /// Gets all the declared local variables in the given <paramref name="declaration"/>.
         /// </summary>
         /// <param name="declaration">Variable declaration</param>
-        public static ImmutableArray<ILocalSymbol> GetDeclaredVariables(this IVariableDeclarationOperation declaration)
+        public static ImmutableArray<ILocalSymbol> GetDeclaredVariables(
+            this IVariableDeclarationOperation declaration
+        )
         {
             if (declaration == null)
             {
@@ -157,7 +169,10 @@ namespace Microsoft.CodeAnalysis.Operations
             return arrayBuilder.ToImmutableAndFree();
         }
 
-        private static void GetDeclaredVariables(this IVariableDeclarationOperation declaration, ArrayBuilder<ILocalSymbol> arrayBuilder)
+        private static void GetDeclaredVariables(
+            this IVariableDeclarationOperation declaration,
+            ArrayBuilder<ILocalSymbol> arrayBuilder
+        )
         {
             foreach (var decl in declaration.Declarators)
             {
@@ -170,14 +185,17 @@ namespace Microsoft.CodeAnalysis.Operations
         /// if the single variable initializer is null.
         /// </summary>
         /// <param name="declarationOperation">Single variable declaration to retrieve initializer for.</param>
-        public static IVariableInitializerOperation? GetVariableInitializer(this IVariableDeclaratorOperation declarationOperation)
+        public static IVariableInitializerOperation? GetVariableInitializer(
+            this IVariableDeclaratorOperation declarationOperation
+        )
         {
             if (declarationOperation == null)
             {
                 throw new ArgumentNullException(nameof(declarationOperation));
             }
 
-            return declarationOperation.Initializer ?? (declarationOperation.Parent as IVariableDeclarationOperation)?.Initializer;
+            return declarationOperation.Initializer
+                ?? (declarationOperation.Parent as IVariableDeclarationOperation)?.Initializer;
         }
 
         /// <summary>
@@ -185,7 +203,10 @@ namespace Microsoft.CodeAnalysis.Operations
         /// </summary>
         /// <param name="dynamicOperation">Dynamic or late bound operation.</param>
         /// <param name="index">Argument index.</param>
-        public static string? GetArgumentName(this IDynamicInvocationOperation dynamicOperation, int index)
+        public static string? GetArgumentName(
+            this IDynamicInvocationOperation dynamicOperation,
+            int index
+        )
         {
             if (dynamicOperation == null)
             {
@@ -200,7 +221,10 @@ namespace Microsoft.CodeAnalysis.Operations
         /// </summary>
         /// <param name="dynamicOperation">Dynamic or late bound operation.</param>
         /// <param name="index">Argument index.</param>
-        public static string? GetArgumentName(this IDynamicIndexerAccessOperation dynamicOperation, int index)
+        public static string? GetArgumentName(
+            this IDynamicIndexerAccessOperation dynamicOperation,
+            int index
+        )
         {
             if (dynamicOperation == null)
             {
@@ -215,7 +239,10 @@ namespace Microsoft.CodeAnalysis.Operations
         /// </summary>
         /// <param name="dynamicOperation">Dynamic or late bound operation.</param>
         /// <param name="index">Argument index.</param>
-        public static string? GetArgumentName(this IDynamicObjectCreationOperation dynamicOperation, int index)
+        public static string? GetArgumentName(
+            this IDynamicObjectCreationOperation dynamicOperation,
+            int index
+        )
         {
             if (dynamicOperation == null)
             {
@@ -230,7 +257,10 @@ namespace Microsoft.CodeAnalysis.Operations
         /// </summary>
         /// <param name="dynamicOperation">Dynamic or late bound operation.</param>
         /// <param name="index">Argument index.</param>
-        internal static string? GetArgumentName(this HasDynamicArgumentsExpression dynamicOperation, int index)
+        internal static string? GetArgumentName(
+            this HasDynamicArgumentsExpression dynamicOperation,
+            int index
+        )
         {
             if (dynamicOperation.Arguments.IsDefaultOrEmpty)
             {
@@ -253,7 +283,10 @@ namespace Microsoft.CodeAnalysis.Operations
         /// </summary>
         /// <param name="dynamicOperation">Dynamic or late bound operation.</param>
         /// <param name="index">Argument index.</param>
-        public static RefKind? GetArgumentRefKind(this IDynamicInvocationOperation dynamicOperation, int index)
+        public static RefKind? GetArgumentRefKind(
+            this IDynamicInvocationOperation dynamicOperation,
+            int index
+        )
         {
             if (dynamicOperation == null)
             {
@@ -270,7 +303,10 @@ namespace Microsoft.CodeAnalysis.Operations
         /// </summary>
         /// <param name="dynamicOperation">Dynamic or late bound operation.</param>
         /// <param name="index">Argument index.</param>
-        public static RefKind? GetArgumentRefKind(this IDynamicIndexerAccessOperation dynamicOperation, int index)
+        public static RefKind? GetArgumentRefKind(
+            this IDynamicIndexerAccessOperation dynamicOperation,
+            int index
+        )
         {
             if (dynamicOperation == null)
             {
@@ -287,7 +323,10 @@ namespace Microsoft.CodeAnalysis.Operations
         /// </summary>
         /// <param name="dynamicOperation">Dynamic or late bound operation.</param>
         /// <param name="index">Argument index.</param>
-        public static RefKind? GetArgumentRefKind(this IDynamicObjectCreationOperation dynamicOperation, int index)
+        public static RefKind? GetArgumentRefKind(
+            this IDynamicObjectCreationOperation dynamicOperation,
+            int index
+        )
         {
             if (dynamicOperation == null)
             {
@@ -297,7 +336,10 @@ namespace Microsoft.CodeAnalysis.Operations
             return GetArgumentRefKind((HasDynamicArgumentsExpression)dynamicOperation, index);
         }
 
-        internal static RefKind? GetArgumentRefKind(this HasDynamicArgumentsExpression dynamicOperation, int index)
+        internal static RefKind? GetArgumentRefKind(
+            this HasDynamicArgumentsExpression dynamicOperation,
+            int index
+        )
         {
             if (dynamicOperation.Arguments.IsDefaultOrEmpty)
             {
@@ -357,10 +399,15 @@ namespace Microsoft.CodeAnalysis.Operations
 
             if (operation.SemanticModel == null)
             {
-                throw new InvalidOperationException(CodeAnalysisResources.OperationMustNotBeControlFlowGraphPart);
+                throw new InvalidOperationException(
+                    CodeAnalysisResources.OperationMustNotBeControlFlowGraphPart
+                );
             }
 
-            if (operation.BranchKind != BranchKind.Break && operation.BranchKind != BranchKind.Continue)
+            if (
+                operation.BranchKind != BranchKind.Break
+                && operation.BranchKind != BranchKind.Continue
+            )
             {
                 return null;
             }
@@ -374,10 +421,12 @@ namespace Microsoft.CodeAnalysis.Operations
             {
                 switch (current)
                 {
-                    case ILoopOperation correspondingLoop when operation.Target.Equals(correspondingLoop.ExitLabel) ||
-                                                               operation.Target.Equals(correspondingLoop.ContinueLabel):
+                    case ILoopOperation correspondingLoop
+                        when operation.Target.Equals(correspondingLoop.ExitLabel)
+                            || operation.Target.Equals(correspondingLoop.ContinueLabel):
                         return correspondingLoop;
-                    case ISwitchOperation correspondingSwitch when operation.Target.Equals(correspondingSwitch.ExitLabel):
+                    case ISwitchOperation correspondingSwitch
+                        when operation.Target.Equals(correspondingSwitch.ExitLabel):
                         return correspondingSwitch;
                 }
             }

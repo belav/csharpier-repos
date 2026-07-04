@@ -6,7 +6,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
     internal static partial class ObjectExtensions
     {
-        public static string GetTypeDisplayName(this object? obj)
-            => obj == null ? "null" : obj.GetType().Name;
+        public static string GetTypeDisplayName(this object? obj) =>
+            obj == null ? "null" : obj.GetType().Name;
     }
 }

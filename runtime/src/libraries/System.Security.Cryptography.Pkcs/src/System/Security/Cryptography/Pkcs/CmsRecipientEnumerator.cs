@@ -17,18 +17,12 @@ namespace System.Security.Cryptography.Pkcs
 
         public CmsRecipient Current
         {
-            get
-            {
-                return _recipients[_current];
-            }
+            get { return _recipients[_current]; }
         }
 
         object IEnumerator.Current
         {
-            get
-            {
-                return _recipients[_current];
-            }
+            get { return _recipients[_current]; }
         }
 
         public bool MoveNext()

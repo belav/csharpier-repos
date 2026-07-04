@@ -15,16 +15,11 @@ namespace System.Activities
     {
         static AsyncCallback onExecuteComplete;
 
-        protected AsyncCodeActivity()
-        {
-        }
+        protected AsyncCodeActivity() { }
 
         protected internal sealed override Version ImplementationVersion
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
             set
             {
                 if (value != null)
@@ -38,10 +33,7 @@ namespace System.Activities
         [Fx.Tag.KnownXamlExternal]
         protected sealed override Func<Activity> Implementation
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
             set
             {
                 if (value != null)
@@ -57,7 +49,9 @@ namespace System.Activities
             {
                 if (onExecuteComplete == null)
                 {
-                    onExecuteComplete = Fx.ThunkCallback(new AsyncCallback(CompleteAsynchronousExecution));
+                    onExecuteComplete = Fx.ThunkCallback(
+                        new AsyncCallback(CompleteAsynchronousExecution)
+                    );
                 }
 
                 return onExecuteComplete;
@@ -66,40 +60,57 @@ namespace System.Activities
 
         internal override bool InternalCanInduceIdle
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
-        protected abstract IAsyncResult BeginExecute(AsyncCodeActivityContext context, AsyncCallback callback, object state);
+        protected abstract IAsyncResult BeginExecute(
+            AsyncCodeActivityContext context,
+            AsyncCallback callback,
+            object state
+        );
         protected abstract void EndExecute(AsyncCodeActivityContext context, IAsyncResult result);
 
         // called on the Cancel and Abort paths to allow cleanup of outstanding async work
-        protected virtual void Cancel(AsyncCodeActivityContext context)
-        {
-        }
+        protected virtual void Cancel(AsyncCodeActivityContext context) { }
 
-        sealed internal override void InternalExecute(ActivityInstance instance, ActivityExecutor executor, BookmarkManager bookmarkManager)
+        internal sealed override void InternalExecute(
+            ActivityInstance instance,
+            ActivityExecutor executor,
+            BookmarkManager bookmarkManager
+        )
         {
             // first set up an async context
             AsyncOperationContext asyncContext = executor.SetupAsyncOperationBlock(instance);
             instance.IncrementBusyCount();
 
-            AsyncCodeActivityContext context = new AsyncCodeActivityContext(asyncContext, instance, executor);
+            AsyncCodeActivityContext context = new AsyncCodeActivityContext(
+                asyncContext,
+                instance,
+                executor
+            );
             bool success = false;
             try
             {
-                IAsyncResult result = BeginExecute(context, AsyncCodeActivity.OnExecuteComplete, asyncContext);
+                IAsyncResult result = BeginExecute(
+                    context,
+                    AsyncCodeActivity.OnExecuteComplete,
+                    asyncContext
+                );
 
                 if (result == null)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.BeginExecuteMustNotReturnANullAsyncResult));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(SR.BeginExecuteMustNotReturnANullAsyncResult)
+                    );
                 }
 
                 if (!object.ReferenceEquals(result.AsyncState, asyncContext))
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.BeginExecuteMustUseProvidedStateAsAsyncResultState));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.BeginExecuteMustUseProvidedStateAsAsyncResultState
+                        )
+                    );
                 }
 
                 if (result.CompletedSynchronously)
@@ -119,7 +130,10 @@ namespace System.Activities
             }
         }
 
-        void IAsyncCodeActivity.FinishExecution(AsyncCodeActivityContext context, IAsyncResult result)
+        void IAsyncCodeActivity.FinishExecution(
+            AsyncCodeActivityContext context,
+            IAsyncResult result
+        )
         {
             this.EndExecute(context, result);
         }
@@ -138,16 +152,26 @@ namespace System.Activities
             // InternalExecute.
             if (asyncContext != null)
             {
-                asyncContext.CompleteAsyncCodeActivity(new CompleteAsyncCodeActivityData(asyncContext, result));
+                asyncContext.CompleteAsyncCodeActivity(
+                    new CompleteAsyncCodeActivityData(asyncContext, result)
+                );
             }
         }
 
-        sealed internal override void InternalCancel(ActivityInstance instance, ActivityExecutor executor, BookmarkManager bookmarkManager)
+        internal sealed override void InternalCancel(
+            ActivityInstance instance,
+            ActivityExecutor executor,
+            BookmarkManager bookmarkManager
+        )
         {
             AsyncOperationContext asyncContext;
             if (executor.TryGetPendingOperation(instance, out asyncContext))
             {
-                AsyncCodeActivityContext context = new AsyncCodeActivityContext(asyncContext, instance, executor);
+                AsyncCodeActivityContext context = new AsyncCodeActivityContext(
+                    asyncContext,
+                    instance,
+                    executor
+                );
                 try
                 {
                     asyncContext.HasCalledAsyncCodeActivityCancel = true;
@@ -160,7 +184,11 @@ namespace System.Activities
             }
         }
 
-        sealed internal override void InternalAbort(ActivityInstance instance, ActivityExecutor executor, Exception terminationReason)
+        internal sealed override void InternalAbort(
+            ActivityInstance instance,
+            ActivityExecutor executor,
+            Exception terminationReason
+        )
         {
             AsyncOperationContext asyncContext;
             if (executor.TryGetPendingOperation(instance, out asyncContext))
@@ -184,32 +212,45 @@ namespace System.Activities
             }
         }
 
-        sealed internal override void OnInternalCacheMetadata(bool createEmptyBindings)
+        internal sealed override void OnInternalCacheMetadata(bool createEmptyBindings)
         {
-            CodeActivityMetadata metadata = new CodeActivityMetadata(this, this.GetParentEnvironment(), createEmptyBindings);
+            CodeActivityMetadata metadata = new CodeActivityMetadata(
+                this,
+                this.GetParentEnvironment(),
+                createEmptyBindings
+            );
             CacheMetadata(metadata);
             metadata.Dispose();
         }
 
-        internal sealed override void OnInternalCreateDynamicUpdateMap(DynamicUpdateMapBuilder.Finalizer finalizer,
-            DynamicUpdateMapBuilder.IDefinitionMatcher matcher, Activity originalActivity)
-        {
-        }
+        internal sealed override void OnInternalCreateDynamicUpdateMap(
+            DynamicUpdateMapBuilder.Finalizer finalizer,
+            DynamicUpdateMapBuilder.IDefinitionMatcher matcher,
+            Activity originalActivity
+        ) { }
 
-        protected sealed override void OnCreateDynamicUpdateMap(UpdateMapMetadata metadata, Activity originalActivity)
+        protected sealed override void OnCreateDynamicUpdateMap(
+            UpdateMapMetadata metadata,
+            Activity originalActivity
+        )
         {
             // NO OP
         }
 
         protected sealed override void CacheMetadata(ActivityMetadata metadata)
         {
-            throw FxTrace.Exception.AsError(new InvalidOperationException(SR.WrongCacheMetadataForCodeActivity));
+            throw FxTrace.Exception.AsError(
+                new InvalidOperationException(SR.WrongCacheMetadataForCodeActivity)
+            );
         }
 
         protected virtual void CacheMetadata(CodeActivityMetadata metadata)
         {
             // We bypass the metadata call to avoid the null checks
-            SetArgumentsCollection(ReflectedInformation.GetArguments(this), metadata.CreateEmptyBindings);
+            SetArgumentsCollection(
+                ReflectedInformation.GetArguments(this),
+                metadata.CreateEmptyBindings
+            );
         }
 
         class CompleteAsyncCodeActivityData : AsyncOperationContext.CompleteData
@@ -224,7 +265,13 @@ namespace System.Activities
 
             protected override void OnCallExecutor()
             {
-                this.Executor.CompleteOperation(new CompleteAsyncCodeActivityWorkItem(this.AsyncContext, this.Instance, this.result));
+                this.Executor.CompleteOperation(
+                    new CompleteAsyncCodeActivityWorkItem(
+                        this.AsyncContext,
+                        this.Instance,
+                        this.result
+                    )
+                );
             }
 
             // not [DataContract] since this workitem will never happen when persistable
@@ -233,7 +280,11 @@ namespace System.Activities
                 IAsyncResult result;
                 AsyncOperationContext asyncContext;
 
-                public CompleteAsyncCodeActivityWorkItem(AsyncOperationContext asyncContext, ActivityInstance instance, IAsyncResult result)
+                public CompleteAsyncCodeActivityWorkItem(
+                    AsyncOperationContext asyncContext,
+                    ActivityInstance instance,
+                    IAsyncResult result
+                )
                     : base(instance)
                 {
                     this.result = result;
@@ -245,7 +296,17 @@ namespace System.Activities
                 {
                     if (TD.CompleteBookmarkWorkItemIsEnabled())
                     {
-                        TD.CompleteBookmarkWorkItem(this.ActivityInstance.Activity.GetType().ToString(), this.ActivityInstance.Activity.DisplayName, this.ActivityInstance.Id, ActivityUtilities.GetTraceString(Bookmark.AsyncOperationCompletionBookmark), ActivityUtilities.GetTraceString(Bookmark.AsyncOperationCompletionBookmark.Scope));
+                        TD.CompleteBookmarkWorkItem(
+                            this.ActivityInstance.Activity.GetType().ToString(),
+                            this.ActivityInstance.Activity.DisplayName,
+                            this.ActivityInstance.Id,
+                            ActivityUtilities.GetTraceString(
+                                Bookmark.AsyncOperationCompletionBookmark
+                            ),
+                            ActivityUtilities.GetTraceString(
+                                Bookmark.AsyncOperationCompletionBookmark.Scope
+                            )
+                        );
                     }
                 }
 
@@ -253,7 +314,17 @@ namespace System.Activities
                 {
                     if (TD.ScheduleBookmarkWorkItemIsEnabled())
                     {
-                        TD.ScheduleBookmarkWorkItem(this.ActivityInstance.Activity.GetType().ToString(), this.ActivityInstance.Activity.DisplayName, this.ActivityInstance.Id, ActivityUtilities.GetTraceString(Bookmark.AsyncOperationCompletionBookmark), ActivityUtilities.GetTraceString(Bookmark.AsyncOperationCompletionBookmark.Scope));
+                        TD.ScheduleBookmarkWorkItem(
+                            this.ActivityInstance.Activity.GetType().ToString(),
+                            this.ActivityInstance.Activity.DisplayName,
+                            this.ActivityInstance.Id,
+                            ActivityUtilities.GetTraceString(
+                                Bookmark.AsyncOperationCompletionBookmark
+                            ),
+                            ActivityUtilities.GetTraceString(
+                                Bookmark.AsyncOperationCompletionBookmark.Scope
+                            )
+                        );
                     }
                 }
 
@@ -261,18 +332,36 @@ namespace System.Activities
                 {
                     if (TD.StartBookmarkWorkItemIsEnabled())
                     {
-                        TD.StartBookmarkWorkItem(this.ActivityInstance.Activity.GetType().ToString(), this.ActivityInstance.Activity.DisplayName, this.ActivityInstance.Id, ActivityUtilities.GetTraceString(Bookmark.AsyncOperationCompletionBookmark), ActivityUtilities.GetTraceString(Bookmark.AsyncOperationCompletionBookmark.Scope));
+                        TD.StartBookmarkWorkItem(
+                            this.ActivityInstance.Activity.GetType().ToString(),
+                            this.ActivityInstance.Activity.DisplayName,
+                            this.ActivityInstance.Id,
+                            ActivityUtilities.GetTraceString(
+                                Bookmark.AsyncOperationCompletionBookmark
+                            ),
+                            ActivityUtilities.GetTraceString(
+                                Bookmark.AsyncOperationCompletionBookmark.Scope
+                            )
+                        );
                     }
                 }
 
-                public override bool Execute(ActivityExecutor executor, BookmarkManager bookmarkManager)
+                public override bool Execute(
+                    ActivityExecutor executor,
+                    BookmarkManager bookmarkManager
+                )
                 {
                     AsyncCodeActivityContext context = null;
 
                     try
                     {
-                        context = new AsyncCodeActivityContext(this.asyncContext, this.ActivityInstance, executor);
-                        IAsyncCodeActivity owner = (IAsyncCodeActivity)this.ActivityInstance.Activity;
+                        context = new AsyncCodeActivityContext(
+                            this.asyncContext,
+                            this.ActivityInstance,
+                            executor
+                        );
+                        IAsyncCodeActivity owner = (IAsyncCodeActivity)
+                            this.ActivityInstance.Activity;
                         owner.FinishExecution(context, this.result);
                     }
                     catch (Exception e)
@@ -300,16 +389,11 @@ namespace System.Activities
 
     public abstract class AsyncCodeActivity<TResult> : Activity<TResult>, IAsyncCodeActivity
     {
-        protected AsyncCodeActivity()
-        {
-        }
+        protected AsyncCodeActivity() { }
 
         protected internal sealed override Version ImplementationVersion
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
             set
             {
                 if (value != null)
@@ -323,10 +407,7 @@ namespace System.Activities
         [Fx.Tag.KnownXamlExternal]
         protected sealed override Func<Activity> Implementation
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
             set
             {
                 if (value != null)
@@ -338,40 +419,60 @@ namespace System.Activities
 
         internal override bool InternalCanInduceIdle
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
-        protected abstract IAsyncResult BeginExecute(AsyncCodeActivityContext context, AsyncCallback callback, object state);
-        protected abstract TResult EndExecute(AsyncCodeActivityContext context, IAsyncResult result);
+        protected abstract IAsyncResult BeginExecute(
+            AsyncCodeActivityContext context,
+            AsyncCallback callback,
+            object state
+        );
+        protected abstract TResult EndExecute(
+            AsyncCodeActivityContext context,
+            IAsyncResult result
+        );
 
         // called on the Cancel and Abort paths to allow cleanup of outstanding async work
-        protected virtual void Cancel(AsyncCodeActivityContext context)
-        {
-        }
+        protected virtual void Cancel(AsyncCodeActivityContext context) { }
 
-        sealed internal override void InternalExecute(ActivityInstance instance, ActivityExecutor executor, BookmarkManager bookmarkManager)
+        internal sealed override void InternalExecute(
+            ActivityInstance instance,
+            ActivityExecutor executor,
+            BookmarkManager bookmarkManager
+        )
         {
             // first set up an async context
             AsyncOperationContext asyncContext = executor.SetupAsyncOperationBlock(instance);
             instance.IncrementBusyCount();
 
-            AsyncCodeActivityContext context = new AsyncCodeActivityContext(asyncContext, instance, executor);
+            AsyncCodeActivityContext context = new AsyncCodeActivityContext(
+                asyncContext,
+                instance,
+                executor
+            );
             bool success = false;
             try
             {
-                IAsyncResult result = BeginExecute(context, AsyncCodeActivity.OnExecuteComplete, asyncContext);
+                IAsyncResult result = BeginExecute(
+                    context,
+                    AsyncCodeActivity.OnExecuteComplete,
+                    asyncContext
+                );
 
                 if (result == null)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.BeginExecuteMustNotReturnANullAsyncResult));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(SR.BeginExecuteMustNotReturnANullAsyncResult)
+                    );
                 }
 
                 if (!object.ReferenceEquals(result.AsyncState, asyncContext))
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.BeginExecuteMustUseProvidedStateAsAsyncResultState));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.BeginExecuteMustUseProvidedStateAsAsyncResultState
+                        )
+                    );
                 }
 
                 if (result.CompletedSynchronously)
@@ -391,18 +492,29 @@ namespace System.Activities
             }
         }
 
-        void IAsyncCodeActivity.FinishExecution(AsyncCodeActivityContext context, IAsyncResult result)
+        void IAsyncCodeActivity.FinishExecution(
+            AsyncCodeActivityContext context,
+            IAsyncResult result
+        )
         {
             TResult executionResult = this.EndExecute(context, result);
             this.Result.Set(context, executionResult);
         }
 
-        sealed internal override void InternalCancel(ActivityInstance instance, ActivityExecutor executor, BookmarkManager bookmarkManager)
+        internal sealed override void InternalCancel(
+            ActivityInstance instance,
+            ActivityExecutor executor,
+            BookmarkManager bookmarkManager
+        )
         {
             AsyncOperationContext asyncContext;
             if (executor.TryGetPendingOperation(instance, out asyncContext))
             {
-                AsyncCodeActivityContext context = new AsyncCodeActivityContext(asyncContext, instance, executor);
+                AsyncCodeActivityContext context = new AsyncCodeActivityContext(
+                    asyncContext,
+                    instance,
+                    executor
+                );
                 try
                 {
                     asyncContext.HasCalledAsyncCodeActivityCancel = true;
@@ -415,7 +527,11 @@ namespace System.Activities
             }
         }
 
-        sealed internal override void InternalAbort(ActivityInstance instance, ActivityExecutor executor, Exception terminationReason)
+        internal sealed override void InternalAbort(
+            ActivityInstance instance,
+            ActivityExecutor executor,
+            Exception terminationReason
+        )
         {
             AsyncOperationContext asyncContext;
             if (executor.TryGetPendingOperation(instance, out asyncContext))
@@ -439,32 +555,45 @@ namespace System.Activities
             }
         }
 
-        sealed internal override void OnInternalCacheMetadataExceptResult(bool createEmptyBindings)
+        internal sealed override void OnInternalCacheMetadataExceptResult(bool createEmptyBindings)
         {
-            CodeActivityMetadata metadata = new CodeActivityMetadata(this, this.GetParentEnvironment(), createEmptyBindings);
+            CodeActivityMetadata metadata = new CodeActivityMetadata(
+                this,
+                this.GetParentEnvironment(),
+                createEmptyBindings
+            );
             CacheMetadata(metadata);
             metadata.Dispose();
         }
 
-        internal sealed override void OnInternalCreateDynamicUpdateMap(DynamicUpdateMapBuilder.Finalizer finalizer, 
-            DynamicUpdateMapBuilder.IDefinitionMatcher matcher, Activity originalActivity)
-        {
-        }
+        internal sealed override void OnInternalCreateDynamicUpdateMap(
+            DynamicUpdateMapBuilder.Finalizer finalizer,
+            DynamicUpdateMapBuilder.IDefinitionMatcher matcher,
+            Activity originalActivity
+        ) { }
 
-        protected sealed override void OnCreateDynamicUpdateMap(UpdateMapMetadata metadata, Activity originalActivity)
+        protected sealed override void OnCreateDynamicUpdateMap(
+            UpdateMapMetadata metadata,
+            Activity originalActivity
+        )
         {
             // NO OP
         }
 
         protected sealed override void CacheMetadata(ActivityMetadata metadata)
         {
-            throw FxTrace.Exception.AsError(new InvalidOperationException(SR.WrongCacheMetadataForCodeActivity));
+            throw FxTrace.Exception.AsError(
+                new InvalidOperationException(SR.WrongCacheMetadataForCodeActivity)
+            );
         }
 
         protected virtual void CacheMetadata(CodeActivityMetadata metadata)
         {
             // We bypass the metadata call to avoid the null checks
-            SetArgumentsCollection(ReflectedInformation.GetArguments(this), metadata.CreateEmptyBindings);
+            SetArgumentsCollection(
+                ReflectedInformation.GetArguments(this),
+                metadata.CreateEmptyBindings
+            );
         }
     }
 }

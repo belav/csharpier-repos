@@ -12,8 +12,14 @@ namespace Microsoft.Win32.RegistryTests
         [Fact]
         public void NegativeTests()
         {
-            AssertExtensions.Throws<ArgumentException>("options", () => TestRegistryKey.GetValue(null, null, (RegistryValueOptions)(-1)));
-            AssertExtensions.Throws<ArgumentException>("options", () => TestRegistryKey.GetValue(null, null, (RegistryValueOptions)2));
+            AssertExtensions.Throws<ArgumentException>(
+                "options",
+                () => TestRegistryKey.GetValue(null, null, (RegistryValueOptions)(-1))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "options",
+                () => TestRegistryKey.GetValue(null, null, (RegistryValueOptions)2)
+            );
 
             Assert.Throws<ObjectDisposedException>(() =>
             {
@@ -27,19 +33,53 @@ namespace Microsoft.Win32.RegistryTests
         {
             if (!TestRegistryKey.IsDefaultValueSet())
             {
-                Assert.Equal(TestData.DefaultValue, TestRegistryKey.GetValue(null, TestData.DefaultValue, RegistryValueOptions.DoNotExpandEnvironmentNames));
-                Assert.Equal(TestData.DefaultValue, TestRegistryKey.GetValue(string.Empty, TestData.DefaultValue, RegistryValueOptions.DoNotExpandEnvironmentNames));
+                Assert.Equal(
+                    TestData.DefaultValue,
+                    TestRegistryKey.GetValue(
+                        null,
+                        TestData.DefaultValue,
+                        RegistryValueOptions.DoNotExpandEnvironmentNames
+                    )
+                );
+                Assert.Equal(
+                    TestData.DefaultValue,
+                    TestRegistryKey.GetValue(
+                        string.Empty,
+                        TestData.DefaultValue,
+                        RegistryValueOptions.DoNotExpandEnvironmentNames
+                    )
+                );
             }
 
             Assert.True(TestRegistryKey.SetDefaultValue(TestData.DefaultValue));
-            Assert.Equal(TestData.DefaultValue, TestRegistryKey.GetValue(null, null, RegistryValueOptions.DoNotExpandEnvironmentNames));
-            Assert.Equal(TestData.DefaultValue, TestRegistryKey.GetValue(string.Empty, null, RegistryValueOptions.DoNotExpandEnvironmentNames));
+            Assert.Equal(
+                TestData.DefaultValue,
+                TestRegistryKey.GetValue(
+                    null,
+                    null,
+                    RegistryValueOptions.DoNotExpandEnvironmentNames
+                )
+            );
+            Assert.Equal(
+                TestData.DefaultValue,
+                TestRegistryKey.GetValue(
+                    string.Empty,
+                    null,
+                    RegistryValueOptions.DoNotExpandEnvironmentNames
+                )
+            );
         }
 
         [Fact]
         public void ShouldAcceptNullAsDefaultValue()
         {
-            Assert.Null(TestRegistryKey.GetValue("tt", defaultValue: null, options: RegistryValueOptions.DoNotExpandEnvironmentNames));
+            Assert.Null(
+                TestRegistryKey.GetValue(
+                    "tt",
+                    defaultValue: null,
+                    options: RegistryValueOptions.DoNotExpandEnvironmentNames
+                )
+            );
         }
 
         [Fact]
@@ -50,19 +90,34 @@ namespace Microsoft.Win32.RegistryTests
             const string expected = "This is a test string";
 
             TestRegistryKey.SetValue(valueName, expected, RegistryValueKind.ExpandString);
-            Assert.Equal(expected, TestRegistryKey.GetValue(valueName, null, RegistryValueOptions.DoNotExpandEnvironmentNames).ToString());
+            Assert.Equal(
+                expected,
+                TestRegistryKey
+                    .GetValue(valueName, null, RegistryValueOptions.DoNotExpandEnvironmentNames)
+                    .ToString()
+            );
             TestRegistryKey.DeleteValue(valueName);
         }
 
-        public static IEnumerable<object[]> TestExpandableStrings { get { return TestData.TestExpandableStrings; } }
+        public static IEnumerable<object[]> TestExpandableStrings
+        {
+            get { return TestData.TestExpandableStrings; }
+        }
 
         [Theory]
         [MemberData(nameof(TestExpandableStrings))]
-        public void GetExpandableStringValue(string testValue, string expectedValue, RegistryValueOptions getOptions)
+        public void GetExpandableStringValue(
+            string testValue,
+            string expectedValue,
+            RegistryValueOptions getOptions
+        )
         {
             const string valueName = "MyTestKey";
             TestRegistryKey.SetValue(valueName, testValue, RegistryValueKind.ExpandString);
-            Assert.Equal(expectedValue, TestRegistryKey.GetValue(valueName, null, getOptions).ToString());
+            Assert.Equal(
+                expectedValue,
+                TestRegistryKey.GetValue(valueName, null, getOptions).ToString()
+            );
             TestRegistryKey.DeleteValue(valueName);
         }
 
@@ -78,30 +133,61 @@ namespace Microsoft.Win32.RegistryTests
             string expectedValue = "%" + varName + "%" + @"\subdirectory\myfile.txt";
             Helpers.SetEnvironmentVariable(varName, @"C:\UsedToBeCurrentDirectoryButAnythingWorks");
             TestRegistryKey.SetValue(valueName, expectedValue, RegistryValueKind.ExpandString);
-            Assert.Equal(expectedValue, TestRegistryKey.GetValue(valueName, string.Empty, RegistryValueOptions.DoNotExpandEnvironmentNames));
+            Assert.Equal(
+                expectedValue,
+                TestRegistryKey.GetValue(
+                    valueName,
+                    string.Empty,
+                    RegistryValueOptions.DoNotExpandEnvironmentNames
+                )
+            );
             TestRegistryKey.DeleteValue(valueName);
         }
 
-        public static IEnumerable<object[]> TestValueTypes { get { return TestData.TestValueTypes; } }
+        public static IEnumerable<object[]> TestValueTypes
+        {
+            get { return TestData.TestValueTypes; }
+        }
 
         [Theory]
         [MemberData(nameof(TestValueTypes))]
         public void GetValueWithValueTypes(string valueName, object testValue)
         {
             TestRegistryKey.SetValue(valueName, testValue, RegistryValueKind.ExpandString);
-            Assert.Equal(testValue.ToString(), TestRegistryKey.GetValue(valueName, null, RegistryValueOptions.DoNotExpandEnvironmentNames).ToString());
+            Assert.Equal(
+                testValue.ToString(),
+                TestRegistryKey
+                    .GetValue(valueName, null, RegistryValueOptions.DoNotExpandEnvironmentNames)
+                    .ToString()
+            );
             TestRegistryKey.DeleteValue(valueName);
         }
 
-        public static IEnumerable<object[]> TestEnvironment { get { return TestData.TestEnvironment; } }
+        public static IEnumerable<object[]> TestEnvironment
+        {
+            get { return TestData.TestEnvironment; }
+        }
 
         [Theory]
         [MemberData(nameof(TestEnvironment))]
-        public void GetValueWithEnvironmentVariable(string valueName, string envVariableName, string expectedVariableValue)
+        public void GetValueWithEnvironmentVariable(
+            string valueName,
+            string envVariableName,
+            string expectedVariableValue
+        )
         {
             _ = envVariableName;
-            TestRegistryKey.SetValue(valueName, expectedVariableValue, RegistryValueKind.ExpandString);
-            Assert.Equal(expectedVariableValue, TestRegistryKey.GetValue(valueName, null, RegistryValueOptions.DoNotExpandEnvironmentNames).ToString());
+            TestRegistryKey.SetValue(
+                valueName,
+                expectedVariableValue,
+                RegistryValueKind.ExpandString
+            );
+            Assert.Equal(
+                expectedVariableValue,
+                TestRegistryKey
+                    .GetValue(valueName, null, RegistryValueOptions.DoNotExpandEnvironmentNames)
+                    .ToString()
+            );
             TestRegistryKey.DeleteValue(valueName);
         }
     }

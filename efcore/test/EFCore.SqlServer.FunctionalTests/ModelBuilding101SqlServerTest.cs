@@ -5,6 +5,7 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class ModelBuilding101SqlServerTest : ModelBuilding101RelationalTestBase
 {
-    protected override DbContextOptionsBuilder ConfigureContext(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer();
+    protected override DbContextOptionsBuilder ConfigureContext(
+        DbContextOptionsBuilder optionsBuilder
+    ) => optionsBuilder.UseSqlServer();
 }

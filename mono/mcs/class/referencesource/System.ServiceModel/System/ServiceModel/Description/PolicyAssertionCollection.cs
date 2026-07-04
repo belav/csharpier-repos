@@ -3,18 +3,16 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Description
 {
-    using System.ServiceModel;
-    using System.ComponentModel;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
     using System.Xml;
 
     public class PolicyAssertionCollection : Collection<XmlElement>
     {
-        public PolicyAssertionCollection()
-        {
-        }
+        public PolicyAssertionCollection() { }
 
         public PolicyAssertionCollection(IEnumerable<XmlElement> elements)
         {
@@ -58,7 +56,7 @@ namespace System.ServiceModel.Description
             return Find(localName, namespaceUri, true);
         }
 
-        XmlElement Find(string localName, string namespaceUri, bool remove) 
+        XmlElement Find(string localName, string namespaceUri, bool remove)
         {
             if (localName == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("localName");
@@ -133,5 +131,4 @@ namespace System.ServiceModel.Description
             base.SetItem(index, item);
         }
     }
-
 }

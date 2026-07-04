@@ -11,8 +11,10 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 /// </remarks>
 public class GuidToBytesConverter : ValueConverter<Guid, byte[]>
 {
-    private static readonly ConverterMappingHints DefaultHints
-        = new(size: 16, valueGeneratorFactory: (_, _) => new SequentialGuidValueGenerator());
+    private static readonly ConverterMappingHints DefaultHints = new(
+        size: 16,
+        valueGeneratorFactory: (_, _) => new SequentialGuidValueGenerator()
+    );
 
     /// <summary>
     ///     Creates a new instance of this converter.
@@ -28,9 +30,7 @@ public class GuidToBytesConverter : ValueConverter<Guid, byte[]>
     ///     </para>
     /// </remarks>
     public GuidToBytesConverter()
-        : this(null)
-    {
-    }
+        : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter.
@@ -50,16 +50,16 @@ public class GuidToBytesConverter : ValueConverter<Guid, byte[]>
     ///     facets for the converted data.
     /// </param>
     public GuidToBytesConverter(ConverterMappingHints? mappingHints)
-        : base(
-            v => v.ToByteArray(),
-            v => new Guid(v),
-            DefaultHints.With(mappingHints))
-    {
-    }
+        : base(v => v.ToByteArray(), v => new Guid(v), DefaultHints.With(mappingHints)) { }
 
     /// <summary>
     ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
     /// </summary>
-    public static ValueConverterInfo DefaultInfo { get; }
-        = new(typeof(Guid), typeof(byte[]), i => new GuidToBytesConverter(i.MappingHints), DefaultHints);
+    public static ValueConverterInfo DefaultInfo { get; } =
+        new(
+            typeof(Guid),
+            typeof(byte[]),
+            i => new GuidToBytesConverter(i.MappingHints),
+            DefaultHints
+        );
 }

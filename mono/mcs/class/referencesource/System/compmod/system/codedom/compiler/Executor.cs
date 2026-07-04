@@ -1,42 +1,42 @@
 //------------------------------------------------------------------------------
 // <copyright file="Executor.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom.Compiler {
-
-    using System.Diagnostics;
+namespace System.CodeDom.Compiler
+{
     using System;
-    using System.ComponentModel;
-    using System.Text;
-    using System.Threading;
-    using System.IO;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
-    using System.CodeDom;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Security.Principal;
+    using System.Text;
+    using System.Threading;
     using Microsoft.Win32;
     using Microsoft.Win32.SafeHandles;
-    using System.Globalization;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.Versioning;
-        
+
     /// <devdoc>
     ///    <para>
     ///       Provides command execution functions for the CodeDom compiler.
     ///    </para>
     /// </devdoc>
     [PermissionSet(SecurityAction.LinkDemand, Unrestricted = true)]
-    public static class Executor {
-
+    public static class Executor
+    {
         // How long (in milliseconds) do we wait for the program to terminate
         private const int ProcessTimeOut = 600000;
 
@@ -47,21 +47,29 @@ namespace System.CodeDom.Compiler {
         /// </devdoc>
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal static string GetRuntimeInstallDirectory() {
+        internal static string GetRuntimeInstallDirectory()
+        {
             return RuntimeEnvironment.GetRuntimeDirectory();
         }
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        private static FileStream CreateInheritedFile(string file) {
-            return new FileStream(file, FileMode.CreateNew, FileAccess.Write, FileShare.Read | FileShare.Inheritable);
+        private static FileStream CreateInheritedFile(string file)
+        {
+            return new FileStream(
+                file,
+                FileMode.CreateNew,
+                FileAccess.Write,
+                FileShare.Read | FileShare.Inheritable
+            );
         }
 
         /// <devdoc>
         /// </devdoc>
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static void ExecWait(string cmd, TempFileCollection tempFiles) {
+        public static void ExecWait(string cmd, TempFileCollection tempFiles)
+        {
             string outputName = null;
             string errorName = null;
             ExecWaitWithCapture(cmd, tempFiles, ref outputName, ref errorName);
@@ -72,8 +80,22 @@ namespace System.CodeDom.Compiler {
         /// </devdoc>
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static int ExecWaitWithCapture(string cmd, TempFileCollection tempFiles, ref string outputName, ref string errorName) {
-            return ExecWaitWithCapture(null, cmd, Environment.CurrentDirectory, tempFiles, ref outputName, ref errorName, null);
+        public static int ExecWaitWithCapture(
+            string cmd,
+            TempFileCollection tempFiles,
+            ref string outputName,
+            ref string errorName
+        )
+        {
+            return ExecWaitWithCapture(
+                null,
+                cmd,
+                Environment.CurrentDirectory,
+                tempFiles,
+                ref outputName,
+                ref errorName,
+                null
+            );
         }
 
         /// <devdoc>
@@ -81,8 +103,23 @@ namespace System.CodeDom.Compiler {
         /// </devdoc>
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static int ExecWaitWithCapture(string cmd, string currentDir, TempFileCollection tempFiles, ref string outputName, ref string errorName) {
-            return ExecWaitWithCapture(null, cmd, currentDir, tempFiles, ref outputName, ref errorName, null);
+        public static int ExecWaitWithCapture(
+            string cmd,
+            string currentDir,
+            TempFileCollection tempFiles,
+            ref string outputName,
+            ref string errorName
+        )
+        {
+            return ExecWaitWithCapture(
+                null,
+                cmd,
+                currentDir,
+                tempFiles,
+                ref outputName,
+                ref errorName,
+                null
+            );
         }
 
         /// <devdoc>
@@ -90,8 +127,23 @@ namespace System.CodeDom.Compiler {
         /// </devdoc>
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static int ExecWaitWithCapture(IntPtr userToken, string cmd, TempFileCollection tempFiles, ref string outputName, ref string errorName) {
-            return ExecWaitWithCapture(new SafeUserTokenHandle(userToken, false), cmd, Environment.CurrentDirectory, tempFiles, ref outputName, ref errorName, null);
+        public static int ExecWaitWithCapture(
+            IntPtr userToken,
+            string cmd,
+            TempFileCollection tempFiles,
+            ref string outputName,
+            ref string errorName
+        )
+        {
+            return ExecWaitWithCapture(
+                new SafeUserTokenHandle(userToken, false),
+                cmd,
+                Environment.CurrentDirectory,
+                tempFiles,
+                ref outputName,
+                ref errorName,
+                null
+            );
         }
 
         /// <devdoc>
@@ -99,8 +151,24 @@ namespace System.CodeDom.Compiler {
         /// </devdoc>
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public static int ExecWaitWithCapture(IntPtr userToken, string cmd, string currentDir, TempFileCollection tempFiles, ref string outputName, ref string errorName) {
-            return ExecWaitWithCapture(new SafeUserTokenHandle(userToken, false), cmd, Environment.CurrentDirectory, tempFiles, ref outputName, ref errorName, null);
+        public static int ExecWaitWithCapture(
+            IntPtr userToken,
+            string cmd,
+            string currentDir,
+            TempFileCollection tempFiles,
+            ref string outputName,
+            ref string errorName
+        )
+        {
+            return ExecWaitWithCapture(
+                new SafeUserTokenHandle(userToken, false),
+                cmd,
+                Environment.CurrentDirectory,
+                tempFiles,
+                ref outputName,
+                ref errorName,
+                null
+            );
         }
 
         /// <devdoc>
@@ -108,34 +176,63 @@ namespace System.CodeDom.Compiler {
         /// </devdoc>
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        internal static int ExecWaitWithCapture(SafeUserTokenHandle userToken, string cmd, string currentDir, TempFileCollection tempFiles, ref string outputName, ref string errorName, string trueCmdLine) {
+        internal static int ExecWaitWithCapture(
+            SafeUserTokenHandle userToken,
+            string cmd,
+            string currentDir,
+            TempFileCollection tempFiles,
+            ref string outputName,
+            ref string errorName,
+            string trueCmdLine
+        )
+        {
             int retValue = 0;
             // Undo any current impersonation, call ExecWaitWithCaptureUnimpersonated, and reimpersonate
 #if !FEATURE_PAL
-            // the extra try-catch is here to mitigate exception filter injection attacks. 
-            try {
+            // the extra try-catch is here to mitigate exception filter injection attacks.
+            try
+            {
                 WindowsImpersonationContext impersonation = RevertImpersonation();
-                try {
-#endif 
-                    
+                try
+                {
+#endif
                     // Execute the process
-                    retValue = ExecWaitWithCaptureUnimpersonated(userToken, cmd, currentDir, tempFiles, ref outputName, ref errorName, trueCmdLine);
+                    retValue = ExecWaitWithCaptureUnimpersonated(
+                        userToken,
+                        cmd,
+                        currentDir,
+                        tempFiles,
+                        ref outputName,
+                        ref errorName,
+                        trueCmdLine
+                    );
 #if !FEATURE_PAL
-                } finally {
+                }
+                finally
+                {
                     ReImpersonate(impersonation);
                 }
             }
-            catch {
+            catch
+            {
                 throw;
             }
-#endif 
+#endif
             return retValue;
         }
 
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        private static unsafe int ExecWaitWithCaptureUnimpersonated(SafeUserTokenHandle userToken, string cmd, string currentDir, TempFileCollection tempFiles, ref string outputName, ref string errorName, string trueCmdLine) {
-
+        private static unsafe int ExecWaitWithCaptureUnimpersonated(
+            SafeUserTokenHandle userToken,
+            string cmd,
+            string currentDir,
+            TempFileCollection tempFiles,
+            ref string outputName,
+            ref string errorName,
+            string trueCmdLine
+        )
+        {
             IntSecurity.UnmanagedCode.Demand();
 
             FileStream output;
@@ -159,7 +256,8 @@ namespace System.CodeDom.Compiler {
             SafeThreadHandle threadSH = new SafeThreadHandle();
             SafeUserTokenHandle primaryToken = null;
 
-            try {
+            try
+            {
                 // Output the command line...
                 StreamWriter sw = new StreamWriter(output, Encoding.UTF8);
                 sw.Write(currentDir);
@@ -177,12 +275,16 @@ namespace System.CodeDom.Compiler {
 #if FEATURE_PAL
                 si.dwFlags = NativeMethods.STARTF_USESTDHANDLES;
 #else //!FEATURE_PAL
-                si.dwFlags = NativeMethods.STARTF_USESTDHANDLES | NativeMethods.STARTF_USESHOWWINDOW;
+                si.dwFlags =
+                    NativeMethods.STARTF_USESTDHANDLES | NativeMethods.STARTF_USESHOWWINDOW;
                 si.wShowWindow = NativeMethods.SW_HIDE;
 #endif //!FEATURE_PAL
                 si.hStdOutput = output.SafeFileHandle;
                 si.hStdError = error.SafeFileHandle;
-                si.hStdInput = new SafeFileHandle(UnsafeNativeMethods.GetStdHandle(NativeMethods.STD_INPUT_HANDLE), false);
+                si.hStdInput = new SafeFileHandle(
+                    UnsafeNativeMethods.GetStdHandle(NativeMethods.STD_INPUT_HANDLE),
+                    false
+                );
 
                 //
                 // Prepare the environment
@@ -193,88 +295,111 @@ namespace System.CodeDom.Compiler {
 
 #else
 
-                StringDictionary environment = new StringDictionary ();
+                StringDictionary environment = new StringDictionary();
 
 #endif // PLATFORM_UNIX
 
                 // Add the current environment
-                foreach ( DictionaryEntry entry in Environment.GetEnvironmentVariables () )
-                    environment[(string) entry.Key] = (string) entry.Value;
+                foreach (DictionaryEntry entry in Environment.GetEnvironmentVariables())
+                    environment[(string)entry.Key] = (string)entry.Value;
 
                 // Add the flag to indicate restricted security in the process
                 environment["_ClrRestrictSecAttributes"] = "1";
 
-                #if DEBUG
+#if DEBUG
                 environment["OANOCACHE"] = "1";
-                #endif
+#endif
 
                 // set up the environment block parameter
                 byte[] environmentBytes = EnvironmentBlock.ToByteArray(environment, false);
-                fixed (byte* environmentBytesPtr = environmentBytes) {
+                fixed (byte* environmentBytesPtr = environmentBytes)
+                {
                     IntPtr environmentPtr = new IntPtr((void*)environmentBytesPtr);
 
-                    if (userToken == null || userToken.IsInvalid) {
+                    if (userToken == null || userToken.IsInvalid)
+                    {
                         RuntimeHelpers.PrepareConstrainedRegions();
-                        try {} finally {
-                           success = NativeMethods.CreateProcess(
-                                                       null,       // String lpApplicationName, 
-                                                       new StringBuilder(cmd), // String lpCommandLine, 
-                                                       null,       // SECURITY_ATTRIBUTES lpProcessAttributes, 
-                                                       null,       // SECURITY_ATTRIBUTES lpThreadAttributes, 
-                                                       true,       // bool bInheritHandles, 
-                                                       0,          // int dwCreationFlags, 
-                                                       environmentPtr, // IntPtr lpEnvironment, 
-                                                       currentDir, // String lpCurrentDirectory, 
-                                                       si,         // STARTUPINFO lpStartupInfo, 
-                                                       pi);        // PROCESS_INFORMATION lpProcessInformation);
-                            if ( pi.hProcess!= (IntPtr)0 && pi.hProcess!= (IntPtr)NativeMethods.INVALID_HANDLE_VALUE)
-                                procSH.InitialSetHandle(pi.hProcess);  
-                            if ( pi.hThread != (IntPtr)0 && pi.hThread != (IntPtr)NativeMethods.INVALID_HANDLE_VALUE)
-                               threadSH.InitialSetHandle(pi.hThread);
+                        try { }
+                        finally
+                        {
+                            success = NativeMethods.CreateProcess(
+                                null, // String lpApplicationName,
+                                new StringBuilder(cmd), // String lpCommandLine,
+                                null, // SECURITY_ATTRIBUTES lpProcessAttributes,
+                                null, // SECURITY_ATTRIBUTES lpThreadAttributes,
+                                true, // bool bInheritHandles,
+                                0, // int dwCreationFlags,
+                                environmentPtr, // IntPtr lpEnvironment,
+                                currentDir, // String lpCurrentDirectory,
+                                si, // STARTUPINFO lpStartupInfo,
+                                pi
+                            ); // PROCESS_INFORMATION lpProcessInformation);
+                            if (
+                                pi.hProcess != (IntPtr)0
+                                && pi.hProcess != (IntPtr)NativeMethods.INVALID_HANDLE_VALUE
+                            )
+                                procSH.InitialSetHandle(pi.hProcess);
+                            if (
+                                pi.hThread != (IntPtr)0
+                                && pi.hThread != (IntPtr)NativeMethods.INVALID_HANDLE_VALUE
+                            )
+                                threadSH.InitialSetHandle(pi.hThread);
                         }
                     }
-                    else {
+                    else
+                    {
 #if FEATURE_PAL
                         throw new NotSupportedException();
 #else
                         success = SafeUserTokenHandle.DuplicateTokenEx(
-                                                    userToken,
-                                                    NativeMethods.TOKEN_ALL_ACCESS,
-                                                    null,
-                                                    NativeMethods.IMPERSONATION_LEVEL_SecurityImpersonation,
-                                                    NativeMethods.TOKEN_TYPE_TokenPrimary,
-                                                    out primaryToken
-                                                    );
+                            userToken,
+                            NativeMethods.TOKEN_ALL_ACCESS,
+                            null,
+                            NativeMethods.IMPERSONATION_LEVEL_SecurityImpersonation,
+                            NativeMethods.TOKEN_TYPE_TokenPrimary,
+                            out primaryToken
+                        );
 
-
-                        if (success) {
+                        if (success)
+                        {
                             RuntimeHelpers.PrepareConstrainedRegions();
-                            try {} finally {
-                               success = NativeMethods.CreateProcessAsUser(
-                                                           primaryToken,  // int token,
-                                                           null,       // String lpApplicationName, 
-                                                           cmd,        // String lpCommandLine, 
-                                                           null,       // SECURITY_ATTRIBUTES lpProcessAttributes, 
-                                                           null,       // SECURITY_ATTRIBUTES lpThreadAttributes, 
-                                                           true,       // bool bInheritHandles, 
-                                                           0,          // int dwCreationFlags, 
-                                                           new HandleRef(null, environmentPtr), // IntPtr lpEnvironment, 
-                                                           currentDir, // String lpCurrentDirectory, 
-                                                           si,         // STARTUPINFO lpStartupInfo, 
-                                                           pi);        // PROCESS_INFORMATION lpProcessInformation);
-                               if ( pi.hProcess!= (IntPtr)0 && pi.hProcess!= (IntPtr)NativeMethods.INVALID_HANDLE_VALUE)
-                                   procSH.InitialSetHandle(pi.hProcess);  
-                               if ( pi.hThread != (IntPtr)0 && pi.hThread != (IntPtr)NativeMethods.INVALID_HANDLE_VALUE)
-                                  threadSH.InitialSetHandle(pi.hThread);
+                            try { }
+                            finally
+                            {
+                                success = NativeMethods.CreateProcessAsUser(
+                                    primaryToken, // int token,
+                                    null, // String lpApplicationName,
+                                    cmd, // String lpCommandLine,
+                                    null, // SECURITY_ATTRIBUTES lpProcessAttributes,
+                                    null, // SECURITY_ATTRIBUTES lpThreadAttributes,
+                                    true, // bool bInheritHandles,
+                                    0, // int dwCreationFlags,
+                                    new HandleRef(null, environmentPtr), // IntPtr lpEnvironment,
+                                    currentDir, // String lpCurrentDirectory,
+                                    si, // STARTUPINFO lpStartupInfo,
+                                    pi
+                                ); // PROCESS_INFORMATION lpProcessInformation);
+                                if (
+                                    pi.hProcess != (IntPtr)0
+                                    && pi.hProcess != (IntPtr)NativeMethods.INVALID_HANDLE_VALUE
+                                )
+                                    procSH.InitialSetHandle(pi.hProcess);
+                                if (
+                                    pi.hThread != (IntPtr)0
+                                    && pi.hThread != (IntPtr)NativeMethods.INVALID_HANDLE_VALUE
+                                )
+                                    threadSH.InitialSetHandle(pi.hThread);
                             }
                         }
 #endif // !FEATURE_PAL
                     }
                 }
             }
-            finally {
+            finally
+            {
                 // Close the file handles
-                if (!success && (primaryToken != null && !primaryToken.IsInvalid)) {
+                if (!success && (primaryToken != null && !primaryToken.IsInvalid))
+                {
                     primaryToken.Close();
                     primaryToken = null;
                 }
@@ -282,47 +407,64 @@ namespace System.CodeDom.Compiler {
                 output.Close();
                 error.Close();
             }
-            
-            if (success) {
 
-                try {
+            if (success)
+            {
+                try
+                {
                     bool signaled;
                     ProcessWaitHandle pwh = null;
-                    try {
+                    try
+                    {
                         pwh = new ProcessWaitHandle(procSH);
                         signaled = pwh.WaitOne(ProcessTimeOut, false);
-                    } finally {
+                    }
+                    finally
+                    {
                         if (pwh != null)
                             pwh.Close();
                     }
 
                     // Check for timeout
-                    if (!signaled) {
-                        throw new ExternalException(SR.GetString(SR.ExecTimeout, cmd), NativeMethods.WAIT_TIMEOUT);
+                    if (!signaled)
+                    {
+                        throw new ExternalException(
+                            SR.GetString(SR.ExecTimeout, cmd),
+                            NativeMethods.WAIT_TIMEOUT
+                        );
                     }
 
                     // Check the process's exit code
                     int status = NativeMethods.STILL_ACTIVE;
-                    if (!NativeMethods.GetExitCodeProcess(procSH, out status)) {
-                        throw new ExternalException(SR.GetString(SR.ExecCantGetRetCode, cmd), Marshal.GetLastWin32Error());
+                    if (!NativeMethods.GetExitCodeProcess(procSH, out status))
+                    {
+                        throw new ExternalException(
+                            SR.GetString(SR.ExecCantGetRetCode, cmd),
+                            Marshal.GetLastWin32Error()
+                        );
                     }
 
                     retValue = status;
                 }
-                finally {
+                finally
+                {
                     procSH.Close();
                     threadSH.Close();
                     if (primaryToken != null && !primaryToken.IsInvalid)
                         primaryToken.Close();
                 }
             }
-            else {
+            else
+            {
                 int err = Marshal.GetLastWin32Error();
                 if (err == NativeMethods.ERROR_NOT_ENOUGH_MEMORY)
                     throw new OutOfMemoryException();
 
                 Win32Exception win32Exception = new Win32Exception(err);
-                ExternalException ex = new ExternalException(SR.GetString(SR.ExecCantExec, cmd), win32Exception);
+                ExternalException ex = new ExternalException(
+                    SR.GetString(SR.ExecCantExec, cmd),
+                    win32Exception
+                );
                 throw ex;
             }
 
@@ -334,18 +476,17 @@ namespace System.CodeDom.Compiler {
         [ResourceExposure(ResourceScope.Process)]
         [ResourceConsumption(ResourceScope.Process)]
         [SecurityPermission(SecurityAction.Assert, ControlPrincipal = true, UnmanagedCode = true)]
-        internal static WindowsImpersonationContext RevertImpersonation() {            
+        internal static WindowsImpersonationContext RevertImpersonation()
+        {
             return WindowsIdentity.Impersonate(new IntPtr(0));
         }
 #endif // !FEATURE_PAL
 
 #if !FEATURE_PAL
-        internal static void ReImpersonate(WindowsImpersonationContext impersonation){
+        internal static void ReImpersonate(WindowsImpersonationContext impersonation)
+        {
             impersonation.Undo();
         }
 #endif // !FEATURE_PAL
-
     }
-
 }
-

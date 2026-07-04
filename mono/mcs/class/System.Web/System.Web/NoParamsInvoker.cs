@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.NoParamsInvoker - proxy used to invoke wired up events without parameters
 //				as if they had parameters.
 //
@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,32 +31,34 @@
 //
 
 using System.Reflection;
+
 namespace System.Web
 {
-	delegate void NoParamsDelegate ();
-	sealed class NoParamsInvoker
-	{
-		EventHandler faked;
-		NoParamsDelegate real;
+    delegate void NoParamsDelegate();
 
-		public NoParamsInvoker (object o, MethodInfo method)
-		{
-			if (method.IsStatic)
-				real = (NoParamsDelegate) Delegate.CreateDelegate (
-					typeof (NoParamsDelegate), method);
-			else
-				real = (NoParamsDelegate) Delegate.CreateDelegate (typeof (NoParamsDelegate), o, method);
-			 faked = new EventHandler (InvokeNoParams);
-		}
+    sealed class NoParamsInvoker
+    {
+        EventHandler faked;
+        NoParamsDelegate real;
 
-		void InvokeNoParams (object o, EventArgs args)
-		{
-			real ();
-		}
+        public NoParamsInvoker(object o, MethodInfo method)
+        {
+            if (method.IsStatic)
+                real = (NoParamsDelegate)Delegate.CreateDelegate(typeof(NoParamsDelegate), method);
+            else
+                real = (NoParamsDelegate)
+                    Delegate.CreateDelegate(typeof(NoParamsDelegate), o, method);
+            faked = new EventHandler(InvokeNoParams);
+        }
 
-		public EventHandler FakeDelegate {
-			get { return faked; }
-		}
-	}
+        void InvokeNoParams(object o, EventArgs args)
+        {
+            real();
+        }
+
+        public EventHandler FakeDelegate
+        {
+            get { return faked; }
+        }
+    }
 }
-

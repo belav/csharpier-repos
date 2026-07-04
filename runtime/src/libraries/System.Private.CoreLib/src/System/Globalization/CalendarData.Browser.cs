@@ -12,20 +12,32 @@ namespace System.Globalization
     internal sealed partial class CalendarData
     {
         private const int CALENDAR_INFO_BUFFER_LEN = 1000;
+
         private unsafe bool JSLoadCalendarDataFromBrowser(string localeName, CalendarId calendarId)
         {
             char* buffer = stackalloc char[CALENDAR_INFO_BUFFER_LEN];
             int exception;
             object exResult;
-            int resultLength = Interop.JsGlobalization.GetCalendarInfo(localeName, calendarId, buffer, CALENDAR_INFO_BUFFER_LEN, out exception, out exResult);
+            int resultLength = Interop.JsGlobalization.GetCalendarInfo(
+                localeName,
+                calendarId,
+                buffer,
+                CALENDAR_INFO_BUFFER_LEN,
+                out exception,
+                out exResult
+            );
             if (exception != 0)
                 throw new Exception((string)exResult);
             string result = new string(buffer, 0, resultLength);
             string[] subresults = result.Split("##");
             if (subresults.Length < 14)
-                throw new Exception("CalendarInfo recieved from the Browser is in icorrect format.");
+                throw new Exception(
+                    "CalendarInfo recieved from the Browser is in icorrect format."
+                );
             // JS always has one result per locale, so even arrays are initialized with one element
-            this.sNativeName = string.IsNullOrEmpty(subresults[0]) ? ((CalendarId)calendarId).ToString() : subresults[0]; // this is EnglishName, not NativeName but it's the best we can do
+            this.sNativeName = string.IsNullOrEmpty(subresults[0])
+                ? ((CalendarId)calendarId).ToString()
+                : subresults[0]; // this is EnglishName, not NativeName but it's the best we can do
             this.saYearMonths = new string[] { subresults[1] };
             this.sMonthDay = subresults[2];
             this.saLongDates = new string[] { subresults[3] };

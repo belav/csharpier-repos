@@ -3,7 +3,6 @@
 
 namespace System.Text
 {
-
     internal static class EncodingExtensions
     {
         public static Encoding RemovePreamble(this Encoding encoding)
@@ -90,7 +89,13 @@ namespace System.Text
             return _encoding.GetBytes(chars, index, count);
         }
 
-        public override int GetBytes(char[] chars, int charIndex, int charCount, byte[] bytes, int byteIndex)
+        public override int GetBytes(
+            char[] chars,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex
+        )
         {
             return _encoding.GetBytes(chars, charIndex, charCount, bytes, byteIndex);
         }
@@ -100,7 +105,13 @@ namespace System.Text
             return _encoding.GetBytes(s);
         }
 
-        public override int GetBytes(string s, int charIndex, int charCount, byte[] bytes, int byteIndex)
+        public override int GetBytes(
+            string s,
+            int charIndex,
+            int charCount,
+            byte[] bytes,
+            int byteIndex
+        )
         {
             return _encoding.GetBytes(s, charIndex, charCount, bytes, byteIndex);
         }
@@ -135,7 +146,13 @@ namespace System.Text
             return _encoding.GetChars(bytes, index, count);
         }
 
-        public override int GetChars(byte[] bytes, int byteIndex, int byteCount, char[] chars, int charIndex)
+        public override int GetChars(
+            byte[] bytes,
+            int byteIndex,
+            int byteCount,
+            char[] chars,
+            int charIndex
+        )
         {
             return _encoding.GetChars(bytes, byteIndex, byteCount, chars, charIndex);
         }

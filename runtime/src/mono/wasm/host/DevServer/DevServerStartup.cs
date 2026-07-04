@@ -30,7 +30,14 @@ internal sealed class DevServerStartup
         services.AddRouting();
     }
 
-    public static void Configure(IApplicationBuilder app, IOptions<DevServerOptions> optionsContainer, TaskCompletionSource<ServerURLs> realUrlsAvailableTcs, ILogger logger, IHostApplicationLifetime applicationLifetime, IConfiguration configuration)
+    public static void Configure(
+        IApplicationBuilder app,
+        IOptions<DevServerOptions> optionsContainer,
+        TaskCompletionSource<ServerURLs> realUrlsAvailableTcs,
+        ILogger logger,
+        IHostApplicationLifetime applicationLifetime,
+        IConfiguration configuration
+    )
     {
         app.UseDeveloperExceptionPage();
         EnableConfiguredPathbase(app, configuration);
@@ -41,74 +48,96 @@ internal sealed class DevServerStartup
 
         if (options.WebServerUseCrossOriginPolicy)
         {
-            app.Use(async (ctx, next) =>
-            {
-                if (ctx.Request.Path.StartsWithSegments("/_framework") && !ctx.Request.Path.StartsWithSegments("/_framework/blazor.server.js") && !ctx.Request.Path.StartsWithSegments("/_framework/blazor.web.js"))
+            app.Use(
+                async (ctx, next) =>
                 {
-                    string fileExtension = Path.GetExtension(ctx.Request.Path);
-                    if (string.Equals(fileExtension, ".js"))
+                    if (
+                        ctx.Request.Path.StartsWithSegments("/_framework")
+                        && !ctx.Request.Path.StartsWithSegments("/_framework/blazor.server.js")
+                        && !ctx.Request.Path.StartsWithSegments("/_framework/blazor.web.js")
+                    )
                     {
-                        // Browser multi-threaded runtime requires cross-origin policy headers to enable SharedArrayBuffer.
-                        ApplyCrossOriginPolicyHeaders(ctx);
+                        string fileExtension = Path.GetExtension(ctx.Request.Path);
+                        if (string.Equals(fileExtension, ".js"))
+                        {
+                            // Browser multi-threaded runtime requires cross-origin policy headers to enable SharedArrayBuffer.
+                            ApplyCrossOriginPolicyHeaders(ctx);
+                        }
                     }
-                }
 
-                await next(ctx);
-            });
+                    await next(ctx);
+                }
+            );
         }
 
         app.UseBlazorFrameworkFiles();
-        app.UseStaticFiles(new StaticFileOptions
-        {
-            // In development, serve everything, as there's no other way to configure it.
-            // In production, developers are responsible for configuring their own production server
-            ServeUnknownFileTypes = true,
-        });
+        app.UseStaticFiles(
+            new StaticFileOptions
+            {
+                // In development, serve everything, as there's no other way to configure it.
+                // In production, developers are responsible for configuring their own production server
+                ServeUnknownFileTypes = true,
+            }
+        );
 
         app.UseRouting();
         app.UseWebSockets();
 
         if (options.OnConsoleConnected is not null)
         {
-            app.Use(async (ctx, next) =>
-            {
-                if (ctx.Request.Path.StartsWithSegments("/console"))
+            app.Use(
+                async (ctx, next) =>
                 {
-                    if (!ctx.WebSockets.IsWebSocketRequest)
+                    if (ctx.Request.Path.StartsWithSegments("/console"))
                     {
-                        ctx.Response.StatusCode = 400;
-                        return;
-                    }
+                        if (!ctx.WebSockets.IsWebSocketRequest)
+                        {
+                            ctx.Response.StatusCode = 400;
+                            return;
+                        }
 
-                    using WebSocket socket = await ctx.WebSockets.AcceptWebSocketAsync();
-                    await options.OnConsoleConnected(socket);
+                        using WebSocket socket = await ctx.WebSockets.AcceptWebSocketAsync();
+                        await options.OnConsoleConnected(socket);
+                    }
+                    else
+                    {
+                        await next(ctx);
+                    }
                 }
-                else
-                {
-                    await next(ctx);
-                }
-            });
+            );
         }
 
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapFallbackToFile("index.html", new StaticFileOptions
-            {
-                OnPrepareResponse = fileContext =>
+            endpoints.MapFallbackToFile(
+                "index.html",
+                new StaticFileOptions
                 {
-                    if (options.WebServerUseCrossOriginPolicy)
+                    OnPrepareResponse = fileContext =>
                     {
-                        // Browser multi-threaded runtime requires cross-origin policy headers to enable SharedArrayBuffer.
-                        ApplyCrossOriginPolicyHeaders(fileContext.Context);
-                    }
+                        if (options.WebServerUseCrossOriginPolicy)
+                        {
+                            // Browser multi-threaded runtime requires cross-origin policy headers to enable SharedArrayBuffer.
+                            ApplyCrossOriginPolicyHeaders(fileContext.Context);
+                        }
+                    },
                 }
-            });
+            );
         });
 
-        ServerURLsProvider.ResolveServerUrlsOnApplicationStarted(app, logger, applicationLifetime, realUrlsAvailableTcs, "/_framework/debug");
+        ServerURLsProvider.ResolveServerUrlsOnApplicationStarted(
+            app,
+            logger,
+            applicationLifetime,
+            realUrlsAvailableTcs,
+            "/_framework/debug"
+        );
     }
 
-    private static void EnableConfiguredPathbase(IApplicationBuilder app, IConfiguration configuration)
+    private static void EnableConfiguredPathbase(
+        IApplicationBuilder app,
+        IConfiguration configuration
+    )
     {
         var pathBase = configuration.GetValue<string>("pathbase");
         if (!string.IsNullOrEmpty(pathBase))
@@ -117,19 +146,23 @@ internal sealed class DevServerStartup
 
             // To ensure consistency with a production environment, only handle requests
             // that match the specified pathbase.
-            app.Use((context, next) =>
-            {
-                if (context.Request.PathBase == pathBase)
+            app.Use(
+                (context, next) =>
                 {
-                    return next(context);
+                    if (context.Request.PathBase == pathBase)
+                    {
+                        return next(context);
+                    }
+                    else
+                    {
+                        context.Response.StatusCode = 404;
+                        return context.Response.WriteAsync(
+                            $"The server is configured only to "
+                                + $"handle request URIs within the PathBase '{pathBase}'."
+                        );
+                    }
                 }
-                else
-                {
-                    context.Response.StatusCode = 404;
-                    return context.Response.WriteAsync($"The server is configured only to " +
-                        $"handle request URIs within the PathBase '{pathBase}'.");
-                }
-            });
+            );
         }
     }
 

@@ -7,26 +7,27 @@ using System.Linq.Expressions;
 
 namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 {
-    internal sealed class TypeLibMetaObject : DynamicMetaObject {
+    internal sealed class TypeLibMetaObject : DynamicMetaObject
+    {
         private readonly ComTypeLibDesc _lib;
 
         internal TypeLibMetaObject(Expression expression, ComTypeLibDesc lib)
-            : base(expression, BindingRestrictions.Empty, lib) {
+            : base(expression, BindingRestrictions.Empty, lib)
+        {
             _lib = lib;
         }
 
-        private DynamicMetaObject TryBindGetMember(string name) {
-            if (_lib.HasMember(name)) {
-                BindingRestrictions restrictions =
-                    BindingRestrictions.GetTypeRestriction(
-                        Expression, typeof(ComTypeLibDesc)
-                    ).Merge(
+        private DynamicMetaObject TryBindGetMember(string name)
+        {
+            if (_lib.HasMember(name))
+            {
+                BindingRestrictions restrictions = BindingRestrictions
+                    .GetTypeRestriction(Expression, typeof(ComTypeLibDesc))
+                    .Merge(
                         BindingRestrictions.GetExpressionRestriction(
                             Expression.Equal(
                                 Expression.Property(
-                                    Helpers.Convert(
-                                        Expression, typeof(ComTypeLibDesc)
-                                    ),
+                                    Helpers.Convert(Expression, typeof(ComTypeLibDesc)),
                                     typeof(ComTypeLibDesc).GetProperty(nameof(ComTypeLibDesc.Guid))
                                 ),
                                 Expression.Constant(_lib.Guid)
@@ -35,9 +36,7 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                     );
 
                 return new DynamicMetaObject(
-                    Expression.Constant(
-                        ((ComTypeLibDesc)Value).GetTypeLibObjectDesc(name)
-                    ),
+                    Expression.Constant(((ComTypeLibDesc)Value).GetTypeLibObjectDesc(name)),
                     restrictions
                 );
             }
@@ -45,20 +44,27 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
             return null;
         }
 
-        public override DynamicMetaObject BindGetMember(GetMemberBinder binder) {
+        public override DynamicMetaObject BindGetMember(GetMemberBinder binder)
+        {
             return TryBindGetMember(binder.Name) ?? base.BindGetMember(binder);
         }
 
-        public override DynamicMetaObject BindInvokeMember(InvokeMemberBinder binder, DynamicMetaObject[] args) {
+        public override DynamicMetaObject BindInvokeMember(
+            InvokeMemberBinder binder,
+            DynamicMetaObject[] args
+        )
+        {
             DynamicMetaObject result = TryBindGetMember(binder.Name);
-            if (result != null) {
+            if (result != null)
+            {
                 return binder.FallbackInvoke(result, args, null);
             }
 
             return base.BindInvokeMember(binder, args);
         }
 
-        public override IEnumerable<string> GetDynamicMemberNames() {
+        public override IEnumerable<string> GetDynamicMemberNames()
+        {
             return _lib.GetMemberNames();
         }
     }

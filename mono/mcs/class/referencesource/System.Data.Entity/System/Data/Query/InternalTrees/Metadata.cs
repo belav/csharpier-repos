@@ -11,8 +11,8 @@ using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.Metadata.Edm;
-using System.Globalization;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace System.Data.Query.InternalTrees
 {
@@ -40,8 +40,8 @@ namespace System.Data.Query.InternalTrees
 
         /// <summary>
         /// Create a typed-table definition corresponding to an entityset (if specified)
-        /// 
-        /// The table has exactly one column - the type of the column is specified by 
+        ///
+        /// The table has exactly one column - the type of the column is specified by
         /// the "type" parameter. This table is considered to be un-"flattened"
         /// </summary>
         /// <param name="type">type of each element (row) of the table</param>
@@ -54,20 +54,23 @@ namespace System.Data.Query.InternalTrees
         }
 
         /// <summary>
-        /// Creates a "flattened" table definition. 
-        /// 
-        /// The table has one column for each specified property in the "properties" parameter. 
+        /// Creates a "flattened" table definition.
+        ///
+        /// The table has one column for each specified property in the "properties" parameter.
         /// The name and datatype of each table column are taken from the corresponding property.
-        /// 
+        ///
         /// The keys of the table (if any) are those specified in the "keyProperties" parameter
-        /// 
+        ///
         /// The table may correspond to an entity set (if the entityset parameter was non-null)
         /// </summary>
         /// <param name="properties">prperties corresponding to columns of the table</param>
         /// <param name="keyProperties"></param>
         /// <param name="extent">entityset corresponding to the table (if any)</param>
-        internal TableMD(IEnumerable<EdmProperty> properties, IEnumerable<EdmMember> keyProperties,
-            EntitySetBase extent)
+        internal TableMD(
+            IEnumerable<EdmProperty> properties,
+            IEnumerable<EdmMember> keyProperties,
+            EntitySetBase extent
+        )
             : this(extent)
         {
             Dictionary<string, ColumnMD> columnMap = new Dictionary<string, ColumnMD>();
@@ -96,22 +99,34 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// The extent metadata (if any)
         /// </summary>
-        internal EntitySetBase Extent { get { return m_extent; } }
+        internal EntitySetBase Extent
+        {
+            get { return m_extent; }
+        }
 
         /// <summary>
         /// List of columns of this table
         /// </summary>
-        internal List<ColumnMD> Columns { get { return m_columns; } }
+        internal List<ColumnMD> Columns
+        {
+            get { return m_columns; }
+        }
 
         /// <summary>
         /// Keys for this table
         /// </summary>
-        internal List<ColumnMD> Keys { get { return m_keys; } }
+        internal List<ColumnMD> Keys
+        {
+            get { return m_keys; }
+        }
 
         /// <summary>
         /// Is this table a "flat" table?
         /// </summary>
-        internal bool Flattened { get { return m_flattened; } }
+        internal bool Flattened
+        {
+            get { return m_flattened; }
+        }
 
         /// <summary>
         /// String form - for debugging
@@ -158,22 +173,25 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// Column Name
         /// </summary>
-        internal string Name { get { return m_name; } }
+        internal string Name
+        {
+            get { return m_name; }
+        }
 
         /// <summary>
         /// Datatype of the column
         /// </summary>
-        internal TypeUsage Type { get { return m_type; } }
+        internal TypeUsage Type
+        {
+            get { return m_type; }
+        }
 
         /// <summary>
         /// Is this column nullable ?
         /// </summary>
-        internal bool IsNullable 
+        internal bool IsNullable
         {
-            get
-            {
-                return (m_property == null) || TypeSemantics.IsNullable(m_property);
-            }
+            get { return (m_property == null) || TypeSemantics.IsNullable(m_property); }
         }
 
         /// <summary>
@@ -229,15 +247,21 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// Metadata for the table instance
         /// </summary>
-        internal TableMD TableMetadata { get { return m_tableMetadata; } }
+        internal TableMD TableMetadata
+        {
+            get { return m_tableMetadata; }
+        }
 
         /// <summary>
         /// List of column references
         /// </summary>
-        internal VarList Columns { get { return m_columns; } }
+        internal VarList Columns
+        {
+            get { return m_columns; }
+        }
 
         /// <summary>
-        /// Get the list of all referenced columns. 
+        /// Get the list of all referenced columns.
         /// </summary>
         internal VarVec ReferencedColumns
         {
@@ -245,19 +269,28 @@ namespace System.Data.Query.InternalTrees
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
-        internal VarVec NonNullableColumns { get { return m_nonnullableColumns; } }
+        internal VarVec NonNullableColumns
+        {
+            get { return m_nonnullableColumns; }
+        }
 
         /// <summary>
         /// List of keys
         /// </summary>
-        internal VarVec Keys { get { return m_keys; } }
+        internal VarVec Keys
+        {
+            get { return m_keys; }
+        }
 
         /// <summary>
         /// (internal) id for this table instance
         /// </summary>
-        internal int TableId { get { return m_tableId; } }
+        internal int TableId
+        {
+            get { return m_tableId; }
+        }
 
         /// <summary>
         /// String form - for debugging
@@ -265,7 +298,13 @@ namespace System.Data.Query.InternalTrees
         /// <returns></returns>
         public override string ToString()
         {
-            return String.Format(CultureInfo.InvariantCulture, "{0}::{1}", m_tableMetadata.ToString(), this.TableId); ;
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                "{0}::{1}",
+                m_tableMetadata.ToString(),
+                this.TableId
+            );
+            ;
         }
     }
 }

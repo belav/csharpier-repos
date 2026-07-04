@@ -2,37 +2,49 @@ using System;
 
 namespace InternalAccess
 {
-	public abstract class Base
-	{
-		internal Base () { }
-		internal string Prop { get { return "A"; } }
-	}
+    public abstract class Base
+    {
+        internal Base() { }
 
-	public class DerivedInternalExample : Base
-	{
-		public DerivedInternalExample () { }
-		internal new string Prop { get { return "D"; } }
-	}
+        internal string Prop
+        {
+            get { return "A"; }
+        }
+    }
 
-	public class DerivedProtectedExample : Base
-	{
-		public DerivedProtectedExample () { }
-		protected new string Prop { get { return "E"; } }
-	}
+    public class DerivedInternalExample : Base
+    {
+        public DerivedInternalExample() { }
 
-	class MainClass
-	{
-		public static int Main ()
-		{
-			DerivedInternalExample die = new DerivedInternalExample ();
-			if (die.Prop != "D")
-				return 1;
+        internal new string Prop
+        {
+            get { return "D"; }
+        }
+    }
 
-			DerivedProtectedExample dpe = new DerivedProtectedExample ();
-			if (dpe.Prop != "A")
-				return 2;
+    public class DerivedProtectedExample : Base
+    {
+        public DerivedProtectedExample() { }
 
-			return 0;
-		}
-	}
+        protected new string Prop
+        {
+            get { return "E"; }
+        }
+    }
+
+    class MainClass
+    {
+        public static int Main()
+        {
+            DerivedInternalExample die = new DerivedInternalExample();
+            if (die.Prop != "D")
+                return 1;
+
+            DerivedProtectedExample dpe = new DerivedProtectedExample();
+            if (dpe.Prop != "A")
+                return 2;
+
+            return 0;
+        }
+    }
 }

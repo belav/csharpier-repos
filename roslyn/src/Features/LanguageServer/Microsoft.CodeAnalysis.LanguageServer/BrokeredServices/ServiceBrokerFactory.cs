@@ -29,7 +29,8 @@ internal class ServiceBrokerFactory
     private BrokeredServiceContainer? _container;
     private readonly ExportProvider _exportProvider;
     private Task _bridgeCompletionTask;
-    private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+    private readonly CancellationTokenSource _cancellationTokenSource =
+        new CancellationTokenSource();
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
@@ -43,12 +44,14 @@ internal class ServiceBrokerFactory
     /// Returns a full-access service broker, but will throw if we haven't yet connected to the Dev Kit broker.
     /// </summary>
     [Export(typeof(SVsFullAccessServiceBroker))]
-    public IServiceBroker FullAccessServiceBroker => this.GetRequiredServiceBrokerContainer().GetFullAccessServiceBroker();
+    public IServiceBroker FullAccessServiceBroker =>
+        this.GetRequiredServiceBrokerContainer().GetFullAccessServiceBroker();
 
     /// <summary>
     /// Returns a full-access service broker, but will return null if we haven't yet connected to the Dev Kit broker.
     /// </summary>
-    public IServiceBroker? TryGetFullAccessServiceBroker() => _container?.GetFullAccessServiceBroker();
+    public IServiceBroker? TryGetFullAccessServiceBroker() =>
+        _container?.GetFullAccessServiceBroker();
 
     public BrokeredServiceContainer GetRequiredServiceBrokerContainer()
     {
@@ -63,7 +66,10 @@ internal class ServiceBrokerFactory
     {
         Contract.ThrowIfFalse(_container == null, "We should only create one container.");
 
-        _container = await BrokeredServiceContainer.CreateAsync(_exportProvider, _cancellationTokenSource.Token);
+        _container = await BrokeredServiceContainer.CreateAsync(
+            _exportProvider,
+            _cancellationTokenSource.Token
+        );
     }
 
     public async Task CreateAndConnectAsync(string brokeredServicePipeName)
@@ -71,7 +77,11 @@ internal class ServiceBrokerFactory
         await CreateAsync();
 
         var bridgeProvider = _exportProvider.GetExportedValue<BrokeredServiceBridgeProvider>();
-        _bridgeCompletionTask = bridgeProvider.SetupBrokeredServicesBridgeAsync(brokeredServicePipeName, _container!, _cancellationTokenSource.Token);
+        _bridgeCompletionTask = bridgeProvider.SetupBrokeredServicesBridgeAsync(
+            brokeredServicePipeName,
+            _container!,
+            _cancellationTokenSource.Token
+        );
     }
 
     public Task ShutdownAndWaitForCompletionAsync()

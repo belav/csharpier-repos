@@ -10,7 +10,6 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
     [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser")]
     public static class TripleDESContractTests
     {
-
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsWindows7))]
         public static void Windows7DoesNotSupportCFB64()
         {

@@ -27,15 +27,24 @@ internal sealed class LanguageServerWorkspaceFactory
         HostServicesProvider hostServicesProvider,
         VSCodeAnalyzerLoader analyzerLoader,
         IFileChangeWatcher fileChangeWatcher,
-        [ImportMany] IEnumerable<Lazy<IDynamicFileInfoProvider, Host.Mef.FileExtensionsMetadata>> dynamicFileInfoProviders,
+        [ImportMany]
+            IEnumerable<
+            Lazy<IDynamicFileInfoProvider, Host.Mef.FileExtensionsMetadata>
+        > dynamicFileInfoProviders,
         ProjectTargetFrameworkManager projectTargetFrameworkManager,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory
+    )
     {
         _logger = loggerFactory.CreateLogger(nameof(LanguageServerWorkspaceFactory));
 
         var workspace = new LanguageServerWorkspace(hostServicesProvider.HostServices);
         Workspace = workspace;
-        ProjectSystemProjectFactory = new ProjectSystemProjectFactory(Workspace, fileChangeWatcher, static (_, _) => Task.CompletedTask, _ => { });
+        ProjectSystemProjectFactory = new ProjectSystemProjectFactory(
+            Workspace,
+            fileChangeWatcher,
+            static (_, _) => Task.CompletedTask,
+            _ => { }
+        );
         workspace.ProjectSystemProjectFactory = ProjectSystemProjectFactory;
 
         analyzerLoader.InitializeDiagnosticsServices(Workspace);
@@ -43,7 +52,8 @@ internal sealed class LanguageServerWorkspaceFactory
         ProjectSystemHostInfo = new ProjectSystemHostInfo(
             DynamicFileInfoProviders: dynamicFileInfoProviders.ToImmutableArray(),
             new ProjectSystemDiagnosticSource(),
-            new HostDiagnosticAnalyzerProvider());
+            new HostDiagnosticAnalyzerProvider()
+        );
 
         TargetFrameworkManager = projectTargetFrameworkManager;
     }
@@ -68,13 +78,18 @@ internal sealed class LanguageServerWorkspaceFactory
             }
             else
             {
-                _logger.LogWarning($"Solution-level analyzer at {analyzerPath} could not be found.");
+                _logger.LogWarning(
+                    $"Solution-level analyzer at {analyzerPath} could not be found."
+                );
             }
         }
 
         await ProjectSystemProjectFactory.ApplyChangeToWorkspaceAsync(w =>
         {
-            w.SetCurrentSolution(s => s.WithAnalyzerReferences(references), WorkspaceChangeKind.SolutionChanged);
+            w.SetCurrentSolution(
+                s => s.WithAnalyzerReferences(references),
+                WorkspaceChangeKind.SolutionChanged
+            );
             return ValueTask.CompletedTask;
         });
     }

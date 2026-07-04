@@ -17,14 +17,22 @@ namespace System.Web.Helpers.Test
         public void PrintWithNegativeDepthThrows()
         {
             // Act & Assert
-            Assert.ThrowsArgumentGreaterThanOrEqualTo(() => ObjectInfo.Print(null, depth: -1), "depth", "0");
+            Assert.ThrowsArgumentGreaterThanOrEqualTo(
+                () => ObjectInfo.Print(null, depth: -1),
+                "depth",
+                "0"
+            );
         }
 
         [Fact]
         public void PrintWithInvalidEnumerationLength()
         {
             // Act & Assert
-            Assert.ThrowsArgumentGreaterThan(() => ObjectInfo.Print(null, enumerationLength: -1), "enumerationLength", "0");
+            Assert.ThrowsArgumentGreaterThan(
+                () => ObjectInfo.Print(null, enumerationLength: -1),
+                "enumerationLength",
+                "0"
+            );
         }
 
         [Fact]
@@ -184,7 +192,7 @@ namespace System.Web.Helpers.Test
                 Age = 23.3,
                 Dob = new DateTime(1986, 11, 19),
                 LongType = 1000000000,
-                Type = 1
+                Type = 1,
             };
 
             using (new CultureReplacer("en-US"))
@@ -212,11 +220,7 @@ namespace System.Web.Helpers.Test
             MockObjectVisitor visitor = CreateObjectVisitor();
             PersonNode node = new PersonNode
             {
-                Person = new Person
-                {
-                    Name = "David",
-                    Age = 23.3
-                }
+                Person = new Person { Name = "David", Age = 23.3 },
             };
             node.Next = node;
 
@@ -426,7 +430,10 @@ namespace System.Web.Helpers.Test
             visitor.Print(value);
 
             // Assert
-            Assert.Equal("int MyProperty = Property accessor 'MyProperty' on object 'System.Web.Helpers.Test.ObjectInfoTest+ClassWithPropertyThatThrowsException' threw the following exception:'Property that shows an exception'", visitor.Members[0]);
+            Assert.Equal(
+                "int MyProperty = Property accessor 'MyProperty' on object 'System.Web.Helpers.Test.ObjectInfoTest+ClassWithPropertyThatThrowsException' threw the following exception:'Property that shows an exception'",
+                visitor.Members[0]
+            );
         }
 
         [Fact]
@@ -489,7 +496,9 @@ namespace System.Web.Helpers.Test
         public void GetTypeNameConvertsGenericTypesToCsharpSyntax()
         {
             // Act
-            string value = ObjectVisitor.GetTypeName(typeof(Func<Func<Func<int, int, object>, Action<int>>>));
+            string value = ObjectVisitor.GetTypeName(
+                typeof(Func<Func<Func<int, int, object>, Action<int>>>)
+            );
 
             // Assert
             Assert.Equal("Func<Func<Func<int, int, object>, Action<int>>>", value);
@@ -643,7 +652,10 @@ namespace System.Web.Helpers.Test
             public PersonNode Next { get; set; }
         }
 
-        private MockObjectVisitor CreateObjectVisitor(int recursionLimit = 10, int enumerationLimit = 1000)
+        private MockObjectVisitor CreateObjectVisitor(
+            int recursionLimit = 10,
+            int enumerationLimit = 1000
+        )
         {
             return new MockObjectVisitor(recursionLimit, enumerationLimit);
         }
@@ -711,7 +723,9 @@ namespace System.Web.Helpers.Test
                 }
                 else
                 {
-                    Members.Add(String.Format("{0} {1} = {2}", GetTypeName(type), name, Values.Last()));
+                    Members.Add(
+                        String.Format("{0} {1} = {2}", GetTypeName(type), name, Values.Last())
+                    );
                 }
             }
 
@@ -724,7 +738,9 @@ namespace System.Web.Helpers.Test
             public override void VisitKeyValue(object key, object value, int depth)
             {
                 base.VisitKeyValue(key, value, depth);
-                KeyValuePairs.Add(String.Format("{0} = {1}", Values[Values.Count - 2], Values[Values.Count - 1]));
+                KeyValuePairs.Add(
+                    String.Format("{0} = {1}", Values[Values.Count - 2], Values[Values.Count - 1])
+                );
             }
         }
     }

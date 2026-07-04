@@ -27,14 +27,12 @@ namespace Microsoft.CodeAnalysis
     {
         private bool _hookedAssemblyResolve;
 
-        internal AnalyzerAssemblyLoader()
-        {
-        }
+        internal AnalyzerAssemblyLoader() { }
 
         public bool IsHostAssembly(Assembly assembly)
         {
-            // When an assembly is loaded from the GAC then the load result would be the same if 
-            // this ran on command line compiler. So there is no consistency issue here, this 
+            // When an assembly is loaded from the GAC then the load result would be the same if
+            // this ran on command line compiler. So there is no consistency issue here, this
             // is just runtime rules expressing themselves.
             if (assembly.GlobalAssemblyCache)
             {
@@ -44,8 +42,15 @@ namespace Microsoft.CodeAnalysis
             // When an assembly is loaded from the compiler directory then this means it's assembly
             // binding redirects taking over. For example it's moving from an older version of System.Memory
             // to the one shipping in the compiler. This is not a consistency issue.
-            var compilerDirectory = Path.GetDirectoryName(typeof(AnalyzerAssemblyLoader).Assembly.Location);
-            if (PathUtilities.Comparer.Equals(compilerDirectory, Path.GetDirectoryName(assembly.Location)))
+            var compilerDirectory = Path.GetDirectoryName(
+                typeof(AnalyzerAssemblyLoader).Assembly.Location
+            );
+            if (
+                PathUtilities.Comparer.Equals(
+                    compilerDirectory,
+                    Path.GetDirectoryName(assembly.Location)
+                )
+            )
             {
                 return true;
             }
@@ -61,9 +66,12 @@ namespace Microsoft.CodeAnalysis
         }
 
         private partial bool IsMatch(AssemblyName requestedName, AssemblyName candidateName) =>
-            candidateName.Name == requestedName.Name &&
-            candidateName.Version >= requestedName.Version &&
-            candidateName.GetPublicKeyToken().AsSpan().SequenceEqual(requestedName.GetPublicKeyToken().AsSpan());
+            candidateName.Name == requestedName.Name
+            && candidateName.Version >= requestedName.Version
+            && candidateName
+                .GetPublicKeyToken()
+                .AsSpan()
+                .SequenceEqual(requestedName.GetPublicKeyToken().AsSpan());
 
         internal bool EnsureResolvedHooked()
         {

@@ -17,7 +17,14 @@ namespace System.Net.Http.Metrics
         private readonly object? _peerAddressTag;
         private bool _currentlyIdle;
 
-        public ConnectionMetrics(SocketsHttpHandlerMetrics metrics, string protocolVersion, string scheme, string host, int? port, string? peerAddress)
+        public ConnectionMetrics(
+            SocketsHttpHandlerMetrics metrics,
+            string protocolVersion,
+            string scheme,
+            string host,
+            int? port,
+            string? peerAddress
+        )
         {
             _metrics = metrics;
             _openConnectionsEnabled = _metrics.OpenConnections.Enabled;
@@ -50,7 +57,8 @@ namespace System.Net.Http.Metrics
             return tags;
         }
 
-        private static KeyValuePair<string, object?> GetStateTag(bool idle) => new KeyValuePair<string, object?>("http.connection.state", idle ? "idle" : "active");
+        private static KeyValuePair<string, object?> GetStateTag(bool idle) =>
+            new KeyValuePair<string, object?>("http.connection.state", idle ? "idle" : "active");
 
         public void ConnectionEstablished()
         {

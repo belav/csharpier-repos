@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,18 +21,17 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 #define USE_STORED_PROCS
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data;
-using System.Linq;
-using nwind;
 using System.Data.SQLite;
-
+using System.Linq;
+using System.Text;
+using nwind;
 //using nwind;  // contains Northwind context
 
 #if ORACLE
@@ -89,12 +88,17 @@ namespace DbLinq.SQLite.Example
             if (args.Length != 4)
             {
                 Console.WriteLine("Usage: DbLinq.MySql.Example.exe server user password database");
-                Console.WriteLine("Debug arguments can be set on project properties in visual studio.");
+                Console.WriteLine(
+                    "Debug arguments can be set on project properties in visual studio."
+                );
                 Console.WriteLine("Press enter to continue.");
                 Console.ReadLine();
                 return;
             }
-            string connStr = String.Format("server={0};user id={1}; password={2}; database={3}", args);
+            string connStr = String.Format(
+                "server={0};user id={1}; password={2}; database={3}",
+                args
+            );
 #endif
 
 #if false
@@ -137,7 +141,7 @@ namespace DbLinq.SQLite.Example
             // BUG: This one throws a null reference for some reason.
             //Console.Clear();
             //var q3 = from c in db.Customers
-            //         from o in c.Orders 
+            //         from o in c.Orders
             //        where c.City == "London" select new { c, o };
             //foreach (var v in q3)
             //    ObjectDumper.Write(v);
@@ -153,8 +157,14 @@ namespace DbLinq.SQLite.Example
 
 #if !SQLITE
             Console.Clear();
-            Console.WriteLine("from c in db.Customers from o in c.Orders where c.City == \"London\" select new { c, o };");
-            var q5 = from c in db.Customers from o in c.Orders where c.City == "London" select new { c, o };
+            Console.WriteLine(
+                "from c in db.Customers from o in c.Orders where c.City == \"London\" select new { c, o };"
+            );
+            var q5 =
+                from c in db.Customers
+                from o in c.Orders
+                where c.City == "London"
+                select new { c, o };
             foreach (var v in q4)
                 ObjectDumper.Write(v);
             Console.WriteLine("Press enter to continue.");
@@ -163,8 +173,13 @@ namespace DbLinq.SQLite.Example
 
 #if !SQLITE
             Console.Clear();
-            Console.WriteLine("from o in db.Orders where o.Customer.City == \"London\" select new { c = o.Customer, o };");
-            var q6 = from o in db.Orders where o.Customer.City == "London" select new { c = o.Customer, o };
+            Console.WriteLine(
+                "from o in db.Orders where o.Customer.City == \"London\" select new { c = o.Customer, o };"
+            );
+            var q6 =
+                from o in db.Orders
+                where o.Customer.City == "London"
+                select new { c = o.Customer, o };
             foreach (var v in q4)
                 ObjectDumper.Write(v);
             Console.WriteLine("Press enter to continue.");
@@ -182,11 +197,29 @@ namespace DbLinq.SQLite.Example
             // BUG: This currently will insert 3 rows when it should insert only 2
             // SubmitChanges isn't clearing the client side transaction data
             Console.Clear();
-            Console.WriteLine("db.Orders.Add(new Order { ProductID = 7, CustomerID = 1, OrderDate = DateTime.Now });");            
-            db.Orders.Add(new Order { EmployeeID = 1, CustomerID = "ALFKI", OrderDate = DateTime.Now });
+            Console.WriteLine(
+                "db.Orders.Add(new Order { ProductID = 7, CustomerID = 1, OrderDate = DateTime.Now });"
+            );
+            db.Orders.Add(
+                new Order
+                {
+                    EmployeeID = 1,
+                    CustomerID = "ALFKI",
+                    OrderDate = DateTime.Now,
+                }
+            );
             db.SubmitChanges();
-            Console.WriteLine("db.Orders.Add(new Order { ProductID = 2, CustomerID = 2, OrderDate = DateTime.Now });");
-            db.Orders.Add(new Order { EmployeeID = 1, CustomerID = "ALFKI", OrderDate = DateTime.Now });
+            Console.WriteLine(
+                "db.Orders.Add(new Order { ProductID = 2, CustomerID = 2, OrderDate = DateTime.Now });"
+            );
+            db.Orders.Add(
+                new Order
+                {
+                    EmployeeID = 1,
+                    CustomerID = "ALFKI",
+                    OrderDate = DateTime.Now,
+                }
+            );
             db.SubmitChanges();
             foreach (var v in db.Orders)
                 ObjectDumper.Write(v);
@@ -202,7 +235,6 @@ namespace DbLinq.SQLite.Example
                 ObjectDumper.Write(v);
             Console.WriteLine("Press enter to continue.");
             Console.ReadLine();
-
         }
     }
 }

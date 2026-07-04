@@ -27,6 +27,7 @@ namespace System.Reflection.TypeLoading.Ecma
         }
 
         internal sealed override RoModule GetRoModule() => _module;
+
         internal EcmaModule GetEcmaModule() => _module;
 
         protected sealed override RoType? ComputeDeclaringType()
@@ -37,7 +38,8 @@ namespace System.Reflection.TypeLoading.Ecma
             return TypeDefinition.GetDeclaringType().ResolveTypeDef(GetEcmaModule());
         }
 
-        protected sealed override string ComputeName() => TypeDefinition.Name.GetString(Reader).EscapeTypeNameIdentifier();
+        protected sealed override string ComputeName() =>
+            TypeDefinition.Name.GetString(Reader).EscapeTypeNameIdentifier();
 
         protected sealed override string? ComputeNamespace()
         {
@@ -47,14 +49,18 @@ namespace System.Reflection.TypeLoading.Ecma
             return TypeDefinition.Namespace.GetStringOrNull(Reader)?.EscapeTypeNameIdentifier();
         }
 
-        protected sealed override TypeAttributes ComputeAttributeFlags() => TypeDefinition.Attributes;
+        protected sealed override TypeAttributes ComputeAttributeFlags() =>
+            TypeDefinition.Attributes;
 
         internal sealed override RoType? SpecializeBaseType(RoType[] instantiation)
         {
             EntityHandle baseTypeHandle = TypeDefinition.BaseType;
             if (baseTypeHandle.IsNil)
                 return null;
-            return baseTypeHandle.ResolveTypeDefRefOrSpec(GetEcmaModule(), instantiation.ToTypeContext());
+            return baseTypeHandle.ResolveTypeDefRefOrSpec(
+                GetEcmaModule(),
+                instantiation.ToTypeContext()
+            );
         }
 
         internal sealed override IEnumerable<RoType> SpecializeInterfaces(RoType[] instantiation)
@@ -62,24 +68,41 @@ namespace System.Reflection.TypeLoading.Ecma
             MetadataReader reader = Reader;
             EcmaModule module = GetEcmaModule();
             TypeContext typeContext = instantiation.ToTypeContext();
-            foreach (InterfaceImplementationHandle h in TypeDefinition.GetInterfaceImplementations())
+            foreach (
+                InterfaceImplementationHandle h in TypeDefinition.GetInterfaceImplementations()
+            )
             {
                 InterfaceImplementation ifc = h.GetInterfaceImplementation(reader);
                 yield return ifc.Interface.ResolveTypeDefRefOrSpec(module, typeContext);
             }
         }
 
-        protected sealed override IEnumerable<CustomAttributeData> GetTrueCustomAttributes() => TypeDefinition.GetCustomAttributes().ToTrueCustomAttributes(GetEcmaModule());
+        protected sealed override IEnumerable<CustomAttributeData> GetTrueCustomAttributes() =>
+            TypeDefinition.GetCustomAttributes().ToTrueCustomAttributes(GetEcmaModule());
 
-        internal sealed override bool IsCustomAttributeDefined(ReadOnlySpan<byte> ns, ReadOnlySpan<byte> name) => TypeDefinition.GetCustomAttributes().IsCustomAttributeDefined(ns, name, GetEcmaModule());
-        internal sealed override CustomAttributeData? TryFindCustomAttribute(ReadOnlySpan<byte> ns, ReadOnlySpan<byte> name) => TypeDefinition.GetCustomAttributes().TryFindCustomAttribute(ns, name, GetEcmaModule());
+        internal sealed override bool IsCustomAttributeDefined(
+            ReadOnlySpan<byte> ns,
+            ReadOnlySpan<byte> name
+        ) =>
+            TypeDefinition
+                .GetCustomAttributes()
+                .IsCustomAttributeDefined(ns, name, GetEcmaModule());
+
+        internal sealed override CustomAttributeData? TryFindCustomAttribute(
+            ReadOnlySpan<byte> ns,
+            ReadOnlySpan<byte> name
+        ) => TypeDefinition.GetCustomAttributes().TryFindCustomAttribute(ns, name, GetEcmaModule());
 
         public sealed override int MetadataToken => _handle.GetToken();
 
         public sealed override bool IsGenericTypeDefinition => GetGenericParameterCount() != 0;
 
-        internal sealed override int GetGenericParameterCount() => GetGenericTypeParametersNoCopy().Length;
-        internal sealed override RoType[] GetGenericTypeParametersNoCopy() => _lazyGenericParameters ??= ComputeGenericTypeParameters();
+        internal sealed override int GetGenericParameterCount() =>
+            GetGenericTypeParametersNoCopy().Length;
+
+        internal sealed override RoType[] GetGenericTypeParametersNoCopy() =>
+            _lazyGenericParameters ??= ComputeGenericTypeParameters();
+
         private RoType[] ComputeGenericTypeParameters()
         {
             EcmaModule module = GetEcmaModule();
@@ -95,6 +118,7 @@ namespace System.Reflection.TypeLoading.Ecma
             }
             return genericParameters;
         }
+
         private volatile RoType[]? _lazyGenericParameters;
 
         protected internal sealed override RoType ComputeEnumUnderlyingType()
@@ -131,7 +155,10 @@ namespace System.Reflection.TypeLoading.Ecma
             size = layout.Size;
         }
 
-        internal sealed override bool IsTypeNameEqual(ReadOnlySpan<byte> ns, ReadOnlySpan<byte> name)
+        internal sealed override bool IsTypeNameEqual(
+            ReadOnlySpan<byte> ns,
+            ReadOnlySpan<byte> name
+        )
         {
             MetadataReader reader = Reader;
             TypeDefinition td = TypeDefinition;
@@ -141,8 +168,16 @@ namespace System.Reflection.TypeLoading.Ecma
         private new MetadataLoadContext Loader => _module.Loader;
         private MetadataReader Reader => GetEcmaModule().Reader;
 
-        private ref readonly TypeDefinition TypeDefinition { get { Loader.DisposeCheck(); return ref _neverAccessThisExceptThroughTypeDefinitionProperty; } }
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]  // Block from debugger watch windows so they don't AV the debugged process.
+        private ref readonly TypeDefinition TypeDefinition
+        {
+            get
+            {
+                Loader.DisposeCheck();
+                return ref _neverAccessThisExceptThroughTypeDefinitionProperty;
+            }
+        }
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Block from debugger watch windows so they don't AV the debugged process.
         private readonly TypeDefinition _neverAccessThisExceptThroughTypeDefinitionProperty;
     }
 }

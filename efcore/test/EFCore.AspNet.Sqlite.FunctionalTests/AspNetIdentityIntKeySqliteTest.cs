@@ -7,19 +7,14 @@ public class AspNetIdentityIntKeySqliteTest
     : AspNetIdentityIntKeyTestBase<AspNetIdentityIntKeySqliteTest.AspNetIdentityIntKeySqliteFixture>
 {
     public AspNetIdentityIntKeySqliteTest(AspNetIdentityIntKeySqliteFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class AspNetIdentityIntKeySqliteFixture : AspNetIdentityFixtureBase
     {
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 
-        protected override string StoreName
-            => "AspNetIntKeyIdentity";
+        protected override string StoreName => "AspNetIntKeyIdentity";
     }
 }

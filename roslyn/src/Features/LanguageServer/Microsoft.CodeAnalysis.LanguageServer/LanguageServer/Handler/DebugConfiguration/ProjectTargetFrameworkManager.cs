@@ -15,22 +15,28 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.DebugConfiguration;
 [Export, Shared]
 internal class ProjectTargetFrameworkManager
 {
-    private readonly ConcurrentDictionary<ProjectId, string?> _projectToTargetFrameworkIdentifer = new();
+    private readonly ConcurrentDictionary<ProjectId, string?> _projectToTargetFrameworkIdentifer =
+        new();
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public ProjectTargetFrameworkManager()
-    {
-    }
+    public ProjectTargetFrameworkManager() { }
 
     public void UpdateIdentifierForProject(ProjectId projectId, string? identifier)
     {
-        _ = _projectToTargetFrameworkIdentifer.AddOrUpdate(projectId, identifier, (project, oldIdentifier) => identifier);
+        _ = _projectToTargetFrameworkIdentifer.AddOrUpdate(
+            projectId,
+            identifier,
+            (project, oldIdentifier) => identifier
+        );
     }
 
     public bool IsDotnetCoreProject(ProjectId projectId)
     {
-        if (_projectToTargetFrameworkIdentifer.TryGetValue(projectId, out var identifier) && identifier != null)
+        if (
+            _projectToTargetFrameworkIdentifer.TryGetValue(projectId, out var identifier)
+            && identifier != null
+        )
         {
             return IsDotnetCoreIdentifier(identifier);
         }

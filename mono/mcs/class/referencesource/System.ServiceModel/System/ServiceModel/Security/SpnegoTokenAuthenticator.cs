@@ -1,4 +1,3 @@
-
 //-----------------------------------------------------------------------------
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //-----------------------------------------------------------------------------
@@ -17,7 +16,6 @@ namespace System.ServiceModel.Security
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
     using System.Xml;
-
     using SafeCloseHandle = System.IdentityModel.SafeCloseHandle;
     using SafeFreeCredentials = System.IdentityModel.SafeFreeCredentials;
 
@@ -34,26 +32,20 @@ namespace System.ServiceModel.Security
             // empty
         }
 
-        // settings        
+        // settings
         public bool ExtractGroupsForWindowsAccounts
         {
-            get
-            {
-                return this.extractGroupsForWindowsAccounts;
-            }
+            get { return this.extractGroupsForWindowsAccounts; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
                 this.extractGroupsForWindowsAccounts = value;
             }
         }
-        
+
         public NetworkCredential ServerCredential
         {
-            get
-            {
-                return this.serverCredential;
-            }
+            get { return this.serverCredential; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
@@ -63,10 +55,7 @@ namespace System.ServiceModel.Security
 
         public bool AllowUnauthenticatedCallers
         {
-            get
-            {
-                return this.allowUnauthenticatedCallers;
-            }
+            get { return this.allowUnauthenticatedCallers; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
@@ -77,10 +66,7 @@ namespace System.ServiceModel.Security
         // overrides
         public override XmlDictionaryString NegotiationValueType
         {
-            get 
-            {
-                return XD.TrustApr2004Dictionary.SpnegoValueTypeUri;
-            }
+            get { return XD.TrustApr2004Dictionary.SpnegoValueTypeUri; }
         }
 
         public override void OnOpening()
@@ -88,7 +74,11 @@ namespace System.ServiceModel.Security
             base.OnOpening();
             if (this.credentialsHandle == null)
             {
-                this.credentialsHandle = SecurityUtils.GetCredentialsHandle("Negotiate", this.serverCredential, true);
+                this.credentialsHandle = SecurityUtils.GetCredentialsHandle(
+                    "Negotiate",
+                    this.serverCredential,
+                    true
+                );
             }
         }
 
@@ -113,18 +103,29 @@ namespace System.ServiceModel.Security
             }
         }
 
-        protected override SspiNegotiationTokenAuthenticatorState CreateSspiState(byte[] incomingBlob, string incomingValueTypeUri)
+        protected override SspiNegotiationTokenAuthenticatorState CreateSspiState(
+            byte[] incomingBlob,
+            string incomingValueTypeUri
+        )
         {
-            ISspiNegotiation windowsNegotiation = new WindowsSspiNegotiation("Negotiate", this.credentialsHandle, DefaultServiceBinding);
+            ISspiNegotiation windowsNegotiation = new WindowsSspiNegotiation(
+                "Negotiate",
+                this.credentialsHandle,
+                DefaultServiceBinding
+            );
             return new SspiNegotiationTokenAuthenticatorState(windowsNegotiation);
         }
 
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateSspiNegotiation(ISspiNegotiation sspiNegotiation)
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateSspiNegotiation(
+            ISspiNegotiation sspiNegotiation
+        )
         {
             WindowsSspiNegotiation windowsNegotiation = (WindowsSspiNegotiation)sspiNegotiation;
             if (windowsNegotiation.IsValidContext == false)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new SecurityNegotiationException(SR.GetString(SR.InvalidSspiNegotiation)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                    new SecurityNegotiationException(SR.GetString(SR.InvalidSspiNegotiation))
+                );
             }
             SecurityTraceRecordHelper.TraceServiceSpnego(windowsNegotiation);
             if (this.IsClientAnonymous)
@@ -133,12 +134,28 @@ namespace System.ServiceModel.Security
             }
             using (SafeCloseHandle contextToken = windowsNegotiation.GetContextToken())
             {
-                WindowsIdentity windowsIdentity = new WindowsIdentity(contextToken.DangerousGetHandle(), windowsNegotiation.ProtocolName);
-                SecurityUtils.ValidateAnonymityConstraint(windowsIdentity, this.AllowUnauthenticatedCallers);
+                WindowsIdentity windowsIdentity = new WindowsIdentity(
+                    contextToken.DangerousGetHandle(),
+                    windowsNegotiation.ProtocolName
+                );
+                SecurityUtils.ValidateAnonymityConstraint(
+                    windowsIdentity,
+                    this.AllowUnauthenticatedCallers
+                );
 
                 List<IAuthorizationPolicy> policies = new List<IAuthorizationPolicy>(1);
-                WindowsClaimSet wic = new WindowsClaimSet( windowsIdentity, windowsNegotiation.ProtocolName, this.extractGroupsForWindowsAccounts, false );
-                policies.Add(new System.IdentityModel.Policy.UnconditionalPolicy(wic, TimeoutHelper.Add(DateTime.UtcNow, base.ServiceTokenLifetime)));
+                WindowsClaimSet wic = new WindowsClaimSet(
+                    windowsIdentity,
+                    windowsNegotiation.ProtocolName,
+                    this.extractGroupsForWindowsAccounts,
+                    false
+                );
+                policies.Add(
+                    new System.IdentityModel.Policy.UnconditionalPolicy(
+                        wic,
+                        TimeoutHelper.Add(DateTime.UtcNow, base.ServiceTokenLifetime)
+                    )
+                );
                 return policies.AsReadOnly();
             }
         }

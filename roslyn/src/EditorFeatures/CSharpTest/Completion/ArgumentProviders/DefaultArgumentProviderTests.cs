@@ -13,14 +13,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.ArgumentProv
     [Trait(Traits.Feature, Traits.Features.Completion)]
     public class DefaultArgumentProviderTests : AbstractCSharpArgumentProviderTests
     {
-        internal override Type GetArgumentProviderType()
-            => typeof(DefaultArgumentProvider);
+        internal override Type GetArgumentProviderType() => typeof(DefaultArgumentProvider);
 
         [Theory]
         [InlineData("System.Collections.DictionaryEntry")]
         public async Task TestDefaultValueIsDefaultLiteral(string type)
         {
-            var markup = $@"
+            var markup =
+                $@"
 class C
 {{
     void Method()
@@ -35,7 +35,11 @@ class C
 ";
 
             await VerifyDefaultValueAsync(markup, "default");
-            await VerifyDefaultValueAsync(markup, expectedDefaultValue: "prior", previousDefaultValue: "prior");
+            await VerifyDefaultValueAsync(
+                markup,
+                expectedDefaultValue: "prior",
+                previousDefaultValue: "prior"
+            );
         }
 
         [Theory]
@@ -46,7 +50,8 @@ class C
         [InlineData("System.Exception")]
         public async Task TestDefaultValueIsNullLiteral(string type)
         {
-            var markup = $@"
+            var markup =
+                $@"
 class C
 {{
     void Method()
@@ -61,7 +66,11 @@ class C
 ";
 
             await VerifyDefaultValueAsync(markup, "null");
-            await VerifyDefaultValueAsync(markup, expectedDefaultValue: "prior", previousDefaultValue: "prior");
+            await VerifyDefaultValueAsync(
+                markup,
+                expectedDefaultValue: "prior",
+                previousDefaultValue: "prior"
+            );
         }
 
         [Theory]
@@ -93,7 +102,8 @@ class C
         [InlineData("System.UInt64", "0UL")]
         public async Task TestDefaultValueIsZero(string type, string literalZero)
         {
-            var markup = $@"
+            var markup =
+                $@"
 class C
 {{
     void Method()
@@ -108,7 +118,11 @@ class C
 ";
 
             await VerifyDefaultValueAsync(markup, literalZero);
-            await VerifyDefaultValueAsync(markup, expectedDefaultValue: "prior", previousDefaultValue: "prior");
+            await VerifyDefaultValueAsync(
+                markup,
+                expectedDefaultValue: "prior",
+                previousDefaultValue: "prior"
+            );
         }
     }
 }

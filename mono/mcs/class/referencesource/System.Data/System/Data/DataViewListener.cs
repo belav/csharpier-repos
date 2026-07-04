@@ -6,15 +6,15 @@
 // <owner current="true" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
-
+namespace System.Data
+{
     using System;
-    using System.ComponentModel;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Diagnostics;
 
-    internal sealed class DataViewListener {
-
+    internal sealed class DataViewListener
+    {
         private readonly WeakReference _dvWeak;
         private DataTable _table;
         private Index _index;
@@ -22,37 +22,47 @@ namespace System.Data {
         /// <summary><see cref="DataView.ObjectID"/></summary>
         internal readonly int ObjectID;
 
-        internal DataViewListener(DataView dv) {
+        internal DataViewListener(DataView dv)
+        {
             this.ObjectID = dv.ObjectID;
             _dvWeak = new WeakReference(dv);
         }
 
-        private void ChildRelationCollectionChanged(object sender, CollectionChangeEventArgs e) {
+        private void ChildRelationCollectionChanged(object sender, CollectionChangeEventArgs e)
+        {
             DataView dv = (DataView)_dvWeak.Target;
-            if (dv != null) {
+            if (dv != null)
+            {
                 dv.ChildRelationCollectionChanged(sender, e);
             }
-            else {
+            else
+            {
                 CleanUp(true);
             }
         }
 
-        private void ParentRelationCollectionChanged(object sender, CollectionChangeEventArgs e) {
+        private void ParentRelationCollectionChanged(object sender, CollectionChangeEventArgs e)
+        {
             DataView dv = (DataView)_dvWeak.Target;
-            if (dv != null) {
+            if (dv != null)
+            {
                 dv.ParentRelationCollectionChanged(sender, e);
             }
-            else {
+            else
+            {
                 CleanUp(true);
             }
         }
 
-        private void ColumnCollectionChanged(object sender, CollectionChangeEventArgs e) {
+        private void ColumnCollectionChanged(object sender, CollectionChangeEventArgs e)
+        {
             DataView dv = (DataView)_dvWeak.Target;
-            if (dv != null) {
+            if (dv != null)
+            {
                 dv.ColumnCollectionChangedInternal(sender, e);
             }
-            else {
+            else
+            {
                 CleanUp(true);
             }
         }
@@ -60,114 +70,159 @@ namespace System.Data {
         /// <summary>
         /// Maintain the DataView before <see cref="DataView.ListChanged"/> is raised.
         /// </summary>
-        internal void MaintainDataView(ListChangedType changedType, DataRow row, bool trackAddRemove) {
+        internal void MaintainDataView(
+            ListChangedType changedType,
+            DataRow row,
+            bool trackAddRemove
+        )
+        {
             DataView dv = (DataView)_dvWeak.Target;
-            if (dv != null) {
+            if (dv != null)
+            {
                 dv.MaintainDataView(changedType, row, trackAddRemove);
             }
-            else {
+            else
+            {
                 CleanUp(true);
             }
         }
 
-        internal void IndexListChanged(ListChangedEventArgs e) {
+        internal void IndexListChanged(ListChangedEventArgs e)
+        {
             DataView dv = (DataView)_dvWeak.Target;
-            if (dv != null) {
+            if (dv != null)
+            {
                 dv.IndexListChangedInternal(e);
             }
-            else {
+            else
+            {
                 CleanUp(true);
             }
         }
 
-        internal void RegisterMetaDataEvents(DataTable table) {
+        internal void RegisterMetaDataEvents(DataTable table)
+        {
             Debug.Assert(null == _table, "DataViewListener already registered table");
             _table = table;
-            if (table != null) {
+            if (table != null)
+            {
                 // actively remove listeners without a target
                 RegisterListener(table);
 
                 // start listening to events
-                CollectionChangeEventHandler handlerCollection = new CollectionChangeEventHandler(ColumnCollectionChanged);
+                CollectionChangeEventHandler handlerCollection = new CollectionChangeEventHandler(
+                    ColumnCollectionChanged
+                );
                 table.Columns.ColumnPropertyChanged += handlerCollection;
                 table.Columns.CollectionChanged += handlerCollection;
 
-                CollectionChangeEventHandler handlerChildRelation = new CollectionChangeEventHandler(ChildRelationCollectionChanged);
-                ((DataRelationCollection.DataTableRelationCollection)(table.ChildRelations)).RelationPropertyChanged += handlerChildRelation;
+                CollectionChangeEventHandler handlerChildRelation =
+                    new CollectionChangeEventHandler(ChildRelationCollectionChanged);
+                (
+                    (DataRelationCollection.DataTableRelationCollection)(table.ChildRelations)
+                ).RelationPropertyChanged += handlerChildRelation;
                 table.ChildRelations.CollectionChanged += handlerChildRelation;
 
-                CollectionChangeEventHandler handlerParentRelation = new CollectionChangeEventHandler(ParentRelationCollectionChanged);
-                ((DataRelationCollection.DataTableRelationCollection)(table.ParentRelations)).RelationPropertyChanged += handlerParentRelation;
+                CollectionChangeEventHandler handlerParentRelation =
+                    new CollectionChangeEventHandler(ParentRelationCollectionChanged);
+                (
+                    (DataRelationCollection.DataTableRelationCollection)(table.ParentRelations)
+                ).RelationPropertyChanged += handlerParentRelation;
                 table.ParentRelations.CollectionChanged += handlerParentRelation;
             }
         }
 
-        internal void UnregisterMetaDataEvents() {
+        internal void UnregisterMetaDataEvents()
+        {
             UnregisterMetaDataEvents(true);
         }
 
-        private void UnregisterMetaDataEvents(bool updateListeners) {
+        private void UnregisterMetaDataEvents(bool updateListeners)
+        {
             DataTable table = _table;
             _table = null;
 
-            if (table != null) {
-                CollectionChangeEventHandler handlerCollection = new CollectionChangeEventHandler(ColumnCollectionChanged);
+            if (table != null)
+            {
+                CollectionChangeEventHandler handlerCollection = new CollectionChangeEventHandler(
+                    ColumnCollectionChanged
+                );
                 table.Columns.ColumnPropertyChanged -= handlerCollection;
                 table.Columns.CollectionChanged -= handlerCollection;
 
-                CollectionChangeEventHandler handlerChildRelation = new CollectionChangeEventHandler(ChildRelationCollectionChanged);
-                ((DataRelationCollection.DataTableRelationCollection)(table.ChildRelations)).RelationPropertyChanged -= handlerChildRelation;
+                CollectionChangeEventHandler handlerChildRelation =
+                    new CollectionChangeEventHandler(ChildRelationCollectionChanged);
+                (
+                    (DataRelationCollection.DataTableRelationCollection)(table.ChildRelations)
+                ).RelationPropertyChanged -= handlerChildRelation;
                 table.ChildRelations.CollectionChanged -= handlerChildRelation;
 
-                CollectionChangeEventHandler handlerParentRelation = new CollectionChangeEventHandler(ParentRelationCollectionChanged);
-                ((DataRelationCollection.DataTableRelationCollection)(table.ParentRelations)).RelationPropertyChanged -= handlerParentRelation;
+                CollectionChangeEventHandler handlerParentRelation =
+                    new CollectionChangeEventHandler(ParentRelationCollectionChanged);
+                (
+                    (DataRelationCollection.DataTableRelationCollection)(table.ParentRelations)
+                ).RelationPropertyChanged -= handlerParentRelation;
                 table.ParentRelations.CollectionChanged -= handlerParentRelation;
 
-                if (updateListeners) {
+                if (updateListeners)
+                {
                     List<DataViewListener> listeners = table.GetListeners();
-                    lock (listeners) {
+                    lock (listeners)
+                    {
                         listeners.Remove(this);
                     }
                 }
             }
         }
 
-        internal void RegisterListChangedEvent(Index index) {
+        internal void RegisterListChangedEvent(Index index)
+        {
             Debug.Assert(null == _index, "DataviewListener already registered index");
             _index = index;
-            if (null != index) {
-                lock (index) {
+            if (null != index)
+            {
+                lock (index)
+                {
                     index.AddRef();
                     index.ListChangedAdd(this);
                 }
             }
         }
 
-        internal void UnregisterListChangedEvent() {
+        internal void UnregisterListChangedEvent()
+        {
             Index index = _index;
             _index = null;
 
-            if (index != null) {
-                lock (index) {
+            if (index != null)
+            {
+                lock (index)
+                {
                     index.ListChangedRemove(this);
-                    if (index.RemoveRef() <= 1) {
+                    if (index.RemoveRef() <= 1)
+                    {
                         index.RemoveRef();
                     }
                 }
             }
         }
 
-        private void CleanUp(bool updateListeners) {
+        private void CleanUp(bool updateListeners)
+        {
             UnregisterMetaDataEvents(updateListeners);
             UnregisterListChangedEvent();
         }
 
-        private void RegisterListener(DataTable table) {
+        private void RegisterListener(DataTable table)
+        {
             List<DataViewListener> listeners = table.GetListeners();
-            lock (listeners) {
-                for (int i = listeners.Count - 1; 0 <= i; --i) {
+            lock (listeners)
+            {
+                for (int i = listeners.Count - 1; 0 <= i; --i)
+                {
                     DataViewListener listener = listeners[i];
-                    if (!listener._dvWeak.IsAlive) {
+                    if (!listener._dvWeak.IsAlive)
+                    {
                         listeners.RemoveAt(i);
                         listener.CleanUp(false);
                     }

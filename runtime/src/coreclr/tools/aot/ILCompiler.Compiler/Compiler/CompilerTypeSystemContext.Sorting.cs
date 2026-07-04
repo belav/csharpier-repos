@@ -14,7 +14,10 @@ namespace ILCompiler
 
             protected override int CompareToImpl(TypeDesc other, TypeSystemComparer comparer)
             {
-                return comparer.Compare(ValueTypeRepresented, ((BoxedValueType)other).ValueTypeRepresented);
+                return comparer.Compare(
+                    ValueTypeRepresented,
+                    ((BoxedValueType)other).ValueTypeRepresented
+                );
             }
         }
 
@@ -59,7 +62,10 @@ namespace ILCompiler
             {
                 var otherMethod = (DefaultInterfaceMethodImplementationInstantiationThunk)other;
 
-                int result = System.Collections.Generic.Comparer<int>.Default.Compare(_interfaceIndex, otherMethod._interfaceIndex);
+                int result = System.Collections.Generic.Comparer<int>.Default.Compare(
+                    _interfaceIndex,
+                    otherMethod._interfaceIndex
+                );
                 if (result != 0)
                     return result;
 

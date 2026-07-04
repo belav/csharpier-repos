@@ -1,21 +1,19 @@
-class B<T>
-{
-}
+class B<T> { }
 
-[A(typeof (B<>))]
+[A(typeof(B<>))]
 public class A : System.Attribute
 {
-	static int ret = 1;
+    static int ret = 1;
 
-	public A (System.Type type)
-	{
-		if (type == typeof (B<>))
-			ret = 0;
-	}
+    public A(System.Type type)
+    {
+        if (type == typeof(B<>))
+            ret = 0;
+    }
 
-	public static int Main ()
-	{
-		typeof (A).GetCustomAttributes (true);
-		return ret;
-	}
+    public static int Main()
+    {
+        typeof(A).GetCustomAttributes(true);
+        return ret;
+    }
 }

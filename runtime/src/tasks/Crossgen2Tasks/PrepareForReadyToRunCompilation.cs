@@ -4,14 +4,14 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.IO;
-using System.Runtime.InteropServices;
+using System.Linq;
+using System.Reflection;
+using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
+using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using System.Reflection.Metadata;
-using System.Reflection;
 
 namespace Microsoft.NET.Build.Tasks
 {
@@ -27,6 +27,7 @@ namespace Microsoft.NET.Build.Tasks
 
         [Required]
         public string OutputPath { get; set; }
+
         [Required]
         public bool IncludeSymbolsInSingleFile { get; set; }
 
@@ -39,6 +40,7 @@ namespace Microsoft.NET.Build.Tasks
         // and the second to create native PDBs for the compiled images (the output of the first step is an input to the second step)
         [Output]
         public ITaskItem[] ReadyToRunCompileList => _compileList.ToArray();
+
         [Output]
         public ITaskItem[] ReadyToRunSymbolsCompileList => _symbolsCompileList.ToArray();
 
@@ -73,8 +75,12 @@ namespace Microsoft.NET.Build.Tasks
                 string isVersion5 = Crossgen2Tool.GetMetadata(MetadataKeys.IsVersion5);
                 _crossgen2IsVersion5 = !string.IsNullOrEmpty(isVersion5) && bool.Parse(isVersion5);
 
-                string perfmapVersion = Crossgen2Tool.GetMetadata(MetadataKeys.PerfmapFormatVersion);
-                _perfmapFormatVersion = !string.IsNullOrEmpty(perfmapVersion) ? int.Parse(perfmapVersion) : 0;
+                string perfmapVersion = Crossgen2Tool.GetMetadata(
+                    MetadataKeys.PerfmapFormatVersion
+                );
+                _perfmapFormatVersion = !string.IsNullOrEmpty(perfmapVersion)
+                    ? int.Parse(perfmapVersion)
+                    : 0;
 
                 if (Crossgen2Composite && EmitSymbols && _crossgen2IsVersion5)
                 {
@@ -86,11 +92,20 @@ namespace Microsoft.NET.Build.Tasks
             string diaSymReaderPath = CrossgenTool?.GetMetadata(MetadataKeys.DiaSymReader);
 
             bool hasValidDiaSymReaderLib =
-                ReadyToRunUseCrossgen2 && !_crossgen2IsVersion5 ||
-                !string.IsNullOrEmpty(diaSymReaderPath) && File.Exists(diaSymReaderPath);
+                ReadyToRunUseCrossgen2 && !_crossgen2IsVersion5
+                || !string.IsNullOrEmpty(diaSymReaderPath) && File.Exists(diaSymReaderPath);
 
             // Process input lists of files
-            ProcessInputFileList(Assemblies, _compileList, _symbolsCompileList, _r2rFiles, _r2rReferences, _r2rCompositeReferences, _r2rCompositeInput, hasValidDiaSymReaderLib);
+            ProcessInputFileList(
+                Assemblies,
+                _compileList,
+                _symbolsCompileList,
+                _r2rFiles,
+                _r2rReferences,
+                _r2rCompositeReferences,
+                _r2rCompositeInput,
+                hasValidDiaSymReaderLib
+            );
         }
 
         private void ProcessInputFileList(
@@ -101,19 +116,34 @@ namespace Microsoft.NET.Build.Tasks
             List<ITaskItem> r2rReferenceList,
             List<ITaskItem> r2rCompositeReferenceList,
             List<ITaskItem> r2rCompositeInputList,
-            bool hasValidDiaSymReaderLib)
+            bool hasValidDiaSymReaderLib
+        )
         {
             if (inputFiles == null)
             {
                 return;
             }
 
-            var exclusionSet = ExcludeList == null || Crossgen2Composite ? null : new HashSet<string>(ExcludeList, StringComparer.OrdinalIgnoreCase);
-            var compositeExclusionSet = PublishReadyToRunCompositeExclusions == null || !Crossgen2Composite ? null : new HashSet<string>(PublishReadyToRunCompositeExclusions, StringComparer.OrdinalIgnoreCase);
+            var exclusionSet =
+                ExcludeList == null || Crossgen2Composite
+                    ? null
+                    : new HashSet<string>(ExcludeList, StringComparer.OrdinalIgnoreCase);
+            var compositeExclusionSet =
+                PublishReadyToRunCompositeExclusions == null || !Crossgen2Composite
+                    ? null
+                    : new HashSet<string>(
+                        PublishReadyToRunCompositeExclusions,
+                        StringComparer.OrdinalIgnoreCase
+                    );
 
             foreach (var file in inputFiles)
             {
-                var eligibility = GetInputFileEligibility(file, Crossgen2Composite, exclusionSet, compositeExclusionSet);
+                var eligibility = GetInputFileEligibility(
+                    file,
+                    Crossgen2Composite,
+                    exclusionSet,
+                    compositeExclusionSet
+                );
 
                 if (eligibility.NoEligibility)
                 {
@@ -123,7 +153,11 @@ namespace Microsoft.NET.Build.Tasks
                 if (eligibility.IsReference)
                     r2rReferenceList.Add(file);
 
-                if (eligibility.IsReference && !eligibility.ReferenceHiddenFromCompositeBuild && !eligibility.Compile)
+                if (
+                    eligibility.IsReference
+                    && !eligibility.ReferenceHiddenFromCompositeBuild
+                    && !eligibility.Compile
+                )
                     r2rCompositeReferenceList.Add(file);
 
                 if (!eligibility.Compile)
@@ -140,22 +174,39 @@ namespace Microsoft.NET.Build.Tasks
 
                 if (EmitSymbols)
                 {
-                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && hasValidDiaSymReaderLib)
+                    if (
+                        RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                        && hasValidDiaSymReaderLib
+                    )
                     {
                         outputPDBImage = Path.ChangeExtension(outputR2RImage, "ni.pdb");
-                        outputPDBImageRelativePath = Path.ChangeExtension(outputR2RImageRelativePath, "ni.pdb");
-                        crossgen1CreatePDBCommand = $"/CreatePDB \"{Path.GetDirectoryName(outputPDBImage)}\"";
+                        outputPDBImageRelativePath = Path.ChangeExtension(
+                            outputR2RImageRelativePath,
+                            "ni.pdb"
+                        );
+                        crossgen1CreatePDBCommand =
+                            $"/CreatePDB \"{Path.GetDirectoryName(outputPDBImage)}\"";
                     }
                     else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                     {
                         string perfmapExtension;
-                        if (ReadyToRunUseCrossgen2 && !_crossgen2IsVersion5 && _perfmapFormatVersion >= 1)
+                        if (
+                            ReadyToRunUseCrossgen2
+                            && !_crossgen2IsVersion5
+                            && _perfmapFormatVersion >= 1
+                        )
                         {
                             perfmapExtension = ".ni.r2rmap";
                         }
                         else
                         {
-                            using (FileStream fs = new FileStream(file.ItemSpec, FileMode.Open, FileAccess.Read))
+                            using (
+                                FileStream fs = new FileStream(
+                                    file.ItemSpec,
+                                    FileMode.Open,
+                                    FileAccess.Read
+                                )
+                            )
                             {
                                 PEReader pereader = new PEReader(fs);
                                 MetadataReader mdReader = pereader.GetMetadataReader();
@@ -165,8 +216,12 @@ namespace Microsoft.NET.Build.Tasks
                         }
 
                         outputPDBImage = Path.ChangeExtension(outputR2RImage, perfmapExtension);
-                        outputPDBImageRelativePath = Path.ChangeExtension(outputR2RImageRelativePath, perfmapExtension);
-                        crossgen1CreatePDBCommand = $"/CreatePerfMap \"{Path.GetDirectoryName(outputPDBImage)}\"";
+                        outputPDBImageRelativePath = Path.ChangeExtension(
+                            outputR2RImageRelativePath,
+                            perfmapExtension
+                        );
+                        crossgen1CreatePDBCommand =
+                            $"/CreatePerfMap \"{Path.GetDirectoryName(outputPDBImage)}\"";
                     }
                 }
 
@@ -179,7 +234,10 @@ namespace Microsoft.NET.Build.Tasks
                     if (outputPDBImage != null && ReadyToRunUseCrossgen2 && !_crossgen2IsVersion5)
                     {
                         r2rCompilationEntry.SetMetadata(MetadataKeys.EmitSymbols, "true");
-                        r2rCompilationEntry.SetMetadata(MetadataKeys.OutputPDBImage, outputPDBImage);
+                        r2rCompilationEntry.SetMetadata(
+                            MetadataKeys.OutputPDBImage,
+                            outputPDBImage
+                        );
                     }
                     r2rCompilationEntry.RemoveMetadata(MetadataKeys.OriginalItemSpec);
                     imageCompilationList.Add(r2rCompilationEntry);
@@ -208,8 +266,14 @@ namespace Microsoft.NET.Build.Tasks
                         // an input to the ReadyToRunCompiler task
                         TaskItem pdbCompilationEntry = new TaskItem(file);
                         pdbCompilationEntry.ItemSpec = outputR2RImage;
-                        pdbCompilationEntry.SetMetadata(MetadataKeys.OutputPDBImage, outputPDBImage);
-                        pdbCompilationEntry.SetMetadata(MetadataKeys.CreatePDBCommand, crossgen1CreatePDBCommand);
+                        pdbCompilationEntry.SetMetadata(
+                            MetadataKeys.OutputPDBImage,
+                            outputPDBImage
+                        );
+                        pdbCompilationEntry.SetMetadata(
+                            MetadataKeys.CreatePDBCommand,
+                            crossgen1CreatePDBCommand
+                        );
                         symbolsCompilationList.Add(pdbCompilationEntry);
                     }
 
@@ -217,11 +281,17 @@ namespace Microsoft.NET.Build.Tasks
                     // for the newly created PDB image.
                     TaskItem r2rSymbolsFileToPublish = new TaskItem(file);
                     r2rSymbolsFileToPublish.ItemSpec = outputPDBImage;
-                    r2rSymbolsFileToPublish.SetMetadata(MetadataKeys.RelativePath, outputPDBImageRelativePath);
+                    r2rSymbolsFileToPublish.SetMetadata(
+                        MetadataKeys.RelativePath,
+                        outputPDBImageRelativePath
+                    );
                     r2rSymbolsFileToPublish.RemoveMetadata(MetadataKeys.OriginalItemSpec);
                     if (!IncludeSymbolsInSingleFile)
                     {
-                        r2rSymbolsFileToPublish.SetMetadata(MetadataKeys.ExcludeFromSingleFile, "true");
+                        r2rSymbolsFileToPublish.SetMetadata(
+                            MetadataKeys.ExcludeFromSingleFile,
+                            "true"
+                        );
                     }
 
                     r2rFilesPublishList.Add(r2rSymbolsFileToPublish);
@@ -230,10 +300,18 @@ namespace Microsoft.NET.Build.Tasks
 
             if (Crossgen2Composite)
             {
-                MainAssembly.SetMetadata(MetadataKeys.RelativePath, Path.GetFileName(MainAssembly.ItemSpec));
+                MainAssembly.SetMetadata(
+                    MetadataKeys.RelativePath,
+                    Path.GetFileName(MainAssembly.ItemSpec)
+                );
 
-                var compositeR2RImageRelativePath = MainAssembly.GetMetadata(MetadataKeys.RelativePath);
-                compositeR2RImageRelativePath = Path.ChangeExtension(compositeR2RImageRelativePath, "r2r" + Path.GetExtension(compositeR2RImageRelativePath));
+                var compositeR2RImageRelativePath = MainAssembly.GetMetadata(
+                    MetadataKeys.RelativePath
+                );
+                compositeR2RImageRelativePath = Path.ChangeExtension(
+                    compositeR2RImageRelativePath,
+                    "r2r" + Path.GetExtension(compositeR2RImageRelativePath)
+                );
                 var compositeR2RImage = Path.Combine(OutputPath, compositeR2RImageRelativePath);
 
                 TaskItem r2rCompilationEntry = new TaskItem(MainAssembly);
@@ -246,31 +324,58 @@ namespace Microsoft.NET.Build.Tasks
                 {
                     string compositePDBImage = null;
                     string compositePDBRelativePath = null;
-                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && hasValidDiaSymReaderLib)
+                    if (
+                        RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                        && hasValidDiaSymReaderLib
+                    )
                     {
                         compositePDBImage = Path.ChangeExtension(compositeR2RImage, ".ni.pdb");
-                        compositePDBRelativePath = Path.ChangeExtension(compositeR2RImageRelativePath, ".ni.pdb");
+                        compositePDBRelativePath = Path.ChangeExtension(
+                            compositeR2RImageRelativePath,
+                            ".ni.pdb"
+                        );
                     }
                     else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                     {
-                        string perfmapExtension = (_perfmapFormatVersion >= 1 ? ".ni.r2rmap" : ".ni.{composite}.map");
-                        compositePDBImage = Path.ChangeExtension(compositeR2RImage, perfmapExtension);
-                        compositePDBRelativePath = Path.ChangeExtension(compositeR2RImageRelativePath, perfmapExtension);
+                        string perfmapExtension = (
+                            _perfmapFormatVersion >= 1 ? ".ni.r2rmap" : ".ni.{composite}.map"
+                        );
+                        compositePDBImage = Path.ChangeExtension(
+                            compositeR2RImage,
+                            perfmapExtension
+                        );
+                        compositePDBRelativePath = Path.ChangeExtension(
+                            compositeR2RImageRelativePath,
+                            perfmapExtension
+                        );
                     }
 
-                    if (compositePDBImage != null && ReadyToRunUseCrossgen2 && !_crossgen2IsVersion5)
+                    if (
+                        compositePDBImage != null
+                        && ReadyToRunUseCrossgen2
+                        && !_crossgen2IsVersion5
+                    )
                     {
                         r2rCompilationEntry.SetMetadata(MetadataKeys.EmitSymbols, "true");
-                        r2rCompilationEntry.SetMetadata(MetadataKeys.OutputPDBImage, compositePDBImage);
+                        r2rCompilationEntry.SetMetadata(
+                            MetadataKeys.OutputPDBImage,
+                            compositePDBImage
+                        );
 
                         // Publish composite PDB file
                         TaskItem r2rSymbolsFileToPublish = new TaskItem(MainAssembly);
                         r2rSymbolsFileToPublish.ItemSpec = compositePDBImage;
-                        r2rSymbolsFileToPublish.SetMetadata(MetadataKeys.RelativePath, compositePDBRelativePath);
+                        r2rSymbolsFileToPublish.SetMetadata(
+                            MetadataKeys.RelativePath,
+                            compositePDBRelativePath
+                        );
                         r2rSymbolsFileToPublish.RemoveMetadata(MetadataKeys.OriginalItemSpec);
                         if (!IncludeSymbolsInSingleFile)
                         {
-                            r2rSymbolsFileToPublish.SetMetadata(MetadataKeys.ExcludeFromSingleFile, "true");
+                            r2rSymbolsFileToPublish.SetMetadata(
+                                MetadataKeys.ExcludeFromSingleFile,
+                                "true"
+                            );
                         }
 
                         r2rFilesPublishList.Add(r2rSymbolsFileToPublish);
@@ -283,7 +388,10 @@ namespace Microsoft.NET.Build.Tasks
                 TaskItem compositeR2RFileToPublish = new TaskItem(MainAssembly);
                 compositeR2RFileToPublish.ItemSpec = compositeR2RImage;
                 compositeR2RFileToPublish.RemoveMetadata(MetadataKeys.OriginalItemSpec);
-                compositeR2RFileToPublish.SetMetadata(MetadataKeys.RelativePath, compositeR2RImageRelativePath);
+                compositeR2RFileToPublish.SetMetadata(
+                    MetadataKeys.RelativePath,
+                    compositeR2RImageRelativePath
+                );
                 r2rFilesPublishList.Add(compositeR2RFileToPublish);
             }
         }
@@ -305,10 +413,16 @@ namespace Microsoft.NET.Build.Tasks
             public static Eligibility None => new Eligibility(EligibilityEnum.None);
 
             public bool NoEligibility => _flags == EligibilityEnum.None;
-            public bool IsReference => (_flags & EligibilityEnum.Reference) == EligibilityEnum.Reference;
-            public bool ReferenceHiddenFromCompositeBuild => (_flags & EligibilityEnum.HideReferenceFromComposite) == EligibilityEnum.HideReferenceFromComposite;
-            public bool CompileIntoCompositeImage => (_flags & EligibilityEnum.CompileIntoCompositeImage) == EligibilityEnum.CompileIntoCompositeImage;
-            public bool CompileSeparately => (_flags & EligibilityEnum.CompileSeparately) == EligibilityEnum.CompileSeparately;
+            public bool IsReference =>
+                (_flags & EligibilityEnum.Reference) == EligibilityEnum.Reference;
+            public bool ReferenceHiddenFromCompositeBuild =>
+                (_flags & EligibilityEnum.HideReferenceFromComposite)
+                == EligibilityEnum.HideReferenceFromComposite;
+            public bool CompileIntoCompositeImage =>
+                (_flags & EligibilityEnum.CompileIntoCompositeImage)
+                == EligibilityEnum.CompileIntoCompositeImage;
+            public bool CompileSeparately =>
+                (_flags & EligibilityEnum.CompileSeparately) == EligibilityEnum.CompileSeparately;
             public bool Compile => CompileIntoCompositeImage || CompileSeparately;
 
             private Eligibility(EligibilityEnum flags)
@@ -319,7 +433,9 @@ namespace Microsoft.NET.Build.Tasks
             public static Eligibility CreateReferenceEligibility(bool hideFromCompositeBuilds)
             {
                 if (hideFromCompositeBuilds)
-                    return new Eligibility(EligibilityEnum.Reference | EligibilityEnum.HideReferenceFromComposite);
+                    return new Eligibility(
+                        EligibilityEnum.Reference | EligibilityEnum.HideReferenceFromComposite
+                    );
                 else
                     return new Eligibility(EligibilityEnum.Reference);
             }
@@ -327,9 +443,15 @@ namespace Microsoft.NET.Build.Tasks
             public static Eligibility CreateCompileEligibility(bool doNotBuildIntoComposite)
             {
                 if (doNotBuildIntoComposite)
-                    return new Eligibility(EligibilityEnum.Reference | EligibilityEnum.HideReferenceFromComposite | EligibilityEnum.CompileSeparately);
+                    return new Eligibility(
+                        EligibilityEnum.Reference
+                            | EligibilityEnum.HideReferenceFromComposite
+                            | EligibilityEnum.CompileSeparately
+                    );
                 else
-                    return new Eligibility(EligibilityEnum.Reference | EligibilityEnum.CompileIntoCompositeImage);
+                    return new Eligibility(
+                        EligibilityEnum.Reference | EligibilityEnum.CompileIntoCompositeImage
+                    );
             }
         };
 
@@ -352,10 +474,18 @@ namespace Microsoft.NET.Build.Tasks
             }
         }
 
-        private static Eligibility GetInputFileEligibility(ITaskItem file, bool compositeCompile, HashSet<string> exclusionSet, HashSet<string> r2rCompositeExclusionSet)
+        private static Eligibility GetInputFileEligibility(
+            ITaskItem file,
+            bool compositeCompile,
+            HashSet<string> exclusionSet,
+            HashSet<string> r2rCompositeExclusionSet
+        )
         {
             // Check to see if this is a valid ILOnly image that we can compile
-            if (!file.ItemSpec.EndsWith(".dll", StringComparison.OrdinalIgnoreCase) && !file.ItemSpec.EndsWith(".exe", StringComparison.OrdinalIgnoreCase))
+            if (
+                !file.ItemSpec.EndsWith(".dll", StringComparison.OrdinalIgnoreCase)
+                && !file.ItemSpec.EndsWith(".exe", StringComparison.OrdinalIgnoreCase)
+            )
             {
                 // If it isn't a dll or an exe, it certainly isn't a valid ILOnly image for compilation
                 return Eligibility.None;
@@ -384,10 +514,22 @@ namespace Microsoft.NET.Build.Tasks
                             return Eligibility.None;
                         }
 
-                        bool excludeFromR2R = (exclusionSet != null && exclusionSet.Contains(Path.GetFileName(file.ItemSpec)));
-                        bool excludeFromComposite = (r2rCompositeExclusionSet != null && r2rCompositeExclusionSet.Contains(Path.GetFileName(file.ItemSpec))) || excludeFromR2R;
+                        bool excludeFromR2R = (
+                            exclusionSet != null
+                            && exclusionSet.Contains(Path.GetFileName(file.ItemSpec))
+                        );
+                        bool excludeFromComposite =
+                            (
+                                r2rCompositeExclusionSet != null
+                                && r2rCompositeExclusionSet.Contains(
+                                    Path.GetFileName(file.ItemSpec)
+                                )
+                            ) || excludeFromR2R;
 
-                        if ((pereader.PEHeaders.CorHeader.Flags & CorFlags.ILOnly) != CorFlags.ILOnly)
+                        if (
+                            (pereader.PEHeaders.CorHeader.Flags & CorFlags.ILOnly)
+                            != CorFlags.ILOnly
+                        )
                         {
                             // This can happen due to C++/CLI binaries or due to previously R2R compiled binaries.
 
@@ -401,7 +543,9 @@ namespace Microsoft.NET.Build.Tasks
                                 // If previously compiled as R2R, treat as reference if this would be compiled separately
                                 if (!compositeCompile || excludeFromComposite)
                                 {
-                                    return Eligibility.CreateReferenceEligibility(excludeFromComposite);
+                                    return Eligibility.CreateReferenceEligibility(
+                                        excludeFromComposite
+                                    );
                                 }
                             }
                         }
@@ -424,7 +568,9 @@ namespace Microsoft.NET.Build.Tasks
                                 return Eligibility.CreateReferenceEligibility(excludeFromComposite);
                         }
 
-                        return Eligibility.CreateCompileEligibility(!compositeCompile || excludeFromComposite);
+                        return Eligibility.CreateCompileEligibility(
+                            !compositeCompile || excludeFromComposite
+                        );
                     }
                 }
                 catch (BadImageFormatException)
@@ -439,33 +585,51 @@ namespace Microsoft.NET.Build.Tasks
         {
             foreach (var attributeHandle in mdReader.GetAssemblyDefinition().GetCustomAttributes())
             {
-                EntityHandle attributeCtor = mdReader.GetCustomAttribute(attributeHandle).Constructor;
+                EntityHandle attributeCtor = mdReader
+                    .GetCustomAttribute(attributeHandle)
+                    .Constructor;
 
                 StringHandle attributeTypeName = default;
                 StringHandle attributeTypeNamespace = default;
 
                 if (attributeCtor.Kind == HandleKind.MemberReference)
                 {
-                    EntityHandle attributeMemberParent = mdReader.GetMemberReference((MemberReferenceHandle)attributeCtor).Parent;
+                    EntityHandle attributeMemberParent = mdReader
+                        .GetMemberReference((MemberReferenceHandle)attributeCtor)
+                        .Parent;
                     if (attributeMemberParent.Kind == HandleKind.TypeReference)
                     {
-                        TypeReference attributeTypeRef = mdReader.GetTypeReference((TypeReferenceHandle)attributeMemberParent);
+                        TypeReference attributeTypeRef = mdReader.GetTypeReference(
+                            (TypeReferenceHandle)attributeMemberParent
+                        );
                         attributeTypeName = attributeTypeRef.Name;
                         attributeTypeNamespace = attributeTypeRef.Namespace;
                     }
                 }
                 else if (attributeCtor.Kind == HandleKind.MethodDefinition)
                 {
-                    TypeDefinitionHandle attributeTypeDefHandle = mdReader.GetMethodDefinition((MethodDefinitionHandle)attributeCtor).GetDeclaringType();
-                    TypeDefinition attributeTypeDef = mdReader.GetTypeDefinition(attributeTypeDefHandle);
+                    TypeDefinitionHandle attributeTypeDefHandle = mdReader
+                        .GetMethodDefinition((MethodDefinitionHandle)attributeCtor)
+                        .GetDeclaringType();
+                    TypeDefinition attributeTypeDef = mdReader.GetTypeDefinition(
+                        attributeTypeDefHandle
+                    );
                     attributeTypeName = attributeTypeDef.Name;
                     attributeTypeNamespace = attributeTypeDef.Namespace;
                 }
 
-                if (!attributeTypeName.IsNil &&
-                    !attributeTypeNamespace.IsNil &&
-                    mdReader.StringComparer.Equals(attributeTypeName, "ReferenceAssemblyAttribute") &&
-                    mdReader.StringComparer.Equals(attributeTypeNamespace, "System.Runtime.CompilerServices"))
+                if (
+                    !attributeTypeName.IsNil
+                    && !attributeTypeNamespace.IsNil
+                    && mdReader.StringComparer.Equals(
+                        attributeTypeName,
+                        "ReferenceAssemblyAttribute"
+                    )
+                    && mdReader.StringComparer.Equals(
+                        attributeTypeNamespace,
+                        "System.Runtime.CompilerServices"
+                    )
+                )
                 {
                     return true;
                 }
@@ -479,7 +643,10 @@ namespace Microsoft.NET.Build.Tasks
             foreach (var assemblyRefHandle in mdReader.AssemblyReferences)
             {
                 AssemblyReference assemblyRef = mdReader.GetAssemblyReference(assemblyRefHandle);
-                if ((assemblyRef.Flags & AssemblyFlags.WindowsRuntime) == AssemblyFlags.WindowsRuntime)
+                if (
+                    (assemblyRef.Flags & AssemblyFlags.WindowsRuntime)
+                    == AssemblyFlags.WindowsRuntime
+                )
                 {
                     return true;
                 }

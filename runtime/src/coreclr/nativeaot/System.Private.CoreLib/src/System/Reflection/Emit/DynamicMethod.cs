@@ -9,13 +9,29 @@ namespace System.Reflection.Emit
     public sealed class DynamicMethod : MethodInfo
     {
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
-        public DynamicMethod(string name, MethodAttributes attributes, CallingConventions callingConvention, Type returnType, Type[] parameterTypes, Module m, bool skipVisibility)
+        public DynamicMethod(
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type returnType,
+            Type[] parameterTypes,
+            Module m,
+            bool skipVisibility
+        )
         {
             ReflectionEmitThrower.ThrowPlatformNotSupportedException();
         }
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
-        public DynamicMethod(string name, MethodAttributes attributes, CallingConventions callingConvention, Type returnType, Type[] parameterTypes, Type owner, bool skipVisibility)
+        public DynamicMethod(
+            string name,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type returnType,
+            Type[] parameterTypes,
+            Type owner,
+            bool skipVisibility
+        )
         {
             ReflectionEmitThrower.ThrowPlatformNotSupportedException();
         }
@@ -27,7 +43,12 @@ namespace System.Reflection.Emit
         }
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
-        public DynamicMethod(string name, Type returnType, Type[] parameterTypes, bool restrictedSkipVisibility)
+        public DynamicMethod(
+            string name,
+            Type returnType,
+            Type[] parameterTypes,
+            bool restrictedSkipVisibility
+        )
         {
             ReflectionEmitThrower.ThrowPlatformNotSupportedException();
         }
@@ -39,7 +60,13 @@ namespace System.Reflection.Emit
         }
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
-        public DynamicMethod(string name, Type returnType, Type[] parameterTypes, Module m, bool skipVisibility)
+        public DynamicMethod(
+            string name,
+            Type returnType,
+            Type[] parameterTypes,
+            Module m,
+            bool skipVisibility
+        )
         {
             ReflectionEmitThrower.ThrowPlatformNotSupportedException();
         }
@@ -51,92 +78,66 @@ namespace System.Reflection.Emit
         }
 
         [RequiresDynamicCode("Creating a DynamicMethod requires dynamic code.")]
-        public DynamicMethod(string name, Type returnType, Type[] parameterTypes, Type owner, bool skipVisibility)
+        public DynamicMethod(
+            string name,
+            Type returnType,
+            Type[] parameterTypes,
+            Type owner,
+            bool skipVisibility
+        )
         {
             ReflectionEmitThrower.ThrowPlatformNotSupportedException();
         }
 
         public override MethodAttributes Attributes
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override CallingConventions CallingConvention
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override Type DeclaringType
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public bool InitLocals
         {
-            get
-            {
-                return default;
-            }
-            set
-            {
-            }
+            get { return default; }
+            set { }
         }
 
         public override RuntimeMethodHandle MethodHandle
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override string Name
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override Type ReflectedType
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override ParameterInfo ReturnParameter
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override Type ReturnType
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public override ICustomAttributeProvider ReturnTypeCustomAttributes
         {
-            get
-            {
-                return default;
-            }
+            get { return default; }
         }
 
         public sealed override Delegate CreateDelegate(Type delegateType)
@@ -149,7 +150,11 @@ namespace System.Reflection.Emit
             return default;
         }
 
-        public ParameterBuilder DefineParameter(int position, ParameterAttributes attributes, string parameterName)
+        public ParameterBuilder DefineParameter(
+            int position,
+            ParameterAttributes attributes,
+            string parameterName
+        )
         {
             return default;
         }
@@ -194,7 +199,13 @@ namespace System.Reflection.Emit
             return default;
         }
 
-        public override object? Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object? Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             return default;
         }

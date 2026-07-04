@@ -16,11 +16,10 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
 {
     using static EmbeddedSyntaxHelpers;
     using static JsonHelpers;
-
     using JsonNodeOrToken = EmbeddedSyntaxNodeOrToken<JsonKind, JsonNode>;
+    using JsonSeparatedList = EmbeddedSeparatedSyntaxNodeList<JsonKind, JsonNode, JsonValueNode>;
     using JsonToken = EmbeddedSyntaxToken<JsonKind>;
     using JsonTrivia = EmbeddedSyntaxTrivia<JsonKind>;
-    using JsonSeparatedList = EmbeddedSeparatedSyntaxNodeList<JsonKind, JsonNode, JsonValueNode>;
 
     /// <summary>
     /// Parser used for reading in a sequence of <see cref="VirtualChar"/>s, and producing a <see
@@ -53,11 +52,26 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
     [NonCopyable]
     internal partial struct JsonParser
     {
-        private static readonly string s_closeBracketExpected = string.Format(FeaturesResources._0_expected, ']');
-        private static readonly string s_closeBraceExpected = string.Format(FeaturesResources._0_expected, '}');
-        private static readonly string s_openParenExpected = string.Format(FeaturesResources._0_expected, '(');
-        private static readonly string s_closeParenExpected = string.Format(FeaturesResources._0_expected, ')');
-        private static readonly string s_commaExpected = string.Format(FeaturesResources._0_expected, ',');
+        private static readonly string s_closeBracketExpected = string.Format(
+            FeaturesResources._0_expected,
+            ']'
+        );
+        private static readonly string s_closeBraceExpected = string.Format(
+            FeaturesResources._0_expected,
+            '}'
+        );
+        private static readonly string s_openParenExpected = string.Format(
+            FeaturesResources._0_expected,
+            '('
+        );
+        private static readonly string s_closeParenExpected = string.Format(
+            FeaturesResources._0_expected,
+            ')'
+        );
+        private static readonly string s_commaExpected = string.Format(
+            FeaturesResources._0_expected,
+            ','
+        );
 
         private JsonLexer _lexer;
         private JsonToken _currentToken;
@@ -79,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
         private bool _inArray;
         private bool _inConstructor;
 
-        private JsonParser(VirtualCharSequence text) : this()
+        private JsonParser(VirtualCharSequence text)
+            : this()
         {
             _lexer = new JsonLexer(text);
 
@@ -88,7 +103,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
         }
 
         /// <summary>
-        /// Returns the latest token the lexer has produced, and then asks the lexer to 
+        /// Returns the latest token the lexer has produced, and then asks the lexer to
         /// produce the next token after that.
         /// </summary>
         private JsonToken ConsumeCurrentToken()
@@ -99,8 +114,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
         }
 
         /// <summary>
-        /// Given an input text, parses out a fully representative syntax tree  and list of 
-        /// diagnostics.  Parsing should always succeed, except in the case of the stack 
+        /// Given an input text, parses out a fully representative syntax tree  and list of
+        /// diagnostics.  Parsing should always succeed, except in the case of the stack
         /// overflowing.
         /// </summary>
         public static JsonTree? TryParse(VirtualCharSequence text, JsonOptions options)
@@ -139,9 +154,13 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
 
             var diagnostic = Earliest(Earliest(diagnostic1, diagnostic2), diagnostic3);
 
-            return new JsonTree(_lexer.Text, root, diagnostic == null
-                ? ImmutableArray<EmbeddedDiagnostic>.Empty
-                : ImmutableArray.Create(diagnostic.Value));
+            return new JsonTree(
+                _lexer.Text,
+                root,
+                diagnostic == null
+                    ? ImmutableArray<EmbeddedDiagnostic>.Empty
+                    : ImmutableArray.Create(diagnostic.Value)
+            );
         }
 
         private static EmbeddedDiagnostic? Earliest(EmbeddedDiagnostic? d1, EmbeddedDiagnostic? d2)
@@ -159,7 +178,9 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
         /// Checks for errors in json for both json.net and strict mode.
         /// </summary>
         private static EmbeddedDiagnostic? CheckTopLevel(
-            VirtualCharSequence text, JsonCompilationUnit compilationUnit)
+            VirtualCharSequence text,
+            JsonCompilationUnit compilationUnit
+        )
         {
             var sequence = compilationUnit.Sequence;
             if (sequence.IsEmpty)
@@ -168,9 +189,12 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                 //
                 // Note: we always have at least some content (either real nodes in the tree) or trivia on the EOF token
                 // as we only parse when we have a non-empty sequence of virtual chars to begin with.
-                if (text.Length > 0 &&
-                    compilationUnit.EndOfFileToken.LeadingTrivia.All(
-                        t => t.Kind is JsonKind.WhitespaceTrivia or JsonKind.EndOfLineTrivia))
+                if (
+                    text.Length > 0
+                    && compilationUnit.EndOfFileToken.LeadingTrivia.All(t =>
+                        t.Kind is JsonKind.WhitespaceTrivia or JsonKind.EndOfLineTrivia
+                    )
+                )
                 {
                     return new EmbeddedDiagnostic(FeaturesResources.Syntax_error, GetSpan(text));
                 }
@@ -183,7 +207,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                 var firstToken = GetFirstToken(sequence[1]);
                 return new EmbeddedDiagnostic(
                     string.Format(FeaturesResources._0_unexpected, firstToken.VirtualChars[0]),
-                    firstToken.GetSpan());
+                    firstToken.GetSpan()
+                );
             }
             else
             {
@@ -195,14 +220,16 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                     var emptyValue = (JsonCommaValueNode)child;
                     return new EmbeddedDiagnostic(
                         string.Format(FeaturesResources._0_unexpected, ','),
-                        emptyValue.CommaToken.GetSpan());
+                        emptyValue.CommaToken.GetSpan()
+                    );
                 }
                 else if (child.Kind == JsonKind.Property)
                 {
                     var propertyValue = (JsonPropertyNode)child;
                     return new EmbeddedDiagnostic(
                         string.Format(FeaturesResources._0_unexpected, ':'),
-                        propertyValue.ColonToken.GetSpan());
+                        propertyValue.ColonToken.GetSpan()
+                    );
                 }
 
                 return CheckSyntax(child);
@@ -243,7 +270,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                     {
                         return new EmbeddedDiagnostic(
                             FeaturesResources.Properties_not_allowed_in_an_array,
-                            ((JsonPropertyNode)child).ColonToken.GetSpan());
+                            ((JsonPropertyNode)child).ColonToken.GetSpan()
+                        );
                     }
                 }
 
@@ -258,7 +286,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                     {
                         return new EmbeddedDiagnostic(
                             FeaturesResources.Property_name_must_be_followed_by_a_colon,
-                            child.GetSpan());
+                            child.GetSpan()
+                        );
                     }
                 }
 
@@ -266,8 +295,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             }
         }
 
-        private static JsonToken GetFirstToken(JsonNodeOrToken nodeOrToken)
-            => nodeOrToken.IsNode ? GetFirstToken(nodeOrToken.Node.ChildAt(0)) : nodeOrToken.Token;
+        private static JsonToken GetFirstToken(JsonNodeOrToken nodeOrToken) =>
+            nodeOrToken.IsNode ? GetFirstToken(nodeOrToken.Node.ChildAt(0)) : nodeOrToken.Token;
 
         private static EmbeddedDiagnostic? GetFirstDiagnostic(JsonNode node)
         {
@@ -281,13 +310,13 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             return null;
         }
 
-        private static EmbeddedDiagnostic? GetFirstDiagnostic(JsonNodeOrToken child)
-            => child.IsNode
-                ? GetFirstDiagnostic(child.Node)
-                : GetFirstDiagnostic(child.Token);
+        private static EmbeddedDiagnostic? GetFirstDiagnostic(JsonNodeOrToken child) =>
+            child.IsNode ? GetFirstDiagnostic(child.Node) : GetFirstDiagnostic(child.Token);
 
-        private static EmbeddedDiagnostic? GetFirstDiagnostic(JsonToken token)
-            => GetFirstDiagnostic(token.LeadingTrivia) ?? token.Diagnostics.FirstOrNull() ?? GetFirstDiagnostic(token.TrailingTrivia);
+        private static EmbeddedDiagnostic? GetFirstDiagnostic(JsonToken token) =>
+            GetFirstDiagnostic(token.LeadingTrivia)
+            ?? token.Diagnostics.FirstOrNull()
+            ?? GetFirstDiagnostic(token.TrailingTrivia);
 
         private static EmbeddedDiagnostic? GetFirstDiagnostic(ImmutableArray<JsonTrivia> list)
         {
@@ -354,20 +383,22 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                 // a message about a missing comma.  Instead, we'll give a specific message that we didn't get a
                 // property when we expected one.
                 if (ShouldConsumeSequenceElement())
-                    result.Add(ConsumeToken(JsonKind.CommaToken, allProperties ? s_commaExpected : null));
+                    result.Add(
+                        ConsumeToken(JsonKind.CommaToken, allProperties ? s_commaExpected : null)
+                    );
             }
 
             return new JsonSeparatedList(result.ToImmutable());
         }
 
-        private readonly bool ShouldConsumeSequenceElement()
-            => _currentToken.Kind switch
+        private readonly bool ShouldConsumeSequenceElement() =>
+            _currentToken.Kind switch
             {
                 JsonKind.EndOfFile => false,
                 JsonKind.CloseBraceToken => !_inObject,
                 JsonKind.CloseBracketToken => !_inArray,
                 JsonKind.CloseParenToken => !_inConstructor,
-                _ => true
+                _ => true,
             };
 
         private JsonValueNode ParseValue()
@@ -391,18 +422,27 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             }
         }
 
-        private static void SplitLiteral(JsonToken literalToken, out JsonToken minusToken, out JsonToken newLiteralToken)
+        private static void SplitLiteral(
+            JsonToken literalToken,
+            out JsonToken minusToken,
+            out JsonToken newLiteralToken
+        )
         {
             minusToken = CreateToken(
-                JsonKind.MinusToken, literalToken.LeadingTrivia,
+                JsonKind.MinusToken,
+                literalToken.LeadingTrivia,
                 literalToken.VirtualChars.GetSubSequence(new TextSpan(0, 1)),
-                ImmutableArray<JsonTrivia>.Empty);
+                ImmutableArray<JsonTrivia>.Empty
+            );
             newLiteralToken = CreateToken(
                 literalToken.Kind,
                 ImmutableArray<JsonTrivia>.Empty,
-                literalToken.VirtualChars.GetSubSequence(TextSpan.FromBounds(1, literalToken.VirtualChars.Length)),
+                literalToken.VirtualChars.GetSubSequence(
+                    TextSpan.FromBounds(1, literalToken.VirtualChars.Length)
+                ),
                 literalToken.TrailingTrivia,
-                literalToken.Diagnostics);
+                literalToken.Diagnostics
+            );
         }
 
         private JsonPropertyNode ParseProperty(JsonToken stringLiteralOrText)
@@ -421,16 +461,26 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             if (_currentToken.Kind == JsonKind.CommaToken)
             {
                 return new JsonPropertyNode(
-                    stringLiteralOrText, colonToken,
-                    new JsonCommaValueNode(CreateMissingToken(JsonKind.CommaToken)));
+                    stringLiteralOrText,
+                    colonToken,
+                    new JsonCommaValueNode(CreateMissingToken(JsonKind.CommaToken))
+                );
             }
             else if (_currentToken.Kind == JsonKind.EndOfFile)
             {
                 return new JsonPropertyNode(
-                    stringLiteralOrText, colonToken,
-                    new JsonCommaValueNode(CreateMissingToken(JsonKind.CommaToken).AddDiagnosticIfNone(new EmbeddedDiagnostic(
-                        FeaturesResources.Missing_property_value,
-                        GetTokenStartPositionSpan(_currentToken)))));
+                    stringLiteralOrText,
+                    colonToken,
+                    new JsonCommaValueNode(
+                        CreateMissingToken(JsonKind.CommaToken)
+                            .AddDiagnosticIfNone(
+                                new EmbeddedDiagnostic(
+                                    FeaturesResources.Missing_property_value,
+                                    GetTokenStartPositionSpan(_currentToken)
+                                )
+                            )
+                    )
+                );
             }
 
             var value = ParseValue();
@@ -440,10 +490,14 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                 var nestedProperty = (JsonPropertyNode)value;
                 value = new JsonPropertyNode(
                     nestedProperty.NameToken,
-                    nestedProperty.ColonToken.AddDiagnosticIfNone(new EmbeddedDiagnostic(
-                        FeaturesResources.Nested_properties_not_allowed,
-                        nestedProperty.ColonToken.GetSpan())),
-                    nestedProperty.Value);
+                    nestedProperty.ColonToken.AddDiagnosticIfNone(
+                        new EmbeddedDiagnostic(
+                            FeaturesResources.Nested_properties_not_allowed,
+                            nestedProperty.ColonToken.GetSpan()
+                        )
+                    ),
+                    nestedProperty.Value
+                );
             }
 
             return new JsonPropertyNode(stringLiteralOrText, colonToken, value);
@@ -470,12 +524,14 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             // Check for certain literal values.  Some of these (like NaN) are json.net only.
             // We'll check for these later in the strict-mode pass.
             Debug.Assert(token.VirtualChars.Length > 0);
-            if (TryMatch(token, "NaN", JsonKind.NaNLiteralToken, out var newKind) ||
-                TryMatch(token, "null", JsonKind.NullLiteralToken, out newKind) ||
-                TryMatch(token, "true", JsonKind.TrueLiteralToken, out newKind) ||
-                TryMatch(token, "false", JsonKind.FalseLiteralToken, out newKind) ||
-                TryMatch(token, "Infinity", JsonKind.InfinityLiteralToken, out newKind) ||
-                TryMatch(token, "undefined", JsonKind.UndefinedLiteralToken, out newKind))
+            if (
+                TryMatch(token, "NaN", JsonKind.NaNLiteralToken, out var newKind)
+                || TryMatch(token, "null", JsonKind.NullLiteralToken, out newKind)
+                || TryMatch(token, "true", JsonKind.TrueLiteralToken, out newKind)
+                || TryMatch(token, "false", JsonKind.FalseLiteralToken, out newKind)
+                || TryMatch(token, "Infinity", JsonKind.InfinityLiteralToken, out newKind)
+                || TryMatch(token, "undefined", JsonKind.UndefinedLiteralToken, out newKind)
+            )
             {
                 return new JsonLiteralNode(token.With(kind: newKind));
             }
@@ -485,7 +541,9 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                 SplitLiteral(token, out var minusToken, out var newLiteralToken);
 
                 return new JsonNegativeLiteralNode(
-                    minusToken, newLiteralToken.With(kind: JsonKind.InfinityLiteralToken));
+                    minusToken,
+                    newLiteralToken.With(kind: JsonKind.InfinityLiteralToken)
+                );
             }
 
             var firstChar = token.VirtualChars[0];
@@ -493,9 +551,15 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                 return new JsonLiteralNode(token.With(kind: JsonKind.NumberToken));
 
             return new JsonTextNode(
-                token.With(kind: JsonKind.TextToken).AddDiagnosticIfNone(new EmbeddedDiagnostic(
-                    string.Format(FeaturesResources._0_unexpected, firstChar.ToString()),
-                    firstChar.Span)));
+                token
+                    .With(kind: JsonKind.TextToken)
+                    .AddDiagnosticIfNone(
+                        new EmbeddedDiagnostic(
+                            string.Format(FeaturesResources._0_unexpected, firstChar.ToString()),
+                            firstChar.Span
+                        )
+                    )
+            );
         }
 
         private JsonConstructorNode ParseConstructor(JsonToken token)
@@ -508,13 +572,19 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                 ConsumeToken(JsonKind.TextToken, FeaturesResources.Name_expected),
                 ConsumeToken(JsonKind.OpenParenToken, s_openParenExpected),
                 ParseSequence(),
-                ConsumeToken(JsonKind.CloseParenToken, s_closeParenExpected));
+                ConsumeToken(JsonKind.CloseParenToken, s_closeParenExpected)
+            );
 
             _inConstructor = savedInConstructor;
             return result;
         }
 
-        private static bool TryMatch(JsonToken token, string val, JsonKind kind, out JsonKind newKind)
+        private static bool TryMatch(
+            JsonToken token,
+            string val,
+            JsonKind kind,
+            out JsonKind newKind
+        )
         {
             if (Matches(token, val))
             {
@@ -541,11 +611,9 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             return true;
         }
 
-        private static bool IsDigit(VirtualChar ch)
-            => ch.Value is >= '0' and <= '9';
+        private static bool IsDigit(VirtualChar ch) => ch.Value is >= '0' and <= '9';
 
-        private JsonCommaValueNode ParseCommaValue()
-            => new(ConsumeCurrentToken());
+        private JsonCommaValueNode ParseCommaValue() => new(ConsumeCurrentToken());
 
         private JsonArrayNode ParseArray()
         {
@@ -555,7 +623,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             var result = new JsonArrayNode(
                 ConsumeCurrentToken(),
                 ParseSequence(),
-                ConsumeToken(JsonKind.CloseBracketToken, s_closeBracketExpected));
+                ConsumeToken(JsonKind.CloseBracketToken, s_closeBracketExpected)
+            );
 
             _inArray = savedInArray;
             return result;
@@ -569,7 +638,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             var result = new JsonObjectNode(
                 ConsumeCurrentToken(),
                 ParseCommaSeparatedSequence(),
-                ConsumeToken(JsonKind.CloseBraceToken, s_closeBraceExpected));
+                ConsumeToken(JsonKind.CloseBraceToken, s_closeBraceExpected)
+            );
 
             _inObject = savedInObject;
             return result;
@@ -584,11 +654,13 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
             if (error == null)
                 return result;
 
-            return result.AddDiagnosticIfNone(new EmbeddedDiagnostic(error, GetTokenStartPositionSpan(_currentToken)));
+            return result.AddDiagnosticIfNone(
+                new EmbeddedDiagnostic(error, GetTokenStartPositionSpan(_currentToken))
+            );
         }
 
-        private readonly TextSpan GetTokenStartPositionSpan(JsonToken token)
-            => token.Kind == JsonKind.EndOfFile
+        private readonly TextSpan GetTokenStartPositionSpan(JsonToken token) =>
+            token.Kind == JsonKind.EndOfFile
                 ? new TextSpan(_lexer.Text.Last().Span.End, 0)
                 : new TextSpan(token.VirtualChars[0].Span.Start, 0);
     }

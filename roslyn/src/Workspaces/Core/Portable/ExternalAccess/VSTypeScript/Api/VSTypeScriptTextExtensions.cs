@@ -9,10 +9,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
 {
     internal static class VSTypeScriptTextExtensions
     {
-        public static IEnumerable<Document> GetRelatedDocuments(this SourceTextContainer container)
-            => TextExtensions.GetRelatedDocuments(container);
+        public static IEnumerable<Document> GetRelatedDocuments(
+            this SourceTextContainer container
+        ) => TextExtensions.GetRelatedDocuments(container);
 
-        public static Document? GetOpenDocumentInCurrentContextWithChanges(this SourceText text)
-            => TextExtensions.GetOpenDocumentInCurrentContextWithChanges(text);
+        public static Document? GetOpenDocumentInCurrentContextWithChanges(this SourceText text) =>
+            TextExtensions.GetOpenDocumentInCurrentContextWithChanges(text);
     }
 }

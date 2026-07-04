@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,72 +33,77 @@ using System.Text;
 
 namespace Microsoft.Build.Internal
 {
-        internal class CollectionFromEnumerable<T> : ICollection<T>
+    internal class CollectionFromEnumerable<T> : ICollection<T>
+    {
+        IEnumerable<T> backingEnumerable;
+
+        public CollectionFromEnumerable(IEnumerable<T> enumerable)
         {
-                IEnumerable<T> backingEnumerable;
-
-                public CollectionFromEnumerable (IEnumerable<T> enumerable)
-                {
-                        backingEnumerable = enumerable;
-                }
-
-                public void Add (T item)
-                {
-                        throw new InvalidOperationException ("This collection is read-only.");
-                }
-
-                public void Clear ()
-                {
-                        throw new InvalidOperationException ("This collection is read-only.");
-                }
-
-                public bool Contains (T item)
-                {
-                        List<T> backingList = backingEnumerable as List<T>;
-                        if (backingList != null)
-                                return backingList.Contains (item);
-                        return backingEnumerable.Contains (item);
-                }
-
-                public void CopyTo (T[] array, int arrayIndex)
-                {
-                        List<T> backingList = backingEnumerable as List<T>;
-                        if (backingList != null) {
-                                backingList.CopyTo (array, arrayIndex);
-                                return;
-                        }
-                        int i = arrayIndex;
-                        foreach (var item in backingEnumerable) {
-                                array[i++] = item;
-                        }
-                }
-
-                public int Count {
-                        get {
-                                var backingList = backingEnumerable as List<T>;
-                                if(backingList == null)
-                                        backingEnumerable = backingList = new List<T> (backingEnumerable);
-                                return backingList.Count;
-                        }
-                }
-
-                public bool IsReadOnly {
-                        get { return true; }
-                }
-
-                public bool Remove (T item)
-                {
-                        throw new InvalidOperationException ("This collection is read-only.");
-                }
-
-                public IEnumerator<T> GetEnumerator ()
-                {
-                        return backingEnumerable.GetEnumerator ();
-                }
-
-                System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator ()
-                {
-                        return backingEnumerable.GetEnumerator ();
-                }
+            backingEnumerable = enumerable;
         }
+
+        public void Add(T item)
+        {
+            throw new InvalidOperationException("This collection is read-only.");
+        }
+
+        public void Clear()
+        {
+            throw new InvalidOperationException("This collection is read-only.");
+        }
+
+        public bool Contains(T item)
+        {
+            List<T> backingList = backingEnumerable as List<T>;
+            if (backingList != null)
+                return backingList.Contains(item);
+            return backingEnumerable.Contains(item);
+        }
+
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            List<T> backingList = backingEnumerable as List<T>;
+            if (backingList != null)
+            {
+                backingList.CopyTo(array, arrayIndex);
+                return;
+            }
+            int i = arrayIndex;
+            foreach (var item in backingEnumerable)
+            {
+                array[i++] = item;
+            }
+        }
+
+        public int Count
+        {
+            get
+            {
+                var backingList = backingEnumerable as List<T>;
+                if (backingList == null)
+                    backingEnumerable = backingList = new List<T>(backingEnumerable);
+                return backingList.Count;
+            }
+        }
+
+        public bool IsReadOnly
+        {
+            get { return true; }
+        }
+
+        public bool Remove(T item)
+        {
+            throw new InvalidOperationException("This collection is read-only.");
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return backingEnumerable.GetEnumerator();
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return backingEnumerable.GetEnumerator();
+        }
+    }
 }

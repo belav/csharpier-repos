@@ -8,14 +8,17 @@ namespace System.Security.Claims
     /// </summary>
     public static class ClaimTypes
     {
-        internal const string ClaimTypeNamespace = "http://schemas.microsoft.com/ws/2008/06/identity/claims";
+        internal const string ClaimTypeNamespace =
+            "http://schemas.microsoft.com/ws/2008/06/identity/claims";
 
         public const string AuthenticationInstant = ClaimTypeNamespace + "/authenticationinstant";
         public const string AuthenticationMethod = ClaimTypeNamespace + "/authenticationmethod";
         public const string CookiePath = ClaimTypeNamespace + "/cookiepath";
         public const string DenyOnlyPrimarySid = ClaimTypeNamespace + "/denyonlyprimarysid";
-        public const string DenyOnlyPrimaryGroupSid = ClaimTypeNamespace + "/denyonlyprimarygroupsid";
-        public const string DenyOnlyWindowsDeviceGroup = ClaimTypeNamespace + "/denyonlywindowsdevicegroup";
+        public const string DenyOnlyPrimaryGroupSid =
+            ClaimTypeNamespace + "/denyonlyprimarygroupsid";
+        public const string DenyOnlyWindowsDeviceGroup =
+            ClaimTypeNamespace + "/denyonlywindowsdevicegroup";
         public const string Dsa = ClaimTypeNamespace + "/dsa";
         public const string Expiration = ClaimTypeNamespace + "/expiration";
         public const string Expired = ClaimTypeNamespace + "/expired";
@@ -34,15 +37,16 @@ namespace System.Security.Claims
         public const string WindowsFqbnVersion = ClaimTypeNamespace + "/windowsfqbnversion";
         public const string WindowsSubAuthority = ClaimTypeNamespace + "/windowssubauthority";
 
-
         //
         // From System.IdentityModel.Claims
         //
-        internal const string ClaimType2005Namespace = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims";
+        internal const string ClaimType2005Namespace =
+            "http://schemas.xmlsoap.org/ws/2005/05/identity/claims";
 
         public const string Anonymous = ClaimType2005Namespace + "/anonymous";
         public const string Authentication = ClaimType2005Namespace + "/authentication";
-        public const string AuthorizationDecision = ClaimType2005Namespace + "/authorizationdecision";
+        public const string AuthorizationDecision =
+            ClaimType2005Namespace + "/authorizationdecision";
         public const string Country = ClaimType2005Namespace + "/country";
         public const string DateOfBirth = ClaimType2005Namespace + "/dateofbirth";
         public const string Dns = ClaimType2005Namespace + "/dns";
@@ -69,9 +73,11 @@ namespace System.Security.Claims
         public const string Upn = ClaimType2005Namespace + "/upn";
         public const string Uri = ClaimType2005Namespace + "/uri";
         public const string Webpage = ClaimType2005Namespace + "/webpage";
-        public const string X500DistinguishedName = ClaimType2005Namespace + "/x500distinguishedname";
+        public const string X500DistinguishedName =
+            ClaimType2005Namespace + "/x500distinguishedname";
 
-        internal const string ClaimType2009Namespace = "http://schemas.xmlsoap.org/ws/2009/09/identity/claims";
+        internal const string ClaimType2009Namespace =
+            "http://schemas.xmlsoap.org/ws/2009/09/identity/claims";
         public const string Actor = ClaimType2009Namespace + "/actor";
     }
 }

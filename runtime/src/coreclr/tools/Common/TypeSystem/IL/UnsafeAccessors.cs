@@ -17,7 +17,10 @@ namespace Internal.IL
         public static MethodIL TryGetIL(EcmaMethod method)
         {
             Debug.Assert(method != null);
-            CustomAttributeValue<TypeDesc>? decodedAttribute = method.GetDecodedCustomAttribute("System.Runtime.CompilerServices", "UnsafeAccessorAttribute");
+            CustomAttributeValue<TypeDesc>? decodedAttribute = method.GetDecodedCustomAttribute(
+                "System.Runtime.CompilerServices",
+                "UnsafeAccessorAttribute"
+            );
             if (!decodedAttribute.HasValue)
             {
                 return null;
@@ -35,16 +38,19 @@ namespace Internal.IL
                 return GenerateAccessorBadImageFailure(method);
             }
 
-            if (!TryParseUnsafeAccessorAttribute(method, decodedAttribute.Value, out UnsafeAccessorKind kind, out string name))
+            if (
+                !TryParseUnsafeAccessorAttribute(
+                    method,
+                    decodedAttribute.Value,
+                    out UnsafeAccessorKind kind,
+                    out string name
+                )
+            )
             {
                 return GenerateAccessorBadImageFailure(method);
             }
 
-            GenerationContext context = new()
-            {
-                Kind = kind,
-                Declaration = method
-            };
+            GenerationContext context = new() { Kind = kind, Declaration = method };
 
             MethodSignature sig = method.Signature;
             TypeDesc retType = sig.ReturnType;
@@ -92,9 +98,11 @@ namespace Internal.IL
 
                     // If the non-static method access is for a
                     // value type, the instance must be byref.
-                    if (kind == UnsafeAccessorKind.Method
+                    if (
+                        kind == UnsafeAccessorKind.Method
                         && firstArgType.IsValueType
-                        && !firstArgType.IsByRef)
+                        && !firstArgType.IsByRef
+                    )
                     {
                         return GenerateAccessorBadImageFailure(method);
                     }
@@ -122,10 +130,14 @@ namespace Internal.IL
                     // The return type must be byref.
                     // If the non-static field access is for a
                     // value type, the instance must be byref.
-                    if (!retType.IsByRef
-                        || (kind == UnsafeAccessorKind.Field
+                    if (
+                        !retType.IsByRef
+                        || (
+                            kind == UnsafeAccessorKind.Field
                             && firstArgType.IsValueType
-                            && !firstArgType.IsByRef))
+                            && !firstArgType.IsByRef
+                        )
+                    )
                     {
                         return GenerateAccessorBadImageFailure(method);
                     }
@@ -136,7 +148,13 @@ namespace Internal.IL
                     }
 
                     context.IsTargetStatic = kind == UnsafeAccessorKind.StaticField;
-                    if (!TrySetTargetField(ref context, name, ((ParameterizedType)retType).GetParameterType()))
+                    if (
+                        !TrySetTargetField(
+                            ref context,
+                            name,
+                            ((ParameterizedType)retType).GetParameterType()
+                        )
+                    )
                     {
                         return GenerateAccessorSpecificFailure(ref context, name, isAmbiguous);
                     }
@@ -157,10 +175,15 @@ namespace Internal.IL
             Method,
             StaticMethod,
             Field,
-            StaticField
+            StaticField,
         };
 
-        private static bool TryParseUnsafeAccessorAttribute(MethodDesc method, CustomAttributeValue<TypeDesc> decodedValue, out UnsafeAccessorKind kind, out string name)
+        private static bool TryParseUnsafeAccessorAttribute(
+            MethodDesc method,
+            CustomAttributeValue<TypeDesc> decodedValue,
+            out UnsafeAccessorKind kind,
+            out string name
+        )
         {
             kind = default;
             name = default;
@@ -168,8 +191,11 @@ namespace Internal.IL
             var context = method.Context;
 
             // Get the kind of accessor
-            if (decodedValue.FixedArguments.Length != 1
-                || decodedValue.FixedArguments[0].Type.UnderlyingType != context.GetWellKnownType(WellKnownType.Int32))
+            if (
+                decodedValue.FixedArguments.Length != 1
+                || decodedValue.FixedArguments[0].Type.UnderlyingType
+                    != context.GetWellKnownType(WellKnownType.Int32)
+            )
             {
                 return false;
             }
@@ -226,8 +252,10 @@ namespace Internal.IL
 
             // Due to how some types degrade, we block on parameterized
             // types. For example ref or pointer.
-            if ((targetType.IsParameterizedType && !targetType.IsArray)
-                || targetType.IsFunctionPointer)
+            if (
+                (targetType.IsParameterizedType && !targetType.IsArray)
+                || targetType.IsFunctionPointer
+            )
             {
                 targetType = null;
             }
@@ -236,7 +264,11 @@ namespace Internal.IL
             return validated != null;
         }
 
-        private static bool DoesMethodMatchUnsafeAccessorDeclaration(ref GenerationContext context, MethodDesc method, bool ignoreCustomModifiers)
+        private static bool DoesMethodMatchUnsafeAccessorDeclaration(
+            ref GenerationContext context,
+            MethodDesc method,
+            bool ignoreCustomModifiers
+        )
         {
             MethodSignature declSig = context.Declaration.Signature;
             MethodSignature maybeSig = method.Signature;
@@ -252,11 +284,14 @@ namespace Internal.IL
                 {
                     EmbeddedSignatureDataKind.UnmanagedCallConv,
                     EmbeddedSignatureDataKind.RequiredCustomModifier,
-                    EmbeddedSignatureDataKind.OptionalCustomModifier
+                    EmbeddedSignatureDataKind.OptionalCustomModifier,
                 };
 
-                var declData = declSig.GetEmbeddedSignatureData(kinds) ?? Array.Empty<EmbeddedSignatureData>();
-                var maybeData = maybeSig.GetEmbeddedSignatureData(kinds) ?? Array.Empty<EmbeddedSignatureData>();
+                var declData =
+                    declSig.GetEmbeddedSignatureData(kinds) ?? Array.Empty<EmbeddedSignatureData>();
+                var maybeData =
+                    maybeSig.GetEmbeddedSignatureData(kinds)
+                    ?? Array.Empty<EmbeddedSignatureData>();
                 if (declData.Length != maybeData.Length)
                 {
                     return false;
@@ -309,8 +344,10 @@ namespace Internal.IL
             }
 
             // Validate calling convention of declaration.
-            if ((declSig.Flags & MethodSignatureFlags.UnmanagedCallingConventionMask)
-                != (maybeSig.Flags & MethodSignatureFlags.UnmanagedCallingConventionMask))
+            if (
+                (declSig.Flags & MethodSignatureFlags.UnmanagedCallingConventionMask)
+                != (maybeSig.Flags & MethodSignatureFlags.UnmanagedCallingConventionMask)
+            )
             {
                 return false;
             }
@@ -353,7 +390,8 @@ namespace Internal.IL
             {
                 // Skip over first argument (index 0) on non-constructor accessors.
                 // See argument count validation above.
-                TypeDesc declType = context.Kind == UnsafeAccessorKind.Constructor ? declSig[i] : declSig[i + 1];
+                TypeDesc declType =
+                    context.Kind == UnsafeAccessorKind.Constructor ? declSig[i] : declSig[i + 1];
                 TypeDesc maybeType = maybeSig[i];
 
                 // Compare the types
@@ -366,7 +404,12 @@ namespace Internal.IL
             return true;
         }
 
-        private static bool TrySetTargetMethod(ref GenerationContext context, string name, out bool isAmbiguous, bool ignoreCustomModifiers = true)
+        private static bool TrySetTargetMethod(
+            ref GenerationContext context,
+            string name,
+            out bool isAmbiguous,
+            bool ignoreCustomModifiers = true
+        )
         {
             TypeDesc targetType = context.TargetType;
 
@@ -386,7 +429,13 @@ namespace Internal.IL
                 }
 
                 // Check signature
-                if (!DoesMethodMatchUnsafeAccessorDeclaration(ref context, md, ignoreCustomModifiers))
+                if (
+                    !DoesMethodMatchUnsafeAccessorDeclaration(
+                        ref context,
+                        md,
+                        ignoreCustomModifiers
+                    )
+                )
                 {
                     continue;
                 }
@@ -399,7 +448,14 @@ namespace Internal.IL
                         // We have detected ambiguity when ignoring custom modifiers.
                         // Start over, but look for a match requiring custom modifiers
                         // to match precisely.
-                        if (TrySetTargetMethod(ref context, name, out isAmbiguous, ignoreCustomModifiers: false))
+                        if (
+                            TrySetTargetMethod(
+                                ref context,
+                                name,
+                                out isAmbiguous,
+                                ignoreCustomModifiers: false
+                            )
+                        )
                             return true;
                     }
 
@@ -415,7 +471,11 @@ namespace Internal.IL
             return context.TargetMethod != null;
         }
 
-        private static bool TrySetTargetField(ref GenerationContext context, string name, TypeDesc fieldType)
+        private static bool TrySetTargetField(
+            ref GenerationContext context,
+            string name,
+            TypeDesc fieldType
+        )
         {
             TypeDesc targetType = context.TargetType;
 
@@ -427,8 +487,7 @@ namespace Internal.IL
                 }
 
                 // Validate the name and target type match.
-                if (fd.Name.Equals(name)
-                    && fieldType == fd.FieldType)
+                if (fd.Name.Equals(name) && fieldType == fd.FieldType)
                 {
                     context.TargetField = fd;
                     return true;
@@ -486,7 +545,11 @@ namespace Internal.IL
             return emit.Link(context.Declaration);
         }
 
-        private static MethodIL GenerateAccessorSpecificFailure(ref GenerationContext context, string name, bool ambiguous)
+        private static MethodIL GenerateAccessorSpecificFailure(
+            ref GenerationContext context,
+            string name,
+            bool ambiguous
+        )
         {
             ILEmitter emit = new ILEmitter();
             ILCodeStream codeStream = emit.NewCodeStream();
@@ -499,21 +562,32 @@ namespace Internal.IL
             if (ambiguous)
             {
                 codeStream.EmitLdc((int)ExceptionStringID.AmbiguousMatchUnsafeAccessor);
-                thrower = typeSysContext.GetHelperEntryPoint("ThrowHelpers", "ThrowAmbiguousMatchException");
+                thrower = typeSysContext.GetHelperEntryPoint(
+                    "ThrowHelpers",
+                    "ThrowAmbiguousMatchException"
+                );
             }
             else
             {
-
                 ExceptionStringID id;
-                if (context.Kind == UnsafeAccessorKind.Field || context.Kind == UnsafeAccessorKind.StaticField)
+                if (
+                    context.Kind == UnsafeAccessorKind.Field
+                    || context.Kind == UnsafeAccessorKind.StaticField
+                )
                 {
                     id = ExceptionStringID.MissingField;
-                    thrower = typeSysContext.GetHelperEntryPoint("ThrowHelpers", "ThrowMissingFieldException");
+                    thrower = typeSysContext.GetHelperEntryPoint(
+                        "ThrowHelpers",
+                        "ThrowMissingFieldException"
+                    );
                 }
                 else
                 {
                     id = ExceptionStringID.MissingMethod;
-                    thrower = typeSysContext.GetHelperEntryPoint("ThrowHelpers", "ThrowMissingMethodException");
+                    thrower = typeSysContext.GetHelperEntryPoint(
+                        "ThrowHelpers",
+                        "ThrowMissingMethodException"
+                    );
                 }
 
                 codeStream.EmitLdc((int)id);
@@ -534,7 +608,10 @@ namespace Internal.IL
             ILCodeLabel label = emit.NewCodeLabel();
             codeStream.EmitLabel(label);
             codeStream.EmitLdc((int)ExceptionStringID.BadImageFormatGeneric);
-            MethodDesc thrower = method.Context.GetHelperEntryPoint("ThrowHelpers", "ThrowBadImageFormatException");
+            MethodDesc thrower = method.Context.GetHelperEntryPoint(
+                "ThrowHelpers",
+                "ThrowBadImageFormatException"
+            );
             codeStream.Emit(ILOpcode.call, emit.NewToken(thrower));
             codeStream.Emit(ILOpcode.br, label);
 

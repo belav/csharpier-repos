@@ -30,79 +30,94 @@ using System.Collections;
 using Microsoft.Build.BuildEngine;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
+using MonoTests.Helpers;
 using NUnit.Framework;
 
-using MonoTests.Helpers;
+namespace MonoTests.Microsoft.Build.BuildEngine
+{
+    [TestFixture]
+    public class UsingTaskTest
+    {
+        Engine engine;
+        Project project;
 
-namespace MonoTests.Microsoft.Build.BuildEngine {
-	[TestFixture]
-	public class UsingTaskTest {
-		
-		Engine		engine;
-		Project		project;
-		
-		[Test]
-		public void TestAssemblyFile1 ()
-		{
-			string documentString = @"
+        [Test]
+        public void TestAssemblyFile1()
+        {
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<UsingTask
-						AssemblyFile='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll") + @"'
+						AssemblyFile='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll")
+                + @"'
 						TaskName='SimpleTask'
 						Condition='true'
 					/>
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
-			
-			IEnumerator en = project.UsingTasks.GetEnumerator ();
-			en.MoveNext ();
-			
-			UsingTask ut = (UsingTask) en.Current;
-			
-			Assert.AreEqual (TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll"), ut.AssemblyFile, "A1");
-			Assert.IsNull (ut.AssemblyName, "A2");
-			Assert.AreEqual ("true", ut.Condition, "A3");
-			Assert.AreEqual (false, ut.IsImported, "A4");
-			Assert.AreEqual ("SimpleTask", ut.TaskName, "A5");
-		}
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-		[Test]
-		public void TestAssemblyFile2 ()
-		{
-			string documentString = @"
+            IEnumerator en = project.UsingTasks.GetEnumerator();
+            en.MoveNext();
+
+            UsingTask ut = (UsingTask)en.Current;
+
+            Assert.AreEqual(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll"),
+                ut.AssemblyFile,
+                "A1"
+            );
+            Assert.IsNull(ut.AssemblyName, "A2");
+            Assert.AreEqual("true", ut.Condition, "A3");
+            Assert.AreEqual(false, ut.IsImported, "A4");
+            Assert.AreEqual("SimpleTask", ut.TaskName, "A5");
+        }
+
+        [Test]
+        public void TestAssemblyFile2()
+        {
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<UsingTask
-						AssemblyFile='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll") + @"'
+						AssemblyFile='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll")
+                + @"'
 						TaskName='SimpleTask'
 					/>
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
-			
-			IEnumerator en = project.UsingTasks.GetEnumerator ();
-			en.MoveNext ();
-			
-			UsingTask ut = (UsingTask) en.Current;
-			
-			Assert.AreEqual (TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll"), ut.AssemblyFile, "A1");
-			Assert.IsNull (ut.AssemblyName, "A2");
-			Assert.AreEqual (null, ut.Condition, "A3");
-			Assert.AreEqual (false, ut.IsImported, "A4");
-			Assert.AreEqual ("SimpleTask", ut.TaskName, "A5");
-		}
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-		[Test]
-		// NOTE: quite hacky test, it works because MSBuild doesn't check type of task at loading
-		public void TestAssemblyName ()
-		{
-			string documentString = @"
+            IEnumerator en = project.UsingTasks.GetEnumerator();
+            en.MoveNext();
+
+            UsingTask ut = (UsingTask)en.Current;
+
+            Assert.AreEqual(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll"),
+                ut.AssemblyFile,
+                "A1"
+            );
+            Assert.IsNull(ut.AssemblyName, "A2");
+            Assert.AreEqual(null, ut.Condition, "A3");
+            Assert.AreEqual(false, ut.IsImported, "A4");
+            Assert.AreEqual("SimpleTask", ut.TaskName, "A5");
+        }
+
+        [Test]
+        // NOTE: quite hacky test, it works because MSBuild doesn't check type of task at loading
+        public void TestAssemblyName()
+        {
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<UsingTask
 						AssemblyName='System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'
@@ -112,44 +127,52 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
-			
-			IEnumerator en = project.UsingTasks.GetEnumerator ();
-			en.MoveNext ();
-			
-			UsingTask ut = (UsingTask) en.Current;
-			
-			Assert.AreEqual ("System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", ut.AssemblyName, "A1");
-			Assert.IsNull (ut.AssemblyFile, "A2");
-			Assert.AreEqual ("true", ut.Condition, "A3");
-			Assert.AreEqual (false, ut.IsImported, "A4");
-			Assert.AreEqual ("System.Uri", ut.TaskName, "A5");
-		}
-		
-		[Test]
-		[ExpectedException (typeof (InvalidProjectFileException))]
-		public void TestTaskName ()
-		{
-			string documentString = @"
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
+
+            IEnumerator en = project.UsingTasks.GetEnumerator();
+            en.MoveNext();
+
+            UsingTask ut = (UsingTask)en.Current;
+
+            Assert.AreEqual(
+                "System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+                ut.AssemblyName,
+                "A1"
+            );
+            Assert.IsNull(ut.AssemblyFile, "A2");
+            Assert.AreEqual("true", ut.Condition, "A3");
+            Assert.AreEqual(false, ut.IsImported, "A4");
+            Assert.AreEqual("System.Uri", ut.TaskName, "A5");
+        }
+
+        [Test]
+        [ExpectedException(typeof(InvalidProjectFileException))]
+        public void TestTaskName()
+        {
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<UsingTask
-						AssemblyFile='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll") + @"'
+						AssemblyFile='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll")
+                + @"'
 					/>
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
-		}
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
+        }
 
-		[Test]
-		[ExpectedException (typeof (InvalidProjectFileException))]
-		public void TestAssemblyNameOrAssemblyFile1 ()
-		{
-			string documentString = @"
+        [Test]
+        [ExpectedException(typeof(InvalidProjectFileException))]
+        public void TestAssemblyNameOrAssemblyFile1()
+        {
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<UsingTask
 						TaskName='SimpleTask'
@@ -157,15 +180,16 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
-		}
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
+        }
 
-		[Test]
-		public void TestAssemblyNameOrAssemblyFileConditionFalse ()
-		{
-			string documentString = @"
+        [Test]
+        public void TestAssemblyNameOrAssemblyFileConditionFalse()
+        {
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<UsingTask
 						TaskName='SimpleTask'
@@ -174,21 +198,25 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			try {
-				project.LoadXml (documentString);
-			} catch (InvalidProjectFileException) {
-				return;
-			}
-			Assert.Fail ("Project load should've failed");
-		}
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            try
+            {
+                project.LoadXml(documentString);
+            }
+            catch (InvalidProjectFileException)
+            {
+                return;
+            }
+            Assert.Fail("Project load should've failed");
+        }
 
-		[Test]
-		[ExpectedException (typeof (InvalidProjectFileException))]
-		public void TestAssemblyNameOrAssemblyFile2 ()
-		{
-			string documentString = @"
+        [Test]
+        [ExpectedException(typeof(InvalidProjectFileException))]
+        public void TestAssemblyNameOrAssemblyFile2()
+        {
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<UsingTask
 						TaskName='SimpleTask'
@@ -198,23 +226,28 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
-		}
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
+        }
 
-		[Test]
-		[Category ("NotDotNet")]
-		public void TestDuplicate1 ()
-		{
-			string documentString = @"
+        [Test]
+        [Category("NotDotNet")]
+        public void TestDuplicate1()
+        {
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<UsingTask
-						AssemblyFile='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll") + @"'
+						AssemblyFile='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll")
+                + @"'
 						TaskName='TrueTestTask'
 					/>
 					<UsingTask
-						AssemblyFile='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll") + @"'
+						AssemblyFile='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll")
+                + @"'
 						TaskName='TrueTestTask'
 					/>
 
@@ -224,35 +257,41 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			MonoTests.Microsoft.Build.Tasks.TestMessageLogger logger =
-				new MonoTests.Microsoft.Build.Tasks.TestMessageLogger ();
-			engine.RegisterLogger (logger);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            MonoTests.Microsoft.Build.Tasks.TestMessageLogger logger =
+                new MonoTests.Microsoft.Build.Tasks.TestMessageLogger();
+            engine.RegisterLogger(logger);
 
-			project.LoadXml (documentString);
+            project.LoadXml(documentString);
 
-			if (!project.Build ("1")) {
-				logger.DumpMessages ();
-				Assert.Fail ("Build failed");
-			}
+            if (!project.Build("1"))
+            {
+                logger.DumpMessages();
+                Assert.Fail("Build failed");
+            }
 
-			Assert.AreEqual (2, project.UsingTasks.Count, "A0");
+            Assert.AreEqual(2, project.UsingTasks.Count, "A0");
 
-			foreach (UsingTask ut in project.UsingTasks) {
-				Assert.AreEqual (TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll"), ut.AssemblyFile, "A1");
-				Assert.IsNull (ut.AssemblyName, "A2");
-				Assert.AreEqual (null, ut.Condition, "A3");
-				Assert.AreEqual (false, ut.IsImported, "A4");
-				Assert.AreEqual ("TrueTestTask", ut.TaskName, "A5");
-			}
-		}
+            foreach (UsingTask ut in project.UsingTasks)
+            {
+                Assert.AreEqual(
+                    TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll"),
+                    ut.AssemblyFile,
+                    "A1"
+                );
+                Assert.IsNull(ut.AssemblyName, "A2");
+                Assert.AreEqual(null, ut.Condition, "A3");
+                Assert.AreEqual(false, ut.IsImported, "A4");
+                Assert.AreEqual("TrueTestTask", ut.TaskName, "A5");
+            }
+        }
 
-
-		[Test]
-		public void TestLazyLoad1 ()
-		{
-			string documentString = @"
+        [Test]
+        public void TestLazyLoad1()
+        {
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<UsingTask
 						AssemblyFile='NonExistantAssembly.dll'
@@ -267,47 +306,54 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			MonoTests.Microsoft.Build.Tasks.TestMessageLogger logger =
-				new MonoTests.Microsoft.Build.Tasks.TestMessageLogger ();
-			engine.RegisterLogger (logger);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            MonoTests.Microsoft.Build.Tasks.TestMessageLogger logger =
+                new MonoTests.Microsoft.Build.Tasks.TestMessageLogger();
+            engine.RegisterLogger(logger);
 
-			project.LoadXml (documentString);
+            project.LoadXml(documentString);
 
-			if (!project.Build ("1")) {
-				logger.DumpMessages ();
-				Assert.Fail ("Build failed");
-			}
+            if (!project.Build("1"))
+            {
+                logger.DumpMessages();
+                Assert.Fail("Build failed");
+            }
 
-			if (project.Build ("2"))
-				Assert.Fail ("Build should've failed, as a task from a nonexistant assembly is referenced");
+            if (project.Build("2"))
+                Assert.Fail(
+                    "Build should've failed, as a task from a nonexistant assembly is referenced"
+                );
 
+            IEnumerator en = project.UsingTasks.GetEnumerator();
+            en.MoveNext();
 
-			IEnumerator en = project.UsingTasks.GetEnumerator ();
-			en.MoveNext ();
+            UsingTask ut = (UsingTask)en.Current;
 
-			UsingTask ut = (UsingTask) en.Current;
+            Assert.AreEqual("NonExistantAssembly.dll", ut.AssemblyFile, "A1");
+            Assert.IsNull(ut.AssemblyName, "A2");
+            Assert.AreEqual(null, ut.Condition, "A3");
+            Assert.AreEqual(false, ut.IsImported, "A4");
+            Assert.AreEqual("SimpleTask", ut.TaskName, "A5");
+        }
 
-			Assert.AreEqual ("NonExistantAssembly.dll", ut.AssemblyFile, "A1");
-			Assert.IsNull (ut.AssemblyName, "A2");
-			Assert.AreEqual (null, ut.Condition, "A3");
-			Assert.AreEqual (false, ut.IsImported, "A4");
-			Assert.AreEqual ("SimpleTask", ut.TaskName, "A5");
-		}
-
-		[Test]
-		[Category ("NotDotNet")]
-		public void TestLazyLoad2 ()
-		{
-			string documentString = @"
+        [Test]
+        [Category("NotDotNet")]
+        public void TestLazyLoad2()
+        {
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<UsingTask
-						AssemblyFile='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll") + @"'
+						AssemblyFile='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll")
+                + @"'
 						TaskName='Another.SameTask'
 					/>
 					<UsingTask
-						AssemblyFile='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll") + @"'
+						AssemblyFile='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll")
+                + @"'
 						TaskName='Other.SameTask'
 					/>
 
@@ -323,29 +369,33 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			MonoTests.Microsoft.Build.Tasks.TestMessageLogger logger =
-				new MonoTests.Microsoft.Build.Tasks.TestMessageLogger ();
-			engine.RegisterLogger (logger);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            MonoTests.Microsoft.Build.Tasks.TestMessageLogger logger =
+                new MonoTests.Microsoft.Build.Tasks.TestMessageLogger();
+            engine.RegisterLogger(logger);
 
-			project.LoadXml (documentString);
+            project.LoadXml(documentString);
 
-			if (!project.Build ("1")) {
-				logger.DumpMessages ();
-				Assert.Fail ("Build failed");
-			}
+            if (!project.Build("1"))
+            {
+                logger.DumpMessages();
+                Assert.Fail("Build failed");
+            }
 
-			logger.CheckLoggedMessageHead ("I0: Other.SameTask I1: Another.SameTask", "A1");
-		}
+            logger.CheckLoggedMessageHead("I0: Other.SameTask I1: Another.SameTask", "A1");
+        }
 
-		[Test]
-		public void TestLazyLoad3 ()
-		{
-			string documentString = @"
+        [Test]
+        public void TestLazyLoad3()
+        {
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<UsingTask
-						AssemblyFile='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll") + @"'
+						AssemblyFile='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll")
+                + @"'
 						TaskName='Another.SameTask'
 						Condition='false'
 					/>
@@ -356,30 +406,34 @@ namespace MonoTests.Microsoft.Build.BuildEngine {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			MonoTests.Microsoft.Build.Tasks.TestMessageLogger logger =
-				new MonoTests.Microsoft.Build.Tasks.TestMessageLogger ();
-			engine.RegisterLogger (logger);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            MonoTests.Microsoft.Build.Tasks.TestMessageLogger logger =
+                new MonoTests.Microsoft.Build.Tasks.TestMessageLogger();
+            engine.RegisterLogger(logger);
 
-			project.LoadXml (documentString);
+            project.LoadXml(documentString);
 
-			IEnumerator en = project.UsingTasks.GetEnumerator ();
-			en.MoveNext ();
+            IEnumerator en = project.UsingTasks.GetEnumerator();
+            en.MoveNext();
 
-			UsingTask ut = (UsingTask) en.Current;
+            UsingTask ut = (UsingTask)en.Current;
 
-			Assert.AreEqual (TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll"), ut.AssemblyFile, "A1");
-			Assert.IsNull (ut.AssemblyName, "A2");
-			Assert.AreEqual ("false", ut.Condition, "A3");
-			Assert.AreEqual (false, ut.IsImported, "A4");
-			Assert.AreEqual ("Another.SameTask", ut.TaskName, "A5");
+            Assert.AreEqual(
+                TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll"),
+                ut.AssemblyFile,
+                "A1"
+            );
+            Assert.IsNull(ut.AssemblyName, "A2");
+            Assert.AreEqual("false", ut.Condition, "A3");
+            Assert.AreEqual(false, ut.IsImported, "A4");
+            Assert.AreEqual("Another.SameTask", ut.TaskName, "A5");
 
-			if (project.Build ("1")) {
-				logger.DumpMessages ();
-				Assert.Fail ("Build should've failed");
-			}
-		}
-
-	}
+            if (project.Build("1"))
+            {
+                logger.DumpMessages();
+                Assert.Fail("Build should've failed");
+            }
+        }
+    }
 }

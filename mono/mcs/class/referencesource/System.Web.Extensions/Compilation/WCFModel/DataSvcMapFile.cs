@@ -27,10 +27,7 @@ namespace Microsoft.VSDesigner.WCFModel
 
         public DataSvcMapFileImpl Impl
         {
-            get
-            {
-                return _impl;
-            }
+            get { return _impl; }
         }
 
         public DataSvcMapFile()
@@ -47,46 +44,28 @@ namespace Microsoft.VSDesigner.WCFModel
 
         public override string ID
         {
-            get
-            {
-                return _impl.ID;
-            }
-            set
-            {
-                _impl.ID = value;
-            }
+            get { return _impl.ID; }
+            set { _impl.ID = value; }
         }
 
         public override List<MetadataSource> MetadataSourceList
         {
-            get
-            {
-                return _impl.MetadataSourceList;
-            }
+            get { return _impl.MetadataSourceList; }
         }
 
         public override List<MetadataFile> MetadataList
         {
-            get
-            {
-                return _impl.MetadataList;
-            }
+            get { return _impl.MetadataList; }
         }
 
         public override List<ExtensionFile> Extensions
         {
-            get
-            {
-                return _impl.Extensions;
-            }
+            get { return _impl.Extensions; }
         }
 
         public List<Parameter> Parameters
         {
-            get
-            {
-                return _impl.Parameters;
-            }
+            get { return _impl.Parameters; }
         }
     }
 

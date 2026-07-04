@@ -19,31 +19,48 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(expected, actual);
         }
 
-        public static SourceText WithReplace(this SourceText text, int offset, int length, string newText)
+        public static SourceText WithReplace(
+            this SourceText text,
+            int offset,
+            int length,
+            string newText
+        )
         {
             var oldFullText = text.ToString();
             var span = new TextSpan(offset, length);
-            var newFullText = oldFullText.Substring(0, offset) + newText + oldFullText.Substring(span.End);
+            var newFullText =
+                oldFullText.Substring(0, offset) + newText + oldFullText.Substring(span.End);
             return SourceText.From(newFullText);
         }
 
-        public static SourceText WithReplaceFirst(this SourceText text, string oldText, string newText)
+        public static SourceText WithReplaceFirst(
+            this SourceText text,
+            string oldText,
+            string newText
+        )
         {
             var oldFullText = text.ToString();
             int offset = oldFullText.IndexOf(oldText, StringComparison.Ordinal);
             int length = oldText.Length;
             var span = new TextSpan(offset, length);
-            var newFullText = oldFullText.Substring(0, offset) + newText + oldFullText.Substring(span.End);
+            var newFullText =
+                oldFullText.Substring(0, offset) + newText + oldFullText.Substring(span.End);
             return SourceText.From(newFullText);
         }
 
-        public static SourceText WithReplace(this SourceText text, int startIndex, string oldText, string newText)
+        public static SourceText WithReplace(
+            this SourceText text,
+            int startIndex,
+            string oldText,
+            string newText
+        )
         {
             var oldFullText = text.ToString();
             int offset = oldFullText.IndexOf(oldText, startIndex, StringComparison.Ordinal); // Use an offset to find the first element to replace at
             int length = oldText.Length;
             var span = new TextSpan(offset, length);
-            var newFullText = oldFullText.Substring(0, offset) + newText + oldFullText.Substring(span.End);
+            var newFullText =
+                oldFullText.Substring(0, offset) + newText + oldFullText.Substring(span.End);
             return SourceText.From(newFullText);
         }
 
@@ -52,12 +69,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             return WithReplace(text, offset, 0, newText);
         }
 
-        public static SourceText WithInsertBefore(this SourceText text, string existingText, string newText)
+        public static SourceText WithInsertBefore(
+            this SourceText text,
+            string existingText,
+            string newText
+        )
         {
             var oldFullText = text.ToString();
             int offset = oldFullText.IndexOf(existingText, StringComparison.Ordinal);
             var span = new TextSpan(offset, 0);
-            var newFullText = oldFullText.Substring(0, offset) + newText + oldFullText.Substring(offset);
+            var newFullText =
+                oldFullText.Substring(0, offset) + newText + oldFullText.Substring(offset);
             return SourceText.From(newFullText);
         }
 

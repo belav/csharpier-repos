@@ -14,7 +14,7 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
 //
@@ -28,71 +28,104 @@
 //
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Microsoft.Build.Execution
 {
-	public class BuildRequestData
-	{
-		public BuildRequestData (ProjectInstance projectInstance, string[] targetsToBuild)
-        	: this (projectInstance, targetsToBuild, null, BuildRequestDataFlags.None)
-		{
-		}
+    public class BuildRequestData
+    {
+        public BuildRequestData(ProjectInstance projectInstance, string[] targetsToBuild)
+            : this(projectInstance, targetsToBuild, null, BuildRequestDataFlags.None) { }
 
-		public BuildRequestData (ProjectInstance projectInstance, string[] targetsToBuild, HostServices hostServices)
-        	: this (projectInstance, targetsToBuild, hostServices, BuildRequestDataFlags.None)
-		{
-		}
+        public BuildRequestData(
+            ProjectInstance projectInstance,
+            string[] targetsToBuild,
+            HostServices hostServices
+        )
+            : this(projectInstance, targetsToBuild, hostServices, BuildRequestDataFlags.None) { }
 
-		public BuildRequestData (ProjectInstance projectInstance, string[] targetsToBuild, HostServices hostServices,
-				BuildRequestDataFlags flags)
-		{
-			if (targetsToBuild == null)
-				throw new ArgumentNullException ("targetsToBuild");
-			ProjectInstance = projectInstance;
-			TargetNames = targetsToBuild;
-			HostServices = hostServices;
-			Flags = flags;
-		}
+        public BuildRequestData(
+            ProjectInstance projectInstance,
+            string[] targetsToBuild,
+            HostServices hostServices,
+            BuildRequestDataFlags flags
+        )
+        {
+            if (targetsToBuild == null)
+                throw new ArgumentNullException("targetsToBuild");
+            ProjectInstance = projectInstance;
+            TargetNames = targetsToBuild;
+            HostServices = hostServices;
+            Flags = flags;
+        }
 
-		public BuildRequestData (string projectFullPath, IDictionary<string, string> globalProperties,
-				string toolsVersion, string[] targetsToBuild, HostServices hostServices)
-			: this (projectFullPath, globalProperties, toolsVersion, targetsToBuild, hostServices, BuildRequestDataFlags.None)
-		{
-		}
+        public BuildRequestData(
+            string projectFullPath,
+            IDictionary<string, string> globalProperties,
+            string toolsVersion,
+            string[] targetsToBuild,
+            HostServices hostServices
+        )
+            : this(
+                projectFullPath,
+                globalProperties,
+                toolsVersion,
+                targetsToBuild,
+                hostServices,
+                BuildRequestDataFlags.None
+            ) { }
 
-		public BuildRequestData (string projectFullPath, IDictionary<string, string> globalProperties,
-				string toolsVersion, string[] targetsToBuild, HostServices hostServices, BuildRequestDataFlags flags)
-			: this (new ProjectInstance (projectFullPath, globalProperties, toolsVersion), targetsToBuild, hostServices, flags)
-		{
-			ExplicitlySpecifiedToolsVersion = toolsVersion;
-		}
+        public BuildRequestData(
+            string projectFullPath,
+            IDictionary<string, string> globalProperties,
+            string toolsVersion,
+            string[] targetsToBuild,
+            HostServices hostServices,
+            BuildRequestDataFlags flags
+        )
+            : this(
+                new ProjectInstance(projectFullPath, globalProperties, toolsVersion),
+                targetsToBuild,
+                hostServices,
+                flags
+            )
+        {
+            ExplicitlySpecifiedToolsVersion = toolsVersion;
+        }
 
-		public string ExplicitlySpecifiedToolsVersion { get; private set; }
+        public string ExplicitlySpecifiedToolsVersion { get; private set; }
 
-		[MonoTODO ("unused")]
-		public BuildRequestDataFlags Flags { get; private set; }
+        [MonoTODO("unused")]
+        public BuildRequestDataFlags Flags { get; private set; }
 
-		[MonoTODO ("unused")]
-		public HostServices HostServices { get; private set; }
+        [MonoTODO("unused")]
+        public HostServices HostServices { get; private set; }
 
-		public string ProjectFullPath {
-			get { return ProjectInstance.FullPath; }
-		}
+        public string ProjectFullPath
+        {
+            get { return ProjectInstance.FullPath; }
+        }
 
-		[MonoTODO ("unused")]
-		public ProjectInstance ProjectInstance { get; private set; }
-		
-		[MonoTODO]
-		public IEnumerable<string> PropertiesToTransfer { get; private set; }
+        [MonoTODO("unused")]
+        public ProjectInstance ProjectInstance { get; private set; }
 
-		[MonoTODO]
-		public ICollection<string> TargetNames { get; private set; }
+        [MonoTODO]
+        public IEnumerable<string> PropertiesToTransfer { get; private set; }
 
-		ICollection<ProjectPropertyInstance> GlobalProperties {
-			get { return ProjectInstance.Properties.Where (p => ProjectInstance.GlobalProperties.Any (i => i.Key == p.Name)).ToArray (); } // we can use == as it should be identical match there.
-		}
-	}
+        [MonoTODO]
+        public ICollection<string> TargetNames { get; private set; }
+
+        ICollection<ProjectPropertyInstance> GlobalProperties
+        {
+            get
+            {
+                return ProjectInstance
+                    .Properties.Where(p =>
+                        ProjectInstance.GlobalProperties.Any(i => i.Key == p.Name)
+                    )
+                    .ToArray();
+            } // we can use == as it should be identical match there.
+        }
+    }
 }
-

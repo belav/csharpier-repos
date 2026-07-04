@@ -29,44 +29,43 @@
 // ************IMPORTANT**********
 // Note: This test completed ,but cannot be run by Framework limitations!
 
-
 using System;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using NUnit.Framework;
 using MonoTests.stand_alone.WebHarness;
 using MonoTests.SystemWeb.Framework;
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-	[TestFixture]
-	public class MappingUrlTest
-	{
-		[TestFixtureSetUp]
-		public void CopyTestResources ()
-		{
-			WebTest.CopyResource (GetType (), "Mapping.aspx", "Mapping.aspx");
-			WebTest.CopyResource (GetType (), "Mapping1.aspx", "Mapping1.aspx");
-			WebTest.CopyResource (GetType (), "WebMapping.config", "Web.config");
-		}
+    [TestFixture]
+    public class MappingUrlTest
+    {
+        [TestFixtureSetUp]
+        public void CopyTestResources()
+        {
+            WebTest.CopyResource(GetType(), "Mapping.aspx", "Mapping.aspx");
+            WebTest.CopyResource(GetType(), "Mapping1.aspx", "Mapping1.aspx");
+            WebTest.CopyResource(GetType(), "WebMapping.config", "Web.config");
+        }
 
-		[Test]
-		[Category ("NunitWeb")]
-		[Category ("NotDotNet")]
-		[Category ("NotWorking")]
-		public void MappingUrl()
-		{
-			WebTest t = new WebTest ("Mapping.aspx");
-			string result = t.Run ();
-			if (result.IndexOf ("Default from mapping") < 0)
-				Assert.Fail ("Mapping URL Fail");
-		}
+        [Test]
+        [Category("NunitWeb")]
+        [Category("NotDotNet")]
+        [Category("NotWorking")]
+        public void MappingUrl()
+        {
+            WebTest t = new WebTest("Mapping.aspx");
+            string result = t.Run();
+            if (result.IndexOf("Default from mapping") < 0)
+                Assert.Fail("Mapping URL Fail");
+        }
 
-		[TestFixtureTearDown]
-		public void Unload ()
-		{
-			WebTest.Unload ();
-		}
-	}
+        [TestFixtureTearDown]
+        public void Unload()
+        {
+            WebTest.Unload();
+        }
+    }
 }

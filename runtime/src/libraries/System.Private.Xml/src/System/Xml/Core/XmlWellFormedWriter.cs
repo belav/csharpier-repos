@@ -23,7 +23,7 @@ namespace System.Xml
         //
         // underlying writer
         private readonly XmlWriter _writer;
-        private readonly XmlRawWriter? _rawWriter;  // writer as XmlRawWriter
+        private readonly XmlRawWriter? _rawWriter; // writer as XmlRawWriter
         private readonly IXmlNamespaceResolver? _predefinedNamespaces; // writer as IXmlNamespaceResolver
 
         // namespace management
@@ -136,100 +136,555 @@ namespace System.Xml
             Whitespace,
         }
 
-        internal static readonly string[] stateName = {
-            "Start",                     // State.Start
-            "TopLevel",                  // State.TopLevel
-            "Document",                  // State.Document
-            "Element Start Tag",         // State.Element
-            "Element Content",           // State.Content
-            "Element Content",           // State.B64Content
-            "Attribute",                 // State.B64Attribute
-            "EndRootElement",            // State.AfterRootEle
-            "Attribute",                 // State.Attribute
-            "Special Attribute",         // State.SpecialAttr
-            "End Document",              // State.EndDocument
-            "Root Level Attribute Value",           // State.RootLevelAttr
-            "Root Level Special Attribute Value",   // State.RootLevelSpecAttr
-            "Root Level Base64 Attribute Value",    // State.RootLevelB64Attr
-            "After Root Level Attribute",           // State.AfterRootLevelAttr
-            "Closed",                    // State.Closed
-            "Error",                     // State.Error
+        internal static readonly string[] stateName =
+        {
+            "Start", // State.Start
+            "TopLevel", // State.TopLevel
+            "Document", // State.Document
+            "Element Start Tag", // State.Element
+            "Element Content", // State.Content
+            "Element Content", // State.B64Content
+            "Attribute", // State.B64Attribute
+            "EndRootElement", // State.AfterRootEle
+            "Attribute", // State.Attribute
+            "Special Attribute", // State.SpecialAttr
+            "End Document", // State.EndDocument
+            "Root Level Attribute Value", // State.RootLevelAttr
+            "Root Level Special Attribute Value", // State.RootLevelSpecAttr
+            "Root Level Base64 Attribute Value", // State.RootLevelB64Attr
+            "After Root Level Attribute", // State.AfterRootLevelAttr
+            "Closed", // State.Closed
+            "Error", // State.Error
         };
 
-        internal static readonly string[] tokenName = {
-            "StartDocument",            // Token.StartDocument
-            "EndDocument",              // Token.EndDocument
-            "PI",                       // Token.PI
-            "Comment",                  // Token.Comment
-            "DTD",                      // Token.Dtd
-            "StartElement",             // Token.StartElement
-            "EndElement",               // Token.EndElement
-            "StartAttribute",           // Token.StartAttribut
-            "EndAttribute",             // Token.EndAttribute
-            "Text",                     // Token.Text
-            "CDATA",                    // Token.CData
-            "Atomic value",             // Token.AtomicValue
-            "Base64",                   // Token.Base64
-            "RawData",                  // Token.RawData
-            "Whitespace",               // Token.Whitespace
+        internal static readonly string[] tokenName =
+        {
+            "StartDocument", // Token.StartDocument
+            "EndDocument", // Token.EndDocument
+            "PI", // Token.PI
+            "Comment", // Token.Comment
+            "DTD", // Token.Dtd
+            "StartElement", // Token.StartElement
+            "EndElement", // Token.EndElement
+            "StartAttribute", // Token.StartAttribut
+            "EndAttribute", // Token.EndAttribute
+            "Text", // Token.Text
+            "CDATA", // Token.CData
+            "Atomic value", // Token.AtomicValue
+            "Base64", // Token.Base64
+            "RawData", // Token.RawData
+            "Whitespace", // Token.Whitespace
         };
 
-        private static readonly WriteState[] s_state2WriteState = {
-            WriteState.Start,       // State.Start
-            WriteState.Prolog,      // State.TopLevel
-            WriteState.Prolog,      // State.Document
-            WriteState.Element,     // State.Element
-            WriteState.Content,     // State.Content
-            WriteState.Content,     // State.B64Content
-            WriteState.Attribute,   // State.B64Attribute
-            WriteState.Content,     // State.AfterRootEle
-            WriteState.Attribute,   // State.Attribute
-            WriteState.Attribute,   // State.SpecialAttr
-            WriteState.Content,     // State.EndDocument
-            WriteState.Attribute,   // State.RootLevelAttr
-            WriteState.Attribute,   // State.RootLevelSpecAttr
-            WriteState.Attribute,   // State.RootLevelB64Attr
-            WriteState.Attribute,   // State.AfterRootLevelAttr
-            WriteState.Closed,      // State.Closed
-            WriteState.Error,       // State.Error
+        private static readonly WriteState[] s_state2WriteState =
+        {
+            WriteState.Start, // State.Start
+            WriteState.Prolog, // State.TopLevel
+            WriteState.Prolog, // State.Document
+            WriteState.Element, // State.Element
+            WriteState.Content, // State.Content
+            WriteState.Content, // State.B64Content
+            WriteState.Attribute, // State.B64Attribute
+            WriteState.Content, // State.AfterRootEle
+            WriteState.Attribute, // State.Attribute
+            WriteState.Attribute, // State.SpecialAttr
+            WriteState.Content, // State.EndDocument
+            WriteState.Attribute, // State.RootLevelAttr
+            WriteState.Attribute, // State.RootLevelSpecAttr
+            WriteState.Attribute, // State.RootLevelB64Attr
+            WriteState.Attribute, // State.AfterRootLevelAttr
+            WriteState.Closed, // State.Closed
+            WriteState.Error, // State.Error
         };
 
-        private static readonly State[] s_stateTableDocument = {
-    //                         State.Start           State.TopLevel   State.Document     State.Element          State.Content     State.B64Content      State.B64Attribute   State.AfterRootEle    State.Attribute,      State.SpecialAttr,   State.EndDocument,  State.RootLevelAttr,      State.RootLevelSpecAttr,  State.RootLevelB64Attr   State.AfterRootLevelAttr, // 16
-    /* Token.StartDocument  */ State.Document,       State.Error,     State.Error,       State.Error,           State.Error,      State.PostB64Cont,    State.Error,         State.Error,          State.Error,          State.Error,         State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.EndDocument    */ State.Error,          State.Error,     State.Error,       State.Error,           State.Error,      State.PostB64Cont,    State.Error,         State.EndDocument,    State.Error,          State.Error,         State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.PI             */ State.StartDoc,       State.TopLevel,  State.Document,    State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.AfterRootEle,   State.EndAttrSCont,   State.EndAttrSCont,  State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.Comment        */ State.StartDoc,       State.TopLevel,  State.Document,    State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.AfterRootEle,   State.EndAttrSCont,   State.EndAttrSCont,  State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.Dtd            */ State.StartDoc,       State.TopLevel,  State.Document,    State.Error,           State.Error,      State.PostB64Cont,    State.PostB64Attr,   State.Error,          State.Error,          State.Error,         State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.StartElement   */ State.StartDocEle,    State.Element,   State.Element,     State.StartContentEle, State.Element,    State.PostB64Cont,    State.PostB64Attr,   State.Error,          State.EndAttrSEle,    State.EndAttrSEle,   State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.EndElement     */ State.Error,          State.Error,     State.Error,       State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.Error,          State.EndAttrEEle,    State.EndAttrEEle,   State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.StartAttribute */ State.Error,          State.Error,     State.Error,       State.Attribute,       State.Error,      State.PostB64Cont,    State.PostB64Attr,   State.Error,          State.EndAttrSAttr,   State.EndAttrSAttr,  State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.EndAttribute   */ State.Error,          State.Error,     State.Error,       State.Error,           State.Error,      State.PostB64Cont,    State.PostB64Attr,   State.Error,          State.Element,        State.Element,       State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.Text           */ State.Error,          State.Error,     State.Error,       State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.Error,          State.Attribute,      State.SpecialAttr,   State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.CData          */ State.Error,          State.Error,     State.Error,       State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.Error,          State.EndAttrSCont,   State.EndAttrSCont,  State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.AtomicValue    */ State.Error,          State.Error,     State.Error,       State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.Error,          State.Attribute,      State.Error,         State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.Base64         */ State.Error,          State.Error,     State.Error,       State.StartContentB64, State.B64Content, State.B64Content,     State.B64Attribute,  State.Error,          State.B64Attribute,   State.Error,         State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.RawData        */ State.StartDoc,       State.Error,     State.Document,    State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.AfterRootEle,   State.Attribute,      State.SpecialAttr,   State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error,
-    /* Token.Whitespace     */ State.StartDoc,       State.TopLevel,  State.Document,    State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.AfterRootEle,   State.Attribute,      State.SpecialAttr,   State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error
+        private static readonly State[] s_stateTableDocument =
+        {
+            //                         State.Start           State.TopLevel   State.Document     State.Element          State.Content     State.B64Content      State.B64Attribute   State.AfterRootEle    State.Attribute,      State.SpecialAttr,   State.EndDocument,  State.RootLevelAttr,      State.RootLevelSpecAttr,  State.RootLevelB64Attr   State.AfterRootLevelAttr, // 16
+            /* Token.StartDocument  */State.Document,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.PostB64Cont,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.EndDocument    */State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.PostB64Cont,
+            State.Error,
+            State.EndDocument,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.PI             */State.StartDoc,
+            State.TopLevel,
+            State.Document,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.AfterRootEle,
+            State.EndAttrSCont,
+            State.EndAttrSCont,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.Comment        */State.StartDoc,
+            State.TopLevel,
+            State.Document,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.AfterRootEle,
+            State.EndAttrSCont,
+            State.EndAttrSCont,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.Dtd            */State.StartDoc,
+            State.TopLevel,
+            State.Document,
+            State.Error,
+            State.Error,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.StartElement   */State.StartDocEle,
+            State.Element,
+            State.Element,
+            State.StartContentEle,
+            State.Element,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Error,
+            State.EndAttrSEle,
+            State.EndAttrSEle,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.EndElement     */State.Error,
+            State.Error,
+            State.Error,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Error,
+            State.EndAttrEEle,
+            State.EndAttrEEle,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.StartAttribute */State.Error,
+            State.Error,
+            State.Error,
+            State.Attribute,
+            State.Error,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Error,
+            State.EndAttrSAttr,
+            State.EndAttrSAttr,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.EndAttribute   */State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Error,
+            State.Element,
+            State.Element,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.Text           */State.Error,
+            State.Error,
+            State.Error,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Error,
+            State.Attribute,
+            State.SpecialAttr,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.CData          */State.Error,
+            State.Error,
+            State.Error,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Error,
+            State.EndAttrSCont,
+            State.EndAttrSCont,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.AtomicValue    */State.Error,
+            State.Error,
+            State.Error,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Error,
+            State.Attribute,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.Base64         */State.Error,
+            State.Error,
+            State.Error,
+            State.StartContentB64,
+            State.B64Content,
+            State.B64Content,
+            State.B64Attribute,
+            State.Error,
+            State.B64Attribute,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.RawData        */State.StartDoc,
+            State.Error,
+            State.Document,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.AfterRootEle,
+            State.Attribute,
+            State.SpecialAttr,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            /* Token.Whitespace     */State.StartDoc,
+            State.TopLevel,
+            State.Document,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.AfterRootEle,
+            State.Attribute,
+            State.SpecialAttr,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
         };
 
-        private static readonly State[] s_stateTableAuto = {
-    //                         State.Start           State.TopLevel       State.Document     State.Element          State.Content     State.B64Content      State.B64Attribute   State.AfterRootEle    State.Attribute,      State.SpecialAttr,   State.EndDocument,  State.RootLevelAttr,      State.RootLevelSpecAttr,  State.RootLevelB64Attr,  State.AfterRootLevelAttr  // 16
-    /* Token.StartDocument  */ State.Document,       State.Error,         State.Error,       State.Error,           State.Error,      State.PostB64Cont,    State.Error,         State.Error,          State.Error,          State.Error,         State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error, /* Token.StartDocument  */
-    /* Token.EndDocument    */ State.Error,          State.Error,         State.Error,       State.Error,           State.Error,      State.PostB64Cont,    State.Error,         State.EndDocument,    State.Error,          State.Error,         State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error, /* Token.EndDocument    */
-    /* Token.PI             */ State.TopLevel,       State.TopLevel,      State.Error,       State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.AfterRootEle,   State.EndAttrSCont,   State.EndAttrSCont,  State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error, /* Token.PI             */
-    /* Token.Comment        */ State.TopLevel,       State.TopLevel,      State.Error,       State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.AfterRootEle,   State.EndAttrSCont,   State.EndAttrSCont,  State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error, /* Token.Comment        */
-    /* Token.Dtd            */ State.StartDoc,       State.TopLevel,      State.Error,       State.Error,           State.Error,      State.PostB64Cont,    State.PostB64Attr,   State.Error,          State.Error,          State.Error,         State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error, /* Token.Dtd            */
-    /* Token.StartElement   */ State.StartFragEle,   State.Element,       State.Error,       State.StartContentEle, State.Element,    State.PostB64Cont,    State.PostB64Attr,   State.Element,        State.EndAttrSEle,    State.EndAttrSEle,   State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error, /* Token.StartElement   */
-    /* Token.EndElement     */ State.Error,          State.Error,         State.Error,       State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.Error,          State.EndAttrEEle,    State.EndAttrEEle,   State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error, /* Token.EndElement     */
-    /* Token.StartAttribute */ State.RootLevelAttr,  State.Error,         State.Error,       State.Attribute,       State.Error,      State.PostB64Cont,    State.PostB64Attr,   State.Error,          State.EndAttrSAttr,   State.EndAttrSAttr,  State.Error,        State.StartRootLevelAttr, State.StartRootLevelAttr, State.PostB64RootAttr,   State.RootLevelAttr,      State.Error, /* Token.StartAttribute */
-    /* Token.EndAttribute   */ State.Error,          State.Error,         State.Error,       State.Error,           State.Error,      State.PostB64Cont,    State.PostB64Attr,   State.Error,          State.Element,        State.Element,       State.Error,        State.AfterRootLevelAttr, State.AfterRootLevelAttr, State.PostB64RootAttr,   State.Error,              State.Error, /* Token.EndAttribute   */
-    /* Token.Text           */ State.StartFragCont,  State.StartFragCont, State.Error,       State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.Content,        State.Attribute,      State.SpecialAttr,   State.Error,        State.RootLevelAttr,      State.RootLevelSpecAttr,  State.PostB64RootAttr,   State.Error,              State.Error, /* Token.Text           */
-    /* Token.CData          */ State.StartFragCont,  State.StartFragCont, State.Error,       State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.Content,        State.EndAttrSCont,   State.EndAttrSCont,  State.Error,        State.Error,              State.Error,              State.Error,             State.Error,              State.Error, /* Token.CData          */
-    /* Token.AtomicValue    */ State.StartFragCont,  State.StartFragCont, State.Error,       State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.Content,        State.Attribute,      State.Error,         State.Error,        State.RootLevelAttr,      State.Error,              State.PostB64RootAttr,   State.Error,              State.Error, /* Token.AtomicValue    */
-    /* Token.Base64         */ State.StartFragB64,   State.StartFragB64,  State.Error,       State.StartContentB64, State.B64Content, State.B64Content,     State.B64Attribute,  State.B64Content,     State.B64Attribute,   State.Error,         State.Error,        State.RootLevelB64Attr,   State.Error,              State.RootLevelB64Attr,  State.Error,              State.Error, /* Token.Base64         */
-    /* Token.RawData        */ State.StartFragCont,  State.TopLevel,      State.Error,       State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.Content,        State.Attribute,      State.SpecialAttr,   State.Error,        State.RootLevelAttr,      State.RootLevelSpecAttr,  State.PostB64RootAttr,   State.AfterRootLevelAttr, State.Error, /* Token.RawData        */
-    /* Token.Whitespace     */ State.TopLevel,       State.TopLevel,      State.Error,       State.StartContent,    State.Content,    State.PostB64Cont,    State.PostB64Attr,   State.AfterRootEle,   State.Attribute,      State.SpecialAttr,   State.Error,        State.RootLevelAttr,      State.RootLevelSpecAttr,  State.PostB64RootAttr,   State.AfterRootLevelAttr, State.Error, /* Token.Whitespace     */
+        private static readonly State[] s_stateTableAuto =
+        {
+            //                         State.Start           State.TopLevel       State.Document     State.Element          State.Content     State.B64Content      State.B64Attribute   State.AfterRootEle    State.Attribute,      State.SpecialAttr,   State.EndDocument,  State.RootLevelAttr,      State.RootLevelSpecAttr,  State.RootLevelB64Attr,  State.AfterRootLevelAttr  // 16
+            /* Token.StartDocument  */State.Document,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.PostB64Cont,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error, /* Token.StartDocument  */
+            /* Token.EndDocument    */State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.PostB64Cont,
+            State.Error,
+            State.EndDocument,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error, /* Token.EndDocument    */
+            /* Token.PI             */State.TopLevel,
+            State.TopLevel,
+            State.Error,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.AfterRootEle,
+            State.EndAttrSCont,
+            State.EndAttrSCont,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error, /* Token.PI             */
+            /* Token.Comment        */State.TopLevel,
+            State.TopLevel,
+            State.Error,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.AfterRootEle,
+            State.EndAttrSCont,
+            State.EndAttrSCont,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error, /* Token.Comment        */
+            /* Token.Dtd            */State.StartDoc,
+            State.TopLevel,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error, /* Token.Dtd            */
+            /* Token.StartElement   */State.StartFragEle,
+            State.Element,
+            State.Error,
+            State.StartContentEle,
+            State.Element,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Element,
+            State.EndAttrSEle,
+            State.EndAttrSEle,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error, /* Token.StartElement   */
+            /* Token.EndElement     */State.Error,
+            State.Error,
+            State.Error,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Error,
+            State.EndAttrEEle,
+            State.EndAttrEEle,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error, /* Token.EndElement     */
+            /* Token.StartAttribute */State.RootLevelAttr,
+            State.Error,
+            State.Error,
+            State.Attribute,
+            State.Error,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Error,
+            State.EndAttrSAttr,
+            State.EndAttrSAttr,
+            State.Error,
+            State.StartRootLevelAttr,
+            State.StartRootLevelAttr,
+            State.PostB64RootAttr,
+            State.RootLevelAttr,
+            State.Error, /* Token.StartAttribute */
+            /* Token.EndAttribute   */State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Error,
+            State.Element,
+            State.Element,
+            State.Error,
+            State.AfterRootLevelAttr,
+            State.AfterRootLevelAttr,
+            State.PostB64RootAttr,
+            State.Error,
+            State.Error, /* Token.EndAttribute   */
+            /* Token.Text           */State.StartFragCont,
+            State.StartFragCont,
+            State.Error,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Content,
+            State.Attribute,
+            State.SpecialAttr,
+            State.Error,
+            State.RootLevelAttr,
+            State.RootLevelSpecAttr,
+            State.PostB64RootAttr,
+            State.Error,
+            State.Error, /* Token.Text           */
+            /* Token.CData          */State.StartFragCont,
+            State.StartFragCont,
+            State.Error,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Content,
+            State.EndAttrSCont,
+            State.EndAttrSCont,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error,
+            State.Error, /* Token.CData          */
+            /* Token.AtomicValue    */State.StartFragCont,
+            State.StartFragCont,
+            State.Error,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Content,
+            State.Attribute,
+            State.Error,
+            State.Error,
+            State.RootLevelAttr,
+            State.Error,
+            State.PostB64RootAttr,
+            State.Error,
+            State.Error, /* Token.AtomicValue    */
+            /* Token.Base64         */State.StartFragB64,
+            State.StartFragB64,
+            State.Error,
+            State.StartContentB64,
+            State.B64Content,
+            State.B64Content,
+            State.B64Attribute,
+            State.B64Content,
+            State.B64Attribute,
+            State.Error,
+            State.Error,
+            State.RootLevelB64Attr,
+            State.Error,
+            State.RootLevelB64Attr,
+            State.Error,
+            State.Error, /* Token.Base64         */
+            /* Token.RawData        */State.StartFragCont,
+            State.TopLevel,
+            State.Error,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.Content,
+            State.Attribute,
+            State.SpecialAttr,
+            State.Error,
+            State.RootLevelAttr,
+            State.RootLevelSpecAttr,
+            State.PostB64RootAttr,
+            State.AfterRootLevelAttr,
+            State.Error, /* Token.RawData        */
+            /* Token.Whitespace     */State.TopLevel,
+            State.TopLevel,
+            State.Error,
+            State.StartContent,
+            State.Content,
+            State.PostB64Cont,
+            State.PostB64Attr,
+            State.AfterRootEle,
+            State.Attribute,
+            State.SpecialAttr,
+            State.Error,
+            State.RootLevelAttr,
+            State.RootLevelSpecAttr,
+            State.PostB64RootAttr,
+            State.AfterRootLevelAttr,
+            State.Error, /* Token.Whitespace     */
         };
 
         //
@@ -251,11 +706,15 @@ namespace System.Xml
             }
 
             _checkCharacters = settings.CheckCharacters;
-            _omitDuplNamespaces = (settings.NamespaceHandling & NamespaceHandling.OmitDuplicates) != 0;
+            _omitDuplNamespaces =
+                (settings.NamespaceHandling & NamespaceHandling.OmitDuplicates) != 0;
             _writeEndDocumentOnClose = settings.WriteEndDocumentOnClose;
 
             _conformanceLevel = settings.ConformanceLevel;
-            _stateTable = (_conformanceLevel == ConformanceLevel.Document) ? s_stateTableDocument : s_stateTableAuto;
+            _stateTable =
+                (_conformanceLevel == ConformanceLevel.Document)
+                    ? s_stateTableDocument
+                    : s_stateTableAuto;
 
             _currentState = State.Start;
 
@@ -390,21 +849,39 @@ namespace System.Xml
                     {
                         if ((i = XmlCharType.IsPublicId(pubid)) >= 0)
                         {
-                            throw new ArgumentException(SR.Format(SR.Xml_InvalidCharacter, XmlException.BuildCharExceptionArgs(pubid, i)), nameof(pubid));
+                            throw new ArgumentException(
+                                SR.Format(
+                                    SR.Xml_InvalidCharacter,
+                                    XmlException.BuildCharExceptionArgs(pubid, i)
+                                ),
+                                nameof(pubid)
+                            );
                         }
                     }
                     if (sysid != null)
                     {
                         if ((i = XmlCharType.IsOnlyCharData(sysid)) >= 0)
                         {
-                            throw new ArgumentException(SR.Format(SR.Xml_InvalidCharacter, XmlException.BuildCharExceptionArgs(sysid, i)), nameof(sysid));
+                            throw new ArgumentException(
+                                SR.Format(
+                                    SR.Xml_InvalidCharacter,
+                                    XmlException.BuildCharExceptionArgs(sysid, i)
+                                ),
+                                nameof(sysid)
+                            );
                         }
                     }
                     if (subset != null)
                     {
                         if ((i = XmlCharType.IsOnlyCharData(subset)) >= 0)
                         {
-                            throw new ArgumentException(SR.Format(SR.Xml_InvalidCharacter, XmlException.BuildCharExceptionArgs(subset, i)), nameof(subset));
+                            throw new ArgumentException(
+                                SR.Format(
+                                    SR.Xml_InvalidCharacter,
+                                    XmlException.BuildCharExceptionArgs(subset, i)
+                                ),
+                                nameof(subset)
+                            );
                         }
                     }
                 }
@@ -492,7 +969,6 @@ namespace System.Xml
                 throw;
             }
         }
-
 
         public override void WriteEndElement()
         {
@@ -596,7 +1072,11 @@ namespace System.Xml
             }
         }
 
-        public override void WriteStartAttribute(string? prefix, string? localName, string? namespaceName)
+        public override void WriteStartAttribute(
+            string? prefix,
+            string? localName,
+            string? namespaceName
+        )
         {
             try
             {
@@ -714,7 +1194,7 @@ namespace System.Xml
                     PushNamespaceImplicit(prefix, namespaceName);
                 }
 
-            SkipPushAndWrite:
+                SkipPushAndWrite:
 
                 // add attribute to the list and check for duplicates
                 AddAttribute(prefix, localName, namespaceName);
@@ -764,7 +1244,11 @@ namespace System.Xml
                                 }
                                 else
                                 {
-                                    _writer.WriteStartAttribute(string.Empty, "xmlns", XmlReservedNs.NsXmlNs);
+                                    _writer.WriteStartAttribute(
+                                        string.Empty,
+                                        "xmlns",
+                                        XmlReservedNs.NsXmlNs
+                                    );
                                     _attrValueCache.Replay(_writer);
                                     _writer.WriteEndAttribute();
                                 }
@@ -777,7 +1261,10 @@ namespace System.Xml
                             {
                                 throw new ArgumentException(SR.Xml_PrefixForEmptyNs);
                             }
-                            if (value == XmlReservedNs.NsXmlNs || (value == XmlReservedNs.NsXml && _curDeclPrefix != "xml"))
+                            if (
+                                value == XmlReservedNs.NsXmlNs
+                                || (value == XmlReservedNs.NsXml && _curDeclPrefix != "xml")
+                            )
                             {
                                 throw new ArgumentException(SR.Xml_CanNotBindToReservedNamespace);
                             }
@@ -801,7 +1288,11 @@ namespace System.Xml
                                 }
                                 else
                                 {
-                                    _writer.WriteStartAttribute("xmlns", _curDeclPrefix, XmlReservedNs.NsXmlNs);
+                                    _writer.WriteStartAttribute(
+                                        "xmlns",
+                                        _curDeclPrefix,
+                                        XmlReservedNs.NsXmlNs
+                                    );
                                     _attrValueCache.Replay(_writer);
                                     _writer.WriteEndAttribute();
                                 }
@@ -822,7 +1313,9 @@ namespace System.Xml
                             }
                             else
                             {
-                                throw new ArgumentException(SR.Format(SR.Xml_InvalidXmlSpace, value));
+                                throw new ArgumentException(
+                                    SR.Format(SR.Xml_InvalidXmlSpace, value)
+                                );
                             }
                             _writer.WriteStartAttribute("xml", "space", XmlReservedNs.NsXml);
                             _attrValueCache.Replay(_writer);
@@ -893,11 +1386,18 @@ namespace System.Xml
                 text ??= string.Empty;
 
                 // xml declaration is a special case (not a processing instruction, but we allow WriteProcessingInstruction as a convenience)
-                if (name.Length == 3 && string.Equals(name, "xml", StringComparison.OrdinalIgnoreCase))
+                if (
+                    name.Length == 3
+                    && string.Equals(name, "xml", StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     if (_currentState != State.Start)
                     {
-                        throw new ArgumentException(_conformanceLevel == ConformanceLevel.Document ? SR.Xml_DupXmlDecl : SR.Xml_CannotWriteXmlDecl);
+                        throw new ArgumentException(
+                            _conformanceLevel == ConformanceLevel.Document
+                                ? SR.Xml_DupXmlDecl
+                                : SR.Xml_CannotWriteXmlDecl
+                        );
                     }
 
                     _xmlDeclFollows = true;
@@ -1258,7 +1758,12 @@ namespace System.Xml
             get
             {
                 int i;
-                for (i = _elemTop; i >= 0 && _elemScopeStack[i].xmlSpace == (System.Xml.XmlSpace)(int)-1; i--) ;
+                for (
+                    i = _elemTop;
+                    i >= 0 && _elemScopeStack[i].xmlSpace == (System.Xml.XmlSpace)(int)-1;
+                    i--
+                )
+                    ;
                 Debug.Assert(i >= 0);
                 return _elemScopeStack[i].xmlSpace;
             }
@@ -1269,7 +1774,8 @@ namespace System.Xml
             get
             {
                 int i;
-                for (i = _elemTop; i > 0 && _elemScopeStack[i].xmlLang == null; i--) ;
+                for (i = _elemTop; i > 0 && _elemScopeStack[i].xmlLang == null; i--)
+                    ;
                 Debug.Assert(i >= 0);
                 return _elemScopeStack[i].xmlLang;
             }
@@ -1501,10 +2007,7 @@ namespace System.Xml
 
         internal XmlRawWriter? RawWriter
         {
-            get
-            {
-                return _rawWriter;
-            }
+            get { return _rawWriter; }
         }
 
         //
@@ -1512,17 +2015,18 @@ namespace System.Xml
         //
         private bool SaveAttrValue
         {
-            get
-            {
-                return _specAttr != SpecialAttribute.No;
-            }
+            get { return _specAttr != SpecialAttribute.No; }
         }
 
         private bool InBase64
         {
             get
             {
-                return (_currentState == State.B64Content || _currentState == State.B64Attribute || _currentState == State.RootLevelB64Attr);
+                return (
+                    _currentState == State.B64Content
+                    || _currentState == State.B64Attribute
+                    || _currentState == State.RootLevelB64Attr
+                );
             }
         }
 
@@ -1534,7 +2038,9 @@ namespace System.Xml
             else if (State.RootLevelAttr == _currentState)
                 _currentState = State.RootLevelSpecAttr;
             else
-                Debug.Fail("State.Attribute == currentState || State.RootLevelAttr == currentState");
+                Debug.Fail(
+                    "State.Attribute == currentState || State.RootLevelAttr == currentState"
+                );
 
             _attrValueCache ??= new AttributeValueCache();
         }
@@ -1598,7 +2104,10 @@ namespace System.Xml
                     // The new namespace Uri needs to be the same as the one that is already declared
                     if (_nsStack[existingNsIndex].namespaceUri != ns)
                     {
-                        throw new XmlException(SR.Xml_RedefinePrefix, new string[] { prefix, _nsStack[existingNsIndex].namespaceUri, ns });
+                        throw new XmlException(
+                            SR.Xml_RedefinePrefix,
+                            new string[] { prefix, _nsStack[existingNsIndex].namespaceUri, ns }
+                        );
                     }
                     // No additional work needed
                     return;
@@ -1629,7 +2138,10 @@ namespace System.Xml
                     // regular namespace declaration -> compare the namespace Uris to decide if the prefix is redefined
                     else
                     {
-                        kind = (_nsStack[existingNsIndex].namespaceUri == ns) ? NamespaceKind.Implied : NamespaceKind.NeedToWrite;
+                        kind =
+                            (_nsStack[existingNsIndex].namespaceUri == ns)
+                                ? NamespaceKind.Implied
+                                : NamespaceKind.NeedToWrite;
                     }
                 }
             }
@@ -1637,8 +2149,10 @@ namespace System.Xml
             else
             {
                 // validate special declaration (xml, xmlns)
-                if ((ns == XmlReservedNs.NsXml && prefix != "xml") ||
-                     (ns == XmlReservedNs.NsXmlNs && prefix != "xmlns"))
+                if (
+                    (ns == XmlReservedNs.NsXml && prefix != "xml")
+                    || (ns == XmlReservedNs.NsXmlNs && prefix != "xmlns")
+                )
                 {
                     throw new ArgumentException(SR.Format(SR.Xml_NamespaceDeclXmlXmlns, prefix));
                 }
@@ -1678,13 +2192,19 @@ namespace System.Xml
                     // The new namespace Uri needs to be the same as the one that is already declared
                     if (_nsStack[existingNsIndex].namespaceUri != ns)
                     {
-                        throw new XmlException(SR.Xml_RedefinePrefix, new string?[] { prefix, _nsStack[existingNsIndex].namespaceUri, ns });
+                        throw new XmlException(
+                            SR.Xml_RedefinePrefix,
+                            new string?[] { prefix, _nsStack[existingNsIndex].namespaceUri, ns }
+                        );
                     }
                     // Check for duplicate declarations
                     NamespaceKind existingNsKind = _nsStack[existingNsIndex].kind;
                     if (existingNsKind == NamespaceKind.Written)
                     {
-                        throw DupAttrException((prefix.Length == 0) ? string.Empty : "xmlns", (prefix.Length == 0) ? "xmlns" : prefix);
+                        throw DupAttrException(
+                            (prefix.Length == 0) ? string.Empty : "xmlns",
+                            (prefix.Length == 0) ? "xmlns" : prefix
+                        );
                     }
                     // Check if it can be omitted
                     if (_omitDuplNamespaces && existingNsKind != NamespaceKind.NeedToWrite)
@@ -1721,8 +2241,10 @@ namespace System.Xml
             }
 
             // validate special declaration (xml, xmlns)
-            if ((ns == XmlReservedNs.NsXml && prefix != "xml") ||
-                 (ns == XmlReservedNs.NsXmlNs && prefix != "xmlns"))
+            if (
+                (ns == XmlReservedNs.NsXml && prefix != "xml")
+                || (ns == XmlReservedNs.NsXmlNs && prefix != "xmlns")
+            )
             {
                 throw new ArgumentException(SR.Format(SR.Xml_NamespaceDeclXmlXmlns, prefix));
             }
@@ -1848,11 +2370,17 @@ namespace System.Xml
                 }
                 else
                 {
-                    throw new InvalidOperationException(SR.Format(SR.Xml_WrongToken, tokenName[(int)token], GetStateName(_currentState)));
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.Xml_WrongToken,
+                            tokenName[(int)token],
+                            GetStateName(_currentState)
+                        )
+                    );
                 }
             }
 
-        Advance:
+            Advance:
             State newState = _stateTable[((int)token << 4) + (int)_currentState];
             //                         [ (int)token * 16 + (int)currentState ];
 
@@ -2070,14 +2598,20 @@ namespace System.Xml
         // This method translates speficic state transition errors in more friendly error messages
         private void ThrowInvalidStateTransition(Token token, State currentState)
         {
-            string wrongTokenMessage = SR.Format(SR.Xml_WrongToken, tokenName[(int)token], GetStateName(currentState));
+            string wrongTokenMessage = SR.Format(
+                SR.Xml_WrongToken,
+                tokenName[(int)token],
+                GetStateName(currentState)
+            );
             switch (currentState)
             {
                 case State.AfterRootEle:
                 case State.Start:
                     if (_conformanceLevel == ConformanceLevel.Document)
                     {
-                        throw new InvalidOperationException($"{wrongTokenMessage} {SR.Xml_ConformanceLevelFragment}");
+                        throw new InvalidOperationException(
+                            $"{wrongTokenMessage} {SR.Xml_ConformanceLevelFragment}"
+                        );
                     }
                     break;
             }
@@ -2086,10 +2620,7 @@ namespace System.Xml
 
         private bool IsClosedOrErrorState
         {
-            get
-            {
-                return (int)_currentState >= (int)State.Closed;
-            }
+            get { return (int)_currentState >= (int)State.Closed; }
         }
 
         private void AddAttribute(string prefix, string localName, string namespaceName)

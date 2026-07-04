@@ -105,11 +105,36 @@ namespace System.ComponentModel.Tests
         {
             var attribute = new AmbientValueAttribute(true);
             yield return new object[] { attribute, attribute, true };
-            yield return new object[] { new AmbientValueAttribute(true), new AmbientValueAttribute(true), true };
-            yield return new object[] { new AmbientValueAttribute(true), new AmbientValueAttribute(false), false };
-            yield return new object[] { new AmbientValueAttribute(true), new AmbientValueAttribute(null), false };
-            yield return new object[] { new AmbientValueAttribute(null), new AmbientValueAttribute(false), false };
-            yield return new object[] { new AmbientValueAttribute(null), new AmbientValueAttribute(null), true };
+            yield return new object[]
+            {
+                new AmbientValueAttribute(true),
+                new AmbientValueAttribute(true),
+                true,
+            };
+            yield return new object[]
+            {
+                new AmbientValueAttribute(true),
+                new AmbientValueAttribute(false),
+                false,
+            };
+            yield return new object[]
+            {
+                new AmbientValueAttribute(true),
+                new AmbientValueAttribute(null),
+                false,
+            };
+            yield return new object[]
+            {
+                new AmbientValueAttribute(null),
+                new AmbientValueAttribute(false),
+                false,
+            };
+            yield return new object[]
+            {
+                new AmbientValueAttribute(null),
+                new AmbientValueAttribute(null),
+                true,
+            };
 
             yield return new object[] { new AmbientValueAttribute(true), new object(), false };
             yield return new object[] { new AmbientValueAttribute(true), null, false };
@@ -117,7 +142,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(AmbientValueAttribute attribute, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            AmbientValueAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
         }

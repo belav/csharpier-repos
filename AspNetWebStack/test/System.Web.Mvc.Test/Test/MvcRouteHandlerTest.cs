@@ -18,7 +18,8 @@ namespace System.Web.Mvc.Test
             routeData.Values["controller"] = "controllerName";
             var context = new RequestContext(new Mock<HttpContextBase>().Object, routeData);
             var controllerFactory = new Mock<IControllerFactory>();
-            controllerFactory.Setup(f => f.GetControllerSessionBehavior(context, "controllerName"))
+            controllerFactory
+                .Setup(f => f.GetControllerSessionBehavior(context, "controllerName"))
                 .Returns(SessionStateBehavior.Default)
                 .Verifiable();
             IRouteHandler rh = new MvcRouteHandler(controllerFactory.Object);
@@ -41,7 +42,8 @@ namespace System.Web.Mvc.Test
             routeData.Values["controller"] = "controllerName";
             var requestContext = new RequestContext(httpContext.Object, routeData);
             var controllerFactory = new Mock<IControllerFactory>();
-            controllerFactory.Setup(f => f.GetControllerSessionBehavior(requestContext, "controllerName"))
+            controllerFactory
+                .Setup(f => f.GetControllerSessionBehavior(requestContext, "controllerName"))
                 .Returns(SessionStateBehavior.ReadOnly)
                 .Verifiable();
             IRouteHandler routeHandler = new MvcRouteHandler(controllerFactory.Object);
@@ -67,7 +69,7 @@ namespace System.Web.Mvc.Test
             Assert.Throws<InvalidOperationException>(
                 () => routeHandler.GetHttpHandler(requestContext),
                 "The matched route does not include a 'controller' route value, which is required."
-                );
+            );
         }
     }
 }

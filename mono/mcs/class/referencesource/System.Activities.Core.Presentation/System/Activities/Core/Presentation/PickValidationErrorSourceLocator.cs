@@ -10,7 +10,10 @@ namespace System.Activities.Core.Presentation
 
     internal class PickValidationErrorSourceLocator : IValidationErrorSourceLocator
     {
-        public List<object> FindSourceDetailFromActivity(Activity errorSource, object errorSourceDetail)
+        public List<object> FindSourceDetailFromActivity(
+            Activity errorSource,
+            object errorSourceDetail
+        )
         {
             if (errorSourceDetail == null)
             {
@@ -96,6 +99,6 @@ namespace System.Activities.Core.Presentation
 
             path.Add(descendent);
             return path;
-        }       
+        }
     }
 }

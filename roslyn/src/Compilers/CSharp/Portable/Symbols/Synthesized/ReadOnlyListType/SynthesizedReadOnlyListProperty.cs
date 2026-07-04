@@ -16,25 +16,45 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             SynthesizedReadOnlyListTypeSymbol containingType,
             PropertySymbol interfaceProperty,
             GenerateMethodBodyDelegate getAccessorBody,
-            GenerateMethodBodyDelegate? setAccessorBody = null)
+            GenerateMethodBodyDelegate? setAccessorBody = null
+        )
         {
             Debug.Assert(setAccessorBody is null == interfaceProperty.SetMethod is null);
 
             _containingType = containingType;
             _interfaceProperty = interfaceProperty;
-            Name = ExplicitInterfaceHelpers.GetMemberName(interfaceProperty.Name, interfaceProperty.ContainingType, aliasQualifierOpt: null);
-            Parameters = interfaceProperty.Parameters.SelectAsArray(static (p, t) => SynthesizedParameterSymbol.DeriveParameter(t, p), this);
-            GetMethod = new SynthesizedReadOnlyListMethod(containingType, interfaceProperty.GetMethod, getAccessorBody);
-            SetMethod = interfaceProperty.SetMethod is null ? null : new SynthesizedReadOnlyListMethod(containingType, interfaceProperty.SetMethod, setAccessorBody!);
+            Name = ExplicitInterfaceHelpers.GetMemberName(
+                interfaceProperty.Name,
+                interfaceProperty.ContainingType,
+                aliasQualifierOpt: null
+            );
+            Parameters = interfaceProperty.Parameters.SelectAsArray(
+                static (p, t) => SynthesizedParameterSymbol.DeriveParameter(t, p),
+                this
+            );
+            GetMethod = new SynthesizedReadOnlyListMethod(
+                containingType,
+                interfaceProperty.GetMethod,
+                getAccessorBody
+            );
+            SetMethod = interfaceProperty.SetMethod is null
+                ? null
+                : new SynthesizedReadOnlyListMethod(
+                    containingType,
+                    interfaceProperty.SetMethod,
+                    setAccessorBody!
+                );
         }
 
         public override string Name { get; }
 
         public override RefKind RefKind => RefKind.None;
 
-        public override TypeWithAnnotations TypeWithAnnotations => _interfaceProperty.TypeWithAnnotations;
+        public override TypeWithAnnotations TypeWithAnnotations =>
+            _interfaceProperty.TypeWithAnnotations;
 
-        public override ImmutableArray<CustomModifier> RefCustomModifiers => ImmutableArray<CustomModifier>.Empty;
+        public override ImmutableArray<CustomModifier> RefCustomModifiers =>
+            ImmutableArray<CustomModifier>.Empty;
 
         public override ImmutableArray<ParameterSymbol> Parameters { get; }
 
@@ -44,13 +64,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override MethodSymbol? SetMethod { get; }
 
-        public override ImmutableArray<PropertySymbol> ExplicitInterfaceImplementations => ImmutableArray.Create(_interfaceProperty);
+        public override ImmutableArray<PropertySymbol> ExplicitInterfaceImplementations =>
+            ImmutableArray.Create(_interfaceProperty);
 
         public override Symbol ContainingSymbol => _containingType;
 
         public override ImmutableArray<Location> Locations => _containingType.Locations;
 
-        public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences => _containingType.DeclaringSyntaxReferences;
+        public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences =>
+            _containingType.DeclaringSyntaxReferences;
 
         public override Accessibility DeclaredAccessibility => Accessibility.Private;
 
@@ -70,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool HasSpecialName => false;
 
-        internal override Cci.CallingConvention CallingConvention => _interfaceProperty.CallingConvention;
+        internal override Cci.CallingConvention CallingConvention =>
+            _interfaceProperty.CallingConvention;
 
         internal override bool MustCallMethodsDirectly => false;
 

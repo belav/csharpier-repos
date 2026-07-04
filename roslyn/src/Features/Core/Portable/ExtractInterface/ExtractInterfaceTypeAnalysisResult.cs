@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
             SyntaxNode typeNode,
             INamedTypeSymbol typeToExtractFrom,
             IEnumerable<ISymbol> extractableMembers,
-            CleanCodeGenerationOptionsProvider fallbackOptions)
+            CleanCodeGenerationOptionsProvider fallbackOptions
+        )
         {
             CanExtractInterface = true;
             DocumentToExtractFrom = documentToExtractFrom;

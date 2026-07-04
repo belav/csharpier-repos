@@ -81,20 +81,31 @@ public class ComputeWasmPublishAssets : Task
         {
             // We'll do a first pass over the resolved files to publish to figure out what files need to be removed
             // as well as categorize resolved files into different groups.
-            var resolvedFilesToPublishToRemove = new Dictionary<string, ITaskItem>(StringComparer.Ordinal);
+            var resolvedFilesToPublishToRemove = new Dictionary<string, ITaskItem>(
+                StringComparer.Ordinal
+            );
 
             // These assemblies are keyed of the assembly name "computed" based on the relative path, which must be
             // unique.
-            var resolvedAssembliesToPublish = new Dictionary<string, ITaskItem>(StringComparer.Ordinal);
-            var resolvedSymbolsToPublish = new Dictionary<string, ITaskItem>(StringComparer.Ordinal);
-            var satelliteAssemblyToPublish = new Dictionary<(string, string), ITaskItem>(EqualityComparer<(string, string)>.Default);
-            var resolvedNativeAssetToPublish = new Dictionary<string, ITaskItem>(StringComparer.Ordinal);
+            var resolvedAssembliesToPublish = new Dictionary<string, ITaskItem>(
+                StringComparer.Ordinal
+            );
+            var resolvedSymbolsToPublish = new Dictionary<string, ITaskItem>(
+                StringComparer.Ordinal
+            );
+            var satelliteAssemblyToPublish = new Dictionary<(string, string), ITaskItem>(
+                EqualityComparer<(string, string)>.Default
+            );
+            var resolvedNativeAssetToPublish = new Dictionary<string, ITaskItem>(
+                StringComparer.Ordinal
+            );
             GroupResolvedFilesToPublish(
                 resolvedFilesToPublishToRemove,
                 resolvedAssembliesToPublish,
                 satelliteAssemblyToPublish,
                 resolvedSymbolsToPublish,
-                resolvedNativeAssetToPublish);
+                resolvedNativeAssetToPublish
+            );
 
             // Group candidate static web assets
             var assemblyAssets = new Dictionary<string, ITaskItem>();
@@ -107,7 +118,8 @@ public class ComputeWasmPublishAssets : Task
                 nativeAssets,
                 satelliteAssemblyAssets,
                 symbolAssets,
-                compressedRepresentations);
+                compressedRepresentations
+            );
 
             var newStaticWebAssets = ComputeUpdatedAssemblies(
                 satelliteAssemblyToPublish,
@@ -115,7 +127,8 @@ public class ComputeWasmPublishAssets : Task
                 resolvedAssembliesToPublish,
                 assemblyAssets,
                 satelliteAssemblyAssets,
-                compressedRepresentations);
+                compressedRepresentations
+            );
 
             newAssets.AddRange(newStaticWebAssets);
 
@@ -124,7 +137,8 @@ public class ComputeWasmPublishAssets : Task
                 resolvedFilesToPublishToRemove,
                 resolvedNativeAssetToPublish,
                 compressedRepresentations,
-                filesToRemove);
+                filesToRemove
+            );
 
             newAssets.AddRange(nativeStaticWebAssets);
 
@@ -133,7 +147,8 @@ public class ComputeWasmPublishAssets : Task
                 compressedRepresentations,
                 resolvedFilesToPublishToRemove,
                 resolvedSymbolsToPublish,
-                filesToRemove);
+                filesToRemove
+            );
 
             newAssets.AddRange(symbolStaticWebAssets);
 
@@ -160,7 +175,8 @@ public class ComputeWasmPublishAssets : Task
         IDictionary<string, ITaskItem> resolvedPublishFilesToRemove,
         Dictionary<string, ITaskItem> resolvedNativeAssetToPublish,
         Dictionary<string, ITaskItem> compressedRepresentations,
-        List<ITaskItem> filesToRemove)
+        List<ITaskItem> filesToRemove
+    )
     {
         var nativeStaticWebAssets = new List<ITaskItem>();
 
@@ -176,9 +192,19 @@ public class ComputeWasmPublishAssets : Task
 
             if (!isDotNetJs && !isDotNetWasm)
             {
-                if (resolvedNativeAssetToPublish.TryGetValue(Path.GetFileName(asset.GetMetadata("OriginalItemSpec")), out var existing))
+                if (
+                    resolvedNativeAssetToPublish.TryGetValue(
+                        Path.GetFileName(asset.GetMetadata("OriginalItemSpec")),
+                        out var existing
+                    )
+                )
                 {
-                    if (!resolvedPublishFilesToRemove.TryGetValue(existing.ItemSpec, out var removed))
+                    if (
+                        !resolvedPublishFilesToRemove.TryGetValue(
+                            existing.ItemSpec,
+                            out var removed
+                        )
+                    )
                     {
                         // This is a native asset like timezones.blat or similar that was not filtered and that needs to be updated
                         // to a publish asset.
@@ -187,11 +213,19 @@ public class ComputeWasmPublishAssets : Task
                         nativeStaticWebAssets.Add(newAsset);
                         filesToRemove.Add(existing);
                         updateMap.Add(asset.ItemSpec, newAsset);
-                        Log.LogMessage(MessageImportance.Low, "Promoting asset '{0}' to Publish asset.", asset.ItemSpec);
+                        Log.LogMessage(
+                            MessageImportance.Low,
+                            "Promoting asset '{0}' to Publish asset.",
+                            asset.ItemSpec
+                        );
                     }
                     else
                     {
-                        Log.LogMessage(MessageImportance.Low, "Removing asset '{0}'.", existing.ItemSpec);
+                        Log.LogMessage(
+                            MessageImportance.Low,
+                            "Removing asset '{0}'.",
+                            existing.ItemSpec
+                        );
                         // This was a file that was filtered, so just remove it, we don't need to add any publish static web asset
                         filesToRemove.Add(removed);
 
@@ -215,26 +249,41 @@ public class ComputeWasmPublishAssets : Task
                 else if (baseName.StartsWith("dotnet"))
                     baseName = "dotnet";
 
-                var aotDotNetJs = WasmAotAssets.SingleOrDefault(a => $"{a.GetMetadata("FileName")}{a.GetMetadata("Extension")}" == $"{baseName}.js");
+                var aotDotNetJs = WasmAotAssets.SingleOrDefault(a =>
+                    $"{a.GetMetadata("FileName")}{a.GetMetadata("Extension")}" == $"{baseName}.js"
+                );
                 ITaskItem newDotNetJs = null;
                 if (aotDotNetJs != null)
                 {
-                    newDotNetJs = new TaskItem(Path.GetFullPath(aotDotNetJs.ItemSpec), asset.CloneCustomMetadata());
+                    newDotNetJs = new TaskItem(
+                        Path.GetFullPath(aotDotNetJs.ItemSpec),
+                        asset.CloneCustomMetadata()
+                    );
                     newDotNetJs.SetMetadata("OriginalItemSpec", aotDotNetJs.ItemSpec);
 
-                    string relativePath = baseName != "dotnet" || FingerprintDotNetJs
-                        ? $"_framework/{$"{baseName}.{DotNetJsVersion}.{FileHasher.GetFileHash(aotDotNetJs.ItemSpec)}.js"}"
-                        : $"_framework/{baseName}.js";
+                    string relativePath =
+                        baseName != "dotnet" || FingerprintDotNetJs
+                            ? $"_framework/{$"{baseName}.{DotNetJsVersion}.{FileHasher.GetFileHash(aotDotNetJs.ItemSpec)}.js"}"
+                            : $"_framework/{baseName}.js";
 
                     newDotNetJs.SetMetadata("RelativePath", relativePath);
 
                     updateMap.Add(asset.ItemSpec, newDotNetJs);
-                    Log.LogMessage(MessageImportance.Low, "Replacing asset '{0}' with AoT version '{1}'", asset.ItemSpec, newDotNetJs.ItemSpec);
+                    Log.LogMessage(
+                        MessageImportance.Low,
+                        "Replacing asset '{0}' with AoT version '{1}'",
+                        asset.ItemSpec,
+                        newDotNetJs.ItemSpec
+                    );
                 }
                 else
                 {
                     newDotNetJs = new TaskItem(asset);
-                    Log.LogMessage(MessageImportance.Low, "Promoting asset '{0}' to Publish asset.", asset.ItemSpec);
+                    Log.LogMessage(
+                        MessageImportance.Low,
+                        "Promoting asset '{0}' to Publish asset.",
+                        asset.ItemSpec
+                    );
                 }
 
                 ApplyPublishProperties(newDotNetJs);
@@ -256,21 +305,35 @@ public class ComputeWasmPublishAssets : Task
                 ITaskItem newDotNetWasm = null;
                 if (aotDotNetWasm != null)
                 {
-                    newDotNetWasm = new TaskItem(Path.GetFullPath(aotDotNetWasm.ItemSpec), asset.CloneCustomMetadata());
+                    newDotNetWasm = new TaskItem(
+                        Path.GetFullPath(aotDotNetWasm.ItemSpec),
+                        asset.CloneCustomMetadata()
+                    );
                     newDotNetWasm.SetMetadata("OriginalItemSpec", aotDotNetWasm.ItemSpec);
                     updateMap.Add(asset.ItemSpec, newDotNetWasm);
-                    Log.LogMessage(MessageImportance.Low, "Replacing asset '{0}' with AoT version '{1}'", asset.ItemSpec, newDotNetWasm.ItemSpec);
+                    Log.LogMessage(
+                        MessageImportance.Low,
+                        "Replacing asset '{0}' with AoT version '{1}'",
+                        asset.ItemSpec,
+                        newDotNetWasm.ItemSpec
+                    );
                 }
                 else
                 {
                     newDotNetWasm = new TaskItem(asset);
-                    Log.LogMessage(MessageImportance.Low, "Promoting asset '{0}' to Publish asset.", asset.ItemSpec);
+                    Log.LogMessage(
+                        MessageImportance.Low,
+                        "Promoting asset '{0}' to Publish asset.",
+                        asset.ItemSpec
+                    );
                 }
 
                 ApplyPublishProperties(newDotNetWasm);
                 nativeStaticWebAssets.Add(newDotNetWasm);
 
-                if (resolvedNativeAssetToPublish.TryGetValue("dotnet.native.wasm", out var resolved))
+                if (
+                    resolvedNativeAssetToPublish.TryGetValue("dotnet.native.wasm", out var resolved)
+                )
                 {
                     filesToRemove.Add(resolved);
                 }
@@ -282,7 +345,11 @@ public class ComputeWasmPublishAssets : Task
             }
         }
 
-        var compressedUpdatedFiles = ProcessCompressedAssets(compressedRepresentations, nativeAssets, updateMap);
+        var compressedUpdatedFiles = ProcessCompressedAssets(
+            compressedRepresentations,
+            nativeAssets,
+            updateMap
+        );
         foreach (var f in compressedUpdatedFiles)
         {
             nativeStaticWebAssets.Add(f);
@@ -293,7 +360,8 @@ public class ComputeWasmPublishAssets : Task
         static bool IsAnyDotNetJs(string key)
         {
             var fileName = Path.GetFileName(key);
-            return fileName.StartsWith("dotnet.", StringComparison.Ordinal) && fileName.EndsWith(".js", StringComparison.Ordinal);
+            return fileName.StartsWith("dotnet.", StringComparison.Ordinal)
+                && fileName.EndsWith(".js", StringComparison.Ordinal);
         }
 
         static bool IsDotNetWasm(string key)
@@ -309,7 +377,8 @@ public class ComputeWasmPublishAssets : Task
         Dictionary<string, ITaskItem> compressedRepresentations,
         Dictionary<string, ITaskItem> resolvedPublishFilesToRemove,
         Dictionary<string, ITaskItem> resolvedSymbolAssetToPublish,
-        List<ITaskItem> filesToRemove)
+        List<ITaskItem> filesToRemove
+    )
     {
         var symbolStaticWebAssets = new List<ITaskItem>();
         var updateMap = new Dictionary<string, ITaskItem>();
@@ -317,7 +386,12 @@ public class ComputeWasmPublishAssets : Task
         foreach (var kvp in symbolAssets)
         {
             var asset = kvp.Value;
-            if (resolvedSymbolAssetToPublish.TryGetValue(Path.GetFileName(asset.GetMetadata("OriginalItemSpec")), out var existing))
+            if (
+                resolvedSymbolAssetToPublish.TryGetValue(
+                    Path.GetFileName(asset.GetMetadata("OriginalItemSpec")),
+                    out var existing
+                )
+            )
             {
                 if (!resolvedPublishFilesToRemove.TryGetValue(existing.ItemSpec, out var removed))
                 {
@@ -328,7 +402,11 @@ public class ComputeWasmPublishAssets : Task
                     symbolStaticWebAssets.Add(newAsset);
                     updateMap.Add(newAsset.ItemSpec, newAsset);
                     filesToRemove.Add(existing);
-                    Log.LogMessage(MessageImportance.Low, "Promoting asset '{0}' to Publish asset.", asset.ItemSpec);
+                    Log.LogMessage(
+                        MessageImportance.Low,
+                        "Promoting asset '{0}' to Publish asset.",
+                        asset.ItemSpec
+                    );
                 }
                 else
                 {
@@ -341,7 +419,11 @@ public class ComputeWasmPublishAssets : Task
             }
         }
 
-        var compressedFiles = ProcessCompressedAssets(compressedRepresentations, symbolAssets, updateMap);
+        var compressedFiles = ProcessCompressedAssets(
+            compressedRepresentations,
+            symbolAssets,
+            updateMap
+        );
 
         foreach (var file in compressedFiles)
         {
@@ -357,7 +439,8 @@ public class ComputeWasmPublishAssets : Task
         Dictionary<string, ITaskItem> resolvedAssembliesToPublish,
         Dictionary<string, ITaskItem> assemblyAssets,
         Dictionary<string, ITaskItem> satelliteAssemblyAssets,
-        Dictionary<string, ITaskItem> compressedRepresentations)
+        Dictionary<string, ITaskItem> compressedRepresentations
+    )
     {
         // All assemblies, satellite assemblies and gzip files are initially defined as build assets.
         // We need to update them to publish assets when they haven't changed or when they have been linked.
@@ -378,7 +461,13 @@ public class ComputeWasmPublishAssets : Task
                 // We found the assembly, so it'll have to be updated.
                 assetsToUpdate.Add(asset.ItemSpec, asset);
                 filesToRemove.Add(existing);
-                if (!string.Equals(asset.ItemSpec, existing.GetMetadata("FullPath"), StringComparison.Ordinal))
+                if (
+                    !string.Equals(
+                        asset.ItemSpec,
+                        existing.GetMetadata("FullPath"),
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     linkedAssets.Add(asset.ItemSpec, existing);
                 }
@@ -403,14 +492,19 @@ public class ComputeWasmPublishAssets : Task
                 }
                 else
                 {
-                    var message = $"Can't find the original satellite assembly in the list of resolved files to " +
-                        $"publish for asset '{satelliteAssembly.ItemSpec}'.";
+                    var message =
+                        $"Can't find the original satellite assembly in the list of resolved files to "
+                        + $"publish for asset '{satelliteAssembly.ItemSpec}'.";
                     throw new InvalidOperationException(message);
                 }
             }
         }
 
-        var compressedFiles = ProcessCompressedAssets(compressedRepresentations, assetsToUpdate, linkedAssets);
+        var compressedFiles = ProcessCompressedAssets(
+            compressedRepresentations,
+            assetsToUpdate,
+            linkedAssets
+        );
 
         foreach (var file in compressedFiles)
         {
@@ -418,7 +512,11 @@ public class ComputeWasmPublishAssets : Task
         }
 
         var updatedAssetsMap = new Dictionary<string, ITaskItem>(StringComparer.Ordinal);
-        foreach (var asset in assetsToUpdate.Select(a => a.Value).OrderBy(a => a.GetMetadata("AssetRole"), Comparer<string>.Create(OrderByAssetRole)))
+        foreach (
+            var asset in assetsToUpdate
+                .Select(a => a.Value)
+                .OrderBy(a => a.GetMetadata("AssetRole"), Comparer<string>.Create(OrderByAssetRole))
+        )
         {
             var assetTraitName = asset.GetMetadata("AssetTraitName");
             switch (assetTraitName)
@@ -427,15 +525,25 @@ public class ComputeWasmPublishAssets : Task
                     ITaskItem newAsemblyAsset = null;
                     if (linkedAssets.TryGetValue(asset.ItemSpec, out var linked))
                     {
-                        newAsemblyAsset = new TaskItem(linked.GetMetadata("FullPath"), asset.CloneCustomMetadata());
+                        newAsemblyAsset = new TaskItem(
+                            linked.GetMetadata("FullPath"),
+                            asset.CloneCustomMetadata()
+                        );
                         newAsemblyAsset.SetMetadata("OriginalItemSpec", linked.ItemSpec);
-                        Log.LogMessage(MessageImportance.Low, "Replacing asset '{0}' with linked version '{1}'",
+                        Log.LogMessage(
+                            MessageImportance.Low,
+                            "Replacing asset '{0}' with linked version '{1}'",
                             asset.ItemSpec,
-                            newAsemblyAsset.ItemSpec);
+                            newAsemblyAsset.ItemSpec
+                        );
                     }
                     else
                     {
-                        Log.LogMessage(MessageImportance.Low, "Linked asset not found for asset '{0}'", asset.ItemSpec);
+                        Log.LogMessage(
+                            MessageImportance.Low,
+                            "Linked asset not found for asset '{0}'",
+                            asset.ItemSpec
+                        );
                         newAsemblyAsset = new TaskItem(asset);
                     }
                     ApplyPublishProperties(newAsemblyAsset);
@@ -447,7 +555,11 @@ public class ComputeWasmPublishAssets : Task
                     var dependentAsset = new TaskItem(asset);
                     ApplyPublishProperties(dependentAsset);
                     UpdateRelatedAssetProperty(asset, dependentAsset, updatedAssetsMap);
-                    Log.LogMessage(MessageImportance.Low, "Promoting asset '{0}' to Publish asset.", asset.ItemSpec);
+                    Log.LogMessage(
+                        MessageImportance.Low,
+                        "Promoting asset '{0}' to Publish asset.",
+                        asset.ItemSpec
+                    );
 
                     updatedAssetsMap.Add(asset.ItemSpec, dependentAsset);
                     break;
@@ -460,7 +572,8 @@ public class ComputeWasmPublishAssets : Task
     private List<ITaskItem> ProcessCompressedAssets(
         Dictionary<string, ITaskItem> compressedRepresentations,
         Dictionary<string, ITaskItem> assetsToUpdate,
-        Dictionary<string, ITaskItem> updatedAssets)
+        Dictionary<string, ITaskItem> updatedAssets
+    )
     {
         var processed = new List<string>();
         var runtimeAssetsToUpdate = new List<ITaskItem>();
@@ -472,14 +585,22 @@ public class ComputeWasmPublishAssets : Task
             {
                 if (!updatedAssets.ContainsKey(relatedAsset))
                 {
-                    Log.LogMessage(MessageImportance.Low, "Related assembly for '{0}' was not updated and the compressed asset can be reused.", relatedAsset);
+                    Log.LogMessage(
+                        MessageImportance.Low,
+                        "Related assembly for '{0}' was not updated and the compressed asset can be reused.",
+                        relatedAsset
+                    );
                     var newCompressedAsset = new TaskItem(compressedAsset);
                     ApplyPublishProperties(newCompressedAsset);
                     runtimeAssetsToUpdate.Add(newCompressedAsset);
                 }
                 else
                 {
-                    Log.LogMessage(MessageImportance.Low, "Related assembly for '{0}' was updated and the compressed asset will be discarded.", relatedAsset);
+                    Log.LogMessage(
+                        MessageImportance.Low,
+                        "Related assembly for '{0}' was updated and the compressed asset will be discarded.",
+                        relatedAsset
+                    );
                 }
 
                 processed.Add(kvp.Key);
@@ -495,9 +616,18 @@ public class ComputeWasmPublishAssets : Task
         return runtimeAssetsToUpdate;
     }
 
-    private static void UpdateRelatedAssetProperty(ITaskItem asset, TaskItem newAsset, Dictionary<string, ITaskItem> updatedAssetsMap)
+    private static void UpdateRelatedAssetProperty(
+        ITaskItem asset,
+        TaskItem newAsset,
+        Dictionary<string, ITaskItem> updatedAssetsMap
+    )
     {
-        if (!updatedAssetsMap.TryGetValue(asset.GetMetadata("RelatedAsset"), out var updatedRelatedAsset))
+        if (
+            !updatedAssetsMap.TryGetValue(
+                asset.GetMetadata("RelatedAsset"),
+                out var updatedRelatedAsset
+            )
+        )
         {
             throw new InvalidOperationException("Related asset not found.");
         }
@@ -512,13 +642,14 @@ public class ComputeWasmPublishAssets : Task
 
         return leftScore - rightScore;
 
-        static int GetScore(string candidate) => candidate switch
-        {
-            "Primary" => 0,
-            "Related" => 1,
-            "Alternative" => 2,
-            _ => throw new InvalidOperationException("Invalid asset role"),
-        };
+        static int GetScore(string candidate) =>
+            candidate switch
+            {
+                "Primary" => 0,
+                "Related" => 1,
+                "Alternative" => 2,
+                _ => throw new InvalidOperationException("Invalid asset role"),
+            };
     }
 
     private void ApplyPublishProperties(ITaskItem newAsemblyAsset)
@@ -534,7 +665,8 @@ public class ComputeWasmPublishAssets : Task
         Dictionary<string, ITaskItem> nativeAssets,
         Dictionary<string, ITaskItem> satelliteAssemblyAssets,
         Dictionary<string, ITaskItem> symbolAssets,
-        Dictionary<string, ITaskItem> compressedRepresentations)
+        Dictionary<string, ITaskItem> compressedRepresentations
+    )
     {
         foreach (var asset in ExistingAssets)
         {
@@ -571,10 +703,16 @@ public class ComputeWasmPublishAssets : Task
         Dictionary<string, ITaskItem> resolvedAssemblyToPublish,
         Dictionary<(string, string), ITaskItem> satelliteAssemblyToPublish,
         Dictionary<string, ITaskItem> resolvedSymbolsToPublish,
-        Dictionary<string, ITaskItem> resolvedNativeAssetToPublish)
+        Dictionary<string, ITaskItem> resolvedNativeAssetToPublish
+    )
     {
         var resolvedFilesToPublish = ResolvedFilesToPublish.ToList();
-        if (AssetsComputingHelper.TryGetAssetFilename(CustomIcuCandidate, out string customIcuCandidateFilename))
+        if (
+            AssetsComputingHelper.TryGetAssetFilename(
+                CustomIcuCandidate,
+                out string customIcuCandidateFilename
+            )
+        )
         {
             var customIcuCandidate = AssetsComputingHelper.GetCustomIcuAsset(CustomIcuCandidate);
             resolvedFilesToPublish.Add(customIcuCandidate);
@@ -583,43 +721,85 @@ public class ComputeWasmPublishAssets : Task
         foreach (var candidate in resolvedFilesToPublish)
         {
 #pragma warning disable CA1864 // Prefer the 'IDictionary.TryAdd(TKey, TValue)' method. Dictionary.TryAdd() not available in .Net framework.
-            if (AssetsComputingHelper.ShouldFilterCandidate(candidate, TimeZoneSupport, InvariantGlobalization, HybridGlobalization, LoadFullICUData, CopySymbols, customIcuCandidateFilename, EnableThreads, EmitSourceMap, out var reason))
+            if (
+                AssetsComputingHelper.ShouldFilterCandidate(
+                    candidate,
+                    TimeZoneSupport,
+                    InvariantGlobalization,
+                    HybridGlobalization,
+                    LoadFullICUData,
+                    CopySymbols,
+                    customIcuCandidateFilename,
+                    EnableThreads,
+                    EmitSourceMap,
+                    out var reason
+                )
+            )
             {
-                Log.LogMessage(MessageImportance.Low, "Skipping asset '{0}' because '{1}'", candidate.ItemSpec, reason);
+                Log.LogMessage(
+                    MessageImportance.Low,
+                    "Skipping asset '{0}' because '{1}'",
+                    candidate.ItemSpec,
+                    reason
+                );
                 if (!resolvedFilesToPublishToRemove.ContainsKey(candidate.ItemSpec))
                 {
                     resolvedFilesToPublishToRemove.Add(candidate.ItemSpec, candidate);
                 }
                 else
                 {
-                    Log.LogMessage(MessageImportance.Low, "Duplicate candidate '{0}' found in ResolvedFilesToPublish", candidate.ItemSpec);
+                    Log.LogMessage(
+                        MessageImportance.Low,
+                        "Duplicate candidate '{0}' found in ResolvedFilesToPublish",
+                        candidate.ItemSpec
+                    );
                 }
                 continue;
             }
 
             var fileName = candidate.GetMetadata("FileName");
             var extension = candidate.GetMetadata("Extension");
-            if (string.Equals(candidate.GetMetadata("AssetType"), "native", StringComparison.Ordinal) && (fileName == "dotnet" || fileName == "dotnet.native") && extension == ".wasm")
+            if (
+                string.Equals(
+                    candidate.GetMetadata("AssetType"),
+                    "native",
+                    StringComparison.Ordinal
+                )
+                && (fileName == "dotnet" || fileName == "dotnet.native")
+                && extension == ".wasm"
+            )
             {
                 ResolveAsNativeAsset(Log, resolvedNativeAssetToPublish, candidate, extension);
                 continue;
             }
 
-            if (string.Equals(extension, ".dll", StringComparison.Ordinal) || string.Equals(extension, Utils.WebcilInWasmExtension, StringComparison.Ordinal))
+            if (
+                string.Equals(extension, ".dll", StringComparison.Ordinal)
+                || string.Equals(extension, Utils.WebcilInWasmExtension, StringComparison.Ordinal)
+            )
             {
                 var culture = candidate.GetMetadata("Culture");
-                var inferredCulture = candidate.GetMetadata("DestinationSubDirectory").Replace("\\", "/").Trim('/');
+                var inferredCulture = candidate
+                    .GetMetadata("DestinationSubDirectory")
+                    .Replace("\\", "/")
+                    .Trim('/');
                 if (!string.IsNullOrEmpty(culture) || !string.IsNullOrEmpty(inferredCulture))
                 {
                     var finalCulture = !string.IsNullOrEmpty(culture) ? culture : inferredCulture;
-                    var assemblyName = Path.GetFileName(candidate.GetMetadata("RelativePath").Replace("\\", "/"));
+                    var assemblyName = Path.GetFileName(
+                        candidate.GetMetadata("RelativePath").Replace("\\", "/")
+                    );
                     if (!satelliteAssemblyToPublish.ContainsKey((finalCulture, assemblyName)))
                     {
                         satelliteAssemblyToPublish.Add((finalCulture, assemblyName), candidate);
                     }
                     else
                     {
-                        Log.LogMessage(MessageImportance.Low, "Duplicate candidate '{0}' found in ResolvedFilesToPublish", candidate.ItemSpec);
+                        Log.LogMessage(
+                            MessageImportance.Low,
+                            "Duplicate candidate '{0}' found in ResolvedFilesToPublish",
+                            candidate.ItemSpec
+                        );
                     }
                     continue;
                 }
@@ -631,7 +811,11 @@ public class ComputeWasmPublishAssets : Task
                 }
                 else
                 {
-                    Log.LogMessage(MessageImportance.Low, "Duplicate candidate '{0}' found in ResolvedFilesToPublish", candidate.ItemSpec);
+                    Log.LogMessage(
+                        MessageImportance.Low,
+                        "Duplicate candidate '{0}' found in ResolvedFilesToPublish",
+                        candidate.ItemSpec
+                    );
                 }
 
                 continue;
@@ -646,7 +830,11 @@ public class ComputeWasmPublishAssets : Task
                 }
                 else
                 {
-                    Log.LogMessage(MessageImportance.Low, "Duplicate candidate '{0}' found in ResolvedFilesToPublish", candidate.ItemSpec);
+                    Log.LogMessage(
+                        MessageImportance.Low,
+                        "Duplicate candidate '{0}' found in ResolvedFilesToPublish",
+                        candidate.ItemSpec
+                    );
                 }
 
                 continue;
@@ -654,13 +842,24 @@ public class ComputeWasmPublishAssets : Task
 
             // Capture all the native unfiltered assets since we need to process them to determine what static web assets need to get
             // upgraded
-            if (string.Equals(candidate.GetMetadata("AssetType"), "native", StringComparison.Ordinal))
+            if (
+                string.Equals(
+                    candidate.GetMetadata("AssetType"),
+                    "native",
+                    StringComparison.Ordinal
+                )
+            )
             {
                 ResolveAsNativeAsset(Log, resolvedNativeAssetToPublish, candidate, extension);
                 continue;
             }
 
-            static void ResolveAsNativeAsset(TaskLoggingHelper log, Dictionary<string, ITaskItem> resolvedNativeAssetToPublish, ITaskItem candidate, string extension)
+            static void ResolveAsNativeAsset(
+                TaskLoggingHelper log,
+                Dictionary<string, ITaskItem> resolvedNativeAssetToPublish,
+                ITaskItem candidate,
+                string extension
+            )
             {
                 var candidateName = $"{candidate.GetMetadata("FileName")}{extension}";
                 if (!resolvedNativeAssetToPublish.ContainsKey(candidateName))
@@ -669,21 +868,32 @@ public class ComputeWasmPublishAssets : Task
                 }
                 else
                 {
-                    log.LogMessage(MessageImportance.Low, "Duplicate candidate '{0}' found in ResolvedFilesToPublish", candidate.ItemSpec);
+                    log.LogMessage(
+                        MessageImportance.Low,
+                        "Duplicate candidate '{0}' found in ResolvedFilesToPublish",
+                        candidate.ItemSpec
+                    );
                 }
             }
 #pragma warning restore CA1864
         }
     }
 
-    private static bool IsNativeAsset(string traitValue) => string.Equals(traitValue, "native", StringComparison.Ordinal);
+    private static bool IsNativeAsset(string traitValue) =>
+        string.Equals(traitValue, "native", StringComparison.Ordinal);
 
-    private static bool IsRuntimeAsset(string traitValue) => string.Equals(traitValue, "runtime", StringComparison.Ordinal);
-    private static bool IsSymbolAsset(string traitValue) => string.Equals(traitValue, "symbol", StringComparison.Ordinal);
+    private static bool IsRuntimeAsset(string traitValue) =>
+        string.Equals(traitValue, "runtime", StringComparison.Ordinal);
 
-    private static bool IsAlternative(ITaskItem asset) => string.Equals(asset.GetMetadata("AssetRole"), "Alternative", StringComparison.Ordinal);
+    private static bool IsSymbolAsset(string traitValue) =>
+        string.Equals(traitValue, "symbol", StringComparison.Ordinal);
 
-    private static bool IsCulture(string traitName) => string.Equals(traitName, "Culture", StringComparison.Ordinal);
+    private static bool IsAlternative(ITaskItem asset) =>
+        string.Equals(asset.GetMetadata("AssetRole"), "Alternative", StringComparison.Ordinal);
 
-    private static bool IsWebAssemblyResource(string traitName) => string.Equals(traitName, "WasmResource", StringComparison.Ordinal);
+    private static bool IsCulture(string traitName) =>
+        string.Equals(traitName, "Culture", StringComparison.Ordinal);
+
+    private static bool IsWebAssemblyResource(string traitName) =>
+        string.Equals(traitName, "WasmResource", StringComparison.Ordinal);
 }

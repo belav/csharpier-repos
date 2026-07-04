@@ -26,7 +26,8 @@ public sealed class ObjectListComparer<TElement> : ValueComparer<IEnumerable<TEl
         : base(
             (a, b) => Compare(a, b, elementComparer),
             o => GetHashCode(o, elementComparer),
-            source => Snapshot(source, elementComparer))
+            source => Snapshot(source, elementComparer)
+        )
     {
         ElementComparer = elementComparer;
     }
@@ -36,7 +37,11 @@ public sealed class ObjectListComparer<TElement> : ValueComparer<IEnumerable<TEl
     /// </summary>
     public ValueComparer ElementComparer { get; }
 
-    private static bool Compare(IEnumerable<TElement>? a, IEnumerable<TElement>? b, ValueComparer elementComparer)
+    private static bool Compare(
+        IEnumerable<TElement>? a,
+        IEnumerable<TElement>? b,
+        ValueComparer elementComparer
+    )
     {
         if (ReferenceEquals(a, b))
         {
@@ -90,7 +95,9 @@ public sealed class ObjectListComparer<TElement> : ValueComparer<IEnumerable<TEl
         throw new InvalidOperationException(
             CoreStrings.BadListType(
                 (a is IList<TElement?> ? b : a).GetType().ShortDisplayName(),
-                typeof(IList<>).MakeGenericType(elementComparer.Type).ShortDisplayName()));
+                typeof(IList<>).MakeGenericType(elementComparer.Type).ShortDisplayName()
+            )
+        );
     }
 
     private static int GetHashCode(IEnumerable<TElement> source, ValueComparer elementComparer)
@@ -105,14 +112,19 @@ public sealed class ObjectListComparer<TElement> : ValueComparer<IEnumerable<TEl
         return hash.ToHashCode();
     }
 
-    private static IList<TElement> Snapshot(IEnumerable<TElement> source, ValueComparer elementComparer)
+    private static IList<TElement> Snapshot(
+        IEnumerable<TElement> source,
+        ValueComparer elementComparer
+    )
     {
         if (source is not IList<TElement> sourceList)
         {
             throw new InvalidOperationException(
                 CoreStrings.BadListType(
                     source.GetType().ShortDisplayName(),
-                    typeof(IList<>).MakeGenericType(elementComparer.Type).ShortDisplayName()));
+                    typeof(IList<>).MakeGenericType(elementComparer.Type).ShortDisplayName()
+                )
+            );
         }
 
         if (sourceList.IsReadOnly)
@@ -132,13 +144,16 @@ public sealed class ObjectListComparer<TElement> : ValueComparer<IEnumerable<TEl
         }
         else
         {
-            var snapshot = (source is List<TElement> || sourceList.IsReadOnly)
-                ? new List<TElement>(sourceList.Count)
-                : (IList<TElement>)Activator.CreateInstance(source.GetType())!;
+            var snapshot =
+                (source is List<TElement> || sourceList.IsReadOnly)
+                    ? new List<TElement>(sourceList.Count)
+                    : (IList<TElement>)Activator.CreateInstance(source.GetType())!;
 
             foreach (var e in sourceList)
             {
-                snapshot.Add(e == null ? (TElement)(object?)null! : (TElement)elementComparer.Snapshot(e));
+                snapshot.Add(
+                    e == null ? (TElement)(object?)null! : (TElement)elementComparer.Snapshot(e)
+                );
             }
 
             return snapshot;

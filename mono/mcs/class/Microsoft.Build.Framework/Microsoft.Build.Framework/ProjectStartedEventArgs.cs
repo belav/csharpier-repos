@@ -26,54 +26,55 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.Collections;
 
-namespace Microsoft.Build.Framework {
-	[Serializable]
-	public class ProjectStartedEventArgs : BuildStatusEventArgs {
-	
-		string	projectFile;
-		string	targetNames;
-		IEnumerable properties;
-		IEnumerable items;
-	
-		protected ProjectStartedEventArgs ()
-		{
-		}
+namespace Microsoft.Build.Framework
+{
+    [Serializable]
+    public class ProjectStartedEventArgs : BuildStatusEventArgs
+    {
+        string projectFile;
+        string targetNames;
+        IEnumerable properties;
+        IEnumerable items;
 
-		public ProjectStartedEventArgs (string message,
-						string helpKeyword,
-						string projectFile,
-						string targetNames,
-						IEnumerable properties,
-						IEnumerable items)
-			: base (message, helpKeyword, null)
-		{
-			this.projectFile = projectFile;
-			this.targetNames = targetNames;
-			this.properties = properties;
-			this.items = items;
-		}
+        protected ProjectStartedEventArgs() { }
 
-		public string ProjectFile {
-			get {
-				return projectFile;
-			}
-		}
-		
-		public string TargetNames {
-			get { return targetNames; }
-		}
-		
-		public IEnumerable Properties {
-			get { return properties; }
-		}
-		
-		public IEnumerable Items {
-			get { return items; }
-		}
-	}
+        public ProjectStartedEventArgs(
+            string message,
+            string helpKeyword,
+            string projectFile,
+            string targetNames,
+            IEnumerable properties,
+            IEnumerable items
+        )
+            : base(message, helpKeyword, null)
+        {
+            this.projectFile = projectFile;
+            this.targetNames = targetNames;
+            this.properties = properties;
+            this.items = items;
+        }
+
+        public string ProjectFile
+        {
+            get { return projectFile; }
+        }
+
+        public string TargetNames
+        {
+            get { return targetNames; }
+        }
+
+        public IEnumerable Properties
+        {
+            get { return properties; }
+        }
+
+        public IEnumerable Items
+        {
+            get { return items; }
+        }
+    }
 }
-

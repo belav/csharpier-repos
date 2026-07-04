@@ -10,18 +10,21 @@ namespace System.Diagnostics.CodeAnalysis
     ///   This attribute allows call sites to be flagged with a diagnostic that indicates that an experimental
     ///   feature is used. Authors can use this attribute to ship preview features in their assemblies.
     /// </remarks>
-    [AttributeUsage(AttributeTargets.Assembly |
-                    AttributeTargets.Module |
-                    AttributeTargets.Class |
-                    AttributeTargets.Struct |
-                    AttributeTargets.Enum |
-                    AttributeTargets.Constructor |
-                    AttributeTargets.Method |
-                    AttributeTargets.Property |
-                    AttributeTargets.Field |
-                    AttributeTargets.Event |
-                    AttributeTargets.Interface |
-                    AttributeTargets.Delegate, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Module
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Enum
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method
+            | AttributeTargets.Property
+            | AttributeTargets.Field
+            | AttributeTargets.Event
+            | AttributeTargets.Interface
+            | AttributeTargets.Delegate,
+        Inherited = false
+    )]
     public sealed class ExperimentalAttribute : Attribute
     {
         /// <summary>

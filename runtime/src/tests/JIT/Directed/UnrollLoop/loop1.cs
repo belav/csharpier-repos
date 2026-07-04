@@ -4,6 +4,7 @@
 
 using System;
 using Xunit;
+
 namespace A
 {
     public class B
@@ -250,4 +251,3 @@ namespace A
         }
     }
 }
-

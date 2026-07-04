@@ -102,7 +102,7 @@ namespace Runtime_45090
     struct _1e00
     {
         public _1000 _0;
-        public _e00  _1;
+        public _e00 _1;
     }
 
     struct _2000
@@ -115,7 +115,7 @@ namespace Runtime_45090
     {
         public _1000 _0;
         public _1000 _1;
-        public _e00  _2;
+        public _e00 _2;
     }
 
     struct _3000
@@ -134,7 +134,7 @@ namespace Runtime_45090
     {
         // Frame size is 4 bytes
         //   push eax
-        public unsafe override int VirtMethodEspBasedFrame()
+        public override unsafe int VirtMethodEspBasedFrame()
         {
             _4 tmp = new _4();
             *(int*)(&tmp) = 45090;

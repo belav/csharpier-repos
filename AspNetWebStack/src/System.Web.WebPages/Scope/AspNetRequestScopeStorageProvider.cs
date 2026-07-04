@@ -16,18 +16,26 @@ namespace System.Web.WebPages.Scope
         private readonly Func<bool> _appStartExecuted;
 
         public AspNetRequestScopeStorageProvider()
-            : this(httpContext: null, appStartExecuted: () => WebPageHttpModule.AppStartExecuteCompleted)
-        {
-        }
+            : this(
+                httpContext: null,
+                appStartExecuted: () => WebPageHttpModule.AppStartExecuteCompleted
+            ) { }
 
-        internal AspNetRequestScopeStorageProvider(HttpContextBase httpContext, Func<bool> appStartExecuted)
+        internal AspNetRequestScopeStorageProvider(
+            HttpContextBase httpContext,
+            Func<bool> appStartExecuted
+        )
         {
             _httpContext = httpContext;
             _appStartExecuted = appStartExecuted;
             ApplicationScope = new ApplicationScopeStorageDictionary();
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "The state storage API is designed to allow contexts to be set")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "The state storage API is designed to allow contexts to be set"
+        )]
         public IDictionary<object, object> CurrentScope
         {
             get { return PageScope ?? RequestScopeInternal ?? ApplicationScope; }
@@ -35,9 +43,11 @@ namespace System.Web.WebPages.Scope
             {
                 if (!_appStartExecuted())
                 {
-                    // Disallow creating new contexts before the start page is executed. 
+                    // Disallow creating new contexts before the start page is executed.
                     // This makes sense because our provider is scoped to a request.
-                    throw new InvalidOperationException(WebPageResources.StateStorage_StorageScopesCannotBeCreated);
+                    throw new InvalidOperationException(
+                        WebPageResources.StateStorage_StorageScopesCannotBeCreated
+                    );
                 }
                 PageScope = value;
             }
@@ -57,7 +67,9 @@ namespace System.Web.WebPages.Scope
                 var requestContext = RequestScopeInternal;
                 if (requestContext == null)
                 {
-                    throw new InvalidOperationException(WebPageResources.StateStorage_RequestScopeNotAvailable);
+                    throw new InvalidOperationException(
+                        WebPageResources.StateStorage_RequestScopeNotAvailable
+                    );
                 }
                 return requestContext;
             }
@@ -69,7 +81,12 @@ namespace System.Web.WebPages.Scope
             {
                 // If a http context is specifically provided, use that. Else return the value from System.Web.HttpContext.Current if its available.
                 var currentHttpContext = Web.HttpContext.Current;
-                return _httpContext ?? (currentHttpContext == null ? null : new HttpContextWrapper(currentHttpContext));
+                return _httpContext
+                    ?? (
+                        currentHttpContext == null
+                            ? null
+                            : new HttpContextWrapper(currentHttpContext)
+                    );
             }
         }
 
@@ -79,10 +96,12 @@ namespace System.Web.WebPages.Scope
             {
                 if (_appStartExecuted())
                 {
-                    var requestContext = (IDictionary<object, object>)HttpContext.Items[_requestScopeKey];
+                    var requestContext =
+                        (IDictionary<object, object>)HttpContext.Items[_requestScopeKey];
                     if (requestContext == null)
                     {
-                        HttpContext.Items[_requestScopeKey] = requestContext = new ScopeStorageDictionary(ApplicationScope);
+                        HttpContext.Items[_requestScopeKey] = requestContext =
+                            new ScopeStorageDictionary(ApplicationScope);
                     }
                     return requestContext;
                 }

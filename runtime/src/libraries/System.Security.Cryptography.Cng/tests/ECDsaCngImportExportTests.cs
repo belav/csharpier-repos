@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System.Security.Cryptography.EcDsa.Tests;
 using System.Security.Cryptography.Tests;
+using Xunit;
 
 namespace System.Security.Cryptography.Cng.Tests
 {
@@ -12,7 +12,12 @@ namespace System.Security.Cryptography.Cng.Tests
         [Fact]
         public static void TestImportKey()
         {
-            using (CngKey key = CngKey.Import(TestData.Key_ECDiffieHellmanP256, CngKeyBlobFormat.GenericPublicBlob))
+            using (
+                CngKey key = CngKey.Import(
+                    TestData.Key_ECDiffieHellmanP256,
+                    CngKeyBlobFormat.GenericPublicBlob
+                )
+            )
             {
                 Assert.Equal(CngAlgorithm.ECDiffieHellmanP256, key.Algorithm);
                 Assert.Equal(CngAlgorithmGroup.ECDiffieHellman, key.AlgorithmGroup);
@@ -39,7 +44,12 @@ namespace System.Security.Cryptography.Cng.Tests
         [Fact]
         public static void TestImportExportRoundTrip()
         {
-            using (CngKey key = CngKey.Import(TestData.Key_ECDiffieHellmanP256, CngKeyBlobFormat.GenericPublicBlob))
+            using (
+                CngKey key = CngKey.Import(
+                    TestData.Key_ECDiffieHellmanP256,
+                    CngKeyBlobFormat.GenericPublicBlob
+                )
+            )
             {
                 byte[] reExported = key.Export(CngKeyBlobFormat.GenericPublicBlob);
                 Assert.Equal<byte>(TestData.Key_ECDiffieHellmanP256, reExported);
@@ -64,7 +74,10 @@ namespace System.Security.Cryptography.Cng.Tests
 
                 // Export to see if the hash is there
                 ECParameters param2 = cng.ExportExplicitParameters(false);
-                Assert.Equal(HashAlgorithmName.SHA1.Name.ToUpper(), param2.Curve.Hash.Value.Name.ToUpper());
+                Assert.Equal(
+                    HashAlgorithmName.SHA1.Name.ToUpper(),
+                    param2.Curve.Hash.Value.Name.ToUpper()
+                );
                 Assert.Equal(0xFF, param2.Curve.Seed[0]);
             }
         }

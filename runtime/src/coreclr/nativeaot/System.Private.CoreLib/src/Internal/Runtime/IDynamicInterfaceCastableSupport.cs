@@ -10,15 +10,28 @@ namespace Internal.Runtime
     static unsafe class IDynamicCastableSupport
     {
         [RuntimeExport("IDynamicCastableIsInterfaceImplemented")]
-        internal static bool IDynamicCastableIsInterfaceImplemented(IDynamicInterfaceCastable instance, MethodTable* interfaceType, bool throwIfNotImplemented)
+        internal static bool IDynamicCastableIsInterfaceImplemented(
+            IDynamicInterfaceCastable instance,
+            MethodTable* interfaceType,
+            bool throwIfNotImplemented
+        )
         {
-            return instance.IsInterfaceImplemented(new RuntimeTypeHandle(interfaceType), throwIfNotImplemented);
+            return instance.IsInterfaceImplemented(
+                new RuntimeTypeHandle(interfaceType),
+                throwIfNotImplemented
+            );
         }
 
         [RuntimeExport("IDynamicCastableGetInterfaceImplementation")]
-        internal static IntPtr IDynamicCastableGetInterfaceImplementation(IDynamicInterfaceCastable instance, MethodTable* interfaceType, ushort slot)
+        internal static IntPtr IDynamicCastableGetInterfaceImplementation(
+            IDynamicInterfaceCastable instance,
+            MethodTable* interfaceType,
+            ushort slot
+        )
         {
-            RuntimeTypeHandle handle = instance.GetInterfaceImplementation(new RuntimeTypeHandle(interfaceType));
+            RuntimeTypeHandle handle = instance.GetInterfaceImplementation(
+                new RuntimeTypeHandle(interfaceType)
+            );
             MethodTable* implType = handle.ToMethodTable();
             if (implType == null)
             {
@@ -28,28 +41,57 @@ namespace Internal.Runtime
             {
                 ThrowInvalidOperationException(implType);
             }
-            IntPtr result = RuntimeImports.RhResolveDispatchOnType(new EETypePtr(implType), new EETypePtr(interfaceType), slot);
+            IntPtr result = RuntimeImports.RhResolveDispatchOnType(
+                new EETypePtr(implType),
+                new EETypePtr(interfaceType),
+                slot
+            );
             if (result == IntPtr.Zero)
             {
-                IDynamicCastableGetInterfaceImplementationFailure(instance, interfaceType, implType);
+                IDynamicCastableGetInterfaceImplementationFailure(
+                    instance,
+                    interfaceType,
+                    implType
+                );
             }
             return result;
         }
 
         private static void ThrowInvalidCastException(object instance, MethodTable* interfaceType)
         {
-            throw new InvalidCastException(SR.Format(SR.InvalidCast_FromTo, instance.GetType(), Type.GetTypeFromMethodTable(interfaceType)));
+            throw new InvalidCastException(
+                SR.Format(
+                    SR.InvalidCast_FromTo,
+                    instance.GetType(),
+                    Type.GetTypeFromMethodTable(interfaceType)
+                )
+            );
         }
 
         private static void ThrowInvalidOperationException(MethodTable* resolvedImplType)
         {
-            throw new InvalidOperationException(SR.Format(SR.IDynamicInterfaceCastable_NotInterface, Type.GetTypeFromMethodTable(resolvedImplType)));
+            throw new InvalidOperationException(
+                SR.Format(
+                    SR.IDynamicInterfaceCastable_NotInterface,
+                    Type.GetTypeFromMethodTable(resolvedImplType)
+                )
+            );
         }
 
-        private static void IDynamicCastableGetInterfaceImplementationFailure(object instance, MethodTable* interfaceType, MethodTable* resolvedImplType)
+        private static void IDynamicCastableGetInterfaceImplementationFailure(
+            object instance,
+            MethodTable* interfaceType,
+            MethodTable* resolvedImplType
+        )
         {
             if (resolvedImplType->DispatchMap == null)
-                throw new InvalidOperationException(SR.Format(SR.IDynamicInterfaceCastable_MissingImplementationAttribute, Type.GetTypeFromMethodTable(resolvedImplType), nameof(DynamicInterfaceCastableImplementationAttribute)));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.IDynamicInterfaceCastable_MissingImplementationAttribute,
+                        Type.GetTypeFromMethodTable(resolvedImplType),
+                        nameof(DynamicInterfaceCastableImplementationAttribute)
+                    )
+                );
 
             bool implementsInterface = false;
             var interfaces = resolvedImplType->InterfaceMap;
@@ -63,7 +105,13 @@ namespace Internal.Runtime
             }
 
             if (!implementsInterface)
-                throw new InvalidOperationException(SR.Format(SR.IDynamicInterfaceCastable_DoesNotImplementRequested, Type.GetTypeFromMethodTable(resolvedImplType), Type.GetTypeFromMethodTable(interfaceType)));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.IDynamicInterfaceCastable_DoesNotImplementRequested,
+                        Type.GetTypeFromMethodTable(resolvedImplType),
+                        Type.GetTypeFromMethodTable(interfaceType)
+                    )
+                );
 
             throw new EntryPointNotFoundException();
         }

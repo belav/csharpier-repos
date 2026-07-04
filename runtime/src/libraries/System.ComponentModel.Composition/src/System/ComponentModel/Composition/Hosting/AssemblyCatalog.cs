@@ -247,7 +247,11 @@ namespace System.ComponentModel.Composition.Hosting
         /// <remarks>
         ///     The assembly referenced by <paramref langword="codeBase"/> is loaded into the Load context.
         /// </remarks>
-        public AssemblyCatalog(string codeBase, ReflectionContext reflectionContext, ICompositionElement definitionOrigin)
+        public AssemblyCatalog(
+            string codeBase,
+            ReflectionContext reflectionContext,
+            ICompositionElement definitionOrigin
+        )
         {
             Requires.NotNullOrEmpty(codeBase, nameof(codeBase));
             Requires.NotNull(reflectionContext, nameof(reflectionContext));
@@ -321,7 +325,11 @@ namespace System.ComponentModel.Composition.Hosting
         ///     </para>
         ///     <paramref name="definitionOrigin"/> is <see langword="null"/>.
         /// </exception>
-        public AssemblyCatalog(Assembly assembly, ReflectionContext reflectionContext, ICompositionElement definitionOrigin)
+        public AssemblyCatalog(
+            Assembly assembly,
+            ReflectionContext reflectionContext,
+            ICompositionElement definitionOrigin
+        )
         {
             Requires.NotNull(assembly, nameof(assembly));
             Requires.NotNull(reflectionContext, nameof(reflectionContext));
@@ -391,7 +399,10 @@ namespace System.ComponentModel.Composition.Hosting
         {
             if (assembly.ReflectionOnly)
             {
-                throw new ArgumentException(SR.Format(SR.Argument_AssemblyReflectionOnly, nameof(assembly)), nameof(assembly));
+                throw new ArgumentException(
+                    SR.Format(SR.Argument_AssemblyReflectionOnly, nameof(assembly)),
+                    nameof(assembly)
+                );
             }
             _assembly = assembly;
         }
@@ -422,7 +433,9 @@ namespace System.ComponentModel.Composition.Hosting
         ///         <paramref name="definition"/>, return an empty <see cref="IEnumerable{T}"/>.
         ///     </note>
         /// </remarks>
-        public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(ImportDefinition definition)
+        public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(
+            ImportDefinition definition
+        )
         {
             return InnerCatalog.GetExports(definition);
         }
@@ -435,17 +448,26 @@ namespace System.ComponentModel.Composition.Hosting
 
                 if (_innerCatalog == null)
                 {
-                    var catalogReflectionContextAttribute = _assembly.GetFirstAttribute<CatalogReflectionContextAttribute>();
-                    var assembly = (catalogReflectionContextAttribute != null)
-                        ? catalogReflectionContextAttribute.CreateReflectionContext().MapAssembly(_assembly)
-                        : _assembly;
+                    var catalogReflectionContextAttribute =
+                        _assembly.GetFirstAttribute<CatalogReflectionContextAttribute>();
+                    var assembly =
+                        (catalogReflectionContextAttribute != null)
+                            ? catalogReflectionContextAttribute
+                                .CreateReflectionContext()
+                                .MapAssembly(_assembly)
+                            : _assembly;
                     lock (_thisLock)
                     {
                         if (_innerCatalog == null)
                         {
-                            var catalog = (_reflectionContext != null)
-                                ? new TypeCatalog(assembly.GetTypes(), _reflectionContext, _definitionOrigin)
-                                : new TypeCatalog(assembly.GetTypes(), _definitionOrigin);
+                            var catalog =
+                                (_reflectionContext != null)
+                                    ? new TypeCatalog(
+                                        assembly.GetTypes(),
+                                        _reflectionContext,
+                                        _definitionOrigin
+                                    )
+                                    : new TypeCatalog(assembly.GetTypes(), _definitionOrigin);
                             Thread.MemoryBarrier();
                             _innerCatalog = catalog;
                         }
@@ -537,11 +559,13 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        private string GetDisplayName() =>
-            $"{GetType().Name} (Assembly=\"{Assembly.FullName}\")";   // NOLOC
+        private string GetDisplayName() => $"{GetType().Name} (Assembly=\"{Assembly.FullName}\")"; // NOLOC
 
-        [UnconditionalSuppressMessage("SingleFile", "IL3000: Avoid accessing Assembly file path when publishing as a single file",
-            Justification = "Setting a CodeBase is single file compatible")]
+        [UnconditionalSuppressMessage(
+            "SingleFile",
+            "IL3000: Avoid accessing Assembly file path when publishing as a single file",
+            Justification = "Setting a CodeBase is single file compatible"
+        )]
         private static Assembly LoadAssembly(string codeBase)
         {
             Requires.NotNullOrEmpty(codeBase, nameof(codeBase));

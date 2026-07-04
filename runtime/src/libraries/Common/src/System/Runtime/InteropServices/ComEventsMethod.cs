@@ -78,9 +78,11 @@ namespace System.Runtime.InteropServices
 
                     // recognize only 'ref Enum' signatures and cache
                     // both enum type and the underlying type.
-                    if (pi.ParameterType.IsByRef
+                    if (
+                        pi.ParameterType.IsByRef
                         && pi.ParameterType.HasElementType
-                        && pi.ParameterType.GetElementType()!.IsEnum)
+                        && pi.ParameterType.GetElementType()!.IsEnum
+                    )
                     {
                         targetTypes ??= new Type?[_expectedParamsCount];
 
@@ -160,7 +162,8 @@ namespace System.Runtime.InteropServices
 
         public void AddDelegate(Delegate d, bool wrapArgs = false)
         {
-            DelegateWrapper[] wrappers, newWrappers;
+            DelegateWrapper[] wrappers,
+                newWrappers;
             do
             {
                 wrappers = _delegateWrappers;
@@ -172,7 +175,8 @@ namespace System.Runtime.InteropServices
 
         public void RemoveDelegate(Delegate d, bool wrapArgs = false)
         {
-            DelegateWrapper[] wrappers, newWrappers;
+            DelegateWrapper[] wrappers,
+                newWrappers;
             do
             {
                 wrappers = _delegateWrappers;
@@ -203,15 +207,15 @@ namespace System.Runtime.InteropServices
 
         public void RemoveDelegates(Func<Delegate, bool> condition)
         {
-            DelegateWrapper[] wrappers, newWrappers;
+            DelegateWrapper[] wrappers,
+                newWrappers;
             do
             {
                 wrappers = _delegateWrappers;
                 List<DelegateWrapper> tmp = new(wrappers);
                 tmp.RemoveAll(w => condition(w.Delegate));
                 newWrappers = tmp.ToArray();
-            }
-            while (!PublishNewWrappers(newWrappers, wrappers));
+            } while (!PublishNewWrappers(newWrappers, wrappers));
         }
 
         public object? Invoke(object[] args)
@@ -228,9 +232,13 @@ namespace System.Runtime.InteropServices
         }
 
         // Attempt to update the member wrapper field
-        private bool PublishNewWrappers(DelegateWrapper[] newWrappers, DelegateWrapper[] currentMaybe)
+        private bool PublishNewWrappers(
+            DelegateWrapper[] newWrappers,
+            DelegateWrapper[] currentMaybe
+        )
         {
-            return Interlocked.CompareExchange(ref _delegateWrappers, newWrappers, currentMaybe) == currentMaybe;
+            return Interlocked.CompareExchange(ref _delegateWrappers, newWrappers, currentMaybe)
+                == currentMaybe;
         }
     }
 }

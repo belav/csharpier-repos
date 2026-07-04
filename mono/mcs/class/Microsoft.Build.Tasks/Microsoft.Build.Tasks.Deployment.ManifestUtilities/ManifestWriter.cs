@@ -25,36 +25,32 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-	
-	[ComVisible (false)]
-	public static class ManifestWriter {
-	
-		[MonoTODO]
-		public static void WriteManifest (Manifest manifest)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public static void WriteManifest (Manifest manifest,
-						  Stream output)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public static void WriteManifest (Manifest manifest,
-						  string path)
-		{
-			throw new NotImplementedException ();
-		}
-	}
-}
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    [ComVisible(false)]
+    public static class ManifestWriter
+    {
+        [MonoTODO]
+        public static void WriteManifest(Manifest manifest)
+        {
+            throw new NotImplementedException();
+        }
 
+        [MonoTODO]
+        public static void WriteManifest(Manifest manifest, Stream output)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public static void WriteManifest(Manifest manifest, string path)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

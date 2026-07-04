@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -28,16 +28,20 @@ namespace System.Linq.Parallel
     ///     Although select many takes two enumerable objects as input, it appears to the
     ///     query analysis infrastructure as a unary operator. That's because it works a
     ///     little differently than the other binary operators: it has to re-open the right
-    ///     child every time an outer element is walked. The right child is NOT partitioned. 
+    ///     child every time an outer element is walked. The right child is NOT partitioned.
     /// </summary>
     /// <typeparam name="TLeftInput"></typeparam>
     /// <typeparam name="TRightInput"></typeparam>
     /// <typeparam name="TOutput"></typeparam>
-    internal sealed class SelectManyQueryOperator<TLeftInput, TRightInput, TOutput> : UnaryQueryOperator<TLeftInput, TOutput>
+    internal sealed class SelectManyQueryOperator<TLeftInput, TRightInput, TOutput>
+        : UnaryQueryOperator<TLeftInput, TOutput>
     {
-
         private readonly Func<TLeftInput, IEnumerable<TRightInput>> m_rightChildSelector; // To select a new child each iteration.
-        private readonly Func<TLeftInput, int, IEnumerable<TRightInput>> m_indexedRightChildSelector; // To select a new child each iteration.
+        private readonly Func<
+            TLeftInput,
+            int,
+            IEnumerable<TRightInput>
+        > m_indexedRightChildSelector; // To select a new child each iteration.
         private readonly Func<TLeftInput, TRightInput, TOutput> m_resultSelector; // An optional result selection function.
         private bool m_prematureMerge = false; // Whether to prematurely merge the input of this operator.
         private bool m_limitsParallelism = false; // Whether to prematurely merge the input of this operator.
@@ -53,19 +57,27 @@ namespace System.Linq.Parallel
         //    resultSelector        - a selection function for creating output elements.
         //
 
-        internal SelectManyQueryOperator(IEnumerable<TLeftInput> leftChild,
-                                         Func<TLeftInput, IEnumerable<TRightInput>> rightChildSelector,
-                                         Func<TLeftInput, int, IEnumerable<TRightInput>> indexedRightChildSelector,
-                                         Func<TLeftInput, TRightInput, TOutput> resultSelector)
-            :base(leftChild)
+        internal SelectManyQueryOperator(
+            IEnumerable<TLeftInput> leftChild,
+            Func<TLeftInput, IEnumerable<TRightInput>> rightChildSelector,
+            Func<TLeftInput, int, IEnumerable<TRightInput>> indexedRightChildSelector,
+            Func<TLeftInput, TRightInput, TOutput> resultSelector
+        )
+            : base(leftChild)
         {
             Contract.Assert(leftChild != null, "left child data source cannot be null");
-            Contract.Assert(rightChildSelector != null || indexedRightChildSelector != null,
-                            "either right child data or selector must be supplied");
-            Contract.Assert(rightChildSelector == null || indexedRightChildSelector == null,
-                            "either indexed- or non-indexed child selector must be supplied (not both)");
-            Contract.Assert(typeof(TRightInput) == typeof(TOutput) || resultSelector != null,
-                            "right input and output must be the same types, otherwise the result selector may not be null");
+            Contract.Assert(
+                rightChildSelector != null || indexedRightChildSelector != null,
+                "either right child data or selector must be supplied"
+            );
+            Contract.Assert(
+                rightChildSelector == null || indexedRightChildSelector == null,
+                "either indexed- or non-indexed child selector must be supplied (not both)"
+            );
+            Contract.Assert(
+                typeof(TRightInput) == typeof(TOutput) || resultSelector != null,
+                "right input and output must be the same types, otherwise the result selector may not be null"
+            );
 
             m_rightChildSelector = rightChildSelector;
             m_indexedRightChildSelector = indexedRightChildSelector;
@@ -87,8 +99,12 @@ namespace System.Linq.Parallel
                 // If this is an indexed SelectMany, we need the order keys to be Correct, so that we can pass them
                 // into the user delegate.
 
-                m_prematureMerge = ExchangeUtilities.IsWorseThan(childIndexState, OrdinalIndexState.Correct);
-                m_limitsParallelism = m_prematureMerge && childIndexState != OrdinalIndexState.Shuffled;
+                m_prematureMerge = ExchangeUtilities.IsWorseThan(
+                    childIndexState,
+                    OrdinalIndexState.Correct
+                );
+                m_limitsParallelism =
+                    m_prematureMerge && childIndexState != OrdinalIndexState.Shuffled;
             }
             else
             {
@@ -97,7 +113,10 @@ namespace System.Linq.Parallel
                     // If the output of this SelectMany is ordered, the input keys must be at least increasing. The
                     // SelectMany algorithm assumes that there will be no duplicate order keys, so if the order keys
                     // are Shuffled, we need to merge prematurely.
-                    m_prematureMerge = ExchangeUtilities.IsWorseThan(childIndexState, OrdinalIndexState.Increasing);
+                    m_prematureMerge = ExchangeUtilities.IsWorseThan(
+                        childIndexState,
+                        OrdinalIndexState.Increasing
+                    );
                 }
             }
 
@@ -105,19 +124,29 @@ namespace System.Linq.Parallel
         }
 
         internal override void WrapPartitionedStream<TLeftKey>(
-            PartitionedStream<TLeftInput, TLeftKey> inputStream, IPartitionedStreamRecipient<TOutput> recipient, bool preferStriping, QuerySettings settings)
+            PartitionedStream<TLeftInput, TLeftKey> inputStream,
+            IPartitionedStreamRecipient<TOutput> recipient,
+            bool preferStriping,
+            QuerySettings settings
+        )
         {
             int partitionCount = inputStream.PartitionCount;
 
             if (m_indexedRightChildSelector != null)
             {
                 PartitionedStream<TLeftInput, int> inputStreamInt;
-                
+
                 // If the index is not correct, we need to reindex.
                 if (m_prematureMerge)
                 {
                     ListQueryResults<TLeftInput> listResults =
-                        QueryOperator<TLeftInput>.ExecuteAndCollectResults(inputStream, partitionCount, OutputOrdered, preferStriping, settings);
+                        QueryOperator<TLeftInput>.ExecuteAndCollectResults(
+                            inputStream,
+                            partitionCount,
+                            OutputOrdered,
+                            preferStriping,
+                            settings
+                        );
                     inputStreamInt = listResults.GetPartitionedStream();
                 }
                 else
@@ -129,11 +158,17 @@ namespace System.Linq.Parallel
             }
 
             //
-            // 
+            //
             if (m_prematureMerge)
             {
-                PartitionedStream<TLeftInput, int> inputStreamInt =
-                    QueryOperator<TLeftInput>.ExecuteAndCollectResults(inputStream, partitionCount, OutputOrdered, preferStriping, settings)
+                PartitionedStream<TLeftInput, int> inputStreamInt = QueryOperator<TLeftInput>
+                    .ExecuteAndCollectResults(
+                        inputStream,
+                        partitionCount,
+                        OutputOrdered,
+                        preferStriping,
+                        settings
+                    )
                     .GetPartitionedStream();
                 WrapPartitionedStreamNotIndexed(inputStreamInt, recipient, settings);
             }
@@ -145,18 +180,32 @@ namespace System.Linq.Parallel
 
         /// <summary>
         /// A helper method for WrapPartitionedStream. We use the helper to reuse a block of code twice, but with
-        /// a different order key type. (If premature merge occured, the order key type will be "int". Otherwise, 
+        /// a different order key type. (If premature merge occured, the order key type will be "int". Otherwise,
         /// it will be the same type as "TLeftKey" in WrapPartitionedStream.)
         /// </summary>
         private void WrapPartitionedStreamNotIndexed<TLeftKey>(
-            PartitionedStream<TLeftInput, TLeftKey> inputStream, IPartitionedStreamRecipient<TOutput> recipient, QuerySettings settings)
+            PartitionedStream<TLeftInput, TLeftKey> inputStream,
+            IPartitionedStreamRecipient<TOutput> recipient,
+            QuerySettings settings
+        )
         {
             int partitionCount = inputStream.PartitionCount;
-            var keyComparer = new PairComparer<TLeftKey, int>(inputStream.KeyComparer, Util.GetDefaultComparer<int>());
-            var outputStream = new PartitionedStream<TOutput, Pair<TLeftKey, int>>(partitionCount, keyComparer, OrdinalIndexState);
+            var keyComparer = new PairComparer<TLeftKey, int>(
+                inputStream.KeyComparer,
+                Util.GetDefaultComparer<int>()
+            );
+            var outputStream = new PartitionedStream<TOutput, Pair<TLeftKey, int>>(
+                partitionCount,
+                keyComparer,
+                OrdinalIndexState
+            );
             for (int i = 0; i < partitionCount; i++)
             {
-                outputStream[i] = new SelectManyQueryOperatorEnumerator<TLeftKey>(inputStream[i], this, settings.CancellationState.MergedCancellationToken);
+                outputStream[i] = new SelectManyQueryOperatorEnumerator<TLeftKey>(
+                    inputStream[i],
+                    this,
+                    settings.CancellationState.MergedCancellationToken
+                );
             }
 
             recipient.Receive(outputStream);
@@ -167,18 +216,32 @@ namespace System.Linq.Parallel
         /// of SelectMany (i.e., the SelectMany that passes indices into the user sequence-generating delegate)
         /// </summary>
         private void WrapPartitionedStreamIndexed(
-            PartitionedStream<TLeftInput, int> inputStream, IPartitionedStreamRecipient<TOutput> recipient, QuerySettings settings)
+            PartitionedStream<TLeftInput, int> inputStream,
+            IPartitionedStreamRecipient<TOutput> recipient,
+            QuerySettings settings
+        )
         {
-            var keyComparer = new PairComparer<int, int>(inputStream.KeyComparer, Util.GetDefaultComparer<int>());
+            var keyComparer = new PairComparer<int, int>(
+                inputStream.KeyComparer,
+                Util.GetDefaultComparer<int>()
+            );
 
-            var outputStream = new PartitionedStream<TOutput, Pair<int, int>>(inputStream.PartitionCount, keyComparer, OrdinalIndexState);
+            var outputStream = new PartitionedStream<TOutput, Pair<int, int>>(
+                inputStream.PartitionCount,
+                keyComparer,
+                OrdinalIndexState
+            );
 
             for (int i = 0; i < inputStream.PartitionCount; i++)
             {
-                outputStream[i] = new IndexedSelectManyQueryOperatorEnumerator(inputStream[i], this, settings.CancellationState.MergedCancellationToken);
+                outputStream[i] = new IndexedSelectManyQueryOperatorEnumerator(
+                    inputStream[i],
+                    this,
+                    settings.CancellationState.MergedCancellationToken
+                );
             }
 
-            recipient.Receive(outputStream);           
+            recipient.Receive(outputStream);
         }
 
         //---------------------------------------------------------------------------------------
@@ -203,22 +266,35 @@ namespace System.Linq.Parallel
             {
                 if (m_resultSelector != null)
                 {
-                    return CancellableEnumerable.Wrap(Child.AsSequentialQuery(token), token).SelectMany(m_rightChildSelector, m_resultSelector);
+                    return CancellableEnumerable
+                        .Wrap(Child.AsSequentialQuery(token), token)
+                        .SelectMany(m_rightChildSelector, m_resultSelector);
                 }
-                return (IEnumerable<TOutput>)(object)(CancellableEnumerable.Wrap(Child.AsSequentialQuery(token), token).SelectMany(m_rightChildSelector));
+                return (IEnumerable<TOutput>)
+                    (object)(
+                        CancellableEnumerable
+                            .Wrap(Child.AsSequentialQuery(token), token)
+                            .SelectMany(m_rightChildSelector)
+                    );
             }
             else
             {
                 Contract.Assert(m_indexedRightChildSelector != null);
                 if (m_resultSelector != null)
                 {
-                    return CancellableEnumerable.Wrap(Child.AsSequentialQuery(token), token).SelectMany(m_indexedRightChildSelector, m_resultSelector);
+                    return CancellableEnumerable
+                        .Wrap(Child.AsSequentialQuery(token), token)
+                        .SelectMany(m_indexedRightChildSelector, m_resultSelector);
                 }
 
-                return (IEnumerable<TOutput>)(object)(CancellableEnumerable.Wrap(Child.AsSequentialQuery(token), token).SelectMany(m_indexedRightChildSelector));
+                return (IEnumerable<TOutput>)
+                    (object)(
+                        CancellableEnumerable
+                            .Wrap(Child.AsSequentialQuery(token), token)
+                            .SelectMany(m_indexedRightChildSelector)
+                    );
             }
         }
-
 
         //---------------------------------------------------------------------------------------
         // Whether this operator performs a premature merge that would not be performed in
@@ -234,10 +310,15 @@ namespace System.Linq.Parallel
         // The enumerator type responsible for executing the SelectMany logic.
         //
 
-        class IndexedSelectManyQueryOperatorEnumerator : QueryOperatorEnumerator<TOutput, Pair<int, int>>
+        class IndexedSelectManyQueryOperatorEnumerator
+            : QueryOperatorEnumerator<TOutput, Pair<int, int>>
         {
             private readonly QueryOperatorEnumerator<TLeftInput, int> m_leftSource; // The left data source to enumerate.
-            private readonly SelectManyQueryOperator<TLeftInput, TRightInput, TOutput> m_selectManyOperator; // The select many operator to use.
+            private readonly SelectManyQueryOperator<
+                TLeftInput,
+                TRightInput,
+                TOutput
+            > m_selectManyOperator; // The select many operator to use.
             private IEnumerator<TRightInput> m_currentRightSource; // The current enumerator we're using.
             private IEnumerator<TOutput> m_currentRightSourceAsOutput; // If we need to access the enumerator for output directly (no result selector).
             private Mutables m_mutables; // bag of frequently mutated value types [allocate in moveNext to avoid false-sharing]
@@ -248,9 +329,8 @@ namespace System.Linq.Parallel
                 internal int m_currentRightSourceIndex = -1; // The index for the right data source.
                 internal TLeftInput m_currentLeftElement; // The current element in the left data source.
                 internal int m_currentLeftSourceIndex; // The current key in the left data source.
-                internal int m_lhsCount; //counts the number of lhs elements enumerated. used for cancellation testing. 
+                internal int m_lhsCount; //counts the number of lhs elements enumerated. used for cancellation testing.
             }
-
 
             //---------------------------------------------------------------------------------------
             // Instantiates a new select-many enumerator. Notice that the right data source is an
@@ -258,9 +338,11 @@ namespace System.Linq.Parallel
             // data source.
             //
 
-            internal IndexedSelectManyQueryOperatorEnumerator(QueryOperatorEnumerator<TLeftInput, int> leftSource,
-                                                              SelectManyQueryOperator<TLeftInput, TRightInput, TOutput> selectManyOperator,
-                CancellationToken cancellationToken)
+            internal IndexedSelectManyQueryOperatorEnumerator(
+                QueryOperatorEnumerator<TLeftInput, int> leftSource,
+                SelectManyQueryOperator<TLeftInput, TRightInput, TOutput> selectManyOperator,
+                CancellationToken cancellationToken
+            )
             {
                 Contract.Assert(leftSource != null);
                 Contract.Assert(selectManyOperator != null);
@@ -274,7 +356,10 @@ namespace System.Linq.Parallel
             // Straightforward IEnumerator<T> methods.
             //
 
-            internal override bool MoveNext(ref TOutput currentElement, ref Pair<int, int> currentKey)
+            internal override bool MoveNext(
+                ref TOutput currentElement,
+                ref Pair<int, int> currentKey
+            )
             {
                 while (true)
                 {
@@ -290,14 +375,22 @@ namespace System.Linq.Parallel
                         // We don't have a "current" right enumerator to use. We have to fetch the next
                         // one. If the left has run out of elements, however, we're done and just return
                         // false right away.
-                        if (!m_leftSource.MoveNext(ref m_mutables.m_currentLeftElement, ref m_mutables.m_currentLeftSourceIndex))
+                        if (
+                            !m_leftSource.MoveNext(
+                                ref m_mutables.m_currentLeftElement,
+                                ref m_mutables.m_currentLeftSourceIndex
+                            )
+                        )
                         {
                             return false;
                         }
 
                         // Use the source selection routine to create a right child.
                         IEnumerable<TRightInput> rightChild =
-                            m_selectManyOperator.m_indexedRightChildSelector(m_mutables.m_currentLeftElement, m_mutables.m_currentLeftSourceIndex);
+                            m_selectManyOperator.m_indexedRightChildSelector(
+                                m_mutables.m_currentLeftElement,
+                                m_mutables.m_currentLeftSourceIndex
+                            );
 
                         Contract.Assert(rightChild != null);
                         m_currentRightSource = rightChild.GetEnumerator();
@@ -312,9 +405,12 @@ namespace System.Linq.Parallel
                         // enumerator object as an IEnumerator<TOutput> and access that later on.
                         if (m_selectManyOperator.m_resultSelector == null)
                         {
-                            m_currentRightSourceAsOutput = (IEnumerator<TOutput>)(object)m_currentRightSource;
-                            Contract.Assert(m_currentRightSourceAsOutput == m_currentRightSource,
-                                            "these must be equal, otherwise the surrounding logic will be broken");
+                            m_currentRightSourceAsOutput =
+                                (IEnumerator<TOutput>)(object)m_currentRightSource;
+                            Contract.Assert(
+                                m_currentRightSourceAsOutput == m_currentRightSource,
+                                "these must be equal, otherwise the surrounding logic will be broken"
+                            );
                         }
                     }
 
@@ -326,7 +422,10 @@ namespace System.Linq.Parallel
                         if (m_selectManyOperator.m_resultSelector != null)
                         {
                             // In the case of a selection function, use that to yield the next element.
-                            currentElement = m_selectManyOperator.m_resultSelector(m_mutables.m_currentLeftElement, m_currentRightSource.Current);
+                            currentElement = m_selectManyOperator.m_resultSelector(
+                                m_mutables.m_currentLeftElement,
+                                m_currentRightSource.Current
+                            );
                         }
                         else
                         {
@@ -335,7 +434,10 @@ namespace System.Linq.Parallel
                             Contract.Assert(m_currentRightSourceAsOutput != null);
                             currentElement = m_currentRightSourceAsOutput.Current;
                         }
-                        currentKey = new Pair<int, int>(m_mutables.m_currentLeftSourceIndex, m_mutables.m_currentRightSourceIndex);
+                        currentKey = new Pair<int, int>(
+                            m_mutables.m_currentLeftSourceIndex,
+                            m_mutables.m_currentRightSourceIndex
+                        );
 
                         return true;
                     }
@@ -364,10 +466,15 @@ namespace System.Linq.Parallel
         // The enumerator type responsible for executing the SelectMany logic.
         //
 
-        class SelectManyQueryOperatorEnumerator<TLeftKey> : QueryOperatorEnumerator<TOutput, Pair<TLeftKey, int>>
+        class SelectManyQueryOperatorEnumerator<TLeftKey>
+            : QueryOperatorEnumerator<TOutput, Pair<TLeftKey, int>>
         {
             private readonly QueryOperatorEnumerator<TLeftInput, TLeftKey> m_leftSource; // The left data source to enumerate.
-            private readonly SelectManyQueryOperator<TLeftInput, TRightInput, TOutput> m_selectManyOperator; // The select many operator to use.
+            private readonly SelectManyQueryOperator<
+                TLeftInput,
+                TRightInput,
+                TOutput
+            > m_selectManyOperator; // The select many operator to use.
             private IEnumerator<TRightInput> m_currentRightSource; // The current enumerator we're using.
             private IEnumerator<TOutput> m_currentRightSourceAsOutput; // If we need to access the enumerator for output directly (no result selector).
             private Mutables m_mutables; // bag of frequently mutated value types [allocate in moveNext to avoid false-sharing]
@@ -378,9 +485,8 @@ namespace System.Linq.Parallel
                 internal int m_currentRightSourceIndex = -1; // The index for the right data source.
                 internal TLeftInput m_currentLeftElement; // The current element in the left data source.
                 internal TLeftKey m_currentLeftKey; // The current key in the left data source.
-                internal int m_lhsCount; // Counts the number of lhs elements enumerated. used for cancellation testing. 
+                internal int m_lhsCount; // Counts the number of lhs elements enumerated. used for cancellation testing.
             }
-
 
             //---------------------------------------------------------------------------------------
             // Instantiates a new select-many enumerator. Notice that the right data source is an
@@ -388,9 +494,11 @@ namespace System.Linq.Parallel
             // data source.
             //
 
-            internal SelectManyQueryOperatorEnumerator(QueryOperatorEnumerator<TLeftInput, TLeftKey> leftSource,
-                                                       SelectManyQueryOperator<TLeftInput, TRightInput, TOutput> selectManyOperator,
-                                                       CancellationToken cancellationToken)
+            internal SelectManyQueryOperatorEnumerator(
+                QueryOperatorEnumerator<TLeftInput, TLeftKey> leftSource,
+                SelectManyQueryOperator<TLeftInput, TRightInput, TOutput> selectManyOperator,
+                CancellationToken cancellationToken
+            )
             {
                 Contract.Assert(leftSource != null);
                 Contract.Assert(selectManyOperator != null);
@@ -404,14 +512,17 @@ namespace System.Linq.Parallel
             // Straightforward IEnumerator<T> methods.
             //
 
-            internal override bool MoveNext(ref TOutput currentElement, ref Pair<TLeftKey, int> currentKey)
+            internal override bool MoveNext(
+                ref TOutput currentElement,
+                ref Pair<TLeftKey, int> currentKey
+            )
             {
                 while (true)
                 {
                     if (m_currentRightSource == null)
                     {
                         m_mutables = new Mutables();
-                        
+
                         // Check cancellation every few lhs-enumerations in case none of them are producing
                         // any outputs.  Otherwise, we rely on the consumer of this operator to be performing the checks.
                         if ((m_mutables.m_lhsCount++ & CancellationState.POLL_INTERVAL) == 0)
@@ -421,13 +532,21 @@ namespace System.Linq.Parallel
                         // one. If the left has run out of elements, however, we're done and just return
                         // false right away.
 
-                        if (!m_leftSource.MoveNext(ref m_mutables.m_currentLeftElement, ref m_mutables.m_currentLeftKey))
+                        if (
+                            !m_leftSource.MoveNext(
+                                ref m_mutables.m_currentLeftElement,
+                                ref m_mutables.m_currentLeftKey
+                            )
+                        )
                         {
                             return false;
                         }
 
                         // Use the source selection routine to create a right child.
-                        IEnumerable<TRightInput> rightChild = m_selectManyOperator.m_rightChildSelector(m_mutables.m_currentLeftElement);
+                        IEnumerable<TRightInput> rightChild =
+                            m_selectManyOperator.m_rightChildSelector(
+                                m_mutables.m_currentLeftElement
+                            );
 
                         Contract.Assert(rightChild != null);
                         m_currentRightSource = rightChild.GetEnumerator();
@@ -442,9 +561,12 @@ namespace System.Linq.Parallel
                         // enumerator object as an IEnumerator<TOutput> and access that later on.
                         if (m_selectManyOperator.m_resultSelector == null)
                         {
-                            m_currentRightSourceAsOutput = (IEnumerator<TOutput>)(object)m_currentRightSource;
-                            Contract.Assert(m_currentRightSourceAsOutput == m_currentRightSource,
-                                            "these must be equal, otherwise the surrounding logic will be broken");
+                            m_currentRightSourceAsOutput =
+                                (IEnumerator<TOutput>)(object)m_currentRightSource;
+                            Contract.Assert(
+                                m_currentRightSourceAsOutput == m_currentRightSource,
+                                "these must be equal, otherwise the surrounding logic will be broken"
+                            );
                         }
                     }
 
@@ -456,7 +578,10 @@ namespace System.Linq.Parallel
                         if (m_selectManyOperator.m_resultSelector != null)
                         {
                             // In the case of a selection function, use that to yield the next element.
-                            currentElement = m_selectManyOperator.m_resultSelector(m_mutables.m_currentLeftElement, m_currentRightSource.Current);
+                            currentElement = m_selectManyOperator.m_resultSelector(
+                                m_mutables.m_currentLeftElement,
+                                m_currentRightSource.Current
+                            );
                         }
                         else
                         {
@@ -465,7 +590,10 @@ namespace System.Linq.Parallel
                             Contract.Assert(m_currentRightSourceAsOutput != null);
                             currentElement = m_currentRightSourceAsOutput.Current;
                         }
-                        currentKey = new Pair<TLeftKey, int>(m_mutables.m_currentLeftKey, m_mutables.m_currentRightSourceIndex);
+                        currentKey = new Pair<TLeftKey, int>(
+                            m_mutables.m_currentLeftKey,
+                            m_mutables.m_currentRightSourceIndex
+                        );
 
                         return true;
                     }

@@ -3,57 +3,57 @@
 // -----------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition.Primitives;
+using System.ComponentModel.Composition.ReflectionModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Collections.ObjectModel;
 using Microsoft.Internal;
 using Microsoft.Internal.Collections;
-using System.ComponentModel.Composition.ReflectionModel;
 
 namespace System.ComponentModel.Composition.Hosting
 {
     public abstract partial class ExportProvider
     {
         /// <summary>
-        ///     Returns the export with the contract name derived from the specified type parameter, 
+        ///     Returns the export with the contract name derived from the specified type parameter,
         ///     throwing an exception if there is not exactly one matching export.
         /// </summary>
         /// <typeparam name="T">
-        ///     The type of the <see cref="Lazy{T}"/> object to return. The contract name is also 
+        ///     The type of the <see cref="Lazy{T}"/> object to return. The contract name is also
         ///     derived from this type parameter.
         /// </typeparam>
         /// <returns>
-        ///     The <see cref="Lazy{T}"/> object with the contract name derived from 
+        ///     The <see cref="Lazy{T}"/> object with the contract name derived from
         ///     <typeparamref name="T"/>.
         /// </returns>
         /// <remarks>
         ///     <para>
-        ///         The returned <see cref="Lazy{T}"/> object is an instance of 
-        ///         <see cref="Lazy{T, TMetadataView}"/> underneath, where 
+        ///         The returned <see cref="Lazy{T}"/> object is an instance of
+        ///         <see cref="Lazy{T, TMetadataView}"/> underneath, where
         ///         <c>TMetadataView</c>
-        ///         is <see cref="IDictionary{TKey, TValue}"/> and where <c>TKey</c> 
+        ///         is <see cref="IDictionary{TKey, TValue}"/> and where <c>TKey</c>
         ///         is <see cref="String"/> and <c>TValue</c> is <see cref="Object"/>.
         ///     </para>
         ///     <para>
-        ///         The contract name is the result of calling 
+        ///         The contract name is the result of calling
         ///         <see cref="AttributedModelServices.GetContractName(Type)"/> on <typeparamref name="T"/>.
         ///     </para>
         ///     <para>
-        ///         The contract name is compared using a case-sensitive, non-linguistic comparison 
+        ///         The contract name is compared using a case-sensitive, non-linguistic comparison
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
         /// <exception cref="ImportCardinalityMismatchException">
         ///     <para>
-        ///         There are zero <see cref="Lazy{T}"/> objects with the contract name derived 
+        ///         There are zero <see cref="Lazy{T}"/> objects with the contract name derived
         ///         from <typeparamref name="T"/> in the <see cref="CompositionContainer"/>.
         ///     </para>
         ///     -or-
         ///     <para>
-        ///         There are more than one <see cref="Lazy{T}"/> objects with the contract name 
+        ///         There are more than one <see cref="Lazy{T}"/> objects with the contract name
         ///         derived from <typeparamref name="T"/> in the <see cref="CompositionContainer"/>.
         ///     </para>
         /// </exception>
@@ -66,15 +66,15 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         /// <summary>
-        ///     Returns the export with the specified contract name, throwing an exception if there 
+        ///     Returns the export with the specified contract name, throwing an exception if there
         ///     is not exactly one matching export.
         /// </summary>
         /// <typeparam name="T">
         ///     The type of the <see cref="Lazy{T}"/> object to return.
         /// </typeparam>
         /// <param name="contractName">
-        ///     A <see cref="String"/> containing the contract name of the <see cref="Lazy{T}"/> 
-        ///     object to return; or <see langword="null"/> or an empty string ("") to use the 
+        ///     A <see cref="String"/> containing the contract name of the <see cref="Lazy{T}"/>
+        ///     object to return; or <see langword="null"/> or an empty string ("") to use the
         ///     default contract name.
         /// </param>
         /// <returns>
@@ -82,24 +82,24 @@ namespace System.ComponentModel.Composition.Hosting
         /// </returns>
         /// <remarks>
         ///     <para>
-        ///         The returned <see cref="Lazy{T}"/> object is an instance of 
-        ///         <see cref="Lazy{T, TMetadataView}"/> underneath, where 
+        ///         The returned <see cref="Lazy{T}"/> object is an instance of
+        ///         <see cref="Lazy{T, TMetadataView}"/> underneath, where
         ///         <c>TMetadataView</c>
-        ///         is <see cref="IDictionary{TKey, TValue}"/> and where <c>TKey</c> 
+        ///         is <see cref="IDictionary{TKey, TValue}"/> and where <c>TKey</c>
         ///         is <see cref="String"/> and <c>TValue</c> is <see cref="Object"/>.
         ///     </para>
         ///     <para>
-        ///         The contract name is the result of calling 
+        ///         The contract name is the result of calling
         ///         <see cref="AttributedModelServices.GetContractName(Type)"/> on <typeparamref name="T"/>.
         ///     </para>
         ///     <para>
-        ///         The default contract name is compared using a case-sensitive, non-linguistic 
+        ///         The default contract name is compared using a case-sensitive, non-linguistic
         ///         comparison using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
         /// <exception cref="ImportCardinalityMismatchException">
         ///     <para>
-        ///         There are zero <see cref="Lazy{T}"/> objects with the specified contract name 
+        ///         There are zero <see cref="Lazy{T}"/> objects with the specified contract name
         ///         in the <see cref="CompositionContainer"/>.
         ///     </para>
         ///     -or-
@@ -117,11 +117,11 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         /// <summary>
-        ///     Returns the export with the contract name derived from the specified type parameter, 
+        ///     Returns the export with the contract name derived from the specified type parameter,
         ///     throwing an exception if there is not exactly one matching export.
         /// </summary>
         /// <typeparam name="T">
-        ///     The type of the <see cref="Lazy{T, TMetadataView}"/> object to return. The 
+        ///     The type of the <see cref="Lazy{T, TMetadataView}"/> object to return. The
         ///     contract name is also derived from this type parameter.
         /// </typeparam>
         /// <typeparam name="TMetadataView">
@@ -129,29 +129,29 @@ namespace System.ComponentModel.Composition.Hosting
         ///     to return.
         /// </typeparam>
         /// <returns>
-        ///     The <see cref="Lazy{T, TMetadataView}"/> object with the contract name derived 
+        ///     The <see cref="Lazy{T, TMetadataView}"/> object with the contract name derived
         ///     from <typeparamref name="T"/>.
         /// </returns>
         /// <remarks>
         ///     <para>
-        ///         The contract name is the result of calling 
+        ///         The contract name is the result of calling
         ///         <see cref="AttributedModelServices.GetContractName(Type)"/> on <typeparamref name="T"/>.
         ///     </para>
         ///     <para>
-        ///         The contract name is compared using a case-sensitive, non-linguistic comparison 
+        ///         The contract name is compared using a case-sensitive, non-linguistic comparison
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
         /// <exception cref="ImportCardinalityMismatchException">
         ///     <para>
-        ///         There are zero <see cref="Lazy{T, TMetadataView}"/> objects with the contract 
-        ///         name derived from <typeparamref name="T"/> in the 
+        ///         There are zero <see cref="Lazy{T, TMetadataView}"/> objects with the contract
+        ///         name derived from <typeparamref name="T"/> in the
         ///         <see cref="CompositionContainer"/>.
         ///     </para>
         ///     -or-
         ///     <para>
-        ///         There are more than one <see cref="Lazy{T, TMetadataView}"/> objects with the 
-        ///         contract name derived from <typeparamref name="T"/> in the 
+        ///         There are more than one <see cref="Lazy{T, TMetadataView}"/> objects with the
+        ///         contract name derived from <typeparamref name="T"/> in the
         ///         <see cref="CompositionContainer"/>.
         ///     </para>
         /// </exception>
@@ -167,7 +167,7 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         /// <summary>
-        ///     Returns the export with the specified contract name, throwing an exception if there 
+        ///     Returns the export with the specified contract name, throwing an exception if there
         ///     is not exactly one matching export.
         /// </summary>
         /// <typeparam name="T">
@@ -178,8 +178,8 @@ namespace System.ComponentModel.Composition.Hosting
         ///     to return.
         /// </typeparam>
         /// <param name="contractName">
-        ///     A <see cref="String"/> containing the contract name of the 
-        ///     <see cref="Lazy{T, TMetadataView}"/> object to return; or <see langword="null"/> 
+        ///     A <see cref="String"/> containing the contract name of the
+        ///     <see cref="Lazy{T, TMetadataView}"/> object to return; or <see langword="null"/>
         ///     or an empty string ("") to use the default contract name.
         /// </param>
         /// <returns>
@@ -187,22 +187,22 @@ namespace System.ComponentModel.Composition.Hosting
         /// </returns>
         /// <remarks>
         ///     <para>
-        ///         The default contract name is the result of calling 
+        ///         The default contract name is the result of calling
         ///         <see cref="AttributedModelServices.GetContractName(Type)"/> on <typeparamref name="T"/>.
         ///     </para>
         ///     <para>
-        ///         The contract name is compared using a case-sensitive, non-linguistic comparison 
+        ///         The contract name is compared using a case-sensitive, non-linguistic comparison
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
         /// <exception cref="ImportCardinalityMismatchException">
         ///     <para>
-        ///         There are zero <see cref="Lazy{T, TMetadataView}"/> objects with the 
+        ///         There are zero <see cref="Lazy{T, TMetadataView}"/> objects with the
         ///         specified contract name in the <see cref="CompositionContainer"/>.
         ///     </para>
         ///     -or-
         ///     <para>
-        ///         There are more than one <see cref="Lazy{T, TMetadataView}"/> objects with the 
+        ///         There are more than one <see cref="Lazy{T, TMetadataView}"/> objects with the
         ///         specified contract name in the <see cref="CompositionContainer"/>.
         ///     </para>
         /// </exception>
@@ -228,28 +228,28 @@ namespace System.ComponentModel.Composition.Hosting
         ///     return.
         /// </param>
         /// <param name="contractName">
-        ///     A <see cref="String"/> containing the contract name of the 
-        ///     <see cref="Export"/> object to return; or <see langword="null"/> 
+        ///     A <see cref="String"/> containing the contract name of the
+        ///     <see cref="Export"/> object to return; or <see langword="null"/>
         ///     or an empty string ("") to use the default contract name.
         /// </param>
         /// <returns>
-        ///     An <see cref="IEnumerable{T}"/> containing the <see cref="Lazy{Object, Object}"/> objects 
-        ///     with the specified contract name, if found; otherwise, an empty 
+        ///     An <see cref="IEnumerable{T}"/> containing the <see cref="Lazy{Object, Object}"/> objects
+        ///     with the specified contract name, if found; otherwise, an empty
         ///     <see cref="IEnumerable{T}"/>.
         /// </returns>
         /// <remarks>
         ///     <para>
-        ///         The returned <see cref="Export"/> objects are instances of 
+        ///         The returned <see cref="Export"/> objects are instances of
         ///         <see cref="Lazy{T, TMetadataView}"/> underneath, where <c>T</c>
-        ///         is <paramref name="type"/> and <c>TMetadataView</c> is 
+        ///         is <paramref name="type"/> and <c>TMetadataView</c> is
         ///         <paramref name="metadataViewType"/>.
         ///     </para>
         ///     <para>
-        ///         The default contract name is the result of calling 
+        ///         The default contract name is the result of calling
         ///         <see cref="AttributedModelServices.GetContractName(Type)"/> on <paramref name="type"/>.
         ///     </para>
         ///     <para>
-        ///         The contract name is compared using a case-sensitive, non-linguistic comparison 
+        ///         The contract name is compared using a case-sensitive, non-linguistic comparison
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
@@ -263,12 +263,22 @@ namespace System.ComponentModel.Composition.Hosting
         ///     The <see cref="CompositionContainer"/> has been disposed of.
         /// </exception>
         [SuppressMessage("Microsoft.Design", "CA1006")]
-        public IEnumerable<Lazy<object, object>> GetExports(Type type, Type metadataViewType, string contractName)
+        public IEnumerable<Lazy<object, object>> GetExports(
+            Type type,
+            Type metadataViewType,
+            string contractName
+        )
         {
-            IEnumerable<Export> exports = this.GetExportsCore(type, metadataViewType, contractName, ImportCardinality.ZeroOrMore);
+            IEnumerable<Export> exports = this.GetExportsCore(
+                type,
+                metadataViewType,
+                contractName,
+                ImportCardinality.ZeroOrMore
+            );
             Collection<Lazy<object, object>> result = new Collection<Lazy<object, object>>();
 
-            Func<Export, Lazy<object, object>> typedExportFactory = ExportServices.CreateSemiStronglyTypedLazyFactory(type, metadataViewType);
+            Func<Export, Lazy<object, object>> typedExportFactory =
+                ExportServices.CreateSemiStronglyTypedLazyFactory(type, metadataViewType);
             foreach (Export export in exports)
             {
                 result.Add(typedExportFactory.Invoke(export));
@@ -281,7 +291,7 @@ namespace System.ComponentModel.Composition.Hosting
         ///     Returns the exports with the contract name derived from the specified type parameter.
         /// </summary>
         /// <typeparam name="T">
-        ///     The type of the <see cref="Lazy{T}"/> objects to return. The contract name is also 
+        ///     The type of the <see cref="Lazy{T}"/> objects to return. The contract name is also
         ///     derived from this type parameter.
         /// </typeparam>
         /// <returns>
@@ -291,18 +301,18 @@ namespace System.ComponentModel.Composition.Hosting
         /// </returns>
         /// <remarks>
         ///     <para>
-        ///         The returned <see cref="Lazy{T}"/> objects are instances of 
-        ///         <see cref="Lazy{T, TMetadataView}"/> underneath, where 
+        ///         The returned <see cref="Lazy{T}"/> objects are instances of
+        ///         <see cref="Lazy{T, TMetadataView}"/> underneath, where
         ///         <c>TMetadataView</c>
-        ///         is <see cref="IDictionary{TKey, TValue}"/> and where <c>TKey</c> 
+        ///         is <see cref="IDictionary{TKey, TValue}"/> and where <c>TKey</c>
         ///         is <see cref="String"/> and <c>TValue</c> is <see cref="Object"/>.
         ///     </para>
         ///     <para>
-        ///         The contract name is the result of calling 
+        ///         The contract name is the result of calling
         ///         <see cref="AttributedModelServices.GetContractName(Type)"/> on <typeparamref name="T"/>.
         ///     </para>
         ///     <para>
-        ///         The contract name is compared using a case-sensitive, non-linguistic comparison 
+        ///         The contract name is compared using a case-sensitive, non-linguistic comparison
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
@@ -322,29 +332,29 @@ namespace System.ComponentModel.Composition.Hosting
         ///     The type of the <see cref="Lazy{T}"/> objects to return.
         /// </typeparam>
         /// <param name="contractName">
-        ///     A <see cref="String"/> containing the contract name of the <see cref="Lazy{T}"/> 
-        ///     objects to return; or <see langword="null"/> or an empty string ("") to use the 
+        ///     A <see cref="String"/> containing the contract name of the <see cref="Lazy{T}"/>
+        ///     objects to return; or <see langword="null"/> or an empty string ("") to use the
         ///     default contract name.
         /// </param>
         /// <returns>
         ///     An <see cref="IEnumerable{T}"/> containing the <see cref="Lazy{T}"/> objects
-        ///     with the specified contract name, if found; otherwise, an empty 
+        ///     with the specified contract name, if found; otherwise, an empty
         ///     <see cref="IEnumerable{T}"/>.
         /// </returns>
         /// <remarks>
         ///     <para>
-        ///         The returned <see cref="Lazy{T}"/> objects are instances of 
-        ///         <see cref="Lazy{T, TMetadataView}"/> underneath, where 
+        ///         The returned <see cref="Lazy{T}"/> objects are instances of
+        ///         <see cref="Lazy{T, TMetadataView}"/> underneath, where
         ///         <c>TMetadataView</c>
-        ///         is <see cref="IDictionary{TKey, TValue}"/> and where <c>TKey</c> 
+        ///         is <see cref="IDictionary{TKey, TValue}"/> and where <c>TKey</c>
         ///         is <see cref="String"/> and <c>TValue</c> is <see cref="Object"/>.
         ///     </para>
         ///     <para>
-        ///         The default contract name is the result of calling 
+        ///         The default contract name is the result of calling
         ///         <see cref="AttributedModelServices.GetContractName(Type)"/> on <typeparamref name="T"/>.
         ///     </para>
         ///     <para>
-        ///         The contract name is compared using a case-sensitive, non-linguistic comparison 
+        ///         The contract name is compared using a case-sensitive, non-linguistic comparison
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
@@ -361,7 +371,7 @@ namespace System.ComponentModel.Composition.Hosting
         ///     Returns the exports with the contract name derived from the specified type parameter.
         /// </summary>
         /// <typeparam name="T">
-        ///     The type of the <see cref="Lazy{T, TMetadataView}"/> objects to return. The 
+        ///     The type of the <see cref="Lazy{T, TMetadataView}"/> objects to return. The
         ///     contract name is also derived from this type parameter.
         /// </typeparam>
         /// <typeparam name="TMetadataView">
@@ -369,18 +379,18 @@ namespace System.ComponentModel.Composition.Hosting
         ///     to return.
         /// </typeparam>
         /// <returns>
-        ///     An <see cref="IEnumerable{T}"/> containing the 
-        ///     <see cref="Lazy{T, TMetadataView}"/> objects with the contract name derived from 
-        ///     <typeparamref name="T"/>, if found; otherwise, an empty 
+        ///     An <see cref="IEnumerable{T}"/> containing the
+        ///     <see cref="Lazy{T, TMetadataView}"/> objects with the contract name derived from
+        ///     <typeparamref name="T"/>, if found; otherwise, an empty
         ///     <see cref="IEnumerable{T}"/>.
         /// </returns>
         /// <remarks>
         ///     <para>
-        ///         The contract name is the result of calling 
+        ///         The contract name is the result of calling
         ///         <see cref="AttributedModelServices.GetContractName(Type)"/> on <typeparamref name="T"/>.
         ///     </para>
         ///     <para>
-        ///         The contract name is compared using a case-sensitive, non-linguistic comparison 
+        ///         The contract name is compared using a case-sensitive, non-linguistic comparison
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
@@ -400,7 +410,7 @@ namespace System.ComponentModel.Composition.Hosting
         ///     Returns the exports with the specified contract name.
         /// </summary>
         /// <typeparam name="T">
-        ///     The type of the <see cref="Lazy{T, TMetadataView}"/> objects to return. The 
+        ///     The type of the <see cref="Lazy{T, TMetadataView}"/> objects to return. The
         ///     contract name is also derived from this type parameter.
         /// </typeparam>
         /// <typeparam name="TMetadataView">
@@ -408,22 +418,22 @@ namespace System.ComponentModel.Composition.Hosting
         ///     to return.
         /// </typeparam>
         /// <param name="contractName">
-        ///     A <see cref="String"/> containing the contract name of the 
-        ///     <see cref="Lazy{T, TMetadataView}"/> objects to return; or <see langword="null"/> 
+        ///     A <see cref="String"/> containing the contract name of the
+        ///     <see cref="Lazy{T, TMetadataView}"/> objects to return; or <see langword="null"/>
         ///     or an empty string ("") to use the default contract name.
         /// </param>
         /// <returns>
-        ///     An <see cref="IEnumerable{T}"/> containing the 
-        ///     <see cref="Lazy{T, TMetadataView}"/> objects with the specified contract name if 
+        ///     An <see cref="IEnumerable{T}"/> containing the
+        ///     <see cref="Lazy{T, TMetadataView}"/> objects with the specified contract name if
         ///     found; otherwise, an empty <see cref="IEnumerable{T}"/>.
         /// </returns>
         /// <remarks>
         ///     <para>
-        ///         The default contract name is the result of calling 
+        ///         The default contract name is the result of calling
         ///         <see cref="AttributedModelServices.GetContractName(Type)"/> on <typeparamref name="T"/>.
         ///     </para>
         ///     <para>
-        ///         The contract name is compared using a case-sensitive, non-linguistic comparison 
+        ///         The contract name is compared using a case-sensitive, non-linguistic comparison
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
@@ -440,24 +450,24 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         /// <summary>
-        ///     Returns the exported value with the contract name derived from the specified type 
+        ///     Returns the exported value with the contract name derived from the specified type
         ///     parameter, throwing an exception if there is not exactly one matching exported value.
         /// </summary>
         /// <typeparam name="T">
-        ///     The type of the exported value to return. The contract name is also 
+        ///     The type of the exported value to return. The contract name is also
         ///     derived from this type parameter.
         /// </typeparam>
         /// <returns>
-        ///     The exported <see cref="Object"/> with the contract name derived from 
+        ///     The exported <see cref="Object"/> with the contract name derived from
         ///     <typeparamref name="T"/>.
         /// </returns>
         /// <remarks>
         ///     <para>
-        ///         The contract name is the result of calling 
+        ///         The contract name is the result of calling
         ///         <see cref="AttributedModelServices.GetContractName(Type)"/> on <typeparamref name="T"/>.
         ///     </para>
         ///     <para>
-        ///         The contract name is compared using a case-sensitive, non-linguistic comparison 
+        ///         The contract name is compared using a case-sensitive, non-linguistic comparison
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
@@ -466,7 +476,7 @@ namespace System.ComponentModel.Composition.Hosting
         /// </exception>
         /// <exception cref="ImportCardinalityMismatchException">
         ///     <para>
-        ///         There are zero exported values with the contract name derived from 
+        ///         There are zero exported values with the contract name derived from
         ///         <typeparamref name="T"/> in the <see cref="CompositionContainer"/>.
         ///     </para>
         ///     -or-
@@ -479,7 +489,7 @@ namespace System.ComponentModel.Composition.Hosting
         ///     The <see cref="CompositionContainer"/> has been disposed of.
         /// </exception>
         /// <exception cref="CompositionException">
-        ///     An error occurred during composition. <see cref="CompositionException.Errors"/> will 
+        ///     An error occurred during composition. <see cref="CompositionException.Errors"/> will
         ///     contain a collection of errors that occurred.
         /// </exception>
         public T GetExportedValue<T>()
@@ -488,7 +498,7 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         /// <summary>
-        ///     Returns the exported value with the specified contract name, throwing an exception 
+        ///     Returns the exported value with the specified contract name, throwing an exception
         ///     if there is not exactly one matching exported value.
         /// </summary>
         /// <typeparam name="T">
@@ -503,11 +513,11 @@ namespace System.ComponentModel.Composition.Hosting
         /// </returns>
         /// <remarks>
         ///     <para>
-        ///         The default contract name is the result of calling 
+        ///         The default contract name is the result of calling
         ///         <see cref="AttributedModelServices.GetContractName(Type)"/> on <typeparamref name="T"/>.
         ///     </para>
         ///     <para>
-        ///         The contract name is compared using a case-sensitive, non-linguistic comparison 
+        ///         The contract name is compared using a case-sensitive, non-linguistic comparison
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
@@ -516,7 +526,7 @@ namespace System.ComponentModel.Composition.Hosting
         /// </exception>
         /// <exception cref="ImportCardinalityMismatchException">
         ///     <para>
-        ///         There are zero exported values with the specified contract name in the 
+        ///         There are zero exported values with the specified contract name in the
         ///         <see cref="CompositionContainer"/>.
         ///     </para>
         ///     -or-
@@ -529,7 +539,7 @@ namespace System.ComponentModel.Composition.Hosting
         ///     The <see cref="CompositionContainer"/> has been disposed of.
         /// </exception>
         /// <exception cref="CompositionException">
-        ///     An error occurred during composition. <see cref="CompositionException.Errors"/> will 
+        ///     An error occurred during composition. <see cref="CompositionException.Errors"/> will
         ///     contain a collection of errors that occurred.
         /// </exception>
         public T GetExportedValue<T>(string contractName)
@@ -538,31 +548,31 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         /// <summary>
-        ///     Returns the exported value with the contract name derived from the specified type 
+        ///     Returns the exported value with the contract name derived from the specified type
         ///     parameter, throwing an exception if there is more than one matching exported value.
         /// </summary>
         /// <typeparam name="T">
-        ///     The type of the exported value to return. The contract name is also 
+        ///     The type of the exported value to return. The contract name is also
         ///     derived from this type parameter.
         /// </typeparam>
         /// <returns>
-        ///     The exported <see cref="Object"/> with the contract name derived from 
+        ///     The exported <see cref="Object"/> with the contract name derived from
         ///     <typeparamref name="T"/>, if found; otherwise, the default value for
         ///     <typeparamref name="T"/>.
         /// </returns>
         /// <remarks>
         ///     <para>
-        ///         If the exported value is not found, then this method returns the appropriate 
-        ///         default value for <typeparamref name="T"/>; for example, 0 (zero) for integer 
-        ///         types, <see langword="false"/> for Boolean types, and <see langword="null"/> 
+        ///         If the exported value is not found, then this method returns the appropriate
+        ///         default value for <typeparamref name="T"/>; for example, 0 (zero) for integer
+        ///         types, <see langword="false"/> for Boolean types, and <see langword="null"/>
         ///         for reference types.
         ///     </para>
         ///     <para>
-        ///         The contract name is the result of calling 
+        ///         The contract name is the result of calling
         ///         <see cref="AttributedModelServices.GetContractName(Type)"/> on <typeparamref name="T"/>.
         ///     </para>
         ///     <para>
-        ///         The contract name is compared using a case-sensitive, non-linguistic comparison 
+        ///         The contract name is compared using a case-sensitive, non-linguistic comparison
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
@@ -579,7 +589,7 @@ namespace System.ComponentModel.Composition.Hosting
         ///     The <see cref="CompositionContainer"/> has been disposed of.
         /// </exception>
         /// <exception cref="CompositionException">
-        ///     An error occurred during composition. <see cref="CompositionException.Errors"/> will 
+        ///     An error occurred during composition. <see cref="CompositionException.Errors"/> will
         ///     contain a collection of errors that occurred.
         /// </exception>
         public T GetExportedValueOrDefault<T>()
@@ -588,7 +598,7 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         /// <summary>
-        ///     Returns the exported value with the specified contract name, throwing an exception 
+        ///     Returns the exported value with the specified contract name, throwing an exception
         ///     if there is more than one matching exported value.
         /// </summary>
         /// <typeparam name="T">
@@ -599,22 +609,22 @@ namespace System.ComponentModel.Composition.Hosting
         ///     or <see langword="null"/> or an empty string ("") to use the default contract name.
         /// </param>
         /// <returns>
-        ///     The exported <see cref="Object"/> with the specified contract name, if found; 
+        ///     The exported <see cref="Object"/> with the specified contract name, if found;
         ///     otherwise, the default value for <typeparamref name="T"/>.
         /// </returns>
         /// <remarks>
         ///     <para>
-        ///         If the exported value is not found, then this method returns the appropriate 
-        ///         default value for <typeparamref name="T"/>; for example, 0 (zero) for integer 
-        ///         types, <see langword="false"/> for Boolean types, and <see langword="null"/> 
+        ///         If the exported value is not found, then this method returns the appropriate
+        ///         default value for <typeparamref name="T"/>; for example, 0 (zero) for integer
+        ///         types, <see langword="false"/> for Boolean types, and <see langword="null"/>
         ///         for reference types.
         ///     </para>
         ///     <para>
-        ///         The default contract name is the result of calling 
+        ///         The default contract name is the result of calling
         ///         <see cref="AttributedModelServices.GetContractName(Type)"/> on <typeparamref name="T"/>.
         ///     </para>
         ///     <para>
-        ///         The contract name is compared using a case-sensitive, non-linguistic comparison 
+        ///         The contract name is compared using a case-sensitive, non-linguistic comparison
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
@@ -629,7 +639,7 @@ namespace System.ComponentModel.Composition.Hosting
         ///     The <see cref="CompositionContainer"/> has been disposed of.
         /// </exception>
         /// <exception cref="CompositionException">
-        ///     An error occurred during composition. <see cref="CompositionException.Errors"/> will 
+        ///     An error occurred during composition. <see cref="CompositionException.Errors"/> will
         ///     contain a collection of errors that occurred.
         /// </exception>
         public T GetExportedValueOrDefault<T>(string contractName)
@@ -638,37 +648,37 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         /// <summary>
-        ///     Returns the exported values with the contract name derived from the specified type 
+        ///     Returns the exported values with the contract name derived from the specified type
         ///     parameter.
         /// </summary>
         /// <typeparam name="T">
-        ///     The type of the exported value to return. The contract name is also 
+        ///     The type of the exported value to return. The contract name is also
         ///     derived from this type parameter.
         /// </typeparam>
         /// <returns>
-        ///     An <see cref="Collection{T}"/> containing the exported values with the contract name 
-        ///     derived from the specified type parameter, if found; otherwise, an empty 
+        ///     An <see cref="Collection{T}"/> containing the exported values with the contract name
+        ///     derived from the specified type parameter, if found; otherwise, an empty
         ///     <see cref="Collection{T}"/>.
         /// </returns>
         /// <remarks>
         ///     <para>
-        ///         The contract name is the result of calling 
+        ///         The contract name is the result of calling
         ///         <see cref="AttributedModelServices.GetContractName(Type)"/> on <typeparamref name="T"/>.
         ///     </para>
         ///     <para>
-        ///         The contract name is compared using a case-sensitive, non-linguistic comparison 
+        ///         The contract name is compared using a case-sensitive, non-linguistic comparison
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
         /// <exception cref="CompositionContractMismatchException">
-        ///     One or more of the underlying exported values cannot be cast to 
+        ///     One or more of the underlying exported values cannot be cast to
         ///     <typeparamref name="T"/>.
         /// </exception>
         /// <exception cref="ObjectDisposedException">
         ///     The <see cref="CompositionContainer"/> has been disposed of.
         /// </exception>
         /// <exception cref="CompositionException">
-        ///     An error occurred during composition. <see cref="CompositionException.Errors"/> will 
+        ///     An error occurred during composition. <see cref="CompositionException.Errors"/> will
         ///     contain a collection of errors that occurred.
         /// </exception>
         public IEnumerable<T> GetExportedValues<T>()
@@ -683,33 +693,33 @@ namespace System.ComponentModel.Composition.Hosting
         ///     The type of the exported value to return.
         /// </typeparam>
         /// <param name="contractName">
-        ///     A <see cref="String"/> containing the contract name of the exported values to 
-        ///     return; or <see langword="null"/> or an empty string ("") to use the default 
+        ///     A <see cref="String"/> containing the contract name of the exported values to
+        ///     return; or <see langword="null"/> or an empty string ("") to use the default
         ///     contract name.
         /// </param>
         /// <returns>
-        ///     An <see cref="Collection{T}"/> containing the exported values with the specified 
+        ///     An <see cref="Collection{T}"/> containing the exported values with the specified
         ///     contract name, if found; otherwise, an empty <see cref="Collection{T}"/>.
         /// </returns>
         /// <remarks>
         ///     <para>
-        ///         The default contract name is the result of calling 
+        ///         The default contract name is the result of calling
         ///         <see cref="AttributedModelServices.GetContractName(Type)"/> on <typeparamref name="T"/>.
         ///     </para>
         ///     <para>
-        ///         The contract name is compared using a case-sensitive, non-linguistic comparison 
+        ///         The contract name is compared using a case-sensitive, non-linguistic comparison
         ///         using <see cref="StringComparer.Ordinal"/>.
         ///     </para>
         /// </remarks>
         /// <exception cref="CompositionContractMismatchException">
-        ///     One or more of the underlying exported values cannot be cast to 
+        ///     One or more of the underlying exported values cannot be cast to
         ///     <typeparamref name="T"/>.
         /// </exception>
         /// <exception cref="ObjectDisposedException">
         ///     The <see cref="CompositionContainer"/> has been disposed of.
         /// </exception>
         /// <exception cref="CompositionException">
-        ///     An error occurred during composition. <see cref="CompositionException.Errors"/> will 
+        ///     An error occurred during composition. <see cref="CompositionException.Errors"/> will
         ///     contain a collection of errors that occurred.
         /// </exception>
         public IEnumerable<T> GetExportedValues<T>(string contractName)
@@ -719,7 +729,12 @@ namespace System.ComponentModel.Composition.Hosting
 
         private IEnumerable<T> GetExportedValuesCore<T>(string contractName)
         {
-            IEnumerable<Export> exports = this.GetExportsCore(typeof(T), (Type)null, contractName, ImportCardinality.ZeroOrMore);
+            IEnumerable<Export> exports = this.GetExportsCore(
+                typeof(T),
+                (Type)null,
+                contractName,
+                ImportCardinality.ZeroOrMore
+            );
 
             Collection<T> result = new Collection<T>();
             foreach (Export export in exports)
@@ -733,14 +748,20 @@ namespace System.ComponentModel.Composition.Hosting
         {
             Assumes.IsTrue(cardinality.IsAtMostOne());
 
-            Export export = this.GetExportsCore(typeof(T), (Type)null, contractName, cardinality).SingleOrDefault();
+            Export export = this.GetExportsCore(typeof(T), (Type)null, contractName, cardinality)
+                .SingleOrDefault();
 
             return (export != null) ? ExportServices.GetCastedExportedValue<T>(export) : default(T);
         }
 
         private IEnumerable<Lazy<T>> GetExportsCore<T>(string contractName)
         {
-            IEnumerable<Export> exports = this.GetExportsCore(typeof(T), (Type)null, contractName, ImportCardinality.ZeroOrMore);
+            IEnumerable<Export> exports = this.GetExportsCore(
+                typeof(T),
+                (Type)null,
+                contractName,
+                ImportCardinality.ZeroOrMore
+            );
 
             Collection<Lazy<T>> result = new Collection<Lazy<T>>();
             foreach (Export export in exports)
@@ -750,9 +771,16 @@ namespace System.ComponentModel.Composition.Hosting
             return result;
         }
 
-        private IEnumerable<Lazy<T, TMetadataView>> GetExportsCore<T, TMetadataView>(string contractName)
+        private IEnumerable<Lazy<T, TMetadataView>> GetExportsCore<T, TMetadataView>(
+            string contractName
+        )
         {
-            IEnumerable<Export> exports = this.GetExportsCore(typeof(T), typeof(TMetadataView), contractName, ImportCardinality.ZeroOrMore);
+            IEnumerable<Export> exports = this.GetExportsCore(
+                typeof(T),
+                typeof(TMetadataView),
+                contractName,
+                ImportCardinality.ZeroOrMore
+            );
 
             Collection<Lazy<T, TMetadataView>> result = new Collection<Lazy<T, TMetadataView>>();
             foreach (Export export in exports)
@@ -764,19 +792,38 @@ namespace System.ComponentModel.Composition.Hosting
 
         private Lazy<T, TMetadataView> GetExportCore<T, TMetadataView>(string contractName)
         {
-            Export export = this.GetExportsCore(typeof(T), typeof(TMetadataView), contractName, ImportCardinality.ExactlyOne).SingleOrDefault();
+            Export export = this.GetExportsCore(
+                    typeof(T),
+                    typeof(TMetadataView),
+                    contractName,
+                    ImportCardinality.ExactlyOne
+                )
+                .SingleOrDefault();
 
-            return (export != null) ? ExportServices.CreateStronglyTypedLazyOfTM<T, TMetadataView>(export) : null;
+            return (export != null)
+                ? ExportServices.CreateStronglyTypedLazyOfTM<T, TMetadataView>(export)
+                : null;
         }
 
         private Lazy<T> GetExportCore<T>(string contractName)
         {
-            Export export = this.GetExportsCore(typeof(T), null, contractName, ImportCardinality.ExactlyOne).SingleOrDefault();
+            Export export = this.GetExportsCore(
+                    typeof(T),
+                    null,
+                    contractName,
+                    ImportCardinality.ExactlyOne
+                )
+                .SingleOrDefault();
 
             return (export != null) ? ExportServices.CreateStronglyTypedLazyOfT<T>(export) : null;
         }
 
-        private IEnumerable<Export> GetExportsCore(Type type, Type metadataViewType, string contractName, ImportCardinality cardinality)
+        private IEnumerable<Export> GetExportsCore(
+            Type type,
+            Type metadataViewType,
+            string contractName,
+            ImportCardinality cardinality
+        )
         {
             // Only 'type' cannot be null - the other parameters have sensible defaults.
             Requires.NotNull(type, "type");
@@ -793,19 +840,39 @@ namespace System.ComponentModel.Composition.Hosting
 
             if (!MetadataViewProvider.IsViewTypeValid(metadataViewType))
             {
-                throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Strings.InvalidMetadataView, metadataViewType.Name));
+                throw new InvalidOperationException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Strings.InvalidMetadataView,
+                        metadataViewType.Name
+                    )
+                );
             }
 
-            ImportDefinition importDefinition = BuildImportDefinition(type, metadataViewType, contractName, cardinality);
+            ImportDefinition importDefinition = BuildImportDefinition(
+                type,
+                metadataViewType,
+                contractName,
+                cardinality
+            );
             return this.GetExports(importDefinition, null);
         }
 
-        private static ImportDefinition BuildImportDefinition(Type type, Type metadataViewType, string contractName, ImportCardinality cardinality)
+        private static ImportDefinition BuildImportDefinition(
+            Type type,
+            Type metadataViewType,
+            string contractName,
+            ImportCardinality cardinality
+        )
         {
             Assumes.NotNull(type, metadataViewType, contractName);
 
-            IEnumerable<KeyValuePair<string, Type>> requiredMetadata = CompositionServices.GetRequiredMetadata(metadataViewType);
-            IDictionary<string, object> metadata = CompositionServices.GetImportMetadata(type, null);
+            IEnumerable<KeyValuePair<string, Type>> requiredMetadata =
+                CompositionServices.GetRequiredMetadata(metadataViewType);
+            IDictionary<string, object> metadata = CompositionServices.GetImportMetadata(
+                type,
+                null
+            );
 
             string requiredTypeIdentity = null;
             if (type != typeof(object))
@@ -813,7 +880,16 @@ namespace System.ComponentModel.Composition.Hosting
                 requiredTypeIdentity = AttributedModelServices.GetTypeIdentity(type);
             }
 
-            return new ContractBasedImportDefinition(contractName, requiredTypeIdentity, requiredMetadata, cardinality, false, true, CreationPolicy.Any, metadata);
+            return new ContractBasedImportDefinition(
+                contractName,
+                requiredTypeIdentity,
+                requiredMetadata,
+                cardinality,
+                false,
+                true,
+                CreationPolicy.Any,
+                metadata
+            );
         }
     }
 }

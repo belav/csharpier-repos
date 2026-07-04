@@ -21,25 +21,30 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting
             {
                 // Note that AppContext.BaseDirectory isn't necessarily the directory containing csi.exe.
                 // For example, when executed via corerun it's the directory containing corerun.
-                string csiDirectory = Path.GetDirectoryName(typeof(Csi).GetTypeInfo().Assembly.ManifestModule.FullyQualifiedName);
+                string csiDirectory = Path.GetDirectoryName(
+                    typeof(Csi).GetTypeInfo().Assembly.ManifestModule.FullyQualifiedName
+                );
 
                 var buildPaths = new BuildPaths(
                     clientDir: csiDirectory,
                     workingDir: Directory.GetCurrentDirectory(),
                     sdkDir: RuntimeMetadataReferenceResolver.GetDesktopFrameworkDirectory(),
-                    tempDir: Path.GetTempPath());
+                    tempDir: Path.GetTempPath()
+                );
 
                 var compiler = new CSharpInteractiveCompiler(
                     responseFile: Path.Combine(csiDirectory, InteractiveResponseFileName),
                     buildPaths: buildPaths,
                     args: args,
-                    analyzerLoader: new NotImplementedAnalyzerLoader());
+                    analyzerLoader: new NotImplementedAnalyzerLoader()
+                );
 
                 var runner = new CommandLineRunner(
                     ConsoleIO.Default,
                     compiler,
                     CSharpScriptCompiler.Instance,
-                    CSharpObjectFormatter.Instance);
+                    CSharpObjectFormatter.Instance
+                );
 
                 return runner.RunInteractive();
             }

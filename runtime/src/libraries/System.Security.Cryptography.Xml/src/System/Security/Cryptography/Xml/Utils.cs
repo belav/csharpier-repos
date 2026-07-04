@@ -25,8 +25,10 @@ namespace System.Security.Cryptography.Xml
 
         private static bool HasNamespace(XmlElement element, string prefix, string value)
         {
-            if (IsCommittedNamespace(element, prefix, value)) return true;
-            if (element.Prefix == prefix && element.NamespaceURI == value) return true;
+            if (IsCommittedNamespace(element, prefix, value))
+                return true;
+            if (element.Prefix == prefix && element.NamespaceURI == value)
+                return true;
             return false;
         }
 
@@ -39,7 +41,8 @@ namespace System.Security.Cryptography.Xml
             }
 
             string name = ((prefix.Length > 0) ? "xmlns:" + prefix : "xmlns");
-            if (element.HasAttribute(name) && element.GetAttribute(name) == value) return true;
+            if (element.HasAttribute(name) && element.GetAttribute(name) == value)
+                return true;
             return false;
         }
 
@@ -55,14 +58,19 @@ namespace System.Security.Cryptography.Xml
             {
                 XmlElement? ancestorElement = ancestorNode as XmlElement;
                 if (ancestorElement != null)
-                    if (HasNamespace(ancestorElement, prefix, value)) return true;
+                    if (HasNamespace(ancestorElement, prefix, value))
+                        return true;
                 ancestorNode = ancestorNode.ParentNode;
             }
 
             return false;
         }
 
-        internal static string? GetAttribute(XmlElement element, string localName, string namespaceURI)
+        internal static string? GetAttribute(
+            XmlElement element,
+            string localName,
+            string namespaceURI
+        )
         {
             string? s = (element.HasAttribute(localName) ? element.GetAttribute(localName) : null);
             if (s == null && element.HasAttribute(localName, namespaceURI))
@@ -77,7 +85,10 @@ namespace System.Security.Cryptography.Xml
 
         internal static bool VerifyAttributes(XmlElement element, string? expectedAttrName)
         {
-            return VerifyAttributes(element, expectedAttrName == null ? null : new string[] { expectedAttrName });
+            return VerifyAttributes(
+                element,
+                expectedAttrName == null ? null : new string[] { expectedAttrName }
+            );
         }
 
         internal static bool VerifyAttributes(XmlElement element, string[]? expectedAttrNames)
@@ -85,9 +96,18 @@ namespace System.Security.Cryptography.Xml
             foreach (XmlAttribute attr in element.Attributes)
             {
                 // There are a few Xml Special Attributes that are always allowed on any node. Make sure we allow those here.
-                bool attrIsAllowed = attr.Name == "xmlns" || attr.Name.StartsWith("xmlns:") || attr.Name == "xml:space" || attr.Name == "xml:lang" || attr.Name == "xml:base";
+                bool attrIsAllowed =
+                    attr.Name == "xmlns"
+                    || attr.Name.StartsWith("xmlns:")
+                    || attr.Name == "xml:space"
+                    || attr.Name == "xml:lang"
+                    || attr.Name == "xml:base";
                 int expectedInd = 0;
-                while (!attrIsAllowed && expectedAttrNames != null && expectedInd < expectedAttrNames.Length)
+                while (
+                    !attrIsAllowed
+                    && expectedAttrNames != null
+                    && expectedInd < expectedAttrNames.Length
+                )
                 {
                     attrIsAllowed = attr.Name == expectedAttrNames[expectedInd];
                     expectedInd++;
@@ -100,7 +120,11 @@ namespace System.Security.Cryptography.Xml
 
         internal static bool IsNamespaceNode(XmlNode n)
         {
-            return n.NodeType == XmlNodeType.Attribute && (n.Prefix.Equals("xmlns") || (n.Prefix.Length == 0 && n.LocalName.Equals("xmlns")));
+            return n.NodeType == XmlNodeType.Attribute
+                && (
+                    n.Prefix.Equals("xmlns")
+                    || (n.Prefix.Length == 0 && n.LocalName.Equals("xmlns"))
+                );
         }
 
         internal static bool IsXmlNamespaceNode(XmlNode n)
@@ -111,7 +135,10 @@ namespace System.Security.Cryptography.Xml
         // We consider xml:space style attributes as default namespace nodes since they obey the same propagation rules
         internal static bool IsDefaultNamespaceNode(XmlNode n)
         {
-            bool b1 = n.NodeType == XmlNodeType.Attribute && n.Prefix.Length == 0 && n.LocalName.Equals("xmlns");
+            bool b1 =
+                n.NodeType == XmlNodeType.Attribute
+                && n.Prefix.Length == 0
+                && n.LocalName.Equals("xmlns");
             bool b2 = IsXmlNamespaceNode(n);
             return b1 || b2;
         }
@@ -132,7 +159,10 @@ namespace System.Security.Cryptography.Xml
             return GetNamespacePrefix(a).Equals(nsPrefix);
         }
 
-        internal static bool IsNonRedundantNamespaceDecl(XmlAttribute a, XmlAttribute? nearestAncestorWithSamePrefix)
+        internal static bool IsNonRedundantNamespaceDecl(
+            XmlAttribute a,
+            XmlAttribute? nearestAncestorWithSamePrefix
+        )
         {
             if (nearestAncestorWithSamePrefix == null)
                 return !IsEmptyDefaultNamespaceNode(a);
@@ -145,12 +175,17 @@ namespace System.Security.Cryptography.Xml
             return DiscardWhiteSpaces(inputBuffer, 0, inputBuffer.Length);
         }
 
-
-        internal static string DiscardWhiteSpaces(string inputBuffer, int inputOffset, int inputCount)
+        internal static string DiscardWhiteSpaces(
+            string inputBuffer,
+            int inputOffset,
+            int inputCount
+        )
         {
-            int i, iCount = 0;
+            int i,
+                iCount = 0;
             for (i = 0; i < inputCount; i++)
-                if (char.IsWhiteSpace(inputBuffer[inputOffset + i])) iCount++;
+                if (char.IsWhiteSpace(inputBuffer[inputOffset + i]))
+                    iCount++;
             char[] rgbOut = new char[inputCount - iCount];
             iCount = 0;
             for (i = 0; i < inputCount; i++)
@@ -161,7 +196,11 @@ namespace System.Security.Cryptography.Xml
             return new string(rgbOut);
         }
 
-        internal static void SBReplaceCharWithString(StringBuilder sb, char oldChar, string newString)
+        internal static void SBReplaceCharWithString(
+            StringBuilder sb,
+            char oldChar,
+            string newString
+        )
         {
             int i = 0;
             int newStringLength = newString.Length;
@@ -173,11 +212,16 @@ namespace System.Security.Cryptography.Xml
                     sb.Insert(i, newString);
                     i += newStringLength;
                 }
-                else i++;
+                else
+                    i++;
             }
         }
 
-        internal static XmlReader PreProcessStreamInput(Stream inputStream, XmlResolver? xmlResolver, string? baseUri)
+        internal static XmlReader PreProcessStreamInput(
+            Stream inputStream,
+            XmlResolver? xmlResolver,
+            string? baseUri
+        )
         {
             XmlReaderSettings settings = GetSecureXmlReaderSettings(xmlResolver);
             XmlReader reader = XmlReader.Create(inputStream, settings, baseUri);
@@ -194,7 +238,11 @@ namespace System.Security.Cryptography.Xml
             return settings;
         }
 
-        internal static XmlDocument PreProcessDocumentInput(XmlDocument document, XmlResolver xmlResolver, string baseUri)
+        internal static XmlDocument PreProcessDocumentInput(
+            XmlDocument document,
+            XmlResolver xmlResolver,
+            string baseUri
+        )
         {
             if (document is null)
             {
@@ -218,7 +266,11 @@ namespace System.Security.Cryptography.Xml
             return doc;
         }
 
-        internal static XmlDocument PreProcessElementInput(XmlElement elem, XmlResolver xmlResolver, string? baseUri)
+        internal static XmlDocument PreProcessElementInput(
+            XmlElement elem,
+            XmlResolver xmlResolver,
+            string? baseUri
+        )
         {
             if (elem is null)
             {
@@ -313,7 +365,8 @@ namespace System.Security.Cryptography.Xml
         {
             foreach (XmlNode nodeElem in nodeList)
             {
-                if (nodeElem == node) return true;
+                if (nodeElem == node)
+                    return true;
             }
             return false;
         }
@@ -473,9 +526,16 @@ namespace System.Security.Cryptography.Xml
             {
                 foreach (XmlNode attrib in namespaces)
                 {
-                    string name = ((attrib.Prefix.Length > 0) ? attrib.Prefix + ":" + attrib.LocalName : attrib.LocalName);
+                    string name = (
+                        (attrib.Prefix.Length > 0)
+                            ? attrib.Prefix + ":" + attrib.LocalName
+                            : attrib.LocalName
+                    );
                     // Skip the attribute if one with the same qualified name already exists
-                    if (elem.HasAttribute(name) || (name.Equals("xmlns") && elem.Prefix.Length == 0)) continue;
+                    if (
+                        elem.HasAttribute(name) || (name.Equals("xmlns") && elem.Prefix.Length == 0)
+                    )
+                        continue;
                     XmlAttribute nsattrib = (XmlAttribute)elem.OwnerDocument.CreateAttribute(name);
                     nsattrib.Value = attrib.Value;
                     elem.SetAttributeNode(nsattrib);
@@ -489,7 +549,8 @@ namespace System.Security.Cryptography.Xml
             {
                 foreach (string key in namespaces.Keys)
                 {
-                    if (elem.HasAttribute(key)) continue;
+                    if (elem.HasAttribute(key))
+                        continue;
                     XmlAttribute nsattrib = (XmlAttribute)elem.OwnerDocument.CreateAttribute(key);
                     nsattrib.Value = namespaces[key] as string;
                     elem.SetAttributeNode(nsattrib);
@@ -515,12 +576,28 @@ namespace System.Security.Cryptography.Xml
                     ancestorNode = ancestorNode.ParentNode;
                     continue;
                 }
-                if (!Utils.IsCommittedNamespace(ancestorElement, ancestorElement.Prefix, ancestorElement.NamespaceURI))
+                if (
+                    !Utils.IsCommittedNamespace(
+                        ancestorElement,
+                        ancestorElement.Prefix,
+                        ancestorElement.NamespaceURI
+                    )
+                )
                 {
                     // Add the namespace attribute to the collection if needed
-                    if (!Utils.IsRedundantNamespace(ancestorElement, ancestorElement.Prefix, ancestorElement.NamespaceURI))
+                    if (
+                        !Utils.IsRedundantNamespace(
+                            ancestorElement,
+                            ancestorElement.Prefix,
+                            ancestorElement.NamespaceURI
+                        )
+                    )
                     {
-                        string name = ((ancestorElement.Prefix.Length > 0) ? "xmlns:" + ancestorElement.Prefix : "xmlns");
+                        string name = (
+                            (ancestorElement.Prefix.Length > 0)
+                                ? "xmlns:" + ancestorElement.Prefix
+                                : "xmlns"
+                        );
                         XmlAttribute nsattrib = elem.OwnerDocument.CreateAttribute(name);
                         nsattrib.Value = ancestorElement.NamespaceURI;
                         namespaces.Add(nsattrib);
@@ -548,13 +625,31 @@ namespace System.Security.Cryptography.Xml
                         }
                         if (attrib.NamespaceURI.Length > 0)
                         {
-                            if (!Utils.IsCommittedNamespace(ancestorElement, attrib.Prefix, attrib.NamespaceURI))
+                            if (
+                                !Utils.IsCommittedNamespace(
+                                    ancestorElement,
+                                    attrib.Prefix,
+                                    attrib.NamespaceURI
+                                )
+                            )
                             {
                                 // Add the namespace attribute to the collection if needed
-                                if (!Utils.IsRedundantNamespace(ancestorElement, attrib.Prefix, attrib.NamespaceURI))
+                                if (
+                                    !Utils.IsRedundantNamespace(
+                                        ancestorElement,
+                                        attrib.Prefix,
+                                        attrib.NamespaceURI
+                                    )
+                                )
                                 {
-                                    string name = ((attrib.Prefix.Length > 0) ? "xmlns:" + attrib.Prefix : "xmlns");
-                                    XmlAttribute nsattrib = elem.OwnerDocument.CreateAttribute(name);
+                                    string name = (
+                                        (attrib.Prefix.Length > 0)
+                                            ? "xmlns:" + attrib.Prefix
+                                            : "xmlns"
+                                    );
+                                    XmlAttribute nsattrib = elem.OwnerDocument.CreateAttribute(
+                                        name
+                                    );
                                     nsattrib.Value = attrib.NamespaceURI;
                                     namespaces.Add(nsattrib);
                                 }
@@ -572,11 +667,12 @@ namespace System.Security.Cryptography.Xml
         internal static byte[] ConvertIntToByteArray(int dwInput)
         {
             byte[] rgbTemp = new byte[8]; // int can never be greater than Int64
-            int t1;  // t1 is remaining value to account for
-            int t2;  // t2 is t1 % 256
+            int t1; // t1 is remaining value to account for
+            int t2; // t2 is t1 % 256
             int i = 0;
 
-            if (dwInput == 0) return new byte[1];
+            if (dwInput == 0)
+                return new byte[1];
             t1 = dwInput;
             while (t1 > 0)
             {
@@ -619,24 +715,28 @@ namespace System.Security.Cryptography.Xml
         }
 
         // Mimic the behavior of the X509IssuerSerial constructor with null and empty checks
-        internal static X509IssuerSerial CreateX509IssuerSerial(string? issuerName, string? serialNumber)
+        internal static X509IssuerSerial CreateX509IssuerSerial(
+            string? issuerName,
+            string? serialNumber
+        )
         {
             if (string.IsNullOrEmpty(issuerName))
                 throw new ArgumentException(SR.Arg_EmptyOrNullString, nameof(issuerName));
             if (string.IsNullOrEmpty(serialNumber))
                 throw new ArgumentException(SR.Arg_EmptyOrNullString, nameof(serialNumber));
 
-            return new X509IssuerSerial()
-            {
-                IssuerName = issuerName,
-                SerialNumber = serialNumber
-            };
+            return new X509IssuerSerial() { IssuerName = issuerName, SerialNumber = serialNumber };
         }
 
-        internal static X509Certificate2Collection BuildBagOfCerts(KeyInfoX509Data keyInfoX509Data, CertUsageType certUsageType)
+        internal static X509Certificate2Collection BuildBagOfCerts(
+            KeyInfoX509Data keyInfoX509Data,
+            CertUsageType certUsageType
+        )
         {
             X509Certificate2Collection collection = new X509Certificate2Collection();
-            ArrayList? decryptionIssuerSerials = (certUsageType == CertUsageType.Decryption ? new ArrayList() : null);
+            ArrayList? decryptionIssuerSerials = (
+                certUsageType == CertUsageType.Decryption ? new ArrayList() : null
+            );
             if (keyInfoX509Data.Certificates != null)
             {
                 foreach (X509Certificate2 certificate in keyInfoX509Data.Certificates)
@@ -647,14 +747,23 @@ namespace System.Security.Cryptography.Xml
                             collection.Add(certificate);
                             break;
                         case CertUsageType.Decryption:
-                            decryptionIssuerSerials!.Add(CreateX509IssuerSerial(certificate.IssuerName.Name, certificate.SerialNumber));
+                            decryptionIssuerSerials!.Add(
+                                CreateX509IssuerSerial(
+                                    certificate.IssuerName.Name,
+                                    certificate.SerialNumber
+                                )
+                            );
                             break;
                     }
                 }
             }
 
-            if (keyInfoX509Data.SubjectNames == null && keyInfoX509Data.IssuerSerials == null &&
-                keyInfoX509Data.SubjectKeyIds == null && decryptionIssuerSerials == null)
+            if (
+                keyInfoX509Data.SubjectNames == null
+                && keyInfoX509Data.IssuerSerials == null
+                && keyInfoX509Data.SubjectKeyIds == null
+                && decryptionIssuerSerials == null
+            )
                 return collection;
 
             // Open LocalMachine and CurrentUser "Other People"/"My" stores.
@@ -679,15 +788,27 @@ namespace System.Security.Cryptography.Xml
                         {
                             foreach (string subjectName in keyInfoX509Data.SubjectNames)
                             {
-                                filters = filters.Find(X509FindType.FindBySubjectDistinguishedName, subjectName, false);
+                                filters = filters.Find(
+                                    X509FindType.FindBySubjectDistinguishedName,
+                                    subjectName,
+                                    false
+                                );
                             }
                         }
                         if (keyInfoX509Data.IssuerSerials != null)
                         {
                             foreach (X509IssuerSerial issuerSerial in keyInfoX509Data.IssuerSerials)
                             {
-                                filters = filters.Find(X509FindType.FindByIssuerDistinguishedName, issuerSerial.IssuerName, false);
-                                filters = filters.Find(X509FindType.FindBySerialNumber, issuerSerial.SerialNumber, false);
+                                filters = filters.Find(
+                                    X509FindType.FindByIssuerDistinguishedName,
+                                    issuerSerial.IssuerName,
+                                    false
+                                );
+                                filters = filters.Find(
+                                    X509FindType.FindBySerialNumber,
+                                    issuerSerial.SerialNumber,
+                                    false
+                                );
                             }
                         }
                         if (keyInfoX509Data.SubjectKeyIds != null)
@@ -695,15 +816,27 @@ namespace System.Security.Cryptography.Xml
                             foreach (byte[] ski in keyInfoX509Data.SubjectKeyIds)
                             {
                                 string hex = EncodeHexString(ski);
-                                filters = filters.Find(X509FindType.FindBySubjectKeyIdentifier, hex, false);
+                                filters = filters.Find(
+                                    X509FindType.FindBySubjectKeyIdentifier,
+                                    hex,
+                                    false
+                                );
                             }
                         }
                         if (decryptionIssuerSerials != null)
                         {
                             foreach (X509IssuerSerial issuerSerial in decryptionIssuerSerials)
                             {
-                                filters = filters.Find(X509FindType.FindByIssuerDistinguishedName, issuerSerial.IssuerName, false);
-                                filters = filters.Find(X509FindType.FindBySerialNumber, issuerSerial.SerialNumber, false);
+                                filters = filters.Find(
+                                    X509FindType.FindByIssuerDistinguishedName,
+                                    issuerSerial.IssuerName,
+                                    false
+                                );
+                                filters = filters.Find(
+                                    X509FindType.FindBySerialNumber,
+                                    issuerSerial.SerialNumber,
+                                    false
+                                );
                             }
                         }
                     }
@@ -740,7 +873,10 @@ namespace System.Security.Cryptography.Xml
             int i = 0;
             for (int index = 0; index < cbHex; index++)
             {
-                hex[index] = (byte)((HexConverter.FromChar(hexString[i]) << 4) | HexConverter.FromChar(hexString[i + 1]));
+                hex[index] = (byte)(
+                    (HexConverter.FromChar(hexString[i]) << 4)
+                    | HexConverter.FromChar(hexString[i + 1])
+                );
                 i += 2;
             }
             return hex;
@@ -752,14 +888,22 @@ namespace System.Security.Cryptography.Xml
             if (elements.Count != 1)
                 return false;
             X509Certificate2 certificate = elements[0].Certificate;
-            if (string.Equals(certificate.SubjectName.Name, certificate.IssuerName.Name, StringComparison.OrdinalIgnoreCase))
+            if (
+                string.Equals(
+                    certificate.SubjectName.Name,
+                    certificate.IssuerName.Name,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
                 return true;
             return false;
         }
 
         internal static AsymmetricAlgorithm? GetAnyPublicKey(X509Certificate2 certificate)
         {
-            AsymmetricAlgorithm? algorithm = (AsymmetricAlgorithm?)certificate.GetRSAPublicKey() ?? certificate.GetECDsaPublicKey();
+            AsymmetricAlgorithm? algorithm =
+                (AsymmetricAlgorithm?)certificate.GetRSAPublicKey()
+                ?? certificate.GetECDsaPublicKey();
 
 #if NETCOREAPP
             if (algorithm is null && !OperatingSystem.IsTvOS() && !OperatingSystem.IsIOS())

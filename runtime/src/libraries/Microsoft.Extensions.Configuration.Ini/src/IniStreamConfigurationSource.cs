@@ -22,7 +22,7 @@ namespace Microsoft.Extensions.Configuration.Ini
         /// </summary>
         /// <param name="builder">The <see cref="IConfigurationBuilder"/>.</param>
         /// <returns>An <see cref="IniConfigurationProvider"/></returns>
-        public override IConfigurationProvider Build(IConfigurationBuilder builder)
-            => new IniStreamConfigurationProvider(this);
+        public override IConfigurationProvider Build(IConfigurationBuilder builder) =>
+            new IniStreamConfigurationProvider(this);
     }
 }

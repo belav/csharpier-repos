@@ -19,15 +19,23 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeRefactorings.ExtractMethod
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, LanguageNames.VisualBasic,
-        Name = PredefinedCodeRefactoringProviderNames.ExtractMethod), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            LanguageNames.VisualBasic,
+            Name = PredefinedCodeRefactoringProviderNames.ExtractMethod
+        ),
+        Shared
+    ]
     internal class ExtractMethodCodeRefactoringProvider : CodeRefactoringProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public ExtractMethodCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public ExtractMethodCodeRefactoringProvider() { }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
@@ -40,16 +48,26 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.ExtractMethod
             if (solution.WorkspaceKind == WorkspaceKind.MiscellaneousFiles)
                 return;
 
-            var activeInlineRenameSession = solution.Services.GetService<ICodeRefactoringHelpersService>().ActiveInlineRenameSession;
+            var activeInlineRenameSession = solution
+                .Services.GetService<ICodeRefactoringHelpersService>()
+                .ActiveInlineRenameSession;
             if (activeInlineRenameSession)
                 return;
 
             if (cancellationToken.IsCancellationRequested)
                 return;
 
-            var extractOptions = await document.GetExtractMethodGenerationOptionsAsync(context.Options, cancellationToken).ConfigureAwait(false);
+            var extractOptions = await document
+                .GetExtractMethodGenerationOptionsAsync(context.Options, cancellationToken)
+                .ConfigureAwait(false);
 
-            var actions = await GetCodeActionsAsync(document, textSpan, extractOptions, cancellationToken).ConfigureAwait(false);
+            var actions = await GetCodeActionsAsync(
+                    document,
+                    textSpan,
+                    extractOptions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             context.RegisterRefactorings(actions);
         }
 
@@ -57,27 +75,47 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.ExtractMethod
             Document document,
             TextSpan textSpan,
             ExtractMethodGenerationOptions extractOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<CodeAction>.GetInstance(out var actions);
-            var methodAction = await ExtractMethodAsync(document, textSpan, extractOptions, cancellationToken).ConfigureAwait(false);
+            var methodAction = await ExtractMethodAsync(
+                    document,
+                    textSpan,
+                    extractOptions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             actions.AddIfNotNull(methodAction);
 
-            var localFunctionAction = await ExtractLocalFunctionAsync(document, textSpan, extractOptions, cancellationToken).ConfigureAwait(false);
+            var localFunctionAction = await ExtractLocalFunctionAsync(
+                    document,
+                    textSpan,
+                    extractOptions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             actions.AddIfNotNull(localFunctionAction);
 
             return actions.ToImmutable();
         }
 
         private static async Task<CodeAction> ExtractMethodAsync(
-            Document document, TextSpan textSpan, ExtractMethodGenerationOptions extractOptions, CancellationToken cancellationToken)
+            Document document,
+            TextSpan textSpan,
+            ExtractMethodGenerationOptions extractOptions,
+            CancellationToken cancellationToken
+        )
         {
-            var result = await ExtractMethodService.ExtractMethodAsync(
-                document,
-                textSpan,
-                localFunction: false,
-                extractOptions,
-                cancellationToken).ConfigureAwait(false);
+            var result = await ExtractMethodService
+                .ExtractMethodAsync(
+                    document,
+                    textSpan,
+                    localFunction: false,
+                    extractOptions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             Contract.ThrowIfNull(result);
 
@@ -88,28 +126,45 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.ExtractMethod
                 FeaturesResources.Extract_method,
                 async cancellationToken =>
                 {
-                    var (document, invocationNameToken) = await result.GetDocumentAsync(cancellationToken).ConfigureAwait(false);
-                    return await AddRenameAnnotationAsync(document, invocationNameToken, cancellationToken).ConfigureAwait(false);
+                    var (document, invocationNameToken) = await result
+                        .GetDocumentAsync(cancellationToken)
+                        .ConfigureAwait(false);
+                    return await AddRenameAnnotationAsync(
+                            document,
+                            invocationNameToken,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 },
-                nameof(FeaturesResources.Extract_method));
+                nameof(FeaturesResources.Extract_method)
+            );
         }
 
         private static async Task<CodeAction> ExtractLocalFunctionAsync(
-            Document document, TextSpan textSpan, ExtractMethodGenerationOptions extractOptions, CancellationToken cancellationToken)
+            Document document,
+            TextSpan textSpan,
+            ExtractMethodGenerationOptions extractOptions,
+            CancellationToken cancellationToken
+        )
         {
-            var syntaxTree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+            var syntaxTree = await document
+                .GetSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
             var syntaxFacts = document.GetLanguageService<ISyntaxFactsService>();
             if (!syntaxFacts.SupportsLocalFunctionDeclaration(syntaxTree.Options))
             {
                 return null;
             }
 
-            var localFunctionResult = await ExtractMethodService.ExtractMethodAsync(
-                document,
-                textSpan,
-                localFunction: true,
-                extractOptions,
-                cancellationToken).ConfigureAwait(false);
+            var localFunctionResult = await ExtractMethodService
+                .ExtractMethodAsync(
+                    document,
+                    textSpan,
+                    localFunction: true,
+                    extractOptions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             Contract.ThrowIfNull(localFunctionResult);
 
             if (!localFunctionResult.Succeeded)
@@ -119,14 +174,26 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.ExtractMethod
                 FeaturesResources.Extract_local_function,
                 async cancellationToken =>
                 {
-                    var (document, invocationNameToken) = await localFunctionResult.GetDocumentAsync(cancellationToken).ConfigureAwait(false);
-                    return await AddRenameAnnotationAsync(document, invocationNameToken, cancellationToken).ConfigureAwait(false);
+                    var (document, invocationNameToken) = await localFunctionResult
+                        .GetDocumentAsync(cancellationToken)
+                        .ConfigureAwait(false);
+                    return await AddRenameAnnotationAsync(
+                            document,
+                            invocationNameToken,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 },
-                nameof(FeaturesResources.Extract_local_function));
+                nameof(FeaturesResources.Extract_local_function)
+            );
             return codeAction;
         }
 
-        private static async Task<Document> AddRenameAnnotationAsync(Document document, SyntaxToken? invocationNameToken, CancellationToken cancellationToken)
+        private static async Task<Document> AddRenameAnnotationAsync(
+            Document document,
+            SyntaxToken? invocationNameToken,
+            CancellationToken cancellationToken
+        )
         {
             if (invocationNameToken == null)
                 return document;
@@ -135,7 +202,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings.ExtractMethod
 
             var finalRoot = root.ReplaceToken(
                 invocationNameToken.Value,
-                invocationNameToken.Value.WithAdditionalAnnotations(RenameAnnotation.Create()));
+                invocationNameToken.Value.WithAdditionalAnnotations(RenameAnnotation.Create())
+            );
 
             return document.WithSyntaxRoot(finalRoot);
         }

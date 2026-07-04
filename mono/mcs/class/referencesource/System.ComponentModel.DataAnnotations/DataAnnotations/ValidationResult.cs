@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 
-namespace System.ComponentModel.DataAnnotations {
+namespace System.ComponentModel.DataAnnotations
+{
     /// <summary>
     /// Container class for the results of a validation request.
     /// <para>
@@ -13,7 +14,8 @@ namespace System.ComponentModel.DataAnnotations {
 #if SILVERLIGHT
     sealed
 #endif
- class ValidationResult {
+    class ValidationResult
+    {
         #region Member Fields
 
         private IEnumerable<string> _memberNames;
@@ -26,7 +28,11 @@ namespace System.ComponentModel.DataAnnotations {
         /// The <c>null</c> value is used to indicate success.  Consumers of <see cref="ValidationResult"/>s
         /// should compare the values to <see cref="ValidationResult.Success"/> rather than checking for null.
         /// </remarks>
-        [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes", Justification = "We want this to be readonly since we're just returning null")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes",
+            Justification = "We want this to be readonly since we're just returning null"
+        )]
         public static readonly ValidationResult Success;
 
         #endregion
@@ -40,18 +46,18 @@ namespace System.ComponentModel.DataAnnotations {
         /// <param name="errorMessage">The user-visible error message.  If null, <see cref="ValidationAttribute.GetValidationResult"/>
         /// will use <see cref="ValidationAttribute.FormatErrorMessage"/> for its error message.</param>
         public ValidationResult(string errorMessage)
-            : this(errorMessage, null) {
-        }
+            : this(errorMessage, null) { }
 
         /// <summary>
         /// Constructor that accepts an error message as well as a list of member names involved in the validation.
         /// This error message would override any error message provided on the <see cref="ValidationAttribute"/>.
         /// </summary>
-        /// <param name="errorMessage">The user-visible error message.  If null, <see cref="ValidationAttribute.GetValidationResult"/> 
+        /// <param name="errorMessage">The user-visible error message.  If null, <see cref="ValidationAttribute.GetValidationResult"/>
         /// will use <see cref="ValidationAttribute.FormatErrorMessage"/> for its error message.</param>
         /// <param name="memberNames">The list of member names affected by this result.
         /// This list of member names is meant to be used by presentation layers to indicate which fields are in error.</param>
-        public ValidationResult(string errorMessage, IEnumerable<string> memberNames) {
+        public ValidationResult(string errorMessage, IEnumerable<string> memberNames)
+        {
             this._errorMessage = errorMessage;
             this._memberNames = memberNames ?? new string[0];
         }
@@ -62,8 +68,10 @@ namespace System.ComponentModel.DataAnnotations {
         /// </summary>
         /// <param name="validationResult">The validation result.</param>
         /// <exception cref="System.ArgumentNullException">The <paramref name="validationResult"/> is null.</exception>
-        protected ValidationResult(ValidationResult validationResult) {
-            if (validationResult == null) {
+        protected ValidationResult(ValidationResult validationResult)
+        {
+            if (validationResult == null)
+            {
                 throw new ArgumentNullException("validationResult");
             }
 
@@ -78,22 +86,18 @@ namespace System.ComponentModel.DataAnnotations {
         /// <summary>
         /// Gets the collection of member names affected by this result.  The collection may be empty but will never be null.
         /// </summary>
-        public IEnumerable<string> MemberNames {
-            get {
-                return this._memberNames;
-            }
+        public IEnumerable<string> MemberNames
+        {
+            get { return this._memberNames; }
         }
 
         /// <summary>
         /// Gets the error message for this result.  It may be null.
         /// </summary>
-        public string ErrorMessage {
-            get {
-                return this._errorMessage;
-            }
-            set {
-                this._errorMessage = value;
-            }
+        public string ErrorMessage
+        {
+            get { return this._errorMessage; }
+            set { this._errorMessage = value; }
         }
 
         #endregion
@@ -111,11 +115,11 @@ namespace System.ComponentModel.DataAnnotations {
         /// </remarks>
         /// <returns>The <see cref="ErrorMessage"/> property value if specified,
         /// otherwise, the base <see cref="Object.ToString"/> result.</returns>
-        public override string ToString() {
+        public override string ToString()
+        {
             return this.ErrorMessage ?? base.ToString();
         }
 
         #endregion Methods
-
     }
 }

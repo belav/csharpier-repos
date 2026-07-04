@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,16 +34,16 @@ using NUnit.Framework;
 
 namespace MonoTests.Microsoft.Build.Logging
 {
-	[TestFixture]
-	public class ConsoleLoggerTest
-	{
-		// Unfortunately, the existing code in MS.Build.Engine.dll has slightly different
-		// format. We'd rather use already complete implementation, just disabled this test.
-		[Test]
-		[Category ("NotWorking")]
-		public void BasicLoggerUsage ()
-		{
-			string expected = @"file : cat error code: msg
+    [TestFixture]
+    public class ConsoleLoggerTest
+    {
+        // Unfortunately, the existing code in MS.Build.Engine.dll has slightly different
+        // format. We'd rather use already complete implementation, just disabled this test.
+        [Test]
+        [Category("NotWorking")]
+        public void BasicLoggerUsage()
+        {
+            string expected = @"file : cat error code: msg
 
 file : cat warning code: msg
 
@@ -75,28 +75,103 @@ finished build
 
 Time Elapsed 00:00:00.01
 
-".Replace ("\r\n", "\n");
-			var sw = new StringWriter();
-			var e = new ConsoleLogger(LoggerVerbosity.Diagnostic, msg => sw.WriteLine(msg), c => {}, () => {});
-			e.Verbosity = LoggerVerbosity.Diagnostic;
-			e.ErrorHandler (null, new BuildErrorEventArgs ("cat", "code", "file", 0, 0, 0, 0, "msg", "help", "sender"));
-			e.WarningHandler (null, new BuildWarningEventArgs ("cat", "code", "file", 0, 0, 0, 0, "msg", "help", "sender"));
-			e.ProjectStartedHandler (null, new ProjectStartedEventArgs ("start project", "HELPME", "project.txt", "target", null, null));
-			e.BuildStartedHandler (null, new BuildStartedEventArgs ("start build", "HELPME", new DateTime (2013, 1, 1)));
-			e.TargetStartedHandler (null, new TargetStartedEventArgs ("start target", "HELPME", "target", "project.txt", "target.txt"/*, "parent"*/));
-			e.TaskStartedHandler (null, new TaskStartedEventArgs ("start task", "HELPME", "project.txt", "task.txt", "task"));
-			e.TaskFinishedHandler (null, new TaskFinishedEventArgs ("finished task", "HELPME", "project.txt", "task.txt", "task", false));
-			e.TargetFinishedHandler (null, new TargetFinishedEventArgs ("finished target", "HELPME", "target", "project.txt", "target.txt", false));
-			e.ProjectFinishedHandler (null, new ProjectFinishedEventArgs ("finished project", "HELPME", "project.txt", false));
-			e.BuildFinishedHandler (null, new BuildFinishedEventArgs ("finished build", "HELPME", false, new DateTime (2013, 1, 1).AddMilliseconds (1)));
+".Replace("\r\n", "\n");
+            var sw = new StringWriter();
+            var e = new ConsoleLogger(
+                LoggerVerbosity.Diagnostic,
+                msg => sw.WriteLine(msg),
+                c => { },
+                () => { }
+            );
+            e.Verbosity = LoggerVerbosity.Diagnostic;
+            e.ErrorHandler(
+                null,
+                new BuildErrorEventArgs("cat", "code", "file", 0, 0, 0, 0, "msg", "help", "sender")
+            );
+            e.WarningHandler(
+                null,
+                new BuildWarningEventArgs(
+                    "cat",
+                    "code",
+                    "file",
+                    0,
+                    0,
+                    0,
+                    0,
+                    "msg",
+                    "help",
+                    "sender"
+                )
+            );
+            e.ProjectStartedHandler(
+                null,
+                new ProjectStartedEventArgs(
+                    "start project",
+                    "HELPME",
+                    "project.txt",
+                    "target",
+                    null,
+                    null
+                )
+            );
+            e.BuildStartedHandler(
+                null,
+                new BuildStartedEventArgs("start build", "HELPME", new DateTime(2013, 1, 1))
+            );
+            e.TargetStartedHandler(
+                null,
+                new TargetStartedEventArgs(
+                    "start target",
+                    "HELPME",
+                    "target",
+                    "project.txt",
+                    "target.txt" /*, "parent"*/
+                )
+            );
+            e.TaskStartedHandler(
+                null,
+                new TaskStartedEventArgs("start task", "HELPME", "project.txt", "task.txt", "task")
+            );
+            e.TaskFinishedHandler(
+                null,
+                new TaskFinishedEventArgs(
+                    "finished task",
+                    "HELPME",
+                    "project.txt",
+                    "task.txt",
+                    "task",
+                    false
+                )
+            );
+            e.TargetFinishedHandler(
+                null,
+                new TargetFinishedEventArgs(
+                    "finished target",
+                    "HELPME",
+                    "target",
+                    "project.txt",
+                    "target.txt",
+                    false
+                )
+            );
+            e.ProjectFinishedHandler(
+                null,
+                new ProjectFinishedEventArgs("finished project", "HELPME", "project.txt", false)
+            );
+            e.BuildFinishedHandler(
+                null,
+                new BuildFinishedEventArgs(
+                    "finished build",
+                    "HELPME",
+                    false,
+                    new DateTime(2013, 1, 1).AddMilliseconds(1)
+                )
+            );
 
-			e.CustomEventHandler(null, new MyCustomBuildEventArgs ());
-			Assert.AreEqual (expected, sw.ToString ().Replace ("\r\n", "\n"), "#1");
-		}
-	}
-	
-	class MyCustomBuildEventArgs : CustomBuildEventArgs
-	{
-	}
+            e.CustomEventHandler(null, new MyCustomBuildEventArgs());
+            Assert.AreEqual(expected, sw.ToString().Replace("\r\n", "\n"), "#1");
+        }
+    }
+
+    class MyCustomBuildEventArgs : CustomBuildEventArgs { }
 }
-

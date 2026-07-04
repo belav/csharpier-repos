@@ -33,7 +33,8 @@ public class ForeignKeyCandidateEventData : TwoPropertyBaseCollectionsEventData
         string dependentToPrincipalNavigationSpecification,
         string principalToDependentNavigationSpecification,
         IReadOnlyList<IReadOnlyPropertyBase> firstPropertyCollection,
-        IReadOnlyList<IReadOnlyPropertyBase> secondPropertyCollection)
+        IReadOnlyList<IReadOnlyPropertyBase> secondPropertyCollection
+    )
         : base(eventDefinition, messageGenerator, firstPropertyCollection, secondPropertyCollection)
     {
         DependentToPrincipalNavigationSpecification = dependentToPrincipalNavigationSpecification;

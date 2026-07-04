@@ -28,42 +28,25 @@ namespace System.ServiceModel.Channels
 
         protected InputQueueChannel<ItemType> Channel
         {
-            get
-            {
-                return this.channel;
-            }
+            get { return this.channel; }
         }
 
         public Action DequeueCallback
         {
-            get
-            {
-                return this.dequeueCallback;
-            }
-            set
-            {
-                this.dequeueCallback = value;
-            }
+            get { return this.dequeueCallback; }
+            set { this.dequeueCallback = value; }
         }
 
-        public abstract int EnqueuedCount
-        {
-            get;
-        }
+        public abstract int EnqueuedCount { get; }
 
         protected int Quota
         {
-            get
-            {
-                return this.quota;
-            }
+            get { return this.quota; }
         }
 
         public abstract bool CanEnqueue(Int64 sequenceNumber);
 
-        public virtual void Dispose()
-        {
-        }
+        public virtual void Dispose() { }
 
         public abstract bool Enqueue(ItemType item, Int64 sequenceNumber);
     }
@@ -79,7 +62,8 @@ namespace System.ServiceModel.Channels
         public OrderedDeliveryStrategy(
             InputQueueChannel<ItemType> channel,
             int quota,
-            bool isEnqueueInOrder)
+            bool isEnqueueInOrder
+        )
             : base(channel, quota)
         {
             this.isEnqueueInOrder = isEnqueueInOrder;
@@ -89,10 +73,7 @@ namespace System.ServiceModel.Channels
 
         public override int EnqueuedCount
         {
-            get
-            {
-                return this.Channel.InternalPendingItems + this.items.Count;
-            }
+            get { return this.Channel.InternalPendingItems + this.items.Count; }
         }
 
         Action<object> OnDispatchCallback
@@ -120,7 +101,9 @@ namespace System.ServiceModel.Channels
                 return false;
             }
 
-            return (this.Channel.InternalPendingItems + sequenceNumber - this.windowStart < this.Quota);
+            return (
+                this.Channel.InternalPendingItems + sequenceNumber - this.windowStart < this.Quota
+            );
         }
 
         public override bool Enqueue(ItemType item, long sequenceNumber)
@@ -177,16 +160,11 @@ namespace System.ServiceModel.Channels
         where ItemType : class, IDisposable
     {
         public UnorderedDeliveryStrategy(InputQueueChannel<ItemType> channel, int quota)
-            : base(channel, quota)
-        {
-        }
+            : base(channel, quota) { }
 
         public override int EnqueuedCount
         {
-            get
-            {
-                return this.Channel.InternalPendingItems;
-            }
+            get { return this.Channel.InternalPendingItems; }
         }
 
         public override bool CanEnqueue(Int64 sequenceNumber)

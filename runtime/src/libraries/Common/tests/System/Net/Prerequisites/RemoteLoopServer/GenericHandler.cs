@@ -13,6 +13,7 @@ namespace RemoteLoopServer
     {
         RequestDelegate _next;
         ILogger _logger;
+
         public GenericHandler(RequestDelegate next, ILogger logger)
         {
             this._next = next;

@@ -37,6 +37,7 @@ namespace System.Reflection.Tests
             return newArray;
         }
 
-        public static IEnumerable<object[]> Wrap(this IEnumerable<object[]> tds) => tds.Select(td => td.Wrap());
+        public static IEnumerable<object[]> Wrap(this IEnumerable<object[]> tds) =>
+            tds.Select(td => td.Wrap());
     }
 }

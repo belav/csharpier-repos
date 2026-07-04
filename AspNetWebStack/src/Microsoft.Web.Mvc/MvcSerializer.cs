@@ -12,11 +12,17 @@ namespace Microsoft.Web.Mvc
 {
     public class MvcSerializer
     {
-        private static readonly string[] _machineKeyPurposes = new string[] { "Microsoft.Web.Mvc.MvcSerializer.v1" };
+        private static readonly string[] _machineKeyPurposes = new string[]
+        {
+            "Microsoft.Web.Mvc.MvcSerializer.v1",
+        };
 
         private static SerializationException CreateSerializationException(Exception innerException)
         {
-            return new SerializationException(MvcResources.MvcSerializer_DeserializationFailed, innerException);
+            return new SerializationException(
+                MvcResources.MvcSerializer_DeserializationFailed,
+                innerException
+            );
         }
 
         public virtual object Deserialize(string serializedValue)
@@ -51,7 +57,12 @@ namespace Microsoft.Web.Mvc
         // Deserializes a stream to a graph using the NetDataContractSerializer (binary mode)
         private static object DeserializeGraph(Stream rawBytes)
         {
-            using (XmlDictionaryReader dr = XmlDictionaryReader.CreateBinaryReader(rawBytes, XmlDictionaryReaderQuotas.Max))
+            using (
+                XmlDictionaryReader dr = XmlDictionaryReader.CreateBinaryReader(
+                    rawBytes,
+                    XmlDictionaryReaderQuotas.Max
+                )
+            )
             {
                 object deserialized = new NetDataContractSerializer().ReadObject(dr);
                 return deserialized;
@@ -87,7 +98,14 @@ namespace Microsoft.Web.Mvc
         // Serializes a graph to a byte array using the NetDataContractSerializer (binary mode)
         private static void SerializeGraph(Stream outputStream, object graph)
         {
-            using (XmlDictionaryWriter dw = XmlDictionaryWriter.CreateBinaryWriter(outputStream, null, null, ownsStream: false))
+            using (
+                XmlDictionaryWriter dw = XmlDictionaryWriter.CreateBinaryWriter(
+                    outputStream,
+                    null,
+                    null,
+                    ownsStream: false
+                )
+            )
             {
                 new NetDataContractSerializer().WriteObject(dw, graph);
             }

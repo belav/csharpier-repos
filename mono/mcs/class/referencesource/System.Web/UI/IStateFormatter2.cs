@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
     using System;
     using System.Web.Security.Cryptography;
 
@@ -12,11 +13,10 @@ namespace System.Web.UI {
     // operations during serialization / deserialization. Internal since we don't publicly
     // expose Purpose objects.
 
-    internal interface IStateFormatter2 : IStateFormatter {
-
+    internal interface IStateFormatter2 : IStateFormatter
+    {
         object Deserialize(string serializedState, Purpose purpose);
 
         string Serialize(object state, Purpose purpose);
-
     }
 }

@@ -36,13 +36,19 @@ namespace System.Globalization.Tests
         public void NegativeSign_SetNull_ThrowsArgumentNullException()
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", "NegativeSign", () => format.NegativeSign = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                "NegativeSign",
+                () => format.NegativeSign = null
+            );
         }
 
         [Fact]
         public void NegativeSign_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => NumberFormatInfo.InvariantInfo.NegativeSign = "");
+            Assert.Throws<InvalidOperationException>(() =>
+                NumberFormatInfo.InvariantInfo.NegativeSign = ""
+            );
         }
     }
 }

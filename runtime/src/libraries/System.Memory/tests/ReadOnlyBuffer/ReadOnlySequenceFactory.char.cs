@@ -11,7 +11,8 @@ namespace System.Memory.Tests
 {
     public abstract class ReadOnlySequenceFactoryChar
     {
-        public static ReadOnlySequenceFactory<char> StringFactory { get; } = new StringTestSequenceFactory();
+        public static ReadOnlySequenceFactory<char> StringFactory { get; } =
+            new StringTestSequenceFactory();
 
         internal class StringTestSequenceFactory : ReadOnlySequenceFactory<char>
         {

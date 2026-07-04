@@ -14,12 +14,25 @@ namespace System.IO.Compression
 {
     public class GzipStreamUnitTests : CompressionStreamUnitTestBase
     {
-        public override Stream CreateStream(Stream stream, CompressionMode mode) => new GZipStream(stream, mode);
-        public override Stream CreateStream(Stream stream, CompressionMode mode, bool leaveOpen) => new GZipStream(stream, mode, leaveOpen);
-        public override Stream CreateStream(Stream stream, CompressionLevel level) => new GZipStream(stream, level);
-        public override Stream CreateStream(Stream stream, CompressionLevel level, bool leaveOpen) => new GZipStream(stream, level, leaveOpen);
+        public override Stream CreateStream(Stream stream, CompressionMode mode) =>
+            new GZipStream(stream, mode);
+
+        public override Stream CreateStream(Stream stream, CompressionMode mode, bool leaveOpen) =>
+            new GZipStream(stream, mode, leaveOpen);
+
+        public override Stream CreateStream(Stream stream, CompressionLevel level) =>
+            new GZipStream(stream, level);
+
+        public override Stream CreateStream(
+            Stream stream,
+            CompressionLevel level,
+            bool leaveOpen
+        ) => new GZipStream(stream, level, leaveOpen);
+
         public override Stream BaseStream(Stream stream) => ((GZipStream)stream).BaseStream;
-        protected override string CompressedTestFile(string uncompressedPath) => Path.Combine("GZipTestData", Path.GetFileName(uncompressedPath) + ".gz");
+
+        protected override string CompressedTestFile(string uncompressedPath) =>
+            Path.Combine("GZipTestData", Path.GetFileName(uncompressedPath) + ".gz");
 
         [Fact]
         public void ConcatenatedGzipStreams()
@@ -51,9 +64,7 @@ namespace System.IO.Compression
         /// A derived MemoryStream that avoids MemoryStream's fast path in CopyTo
         /// that bypasses buffering.
         /// </summary>
-        private class DerivedMemoryStream : MemoryStream
-        {
-        }
+        private class DerivedMemoryStream : MemoryStream { }
 
         [Fact]
         public async Task ConcatenatedEmptyGzipStreams()
@@ -79,7 +90,13 @@ namespace System.IO.Compression
 
             using (Stream compressedStream = new DerivedMemoryStream())
             {
-                using (var gz = new GZipStream(compressedStream, CompressionLevel.NoCompression, leaveOpen: true))
+                using (
+                    var gz = new GZipStream(
+                        compressedStream,
+                        CompressionLevel.NoCompression,
+                        leaveOpen: true
+                    )
+                )
                 {
                     // write one byte in order to allow us to prime the inflater buffer
                     gz.WriteByte(3);
@@ -91,7 +108,13 @@ namespace System.IO.Compression
                 }
 
                 compressedStream.Seek(0, SeekOrigin.Begin);
-                using (Stream gz = new GZipStream(compressedStream, CompressionMode.Decompress, leaveOpen: true))
+                using (
+                    Stream gz = new GZipStream(
+                        compressedStream,
+                        CompressionMode.Decompress,
+                        leaveOpen: true
+                    )
+                )
                 using (Stream decompressedData = new DerivedMemoryStream())
                 {
                     // read one byte in order to fill the inflater buffer before copy
@@ -102,7 +125,13 @@ namespace System.IO.Compression
                 }
 
                 compressedStream.Seek(0, SeekOrigin.Begin);
-                using (Stream gz = new GZipStream(compressedStream, CompressionMode.Decompress, leaveOpen: true))
+                using (
+                    Stream gz = new GZipStream(
+                        compressedStream,
+                        CompressionMode.Decompress,
+                        leaveOpen: true
+                    )
+                )
                 using (Stream decompressedData = new DerivedMemoryStream())
                 {
                     // read one byte in order to fill the inflater buffer before copy
@@ -125,7 +154,7 @@ namespace System.IO.Compression
         [InlineData(10, TestScenario.ReadAsync, 1000, 2000)]
         [InlineData(10, TestScenario.Copy, 1000, 2000)]
         [InlineData(10, TestScenario.CopyAsync, 1000, 2000)]
-        [InlineData(2, TestScenario.Copy, 1000, 0x2000-30)]
+        [InlineData(2, TestScenario.Copy, 1000, 0x2000 - 30)]
         [InlineData(2, TestScenario.CopyAsync, 1000, 0x2000 - 30)]
         [InlineData(1000, TestScenario.Read, 1, 1)]
         [InlineData(1000, TestScenario.ReadAsync, 1, 1)]
@@ -133,7 +162,12 @@ namespace System.IO.Compression
         [InlineData(1000, TestScenario.ReadAsync, 1001 * 24, 1)]
         [InlineData(1000, TestScenario.Copy, 1001 * 24, 1)]
         [InlineData(1000, TestScenario.CopyAsync, 1001 * 24, 1)]
-        public async Task ManyConcatenatedGzipStreams(int streamCount, TestScenario scenario, int bufferSize, int bytesPerStream)
+        public async Task ManyConcatenatedGzipStreams(
+            int streamCount,
+            TestScenario scenario,
+            int bufferSize,
+            int bytesPerStream
+        )
         {
             await TestConcatenatedGzipStreams(streamCount, scenario, bufferSize, bytesPerStream);
         }
@@ -153,24 +187,44 @@ namespace System.IO.Compression
         [InlineData(1000, TestScenario.ReadAsync, 1001 * 24, 9000)]
         [InlineData(1000, TestScenario.Copy, 1001 * 24, 9000)]
         [InlineData(1000, TestScenario.CopyAsync, 1001 * 24, 9000)]
-        public async Task ManyManyConcatenatedGzipStreams(int streamCount, TestScenario scenario, int bufferSize, int bytesPerStream)
+        public async Task ManyManyConcatenatedGzipStreams(
+            int streamCount,
+            TestScenario scenario,
+            int bufferSize,
+            int bytesPerStream
+        )
         {
             await TestConcatenatedGzipStreams(streamCount, scenario, bufferSize, bytesPerStream);
         }
 
-        private async Task TestConcatenatedGzipStreams(int streamCount, TestScenario scenario, int bufferSize, int bytesPerStream = 1)
+        private async Task TestConcatenatedGzipStreams(
+            int streamCount,
+            TestScenario scenario,
+            int bufferSize,
+            int bytesPerStream = 1
+        )
         {
             bool isCopy = scenario == TestScenario.Copy || scenario == TestScenario.CopyAsync;
 
             using (MemoryStream correctDecompressedOutput = new MemoryStream())
             // For copy scenarios use a derived MemoryStream to avoid MemoryStream's Copy optimization
             // that turns the Copy into a single Write passing the backing buffer
-            using (MemoryStream compressedStream = isCopy ? new DerivedMemoryStream() : new MemoryStream())
+            using (
+                MemoryStream compressedStream = isCopy
+                    ? new DerivedMemoryStream()
+                    : new MemoryStream()
+            )
             using (MemoryStream decompressorOutput = new MemoryStream())
             {
                 for (int i = 0; i < streamCount; i++)
                 {
-                    using (var gz = new GZipStream(compressedStream, CompressionLevel.NoCompression, true))
+                    using (
+                        var gz = new GZipStream(
+                            compressedStream,
+                            CompressionLevel.NoCompression,
+                            true
+                        )
+                    )
                     {
                         for (int j = 0; j < bytesPerStream; j++)
                         {
@@ -186,7 +240,8 @@ namespace System.IO.Compression
 
                 var bytes = new byte[bufferSize];
                 bool finished = false;
-                int retCount = 0, totalRead = 0;
+                int retCount = 0,
+                    totalRead = 0;
                 while (!finished)
                 {
                     switch (scenario)
@@ -252,31 +307,54 @@ namespace System.IO.Compression
         public void DerivedStream_ReadWriteSpan_UsesReadWriteArray()
         {
             var ms = new MemoryStream();
-            using (var compressor = new DerivedGZipStream(ms, CompressionMode.Compress, leaveOpen: true))
+            using (
+                var compressor = new DerivedGZipStream(
+                    ms,
+                    CompressionMode.Compress,
+                    leaveOpen: true
+                )
+            )
             {
                 compressor.Write(new Span<byte>(new byte[1]));
                 Assert.True(compressor.WriteArrayInvoked);
             }
             ms.Position = 0;
-            using (var compressor = new DerivedGZipStream(ms, CompressionMode.Decompress, leaveOpen: true))
+            using (
+                var compressor = new DerivedGZipStream(
+                    ms,
+                    CompressionMode.Decompress,
+                    leaveOpen: true
+                )
+            )
             {
                 compressor.Read(new Span<byte>(new byte[1]));
                 Assert.True(compressor.ReadArrayInvoked);
             }
             ms.Position = 0;
-            using (var compressor = new DerivedGZipStream(ms, CompressionMode.Decompress, leaveOpen: true))
+            using (
+                var compressor = new DerivedGZipStream(
+                    ms,
+                    CompressionMode.Decompress,
+                    leaveOpen: true
+                )
+            )
             {
                 compressor.ReadAsync(new Memory<byte>(new byte[1])).AsTask().Wait();
                 Assert.True(compressor.ReadArrayInvoked);
             }
             ms.Position = 0;
-            using (var compressor = new DerivedGZipStream(ms, CompressionMode.Compress, leaveOpen: true))
+            using (
+                var compressor = new DerivedGZipStream(
+                    ms,
+                    CompressionMode.Compress,
+                    leaveOpen: true
+                )
+            )
             {
                 compressor.WriteAsync(new ReadOnlyMemory<byte>(new byte[1])).AsTask().Wait();
                 Assert.True(compressor.WriteArrayInvoked);
             }
         }
-
 
         [Fact]
         public void StreamCorruption_IsDetected()
@@ -310,11 +388,20 @@ namespace System.IO.Compression
 
                 using (var decompressedStream = new MemoryStream(compressedData))
                 {
-                    using (Stream decompressor = CreateStream(decompressedStream, CompressionMode.Decompress))
+                    using (
+                        Stream decompressor = CreateStream(
+                            decompressedStream,
+                            CompressionMode.Decompress
+                        )
+                    )
                     {
                         Assert.Throws<InvalidDataException>(() =>
                         {
-                            while (ZipFileTestBase.ReadAllBytes(decompressor, buffer, 0, buffer.Length) != 0);
+                            while (
+                                ZipFileTestBase.ReadAllBytes(decompressor, buffer, 0, buffer.Length)
+                                != 0
+                            )
+                                ;
                         });
                     }
                 }
@@ -333,88 +420,129 @@ namespace System.IO.Compression
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void StreamTruncation_IsDetected(TestScenario testScenario)
         {
-            RemoteExecutor.Invoke(async (testScenario) =>
-            {
-                TestScenario scenario = Enum.Parse<TestScenario>(testScenario);
-
-                AppContext.SetSwitch("System.IO.Compression.UseStrictValidation", true);
-
-                var buffer = new byte[16];
-                byte[] source = Enumerable.Range(0, 64).Select(i => (byte)i).ToArray();
-                byte[] compressedData;
-                using (var compressed = new MemoryStream())
-                using (Stream compressor = CreateStream(compressed, CompressionMode.Compress))
-                {
-                    foreach (byte b in source)
+            RemoteExecutor
+                .Invoke(
+                    async (testScenario) =>
                     {
-                        compressor.WriteByte(b);
-                    }
+                        TestScenario scenario = Enum.Parse<TestScenario>(testScenario);
 
-                    compressor.Dispose();
-                    compressedData = compressed.ToArray();
-                }
+                        AppContext.SetSwitch("System.IO.Compression.UseStrictValidation", true);
 
-                for (var i = 1; i <= compressedData.Length; i += 1)
-                {
-                    bool expectException = i < compressedData.Length;
-                    using (var compressedStream = new MemoryStream(compressedData.Take(i).ToArray()))
-                    {
-                        using (Stream decompressor = CreateStream(compressedStream, CompressionMode.Decompress))
+                        var buffer = new byte[16];
+                        byte[] source = Enumerable.Range(0, 64).Select(i => (byte)i).ToArray();
+                        byte[] compressedData;
+                        using (var compressed = new MemoryStream())
+                        using (
+                            Stream compressor = CreateStream(compressed, CompressionMode.Compress)
+                        )
                         {
-                            var decompressedStream = new MemoryStream();
-
-                            try
+                            foreach (byte b in source)
                             {
-                                switch (scenario)
+                                compressor.WriteByte(b);
+                            }
+
+                            compressor.Dispose();
+                            compressedData = compressed.ToArray();
+                        }
+
+                        for (var i = 1; i <= compressedData.Length; i += 1)
+                        {
+                            bool expectException = i < compressedData.Length;
+                            using (
+                                var compressedStream = new MemoryStream(
+                                    compressedData.Take(i).ToArray()
+                                )
+                            )
+                            {
+                                using (
+                                    Stream decompressor = CreateStream(
+                                        compressedStream,
+                                        CompressionMode.Decompress
+                                    )
+                                )
                                 {
-                                    case TestScenario.Copy:
-                                        decompressor.CopyTo(decompressedStream);
-                                        break;
+                                    var decompressedStream = new MemoryStream();
 
-                                    case TestScenario.CopyAsync:
-                                        await decompressor.CopyToAsync(decompressedStream);
-                                        break;
+                                    try
+                                    {
+                                        switch (scenario)
+                                        {
+                                            case TestScenario.Copy:
+                                                decompressor.CopyTo(decompressedStream);
+                                                break;
 
-                                    case TestScenario.Read:
-                                        while (ZipFileTestBase.ReadAllBytes(decompressor, buffer, 0, buffer.Length) != 0) { };
-                                        break;
+                                            case TestScenario.CopyAsync:
+                                                await decompressor.CopyToAsync(decompressedStream);
+                                                break;
 
-                                    case TestScenario.ReadAsync:
-                                        while (await ZipFileTestBase.ReadAllBytesAsync(decompressor, buffer, 0, buffer.Length) != 0) { };
-                                        break;
+                                            case TestScenario.Read:
+                                                while (
+                                                    ZipFileTestBase.ReadAllBytes(
+                                                        decompressor,
+                                                        buffer,
+                                                        0,
+                                                        buffer.Length
+                                                    ) != 0
+                                                ) { }
+                                                ;
+                                                break;
 
-                                    case TestScenario.ReadByte:
-                                        while (decompressor.ReadByte() != -1) { }
-                                        break;
+                                            case TestScenario.ReadAsync:
+                                                while (
+                                                    await ZipFileTestBase.ReadAllBytesAsync(
+                                                        decompressor,
+                                                        buffer,
+                                                        0,
+                                                        buffer.Length
+                                                    ) != 0
+                                                ) { }
+                                                ;
+                                                break;
 
-                                    case TestScenario.ReadByteAsync:
-                                        while (await decompressor.ReadByteAsync() != -1) { }
-                                        break;
+                                            case TestScenario.ReadByte:
+                                                while (decompressor.ReadByte() != -1) { }
+                                                break;
+
+                                            case TestScenario.ReadByteAsync:
+                                                while (await decompressor.ReadByteAsync() != -1) { }
+                                                break;
+                                        }
+                                    }
+                                    catch (InvalidDataException e)
+                                    {
+                                        if (expectException)
+                                            continue;
+
+                                        throw new XunitException(
+                                            $"An unexpected error occurred while decompressing data:{e}"
+                                        );
+                                    }
+
+                                    if (expectException)
+                                    {
+                                        throw new XunitException(
+                                            $"Truncated stream was decompressed successfully but exception was expected: length={i}/{compressedData.Length}"
+                                        );
+                                    }
                                 }
                             }
-                            catch (InvalidDataException e)
-                            {
-                                if (expectException)
-                                    continue;
-
-                                throw new XunitException($"An unexpected error occurred while decompressing data:{e}");
-                            }
-
-                            if (expectException)
-                            {
-                                throw new XunitException($"Truncated stream was decompressed successfully but exception was expected: length={i}/{compressedData.Length}");
-                            }
                         }
-                    }
-                }
-            }, testScenario.ToString()).Dispose();
+                    },
+                    testScenario.ToString()
+                )
+                .Dispose();
         }
 
         private sealed class DerivedGZipStream : GZipStream
         {
-            public bool ReadArrayInvoked = false, WriteArrayInvoked = false;
-            internal DerivedGZipStream(Stream stream, CompressionMode mode) : base(stream, mode) { }
-            internal DerivedGZipStream(Stream stream, CompressionMode mode, bool leaveOpen) : base(stream, mode, leaveOpen) { }
+            public bool ReadArrayInvoked = false,
+                WriteArrayInvoked = false;
+
+            internal DerivedGZipStream(Stream stream, CompressionMode mode)
+                : base(stream, mode) { }
+
+            internal DerivedGZipStream(Stream stream, CompressionMode mode, bool leaveOpen)
+                : base(stream, mode, leaveOpen) { }
 
             public override int Read(byte[] buffer, int offset, int count)
             {
@@ -422,7 +550,12 @@ namespace System.IO.Compression
                 return base.Read(buffer, offset, count);
             }
 
-            public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+            public override Task<int> ReadAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            )
             {
                 ReadArrayInvoked = true;
                 return base.ReadAsync(buffer, offset, count, cancellationToken);
@@ -434,7 +567,12 @@ namespace System.IO.Compression
                 base.Write(buffer, offset, count);
             }
 
-            public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+            public override Task WriteAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            )
             {
                 WriteArrayInvoked = true;
                 return base.WriteAsync(buffer, offset, count, cancellationToken);

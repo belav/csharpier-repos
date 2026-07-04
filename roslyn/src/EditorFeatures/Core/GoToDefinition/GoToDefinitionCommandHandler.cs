@@ -29,22 +29,30 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
     [ContentType(ContentTypeNames.RoslynContentType)]
     [Name(PredefinedCommandHandlerNames.GoToDefinition)]
     [method: ImportingConstructor]
-    [method: SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+    [method: SuppressMessage(
+        "RoslynDiagnosticsReliability",
+        "RS0033:Importing constructor should be [Obsolete]",
+        Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+    )]
     internal class GoToDefinitionCommandHandler(
         IGlobalOptionService globalOptionService,
         IThreadingContext threadingContext,
         IUIThreadOperationExecutor executor,
-        IAsynchronousOperationListenerProvider listenerProvider) :
-        ICommandHandler<GoToDefinitionCommandArgs>
+        IAsynchronousOperationListenerProvider listenerProvider
+    ) : ICommandHandler<GoToDefinitionCommandArgs>
     {
         private readonly IGlobalOptionService _globalOptionService = globalOptionService;
         private readonly IThreadingContext _threadingContext = threadingContext;
         private readonly IUIThreadOperationExecutor _executor = executor;
-        private readonly IAsynchronousOperationListener _listener = listenerProvider.GetListener(FeatureAttribute.GoToDefinition);
+        private readonly IAsynchronousOperationListener _listener = listenerProvider.GetListener(
+            FeatureAttribute.GoToDefinition
+        );
 
         public string DisplayName => EditorFeaturesResources.Go_to_Definition;
 
-        private static (Document?, IDefinitionLocationService?) GetDocumentAndService(ITextSnapshot snapshot)
+        private static (Document?, IDefinitionLocationService?) GetDocumentAndService(
+            ITextSnapshot snapshot
+        )
         {
             var document = snapshot.GetOpenDocumentInCurrentContextWithChanges();
             return (document, document?.GetLanguageService<IDefinitionLocationService>());
@@ -53,9 +61,7 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
         public CommandState GetCommandState(GoToDefinitionCommandArgs args)
         {
             var (_, service) = GetDocumentAndService(args.SubjectBuffer.CurrentSnapshot);
-            return service != null
-                ? CommandState.Available
-                : CommandState.Unspecified;
+            return service != null ? CommandState.Available : CommandState.Unspecified;
         }
 
         public bool ExecuteCommand(GoToDefinitionCommandArgs args, CommandExecutionContext context)
@@ -83,8 +89,8 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
             // If there's a selection, use the starting point of the selection as the invocation point. Otherwise, just
             // pick wherever the caret is exactly at.
             var caretPos =
-                args.TextView.Selection.GetSnapshotSpansOnBuffer(subjectBuffer).FirstOrNull()?.Start ??
-                args.TextView.GetCaretPoint(subjectBuffer);
+                args.TextView.Selection.GetSnapshotSpansOnBuffer(subjectBuffer).FirstOrNull()?.Start
+                ?? args.TextView.GetCaretPoint(subjectBuffer);
 
             if (!caretPos.HasValue)
                 return false;
@@ -100,28 +106,39 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
         }
 
         private async Task ExecuteAsynchronouslyAsync(
-            GoToDefinitionCommandArgs args, Document document, IDefinitionLocationService service, SnapshotPoint position)
+            GoToDefinitionCommandArgs args,
+            Document document,
+            IDefinitionLocationService service,
+            SnapshotPoint position
+        )
         {
             bool succeeded;
 
-            var indicatorFactory = document.Project.Solution.Services.GetRequiredService<IBackgroundWorkIndicatorFactory>();
+            var indicatorFactory =
+                document.Project.Solution.Services.GetRequiredService<IBackgroundWorkIndicatorFactory>();
 
             // TODO: prior logic was to get a tracking span of length 1 here.  Preserving that, though it's unclear if
             // that is necessary for the BWI to work properly.
             Contract.ThrowIfTrue(position.Snapshot.Length == 0);
-            var applicableToSpan = position < position.Snapshot.Length
-                ? new SnapshotSpan(position, position + 1)
-                : new SnapshotSpan(position - 1, position);
+            var applicableToSpan =
+                position < position.Snapshot.Length
+                    ? new SnapshotSpan(position, position + 1)
+                    : new SnapshotSpan(position - 1, position);
 
-            using (var backgroundIndicator = indicatorFactory.Create(
-                args.TextView, applicableToSpan,
-                EditorFeaturesResources.Navigating_to_definition))
+            using (
+                var backgroundIndicator = indicatorFactory.Create(
+                    args.TextView,
+                    applicableToSpan,
+                    EditorFeaturesResources.Navigating_to_definition
+                )
+            )
             {
                 var cancellationToken = backgroundIndicator.UserCancellationToken;
 
                 // determine the location first.
-                var definitionLocation = await service.GetDefinitionLocationAsync(
-                    document, position, cancellationToken).ConfigureAwait(false);
+                var definitionLocation = await service
+                    .GetDefinitionLocationAsync(document, position, cancellationToken)
+                    .ConfigureAwait(false);
 
                 // make sure that if our background indicator got canceled, that we do not still perform the navigation.
                 if (backgroundIndicator.UserCancellationToken.IsCancellationRequested)
@@ -130,17 +147,30 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
                 // we're about to navigate.  so disable cancellation on focus-lost in our indicator so we don't end up
                 // causing ourselves to self-cancel.
                 backgroundIndicator.CancelOnFocusLost = false;
-                succeeded = definitionLocation != null && await definitionLocation.Location.TryNavigateToAsync(
-                    _threadingContext, new NavigationOptions(PreferProvisionalTab: true, ActivateTab: true), cancellationToken).ConfigureAwait(false);
+                succeeded =
+                    definitionLocation != null
+                    && await definitionLocation
+                        .Location.TryNavigateToAsync(
+                            _threadingContext,
+                            new NavigationOptions(PreferProvisionalTab: true, ActivateTab: true),
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
             }
 
             if (!succeeded)
             {
-                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(CancellationToken.None);
+                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    CancellationToken.None
+                );
 
-                var notificationService = document.Project.Solution.Services.GetRequiredService<INotificationService>();
+                var notificationService =
+                    document.Project.Solution.Services.GetRequiredService<INotificationService>();
                 notificationService.SendNotification(
-                    FeaturesResources.Cannot_navigate_to_the_symbol_under_the_caret, EditorFeaturesResources.Go_to_Definition, NotificationSeverity.Information);
+                    FeaturesResources.Cannot_navigate_to_the_symbol_under_the_caret,
+                    EditorFeaturesResources.Go_to_Definition,
+                    NotificationSeverity.Information
+                );
             }
         }
     }

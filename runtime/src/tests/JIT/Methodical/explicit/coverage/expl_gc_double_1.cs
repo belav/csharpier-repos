@@ -10,8 +10,10 @@ internal class AA
 {
     [FieldOffset(9)]
     public ulong tmp1;
+
     [FieldOffset(1)]
     public sbyte tmp2;
+
     [FieldOffset(13)]
     public ushort tmp3;
 
@@ -20,6 +22,7 @@ internal class AA
 
     [FieldOffset(48)]
     public int tmp4;
+
     [FieldOffset(41)]
     public float tmp5;
 
@@ -38,14 +41,20 @@ internal class AA
     public static AA[,,] aa_init = new AA[1, 101, 2];
     public static AA[,,] aa_zero = new AA[1, 101, 2];
     public static object b_init = new AA(100);
-    public static AA _init, _zero;
+    public static AA _init,
+        _zero;
 
-    public static double call_target(double arg) { return arg; }
-    public static double call_target_ref(ref double arg) { return arg; }
-
-    public void verify()
+    public static double call_target(double arg)
     {
+        return arg;
     }
+
+    public static double call_target_ref(ref double arg)
+    {
+        return arg;
+    }
+
+    public void verify() { }
 
     public static void verify_all()
     {
@@ -74,7 +83,8 @@ internal class AA
 
 internal struct BB
 {
-    public static AA f_init, f_zero;
+    public static AA f_init,
+        f_zero;
 }
 
 public static class Test_expl_gc_double_1

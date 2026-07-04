@@ -46,7 +46,8 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
         IPluralizer pluralizer,
         ICSharpUtilities cSharpUtilities,
         IScaffoldingTypeMapper scaffoldingTypeMapper,
-        IModelRuntimeInitializer modelRuntimeInitializer)
+        IModelRuntimeInitializer modelRuntimeInitializer
+    )
     {
         _reporter = reporter;
         _candidateNamingService = candidateNamingService;
@@ -71,17 +72,15 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
                 ? (t => t.Name)
                 : t => _candidateNamingService.GenerateCandidateIdentifier(t),
             _cSharpUtilities,
-            options.NoPluralize
-                ? null
-                : _pluralizer.Singularize);
+            options.NoPluralize ? null : _pluralizer.Singularize
+        );
         _dbSetNamer = new CSharpUniqueNamer<DatabaseTable>(
             options.UseDatabaseNames
                 ? (t => t.Name)
                 : t => _candidateNamingService.GenerateCandidateIdentifier(t),
             _cSharpUtilities,
-            options.NoPluralize
-                ? null
-                : _pluralizer.Pluralize);
+            options.NoPluralize ? null : _pluralizer.Pluralize
+        );
         _columnNamers = new Dictionary<DatabaseTable, CSharpUniqueNamer<DatabaseColumn>>();
         _options = options;
 
@@ -96,8 +95,7 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual string GetEntityTypeName(DatabaseTable table)
-        => _tableNamer.GetName(table);
+    protected virtual string GetEntityTypeName(DatabaseTable table) => _tableNamer.GetName(table);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -105,8 +103,7 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual string GetDbSetName(DatabaseTable table)
-        => _dbSetNamer.GetName(table);
+    protected virtual string GetDbSetName(DatabaseTable table) => _dbSetNamer.GetName(table);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -133,7 +130,9 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
                         c => c.Name,
                         usedNames,
                         _cSharpUtilities,
-                        singularizePluralizer: null));
+                        singularizePluralizer: null
+                    )
+                );
             }
             else
             {
@@ -143,7 +142,9 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
                         c => _candidateNamingService.GenerateCandidateIdentifier(c),
                         usedNames,
                         _cSharpUtilities,
-                        singularizePluralizer: null));
+                        singularizePluralizer: null
+                    )
+                );
             }
         }
 
@@ -156,7 +157,10 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual ModelBuilder VisitDatabaseModel(ModelBuilder modelBuilder, DatabaseModel databaseModel)
+    protected virtual ModelBuilder VisitDatabaseModel(
+        ModelBuilder modelBuilder,
+        DatabaseModel databaseModel
+    )
     {
         if (!string.IsNullOrEmpty(databaseModel.DefaultSchema))
         {
@@ -167,8 +171,11 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
         {
             modelBuilder.Model.SetDatabaseName(
                 !_options.UseDatabaseNames && !string.IsNullOrEmpty(databaseModel.DatabaseName)
-                    ? _candidateNamingService.GenerateCandidateIdentifier(databaseModel.DatabaseName)
-                    : databaseModel.DatabaseName);
+                    ? _candidateNamingService.GenerateCandidateIdentifier(
+                        databaseModel.DatabaseName
+                    )
+                    : databaseModel.DatabaseName
+            );
         }
 
         if (!string.IsNullOrEmpty(databaseModel.Collation))
@@ -178,11 +185,16 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
 
         VisitSequences(modelBuilder, databaseModel.Sequences);
         VisitTables(modelBuilder, databaseModel.Tables);
-        VisitForeignKeys(modelBuilder, databaseModel.Tables.SelectMany(table => table.ForeignKeys).ToList());
+        VisitForeignKeys(
+            modelBuilder,
+            databaseModel.Tables.SelectMany(table => table.ForeignKeys).ToList()
+        );
 
         modelBuilder.Model.AddAnnotations(
-            databaseModel.GetAnnotations().Where(
-                a => a.Name != ScaffoldingAnnotationNames.ConnectionString));
+            databaseModel
+                .GetAnnotations()
+                .Where(a => a.Name != ScaffoldingAnnotationNames.ConnectionString)
+        );
 
         return modelBuilder;
     }
@@ -195,7 +207,8 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
     /// </summary>
     protected virtual ModelBuilder VisitSequences(
         ModelBuilder modelBuilder,
-        ICollection<DatabaseSequence> sequences)
+        ICollection<DatabaseSequence> sequences
+    )
     {
         foreach (var sequence in sequences)
         {
@@ -211,7 +224,10 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual SequenceBuilder? VisitSequence(ModelBuilder modelBuilder, DatabaseSequence sequence)
+    protected virtual SequenceBuilder? VisitSequence(
+        ModelBuilder modelBuilder,
+        DatabaseSequence sequence
+    )
     {
         if (string.IsNullOrEmpty(sequence.Name))
         {
@@ -222,23 +238,23 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
         Type? sequenceType = null;
         if (sequence.StoreType != null)
         {
-            sequenceType = _scaffoldingTypeMapper.FindMapping(
-                    sequence.StoreType,
-                    keyOrIndex: false,
-                    rowVersion: false)
+            sequenceType = _scaffoldingTypeMapper
+                .FindMapping(sequence.StoreType, keyOrIndex: false, rowVersion: false)
                 ?.ClrType;
         }
 
-        if (sequenceType != null
-            && !Sequence.SupportedTypes.Contains(sequenceType))
+        if (sequenceType != null && !Sequence.SupportedTypes.Contains(sequenceType))
         {
-            _reporter.WriteWarning(DesignStrings.BadSequenceType(sequence.Name, sequence.StoreType));
+            _reporter.WriteWarning(
+                DesignStrings.BadSequenceType(sequence.Name, sequence.StoreType)
+            );
             return null;
         }
 
-        var builder = sequenceType != null
-            ? modelBuilder.HasSequence(sequenceType, sequence.Name, sequence.Schema)
-            : modelBuilder.HasSequence(sequence.Name, sequence.Schema);
+        var builder =
+            sequenceType != null
+                ? modelBuilder.HasSequence(sequenceType, sequence.Name, sequence.Schema)
+                : modelBuilder.HasSequence(sequence.Name, sequence.Schema);
 
         if (sequence.IncrementBy.HasValue)
         {
@@ -274,7 +290,10 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual ModelBuilder VisitTables(ModelBuilder modelBuilder, ICollection<DatabaseTable> tables)
+    protected virtual ModelBuilder VisitTables(
+        ModelBuilder modelBuilder,
+        ICollection<DatabaseTable> tables
+    )
     {
         foreach (var table in tables)
         {
@@ -306,13 +325,16 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
         else
         {
             builder.ToTable(
-                table.Name, table.Schema, tb =>
+                table.Name,
+                table.Schema,
+                tb =>
                 {
                     if (table.Comment != null)
                     {
                         tb.HasComment(table.Comment);
                     }
-                });
+                }
+            );
         }
 
         VisitColumns(builder, table.Columns);
@@ -323,7 +345,9 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
 
             if (keyBuilder == null)
             {
-                _reporter.WriteWarning(DesignStrings.UnableToGenerateEntityType(table.DisplayName()));
+                _reporter.WriteWarning(
+                    DesignStrings.UnableToGenerateEntityType(table.DisplayName())
+                );
 
                 modelBuilder.Model.RemoveEntityType(entityTypeName);
                 return null;
@@ -340,9 +364,10 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
         foreach (var trigger in table.Triggers)
         {
             builder.ToTable(
-                table.Name, table.Schema, tb => tb
-                    .HasTrigger(trigger.Name)
-                    .Metadata.AddAnnotations(trigger.GetAnnotations()));
+                table.Name,
+                table.Schema,
+                tb => tb.HasTrigger(trigger.Name).Metadata.AddAnnotations(trigger.GetAnnotations())
+            );
         }
 
         builder.Metadata.AddAnnotations(table.GetAnnotations());
@@ -356,7 +381,10 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual EntityTypeBuilder VisitColumns(EntityTypeBuilder builder, ICollection<DatabaseColumn> columns)
+    protected virtual EntityTypeBuilder VisitColumns(
+        EntityTypeBuilder builder,
+        ICollection<DatabaseColumn> columns
+    )
     {
         foreach (var column in columns)
         {
@@ -380,7 +408,8 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
         {
             _unmappedColumns.Add(column);
             _reporter.WriteWarning(
-                DesignStrings.CannotFindTypeMappingForColumn(column.DisplayName(), column.StoreType));
+                DesignStrings.CannotFindTypeMappingForColumn(column.DisplayName(), column.StoreType)
+            );
             return null;
         }
 
@@ -390,12 +419,15 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
             clrType = clrType.MakeNullable();
         }
 
-        if (clrType == typeof(bool)
+        if (
+            clrType == typeof(bool)
             && column.DefaultValueSql != null
-            && column.DefaultValue == null)
+            && column.DefaultValue == null
+        )
         {
             _reporter.WriteWarning(
-                DesignStrings.NonNullableBoooleanColumnHasDefaultConstraint(column.DisplayName()));
+                DesignStrings.NonNullableBoooleanColumnHasDefaultConstraint(column.DisplayName())
+            );
 
             clrType = clrType.MakeNullable();
         }
@@ -404,8 +436,7 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
 
         property.HasColumnName(column.Name);
 
-        if (!typeScaffoldingInfo.IsInferred
-            && !string.IsNullOrWhiteSpace(column.StoreType))
+        if (!typeScaffoldingInfo.IsInferred && !string.IsNullOrWhiteSpace(column.StoreType))
         {
             property.HasColumnType(column.StoreType);
         }
@@ -431,7 +462,8 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
             {
                 property.HasPrecision(
                     typeScaffoldingInfo.ScaffoldPrecision.Value,
-                    typeScaffoldingInfo.ScaffoldScale.Value);
+                    typeScaffoldingInfo.ScaffoldScale.Value
+                );
             }
             else
             {
@@ -499,9 +531,13 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
         property.Metadata.SetColumnOrder(column.Table.Columns.IndexOf(column));
 
         property.Metadata.AddAnnotations(
-            column.GetAnnotations().Where(
-                a => a.Name != ScaffoldingAnnotationNames.ConcurrencyToken
-                    && a.Name != ScaffoldingAnnotationNames.ClrType));
+            column
+                .GetAnnotations()
+                .Where(a =>
+                    a.Name != ScaffoldingAnnotationNames.ConcurrencyToken
+                    && a.Name != ScaffoldingAnnotationNames.ClrType
+                )
+        );
 
         return property;
     }
@@ -516,8 +552,8 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
     {
         var primaryKey = table.PrimaryKey!;
 
-        var unmappedColumns = primaryKey.Columns
-            .Where(c => _unmappedColumns.Contains(c))
+        var unmappedColumns = primaryKey
+            .Columns.Where(c => _unmappedColumns.Contains(c))
             .Select(c => c.Name)
             .ToList();
         if (unmappedColumns.Count > 0)
@@ -525,7 +561,9 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
             _reporter.WriteWarning(
                 DesignStrings.PrimaryKeyErrorPropertyNotFound(
                     table.DisplayName(),
-                    string.Join(CultureInfo.CurrentCulture.TextInfo.ListSeparator, unmappedColumns)));
+                    string.Join(CultureInfo.CurrentCulture.TextInfo.ListSeparator, unmappedColumns)
+                )
+            );
             return null;
         }
 
@@ -536,7 +574,9 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
             var property = builder.Metadata.FindProperty(GetPropertyName(primaryKey.Columns[0]));
             if (property != null)
             {
-                var conventionalValueGenerated = ValueGenerationConvention.GetValueGenerated(property);
+                var conventionalValueGenerated = ValueGenerationConvention.GetValueGenerated(
+                    property
+                );
                 if (conventionalValueGenerated == ValueGenerated.OnAdd)
                 {
                     property.ValueGenerated = ValueGenerated.Never;
@@ -544,8 +584,10 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
             }
         }
 
-        if (!string.IsNullOrEmpty(primaryKey.Name)
-            && primaryKey.Name != keyBuilder.Metadata.GetDefaultName())
+        if (
+            !string.IsNullOrEmpty(primaryKey.Name)
+            && primaryKey.Name != keyBuilder.Metadata.GetDefaultName()
+        )
         {
             keyBuilder.HasName(primaryKey.Name);
         }
@@ -563,7 +605,8 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
     /// </summary>
     protected virtual EntityTypeBuilder VisitUniqueConstraints(
         EntityTypeBuilder builder,
-        ICollection<DatabaseUniqueConstraint> uniqueConstraints)
+        ICollection<DatabaseUniqueConstraint> uniqueConstraints
+    )
     {
         foreach (var uniqueConstraint in uniqueConstraints)
         {
@@ -581,10 +624,11 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
     /// </summary>
     protected virtual IndexBuilder? VisitUniqueConstraint(
         EntityTypeBuilder builder,
-        DatabaseUniqueConstraint uniqueConstraint)
+        DatabaseUniqueConstraint uniqueConstraint
+    )
     {
-        var unmappedColumns = uniqueConstraint.Columns
-            .Where(c => _unmappedColumns.Contains(c))
+        var unmappedColumns = uniqueConstraint
+            .Columns.Where(c => _unmappedColumns.Contains(c))
             .Select(c => c.Name)
             .ToList();
         if (unmappedColumns.Count > 0)
@@ -592,7 +636,9 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
             _reporter.WriteWarning(
                 DesignStrings.UnableToScaffoldIndexMissingProperty(
                     uniqueConstraint.Name,
-                    string.Join(CultureInfo.CurrentCulture.TextInfo.ListSeparator, unmappedColumns)));
+                    string.Join(CultureInfo.CurrentCulture.TextInfo.ListSeparator, unmappedColumns)
+                )
+            );
             return null;
         }
 
@@ -612,7 +658,10 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual EntityTypeBuilder VisitIndexes(EntityTypeBuilder builder, ICollection<DatabaseIndex> indexes)
+    protected virtual EntityTypeBuilder VisitIndexes(
+        EntityTypeBuilder builder,
+        ICollection<DatabaseIndex> indexes
+    )
     {
         foreach (var index in indexes)
         {
@@ -630,8 +679,8 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
     /// </summary>
     protected virtual IndexBuilder? VisitIndex(EntityTypeBuilder builder, DatabaseIndex index)
     {
-        var unmappedColumns = index.Columns
-            .Where(c => _unmappedColumns.Contains(c))
+        var unmappedColumns = index
+            .Columns.Where(c => _unmappedColumns.Contains(c))
             .Select(c => c.Name)
             .ToList();
         if (unmappedColumns.Count > 0)
@@ -639,7 +688,9 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
             _reporter.WriteWarning(
                 DesignStrings.UnableToScaffoldIndexMissingProperty(
                     index.Name,
-                    string.Join(CultureInfo.CurrentCulture.TextInfo.ListSeparator, unmappedColumns)));
+                    string.Join(CultureInfo.CurrentCulture.TextInfo.ListSeparator, unmappedColumns)
+                )
+            );
             return null;
         }
 
@@ -673,7 +724,8 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
     /// </summary>
     protected virtual ModelBuilder VisitForeignKeys(
         ModelBuilder modelBuilder,
-        IList<DatabaseForeignKey> foreignKeys)
+        IList<DatabaseForeignKey> foreignKeys
+    )
     {
         foreach (var fk in foreignKeys)
         {
@@ -696,36 +748,50 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
                     _candidateNamingService.GetDependentEndCandidateNavigationPropertyName(fks[1]);
                 if (!_options.NoPluralize)
                 {
-                    leftNavigationPropertyCandidateName = _pluralizer.Pluralize(leftNavigationPropertyCandidateName);
+                    leftNavigationPropertyCandidateName = _pluralizer.Pluralize(
+                        leftNavigationPropertyCandidateName
+                    );
                 }
 
-                var leftNavigationPropertyName =
-                    _cSharpUtilities.GenerateCSharpIdentifier(
-                        leftNavigationPropertyCandidateName,
-                        leftExistingIdentifiers,
-                        singularizePluralizer: null,
-                        uniquifier: NavigationUniquifier);
+                var leftNavigationPropertyName = _cSharpUtilities.GenerateCSharpIdentifier(
+                    leftNavigationPropertyCandidateName,
+                    leftExistingIdentifiers,
+                    singularizePluralizer: null,
+                    uniquifier: NavigationUniquifier
+                );
 
                 var rightExistingIdentifiers = ExistingIdentifiers(rightEntityType);
                 var rightNavigationPropertyCandidateName =
                     _candidateNamingService.GetDependentEndCandidateNavigationPropertyName(fks[0]);
                 if (!_options.NoPluralize)
                 {
-                    rightNavigationPropertyCandidateName = _pluralizer.Pluralize(rightNavigationPropertyCandidateName);
+                    rightNavigationPropertyCandidateName = _pluralizer.Pluralize(
+                        rightNavigationPropertyCandidateName
+                    );
                 }
 
-                var rightNavigationPropertyName =
-                    _cSharpUtilities.GenerateCSharpIdentifier(
-                        rightNavigationPropertyCandidateName,
-                        rightExistingIdentifiers,
-                        singularizePluralizer: null,
-                        uniquifier: NavigationUniquifier);
+                var rightNavigationPropertyName = _cSharpUtilities.GenerateCSharpIdentifier(
+                    rightNavigationPropertyCandidateName,
+                    rightExistingIdentifiers,
+                    singularizePluralizer: null,
+                    uniquifier: NavigationUniquifier
+                );
 
                 var leftSkipNavigation = leftEntityType.AddSkipNavigation(
-                    leftNavigationPropertyName, memberInfo: null, targetEntityType: rightEntityType, collection: true, onDependent: false);
+                    leftNavigationPropertyName,
+                    memberInfo: null,
+                    targetEntityType: rightEntityType,
+                    collection: true,
+                    onDependent: false
+                );
                 leftSkipNavigation.SetForeignKey(fks[0]);
                 var rightSkipNavigation = rightEntityType.AddSkipNavigation(
-                    rightNavigationPropertyName, memberInfo: null, targetEntityType: leftEntityType, collection: true, onDependent: false);
+                    rightNavigationPropertyName,
+                    memberInfo: null,
+                    targetEntityType: leftEntityType,
+                    collection: true,
+                    onDependent: false
+                );
                 rightSkipNavigation.SetForeignKey(fks[1]);
                 leftSkipNavigation.SetInverse(rightSkipNavigation);
                 rightSkipNavigation.SetInverse(leftSkipNavigation);
@@ -747,12 +813,18 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual IMutableForeignKey? VisitForeignKey(ModelBuilder modelBuilder, DatabaseForeignKey foreignKey)
+    protected virtual IMutableForeignKey? VisitForeignKey(
+        ModelBuilder modelBuilder,
+        DatabaseForeignKey foreignKey
+    )
     {
         if (foreignKey.PrincipalTable == null)
         {
             _reporter.WriteWarning(
-                DesignStrings.ForeignKeyScaffoldErrorPrincipalTableNotFound(foreignKey.DisplayName()));
+                DesignStrings.ForeignKeyScaffoldErrorPrincipalTableNotFound(
+                    foreignKey.DisplayName()
+                )
+            );
             return null;
         }
 
@@ -761,14 +833,16 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
             return null;
         }
 
-        var dependentEntityType = modelBuilder.Model.FindEntityType(GetEntityTypeName(foreignKey.Table));
+        var dependentEntityType = modelBuilder.Model.FindEntityType(
+            GetEntityTypeName(foreignKey.Table)
+        );
         if (dependentEntityType == null)
         {
             return null;
         }
 
-        var unmappedDependentColumns = foreignKey.Columns
-            .Where(c => _unmappedColumns.Contains(c))
+        var unmappedDependentColumns = foreignKey
+            .Columns.Where(c => _unmappedColumns.Contains(c))
             .Select(c => c.Name)
             .ToList();
         if (unmappedDependentColumns.Count > 0)
@@ -776,28 +850,39 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
             _reporter.WriteWarning(
                 DesignStrings.ForeignKeyScaffoldErrorPropertyNotFound(
                     foreignKey.DisplayName(),
-                    string.Join(CultureInfo.CurrentCulture.TextInfo.ListSeparator, unmappedDependentColumns)));
+                    string.Join(
+                        CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                        unmappedDependentColumns
+                    )
+                )
+            );
             return null;
         }
 
-        var dependentProperties = foreignKey.Columns
-            .Select(GetPropertyName)
+        var dependentProperties = foreignKey
+            .Columns.Select(GetPropertyName)
             .Select(name => dependentEntityType.FindProperty(name)!)
             .ToList()
             .AsReadOnly();
 
-        var principalEntityType = modelBuilder.Model.FindEntityType(GetEntityTypeName(foreignKey.PrincipalTable));
+        var principalEntityType = modelBuilder.Model.FindEntityType(
+            GetEntityTypeName(foreignKey.PrincipalTable)
+        );
         if (principalEntityType == null)
         {
             _reporter.WriteWarning(
                 DesignStrings.ForeignKeyScaffoldErrorPrincipalTableScaffoldingError(
                     foreignKey.DisplayName(),
-                    foreignKey.PrincipalTable.DisplayName()));
+                    foreignKey.PrincipalTable.DisplayName()
+                )
+            );
             return null;
         }
 
-        var unmappedPrincipalColumns = foreignKey.PrincipalColumns
-            .Where(pc => principalEntityType.FindProperty(GetPropertyName(pc)) == null)
+        var unmappedPrincipalColumns = foreignKey
+            .PrincipalColumns.Where(pc =>
+                principalEntityType.FindProperty(GetPropertyName(pc)) == null
+            )
             .Select(pc => pc.Name)
             .ToList();
         if (unmappedPrincipalColumns.Count > 0)
@@ -805,16 +890,21 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
             _reporter.WriteWarning(
                 DesignStrings.ForeignKeyScaffoldErrorPropertyNotFound(
                     foreignKey.DisplayName(),
-                    string.Join(CultureInfo.CurrentCulture.TextInfo.ListSeparator, unmappedPrincipalColumns)));
+                    string.Join(
+                        CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                        unmappedPrincipalColumns
+                    )
+                )
+            );
             return null;
         }
 
-        var principalPropertiesMap = foreignKey.PrincipalColumns
-            .Select(
-                fc => (property: principalEntityType.FindProperty(GetPropertyName(fc))!, column: fc)).ToList();
-        var principalProperties = principalPropertiesMap
-            .Select(tuple => tuple.property)
+        var principalPropertiesMap = foreignKey
+            .PrincipalColumns.Select(fc =>
+                (property: principalEntityType.FindProperty(GetPropertyName(fc))!, column: fc)
+            )
             .ToList();
+        var principalProperties = principalPropertiesMap.Select(tuple => tuple.property).ToList();
 
         var principalKey = principalEntityType.FindKey(principalProperties);
         if (principalKey == null)
@@ -826,16 +916,21 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
             {
                 // ensure all principal properties are non-nullable even if the columns
                 // are nullable on the database. EF's concept of a key requires this.
-                var nullablePrincipalProperties =
-                    principalPropertiesMap.Where(tuple => tuple.property.IsNullable).ToList();
+                var nullablePrincipalProperties = principalPropertiesMap
+                    .Where(tuple => tuple.property.IsNullable)
+                    .ToList();
                 if (nullablePrincipalProperties.Count > 0)
                 {
                     _reporter.WriteWarning(
                         DesignStrings.ForeignKeyPrincipalEndContainsNullableColumns(
                             foreignKey.DisplayName(),
                             index.GetDatabaseName(),
-                            nullablePrincipalProperties.Select(tuple => tuple.column.DisplayName()).ToList()
-                                .Aggregate((a, b) => a + "," + b)));
+                            nullablePrincipalProperties
+                                .Select(tuple => tuple.column.DisplayName())
+                                .ToList()
+                                .Aggregate((a, b) => a + "," + b)
+                        )
+                    );
 
                     nullablePrincipalProperties.ForEach(tuple => tuple.property.IsNullable = false);
                 }
@@ -849,33 +944,51 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
                 _reporter.WriteWarning(
                     DesignStrings.ForeignKeyScaffoldErrorPrincipalKeyNotFound(
                         foreignKey.DisplayName(),
-                        string.Join(CultureInfo.CurrentCulture.TextInfo.ListSeparator, principalColumns),
-                        principalEntityType.Name));
+                        string.Join(
+                            CultureInfo.CurrentCulture.TextInfo.ListSeparator,
+                            principalColumns
+                        ),
+                        principalEntityType.Name
+                    )
+                );
 
                 return null;
             }
         }
 
-        var existingForeignKey = dependentEntityType.FindForeignKey(dependentProperties, principalKey, principalEntityType);
+        var existingForeignKey = dependentEntityType.FindForeignKey(
+            dependentProperties,
+            principalKey,
+            principalEntityType
+        );
         if (existingForeignKey is not null)
         {
             _reporter.WriteWarning(
-                DesignStrings.ForeignKeyWithSameFacetsExists(foreignKey.DisplayName(), existingForeignKey.GetConstraintName()));
+                DesignStrings.ForeignKeyWithSameFacetsExists(
+                    foreignKey.DisplayName(),
+                    existingForeignKey.GetConstraintName()
+                )
+            );
 
             return null;
         }
 
         var newForeignKey = dependentEntityType.AddForeignKey(
-            dependentProperties, principalKey, principalEntityType);
+            dependentProperties,
+            principalKey,
+            principalEntityType
+        );
 
         var dependentKey = dependentEntityType.FindKey(dependentProperties);
-        var dependentIndexes = dependentEntityType.GetIndexes()
+        var dependentIndexes = dependentEntityType
+            .GetIndexes()
             .Where(i => i.Properties.SequenceEqual(dependentProperties));
-        newForeignKey.IsUnique = dependentKey != null
-            || dependentIndexes.Any(i => i.IsUnique);
+        newForeignKey.IsUnique = dependentKey != null || dependentIndexes.Any(i => i.IsUnique);
 
-        if (!string.IsNullOrEmpty(foreignKey.Name)
-            && foreignKey.Name != newForeignKey.GetDefaultName())
+        if (
+            !string.IsNullOrEmpty(foreignKey.Name)
+            && foreignKey.Name != newForeignKey.GetDefaultName()
+        )
         {
             newForeignKey.SetConstraintName(foreignKey.Name);
         }
@@ -898,12 +1011,12 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
         var dependentEndExistingIdentifiers = ExistingIdentifiers(foreignKey.DeclaringEntityType);
         var dependentEndNavigationPropertyCandidateName =
             _candidateNamingService.GetDependentEndCandidateNavigationPropertyName(foreignKey);
-        var dependentEndNavigationPropertyName =
-            _cSharpUtilities.GenerateCSharpIdentifier(
-                dependentEndNavigationPropertyCandidateName,
-                dependentEndExistingIdentifiers,
-                singularizePluralizer: null,
-                uniquifier: NavigationUniquifier);
+        var dependentEndNavigationPropertyName = _cSharpUtilities.GenerateCSharpIdentifier(
+            dependentEndNavigationPropertyCandidateName,
+            dependentEndExistingIdentifiers,
+            singularizePluralizer: null,
+            uniquifier: NavigationUniquifier
+        );
 
         foreignKey.SetDependentToPrincipal(dependentEndNavigationPropertyName);
 
@@ -917,31 +1030,35 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
             ? string.Format(
                 CultureInfo.CurrentCulture,
                 SelfReferencingPrincipalEndNavigationNamePattern,
-                dependentEndNavigationPropertyName)
+                dependentEndNavigationPropertyName
+            )
             : _candidateNamingService.GetPrincipalEndCandidateNavigationPropertyName(
-                foreignKey, dependentEndNavigationPropertyName);
+                foreignKey,
+                dependentEndNavigationPropertyName
+            );
 
-        if (!foreignKey.IsUnique
-            && !foreignKey.IsSelfReferencing())
+        if (!foreignKey.IsUnique && !foreignKey.IsSelfReferencing())
         {
             principalEndNavigationPropertyCandidateName = _options.NoPluralize
                 ? principalEndNavigationPropertyCandidateName
                 : _pluralizer.Pluralize(principalEndNavigationPropertyCandidateName);
         }
 
-        var principalEndNavigationPropertyName =
-            _cSharpUtilities.GenerateCSharpIdentifier(
-                principalEndNavigationPropertyCandidateName,
-                principalEndExistingIdentifiers,
-                singularizePluralizer: null,
-                uniquifier: NavigationUniquifier);
+        var principalEndNavigationPropertyName = _cSharpUtilities.GenerateCSharpIdentifier(
+            principalEndNavigationPropertyCandidateName,
+            principalEndExistingIdentifiers,
+            singularizePluralizer: null,
+            uniquifier: NavigationUniquifier
+        );
 
         foreignKey.SetPrincipalToDependent(principalEndNavigationPropertyName);
     }
 
     // Stores the names of the EntityType itself and its Properties, but does not include any Navigation Properties
-    private readonly Dictionary<IReadOnlyEntityType, List<string>> _entityTypeAndPropertyIdentifiers =
-        new();
+    private readonly Dictionary<
+        IReadOnlyEntityType,
+        List<string>
+    > _entityTypeAndPropertyIdentifiers = new();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -980,12 +1097,14 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
             column.StoreType,
             column.IsKeyOrIndex(),
             column.IsRowVersion(),
-            (Type?)column[ScaffoldingAnnotationNames.ClrType]);
+            (Type?)column[ScaffoldingAnnotationNames.ClrType]
+        );
     }
 
     private static void AssignOnDeleteAction(
         DatabaseForeignKey databaseForeignKey,
-        IMutableForeignKey foreignKey)
+        IMutableForeignKey foreignKey
+    )
     {
         switch (databaseForeignKey.OnDelete)
         {
@@ -1008,15 +1127,21 @@ public class RelationalScaffoldingModelFactory : IScaffoldingModelFactory
     }
 
     // TODO use CSharpUniqueNamer
-    private static string NavigationUniquifier(string proposedIdentifier, ICollection<string>? existingIdentifiers)
+    private static string NavigationUniquifier(
+        string proposedIdentifier,
+        ICollection<string>? existingIdentifiers
+    )
     {
         if (existingIdentifiers?.Contains(proposedIdentifier) != true)
         {
             return proposedIdentifier;
         }
 
-        var finalIdentifier =
-            string.Format(CultureInfo.CurrentCulture, NavigationNameUniquifyingPattern, proposedIdentifier);
+        var finalIdentifier = string.Format(
+            CultureInfo.CurrentCulture,
+            NavigationNameUniquifyingPattern,
+            proposedIdentifier
+        );
         var suffix = 1;
         while (existingIdentifiers.Contains(finalIdentifier))
         {

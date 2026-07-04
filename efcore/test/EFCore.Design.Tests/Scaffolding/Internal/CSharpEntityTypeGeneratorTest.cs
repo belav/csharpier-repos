@@ -11,14 +11,15 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 
 public class CSharpEntityTypeGeneratorTest : ModelCodeGeneratorTestBase
 {
-    public CSharpEntityTypeGeneratorTest(ModelCodeGeneratorTestFixture fixture, ITestOutputHelper output)
-        : base(fixture, output)
-    {
-    }
+    public CSharpEntityTypeGeneratorTest(
+        ModelCodeGeneratorTestFixture fixture,
+        ITestOutputHelper output
+    )
+        : base(fixture, output) { }
 
     [ConditionalFact]
-    public Task KeylessAttribute_is_generated_for_key_less_entity()
-        => TestAsync(
+    public Task KeylessAttribute_is_generated_for_key_less_entity() =>
+        TestAsync(
             modelBuilder => modelBuilder.Entity("Vista").HasNoKey(),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
@@ -38,7 +39,8 @@ public partial class Vista
 {
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Vista.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Vista.cs")
+                );
 
                 AssertFileContents(
                     $$"""
@@ -73,17 +75,19 @@ public partial class TestDbContext : DbContext
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 """,
-                    code.ContextFile);
+                    code.ContextFile
+                );
             },
             model =>
             {
                 var entityType = model.FindEntityType("TestNamespace.Vista");
                 Assert.Null(entityType.FindPrimaryKey());
-            });
+            }
+        );
 
     [ConditionalFact]
-    public Task TableAttribute_is_generated_for_custom_name()
-        => TestAsync(
+    public Task TableAttribute_is_generated_for_custom_name() =>
+        TestAsync(
             modelBuilder =>
             {
                 modelBuilder.Entity(
@@ -94,7 +98,8 @@ public partial class TestDbContext : DbContext
                         b.HasAnnotation(ScaffoldingAnnotationNames.DbSetName, "Vista");
                         b.Property<int>("Id");
                         b.HasKey("Id");
-                    });
+                    }
+                );
             },
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
@@ -116,18 +121,20 @@ public partial class Vista
     public int Id { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Vista.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Vista.cs")
+                );
             },
             model =>
             {
                 var entityType = model.FindEntityType("TestNamespace.Vista");
                 Assert.Equal("Vistas", entityType.GetTableName());
                 Assert.Null(entityType.GetSchema());
-            });
+            }
+        );
 
     [ConditionalFact]
-    public Task TableAttribute_is_not_generated_for_default_schema()
-        => TestAsync(
+    public Task TableAttribute_is_not_generated_for_default_schema() =>
+        TestAsync(
             modelBuilder =>
             {
                 modelBuilder.HasDefaultSchema("dbo");
@@ -138,7 +145,8 @@ public partial class Vista
                         b.ToTable("Vista", "dbo"); // Default name is "Vista" in the absence of pluralizer
                         b.Property<int>("Id");
                         b.HasKey("Id");
-                    });
+                    }
+                );
             },
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
@@ -159,18 +167,20 @@ public partial class Vista
     public int Id { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Vista.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Vista.cs")
+                );
             },
             model =>
             {
                 var entityType = model.FindEntityType("TestNamespace.Vista");
                 Assert.Equal("Vista", entityType.GetTableName());
                 Assert.Null(entityType.GetSchema()); // Takes through model default schema
-            });
+            }
+        );
 
     [ConditionalFact]
-    public Task TableAttribute_is_generated_for_non_default_schema()
-        => TestAsync(
+    public Task TableAttribute_is_generated_for_non_default_schema() =>
+        TestAsync(
             modelBuilder =>
             {
                 modelBuilder.HasDefaultSchema("dbo");
@@ -181,7 +191,8 @@ public partial class Vista
                         b.ToTable("Vista", "custom");
                         b.Property<int>("Id");
                         b.HasKey("Id");
-                    });
+                    }
+                );
             },
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
@@ -203,18 +214,20 @@ public partial class Vista
     public int Id { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Vista.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Vista.cs")
+                );
             },
             model =>
             {
                 var entityType = model.FindEntityType("TestNamespace.Vista");
                 Assert.Equal("Vista", entityType.GetTableName());
                 Assert.Equal("custom", entityType.GetSchema());
-            });
+            }
+        );
 
     [ConditionalFact]
-    public Task TableAttribute_is_not_generated_for_views()
-        => TestAsync(
+    public Task TableAttribute_is_not_generated_for_views() =>
+        TestAsync(
             modelBuilder => modelBuilder.Entity("Vista").ToView("Vistas", "dbo"),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
@@ -234,7 +247,8 @@ public partial class Vista
 {
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Vista.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Vista.cs")
+                );
             },
             model =>
             {
@@ -243,13 +257,14 @@ public partial class Vista
                 Assert.Null(entityType.GetTableName());
                 Assert.Equal("dbo", entityType.GetViewSchema());
                 Assert.Null(entityType.GetSchema());
-            });
+            }
+        );
 
     [ConditionalFact]
-    public Task IndexAttribute_is_generated_for_multiple_indexes_with_name_unique_descending()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
+    public Task IndexAttribute_is_generated_for_multiple_indexes_with_name_unique_descending() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder.Entity(
                     "EntityWithIndexes",
                     x =>
                     {
@@ -263,7 +278,8 @@ public partial class Vista
                             .IsDescending(true, false);
                         x.HasIndex(new[] { "B", "C" }, "IndexOnBAndC");
                         x.HasIndex("C");
-                    }),
+                    }
+                ),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -292,7 +308,8 @@ public partial class EntityWithIndexes
     public int C { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "EntityWithIndexes.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "EntityWithIndexes.cs")
+                );
             },
             model =>
             {
@@ -302,14 +319,16 @@ public partial class EntityWithIndexes
                     indexes,
                     t => Assert.Null(t.Name),
                     t => Assert.Equal("IndexOnAAndB", t.Name),
-                    t => Assert.Equal("IndexOnBAndC", t.Name));
-            });
+                    t => Assert.Equal("IndexOnBAndC", t.Name)
+                );
+            }
+        );
 
     [ConditionalFact]
-    public Task IndexAttribute_is_generated_with_ascending_descending()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
+    public Task IndexAttribute_is_generated_with_ascending_descending() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder.Entity(
                     "EntityWithAscendingDescendingIndexes",
                     x =>
                     {
@@ -318,9 +337,11 @@ public partial class EntityWithIndexes
                         x.Property<int>("B");
                         x.HasKey("Id");
                         x.HasIndex(new[] { "A", "B" }, "AllAscending");
-                        x.HasIndex(new[] { "A", "B" }, "PartiallyDescending").IsDescending(true, false);
+                        x.HasIndex(new[] { "A", "B" }, "PartiallyDescending")
+                            .IsDescending(true, false);
                         x.HasIndex(new[] { "A", "B" }, "AllDescending").IsDescending();
-                    }),
+                    }
+                ),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -347,11 +368,16 @@ public partial class EntityWithAscendingDescendingIndexes
     public int B { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "EntityWithAscendingDescendingIndexes.cs"));
+                    code.AdditionalFiles.Single(f =>
+                        f.Path == "EntityWithAscendingDescendingIndexes.cs"
+                    )
+                );
             },
             model =>
             {
-                var entityType = model.FindEntityType("TestNamespace.EntityWithAscendingDescendingIndexes");
+                var entityType = model.FindEntityType(
+                    "TestNamespace.EntityWithAscendingDescendingIndexes"
+                );
                 var indexes = entityType.GetIndexes();
                 Assert.Collection(
                     indexes,
@@ -369,14 +395,16 @@ public partial class EntityWithAscendingDescendingIndexes
                     {
                         Assert.Equal("PartiallyDescending", i.Name);
                         Assert.Equal(new[] { true, false }, i.IsDescending);
-                    });
-            });
+                    }
+                );
+            }
+        );
 
     [ConditionalFact]
-    public Task Entity_with_indexes_generates_IndexAttribute_only_for_indexes_without_annotations()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
+    public Task Entity_with_indexes_generates_IndexAttribute_only_for_indexes_without_annotations() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder.Entity(
                     "EntityWithIndexes",
                     x =>
                     {
@@ -385,11 +413,10 @@ public partial class EntityWithAscendingDescendingIndexes
                         x.Property<int>("B");
                         x.Property<int>("C");
                         x.HasKey("Id");
-                        x.HasIndex(new[] { "A", "B" }, "IndexOnAAndB")
-                            .IsUnique();
-                        x.HasIndex(new[] { "B", "C" }, "IndexOnBAndC")
-                            .HasFilter("Filter SQL");
-                    }),
+                        x.HasIndex(new[] { "A", "B" }, "IndexOnAAndB").IsUnique();
+                        x.HasIndex(new[] { "B", "C" }, "IndexOnBAndC").HasFilter("Filter SQL");
+                    }
+                ),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -416,7 +443,8 @@ public partial class EntityWithIndexes
     public int C { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "EntityWithIndexes.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "EntityWithIndexes.cs")
+                );
 
                 AssertFileContents(
                     $$"""
@@ -456,22 +484,28 @@ public partial class TestDbContext : DbContext
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 """,
-                    code.ContextFile);
+                    code.ContextFile
+                );
             },
             model =>
-                Assert.Equal(2, model.FindEntityType("TestNamespace.EntityWithIndexes").GetIndexes().Count()));
+                Assert.Equal(
+                    2,
+                    model.FindEntityType("TestNamespace.EntityWithIndexes").GetIndexes().Count()
+                )
+        );
 
     [ConditionalFact]
-    public Task KeyAttribute_is_generated_for_single_property_and_no_fluent_api()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
+    public Task KeyAttribute_is_generated_for_single_property_and_no_fluent_api() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder.Entity(
                     "Entity",
                     x =>
                     {
                         x.Property<int>("PrimaryKey");
                         x.HasKey("PrimaryKey");
-                    }),
+                    }
+                ),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -491,7 +525,8 @@ public partial class Entity
     public int PrimaryKey { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs")
+                );
 
                 AssertFileContents(
                     $$"""
@@ -526,23 +561,29 @@ public partial class TestDbContext : DbContext
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 """,
-                    code.ContextFile);
+                    code.ContextFile
+                );
             },
             model =>
-                Assert.Equal("PrimaryKey", model.FindEntityType("TestNamespace.Entity").FindPrimaryKey().Properties[0].Name));
+                Assert.Equal(
+                    "PrimaryKey",
+                    model.FindEntityType("TestNamespace.Entity").FindPrimaryKey().Properties[0].Name
+                )
+        );
 
     [ConditionalFact]
-    public Task KeyAttribute_is_generated_on_multiple_properties_but_and_uses_PrimaryKeyAttribute_for_composite_key()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
+    public Task KeyAttribute_is_generated_on_multiple_properties_but_and_uses_PrimaryKeyAttribute_for_composite_key() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder.Entity(
                     "Post",
                     x =>
                     {
                         x.Property<int>("Key");
                         x.Property<int>("Serial");
                         x.HasKey("Key", "Serial");
-                    }),
+                    }
+                ),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -566,7 +607,8 @@ public partial class Post
     public int Serial { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Post.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Post.cs")
+                );
 
                 AssertFileContents(
                     $$"""
@@ -601,19 +643,24 @@ public partial class TestDbContext : DbContext
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 """,
-                    code.ContextFile);
+                    code.ContextFile
+                );
             },
             model =>
             {
                 var postType = model.FindEntityType("TestNamespace.Post");
-                Assert.Equal(new[] { "Key", "Serial" }, postType.FindPrimaryKey().Properties.Select(p => p.Name));
-            });
+                Assert.Equal(
+                    new[] { "Key", "Serial" },
+                    postType.FindPrimaryKey().Properties.Select(p => p.Name)
+                );
+            }
+        );
 
     [ConditionalFact]
-    public Task Required_and_not_required_properties_without_nrt()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
+    public Task Required_and_not_required_properties_without_nrt() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder.Entity(
                     "Entity",
                     x =>
                     {
@@ -622,7 +669,8 @@ public partial class TestDbContext : DbContext
                         x.Property<string>("NonRequiredString");
                         x.Property<int>("RequiredInt");
                         x.Property<int?>("NonRequiredInt");
-                    }),
+                    }
+                ),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -651,7 +699,8 @@ public partial class Entity
     public string RequiredString { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs")
+                );
             },
             model =>
             {
@@ -660,13 +709,14 @@ public partial class Entity
                 Assert.True(entityType.GetProperty("NonRequiredString").IsNullable);
                 Assert.False(entityType.GetProperty("RequiredInt").IsNullable);
                 Assert.True(entityType.GetProperty("NonRequiredInt").IsNullable);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public Task Required_and_not_required_properties_with_nrt()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
+    public Task Required_and_not_required_properties_with_nrt() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder.Entity(
                     "Entity",
                     x =>
                     {
@@ -675,8 +725,13 @@ public partial class Entity
                         x.Property<string>("NonRequiredString");
                         x.Property<int>("RequiredInt");
                         x.Property<int?>("NonRequiredInt");
-                    }),
-            new ModelCodeGenerationOptions { UseDataAnnotations = true, UseNullableReferenceTypes = true },
+                    }
+                ),
+            new ModelCodeGenerationOptions
+            {
+                UseDataAnnotations = true,
+                UseNullableReferenceTypes = true,
+            },
             code =>
             {
                 AssertFileContents(
@@ -703,7 +758,8 @@ public partial class Entity
     public string RequiredString { get; set; } = null!;
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs")
+                );
             },
             model =>
             {
@@ -712,27 +768,35 @@ public partial class Entity
                 Assert.True(entityType.GetProperty("NonRequiredString").IsNullable);
                 Assert.False(entityType.GetProperty("RequiredInt").IsNullable);
                 Assert.True(entityType.GetProperty("NonRequiredInt").IsNullable);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public Task Required_and_not_required_navigations_without_nrt()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
-                    "Entity",
-                    x =>
-                    {
-                        x.Property<int>("Id");
+    public Task Required_and_not_required_navigations_without_nrt() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder
+                    .Entity(
+                        "Entity",
+                        x =>
+                        {
+                            x.Property<int>("Id");
 
-                        x.HasOne("Dependent1", "RequiredReferenceNavigation").WithMany("Entity").IsRequired();
-                        x.HasOne("Dependent2", "OptionalReferenceNavigation").WithMany("Entity");
-                        x.HasOne("Dependent3", "RequiredValueNavigation").WithMany("Entity").IsRequired();
-                        x.HasOne("Dependent4", "OptionalValueNavigation").WithMany("Entity");
-                    })
-                .Entity("Dependent1", x => x.Property<string>("Id"))
-                .Entity("Dependent2", x => x.Property<string>("Id"))
-                .Entity("Dependent3", x => x.Property<int>("Id"))
-                .Entity("Dependent4", x => x.Property<int>("Id")),
+                            x.HasOne("Dependent1", "RequiredReferenceNavigation")
+                                .WithMany("Entity")
+                                .IsRequired();
+                            x.HasOne("Dependent2", "OptionalReferenceNavigation")
+                                .WithMany("Entity");
+                            x.HasOne("Dependent3", "RequiredValueNavigation")
+                                .WithMany("Entity")
+                                .IsRequired();
+                            x.HasOne("Dependent4", "OptionalValueNavigation").WithMany("Entity");
+                        }
+                    )
+                    .Entity("Dependent1", x => x.Property<string>("Id"))
+                    .Entity("Dependent2", x => x.Property<string>("Id"))
+                    .Entity("Dependent3", x => x.Property<int>("Id"))
+                    .Entity("Dependent4", x => x.Property<int>("Id")),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -777,7 +841,8 @@ public partial class Entity
     public virtual Dependent3 RequiredValueNavigation { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs")
+                );
             },
             model =>
             {
@@ -788,49 +853,72 @@ public partial class Entity
                 Assert.False(entityType.GetProperty("RequiredValueNavigationId").IsNullable);
                 Assert.True(entityType.GetProperty("OptionalValueNavigationId").IsNullable);
 
-                Assert.True(entityType.FindNavigation("RequiredReferenceNavigation")!.ForeignKey.IsRequired);
-                Assert.False(entityType.FindNavigation("OptionalReferenceNavigation")!.ForeignKey.IsRequired);
-                Assert.True(entityType.FindNavigation("RequiredValueNavigation")!.ForeignKey.IsRequired);
-                Assert.False(entityType.FindNavigation("OptionalValueNavigation")!.ForeignKey.IsRequired);
-            });
+                Assert.True(
+                    entityType.FindNavigation("RequiredReferenceNavigation")!.ForeignKey.IsRequired
+                );
+                Assert.False(
+                    entityType.FindNavigation("OptionalReferenceNavigation")!.ForeignKey.IsRequired
+                );
+                Assert.True(
+                    entityType.FindNavigation("RequiredValueNavigation")!.ForeignKey.IsRequired
+                );
+                Assert.False(
+                    entityType.FindNavigation("OptionalValueNavigation")!.ForeignKey.IsRequired
+                );
+            }
+        );
 
     [ConditionalFact]
-    public Task Required_and_not_required_reference_navigations_with_nrt()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
-                    "Entity",
-                    x =>
-                    {
-                        x.Property<int>("Id");
+    public Task Required_and_not_required_reference_navigations_with_nrt() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder
+                    .Entity(
+                        "Entity",
+                        x =>
+                        {
+                            x.Property<int>("Id");
 
-                        x
-                            .HasOne("Dependent1", "RequiredNavigationWithReferenceForeignKey")
-                            .WithOne("Entity")
-                            .HasForeignKey("Dependent1", "RequiredNavigationWithReferenceForeignKey")
-                            .IsRequired();
+                            x.HasOne("Dependent1", "RequiredNavigationWithReferenceForeignKey")
+                                .WithOne("Entity")
+                                .HasForeignKey(
+                                    "Dependent1",
+                                    "RequiredNavigationWithReferenceForeignKey"
+                                )
+                                .IsRequired();
 
-                        x
-                            .HasOne("Dependent2", "OptionalNavigationWithReferenceForeignKey")
-                            .WithOne("Entity")
-                            .HasForeignKey("Dependent2", "OptionalNavigationWithReferenceForeignKey");
+                            x.HasOne("Dependent2", "OptionalNavigationWithReferenceForeignKey")
+                                .WithOne("Entity")
+                                .HasForeignKey(
+                                    "Dependent2",
+                                    "OptionalNavigationWithReferenceForeignKey"
+                                );
 
-                        x
-                            .HasOne("Dependent3", "RequiredNavigationWithValueForeignKey")
-                            .WithOne("Entity")
-                            .HasForeignKey("Dependent3", "RequiredNavigationWithValueForeignKey")
-                            .IsRequired();
+                            x.HasOne("Dependent3", "RequiredNavigationWithValueForeignKey")
+                                .WithOne("Entity")
+                                .HasForeignKey(
+                                    "Dependent3",
+                                    "RequiredNavigationWithValueForeignKey"
+                                )
+                                .IsRequired();
 
-                        x
-                            .HasOne("Dependent4", "OptionalNavigationWithValueForeignKey")
-                            .WithOne("Entity")
-                            .HasForeignKey("Dependent4", "OptionalNavigationWithValueForeignKey");
-                    })
-                .Entity("Dependent1", x => x.Property<string>("Id"))
-                .Entity("Dependent2", x => x.Property<string>("Id"))
-                .Entity("Dependent3", x => x.Property<int>("Id"))
-                .Entity("Dependent4", x => x.Property<int>("Id")),
-            new ModelCodeGenerationOptions { UseDataAnnotations = true, UseNullableReferenceTypes = true },
+                            x.HasOne("Dependent4", "OptionalNavigationWithValueForeignKey")
+                                .WithOne("Entity")
+                                .HasForeignKey(
+                                    "Dependent4",
+                                    "OptionalNavigationWithValueForeignKey"
+                                );
+                        }
+                    )
+                    .Entity("Dependent1", x => x.Property<string>("Id"))
+                    .Entity("Dependent2", x => x.Property<string>("Id"))
+                    .Entity("Dependent3", x => x.Property<int>("Id"))
+                    .Entity("Dependent4", x => x.Property<int>("Id")),
+            new ModelCodeGenerationOptions
+            {
+                UseDataAnnotations = true,
+                UseNullableReferenceTypes = true,
+            },
             code =>
             {
                 AssertFileContents(
@@ -861,38 +949,68 @@ public partial class Entity
     public virtual Dependent3? RequiredNavigationWithValueForeignKey { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs")
+                );
             },
             model =>
             {
                 var entityType = model.FindEntityType("TestNamespace.Entity");
 
-                Assert.True(entityType.FindNavigation("RequiredNavigationWithReferenceForeignKey")!.ForeignKey.IsRequired);
-                Assert.False(entityType.FindNavigation("OptionalNavigationWithReferenceForeignKey")!.ForeignKey.IsRequired);
-                Assert.True(entityType.FindNavigation("RequiredNavigationWithValueForeignKey")!.ForeignKey.IsRequired);
-                Assert.False(entityType.FindNavigation("OptionalNavigationWithValueForeignKey")!.ForeignKey.IsRequired);
-            });
+                Assert.True(
+                    entityType
+                        .FindNavigation("RequiredNavigationWithReferenceForeignKey")!
+                        .ForeignKey.IsRequired
+                );
+                Assert.False(
+                    entityType
+                        .FindNavigation("OptionalNavigationWithReferenceForeignKey")!
+                        .ForeignKey.IsRequired
+                );
+                Assert.True(
+                    entityType
+                        .FindNavigation("RequiredNavigationWithValueForeignKey")!
+                        .ForeignKey.IsRequired
+                );
+                Assert.False(
+                    entityType
+                        .FindNavigation("OptionalNavigationWithValueForeignKey")!
+                        .ForeignKey.IsRequired
+                );
+            }
+        );
 
     [ConditionalFact]
-    public Task Required_and_not_required_collection_navigations_with_nrt()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
-                    "Entity",
-                    x =>
-                    {
-                        x.Property<int>("Id");
+    public Task Required_and_not_required_collection_navigations_with_nrt() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder
+                    .Entity(
+                        "Entity",
+                        x =>
+                        {
+                            x.Property<int>("Id");
 
-                        x.HasOne("Dependent1", "RequiredNavigationWithReferenceForeignKey").WithMany("Entity").IsRequired();
-                        x.HasOne("Dependent2", "OptionalNavigationWithReferenceForeignKey").WithMany("Entity");
-                        x.HasOne("Dependent3", "RequiredNavigationWithValueForeignKey").WithMany("Entity").IsRequired();
-                        x.HasOne("Dependent4", "OptionalNavigationWithValueForeignKey").WithMany("Entity");
-                    })
-                .Entity("Dependent1", x => x.Property<string>("Id"))
-                .Entity("Dependent2", x => x.Property<string>("Id"))
-                .Entity("Dependent3", x => x.Property<int>("Id"))
-                .Entity("Dependent4", x => x.Property<int>("Id")),
-            new ModelCodeGenerationOptions { UseDataAnnotations = true, UseNullableReferenceTypes = true },
+                            x.HasOne("Dependent1", "RequiredNavigationWithReferenceForeignKey")
+                                .WithMany("Entity")
+                                .IsRequired();
+                            x.HasOne("Dependent2", "OptionalNavigationWithReferenceForeignKey")
+                                .WithMany("Entity");
+                            x.HasOne("Dependent3", "RequiredNavigationWithValueForeignKey")
+                                .WithMany("Entity")
+                                .IsRequired();
+                            x.HasOne("Dependent4", "OptionalNavigationWithValueForeignKey")
+                                .WithMany("Entity");
+                        }
+                    )
+                    .Entity("Dependent1", x => x.Property<string>("Id"))
+                    .Entity("Dependent2", x => x.Property<string>("Id"))
+                    .Entity("Dependent3", x => x.Property<int>("Id"))
+                    .Entity("Dependent4", x => x.Property<int>("Id")),
+            new ModelCodeGenerationOptions
+            {
+                UseDataAnnotations = true,
+                UseNullableReferenceTypes = true,
+            },
             code =>
             {
                 AssertFileContents(
@@ -935,41 +1053,69 @@ public partial class Entity
     public virtual Dependent3 RequiredNavigationWithValueForeignKey { get; set; } = null!;
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs")
+                );
 
                 for (var i = 1; i <= 4; i++)
                 {
                     Assert.Contains(
                         "public virtual ICollection<Entity> Entity { get; set; }",
-                        code.AdditionalFiles.Single(f => f.Path == $"Dependent{i}.cs").Code);
+                        code.AdditionalFiles.Single(f => f.Path == $"Dependent{i}.cs").Code
+                    );
                 }
             },
             model =>
             {
                 var entityType = model.FindEntityType("TestNamespace.Entity");
 
-                Assert.False(entityType.GetProperty("RequiredNavigationWithReferenceForeignKeyId").IsNullable);
-                Assert.True(entityType.GetProperty("OptionalNavigationWithReferenceForeignKeyId").IsNullable);
-                Assert.False(entityType.GetProperty("RequiredNavigationWithValueForeignKeyId").IsNullable);
-                Assert.True(entityType.GetProperty("OptionalNavigationWithValueForeignKeyId").IsNullable);
+                Assert.False(
+                    entityType.GetProperty("RequiredNavigationWithReferenceForeignKeyId").IsNullable
+                );
+                Assert.True(
+                    entityType.GetProperty("OptionalNavigationWithReferenceForeignKeyId").IsNullable
+                );
+                Assert.False(
+                    entityType.GetProperty("RequiredNavigationWithValueForeignKeyId").IsNullable
+                );
+                Assert.True(
+                    entityType.GetProperty("OptionalNavigationWithValueForeignKeyId").IsNullable
+                );
 
-                Assert.True(entityType.FindNavigation("RequiredNavigationWithReferenceForeignKey")!.ForeignKey.IsRequired);
-                Assert.False(entityType.FindNavigation("OptionalNavigationWithReferenceForeignKey")!.ForeignKey.IsRequired);
-                Assert.True(entityType.FindNavigation("RequiredNavigationWithValueForeignKey")!.ForeignKey.IsRequired);
-                Assert.False(entityType.FindNavigation("OptionalNavigationWithValueForeignKey")!.ForeignKey.IsRequired);
-            });
+                Assert.True(
+                    entityType
+                        .FindNavigation("RequiredNavigationWithReferenceForeignKey")!
+                        .ForeignKey.IsRequired
+                );
+                Assert.False(
+                    entityType
+                        .FindNavigation("OptionalNavigationWithReferenceForeignKey")!
+                        .ForeignKey.IsRequired
+                );
+                Assert.True(
+                    entityType
+                        .FindNavigation("RequiredNavigationWithValueForeignKey")!
+                        .ForeignKey.IsRequired
+                );
+                Assert.False(
+                    entityType
+                        .FindNavigation("OptionalNavigationWithValueForeignKey")!
+                        .ForeignKey.IsRequired
+                );
+            }
+        );
 
     [ConditionalFact]
-    public Task RequiredAttribute_is_not_generated_for_key_property()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
+    public Task RequiredAttribute_is_not_generated_for_key_property() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder.Entity(
                     "Entity",
                     x =>
                     {
                         x.Property<string>("RequiredString");
                         x.HasKey("RequiredString");
-                    }),
+                    }
+                ),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -989,26 +1135,36 @@ public partial class Entity
     public string RequiredString { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs")
+                );
             },
             model =>
-                Assert.False(model.FindEntityType("TestNamespace.Entity").GetProperty("RequiredString").IsNullable));
+                Assert.False(
+                    model
+                        .FindEntityType("TestNamespace.Entity")
+                        .GetProperty("RequiredString")
+                        .IsNullable
+                )
+        );
 
     [ConditionalFact]
-    public Task ColumnAttribute_is_generated_for_property()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
+    public Task ColumnAttribute_is_generated_for_property() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder.Entity(
                     "Entity",
                     x =>
                     {
                         x.Property<int>("Id");
                         x.Property<string>("A").HasColumnName("propertyA");
                         x.Property<string>("B").HasColumnType("nchar(10)");
-                        x.Property<string>("C").HasColumnName("random").HasColumnType("varchar(200)");
+                        x.Property<string>("C")
+                            .HasColumnName("random")
+                            .HasColumnType("varchar(200)");
                         x.Property<decimal>("D").HasColumnType("numeric(18, 2)");
                         x.Property<string>("E").HasMaxLength(100);
-                    }),
+                    }
+                ),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -1043,7 +1199,8 @@ public partial class Entity
     public string E { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs")
+                );
 
                 AssertFileContents(
                     $$"""
@@ -1078,7 +1235,8 @@ public partial class TestDbContext : DbContext
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 """,
-                    code.ContextFile);
+                    code.ContextFile
+                );
             },
             model =>
             {
@@ -1087,20 +1245,22 @@ public partial class TestDbContext : DbContext
                 Assert.Equal("nchar(10)", entitType.GetProperty("B").GetColumnType());
                 Assert.Equal("random", entitType.GetProperty("C").GetColumnName());
                 Assert.Equal("varchar(200)", entitType.GetProperty("C").GetColumnType());
-            });
+            }
+        );
 
     [ConditionalFact]
-    public Task MaxLengthAttribute_is_generated_for_property()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
+    public Task MaxLengthAttribute_is_generated_for_property() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder.Entity(
                     "Entity",
                     x =>
                     {
                         x.Property<int>("Id");
                         x.Property<string>("A").HasMaxLength(34);
                         x.Property<byte[]>("B").HasMaxLength(10);
-                    }),
+                    }
+                ),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -1126,20 +1286,22 @@ public partial class Entity
     public byte[] B { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs")
+                );
             },
             model =>
             {
                 var entitType = model.FindEntityType("TestNamespace.Entity");
                 Assert.Equal(34, entitType.GetProperty("A").GetMaxLength());
                 Assert.Equal(10, entitType.GetProperty("B").GetMaxLength());
-            });
+            }
+        );
 
     [ConditionalFact]
-    public Task UnicodeAttribute_is_generated_for_property()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
+    public Task UnicodeAttribute_is_generated_for_property() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder.Entity(
                     "Entity",
                     x =>
                     {
@@ -1147,7 +1309,8 @@ public partial class Entity
                         x.Property<string>("A").HasMaxLength(34).IsUnicode();
                         x.Property<string>("B").HasMaxLength(34).IsUnicode(false);
                         x.Property<string>("C").HasMaxLength(34);
-                    }),
+                    }
+                ),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -1178,7 +1341,8 @@ public partial class Entity
     public string C { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs")
+                );
             },
             model =>
             {
@@ -1186,13 +1350,14 @@ public partial class Entity
                 Assert.True(entitType.GetProperty("A").IsUnicode());
                 Assert.False(entitType.GetProperty("B").IsUnicode());
                 Assert.Null(entitType.GetProperty("C").IsUnicode());
-            });
+            }
+        );
 
     [ConditionalFact]
-    public Task PrecisionAttribute_is_generated_for_property()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
+    public Task PrecisionAttribute_is_generated_for_property() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder.Entity(
                     "Entity",
                     x =>
                     {
@@ -1201,7 +1366,8 @@ public partial class Entity
                         x.Property<decimal>("B").HasPrecision(14, 3);
                         x.Property<DateTime>("C").HasPrecision(5);
                         x.Property<DateTimeOffset>("D").HasPrecision(3);
-                    }),
+                    }
+                ),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -1233,7 +1399,8 @@ public partial class Entity
     public DateTimeOffset D { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs")
+                );
             },
             model =>
             {
@@ -1243,20 +1410,21 @@ public partial class Entity
                 Assert.Equal(3, entitType.GetProperty("B").GetScale());
                 Assert.Equal(5, entitType.GetProperty("C").GetPrecision());
                 Assert.Equal(3, entitType.GetProperty("D").GetPrecision());
-            });
+            }
+        );
 
     [ConditionalFact]
-    public Task Comments_are_generated()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
+    public Task Comments_are_generated() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder.Entity(
                     "Entity",
                     x =>
                     {
                         x.ToTable(tb => tb.HasComment("Entity Comment"));
                         x.Property<int>("Id").HasComment("Property Comment");
-                    })
-            ,
+                    }
+                ),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -1282,33 +1450,39 @@ public partial class Entity
     public int Id { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs")
+                );
             },
-            model => { });
+            model => { }
+        );
 
     [ConditionalFact]
-    public Task Comments_complex_are_generated()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
+    public Task Comments_complex_are_generated() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder.Entity(
                     "Entity",
                     x =>
                     {
-                        x.ToTable(
-                            tb => tb.HasComment(
+                        x.ToTable(tb =>
+                            tb.HasComment(
                                 """
 Entity Comment
 On multiple lines
 With XML content <br/>
-"""));
-                        x.Property<int>("Id").HasComment(
-                            """
+"""
+                            )
+                        );
+                        x.Property<int>("Id")
+                            .HasComment(
+                                """
 Property Comment
 On multiple lines
 With XML content <br/>
-""");
-                    })
-            ,
+"""
+                            );
+                    }
+                ),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -1338,15 +1512,17 @@ public partial class Entity
     public int Id { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs")
+                );
             },
-            model => { });
+            model => { }
+        );
 
     [ConditionalFact]
-    public Task Properties_are_sorted_in_order_of_definition_in_table()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
+    public Task Properties_are_sorted_in_order_of_definition_in_table() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder.Entity(
                     "Entity",
                     x =>
                     {
@@ -1354,7 +1530,8 @@ public partial class Entity
                         x.Property<int>("Id");
                         x.Property<string>("LastProperty");
                         x.Property<string>("FirstProperty");
-                    }),
+                    }
+                ),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -1378,29 +1555,29 @@ public partial class Entity
     public string LastProperty { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Entity.cs")
+                );
             },
-            model => { });
+            model => { }
+        );
 
     [ConditionalFact]
-    public Task Navigation_properties_are_sorted_after_properties_and_collection_are_initialized_in_ctor()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
-                    "Person",
-                    x => x.Property<int>("Id"))
-                .Entity(
-                    "Contribution",
-                    x => x.Property<int>("Id"))
-                .Entity(
-                    "Post",
-                    x =>
-                    {
-                        x.Property<int>("Id");
+    public Task Navigation_properties_are_sorted_after_properties_and_collection_are_initialized_in_ctor() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder
+                    .Entity("Person", x => x.Property<int>("Id"))
+                    .Entity("Contribution", x => x.Property<int>("Id"))
+                    .Entity(
+                        "Post",
+                        x =>
+                        {
+                            x.Property<int>("Id");
 
-                        x.HasOne("Person", "Author").WithMany("Posts");
-                        x.HasMany("Contribution", "Contributions").WithOne("Post");
-                    }),
+                            x.HasOne("Person", "Author").WithMany("Posts");
+                            x.HasMany("Contribution", "Contributions").WithOne("Post");
+                        }
+                    ),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -1429,7 +1606,8 @@ public partial class Post
     public virtual ICollection<Contribution> Contributions { get; set; } = new List<Contribution>();
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Post.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Post.cs")
+                );
 
                 AssertFileContents(
                     """
@@ -1450,40 +1628,53 @@ public partial class Person
     public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Person.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Person.cs")
+                );
             },
             model =>
             {
                 var postType = model.FindEntityType("TestNamespace.Post");
                 var authorNavigation = postType.FindNavigation("Author");
                 Assert.True(authorNavigation.IsOnDependent);
-                Assert.Equal("TestNamespace.Person", authorNavigation.ForeignKey.PrincipalEntityType.Name);
+                Assert.Equal(
+                    "TestNamespace.Person",
+                    authorNavigation.ForeignKey.PrincipalEntityType.Name
+                );
 
                 var contributionsNav = postType.FindNavigation("Contributions");
                 Assert.False(contributionsNav.IsOnDependent);
-                Assert.Equal("TestNamespace.Contribution", contributionsNav.ForeignKey.DeclaringEntityType.Name);
-            });
+                Assert.Equal(
+                    "TestNamespace.Contribution",
+                    contributionsNav.ForeignKey.DeclaringEntityType.Name
+                );
+            }
+        );
 
     [ConditionalFact]
-    public Task ForeignKeyAttribute_is_generated_for_composite_fk()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
-                    "Blog",
-                    x =>
-                    {
-                        x.Property<int>("Id1");
-                        x.Property<int>("Id2");
-                        x.HasKey("Id1", "Id2");
-                    })
-                .Entity(
-                    "Post",
-                    x =>
-                    {
-                        x.Property<int>("Id");
+    public Task ForeignKeyAttribute_is_generated_for_composite_fk() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder
+                    .Entity(
+                        "Blog",
+                        x =>
+                        {
+                            x.Property<int>("Id1");
+                            x.Property<int>("Id2");
+                            x.HasKey("Id1", "Id2");
+                        }
+                    )
+                    .Entity(
+                        "Post",
+                        x =>
+                        {
+                            x.Property<int>("Id");
 
-                        x.HasOne("Blog", "BlogNavigation").WithMany("Posts").HasForeignKey("BlogId1", "BlogId2");
-                    }),
+                            x.HasOne("Blog", "BlogNavigation")
+                                .WithMany("Posts")
+                                .HasForeignKey("BlogId1", "BlogId2");
+                        }
+                    ),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -1511,7 +1702,8 @@ public partial class Post
     public virtual Blog BlogNavigation { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Post.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Post.cs")
+                );
 
                 AssertFileContents(
                     $$"""
@@ -1548,38 +1740,50 @@ public partial class TestDbContext : DbContext
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 """,
-                    code.ContextFile);
+                    code.ContextFile
+                );
             },
             model =>
             {
                 var postType = model.FindEntityType("TestNamespace.Post");
                 var blogNavigation = postType.FindNavigation("BlogNavigation");
-                Assert.Equal("TestNamespace.Blog", blogNavigation.ForeignKey.PrincipalEntityType.Name);
-                Assert.Equal(new[] { "BlogId1", "BlogId2" }, blogNavigation.ForeignKey.Properties.Select(p => p.Name));
-            });
+                Assert.Equal(
+                    "TestNamespace.Blog",
+                    blogNavigation.ForeignKey.PrincipalEntityType.Name
+                );
+                Assert.Equal(
+                    new[] { "BlogId1", "BlogId2" },
+                    blogNavigation.ForeignKey.Properties.Select(p => p.Name)
+                );
+            }
+        );
 
     [ConditionalFact]
-    public Task ForeignKeyAttribute_InversePropertyAttribute_when_composite_alternate_key()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
-                    "Blog",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<int>("Id1");
-                        x.Property<int>("Id2");
-                    })
-                .Entity(
-                    "Post",
-                    x =>
-                    {
-                        x.Property<int>("Id");
+    public Task ForeignKeyAttribute_InversePropertyAttribute_when_composite_alternate_key() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder
+                    .Entity(
+                        "Blog",
+                        x =>
+                        {
+                            x.Property<int>("Id");
+                            x.Property<int>("Id1");
+                            x.Property<int>("Id2");
+                        }
+                    )
+                    .Entity(
+                        "Post",
+                        x =>
+                        {
+                            x.Property<int>("Id");
 
-                        x.HasOne("Blog", "BlogNavigation").WithMany("Posts")
-                            .HasPrincipalKey("Id1", "Id2")
-                            .HasForeignKey("BlogId1", "BlogId2");
-                    }),
+                            x.HasOne("Blog", "BlogNavigation")
+                                .WithMany("Posts")
+                                .HasPrincipalKey("Id1", "Id2")
+                                .HasForeignKey("BlogId1", "BlogId2");
+                        }
+                    ),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -1607,7 +1811,8 @@ public partial class Post
     public virtual Blog BlogNavigation { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Post.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Post.cs")
+                );
 
                 AssertFileContents(
                     $$"""
@@ -1651,39 +1856,58 @@ public partial class TestDbContext : DbContext
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 """,
-                    code.ContextFile);
+                    code.ContextFile
+                );
             },
             model =>
             {
                 var postType = model.FindEntityType("TestNamespace.Post");
                 var blogNavigation = postType.FindNavigation("BlogNavigation");
-                Assert.Equal("TestNamespace.Blog", blogNavigation.ForeignKey.PrincipalEntityType.Name);
-                Assert.Equal(new[] { "BlogId1", "BlogId2" }, blogNavigation.ForeignKey.Properties.Select(p => p.Name));
-                Assert.Equal(new[] { "Id1", "Id2" }, blogNavigation.ForeignKey.PrincipalKey.Properties.Select(p => p.Name));
-            });
+                Assert.Equal(
+                    "TestNamespace.Blog",
+                    blogNavigation.ForeignKey.PrincipalEntityType.Name
+                );
+                Assert.Equal(
+                    new[] { "BlogId1", "BlogId2" },
+                    blogNavigation.ForeignKey.Properties.Select(p => p.Name)
+                );
+                Assert.Equal(
+                    new[] { "Id1", "Id2" },
+                    blogNavigation.ForeignKey.PrincipalKey.Properties.Select(p => p.Name)
+                );
+            }
+        );
 
     [ConditionalFact]
-    public Task ForeignKeyAttribute_is_generated_for_fk_referencing_ak()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
-                    "Color",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<string>("ColorCode");
-                    })
-                .Entity(
-                    "Car",
-                    x =>
-                    {
-                        x.Property<int>("Id");
+    public Task ForeignKeyAttribute_is_generated_for_fk_referencing_ak() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder
+                    .Entity(
+                        "Color",
+                        x =>
+                        {
+                            x.Property<int>("Id");
+                            x.Property<string>("ColorCode");
+                        }
+                    )
+                    .Entity(
+                        "Car",
+                        x =>
+                        {
+                            x.Property<int>("Id");
 
-                        x.HasOne("Color", "Color").WithMany("Cars")
-                            .HasPrincipalKey("ColorCode")
-                            .HasForeignKey("ColorCode");
-                    }),
-            new ModelCodeGenerationOptions { UseDataAnnotations = true, UseNullableReferenceTypes = true },
+                            x.HasOne("Color", "Color")
+                                .WithMany("Cars")
+                                .HasPrincipalKey("ColorCode")
+                                .HasForeignKey("ColorCode");
+                        }
+                    ),
+            new ModelCodeGenerationOptions
+            {
+                UseDataAnnotations = true,
+                UseNullableReferenceTypes = true,
+            },
             code =>
             {
                 AssertFileContents(
@@ -1707,7 +1931,8 @@ public partial class Color
     public virtual ICollection<Car> Cars { get; set; } = new List<Car>();
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Color.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Color.cs")
+                );
 
                 AssertFileContents(
                     """
@@ -1731,7 +1956,8 @@ public partial class Car
     public virtual Color? Color { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Car.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Car.cs")
+                );
 
                 AssertFileContents(
                     $$"""
@@ -1775,23 +2001,35 @@ public partial class TestDbContext : DbContext
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 """,
-                    code.ContextFile);
+                    code.ContextFile
+                );
             },
             model =>
             {
                 var carType = model.FindEntityType("TestNamespace.Car");
                 var colorNavigation = carType.FindNavigation("Color");
-                Assert.Equal("TestNamespace.Color", colorNavigation.ForeignKey.PrincipalEntityType.Name);
-                Assert.Equal(new[] { "ColorCode" }, colorNavigation.ForeignKey.Properties.Select(p => p.Name));
-                Assert.Equal(new[] { "ColorCode" }, colorNavigation.ForeignKey.PrincipalKey.Properties.Select(p => p.Name));
-            });
+                Assert.Equal(
+                    "TestNamespace.Color",
+                    colorNavigation.ForeignKey.PrincipalEntityType.Name
+                );
+                Assert.Equal(
+                    new[] { "ColorCode" },
+                    colorNavigation.ForeignKey.Properties.Select(p => p.Name)
+                );
+                Assert.Equal(
+                    new[] { "ColorCode" },
+                    colorNavigation.ForeignKey.PrincipalKey.Properties.Select(p => p.Name)
+                );
+            }
+        );
 
     [ConditionalFact]
-    public Task Foreign_key_from_keyless_table()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity("Blog", x => x.Property<int>("Id"))
-                .Entity("Post", x => x.HasOne("Blog", "Blog").WithMany()),
+    public Task Foreign_key_from_keyless_table() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder
+                    .Entity("Blog", x => x.Property<int>("Id"))
+                    .Entity("Post", x => x.HasOne("Blog", "Blog").WithMany()),
             new ModelCodeGenerationOptions(),
             code =>
             {
@@ -1839,7 +2077,8 @@ public partial class TestDbContext : DbContext
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 """,
-                    code.ContextFile);
+                    code.ContextFile
+                );
 
                 AssertFileContents(
                     """
@@ -1853,7 +2092,8 @@ public partial class Blog
     public int Id { get; set; }
 }
 """,
-                    code.AdditionalFiles.First(f => f.Path == "Blog.cs"));
+                    code.AdditionalFiles.First(f => f.Path == "Blog.cs")
+                );
 
                 AssertFileContents(
                     """
@@ -1869,7 +2109,8 @@ public partial class Post
     public virtual Blog Blog { get; set; }
 }
 """,
-                    code.AdditionalFiles.First(f => f.Path == "Post.cs"));
+                    code.AdditionalFiles.First(f => f.Path == "Post.cs")
+                );
             },
             model =>
             {
@@ -1877,22 +2118,23 @@ public partial class Post
                 var foreignKey = Assert.Single(post.GetForeignKeys());
                 Assert.Equal("Blog", foreignKey.DependentToPrincipal.Name);
                 Assert.Null(foreignKey.PrincipalToDependent);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public Task InverseProperty_when_navigation_property_with_same_type_and_navigation_name()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
-                    "Blog",
-                    x => x.Property<int>("Id"))
-                .Entity(
-                    "Post",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.HasOne("Blog", "Blog").WithMany("Posts");
-                    }),
+    public Task InverseProperty_when_navigation_property_with_same_type_and_navigation_name() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder
+                    .Entity("Blog", x => x.Property<int>("Id"))
+                    .Entity(
+                        "Post",
+                        x =>
+                        {
+                            x.Property<int>("Id");
+                            x.HasOne("Blog", "Blog").WithMany("Posts");
+                        }
+                    ),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -1918,7 +2160,8 @@ public partial class Post
     public virtual Blog Blog { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Post.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Post.cs")
+                );
             },
             model =>
             {
@@ -1931,22 +2174,25 @@ public partial class Post
                 var inverseNavigation = blogNavigation.Inverse;
                 Assert.Equal("TestNamespace.Blog", inverseNavigation.DeclaringEntityType.Name);
                 Assert.Equal("Posts", inverseNavigation.Name);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public Task InverseProperty_when_navigation_property_with_same_type_and_property_name()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
-                    "Blog",
-                    x => x.Property<int>("Id"))
-                .Entity(
-                    "Post",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.HasOne("Blog", "BlogNavigation").WithMany("Posts").HasForeignKey("Blog");
-                    }),
+    public Task InverseProperty_when_navigation_property_with_same_type_and_property_name() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder
+                    .Entity("Blog", x => x.Property<int>("Id"))
+                    .Entity(
+                        "Post",
+                        x =>
+                        {
+                            x.Property<int>("Id");
+                            x.HasOne("Blog", "BlogNavigation")
+                                .WithMany("Posts")
+                                .HasForeignKey("Blog");
+                        }
+                    ),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -1972,7 +2218,8 @@ public partial class Post
     public virtual Blog BlogNavigation { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Post.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Post.cs")
+                );
             },
             model =>
             {
@@ -1985,23 +2232,26 @@ public partial class Post
                 var inverseNavigation = blogNavigation.Inverse;
                 Assert.Equal("TestNamespace.Blog", inverseNavigation.DeclaringEntityType.Name);
                 Assert.Equal("Posts", inverseNavigation.Name);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public Task InverseProperty_when_navigation_property_with_same_type_and_other_navigation_name()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
-                    "Blog",
-                    x => x.Property<int>("Id"))
-                .Entity(
-                    "Post",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.HasOne("Blog", "Blog").WithMany("Posts");
-                        x.HasOne("Blog", "OriginalBlog").WithMany("OriginalPosts").HasForeignKey("OriginalBlogId");
-                    }),
+    public Task InverseProperty_when_navigation_property_with_same_type_and_other_navigation_name() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder
+                    .Entity("Blog", x => x.Property<int>("Id"))
+                    .Entity(
+                        "Post",
+                        x =>
+                        {
+                            x.Property<int>("Id");
+                            x.HasOne("Blog", "Blog").WithMany("Posts");
+                            x.HasOne("Blog", "OriginalBlog")
+                                .WithMany("OriginalPosts")
+                                .HasForeignKey("OriginalBlogId");
+                        }
+                    ),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -2033,7 +2283,8 @@ public partial class Post
     public virtual Blog OriginalBlog { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Post.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Post.cs")
+                );
             },
             model =>
             {
@@ -2050,28 +2301,34 @@ public partial class Post
 
                 var originalBlogNavigation = postType.FindNavigation("OriginalBlog");
 
-                var originalForeignKeyProperty = Assert.Single(originalBlogNavigation.ForeignKey.Properties);
+                var originalForeignKeyProperty = Assert.Single(
+                    originalBlogNavigation.ForeignKey.Properties
+                );
                 Assert.Equal("OriginalBlogId", originalForeignKeyProperty.Name);
 
                 var originalInverseNavigation = originalBlogNavigation.Inverse;
-                Assert.Equal("TestNamespace.Blog", originalInverseNavigation.DeclaringEntityType.Name);
+                Assert.Equal(
+                    "TestNamespace.Blog",
+                    originalInverseNavigation.DeclaringEntityType.Name
+                );
                 Assert.Equal("OriginalPosts", originalInverseNavigation.Name);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public Task InverseProperty_when_navigation_property_and_keyless()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
-                    "Blog",
-                    x => x.Property<int>("Id"))
-                .Entity(
-                    "Post",
-                    x =>
-                    {
-                        x.HasNoKey();
-                        x.HasOne("Blog", "Blog").WithMany();
-                    }),
+    public Task InverseProperty_when_navigation_property_and_keyless() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder
+                    .Entity("Blog", x => x.Property<int>("Id"))
+                    .Entity(
+                        "Post",
+                        x =>
+                        {
+                            x.HasNoKey();
+                            x.HasOne("Blog", "Blog").WithMany();
+                        }
+                    ),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -2094,7 +2351,8 @@ public partial class Post
     public virtual Blog Blog { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "Post.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "Post.cs")
+                );
             },
             model =>
             {
@@ -2105,20 +2363,22 @@ public partial class Post
                 Assert.Equal("BlogId", foreignKeyProperty.Name);
 
                 Assert.Null(blogNavigation.Inverse);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public Task Entity_with_custom_annotation()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
+    public Task Entity_with_custom_annotation() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder.Entity(
                     "EntityWithAnnotation",
                     x =>
                     {
                         x.HasAnnotation("Custom:EntityAnnotation", "first argument");
                         x.Property<int>("Id");
                         x.HasKey("Id");
-                    }),
+                    }
+                ),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -2139,7 +2399,8 @@ public partial class EntityWithAnnotation
     public int Id { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "EntityWithAnnotation.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "EntityWithAnnotation.cs")
+                );
 
                 AssertFileContents(
                     $$"""
@@ -2174,23 +2435,26 @@ public partial class TestDbContext : DbContext
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 """,
-                    code.ContextFile);
+                    code.ContextFile
+                );
             },
             assertModel: null,
-            skipBuild: true);
+            skipBuild: true
+        );
 
     [ConditionalFact]
-    public Task Entity_property_with_custom_annotation()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
+    public Task Entity_property_with_custom_annotation() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder.Entity(
                     "EntityWithPropertyAnnotation",
                     x =>
                     {
                         x.Property<int>("Id")
                             .HasAnnotation("Custom:PropertyAnnotation", "first argument");
                         x.HasKey("Id");
-                    }),
+                    }
+                ),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -2211,7 +2475,8 @@ public partial class EntityWithPropertyAnnotation
     public int Id { get; set; }
 }
 """,
-                    code.AdditionalFiles.Single(f => f.Path == "EntityWithPropertyAnnotation.cs"));
+                    code.AdditionalFiles.Single(f => f.Path == "EntityWithPropertyAnnotation.cs")
+                );
 
                 AssertFileContents(
                     $$"""
@@ -2246,26 +2511,25 @@ public partial class TestDbContext : DbContext
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 """,
-                    code.ContextFile);
+                    code.ContextFile
+                );
             },
             assertModel: null,
-            skipBuild: true);
+            skipBuild: true
+        );
 
     [ConditionalFact]
-    public Task Scaffold_skip_navigations_default()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
-                    "Blog",
-                    x => x.Property<int>("Id"))
-                .Entity(
-                    "Post",
-                    x => x.Property<int>("Id"))
-                .Entity("BlogPost", _ => { })
-                .Entity("Blog")
-                .HasMany("Post", "Posts")
-                .WithMany("Blogs")
-                .UsingEntity("BlogPost"),
+    public Task Scaffold_skip_navigations_default() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder
+                    .Entity("Blog", x => x.Property<int>("Id"))
+                    .Entity("Post", x => x.Property<int>("Id"))
+                    .Entity("BlogPost", _ => { })
+                    .Entity("Blog")
+                    .HasMany("Post", "Posts")
+                    .WithMany("Blogs")
+                    .UsingEntity("BlogPost"),
             new ModelCodeGenerationOptions { UseDataAnnotations = false },
             code =>
             {
@@ -2318,7 +2582,8 @@ public partial class TestDbContext : DbContext
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 """,
-                    code.ContextFile);
+                    code.ContextFile
+                );
 
                 AssertFileContents(
                     """
@@ -2334,7 +2599,8 @@ public partial class Blog
     public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
 }
 """,
-                    code.AdditionalFiles.Single(e => e.Path == "Blog.cs"));
+                    code.AdditionalFiles.Single(e => e.Path == "Blog.cs")
+                );
 
                 AssertFileContents(
                     """
@@ -2350,7 +2616,8 @@ public partial class Post
     public virtual ICollection<Blog> Blogs { get; set; } = new List<Blog>();
 }
 """,
-                    code.AdditionalFiles.Single(e => e.Path == "Post.cs"));
+                    code.AdditionalFiles.Single(e => e.Path == "Post.cs")
+                );
 
                 Assert.Equal(2, code.AdditionalFiles.Count);
             },
@@ -2374,23 +2641,21 @@ public partial class Post
                 Assert.Equal(typeof(Dictionary<string, object>), joinEntityType.ClrType);
                 Assert.Single(joinEntityType.GetIndexes());
                 Assert.Equal(2, joinEntityType.GetForeignKeys().Count());
-            });
+            }
+        );
 
     [ConditionalFact]
-    public Task Scaffold_skip_navigations_different_key_type()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
-                    "Blog",
-                    x => x.Property<int>("Id"))
-                .Entity(
-                    "Post",
-                    x => x.Property<string>("Id"))
-                .Entity("BlogPost", _ => { })
-                .Entity("Blog")
-                .HasMany("Post", "Posts")
-                .WithMany("Blogs")
-                .UsingEntity("BlogPost"),
+    public Task Scaffold_skip_navigations_different_key_type() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder
+                    .Entity("Blog", x => x.Property<int>("Id"))
+                    .Entity("Post", x => x.Property<string>("Id"))
+                    .Entity("BlogPost", _ => { })
+                    .Entity("Blog")
+                    .HasMany("Post", "Posts")
+                    .WithMany("Blogs")
+                    .UsingEntity("BlogPost"),
             new ModelCodeGenerationOptions { UseDataAnnotations = false },
             code =>
             {
@@ -2443,7 +2708,8 @@ public partial class TestDbContext : DbContext
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 """,
-                    code.ContextFile);
+                    code.ContextFile
+                );
 
                 AssertFileContents(
                     """
@@ -2459,7 +2725,8 @@ public partial class Blog
     public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
 }
 """,
-                    code.AdditionalFiles.Single(e => e.Path == "Blog.cs"));
+                    code.AdditionalFiles.Single(e => e.Path == "Blog.cs")
+                );
 
                 AssertFileContents(
                     """
@@ -2475,7 +2742,8 @@ public partial class Post
     public virtual ICollection<Blog> Blogs { get; set; } = new List<Blog>();
 }
 """,
-                    code.AdditionalFiles.Single(e => e.Path == "Post.cs"));
+                    code.AdditionalFiles.Single(e => e.Path == "Post.cs")
+                );
 
                 Assert.Equal(2, code.AdditionalFiles.Count);
             },
@@ -2499,23 +2767,21 @@ public partial class Post
                 Assert.Equal(typeof(Dictionary<string, object>), joinEntityType.ClrType);
                 Assert.Single(joinEntityType.GetIndexes());
                 Assert.Equal(2, joinEntityType.GetForeignKeys().Count());
-            });
+            }
+        );
 
     [ConditionalFact]
-    public Task Scaffold_skip_navigations_default_data_annotations()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
-                    "Blog",
-                    x => x.Property<int>("Id"))
-                .Entity(
-                    "Post",
-                    x => x.Property<int>("Id"))
-                .Entity("BlogPost", _ => { })
-                .Entity("Blog")
-                .HasMany("Post", "Posts")
-                .WithMany("Blogs")
-                .UsingEntity("BlogPost"),
+    public Task Scaffold_skip_navigations_default_data_annotations() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder
+                    .Entity("Blog", x => x.Property<int>("Id"))
+                    .Entity("Post", x => x.Property<int>("Id"))
+                    .Entity("BlogPost", _ => { })
+                    .Entity("Blog")
+                    .HasMany("Post", "Posts")
+                    .WithMany("Blogs")
+                    .UsingEntity("BlogPost"),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -2568,7 +2834,8 @@ public partial class TestDbContext : DbContext
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 """,
-                    code.ContextFile);
+                    code.ContextFile
+                );
 
                 AssertFileContents(
                     """
@@ -2590,7 +2857,8 @@ public partial class Blog
     public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
 }
 """,
-                    code.AdditionalFiles.Single(e => e.Path == "Blog.cs"));
+                    code.AdditionalFiles.Single(e => e.Path == "Blog.cs")
+                );
 
                 AssertFileContents(
                     """
@@ -2612,7 +2880,8 @@ public partial class Post
     public virtual ICollection<Blog> Blogs { get; set; } = new List<Blog>();
 }
 """,
-                    code.AdditionalFiles.Single(e => e.Path == "Post.cs"));
+                    code.AdditionalFiles.Single(e => e.Path == "Post.cs")
+                );
 
                 Assert.Equal(2, code.AdditionalFiles.Count);
             },
@@ -2636,27 +2905,31 @@ public partial class Post
                 Assert.Equal(typeof(Dictionary<string, object>), joinEntityType.ClrType);
                 Assert.Single(joinEntityType.GetIndexes());
                 Assert.Equal(2, joinEntityType.GetForeignKeys().Count());
-            });
+            }
+        );
 
     [ConditionalFact]
-    public Task Scaffold_skip_navigations_alternate_key_data_annotations()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
-                    "Blog",
-                    x =>
-                    {
-                        x.Property<int>("Id");
-                        x.Property<int>("Key");
-                    })
-                .Entity(
-                    "Post",
-                    x => x.Property<int>("Id"))
-                .Entity("Blog").HasMany("Post", "Posts").WithMany("Blogs")
-                .UsingEntity(
-                    "BlogPost",
-                    r => r.HasOne("Post").WithMany(),
-                    l => l.HasOne("Blog").WithMany().HasPrincipalKey("Key")),
+    public Task Scaffold_skip_navigations_alternate_key_data_annotations() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder
+                    .Entity(
+                        "Blog",
+                        x =>
+                        {
+                            x.Property<int>("Id");
+                            x.Property<int>("Key");
+                        }
+                    )
+                    .Entity("Post", x => x.Property<int>("Id"))
+                    .Entity("Blog")
+                    .HasMany("Post", "Posts")
+                    .WithMany("Blogs")
+                    .UsingEntity(
+                        "BlogPost",
+                        r => r.HasOne("Post").WithMany(),
+                        l => l.HasOne("Blog").WithMany().HasPrincipalKey("Key")
+                    ),
             new ModelCodeGenerationOptions { UseDataAnnotations = true },
             code =>
             {
@@ -2711,7 +2984,8 @@ public partial class TestDbContext : DbContext
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 """,
-                    code.ContextFile);
+                    code.ContextFile
+                );
 
                 AssertFileContents(
                     """
@@ -2735,7 +3009,8 @@ public partial class Blog
     public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
 }
 """,
-                    code.AdditionalFiles.Single(e => e.Path == "Blog.cs"));
+                    code.AdditionalFiles.Single(e => e.Path == "Blog.cs")
+                );
 
                 AssertFileContents(
                     """
@@ -2757,7 +3032,8 @@ public partial class Post
     public virtual ICollection<Blog> Blogs { get; set; } = new List<Blog>();
 }
 """,
-                    code.AdditionalFiles.Single(e => e.Path == "Post.cs"));
+                    code.AdditionalFiles.Single(e => e.Path == "Post.cs")
+                );
 
                 Assert.Equal(2, code.AdditionalFiles.Count);
             },
@@ -2782,46 +3058,67 @@ public partial class Post
                 Assert.Single(joinEntityType.GetIndexes());
                 Assert.Equal(2, joinEntityType.GetForeignKeys().Count());
 
-                var fk = Assert.Single(joinEntityType.FindDeclaredForeignKeys(new[] { joinEntityType.GetProperty("BlogsKey") }));
+                var fk = Assert.Single(
+                    joinEntityType.FindDeclaredForeignKeys(
+                        new[] { joinEntityType.GetProperty("BlogsKey") }
+                    )
+                );
                 Assert.False(fk.PrincipalKey.IsPrimaryKey());
-            });
+            }
+        );
 
     [ConditionalFact]
-    public Task Many_to_many_ef6()
-        => TestAsync(
-            modelBuilder => modelBuilder
-                .Entity(
-                    "Blog",
-                    x =>
-                    {
-                        x.ToTable("Blogs");
-                        x.HasAnnotation(ScaffoldingAnnotationNames.DbSetName, "Blogs");
+    public Task Many_to_many_ef6() =>
+        TestAsync(
+            modelBuilder =>
+                modelBuilder
+                    .Entity(
+                        "Blog",
+                        x =>
+                        {
+                            x.ToTable("Blogs");
+                            x.HasAnnotation(ScaffoldingAnnotationNames.DbSetName, "Blogs");
 
-                        x.Property<int>("Id");
-                    })
-                .Entity(
-                    "Post",
-                    x =>
-                    {
-                        x.ToTable("Posts");
-                        x.HasAnnotation(ScaffoldingAnnotationNames.DbSetName, "Posts");
+                            x.Property<int>("Id");
+                        }
+                    )
+                    .Entity(
+                        "Post",
+                        x =>
+                        {
+                            x.ToTable("Posts");
+                            x.HasAnnotation(ScaffoldingAnnotationNames.DbSetName, "Posts");
 
-                        x.Property<int>("Id");
+                            x.Property<int>("Id");
 
-                        x.HasMany("Blog", "Blogs").WithMany("Posts")
-                            .UsingEntity(
-                                "PostBlog",
-                                r => r.HasOne("Blog", null).WithMany().HasForeignKey("BlogId").HasConstraintName("Post_Blogs_Target"),
-                                l => l.HasOne("Post", null).WithMany().HasForeignKey("PostId").HasConstraintName("Post_Blogs_Source"),
-                                j =>
-                                {
-                                    j.ToTable("PostBlogs");
-                                    j.HasAnnotation(ScaffoldingAnnotationNames.DbSetName, "PostBlogs");
+                            x.HasMany("Blog", "Blogs")
+                                .WithMany("Posts")
+                                .UsingEntity(
+                                    "PostBlog",
+                                    r =>
+                                        r.HasOne("Blog", null)
+                                            .WithMany()
+                                            .HasForeignKey("BlogId")
+                                            .HasConstraintName("Post_Blogs_Target"),
+                                    l =>
+                                        l.HasOne("Post", null)
+                                            .WithMany()
+                                            .HasForeignKey("PostId")
+                                            .HasConstraintName("Post_Blogs_Source"),
+                                    j =>
+                                    {
+                                        j.ToTable("PostBlogs");
+                                        j.HasAnnotation(
+                                            ScaffoldingAnnotationNames.DbSetName,
+                                            "PostBlogs"
+                                        );
 
-                                    j.Property<int>("BlogId").HasColumnName("Blog_Id");
-                                    j.Property<int>("PostId").HasColumnName("Post_Id");
-                                });
-                    }),
+                                        j.Property<int>("BlogId").HasColumnName("Blog_Id");
+                                        j.Property<int>("PostId").HasColumnName("Post_Id");
+                                    }
+                                );
+                        }
+                    ),
             new ModelCodeGenerationOptions(),
             code =>
             {
@@ -2881,70 +3178,99 @@ public partial class TestDbContext : DbContext
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
 """,
-                    code.ContextFile);
+                    code.ContextFile
+                );
             },
-            model => Assert.Collection(
-                model.GetEntityTypes().OrderBy(e => e.Name),
-                t1 =>
-                {
-                    Assert.Equal("PostBlog", t1.Name);
-                    Assert.Equal("PostBlogs", t1.GetTableName());
-                    Assert.Collection(
-                        t1.GetForeignKeys().OrderBy(fk => fk.GetConstraintName()),
-                        fk1 =>
-                        {
-                            Assert.Equal("Post_Blogs_Source", fk1.GetConstraintName());
-                            var property = Assert.Single(fk1.Properties);
-                            Assert.Equal("PostId", property.Name);
-                            Assert.Equal("Post_Id", property.GetColumnName(StoreObjectIdentifier.Table(t1.GetTableName())));
-                            Assert.Equal("TestNamespace.Post", fk1.PrincipalEntityType.Name);
-                            Assert.Equal(DeleteBehavior.Cascade, fk1.DeleteBehavior);
-                        },
-                        fk2 =>
-                        {
-                            Assert.Equal("Post_Blogs_Target", fk2.GetConstraintName());
-                            var property = Assert.Single(fk2.Properties);
-                            Assert.Equal("BlogId", property.Name);
-                            Assert.Equal("Blog_Id", property.GetColumnName(StoreObjectIdentifier.Table(t1.GetTableName())));
-                            Assert.Equal("TestNamespace.Blog", fk2.PrincipalEntityType.Name);
-                            Assert.Equal(DeleteBehavior.Cascade, fk2.DeleteBehavior);
-                        });
-                },
-                t2 =>
-                {
-                    Assert.Equal("TestNamespace.Blog", t2.Name);
-                    Assert.Equal("Blogs", t2.GetTableName());
-                    Assert.Empty(t2.GetDeclaredForeignKeys());
-                    var skipNavigation = Assert.Single(t2.GetSkipNavigations());
-                    Assert.Equal("Posts", skipNavigation.Name);
-                    Assert.Equal("Blogs", skipNavigation.Inverse.Name);
-                    Assert.Equal("PostBlog", skipNavigation.JoinEntityType.Name);
-                    Assert.Equal("Post_Blogs_Target", skipNavigation.ForeignKey.GetConstraintName());
-                },
-                t3 =>
-                {
-                    Assert.Equal("TestNamespace.Post", t3.Name);
-                    Assert.Equal("Posts", t3.GetTableName());
-                    Assert.Empty(t3.GetDeclaredForeignKeys());
-                    var skipNavigation = Assert.Single(t3.GetSkipNavigations());
-                    Assert.Equal("Blogs", skipNavigation.Name);
-                    Assert.Equal("Posts", skipNavigation.Inverse.Name);
-                    Assert.Equal("PostBlog", skipNavigation.JoinEntityType.Name);
-                    Assert.Equal("Post_Blogs_Source", skipNavigation.ForeignKey.GetConstraintName());
-                }));
+            model =>
+                Assert.Collection(
+                    model.GetEntityTypes().OrderBy(e => e.Name),
+                    t1 =>
+                    {
+                        Assert.Equal("PostBlog", t1.Name);
+                        Assert.Equal("PostBlogs", t1.GetTableName());
+                        Assert.Collection(
+                            t1.GetForeignKeys().OrderBy(fk => fk.GetConstraintName()),
+                            fk1 =>
+                            {
+                                Assert.Equal("Post_Blogs_Source", fk1.GetConstraintName());
+                                var property = Assert.Single(fk1.Properties);
+                                Assert.Equal("PostId", property.Name);
+                                Assert.Equal(
+                                    "Post_Id",
+                                    property.GetColumnName(
+                                        StoreObjectIdentifier.Table(t1.GetTableName())
+                                    )
+                                );
+                                Assert.Equal("TestNamespace.Post", fk1.PrincipalEntityType.Name);
+                                Assert.Equal(DeleteBehavior.Cascade, fk1.DeleteBehavior);
+                            },
+                            fk2 =>
+                            {
+                                Assert.Equal("Post_Blogs_Target", fk2.GetConstraintName());
+                                var property = Assert.Single(fk2.Properties);
+                                Assert.Equal("BlogId", property.Name);
+                                Assert.Equal(
+                                    "Blog_Id",
+                                    property.GetColumnName(
+                                        StoreObjectIdentifier.Table(t1.GetTableName())
+                                    )
+                                );
+                                Assert.Equal("TestNamespace.Blog", fk2.PrincipalEntityType.Name);
+                                Assert.Equal(DeleteBehavior.Cascade, fk2.DeleteBehavior);
+                            }
+                        );
+                    },
+                    t2 =>
+                    {
+                        Assert.Equal("TestNamespace.Blog", t2.Name);
+                        Assert.Equal("Blogs", t2.GetTableName());
+                        Assert.Empty(t2.GetDeclaredForeignKeys());
+                        var skipNavigation = Assert.Single(t2.GetSkipNavigations());
+                        Assert.Equal("Posts", skipNavigation.Name);
+                        Assert.Equal("Blogs", skipNavigation.Inverse.Name);
+                        Assert.Equal("PostBlog", skipNavigation.JoinEntityType.Name);
+                        Assert.Equal(
+                            "Post_Blogs_Target",
+                            skipNavigation.ForeignKey.GetConstraintName()
+                        );
+                    },
+                    t3 =>
+                    {
+                        Assert.Equal("TestNamespace.Post", t3.Name);
+                        Assert.Equal("Posts", t3.GetTableName());
+                        Assert.Empty(t3.GetDeclaredForeignKeys());
+                        var skipNavigation = Assert.Single(t3.GetSkipNavigations());
+                        Assert.Equal("Blogs", skipNavigation.Name);
+                        Assert.Equal("Posts", skipNavigation.Inverse.Name);
+                        Assert.Equal("PostBlog", skipNavigation.JoinEntityType.Name);
+                        Assert.Equal(
+                            "Post_Blogs_Source",
+                            skipNavigation.ForeignKey.GetConstraintName()
+                        );
+                    }
+                )
+        );
 
-    protected override void AddModelServices(IServiceCollection services)
-        => services.Replace(ServiceDescriptor.Singleton<IRelationalAnnotationProvider, TestModelAnnotationProvider>());
+    protected override void AddModelServices(IServiceCollection services) =>
+        services.Replace(
+            ServiceDescriptor.Singleton<
+                IRelationalAnnotationProvider,
+                TestModelAnnotationProvider
+            >()
+        );
 
-    protected override void AddScaffoldingServices(IServiceCollection services)
-        => services.Replace(ServiceDescriptor.Singleton<IAnnotationCodeGenerator, TestModelAnnotationCodeGenerator>());
+    protected override void AddScaffoldingServices(IServiceCollection services) =>
+        services.Replace(
+            ServiceDescriptor.Singleton<
+                IAnnotationCodeGenerator,
+                TestModelAnnotationCodeGenerator
+            >()
+        );
 
     private class TestModelAnnotationProvider : SqlServerAnnotationProvider
     {
         public TestModelAnnotationProvider(RelationalAnnotationProviderDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+            : base(dependencies) { }
 
         public override IEnumerable<IAnnotation> For(ITable table, bool designTime)
         {
@@ -2955,7 +3281,11 @@ public partial class TestDbContext : DbContext
 
             var entityType = table.EntityTypeMappings.First().TypeBase;
 
-            foreach (var annotation in entityType.GetAnnotations().Where(a => a.Name == "Custom:EntityAnnotation"))
+            foreach (
+                var annotation in entityType
+                    .GetAnnotations()
+                    .Where(a => a.Name == "Custom:EntityAnnotation")
+            )
             {
                 yield return annotation;
             }
@@ -2969,9 +3299,14 @@ public partial class TestDbContext : DbContext
             }
 
             var properties = column.PropertyMappings.Select(m => m.Property);
-            var annotations = properties.SelectMany(p => p.GetAnnotations()).GroupBy(a => a.Name).Select(g => g.First());
+            var annotations = properties
+                .SelectMany(p => p.GetAnnotations())
+                .GroupBy(a => a.Name)
+                .Select(g => g.First());
 
-            foreach (var annotation in annotations.Where(a => a.Name == "Custom:PropertyAnnotation"))
+            foreach (
+                var annotation in annotations.Where(a => a.Name == "Custom:PropertyAnnotation")
+            )
             {
                 yield return annotation;
             }
@@ -2981,24 +3316,32 @@ public partial class TestDbContext : DbContext
     private class TestModelAnnotationCodeGenerator : SqlServerAnnotationCodeGenerator
     {
         public TestModelAnnotationCodeGenerator(AnnotationCodeGeneratorDependencies dependencies)
-            : base(dependencies)
-        {
-        }
+            : base(dependencies) { }
 
-        protected override AttributeCodeFragment GenerateDataAnnotation(IEntityType entityType, IAnnotation annotation)
-            => annotation.Name switch
+        protected override AttributeCodeFragment GenerateDataAnnotation(
+            IEntityType entityType,
+            IAnnotation annotation
+        ) =>
+            annotation.Name switch
             {
                 "Custom:EntityAnnotation" => new AttributeCodeFragment(
-                    typeof(CustomEntityDataAnnotationAttribute), annotation.Value as string),
-                _ => base.GenerateDataAnnotation(entityType, annotation)
+                    typeof(CustomEntityDataAnnotationAttribute),
+                    annotation.Value as string
+                ),
+                _ => base.GenerateDataAnnotation(entityType, annotation),
             };
 
-        protected override AttributeCodeFragment GenerateDataAnnotation(IProperty property, IAnnotation annotation)
-            => annotation.Name switch
+        protected override AttributeCodeFragment GenerateDataAnnotation(
+            IProperty property,
+            IAnnotation annotation
+        ) =>
+            annotation.Name switch
             {
                 "Custom:PropertyAnnotation" => new AttributeCodeFragment(
-                    typeof(CustomPropertyDataAnnotationAttribute), annotation.Value as string),
-                _ => base.GenerateDataAnnotation(property, annotation)
+                    typeof(CustomPropertyDataAnnotationAttribute),
+                    annotation.Value as string
+                ),
+                _ => base.GenerateDataAnnotation(property, annotation),
             };
     }
 

@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
@@ -25,15 +24,22 @@ namespace Internal.TypeSystem
     // to sort itself with respect to other instances of the same type.
     // Comparisons between different categories of types are centralized to a single location that
     // can provide rules to sort them.
-    public class TypeSystemComparer : IComparer<TypeDesc>, IComparer<MethodDesc>, IComparer<FieldDesc>, IComparer<MethodSignature>
+    public class TypeSystemComparer
+        : IComparer<TypeDesc>,
+            IComparer<MethodDesc>,
+            IComparer<FieldDesc>,
+            IComparer<MethodSignature>
     {
         public static TypeSystemComparer Instance { get; } = new TypeSystemComparer();
 
         public int Compare(TypeDesc x, TypeDesc y)
         {
-            if (x == y) return 0;
-            if (x == null) return -1;
-            if (y == null) return 1;
+            if (x == y)
+                return 0;
+            if (x == null)
+                return -1;
+            if (y == null)
+                return 1;
 
             int codeX = x.ClassCode;
             int codeY = y.ClassCode;
@@ -55,7 +61,8 @@ namespace Internal.TypeSystem
             }
         }
 
-        internal int CompareWithinClass<T>(T x, T y) where T : TypeDesc
+        internal int CompareWithinClass<T>(T x, T y)
+            where T : TypeDesc
         {
             Debug.Assert(x.GetType() == y.GetType());
 

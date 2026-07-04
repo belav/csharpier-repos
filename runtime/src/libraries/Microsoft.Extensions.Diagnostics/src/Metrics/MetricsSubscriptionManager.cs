@@ -15,7 +15,11 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
         private readonly IDisposable? _changeTokenRegistration;
         private bool _disposed;
 
-        public MetricsSubscriptionManager(IEnumerable<IMetricsListener> listeners, IOptionsMonitor<MetricsOptions> options, IMeterFactory meterFactory)
+        public MetricsSubscriptionManager(
+            IEnumerable<IMetricsListener> listeners,
+            IOptionsMonitor<MetricsOptions> options,
+            IMeterFactory meterFactory
+        )
         {
             var list = listeners.ToList();
             _listeners = new ListenerSubscription[list.Count];

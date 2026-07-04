@@ -12,11 +12,14 @@ namespace Microsoft.DotNet.CoreSetup.Test
     public sealed class SymLink : IDisposable
     {
         public string SrcPath { get; private set; }
+
         public SymLink(string src, string dest)
         {
             if (!MakeSymbolicLink(src, dest, out var errorMessage))
             {
-                throw new IOException($"Error creating symbolic link at {src} pointing to {dest}: {errorMessage}");
+                throw new IOException(
+                    $"Error creating symbolic link at {src} pointing to {dest}: {errorMessage}"
+                );
             }
             SrcPath = src;
         }
@@ -30,7 +33,11 @@ namespace Microsoft.DotNet.CoreSetup.Test
             }
         }
 
-        private static bool MakeSymbolicLink(string symbolicLinkName, string targetFileName, out string errorMessage)
+        private static bool MakeSymbolicLink(
+            string symbolicLinkName,
+            string targetFileName,
+            out string errorMessage
+        )
         {
             errorMessage = string.Empty;
             if (OperatingSystem.IsWindows())
@@ -60,7 +67,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
         {
             IsFile = 0x0,
             IsDirectory = 0x1,
-            AllowUnprivilegedCreate = 0x2
+            AllowUnprivilegedCreate = 0x2,
         }
 
         [DllImport("kernel32.dll", SetLastError = true)]
@@ -68,12 +75,11 @@ namespace Microsoft.DotNet.CoreSetup.Test
         private static extern bool CreateSymbolicLink(
             string symbolicLinkName,
             string targetFileName,
-            SymbolicLinkFlag flags);
+            SymbolicLinkFlag flags
+        );
 
         [DllImport("libc", SetLastError = true)]
-        private static extern int symlink(
-            string targetFileName,
-            string linkPath);
+        private static extern int symlink(string targetFileName, string linkPath);
 
         [DllImport("libc", CharSet = CharSet.Ansi)]
         private static extern IntPtr strerror(int errnum);

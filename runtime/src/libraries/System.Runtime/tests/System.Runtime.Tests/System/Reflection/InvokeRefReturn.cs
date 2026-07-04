@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-
 using Xunit;
 
 namespace System.Reflection.Tests
@@ -21,7 +20,10 @@ namespace System.Reflection.Tests
         [MemberData(nameof(RefReturnInvokeTestData))]
         public static void TestRefReturnMethodInvoke<T>(T value)
         {
-            TestRefReturnInvoke<T>(value, (p, t) => p.GetGetMethod().Invoke(t, Array.Empty<object>()));
+            TestRefReturnInvoke<T>(
+                value,
+                (p, t) => p.GetGetMethod().Invoke(t, Array.Empty<object>())
+            );
         }
 
         [Fact]
@@ -41,7 +43,9 @@ namespace System.Reflection.Tests
         public static void TestNullRefReturnInvoke<T>(T value)
         {
             TestClass<T> tc = new TestClass<T>(value);
-            PropertyInfo p = typeof(TestClass<T>).GetProperty(nameof(TestClass<T>.NullRefReturningProp));
+            PropertyInfo p = typeof(TestClass<T>).GetProperty(
+                nameof(TestClass<T>.NullRefReturningProp)
+            );
             Assert.NotNull(p);
             Exception ex = Assert.Throws<TargetInvocationException>(() => p.GetValue(tc));
             Assert.IsType<NullReferenceException>(ex.InnerException);
@@ -52,7 +56,9 @@ namespace System.Reflection.Tests
         {
             int* expected = (int*)0x1122334455667788;
             TestClassIntPointer tc = new TestClassIntPointer(expected);
-            PropertyInfo p = typeof(TestClassIntPointer).GetProperty(nameof(TestClassIntPointer.RefReturningProp));
+            PropertyInfo p = typeof(TestClassIntPointer).GetProperty(
+                nameof(TestClassIntPointer.RefReturningProp)
+            );
             object rv = p.GetValue(tc);
             Assert.True(rv is Pointer);
             int* actual = (int*)(Pointer.Unbox(rv));
@@ -64,7 +70,9 @@ namespace System.Reflection.Tests
         {
             TestClassIntPointer tc = new TestClassIntPointer(null);
 
-            PropertyInfo p = typeof(TestClassIntPointer).GetProperty(nameof(TestClassIntPointer.NullRefReturningProp));
+            PropertyInfo p = typeof(TestClassIntPointer).GetProperty(
+                nameof(TestClassIntPointer.NullRefReturningProp)
+            );
             Assert.NotNull(p);
             Exception ex = Assert.Throws<TargetInvocationException>(() => p.GetValue(tc));
             Assert.IsType<NullReferenceException>(ex.InnerException);
@@ -75,7 +83,9 @@ namespace System.Reflection.Tests
         {
             ByRefLike brl = new ByRefLike();
             ByRefLike* pBrl = &brl;
-            MethodInfo mi = typeof(TestClass<int>).GetMethod(nameof(TestClass<int>.ByRefLikeRefReturningMethod));
+            MethodInfo mi = typeof(TestClass<int>).GetMethod(
+                nameof(TestClass<int>.ByRefLikeRefReturningMethod)
+            );
             try
             {
                 // Don't use Assert.Throws because that will make a lambda and invalidate the pointer
@@ -119,10 +129,15 @@ namespace System.Reflection.Tests
             }
         }
 
-        private static void TestRefReturnInvoke<T>(T value, Func<PropertyInfo, TestClass<T>, object> invoker)
+        private static void TestRefReturnInvoke<T>(
+            T value,
+            Func<PropertyInfo, TestClass<T>, object> invoker
+        )
         {
             TestClass<T> tc = new TestClass<T>(value);
-            PropertyInfo p = typeof(TestClass<T>).GetProperty(nameof(TestClass<T>.RefReturningProp));
+            PropertyInfo p = typeof(TestClass<T>).GetProperty(
+                nameof(TestClass<T>.RefReturningProp)
+            );
             object rv = invoker(p, tc);
             if (rv != null)
             {
@@ -139,10 +154,13 @@ namespace System.Reflection.Tests
             }
         }
 
-        private static void TestRefReturnInvokeNullable<T>(T? nullable) where T : struct
+        private static void TestRefReturnInvokeNullable<T>(T? nullable)
+            where T : struct
         {
             TestClass<T?> tc = new TestClass<T?>(nullable);
-            PropertyInfo p = typeof(TestClass<T?>).GetProperty(nameof(TestClass<T?>.RefReturningProp));
+            PropertyInfo p = typeof(TestClass<T?>).GetProperty(
+                nameof(TestClass<T?>.RefReturningProp)
+            );
             object rv = p.GetValue(tc);
             if (rv != null)
             {
@@ -164,9 +182,14 @@ namespace System.Reflection.Tests
         {
             private T _value;
 
-            public TestClass(T value) { _value = value; }
+            public TestClass(T value)
+            {
+                _value = value;
+            }
+
             public ref T RefReturningProp => ref _value;
             public unsafe ref T NullRefReturningProp => ref Unsafe.AsRef<T>((void*)null);
+
             public static unsafe ref ByRefLike ByRefLikeRefReturningMethod(ByRefLike* a) => ref *a;
         }
 
@@ -174,7 +197,11 @@ namespace System.Reflection.Tests
         {
             private int* _value;
 
-            public TestClassIntPointer(int* value) { _value = value; }
+            public TestClassIntPointer(int* value)
+            {
+                _value = value;
+            }
+
             public ref int* RefReturningProp => ref _value;
             public ref int* NullRefReturningProp => ref *(int**)null;
         }

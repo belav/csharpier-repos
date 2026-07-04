@@ -12,12 +12,20 @@ namespace System.IO.Pipes
     public sealed partial class AnonymousPipeServerStream : PipeStream
     {
         // Creates the anonymous pipe.
-        private void Create(PipeDirection direction, HandleInheritability inheritability, int bufferSize)
+        private void Create(
+            PipeDirection direction,
+            HandleInheritability inheritability,
+            int bufferSize
+        )
         {
-            Debug.Assert(direction != PipeDirection.InOut, "Anonymous pipe direction shouldn't be InOut");
+            Debug.Assert(
+                direction != PipeDirection.InOut,
+                "Anonymous pipe direction shouldn't be InOut"
+            );
             // Ignore bufferSize.  It's optional, and the fcntl F_SETPIPE_SZ for changing it is Linux specific.
 
-            SafePipeHandle? serverHandle = null, clientHandle = null;
+            SafePipeHandle? serverHandle = null,
+                clientHandle = null;
             try
             {
                 if (direction == PipeDirection.In)
@@ -43,8 +51,10 @@ namespace System.IO.Pipes
             // as if we allowed the server fd to be inherited, then when this process
             // closes its end of the pipe, the client won't receive an EOF or broken
             // pipe notification, as the child will still have open its dup of the fd.
-            if (inheritability == HandleInheritability.Inheritable &&
-                Interop.Sys.Fcntl.SetFD(clientHandle, 0) == -1)
+            if (
+                inheritability == HandleInheritability.Inheritable
+                && Interop.Sys.Fcntl.SetFD(clientHandle, 0) == -1
+            )
             {
                 throw Interop.GetExceptionForIoErrno(Interop.Sys.GetLastErrorInfo());
             }

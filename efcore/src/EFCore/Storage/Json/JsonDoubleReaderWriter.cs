@@ -15,15 +15,15 @@ public sealed class JsonDoubleReaderWriter : JsonValueReaderWriter<double>
     /// </summary>
     public static JsonDoubleReaderWriter Instance { get; } = new();
 
-    private JsonDoubleReaderWriter()
-    {
-    }
+    private JsonDoubleReaderWriter() { }
 
     /// <inheritdoc />
-    public override double FromJsonTyped(ref Utf8JsonReaderManager manager, object? existingObject = null)
-        => manager.CurrentReader.GetDouble();
+    public override double FromJsonTyped(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    ) => manager.CurrentReader.GetDouble();
 
     /// <inheritdoc />
-    public override void ToJsonTyped(Utf8JsonWriter writer, double value)
-        => writer.WriteNumberValue(value);
+    public override void ToJsonTyped(Utf8JsonWriter writer, double value) =>
+        writer.WriteNumberValue(value);
 }

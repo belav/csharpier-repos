@@ -44,7 +44,9 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             return false;
         }
 
-        internal static DebuggerDisplayAttribute GetApplicableDebuggerDisplayAttribute(MemberInfo member)
+        internal static DebuggerDisplayAttribute GetApplicableDebuggerDisplayAttribute(
+            MemberInfo member
+        )
         {
             // Includes inherited attributes. The debugger uses the first attribute if multiple are applied.
             var result = member.GetCustomAttributes<DebuggerDisplayAttribute>().FirstOrDefault();
@@ -56,7 +58,9 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             // TODO (tomat): which assembly should we look at for dd attributes?
             if (member is TypeInfo type)
             {
-                foreach (DebuggerDisplayAttribute attr in type.Assembly.GetCustomAttributes<DebuggerDisplayAttribute>())
+                foreach (
+                    DebuggerDisplayAttribute attr in type.Assembly.GetCustomAttributes<DebuggerDisplayAttribute>()
+                )
                 {
                     if (IsApplicableAttribute(type, attr.Target.GetTypeInfo(), attr.TargetTypeName))
                     {
@@ -68,7 +72,9 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             return null;
         }
 
-        private static DebuggerTypeProxyAttribute GetApplicableDebuggerTypeProxyAttribute(TypeInfo type)
+        private static DebuggerTypeProxyAttribute GetApplicableDebuggerTypeProxyAttribute(
+            TypeInfo type
+        )
         {
             // includes inherited attributes. The debugger uses the first attribute if multiple are applied.
             var result = type.GetCustomAttributes<DebuggerTypeProxyAttribute>().FirstOrDefault();
@@ -78,7 +84,9 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             }
 
             // TODO (tomat): which assembly should we look at for proxy attributes?
-            foreach (DebuggerTypeProxyAttribute attr in type.Assembly.GetCustomAttributes<DebuggerTypeProxyAttribute>())
+            foreach (
+                DebuggerTypeProxyAttribute attr in type.Assembly.GetCustomAttributes<DebuggerTypeProxyAttribute>()
+            )
             {
                 if (IsApplicableAttribute(type, attr.Target.GetTypeInfo(), attr.TargetTypeName))
                 {
@@ -89,7 +97,11 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             return null;
         }
 
-        private static bool IsApplicableAttribute(TypeInfo type, TypeInfo targetType, string targetTypeName)
+        private static bool IsApplicableAttribute(
+            TypeInfo type,
+            TypeInfo targetType,
+            string targetTypeName
+        )
         {
             return type != null && AreEquivalent(targetType, type)
                 || targetTypeName != null && type.FullName == targetTypeName;
@@ -111,7 +123,11 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             {
                 try
                 {
-                    var proxyType = Type.GetType(debuggerTypeProxy.ProxyTypeName, throwOnError: false, ignoreCase: false);
+                    var proxyType = Type.GetType(
+                        debuggerTypeProxy.ProxyTypeName,
+                        throwOnError: false,
+                        ignoreCase: false
+                    );
                     if (proxyType != null)
                     {
                         if (proxyType.GetTypeInfo().IsGenericTypeDefinition)
@@ -183,7 +199,9 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 }
                 else
                 {
-                    members = ((IEnumerable<MemberInfo>)type.DeclaredFields).Concat(type.DeclaredProperties);
+                    members = ((IEnumerable<MemberInfo>)type.DeclaredFields).Concat(
+                        type.DeclaredProperties
+                    );
                 }
 
                 MemberInfo candidate = null;
@@ -236,7 +254,11 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             return null;
         }
 
-        internal static object GetMemberValue(MemberInfo member, object obj, out Exception exception)
+        internal static object GetMemberValue(
+            MemberInfo member,
+            object obj,
+            out Exception exception
+        )
         {
             exception = null;
 
@@ -365,7 +387,12 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             return SpecialType.None;
         }
 
-        internal static ObjectDisplayOptions GetObjectDisplayOptions(bool useQuotes = false, bool escapeNonPrintable = false, bool includeCodePoints = false, int numberRadix = NumberRadixDecimal)
+        internal static ObjectDisplayOptions GetObjectDisplayOptions(
+            bool useQuotes = false,
+            bool escapeNonPrintable = false,
+            bool includeCodePoints = false,
+            int numberRadix = NumberRadixDecimal
+        )
         {
             var options = ObjectDisplayOptions.None;
 
@@ -404,9 +431,15 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         // Parses
         // <clr-member-name>
         // <clr-member-name> ',' 'nq'
-        // <clr-member-name> '(' ')' 
+        // <clr-member-name> '(' ')'
         // <clr-member-name> '(' ')' ',' 'nq'
-        internal static string ParseSimpleMemberName(string str, int start, int end, out bool noQuotes, out bool isCallable)
+        internal static string ParseSimpleMemberName(
+            string str,
+            int start,
+            int end,
+            out bool noQuotes,
+            out bool isCallable
+        )
         {
             Debug.Assert(str != null && start >= 0 && end >= start);
 

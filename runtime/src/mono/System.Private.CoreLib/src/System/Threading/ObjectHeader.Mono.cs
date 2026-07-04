@@ -15,10 +15,10 @@ internal static class ObjectHeader
     [StructLayout(LayoutKind.Sequential)]
     private unsafe struct Header
     {
-#region Keep in sync with src/native/public/mono/metadata/details/object-types.h
+        #region Keep in sync with src/native/public/mono/metadata/details/object-types.h
         public void* vtable;
         public IntPtr synchronization; // really a LockWord
-#endregion // keep in sync with src/native/public/mono/metadata/details/object-types.h
+        #endregion // keep in sync with src/native/public/mono/metadata/details/object-types.h
     }
 
     // This is similar to QCallHandler ObjectHandleOnStack, but with a getter that let's view the
@@ -31,37 +31,40 @@ internal static class ObjectHeader
     private unsafe ref struct ObjectHeaderOnStack
     {
         private Header** _header;
+
         private ObjectHeaderOnStack(ref object o)
         {
             _header = (Header**)Unsafe.AsPointer(ref o);
         }
+
         public static ObjectHeaderOnStack Create(ref object o)
         {
             return new ObjectHeaderOnStack(ref o);
         }
-        public ref Header Header => ref Unsafe.AsRef<Header>(*_header);
 
+        public ref Header Header => ref Unsafe.AsRef<Header>(*_header);
     }
 
     [StructLayout(LayoutKind.Sequential)]
     private unsafe struct MonoThreadsSync
     {
-#region Keep in sync with monitor.h
+        #region Keep in sync with monitor.h
         // FIXME: volatile?
         public uint status;
         public uint nest;
         public int hash_code;
         // Note: more fields after here
-#endregion // keep in sync with monitor.h
+        #endregion // keep in sync with monitor.h
     }
 
     private static class SyncBlock
     {
         public static int HashCode(ref MonoThreadsSync mon) => mon.hash_code;
-        public static ref uint Status (ref MonoThreadsSync mon) => ref mon.status;
+
+        public static ref uint Status(ref MonoThreadsSync mon) => ref mon.status;
 
         // only call if current thread owns the lock
-        public static void IncrementNest (ref MonoThreadsSync mon)
+        public static void IncrementNest(ref MonoThreadsSync mon)
         {
             mon.nest++;
         }
@@ -69,7 +72,7 @@ internal static class ObjectHeader
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool TryDecrementNest(ref MonoThreadsSync mon)
         {
-            Debug.Assert (mon.nest > 0);
+            Debug.Assert(mon.nest > 0);
             if (mon.nest == 1)
             {
                 // leave mon.nest == 1, the caller will set mon.owner to 0 to indicate the monitor
@@ -86,16 +89,17 @@ internal static class ObjectHeader
     // </summary>
     private static class MonitorStatus
     {
-#region Keep in sync with monitor.h
+        #region Keep in sync with monitor.h
         private const uint OwnerMask = 0x0000ffffu;
         private const uint EntryCountMask = 0xffff0000u;
         private const uint EntryCountWaiters = 0x80000000u;
         //private const uint EntryCountZero = 0x7fff0000u;
         //private const int EntryCountShift = 16;
-#endregion // keep in sync with monitor.h
+        #endregion // keep in sync with monitor.h
 
         public static int GetOwner(uint status) => (int)(status & OwnerMask);
-        public static uint SetOwner (uint status, int owner)
+
+        public static uint SetOwner(uint status, int owner)
         {
             return (status & EntryCountMask) | (uint)owner;
         }
@@ -109,7 +113,7 @@ internal static class ObjectHeader
     [StructLayout(LayoutKind.Sequential)]
     private struct LockWord
     {
-#region Keep in sync with monitor.h
+        #region Keep in sync with monitor.h
 
         private IntPtr _lock_word;
 
@@ -134,7 +138,7 @@ internal static class ObjectHeader
             HasHash = 1,
             Inflated = 2,
         }
-#endregion // Keep in sync with monitor.h
+        #endregion // Keep in sync with monitor.h
 
         public bool IsInflated => (_lock_word & (IntPtr)Status.Inflated) != 0;
 
@@ -220,7 +224,7 @@ internal static class ObjectHeader
 
         public IntPtr AsIntPtr => _lock_word;
 
-        internal void SetFromIntPtr (IntPtr new_lw)
+        internal void SetFromIntPtr(IntPtr new_lw)
         {
             _lock_word = new_lw;
         }
@@ -233,9 +237,17 @@ internal static class ObjectHeader
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    private static IntPtr LockWordCompareExchange (ObjectHeaderOnStack h, LockWord nlw, LockWord expected)
+    private static IntPtr LockWordCompareExchange(
+        ObjectHeaderOnStack h,
+        LockWord nlw,
+        LockWord expected
+    )
     {
-        return Interlocked.CompareExchange (ref h.Header.synchronization, nlw.AsIntPtr, expected.AsIntPtr);
+        return Interlocked.CompareExchange(
+            ref h.Header.synchronization,
+            nlw.AsIntPtr,
+            expected.AsIntPtr
+        );
     }
 
     /// <summary>
@@ -250,13 +262,17 @@ internal static class ObjectHeader
             return true;
 
         ObjectHeaderOnStack h = ObjectHeaderOnStack.Create(ref o);
-        LockWord lw = GetLockWord (h);
-        if (lw.HasHash) {
-            if (lw.IsInflated) {
+        LockWord lw = GetLockWord(h);
+        if (lw.HasHash)
+        {
+            if (lw.IsInflated)
+            {
                 ref MonoThreadsSync mon = ref lw.GetInflatedLock();
                 hash = SyncBlock.HashCode(ref mon);
                 return true;
-            } else {
+            }
+            else
+            {
                 hash = lw.FlatHash;
                 return true;
             }
@@ -267,12 +283,15 @@ internal static class ObjectHeader
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static bool TryEnterInflatedFast(scoped ref MonoThreadsSync mon, int small_id)
     {
-
-        uint old_status = SyncBlock.Status (ref mon);
+        uint old_status = SyncBlock.Status(ref mon);
         if (MonitorStatus.GetOwner(old_status) == 0)
         {
             uint new_status = MonitorStatus.SetOwner(old_status, small_id);
-            uint prev_status = Interlocked.CompareExchange (ref SyncBlock.Status (ref mon), new_status, old_status);
+            uint prev_status = Interlocked.CompareExchange(
+                ref SyncBlock.Status(ref mon),
+                new_status,
+                old_status
+            );
             if (prev_status == old_status)
             {
                 return true;
@@ -283,7 +302,7 @@ internal static class ObjectHeader
         if (MonitorStatus.GetOwner(old_status) == small_id)
         {
             // we own it
-            SyncBlock.IncrementNest (ref mon);
+            SyncBlock.IncrementNest(ref mon);
             return true;
         }
         else
@@ -298,19 +317,21 @@ internal static class ObjectHeader
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool TryEnterFast(object? o)
     {
-        Debug.Assert (o != null);
-        ObjectHeaderOnStack h = ObjectHeaderOnStack.Create (ref o);
-        LockWord lw = GetLockWord (h);
-        if (!lw.IsInflated  && lw.HasHash)
+        Debug.Assert(o != null);
+        ObjectHeaderOnStack h = ObjectHeaderOnStack.Create(ref o);
+        LockWord lw = GetLockWord(h);
+        if (!lw.IsInflated && lw.HasHash)
             return false; // need to inflate, fall back to native
         int owner = Thread.CurrentThread.GetSmallId();
         if (lw.IsFree)
         {
             LockWord nlw = LockWord.NewFlat(owner);
-            if (LockWordCompareExchange (h, nlw, lw) == lw.AsIntPtr)
+            if (LockWordCompareExchange(h, nlw, lw) == lw.AsIntPtr)
             {
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
         }
@@ -326,9 +347,11 @@ internal static class ObjectHeader
                 {
                     // too much recursive locking, need to inflate
                     return false;
-                } else {
+                }
+                else
+                {
                     LockWord nlw = lw.IncrementNest();
-                    if (LockWordCompareExchange (h, nlw, lw) == lw.AsIntPtr)
+                    if (LockWordCompareExchange(h, nlw, lw) == lw.AsIntPtr)
                     {
                         return true;
                     }
@@ -342,7 +365,7 @@ internal static class ObjectHeader
             // there's contention, go to slow path
             return false;
         }
-        Debug.Assert (lw.HasHash);
+        Debug.Assert(lw.HasHash);
         return false;
     }
 
@@ -359,7 +382,8 @@ internal static class ObjectHeader
         }
         else if (lw.IsInflated)
         {
-            return MonitorStatus.GetOwner(lw.GetInflatedLock().status) == Thread.CurrentThread.GetSmallId();
+            return MonitorStatus.GetOwner(lw.GetInflatedLock().status)
+                == Thread.CurrentThread.GetSmallId();
         }
         return false;
     }
@@ -385,16 +409,16 @@ internal static class ObjectHeader
     private static bool TryExitInflated(scoped ref MonoThreadsSync mon)
     {
         // if we're in a nested lock, decrement the count and we're done
-        if (SyncBlock.TryDecrementNest (ref mon))
+        if (SyncBlock.TryDecrementNest(ref mon))
             return true;
 
-        ref uint status = ref SyncBlock.Status (ref mon);
+        ref uint status = ref SyncBlock.Status(ref mon);
         uint old_status = status;
         // if there are waiters, fall back to the slow path to wake them
-        if (MonitorStatus.HaveWaiters (old_status))
+        if (MonitorStatus.HaveWaiters(old_status))
             return false;
-        uint new_status = MonitorStatus.SetOwner (old_status, 0);
-        uint prev_status = Interlocked.CompareExchange (ref status, new_status, old_status);
+        uint new_status = MonitorStatus.SetOwner(old_status, 0);
+        uint prev_status = Interlocked.CompareExchange(ref status, new_status, old_status);
         if (prev_status == old_status)
             return true; // success, and there were no waiters, we're done
         else
@@ -404,8 +428,7 @@ internal static class ObjectHeader
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static bool TryExitFlat(ObjectHeaderOnStack h, LockWord lw)
     {
-
-        Debug.Assert (!lw.IsInflated);
+        Debug.Assert(!lw.IsInflated);
         // if the lock word is flat, there has been no contention
         LockWord nlw;
         if (lw.IsNested)
@@ -413,19 +436,18 @@ internal static class ObjectHeader
         else
             nlw = default;
 
-        if (LockWordCompareExchange (h, nlw, lw) == lw.AsIntPtr)
+        if (LockWordCompareExchange(h, nlw, lw) == lw.AsIntPtr)
             return true;
         // someone inflated the lock in the meantime, fall back to the slow path
 
         return false;
     }
 
-
     // checks that obj is locked by the current thread
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    #pragma warning disable IDE0060 // spurious "unused parameter" warning because we never use obj, just take aref to it.
+#pragma warning disable IDE0060 // spurious "unused parameter" warning because we never use obj, just take aref to it.
     public static bool TryExitChecked(object obj)
-    #pragma warning restore IDE0060
+#pragma warning restore IDE0060
     {
         ObjectHeaderOnStack h = ObjectHeaderOnStack.Create(ref obj);
         LockWord lw = GetLockWord(h);

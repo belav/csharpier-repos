@@ -11,7 +11,10 @@ namespace System.Reflection.Context.Projection
     {
         private readonly Projector _projector;
 
-        public ProjectingExceptionHandlingClause(ExceptionHandlingClause clause, Projector projector)
+        public ProjectingExceptionHandlingClause(
+            ExceptionHandlingClause clause,
+            Projector projector
+        )
             : base(clause)
         {
             Debug.Assert(null != projector);

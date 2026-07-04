@@ -1,5 +1,5 @@
 //
-// CodeTypeParameterCas.cs 
+// CodeTypeParameterCas.cs
 //	- CAS unit tests for System.CodeDom.CodeTypeParameter
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,62 +27,59 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-using NUnit.Framework;
-
 using System;
 using System.CodeDom;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.CodeDom {
+namespace MonoCasTests.System.CodeDom
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class CodeTypeParameterCas
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeTypeParameterCas {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted()
+        {
+            CodeTypeParameter ctp = new CodeTypeParameter();
+            Assert.AreEqual(0, ctp.Constraints.Count, "Constraints");
+            Assert.AreEqual(0, ctp.CustomAttributes.Count, "CustomAttributes");
+            Assert.IsFalse(ctp.HasConstructorConstraint, "HasConstructorConstraint");
+            ctp.HasConstructorConstraint = true;
+            Assert.AreEqual(String.Empty, ctp.Name);
+            ctp.Name = "mono";
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted()
+        {
+            CodeTypeParameter ctp = new CodeTypeParameter("mono");
+            Assert.AreEqual(0, ctp.Constraints.Count, "Constraints");
+            Assert.AreEqual(0, ctp.CustomAttributes.Count, "CustomAttributes");
+            Assert.IsFalse(ctp.HasConstructorConstraint, "HasConstructorConstraint");
+            ctp.HasConstructorConstraint = true;
+            Assert.AreEqual("mono", ctp.Name);
+            ctp.Name = String.Empty;
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodeTypeParameter ctp = new CodeTypeParameter ();
-			Assert.AreEqual (0, ctp.Constraints.Count, "Constraints");
-			Assert.AreEqual (0, ctp.CustomAttributes.Count, "CustomAttributes");
-			Assert.IsFalse (ctp.HasConstructorConstraint, "HasConstructorConstraint");
-			ctp.HasConstructorConstraint = true;
-			Assert.AreEqual (String.Empty, ctp.Name);
-			ctp.Name = "mono";
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			CodeTypeParameter ctp = new CodeTypeParameter ("mono");
-			Assert.AreEqual (0, ctp.Constraints.Count, "Constraints");
-			Assert.AreEqual (0, ctp.CustomAttributes.Count, "CustomAttributes");
-			Assert.IsFalse (ctp.HasConstructorConstraint, "HasConstructorConstraint");
-			ctp.HasConstructorConstraint = true;
-			Assert.AreEqual ("mono", ctp.Name);
-			ctp.Name = String.Empty;
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeTypeParameter).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            ConstructorInfo ci = typeof(CodeTypeParameter).GetConstructor(new Type[0]);
+            Assert.IsNotNull(ci, "default .ctor");
+            Assert.IsNotNull(ci.Invoke(null), "invoke");
+        }
+    }
 }
-

@@ -29,6 +29,7 @@ namespace MS.Internal.Xml.XPath
             _nsUri = string.Empty;
             this.qyInput = qyInput;
         }
+
         protected BaseAxisQuery(Query qyInput, string name, string prefix, XPathNodeType typeTest)
         {
             Debug.Assert(qyInput != null);
@@ -39,7 +40,9 @@ namespace MS.Internal.Xml.XPath
             _nameTest = prefix.Length != 0 || name.Length != 0;
             _nsUri = string.Empty;
         }
-        protected BaseAxisQuery(BaseAxisQuery other) : base(other)
+
+        protected BaseAxisQuery(BaseAxisQuery other)
+            : base(other)
         {
             this.qyInput = Clone(other.qyInput);
             _name = other._name;
@@ -55,7 +58,7 @@ namespace MS.Internal.Xml.XPath
         {
             position = 0;
             currentNode = null; // After this current will not point to context node from Evaluate() call
-                                // But this is ok, because there is no public Reset() on XPathNodeIterator
+            // But this is ok, because there is no public Reset() on XPathNodeIterator
             qyInput.Reset();
         }
 
@@ -66,20 +69,42 @@ namespace MS.Internal.Xml.XPath
             qyInput.SetXsltContext(context);
         }
 
-        protected string Name { get { return _name; } }
-        protected string? Namespace { get { return _nsUri; } }
-        protected bool NameTest { get { return _nameTest; } }
-        protected XPathNodeType TypeTest { get { return _typeTest; } }
+        protected string Name
+        {
+            get { return _name; }
+        }
+        protected string? Namespace
+        {
+            get { return _nsUri; }
+        }
+        protected bool NameTest
+        {
+            get { return _nameTest; }
+        }
+        protected XPathNodeType TypeTest
+        {
+            get { return _typeTest; }
+        }
 
-        public override int CurrentPosition { get { return position; } }
-        public override XPathNavigator? Current { get { return currentNode; } }
+        public override int CurrentPosition
+        {
+            get { return position; }
+        }
+        public override XPathNavigator? Current
+        {
+            get { return currentNode; }
+        }
 
         public virtual bool matches(XPathNavigator e)
         {
             if (
-                TypeTest == e.NodeType ||
-                TypeTest == XPathNodeType.All ||
-                TypeTest == XPathNodeType.Text && (e.NodeType == XPathNodeType.Whitespace || e.NodeType == XPathNodeType.SignificantWhitespace)
+                TypeTest == e.NodeType
+                || TypeTest == XPathNodeType.All
+                || TypeTest == XPathNodeType.Text
+                    && (
+                        e.NodeType == XPathNodeType.Whitespace
+                        || e.NodeType == XPathNodeType.SignificantWhitespace
+                    )
             )
             {
                 if (NameTest)
@@ -115,7 +140,7 @@ namespace MS.Internal.Xml.XPath
             {
                 if (qyInput.GetType() != typeof(ContextQuery))
                 {
-                    return 0.5;   // a/b a[b] id('s')/a
+                    return 0.5; // a/b a[b] id('s')/a
                 }
                 Debug.Assert(this is AttributeQuery || this is ChildrenQuery);
                 if (_name.Length != 0)
@@ -130,6 +155,9 @@ namespace MS.Internal.Xml.XPath
             }
         }
 
-        public override XPathResultType StaticType { get { return XPathResultType.NodeSet; } }
+        public override XPathResultType StaticType
+        {
+            get { return XPathResultType.NodeSet; }
+        }
     }
 }

@@ -281,8 +281,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void TextSpanOverlap04()
         {
-            TextSpan span1 = new TextSpan(10, 0);   // [10, 10)
-            TextSpan span2 = new TextSpan(5, 10);   // [5, 15)
+            TextSpan span1 = new TextSpan(10, 0); // [10, 10)
+            TextSpan span2 = new TextSpan(5, 10); // [5, 15)
 
             Assert.False(span1.OverlapsWith(span2));
             Assert.False(span2.OverlapsWith(span1));

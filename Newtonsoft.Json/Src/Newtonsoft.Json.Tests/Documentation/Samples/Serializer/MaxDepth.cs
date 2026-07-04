@@ -44,7 +44,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            string json = @"[
+            string json =
+                @"[
               [
                 [
                   '1',
@@ -56,10 +57,10 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
 
             try
             {
-                JsonConvert.DeserializeObject<List<IList<IList<string>>>>(json, new JsonSerializerSettings
-                {
-                    MaxDepth = 2
-                });
+                JsonConvert.DeserializeObject<List<IList<IList<string>>>>(
+                    json,
+                    new JsonSerializerSettings { MaxDepth = 2 }
+                );
             }
             catch (JsonReaderException ex)
             {

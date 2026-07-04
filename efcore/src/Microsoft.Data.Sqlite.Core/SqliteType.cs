@@ -29,6 +29,6 @@ namespace Microsoft.Data.Sqlite
         /// <summary>
         ///     A blob of data.
         /// </summary>
-        Blob = SQLITE_BLOB
+        Blob = SQLITE_BLOB,
     }
 }

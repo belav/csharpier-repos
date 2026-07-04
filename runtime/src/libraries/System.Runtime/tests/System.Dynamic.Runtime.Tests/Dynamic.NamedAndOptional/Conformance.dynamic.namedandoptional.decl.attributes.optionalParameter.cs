@@ -14,9 +14,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
 
     public class Parent
     {
-        public int Foo(
-        [Optional]
-        dynamic i)
+        public int Foo([Optional] dynamic i)
         {
             if (i == 0)
                 return 0;
@@ -27,6 +25,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private const int i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -42,8 +41,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.attributes.optionalParameter.opt01a.opt01a
 {
     // <Area>Use of Optional Parameters</Area>
@@ -55,9 +52,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
 
     public class Parent
     {
-        public int Foo(
-        [Optional]
-        int ? i)
+        public int Foo([Optional] int? i)
         {
             if (i == null)
                 return 0;
@@ -68,6 +63,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private const int i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -81,8 +77,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.attributes.optionalParameter.opt02.opt02
 {
@@ -95,9 +89,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
 
     public class Parent
     {
-        public int Foo(
-        [Optional]
-        dynamic i)
+        public int Foo([Optional] dynamic i)
         {
             if (i == 2)
                 return 0;
@@ -108,6 +100,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private const int i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -121,8 +114,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.attributes.optionalParameter.opt02a.opt02a
 {
@@ -135,9 +126,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
 
     public class Parent
     {
-        public int Foo(
-        [Optional]
-        int ? i)
+        public int Foo([Optional] int? i)
         {
             if (i == 2)
                 return 0;
@@ -148,6 +137,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private const int i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -162,8 +152,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.attributes.optionalParameter.opt03.opt03
 {
     // <Area>Use of Optional Parameters</Area>
@@ -171,13 +159,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     // <Description>Optional Parameters declared with Attributes</Description>
     // <Expects status=success></Expects>
     // <Code>
-    using System.Runtime.InteropServices;
     using System;
+    using System.Runtime.InteropServices;
 
     public class Parent
     {
-        public int Foo(int j, [Optional]
-        dynamic i)
+        public int Foo(int j, [Optional] dynamic i)
         {
             if (j == 2 && i == Type.Missing)
                 return 0;
@@ -188,6 +175,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private const int i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -201,8 +189,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.attributes.optionalParameter.opt03a.opt03a
 {
@@ -215,8 +201,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
 
     public class Parent
     {
-        public int Foo(int? j, [Optional]
-        int ? i)
+        public int Foo(int? j, [Optional] int? i)
         {
             if (j == 2 && i == null)
                 return 0;
@@ -227,6 +212,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private const int i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -241,8 +227,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.attributes.optionalParameter.opt04.opt04
 {
     // <Area>Use of Optional Parameters</Area>
@@ -254,10 +238,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
 
     public class Parent
     {
-        public int Foo(
-        [Optional]
-        dynamic j, [Optional]
-        dynamic i)
+        public int Foo([Optional] dynamic j, [Optional] dynamic i)
         {
             if (j == 2 && i == System.Type.Missing)
                 return 0;
@@ -268,6 +249,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private const int i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -281,8 +263,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.attributes.optionalParameter.opt04a.opt04a
 {
@@ -295,10 +275,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
 
     public class Parent
     {
-        public int Foo(
-        [Optional]
-        int ? j, [Optional]
-        int ? i)
+        public int Foo([Optional] int? j, [Optional] int? i)
         {
             if (j == 2 && i == null)
                 return 0;
@@ -309,6 +286,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private const int i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -323,8 +301,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.attributes.optionalParameter.opt07.opt07
 {
     // <Area>Use of Optional Parameters</Area>
@@ -336,9 +312,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
 
     public class Parent
     {
-        public int Foo(
-        [Optional]
-        dynamic j, dynamic i)
+        public int Foo([Optional] dynamic j, dynamic i)
         {
             if (j == System.Type.Missing && i == 2)
                 return 0;
@@ -349,6 +323,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private const int i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -362,8 +337,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.attributes.optionalParameter.opt07a.opt07a
 {
@@ -376,9 +349,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
 
     public class Parent
     {
-        public int Foo(
-        [Optional]
-        int ? j, int? i)
+        public int Foo([Optional] int? j, int? i)
         {
             if (j == null && i == 2)
                 return 0;
@@ -389,6 +360,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private const int i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -403,8 +375,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.attributes.optionalParameter.opt08.opt08
 {
     // <Area>Use of Optional Parameters</Area>
@@ -416,9 +386,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
 
     public class Parent
     {
-        public int Foo(
-        [Optional]
-        dynamic j, int i)
+        public int Foo([Optional] dynamic j, int i)
         {
             if (j == System.Type.Missing && i == 0)
                 return 0;
@@ -429,6 +397,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private const int i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -442,8 +411,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
         }
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.attributes.optionalParameter.opt08a.opt08a
 {
@@ -456,9 +423,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
 
     public class Parent
     {
-        public int Foo(
-        [Optional]
-        int ? j, int? i)
+        public int Foo([Optional] int? j, int? i)
         {
             if (j == null && i == 0)
                 return 0;
@@ -469,6 +434,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private const int i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -483,8 +449,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.attributes.optionalParameter.opt09.opt09
 {
     // <Area>Use of Optional Parameters</Area>
@@ -496,9 +460,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
 
     public class Parent
     {
-        public int Foo(
-        [Optional]
-        dynamic i)
+        public int Foo([Optional] dynamic i)
         {
             if (i == System.Type.Missing)
                 return 0;
@@ -509,6 +471,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private const int i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -523,8 +486,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     }
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.attributes.optionalParameter.opt09a.opt09a
 {
     // <Area>Use of Optional Parameters</Area>
@@ -536,9 +497,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
 
     public class Parent
     {
-        public int Foo(
-        [Optional]
-        string i)
+        public int Foo([Optional] string i)
         {
             if (i == null)
                 return 0;
@@ -549,6 +508,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.decl.a
     public class Test
     {
         private const int i = 5;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {

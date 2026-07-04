@@ -3,8 +3,10 @@
 
 #if ASSEMBLY_V2
 [assembly: System.Reflection.AssemblyVersion("2.0.0.0")]
+
 #else
 [assembly: System.Reflection.AssemblyVersion("1.0.0.0")]
+
 #endif
 
 namespace AssemblyToLoad

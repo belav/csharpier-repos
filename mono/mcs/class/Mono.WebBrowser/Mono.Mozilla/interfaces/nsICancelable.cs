@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,32 +26,31 @@
 //
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Mono.Mozilla {
+namespace Mono.Mozilla
+{
+    [Guid("d94ac0a0-bb18-46b8-844e-84159064b0bd")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsICancelable
+    {
+        #region nsICancelable
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int cancel(int aReason);
 
-	[Guid ("d94ac0a0-bb18-46b8-844e-84159064b0bd")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsICancelable {
+        #endregion
+    }
 
-#region nsICancelable
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int cancel (
-				   int aReason);
-
-#endregion
-	}
-
-
-	internal class nsCancelable {
-		public static nsICancelable GetProxy (Mono.WebBrowser.IWebBrowser control, nsICancelable obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsICancelable).GUID, obj);
-			return o as nsICancelable;
-		}
-	}
+    internal class nsCancelable
+    {
+        public static nsICancelable GetProxy(Mono.WebBrowser.IWebBrowser control, nsICancelable obj)
+        {
+            object o = Base.GetProxyForObject(control, typeof(nsICancelable).GUID, obj);
+            return o as nsICancelable;
+        }
+    }
 }

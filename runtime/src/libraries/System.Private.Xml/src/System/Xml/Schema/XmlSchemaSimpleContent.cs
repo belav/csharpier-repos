@@ -9,8 +9,10 @@ namespace System.Xml.Schema
     {
         private XmlSchemaContent? _content;
 
-        [XmlElement("restriction", typeof(XmlSchemaSimpleContentRestriction)),
-         XmlElement("extension", typeof(XmlSchemaSimpleContentExtension))]
+        [
+            XmlElement("restriction", typeof(XmlSchemaSimpleContentRestriction)),
+            XmlElement("extension", typeof(XmlSchemaSimpleContentExtension))
+        ]
         public override XmlSchemaContent? Content
         {
             get { return _content; }

@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 // 119019
 // execute the same throw in handler (int f1, f2) twice (accomplished by calling f1 twice)
 
@@ -36,12 +35,12 @@ namespace hello_samerethrowtwice_rethrow_cs
             testLog = new TestUtil.TestLog(expectedOut);
         }
 
-        static public void f3()
+        public static void f3()
         {
             throw new Exception();
         }
 
-        static public void f2()
+        public static void f2()
         {
             try
             {
@@ -55,7 +54,7 @@ namespace hello_samerethrowtwice_rethrow_cs
             }
         }
 
-        static public void f1()
+        public static void f1()
         {
             try
             {
@@ -70,7 +69,7 @@ namespace hello_samerethrowtwice_rethrow_cs
         }
 
         [Fact]
-        static public int TestEntryPoint()
+        public static int TestEntryPoint()
         {
             //Start recording
             testLog.StartRecording();
@@ -100,4 +99,3 @@ namespace hello_samerethrowtwice_rethrow_cs
         }
     }
 }
-

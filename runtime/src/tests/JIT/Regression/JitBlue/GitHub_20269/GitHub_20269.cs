@@ -2,22 +2,23 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Runtime.CompilerServices;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using Xunit;
 
 namespace GitHub_20269
 {
-    // This tests a case where 
+    // This tests a case where
     // 1) We merge returns.
     // 2) One of the returns has an operand that is a call to a multi-reg returning method.
     // 3) The call is marked as a tail-call candidate in the importer.
     // 3) The tail call is rejected late in morph.
-    // 
+    //
 
     public class Program
     {
         static int i;
+
         [Fact]
         public static int TestEntryPoint()
         {
@@ -33,7 +34,7 @@ namespace GitHub_20269
             DoNothing(ref x);
 
             // 5 returns are needed to trigger merge of returns
-            switch(i)
+            switch (i)
             {
                 case 1:
                     // This call is a tail-call candidate rejected late.
@@ -50,7 +51,6 @@ namespace GitHub_20269
 
                 default:
                     return new Vector<float>(100.0f);
-
             }
         }
 
@@ -61,8 +61,6 @@ namespace GitHub_20269
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        internal static void DoNothing(ref int i)
-        {
-        }
+        internal static void DoNothing(ref int i) { }
     }
 }

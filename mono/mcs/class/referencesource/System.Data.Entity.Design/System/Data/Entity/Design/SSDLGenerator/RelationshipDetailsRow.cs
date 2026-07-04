@@ -7,11 +7,11 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System.Collections.Generic;
-using System.Xml;
-using System.Data.Common;
-using System.Globalization;
 using System.Data;
+using System.Data.Common;
 using System.Data.Entity.Design.Common;
+using System.Globalization;
+using System.Xml;
 
 namespace System.Data.Entity.Design.SsdlGenerator
 {
@@ -20,7 +20,6 @@ namespace System.Data.Entity.Design.SsdlGenerator
     /// </summary>
     internal sealed class RelationshipDetailsRow : System.Data.DataRow
     {
-
         private RelationshipDetailsCollection _tableRelationshipDetails;
 
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -35,10 +34,7 @@ namespace System.Data.Entity.Design.SsdlGenerator
         /// </summary>
         public new RelationshipDetailsCollection Table
         {
-            get
-            {
-                return _tableRelationshipDetails;
-            }
+            get { return _tableRelationshipDetails; }
         }
 
         /// <summary>
@@ -54,13 +50,14 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
                 catch (System.InvalidCastException e)
                 {
-                    throw EDesignUtil.StonglyTypedAccessToNullValue(_tableRelationshipDetails.PKCatalogColumn.ColumnName, _tableRelationshipDetails.TableName, e);
+                    throw EDesignUtil.StonglyTypedAccessToNullValue(
+                        _tableRelationshipDetails.PKCatalogColumn.ColumnName,
+                        _tableRelationshipDetails.TableName,
+                        e
+                    );
                 }
             }
-            set
-            {
-                this[this._tableRelationshipDetails.PKCatalogColumn] = value;
-            }
+            set { this[this._tableRelationshipDetails.PKCatalogColumn] = value; }
         }
 
         /// <summary>
@@ -76,13 +73,14 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
                 catch (System.InvalidCastException e)
                 {
-                    throw EDesignUtil.StonglyTypedAccessToNullValue(_tableRelationshipDetails.PKSchemaColumn.ColumnName, _tableRelationshipDetails.TableName, e);
+                    throw EDesignUtil.StonglyTypedAccessToNullValue(
+                        _tableRelationshipDetails.PKSchemaColumn.ColumnName,
+                        _tableRelationshipDetails.TableName,
+                        e
+                    );
                 }
             }
-            set
-            {
-                this[this._tableRelationshipDetails.PKSchemaColumn] = value;
-            }
+            set { this[this._tableRelationshipDetails.PKSchemaColumn] = value; }
         }
 
         /// <summary>
@@ -98,13 +96,14 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
                 catch (System.InvalidCastException e)
                 {
-                    throw EDesignUtil.StonglyTypedAccessToNullValue(_tableRelationshipDetails.PKTableColumn.ColumnName, _tableRelationshipDetails.TableName, e);
+                    throw EDesignUtil.StonglyTypedAccessToNullValue(
+                        _tableRelationshipDetails.PKTableColumn.ColumnName,
+                        _tableRelationshipDetails.TableName,
+                        e
+                    );
                 }
             }
-            set
-            {
-                this[this._tableRelationshipDetails.PKTableColumn] = value;
-            }
+            set { this[this._tableRelationshipDetails.PKTableColumn] = value; }
         }
 
         /// <summary>
@@ -120,13 +119,14 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
                 catch (System.InvalidCastException e)
                 {
-                    throw EDesignUtil.StonglyTypedAccessToNullValue(_tableRelationshipDetails.PKColumnColumn.ColumnName, _tableRelationshipDetails.TableName, e);
+                    throw EDesignUtil.StonglyTypedAccessToNullValue(
+                        _tableRelationshipDetails.PKColumnColumn.ColumnName,
+                        _tableRelationshipDetails.TableName,
+                        e
+                    );
                 }
             }
-            set
-            {
-                this[this._tableRelationshipDetails.PKColumnColumn] = value;
-            }
+            set { this[this._tableRelationshipDetails.PKColumnColumn] = value; }
         }
 
         /// <summary>
@@ -142,13 +142,14 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
                 catch (System.InvalidCastException e)
                 {
-                    throw EDesignUtil.StonglyTypedAccessToNullValue(_tableRelationshipDetails.FKCatalogColumn.ColumnName, _tableRelationshipDetails.TableName, e);
+                    throw EDesignUtil.StonglyTypedAccessToNullValue(
+                        _tableRelationshipDetails.FKCatalogColumn.ColumnName,
+                        _tableRelationshipDetails.TableName,
+                        e
+                    );
                 }
             }
-            set
-            {
-                this[this._tableRelationshipDetails.FKCatalogColumn] = value;
-            }
+            set { this[this._tableRelationshipDetails.FKCatalogColumn] = value; }
         }
 
         /// <summary>
@@ -164,13 +165,14 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
                 catch (System.InvalidCastException e)
                 {
-                    throw EDesignUtil.StonglyTypedAccessToNullValue(_tableRelationshipDetails.FKSchemaColumn.ColumnName, _tableRelationshipDetails.TableName, e);
+                    throw EDesignUtil.StonglyTypedAccessToNullValue(
+                        _tableRelationshipDetails.FKSchemaColumn.ColumnName,
+                        _tableRelationshipDetails.TableName,
+                        e
+                    );
                 }
             }
-            set
-            {
-                this[this._tableRelationshipDetails.FKSchemaColumn] = value;
-            }
+            set { this[this._tableRelationshipDetails.FKSchemaColumn] = value; }
         }
 
         /// <summary>
@@ -186,13 +188,14 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
                 catch (System.InvalidCastException e)
                 {
-                    throw EDesignUtil.StonglyTypedAccessToNullValue(_tableRelationshipDetails.FKTableColumn.ColumnName, _tableRelationshipDetails.TableName, e);
+                    throw EDesignUtil.StonglyTypedAccessToNullValue(
+                        _tableRelationshipDetails.FKTableColumn.ColumnName,
+                        _tableRelationshipDetails.TableName,
+                        e
+                    );
                 }
             }
-            set
-            {
-                this[this._tableRelationshipDetails.FKTableColumn] = value;
-            }
+            set { this[this._tableRelationshipDetails.FKTableColumn] = value; }
         }
 
         /// <summary>
@@ -208,13 +211,14 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
                 catch (System.InvalidCastException e)
                 {
-                    throw EDesignUtil.StonglyTypedAccessToNullValue(_tableRelationshipDetails.FKColumnColumn.ColumnName, _tableRelationshipDetails.TableName, e);
+                    throw EDesignUtil.StonglyTypedAccessToNullValue(
+                        _tableRelationshipDetails.FKColumnColumn.ColumnName,
+                        _tableRelationshipDetails.TableName,
+                        e
+                    );
                 }
             }
-            set
-            {
-                this[this._tableRelationshipDetails.FKColumnColumn] = value;
-            }
+            set { this[this._tableRelationshipDetails.FKColumnColumn] = value; }
         }
 
         /// <summary>
@@ -230,13 +234,14 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
                 catch (System.InvalidCastException e)
                 {
-                    throw EDesignUtil.StonglyTypedAccessToNullValue(_tableRelationshipDetails.OrdinalColumn.ColumnName, _tableRelationshipDetails.TableName, e);
+                    throw EDesignUtil.StonglyTypedAccessToNullValue(
+                        _tableRelationshipDetails.OrdinalColumn.ColumnName,
+                        _tableRelationshipDetails.TableName,
+                        e
+                    );
                 }
             }
-            set
-            {
-                this[this._tableRelationshipDetails.OrdinalColumn] = value;
-            }
+            set { this[this._tableRelationshipDetails.OrdinalColumn] = value; }
         }
 
         /// <summary>
@@ -252,13 +257,14 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
                 catch (System.InvalidCastException e)
                 {
-                    throw EDesignUtil.StonglyTypedAccessToNullValue(_tableRelationshipDetails.RelationshipNameColumn.ColumnName, _tableRelationshipDetails.TableName, e);
+                    throw EDesignUtil.StonglyTypedAccessToNullValue(
+                        _tableRelationshipDetails.RelationshipNameColumn.ColumnName,
+                        _tableRelationshipDetails.TableName,
+                        e
+                    );
                 }
             }
-            set
-            {
-                this[this._tableRelationshipDetails.RelationshipNameColumn] = value;
-            }
+            set { this[this._tableRelationshipDetails.RelationshipNameColumn] = value; }
         }
 
         /// <summary>
@@ -274,14 +280,16 @@ namespace System.Data.Entity.Design.SsdlGenerator
                 }
                 catch (System.InvalidCastException e)
                 {
-                    throw EDesignUtil.StonglyTypedAccessToNullValue(_tableRelationshipDetails.RelationshipIdColumn.ColumnName, _tableRelationshipDetails.TableName, e);
+                    throw EDesignUtil.StonglyTypedAccessToNullValue(
+                        _tableRelationshipDetails.RelationshipIdColumn.ColumnName,
+                        _tableRelationshipDetails.TableName,
+                        e
+                    );
                 }
             }
-            set
-            {
-                this[this._tableRelationshipDetails.RelationshipIdColumn] = value;
-            }
+            set { this[this._tableRelationshipDetails.RelationshipIdColumn] = value; }
         }
+
         /// <summary>
         /// Gets the IsCascadeDelete column value
         /// </summary>
@@ -291,19 +299,23 @@ namespace System.Data.Entity.Design.SsdlGenerator
             {
                 try
                 {
-                    return ((bool)(this[this._tableRelationshipDetails.RelationshipIsCascadeDeleteColumn]));
+                    return (
+                        (bool)(
+                            this[this._tableRelationshipDetails.RelationshipIsCascadeDeleteColumn]
+                        )
+                    );
                 }
                 catch (System.InvalidCastException e)
                 {
-                    throw EDesignUtil.StonglyTypedAccessToNullValue(_tableRelationshipDetails.RelationshipIsCascadeDeleteColumn.ColumnName, _tableRelationshipDetails.TableName, e);
+                    throw EDesignUtil.StonglyTypedAccessToNullValue(
+                        _tableRelationshipDetails.RelationshipIsCascadeDeleteColumn.ColumnName,
+                        _tableRelationshipDetails.TableName,
+                        e
+                    );
                 }
             }
-            set
-            {
-                this[this._tableRelationshipDetails.RelationshipIsCascadeDeleteColumn] = value;
-            }
+            set { this[this._tableRelationshipDetails.RelationshipIsCascadeDeleteColumn] = value; }
         }
-
 
         /// <summary>
         /// Determines if the PkCatalog column value is null

@@ -10,6 +10,6 @@ namespace System.ServiceModel.Channels
         Completed,
         Abandoning,
         Abandoned,
-        Faulted
+        Faulted,
     }
 }

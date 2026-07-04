@@ -10,6 +10,6 @@ namespace Xunit
     {
         CoreCLR = 1,
         Mono = 2,
-        Any = ~0
+        Any = ~0,
     }
 }

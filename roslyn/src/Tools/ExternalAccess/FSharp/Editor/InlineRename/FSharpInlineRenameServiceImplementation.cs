@@ -9,6 +9,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor
 {
     internal abstract class FSharpInlineRenameServiceImplementation
     {
-        public abstract Task<FSharpInlineRenameInfo?> GetRenameInfoAsync(Document document, int position, CancellationToken cancellationToken);
+        public abstract Task<FSharpInlineRenameInfo?> GetRenameInfoAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
     }
 }

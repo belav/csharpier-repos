@@ -37,15 +37,32 @@ namespace System.Numerics.Tests
         public static void RunMultiply_TwoLargeBigIntegers_Threshold()
         {
             // Again, with lower threshold
-            BigIntTools.Utils.RunWithFakeThreshold("SquareThreshold", 8, () =>
-                BigIntTools.Utils.RunWithFakeThreshold("MultiplyThreshold", 8, RunMultiply_TwoLargeBigIntegers)
+            BigIntTools.Utils.RunWithFakeThreshold(
+                "SquareThreshold",
+                8,
+                () =>
+                    BigIntTools.Utils.RunWithFakeThreshold(
+                        "MultiplyThreshold",
+                        8,
+                        RunMultiply_TwoLargeBigIntegers
+                    )
             );
 
             // Again, with lower threshold
-            BigIntTools.Utils.RunWithFakeThreshold("SquareThreshold", 8, () =>
-                BigIntTools.Utils.RunWithFakeThreshold("MultiplyThreshold", 8, () =>
-                    BigIntTools.Utils.RunWithFakeThreshold("StackAllocThreshold", 8, RunMultiply_TwoLargeBigIntegers)
-                )
+            BigIntTools.Utils.RunWithFakeThreshold(
+                "SquareThreshold",
+                8,
+                () =>
+                    BigIntTools.Utils.RunWithFakeThreshold(
+                        "MultiplyThreshold",
+                        8,
+                        () =>
+                            BigIntTools.Utils.RunWithFakeThreshold(
+                                "StackAllocThreshold",
+                                8,
+                                RunMultiply_TwoLargeBigIntegers
+                            )
+                    )
             );
         }
 
@@ -79,11 +96,15 @@ namespace System.Numerics.Tests
                 {
                     tempByteArray1 = GetRandomByteArray(random);
                     tempByteArray2 = GetRandomByteArray(random, 2);
-                    VerifyMultiplyString(Print(tempByteArray1) + Print(tempByteArray2) + "bMultiply");
+                    VerifyMultiplyString(
+                        Print(tempByteArray1) + Print(tempByteArray2) + "bMultiply"
+                    );
 
                     tempByteArray1 = GetRandomByteArray(random, 2);
                     tempByteArray2 = GetRandomByteArray(random);
-                    VerifyMultiplyString(Print(tempByteArray1) + Print(tempByteArray2) + "bMultiply");
+                    VerifyMultiplyString(
+                        Print(tempByteArray1) + Print(tempByteArray2) + "bMultiply"
+                    );
                 }
                 catch (IndexOutOfRangeException)
                 {
@@ -142,8 +163,14 @@ namespace System.Numerics.Tests
             byte[] tempByteArray2 = new byte[0];
 
             // Axiom: X*1 = X
-            VerifyIdentityString(int.MaxValue + " " + BigInteger.One + " bMultiply", Int32.MaxValue.ToString());
-            VerifyIdentityString(long.MaxValue + " " + BigInteger.One + " bMultiply", Int64.MaxValue.ToString());
+            VerifyIdentityString(
+                int.MaxValue + " " + BigInteger.One + " bMultiply",
+                Int32.MaxValue.ToString()
+            );
+            VerifyIdentityString(
+                long.MaxValue + " " + BigInteger.One + " bMultiply",
+                Int64.MaxValue.ToString()
+            );
 
             for (int i = 0; i < s_samples; i++)
             {
@@ -160,13 +187,22 @@ namespace System.Numerics.Tests
             byte[] tempByteArray2 = new byte[0];
 
             // Axiom: X*0 = 0
-            VerifyIdentityString(int.MaxValue + " " + BigInteger.Zero + " bMultiply", BigInteger.Zero.ToString());
-            VerifyIdentityString(long.MaxValue + " " + BigInteger.Zero + " bMultiply", BigInteger.Zero.ToString());
+            VerifyIdentityString(
+                int.MaxValue + " " + BigInteger.Zero + " bMultiply",
+                BigInteger.Zero.ToString()
+            );
+            VerifyIdentityString(
+                long.MaxValue + " " + BigInteger.Zero + " bMultiply",
+                BigInteger.Zero.ToString()
+            );
 
             for (int i = 0; i < s_samples; i++)
             {
                 string randBigInt = Print(GetRandomByteArray(random));
-                VerifyIdentityString(randBigInt + BigInteger.Zero + " bMultiply", BigInteger.Zero.ToString());
+                VerifyIdentityString(
+                    randBigInt + BigInteger.Zero + " bMultiply",
+                    BigInteger.Zero.ToString()
+                );
             }
         }
 
@@ -178,13 +214,19 @@ namespace System.Numerics.Tests
             byte[] tempByteArray2 = new byte[0];
 
             // Axiom: a*b = b*a
-            VerifyIdentityString(int.MaxValue + " " + long.MaxValue + " bMultiply", long.MaxValue + " " + int.MaxValue + " bMultiply");
+            VerifyIdentityString(
+                int.MaxValue + " " + long.MaxValue + " bMultiply",
+                long.MaxValue + " " + int.MaxValue + " bMultiply"
+            );
 
             for (int i = 0; i < s_samples; i++)
             {
                 string randBigInt1 = Print(GetRandomByteArray(random));
                 string randBigInt2 = Print(GetRandomByteArray(random));
-                VerifyIdentityString(randBigInt1 + randBigInt2 + "bMultiply", randBigInt2 + randBigInt1 + "bMultiply");
+                VerifyIdentityString(
+                    randBigInt1 + randBigInt2 + "bMultiply",
+                    randBigInt2 + randBigInt1 + "bMultiply"
+                );
             }
         }
 
@@ -216,11 +258,19 @@ namespace System.Numerics.Tests
             {
                 for (int d1 = -2; d1 <= 2; d1++)
                 {
-                    tempByteArray1 = GetRandomByteArray(random, BigIntegerCalculator.MultiplyThreshold + d1);
+                    tempByteArray1 = GetRandomByteArray(
+                        random,
+                        BigIntegerCalculator.MultiplyThreshold + d1
+                    );
                     for (int d2 = -4; d2 <= 4; d2++)
                     {
-                        tempByteArray2 = GetRandomByteArray(random, (BigIntegerCalculator.MultiplyThreshold + 1) * 2 + d2);
-                        VerifyMultiplyString(Print(tempByteArray1) + Print(tempByteArray2) + "bMultiply");
+                        tempByteArray2 = GetRandomByteArray(
+                            random,
+                            (BigIntegerCalculator.MultiplyThreshold + 1) * 2 + d2
+                        );
+                        VerifyMultiplyString(
+                            Print(tempByteArray1) + Print(tempByteArray2) + "bMultiply"
+                        );
                     }
                 }
             }
@@ -240,7 +290,6 @@ namespace System.Numerics.Tests
                     tempByteArray1 = GetRandomByteArray(random);
                     string randBigInt = Print(tempByteArray1);
                     VerifyMultiplyString(randBigInt + randBigInt + "uNegate bMultiply");
-
                 }
                 catch (IndexOutOfRangeException)
                 {

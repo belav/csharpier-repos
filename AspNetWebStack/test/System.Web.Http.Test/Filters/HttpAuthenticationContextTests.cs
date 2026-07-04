@@ -19,7 +19,13 @@ namespace System.Web.Http.Controllers
             IPrincipal principal = CreateDummyPrincipal();
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => { CreateProductUnderTest(actionContext, principal); }, "actionContext");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    CreateProductUnderTest(actionContext, principal);
+                },
+                "actionContext"
+            );
         }
 
         [Fact]
@@ -28,7 +34,10 @@ namespace System.Web.Http.Controllers
             // Arrange
             HttpActionContext expectedActionContext = CreateActionContext();
             IPrincipal principal = CreateDummyPrincipal();
-            HttpAuthenticationContext product = CreateProductUnderTest(expectedActionContext, principal);
+            HttpAuthenticationContext product = CreateProductUnderTest(
+                expectedActionContext,
+                principal
+            );
 
             // Act
             HttpActionContext actionContext = product.ActionContext;
@@ -43,7 +52,10 @@ namespace System.Web.Http.Controllers
             // Arrange
             HttpActionContext actionContext = CreateActionContext();
             IPrincipal expectedPrincipal = CreateDummyPrincipal();
-            HttpAuthenticationContext product = CreateProductUnderTest(actionContext, expectedPrincipal);
+            HttpAuthenticationContext product = CreateProductUnderTest(
+                actionContext,
+                expectedPrincipal
+            );
 
             // Act
             IPrincipal principal = product.Principal;
@@ -60,7 +72,10 @@ namespace System.Web.Http.Controllers
             {
                 HttpActionContext actionContext = CreateActionContext(expectedRequest);
                 IPrincipal principal = CreateDummyPrincipal();
-                HttpAuthenticationContext product = CreateProductUnderTest(actionContext, principal);
+                HttpAuthenticationContext product = CreateProductUnderTest(
+                    actionContext,
+                    principal
+                );
 
                 // Act
                 HttpRequestMessage request = product.Request;
@@ -89,8 +104,10 @@ namespace System.Web.Http.Controllers
             return new Mock<IPrincipal>(MockBehavior.Strict).Object;
         }
 
-        private static HttpAuthenticationContext CreateProductUnderTest(HttpActionContext actionContext,
-            IPrincipal principal)
+        private static HttpAuthenticationContext CreateProductUnderTest(
+            HttpActionContext actionContext,
+            IPrincipal principal
+        )
         {
             return new HttpAuthenticationContext(actionContext, principal);
         }

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void SimpleAssembly()
         {
-            var text = @"namespace N
+            var text =
+                @"namespace N
 {
     class A {}
 }
@@ -32,7 +33,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             // See bug 2058: the following lines assume System.Reflection.AssemblyName preserves the case of
             // the "displayName" passed to it, but it sometimes does not.
             Assert.Equal(simpleName, sym.Name, StringComparer.OrdinalIgnoreCase);
-            Assert.Equal(simpleName + ", Version=0.0.0.0, Culture=neutral, PublicKeyToken=null", sym.ToTestDisplayString(), StringComparer.OrdinalIgnoreCase);
+            Assert.Equal(
+                simpleName + ", Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+                sym.ToTestDisplayString(),
+                StringComparer.OrdinalIgnoreCase
+            );
             Assert.Equal(String.Empty, sym.GlobalNamespace.Name);
             Assert.Equal(SymbolKind.Assembly, sym.Kind);
             Assert.Equal(Accessibility.NotApplicable, sym.DeclaredAccessibility);
@@ -46,13 +51,24 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Null(sym.ContainingSymbol);
         }
 
-        [Theory, MemberData(nameof(FileScopedOrBracedNamespace)), WorkItem(1979, "DevDiv_Projects/Roslyn"), WorkItem(2026, "DevDiv_Projects/Roslyn"), WorkItem(544009, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544009")]
+        [
+            Theory,
+            MemberData(nameof(FileScopedOrBracedNamespace)),
+            WorkItem(1979, "DevDiv_Projects/Roslyn"),
+            WorkItem(2026, "DevDiv_Projects/Roslyn"),
+            WorkItem(544009, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544009")
+        ]
         public void SourceModule(string ob, string cb)
         {
-            var text = @"namespace NS.NS1.NS2
-" + ob + @"
+            var text =
+                @"namespace NS.NS1.NS2
+"
+                + ob
+                + @"
     class A {}
-" + cb + @"
+"
+                + cb
+                + @"
 ";
             var comp = CreateCompilation(text, assemblyName: "Test");
 
@@ -72,8 +88,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal("Test", sym.ContainingSymbol.Name);
 
             var ns = comp.GlobalNamespace.GetMembers("NS").Single() as NamespaceSymbol;
-            var ns1 = (ns.GetMembers("NS1").Single() as NamespaceSymbol).GetMembers("NS2").Single() as NamespaceSymbol;
-            // NamespaceExtent 
+            var ns1 =
+                (ns.GetMembers("NS1").Single() as NamespaceSymbol).GetMembers("NS2").Single()
+                as NamespaceSymbol;
+            // NamespaceExtent
             var ext = ns1.Extent;
             Assert.Equal(NamespaceKind.Module, ext.Kind);
             Assert.Equal(1, ns1.ConstituentNamespaces.Length);
@@ -86,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void SimpleNamespace()
         {
-            var text = @"namespace N1
+            var text =
+                @"namespace N1
 {
     namespace N11 {
         namespace N111 {
@@ -99,7 +118,8 @@ namespace N1 {
     struct S {}
 }
 ";
-            var text1 = @"namespace N1
+            var text1 =
+                @"namespace N1
 {
     namespace N11 {
         namespace N111 {
@@ -108,33 +128,48 @@ namespace N1 {
     }
 }
 ";
-            var text2 = @"namespace N1
+            var text2 =
+                @"namespace N1
     namespace N12 {
          struct S {}
     }
 }
 ";
-            var comp1 = CSharpCompilation.Create(assemblyName: "Test", options: TestOptions.DebugExe,
-                            syntaxTrees: new SyntaxTree[] { SyntaxFactory.ParseSyntaxTree(text) }, references: new MetadataReference[] { });
+            var comp1 = CSharpCompilation.Create(
+                assemblyName: "Test",
+                options: TestOptions.DebugExe,
+                syntaxTrees: new SyntaxTree[] { SyntaxFactory.ParseSyntaxTree(text) },
+                references: new MetadataReference[] { }
+            );
             var compRef = new CSharpCompilationReference(comp1);
 
-            var comp = CSharpCompilation.Create(assemblyName: "Test1", options: TestOptions.DebugExe,
-                            syntaxTrees: new SyntaxTree[] { SyntaxFactory.ParseSyntaxTree(text1), SyntaxFactory.ParseSyntaxTree(text2) },
-                            references: new MetadataReference[] { compRef });
+            var comp = CSharpCompilation.Create(
+                assemblyName: "Test1",
+                options: TestOptions.DebugExe,
+                syntaxTrees: new SyntaxTree[]
+                {
+                    SyntaxFactory.ParseSyntaxTree(text1),
+                    SyntaxFactory.ParseSyntaxTree(text2),
+                },
+                references: new MetadataReference[] { compRef }
+            );
 
             var global = comp.GlobalNamespace;
             var ns = global.GetMembers("N1").Single() as NamespaceSymbol;
             Assert.Equal(1, ns.GetTypeMembers().Length); // S
             Assert.Equal(3, ns.GetMembers().Length); // N11, N12, S
 
-            var ns1 = (ns.GetMembers("N11").Single() as NamespaceSymbol).GetMembers("N111").Single() as NamespaceSymbol;
+            var ns1 =
+                (ns.GetMembers("N11").Single() as NamespaceSymbol).GetMembers("N111").Single()
+                as NamespaceSymbol;
             Assert.Equal(2, ns1.GetTypeMembers().Length); // A & B
         }
 
         [Fact]
         public void UsingAliasForNamespace()
         {
-            var text = @"using Gen = System.Collections.Generic;
+            var text =
+                @"using Gen = System.Collections.Generic;
 
 namespace NS {
     public interface IGoo {}
@@ -145,13 +180,15 @@ namespace NS.NS1 {
     class A : F { }
 }
 ";
-            var text1 = @"namespace NS.NS1 {
+            var text1 =
+                @"namespace NS.NS1 {
     public class B {
         protected Gen.List<int> field;
     }
 }
 ";
-            var text2 = @"namespace NS {
+            var text2 =
+                @"namespace NS {
     namespace NS2 {
         using NN = NS.NS1;
         class C : NN.B { }
@@ -161,9 +198,16 @@ namespace NS.NS1 {
             var comp1 = CreateCompilation(text);
             var compRef = new CSharpCompilationReference(comp1);
 
-            var comp = CSharpCompilation.Create(assemblyName: "Test1", options: TestOptions.DebugExe,
-                            syntaxTrees: new SyntaxTree[] { SyntaxFactory.ParseSyntaxTree(text1), SyntaxFactory.ParseSyntaxTree(text2) },
-                            references: new MetadataReference[] { compRef });
+            var comp = CSharpCompilation.Create(
+                assemblyName: "Test1",
+                options: TestOptions.DebugExe,
+                syntaxTrees: new SyntaxTree[]
+                {
+                    SyntaxFactory.ParseSyntaxTree(text1),
+                    SyntaxFactory.ParseSyntaxTree(text2),
+                },
+                references: new MetadataReference[] { compRef }
+            );
 
             var global = comp.GlobalNamespace;
             var ns = global.GetMembers("NS").Single() as NamespaceSymbol;
@@ -184,20 +228,35 @@ namespace NS.NS1 {
         [Theory, MemberData(nameof(FileScopedOrBracedNamespace))]
         public void MultiModulesNamespace(string ob, string cb)
         {
-            var text1 = @"namespace N1
-" + ob + @"
+            var text1 =
+                @"namespace N1
+"
+                + ob
+                + @"
     class A {}
-" + cb + @"
+"
+                + cb
+                + @"
 ";
-            var text2 = @"namespace N1
-" + ob + @"
+            var text2 =
+                @"namespace N1
+"
+                + ob
+                + @"
     interface IGoo {}
-" + cb + @"
+"
+                + cb
+                + @"
 ";
-            var text3 = @"namespace N1
-" + ob + @"
+            var text3 =
+                @"namespace N1
+"
+                + ob
+                + @"
     struct SGoo {}
-" + cb + @"
+"
+                + cb
+                + @"
 ";
             var comp1 = CreateCompilation(text1, assemblyName: "Compilation1");
             var comp2 = CreateCompilation(text2, assemblyName: "Compilation2");
@@ -205,7 +264,11 @@ namespace NS.NS1 {
             var compRef1 = new CSharpCompilationReference(comp1);
             var compRef2 = new CSharpCompilationReference(comp2);
 
-            var comp = CreateEmptyCompilation(new string[] { text3 }, references: new MetadataReference[] { compRef1, compRef2 }.ToList(), assemblyName: "Test3");
+            var comp = CreateEmptyCompilation(
+                new string[] { text3 },
+                references: new MetadataReference[] { compRef1, compRef2 }.ToList(),
+                assemblyName: "Test3"
+            );
             //Compilation.Create(outputName: "Test3", options: CompilationOptions.Default,
             //                        syntaxTrees: new SyntaxTree[] { SyntaxTree.ParseCompilationUnit(text3) },
             //                        references: new MetadataReference[] { compRef1, compRef2 });
@@ -217,9 +280,25 @@ namespace NS.NS1 {
 
             var constituents = ns.ConstituentNamespaces;
             Assert.Equal(3, constituents.Length);
-            Assert.True(constituents.Contains(comp.SourceAssembly.GlobalNamespace.GetMembers("N1").Single() as NamespaceSymbol));
-            Assert.True(constituents.Contains(comp.GetReferencedAssemblySymbol(compRef1).GlobalNamespace.GetMembers("N1").Single() as NamespaceSymbol));
-            Assert.True(constituents.Contains(comp.GetReferencedAssemblySymbol(compRef2).GlobalNamespace.GetMembers("N1").Single() as NamespaceSymbol));
+            Assert.True(
+                constituents.Contains(
+                    comp.SourceAssembly.GlobalNamespace.GetMembers("N1").Single() as NamespaceSymbol
+                )
+            );
+            Assert.True(
+                constituents.Contains(
+                    comp.GetReferencedAssemblySymbol(compRef1)
+                        .GlobalNamespace.GetMembers("N1")
+                        .Single() as NamespaceSymbol
+                )
+            );
+            Assert.True(
+                constituents.Contains(
+                    comp.GetReferencedAssemblySymbol(compRef2)
+                        .GlobalNamespace.GetMembers("N1")
+                        .Single() as NamespaceSymbol
+                )
+            );
 
             foreach (var constituentNs in constituents)
             {
@@ -232,31 +311,47 @@ namespace NS.NS1 {
         [Fact]
         public void MultiModulesNamespaceCorLibraries()
         {
-            var text1 = @"namespace N1
+            var text1 =
+                @"namespace N1
 {
     class A {}
 }
 ";
-            var text2 = @"namespace N1
+            var text2 =
+                @"namespace N1
 {
     interface IGoo {}
 }
 ";
-            var text3 = @"namespace N1
+            var text3 =
+                @"namespace N1
 {
     struct SGoo {}
 }
 ";
 
-            var comp1 = CSharpCompilation.Create(assemblyName: "Test1", options: TestOptions.DebugExe, syntaxTrees: new SyntaxTree[] { SyntaxFactory.ParseSyntaxTree(text1) }, references: new MetadataReference[] { });
-            var comp2 = CSharpCompilation.Create(assemblyName: "Test2", options: TestOptions.DebugExe, syntaxTrees: new SyntaxTree[] { SyntaxFactory.ParseSyntaxTree(text2) }, references: new MetadataReference[] { });
+            var comp1 = CSharpCompilation.Create(
+                assemblyName: "Test1",
+                options: TestOptions.DebugExe,
+                syntaxTrees: new SyntaxTree[] { SyntaxFactory.ParseSyntaxTree(text1) },
+                references: new MetadataReference[] { }
+            );
+            var comp2 = CSharpCompilation.Create(
+                assemblyName: "Test2",
+                options: TestOptions.DebugExe,
+                syntaxTrees: new SyntaxTree[] { SyntaxFactory.ParseSyntaxTree(text2) },
+                references: new MetadataReference[] { }
+            );
 
             var compRef1 = new CSharpCompilationReference(comp1);
             var compRef2 = new CSharpCompilationReference(comp2);
 
-            var comp = CSharpCompilation.Create(assemblyName: "Test3", options: TestOptions.DebugExe,
-                                        syntaxTrees: new SyntaxTree[] { SyntaxFactory.ParseSyntaxTree(text3) },
-                                        references: new MetadataReference[] { compRef1, compRef2 });
+            var comp = CSharpCompilation.Create(
+                assemblyName: "Test3",
+                options: TestOptions.DebugExe,
+                syntaxTrees: new SyntaxTree[] { SyntaxFactory.ParseSyntaxTree(text3) },
+                references: new MetadataReference[] { compRef1, compRef2 }
+            );
 
             var global = comp.GlobalNamespace; // throw
             var ns = global.GetMembers("N1").Single() as NamespaceSymbol;
@@ -265,17 +360,36 @@ namespace NS.NS1 {
 
             var constituents = ns.ConstituentNamespaces;
             Assert.Equal(3, constituents.Length);
-            Assert.True(constituents.Contains(comp.SourceAssembly.GlobalNamespace.GetMembers("N1").Single() as NamespaceSymbol));
-            Assert.True(constituents.Contains(comp.GetReferencedAssemblySymbol(compRef1).GlobalNamespace.GetMembers("N1").Single() as NamespaceSymbol));
-            Assert.True(constituents.Contains(comp.GetReferencedAssemblySymbol(compRef2).GlobalNamespace.GetMembers("N1").Single() as NamespaceSymbol));
+            Assert.True(
+                constituents.Contains(
+                    comp.SourceAssembly.GlobalNamespace.GetMembers("N1").Single() as NamespaceSymbol
+                )
+            );
+            Assert.True(
+                constituents.Contains(
+                    comp.GetReferencedAssemblySymbol(compRef1)
+                        .GlobalNamespace.GetMembers("N1")
+                        .Single() as NamespaceSymbol
+                )
+            );
+            Assert.True(
+                constituents.Contains(
+                    comp.GetReferencedAssemblySymbol(compRef2)
+                        .GlobalNamespace.GetMembers("N1")
+                        .Single() as NamespaceSymbol
+                )
+            );
         }
 
         /// Container with nested types and non-type members with the same name
         [Theory, MemberData(nameof(FileScopedOrBracedNamespace))]
         public void ClassWithNestedTypesAndMembersWithSameName(string ob, string cb)
         {
-            var text1 = @"namespace N1
-" + ob + @"
+            var text1 =
+                @"namespace N1
+"
+                + ob
+                + @"
     class A 
     {
         class b
@@ -292,13 +406,16 @@ namespace NS.NS1 {
 
         int b(string s){}
     }
-" + cb + @"
+"
+                + cb
+                + @"
 ";
 
             var comp = CSharpCompilation.Create(
                 assemblyName: "Test1",
                 syntaxTrees: new SyntaxTree[] { SyntaxFactory.ParseSyntaxTree(text1) },
-                references: new MetadataReference[] { });
+                references: new MetadataReference[] { }
+            );
             var global = comp.GlobalNamespace; // throw
             var ns = global.GetMembers("N1").Single() as NamespaceSymbol;
             Assert.Equal(1, ns.GetTypeMembers().Length); // A
@@ -310,7 +427,8 @@ namespace NS.NS1 {
         [Fact]
         public void GetDeclaredSymbolDupNsAliasErr()
         {
-            var compilation = CreateEmptyCompilation(@"
+            var compilation = CreateEmptyCompilation(
+                @"
 namespace NS1 {
 	class A { }
 }	
@@ -326,7 +444,8 @@ namespace NS
 
 	class C : ns.A {}
 }
-");
+"
+            );
             var tree = compilation.SyntaxTrees[0];
             var root = tree.GetCompilationUnitRoot();
             var model = compilation.GetSemanticModel(tree);
@@ -341,17 +460,23 @@ namespace NS
         [Theory, MemberData(nameof(FileScopedOrBracedNamespace))]
         public void GenericNamespace(string ob, string cb)
         {
-            var compilation = CreateEmptyCompilation(@"
+            var compilation = CreateEmptyCompilation(
+                @"
 namespace Goo<T>
-" + ob + @"
+"
+                    + ob
+                    + @"
     class Program    
     {        
         static void Main()
         { 
         }
     }
-" + cb + @"
-");
+"
+                    + cb
+                    + @"
+"
+            );
             var global = compilation.GlobalNamespace;
 
             var @namespace = global.GetMember<NamespaceSymbol>("Goo");
@@ -370,7 +495,9 @@ namespace Goo<T>
         {
             var source = @"public class C { }";
 
-            var aliasedCorlib = TestMetadata.Net451.mscorlib.WithAliases(ImmutableArray.Create("Goo"));
+            var aliasedCorlib = TestMetadata.Net451.mscorlib.WithAliases(
+                ImmutableArray.Create("Goo")
+            );
 
             var comp = CreateEmptyCompilation(source, new[] { aliasedCorlib });
 
@@ -383,14 +510,18 @@ namespace Goo<T>
             Assert.Equal("System.Object", objectType.ToTestDisplayString());
 
             Assert.Equal(objectType, comp.Assembly.GetSpecialType(SpecialType.System_Object));
-            Assert.Equal(objectType, comp.Assembly.CorLibrary.GetSpecialType(SpecialType.System_Object));
+            Assert.Equal(
+                objectType,
+                comp.Assembly.CorLibrary.GetSpecialType(SpecialType.System_Object)
+            );
         }
 
         [WorkItem(690871, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/690871")]
         [Fact]
         public void WellKnownTypesAndAliases()
         {
-            var lib = @"
+            var lib =
+                @"
 namespace System.Threading.Tasks
 {
     public class Task
@@ -399,7 +530,8 @@ namespace System.Threading.Tasks
     }
 }
 ";
-            var source = @"
+            var source =
+                @"
 extern alias myTask;
 using System.Threading;
 using System.Threading.Tasks;
@@ -428,7 +560,8 @@ class App
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Threading.Tasks;"),
                 // (2,1): info CS8020: Unused extern alias.
                 // extern alias myTask;
-                Diagnostic(ErrorCode.HDN_UnusedExternAlias, "extern alias myTask;"));
+                Diagnostic(ErrorCode.HDN_UnusedExternAlias, "extern alias myTask;")
+            );
 
             var taskType = comp.GetWellKnownType(WellKnownType.System_Threading_Tasks_Task);
             Assert.Equal(TypeKind.Class, taskType.TypeKind);
@@ -436,16 +569,22 @@ class App
 
             // When we look in a single assembly, we don't consider referenced assemblies.
             Assert.Null(comp.Assembly.GetTypeByMetadataName("System.Threading.Tasks.Task"));
-            Assert.Equal(taskType, comp.Assembly.CorLibrary.GetTypeByMetadataName("System.Threading.Tasks.Task"));
+            Assert.Equal(
+                taskType,
+                comp.Assembly.CorLibrary.GetTypeByMetadataName("System.Threading.Tasks.Task")
+            );
         }
 
         [WorkItem(863435, "DevDiv/Personal")]
         [Theory, MemberData(nameof(FileScopedOrBracedNamespace))]
         public void CS1671ERR_BadModifiersOnNamespace01(string ob, string cb)
         {
-            var test = @"
+            var test =
+                @"
 public namespace NS // CS1671
-" + ob + @"
+"
+                + ob
+                + @"
     class Test
     {
         public static int Main()
@@ -453,188 +592,263 @@ public namespace NS // CS1671
             return 1;
         }
     }
-" + cb + @"
+"
+                + cb
+                + @"
 ";
-            CreateCompilationWithMscorlib45(test, parseOptions: TestOptions.RegularWithFileScopedNamespaces).VerifyDiagnostics(
-                // (2,1): error CS1671: A namespace declaration cannot have modifiers or attributes
-                Diagnostic(ErrorCode.ERR_BadModifiersOnNamespace, "public").WithLocation(2, 1));
+            CreateCompilationWithMscorlib45(
+                    test,
+                    parseOptions: TestOptions.RegularWithFileScopedNamespaces
+                )
+                .VerifyDiagnostics(
+                    // (2,1): error CS1671: A namespace declaration cannot have modifiers or attributes
+                    Diagnostic(ErrorCode.ERR_BadModifiersOnNamespace, "public").WithLocation(2, 1)
+                );
         }
 
         [Fact]
         public void CS1671ERR_BadModifiersOnNamespace02()
         {
-            var test = @"[System.Obsolete]
+            var test =
+                @"[System.Obsolete]
 namespace N { }
 ";
 
-            CreateCompilationWithMscorlib45(test).VerifyDiagnostics(
-                // (2,1): error CS1671: A namespace declaration cannot have modifiers or attributes
-                Diagnostic(ErrorCode.ERR_BadModifiersOnNamespace, "[System.Obsolete]").WithLocation(1, 1));
+            CreateCompilationWithMscorlib45(test)
+                .VerifyDiagnostics(
+                    // (2,1): error CS1671: A namespace declaration cannot have modifiers or attributes
+                    Diagnostic(ErrorCode.ERR_BadModifiersOnNamespace, "[System.Obsolete]")
+                        .WithLocation(1, 1)
+                );
         }
 
         [Fact]
         public void NamespaceWithSemicolon1()
         {
-            var test =
-@"namespace A;";
+            var test = @"namespace A;";
 
-            CreateCompilationWithMscorlib45(test, parseOptions: TestOptions.RegularWithFileScopedNamespaces).VerifyDiagnostics();
+            CreateCompilationWithMscorlib45(
+                    test,
+                    parseOptions: TestOptions.RegularWithFileScopedNamespaces
+                )
+                .VerifyDiagnostics();
         }
 
         [Fact]
         public void NamespaceWithSemicolon3()
         {
-            var test =
-@"namespace A.B;";
+            var test = @"namespace A.B;";
 
-            CreateCompilationWithMscorlib45(test, parseOptions: TestOptions.RegularWithFileScopedNamespaces).VerifyDiagnostics();
+            CreateCompilationWithMscorlib45(
+                    test,
+                    parseOptions: TestOptions.RegularWithFileScopedNamespaces
+                )
+                .VerifyDiagnostics();
         }
 
         [Fact]
         public void MultipleFileScopedNamespaces()
         {
             var test =
-@"namespace A;
+                @"namespace A;
 namespace B;";
 
-            CreateCompilationWithMscorlib45(test, parseOptions: TestOptions.RegularWithFileScopedNamespaces).VerifyDiagnostics(
-                // (2,11): error CS8907: Source file can only contain one file-scoped namespace declaration.
-                // namespace B;
-                Diagnostic(ErrorCode.ERR_MultipleFileScopedNamespace, "B").WithLocation(2, 11));
+            CreateCompilationWithMscorlib45(
+                    test,
+                    parseOptions: TestOptions.RegularWithFileScopedNamespaces
+                )
+                .VerifyDiagnostics(
+                    // (2,11): error CS8907: Source file can only contain one file-scoped namespace declaration.
+                    // namespace B;
+                    Diagnostic(ErrorCode.ERR_MultipleFileScopedNamespace, "B").WithLocation(2, 11)
+                );
         }
 
         [Fact]
         public void FileScopedNamespaceNestedInNormalNamespace()
         {
             var test =
-@"namespace A
+                @"namespace A
 {
     namespace B;
 }";
 
-            CreateCompilationWithMscorlib45(test, parseOptions: TestOptions.RegularWithFileScopedNamespaces).VerifyDiagnostics(
-                // (3,15): error CS8908: Source file can not contain both file-scoped and normal namespace declarations.
-                //     namespace B;
-                Diagnostic(ErrorCode.ERR_FileScopedAndNormalNamespace, "B").WithLocation(3, 15));
+            CreateCompilationWithMscorlib45(
+                    test,
+                    parseOptions: TestOptions.RegularWithFileScopedNamespaces
+                )
+                .VerifyDiagnostics(
+                    // (3,15): error CS8908: Source file can not contain both file-scoped and normal namespace declarations.
+                    //     namespace B;
+                    Diagnostic(ErrorCode.ERR_FileScopedAndNormalNamespace, "B")
+                        .WithLocation(3, 15)
+                );
         }
 
         [Fact]
         public void NormalAndFileScopedNamespace1()
         {
             var test =
-@"namespace A;
+                @"namespace A;
 namespace B
 {
 }";
 
-            CreateCompilationWithMscorlib45(test, parseOptions: TestOptions.RegularWithFileScopedNamespaces).VerifyDiagnostics(
-                // (2,11): error CS8908: error CS8908: Source file can not contain both file-scoped and normal namespace declarations.
-                // namespace B
-                Diagnostic(ErrorCode.ERR_FileScopedAndNormalNamespace, "B").WithLocation(2, 11));
+            CreateCompilationWithMscorlib45(
+                    test,
+                    parseOptions: TestOptions.RegularWithFileScopedNamespaces
+                )
+                .VerifyDiagnostics(
+                    // (2,11): error CS8908: error CS8908: Source file can not contain both file-scoped and normal namespace declarations.
+                    // namespace B
+                    Diagnostic(ErrorCode.ERR_FileScopedAndNormalNamespace, "B")
+                        .WithLocation(2, 11)
+                );
         }
 
         [Fact]
         public void NormalAndFileScopedNamespace2()
         {
             var test =
-@"namespace A
+                @"namespace A
 {
 }
 namespace B;";
 
-            CreateCompilationWithMscorlib45(test, parseOptions: TestOptions.RegularWithFileScopedNamespaces).VerifyDiagnostics(
-                // (4,11): error CS8909: File-scoped namespace must precede all other members in a file.
-                // namespace B;
-                Diagnostic(ErrorCode.ERR_FileScopedNamespaceNotBeforeAllMembers, "B").WithLocation(4, 11));
+            CreateCompilationWithMscorlib45(
+                    test,
+                    parseOptions: TestOptions.RegularWithFileScopedNamespaces
+                )
+                .VerifyDiagnostics(
+                    // (4,11): error CS8909: File-scoped namespace must precede all other members in a file.
+                    // namespace B;
+                    Diagnostic(ErrorCode.ERR_FileScopedNamespaceNotBeforeAllMembers, "B")
+                        .WithLocation(4, 11)
+                );
         }
 
         [Fact]
         public void NamespaceWithPrecedingUsing()
         {
             var test =
-@"using System;
+                @"using System;
 namespace A;";
 
-            CreateCompilationWithMscorlib45(test, parseOptions: TestOptions.RegularWithFileScopedNamespaces).VerifyDiagnostics(
-                // (1,1): hidden CS8019: Unnecessary using directive.
-                // using System;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System;").WithLocation(1, 1));
+            CreateCompilationWithMscorlib45(
+                    test,
+                    parseOptions: TestOptions.RegularWithFileScopedNamespaces
+                )
+                .VerifyDiagnostics(
+                    // (1,1): hidden CS8019: Unnecessary using directive.
+                    // using System;
+                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System;")
+                        .WithLocation(1, 1)
+                );
         }
 
         [Fact]
         public void NamespaceWithFollowingUsing()
         {
             var test =
-@"namespace X;
+                @"namespace X;
 using System;";
 
-            CreateCompilationWithMscorlib45(test, parseOptions: TestOptions.RegularWithFileScopedNamespaces).VerifyDiagnostics(
-                // (2,1): hidden CS8019: Unnecessary using directive.
-                // using System;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System;").WithLocation(2, 1));
+            CreateCompilationWithMscorlib45(
+                    test,
+                    parseOptions: TestOptions.RegularWithFileScopedNamespaces
+                )
+                .VerifyDiagnostics(
+                    // (2,1): hidden CS8019: Unnecessary using directive.
+                    // using System;
+                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System;")
+                        .WithLocation(2, 1)
+                );
         }
 
         [Fact]
         public void NamespaceWithPrecedingType()
         {
             var test =
-@"class X { }
+                @"class X { }
 namespace System;";
 
-            CreateCompilationWithMscorlib45(test, parseOptions: TestOptions.RegularWithFileScopedNamespaces).VerifyDiagnostics(
-                // (2,11): error CS8909: File-scoped namespace must precede all other members in a file.
-                // namespace System;
-                Diagnostic(ErrorCode.ERR_FileScopedNamespaceNotBeforeAllMembers, "System").WithLocation(2, 11));
+            CreateCompilationWithMscorlib45(
+                    test,
+                    parseOptions: TestOptions.RegularWithFileScopedNamespaces
+                )
+                .VerifyDiagnostics(
+                    // (2,11): error CS8909: File-scoped namespace must precede all other members in a file.
+                    // namespace System;
+                    Diagnostic(ErrorCode.ERR_FileScopedNamespaceNotBeforeAllMembers, "System")
+                        .WithLocation(2, 11)
+                );
         }
 
         [Fact]
         public void NamespaceWithFollowingType()
         {
             var test =
-@"namespace System;
+                @"namespace System;
 class X { }";
 
-            CreateCompilationWithMscorlib45(test, parseOptions: TestOptions.RegularWithFileScopedNamespaces).VerifyDiagnostics();
+            CreateCompilationWithMscorlib45(
+                    test,
+                    parseOptions: TestOptions.RegularWithFileScopedNamespaces
+                )
+                .VerifyDiagnostics();
         }
 
         [Fact]
         public void FileScopedNamespaceWithPrecedingStatement()
         {
             var test =
-@"
+                @"
 System.Console.WriteLine();
 namespace B;";
 
-            CreateCompilationWithMscorlib45(test, parseOptions: TestOptions.RegularWithFileScopedNamespaces).VerifyDiagnostics(
-                // (3,11): error CS8914: File-scoped namespace must precede all other members in a file.
-                // namespace B;
-                Diagnostic(ErrorCode.ERR_FileScopedNamespaceNotBeforeAllMembers, "B").WithLocation(3, 11));
+            CreateCompilationWithMscorlib45(
+                    test,
+                    parseOptions: TestOptions.RegularWithFileScopedNamespaces
+                )
+                .VerifyDiagnostics(
+                    // (3,11): error CS8914: File-scoped namespace must precede all other members in a file.
+                    // namespace B;
+                    Diagnostic(ErrorCode.ERR_FileScopedNamespaceNotBeforeAllMembers, "B")
+                        .WithLocation(3, 11)
+                );
         }
 
         [Fact]
         public void FileScopedNamespaceWithFollowingStatement()
         {
             var test =
-@"
+                @"
 namespace B;
 System.Console.WriteLine();";
 
-            CreateCompilationWithMscorlib45(test, parseOptions: TestOptions.RegularWithFileScopedNamespaces).VerifyDiagnostics(
+            CreateCompilationWithMscorlib45(
+                    test,
+                    parseOptions: TestOptions.RegularWithFileScopedNamespaces
+                )
+                .VerifyDiagnostics(
                     // (3,16): error CS0116: A namespace cannot directly contain members such as fields or methods
                     // System.Console.WriteLine();
-                    Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "WriteLine").WithLocation(3, 16),
+                    Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "WriteLine")
+                        .WithLocation(3, 16),
                     // (3,26): error CS8124: Tuple must contain at least two elements.
                     // System.Console.WriteLine();
                     Diagnostic(ErrorCode.ERR_TupleTooFewElements, ")").WithLocation(3, 26),
                     // (3,27): error CS1022: Type or namespace definition, or end-of-file expected
                     // System.Console.WriteLine();
-                    Diagnostic(ErrorCode.ERR_EOFExpected, ";").WithLocation(3, 27));
+                    Diagnostic(ErrorCode.ERR_EOFExpected, ";").WithLocation(3, 27)
+                );
         }
 
         [Fact]
         public void FileScopedNamespaceUsingsBeforeAndAfter()
         {
-            var source1 = @"
+            var source1 =
+                @"
 namespace A
 {
     class C1 { }
@@ -645,7 +859,8 @@ namespace B
     class C2 { }
 }
 ";
-            var source2 = @"
+            var source2 =
+                @"
 using A;
 namespace X;
 using B;
@@ -660,27 +875,38 @@ class C
 }
 ";
 
-            CreateCompilationWithMscorlib45(new[] { source1, source2 }, parseOptions: TestOptions.RegularWithFileScopedNamespaces).VerifyDiagnostics();
+            CreateCompilationWithMscorlib45(
+                    new[] { source1, source2 },
+                    parseOptions: TestOptions.RegularWithFileScopedNamespaces
+                )
+                .VerifyDiagnostics();
         }
 
         [Fact]
         public void FileScopedNamespaceFollowedByVariable()
         {
-            var test = @"
+            var test =
+                @"
 namespace B;
 int x; // 1
 ";
 
-            CreateCompilationWithMscorlib45(test, parseOptions: TestOptions.RegularWithFileScopedNamespaces).VerifyDiagnostics(
-                // (3,5): error CS0116: A namespace cannot directly contain members such as fields, methods or statements
-                // int x; // 1
-                Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "x").WithLocation(3, 5));
+            CreateCompilationWithMscorlib45(
+                    test,
+                    parseOptions: TestOptions.RegularWithFileScopedNamespaces
+                )
+                .VerifyDiagnostics(
+                    // (3,5): error CS0116: A namespace cannot directly contain members such as fields, methods or statements
+                    // int x; // 1
+                    Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "x").WithLocation(3, 5)
+                );
         }
 
         [Fact, WorkItem(54836, "https://github.com/dotnet/roslyn/issues/54836")]
         public void AssemblyRetargetableAttributeIsRespected()
         {
-            var code = @"
+            var code =
+                @"
 using System.Reflection;
 [assembly: AssemblyFlags(AssemblyNameFlags.Retargetable)]";
 

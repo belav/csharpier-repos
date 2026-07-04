@@ -19,10 +19,18 @@ namespace System.IO.Pipelines.Tests
         }
 
         public override void AdvanceTo(SequencePosition consumed) => _reader.AdvanceTo(consumed);
-        public override void AdvanceTo(SequencePosition consumed, SequencePosition examined) => _reader.AdvanceTo(consumed, examined);
+
+        public override void AdvanceTo(SequencePosition consumed, SequencePosition examined) =>
+            _reader.AdvanceTo(consumed, examined);
+
         public override void CancelPendingRead() => _reader.CancelPendingRead();
+
         public override void Complete(Exception? exception = null) => _reader.Complete(exception);
-        public override ValueTask<ReadResult> ReadAsync(CancellationToken cancellationToken = default) => _reader.ReadAsync(cancellationToken);
+
+        public override ValueTask<ReadResult> ReadAsync(
+            CancellationToken cancellationToken = default
+        ) => _reader.ReadAsync(cancellationToken);
+
         public override bool TryRead(out ReadResult result) => _reader.TryRead(out result);
     }
 }

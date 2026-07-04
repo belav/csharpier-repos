@@ -10,11 +10,7 @@ namespace System.IO.Tests
     public class File_GetSetTimes_SafeFileHandle : File_GetSetTimes
     {
         protected virtual SafeFileHandle OpenFileHandle(string path, FileAccess fileAccess) =>
-            File.OpenHandle(
-                path,
-                FileMode.OpenOrCreate,
-                fileAccess,
-                FileShare.ReadWrite);
+            File.OpenHandle(path, FileMode.OpenOrCreate, fileAccess, FileShare.ReadWrite);
 
         protected override bool CanBeReadOnly => false;
 
@@ -99,7 +95,8 @@ namespace System.IO.Tests
             using SafeFileHandle handle = OpenFileHandle(filePath, FileAccess.ReadWrite);
 
             File.SetLastAccessTime(handle, DateTime.Now.Subtract(TimeSpan.FromDays(1)));
-            DateTime timeAfterWrite = default, timeBeforeWrite = File.GetLastWriteTime(handle);
+            DateTime timeAfterWrite = default,
+                timeBeforeWrite = File.GetLastWriteTime(handle);
 
             // According to https://learn.microsoft.com/en-us/windows/win32/api/fileapi/ns-fileapi-win32_file_attribute_data
             // write time has a resolution of 2 seconds on FAT. Let's wait a little bit longer.
@@ -118,23 +115,59 @@ namespace System.IO.Tests
         [Fact]
         public void NullArgumentValidation()
         {
-            Assert.Throws<ArgumentNullException>("fileHandle", static () => File.GetCreationTime(default(SafeFileHandle)!));
-            Assert.Throws<ArgumentNullException>("fileHandle", static () => File.SetCreationTime(default(SafeFileHandle)!, DateTime.Now));
+            Assert.Throws<ArgumentNullException>(
+                "fileHandle",
+                static () => File.GetCreationTime(default(SafeFileHandle)!)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "fileHandle",
+                static () => File.SetCreationTime(default(SafeFileHandle)!, DateTime.Now)
+            );
 
-            Assert.Throws<ArgumentNullException>("fileHandle", static () => File.GetCreationTimeUtc(default(SafeFileHandle)!));
-            Assert.Throws<ArgumentNullException>("fileHandle", static () => File.SetCreationTimeUtc(default(SafeFileHandle)!, DateTime.Now));
+            Assert.Throws<ArgumentNullException>(
+                "fileHandle",
+                static () => File.GetCreationTimeUtc(default(SafeFileHandle)!)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "fileHandle",
+                static () => File.SetCreationTimeUtc(default(SafeFileHandle)!, DateTime.Now)
+            );
 
-            Assert.Throws<ArgumentNullException>("fileHandle", static () => File.GetLastAccessTime(default(SafeFileHandle)!));
-            Assert.Throws<ArgumentNullException>("fileHandle", static () => File.SetLastAccessTime(default(SafeFileHandle)!, DateTime.Now));
+            Assert.Throws<ArgumentNullException>(
+                "fileHandle",
+                static () => File.GetLastAccessTime(default(SafeFileHandle)!)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "fileHandle",
+                static () => File.SetLastAccessTime(default(SafeFileHandle)!, DateTime.Now)
+            );
 
-            Assert.Throws<ArgumentNullException>("fileHandle", static () => File.GetLastAccessTimeUtc(default(SafeFileHandle)!));
-            Assert.Throws<ArgumentNullException>("fileHandle", static () => File.SetLastAccessTimeUtc(default(SafeFileHandle)!, DateTime.Now));
+            Assert.Throws<ArgumentNullException>(
+                "fileHandle",
+                static () => File.GetLastAccessTimeUtc(default(SafeFileHandle)!)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "fileHandle",
+                static () => File.SetLastAccessTimeUtc(default(SafeFileHandle)!, DateTime.Now)
+            );
 
-            Assert.Throws<ArgumentNullException>("fileHandle", static () => File.GetLastWriteTime(default(SafeFileHandle)!));
-            Assert.Throws<ArgumentNullException>("fileHandle", static () => File.SetLastWriteTime(default(SafeFileHandle)!, DateTime.Now));
+            Assert.Throws<ArgumentNullException>(
+                "fileHandle",
+                static () => File.GetLastWriteTime(default(SafeFileHandle)!)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "fileHandle",
+                static () => File.SetLastWriteTime(default(SafeFileHandle)!, DateTime.Now)
+            );
 
-            Assert.Throws<ArgumentNullException>("fileHandle", static () => File.GetLastWriteTimeUtc(default(SafeFileHandle)!));
-            Assert.Throws<ArgumentNullException>("fileHandle", static () => File.SetLastWriteTimeUtc(default(SafeFileHandle)!, DateTime.Now));
+            Assert.Throws<ArgumentNullException>(
+                "fileHandle",
+                static () => File.GetLastWriteTimeUtc(default(SafeFileHandle)!)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "fileHandle",
+                static () => File.SetLastWriteTimeUtc(default(SafeFileHandle)!, DateTime.Now)
+            );
         }
     }
 }

@@ -20,7 +20,10 @@ namespace System.Security.Cryptography.Xml
             return GetScopeAt(_ancestorStack.Count - 1);
         }
 
-        protected XmlAttribute? GetNearestRenderedNamespaceWithMatchingPrefix(string nsPrefix, out int depth)
+        protected XmlAttribute? GetNearestRenderedNamespaceWithMatchingPrefix(
+            string nsPrefix,
+            out int depth
+        )
         {
             XmlAttribute? attr;
             depth = -1;
@@ -35,7 +38,10 @@ namespace System.Security.Cryptography.Xml
             return null;
         }
 
-        protected XmlAttribute? GetNearestUnrenderedNamespaceWithMatchingPrefix(string nsPrefix, out int depth)
+        protected XmlAttribute? GetNearestUnrenderedNamespaceWithMatchingPrefix(
+            string nsPrefix,
+            out int depth
+        )
         {
             XmlAttribute? attr;
             depth = -1;
@@ -60,9 +66,23 @@ namespace System.Security.Cryptography.Xml
             _ancestorStack.RemoveAt(_ancestorStack.Count - 1);
         }
 
-        internal abstract void TrackNamespaceNode(XmlAttribute attr, SortedList nsListToRender, Hashtable nsLocallyDeclared);
-        internal abstract void TrackXmlNamespaceNode(XmlAttribute attr, SortedList nsListToRender, SortedList attrListToRender, Hashtable nsLocallyDeclared);
-        internal abstract void GetNamespacesToRender(XmlElement element, SortedList attrListToRender, SortedList nsListToRender, Hashtable nsLocallyDeclared);
+        internal abstract void TrackNamespaceNode(
+            XmlAttribute attr,
+            SortedList nsListToRender,
+            Hashtable nsLocallyDeclared
+        );
+        internal abstract void TrackXmlNamespaceNode(
+            XmlAttribute attr,
+            SortedList nsListToRender,
+            SortedList attrListToRender,
+            Hashtable nsLocallyDeclared
+        );
+        internal abstract void GetNamespacesToRender(
+            XmlElement element,
+            SortedList attrListToRender,
+            SortedList nsListToRender,
+            Hashtable nsLocallyDeclared
+        );
 
         internal void LoadUnrenderedNamespaces(Hashtable nsLocallyDeclared)
         {

@@ -17,11 +17,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
     [Trait(Traits.Feature, Traits.Features.CodeActionsReplacePropertyWithMethods)]
     public class ReplacePropertyWithMethodsTests : AbstractCSharpCodeActionTest
     {
-        private OptionsCollection PreferExpressionBodiedMethods
-            => new(GetLanguage()) { { CSharpCodeStyleOptions.PreferExpressionBodiedMethods, CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement } };
+        private OptionsCollection PreferExpressionBodiedMethods =>
+            new(GetLanguage())
+            {
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                    CSharpCodeStyleOptions.WhenPossibleWithSuggestionEnforcement
+                },
+            };
 
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new ReplacePropertyWithMethodsCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new ReplacePropertyWithMethodsCodeRefactoringProvider();
 
         [Fact]
         public async Task TestGetWithBody()
@@ -47,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         return 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -74,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         return 0;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -109,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                     {
                         var v = new { P = this.GetProp() } }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -144,7 +155,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                     {
                         var v = new { Prop = this.GetProp() } }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -189,7 +201,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         RefM(ref this.{|Conflict:GetProp|}());
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -234,7 +247,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         OutM(out this.{|Conflict:GetProp|}());
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -275,7 +289,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                 class D
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -302,7 +317,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         var v = value;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -339,7 +355,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         this.SetProp(1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -375,7 +392,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         var v = value;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -411,7 +429,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         var v = value;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -457,7 +476,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         this.SetProp(this.GetProp() + 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -503,7 +523,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         this.SetProp(this.GetProp() - 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -530,7 +551,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         return this.GetProp() + 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -557,7 +579,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         this.SetProp(value + 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -603,7 +626,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         this.SetProp(this.GetProp() * x);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -649,7 +673,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         this.SetProp(this.GetProp() * (x + y));
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41159")]
@@ -695,7 +720,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         this.SetProp(this.GetProp() ?? x);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41159")]
@@ -741,7 +767,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         this.SetProp(this.GetProp() >> x);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/41159")]
@@ -787,7 +814,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         this.SetProp(this.GetProp() >>> x);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -813,7 +841,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         var v = this.GetProp();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -834,7 +863,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         return 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -855,7 +885,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         return 1; // Comment
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -892,7 +923,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         return count;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -914,7 +946,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         return 42;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -940,7 +973,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                     {
                         var v = new { P = this.GetProp() } }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -975,7 +1009,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                     {
                         var v = new { P = this.GetProp() } }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -993,7 +1028,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                 {
                     int GetProp();
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1016,7 +1052,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         return prop;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1049,7 +1086,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         this.prop = this.GetProp() + 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1082,7 +1120,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         this.prop = this.GetProp() * (x + y);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1105,7 +1144,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         return prop;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1131,7 +1171,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         return prop1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1154,7 +1195,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         return pascalCase;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1185,7 +1227,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
 
                     public abstract int GetProp();
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1214,7 +1257,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
 
                     public abstract void SetProp(int i);
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1243,7 +1287,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
 
                     public abstract void SetProp(dynamic i);
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1283,7 +1328,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         SetProp(GetProp() + 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1323,7 +1369,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         SetProp(GetProp() + 1); /* Trailing */
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1363,7 +1410,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         SetProp(GetProp() + 1 /* Trailing */ );
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1401,7 +1449,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         SetProp(GetProp() + 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1439,7 +1488,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         SetProp(GetProp() * (GetProp() + 1));
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1475,7 +1525,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         bool f = goo?.GetAny() == true;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1500,7 +1551,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                 {
                     private int GetProp() => 0;
                 }
-                """, options: PreferExpressionBodiedMethods);
+                """,
+                options: PreferExpressionBodiedMethods
+            );
         }
 
         [Fact]
@@ -1531,7 +1584,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                     private int GetProp() => 0;
                     private void SetProp(int value) => throw e;
                 }
-                """, options: PreferExpressionBodiedMethods);
+                """,
+                options: PreferExpressionBodiedMethods
+            );
         }
 
         [Fact]
@@ -1556,7 +1611,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                     private int GetProp() => 0;
                     private void SetProp(int value) => throw e;
                 }
-                """, options: PreferExpressionBodiedMethods);
+                """,
+                options: PreferExpressionBodiedMethods
+            );
         }
 
         [Fact]
@@ -1575,7 +1632,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                 {
                     private int GetProp() => 0;
                 }
-                """, options: PreferExpressionBodiedMethods);
+                """,
+                options: PreferExpressionBodiedMethods
+            );
         }
 
         [Fact]
@@ -1596,7 +1655,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
 
                     private int GetProp() => prop;
                 }
-                """, options: PreferExpressionBodiedMethods);
+                """,
+                options: PreferExpressionBodiedMethods
+            );
         }
 
         [Fact]
@@ -1618,7 +1679,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                     private int GetProp() => prop;
                     private void SetProp(int value) => prop = value;
                 }
-                """, options: PreferExpressionBodiedMethods);
+                """,
+                options: PreferExpressionBodiedMethods
+            );
         }
 
         [Fact]
@@ -1648,7 +1711,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         return B();
                     }
                 }
-                """, options: PreferExpressionBodiedMethods);
+                """,
+                options: PreferExpressionBodiedMethods
+            );
         }
 
         [Fact]
@@ -1682,7 +1747,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                     /// </returns>
                     object GetActiveProjectContext();
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1716,7 +1782,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                     /// </param>
                     void SetActiveProjectContext(object value);
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1758,7 +1825,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                     /// </param>
                     void SetActiveProjectContext(object value);
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1798,7 +1866,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                     /// <seealso cref="ILanguageServiceHost.SetActiveProjectContext(object)"/>
                     private int x;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1844,7 +1913,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                     /// <seealso cref="ILanguageServiceHost.GetActiveProjectContext()"/>
                     private int x;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1878,7 +1948,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                     /// <seealso cref="ISomeInterface{T}.SetContext(ISomeInterface{T})"/>
                     private int x;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1902,19 +1973,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                     }
                 }
                 """,
-    """
-    class C
-    {
-        private int GetProp()
-        {
-    #if true
-            return 0;
-    #else
-                return 1;
-    #endif
-        }
-    }
-    """);
+                """
+                class C
+                {
+                    private int GetProp()
+                    {
+                #if true
+                        return 0;
+                #else
+                            return 1;
+                #endif
+                    }
+                }
+                """
+            );
         }
 
         [Fact]
@@ -1938,18 +2010,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                     }
                 }
                 """,
-    """
-    class C
-    {
-        private int GetProp() =>
-    #if true
-                0;
-    #else
-                return 1;
-    #endif
-    }
-    """,
-    options: PreferExpressionBodiedMethods);
+                """
+                class C
+                {
+                    private int GetProp() =>
+                #if true
+                            0;
+                #else
+                            return 1;
+                #endif
+                }
+                """,
+                options: PreferExpressionBodiedMethods
+            );
         }
 
         [Fact]
@@ -1978,7 +2051,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         1;
                 #endif
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2008,7 +2082,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                 #endif
                 }
                 """,
-    options: PreferExpressionBodiedMethods);
+                options: PreferExpressionBodiedMethods
+            );
         }
 
         [Fact]
@@ -2056,7 +2131,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         throw new System.NotImplementedException();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2078,7 +2154,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         return default;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2107,7 +2184,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         pointer = value;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2136,7 +2214,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                     public unsafe void SetP(int value)
                     { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2170,7 +2249,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         this.value = value;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2204,7 +2284,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         this.value = value;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2238,7 +2319,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         C.value = value;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2286,7 +2368,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2334,7 +2417,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2382,7 +2466,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -2438,7 +2523,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         <Document IsLinkFile='true' LinkProjectName='CSProj.1' LinkFilePath='C.cs'/>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25367")]
@@ -2474,7 +2560,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                         return 42;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25367")]
@@ -2517,7 +2604,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ReplaceProp
                     private static void SetSomeValue(int value)
                     { }
                 }
-                """);
+                """
+            );
         }
     }
 }

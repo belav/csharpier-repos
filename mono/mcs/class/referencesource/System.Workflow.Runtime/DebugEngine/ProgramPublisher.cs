@@ -2,19 +2,17 @@
 #region Using directives
 
 using System;
-using System.Threading;
+using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Diagnostics;
+using System.Threading;
 
 #endregion
 
 namespace System.Workflow.Runtime.DebugEngine
 {
     [ComImport, Guid(Guids.CLSID_WDEProgramPublisher)]
-    internal class WDEProgramPublisher
-    {
-    }
+    internal class WDEProgramPublisher { }
 
     internal sealed class ProgramPublisher
     {
@@ -75,7 +73,9 @@ namespace System.Workflow.Runtime.DebugEngine
             catch (Exception e)
             {
                 // Ignore any exceptions that are caused by WDE.dll not being present or registered.
-                Debug.WriteLine("WDE: ProgramPublisher.PublisherThreadFunc() exception: " + e.ToString());
+                Debug.WriteLine(
+                    "WDE: ProgramPublisher.PublisherThreadFunc() exception: " + e.ToString()
+                );
             }
         }
 
@@ -112,7 +112,9 @@ namespace System.Workflow.Runtime.DebugEngine
             }
             catch (Exception e)
             {
-                Debug.WriteLine("WDE: ProgramPublisher.UnpublishThreadFunc(): catch exception " + e.ToString());
+                Debug.WriteLine(
+                    "WDE: ProgramPublisher.UnpublishThreadFunc(): catch exception " + e.ToString()
+                );
                 // We eat up any exceptions that can occur because the host process is abnormally terminated.
             }
             finally
@@ -129,12 +131,14 @@ namespace System.Workflow.Runtime.DebugEngine
         #endregion
     }
 
-    [ComImport(), Guid(Guids.IID_IWDEProgramPublisher), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [
+        ComImport(),
+        Guid(Guids.IID_IWDEProgramPublisher),
+        InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+    ]
     internal interface IWDEProgramPublisher
     {
         void Publish([MarshalAs(UnmanagedType.IUnknown)] object ProgramNode);
         void Unpublish([MarshalAs(UnmanagedType.IUnknown)] object ProgramNode);
     }
-
-
 }

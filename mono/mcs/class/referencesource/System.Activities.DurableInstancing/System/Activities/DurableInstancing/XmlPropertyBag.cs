@@ -19,9 +19,7 @@ namespace System.Activities.DurableInstancing
 
     class XmlPropertyBag : Dictionary<XName, object>, IXmlSerializable
     {
-        public XmlPropertyBag()
-        {
-        }
+        public XmlPropertyBag() { }
 
         public XmlSchema GetSchema()
         {
@@ -38,15 +36,14 @@ namespace System.Activities.DurableInstancing
                     XName propertyName = XName.Get(reader.Value);
 
                     reader.MoveToNextAttribute();
-                    PrimitiveType type = (PrimitiveType)Int32.Parse(reader.Value, CultureInfo.InvariantCulture);
+                    PrimitiveType type = (PrimitiveType)
+                        Int32.Parse(reader.Value, CultureInfo.InvariantCulture);
 
                     reader.MoveToNextAttribute();
                     object value = ConvertStringToNativeType(reader.Value, type);
 
                     this.Add(propertyName, value);
-                }
-
-                while (reader.ReadToNextSibling("Property"));
+                } while (reader.ReadToNextSibling("Property"));
             }
         }
 
@@ -58,7 +55,10 @@ namespace System.Activities.DurableInstancing
             {
                 writer.WriteStartElement("Property");
                 writer.WriteAttributeString("XName", property.Key.ToString());
-                writer.WriteAttributeString("Type", ((int)GetPrimitiveType(property.Value)).ToString(CultureInfo.InvariantCulture));
+                writer.WriteAttributeString(
+                    "Type",
+                    ((int)GetPrimitiveType(property.Value)).ToString(CultureInfo.InvariantCulture)
+                );
                 writer.WriteAttributeString("Value", ConvertNativeValueToString(property.Value));
                 writer.WriteEndElement();
             }
@@ -235,7 +235,10 @@ namespace System.Activities.DurableInstancing
             }
             else if (value is DateTime)
             {
-                return XmlConvert.ToString((DateTime)value, XmlDateTimeSerializationMode.RoundtripKind);
+                return XmlConvert.ToString(
+                    (DateTime)value,
+                    XmlDateTimeSerializationMode.RoundtripKind
+                );
             }
             else if (value is DateTimeOffset)
             {

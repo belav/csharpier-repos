@@ -12,7 +12,11 @@ namespace System.Runtime.CompilerServices
     /// </summary>
     internal static class ICastableHelpers
     {
-        internal static bool IsInstanceOfInterface(ICastable castable, RuntimeType type, [NotNullWhen(true)] out Exception? castError)
+        internal static bool IsInstanceOfInterface(
+            ICastable castable,
+            RuntimeType type,
+            [NotNullWhen(true)] out Exception? castError
+        )
         {
             return castable.IsInstanceOfInterface(new RuntimeTypeHandle(type), out castError);
         }

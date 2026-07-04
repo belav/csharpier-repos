@@ -15,7 +15,9 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         public const string ExpectedResponseBody = "This is the response body.";
         public const string FakeServerEndpoint = "http://www.contoso.com/";
         public const string FakeSecureServerEndpoint = "https://www.contoso.com/";
-        public static readonly byte[] ExpectedResponseBodyBytes = Encoding.UTF8.GetBytes(ExpectedResponseBody);
+        public static readonly byte[] ExpectedResponseBodyBytes = Encoding.UTF8.GetBytes(
+            ExpectedResponseBody
+        );
 
         private static MemoryStream requestBody = null;
         private static MemoryStream responseBody = null;
@@ -24,10 +26,7 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
 
         public static byte[] RequestBody
         {
-            get
-            {
-                return requestBody.ToArray();
-            }
+            get { return requestBody.ToArray(); }
         }
 
         public static byte[] ResponseBody
@@ -41,28 +40,14 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
 
         public static string ResponseHeaders
         {
-            get
-            {
-                return responseHeaders;
-            }
-
-            set
-            {
-                responseHeaders = value;
-            }
+            get { return responseHeaders; }
+            set { responseHeaders = value; }
         }
 
         public static double DataAvailablePercentage
         {
-            get
-            {
-                return dataAvailablePercentage;
-            }
-
-            set
-            {
-                dataAvailablePercentage = value;
-            }
+            get { return dataAvailablePercentage; }
+            set { dataAvailablePercentage = value; }
         }
 
         public static int DataAvailable
@@ -75,7 +60,9 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
                 }
 
                 int totalBytesLeftToRead = (int)(responseBody.Length - responseBody.Position);
-                int allowedBytesToRead = (int)((double)totalBytesLeftToRead * dataAvailablePercentage);
+                int allowedBytesToRead = (int)(
+                    (double)totalBytesLeftToRead * dataAvailablePercentage
+                );
                 if (allowedBytesToRead == 0 && totalBytesLeftToRead != 0)
                 {
                     allowedBytesToRead = 1;
@@ -120,11 +107,11 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
             byte[] responseBodyBytes = Encoding.UTF8.GetBytes(responseBody);
             byte[] compressedBytes;
             string responseHeadersFormat =
-                "HTTP/1.1 200 OK\r\n" +
-                "{0}" +
-                "Content-Length: {1}\r\n" +
-                "Content-Type: text/plain; charset=utf-8\r\n" +
-                "Date: Tue, 08 Jul 2014 20:45:02 GMT\r\n";
+                "HTTP/1.1 200 OK\r\n"
+                + "{0}"
+                + "Content-Length: {1}\r\n"
+                + "Content-Type: text/plain; charset=utf-8\r\n"
+                + "Date: Tue, 08 Jul 2014 20:45:02 GMT\r\n";
 
             if (compressionKind == DecompressionMethods.None)
             {
@@ -132,7 +119,10 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
             }
             else
             {
-                compressedBytes = CompressBytes(responseBodyBytes, compressionKind == DecompressionMethods.GZip);
+                compressedBytes = CompressBytes(
+                    responseBodyBytes,
+                    compressionKind == DecompressionMethods.GZip
+                );
             }
 
             ResponseBody = compressedBytes;
@@ -140,10 +130,17 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
             string contentEncodingHeader = string.Empty;
             if (compressionKind != DecompressionMethods.None)
             {
-                contentEncodingHeader = string.Format("Content-Encoding: {0}\r\n", compressionKind.ToString().ToLower());
+                contentEncodingHeader = string.Format(
+                    "Content-Encoding: {0}\r\n",
+                    compressionKind.ToString().ToLower()
+                );
             }
 
-            ResponseHeaders = string.Format(responseHeadersFormat, contentEncodingHeader, compressedBytes.Length);
+            ResponseHeaders = string.Format(
+                responseHeadersFormat,
+                contentEncodingHeader,
+                compressedBytes.Length
+            );
         }
 
         public static void Reset()
@@ -158,9 +155,11 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         {
             using (var memoryStream = new MemoryStream())
             {
-                using (Stream compressedStream = useGZip ?
-                    new GZipStream(memoryStream, CompressionMode.Compress) :
-                    new DeflateStream(memoryStream, CompressionMode.Compress))
+                using (
+                    Stream compressedStream = useGZip
+                        ? new GZipStream(memoryStream, CompressionMode.Compress)
+                        : new DeflateStream(memoryStream, CompressionMode.Compress)
+                )
                 {
                     compressedStream.Write(bytes, 0, bytes.Length);
                 }

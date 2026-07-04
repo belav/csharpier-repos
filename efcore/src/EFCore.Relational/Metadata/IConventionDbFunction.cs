@@ -107,7 +107,10 @@ public interface IConventionDbFunction : IReadOnlyDbFunction, IConventionAnnotat
     /// <param name="typeMapping">The type mapping of the function in the database.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The configured value.</returns>
-    RelationalTypeMapping? SetTypeMapping(RelationalTypeMapping? typeMapping, bool fromDataAnnotation = false);
+    RelationalTypeMapping? SetTypeMapping(
+        RelationalTypeMapping? typeMapping,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Gets the configuration source for <see cref="IReadOnlyDbFunction.TypeMapping" />.
@@ -125,7 +128,8 @@ public interface IConventionDbFunction : IReadOnlyDbFunction, IConventionAnnotat
     /// <returns>The configured value.</returns>
     Func<IReadOnlyList<SqlExpression>, SqlExpression>? SetTranslation(
         Func<IReadOnlyList<SqlExpression>, SqlExpression>? translation,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Gets the configuration source for <see cref="IReadOnlyDbFunction.Translation" />.

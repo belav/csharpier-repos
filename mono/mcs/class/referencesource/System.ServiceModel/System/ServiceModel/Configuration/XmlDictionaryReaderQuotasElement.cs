@@ -4,13 +4,13 @@
 
 namespace System.ServiceModel.Configuration
 {
+    using System.ComponentModel;
     using System.Configuration;
     using System.Globalization;
     using System.Net;
-    using System.Xml;
     using System.ServiceModel;
-    using System.ComponentModel;
     using System.ServiceModel.Channels;
+    using System.Xml;
 
     public sealed partial class XmlDictionaryReaderQuotasElement : ServiceModelConfigurationElement
     {
@@ -91,24 +91,39 @@ namespace System.ServiceModel.Configuration
             }
             if (readerQuotas.MaxDepth != EncoderDefaults.MaxDepth)
             {
-                SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxDepth, readerQuotas.MaxDepth);                
+                SetPropertyValueIfNotDefaultValue(
+                    ConfigurationStrings.MaxDepth,
+                    readerQuotas.MaxDepth
+                );
             }
             if (readerQuotas.MaxStringContentLength != EncoderDefaults.MaxStringContentLength)
             {
-                SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxStringContentLength, readerQuotas.MaxStringContentLength);
+                SetPropertyValueIfNotDefaultValue(
+                    ConfigurationStrings.MaxStringContentLength,
+                    readerQuotas.MaxStringContentLength
+                );
             }
             if (readerQuotas.MaxArrayLength != EncoderDefaults.MaxArrayLength)
             {
-                SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxArrayLength, readerQuotas.MaxArrayLength);
+                SetPropertyValueIfNotDefaultValue(
+                    ConfigurationStrings.MaxArrayLength,
+                    readerQuotas.MaxArrayLength
+                );
             }
             if (readerQuotas.MaxBytesPerRead != EncoderDefaults.MaxBytesPerRead)
             {
-                SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxBytesPerRead, readerQuotas.MaxBytesPerRead);
+                SetPropertyValueIfNotDefaultValue(
+                    ConfigurationStrings.MaxBytesPerRead,
+                    readerQuotas.MaxBytesPerRead
+                );
             }
             if (readerQuotas.MaxNameTableCharCount != EncoderDefaults.MaxNameTableCharCount)
             {
-                SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxNameTableCharCount, readerQuotas.MaxNameTableCharCount);
-            } 
+                SetPropertyValueIfNotDefaultValue(
+                    ConfigurationStrings.MaxNameTableCharCount,
+                    readerQuotas.MaxNameTableCharCount
+                );
+            }
         }
     }
 }

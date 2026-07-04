@@ -22,15 +22,18 @@ public class CommentTests : AbstractSyntaxStructureProviderTests
 {
     protected override string LanguageName => LanguageNames.CSharp;
 
-    private static ImmutableArray<BlockSpan> CreateCommentBlockSpan(
-        SyntaxTriviaList triviaList)
+    private static ImmutableArray<BlockSpan> CreateCommentBlockSpan(SyntaxTriviaList triviaList)
     {
         using var result = TemporaryArray<BlockSpan>.Empty;
         CSharpStructureHelpers.CollectCommentBlockSpans(triviaList, ref result.AsRef());
         return result.ToImmutableAndClear();
     }
 
-    internal override async Task<ImmutableArray<BlockSpan>> GetBlockSpansWorkerAsync(Document document, BlockStructureOptions options, int position)
+    internal override async Task<ImmutableArray<BlockSpan>> GetBlockSpansWorkerAsync(
+        Document document,
+        BlockStructureOptions options,
+        int position
+    )
     {
         var root = await document.GetRequiredSyntaxRootAsync(CancellationToken.None);
         var trivia = root.FindTrivia(position, findInsideTrivia: true);
@@ -53,63 +56,59 @@ public class CommentTests : AbstractSyntaxStructureProviderTests
     public async Task TestSimpleComment1()
     {
         var code = """
-                {|span:// Hello
-                // $$C#|}
-                class C
-                {
-                }
-                """;
+            {|span:// Hello
+            // $$C#|}
+            class C
+            {
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "// Hello ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span", "// Hello ...", autoCollapse: true));
     }
 
     [Fact]
     public async Task TestSimpleComment2()
     {
         var code = """
-                {|span:// Hello
-                //
-                // $$C#!|}
-                class C
-                {
-                }
-                """;
+            {|span:// Hello
+            //
+            // $$C#!|}
+            class C
+            {
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "// Hello ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span", "// Hello ...", autoCollapse: true));
     }
 
     [Fact]
     public async Task TestSimpleComment3()
     {
         var code = """
-                {|span:// Hello
+            {|span:// Hello
 
-                // $$C#!|}
-                class C
-                {
-                }
-                """;
+            // $$C#!|}
+            class C
+            {
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "// Hello ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span", "// Hello ...", autoCollapse: true));
     }
 
     [Fact]
     public async Task TestSingleLineCommentGroupFollowedByDocumentationComment()
     {
         var code = """
-                {|span:// Hello
+            {|span:// Hello
 
-                // $$C#!|}
-                /// <summary></summary>
-                class C
-                {
-                }
-                """;
+            // $$C#!|}
+            /// <summary></summary>
+            class C
+            {
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("span", "// Hello ...", autoCollapse: true));
+        await VerifyBlockSpansAsync(code, Region("span", "// Hello ...", autoCollapse: true));
     }
 }

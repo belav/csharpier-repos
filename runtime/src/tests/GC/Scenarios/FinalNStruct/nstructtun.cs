@@ -8,7 +8,6 @@ namespace NStruct
 
     internal class NStructTun
     {
-
         public class CreateObj
         {
             // disabling unused variable warning
@@ -36,11 +35,15 @@ namespace NStruct
                 GC.WaitForPendingFinalizers();
                 GC.Collect();
 
-                Console.Out.WriteLine(FinalizeCount.icCreat + " NStruct Objects were deleted and " + FinalizeCount.icFinal + " finalized.");
+                Console.Out.WriteLine(
+                    FinalizeCount.icCreat
+                        + " NStruct Objects were deleted and "
+                        + FinalizeCount.icFinal
+                        + " finalized."
+                );
 
                 return (FinalizeCount.icCreat == FinalizeCount.icFinal);
             }
-
         }
 
         public static int Main(String[] Args)
@@ -72,9 +75,6 @@ namespace NStruct
 
             Console.WriteLine("Test Failed");
             return 1;
-
         }
     }
-
-
 }

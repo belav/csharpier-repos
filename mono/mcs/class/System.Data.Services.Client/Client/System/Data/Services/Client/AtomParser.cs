@@ -1,14 +1,13 @@
 //Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
-
 
 namespace System.Data.Services.Client
 {
@@ -20,9 +19,9 @@ namespace System.Data.Services.Client
     using System.Diagnostics;
     using System.Linq;
     using System.Reflection;
+    using System.Text;
     using System.Xml;
     using System.Xml.Linq;
-    using System.Text;
 
     #endregion Namespaces.
 
@@ -51,20 +50,31 @@ namespace System.Data.Services.Client
 
         #region Constructors.
 
-        internal AtomParser(XmlReader reader, Func<XmlReader, KeyValuePair<XmlReader, object>> entryCallback, string typeScheme, string currentDataNamespace)
+        internal AtomParser(
+            XmlReader reader,
+            Func<XmlReader, KeyValuePair<XmlReader, object>> entryCallback,
+            string typeScheme,
+            string currentDataNamespace
+        )
         {
             Debug.Assert(reader != null, "reader != null");
             Debug.Assert(typeScheme != null, "typeScheme != null");
             Debug.Assert(entryCallback != null, "entryCallback != null");
-            Debug.Assert(!String.IsNullOrEmpty(currentDataNamespace), "currentDataNamespace is empty or null");
+            Debug.Assert(
+                !String.IsNullOrEmpty(currentDataNamespace),
+                "currentDataNamespace is empty or null"
+            );
 
             this.reader = reader;
             this.readers = new Stack<XmlReader>();
             this.entryCallback = entryCallback;
             this.typeScheme = typeScheme;
             this.currentDataNamespace = currentDataNamespace;
-            
-            Debug.Assert(this.kind == AtomDataKind.None, "this.kind == AtomDataKind.None -- otherwise not initialized correctly");
+
+            Debug.Assert(
+                this.kind == AtomDataKind.None,
+                "this.kind == AtomDataKind.None -- otherwise not initialized correctly"
+            );
         }
 
         #endregion Constructors.
@@ -73,26 +83,17 @@ namespace System.Data.Services.Client
 
         internal AtomEntry CurrentEntry
         {
-            get
-            {
-                return this.entry;
-            }
+            get { return this.entry; }
         }
 
         internal AtomFeed CurrentFeed
         {
-            get
-            {
-                return this.feed;
-            }
+            get { return this.feed; }
         }
 
         internal AtomDataKind DataKind
         {
-            get
-            {
-                return this.kind;
-            }
+            get { return this.kind; }
         }
 
         internal bool IsDataWebElement
@@ -107,11 +108,17 @@ namespace System.Data.Services.Client
         internal static KeyValuePair<XmlReader, object> XElementBuilderCallback(XmlReader reader)
         {
             Debug.Assert(reader != null, "reader != null");
-            Debug.Assert(reader is Xml.XmlWrappingReader, "reader must be a instance of XmlWrappingReader");
-            
+            Debug.Assert(
+                reader is Xml.XmlWrappingReader,
+                "reader must be a instance of XmlWrappingReader"
+            );
+
             string readerBaseUri = reader.BaseURI;
             XElement element = XElement.Load(reader.ReadSubtree(), LoadOptions.None);
-            return new KeyValuePair<XmlReader, object>(Xml.XmlWrappingReader.CreateReader(readerBaseUri, element.CreateReader()), element);
+            return new KeyValuePair<XmlReader, object>(
+                Xml.XmlWrappingReader.CreateReader(readerBaseUri, element.CreateReader()),
+                element
+            );
         }
 
         #endregion Internal methods.
@@ -133,8 +140,10 @@ namespace System.Data.Services.Client
                 }
 
                 Debug.Assert(
-                    this.reader.NodeType == XmlNodeType.Element || this.reader.NodeType == XmlNodeType.EndElement,
-                    "this.reader.NodeType == XmlNodeType.Element || this.reader.NodeType == XmlNodeType.EndElement -- otherwise we should have ignored or thrown");
+                    this.reader.NodeType == XmlNodeType.Element
+                        || this.reader.NodeType == XmlNodeType.EndElement,
+                    "this.reader.NodeType == XmlNodeType.Element || this.reader.NodeType == XmlNodeType.EndElement -- otherwise we should have ignored or thrown"
+                );
 
                 AtomDataKind readerData = ParseStateForReader(this.reader);
 
@@ -179,7 +188,9 @@ namespace System.Data.Services.Client
                     case AtomDataKind.PagingLinks:
                         if (this.feed == null)
                         {
-                            throw new InvalidOperationException(Strings.AtomParser_PagingLinkOutsideOfFeed);
+                            throw new InvalidOperationException(
+                                Strings.AtomParser_PagingLinkOutsideOfFeed
+                            );
                         }
 
                         this.kind = AtomDataKind.PagingLinks;
@@ -187,13 +198,16 @@ namespace System.Data.Services.Client
                         return true;
 
                     default:
-                        Debug.Assert(false, "Atom Parser is in a wrong state...Did you add a new AtomDataKind?");
+                        Debug.Assert(
+                            false,
+                            "Atom Parser is in a wrong state...Did you add a new AtomDataKind?"
+                        );
                         break;
                 }
             }
 
             this.kind = AtomDataKind.Finished;
-            this.entry = null;            
+            this.entry = null;
             return false;
         }
 
@@ -201,7 +215,8 @@ namespace System.Data.Services.Client
         {
             Debug.Assert(
                 this.kind == AtomDataKind.Custom,
-                "this.kind == AtomDataKind.Custom -- otherwise caller shouldn't invoke ReadCurrentPropertyValue");
+                "this.kind == AtomDataKind.Custom -- otherwise caller shouldn't invoke ReadCurrentPropertyValue"
+            );
             return this.ReadPropertyValue();
         }
 
@@ -209,7 +224,8 @@ namespace System.Data.Services.Client
         {
             Debug.Assert(
                 this.kind == AtomDataKind.Custom,
-                "this.kind == AtomDataKind.Custom -- otherwise caller shouldn't invoke ReadCustomElementString");
+                "this.kind == AtomDataKind.Custom -- otherwise caller shouldn't invoke ReadCustomElementString"
+            );
             return MaterializeAtom.ReadElementString(this.reader, true);
         }
 
@@ -228,7 +244,8 @@ namespace System.Data.Services.Client
             Debug.Assert(reader != null, "reader != null");
             Debug.Assert(
                 reader.NodeType == XmlNodeType.Element || reader.NodeType == XmlNodeType.EndElement,
-                "reader.NodeType == XmlNodeType.Element || EndElement -- otherwise can't determine");
+                "reader.NodeType == XmlNodeType.Element || EndElement -- otherwise can't determine"
+            );
 
             AtomDataKind result = AtomDataKind.Custom;
             string elementName = reader.LocalName;
@@ -243,8 +260,13 @@ namespace System.Data.Services.Client
                 {
                     result = AtomDataKind.Feed;
                 }
-                else if (Util.AreSame(XmlConstants.AtomLinkElementName, elementName) &&
-                    Util.AreSame(XmlConstants.AtomLinkNextAttributeString, reader.GetAttribute(XmlConstants.AtomLinkRelationAttributeName)))
+                else if (
+                    Util.AreSame(XmlConstants.AtomLinkElementName, elementName)
+                    && Util.AreSame(
+                        XmlConstants.AtomLinkNextAttributeString,
+                        reader.GetAttribute(XmlConstants.AtomLinkRelationAttributeName)
+                    )
+                )
                 {
                     result = AtomDataKind.PagingLinks;
                 }
@@ -260,12 +282,19 @@ namespace System.Data.Services.Client
             return result;
         }
 
-        private static bool ReadChildElement(XmlReader reader, string localName, string namespaceUri)
+        private static bool ReadChildElement(
+            XmlReader reader,
+            string localName,
+            string namespaceUri
+        )
         {
             Debug.Assert(localName != null, "localName != null");
             Debug.Assert(namespaceUri != null, "namespaceUri != null");
             Debug.Assert(!reader.IsEmptyElement, "!reader.IsEmptyElement");
-            Debug.Assert(reader.NodeType != XmlNodeType.EndElement, "reader.NodeType != XmlNodeType.EndElement");
+            Debug.Assert(
+                reader.NodeType != XmlNodeType.EndElement,
+                "reader.NodeType != XmlNodeType.EndElement"
+            );
 
             return reader.Read() && reader.IsStartElement(localName, namespaceUri);
         }
@@ -275,9 +304,15 @@ namespace System.Data.Services.Client
             Debug.Assert(reader != null, "reader != null");
             Debug.Assert(reader.Depth >= depth, "reader.Depth >= depth");
 
-            while (!(reader.Depth == depth && 
-                     (reader.NodeType == XmlNodeType.EndElement ||
-                      (reader.NodeType == XmlNodeType.Element && reader.IsEmptyElement))))
+            while (
+                !(
+                    reader.Depth == depth
+                    && (
+                        reader.NodeType == XmlNodeType.EndElement
+                        || (reader.NodeType == XmlNodeType.Element && reader.IsEmptyElement)
+                    )
+                )
+            )
             {
                 reader.Read();
             }
@@ -298,13 +333,16 @@ namespace System.Data.Services.Client
                 if (reader.Depth == depth)
                 {
                     Debug.Assert(
-                        reader.NodeType == XmlNodeType.EndElement, 
-                        "reader.NodeType == XmlNodeType.EndElement -- otherwise XmlReader is acting odd");
+                        reader.NodeType == XmlNodeType.EndElement,
+                        "reader.NodeType == XmlNodeType.EndElement -- otherwise XmlReader is acting odd"
+                    );
                     break;
                 }
 
-                if (reader.NodeType == XmlNodeType.SignificantWhitespace ||
-                    reader.NodeType == XmlNodeType.Text)
+                if (
+                    reader.NodeType == XmlNodeType.SignificantWhitespace
+                    || reader.NodeType == XmlNodeType.Text
+                )
                 {
                     result.Append(reader.Value);
                 }
@@ -340,27 +378,55 @@ namespace System.Data.Services.Client
 
         private static bool IsAllowedContentType(string contentType)
         {
-            return (String.Equals(XmlConstants.MimeApplicationXml, contentType, StringComparison.OrdinalIgnoreCase) ||
-                    String.Equals(XmlConstants.MimeApplicationAtom, contentType, StringComparison.OrdinalIgnoreCase));
+            return (
+                String.Equals(
+                    XmlConstants.MimeApplicationXml,
+                    contentType,
+                    StringComparison.OrdinalIgnoreCase
+                )
+                || String.Equals(
+                    XmlConstants.MimeApplicationAtom,
+                    contentType,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            );
         }
 
         private static bool IsAllowedLinkType(string linkType, out bool isFeed)
         {
-            isFeed = String.Equals(XmlConstants.LinkMimeTypeFeed, linkType, StringComparison.OrdinalIgnoreCase);
-            return isFeed ? true : String.Equals(XmlConstants.LinkMimeTypeEntry, linkType, StringComparison.OrdinalIgnoreCase);
+            isFeed = String.Equals(
+                XmlConstants.LinkMimeTypeFeed,
+                linkType,
+                StringComparison.OrdinalIgnoreCase
+            );
+            return isFeed
+                ? true
+                : String.Equals(
+                    XmlConstants.LinkMimeTypeEntry,
+                    linkType,
+                    StringComparison.OrdinalIgnoreCase
+                );
         }
 
         private void ParseCurrentContent(AtomEntry targetEntry)
         {
             Debug.Assert(targetEntry != null, "targetEntry != null");
-            Debug.Assert(this.reader.NodeType == XmlNodeType.Element, "this.reader.NodeType == XmlNodeType.Element");
-            
-            string propertyValue = this.reader.GetAttributeEx(XmlConstants.AtomContentSrcAttributeName, XmlConstants.AtomNamespace);
+            Debug.Assert(
+                this.reader.NodeType == XmlNodeType.Element,
+                "this.reader.NodeType == XmlNodeType.Element"
+            );
+
+            string propertyValue = this.reader.GetAttributeEx(
+                XmlConstants.AtomContentSrcAttributeName,
+                XmlConstants.AtomNamespace
+            );
             if (propertyValue != null)
             {
                 if (!this.reader.IsEmptyElement)
                 {
-                    throw Error.InvalidOperation(Strings.Deserialize_ExpectedEmptyMediaLinkEntryContent);
+                    throw Error.InvalidOperation(
+                        Strings.Deserialize_ExpectedEmptyMediaLinkEntryContent
+                    );
                 }
 
                 targetEntry.MediaLinkEntry = true;
@@ -370,12 +436,17 @@ namespace System.Data.Services.Client
             {
                 if (targetEntry.MediaLinkEntry.HasValue && targetEntry.MediaLinkEntry.Value)
                 {
-                    throw Error.InvalidOperation(Strings.Deserialize_ContentPlusPropertiesNotAllowed);
+                    throw Error.InvalidOperation(
+                        Strings.Deserialize_ContentPlusPropertiesNotAllowed
+                    );
                 }
 
                 targetEntry.MediaLinkEntry = false;
 
-                propertyValue = this.reader.GetAttributeEx(XmlConstants.AtomTypeAttributeName, XmlConstants.AtomNamespace);
+                propertyValue = this.reader.GetAttributeEx(
+                    XmlConstants.AtomTypeAttributeName,
+                    XmlConstants.AtomNamespace
+                );
                 if (AtomParser.IsAllowedContentType(propertyValue))
                 {
                     if (this.reader.IsEmptyElement)
@@ -383,12 +454,17 @@ namespace System.Data.Services.Client
                         return;
                     }
 
-                    if (ReadChildElement(this.reader, XmlConstants.AtomPropertiesElementName, XmlConstants.DataWebMetadataNamespace))
+                    if (
+                        ReadChildElement(
+                            this.reader,
+                            XmlConstants.AtomPropertiesElementName,
+                            XmlConstants.DataWebMetadataNamespace
+                        )
+                    )
                     {
                         this.ReadCurrentProperties(targetEntry.DataValues);
                     }
-                    else
-                    if (this.reader.NodeType != XmlNodeType.EndElement)
+                    else if (this.reader.NodeType != XmlNodeType.EndElement)
                     {
                         throw Error.InvalidOperation(Strings.Deserialize_NotApplicationXml);
                     }
@@ -400,11 +476,13 @@ namespace System.Data.Services.Client
         {
             Debug.Assert(targetEntry != null, "targetEntry != null");
             Debug.Assert(
-                this.reader.NodeType == XmlNodeType.Element, 
-                "this.reader.NodeType == XmlNodeType.Element -- otherwise we shouldn't try to parse a link");
+                this.reader.NodeType == XmlNodeType.Element,
+                "this.reader.NodeType == XmlNodeType.Element -- otherwise we shouldn't try to parse a link"
+            );
             Debug.Assert(
                 this.reader.LocalName == "link",
-                "this.reader.LocalName == 'link' -- otherwise we shouldn't try to parse a link");
+                "this.reader.LocalName == 'link' -- otherwise we shouldn't try to parse a link"
+            );
 
             string relation = this.reader.GetAttribute(XmlConstants.AtomLinkRelationAttributeName);
             if (relation == null)
@@ -412,7 +490,10 @@ namespace System.Data.Services.Client
                 return;
             }
 
-            if (relation == XmlConstants.AtomEditRelationAttributeValue && targetEntry.EditLink == null)
+            if (
+                relation == XmlConstants.AtomEditRelationAttributeValue
+                && targetEntry.EditLink == null
+            )
             {
                 string href = this.reader.GetAttribute(XmlConstants.AtomHRefAttributeName);
                 if (String.IsNullOrEmpty(href))
@@ -422,7 +503,10 @@ namespace System.Data.Services.Client
 
                 targetEntry.EditLink = this.ConvertHRefAttributeValueIntoURI(href);
             }
-            else if (relation == XmlConstants.AtomSelfRelationAttributeValue && targetEntry.QueryLink == null)
+            else if (
+                relation == XmlConstants.AtomSelfRelationAttributeValue
+                && targetEntry.QueryLink == null
+            )
             {
                 string href = this.reader.GetAttribute(XmlConstants.AtomHRefAttributeName);
                 if (String.IsNullOrEmpty(href))
@@ -432,16 +516,24 @@ namespace System.Data.Services.Client
 
                 targetEntry.QueryLink = this.ConvertHRefAttributeValueIntoURI(href);
             }
-            else if (relation == XmlConstants.AtomEditMediaRelationAttributeValue && targetEntry.MediaEditUri == null)
+            else if (
+                relation == XmlConstants.AtomEditMediaRelationAttributeValue
+                && targetEntry.MediaEditUri == null
+            )
             {
                 string href = this.reader.GetAttribute(XmlConstants.AtomHRefAttributeName);
                 if (String.IsNullOrEmpty(href))
                 {
-                    throw Error.InvalidOperation(Strings.Context_MissingEditMediaLinkInResponseBody);
+                    throw Error.InvalidOperation(
+                        Strings.Context_MissingEditMediaLinkInResponseBody
+                    );
                 }
 
                 targetEntry.MediaEditUri = this.ConvertHRefAttributeValueIntoURI(href);
-                targetEntry.StreamETagText = this.reader.GetAttribute(XmlConstants.AtomETagAttributeName, XmlConstants.DataWebMetadataNamespace);
+                targetEntry.StreamETagText = this.reader.GetAttribute(
+                    XmlConstants.AtomETagAttributeName,
+                    XmlConstants.DataWebMetadataNamespace
+                );
             }
 
             if (!this.reader.IsEmptyElement)
@@ -452,7 +544,9 @@ namespace System.Data.Services.Client
                     return;
                 }
 
-                string propertyValueText = this.reader.GetAttribute(XmlConstants.AtomTypeAttributeName);
+                string propertyValueText = this.reader.GetAttribute(
+                    XmlConstants.AtomTypeAttributeName
+                );
                 bool isFeed;
 
                 if (!IsAllowedLinkType(propertyValueText, out isFeed))
@@ -460,7 +554,13 @@ namespace System.Data.Services.Client
                     return;
                 }
 
-                if (!ReadChildElement(this.reader, XmlConstants.AtomInlineElementName, XmlConstants.DataWebMetadataNamespace))
+                if (
+                    !ReadChildElement(
+                        this.reader,
+                        XmlConstants.AtomInlineElementName,
+                        XmlConstants.DataWebMetadataNamespace
+                    )
+                )
                 {
                     return;
                 }
@@ -474,13 +574,27 @@ namespace System.Data.Services.Client
                     AtomEntry nestedEntry = null;
                     List<AtomEntry> feedEntries = null;
 
-                    Debug.Assert(this.reader is Xml.XmlWrappingReader, "reader must be a instance of XmlWrappingReader");
+                    Debug.Assert(
+                        this.reader is Xml.XmlWrappingReader,
+                        "reader must be a instance of XmlWrappingReader"
+                    );
                     string readerBaseUri = this.reader.BaseURI;
-                    XmlReader nestedReader = Xml.XmlWrappingReader.CreateReader(readerBaseUri, this.reader.ReadSubtree());
+                    XmlReader nestedReader = Xml.XmlWrappingReader.CreateReader(
+                        readerBaseUri,
+                        this.reader.ReadSubtree()
+                    );
                     nestedReader.Read();
-                    Debug.Assert(nestedReader.LocalName == "inline", "nestedReader.LocalName == 'inline'");
+                    Debug.Assert(
+                        nestedReader.LocalName == "inline",
+                        "nestedReader.LocalName == 'inline'"
+                    );
 
-                    AtomParser nested = new AtomParser(nestedReader, this.entryCallback, this.typeScheme, this.currentDataNamespace);
+                    AtomParser nested = new AtomParser(
+                        nestedReader,
+                        this.entryCallback,
+                        this.typeScheme,
+                        this.currentDataNamespace
+                    );
                     while (nested.Read())
                     {
                         switch (nested.DataKind)
@@ -505,7 +619,9 @@ namespace System.Data.Services.Client
                             case AtomDataKind.PagingLinks:
                                 break;
                             default:
-                                throw new InvalidOperationException(Strings.AtomParser_UnexpectedContentUnderExpandedLink);
+                                throw new InvalidOperationException(
+                                    Strings.AtomParser_UnexpectedContentUnderExpandedLink
+                                );
                         }
                     }
 
@@ -513,7 +629,8 @@ namespace System.Data.Services.Client
                     {
                         Debug.Assert(
                             nestedFeed.Entries == null,
-                            "nestedFeed.Entries == null -- otherwise someone initialized this for us");
+                            "nestedFeed.Entries == null -- otherwise someone initialized this for us"
+                        );
                         nestedFeed.Entries = feedEntries;
                     }
                 }
@@ -544,7 +661,7 @@ namespace System.Data.Services.Client
                 targetEntry.DataValues.Add(property);
             }
         }
-        
+
         private void ReadPropertyValueIntoResult(AtomContentProperty property)
         {
             Debug.Assert(this.reader != null, "reader != null");
@@ -595,7 +712,8 @@ namespace System.Data.Services.Client
             Debug.Assert(this.reader != null, "reader != null");
             Debug.Assert(
                 this.reader.NodeType == XmlNodeType.Element,
-                "reader.NodeType == XmlNodeType.Element -- otherwise caller is confused as to where the reader is");
+                "reader.NodeType == XmlNodeType.Element -- otherwise caller is confused as to where the reader is"
+            );
 
             if (!this.IsDataWebElement)
             {
@@ -605,7 +723,10 @@ namespace System.Data.Services.Client
 
             AtomContentProperty result = new AtomContentProperty();
             result.Name = this.reader.LocalName;
-            result.TypeName = this.reader.GetAttributeEx(XmlConstants.AtomTypeAttributeName, XmlConstants.DataWebMetadataNamespace);
+            result.TypeName = this.reader.GetAttributeEx(
+                XmlConstants.AtomTypeAttributeName,
+                XmlConstants.DataWebMetadataNamespace
+            );
             result.IsNull = Util.DoesNullAttributeSayTrue(this.reader);
             result.Text = result.IsNull ? null : String.Empty;
 
@@ -628,7 +749,10 @@ namespace System.Data.Services.Client
         private void ReadCurrentProperties(List<AtomContentProperty> values)
         {
             Debug.Assert(values != null, "values != null");
-            Debug.Assert(this.reader.NodeType == XmlNodeType.Element, "this.reader.NodeType == XmlNodeType.Element");
+            Debug.Assert(
+                this.reader.NodeType == XmlNodeType.Element,
+                "this.reader.NodeType == XmlNodeType.Element"
+            );
 
             while (this.reader.Read())
             {
@@ -656,7 +780,10 @@ namespace System.Data.Services.Client
 
         private void ParseCurrentEntry(out AtomEntry targetEntry)
         {
-            Debug.Assert(this.reader.NodeType == XmlNodeType.Element, "this.reader.NodeType == XmlNodeType.Element");
+            Debug.Assert(
+                this.reader.NodeType == XmlNodeType.Element,
+                "this.reader.NodeType == XmlNodeType.Element"
+            );
 
             var callbackResult = this.entryCallback(this.reader);
             Debug.Assert(callbackResult.Key != null, "callbackResult.Key != null");
@@ -664,13 +791,19 @@ namespace System.Data.Services.Client
             this.reader = callbackResult.Key;
 
             this.reader.Read();
-            Debug.Assert(this.reader.LocalName == "entry", "this.reader.LocalName == 'entry' - otherwise we're not reading the subtree");
+            Debug.Assert(
+                this.reader.LocalName == "entry",
+                "this.reader.LocalName == 'entry' - otherwise we're not reading the subtree"
+            );
 
             bool hasContent = false;
             targetEntry = new AtomEntry();
             targetEntry.DataValues = new List<AtomContentProperty>();
             targetEntry.Tag = callbackResult.Value;
-            targetEntry.ETagText = this.reader.GetAttribute(XmlConstants.AtomETagAttributeName, XmlConstants.DataWebMetadataNamespace);
+            targetEntry.ETagText = this.reader.GetAttribute(
+                XmlConstants.AtomETagAttributeName,
+                XmlConstants.DataWebMetadataNamespace
+            );
 
             while (this.reader.Read())
             {
@@ -686,12 +819,21 @@ namespace System.Data.Services.Client
                     string namespaceURI = this.reader.NamespaceURI;
                     if (namespaceURI == XmlConstants.AtomNamespace)
                     {
-                        if (elementName == XmlConstants.AtomCategoryElementName && targetEntry.TypeName == null)
+                        if (
+                            elementName == XmlConstants.AtomCategoryElementName
+                            && targetEntry.TypeName == null
+                        )
                         {
-                            string text = this.reader.GetAttributeEx(XmlConstants.AtomCategorySchemeAttributeName, XmlConstants.AtomNamespace);
+                            string text = this.reader.GetAttributeEx(
+                                XmlConstants.AtomCategorySchemeAttributeName,
+                                XmlConstants.AtomNamespace
+                            );
                             if (text == this.typeScheme)
                             {
-                                targetEntry.TypeName = this.reader.GetAttributeEx(XmlConstants.AtomCategoryTermAttributeName, XmlConstants.AtomNamespace);
+                                targetEntry.TypeName = this.reader.GetAttributeEx(
+                                    XmlConstants.AtomCategoryTermAttributeName,
+                                    XmlConstants.AtomNamespace
+                                );
                             }
                         }
                         else if (elementName == XmlConstants.AtomContentElementName)
@@ -699,15 +841,20 @@ namespace System.Data.Services.Client
                             hasContent = true;
                             this.ParseCurrentContent(targetEntry);
                         }
-                        else if (elementName == XmlConstants.AtomIdElementName && targetEntry.Identity == null)
+                        else if (
+                            elementName == XmlConstants.AtomIdElementName
+                            && targetEntry.Identity == null
+                        )
                         {
                             string idText = ReadElementStringForText(this.reader);
                             idText = Util.ReferenceIdentity(idText);
-                            
+
                             Uri idUri = Util.CreateUri(idText, UriKind.RelativeOrAbsolute);
                             if (!idUri.IsAbsoluteUri)
                             {
-                                throw Error.InvalidOperation(Strings.Context_TrackingExpectsAbsoluteUri);
+                                throw Error.InvalidOperation(
+                                    Strings.Context_TrackingExpectsAbsoluteUri
+                                );
                             }
 
                             targetEntry.Identity = idText;
@@ -721,9 +868,14 @@ namespace System.Data.Services.Client
                     {
                         if (elementName == XmlConstants.AtomPropertiesElementName)
                         {
-                            if (targetEntry.MediaLinkEntry.HasValue && !targetEntry.MediaLinkEntry.Value)
+                            if (
+                                targetEntry.MediaLinkEntry.HasValue
+                                && !targetEntry.MediaLinkEntry.Value
+                            )
                             {
-                                throw Error.InvalidOperation(Strings.Deserialize_ContentPlusPropertiesNotAllowed);
+                                throw Error.InvalidOperation(
+                                    Strings.Deserialize_ContentPlusPropertiesNotAllowed
+                                );
                             }
 
                             targetEntry.MediaLinkEntry = true;
@@ -765,7 +917,14 @@ namespace System.Data.Services.Client
             }
 
             long countValue;
-            if (!long.TryParse(MaterializeAtom.ReadElementString(this.reader, true), System.Globalization.NumberStyles.Integer, System.Globalization.CultureInfo.InvariantCulture, out countValue))
+            if (
+                !long.TryParse(
+                    MaterializeAtom.ReadElementString(this.reader, true),
+                    System.Globalization.NumberStyles.Integer,
+                    System.Globalization.CultureInfo.InvariantCulture,
+                    out countValue
+                )
+            )
             {
                 throw new FormatException(Strings.MaterializeFromAtom_CountFormatError);
             }

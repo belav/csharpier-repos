@@ -1,14 +1,13 @@
 //Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
-
 
 namespace System.Data.Services.Client
 {
@@ -54,7 +53,9 @@ namespace System.Data.Services.Client
             string serialized = ew.Translate(e);
             if (ew.cantTranslateExpression)
             {
-                throw new NotSupportedException(Strings.ALinq_CantTranslateExpression(e.ToString()));
+                throw new NotSupportedException(
+                    Strings.ALinq_CantTranslateExpression(e.ToString())
+                );
             }
 
             return serialized;
@@ -116,8 +117,11 @@ namespace System.Data.Services.Client
             Debug.Assert(ire != null, "ire != null");
             if (this.parent == null || this.parent.NodeType != ExpressionType.MemberAccess)
             {
-                string expressionText = (this.parent != null) ? this.parent.ToString() : ire.ToString();
-                throw new NotSupportedException(Strings.ALinq_CantTranslateExpression(expressionText));
+                string expressionText =
+                    (this.parent != null) ? this.parent.ToString() : ire.ToString();
+                throw new NotSupportedException(
+                    Strings.ALinq_CantTranslateExpression(expressionText)
+                );
             }
 
             return ire;
@@ -179,13 +183,18 @@ namespace System.Data.Services.Client
         {
             if (m.Member is FieldInfo)
             {
-                throw new NotSupportedException(Strings.ALinq_CantReferToPublicField(m.Member.Name));
+                throw new NotSupportedException(
+                    Strings.ALinq_CantReferToPublicField(m.Member.Name)
+                );
             }
 
             Expression e = this.Visit(m.Expression);
 
-            if (m.Member.Name == "Value" && m.Member.DeclaringType.IsGenericType
-                && m.Member.DeclaringType.GetGenericTypeDefinition() == typeof(Nullable<>))
+            if (
+                m.Member.Name == "Value"
+                && m.Member.DeclaringType.IsGenericType
+                && m.Member.DeclaringType.GetGenericTypeDefinition() == typeof(Nullable<>)
+            )
             {
                 return m;
             }
@@ -377,7 +386,9 @@ namespace System.Data.Services.Client
                     return ClientConvert.ToTypeName(type);
                 }
 
-                throw new NotSupportedException(Strings.ALinq_CantCastToUnsupportedPrimitive(type.Name));
+                throw new NotSupportedException(
+                    Strings.ALinq_CantCastToUnsupportedPrimitive(type.Name)
+                );
             }
             else
             {

@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Security.Principal;
-
 using Xunit;
 
 namespace System.Net.Security.Tests

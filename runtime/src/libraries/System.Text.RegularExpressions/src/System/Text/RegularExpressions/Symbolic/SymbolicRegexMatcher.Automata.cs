@@ -27,7 +27,10 @@ namespace System.Text.RegularExpressions.Symbolic
         /// Cache for the states that have been created. Each state is uniquely identified by its associated
         /// <see cref="SymbolicRegexNode{TSet}"/> and the kind of the previous character.
         /// </summary>
-        private readonly Dictionary<(SymbolicRegexNode<TSet> Node, uint PrevCharKind), MatchingState<TSet>> _stateCache = new();
+        private readonly Dictionary<
+            (SymbolicRegexNode<TSet> Node, uint PrevCharKind),
+            MatchingState<TSet>
+        > _stateCache = new();
 
         /// <summary>
         /// Maps state ids to states, initial capacity is given by <see cref="InitialDfaStateCapacity"/>.
@@ -87,7 +90,10 @@ namespace System.Text.RegularExpressions.Symbolic
         /// Each entry is an array of pairs of target state and effects to be applied when taking the transition.
         /// If the entry is null then the transition has not been computed yet.
         /// </summary>
-        private (int, DerivativeEffect[])[]?[] _capturingNfaDelta = Array.Empty<(int, DerivativeEffect[])[]?>();
+        private (int, DerivativeEffect[])[]?[] _capturingNfaDelta = Array.Empty<(
+            int,
+            DerivativeEffect[]
+        )[]?>();
 
         /// <summary>
         /// Implements a version of <see cref="Array.Resize"/> that is guaranteed to not publish an array before values
@@ -107,7 +113,8 @@ namespace System.Text.RegularExpressions.Symbolic
             Volatile.Write(ref array, newArray);
         }
 
-        private int DeltaOffset(int stateId, int mintermId) => (stateId << _mintermsLog) | mintermId;
+        private int DeltaOffset(int stateId, int mintermId) =>
+            (stateId << _mintermsLog) | mintermId;
 
         /// <summary>Returns the span from <see cref="_dfaDelta"/> that may contain transitions for the given state</summary>
         private Span<int> GetDeltasFor(MatchingState<TSet> state)
@@ -148,7 +155,10 @@ namespace System.Text.RegularExpressions.Symbolic
         /// <param name="node">the pattern that this state will represent</param>
         /// <param name="prevCharKind">the kind of the character that led to this state</param>
         /// <returns></returns>
-        private MatchingState<TSet> GetOrCreateState(SymbolicRegexNode<TSet> node, uint prevCharKind)
+        private MatchingState<TSet> GetOrCreateState(
+            SymbolicRegexNode<TSet> node,
+            uint prevCharKind
+        )
         {
             Debug.Assert(Monitor.IsEntered(this));
             return GetOrCreateState_NoLock(node, prevCharKind);
@@ -161,7 +171,11 @@ namespace System.Text.RegularExpressions.Symbolic
         /// <param name="prevCharKind">the kind of the character that led to this state</param>
         /// <param name="isInitialState">whether to mark the state as an initial state or not</param>
         /// <returns></returns>
-        private MatchingState<TSet> GetOrCreateState_NoLock(SymbolicRegexNode<TSet> node, uint prevCharKind, bool isInitialState = false)
+        private MatchingState<TSet> GetOrCreateState_NoLock(
+            SymbolicRegexNode<TSet> node,
+            uint prevCharKind,
+            bool isInitialState = false
+        )
         {
             SymbolicRegexNode<TSet> prunedNode = node.PruneAnchors(_builder, prevCharKind);
             (SymbolicRegexNode<TSet> Node, uint PrevCharKind) key = (prunedNode, prevCharKind);
@@ -268,7 +282,12 @@ namespace System.Text.RegularExpressions.Symbolic
         /// <summary>Gets or creates a new DFA transition.</summary>
         /// <remarks>This function locks the matcher for safe concurrent use of the <see cref="_builder"/></remarks>
         private bool TryCreateNewTransition(
-            MatchingState<TSet> sourceState, int mintermId, int offset, bool checkThreshold, [NotNullWhen(true)] out MatchingState<TSet>? nextState)
+            MatchingState<TSet> sourceState,
+            int mintermId,
+            int offset,
+            bool checkThreshold,
+            [NotNullWhen(true)] out MatchingState<TSet>? nextState
+        )
         {
             Debug.Assert(offset < _dfaDelta.Length);
 
@@ -286,7 +305,10 @@ namespace System.Text.RegularExpressions.Symbolic
 
                     TSet minterm = GetMintermFromId(mintermId);
                     uint nextCharKind = GetPositionKind(mintermId);
-                    targetState = GetOrCreateState(sourceState.Next(_builder, minterm, nextCharKind), nextCharKind);
+                    targetState = GetOrCreateState(
+                        sourceState.Next(_builder, minterm, nextCharKind),
+                        nextCharKind
+                    );
                     Volatile.Write(ref _dfaDelta[offset], targetState.Id);
                 }
 
@@ -314,12 +336,18 @@ namespace System.Text.RegularExpressions.Symbolic
                     MatchingState<TSet> coreState = GetState(coreId);
                     TSet minterm = GetMintermFromId(mintermId);
                     uint nextCharKind = GetPositionKind(mintermId);
-                    SymbolicRegexNode<TSet>? targetNode = coreTargetId > 0 ?
-                        GetState(coreTargetId).Node : coreState.Next(_builder, minterm, nextCharKind);
+                    SymbolicRegexNode<TSet>? targetNode =
+                        coreTargetId > 0
+                            ? GetState(coreTargetId).Node
+                            : coreState.Next(_builder, minterm, nextCharKind);
 
                     List<int> targetsList = new();
-                    ForEachNfaState(targetNode, nextCharKind, targetsList, static (int nfaId, List<int> targetsList) =>
-                        targetsList.Add(nfaId));
+                    ForEachNfaState(
+                        targetNode,
+                        nextCharKind,
+                        targetsList,
+                        static (int nfaId, List<int> targetsList) => targetsList.Add(nfaId)
+                    );
 
                     targets = targetsList.ToArray();
                     Volatile.Write(ref _nfaDelta[nfaOffset], targets);
@@ -331,7 +359,11 @@ namespace System.Text.RegularExpressions.Symbolic
 
         /// <summary>Gets or creates a new capturing NFA transition.</summary>
         /// <remarks>This function locks the matcher for safe concurrent use of the <see cref="_builder"/></remarks>
-        private (int, DerivativeEffect[])[] CreateNewCapturingTransition(int nfaStateId, int mintermId, int offset)
+        private (int, DerivativeEffect[])[] CreateNewCapturingTransition(
+            int nfaStateId,
+            int mintermId,
+            int offset
+        )
         {
             lock (this)
             {
@@ -343,14 +375,29 @@ namespace System.Text.RegularExpressions.Symbolic
                     MatchingState<TSet> coreState = GetState(GetCoreStateId(nfaStateId));
                     TSet minterm = GetMintermFromId(mintermId);
                     uint nextCharKind = GetPositionKind(mintermId);
-                    List<(SymbolicRegexNode<TSet> Node, DerivativeEffect[] Effects)>? transition = coreState.NfaNextWithEffects(_builder, minterm, nextCharKind);
+                    List<(SymbolicRegexNode<TSet> Node, DerivativeEffect[] Effects)>? transition =
+                        coreState.NfaNextWithEffects(_builder, minterm, nextCharKind);
                     // Build the new state and store it into the array.
                     List<(int, DerivativeEffect[])> targetsList = new();
-                    foreach ((SymbolicRegexNode<TSet> Node, DerivativeEffect[] Effects) entry in transition)
+                    foreach (
+                        (
+                            SymbolicRegexNode<TSet> Node,
+                            DerivativeEffect[] Effects
+                        ) entry in transition
+                    )
                     {
-                        ForEachNfaState(entry.Node, nextCharKind, (targetsList, entry.Effects),
-                            static (int nfaId, (List<(int, DerivativeEffect[])> Targets, DerivativeEffect[] Effects) args) =>
-                                args.Targets.Add((nfaId, args.Effects)));
+                        ForEachNfaState(
+                            entry.Node,
+                            nextCharKind,
+                            (targetsList, entry.Effects),
+                            static (
+                                int nfaId,
+                                (
+                                    List<(int, DerivativeEffect[])> Targets,
+                                    DerivativeEffect[] Effects
+                                ) args
+                            ) => args.Targets.Add((nfaId, args.Effects))
+                        );
                     }
                     targets = targetsList.ToArray();
                     Volatile.Write(ref _capturingNfaDelta[offset], targets);
@@ -371,11 +418,18 @@ namespace System.Text.RegularExpressions.Symbolic
         /// <param name="prevCharKind">the previous character kind for each created NFA state</param>
         /// <param name="arg">an additional argument passed through to each call to the action</param>
         /// <param name="action">action to call for each NFA state</param>
-        private void ForEachNfaState<T>(SymbolicRegexNode<TSet> node, uint prevCharKind, T arg, Action<int, T> action)
+        private void ForEachNfaState<T>(
+            SymbolicRegexNode<TSet> node,
+            uint prevCharKind,
+            T arg,
+            Action<int, T> action
+        )
         {
             lock (this)
             {
-                foreach (SymbolicRegexNode<TSet> nfaNode in node.EnumerateAlternationBranches(_builder))
+                foreach (
+                    SymbolicRegexNode<TSet> nfaNode in node.EnumerateAlternationBranches(_builder)
+                )
                 {
                     if (CreateNfaState(nfaNode, prevCharKind) is int nfaId)
                     {

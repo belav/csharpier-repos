@@ -12,4 +12,3 @@ internal sealed class Response
     public JToken? Value { get; init; }
     public string? Exception { get; init; }
 }
-

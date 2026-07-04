@@ -22,16 +22,21 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 {
     internal partial class CSharpCodeModelService
     {
-        protected override AbstractNodeLocator CreateNodeLocator()
-            => new NodeLocator();
+        protected override AbstractNodeLocator CreateNodeLocator() => new NodeLocator();
 
         private class NodeLocator : AbstractNodeLocator
         {
             protected override string LanguageName => LanguageNames.CSharp;
 
-            protected override EnvDTE.vsCMPart DefaultPart => EnvDTE.vsCMPart.vsCMPartWholeWithAttributes;
+            protected override EnvDTE.vsCMPart DefaultPart =>
+                EnvDTE.vsCMPart.vsCMPartWholeWithAttributes;
 
-            protected override VirtualTreePoint? GetStartPoint(SourceText text, LineFormattingOptions options, SyntaxNode node, EnvDTE.vsCMPart part)
+            protected override VirtualTreePoint? GetStartPoint(
+                SourceText text,
+                LineFormattingOptions options,
+                SyntaxNode node,
+                EnvDTE.vsCMPart part
+            )
             {
                 switch (node.Kind())
                 {
@@ -53,11 +58,21 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     case SyntaxKind.DestructorDeclaration:
                     case SyntaxKind.OperatorDeclaration:
                     case SyntaxKind.ConversionOperatorDeclaration:
-                        return GetStartPoint(text, options, (BaseMethodDeclarationSyntax)node, part);
+                        return GetStartPoint(
+                            text,
+                            options,
+                            (BaseMethodDeclarationSyntax)node,
+                            part
+                        );
                     case SyntaxKind.PropertyDeclaration:
                     case SyntaxKind.IndexerDeclaration:
                     case SyntaxKind.EventDeclaration:
-                        return GetStartPoint(text, options, (BasePropertyDeclarationSyntax)node, part);
+                        return GetStartPoint(
+                            text,
+                            options,
+                            (BasePropertyDeclarationSyntax)node,
+                            part
+                        );
                     case SyntaxKind.GetAccessorDeclaration:
                     case SyntaxKind.SetAccessorDeclaration:
                     case SyntaxKind.AddAccessorDeclaration:
@@ -82,7 +97,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 }
             }
 
-            protected override VirtualTreePoint? GetEndPoint(SourceText text, LineFormattingOptions options, SyntaxNode node, EnvDTE.vsCMPart part)
+            protected override VirtualTreePoint? GetEndPoint(
+                SourceText text,
+                LineFormattingOptions options,
+                SyntaxNode node,
+                EnvDTE.vsCMPart part
+            )
             {
                 switch (node.Kind())
                 {
@@ -133,19 +153,34 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 }
             }
 
-            private static VirtualTreePoint GetBodyStartPoint(SourceText text, SyntaxToken openBrace)
+            private static VirtualTreePoint GetBodyStartPoint(
+                SourceText text,
+                SyntaxToken openBrace
+            )
             {
                 Debug.Assert(!openBrace.IsMissing);
 
                 var openBraceLine = text.Lines.GetLineFromPosition(openBrace.Span.End);
-                var textAfterBrace = text.ToString(TextSpan.FromBounds(openBrace.Span.End, openBraceLine.End));
+                var textAfterBrace = text.ToString(
+                    TextSpan.FromBounds(openBrace.Span.End, openBraceLine.End)
+                );
 
                 return string.IsNullOrWhiteSpace(textAfterBrace)
-                    ? new VirtualTreePoint(openBrace.SyntaxTree, text, text.Lines[openBraceLine.LineNumber + 1].Start)
+                    ? new VirtualTreePoint(
+                        openBrace.SyntaxTree,
+                        text,
+                        text.Lines[openBraceLine.LineNumber + 1].Start
+                    )
                     : new VirtualTreePoint(openBrace.SyntaxTree, text, openBrace.Span.End);
             }
 
-            private static VirtualTreePoint GetBodyStartPoint(SourceText text, LineFormattingOptions options, SyntaxToken openBrace, SyntaxToken closeBrace, int memberStartColumn)
+            private static VirtualTreePoint GetBodyStartPoint(
+                SourceText text,
+                LineFormattingOptions options,
+                SyntaxToken openBrace,
+                SyntaxToken closeBrace,
+                int memberStartColumn
+            )
             {
                 Debug.Assert(!openBrace.IsMissing);
                 Debug.Assert(!closeBrace.IsMissing);
@@ -160,9 +195,14 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 // We need to check if there is any significant trivia trailing this token or leading
                 // to the next token. This accounts for the fact that comments were included in the token
                 // stream in Dev10.
-                var significantTrivia = openBrace.GetAllTrailingTrivia()
-                                                 .Where(t => t is not SyntaxTrivia(SyntaxKind.WhitespaceTrivia or SyntaxKind.EndOfLineTrivia))
-                                                 .FirstOrDefault();
+                var significantTrivia = openBrace
+                    .GetAllTrailingTrivia()
+                    .Where(t =>
+                        t
+                            is not SyntaxTrivia
+                            (SyntaxKind.WhitespaceTrivia or SyntaxKind.EndOfLineTrivia)
+                    )
+                    .FirstOrDefault();
 
                 if (significantTrivia.Kind() != SyntaxKind.None)
                 {
@@ -171,16 +211,23 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 
                 // If the opening and closing curlies are at least two lines apart then place the cursor
                 // on the next line provided that there isn't any token on the line with the open curly.
-                if (openBraceLine.LineNumber + 1 < closeBraceLine.LineNumber &&
-                    openBraceLine.LineNumber < text.Lines.IndexOf(tokenAfterOpenBrace.SpanStart))
+                if (
+                    openBraceLine.LineNumber + 1 < closeBraceLine.LineNumber
+                    && openBraceLine.LineNumber < text.Lines.IndexOf(tokenAfterOpenBrace.SpanStart)
+                )
                 {
                     var lineAfterOpenBrace = text.Lines[openBraceLine.LineNumber + 1];
-                    var firstNonWhitespaceOffset = lineAfterOpenBrace.GetFirstNonWhitespaceOffset() ?? -1;
+                    var firstNonWhitespaceOffset =
+                        lineAfterOpenBrace.GetFirstNonWhitespaceOffset() ?? -1;
 
                     // If the line contains any text, we return the start of the first non-whitespace character.
                     if (firstNonWhitespaceOffset >= 0)
                     {
-                        return new VirtualTreePoint(openBrace.SyntaxTree, text, lineAfterOpenBrace.Start + firstNonWhitespaceOffset);
+                        return new VirtualTreePoint(
+                            openBrace.SyntaxTree,
+                            text,
+                            lineAfterOpenBrace.Start + firstNonWhitespaceOffset
+                        );
                     }
 
                     // If the line is all whitespace then place the caret at the first indent after the start
@@ -188,11 +235,19 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     var indentSize = options.TabSize;
                     var lineText = lineAfterOpenBrace.ToString();
 
-                    var lineEndColumn = lineText.GetColumnFromLineOffset(lineText.Length, indentSize);
+                    var lineEndColumn = lineText.GetColumnFromLineOffset(
+                        lineText.Length,
+                        indentSize
+                    );
                     var indentColumn = memberStartColumn + indentSize;
                     var virtualSpaces = indentColumn - lineEndColumn;
 
-                    return new VirtualTreePoint(openBrace.SyntaxTree, text, lineAfterOpenBrace.End, virtualSpaces);
+                    return new VirtualTreePoint(
+                        openBrace.SyntaxTree,
+                        text,
+                        lineAfterOpenBrace.End,
+                        virtualSpaces
+                    );
                 }
                 else
                 {
@@ -212,14 +267,20 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             private static VirtualTreePoint GetBodyEndPoint(SourceText text, SyntaxToken closeBrace)
             {
                 var closeBraceLine = text.Lines.GetLineFromPosition(closeBrace.SpanStart);
-                var textBeforeBrace = text.ToString(TextSpan.FromBounds(closeBraceLine.Start, closeBrace.SpanStart));
+                var textBeforeBrace = text.ToString(
+                    TextSpan.FromBounds(closeBraceLine.Start, closeBrace.SpanStart)
+                );
 
                 return string.IsNullOrWhiteSpace(textBeforeBrace)
                     ? new VirtualTreePoint(closeBrace.SyntaxTree, text, closeBraceLine.Start)
                     : new VirtualTreePoint(closeBrace.SyntaxTree, text, closeBrace.SpanStart);
             }
 
-            private static VirtualTreePoint GetStartPoint(SourceText text, ArrowExpressionClauseSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetStartPoint(
+                SourceText text,
+                ArrowExpressionClauseSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 int startPosition;
 
@@ -240,7 +301,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return new VirtualTreePoint(node.SyntaxTree, text, startPosition);
             }
 
-            private static VirtualTreePoint GetStartPoint(SourceText text, AttributeSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetStartPoint(
+                SourceText text,
+                AttributeSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 int startPosition;
 
@@ -273,7 +338,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return new VirtualTreePoint(node.SyntaxTree, text, startPosition);
             }
 
-            private static VirtualTreePoint GetStartPoint(SourceText text, AttributeArgumentSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetStartPoint(
+                SourceText text,
+                AttributeArgumentSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 int startPosition;
 
@@ -303,7 +372,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return new VirtualTreePoint(node.SyntaxTree, text, startPosition);
             }
 
-            private static VirtualTreePoint GetStartPoint(SourceText text, BaseTypeDeclarationSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetStartPoint(
+                SourceText text,
+                BaseTypeDeclarationSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 int startPosition;
 
@@ -351,7 +424,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return new VirtualTreePoint(node.SyntaxTree, text, startPosition);
             }
 
-            private static VirtualTreePoint GetStartPoint(SourceText text, LineFormattingOptions options, BaseMethodDeclarationSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetStartPoint(
+                SourceText text,
+                LineFormattingOptions options,
+                BaseMethodDeclarationSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 int startPosition;
 
@@ -384,28 +462,47 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         if (node.Body != null && !node.Body.OpenBraceToken.IsMissing)
                         {
                             var line = text.Lines.GetLineFromPosition(node.SpanStart);
-                            var indentation = line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(options.TabSize);
+                            var indentation =
+                                line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(
+                                    options.TabSize
+                                );
 
-                            return GetBodyStartPoint(text, options, node.Body.OpenBraceToken, node.Body.CloseBraceToken, indentation);
+                            return GetBodyStartPoint(
+                                text,
+                                options,
+                                node.Body.OpenBraceToken,
+                                node.Body.CloseBraceToken,
+                                indentation
+                            );
                         }
                         else
                         {
                             switch (node.Kind())
                             {
                                 case SyntaxKind.MethodDeclaration:
-                                    startPosition = ((MethodDeclarationSyntax)node).Identifier.SpanStart;
+                                    startPosition = ((MethodDeclarationSyntax)node)
+                                        .Identifier
+                                        .SpanStart;
                                     break;
                                 case SyntaxKind.ConstructorDeclaration:
-                                    startPosition = ((ConstructorDeclarationSyntax)node).Identifier.SpanStart;
+                                    startPosition = ((ConstructorDeclarationSyntax)node)
+                                        .Identifier
+                                        .SpanStart;
                                     break;
                                 case SyntaxKind.DestructorDeclaration:
-                                    startPosition = ((DestructorDeclarationSyntax)node).Identifier.SpanStart;
+                                    startPosition = ((DestructorDeclarationSyntax)node)
+                                        .Identifier
+                                        .SpanStart;
                                     break;
                                 case SyntaxKind.ConversionOperatorDeclaration:
-                                    startPosition = ((ConversionOperatorDeclarationSyntax)node).ImplicitOrExplicitKeyword.SpanStart;
+                                    startPosition = ((ConversionOperatorDeclarationSyntax)node)
+                                        .ImplicitOrExplicitKeyword
+                                        .SpanStart;
                                     break;
                                 case SyntaxKind.OperatorDeclaration:
-                                    startPosition = ((OperatorDeclarationSyntax)node).OperatorToken.SpanStart;
+                                    startPosition = ((OperatorDeclarationSyntax)node)
+                                        .OperatorToken
+                                        .SpanStart;
                                     break;
                                 default:
                                     startPosition = node.GetFirstTokenAfterAttributes().SpanStart;
@@ -416,7 +513,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         break;
 
                     case EnvDTE.vsCMPart.vsCMPartBody:
-                        if (node.Body == null || node.Body.OpenBraceToken.IsMissing || node.Body.CloseBraceToken.IsMissing)
+                        if (
+                            node.Body == null
+                            || node.Body.OpenBraceToken.IsMissing
+                            || node.Body.CloseBraceToken.IsMissing
+                        )
                         {
                             throw Exceptions.ThrowEFail();
                         }
@@ -430,7 +531,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return new VirtualTreePoint(node.SyntaxTree, text, startPosition);
             }
 
-            private static AccessorDeclarationSyntax FindFirstAccessorNode(BasePropertyDeclarationSyntax node)
+            private static AccessorDeclarationSyntax FindFirstAccessorNode(
+                BasePropertyDeclarationSyntax node
+            )
             {
                 if (node.AccessorList == null)
                 {
@@ -440,7 +543,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return node.AccessorList.Accessors.FirstOrDefault();
             }
 
-            private static VirtualTreePoint GetStartPoint(SourceText text, LineFormattingOptions options, BasePropertyDeclarationSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetStartPoint(
+                SourceText text,
+                LineFormattingOptions options,
+                BasePropertyDeclarationSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 int startPosition;
 
@@ -471,29 +579,56 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         if (firstAccessorNode != null)
                         {
                             var line = text.Lines.GetLineFromPosition(firstAccessorNode.SpanStart);
-                            var indentation = line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(options.TabSize);
+                            var indentation =
+                                line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(
+                                    options.TabSize
+                                );
 
                             if (firstAccessorNode.Body != null)
                             {
-                                return GetBodyStartPoint(text, options, firstAccessorNode.Body.OpenBraceToken, firstAccessorNode.Body.CloseBraceToken, indentation);
+                                return GetBodyStartPoint(
+                                    text,
+                                    options,
+                                    firstAccessorNode.Body.OpenBraceToken,
+                                    firstAccessorNode.Body.CloseBraceToken,
+                                    indentation
+                                );
                             }
                             else if (!firstAccessorNode.SemicolonToken.IsMissing)
                             {
                                 // This is total weirdness from the old C# code model with auto props.
                                 // If there isn't a body, the semi-colon is used
-                                return GetBodyStartPoint(text, options, firstAccessorNode.SemicolonToken, firstAccessorNode.SemicolonToken, indentation);
+                                return GetBodyStartPoint(
+                                    text,
+                                    options,
+                                    firstAccessorNode.SemicolonToken,
+                                    firstAccessorNode.SemicolonToken,
+                                    indentation
+                                );
                             }
                         }
 
                         throw Exceptions.ThrowEFail();
 
                     case EnvDTE.vsCMPart.vsCMPartBody:
-                        if (node.AccessorList != null && !node.AccessorList.OpenBraceToken.IsMissing)
+                        if (
+                            node.AccessorList != null
+                            && !node.AccessorList.OpenBraceToken.IsMissing
+                        )
                         {
                             var line = text.Lines.GetLineFromPosition(node.SpanStart);
-                            var indentation = line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(options.TabSize);
+                            var indentation =
+                                line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(
+                                    options.TabSize
+                                );
 
-                            return GetBodyStartPoint(text, options, node.AccessorList.OpenBraceToken, node.AccessorList.CloseBraceToken, indentation);
+                            return GetBodyStartPoint(
+                                text,
+                                options,
+                                node.AccessorList.OpenBraceToken,
+                                node.AccessorList.CloseBraceToken,
+                                indentation
+                            );
                         }
 
                         throw Exceptions.ThrowEFail();
@@ -505,7 +640,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return new VirtualTreePoint(node.SyntaxTree, text, startPosition);
             }
 
-            private static VirtualTreePoint GetStartPoint(SourceText text, LineFormattingOptions options, AccessorDeclarationSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetStartPoint(
+                SourceText text,
+                LineFormattingOptions options,
+                AccessorDeclarationSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 int startPosition;
 
@@ -530,17 +670,28 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         if (node.Body != null && !node.Body.OpenBraceToken.IsMissing)
                         {
                             var line = text.Lines.GetLineFromPosition(node.SpanStart);
-                            var indentation = line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(options.TabSize);
+                            var indentation =
+                                line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(
+                                    options.TabSize
+                                );
 
-                            return GetBodyStartPoint(text, options, node.Body.OpenBraceToken, node.Body.CloseBraceToken, indentation);
+                            return GetBodyStartPoint(
+                                text,
+                                options,
+                                node.Body.OpenBraceToken,
+                                node.Body.CloseBraceToken,
+                                indentation
+                            );
                         }
 
                         throw Exceptions.ThrowEFail();
 
                     case EnvDTE.vsCMPart.vsCMPartBody:
-                        if (node.Body == null ||
-                            node.Body.OpenBraceToken.IsMissing ||
-                            node.Body.CloseBraceToken.IsMissing)
+                        if (
+                            node.Body == null
+                            || node.Body.OpenBraceToken.IsMissing
+                            || node.Body.CloseBraceToken.IsMissing
+                        )
                         {
                             throw Exceptions.ThrowEFail();
                         }
@@ -554,7 +705,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return new VirtualTreePoint(node.SyntaxTree, text, startPosition);
             }
 
-            private static VirtualTreePoint GetStartPoint(SourceText text, BaseNamespaceDeclarationSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetStartPoint(
+                SourceText text,
+                BaseNamespaceDeclarationSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 int startPosition;
 
@@ -582,7 +737,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     case EnvDTE.vsCMPart.vsCMPartBody:
                         if (node is NamespaceDeclarationSyntax namespaceDeclaration)
                         {
-                            if (namespaceDeclaration.OpenBraceToken.IsMissing || namespaceDeclaration.CloseBraceToken.IsMissing)
+                            if (
+                                namespaceDeclaration.OpenBraceToken.IsMissing
+                                || namespaceDeclaration.CloseBraceToken.IsMissing
+                            )
                                 throw Exceptions.ThrowEFail();
 
                             return GetBodyStartPoint(text, namespaceDeclaration.OpenBraceToken);
@@ -603,7 +761,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return new VirtualTreePoint(node.SyntaxTree, text, startPosition);
             }
 
-            private static VirtualTreePoint GetStartPoint(SourceText text, DelegateDeclarationSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetStartPoint(
+                SourceText text,
+                DelegateDeclarationSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 int startPosition;
 
@@ -643,7 +805,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return new VirtualTreePoint(node.SyntaxTree, text, startPosition);
             }
 
-            private static VirtualTreePoint GetStartPoint(SourceText text, UsingDirectiveSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetStartPoint(
+                SourceText text,
+                UsingDirectiveSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 int startPosition;
 
@@ -676,7 +842,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return new VirtualTreePoint(node.SyntaxTree, text, startPosition);
             }
 
-            private static VirtualTreePoint GetStartPoint(SourceText text, VariableDeclaratorSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetStartPoint(
+                SourceText text,
+                VariableDeclaratorSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 var field = node.FirstAncestorOrSelf<BaseFieldDeclarationSyntax>();
                 int startPosition;
@@ -717,7 +887,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return new VirtualTreePoint(node.SyntaxTree, text, startPosition);
             }
 
-            private static VirtualTreePoint GetStartPoint(SourceText text, EnumMemberDeclarationSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetStartPoint(
+                SourceText text,
+                EnumMemberDeclarationSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 int startPosition;
 
@@ -757,7 +931,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return new VirtualTreePoint(node.SyntaxTree, text, startPosition);
             }
 
-            private static VirtualTreePoint GetStartPoint(SourceText text, ParameterSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetStartPoint(
+                SourceText text,
+                ParameterSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 int startPosition;
 
@@ -797,7 +975,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return new VirtualTreePoint(node.SyntaxTree, text, startPosition);
             }
 
-            private static VirtualTreePoint GetEndPoint(SourceText text, ArrowExpressionClauseSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetEndPoint(
+                SourceText text,
+                ArrowExpressionClauseSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 int endPosition;
 
@@ -815,7 +997,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return new VirtualTreePoint(node.SyntaxTree, text, endPosition);
             }
 
-            private static VirtualTreePoint GetEndPoint(SourceText text, AttributeSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetEndPoint(
+                SourceText text,
+                AttributeSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 int endPosition;
 
@@ -848,7 +1034,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return new VirtualTreePoint(node.SyntaxTree, text, endPosition);
             }
 
-            private static VirtualTreePoint GetEndPoint(SourceText text, AttributeArgumentSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetEndPoint(
+                SourceText text,
+                AttributeArgumentSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 int endPosition;
 
@@ -878,7 +1068,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return new VirtualTreePoint(node.SyntaxTree, text, endPosition);
             }
 
-            private static VirtualTreePoint GetEndPoint(SourceText text, BaseTypeDeclarationSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetEndPoint(
+                SourceText text,
+                BaseTypeDeclarationSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 int endPosition;
 
@@ -919,7 +1113,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return new VirtualTreePoint(node.SyntaxTree, text, endPosition);
             }
 
-            private static VirtualTreePoint GetEndPoint(SourceText text, BaseMethodDeclarationSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetEndPoint(
+                SourceText text,
+                BaseMethodDeclarationSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 int endPosition;
 
@@ -956,19 +1154,34 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                             switch (node.Kind())
                             {
                                 case SyntaxKind.MethodDeclaration:
-                                    endPosition = ((MethodDeclarationSyntax)node).Identifier.Span.End;
+                                    endPosition = ((MethodDeclarationSyntax)node)
+                                        .Identifier
+                                        .Span
+                                        .End;
                                     break;
                                 case SyntaxKind.ConstructorDeclaration:
-                                    endPosition = ((ConstructorDeclarationSyntax)node).Identifier.Span.End;
+                                    endPosition = ((ConstructorDeclarationSyntax)node)
+                                        .Identifier
+                                        .Span
+                                        .End;
                                     break;
                                 case SyntaxKind.DestructorDeclaration:
-                                    endPosition = ((DestructorDeclarationSyntax)node).Identifier.Span.End;
+                                    endPosition = ((DestructorDeclarationSyntax)node)
+                                        .Identifier
+                                        .Span
+                                        .End;
                                     break;
                                 case SyntaxKind.ConversionOperatorDeclaration:
-                                    endPosition = ((ConversionOperatorDeclarationSyntax)node).ImplicitOrExplicitKeyword.Span.End;
+                                    endPosition = ((ConversionOperatorDeclarationSyntax)node)
+                                        .ImplicitOrExplicitKeyword
+                                        .Span
+                                        .End;
                                     break;
                                 case SyntaxKind.OperatorDeclaration:
-                                    endPosition = ((OperatorDeclarationSyntax)node).OperatorToken.Span.End;
+                                    endPosition = ((OperatorDeclarationSyntax)node)
+                                        .OperatorToken
+                                        .Span
+                                        .End;
                                     break;
                                 default:
                                     endPosition = node.GetFirstTokenAfterAttributes().Span.End;
@@ -979,7 +1192,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         break;
 
                     case EnvDTE.vsCMPart.vsCMPartBody:
-                        if (node.Body == null || node.Body.OpenBraceToken.IsMissing || node.Body.CloseBraceToken.IsMissing)
+                        if (
+                            node.Body == null
+                            || node.Body.OpenBraceToken.IsMissing
+                            || node.Body.CloseBraceToken.IsMissing
+                        )
                         {
                             throw Exceptions.ThrowEFail();
                         }
@@ -993,7 +1210,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return new VirtualTreePoint(node.SyntaxTree, text, endPosition);
             }
 
-            private static VirtualTreePoint GetEndPoint(SourceText text, BasePropertyDeclarationSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetEndPoint(
+                SourceText text,
+                BasePropertyDeclarationSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 int endPosition;
 
@@ -1026,7 +1247,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         {
                             if (firstAccessorNode.Body != null)
                             {
-                                return GetBodyEndPoint(text, firstAccessorNode.Body.CloseBraceToken);
+                                return GetBodyEndPoint(
+                                    text,
+                                    firstAccessorNode.Body.CloseBraceToken
+                                );
                             }
                             else
                             {
@@ -1039,7 +1263,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                         throw Exceptions.ThrowEFail();
 
                     case EnvDTE.vsCMPart.vsCMPartBody:
-                        if (node.AccessorList != null && !node.AccessorList.CloseBraceToken.IsMissing)
+                        if (
+                            node.AccessorList != null
+                            && !node.AccessorList.CloseBraceToken.IsMissing
+                        )
                         {
                             return GetBodyEndPoint(text, node.AccessorList.CloseBraceToken);
                         }
@@ -1053,7 +1280,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return new VirtualTreePoint(node.SyntaxTree, text, endPosition);
             }
 
-            private static VirtualTreePoint GetEndPoint(SourceText text, AccessorDeclarationSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetEndPoint(
+                SourceText text,
+                AccessorDeclarationSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 int endPosition;
 
@@ -1076,9 +1307,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 
                     case EnvDTE.vsCMPart.vsCMPartBody:
                     case EnvDTE.vsCMPart.vsCMPartNavigate:
-                        if (node.Body == null ||
-                            node.Body.OpenBraceToken.IsMissing ||
-                            node.Body.CloseBraceToken.IsMissing)
+                        if (
+                            node.Body == null
+                            || node.Body.OpenBraceToken.IsMissing
+                            || node.Body.CloseBraceToken.IsMissing
+                        )
                         {
                             throw Exceptions.ThrowEFail();
                         }
@@ -1092,7 +1325,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return new VirtualTreePoint(node.SyntaxTree, text, endPosition);
             }
 
-            private static VirtualTreePoint GetEndPoint(SourceText text, DelegateDeclarationSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetEndPoint(
+                SourceText text,
+                DelegateDeclarationSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 int endPosition;
 
@@ -1133,7 +1370,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return new VirtualTreePoint(node.SyntaxTree, text, endPosition);
             }
 
-            private static VirtualTreePoint GetEndPoint(SourceText text, BaseNamespaceDeclarationSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetEndPoint(
+                SourceText text,
+                BaseNamespaceDeclarationSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 int endPosition;
 
@@ -1161,14 +1402,21 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                     case EnvDTE.vsCMPart.vsCMPartBody:
                         if (node is NamespaceDeclarationSyntax namespaceDeclaration)
                         {
-                            if (namespaceDeclaration.OpenBraceToken.IsMissing || namespaceDeclaration.CloseBraceToken.IsMissing)
+                            if (
+                                namespaceDeclaration.OpenBraceToken.IsMissing
+                                || namespaceDeclaration.CloseBraceToken.IsMissing
+                            )
                                 throw Exceptions.ThrowEFail();
 
                             return GetBodyEndPoint(text, namespaceDeclaration.CloseBraceToken);
                         }
                         else if (node is FileScopedNamespaceDeclarationSyntax fileScopedNamespace)
                         {
-                            return new VirtualTreePoint(fileScopedNamespace.SyntaxTree, text, fileScopedNamespace.Parent.Span.End);
+                            return new VirtualTreePoint(
+                                fileScopedNamespace.SyntaxTree,
+                                text,
+                                fileScopedNamespace.Parent.Span.End
+                            );
                         }
                         else
                         {
@@ -1182,7 +1430,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return new VirtualTreePoint(node.SyntaxTree, text, endPosition);
             }
 
-            private static VirtualTreePoint GetEndPoint(SourceText text, UsingDirectiveSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetEndPoint(
+                SourceText text,
+                UsingDirectiveSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 int endPosition;
 
@@ -1215,7 +1467,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return new VirtualTreePoint(node.SyntaxTree, text, endPosition);
             }
 
-            private static VirtualTreePoint GetEndPoint(SourceText text, EnumMemberDeclarationSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetEndPoint(
+                SourceText text,
+                EnumMemberDeclarationSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 int endPosition;
 
@@ -1256,7 +1512,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return new VirtualTreePoint(node.SyntaxTree, text, endPosition);
             }
 
-            private static VirtualTreePoint GetEndPoint(SourceText text, VariableDeclaratorSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetEndPoint(
+                SourceText text,
+                VariableDeclaratorSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 var field = node.FirstAncestorOrSelf<BaseFieldDeclarationSyntax>();
                 int endPosition;
@@ -1298,7 +1558,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 return new VirtualTreePoint(node.SyntaxTree, text, endPosition);
             }
 
-            private static VirtualTreePoint GetEndPoint(SourceText text, ParameterSyntax node, EnvDTE.vsCMPart part)
+            private static VirtualTreePoint GetEndPoint(
+                SourceText text,
+                ParameterSyntax node,
+                EnvDTE.vsCMPart part
+            )
             {
                 int endPosition;
 

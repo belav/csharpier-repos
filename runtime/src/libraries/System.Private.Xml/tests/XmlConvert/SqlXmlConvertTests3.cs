@@ -13,7 +13,9 @@ namespace System.Xml.XmlConvertTests
         {
             foreach (string token in strEncodeLocal)
             {
-                AddVariation(new CVariation(this, "EncodeLocalName only with " + token, XmlEncodeName3));
+                AddVariation(
+                    new CVariation(this, "EncodeLocalName only with " + token, XmlEncodeName3)
+                );
             }
         }
 

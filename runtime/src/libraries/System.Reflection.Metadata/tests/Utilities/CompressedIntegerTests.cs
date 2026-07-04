@@ -39,20 +39,35 @@ namespace System.Reflection.Metadata.Tests
             Assert.Equal(CompressUnsignedInteger(0x2E57), new byte[] { 0xAE, 0x57 });
             Assert.Equal(CompressUnsignedInteger(0x3FFF), new byte[] { 0xBF, 0xFF });
             Assert.Equal(CompressUnsignedInteger(0x4000), new byte[] { 0xC0, 0x00, 0x40, 0x00 });
-            Assert.Equal(CompressUnsignedInteger(0x1FFFFFFF), new byte[] { 0xDF, 0xFF, 0xFF, 0xFF });
+            Assert.Equal(
+                CompressUnsignedInteger(0x1FFFFFFF),
+                new byte[] { 0xDF, 0xFF, 0xFF, 0xFF }
+            );
         }
 
         [Fact]
         public void DecompressInvalidUnsignedIntegers()
         {
             // Too few bytes
-            Assert.Equal(BlobReader.InvalidCompressedInteger, ReadCompressedUnsignedInteger(new byte[0]));
+            Assert.Equal(
+                BlobReader.InvalidCompressedInteger,
+                ReadCompressedUnsignedInteger(new byte[0])
+            );
             Assert.Equal(BlobReader.InvalidCompressedInteger, ReadCompressedUnsignedInteger(0x80));
-            Assert.Equal(BlobReader.InvalidCompressedInteger, ReadCompressedUnsignedInteger(0xC0, 0xFF));
+            Assert.Equal(
+                BlobReader.InvalidCompressedInteger,
+                ReadCompressedUnsignedInteger(0xC0, 0xFF)
+            );
 
             // No compressed integer can lead with 3 bits set.
-            Assert.Equal(BlobReader.InvalidCompressedInteger, ReadCompressedUnsignedInteger(0xFF, 0xFF, 0xFF, 0xFF));
-            Assert.Equal(BlobReader.InvalidCompressedInteger, ReadCompressedUnsignedInteger(0xE0, 0x00, 0x00, 0x00));
+            Assert.Equal(
+                BlobReader.InvalidCompressedInteger,
+                ReadCompressedUnsignedInteger(0xFF, 0xFF, 0xFF, 0xFF)
+            );
+            Assert.Equal(
+                BlobReader.InvalidCompressedInteger,
+                ReadCompressedUnsignedInteger(0xE0, 0x00, 0x00, 0x00)
+            );
         }
 
         [Fact]
@@ -69,7 +84,6 @@ namespace System.Reflection.Metadata.Tests
             Assert.Equal(268435455, ReadCompressedSignedInteger(0xDF, 0xFF, 0xFF, 0xFE));
             Assert.Equal(-268435456, ReadCompressedSignedInteger(0xC0, 0x00, 0x00, 0x01));
         }
-
 
         [Fact]
         public void CheckCompressedUnsignedIntegers()
@@ -116,13 +130,25 @@ namespace System.Reflection.Metadata.Tests
         public unsafe void DecompressInvalidSignedIntegers()
         {
             // Too few bytes
-            Assert.Equal(BlobReader.InvalidCompressedInteger, ReadCompressedSignedInteger(new byte[0]));
+            Assert.Equal(
+                BlobReader.InvalidCompressedInteger,
+                ReadCompressedSignedInteger(new byte[0])
+            );
             Assert.Equal(BlobReader.InvalidCompressedInteger, ReadCompressedSignedInteger(0x80));
-            Assert.Equal(BlobReader.InvalidCompressedInteger, ReadCompressedSignedInteger(0xC0, 0xFF));
+            Assert.Equal(
+                BlobReader.InvalidCompressedInteger,
+                ReadCompressedSignedInteger(0xC0, 0xFF)
+            );
 
             // No compressed integer can lead with 3 bits set.
-            Assert.Equal(BlobReader.InvalidCompressedInteger, ReadCompressedSignedInteger(0xFF, 0xFF, 0xFF, 0xFF));
-            Assert.Equal(BlobReader.InvalidCompressedInteger, ReadCompressedSignedInteger(0xE0, 0x00, 0x00, 0x00));
+            Assert.Equal(
+                BlobReader.InvalidCompressedInteger,
+                ReadCompressedSignedInteger(0xFF, 0xFF, 0xFF, 0xFF)
+            );
+            Assert.Equal(
+                BlobReader.InvalidCompressedInteger,
+                ReadCompressedSignedInteger(0xE0, 0x00, 0x00, 0x00)
+            );
         }
 
         [Fact]
@@ -161,15 +187,30 @@ namespace System.Reflection.Metadata.Tests
 
         private void CheckCompressedSignedInteger(int valueToRoundTrip, int numberOfBytesExpected)
         {
-            CheckCompressedInteger(valueToRoundTrip, numberOfBytesExpected, CompressSignedInteger, ReadCompressedSignedInteger);
+            CheckCompressedInteger(
+                valueToRoundTrip,
+                numberOfBytesExpected,
+                CompressSignedInteger,
+                ReadCompressedSignedInteger
+            );
         }
 
         private void CheckCompressedUnsignedInteger(int valueToRoundTrip, int numberOfBytesExpected)
         {
-            CheckCompressedInteger(valueToRoundTrip, numberOfBytesExpected, CompressUnsignedInteger, ReadCompressedUnsignedInteger);
+            CheckCompressedInteger(
+                valueToRoundTrip,
+                numberOfBytesExpected,
+                CompressUnsignedInteger,
+                ReadCompressedUnsignedInteger
+            );
         }
 
-        private void CheckCompressedInteger(int valueToRoundTrip, int numberOfBytesExpected, Func<int, byte[]> compress, Func<byte[], int> read)
+        private void CheckCompressedInteger(
+            int valueToRoundTrip,
+            int numberOfBytesExpected,
+            Func<int, byte[]> compress,
+            Func<byte[], int> read
+        )
         {
             byte[] bytes = compress(valueToRoundTrip);
 
@@ -254,7 +295,7 @@ namespace System.Reflection.Metadata.Tests
                     {
                         // 1 byte encoding: bit 7 clear,
                         // 7-bit value in bits 0-6
-                        (byte)value
+                        (byte)value,
                     };
 
                 case 2:
@@ -264,7 +305,7 @@ namespace System.Reflection.Metadata.Tests
                         // 2 byte encoding: bit 15 set, bit 14 clear,
                         // 14-bit value stored big-endian in bits 0-13
                         (byte)(0x80 | ((value >> 8) & 0x3f)),
-                        (byte)(       ((value >> 0) & 0xff)),
+                        (byte)(((value >> 0) & 0xff)),
                     };
 
                 case 4:
@@ -274,9 +315,9 @@ namespace System.Reflection.Metadata.Tests
                         // 4 byte encoding: bit 31 set, bit 30 set, bit 29 clear,
                         // 29-bit value stored big-endian in bits 0-28
                         (byte)(0xC0 | ((value >> 24) & 0x1f)),
-                        (byte)(       ((value >> 16) & 0xff)),
-                        (byte)(       ((value >> 8)  & 0xff)),
-                        (byte)(       ((value >> 0)  & 0xff)),
+                        (byte)(((value >> 16) & 0xff)),
+                        (byte)(((value >> 8) & 0xff)),
+                        (byte)(((value >> 0) & 0xff)),
                     };
 
                 default:
@@ -288,16 +329,30 @@ namespace System.Reflection.Metadata.Tests
         {
             return ReadCompressedInteger(
                 bytes,
-                delegate (ref BlobReader reader, out int value) { return reader.TryReadCompressedInteger(out value); },
-                delegate (ref BlobReader reader) { return reader.ReadCompressedInteger(); });
+                delegate(ref BlobReader reader, out int value)
+                {
+                    return reader.TryReadCompressedInteger(out value);
+                },
+                delegate(ref BlobReader reader)
+                {
+                    return reader.ReadCompressedInteger();
+                }
+            );
         }
 
         private int ReadCompressedSignedInteger(params byte[] bytes)
         {
             return ReadCompressedInteger(
                 bytes,
-                delegate (ref BlobReader reader, out int value) { return reader.TryReadCompressedSignedInteger(out value); },
-                delegate (ref BlobReader reader) { return reader.ReadCompressedSignedInteger(); });
+                delegate(ref BlobReader reader, out int value)
+                {
+                    return reader.TryReadCompressedSignedInteger(out value);
+                },
+                delegate(ref BlobReader reader)
+                {
+                    return reader.ReadCompressedSignedInteger();
+                }
+            );
         }
 
         private delegate bool TryReadFunc(ref BlobReader reader, out int value);

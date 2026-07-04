@@ -15,39 +15,44 @@ namespace System.ServiceModel
         string httpActionHeader;
         string soapActionHeader;
 
-        public ActionMismatchAddressingException(string message, string soapActionHeader, string httpActionHeader)
+        public ActionMismatchAddressingException(
+            string message,
+            string soapActionHeader,
+            string httpActionHeader
+        )
             : base(message)
         {
             this.httpActionHeader = httpActionHeader;
             this.soapActionHeader = soapActionHeader;
         }
 
-        protected ActionMismatchAddressingException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+        protected ActionMismatchAddressingException(
+            SerializationInfo info,
+            StreamingContext context
+        )
+            : base(info, context) { }
 
         public string HttpActionHeader
         {
-            get
-            {
-                return httpActionHeader;
-            }
+            get { return httpActionHeader; }
         }
 
         public string SoapActionHeader
         {
-            get
-            {
-                return soapActionHeader;
-            }
+            get { return soapActionHeader; }
         }
 
         internal Message ProvideFault(MessageVersion messageVersion)
         {
             Fx.Assert(messageVersion.Addressing == AddressingVersion.WSAddressing10, "");
-            WSAddressing10ProblemHeaderQNameFault phf = new WSAddressing10ProblemHeaderQNameFault(this);
-            Message message = System.ServiceModel.Channels.Message.CreateMessage(messageVersion, phf, messageVersion.Addressing.FaultAction);
+            WSAddressing10ProblemHeaderQNameFault phf = new WSAddressing10ProblemHeaderQNameFault(
+                this
+            );
+            Message message = System.ServiceModel.Channels.Message.CreateMessage(
+                messageVersion,
+                phf,
+                messageVersion.Addressing.FaultAction
+            );
             phf.AddHeaders(message.Headers);
             return message;
         }

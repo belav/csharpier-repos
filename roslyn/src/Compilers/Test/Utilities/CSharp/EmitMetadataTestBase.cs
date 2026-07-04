@@ -34,9 +34,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             elem.Add(from t in childrenTypes select LoadChildType(t));
 
-            var childrenNS = n.GetMembers().
-                                OfType<NamespaceSymbol>().
-                                OrderBy(child => child.Name, StringComparer.OrdinalIgnoreCase);
+            var childrenNS = n.GetMembers()
+                .OfType<NamespaceSymbol>()
+                .OrderBy(child => child.Name, StringComparer.OrdinalIgnoreCase);
 
             elem.Add(from c in childrenNS select LoadChildNamespace(c));
 
@@ -71,7 +71,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 elem.Add(new XAttribute("base", t.BaseType().ToTestDisplayString()));
             }
 
-            var fields = t.GetMembers().Where(m => m.Kind == SymbolKind.Field).OrderBy(f => f.Name).Cast<FieldSymbol>();
+            var fields = t.GetMembers()
+                .Where(m => m.Kind == SymbolKind.Field)
+                .OrderBy(f => f.Name)
+                .Cast<FieldSymbol>();
 
             elem.Add(from f in fields select LoadField(f));
 
@@ -96,7 +99,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         /// <summary>
         /// Validate the contents of the DeclSecurity metadata table.
         /// </summary>
-        internal static void ValidateDeclSecurity(ModuleSymbol module, params DeclSecurityEntry[] expectedEntries)
+        internal static void ValidateDeclSecurity(
+            ModuleSymbol module,
+            params DeclSecurityEntry[] expectedEntries
+        )
         {
             var metadataReader = module.GetMetadata().MetadataReader;
             var actualEntries = new List<DeclSecurityEntry>(expectedEntries.Length);
@@ -107,32 +113,51 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 var actual = metadataReader.GetDeclarativeSecurityAttribute(actualHandle);
 
                 var actualPermissionSetBytes = metadataReader.GetBlobBytes(actual.PermissionSet);
-                var actualPermissionSet = new string(actualPermissionSetBytes.Select(b => (char)b).ToArray());
+                var actualPermissionSet = new string(
+                    actualPermissionSetBytes.Select(b => (char)b).ToArray()
+                );
                 string actualParentName;
                 SymbolKind actualParentKind;
-                GetAttributeParentNameAndKind(metadataReader, actual.Parent, out actualParentName, out actualParentKind);
+                GetAttributeParentNameAndKind(
+                    metadataReader,
+                    actual.Parent,
+                    out actualParentName,
+                    out actualParentKind
+                );
 
-                actualEntries.Add(new DeclSecurityEntry()
-                {
-                    ActionFlags = actual.Action,
-                    ParentNameOpt = actualParentName,
-                    PermissionSet = actualPermissionSet,
-                    ParentKind = actualParentKind
-                });
+                actualEntries.Add(
+                    new DeclSecurityEntry()
+                    {
+                        ActionFlags = actual.Action,
+                        ParentNameOpt = actualParentName,
+                        PermissionSet = actualPermissionSet,
+                        ParentKind = actualParentKind,
+                    }
+                );
 
                 i++;
             }
 
-            AssertEx.SetEqual(expectedEntries, actualEntries, itemInspector: entry => $@"
+            AssertEx.SetEqual(
+                expectedEntries,
+                actualEntries,
+                itemInspector: entry =>
+                    $@"
 {{
     ActionFlags = {entry.ActionFlags},
     ParentNameOpt = {entry.ParentNameOpt},
     PermissionSet = {entry.PermissionSet},
     ParentKind = {entry.ParentKind}
-}}");
+}}"
+            );
         }
 
-        private static void GetAttributeParentNameAndKind(MetadataReader metadataReader, EntityHandle token, out string name, out SymbolKind kind)
+        private static void GetAttributeParentNameAndKind(
+            MetadataReader metadataReader,
+            EntityHandle token,
+            out string name,
+            out SymbolKind kind
+        )
         {
             switch (token.Kind)
             {
@@ -142,12 +167,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     return;
 
                 case HandleKind.TypeDefinition:
-                    name = metadataReader.GetString(metadataReader.GetTypeDefinition((TypeDefinitionHandle)token).Name);
+                    name = metadataReader.GetString(
+                        metadataReader.GetTypeDefinition((TypeDefinitionHandle)token).Name
+                    );
                     kind = SymbolKind.NamedType;
                     return;
 
                 case HandleKind.MethodDefinition:
-                    name = metadataReader.GetString(metadataReader.GetMethodDefinition((MethodDefinitionHandle)token).Name);
+                    name = metadataReader.GetString(
+                        metadataReader.GetMethodDefinition((MethodDefinitionHandle)token).Name
+                    );
                     kind = SymbolKind.Method;
                     return;
 

@@ -20,7 +20,9 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
     ///     Creates a new instance of <see cref="NavigationAttributeConventionBase{TAttribute}" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    protected NavigationAttributeConventionBase(ProviderConventionSetBuilderDependencies dependencies)
+    protected NavigationAttributeConventionBase(
+        ProviderConventionSetBuilderDependencies dependencies
+    )
     {
         Dependencies = dependencies;
     }
@@ -41,7 +43,8 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
         IConventionModelBuilder modelBuilder,
         string name,
         Type? type,
-        IConventionContext<string> context)
+        IConventionContext<string> context
+    )
     {
         if (type == null)
         {
@@ -51,7 +54,10 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
         var navigations = new List<(PropertyInfo, Type)>();
         foreach (var navigationPropertyInfo in type.GetRuntimeProperties())
         {
-            var targetClrType = FindCandidateNavigationWithAttributePropertyType(navigationPropertyInfo, modelBuilder.Metadata);
+            var targetClrType = FindCandidateNavigationWithAttributePropertyType(
+                navigationPropertyInfo,
+                modelBuilder.Metadata
+            );
             if (targetClrType == null)
             {
                 continue;
@@ -73,7 +79,14 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
             var attributes = navigationPropertyInfo.GetCustomAttributes<TAttribute>(inherit: true);
             foreach (var attribute in attributes)
             {
-                ProcessTypeIgnored(modelBuilder, type, navigationPropertyInfo, targetClrType, attribute, context);
+                ProcessTypeIgnored(
+                    modelBuilder,
+                    type,
+                    navigationPropertyInfo,
+                    targetClrType,
+                    attribute,
+                    context
+                );
                 if (((ConventionContext<string>)context).ShouldStopProcessing())
                 {
                     return;
@@ -89,7 +102,8 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
     /// <param name="context">Additional information associated with convention execution.</param>
     public virtual void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
-        IConventionContext<IConventionEntityTypeBuilder> context)
+        IConventionContext<IConventionEntityTypeBuilder> context
+    )
     {
         var navigations = GetNavigationsWithAttribute(entityTypeBuilder.Metadata);
         if (navigations == null)
@@ -103,8 +117,18 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
             var attributes = navigationPropertyInfo.GetCustomAttributes<TAttribute>(inherit: true);
             foreach (var attribute in attributes)
             {
-                ProcessEntityTypeAdded(entityTypeBuilder, navigationPropertyInfo, targetClrType, attribute, context);
-                if (((ConventionContext<IConventionEntityTypeBuilder>)context).ShouldStopProcessing())
+                ProcessEntityTypeAdded(
+                    entityTypeBuilder,
+                    navigationPropertyInfo,
+                    targetClrType,
+                    attribute,
+                    context
+                );
+                if (
+                    (
+                        (ConventionContext<IConventionEntityTypeBuilder>)context
+                    ).ShouldStopProcessing()
+                )
                 {
                     return;
                 }
@@ -121,7 +145,8 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
     public virtual void ProcessEntityTypeRemoved(
         IConventionModelBuilder modelBuilder,
         IConventionEntityType entityType,
-        IConventionContext<IConventionEntityType> context)
+        IConventionContext<IConventionEntityType> context
+    )
     {
         var navigations = GetNavigationsWithAttribute(entityType);
         if (navigations == null)
@@ -135,7 +160,14 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
             var attributes = navigationPropertyInfo.GetCustomAttributes<TAttribute>(inherit: true);
             foreach (var attribute in attributes)
             {
-                ProcessEntityTypeRemoved(modelBuilder, entityType, navigationPropertyInfo, targetClrType, attribute, context);
+                ProcessEntityTypeRemoved(
+                    modelBuilder,
+                    entityType,
+                    navigationPropertyInfo,
+                    targetClrType,
+                    attribute,
+                    context
+                );
                 if (((ConventionContext<IConventionEntityType>)context).ShouldStopProcessing())
                 {
                     return;
@@ -155,7 +187,8 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
         IConventionEntityTypeBuilder entityTypeBuilder,
         IConventionEntityType? newBaseType,
         IConventionEntityType? oldBaseType,
-        IConventionContext<IConventionEntityType> context)
+        IConventionContext<IConventionEntityType> context
+    )
     {
         var entityType = entityTypeBuilder.Metadata;
         if (entityTypeBuilder.Metadata.BaseType != newBaseType)
@@ -176,7 +209,14 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
             foreach (var attribute in attributes)
             {
                 ProcessEntityTypeBaseTypeChanged(
-                    entityTypeBuilder, newBaseType, oldBaseType, navigationPropertyInfo, targetClrType, attribute, context);
+                    entityTypeBuilder,
+                    newBaseType,
+                    oldBaseType,
+                    navigationPropertyInfo,
+                    targetClrType,
+                    attribute,
+                    context
+                );
                 if (((ConventionContext<IConventionEntityType>)context).ShouldStopProcessing())
                 {
                     return;
@@ -185,12 +225,17 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
         }
     }
 
-    private List<(PropertyInfo, Type)>? GetNavigationsWithAttribute(IConventionEntityType entityType)
+    private List<(PropertyInfo, Type)>? GetNavigationsWithAttribute(
+        IConventionEntityType entityType
+    )
     {
         var navigations = new List<(PropertyInfo, Type)>();
         foreach (var navigationPropertyInfo in entityType.GetRuntimeProperties().Values)
         {
-            var targetClrType = FindCandidateNavigationWithAttributePropertyType(navigationPropertyInfo, entityType);
+            var targetClrType = FindCandidateNavigationWithAttributePropertyType(
+                navigationPropertyInfo,
+                entityType
+            );
             if (targetClrType == null)
             {
                 continue;
@@ -209,8 +254,8 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
         return navigations;
     }
 
-    private static void Sort(List<(PropertyInfo, Type)> navigations)
-        => navigations.Sort((x, y) => StringComparer.Ordinal.Compare(x.Item1.Name, y.Item1.Name));
+    private static void Sort(List<(PropertyInfo, Type)> navigations) =>
+        navigations.Sort((x, y) => StringComparer.Ordinal.Compare(x.Item1.Name, y.Item1.Name));
 
     /// <summary>
     ///     Called after a navigation is added to the entity type.
@@ -219,7 +264,8 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
     /// <param name="context">Additional information associated with convention execution.</param>
     public virtual void ProcessNavigationAdded(
         IConventionNavigationBuilder navigationBuilder,
-        IConventionContext<IConventionNavigationBuilder> context)
+        IConventionContext<IConventionNavigationBuilder> context
+    )
     {
         var navigation = navigationBuilder.Metadata;
         var attributes = GetAttributes<TAttribute>(navigation.DeclaringEntityType, navigation);
@@ -240,10 +286,14 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
     /// <param name="context">Additional information associated with convention execution.</param>
     public virtual void ProcessSkipNavigationAdded(
         IConventionSkipNavigationBuilder skipNavigationBuilder,
-        IConventionContext<IConventionSkipNavigationBuilder> context)
+        IConventionContext<IConventionSkipNavigationBuilder> context
+    )
     {
         var skipNavigation = skipNavigationBuilder.Metadata;
-        var attributes = GetAttributes<TAttribute>(skipNavigation.DeclaringEntityType, skipNavigation);
+        var attributes = GetAttributes<TAttribute>(
+            skipNavigation.DeclaringEntityType,
+            skipNavigation
+        );
         foreach (var attribute in attributes)
         {
             ProcessSkipNavigationAdded(skipNavigationBuilder, attribute, context);
@@ -261,17 +311,24 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
     /// <param name="context">Additional information associated with convention execution.</param>
     public virtual void ProcessForeignKeyPrincipalEndChanged(
         IConventionForeignKeyBuilder relationshipBuilder,
-        IConventionContext<IConventionForeignKeyBuilder> context)
+        IConventionContext<IConventionForeignKeyBuilder> context
+    )
     {
         var fk = relationshipBuilder.Metadata;
-        var dependentToPrincipalAttributes = fk.DependentToPrincipal == null
-            ? null
-            : GetAttributes<TAttribute>(fk.DeclaringEntityType, fk.DependentToPrincipal);
-        var principalToDependentAttributes = fk.PrincipalToDependent == null
-            ? null
-            : GetAttributes<TAttribute>(fk.PrincipalEntityType, fk.PrincipalToDependent);
+        var dependentToPrincipalAttributes =
+            fk.DependentToPrincipal == null
+                ? null
+                : GetAttributes<TAttribute>(fk.DeclaringEntityType, fk.DependentToPrincipal);
+        var principalToDependentAttributes =
+            fk.PrincipalToDependent == null
+                ? null
+                : GetAttributes<TAttribute>(fk.PrincipalEntityType, fk.PrincipalToDependent);
         ProcessForeignKeyPrincipalEndChanged(
-            relationshipBuilder, dependentToPrincipalAttributes, principalToDependentAttributes, context);
+            relationshipBuilder,
+            dependentToPrincipalAttributes,
+            principalToDependentAttributes,
+            context
+        );
     }
 
     /// <summary>
@@ -283,7 +340,8 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
     public virtual void ProcessEntityTypeMemberIgnored(
         IConventionEntityTypeBuilder entityTypeBuilder,
         string name,
-        IConventionContext<string> context)
+        IConventionContext<string> context
+    )
     {
         var navigationPropertyInfo = entityTypeBuilder.Metadata.GetRuntimeProperties().Find(name);
         if (navigationPropertyInfo == null)
@@ -291,7 +349,10 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
             return;
         }
 
-        var targetClrType = FindCandidateNavigationWithAttributePropertyType(navigationPropertyInfo, entityTypeBuilder.Metadata);
+        var targetClrType = FindCandidateNavigationWithAttributePropertyType(
+            navigationPropertyInfo,
+            entityTypeBuilder.Metadata
+        );
         if (targetClrType == null)
         {
             return;
@@ -300,7 +361,13 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
         var attributes = navigationPropertyInfo.GetCustomAttributes<TAttribute>(true);
         foreach (var attribute in attributes)
         {
-            ProcessEntityTypeMemberIgnored(entityTypeBuilder, navigationPropertyInfo, targetClrType, attribute, context);
+            ProcessEntityTypeMemberIgnored(
+                entityTypeBuilder,
+                navigationPropertyInfo,
+                targetClrType,
+                attribute,
+                context
+            );
             if (((ConventionContext<string>)context).ShouldStopProcessing())
             {
                 return;
@@ -308,21 +375,34 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
         }
     }
 
-    private Type? FindCandidateNavigationWithAttributePropertyType(PropertyInfo propertyInfo, IConventionModel model)
+    private Type? FindCandidateNavigationWithAttributePropertyType(
+        PropertyInfo propertyInfo,
+        IConventionModel model
+    )
     {
-        var targetClrType = Dependencies.MemberClassifier.FindCandidateNavigationPropertyType(propertyInfo, model, useAttributes: true, out _);
-        return targetClrType != null
+        var targetClrType = Dependencies.MemberClassifier.FindCandidateNavigationPropertyType(
+            propertyInfo,
+            model,
+            useAttributes: true,
+            out _
+        );
+        return
+            targetClrType != null
             && Attribute.IsDefined(propertyInfo, typeof(TAttribute), inherit: true)
-                ? targetClrType
-                : null;
+            ? targetClrType
+            : null;
     }
 
-    private Type? FindCandidateNavigationWithAttributePropertyType(PropertyInfo propertyInfo, IConventionEntityType entityType)
-        => Dependencies.MemberClassifier.GetNavigationCandidates(entityType, useAttributes: true)
-                .TryGetValue(propertyInfo, out var target)
-            && Attribute.IsDefined(propertyInfo, typeof(TAttribute), inherit: true)
-                ? target.Type
-                : null;
+    private Type? FindCandidateNavigationWithAttributePropertyType(
+        PropertyInfo propertyInfo,
+        IConventionEntityType entityType
+    ) =>
+        Dependencies
+            .MemberClassifier.GetNavigationCandidates(entityType, useAttributes: true)
+            .TryGetValue(propertyInfo, out var target)
+        && Attribute.IsDefined(propertyInfo, typeof(TAttribute), inherit: true)
+            ? target.Type
+            : null;
 
     /// <summary>
     ///     Returns the attributes applied to the given navigation.
@@ -333,9 +413,10 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
     /// <returns>The attributes applied to the given navigation.</returns>
     protected static IEnumerable<TCustomAttribute> GetAttributes<TCustomAttribute>(
         IConventionEntityType entityType,
-        IConventionNavigation navigation)
-        where TCustomAttribute : Attribute
-        => GetAttributes<TCustomAttribute>(navigation.GetIdentifyingMemberInfo());
+        IConventionNavigation navigation
+    )
+        where TCustomAttribute : Attribute =>
+        GetAttributes<TCustomAttribute>(navigation.GetIdentifyingMemberInfo());
 
     /// <summary>
     ///     Returns the attributes applied to the given skip navigation.
@@ -346,11 +427,14 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
     /// <returns>The attributes applied to the given skip navigation.</returns>
     protected static IEnumerable<TCustomAttribute> GetAttributes<TCustomAttribute>(
         IConventionEntityType entityType,
-        IConventionSkipNavigation skipNavigation)
-        where TCustomAttribute : Attribute
-        => GetAttributes<TCustomAttribute>(skipNavigation.GetIdentifyingMemberInfo());
+        IConventionSkipNavigation skipNavigation
+    )
+        where TCustomAttribute : Attribute =>
+        GetAttributes<TCustomAttribute>(skipNavigation.GetIdentifyingMemberInfo());
 
-    private static IEnumerable<TCustomAttribute> GetAttributes<TCustomAttribute>(MemberInfo? memberInfo)
+    private static IEnumerable<TCustomAttribute> GetAttributes<TCustomAttribute>(
+        MemberInfo? memberInfo
+    )
         where TCustomAttribute : Attribute
     {
         if (memberInfo == null)
@@ -378,8 +462,8 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
         MemberInfo navigationMemberInfo,
         Type targetClrType,
         TAttribute attribute,
-        IConventionContext<string> context)
-        => throw new NotSupportedException();
+        IConventionContext<string> context
+    ) => throw new NotSupportedException();
 
     /// <summary>
     ///     Called for every navigation property that has an attribute after an entity type is added to the model.
@@ -394,8 +478,8 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
         MemberInfo navigationMemberInfo,
         Type targetClrType,
         TAttribute attribute,
-        IConventionContext<IConventionEntityTypeBuilder> context)
-        => throw new NotSupportedException();
+        IConventionContext<IConventionEntityTypeBuilder> context
+    ) => throw new NotSupportedException();
 
     /// <summary>
     ///     Called for every navigation property that has an attribute after an entity type is removed.
@@ -412,8 +496,8 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
         MemberInfo navigationMemberInfo,
         Type targetClrType,
         TAttribute attribute,
-        IConventionContext<IConventionEntityType> context)
-        => throw new NotSupportedException();
+        IConventionContext<IConventionEntityType> context
+    ) => throw new NotSupportedException();
 
     /// <summary>
     ///     Called for every navigation property that has an attribute after the base type for an entity type is changed.
@@ -432,8 +516,8 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
         MemberInfo navigationMemberInfo,
         Type targetClrType,
         TAttribute attribute,
-        IConventionContext<IConventionEntityType> context)
-        => throw new NotSupportedException();
+        IConventionContext<IConventionEntityType> context
+    ) => throw new NotSupportedException();
 
     /// <summary>
     ///     Called after a navigation property that has an attribute is added to an entity type.
@@ -444,8 +528,8 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
     public virtual void ProcessNavigationAdded(
         IConventionNavigationBuilder navigationBuilder,
         TAttribute attribute,
-        IConventionContext<IConventionNavigationBuilder> context)
-        => throw new NotSupportedException();
+        IConventionContext<IConventionNavigationBuilder> context
+    ) => throw new NotSupportedException();
 
     /// <summary>
     ///     Called after a skip navigation property that has an attribute is added to an entity type.
@@ -456,8 +540,8 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
     public virtual void ProcessSkipNavigationAdded(
         IConventionSkipNavigationBuilder skipNavigationBuilder,
         TAttribute attribute,
-        IConventionContext<IConventionSkipNavigationBuilder> context)
-        => throw new NotSupportedException();
+        IConventionContext<IConventionSkipNavigationBuilder> context
+    ) => throw new NotSupportedException();
 
     /// <summary>
     ///     Called after a navigation property that has an attribute is ignored.
@@ -472,8 +556,8 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
         MemberInfo navigationMemberInfo,
         Type targetClrType,
         TAttribute attribute,
-        IConventionContext<string> context)
-        => throw new NotSupportedException();
+        IConventionContext<string> context
+    ) => throw new NotSupportedException();
 
     /// <summary>
     ///     Called after the principal end of a foreign key is changed.
@@ -486,6 +570,6 @@ public abstract class NavigationAttributeConventionBase<TAttribute>
         IConventionForeignKeyBuilder relationshipBuilder,
         IEnumerable<TAttribute>? dependentToPrincipalAttributes,
         IEnumerable<TAttribute>? principalToDependentAttributes,
-        IConventionContext<IConventionForeignKeyBuilder> context)
-        => throw new NotSupportedException();
+        IConventionContext<IConventionForeignKeyBuilder> context
+    ) => throw new NotSupportedException();
 }

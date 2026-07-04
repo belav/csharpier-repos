@@ -26,7 +26,10 @@ namespace Microsoft.CodeAnalysis.Remote
     {
         private readonly CancellationTokenSource _cancellationTokenSource = new();
 
-        private RemoteKeepAliveSession(SolutionState solution, IAsynchronousOperationListener listener)
+        private RemoteKeepAliveSession(
+            SolutionState solution,
+            IAsynchronousOperationListener listener
+        )
         {
             var cancellationToken = _cancellationTokenSource.Token;
             var token = listener.BeginAsyncOperation(nameof(RemoteKeepAliveSession));
@@ -38,16 +41,22 @@ namespace Microsoft.CodeAnalysis.Remote
 
             async Task CreateClientAndKeepAliveAsync()
             {
-                var client = await RemoteHostClient.TryGetClientAsync(solution.Services, cancellationToken).ConfigureAwait(false);
+                var client = await RemoteHostClient
+                    .TryGetClientAsync(solution.Services, cancellationToken)
+                    .ConfigureAwait(false);
                 if (client is null)
                     return;
 
                 // Now kick off the keep-alive work.  We don't wait on this as this will stick on the OOP side until
                 // the cancellation token triggers.
-                var unused = client.TryInvokeAsync<IRemoteKeepAliveService>(
-                    solution,
-                    (service, solutionInfo, cancellationToken) => service.KeepAliveAsync(solutionInfo, cancellationToken),
-                    cancellationToken).AsTask();
+                var unused = client
+                    .TryInvokeAsync<IRemoteKeepAliveService>(
+                        solution,
+                        (service, solutionInfo, cancellationToken) =>
+                            service.KeepAliveAsync(solutionInfo, cancellationToken),
+                        cancellationToken
+                    )
+                    .AsTask();
             }
         }
 
@@ -78,12 +87,16 @@ namespace Microsoft.CodeAnalysis.Remote
         /// system know when unobserved async work is kicked off in case we have any tooling that keep track of this for
         /// any reason (for example for tracking down problems in testing scenarios).
         /// </remarks>
-        public static RemoteKeepAliveSession Create(Solution solution, IAsynchronousOperationListener listener)
-            => Create(solution.State, listener);
+        public static RemoteKeepAliveSession Create(
+            Solution solution,
+            IAsynchronousOperationListener listener
+        ) => Create(solution.State, listener);
 
         /// <inheritdoc cref="Create(Solution, IAsynchronousOperationListener)"/>
         public static RemoteKeepAliveSession Create(
-            SolutionState solution, IAsynchronousOperationListener listener)
+            SolutionState solution,
+            IAsynchronousOperationListener listener
+        )
         {
             return new RemoteKeepAliveSession(solution, listener);
         }

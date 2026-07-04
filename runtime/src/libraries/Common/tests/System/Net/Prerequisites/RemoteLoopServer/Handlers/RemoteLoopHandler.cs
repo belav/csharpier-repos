@@ -33,7 +33,6 @@ namespace RemoteLoopServer
                 {
                     await ProcessWebSocketRequest(context, socket, logger);
                 }
-
             }
             catch (Exception ex)
             {
@@ -41,7 +40,11 @@ namespace RemoteLoopServer
             }
         }
 
-        private static async Task ProcessWebSocketRequest(HttpContext context, WebSocket control, ILogger logger)
+        private static async Task ProcessWebSocketRequest(
+            HttpContext context,
+            WebSocket control,
+            ILogger logger
+        )
         {
             byte[] controlBuffer = new byte[128 * 1024];
             byte[] testedBuffer = new byte[128 * 1024];
@@ -50,8 +53,14 @@ namespace RemoteLoopServer
             CancellationTokenSource cts = new CancellationTokenSource();
             try
             {
-                WebSocketReceiveResult first = await control.ReceiveAsync(controlBuffer, cts.Token).ConfigureAwait(false);
-                if (first.Count <= 0 || first.MessageType != WebSocketMessageType.Binary || control.State != WebSocketState.Open)
+                WebSocketReceiveResult first = await control
+                    .ReceiveAsync(controlBuffer, cts.Token)
+                    .ConfigureAwait(false);
+                if (
+                    first.Count <= 0
+                    || first.MessageType != WebSocketMessageType.Binary
+                    || control.State != WebSocketState.Open
+                )
                 {
                     throw new Exception("Unexpected close");
                 }
@@ -62,13 +71,24 @@ namespace RemoteLoopServer
                 var listenBacklog = int.Parse(split[0]);
                 var address = IPAddress.Parse(split[1]);
 
-                listenSocket = new Socket(address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                listenSocket = new Socket(
+                    address.AddressFamily,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                );
                 listenSocket.Bind(new IPEndPoint(address, 0));
                 listenSocket.Listen(listenBacklog);
                 EndPoint endPoint = listenSocket.LocalEndPoint;
 
                 // respond with what we have done
-                await control.SendAsync(Encoding.ASCII.GetBytes(endPoint.ToString()), WebSocketMessageType.Binary, true, cts.Token).ConfigureAwait(false);
+                await control
+                    .SendAsync(
+                        Encoding.ASCII.GetBytes(endPoint.ToString()),
+                        WebSocketMessageType.Binary,
+                        true,
+                        cts.Token
+                    )
+                    .ConfigureAwait(false);
 
                 // wait for the tested client to connect
                 tested = await listenSocket.AcceptAsync().ConfigureAwait(false);
@@ -76,8 +96,13 @@ namespace RemoteLoopServer
                 // now we are connected, pump messages
                 bool close = false;
 
-                Task<int> testedNext = tested.ReceiveAsync(new Memory<byte>(testedBuffer), SocketFlags.None, cts.Token).AsTask();
-                Task<WebSocketReceiveResult> controlNext = control.ReceiveAsync(controlBuffer, cts.Token);
+                Task<int> testedNext = tested
+                    .ReceiveAsync(new Memory<byte>(testedBuffer), SocketFlags.None, cts.Token)
+                    .AsTask();
+                Task<WebSocketReceiveResult> controlNext = control.ReceiveAsync(
+                    controlBuffer,
+                    cts.Token
+                );
                 while (!close)
                 {
                     // wait for either message
@@ -97,17 +122,32 @@ namespace RemoteLoopServer
                             }
                             if (testedNext.Result > 0)
                             {
-                                var slice = new ArraySegment<byte>(testedBuffer, 0, testedNext.Result);
-                                await control.SendAsync(slice, WebSocketMessageType.Binary, true, cts.Token).ConfigureAwait(false);
+                                var slice = new ArraySegment<byte>(
+                                    testedBuffer,
+                                    0,
+                                    testedNext.Result
+                                );
+                                await control
+                                    .SendAsync(slice, WebSocketMessageType.Binary, true, cts.Token)
+                                    .ConfigureAwait(false);
                             }
                             // did we get TCP FIN?
-                            if (!close && (tested.Poll(1, SelectMode.SelectRead) && tested.Available == 0))
+                            if (
+                                !close
+                                && (tested.Poll(1, SelectMode.SelectRead) && tested.Available == 0)
+                            )
                             {
                                 close = true;
                             }
                             if (!close)
                             {
-                                testedNext = tested.ReceiveAsync(new Memory<byte>(testedBuffer), SocketFlags.None, cts.Token).AsTask();
+                                testedNext = tested
+                                    .ReceiveAsync(
+                                        new Memory<byte>(testedBuffer),
+                                        SocketFlags.None,
+                                        cts.Token
+                                    )
+                                    .AsTask();
                             }
                         }
                     }
@@ -125,12 +165,21 @@ namespace RemoteLoopServer
                             }
                             if (controlNext.Result.Count > 0)
                             {
-                                var slice = new ArraySegment<byte>(controlBuffer, 0, controlNext.Result.Count);
-                                await tested.SendAsync(slice, SocketFlags.None, cts.Token).ConfigureAwait(false);
+                                var slice = new ArraySegment<byte>(
+                                    controlBuffer,
+                                    0,
+                                    controlNext.Result.Count
+                                );
+                                await tested
+                                    .SendAsync(slice, SocketFlags.None, cts.Token)
+                                    .ConfigureAwait(false);
                             }
                             if (!close)
                             {
-                                controlNext = control.ReceiveAsync(new ArraySegment<byte>(controlBuffer), cts.Token);
+                                controlNext = control.ReceiveAsync(
+                                    new ArraySegment<byte>(controlBuffer),
+                                    cts.Token
+                                );
                             }
                         }
                     }
@@ -139,15 +188,28 @@ namespace RemoteLoopServer
                 {
                     tested.Disconnect(false);
                 }
-                if (control.State == WebSocketState.Open || control.State == WebSocketState.Connecting || control.State == WebSocketState.None)
+                if (
+                    control.State == WebSocketState.Open
+                    || control.State == WebSocketState.Connecting
+                    || control.State == WebSocketState.None
+                )
                 {
                     try
                     {
-                        await control.CloseAsync(WebSocketCloseStatus.NormalClosure, "closing remoteLoop", cts.Token).ConfigureAwait(false);
+                        await control
+                            .CloseAsync(
+                                WebSocketCloseStatus.NormalClosure,
+                                "closing remoteLoop",
+                                cts.Token
+                            )
+                            .ConfigureAwait(false);
                     }
                     catch (WebSocketException ex)
                     {
-                        logger.LogWarning(ex, "RemoteLoopHandler.ProcessWebSocketRequest closing failed");
+                        logger.LogWarning(
+                            ex,
+                            "RemoteLoopHandler.ProcessWebSocketRequest closing failed"
+                        );
                     }
                 }
                 cts.Cancel();

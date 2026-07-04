@@ -8,16 +8,41 @@ namespace System.Globalization.Tests
         [ThreadStatic]
         private static RandomDataGenerator t_randomDataGenerator;
 
-        private static RandomDataGenerator Generator => t_randomDataGenerator ??= new RandomDataGenerator();
+        private static RandomDataGenerator Generator =>
+            t_randomDataGenerator ??= new RandomDataGenerator();
 
         private static readonly int[] s_daysPerMonthLeapYear = new int[]
         {
-            0, 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+            0,
+            31,
+            29,
+            31,
+            30,
+            31,
+            30,
+            31,
+            31,
+            30,
+            31,
+            30,
+            31,
         };
 
         private static readonly int[] s_daysPerMonthCommonYear = new int[]
         {
-            0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+            0,
+            31,
+            28,
+            31,
+            30,
+            31,
+            30,
+            31,
+            31,
+            30,
+            31,
+            30,
+            31,
         };
 
         public static int RandomYear()

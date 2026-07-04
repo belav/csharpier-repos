@@ -6,11 +6,12 @@
 // <owner current="true" primary="false">laled</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
-
-    public enum MissingMappingAction {
+namespace System.Data
+{
+    public enum MissingMappingAction
+    {
         Passthrough = 1,
-        Ignore      = 2,
-        Error       = 3,
+        Ignore = 2,
+        Error = 3,
     }
 }

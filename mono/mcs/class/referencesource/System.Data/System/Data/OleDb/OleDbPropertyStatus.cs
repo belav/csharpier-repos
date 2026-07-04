@@ -6,9 +6,10 @@
 // <owner current="true" primary="false">laled</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.OleDb {
-
-    internal enum OleDbPropertyStatus { // WebData 99005
+namespace System.Data.OleDb
+{
+    internal enum OleDbPropertyStatus
+    { // WebData 99005
         Ok = 0,
         NotSupported = 1,
         BadValue = 2,

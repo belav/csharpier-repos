@@ -27,23 +27,22 @@
 
 using System;
 
-
 namespace Mono.Simd
 {
-	/*
-	This enum MUST be kept in sync with its runtime mirror in mini.h.
-	The SIMD_VERSION_ values are bit indexes, while the ones here are masks.
-	*/
-	[Flags]
-	public enum AccelMode
-	{
-		None	= 0,
-		SSE1	= 1 << 0,
-		SSE2	= 1 << 1,
-		SSE3	= 1 << 2,
-		SSSE3	= 1 << 3,
-		SSE41	= 1 << 4,
-		SSE42	= 1 << 5,
-		SSE4A	= 1 << 6,
-	}
+    /*
+    This enum MUST be kept in sync with its runtime mirror in mini.h.
+    The SIMD_VERSION_ values are bit indexes, while the ones here are masks.
+    */
+    [Flags]
+    public enum AccelMode
+    {
+        None = 0,
+        SSE1 = 1 << 0,
+        SSE2 = 1 << 1,
+        SSE3 = 1 << 2,
+        SSSE3 = 1 << 3,
+        SSE41 = 1 << 4,
+        SSE42 = 1 << 5,
+        SSE4A = 1 << 6,
+    }
 }

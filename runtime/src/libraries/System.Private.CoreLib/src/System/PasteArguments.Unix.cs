@@ -12,7 +12,10 @@ namespace System
         /// Repastes a set of arguments into a linear string that parses back into the originals under pre- or post-2008 VC parsing rules.
         /// On Unix: the rules for parsing the executable name (argv[0]) are ignored.
         /// </summary>
-        internal static string Paste(IEnumerable<string> arguments, bool pasteFirstArgumentUsingArgV0Rules)
+        internal static string Paste(
+            IEnumerable<string> arguments,
+            bool pasteFirstArgumentUsingArgV0Rules
+        )
         {
             var stringBuilder = new ValueStringBuilder(stackalloc char[256]);
             foreach (string argument in arguments)
@@ -21,6 +24,5 @@ namespace System
             }
             return stringBuilder.ToString();
         }
-
     }
 }

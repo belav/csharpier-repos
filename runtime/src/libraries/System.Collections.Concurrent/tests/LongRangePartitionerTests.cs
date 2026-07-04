@@ -33,13 +33,25 @@ namespace System.Collections.Concurrent.Tests
         public static void CheckKeyProperties()
         {
             var partitioner = Partitioner.Create(0, 9223372036854774807);
-            Assert.True(partitioner.KeysOrderedInEachPartition, "Expected KeysOrderedInEachPartition to be set to true");
-            Assert.False(partitioner.KeysOrderedAcrossPartitions, "KeysOrderedAcrossPartitions to be set to false");
+            Assert.True(
+                partitioner.KeysOrderedInEachPartition,
+                "Expected KeysOrderedInEachPartition to be set to true"
+            );
+            Assert.False(
+                partitioner.KeysOrderedAcrossPartitions,
+                "KeysOrderedAcrossPartitions to be set to false"
+            );
             Assert.True(partitioner.KeysNormalized, "Expected KeysNormalized to be set to true");
 
             partitioner = Partitioner.Create(0, 9223372036854774807, 90);
-            Assert.True(partitioner.KeysOrderedInEachPartition, "Expected KeysOrderedInEachPartition to be set to true");
-            Assert.False(partitioner.KeysOrderedAcrossPartitions, "KeysOrderedAcrossPartitions to be set to false");
+            Assert.True(
+                partitioner.KeysOrderedInEachPartition,
+                "Expected KeysOrderedInEachPartition to be set to true"
+            );
+            Assert.False(
+                partitioner.KeysOrderedAcrossPartitions,
+                "KeysOrderedAcrossPartitions to be set to false"
+            );
             Assert.True(partitioner.KeysNormalized, "Expected KeysNormalized to be set to true");
         }
 
@@ -68,7 +80,10 @@ namespace System.Collections.Concurrent.Tests
                 foreach (var item in partition.UnRoll())
                     elements.Add(item);
             }
-            Assert.True(elements.CompareSequences<long>(RangePartitionerHelpers.LongEnumerable(from, to)), "GetPartitions element mismatch");
+            Assert.True(
+                elements.CompareSequences<long>(RangePartitionerHelpers.LongEnumerable(from, to)),
+                "GetPartitions element mismatch"
+            );
         }
 
         /// <summary>
@@ -96,7 +111,10 @@ namespace System.Collections.Concurrent.Tests
                 foreach (var item in partition.UnRoll())
                     elements.Add(item);
             }
-            Assert.True(elements.CompareSequences<long>(RangePartitionerHelpers.LongEnumerable(from, to)), "GetDynamicPartitions Element mismatch");
+            Assert.True(
+                elements.CompareSequences<long>(RangePartitionerHelpers.LongEnumerable(from, to)),
+                "GetDynamicPartitions Element mismatch"
+            );
         }
 
         /// <summary>
@@ -126,7 +144,10 @@ namespace System.Collections.Concurrent.Tests
                     elements.Add(item);
             }
 
-            Assert.True(elements.CompareSequences<long>(RangePartitionerHelpers.LongEnumerable(from, to)), "GetOrderablePartitions Element mismatch");
+            Assert.True(
+                elements.CompareSequences<long>(RangePartitionerHelpers.LongEnumerable(from, to)),
+                "GetOrderablePartitions Element mismatch"
+            );
 
             //var keys = partitioner.GetOrderablePartitions(dop).SelectMany(enumerator => enumerator.UnRollIndices()).ToArray();
             IList<long> keys = new List<long>();
@@ -135,7 +156,12 @@ namespace System.Collections.Concurrent.Tests
                 foreach (var item in partition.UnRollIndices())
                     keys.Add(item);
             }
-            Assert.True(keys.CompareSequences<long>(RangePartitionerHelpers.LongEnumerable(keys[0], keys.Count)), "GetOrderablePartitions key mismatch");
+            Assert.True(
+                keys.CompareSequences<long>(
+                    RangePartitionerHelpers.LongEnumerable(keys[0], keys.Count)
+                ),
+                "GetOrderablePartitions key mismatch"
+            );
         }
 
         /// <summary>
@@ -166,7 +192,10 @@ namespace System.Collections.Concurrent.Tests
                 foreach (var item in partition.UnRoll())
                     elements.Add(item);
             }
-            Assert.True(elements.CompareSequences<long>(RangePartitionerHelpers.LongEnumerable(from, to)), "GetOrderableDynamicPartitions Element mismatch");
+            Assert.True(
+                elements.CompareSequences<long>(RangePartitionerHelpers.LongEnumerable(from, to)),
+                "GetOrderableDynamicPartitions Element mismatch"
+            );
 
             //var keys = partitioner.GetOrderableDynamicPartitions().Select(tuple => tuple.Key).ToArray();
             IList<long> keys = new List<long>();
@@ -174,7 +203,12 @@ namespace System.Collections.Concurrent.Tests
             {
                 keys.Add(tuple.Key);
             }
-            Assert.True(keys.CompareSequences<long>(RangePartitionerHelpers.LongEnumerable(keys[0], keys.Count)), "GetOrderableDynamicPartitions key mismatch");
+            Assert.True(
+                keys.CompareSequences<long>(
+                    RangePartitionerHelpers.LongEnumerable(keys[0], keys.Count)
+                ),
+                "GetOrderableDynamicPartitions key mismatch"
+            );
         }
 
         /// <summary>
@@ -191,7 +225,12 @@ namespace System.Collections.Concurrent.Tests
         [InlineData(1999, 1, 2000, 3)]
         [InlineData(9223372036854774807, 999, 600, 4)]
         [InlineData(-9223372036854774807, 1000, 19, 63)]
-        public static void CheckGetPartitionsWithRange(long from, long count, long desiredRangeSize, int dop)
+        public static void CheckGetPartitionsWithRange(
+            long from,
+            long count,
+            long desiredRangeSize,
+            int dop
+        )
         {
             long to = from + count;
             var partitioner = Partitioner.Create(from, to, desiredRangeSize);
@@ -203,7 +242,10 @@ namespace System.Collections.Concurrent.Tests
                 foreach (var item in partition.UnRoll())
                     elements.Add(item);
             }
-            Assert.True(elements.CompareSequences<long>(RangePartitionerHelpers.LongEnumerable(from, to)), "GetPartitions element mismatch");
+            Assert.True(
+                elements.CompareSequences<long>(RangePartitionerHelpers.LongEnumerable(from, to)),
+                "GetPartitions element mismatch"
+            );
 
             //var rangeSizes = partitioner.GetPartitions(dop).SelectMany(enumerator => enumerator.GetRangeSize()).ToArray();
             IList<long> rangeSizes = new List<long>();
@@ -229,7 +271,11 @@ namespace System.Collections.Concurrent.Tests
         [InlineData(1999, 1, 2000)]
         [InlineData(9223372036854774807, 999, 600)]
         [InlineData(-9223372036854774807, 1000, 19)]
-        public static void CheckGetDynamicPartitionsWithRange(long from, long count, long desiredRangeSize)
+        public static void CheckGetDynamicPartitionsWithRange(
+            long from,
+            long count,
+            long desiredRangeSize
+        )
         {
             long to = from + count;
             var partitioner = Partitioner.Create(from, to, desiredRangeSize);
@@ -241,7 +287,10 @@ namespace System.Collections.Concurrent.Tests
                 foreach (var item in partition.UnRoll())
                     elements.Add(item);
             }
-            Assert.True(elements.CompareSequences<long>(RangePartitionerHelpers.LongEnumerable(from, to)), "GetDynamicPartitions Element mismatch");
+            Assert.True(
+                elements.CompareSequences<long>(RangePartitionerHelpers.LongEnumerable(from, to)),
+                "GetDynamicPartitions Element mismatch"
+            );
 
             //var rangeSizes = partitioner.GetDynamicPartitions().Select(tuple => tuple.GetRangeSize()).ToArray();
             IList<long> rangeSizes = new List<long>();
@@ -267,7 +316,12 @@ namespace System.Collections.Concurrent.Tests
         [InlineData(1999, 1, 2000, 3)]
         [InlineData(9223372036854774807, 999, 600, 4)]
         [InlineData(-9223372036854774807, 1000, 19, 63)]
-        public static void CheckGetOrderablePartitionsWithRange(long from, long count, long desiredRangeSize, int dop)
+        public static void CheckGetOrderablePartitionsWithRange(
+            long from,
+            long count,
+            long desiredRangeSize,
+            int dop
+        )
         {
             long to = from + count;
             var partitioner = Partitioner.Create(from, to, desiredRangeSize);
@@ -279,7 +333,10 @@ namespace System.Collections.Concurrent.Tests
                 foreach (var item in partition.UnRoll())
                     elements.Add(item);
             }
-            Assert.True(elements.CompareSequences<long>(RangePartitionerHelpers.LongEnumerable(from, to)), "GetOrderablePartitions Element mismatch");
+            Assert.True(
+                elements.CompareSequences<long>(RangePartitionerHelpers.LongEnumerable(from, to)),
+                "GetOrderablePartitions Element mismatch"
+            );
 
             //var keys = partitioner.GetOrderablePartitions(dop).SelectMany(enumerator => enumerator.UnRollIndices()).ToArray();
             IList<long> keys = new List<long>();
@@ -288,7 +345,12 @@ namespace System.Collections.Concurrent.Tests
                 foreach (var item in partition.UnRollIndices())
                     keys.Add(item);
             }
-            Assert.True(keys.CompareSequences<long>(RangePartitionerHelpers.LongEnumerable(keys[0], keys.Count)), "GetOrderablePartitions key mismatch");
+            Assert.True(
+                keys.CompareSequences<long>(
+                    RangePartitionerHelpers.LongEnumerable(keys[0], keys.Count)
+                ),
+                "GetOrderablePartitions key mismatch"
+            );
 
             //var rangeSizes = partitioner.GetOrderablePartitions(dop).SelectMany(enumerator => enumerator.GetRangeSize()).ToArray();
             IList<long> rangeSizes = new List<long>();
@@ -316,7 +378,11 @@ namespace System.Collections.Concurrent.Tests
         [InlineData(1999, 1, 2000)]
         [InlineData(9223372036854774807, 999, 600)]
         [InlineData(-9223372036854774807, 1000, 19)]
-        public static void GetOrderableDynamicPartitionsWithRange(long from, long count, long desiredRangeSize)
+        public static void GetOrderableDynamicPartitionsWithRange(
+            long from,
+            long count,
+            long desiredRangeSize
+        )
         {
             long to = from + count;
             var partitioner = Partitioner.Create(from, to, desiredRangeSize);
@@ -328,7 +394,10 @@ namespace System.Collections.Concurrent.Tests
                 foreach (var item in tuple.UnRoll())
                     elements.Add(item);
             }
-            Assert.True(elements.CompareSequences<long>(RangePartitionerHelpers.LongEnumerable(from, to)), "GetOrderableDynamicPartitions Element mismatch");
+            Assert.True(
+                elements.CompareSequences<long>(RangePartitionerHelpers.LongEnumerable(from, to)),
+                "GetOrderableDynamicPartitions Element mismatch"
+            );
 
             //var keys = partitioner.GetOrderableDynamicPartitions().Select(tuple => tuple.Key).ToArray();
             IList<long> keys = new List<long>();
@@ -337,7 +406,12 @@ namespace System.Collections.Concurrent.Tests
                 keys.Add(tuple.Key);
             }
 
-            Assert.True(keys.CompareSequences<long>(RangePartitionerHelpers.LongEnumerable(keys[0], keys.Count)), "GetOrderableDynamicPartitions key mismatch");
+            Assert.True(
+                keys.CompareSequences<long>(
+                    RangePartitionerHelpers.LongEnumerable(keys[0], keys.Count)
+                ),
+                "GetOrderableDynamicPartitions key mismatch"
+            );
 
             //var rangeSizes = partitioner.GetOrderableDynamicPartitions().Select(tuple => tuple.GetRangeSize()).ToArray();
             IList<long> rangeSizes = new List<long>();
@@ -382,13 +456,17 @@ namespace System.Collections.Concurrent.Tests
         {
             long to = from + count;
 
-            var partitioner = (rangeSize == -1) ? Partitioner.Create(from, to) : Partitioner.Create(from, to, rangeSize);
+            var partitioner =
+                (rangeSize == -1)
+                    ? Partitioner.Create(from, to)
+                    : Partitioner.Create(from, to, rangeSize);
 
             // Check static partitions
             var partitions = partitioner.GetPartitions(2);
 
             // Initialize the from / to values from the first element
-            if (!partitions[0].MoveNext()) return;
+            if (!partitions[0].MoveNext())
+                return;
             Assert.Equal(from, partitions[0].Current.Item1);
             if (rangeSize == -1)
             {
@@ -396,7 +474,8 @@ namespace System.Collections.Concurrent.Tests
             }
 
             long nextExpectedFrom = partitions[0].Current.Item2;
-            long nextExpectedTo = (nextExpectedFrom + rangeSize) > to ? to : (nextExpectedFrom + rangeSize);
+            long nextExpectedTo =
+                (nextExpectedFrom + rangeSize) > to ? to : (nextExpectedFrom + rangeSize);
 
             // Ensure that each partition gets one range only
             // we check this by alternating partitions asking for elements and make sure
@@ -404,36 +483,48 @@ namespace System.Collections.Concurrent.Tests
             long actualCount = partitions[0].Current.Item2 - partitions[0].Current.Item1;
             while (true)
             {
-                if (!partitions[0].MoveNext()) break;
+                if (!partitions[0].MoveNext())
+                    break;
 
                 Assert.Equal(nextExpectedFrom, partitions[0].Current.Item1);
                 Assert.Equal(nextExpectedTo, partitions[0].Current.Item2);
-                nextExpectedFrom = (nextExpectedFrom + rangeSize) > to ? to : (nextExpectedFrom + rangeSize);
-                nextExpectedTo = (nextExpectedTo + rangeSize) > to ? to : (nextExpectedTo + rangeSize);
+                nextExpectedFrom =
+                    (nextExpectedFrom + rangeSize) > to ? to : (nextExpectedFrom + rangeSize);
+                nextExpectedTo =
+                    (nextExpectedTo + rangeSize) > to ? to : (nextExpectedTo + rangeSize);
                 actualCount += partitions[0].Current.Item2 - partitions[0].Current.Item1;
 
-                if (!partitions[1].MoveNext()) break;
+                if (!partitions[1].MoveNext())
+                    break;
 
                 Assert.Equal(nextExpectedFrom, partitions[1].Current.Item1);
                 Assert.Equal(nextExpectedTo, partitions[1].Current.Item2);
-                nextExpectedFrom = (nextExpectedFrom + rangeSize) > to ? to : (nextExpectedFrom + rangeSize);
-                nextExpectedTo = (nextExpectedTo + rangeSize) > to ? to : (nextExpectedTo + rangeSize);
+                nextExpectedFrom =
+                    (nextExpectedFrom + rangeSize) > to ? to : (nextExpectedFrom + rangeSize);
+                nextExpectedTo =
+                    (nextExpectedTo + rangeSize) > to ? to : (nextExpectedTo + rangeSize);
                 actualCount += partitions[1].Current.Item2 - partitions[1].Current.Item1;
 
-                if (!partitions[1].MoveNext()) break;
+                if (!partitions[1].MoveNext())
+                    break;
 
                 Assert.Equal(nextExpectedFrom, partitions[1].Current.Item1);
                 Assert.Equal(nextExpectedTo, partitions[1].Current.Item2);
-                nextExpectedFrom = (nextExpectedFrom + rangeSize) > to ? to : (nextExpectedFrom + rangeSize);
-                nextExpectedTo = (nextExpectedTo + rangeSize) > to ? to : (nextExpectedTo + rangeSize);
+                nextExpectedFrom =
+                    (nextExpectedFrom + rangeSize) > to ? to : (nextExpectedFrom + rangeSize);
+                nextExpectedTo =
+                    (nextExpectedTo + rangeSize) > to ? to : (nextExpectedTo + rangeSize);
                 actualCount += partitions[1].Current.Item2 - partitions[1].Current.Item1;
 
-                if (!partitions[0].MoveNext()) break;
+                if (!partitions[0].MoveNext())
+                    break;
 
                 Assert.Equal(nextExpectedFrom, partitions[0].Current.Item1);
                 Assert.Equal(nextExpectedTo, partitions[0].Current.Item2);
-                nextExpectedFrom = (nextExpectedFrom + rangeSize) > to ? to : (nextExpectedFrom + rangeSize);
-                nextExpectedTo = (nextExpectedTo + rangeSize) > to ? to : (nextExpectedTo + rangeSize);
+                nextExpectedFrom =
+                    (nextExpectedFrom + rangeSize) > to ? to : (nextExpectedFrom + rangeSize);
+                nextExpectedTo =
+                    (nextExpectedTo + rangeSize) > to ? to : (nextExpectedTo + rangeSize);
                 actualCount += partitions[0].Current.Item2 - partitions[0].Current.Item1;
             }
 
@@ -451,7 +542,10 @@ namespace System.Collections.Concurrent.Tests
         {
             long to = from + count;
 
-            var partitioner = (rangeSize == -1) ? Partitioner.Create(from, to) : Partitioner.Create(from, to, rangeSize);
+            var partitioner =
+                (rangeSize == -1)
+                    ? Partitioner.Create(from, to)
+                    : Partitioner.Create(from, to, rangeSize);
 
             // Check static partitions
             var partitions = partitioner.GetDynamicPartitions();
@@ -459,7 +553,8 @@ namespace System.Collections.Concurrent.Tests
             var partition2 = partitions.GetEnumerator();
 
             // Initialize the from / to values from the first element
-            if (!partition1.MoveNext()) return;
+            if (!partition1.MoveNext())
+                return;
             Assert.Equal(from, partition1.Current.Item1);
             if (rangeSize == -1)
             {
@@ -467,7 +562,8 @@ namespace System.Collections.Concurrent.Tests
             }
 
             long nextExpectedFrom = partition1.Current.Item2;
-            long nextExpectedTo = (nextExpectedFrom + rangeSize) > to ? to : (nextExpectedFrom + rangeSize);
+            long nextExpectedTo =
+                (nextExpectedFrom + rangeSize) > to ? to : (nextExpectedFrom + rangeSize);
 
             // Ensure that each partition gets one range only
             // we check this by alternating partitions asking for elements and make sure
@@ -475,36 +571,48 @@ namespace System.Collections.Concurrent.Tests
             long actualCount = partition1.Current.Item2 - partition1.Current.Item1;
             while (true)
             {
-                if (!partition1.MoveNext()) break;
+                if (!partition1.MoveNext())
+                    break;
 
                 Assert.Equal(nextExpectedFrom, partition1.Current.Item1);
                 Assert.Equal(nextExpectedTo, partition1.Current.Item2);
-                nextExpectedFrom = (nextExpectedFrom + rangeSize) > to ? to : (nextExpectedFrom + rangeSize);
-                nextExpectedTo = (nextExpectedTo + rangeSize) > to ? to : (nextExpectedTo + rangeSize);
+                nextExpectedFrom =
+                    (nextExpectedFrom + rangeSize) > to ? to : (nextExpectedFrom + rangeSize);
+                nextExpectedTo =
+                    (nextExpectedTo + rangeSize) > to ? to : (nextExpectedTo + rangeSize);
                 actualCount += partition1.Current.Item2 - partition1.Current.Item1;
 
-                if (!partition2.MoveNext()) break;
+                if (!partition2.MoveNext())
+                    break;
 
                 Assert.Equal(nextExpectedFrom, partition2.Current.Item1);
                 Assert.Equal(nextExpectedTo, partition2.Current.Item2);
-                nextExpectedFrom = (nextExpectedFrom + rangeSize) > to ? to : (nextExpectedFrom + rangeSize);
-                nextExpectedTo = (nextExpectedTo + rangeSize) > to ? to : (nextExpectedTo + rangeSize);
+                nextExpectedFrom =
+                    (nextExpectedFrom + rangeSize) > to ? to : (nextExpectedFrom + rangeSize);
+                nextExpectedTo =
+                    (nextExpectedTo + rangeSize) > to ? to : (nextExpectedTo + rangeSize);
                 actualCount += partition2.Current.Item2 - partition2.Current.Item1;
 
-                if (!partition2.MoveNext()) break;
+                if (!partition2.MoveNext())
+                    break;
 
                 Assert.Equal(nextExpectedFrom, partition2.Current.Item1);
                 Assert.Equal(nextExpectedTo, partition2.Current.Item2);
-                nextExpectedFrom = (nextExpectedFrom + rangeSize) > to ? to : (nextExpectedFrom + rangeSize);
-                nextExpectedTo = (nextExpectedTo + rangeSize) > to ? to : (nextExpectedTo + rangeSize);
+                nextExpectedFrom =
+                    (nextExpectedFrom + rangeSize) > to ? to : (nextExpectedFrom + rangeSize);
+                nextExpectedTo =
+                    (nextExpectedTo + rangeSize) > to ? to : (nextExpectedTo + rangeSize);
                 actualCount += partition2.Current.Item2 - partition2.Current.Item1;
 
-                if (!partition1.MoveNext()) break;
+                if (!partition1.MoveNext())
+                    break;
 
                 Assert.Equal(nextExpectedFrom, partition1.Current.Item1);
                 Assert.Equal(nextExpectedTo, partition1.Current.Item2);
-                nextExpectedFrom = (nextExpectedFrom + rangeSize) > to ? to : (nextExpectedFrom + rangeSize);
-                nextExpectedTo = (nextExpectedTo + rangeSize) > to ? to : (nextExpectedTo + rangeSize);
+                nextExpectedFrom =
+                    (nextExpectedFrom + rangeSize) > to ? to : (nextExpectedFrom + rangeSize);
+                nextExpectedTo =
+                    (nextExpectedTo + rangeSize) > to ? to : (nextExpectedTo + rangeSize);
                 actualCount += partition1.Current.Item2 - partition1.Current.Item1;
             }
 
@@ -524,7 +632,10 @@ namespace System.Collections.Concurrent.Tests
         [InlineData(long.MinValue / 2, long.MaxValue / 2)]
         public void TestPartitionerCreate(long fromInclusive, long toExclusive)
         {
-            OrderablePartitioner<Tuple<long, long>> op = Partitioner.Create(fromInclusive, toExclusive);
+            OrderablePartitioner<Tuple<long, long>> op = Partitioner.Create(
+                fromInclusive,
+                toExclusive
+            );
             long start = fromInclusive;
 
             foreach (var p in op.GetDynamicPartitions())

@@ -6,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,94 +26,104 @@
 //
 // (C) 2005-2010 Novell, Inc.
 
-using System.ComponentModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Security.Permissions;
 
-namespace System.Web.UI.HtmlControls {
+namespace System.Web.UI.HtmlControls
+{
+    // CAS
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    // attributes
+    [DefaultEvent("ServerChange")]
+    [SupportsEventValidation]
+    public class HtmlInputHidden : HtmlInputControl, IPostBackDataHandler
+    {
+        static readonly object ServerChangeEvent = new object();
 
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[DefaultEvent ("ServerChange")]
-	[SupportsEventValidation]
-	public class HtmlInputHidden : HtmlInputControl, IPostBackDataHandler {
+        public HtmlInputHidden()
+            : base("hidden") { }
 
-		static readonly object ServerChangeEvent = new object ();
+        bool LoadPostDataInternal(string postDataKey, NameValueCollection postCollection)
+        {
+            string data = postCollection[postDataKey];
+            if (data != null && data != Value)
+            {
+                ValidateEvent(postDataKey, String.Empty);
+                Value = data;
+                return true;
+            }
+            return false;
+        }
 
-		public HtmlInputHidden () : base ("hidden")
-		{
-		}
+        void RaisePostDataChangedEventInternal()
+        {
+            OnServerChange(EventArgs.Empty);
+        }
 
-		bool LoadPostDataInternal (string postDataKey, NameValueCollection postCollection)
-		{
-			string data = postCollection [postDataKey];
-			if (data != null && data != Value) {
-				ValidateEvent (postDataKey, String.Empty);
-				Value = data;
-				return true;
-			}
-			return false;
-		}
+        protected virtual bool LoadPostData(string postDataKey, NameValueCollection postCollection)
+        {
+            return LoadPostDataInternal(postDataKey, postCollection);
+        }
 
-		void RaisePostDataChangedEventInternal ()
-		{
-			OnServerChange (EventArgs.Empty);
-		}
+        protected virtual void RaisePostDataChangedEvent()
+        {
+            RaisePostDataChangedEventInternal();
+        }
 
-		protected virtual bool LoadPostData (string postDataKey, NameValueCollection postCollection)
-		{
-			return LoadPostDataInternal (postDataKey, postCollection);
-		}
+        bool IPostBackDataHandler.LoadPostData(
+            string postDataKey,
+            NameValueCollection postCollection
+        )
+        {
+            return LoadPostData(postDataKey, postCollection);
+        }
 
-		protected virtual void RaisePostDataChangedEvent ()
-		{
-			RaisePostDataChangedEventInternal ();
-		}
-		
-		bool IPostBackDataHandler.LoadPostData (string postDataKey,
-							NameValueCollection postCollection)
-		{
-			return LoadPostData (postDataKey, postCollection);
-		}
+        void IPostBackDataHandler.RaisePostDataChangedEvent()
+        {
+            RaisePostDataChangedEvent();
+        }
 
-		void IPostBackDataHandler.RaisePostDataChangedEvent ()
-		{
-			RaisePostDataChangedEvent ();
-		}
+        protected override void RenderAttributes(HtmlTextWriter writer)
+        {
+            Page page = Page;
+            if (page != null)
+                page.ClientScript.RegisterForEventValidation(Name);
+            base.RenderAttributes(writer);
+        }
 
-		protected override void RenderAttributes (HtmlTextWriter writer)
-		{
-			Page page = Page;
-			if (page != null)
-				page.ClientScript.RegisterForEventValidation (Name);
-			base.RenderAttributes (writer);
-		}		
+        protected internal override void OnPreRender(EventArgs e)
+        {
+            base.OnPreRender(e);
 
-		protected internal override void OnPreRender (EventArgs e)
-		{
-			base.OnPreRender (e);
+            Page page = Page;
+            if (page != null && !Disabled)
+            {
+                page.RegisterRequiresPostBack(this);
+                page.RegisterEnabledControl(this);
+            }
+        }
 
-			Page page = Page;
-			if (page != null && !Disabled) {
-				page.RegisterRequiresPostBack (this);
-				page.RegisterEnabledControl (this);
-			}
-		}
+        protected virtual void OnServerChange(EventArgs e)
+        {
+            EventHandler handler = (EventHandler)Events[ServerChangeEvent];
+            if (handler != null)
+                handler(this, e);
+        }
 
-		protected virtual void OnServerChange (EventArgs e)
-		{
-			EventHandler handler = (EventHandler) Events [ServerChangeEvent];
-			if (handler != null)
-				handler (this, e);
-		}
-			
-		[WebSysDescription("")]
-		[WebCategory("Action")]
-		public event EventHandler ServerChange {
-			add { Events.AddHandler (ServerChangeEvent, value); }
-			remove { Events.RemoveHandler (ServerChangeEvent, value); }
-		}
-	}
+        [WebSysDescription("")]
+        [WebCategory("Action")]
+        public event EventHandler ServerChange
+        {
+            add { Events.AddHandler(ServerChangeEvent, value); }
+            remove { Events.RemoveHandler(ServerChangeEvent, value); }
+        }
+    }
 }

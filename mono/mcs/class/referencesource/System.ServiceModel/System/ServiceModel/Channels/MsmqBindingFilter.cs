@@ -33,7 +33,16 @@ namespace System.ServiceModel.Channels
 
         public int Match(string name)
         {
-            if (string.Compare(CanonicalPrefix, 0, name, 0, CanonicalPrefix.Length, StringComparison.OrdinalIgnoreCase) == 0)
+            if (
+                string.Compare(
+                    CanonicalPrefix,
+                    0,
+                    name,
+                    0,
+                    CanonicalPrefix.Length,
+                    StringComparison.OrdinalIgnoreCase
+                ) == 0
+            )
             {
                 return CanonicalPrefix.Length;
             }
@@ -47,6 +56,11 @@ namespace System.ServiceModel.Channels
         }
 
         public abstract object MatchFound(string host, string name, bool isPrivate);
-        public abstract void MatchLost(string host, string name, bool isPrivate, object callbackState);
+        public abstract void MatchLost(
+            string host,
+            string name,
+            bool isPrivate,
+            object callbackState
+        );
     }
 }

@@ -12,7 +12,10 @@ namespace System.IO.Compression.Tests
         [InlineData("folder/", "40755")]
         [InlineData("folder/file", "100644")]
         [InlineData("folder\\file", "100644")]
-        public static void Verify_Default_Permissions_Are_Applied_For_Entries(string path, string mode)
+        public static void Verify_Default_Permissions_Are_Applied_For_Entries(
+            string path,
+            string mode
+        )
         {
             using var archive = new ZipArchive(new MemoryStream(), ZipArchiveMode.Create, false);
             var newEntry = archive.CreateEntry(path);

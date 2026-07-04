@@ -24,10 +24,7 @@ namespace System.Security.Authentication.ExtendedProtection.Configuration
 
         protected override ConfigurationPropertyCollection Properties
         {
-            get
-            {
-                return this.properties;
-            }
+            get { return this.properties; }
         }
 
         internal string Key
@@ -37,9 +34,11 @@ namespace System.Security.Authentication.ExtendedProtection.Configuration
 
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
 
-        readonly ConfigurationProperty name =
-            new ConfigurationProperty(ExtendedProtectionConfigurationStrings.Name,
-                typeof(string), null,
-                ConfigurationPropertyOptions.IsRequired);
+        readonly ConfigurationProperty name = new ConfigurationProperty(
+            ExtendedProtectionConfigurationStrings.Name,
+            typeof(string),
+            null,
+            ConfigurationPropertyOptions.IsRequired
+        );
     }
 }

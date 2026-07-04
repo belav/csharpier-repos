@@ -14,8 +14,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TaskList
     [UseExportProvider]
     public class CSharpTaskListTests : AbstractTaskListTests
     {
-        protected override TestWorkspace CreateWorkspace(string codeWithMarker, TestComposition composition)
-            => TestWorkspace.CreateCSharp(codeWithMarker, composition: composition);
+        protected override TestWorkspace CreateWorkspace(
+            string codeWithMarker,
+            TestComposition composition
+        ) => TestWorkspace.CreateCSharp(codeWithMarker, composition: composition);
 
         [Theory, CombinatorialData]
         public async Task SingleLineTodoComment_Colon(TestHost host)

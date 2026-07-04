@@ -8,14 +8,15 @@ namespace System.ServiceModel
     public enum MsmqEncryptionAlgorithm
     {
         RC4Stream,
-        Aes
+        Aes,
     }
 
     static class MsmqEncryptionAlgorithmHelper
     {
         public static bool IsDefined(MsmqEncryptionAlgorithm algorithm)
         {
-            return algorithm == MsmqEncryptionAlgorithm.RC4Stream || algorithm == MsmqEncryptionAlgorithm.Aes;
+            return algorithm == MsmqEncryptionAlgorithm.RC4Stream
+                || algorithm == MsmqEncryptionAlgorithm.Aes;
         }
 
         public static int ToInt32(MsmqEncryptionAlgorithm algorithm)

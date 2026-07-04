@@ -14,56 +14,82 @@ namespace System.Text.Json.Serialization.Tests
         {
             ArgumentNullException ex;
 
-            ex = Assert.Throws<ArgumentNullException>(() => JsonSerializer.Serialize(writer: null, 1));
+            ex = Assert.Throws<ArgumentNullException>(() =>
+                JsonSerializer.Serialize(writer: null, 1)
+            );
             Assert.Contains("writer", ex.ToString());
 
-            ex = Assert.Throws<ArgumentNullException>(() => JsonSerializer.Serialize(writer: null, 1, typeof(int)));
+            ex = Assert.Throws<ArgumentNullException>(() =>
+                JsonSerializer.Serialize(writer: null, 1, typeof(int))
+            );
             Assert.Contains("writer", ex.ToString());
         }
 
         [Fact]
-        public async static void NullInputTypeThrows()
+        public static async void NullInputTypeThrows()
         {
             ArgumentException ex;
             Utf8JsonWriter writer = new Utf8JsonWriter(new MemoryStream());
 
-            ex = Assert.Throws<ArgumentNullException>(() => JsonSerializer.Serialize(writer: writer, value: null, inputType: null));
+            ex = Assert.Throws<ArgumentNullException>(() =>
+                JsonSerializer.Serialize(writer: writer, value: null, inputType: null)
+            );
             Assert.Contains("inputType", ex.ToString());
 
-            ex = Assert.Throws<ArgumentNullException>(() => JsonSerializer.Serialize(writer, value: null, inputType: null));
+            ex = Assert.Throws<ArgumentNullException>(() =>
+                JsonSerializer.Serialize(writer, value: null, inputType: null)
+            );
             Assert.Contains("inputType", ex.ToString());
 
-            ex = Assert.Throws<ArgumentNullException>(() => JsonSerializer.Serialize(1, inputType: null));
+            ex = Assert.Throws<ArgumentNullException>(() =>
+                JsonSerializer.Serialize(1, inputType: null)
+            );
             Assert.Contains("inputType", ex.ToString());
 
-            ex = Assert.Throws<ArgumentNullException>(() => JsonSerializer.SerializeToUtf8Bytes(null, inputType: null));
+            ex = Assert.Throws<ArgumentNullException>(() =>
+                JsonSerializer.SerializeToUtf8Bytes(null, inputType: null)
+            );
             Assert.Contains("inputType", ex.ToString());
 
-            ex = await Assert.ThrowsAsync<ArgumentNullException>(async () => await JsonSerializer.SerializeAsync(new MemoryStream(), null, inputType: null));
+            ex = await Assert.ThrowsAsync<ArgumentNullException>(async () =>
+                await JsonSerializer.SerializeAsync(new MemoryStream(), null, inputType: null)
+            );
             Assert.Contains("inputType", ex.ToString());
         }
 
         [Fact]
-        public async static void NullValueWithValueTypeThrows()
+        public static async void NullValueWithValueTypeThrows()
         {
             JsonException ex;
 
             Utf8JsonWriter writer = new Utf8JsonWriter(new MemoryStream());
-            ex = Assert.Throws<JsonException>(() => JsonSerializer.Serialize(writer: writer, value: null, inputType: typeof(int)));
+            ex = Assert.Throws<JsonException>(() =>
+                JsonSerializer.Serialize(writer: writer, value: null, inputType: typeof(int))
+            );
             Assert.Contains(typeof(int).ToString(), ex.ToString());
 
-            ex = Assert.Throws<JsonException>(() => JsonSerializer.Serialize(value: null, inputType: typeof(int)));
+            ex = Assert.Throws<JsonException>(() =>
+                JsonSerializer.Serialize(value: null, inputType: typeof(int))
+            );
             Assert.Contains(typeof(int).ToString(), ex.ToString());
 
-            ex = Assert.Throws<JsonException>(() => JsonSerializer.SerializeToUtf8Bytes(value: null, inputType: typeof(int)));
+            ex = Assert.Throws<JsonException>(() =>
+                JsonSerializer.SerializeToUtf8Bytes(value: null, inputType: typeof(int))
+            );
             Assert.Contains(typeof(int).ToString(), ex.ToString());
 
-            ex = await Assert.ThrowsAsync<JsonException>(async () => await JsonSerializer.SerializeAsync(new MemoryStream(), value: null, inputType: typeof(int)));
+            ex = await Assert.ThrowsAsync<JsonException>(async () =>
+                await JsonSerializer.SerializeAsync(
+                    new MemoryStream(),
+                    value: null,
+                    inputType: typeof(int)
+                )
+            );
             Assert.Contains(typeof(int).ToString(), ex.ToString());
         }
 
         [Fact]
-        public async static void NullValueWithNullableSuccess()
+        public static async void NullValueWithNullableSuccess()
         {
             byte[] nullUtf8Literal = "null"u8.ToArray();
 
@@ -111,9 +137,11 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void SerializeToWriterRoundTripEscaping()
         {
-            const string jsonIn = " { \"p\\u0069zza\": 1, \"hello\\u6C49\\u5B57\": 2, \"normal\": 3 }";
+            const string jsonIn =
+                " { \"p\\u0069zza\": 1, \"hello\\u6C49\\u5B57\": 2, \"normal\": 3 }";
 
-            CustomClassWithEscapedProperty input = JsonSerializer.Deserialize<CustomClassWithEscapedProperty>(jsonIn);
+            CustomClassWithEscapedProperty input =
+                JsonSerializer.Deserialize<CustomClassWithEscapedProperty>(jsonIn);
 
             Assert.Equal(1, input.pizza);
             Assert.Equal(2, input.hello\u6C49\u5B57);
@@ -122,7 +150,8 @@ namespace System.Text.Json.Serialization.Tests
             string normalizedString = JsonSerializer.Serialize(input);
             Assert.Equal("{\"pizza\":1,\"hello\\u6C49\\u5B57\":2,\"normal\":3}", normalizedString);
 
-            CustomClassWithEscapedProperty inputNormalized = JsonSerializer.Deserialize<CustomClassWithEscapedProperty>(normalizedString);
+            CustomClassWithEscapedProperty inputNormalized =
+                JsonSerializer.Deserialize<CustomClassWithEscapedProperty>(normalizedString);
             Assert.Equal(1, inputNormalized.pizza);
             Assert.Equal(2, inputNormalized.hello\u6C49\u5B57);
             Assert.Equal(3, inputNormalized.normal);
@@ -142,10 +171,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             int[] input = new int[3] { 1, 2, 3 };
 
-            var serializerOptions = new JsonSerializerOptions
-            {
-                WriteIndented = true,
-            };
+            var serializerOptions = new JsonSerializerOptions { WriteIndented = true };
 
             using (var stream = new MemoryStream())
             {
@@ -158,7 +184,12 @@ namespace System.Text.Json.Serialization.Tests
 
             using (var stream = new MemoryStream())
             {
-                using (var writer = new Utf8JsonWriter(stream, new JsonWriterOptions { Indented = false }))
+                using (
+                    var writer = new Utf8JsonWriter(
+                        stream,
+                        new JsonWriterOptions { Indented = false }
+                    )
+                )
                 {
                     JsonSerializer.Serialize(writer, input, serializerOptions);
                 }
@@ -167,11 +198,19 @@ namespace System.Text.Json.Serialization.Tests
 
             using (var stream = new MemoryStream())
             {
-                using (var writer = new Utf8JsonWriter(stream, new JsonWriterOptions { Indented = true }))
+                using (
+                    var writer = new Utf8JsonWriter(
+                        stream,
+                        new JsonWriterOptions { Indented = true }
+                    )
+                )
                 {
                     JsonSerializer.Serialize(writer, input);
                 }
-                Assert.Equal($"[{Environment.NewLine}  1,{Environment.NewLine}  2,{Environment.NewLine}  3{Environment.NewLine}]", Encoding.UTF8.GetString(stream.ToArray()));
+                Assert.Equal(
+                    $"[{Environment.NewLine}  1,{Environment.NewLine}  2,{Environment.NewLine}  3{Environment.NewLine}]",
+                    Encoding.UTF8.GetString(stream.ToArray())
+                );
             }
         }
 
@@ -191,21 +230,40 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     JsonSerializer.Serialize(writer, input, serializerOptions);
                 }
-                Assert.Equal("\"abcd\\u002B\\u003C\\u003E\\u0026\"", Encoding.UTF8.GetString(stream.ToArray()));
+                Assert.Equal(
+                    "\"abcd\\u002B\\u003C\\u003E\\u0026\"",
+                    Encoding.UTF8.GetString(stream.ToArray())
+                );
             }
 
             using (var stream = new MemoryStream())
             {
-                using (var writer = new Utf8JsonWriter(stream, new JsonWriterOptions { Encoder = JavaScriptEncoder.Default }))
+                using (
+                    var writer = new Utf8JsonWriter(
+                        stream,
+                        new JsonWriterOptions { Encoder = JavaScriptEncoder.Default }
+                    )
+                )
                 {
                     JsonSerializer.Serialize(writer, input, serializerOptions);
                 }
-                Assert.Equal("\"abcd\\u002B\\u003C\\u003E\\u0026\"", Encoding.UTF8.GetString(stream.ToArray()));
+                Assert.Equal(
+                    "\"abcd\\u002B\\u003C\\u003E\\u0026\"",
+                    Encoding.UTF8.GetString(stream.ToArray())
+                );
             }
 
             using (var stream = new MemoryStream())
             {
-                using (var writer = new Utf8JsonWriter(stream, new JsonWriterOptions { Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping }))
+                using (
+                    var writer = new Utf8JsonWriter(
+                        stream,
+                        new JsonWriterOptions
+                        {
+                            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+                        }
+                    )
+                )
                 {
                     JsonSerializer.Serialize(writer, input);
                 }
@@ -229,7 +287,12 @@ namespace System.Text.Json.Serialization.Tests
 
             using (var stream = new MemoryStream())
             {
-                using (var writer = new Utf8JsonWriter(stream, new JsonWriterOptions { SkipValidation = true }))
+                using (
+                    var writer = new Utf8JsonWriter(
+                        stream,
+                        new JsonWriterOptions { SkipValidation = true }
+                    )
+                )
                 {
                     writer.WriteStartObject();
                     JsonSerializer.Serialize(writer, input);
@@ -246,13 +309,20 @@ namespace System.Text.Json.Serialization.Tests
             {
                 using (var writer = new Utf8JsonWriter(stream))
                 {
-                    Assert.Throws<JsonException>(() => JsonSerializer.Serialize(writer, input, serializerOptions));
+                    Assert.Throws<JsonException>(() =>
+                        JsonSerializer.Serialize(writer, input, serializerOptions)
+                    );
                 }
             }
 
             using (var stream = new MemoryStream())
             {
-                using (var writer = new Utf8JsonWriter(stream, new JsonWriterOptions { SkipValidation = true }))
+                using (
+                    var writer = new Utf8JsonWriter(
+                        stream,
+                        new JsonWriterOptions { SkipValidation = true }
+                    )
+                )
                 {
                     JsonSerializer.Serialize(writer, input, serializerOptions);
                 }
@@ -262,12 +332,20 @@ namespace System.Text.Json.Serialization.Tests
 
         public class InvalidArrayConverter : JsonConverter<int[]>
         {
-            public override int[] Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override int[] Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 throw new NotImplementedException();
             }
 
-            public override void Write(Utf8JsonWriter writer, int[] value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                int[] value,
+                JsonSerializerOptions options
+            )
             {
                 writer.WriteStartArray();
                 writer.WriteEndObject();
@@ -279,7 +357,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             string json = "{\"type\":\"array\",\"array\":[1]}";
             string jsonFormatted =
-@"{
+                @"{
   ""type"": ""array"",
   ""array"": [
     1
@@ -301,11 +379,14 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             {
-                var options = new JsonSerializerOptions
-                {
-                    Converters = { new CustomConverter() }
-                };
-                WriteAndValidate(direct, typeof(DeepArray), expectedInner, options, writerOptions: default);
+                var options = new JsonSerializerOptions { Converters = { new CustomConverter() } };
+                WriteAndValidate(
+                    direct,
+                    typeof(DeepArray),
+                    expectedInner,
+                    options,
+                    writerOptions: default
+                );
                 WriteAndValidate(custom, typeof(IContent), json, options, writerOptions: default);
             }
 
@@ -313,7 +394,7 @@ namespace System.Text.Json.Serialization.Tests
                 var options = new JsonSerializerOptions
                 {
                     WriteIndented = true,
-                    Converters = { new CustomConverter() }
+                    Converters = { new CustomConverter() },
                 };
                 var writerOptions = new JsonWriterOptions { Indented = false };
                 WriteAndValidate(direct, typeof(DeepArray), expectedInner, options, writerOptions);
@@ -324,23 +405,38 @@ namespace System.Text.Json.Serialization.Tests
                 var options = new JsonSerializerOptions
                 {
                     WriteIndented = true,
-                    Converters = { new CustomConverter() }
+                    Converters = { new CustomConverter() },
                 };
-                WriteAndValidate(direct, typeof(DeepArray), expectedInner, options, writerOptions: default);
+                WriteAndValidate(
+                    direct,
+                    typeof(DeepArray),
+                    expectedInner,
+                    options,
+                    writerOptions: default
+                );
                 WriteAndValidate(custom, typeof(IContent), json, options, writerOptions: default);
             }
 
             {
-                var options = new JsonSerializerOptions
-                {
-                    Converters = { new CustomConverter() }
-                };
+                var options = new JsonSerializerOptions { Converters = { new CustomConverter() } };
                 var writerOptions = new JsonWriterOptions { Indented = true };
-                WriteAndValidate(direct, typeof(DeepArray), $"{{{Environment.NewLine}  \"array\": [{Environment.NewLine}    1{Environment.NewLine}  ]{Environment.NewLine}}}", options, writerOptions);
+                WriteAndValidate(
+                    direct,
+                    typeof(DeepArray),
+                    $"{{{Environment.NewLine}  \"array\": [{Environment.NewLine}    1{Environment.NewLine}  ]{Environment.NewLine}}}",
+                    options,
+                    writerOptions
+                );
                 WriteAndValidate(custom, typeof(IContent), jsonFormatted, options, writerOptions);
             }
 
-            static void WriteAndValidate(object input, Type type, string expected, JsonSerializerOptions options, JsonWriterOptions writerOptions)
+            static void WriteAndValidate(
+                object input,
+                Type type,
+                string expected,
+                JsonSerializerOptions options,
+                JsonWriterOptions writerOptions
+            )
             {
                 using (var stream = new MemoryStream())
                 {
@@ -348,14 +444,18 @@ namespace System.Text.Json.Serialization.Tests
                     {
                         JsonSerializer.Serialize(writer, input, type, options);
                     }
-                    Assert.Equal(expected, Encoding.UTF8.GetString(stream.ToArray()), ignoreLineEndingDifferences: true);
+                    Assert.Equal(
+                        expected,
+                        Encoding.UTF8.GetString(stream.ToArray()),
+                        ignoreLineEndingDifferences: true
+                    );
                 }
             }
         }
 
         public class CustomClassToExceedMaxBufferSize
         {
-            private static readonly string s_name = new string('a', 100_000_000);//Large enough value to cause integer overflow exception when allocating buffer and small enought to not cause a "The JSON value of length X is too large and not supported."
+            private static readonly string s_name = new string('a', 100_000_000); //Large enough value to cause integer overflow exception when allocating buffer and small enought to not cause a "The JSON value of length X is too large and not supported."
             public string GetName1 => s_name;
             public string GetName2 => s_name;
             public string GetName3 => s_name;
@@ -378,10 +478,10 @@ namespace System.Text.Json.Serialization.Tests
             public string GetName20 => s_name;
         }
 
-        // NOTE: SerializeExceedMaximumBufferSize test is constrained to run on Windows and MacOSX because it causes 
-        //       problems on Linux due to the way deferred memory allocation works. On Linux, the allocation can 
-        //       succeed even if there is not enough memory but then the test may get killed by the OOM killer at the 
-        //       time the memory is accessed which triggers the full memory allocation. 
+        // NOTE: SerializeExceedMaximumBufferSize test is constrained to run on Windows and MacOSX because it causes
+        //       problems on Linux due to the way deferred memory allocation works. On Linux, the allocation can
+        //       succeed even if there is not enough memory but then the test may get killed by the OOM killer at the
+        //       time the memory is accessed which triggers the full memory allocation.
         [PlatformSpecific(TestPlatforms.Windows | TestPlatforms.OSX)]
         [ConditionalFact(typeof(Environment), nameof(Environment.Is64BitProcess))]
         [OuterLoop]
@@ -389,7 +489,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             CustomClassToExceedMaxBufferSize temp = new CustomClassToExceedMaxBufferSize();
 
-            Assert.Throws<OutOfMemoryException>(() => JsonSerializer.Serialize(temp, typeof(CustomClassToExceedMaxBufferSize)));
+            Assert.Throws<OutOfMemoryException>(() =>
+                JsonSerializer.Serialize(temp, typeof(CustomClassToExceedMaxBufferSize))
+            );
         }
 
         [Theory]
@@ -399,7 +501,11 @@ namespace System.Text.Json.Serialization.Tests
         public static void MaxDepthFlowsToConverter(int maxDepth)
         {
             var converter = new InstrumentedConverter();
-            var options = new JsonSerializerOptions { Converters = { converter }, MaxDepth = maxDepth };
+            var options = new JsonSerializerOptions
+            {
+                Converters = { converter },
+                MaxDepth = maxDepth,
+            };
             int effectiveMaxDepth = maxDepth == 0 ? 64 : maxDepth;
 
             JsonSerializer.Serialize(value: 42, options);
@@ -411,8 +517,17 @@ namespace System.Text.Json.Serialization.Tests
         {
             public JsonWriterOptions WriterOptions { get; private set; }
 
-            public override int Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-            public override void Write(Utf8JsonWriter writer, int value, JsonSerializerOptions options)
+            public override int Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) => throw new NotImplementedException();
+
+            public override void Write(
+                Utf8JsonWriter writer,
+                int value,
+                JsonSerializerOptions options
+            )
             {
                 WriterOptions = writer.Options;
                 writer.WriteNumberValue(value);
@@ -444,7 +559,9 @@ namespace System.Text.Json.Serialization.Tests
             int effectiveMaxDepth = maxDepth == 0 ? 64 : maxDepth;
 
             Peano value = Peano.CreateFromNumber(effectiveMaxDepth + 1);
-            JsonException exn = Assert.Throws<JsonException>(() => JsonSerializer.Serialize(value, options));
+            JsonException exn = Assert.Throws<JsonException>(() =>
+                JsonSerializer.Serialize(value, options)
+            );
             Assert.Contains("A possible object cycle was detected", exn.Message);
         }
 

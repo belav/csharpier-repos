@@ -20,9 +20,24 @@ namespace System.ComponentModel.Tests
 
         public static IEnumerable<object[]> Equals_TestData()
         {
-            yield return new object[] { NotifyParentPropertyAttribute.Yes, NotifyParentPropertyAttribute.Yes, true };
-            yield return new object[] { NotifyParentPropertyAttribute.No, new NotifyParentPropertyAttribute(false), true };
-            yield return new object[] { NotifyParentPropertyAttribute.Yes, NotifyParentPropertyAttribute.No, false };
+            yield return new object[]
+            {
+                NotifyParentPropertyAttribute.Yes,
+                NotifyParentPropertyAttribute.Yes,
+                true,
+            };
+            yield return new object[]
+            {
+                NotifyParentPropertyAttribute.No,
+                new NotifyParentPropertyAttribute(false),
+                true,
+            };
+            yield return new object[]
+            {
+                NotifyParentPropertyAttribute.Yes,
+                NotifyParentPropertyAttribute.No,
+                false,
+            };
 
             yield return new object[] { NotifyParentPropertyAttribute.Yes, new object(), false };
             yield return new object[] { NotifyParentPropertyAttribute.Yes, null, false };
@@ -30,7 +45,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(NotifyParentPropertyAttribute attribute, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            NotifyParentPropertyAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is NotifyParentPropertyAttribute)
@@ -48,7 +67,10 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(DefaultProperties_TestData))]
-        public void DefaultProperties_GetNotifyParent_ReturnsExpected(NotifyParentPropertyAttribute attribute, bool expectedNotifyParent)
+        public void DefaultProperties_GetNotifyParent_ReturnsExpected(
+            NotifyParentPropertyAttribute attribute,
+            bool expectedNotifyParent
+        )
         {
             Assert.Equal(expectedNotifyParent, attribute.NotifyParent);
             Assert.Equal(!expectedNotifyParent, attribute.IsDefaultAttribute());

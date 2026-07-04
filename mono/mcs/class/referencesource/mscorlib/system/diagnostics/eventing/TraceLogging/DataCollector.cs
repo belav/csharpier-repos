@@ -1,9 +1,9 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Security;
-
 #if ES_BUILD_STANDALONE
 using Environment = Microsoft.Diagnostics.Tracing.Internal.Environment;
+
 namespace Microsoft.Diagnostics.Tracing
 #else
 namespace System.Diagnostics.Tracing
@@ -33,7 +33,7 @@ namespace System.Diagnostics.Tracing
         private GCHandle* pins;
         private byte[] buffer;
         private int bufferPos;
-        private int bufferNesting;          // We may merge many fields int a single blob.   If we are doing this we increment this. 
+        private int bufferNesting; // We may merge many fields int a single blob.   If we are doing this we increment this.
         private bool writingScalars;
 
         internal void Enable(
@@ -42,7 +42,8 @@ namespace System.Diagnostics.Tracing
             EventSource.EventData* datas,
             int dataCount,
             GCHandle* pins,
-            int pinCount)
+            int pinCount
+        )
         {
             this.datasStart = datas;
             this.scratchEnd = scratch + scratchSize;
@@ -82,7 +83,9 @@ namespace System.Diagnostics.Tracing
                 var scratchNew = scratchOld + size;
                 if (this.scratchEnd < scratchNew)
                 {
-                    throw new IndexOutOfRangeException(Environment.GetResourceString("EventSource_AddScalarOutOfRange"));
+                    throw new IndexOutOfRangeException(
+                        Environment.GetResourceString("EventSource_AddScalarOutOfRange")
+                    );
                 }
 
                 this.ScalarsBegin();
@@ -258,8 +261,7 @@ namespace System.Diagnostics.Tracing
             do
             {
                 newSize *= 2;
-            }
-            while (newSize < required);
+            } while (newSize < required);
 
             Array.Resize(ref this.buffer, newSize);
         }
@@ -269,13 +271,17 @@ namespace System.Diagnostics.Tracing
             var pinsTemp = this.pins;
             if (this.pinsEnd <= pinsTemp)
             {
-                throw new IndexOutOfRangeException(Environment.GetResourceString("EventSource_PinArrayOutOfRange"));
+                throw new IndexOutOfRangeException(
+                    Environment.GetResourceString("EventSource_PinArrayOutOfRange")
+                );
             }
 
             var datasTemp = this.datas;
             if (this.datasEnd <= datasTemp)
             {
-                throw new IndexOutOfRangeException(Environment.GetResourceString("EventSource_DataDescriptorsOutOfRange"));
+                throw new IndexOutOfRangeException(
+                    Environment.GetResourceString("EventSource_DataDescriptorsOutOfRange")
+                );
             }
 
             this.pins = pinsTemp + 1;
@@ -293,7 +299,9 @@ namespace System.Diagnostics.Tracing
                 var datasTemp = this.datas;
                 if (this.datasEnd <= datasTemp)
                 {
-                    throw new IndexOutOfRangeException(Environment.GetResourceString("EventSource_DataDescriptorsOutOfRange"));
+                    throw new IndexOutOfRangeException(
+                        Environment.GetResourceString("EventSource_DataDescriptorsOutOfRange")
+                    );
                 }
 
                 datasTemp->m_Ptr = (long)(ulong)(UIntPtr)this.scratch;

@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
         /// Specialized formatter for the "return a == obj.a &amp;&amp; b == obj.b &amp;&amp; c == obj.c &amp;&amp; ...
         /// code that we spit out.
         /// </summary>
-        private class FormatLargeBinaryExpressionRule(ISyntaxFactsService syntaxFacts) : AbstractFormattingRule
+        private class FormatLargeBinaryExpressionRule(ISyntaxFactsService syntaxFacts)
+            : AbstractFormattingRule
         {
             private readonly ISyntaxFactsService _syntaxFacts = syntaxFacts;
 
@@ -22,11 +23,17 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             /// Wrap the large &amp;&amp; expression after every &amp;&amp; token.
             /// </summary>
             public override AdjustNewLinesOperation? GetAdjustNewLinesOperation(
-                in SyntaxToken previousToken, in SyntaxToken currentToken, in NextGetAdjustNewLinesOperation nextOperation)
+                in SyntaxToken previousToken,
+                in SyntaxToken currentToken,
+                in NextGetAdjustNewLinesOperation nextOperation
+            )
             {
                 if (_syntaxFacts.IsLogicalAndExpression(previousToken.Parent))
                 {
-                    return FormattingOperations.CreateAdjustNewLinesOperation(1, AdjustNewLinesOption.PreserveLines);
+                    return FormattingOperations.CreateAdjustNewLinesOperation(
+                        1,
+                        AdjustNewLinesOption.PreserveLines
+                    );
                 }
 
                 return nextOperation.Invoke(in previousToken, in currentToken);
@@ -35,25 +42,31 @@ namespace Microsoft.CodeAnalysis.GenerateEqualsAndGetHashCodeFromMembers
             /// <summary>
             /// Align all the wrapped parts of the expression with the token after 'return'.
             /// That way we get:
-            /// 
+            ///
             /// return a == obj.a &amp;&amp;
             ///        b == obj.b &amp;&amp;
             ///        ...
             /// </summary>
             public override void AddIndentBlockOperations(
-                List<IndentBlockOperation> list, SyntaxNode node, in NextIndentBlockOperationAction nextOperation)
+                List<IndentBlockOperation> list,
+                SyntaxNode node,
+                in NextIndentBlockOperationAction nextOperation
+            )
             {
                 if (_syntaxFacts.IsReturnStatement(node))
                 {
                     var expr = _syntaxFacts.GetExpressionOfReturnStatement(node);
                     if (expr?.ChildNodesAndTokens().Count > 1)
                     {
-                        list.Add(FormattingOperations.CreateRelativeIndentBlockOperation(
-                            expr.GetFirstToken(),
-                            expr.GetFirstToken().GetNextToken(),
-                            node.GetLastToken(),
-                            indentationDelta: 0,
-                            option: IndentBlockOption.RelativePosition));
+                        list.Add(
+                            FormattingOperations.CreateRelativeIndentBlockOperation(
+                                expr.GetFirstToken(),
+                                expr.GetFirstToken().GetNextToken(),
+                                node.GetLastToken(),
+                                indentationDelta: 0,
+                                option: IndentBlockOption.RelativePosition
+                            )
+                        );
 
                         return;
                     }

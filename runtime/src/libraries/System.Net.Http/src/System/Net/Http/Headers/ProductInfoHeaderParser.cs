@@ -13,15 +13,20 @@ namespace System.Net.Http.Headers
         // Unlike most other headers, User-Agent and Server use whitespace as separators
         private const string separator = " ";
 
-        internal static readonly ProductInfoHeaderParser SingleValueParser = new ProductInfoHeaderParser(false);
-        internal static readonly ProductInfoHeaderParser MultipleValueParser = new ProductInfoHeaderParser(true);
+        internal static readonly ProductInfoHeaderParser SingleValueParser =
+            new ProductInfoHeaderParser(false);
+        internal static readonly ProductInfoHeaderParser MultipleValueParser =
+            new ProductInfoHeaderParser(true);
 
         private ProductInfoHeaderParser(bool supportsMultipleValues)
-            : base(supportsMultipleValues, separator)
-        {
-        }
+            : base(supportsMultipleValues, separator) { }
 
-        public override bool TryParseValue([NotNullWhen(true)] string? value, object? storeValue, ref int index, [NotNullWhen(true)] out object? parsedValue)
+        public override bool TryParseValue(
+            [NotNullWhen(true)] string? value,
+            object? storeValue,
+            ref int index,
+            [NotNullWhen(true)] out object? parsedValue
+        )
         {
             parsedValue = null;
 
@@ -38,7 +43,11 @@ namespace System.Net.Http.Headers
                 return false; // whitespace-only values are not valid
             }
 
-            int length = ProductInfoHeaderValue.GetProductInfoLength(value, current, out ProductInfoHeaderValue? result);
+            int length = ProductInfoHeaderValue.GetProductInfoLength(
+                value,
+                current,
+                out ProductInfoHeaderValue? result
+            );
 
             if (length == 0)
             {

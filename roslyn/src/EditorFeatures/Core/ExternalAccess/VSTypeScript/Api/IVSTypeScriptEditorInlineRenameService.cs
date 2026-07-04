@@ -15,6 +15,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
     /// </summary>
     internal abstract class VSTypeScriptEditorInlineRenameServiceImplementation
     {
-        public abstract Task<VSTypeScriptInlineRenameInfo> GetRenameInfoAsync(Document document, int position, CancellationToken cancellationToken);
+        public abstract Task<VSTypeScriptInlineRenameInfo> GetRenameInfoAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
     }
 }

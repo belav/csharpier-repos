@@ -11,9 +11,19 @@ using Xunit;
 
 public class GitHub_11407
 {
-    struct foo { public byte b1, b2, b3, b4; }
+    struct foo
+    {
+        public byte b1,
+            b2,
+            b3,
+            b4;
+    }
+
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static foo getfoo() { return new foo(); }
+    static foo getfoo()
+    {
+        return new foo();
+    }
 
     [Fact]
     public static int TestEntryPoint()

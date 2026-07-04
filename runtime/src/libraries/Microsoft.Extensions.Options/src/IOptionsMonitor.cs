@@ -10,7 +10,9 @@ namespace Microsoft.Extensions.Options
     /// Used for notifications when <typeparamref name="TOptions"/> instances change.
     /// </summary>
     /// <typeparam name="TOptions">The options type.</typeparam>
-    public interface IOptionsMonitor<[DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] out TOptions>
+    public interface IOptionsMonitor<
+        [DynamicallyAccessedMembers(Options.DynamicallyAccessedMembers)] out TOptions
+    >
     {
         /// <summary>
         /// Returns the current <typeparamref name="TOptions"/> instance with the <see cref="Options.DefaultName"/>.

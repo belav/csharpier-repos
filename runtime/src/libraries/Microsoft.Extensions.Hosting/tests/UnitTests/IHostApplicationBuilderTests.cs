@@ -18,17 +18,17 @@ public class IHostApplicationBuilderTests
     [Fact]
     public void TestIHostApplicationBuilderCanBeUsedInExtensionMethod()
     {
-        HostApplicationBuilder builder = Host.CreateEmptyApplicationBuilder(new HostApplicationBuilderSettings
-        {
-            EnvironmentName = "Development"
-        });
+        HostApplicationBuilder builder = Host.CreateEmptyApplicationBuilder(
+            new HostApplicationBuilderSettings { EnvironmentName = "Development" }
+        );
 
         builder.VerifyBuilderWorks();
 
         using IHost host = builder.Build();
 
         // VerifyBuilderWorks should have configured a FakeServiceProviderFactory with the following State.
-        FakeServiceCollection fakeServices = host.Services.GetRequiredService<FakeServiceCollection>();
+        FakeServiceCollection fakeServices =
+            host.Services.GetRequiredService<FakeServiceCollection>();
         Assert.Equal("Hi!", fakeServices.State);
     }
 }
@@ -45,10 +45,9 @@ internal static class HostBuilderExtensions
         Assert.Equal(2, builder.Configuration.Sources.Count); // there's an empty source by default
         Assert.Equal("Development", builder.Configuration[HostDefaults.EnvironmentKey]);
 
-        builder.Configuration.AddInMemoryCollection(new Dictionary<string, string>
-        {
-            ["Key1"] = "value1"
-        });
+        builder.Configuration.AddInMemoryCollection(
+            new Dictionary<string, string> { ["Key1"] = "value1" }
+        );
 
         Assert.Equal(2, builder.Configuration.GetChildren().Count());
         Assert.Equal(3, builder.Configuration.Sources.Count);
@@ -58,12 +57,21 @@ internal static class HostBuilderExtensions
         Assert.True(builder.Environment.IsDevelopment());
         Assert.NotNull(builder.Environment.ContentRootFileProvider);
 
-        Assert.DoesNotContain(builder.Services, sd => sd.ImplementationType == typeof(ConsoleLoggerProvider));
+        Assert.DoesNotContain(
+            builder.Services,
+            sd => sd.ImplementationType == typeof(ConsoleLoggerProvider)
+        );
         builder.Logging.AddConsole();
-        Assert.Contains(builder.Services, sd => sd.ImplementationType == typeof(ConsoleLoggerProvider));
+        Assert.Contains(
+            builder.Services,
+            sd => sd.ImplementationType == typeof(ConsoleLoggerProvider)
+        );
 
         builder.Services.AddSingleton(typeof(IHostApplicationBuilderTests));
 
-        builder.ConfigureContainer(new FakeServiceProviderFactory(), container => container.State = "Hi!");
+        builder.ConfigureContainer(
+            new FakeServiceProviderFactory(),
+            container => container.State = "Hi!"
+        );
     }
 }

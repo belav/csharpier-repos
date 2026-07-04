@@ -7,7 +7,11 @@ namespace System.Reflection.Runtime.General
 {
     internal struct TypeForwardInfo
     {
-        public TypeForwardInfo(RuntimeAssemblyName redirectedAssemblyName, string namespaceName, string typeName)
+        public TypeForwardInfo(
+            RuntimeAssemblyName redirectedAssemblyName,
+            string namespaceName,
+            string typeName
+        )
         {
             Debug.Assert(redirectedAssemblyName != null);
             Debug.Assert(namespaceName != null);

@@ -21,9 +21,20 @@ namespace Roslyn.Test.Performance.Utilities
         private readonly string _solutionToTest;
         private readonly string _benchviewUploadName;
         private readonly string[] _scenarios;
-        private static readonly string _nugetPackagesPath = System.Environment.GetEnvironmentVariable("NUGET_PACKAGES") ??
-            Path.Combine(System.Environment.GetEnvironmentVariable("UserProfile"), ".nuget", "packages");
-        private static readonly string _installerPath = Path.Combine(_nugetPackagesPath, "roslyntools.vsixexpinstaller", "1.0.0-beta2-63222-01", "tools", "vsixexpinstaller.exe");
+        private static readonly string _nugetPackagesPath =
+            System.Environment.GetEnvironmentVariable("NUGET_PACKAGES")
+            ?? Path.Combine(
+                System.Environment.GetEnvironmentVariable("UserProfile"),
+                ".nuget",
+                "packages"
+            );
+        private static readonly string _installerPath = Path.Combine(
+            _nugetPackagesPath,
+            "roslyntools.vsixexpinstaller",
+            "1.0.0-beta2-63222-01",
+            "tools",
+            "vsixexpinstaller.exe"
+        );
 
         public VsPerfTest(
             string testTemplateName,
@@ -32,7 +43,9 @@ namespace Roslyn.Test.Performance.Utilities
             string benchviewUploadName,
             string[] scenarios,
             string zipFileToDownload = "RoslynSolutions",
-            int zipFileVersion = 2) : base()
+            int zipFileVersion = 2
+        )
+            : base()
         {
             _testTemplateName = testTemplateName;
             _testName = testName;
@@ -58,7 +71,10 @@ namespace Roslyn.Test.Performance.Utilities
             // Read the test template and replace with actual solution path.
             var taoTestFileTemplatePath = Path.Combine(dir, _testTemplateName);
             var template = File.ReadAllText(taoTestFileTemplatePath);
-            var finalTest = template.Replace("ReplaceWithActualSolutionPath", Path.Combine(TempDirectory, _zipFileToDownload, _solutionToTest));
+            var finalTest = template.Replace(
+                "ReplaceWithActualSolutionPath",
+                Path.Combine(TempDirectory, _zipFileToDownload, _solutionToTest)
+            );
             finalTest = finalTest.Replace("ReplaceWithPerfLogDirectory", logDirectory);
 
             // Perform test specific string replacements
@@ -71,12 +87,19 @@ namespace Roslyn.Test.Performance.Utilities
             InstallVsixes();
         }
 
-        protected virtual string GetFinalTestSource(string testTemplateWithReplacedSolutionPath, string testFolderDirectory)
-            => testTemplateWithReplacedSolutionPath;
+        protected virtual string GetFinalTestSource(
+            string testTemplateWithReplacedSolutionPath,
+            string testFolderDirectory
+        ) => testTemplateWithReplacedSolutionPath;
 
         protected void InstallVsixes()
         {
-            var vsix = Path.Combine(MyBinaries(), "Vsix", "VisualStudioSetup", "Roslyn.VisualStudio.Setup.vsix");
+            var vsix = Path.Combine(
+                MyBinaries(),
+                "Vsix",
+                "VisualStudioSetup",
+                "Roslyn.VisualStudio.Setup.vsix"
+            );
 
             var rootSuffixArg = $"/rootsuffix:{_rootSuffix}";
 
@@ -89,11 +112,13 @@ namespace Roslyn.Test.Performance.Utilities
 
         public override void Test()
         {
-            var args = $"{Path.Combine(TempDirectory, _testTemplateName)} -perf -host:vs -roslynonly -rootsuffix:{_rootSuffix}";
+            var args =
+                $"{Path.Combine(TempDirectory, _testTemplateName)} -perf -host:vs -roslynonly -rootsuffix:{_rootSuffix}";
             ShellOutVital(TaoPath, args, TempDirectory);
 
             var logDirectory = Path.Combine(TempDirectory, _testName, "PerfResults");
-            var xcopyArgs = $"{logDirectory} {Path.Combine(MyBinaries(), "..", "..", "ToArchive")} /s /i /y";
+            var xcopyArgs =
+                $"{logDirectory} {Path.Combine(MyBinaries(), "..", "..", "ToArchive")} /s /i /y";
             ShellOutVital("xcopy", xcopyArgs);
 
             foreach (var xml in Directory.EnumerateFiles(logDirectory, "*.xml"))
@@ -105,9 +130,11 @@ namespace Roslyn.Test.Performance.Utilities
         }
 
         public override int Iterations => 1;
-        public override string Name => _testTemplateName.Substring(0, _testTemplateName.IndexOf("Template.xml"));
+        public override string Name =>
+            _testTemplateName.Substring(0, _testTemplateName.IndexOf("Template.xml"));
         public override string MeasuredProc => "devenv";
         public override bool ProvidesScenarios => false;
+
         public override string[] GetScenarios()
         {
             throw new System.NotImplementedException();

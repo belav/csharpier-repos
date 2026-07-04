@@ -12,17 +12,18 @@ using Microsoft.VisualStudio.Text.Tagging;
 
 namespace Microsoft.CodeAnalysis.Editor.Tagging;
 
-internal abstract class AsynchronousTaggerProvider<TTag> : AbstractAsynchronousTaggerProvider<TTag>, ITaggerProvider
+internal abstract class AsynchronousTaggerProvider<TTag>
+    : AbstractAsynchronousTaggerProvider<TTag>,
+        ITaggerProvider
     where TTag : ITag
 {
     protected AsynchronousTaggerProvider(
         IThreadingContext threadingContext,
         IGlobalOptionService globalOptions,
         ITextBufferVisibilityTracker? visibilityTracker,
-        IAsynchronousOperationListener asyncListener)
-        : base(threadingContext, globalOptions, visibilityTracker, asyncListener)
-    {
-    }
+        IAsynchronousOperationListener asyncListener
+    )
+        : base(threadingContext, globalOptions, visibilityTracker, asyncListener) { }
 
     public EfficientTagger<TTag>? CreateTagger(ITextBuffer subjectBuffer)
     {

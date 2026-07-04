@@ -14,12 +14,22 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         /// Finds the references for the symbol at the specific position in the document,
         /// pushing the results into the context instance.
         /// </summary>
-        Task FindReferencesAsync(Document document, int position, IVSTypeScriptFindUsagesContext context, CancellationToken cancellationToken);
+        Task FindReferencesAsync(
+            Document document,
+            int position,
+            IVSTypeScriptFindUsagesContext context,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Finds the implementations for the symbol at the specific position in the document,
         /// pushing the results into the context instance.
         /// </summary>
-        Task FindImplementationsAsync(Document document, int position, IVSTypeScriptFindUsagesContext context, CancellationToken cancellationToken);
+        Task FindImplementationsAsync(
+            Document document,
+            int position,
+            IVSTypeScriptFindUsagesContext context,
+            CancellationToken cancellationToken
+        );
     }
 }

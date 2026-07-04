@@ -37,11 +37,15 @@ public static class CriticalFinalizerTest
     {
         var arr = new object[checked(count * 2)];
 
-        Parallel.For(0, count, i =>
-        {
-            arr[i * 2] = new Normal();
-            arr[i * 2 + 1] = new Critical();
-        });
+        Parallel.For(
+            0,
+            count,
+            i =>
+            {
+                arr[i * 2] = new Normal();
+                arr[i * 2 + 1] = new Critical();
+            }
+        );
 
         GC.KeepAlive(arr);
     }
@@ -63,10 +67,18 @@ public static class CriticalFinalizerTest
         int criticalFinalized = Critical.Finalized;
         int normalFinalizedBeforeFirstCritical = Critical.NormalFinalizedBeforeFirstCritical;
 
-        if (normalFinalized != Count || criticalFinalized != Count || normalFinalizedBeforeFirstCritical != Count)
+        if (
+            normalFinalized != Count
+            || criticalFinalized != Count
+            || normalFinalizedBeforeFirstCritical != Count
+        )
         {
-            Console.WriteLine($"Finalized {normalFinalized} {nameof(Normal)} and {criticalFinalized} {nameof(Critical)} objects.");
-            Console.WriteLine($"The first {nameof(Critical)} object was finalized after {normalFinalizedBeforeFirstCritical} {nameof(Normal)} objects.");
+            Console.WriteLine(
+                $"Finalized {normalFinalized} {nameof(Normal)} and {criticalFinalized} {nameof(Critical)} objects."
+            );
+            Console.WriteLine(
+                $"The first {nameof(Critical)} object was finalized after {normalFinalizedBeforeFirstCritical} {nameof(Normal)} objects."
+            );
             return 101;
         }
 

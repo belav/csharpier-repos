@@ -10,8 +10,11 @@ public class ModelBuilderAssemblyScanTest : ModelBuilderTest
     public ModelBuilderAssemblyScanTest()
     {
         _mockEntityTypeAssembly = MockAssembly.Create(
-            typeof(ScannerCustomerEntityConfiguration), typeof(ScannerCustomerEntityConfiguration2),
-            typeof(AbstractCustomerEntityConfiguration), typeof(AbstractCustomerEntityConfigurationImpl));
+            typeof(ScannerCustomerEntityConfiguration),
+            typeof(ScannerCustomerEntityConfiguration2),
+            typeof(AbstractCustomerEntityConfiguration),
+            typeof(AbstractCustomerEntityConfigurationImpl)
+        );
     }
 
     [ConditionalFact]
@@ -22,9 +25,15 @@ public class ModelBuilderAssemblyScanTest : ModelBuilderTest
 
         var entityType = builder.Model.FindEntityType(typeof(ScannerCustomer));
         // ScannerCustomerEntityConfiguration called
-        Assert.Equal(200, entityType.FindProperty(nameof(ScannerCustomer.FirstName)).GetMaxLength());
+        Assert.Equal(
+            200,
+            entityType.FindProperty(nameof(ScannerCustomer.FirstName)).GetMaxLength()
+        );
         // ScannerCustomerEntityConfiguration2 called
-        Assert.Equal(1000, entityType.FindProperty(nameof(ScannerCustomer.LastName)).GetMaxLength());
+        Assert.Equal(
+            1000,
+            entityType.FindProperty(nameof(ScannerCustomer.LastName)).GetMaxLength()
+        );
         // AbstractCustomerEntityConfiguration not called
         Assert.Null(entityType.FindProperty(nameof(ScannerCustomer.MiddleName)).GetMaxLength());
         // AbstractCustomerEntityConfigurationImpl called
@@ -36,11 +45,16 @@ public class ModelBuilderAssemblyScanTest : ModelBuilderTest
     {
         var builder = CreateModelBuilder();
         builder.ApplyConfigurationsFromAssembly(
-            _mockEntityTypeAssembly, type => type.Name == nameof(ScannerCustomerEntityConfiguration));
+            _mockEntityTypeAssembly,
+            type => type.Name == nameof(ScannerCustomerEntityConfiguration)
+        );
 
         var entityType = builder.Model.FindEntityType(typeof(ScannerCustomer));
         // ScannerCustomerEntityConfiguration called
-        Assert.Equal(200, entityType.FindProperty(nameof(ScannerCustomer.FirstName)).GetMaxLength());
+        Assert.Equal(
+            200,
+            entityType.FindProperty(nameof(ScannerCustomer.FirstName)).GetMaxLength()
+        );
         // ScannerCustomerEntityConfiguration2 not called
         Assert.Null(entityType.FindProperty(nameof(ScannerCustomer.LastName)).GetMaxLength());
         // AbstractCustomerEntityConfiguration not called
@@ -54,15 +68,17 @@ public class ModelBuilderAssemblyScanTest : ModelBuilderTest
     {
         var builder = CreateModelBuilder();
         builder.ApplyConfigurationsFromAssembly(
-            _mockEntityTypeAssembly, type => type.Name == nameof(AbstractCustomerEntityConfiguration));
+            _mockEntityTypeAssembly,
+            type => type.Name == nameof(AbstractCustomerEntityConfiguration)
+        );
 
         var entityType = builder.Model.FindEntityType(typeof(ScannerCustomer));
         // No configuration should occur
         Assert.Null(entityType);
     }
 
-    protected virtual ModelBuilder CreateModelBuilder()
-        => InMemoryTestHelpers.Instance.CreateConventionBuilder();
+    protected virtual ModelBuilder CreateModelBuilder() =>
+        InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
     protected class ScannerCustomer
     {
@@ -86,25 +102,26 @@ public class ModelBuilderAssemblyScanTest : ModelBuilderTest
 
     private class ScannerCustomerEntityConfiguration : IEntityTypeConfiguration<ScannerCustomer>
     {
-        public void Configure(EntityTypeBuilder<ScannerCustomer> builder)
-            => builder.Property(c => c.FirstName).HasMaxLength(200);
+        public void Configure(EntityTypeBuilder<ScannerCustomer> builder) =>
+            builder.Property(c => c.FirstName).HasMaxLength(200);
     }
 
     private class ScannerCustomerEntityConfiguration2 : IEntityTypeConfiguration<ScannerCustomer>
     {
-        public void Configure(EntityTypeBuilder<ScannerCustomer> builder)
-            => builder.Property(c => c.LastName).HasMaxLength(1000);
+        public void Configure(EntityTypeBuilder<ScannerCustomer> builder) =>
+            builder.Property(c => c.LastName).HasMaxLength(1000);
     }
 
-    private abstract class AbstractCustomerEntityConfiguration : IEntityTypeConfiguration<ScannerCustomer>
+    private abstract class AbstractCustomerEntityConfiguration
+        : IEntityTypeConfiguration<ScannerCustomer>
     {
-        public virtual void Configure(EntityTypeBuilder<ScannerCustomer> builder)
-            => builder.Property(c => c.MiddleName).HasMaxLength(500);
+        public virtual void Configure(EntityTypeBuilder<ScannerCustomer> builder) =>
+            builder.Property(c => c.MiddleName).HasMaxLength(500);
     }
 
     private class AbstractCustomerEntityConfigurationImpl : AbstractCustomerEntityConfiguration
     {
-        public override void Configure(EntityTypeBuilder<ScannerCustomer> builder)
-            => builder.HasIndex(c => c.IndexedField);
+        public override void Configure(EntityTypeBuilder<ScannerCustomer> builder) =>
+            builder.HasIndex(c => c.IndexedField);
     }
 }

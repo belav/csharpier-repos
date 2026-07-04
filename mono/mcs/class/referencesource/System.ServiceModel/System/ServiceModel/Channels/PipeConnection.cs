@@ -5,6 +5,7 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
@@ -14,9 +15,8 @@ namespace System.ServiceModel.Channels
     using System.Runtime.Diagnostics;
     using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
-    using System.Security.AccessControl;
-    using System.ComponentModel;
     using System.Security;
+    using System.Security.AccessControl;
     using System.Security.Cryptography;
     using System.Security.Permissions;
     using System.Security.Principal;
@@ -42,8 +42,8 @@ namespace System.ServiceModel.Channels
 
         // read state
         object readLock = new object();
-        bool inReadingState;     // This keeps track of the state machine (IConnection interface).
-        bool isReadOutstanding;  // This tracks whether an actual I/O is pending.
+        bool inReadingState; // This keeps track of the state machine (IConnection interface).
+        bool isReadOutstanding; // This tracks whether an actual I/O is pending.
         OverlappedContext readOverlapped;
         byte[] asyncReadBuffer;
         int readBufferSize;
@@ -57,8 +57,8 @@ namespace System.ServiceModel.Channels
 
         // write state
         object writeLock = new object();
-        bool inWritingState;      // This keeps track of the state machine (IConnection interface).
-        bool isWriteOutstanding;  // This tracks whether an actual I/O is pending.
+        bool inWritingState; // This keeps track of the state machine (IConnection interface).
+        bool isWriteOutstanding; // This tracks whether an actual I/O is pending.
         OverlappedContext writeOverlapped;
         Exception asyncWriteException;
         WaitCallback asyncWriteCallback;
@@ -81,7 +81,12 @@ namespace System.ServiceModel.Channels
         IOThreadTimer writeTimer;
         static Action<object> onWriteTimeout;
 
-        public PipeConnection(PipeHandle pipe, int connectionBufferSize, bool isBoundToCompletionPort, bool autoBindToCompletionPort)
+        public PipeConnection(
+            PipeHandle pipe,
+            int connectionBufferSize,
+            bool isBoundToCompletionPort,
+            bool autoBindToCompletionPort
+        )
         {
             if (pipe == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("pipe");
@@ -96,7 +101,9 @@ namespace System.ServiceModel.Channels
             this.readBufferSize = connectionBufferSize;
             this.writeBufferSize = connectionBufferSize;
             this.readOverlapped = new OverlappedContext();
-            this.asyncReadBuffer = DiagnosticUtility.Utility.AllocateByteArray(connectionBufferSize);
+            this.asyncReadBuffer = DiagnosticUtility.Utility.AllocateByteArray(
+                connectionBufferSize
+            );
             this.writeOverlapped = new OverlappedContext();
             this.atEOFEvent = new ManualResetEvent(false);
             this.onAsyncReadComplete = new OverlappedIOCompleteCallback(OnAsyncReadComplete);
@@ -105,18 +112,12 @@ namespace System.ServiceModel.Channels
 
         public int AsyncReadBufferSize
         {
-            get
-            {
-                return this.readBufferSize;
-            }
+            get { return this.readBufferSize; }
         }
 
         public byte[] AsyncReadBuffer
         {
-            get
-            {
-                return this.asyncReadBuffer;
-            }
+            get { return this.asyncReadBuffer; }
         }
 
         static byte[] ZeroBuffer
@@ -180,13 +181,19 @@ namespace System.ServiceModel.Channels
         static void OnReadTimeout(object state)
         {
             PipeConnection thisPtr = (PipeConnection)state;
-            thisPtr.Abort(SR.GetString(SR.PipeConnectionAbortedReadTimedOut, thisPtr.readTimeout), TransferOperation.Read);
+            thisPtr.Abort(
+                SR.GetString(SR.PipeConnectionAbortedReadTimedOut, thisPtr.readTimeout),
+                TransferOperation.Read
+            );
         }
 
         static void OnWriteTimeout(object state)
         {
             PipeConnection thisPtr = (PipeConnection)state;
-            thisPtr.Abort(SR.GetString(SR.PipeConnectionAbortedWriteTimedOut, thisPtr.writeTimeout), TransferOperation.Write);
+            thisPtr.Abort(
+                SR.GetString(SR.PipeConnectionAbortedWriteTimedOut, thisPtr.writeTimeout),
+                TransferOperation.Write
+            );
         }
 
         public void Abort()
@@ -199,12 +206,19 @@ namespace System.ServiceModel.Channels
             CloseHandle(true, timeoutErrorString, transferOperation);
         }
 
-        Exception ConvertPipeException(PipeException pipeException, TransferOperation transferOperation)
+        Exception ConvertPipeException(
+            PipeException pipeException,
+            TransferOperation transferOperation
+        )
         {
             return ConvertPipeException(pipeException.Message, pipeException, transferOperation);
         }
 
-        Exception ConvertPipeException(string exceptionMessage, PipeException pipeException, TransferOperation transferOperation)
+        Exception ConvertPipeException(
+            string exceptionMessage,
+            PipeException pipeException,
+            TransferOperation transferOperation
+        )
         {
             if (this.timeoutErrorString != null)
             {
@@ -228,8 +242,13 @@ namespace System.ServiceModel.Channels
         }
 
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-        public unsafe AsyncCompletionResult BeginRead(int offset, int size, TimeSpan timeout,
-            WaitCallback callback, object state)
+        public unsafe AsyncCompletionResult BeginRead(
+            int offset,
+            int size,
+            TimeSpan timeout,
+            WaitCallback callback,
+            object state
+        )
         {
             ConnectionUtilities.ValidateBufferBounds(AsyncReadBuffer, offset, size);
 
@@ -275,14 +294,31 @@ namespace System.ServiceModel.Channels
                         this.asyncReadCallbackState = state;
 
                         this.isReadOutstanding = true;
-                        this.readOverlapped.StartAsyncOperation(AsyncReadBuffer, this.onAsyncReadComplete, this.isBoundToCompletionPort);
-                        if (UnsafeNativeMethods.ReadFile(this.pipe.DangerousGetHandle(), this.readOverlapped.BufferPtr + offset, size, IntPtr.Zero, this.readOverlapped.NativeOverlapped) == 0)
+                        this.readOverlapped.StartAsyncOperation(
+                            AsyncReadBuffer,
+                            this.onAsyncReadComplete,
+                            this.isBoundToCompletionPort
+                        );
+                        if (
+                            UnsafeNativeMethods.ReadFile(
+                                this.pipe.DangerousGetHandle(),
+                                this.readOverlapped.BufferPtr + offset,
+                                size,
+                                IntPtr.Zero,
+                                this.readOverlapped.NativeOverlapped
+                            ) == 0
+                        )
                         {
                             int error = Marshal.GetLastWin32Error();
-                            if (error != UnsafeNativeMethods.ERROR_IO_PENDING && error != UnsafeNativeMethods.ERROR_MORE_DATA)
+                            if (
+                                error != UnsafeNativeMethods.ERROR_IO_PENDING
+                                && error != UnsafeNativeMethods.ERROR_MORE_DATA
+                            )
                             {
                                 this.isReadOutstanding = false;
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Exceptions.CreateReadException(error));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    Exceptions.CreateReadException(error)
+                                );
                             }
                         }
                     }
@@ -302,10 +338,16 @@ namespace System.ServiceModel.Channels
                     if (!this.isReadOutstanding)
                     {
                         int bytesRead;
-                        Exception readException = Exceptions.GetOverlappedReadException(this.pipe, this.readOverlapped.NativeOverlapped, out bytesRead);
+                        Exception readException = Exceptions.GetOverlappedReadException(
+                            this.pipe,
+                            this.readOverlapped.NativeOverlapped,
+                            out bytesRead
+                        );
                         if (readException != null)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(readException);
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                readException
+                            );
                         }
                         asyncBytesRead = bytesRead;
                         HandleReadComplete(asyncBytesRead);
@@ -315,18 +357,30 @@ namespace System.ServiceModel.Channels
                         EnterReadingState();
                     }
 
-                    return this.isReadOutstanding ? AsyncCompletionResult.Queued : AsyncCompletionResult.Completed;
+                    return this.isReadOutstanding
+                        ? AsyncCompletionResult.Queued
+                        : AsyncCompletionResult.Completed;
                 }
                 catch (PipeException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(ConvertPipeException(e, TransferOperation.Read), ExceptionEventType);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                        ConvertPipeException(e, TransferOperation.Read),
+                        ExceptionEventType
+                    );
                 }
             }
         }
 
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-        public unsafe AsyncCompletionResult BeginWrite(byte[] buffer, int offset, int size, bool immediate, TimeSpan timeout,
-            WaitCallback callback, object state)
+        public unsafe AsyncCompletionResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int size,
+            bool immediate,
+            TimeSpan timeout,
+            WaitCallback callback,
+            object state
+        )
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             FinishPendingWrite(timeout);
@@ -355,7 +409,9 @@ namespace System.ServiceModel.Channels
 
                     if (this.isWriteOutstanding)
                     {
-                        throw Fx.AssertAndThrow("Write I/O already pending when BeginWrite called.");
+                        throw Fx.AssertAndThrow(
+                            "Write I/O already pending when BeginWrite called."
+                        );
                     }
 
                     try
@@ -369,14 +425,28 @@ namespace System.ServiceModel.Channels
                         this.asyncWriteCallbackState = state;
 
                         this.isWriteOutstanding = true;
-                        this.writeOverlapped.StartAsyncOperation(buffer, this.onAsyncWriteComplete, this.isBoundToCompletionPort);
-                        if (UnsafeNativeMethods.WriteFile(this.pipe.DangerousGetHandle(), this.writeOverlapped.BufferPtr + offset, size, IntPtr.Zero, this.writeOverlapped.NativeOverlapped) == 0)
+                        this.writeOverlapped.StartAsyncOperation(
+                            buffer,
+                            this.onAsyncWriteComplete,
+                            this.isBoundToCompletionPort
+                        );
+                        if (
+                            UnsafeNativeMethods.WriteFile(
+                                this.pipe.DangerousGetHandle(),
+                                this.writeOverlapped.BufferPtr + offset,
+                                size,
+                                IntPtr.Zero,
+                                this.writeOverlapped.NativeOverlapped
+                            ) == 0
+                        )
                         {
                             int error = Marshal.GetLastWin32Error();
                             if (error != UnsafeNativeMethods.ERROR_IO_PENDING)
                             {
                                 this.isWriteOutstanding = false;
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Exceptions.CreateWriteException(error));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    Exceptions.CreateWriteException(error)
+                                );
                             }
                         }
                     }
@@ -395,14 +465,22 @@ namespace System.ServiceModel.Channels
                     if (!this.isWriteOutstanding)
                     {
                         int bytesWritten;
-                        Exception writeException = Exceptions.GetOverlappedWriteException(this.pipe, this.writeOverlapped.NativeOverlapped, out bytesWritten);
+                        Exception writeException = Exceptions.GetOverlappedWriteException(
+                            this.pipe,
+                            this.writeOverlapped.NativeOverlapped,
+                            out bytesWritten
+                        );
                         if (writeException == null && bytesWritten != size)
                         {
-                            writeException = new PipeException(SR.GetString(SR.PipeWriteIncomplete));
+                            writeException = new PipeException(
+                                SR.GetString(SR.PipeWriteIncomplete)
+                            );
                         }
                         if (writeException != null)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(writeException);
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                writeException
+                            );
                         }
                     }
                     else
@@ -410,11 +488,16 @@ namespace System.ServiceModel.Channels
                         EnterWritingState();
                     }
 
-                    return this.isWriteOutstanding ? AsyncCompletionResult.Queued : AsyncCompletionResult.Completed;
+                    return this.isWriteOutstanding
+                        ? AsyncCompletionResult.Queued
+                        : AsyncCompletionResult.Completed;
                 }
                 catch (PipeException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(ConvertPipeException(e, TransferOperation.Write), ExceptionEventType);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                        ConvertPipeException(e, TransferOperation.Write),
+                        ExceptionEventType
+                    );
                 }
             }
         }
@@ -440,10 +523,15 @@ namespace System.ServiceModel.Channels
                         if (!isShutdownWritten && inWritingState)
                         {
                             throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                                new PipeException(SR.GetString(SR.PipeCantCloseWithPendingWrite)), ExceptionEventType);
+                                new PipeException(SR.GetString(SR.PipeCantCloseWithPendingWrite)),
+                                ExceptionEventType
+                            );
                         }
 
-                        if (closeState == CloseState.Closing || closeState == CloseState.HandleClosed)
+                        if (
+                            closeState == CloseState.Closing
+                            || closeState == CloseState.HandleClosed
+                        )
                         {
                             // already closing or closed, so just return
                             return;
@@ -491,7 +579,9 @@ namespace System.ServiceModel.Channels
                 catch (TimeoutException e)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                        new TimeoutException(SR.GetString(SR.PipeShutdownWriteError), e), ExceptionEventType);
+                        new TimeoutException(SR.GetString(SR.PipeShutdownWriteError), e),
+                        ExceptionEventType
+                    );
                 }
 
                 // ensure we have received EOF signal
@@ -504,7 +594,9 @@ namespace System.ServiceModel.Channels
                     catch (TimeoutException e)
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                            new TimeoutException(SR.GetString(SR.PipeShutdownReadError), e), ExceptionEventType);
+                            new TimeoutException(SR.GetString(SR.PipeShutdownReadError), e),
+                            ExceptionEventType
+                        );
                     }
                 }
                 else if (existingReadIsPending)
@@ -512,7 +604,9 @@ namespace System.ServiceModel.Channels
                     if (!TimeoutHelper.WaitOne(atEOFEvent, timeoutHelper.RemainingTime()))
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                            new TimeoutException(SR.GetString(SR.PipeShutdownReadError)), ExceptionEventType);
+                            new TimeoutException(SR.GetString(SR.PipeShutdownReadError)),
+                            ExceptionEventType
+                        );
                     }
                 }
                 // else we had already seen EOF.
@@ -552,12 +646,20 @@ namespace System.ServiceModel.Channels
             catch (TimeoutException e)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                    new TimeoutException(SR.GetString(SR.PipeCloseFailed), e), ExceptionEventType);
+                    new TimeoutException(SR.GetString(SR.PipeCloseFailed), e),
+                    ExceptionEventType
+                );
             }
             catch (PipeException e)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                    ConvertPipeException(SR.GetString(SR.PipeCloseFailed), e, TransferOperation.Undefined), ExceptionEventType);
+                    ConvertPipeException(
+                        SR.GetString(SR.PipeCloseFailed),
+                        e,
+                        TransferOperation.Undefined
+                    ),
+                    ExceptionEventType
+                );
             }
             finally
             {
@@ -603,11 +705,17 @@ namespace System.ServiceModel.Channels
                         {
                             TD.CloseTimeout(exception.Message);
                         }
-                        DiagnosticUtility.TraceHandledException(exception, TraceEventType.Information);
+                        DiagnosticUtility.TraceHandledException(
+                            exception,
+                            TraceEventType.Information
+                        );
                     }
                     catch (CommunicationException exception)
                     {
-                        DiagnosticUtility.TraceHandledException(exception, TraceEventType.Information);
+                        DiagnosticUtility.TraceHandledException(
+                            exception,
+                            TraceEventType.Information
+                        );
                     }
                 }
             }
@@ -624,25 +732,39 @@ namespace System.ServiceModel.Channels
 
                 if (DiagnosticUtility.ShouldTrace(traceEventType))
                 {
-                    TraceUtility.TraceEvent(traceEventType, TraceCode.PipeConnectionAbort, SR.GetString(SR.TraceCodePipeConnectionAbort), this);
+                    TraceUtility.TraceEvent(
+                        traceEventType,
+                        TraceCode.PipeConnectionAbort,
+                        SR.GetString(SR.TraceCodePipeConnectionAbort),
+                        this
+                    );
                 }
             }
         }
 
         CommunicationException CreatePipeDuplicationFailedException(int win32Error)
         {
-            Exception innerException = new PipeException(SR.GetString(SR.PipeDuplicationFailed), win32Error);
+            Exception innerException = new PipeException(
+                SR.GetString(SR.PipeDuplicationFailed),
+                win32Error
+            );
             return new CommunicationException(innerException.Message, innerException);
         }
 
         public object DuplicateAndClose(int targetProcessId)
         {
-            SafeCloseHandle targetProcessHandle = ListenerUnsafeNativeMethods.OpenProcess(ListenerUnsafeNativeMethods.PROCESS_DUP_HANDLE, false, targetProcessId);
+            SafeCloseHandle targetProcessHandle = ListenerUnsafeNativeMethods.OpenProcess(
+                ListenerUnsafeNativeMethods.PROCESS_DUP_HANDLE,
+                false,
+                targetProcessId
+            );
             if (targetProcessHandle.IsInvalid)
             {
                 targetProcessHandle.SetHandleAsInvalid();
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                    CreatePipeDuplicationFailedException(Marshal.GetLastWin32Error()), ExceptionEventType);
+                    CreatePipeDuplicationFailedException(Marshal.GetLastWin32Error()),
+                    ExceptionEventType
+                );
             }
             try
             {
@@ -651,14 +773,26 @@ namespace System.ServiceModel.Channels
                 if (sourceProcessHandle == IntPtr.Zero)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                        CreatePipeDuplicationFailedException(Marshal.GetLastWin32Error()), ExceptionEventType);
+                        CreatePipeDuplicationFailedException(Marshal.GetLastWin32Error()),
+                        ExceptionEventType
+                    );
                 }
                 IntPtr duplicatedHandle;
-                bool success = UnsafeNativeMethods.DuplicateHandle(sourceProcessHandle, this.pipe, targetProcessHandle, out duplicatedHandle, 0, false, UnsafeNativeMethods.DUPLICATE_SAME_ACCESS);
+                bool success = UnsafeNativeMethods.DuplicateHandle(
+                    sourceProcessHandle,
+                    this.pipe,
+                    targetProcessHandle,
+                    out duplicatedHandle,
+                    0,
+                    false,
+                    UnsafeNativeMethods.DUPLICATE_SAME_ACCESS
+                );
                 if (!success)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                        CreatePipeDuplicationFailedException(Marshal.GetLastWin32Error()), ExceptionEventType);
+                        CreatePipeDuplicationFailedException(Marshal.GetLastWin32Error()),
+                        ExceptionEventType
+                    );
                 }
                 this.Abort();
                 return duplicatedHandle;
@@ -690,7 +824,10 @@ namespace System.ServiceModel.Channels
             {
                 Exception exceptionToThrow = asyncReadException;
                 asyncReadException = null;
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(exceptionToThrow, ExceptionEventType);
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                    exceptionToThrow,
+                    ExceptionEventType
+                );
             }
             return asyncBytesRead;
         }
@@ -701,7 +838,10 @@ namespace System.ServiceModel.Channels
             {
                 Exception exceptionToThrow = this.asyncWriteException;
                 this.asyncWriteException = null;
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(exceptionToThrow, ExceptionEventType);
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                    exceptionToThrow,
+                    ExceptionEventType
+                );
             }
         }
 
@@ -791,7 +931,10 @@ namespace System.ServiceModel.Channels
             }
             catch (PipeException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(ConvertPipeException(e, TransferOperation.Write), ExceptionEventType);
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                    ConvertPipeException(e, TransferOperation.Write),
+                    ExceptionEventType
+                );
             }
         }
 
@@ -803,7 +946,9 @@ namespace System.ServiceModel.Channels
             if (!UnsafeNativeMethods.GetNamedPipeServerProcessId(pipe, out id))
             {
                 Win32Exception e = new Win32Exception();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(e.Message, e));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CommunicationException(e.Message, e)
+                );
             }
             return id;
         }
@@ -815,7 +960,9 @@ namespace System.ServiceModel.Channels
             if (!UnsafeNativeMethods.GetNamedPipeServerProcessId(pipe, out id))
             {
                 Win32Exception e = new Win32Exception();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(e.Message, e));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CommunicationException(e.Message, e)
+                );
             }
             return id;
         }
@@ -832,13 +979,16 @@ namespace System.ServiceModel.Channels
 
         bool IsBrokenPipeError(int error)
         {
-            return error == UnsafeNativeMethods.ERROR_NO_DATA ||
-                error == UnsafeNativeMethods.ERROR_BROKEN_PIPE;
+            return error == UnsafeNativeMethods.ERROR_NO_DATA
+                || error == UnsafeNativeMethods.ERROR_BROKEN_PIPE;
         }
 
         Exception CreatePipeClosedException(TransferOperation transferOperation)
         {
-            return ConvertPipeException(new PipeException(SR.GetString(SR.PipeClosed)), transferOperation);
+            return ConvertPipeException(
+                new PipeException(SR.GetString(SR.PipeClosed)),
+                transferOperation
+            );
         }
 
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
@@ -855,16 +1005,31 @@ namespace System.ServiceModel.Channels
                     {
                         if (this.readTimeout != TimeSpan.MaxValue && !this.ReadTimer.Cancel())
                         {
-                            this.Abort(SR.GetString(SR.PipeConnectionAbortedReadTimedOut, this.readTimeout), TransferOperation.Read);
+                            this.Abort(
+                                SR.GetString(
+                                    SR.PipeConnectionAbortedReadTimedOut,
+                                    this.readTimeout
+                                ),
+                                TransferOperation.Read
+                            );
                         }
 
                         if (this.closeState == CloseState.HandleClosed)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreatePipeClosedException(TransferOperation.Read));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                CreatePipeClosedException(TransferOperation.Read)
+                            );
                         }
                         if (!haveResult)
                         {
-                            if (UnsafeNativeMethods.GetOverlappedResult(this.pipe.DangerousGetHandle(), this.readOverlapped.NativeOverlapped, out numBytes, 0) == 0)
+                            if (
+                                UnsafeNativeMethods.GetOverlappedResult(
+                                    this.pipe.DangerousGetHandle(),
+                                    this.readOverlapped.NativeOverlapped,
+                                    out numBytes,
+                                    0
+                                ) == 0
+                            )
                             {
                                 error = Marshal.GetLastWin32Error();
                             }
@@ -876,14 +1041,18 @@ namespace System.ServiceModel.Channels
 
                         if (error != 0 && error != UnsafeNativeMethods.ERROR_MORE_DATA)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Exceptions.CreateReadException((int)error));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                Exceptions.CreateReadException((int)error)
+                            );
                         }
                         this.asyncBytesRead = numBytes;
                         HandleReadComplete(this.asyncBytesRead);
                     }
                     catch (PipeException e)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(ConvertPipeException(e, TransferOperation.Read));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            ConvertPipeException(e, TransferOperation.Read)
+                        );
                     }
                 }
 #pragma warning suppress 56500 // Microsoft, transferring exception to caller
@@ -928,11 +1097,20 @@ namespace System.ServiceModel.Channels
                     {
                         if (this.closeState == CloseState.HandleClosed)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreatePipeClosedException(TransferOperation.Write));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                CreatePipeClosedException(TransferOperation.Write)
+                            );
                         }
                         if (!haveResult)
                         {
-                            if (UnsafeNativeMethods.GetOverlappedResult(this.pipe.DangerousGetHandle(), this.writeOverlapped.NativeOverlapped, out numBytes, 0) == 0)
+                            if (
+                                UnsafeNativeMethods.GetOverlappedResult(
+                                    this.pipe.DangerousGetHandle(),
+                                    this.writeOverlapped.NativeOverlapped,
+                                    out numBytes,
+                                    0
+                                ) == 0
+                            )
                             {
                                 error = Marshal.GetLastWin32Error();
                             }
@@ -944,16 +1122,23 @@ namespace System.ServiceModel.Channels
 
                         if (error != 0)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Exceptions.CreateWriteException(error));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                Exceptions.CreateWriteException(error)
+                            );
                         }
                         else if (numBytes != this.asyncBytesToWrite)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new PipeException(SR.GetString(SR.PipeWriteIncomplete)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new PipeException(SR.GetString(SR.PipeWriteIncomplete))
+                            );
                         }
                     }
                     catch (PipeException e)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelper(ConvertPipeException(e, TransferOperation.Write), ExceptionEventType);
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                            ConvertPipeException(e, TransferOperation.Write),
+                            ExceptionEventType
+                        );
                     }
                 }
 #pragma warning suppress 56500 // Microsoft, transferring exception to another thread
@@ -985,7 +1170,7 @@ namespace System.ServiceModel.Channels
         }
 
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-        unsafe public int Read(byte[] buffer, int offset, int size, TimeSpan timeout)
+        public unsafe int Read(byte[] buffer, int offset, int size, TimeSpan timeout)
         {
             ConnectionUtilities.ValidateBufferBounds(buffer, offset, size);
 
@@ -1038,7 +1223,10 @@ namespace System.ServiceModel.Channels
             }
             catch (PipeException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(ConvertPipeException(e, TransferOperation.Read), ExceptionEventType);
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                    ConvertPipeException(e, TransferOperation.Read),
+                    ExceptionEventType
+                );
             }
         }
 
@@ -1058,7 +1246,10 @@ namespace System.ServiceModel.Channels
             }
             catch (PipeException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(ConvertPipeException(e, TransferOperation.Undefined), ExceptionEventType);
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                    ConvertPipeException(e, TransferOperation.Undefined),
+                    ExceptionEventType
+                );
             }
         }
 
@@ -1121,13 +1312,19 @@ namespace System.ServiceModel.Channels
                         {
                             if (FinishSyncRead(traceExceptionsAsErrors) != 0)
                             {
-                                Exception exception = ConvertPipeException(new PipeException(SR.GetString(SR.PipeSignalExpected)), TransferOperation.Read);
+                                Exception exception = ConvertPipeException(
+                                    new PipeException(SR.GetString(SR.PipeSignalExpected)),
+                                    TransferOperation.Read
+                                );
                                 TraceEventType traceEventType = TraceEventType.Information;
                                 if (traceExceptionsAsErrors)
                                 {
                                     traceEventType = TraceEventType.Error;
                                 }
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(exception, traceEventType);
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                                    exception,
+                                    traceEventType
+                                );
                             }
                         }
                     }
@@ -1176,12 +1373,26 @@ namespace System.ServiceModel.Channels
 
         public void Write(byte[] buffer, int offset, int size, bool immediate, TimeSpan timeout)
         {
-            WriteHelper(buffer, offset, size, immediate, timeout, ref this.writeOverlapped.Holder[0]);
+            WriteHelper(
+                buffer,
+                offset,
+                size,
+                immediate,
+                timeout,
+                ref this.writeOverlapped.Holder[0]
+            );
         }
 
         // The holder is a perf optimization that lets us avoid repeatedly indexing into the array.
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-        unsafe void WriteHelper(byte[] buffer, int offset, int size, bool immediate, TimeSpan timeout, ref object holder)
+        unsafe void WriteHelper(
+            byte[] buffer,
+            int offset,
+            int size,
+            bool immediate,
+            TimeSpan timeout,
+            ref object holder
+        )
         {
             try
             {
@@ -1243,12 +1454,22 @@ namespace System.ServiceModel.Channels
             }
             catch (PipeException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(ConvertPipeException(e, TransferOperation.Write), ExceptionEventType);
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                    ConvertPipeException(e, TransferOperation.Write),
+                    ExceptionEventType
+                );
             }
         }
 
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-        public unsafe void Write(byte[] buffer, int offset, int size, bool immediate, TimeSpan timeout, BufferManager bufferManager)
+        public unsafe void Write(
+            byte[] buffer,
+            int offset,
+            int size,
+            bool immediate,
+            TimeSpan timeout,
+            BufferManager bufferManager
+        )
         {
             bool shouldReturnBuffer = true;
 
@@ -1256,7 +1477,14 @@ namespace System.ServiceModel.Channels
             {
                 if (size > this.writeBufferSize)
                 {
-                    WriteHelper(buffer, offset, size, immediate, timeout, ref this.writeOverlapped.Holder[0]);
+                    WriteHelper(
+                        buffer,
+                        offset,
+                        size,
+                        immediate,
+                        timeout,
+                        ref this.writeOverlapped.Holder[0]
+                    );
                     return;
                 }
 
@@ -1288,7 +1516,10 @@ namespace System.ServiceModel.Channels
                             {
                                 EnterWritingState();
 
-                                Fx.Assert(this.pendingWriteBuffer == null, "Need to pend a write but one's already pending.");
+                                Fx.Assert(
+                                    this.pendingWriteBuffer == null,
+                                    "Need to pend a write but one's already pending."
+                                );
                                 this.pendingWriteBuffer = buffer;
                                 this.pendingWriteBufferManager = bufferManager;
                             }
@@ -1298,7 +1529,10 @@ namespace System.ServiceModel.Channels
             }
             catch (PipeException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(ConvertPipeException(e, TransferOperation.Write), ExceptionEventType);
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                    ConvertPipeException(e, TransferOperation.Write),
+                    ExceptionEventType
+                );
             }
             finally
             {
@@ -1315,18 +1549,27 @@ namespace System.ServiceModel.Channels
             {
                 if (closeState == CloseState.Closing)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(new PipeException(SR.GetString(SR.PipeAlreadyClosing)), ExceptionEventType);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                        new PipeException(SR.GetString(SR.PipeAlreadyClosing)),
+                        ExceptionEventType
+                    );
                 }
             }
 
             if (inReadingState)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(new PipeException(SR.GetString(SR.PipeReadPending)), ExceptionEventType);
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                    new PipeException(SR.GetString(SR.PipeReadPending)),
+                    ExceptionEventType
+                );
             }
 
             if (closeState == CloseState.HandleClosed)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(new PipeException(SR.GetString(SR.PipeClosed)), ExceptionEventType);
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                    new PipeException(SR.GetString(SR.PipeClosed)),
+                    ExceptionEventType
+                );
             }
         }
 
@@ -1336,23 +1579,35 @@ namespace System.ServiceModel.Channels
             {
                 if (isShutdownWritten)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(new PipeException(SR.GetString(SR.PipeAlreadyShuttingDown)), ExceptionEventType);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                        new PipeException(SR.GetString(SR.PipeAlreadyShuttingDown)),
+                        ExceptionEventType
+                    );
                 }
 
                 if (closeState == CloseState.Closing)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(new PipeException(SR.GetString(SR.PipeAlreadyClosing)), ExceptionEventType);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                        new PipeException(SR.GetString(SR.PipeAlreadyClosing)),
+                        ExceptionEventType
+                    );
                 }
             }
 
             if (inWritingState)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(new PipeException(SR.GetString(SR.PipeWritePending)), ExceptionEventType);
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                    new PipeException(SR.GetString(SR.PipeWritePending)),
+                    ExceptionEventType
+                );
             }
 
             if (closeState == CloseState.HandleClosed)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(new PipeException(SR.GetString(SR.PipeClosed)), ExceptionEventType);
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                    new PipeException(SR.GetString(SR.PipeClosed)),
+                    ExceptionEventType
+                );
             }
         }
 
@@ -1373,7 +1628,15 @@ namespace System.ServiceModel.Channels
             {
                 this.isReadOutstanding = true;
                 this.readOverlapped.StartSyncOperation(buffer, ref holder);
-                if (UnsafeNativeMethods.ReadFile(this.pipe.DangerousGetHandle(), this.readOverlapped.BufferPtr + offset, size, IntPtr.Zero, this.readOverlapped.NativeOverlapped) == 0)
+                if (
+                    UnsafeNativeMethods.ReadFile(
+                        this.pipe.DangerousGetHandle(),
+                        this.readOverlapped.BufferPtr + offset,
+                        size,
+                        IntPtr.Zero,
+                        this.readOverlapped.NativeOverlapped
+                    ) == 0
+                )
                 {
                     int error = Marshal.GetLastWin32Error();
                     if (error != UnsafeNativeMethods.ERROR_IO_PENDING)
@@ -1381,7 +1644,9 @@ namespace System.ServiceModel.Channels
                         this.isReadOutstanding = false;
                         if (error != UnsafeNativeMethods.ERROR_MORE_DATA)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Exceptions.CreateReadException(error));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                Exceptions.CreateReadException(error)
+                            );
                         }
                     }
                 }
@@ -1406,9 +1671,14 @@ namespace System.ServiceModel.Channels
             {
                 if (!this.readOverlapped.WaitForSyncOperation(timeout))
                 {
-                    Abort(SR.GetString(SR.PipeConnectionAbortedReadTimedOut, this.readTimeout), TransferOperation.Read);
+                    Abort(
+                        SR.GetString(SR.PipeConnectionAbortedReadTimedOut, this.readTimeout),
+                        TransferOperation.Read
+                    );
 
-                    Exception timeoutException = new TimeoutException(SR.GetString(SR.PipeReadTimedOut, timeout));
+                    Exception timeoutException = new TimeoutException(
+                        SR.GetString(SR.PipeReadTimedOut, timeout)
+                    );
                     TraceEventType traceEventType = TraceEventType.Information;
                     if (traceExceptionsAsErrors)
                     {
@@ -1416,7 +1686,10 @@ namespace System.ServiceModel.Channels
                     }
 
                     // This intentionally doesn't reset isReadOutstanding, because technically it still is, and we need to not free the buffer.
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(timeoutException, traceEventType);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                        timeoutException,
+                        traceEventType
+                    );
                 }
                 else
                 {
@@ -1438,7 +1711,11 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                readException = Exceptions.GetOverlappedReadException(this.pipe, this.readOverlapped.NativeOverlapped, out bytesRead);
+                readException = Exceptions.GetOverlappedReadException(
+                    this.pipe,
+                    this.readOverlapped.NativeOverlapped,
+                    out bytesRead
+                );
             }
             if (readException != null)
             {
@@ -1463,7 +1740,9 @@ namespace System.ServiceModel.Channels
         {
             if (this.isWriteOutstanding)
             {
-                throw Fx.AssertAndThrow("StartSyncWrite called when write I/O was already pending.");
+                throw Fx.AssertAndThrow(
+                    "StartSyncWrite called when write I/O was already pending."
+                );
             }
 
             try
@@ -1471,13 +1750,23 @@ namespace System.ServiceModel.Channels
                 this.syncWriteSize = size;
                 this.isWriteOutstanding = true;
                 this.writeOverlapped.StartSyncOperation(buffer, ref holder);
-                if (UnsafeNativeMethods.WriteFile(this.pipe.DangerousGetHandle(), this.writeOverlapped.BufferPtr + offset, size, IntPtr.Zero, this.writeOverlapped.NativeOverlapped) == 0)
+                if (
+                    UnsafeNativeMethods.WriteFile(
+                        this.pipe.DangerousGetHandle(),
+                        this.writeOverlapped.BufferPtr + offset,
+                        size,
+                        IntPtr.Zero,
+                        this.writeOverlapped.NativeOverlapped
+                    ) == 0
+                )
                 {
                     int error = Marshal.GetLastWin32Error();
                     if (error != UnsafeNativeMethods.ERROR_IO_PENDING)
                     {
                         this.isWriteOutstanding = false;
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Exceptions.CreateWriteException(error));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            Exceptions.CreateWriteException(error)
+                        );
                     }
                 }
                 else
@@ -1500,15 +1789,24 @@ namespace System.ServiceModel.Channels
         }
 
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-        unsafe void WaitForSyncWrite(TimeSpan timeout, bool traceExceptionsAsErrors, ref object holder)
+        unsafe void WaitForSyncWrite(
+            TimeSpan timeout,
+            bool traceExceptionsAsErrors,
+            ref object holder
+        )
         {
             if (this.isWriteOutstanding)
             {
                 if (!this.writeOverlapped.WaitForSyncOperation(timeout, ref holder))
                 {
-                    Abort(SR.GetString(SR.PipeConnectionAbortedWriteTimedOut, this.writeTimeout), TransferOperation.Write);
+                    Abort(
+                        SR.GetString(SR.PipeConnectionAbortedWriteTimedOut, this.writeTimeout),
+                        TransferOperation.Write
+                    );
 
-                    Exception timeoutException = new TimeoutException(SR.GetString(SR.PipeWriteTimedOut, timeout));
+                    Exception timeoutException = new TimeoutException(
+                        SR.GetString(SR.PipeWriteTimedOut, timeout)
+                    );
                     TraceEventType traceEventType = TraceEventType.Information;
                     if (traceExceptionsAsErrors)
                     {
@@ -1516,7 +1814,10 @@ namespace System.ServiceModel.Channels
                     }
 
                     // This intentionally doesn't reset isWriteOutstanding, because technically it still is, and we need to not free the buffer.
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(timeoutException, traceEventType);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                        timeoutException,
+                        traceEventType
+                    );
                 }
                 else
                 {
@@ -1538,7 +1839,11 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                writeException = Exceptions.GetOverlappedWriteException(this.pipe, this.writeOverlapped.NativeOverlapped, out bytesWritten);
+                writeException = Exceptions.GetOverlappedWriteException(
+                    this.pipe,
+                    this.writeOverlapped.NativeOverlapped,
+                    out bytesWritten
+                );
                 if (writeException == null && bytesWritten != this.syncWriteSize)
                 {
                     writeException = new PipeException(SR.GetString(SR.PipeWriteIncomplete));
@@ -1552,7 +1857,10 @@ namespace System.ServiceModel.Channels
                 {
                     traceEventType = TraceEventType.Error;
                 }
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(writeException, traceEventType);
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                    writeException,
+                    traceEventType
+                );
             }
         }
 
@@ -1574,7 +1882,10 @@ namespace System.ServiceModel.Channels
         {
             static PipeException CreateException(string resourceString, int error)
             {
-                return new PipeException(SR.GetString(resourceString, PipeError.GetErrorString(error)), error);
+                return new PipeException(
+                    SR.GetString(resourceString, PipeError.GetErrorString(error)),
+                    error
+                );
             }
 
             public static PipeException CreateReadException(int error)
@@ -1589,10 +1900,20 @@ namespace System.ServiceModel.Channels
 
             // Must be called in a lock, after checking for HandleClosed.
             [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-            public static unsafe PipeException GetOverlappedWriteException(PipeHandle pipe,
-                NativeOverlapped* nativeOverlapped, out int bytesWritten)
+            public static unsafe PipeException GetOverlappedWriteException(
+                PipeHandle pipe,
+                NativeOverlapped* nativeOverlapped,
+                out int bytesWritten
+            )
             {
-                if (UnsafeNativeMethods.GetOverlappedResult(pipe.DangerousGetHandle(), nativeOverlapped, out bytesWritten, 0) == 0)
+                if (
+                    UnsafeNativeMethods.GetOverlappedResult(
+                        pipe.DangerousGetHandle(),
+                        nativeOverlapped,
+                        out bytesWritten,
+                        0
+                    ) == 0
+                )
                 {
                     int error = Marshal.GetLastWin32Error();
                     return Exceptions.CreateWriteException(error);
@@ -1605,17 +1926,26 @@ namespace System.ServiceModel.Channels
 
             // Must be called in a lock, after checking for HandleClosed.
             [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-            public static unsafe PipeException GetOverlappedReadException(PipeHandle pipe,
-                NativeOverlapped* nativeOverlapped, out int bytesRead)
+            public static unsafe PipeException GetOverlappedReadException(
+                PipeHandle pipe,
+                NativeOverlapped* nativeOverlapped,
+                out int bytesRead
+            )
             {
-                if (UnsafeNativeMethods.GetOverlappedResult(pipe.DangerousGetHandle(), nativeOverlapped, out bytesRead, 0) == 0)
+                if (
+                    UnsafeNativeMethods.GetOverlappedResult(
+                        pipe.DangerousGetHandle(),
+                        nativeOverlapped,
+                        out bytesRead,
+                        0
+                    ) == 0
+                )
                 {
                     int error = Marshal.GetLastWin32Error();
                     if (error == UnsafeNativeMethods.ERROR_MORE_DATA)
                     {
                         return null;
                     }
-
                     else
                     {
                         return Exceptions.CreateReadException(error);
@@ -1628,7 +1958,6 @@ namespace System.ServiceModel.Channels
             }
         }
     }
-
 
     class PipeConnectionInitiator : IConnectionInitiator
     {
@@ -1644,7 +1973,9 @@ namespace System.ServiceModel.Channels
         Exception CreateConnectFailedException(Uri remoteUri, PipeException innerException)
         {
             return new CommunicationException(
-                SR.GetString(SR.PipeConnectFailed, remoteUri.AbsoluteUri), innerException);
+                SR.GetString(SR.PipeConnectFailed, remoteUri.AbsoluteUri),
+                innerException
+            );
         }
 
         public IConnection Connect(Uri remoteUri, TimeSpan timeout)
@@ -1652,7 +1983,12 @@ namespace System.ServiceModel.Channels
             string resolvedAddress;
             BackoffTimeoutHelper backoffHelper;
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
-            this.PrepareConnect(remoteUri, timeoutHelper.RemainingTime(), out resolvedAddress, out backoffHelper);
+            this.PrepareConnect(
+                remoteUri,
+                timeoutHelper.RemainingTime(),
+                out resolvedAddress,
+                out backoffHelper
+            );
 
             IConnection connection = null;
             while (connection == null)
@@ -1670,14 +2006,19 @@ namespace System.ServiceModel.Channels
                             SR.GetString(
                                 SR.TraceCodeFailedPipeConnect,
                                 timeoutHelper.RemainingTime(),
-                                remoteUri));
+                                remoteUri
+                            )
+                        );
                     }
                 }
             }
             return connection;
         }
 
-        internal static string GetPipeName(Uri uri, IPipeTransportFactorySettings transportFactorySettings)
+        internal static string GetPipeName(
+            Uri uri,
+            IPipeTransportFactorySettings transportFactorySettings
+        )
         {
             AppContainerInfo appInfo = GetAppContainerInfo(transportFactorySettings);
 
@@ -1692,10 +2033,9 @@ namespace System.ServiceModel.Channels
             {
                 for (int iGlobal = 0; iGlobal < globalChoices.Length; iGlobal++)
                 {
-
                     if (appInfo != null && globalChoices[iGlobal])
                     {
-                        // Don't look at shared memory to acces pipes 
+                        // Don't look at shared memory to acces pipes
                         // that are created in the local NamedObjectPath
                         continue;
                     }
@@ -1705,11 +2045,18 @@ namespace System.ServiceModel.Channels
 
                     while (path.Length > 0)
                     {
-
-                        string sharedMemoryName = PipeUri.BuildSharedMemoryName(hostChoices[i], path, globalChoices[iGlobal], appInfo);
+                        string sharedMemoryName = PipeUri.BuildSharedMemoryName(
+                            hostChoices[i],
+                            path,
+                            globalChoices[iGlobal],
+                            appInfo
+                        );
                         try
                         {
-                            PipeSharedMemory sharedMemory = PipeSharedMemory.Open(sharedMemoryName, uri);
+                            PipeSharedMemory sharedMemory = PipeSharedMemory.Open(
+                                sharedMemoryName,
+                                uri
+                            );
                             if (sharedMemory != null)
                             {
                                 try
@@ -1717,7 +2064,7 @@ namespace System.ServiceModel.Channels
                                     string pipeName = sharedMemory.GetPipeName(appInfo);
                                     if (pipeName != null)
                                     {
-                                        // Found a matching pipe name. 
+                                        // Found a matching pipe name.
                                         // If the best match app setting is enabled, save the match if it is the best so far and continue.
                                         // Otherwise, just return the first match we find.
                                         if (ServiceModelAppSettings.UseBestMatchNamedPipeUri)
@@ -1742,8 +2089,12 @@ namespace System.ServiceModel.Channels
                         }
                         catch (AddressAccessDeniedException exception)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new EndpointNotFoundException(SR.GetString(
-                                SR.EndpointNotFound, uri.AbsoluteUri), exception));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new EndpointNotFoundException(
+                                    SR.GetString(SR.EndpointNotFound, uri.AbsoluteUri),
+                                    exception
+                                )
+                            );
                         }
 
                         path = PipeUri.GetParentPath(path);
@@ -1754,14 +2105,22 @@ namespace System.ServiceModel.Channels
             if (string.IsNullOrEmpty(matchPipeName))
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new EndpointNotFoundException(SR.GetString(SR.EndpointNotFound, uri.AbsoluteUri),
-                    new PipeException(SR.GetString(SR.PipeEndpointNotFound, uri.AbsoluteUri))));
+                    new EndpointNotFoundException(
+                        SR.GetString(SR.EndpointNotFound, uri.AbsoluteUri),
+                        new PipeException(SR.GetString(SR.PipeEndpointNotFound, uri.AbsoluteUri))
+                    )
+                );
             }
 
             return matchPipeName;
         }
 
-        public IAsyncResult BeginConnect(Uri uri, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginConnect(
+            Uri uri,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new ConnectAsyncResult(this, uri, timeout, callback, state);
         }
@@ -1771,32 +2130,51 @@ namespace System.ServiceModel.Channels
             return ConnectAsyncResult.End(result);
         }
 
-        void PrepareConnect(Uri remoteUri, TimeSpan timeout, out string resolvedAddress, out BackoffTimeoutHelper backoffHelper)
+        void PrepareConnect(
+            Uri remoteUri,
+            TimeSpan timeout,
+            out string resolvedAddress,
+            out BackoffTimeoutHelper backoffHelper
+        )
         {
             PipeUri.Validate(remoteUri);
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(System.Diagnostics.TraceEventType.Information, TraceCode.InitiatingNamedPipeConnection,
+                TraceUtility.TraceEvent(
+                    System.Diagnostics.TraceEventType.Information,
+                    TraceCode.InitiatingNamedPipeConnection,
                     SR.GetString(SR.TraceCodeInitiatingNamedPipeConnection),
-                    new StringTraceRecord("Uri", remoteUri.ToString()), this, null);
+                    new StringTraceRecord("Uri", remoteUri.ToString()),
+                    this,
+                    null
+                );
             }
             resolvedAddress = GetPipeName(remoteUri, this.pipeSettings);
             const int backoffBufferMilliseconds = 150;
             TimeSpan backoffTimeout;
             if (timeout >= TimeSpan.FromMilliseconds(backoffBufferMilliseconds * 2))
             {
-                backoffTimeout = TimeoutHelper.Add(timeout, TimeSpan.Zero - TimeSpan.FromMilliseconds(backoffBufferMilliseconds));
+                backoffTimeout = TimeoutHelper.Add(
+                    timeout,
+                    TimeSpan.Zero - TimeSpan.FromMilliseconds(backoffBufferMilliseconds)
+                );
             }
             else
             {
-                backoffTimeout = Ticks.ToTimeSpan((Ticks.FromMilliseconds(backoffBufferMilliseconds) / 2) + 1);
+                backoffTimeout = Ticks.ToTimeSpan(
+                    (Ticks.FromMilliseconds(backoffBufferMilliseconds) / 2) + 1
+                );
             }
 
             backoffHelper = new BackoffTimeoutHelper(backoffTimeout, TimeSpan.FromMinutes(5));
         }
 
         [ResourceConsumption(ResourceScope.Machine)]
-        IConnection TryConnect(Uri remoteUri, string resolvedAddress, BackoffTimeoutHelper backoffHelper)
+        IConnection TryConnect(
+            Uri remoteUri,
+            string resolvedAddress,
+            BackoffTimeoutHelper backoffHelper
+        )
         {
             const int access = UnsafeNativeMethods.GENERIC_READ | UnsafeNativeMethods.GENERIC_WRITE;
             bool lastAttempt = backoffHelper.IsExpired();
@@ -1805,10 +2183,18 @@ namespace System.ServiceModel.Channels
 
             // By default Windows named pipe connection is created with impersonation, but we want
             // to create it with anonymous and let WCF take care of impersonation/identification.
-            flags |= UnsafeNativeMethods.SECURITY_QOS_PRESENT | UnsafeNativeMethods.SECURITY_ANONYMOUS;
+            flags |=
+                UnsafeNativeMethods.SECURITY_QOS_PRESENT | UnsafeNativeMethods.SECURITY_ANONYMOUS;
 
-            PipeHandle pipeHandle = UnsafeNativeMethods.CreateFile(resolvedAddress, access, 0, IntPtr.Zero,
-                UnsafeNativeMethods.OPEN_EXISTING, flags, IntPtr.Zero);
+            PipeHandle pipeHandle = UnsafeNativeMethods.CreateFile(
+                resolvedAddress,
+                access,
+                0,
+                IntPtr.Zero,
+                UnsafeNativeMethods.OPEN_EXISTING,
+                flags,
+                IntPtr.Zero
+            );
             int error = Marshal.GetLastWin32Error();
             if (pipeHandle.IsInvalid)
             {
@@ -1817,37 +2203,68 @@ namespace System.ServiceModel.Channels
             else
             {
                 int mode = UnsafeNativeMethods.PIPE_READMODE_MESSAGE;
-                if (UnsafeNativeMethods.SetNamedPipeHandleState(pipeHandle, ref mode, IntPtr.Zero, IntPtr.Zero) == 0)
+                if (
+                    UnsafeNativeMethods.SetNamedPipeHandleState(
+                        pipeHandle,
+                        ref mode,
+                        IntPtr.Zero,
+                        IntPtr.Zero
+                    ) == 0
+                )
                 {
                     error = Marshal.GetLastWin32Error();
                     pipeHandle.Close();
-                    PipeException innerException = new PipeException(SR.GetString(SR.PipeModeChangeFailed,
-                        PipeError.GetErrorString(error)), error);
+                    PipeException innerException = new PipeException(
+                        SR.GetString(SR.PipeModeChangeFailed, PipeError.GetErrorString(error)),
+                        error
+                    );
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        CreateConnectFailedException(remoteUri, innerException));
+                        CreateConnectFailedException(remoteUri, innerException)
+                    );
                 }
                 return new PipeConnection(pipeHandle, bufferSize, false, true);
             }
 
-            if (error == UnsafeNativeMethods.ERROR_FILE_NOT_FOUND || error == UnsafeNativeMethods.ERROR_PIPE_BUSY)
+            if (
+                error == UnsafeNativeMethods.ERROR_FILE_NOT_FOUND
+                || error == UnsafeNativeMethods.ERROR_PIPE_BUSY
+            )
             {
                 if (lastAttempt)
                 {
-                    Exception innerException = new PipeException(SR.GetString(SR.PipeConnectAddressFailed,
-                        resolvedAddress, PipeError.GetErrorString(error)), error);
+                    Exception innerException = new PipeException(
+                        SR.GetString(
+                            SR.PipeConnectAddressFailed,
+                            resolvedAddress,
+                            PipeError.GetErrorString(error)
+                        ),
+                        error
+                    );
 
                     TimeoutException timeoutException;
                     string endpoint = remoteUri.AbsoluteUri;
 
                     if (error == UnsafeNativeMethods.ERROR_PIPE_BUSY)
                     {
-                        timeoutException = new TimeoutException(SR.GetString(SR.PipeConnectTimedOutServerTooBusy,
-                            endpoint, backoffHelper.OriginalTimeout), innerException);
+                        timeoutException = new TimeoutException(
+                            SR.GetString(
+                                SR.PipeConnectTimedOutServerTooBusy,
+                                endpoint,
+                                backoffHelper.OriginalTimeout
+                            ),
+                            innerException
+                        );
                     }
                     else
                     {
-                        timeoutException = new TimeoutException(SR.GetString(SR.PipeConnectTimedOut,
-                            endpoint, backoffHelper.OriginalTimeout), innerException);
+                        timeoutException = new TimeoutException(
+                            SR.GetString(
+                                SR.PipeConnectTimedOut,
+                                endpoint,
+                                backoffHelper.OriginalTimeout
+                            ),
+                            innerException
+                        );
                     }
 
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(timeoutException);
@@ -1857,23 +2274,39 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                PipeException innerException = new PipeException(SR.GetString(SR.PipeConnectAddressFailed,
-                    resolvedAddress, PipeError.GetErrorString(error)), error);
+                PipeException innerException = new PipeException(
+                    SR.GetString(
+                        SR.PipeConnectAddressFailed,
+                        resolvedAddress,
+                        PipeError.GetErrorString(error)
+                    ),
+                    error
+                );
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    CreateConnectFailedException(remoteUri, innerException));
+                    CreateConnectFailedException(remoteUri, innerException)
+                );
             }
         }
 
-        static AppContainerInfo GetAppContainerInfo(IPipeTransportFactorySettings transportFactorySettings)
+        static AppContainerInfo GetAppContainerInfo(
+            IPipeTransportFactorySettings transportFactorySettings
+        )
         {
-            if (AppContainerInfo.IsAppContainerSupported &&
-                transportFactorySettings != null &&
-                transportFactorySettings.PipeSettings != null)
+            if (
+                AppContainerInfo.IsAppContainerSupported
+                && transportFactorySettings != null
+                && transportFactorySettings.PipeSettings != null
+            )
             {
-                ApplicationContainerSettings appSettings = transportFactorySettings.PipeSettings.ApplicationContainerSettings;
+                ApplicationContainerSettings appSettings = transportFactorySettings
+                    .PipeSettings
+                    .ApplicationContainerSettings;
                 if (appSettings != null && appSettings.TargetingAppContainer)
                 {
-                    return AppContainerInfo.CreateAppContainerInfo(appSettings.PackageFullName, appSettings.SessionId);
+                    return AppContainerInfo.CreateAppContainerInfo(
+                        appSettings.PackageFullName,
+                        appSettings.SessionId
+                    );
                 }
             }
 
@@ -1890,14 +2323,24 @@ namespace System.ServiceModel.Channels
             IConnection connection;
             static Action<object> waitCompleteCallback;
 
-            public ConnectAsyncResult(PipeConnectionInitiator parent, Uri remoteUri, TimeSpan timeout,
-                AsyncCallback callback, object state)
+            public ConnectAsyncResult(
+                PipeConnectionInitiator parent,
+                Uri remoteUri,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.parent = parent;
                 this.remoteUri = remoteUri;
                 this.timeoutHelper = new TimeoutHelper(timeout);
-                parent.PrepareConnect(remoteUri, this.timeoutHelper.RemainingTime(), out this.resolvedAddress, out this.backoffHelper);
+                parent.PrepareConnect(
+                    remoteUri,
+                    this.timeoutHelper.RemainingTime(),
+                    out this.resolvedAddress,
+                    out this.backoffHelper
+                );
 
                 if (this.ConnectAndWait())
                 {
@@ -1907,7 +2350,11 @@ namespace System.ServiceModel.Channels
 
             bool ConnectAndWait()
             {
-                this.connection = this.parent.TryConnect(this.remoteUri, this.resolvedAddress, this.backoffHelper);
+                this.connection = this.parent.TryConnect(
+                    this.remoteUri,
+                    this.resolvedAddress,
+                    this.backoffHelper
+                );
                 bool completed = (this.connection != null);
                 if (!completed)
                 {
@@ -1942,7 +2389,9 @@ namespace System.ServiceModel.Channels
                             SR.GetString(
                                 SR.TraceCodeFailedPipeConnect,
                                 thisPtr.timeoutHelper.RemainingTime(),
-                                thisPtr.remoteUri));
+                                thisPtr.remoteUri
+                            )
+                        );
                     }
 
                     completeSelf = thisPtr.ConnectAndWait();
@@ -1978,8 +2427,14 @@ namespace System.ServiceModel.Channels
         bool useCompletionPort;
         int maxInstances;
 
-        public PipeConnectionListener(Uri pipeUri, HostNameComparisonMode hostNameComparisonMode, int bufferSize,
-            List<SecurityIdentifier> allowedSids, bool useCompletionPort, int maxConnections)
+        public PipeConnectionListener(
+            Uri pipeUri,
+            HostNameComparisonMode hostNameComparisonMode,
+            int bufferSize,
+            List<SecurityIdentifier> allowedSids,
+            bool useCompletionPort,
+            int maxConnections
+        )
         {
             PipeUri.Validate(pipeUri);
             this.pipeUri = pipeUri;
@@ -1988,7 +2443,10 @@ namespace System.ServiceModel.Channels
             this.bufferSize = bufferSize;
             pendingAccepts = new List<PendingAccept>();
             this.useCompletionPort = useCompletionPort;
-            this.maxInstances = Math.Min(maxConnections, UnsafeNativeMethods.PIPE_UNLIMITED_INSTANCES);
+            this.maxInstances = Math.Min(
+                maxConnections,
+                UnsafeNativeMethods.PIPE_UNLIMITED_INSTANCES
+            );
         }
 
         object ThisLock
@@ -1996,7 +2454,10 @@ namespace System.ServiceModel.Channels
             get { return this; }
         }
 
-        public string PipeName { get { return sharedMemory.PipeName; } }
+        public string PipeName
+        {
+            get { return sharedMemory.PipeName; }
+        }
 
         public IAsyncResult BeginAccept(AsyncCallback callback, object state)
         {
@@ -2004,16 +2465,26 @@ namespace System.ServiceModel.Channels
             {
                 if (isDisposed)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException("", SR.GetString(SR.PipeListenerDisposed)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ObjectDisposedException("", SR.GetString(SR.PipeListenerDisposed))
+                    );
                 }
 
                 if (!isListening)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.PipeListenerNotListening)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.PipeListenerNotListening))
+                    );
                 }
 
                 PipeHandle pipeHandle = CreatePipe();
-                PendingAccept pendingAccept = new PendingAccept(this, pipeHandle, useCompletionPort, callback, state);
+                PendingAccept pendingAccept = new PendingAccept(
+                    this,
+                    pipeHandle,
+                    useCompletionPort,
+                    callback,
+                    state
+                );
                 if (!pendingAccept.CompletedSynchronously)
                 {
                     this.pendingAccepts.Add(pendingAccept);
@@ -2027,7 +2498,10 @@ namespace System.ServiceModel.Channels
             PendingAccept pendingAccept = result as PendingAccept;
             if (pendingAccept == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("result", SR.GetString(SR.InvalidAsyncResult));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "result",
+                    SR.GetString(SR.InvalidAsyncResult)
+                );
             }
 
             PipeHandle acceptedPipe = pendingAccept.End();
@@ -2038,8 +2512,12 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                return new PipeConnection(acceptedPipe, bufferSize,
-                    pendingAccept.IsBoundToCompletionPort, pendingAccept.IsBoundToCompletionPort);
+                return new PipeConnection(
+                    acceptedPipe,
+                    bufferSize,
+                    pendingAccept.IsBoundToCompletionPort,
+                    pendingAccept.IsBoundToCompletionPort
+                );
             }
         }
 
@@ -2047,7 +2525,8 @@ namespace System.ServiceModel.Channels
         [ResourceConsumption(ResourceScope.Machine)]
         unsafe PipeHandle CreatePipe()
         {
-            int openMode = UnsafeNativeMethods.PIPE_ACCESS_DUPLEX | UnsafeNativeMethods.FILE_FLAG_OVERLAPPED;
+            int openMode =
+                UnsafeNativeMethods.PIPE_ACCESS_DUPLEX | UnsafeNativeMethods.FILE_FLAG_OVERLAPPED;
             if (!anyPipesCreated)
             {
                 openMode |= UnsafeNativeMethods.FILE_FLAG_FIRST_PIPE_INSTANCE;
@@ -2057,13 +2536,18 @@ namespace System.ServiceModel.Channels
 
             try
             {
-                binarySecurityDescriptor = SecurityDescriptorHelper.FromSecurityIdentifiers(allowedSids, UnsafeNativeMethods.GENERIC_READ | UnsafeNativeMethods.GENERIC_WRITE);
+                binarySecurityDescriptor = SecurityDescriptorHelper.FromSecurityIdentifiers(
+                    allowedSids,
+                    UnsafeNativeMethods.GENERIC_READ | UnsafeNativeMethods.GENERIC_WRITE
+                );
             }
             catch (Win32Exception e)
             {
                 // While Win32exceptions are not expected, if they do occur we need to obey the pipe/communication exception model.
                 Exception innerException = new PipeException(e.Message, e);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(innerException.Message, innerException));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CommunicationException(innerException.Message, innerException)
+                );
             }
 
             PipeHandle pipeHandle;
@@ -2071,15 +2555,22 @@ namespace System.ServiceModel.Channels
             string pipeName = null;
             fixed (byte* pinnedSecurityDescriptor = binarySecurityDescriptor)
             {
-                UnsafeNativeMethods.SECURITY_ATTRIBUTES securityAttributes = new UnsafeNativeMethods.SECURITY_ATTRIBUTES();
+                UnsafeNativeMethods.SECURITY_ATTRIBUTES securityAttributes =
+                    new UnsafeNativeMethods.SECURITY_ATTRIBUTES();
                 securityAttributes.lpSecurityDescriptor = (IntPtr)pinnedSecurityDescriptor;
 
                 pipeName = this.sharedMemory.PipeName;
                 pipeHandle = UnsafeNativeMethods.CreateNamedPipe(
-                                                    pipeName,
-                                                    openMode,
-                                                    UnsafeNativeMethods.PIPE_TYPE_MESSAGE | UnsafeNativeMethods.PIPE_READMODE_MESSAGE,
-                                                    maxInstances, bufferSize, bufferSize, 0, securityAttributes);
+                    pipeName,
+                    openMode,
+                    UnsafeNativeMethods.PIPE_TYPE_MESSAGE
+                        | UnsafeNativeMethods.PIPE_READMODE_MESSAGE,
+                    maxInstances,
+                    bufferSize,
+                    bufferSize,
+                    0,
+                    securityAttributes
+                );
                 error = Marshal.GetLastWin32Error();
             }
 
@@ -2087,20 +2578,32 @@ namespace System.ServiceModel.Channels
             {
                 pipeHandle.SetHandleAsInvalid();
 
-                Exception innerException = new PipeException(SR.GetString(SR.PipeListenFailed,
-                    pipeUri.AbsoluteUri, PipeError.GetErrorString(error)), error);
+                Exception innerException = new PipeException(
+                    SR.GetString(
+                        SR.PipeListenFailed,
+                        pipeUri.AbsoluteUri,
+                        PipeError.GetErrorString(error)
+                    ),
+                    error
+                );
 
                 if (error == UnsafeNativeMethods.ERROR_ACCESS_DENIED)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new AddressAccessDeniedException(innerException.Message, innerException));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new AddressAccessDeniedException(innerException.Message, innerException)
+                    );
                 }
                 else if (error == UnsafeNativeMethods.ERROR_ALREADY_EXISTS)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new AddressAlreadyInUseException(innerException.Message, innerException));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new AddressAlreadyInUseException(innerException.Message, innerException)
+                    );
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(innerException.Message, innerException));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new CommunicationException(innerException.Message, innerException)
+                    );
                 }
             }
             else
@@ -2156,26 +2659,60 @@ namespace System.ServiceModel.Channels
             {
                 if (!isListening)
                 {
-                    string sharedMemoryName = PipeUri.BuildSharedMemoryName(pipeUri, hostNameComparisonMode, true);
-                    if (!PipeSharedMemory.TryCreate(allowedSids, pipeUri, sharedMemoryName, out this.sharedMemory))
+                    string sharedMemoryName = PipeUri.BuildSharedMemoryName(
+                        pipeUri,
+                        hostNameComparisonMode,
+                        true
+                    );
+                    if (
+                        !PipeSharedMemory.TryCreate(
+                            allowedSids,
+                            pipeUri,
+                            sharedMemoryName,
+                            out this.sharedMemory
+                        )
+                    )
                     {
                         PipeSharedMemory tempSharedMemory = null;
 
                         // first see if we're in RANU by creating a unique Uri in the global namespace
                         Uri tempUri = new Uri(pipeUri, Guid.NewGuid().ToString());
-                        string tempSharedMemoryName = PipeUri.BuildSharedMemoryName(tempUri, hostNameComparisonMode, true);
-                        if (PipeSharedMemory.TryCreate(allowedSids, tempUri, tempSharedMemoryName, out tempSharedMemory))
+                        string tempSharedMemoryName = PipeUri.BuildSharedMemoryName(
+                            tempUri,
+                            hostNameComparisonMode,
+                            true
+                        );
+                        if (
+                            PipeSharedMemory.TryCreate(
+                                allowedSids,
+                                tempUri,
+                                tempSharedMemoryName,
+                                out tempSharedMemory
+                            )
+                        )
                         {
                             // we're not RANU, throw PipeNameInUse
                             tempSharedMemory.Dispose();
                             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                PipeSharedMemory.CreatePipeNameInUseException(UnsafeNativeMethods.ERROR_ACCESS_DENIED, pipeUri));
+                                PipeSharedMemory.CreatePipeNameInUseException(
+                                    UnsafeNativeMethods.ERROR_ACCESS_DENIED,
+                                    pipeUri
+                                )
+                            );
                         }
                         else
                         {
                             // try the session namespace since we're RANU
-                            sharedMemoryName = PipeUri.BuildSharedMemoryName(pipeUri, hostNameComparisonMode, false);
-                            this.sharedMemory = PipeSharedMemory.Create(allowedSids, pipeUri, sharedMemoryName);
+                            sharedMemoryName = PipeUri.BuildSharedMemoryName(
+                                pipeUri,
+                                hostNameComparisonMode,
+                                false
+                            );
+                            this.sharedMemory = PipeSharedMemory.Create(
+                                allowedSids,
+                                pipeUri,
+                                sharedMemoryName
+                            );
                         }
                     }
 
@@ -2188,7 +2725,10 @@ namespace System.ServiceModel.Channels
         {
             lock (ThisLock)
             {
-                Fx.Assert(this.pendingAccepts.Contains(pendingAccept), "An unknown PendingAccept is removing itself.");
+                Fx.Assert(
+                    this.pendingAccepts.Contains(pendingAccept),
+                    "An unknown PendingAccept is removing itself."
+                );
                 this.pendingAccepts.Remove(pendingAccept);
             }
         }
@@ -2205,8 +2745,13 @@ namespace System.ServiceModel.Channels
             EventTraceActivity eventTraceActivity;
 
             [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-            public unsafe PendingAccept(PipeConnectionListener listener, PipeHandle pipeHandle, bool isBoundToCompletionPort,
-                AsyncCallback callback, object state)
+            public unsafe PendingAccept(
+                PipeConnectionListener listener,
+                PipeHandle pipeHandle,
+                bool isBoundToCompletionPort,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.pipeHandle = pipeHandle;
@@ -2219,7 +2764,12 @@ namespace System.ServiceModel.Channels
                 if (TD.PipeConnectionAcceptStartIsEnabled())
                 {
                     this.eventTraceActivity = new EventTraceActivity();
-                    TD.PipeConnectionAcceptStart(this.eventTraceActivity, this.listener.pipeUri != null ? this.listener.pipeUri.ToString() : string.Empty);
+                    TD.PipeConnectionAcceptStart(
+                        this.eventTraceActivity,
+                        this.listener.pipeUri != null
+                            ? this.listener.pipeUri.ToString()
+                            : string.Empty
+                    );
                 }
 
                 if (!Thread.CurrentThread.IsThreadPoolThread)
@@ -2249,8 +2799,10 @@ namespace System.ServiceModel.Channels
 
             Exception CreatePipeAcceptFailedException(int errorCode)
             {
-                Exception innerException = new PipeException(SR.GetString(SR.PipeAcceptFailed,
-                    PipeError.GetErrorString(errorCode)), errorCode);
+                Exception innerException = new PipeException(
+                    SR.GetString(SR.PipeAcceptFailed, PipeError.GetErrorString(errorCode)),
+                    errorCode
+                );
                 return new CommunicationException(innerException.Message, innerException);
             }
 
@@ -2263,23 +2815,36 @@ namespace System.ServiceModel.Channels
                 {
                     try
                     {
-                        this.overlapped.StartAsyncOperation(null, onAcceptComplete, this.isBoundToCompletionPort);
+                        this.overlapped.StartAsyncOperation(
+                            null,
+                            onAcceptComplete,
+                            this.isBoundToCompletionPort
+                        );
                         while (true)
                         {
-                            if (UnsafeNativeMethods.ConnectNamedPipe(pipeHandle, overlapped.NativeOverlapped) == 0)
+                            if (
+                                UnsafeNativeMethods.ConnectNamedPipe(
+                                    pipeHandle,
+                                    overlapped.NativeOverlapped
+                                ) == 0
+                            )
                             {
                                 int error = Marshal.GetLastWin32Error();
                                 switch (error)
                                 {
                                     case UnsafeNativeMethods.ERROR_NO_DATA:
-                                        if (UnsafeNativeMethods.DisconnectNamedPipe(pipeHandle) != 0)
+                                        if (
+                                            UnsafeNativeMethods.DisconnectNamedPipe(pipeHandle) != 0
+                                        )
                                         {
                                             continue;
                                         }
                                         else
                                         {
                                             completeSelf = true;
-                                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreatePipeAcceptFailedException(error));
+                                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                                CreatePipeAcceptFailedException(error)
+                                            );
                                         }
                                     case UnsafeNativeMethods.ERROR_PIPE_CONNECTED:
                                         completeSelf = true;
@@ -2288,7 +2853,9 @@ namespace System.ServiceModel.Channels
                                         break;
                                     default:
                                         completeSelf = true;
-                                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreatePipeAcceptFailedException(error));
+                                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                            CreatePipeAcceptFailedException(error)
+                                        );
                                 }
                             }
                             else
@@ -2302,8 +2869,14 @@ namespace System.ServiceModel.Channels
                     catch (ObjectDisposedException exception)
                     {
                         // A ---- with Abort can cause PipeHandle to throw this.
-                        Fx.Assert(this.result == null, "Got an ObjectDisposedException but not an Abort!");
-                        DiagnosticUtility.TraceHandledException(exception, TraceEventType.Information);
+                        Fx.Assert(
+                            this.result == null,
+                            "Got an ObjectDisposedException but not an Abort!"
+                        );
+                        DiagnosticUtility.TraceHandledException(
+                            exception,
+                            TraceEventType.Information
+                        );
                         completeSelf = true;
                     }
                     finally
@@ -2357,8 +2930,15 @@ namespace System.ServiceModel.Channels
                 if (!haveResult)
                 {
                     // No ---- with Abort here since Abort can't be called once RemovePendingAccept happens.
-                    if (this.result != null && UnsafeNativeMethods.GetOverlappedResult(this.pipeHandle,
-                        this.overlapped.NativeOverlapped, out numBytes, 0) == 0)
+                    if (
+                        this.result != null
+                        && UnsafeNativeMethods.GetOverlappedResult(
+                            this.pipeHandle,
+                            this.overlapped.NativeOverlapped,
+                            out numBytes,
+                            0
+                        ) == 0
+                    )
                     {
                         error = Marshal.GetLastWin32Error();
                     }
@@ -2395,15 +2975,27 @@ namespace System.ServiceModel.Channels
 
         static SecurityDescriptorHelper()
         {
-            worldCreatorOwnerWithReadAndWriteDescriptorDenyNetwork = FromSecurityIdentifiersFull(null, UnsafeNativeMethods.GENERIC_READ | UnsafeNativeMethods.GENERIC_WRITE);
-            worldCreatorOwnerWithReadDescriptorDenyNetwork = FromSecurityIdentifiersFull(null, UnsafeNativeMethods.GENERIC_READ);
+            worldCreatorOwnerWithReadAndWriteDescriptorDenyNetwork = FromSecurityIdentifiersFull(
+                null,
+                UnsafeNativeMethods.GENERIC_READ | UnsafeNativeMethods.GENERIC_WRITE
+            );
+            worldCreatorOwnerWithReadDescriptorDenyNetwork = FromSecurityIdentifiersFull(
+                null,
+                UnsafeNativeMethods.GENERIC_READ
+            );
         }
 
-        internal static byte[] FromSecurityIdentifiers(List<SecurityIdentifier> allowedSids, int accessRights)
+        internal static byte[] FromSecurityIdentifiers(
+            List<SecurityIdentifier> allowedSids,
+            int accessRights
+        )
         {
             if (allowedSids == null)
             {
-                if (accessRights == (UnsafeNativeMethods.GENERIC_READ | UnsafeNativeMethods.GENERIC_WRITE))
+                if (
+                    accessRights
+                    == (UnsafeNativeMethods.GENERIC_READ | UnsafeNativeMethods.GENERIC_WRITE)
+                )
                 {
                     return worldCreatorOwnerWithReadAndWriteDescriptorDenyNetwork;
                 }
@@ -2417,50 +3009,81 @@ namespace System.ServiceModel.Channels
             return FromSecurityIdentifiersFull(allowedSids, accessRights);
         }
 
-        static byte[] FromSecurityIdentifiersFull(List<SecurityIdentifier> allowedSids, int accessRights)
+        static byte[] FromSecurityIdentifiersFull(
+            List<SecurityIdentifier> allowedSids,
+            int accessRights
+        )
         {
             int capacity = allowedSids == null ? 3 : 2 + allowedSids.Count;
             DiscretionaryAcl dacl = new DiscretionaryAcl(false, false, capacity);
 
             // add deny ACE first so that we don't get short circuited
-            dacl.AddAccess(AccessControlType.Deny, new SecurityIdentifier(WellKnownSidType.NetworkSid, null),
-                UnsafeNativeMethods.GENERIC_ALL, InheritanceFlags.None, PropagationFlags.None);
+            dacl.AddAccess(
+                AccessControlType.Deny,
+                new SecurityIdentifier(WellKnownSidType.NetworkSid, null),
+                UnsafeNativeMethods.GENERIC_ALL,
+                InheritanceFlags.None,
+                PropagationFlags.None
+            );
 
             // clients get different rights, since they shouldn't be able to listen
             int clientAccessRights = GenerateClientAccessRights(accessRights);
 
             if (allowedSids == null)
             {
-                dacl.AddAccess(AccessControlType.Allow, new SecurityIdentifier(WellKnownSidType.WorldSid, null),
-                    clientAccessRights, InheritanceFlags.None, PropagationFlags.None);
+                dacl.AddAccess(
+                    AccessControlType.Allow,
+                    new SecurityIdentifier(WellKnownSidType.WorldSid, null),
+                    clientAccessRights,
+                    InheritanceFlags.None,
+                    PropagationFlags.None
+                );
             }
             else
             {
                 for (int i = 0; i < allowedSids.Count; i++)
                 {
                     SecurityIdentifier allowedSid = allowedSids[i];
-                    dacl.AddAccess(AccessControlType.Allow, allowedSid,
-                        clientAccessRights, InheritanceFlags.None, PropagationFlags.None);
+                    dacl.AddAccess(
+                        AccessControlType.Allow,
+                        allowedSid,
+                        clientAccessRights,
+                        InheritanceFlags.None,
+                        PropagationFlags.None
+                    );
                 }
             }
 
-            dacl.AddAccess(AccessControlType.Allow, GetProcessLogonSid(), accessRights, InheritanceFlags.None, PropagationFlags.None);
-
+            dacl.AddAccess(
+                AccessControlType.Allow,
+                GetProcessLogonSid(),
+                accessRights,
+                InheritanceFlags.None,
+                PropagationFlags.None
+            );
 
             if (AppContainerInfo.IsRunningInAppContainer)
             {
                 // NamedPipeBinding requires dacl with current AppContainer SID
-                // to setup multiple NamedPipes in the BeginAccept loop.                
+                // to setup multiple NamedPipes in the BeginAccept loop.
                 dacl.AddAccess(
-                            AccessControlType.Allow,
-                            AppContainerInfo.GetCurrentAppContainerSid(),
-                            accessRights,
-                            InheritanceFlags.None,
-                            PropagationFlags.None);
+                    AccessControlType.Allow,
+                    AppContainerInfo.GetCurrentAppContainerSid(),
+                    accessRights,
+                    InheritanceFlags.None,
+                    PropagationFlags.None
+                );
             }
 
-            CommonSecurityDescriptor securityDescriptor =
-                new CommonSecurityDescriptor(false, false, ControlFlags.None, null, null, null, dacl);
+            CommonSecurityDescriptor securityDescriptor = new CommonSecurityDescriptor(
+                false,
+                false,
+                ControlFlags.None,
+                null,
+                null,
+                null,
+                dacl
+            );
             byte[] binarySecurityDescriptor = new byte[securityDescriptor.BinaryLength];
             securityDescriptor.GetBinaryForm(binarySecurityDescriptor, 0);
             return binarySecurityDescriptor;
@@ -2477,7 +3100,10 @@ namespace System.ServiceModel.Channels
                 everyoneAccessRights &= ~UnsafeNativeMethods.GENERIC_WRITE;
 
                 // Since GENERIC_WRITE grants the permissions to write to a file, we need to add it back.
-                const int clientWriteAccess = UnsafeNativeMethods.FILE_WRITE_ATTRIBUTES | UnsafeNativeMethods.FILE_WRITE_DATA | UnsafeNativeMethods.FILE_WRITE_EA;
+                const int clientWriteAccess =
+                    UnsafeNativeMethods.FILE_WRITE_ATTRIBUTES
+                    | UnsafeNativeMethods.FILE_WRITE_DATA
+                    | UnsafeNativeMethods.FILE_WRITE_EA;
                 everyoneAccessRights |= clientWriteAccess;
             }
 
@@ -2505,9 +3131,7 @@ namespace System.ServiceModel.Channels
         Uri pipeUri;
 
         PipeSharedMemory(SafeFileMappingHandle fileMapping, Uri pipeUri)
-            : this(fileMapping, pipeUri, null)
-        {
-        }
+            : this(fileMapping, pipeUri, null) { }
 
         PipeSharedMemory(SafeFileMappingHandle fileMapping, Uri pipeUri, string pipeName)
         {
@@ -2516,7 +3140,11 @@ namespace System.ServiceModel.Channels
             this.pipeUri = pipeUri;
         }
 
-        public static PipeSharedMemory Create(List<SecurityIdentifier> allowedSids, Uri pipeUri, string sharedMemoryName)
+        public static PipeSharedMemory Create(
+            List<SecurityIdentifier> allowedSids,
+            Uri pipeUri,
+            string sharedMemoryName
+        )
         {
             PipeSharedMemory result;
             if (TryCreate(allowedSids, pipeUri, sharedMemoryName, out result))
@@ -2525,25 +3153,37 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreatePipeNameInUseException(UnsafeNativeMethods.ERROR_ACCESS_DENIED, pipeUri));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    CreatePipeNameInUseException(UnsafeNativeMethods.ERROR_ACCESS_DENIED, pipeUri)
+                );
             }
         }
 
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
-        public unsafe static bool TryCreate(List<SecurityIdentifier> allowedSids, Uri pipeUri, string sharedMemoryName, out PipeSharedMemory result)
+        public static unsafe bool TryCreate(
+            List<SecurityIdentifier> allowedSids,
+            Uri pipeUri,
+            string sharedMemoryName,
+            out PipeSharedMemory result
+        )
         {
             Guid pipeGuid = Guid.NewGuid();
             string pipeName = BuildPipeName(pipeGuid.ToString());
             byte[] binarySecurityDescriptor;
             try
             {
-                binarySecurityDescriptor = SecurityDescriptorHelper.FromSecurityIdentifiers(allowedSids, UnsafeNativeMethods.GENERIC_READ);
+                binarySecurityDescriptor = SecurityDescriptorHelper.FromSecurityIdentifiers(
+                    allowedSids,
+                    UnsafeNativeMethods.GENERIC_READ
+                );
             }
             catch (Win32Exception e)
             {
                 // While Win32exceptions are not expected, if they do occur we need to obey the pipe/communication exception model.
                 Exception innerException = new PipeException(e.Message, e);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(innerException.Message, innerException));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CommunicationException(innerException.Message, innerException)
+                );
             }
 
             SafeFileMappingHandle fileMapping;
@@ -2551,11 +3191,18 @@ namespace System.ServiceModel.Channels
             result = null;
             fixed (byte* pinnedSecurityDescriptor = binarySecurityDescriptor)
             {
-                UnsafeNativeMethods.SECURITY_ATTRIBUTES securityAttributes = new UnsafeNativeMethods.SECURITY_ATTRIBUTES();
+                UnsafeNativeMethods.SECURITY_ATTRIBUTES securityAttributes =
+                    new UnsafeNativeMethods.SECURITY_ATTRIBUTES();
                 securityAttributes.lpSecurityDescriptor = (IntPtr)pinnedSecurityDescriptor;
 
-                fileMapping = UnsafeNativeMethods.CreateFileMapping((IntPtr)(-1), securityAttributes,
-                    UnsafeNativeMethods.PAGE_READWRITE, 0, sizeof(SharedMemoryContents), sharedMemoryName);
+                fileMapping = UnsafeNativeMethods.CreateFileMapping(
+                    (IntPtr)(-1),
+                    securityAttributes,
+                    UnsafeNativeMethods.PAGE_READWRITE,
+                    0,
+                    sizeof(SharedMemoryContents),
+                    sharedMemoryName
+                );
                 error = Marshal.GetLastWin32Error();
             }
 
@@ -2568,9 +3215,17 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    Exception innerException = new PipeException(SR.GetString(SR.PipeNameCantBeReserved,
-                        pipeUri.AbsoluteUri, PipeError.GetErrorString(error)), error);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new AddressAccessDeniedException(innerException.Message, innerException));
+                    Exception innerException = new PipeException(
+                        SR.GetString(
+                            SR.PipeNameCantBeReserved,
+                            pipeUri.AbsoluteUri,
+                            PipeError.GetErrorString(error)
+                        ),
+                        error
+                    );
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new AddressAccessDeniedException(innerException.Message, innerException)
+                    );
                 }
             }
 
@@ -2578,9 +3233,15 @@ namespace System.ServiceModel.Channels
             if (error == UnsafeNativeMethods.ERROR_ALREADY_EXISTS)
             {
                 fileMapping.Close();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreatePipeNameInUseException(error, pipeUri));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    CreatePipeNameInUseException(error, pipeUri)
+                );
             }
-            PipeSharedMemory pipeSharedMemory = new PipeSharedMemory(fileMapping, pipeUri, pipeName);
+            PipeSharedMemory pipeSharedMemory = new PipeSharedMemory(
+                fileMapping,
+                pipeUri,
+                pipeName
+            );
             bool disposeSharedMemory = true;
             try
             {
@@ -2607,7 +3268,10 @@ namespace System.ServiceModel.Channels
         public static PipeSharedMemory Open(string sharedMemoryName, Uri pipeUri)
         {
             SafeFileMappingHandle fileMapping = UnsafeNativeMethods.OpenFileMapping(
-                UnsafeNativeMethods.FILE_MAP_READ, false, sharedMemoryName);
+                UnsafeNativeMethods.FILE_MAP_READ,
+                false,
+                sharedMemoryName
+            );
             if (fileMapping.IsInvalid)
             {
                 int error = Marshal.GetLastWin32Error();
@@ -2615,7 +3279,10 @@ namespace System.ServiceModel.Channels
                 if (error == UnsafeNativeMethods.ERROR_FILE_NOT_FOUND)
                 {
                     fileMapping = UnsafeNativeMethods.OpenFileMapping(
-                        UnsafeNativeMethods.FILE_MAP_READ, false, "Global\\" + sharedMemoryName);
+                        UnsafeNativeMethods.FILE_MAP_READ,
+                        false,
+                        "Global\\" + sharedMemoryName
+                    );
                     if (fileMapping.IsInvalid)
                     {
                         error = Marshal.GetLastWin32Error();
@@ -2624,12 +3291,16 @@ namespace System.ServiceModel.Channels
                         {
                             return null;
                         }
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreatePipeNameCannotBeAccessedException(error, pipeUri));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            CreatePipeNameCannotBeAccessedException(error, pipeUri)
+                        );
                     }
                     return new PipeSharedMemory(fileMapping, pipeUri);
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreatePipeNameCannotBeAccessedException(error, pipeUri));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    CreatePipeNameCannotBeAccessedException(error, pipeUri)
+                );
             }
             return new PipeSharedMemory(fileMapping, pipeUri);
         }
@@ -2653,7 +3324,8 @@ namespace System.ServiceModel.Channels
                     SafeViewOfFileHandle view = GetView(false);
                     try
                     {
-                        SharedMemoryContents* contents = (SharedMemoryContents*)view.DangerousGetHandle();
+                        SharedMemoryContents* contents = (SharedMemoryContents*)
+                            view.DangerousGetHandle();
                         if (contents->isInitialized)
                         {
                             Thread.MemoryBarrier();
@@ -2681,11 +3353,12 @@ namespace System.ServiceModel.Channels
                 // Build the PipeName for a pipe inside an AppContainer as follows
                 // \\.\pipe\Sessions\<SessionId>\<NamedObjectPath>\<PipeGuid>
                 return string.Format(
-                            CultureInfo.InvariantCulture,
-                            @"\\.\pipe\Sessions\{0}\{1}\{2}",
-                            appInfo.SessionId,
-                            appInfo.NamedObjectPath,
-                            this.pipeNameGuidPart);
+                    CultureInfo.InvariantCulture,
+                    @"\\.\pipe\Sessions\{0}\{1}\{2}",
+                    appInfo.SessionId,
+                    appInfo.NamedObjectPath,
+                    this.pipeNameGuidPart
+                );
             }
 
             return null;
@@ -2710,34 +3383,49 @@ namespace System.ServiceModel.Channels
 
         public static Exception CreatePipeNameInUseException(int error, Uri pipeUri)
         {
-            Exception innerException = new PipeException(SR.GetString(SR.PipeNameInUse, pipeUri.AbsoluteUri), error);
+            Exception innerException = new PipeException(
+                SR.GetString(SR.PipeNameInUse, pipeUri.AbsoluteUri),
+                error
+            );
             return new AddressAlreadyInUseException(innerException.Message, innerException);
         }
 
         static Exception CreatePipeNameCannotBeAccessedException(int error, Uri pipeUri)
         {
-            Exception innerException = new PipeException(SR.GetString(SR.PipeNameCanNotBeAccessed,
-                PipeError.GetErrorString(error)), error);
-            return new AddressAccessDeniedException(SR.GetString(SR.PipeNameCanNotBeAccessed2, pipeUri.AbsoluteUri), innerException);
+            Exception innerException = new PipeException(
+                SR.GetString(SR.PipeNameCanNotBeAccessed, PipeError.GetErrorString(error)),
+                error
+            );
+            return new AddressAccessDeniedException(
+                SR.GetString(SR.PipeNameCanNotBeAccessed2, pipeUri.AbsoluteUri),
+                innerException
+            );
         }
 
         SafeViewOfFileHandle GetView(bool writable)
         {
-            SafeViewOfFileHandle handle = UnsafeNativeMethods.MapViewOfFile(fileMapping,
+            SafeViewOfFileHandle handle = UnsafeNativeMethods.MapViewOfFile(
+                fileMapping,
                 writable ? UnsafeNativeMethods.FILE_MAP_WRITE : UnsafeNativeMethods.FILE_MAP_READ,
-                0, 0, (IntPtr)sizeof(SharedMemoryContents));
+                0,
+                0,
+                (IntPtr)sizeof(SharedMemoryContents)
+            );
             if (handle.IsInvalid)
             {
                 int error = Marshal.GetLastWin32Error();
                 handle.SetHandleAsInvalid();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreatePipeNameCannotBeAccessedException(error, pipeUri));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    CreatePipeNameCannotBeAccessedException(error, pipeUri)
+                );
             }
             return handle;
         }
 
         static string BuildPipeName(string pipeGuid)
         {
-            return (AppContainerInfo.IsRunningInAppContainer ? PipeLocalPrefix : PipePrefix) + pipeGuid;
+            return (AppContainerInfo.IsRunningInAppContainer ? PipeLocalPrefix : PipePrefix)
+                + pipeGuid;
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -2750,7 +3438,11 @@ namespace System.ServiceModel.Channels
 
     static class PipeUri
     {
-        public static string BuildSharedMemoryName(Uri uri, HostNameComparisonMode hostNameComparisonMode, bool global)
+        public static string BuildSharedMemoryName(
+            Uri uri,
+            HostNameComparisonMode hostNameComparisonMode,
+            bool global
+        )
         {
             string path = PipeUri.GetPath(uri);
             string host = null;
@@ -2771,7 +3463,12 @@ namespace System.ServiceModel.Channels
             return PipeUri.BuildSharedMemoryName(host, path, global);
         }
 
-        internal static string BuildSharedMemoryName(string hostName, string path, bool global, AppContainerInfo appContainerInfo)
+        internal static string BuildSharedMemoryName(
+            string hostName,
+            string path,
+            bool global,
+            AppContainerInfo appContainerInfo
+        )
         {
             if (appContainerInfo == null)
             {
@@ -2779,18 +3476,25 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                Fx.Assert(appContainerInfo.SessionId != ApplicationContainerSettingsDefaults.CurrentSession, "Session has not yet been initialized.");
-                Fx.Assert(!String.IsNullOrEmpty(appContainerInfo.NamedObjectPath),
-                    "NamedObjectPath cannot be empty when creating the SharedMemoryName when running in an AppContainer.");
+                Fx.Assert(
+                    appContainerInfo.SessionId
+                        != ApplicationContainerSettingsDefaults.CurrentSession,
+                    "Session has not yet been initialized."
+                );
+                Fx.Assert(
+                    !String.IsNullOrEmpty(appContainerInfo.NamedObjectPath),
+                    "NamedObjectPath cannot be empty when creating the SharedMemoryName when running in an AppContainer."
+                );
 
                 //We need to use a session symlink for the lowbox appcontainer.
-                // Session\{0}\{1}\{2}\<SharedMemoryName>                
+                // Session\{0}\{1}\{2}\<SharedMemoryName>
                 return string.Format(
-                            CultureInfo.InvariantCulture,
-                            @"Session\{0}\{1}\{2}",
-                            appContainerInfo.SessionId,
-                            appContainerInfo.NamedObjectPath,
-                            BuildSharedMemoryName(hostName, path, global));
+                    CultureInfo.InvariantCulture,
+                    @"Session\{0}\{1}\{2}",
+                    appContainerInfo.SessionId,
+                    appContainerInfo.NamedObjectPath,
+                    BuildSharedMemoryName(hostName, path, global)
+                );
             }
         }
 
@@ -2824,7 +3528,7 @@ namespace System.ServiceModel.Channels
             builder = new StringBuilder();
             if (global)
             {
-                // we may need to create the shared memory in the global namespace so we work with terminal services+admin 
+                // we may need to create the shared memory in the global namespace so we work with terminal services+admin
                 builder.Append("Global\\");
             }
             else
@@ -2837,7 +3541,11 @@ namespace System.ServiceModel.Channels
             return builder.ToString();
         }
 
-        [SuppressMessage("Microsoft.Security.Cryptography", "CA5354:DoNotUseSHA1", Justification = "Cannot change. It will cause compatibility issue. Not used for cryptographic purposes.")]
+        [SuppressMessage(
+            "Microsoft.Security.Cryptography",
+            "CA5354:DoNotUseSHA1",
+            Justification = "Cannot change. It will cause compatibility issue. Not used for cryptographic purposes."
+        )]
         static HashAlgorithm GetHashAlgorithm()
         {
             if (!LocalAppContextSwitches.UseSha1InPipeConnectionGetHashAlgorithm)
@@ -2876,7 +3584,10 @@ namespace System.ServiceModel.Channels
         public static void Validate(Uri uri)
         {
             if (uri.Scheme != Uri.UriSchemeNetPipe)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("uri", SR.GetString(SR.PipeUriSchemeWrong));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "uri",
+                    SR.GetString(SR.PipeUriSchemeWrong)
+                );
         }
     }
 
@@ -2885,9 +3596,19 @@ namespace System.ServiceModel.Channels
         public static string GetErrorString(int error)
         {
             StringBuilder stringBuilder = new StringBuilder(512);
-            if (UnsafeNativeMethods.FormatMessage(UnsafeNativeMethods.FORMAT_MESSAGE_IGNORE_INSERTS |
-                UnsafeNativeMethods.FORMAT_MESSAGE_FROM_SYSTEM | UnsafeNativeMethods.FORMAT_MESSAGE_ARGUMENT_ARRAY,
-                IntPtr.Zero, error, CultureInfo.CurrentCulture.LCID, stringBuilder, stringBuilder.Capacity, IntPtr.Zero) != 0)
+            if (
+                UnsafeNativeMethods.FormatMessage(
+                    UnsafeNativeMethods.FORMAT_MESSAGE_IGNORE_INSERTS
+                        | UnsafeNativeMethods.FORMAT_MESSAGE_FROM_SYSTEM
+                        | UnsafeNativeMethods.FORMAT_MESSAGE_ARGUMENT_ARRAY,
+                    IntPtr.Zero,
+                    error,
+                    CultureInfo.CurrentCulture.LCID,
+                    stringBuilder,
+                    stringBuilder.Capacity,
+                    IntPtr.Zero
+                ) != 0
+            )
             {
                 stringBuilder = stringBuilder.Replace("\n", "");
                 stringBuilder = stringBuilder.Replace("\r", "");
@@ -2895,14 +3616,16 @@ namespace System.ServiceModel.Channels
                     SR.PipeKnownWin32Error,
                     stringBuilder.ToString(),
                     error.ToString(CultureInfo.InvariantCulture),
-                    Convert.ToString(error, 16));
+                    Convert.ToString(error, 16)
+                );
             }
             else
             {
                 return SR.GetString(
                     SR.PipeUnknownWin32Error,
                     error.ToString(CultureInfo.InvariantCulture),
-                    Convert.ToString(error, 16));
+                    Convert.ToString(error, 16)
+                );
             }
         }
     }

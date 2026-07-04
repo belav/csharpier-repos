@@ -6,16 +6,12 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection.Metadata;
-
-using Internal.TypeSystem;
-using Internal.TypeSystem.Ecma;
-
 using ILCompiler.Dataflow;
 using ILCompiler.DependencyAnalysisFramework;
 using ILCompiler.Logging;
-
 using ILLink.Shared;
-
+using Internal.TypeSystem;
+using Internal.TypeSystem.Ecma;
 using static ILCompiler.Dataflow.DynamicallyAccessedMembersBinder;
 
 namespace ILCompiler.DependencyAnalysis
@@ -34,21 +30,45 @@ namespace ILCompiler.DependencyAnalysis
             _entity = entity;
         }
 
-        public static void AddDependenciesDueToDynamicDependencyAttribute(ref DependencyList dependencies, NodeFactory factory, EcmaMethod method)
+        public static void AddDependenciesDueToDynamicDependencyAttribute(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            EcmaMethod method
+        )
         {
-            if (method.HasCustomAttribute("System.Diagnostics.CodeAnalysis", "DynamicDependencyAttribute"))
+            if (
+                method.HasCustomAttribute(
+                    "System.Diagnostics.CodeAnalysis",
+                    "DynamicDependencyAttribute"
+                )
+            )
             {
                 dependencies ??= new DependencyList();
-                dependencies.Add(factory.DynamicDependencyAttributesOnEntity(method), "DynamicDependencyAttribute present");
+                dependencies.Add(
+                    factory.DynamicDependencyAttributesOnEntity(method),
+                    "DynamicDependencyAttribute present"
+                );
             }
         }
 
-        public static void AddDependenciesDueToDynamicDependencyAttribute(ref DependencyList dependencies, NodeFactory factory, EcmaField field)
+        public static void AddDependenciesDueToDynamicDependencyAttribute(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            EcmaField field
+        )
         {
-            if (field.HasCustomAttribute("System.Diagnostics.CodeAnalysis", "DynamicDependencyAttribute"))
+            if (
+                field.HasCustomAttribute(
+                    "System.Diagnostics.CodeAnalysis",
+                    "DynamicDependencyAttribute"
+                )
+            )
             {
                 dependencies ??= new DependencyList();
-                dependencies.Add(factory.DynamicDependencyAttributesOnEntity(field), "DynamicDependencyAttribute present");
+                dependencies.Add(
+                    factory.DynamicDependencyAttributesOnEntity(field),
+                    "DynamicDependencyAttribute present"
+                );
             }
         }
 
@@ -57,15 +77,34 @@ namespace ILCompiler.DependencyAnalysis
             DependencyList dependencies = null;
             try
             {
-                (TypeDesc owningType, IEnumerable<CustomAttributeValue<TypeDesc>> attributes) = _entity switch
-                {
-                    EcmaMethod method => (method.OwningType, method.GetDecodedCustomAttributes("System.Diagnostics.CodeAnalysis", "DynamicDependencyAttribute")),
-                    _ => (((EcmaField)_entity).OwningType, ((EcmaField)_entity).GetDecodedCustomAttributes("System.Diagnostics.CodeAnalysis", "DynamicDependencyAttribute")),
-                };
+                (TypeDesc owningType, IEnumerable<CustomAttributeValue<TypeDesc>> attributes) =
+                    _entity switch
+                    {
+                        EcmaMethod method => (
+                            method.OwningType,
+                            method.GetDecodedCustomAttributes(
+                                "System.Diagnostics.CodeAnalysis",
+                                "DynamicDependencyAttribute"
+                            )
+                        ),
+                        _ => (
+                            ((EcmaField)_entity).OwningType,
+                            ((EcmaField)_entity).GetDecodedCustomAttributes(
+                                "System.Diagnostics.CodeAnalysis",
+                                "DynamicDependencyAttribute"
+                            )
+                        ),
+                    };
 
                 foreach (CustomAttributeValue<TypeDesc> attribute in attributes)
                 {
-                    AddDependenciesDueToDynamicDependencyAttribute(ref dependencies, factory, _entity, owningType, attribute);
+                    AddDependenciesDueToDynamicDependencyAttribute(
+                        ref dependencies,
+                        factory,
+                        _entity,
+                        owningType,
+                        attribute
+                    );
                 }
             }
             catch (TypeSystemException)
@@ -81,7 +120,8 @@ namespace ILCompiler.DependencyAnalysis
             NodeFactory factory,
             TypeSystemEntity entity,
             TypeDesc owningType,
-            CustomAttributeValue<TypeDesc> attribute)
+            CustomAttributeValue<TypeDesc> attribute
+        )
         {
             IEnumerable<TypeSystemEntity> members;
 
@@ -103,7 +143,8 @@ namespace ILCompiler.DependencyAnalysis
             var fixedArgs = attribute.FixedArguments;
             TypeDesc targetType;
 
-            UsageBasedMetadataManager metadataManager = (UsageBasedMetadataManager)factory.MetadataManager;
+            UsageBasedMetadataManager metadataManager = (UsageBasedMetadataManager)
+                factory.MetadataManager;
 
             if (fixedArgs.Length > 0 && fixedArgs[0].Value is string sigFromAttribute)
             {
@@ -120,25 +161,34 @@ namespace ILCompiler.DependencyAnalysis
                         break;
 
                     // DynamicDependencyAttribute(String, String, String)
-                    case 3 when fixedArgs[1].Value is string typeStringFromAttribute
-                        && fixedArgs[2].Value is string assemblyStringFromAttribute:
-                        ModuleDesc asm = factory.TypeSystemContext.ResolveAssembly(new System.Reflection.AssemblyName(assemblyStringFromAttribute), throwIfNotFound: false);
+                    case 3
+                        when fixedArgs[1].Value is string typeStringFromAttribute
+                            && fixedArgs[2].Value is string assemblyStringFromAttribute:
+                        ModuleDesc asm = factory.TypeSystemContext.ResolveAssembly(
+                            new System.Reflection.AssemblyName(assemblyStringFromAttribute),
+                            throwIfNotFound: false
+                        );
                         if (asm == null)
                         {
                             metadataManager.Logger.LogWarning(
                                 new MessageOrigin(entity),
                                 DiagnosticId.UnresolvedAssemblyInDynamicDependencyAttribute,
-                                assemblyStringFromAttribute);
+                                assemblyStringFromAttribute
+                            );
                             return;
                         }
 
-                        targetType = DocumentationSignatureParser.GetTypeByDocumentationSignature((IAssemblyDesc)asm, typeStringFromAttribute);
+                        targetType = DocumentationSignatureParser.GetTypeByDocumentationSignature(
+                            (IAssemblyDesc)asm,
+                            typeStringFromAttribute
+                        );
                         if (targetType == null)
                         {
                             metadataManager.Logger.LogWarning(
                                 new MessageOrigin(entity),
                                 DiagnosticId.UnresolvedTypeInDynamicDependencyAttribute,
-                                typeStringFromAttribute);
+                                typeStringFromAttribute
+                            );
                             return;
                         }
                         break;
@@ -148,7 +198,11 @@ namespace ILCompiler.DependencyAnalysis
                         return;
                 }
 
-                members = DocumentationSignatureParser.GetMembersByDocumentationSignature(Linkerify(targetType), sigFromAttribute, acceptName: true);
+                members = DocumentationSignatureParser.GetMembersByDocumentationSignature(
+                    Linkerify(targetType),
+                    sigFromAttribute,
+                    acceptName: true
+                );
 
                 if (!members.Any())
                 {
@@ -156,7 +210,8 @@ namespace ILCompiler.DependencyAnalysis
                         new MessageOrigin(entity),
                         DiagnosticId.NoMembersResolvedForMemberSignatureOrType,
                         sigFromAttribute,
-                        targetType.GetDisplayName());
+                        targetType.GetDisplayName()
+                    );
                     return;
                 }
             }
@@ -167,27 +222,38 @@ namespace ILCompiler.DependencyAnalysis
                     // DynamicDependencyAttribute(DynamicallyAccessedMemberTypes, Type)
                     targetType = typeFromAttribute;
                 }
-                else if (fixedArgs.Length == 3 && fixedArgs[1].Value is string typeStringFromAttribute
-                    && fixedArgs[2].Value is string assemblyStringFromAttribute)
+                else if (
+                    fixedArgs.Length == 3
+                    && fixedArgs[1].Value is string typeStringFromAttribute
+                    && fixedArgs[2].Value is string assemblyStringFromAttribute
+                )
                 {
                     // DynamicDependencyAttribute(DynamicallyAccessedMemberTypes, String, String)
-                    ModuleDesc asm = factory.TypeSystemContext.ResolveAssembly(new System.Reflection.AssemblyName(assemblyStringFromAttribute), throwIfNotFound: false);
+                    ModuleDesc asm = factory.TypeSystemContext.ResolveAssembly(
+                        new System.Reflection.AssemblyName(assemblyStringFromAttribute),
+                        throwIfNotFound: false
+                    );
                     if (asm == null)
                     {
                         metadataManager.Logger.LogWarning(
                             new MessageOrigin(entity),
                             DiagnosticId.UnresolvedAssemblyInDynamicDependencyAttribute,
-                            assemblyStringFromAttribute);
+                            assemblyStringFromAttribute
+                        );
                         return;
                     }
 
-                    targetType = DocumentationSignatureParser.GetTypeByDocumentationSignature((IAssemblyDesc)asm, typeStringFromAttribute);
+                    targetType = DocumentationSignatureParser.GetTypeByDocumentationSignature(
+                        (IAssemblyDesc)asm,
+                        typeStringFromAttribute
+                    );
                     if (targetType == null)
                     {
                         metadataManager.Logger.LogWarning(
                             new MessageOrigin(entity),
                             DiagnosticId.UnresolvedTypeInDynamicDependencyAttribute,
-                            typeStringFromAttribute);
+                            typeStringFromAttribute
+                        );
                         return;
                     }
                 }
@@ -197,7 +263,10 @@ namespace ILCompiler.DependencyAnalysis
                     return;
                 }
 
-                members = Linkerify(targetType).GetDynamicallyAccessedMembers((DynamicallyAccessedMemberTypes)memberTypesFromAttribute);
+                members = Linkerify(targetType)
+                    .GetDynamicallyAccessedMembers(
+                        (DynamicallyAccessedMemberTypes)memberTypesFromAttribute
+                    );
 
                 if (!members.Any())
                 {
@@ -205,7 +274,8 @@ namespace ILCompiler.DependencyAnalysis
                         new MessageOrigin(entity),
                         DiagnosticId.NoMembersResolvedForMemberSignatureOrType,
                         memberTypesFromAttribute.ToString(),
-                        targetType.GetDisplayName());
+                        targetType.GetDisplayName()
+                    );
                     return;
                 }
             }
@@ -225,7 +295,8 @@ namespace ILCompiler.DependencyAnalysis
                 factory,
                 metadataManager.FlowAnnotations,
                 typeHierarchyDataFlowOrigin: null,
-                enabled: true);
+                enabled: true
+            );
             foreach (var member in members)
             {
                 reflectionMarker.MarkTypeSystemEntity(new MessageOrigin(entity), member, reason);
@@ -244,7 +315,15 @@ namespace ILCompiler.DependencyAnalysis
         public override bool HasDynamicDependencies => false;
         public override bool HasConditionalStaticDependencies => false;
         public override bool StaticDependenciesAreComputed => true;
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory context) => null;
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory context) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory context
+        ) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory context
+        ) => null;
     }
 }

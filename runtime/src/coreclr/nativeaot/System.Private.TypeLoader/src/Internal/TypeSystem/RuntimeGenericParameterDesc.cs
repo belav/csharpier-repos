@@ -10,7 +10,12 @@ namespace Internal.TypeSystem
         private readonly GenericVariance _variance;
         private readonly TypeSystemEntity _associatedTypeOrMethod;
 
-        public RuntimeGenericParameterDesc(GenericParameterKind kind, int index, TypeSystemEntity associatedTypeOrMethod, GenericVariance variance)
+        public RuntimeGenericParameterDesc(
+            GenericParameterKind kind,
+            int index,
+            TypeSystemEntity associatedTypeOrMethod,
+            GenericVariance variance
+        )
         {
             _kind = kind;
             _index = index;

@@ -50,55 +50,73 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules.BER,
             typeof(X509KeyUsageCSharpStyle),
             (long)(X509KeyUsageCSharpStyle.None),
-            "030100")]
+            "030100"
+        )]
         [InlineData(
             AsnEncodingRules.CER,
             typeof(X509KeyUsageCSharpStyle),
             (long)(X509KeyUsageCSharpStyle.DecipherOnly | X509KeyUsageCSharpStyle.KeyCertSign),
-            "0303070480")]
+            "0303070480"
+        )]
         [InlineData(
             AsnEncodingRules.DER,
             typeof(X509KeyUsageCSharpStyle),
             (long)(X509KeyUsageCSharpStyle.KeyAgreement),
-            "03020308")]
+            "03020308"
+        )]
         [InlineData(
             AsnEncodingRules.BER,
             typeof(LongFlags),
             (long)(LongFlags.Mid | LongFlags.Max),
-            "0309010000000080000002")]
+            "0309010000000080000002"
+        )]
         [InlineData(
             AsnEncodingRules.CER,
             typeof(LongFlags),
             (long)(LongFlags.Mid | LongFlags.Min),
-            "0309000000000080000001")]
+            "0309000000000080000001"
+        )]
         [InlineData(
             AsnEncodingRules.DER,
             typeof(LongFlags),
             (long)(LongFlags.Min | LongFlags.Max),
-            "0309000000000000000003")]
+            "0309000000000000000003"
+        )]
         // BER: Unused bits are unmapped, regardless of value.
         [InlineData(
             AsnEncodingRules.BER,
             typeof(X509KeyUsageCSharpStyle),
             (long)(X509KeyUsageCSharpStyle.DecipherOnly | X509KeyUsageCSharpStyle.KeyCertSign),
-            "030307048F")]
+            "030307048F"
+        )]
         // BER: Trailing zeros are permitted.
         [InlineData(
             AsnEncodingRules.BER,
             typeof(X509KeyUsageCSharpStyle),
-            (long)(X509KeyUsageCSharpStyle.DecipherOnly | X509KeyUsageCSharpStyle.KeyCertSign | X509KeyUsageCSharpStyle.DataEncipherment),
-            "03050014800000")]
+            (long)(
+                X509KeyUsageCSharpStyle.DecipherOnly
+                | X509KeyUsageCSharpStyle.KeyCertSign
+                | X509KeyUsageCSharpStyle.DataEncipherment
+            ),
+            "03050014800000"
+        )]
         // BER: Trailing 0-bits don't have to be declared "unused"
         [InlineData(
             AsnEncodingRules.BER,
             typeof(X509KeyUsageCSharpStyle),
-            (long)(X509KeyUsageCSharpStyle.DecipherOnly | X509KeyUsageCSharpStyle.KeyCertSign | X509KeyUsageCSharpStyle.DataEncipherment),
-            "0303001480")]
+            (long)(
+                X509KeyUsageCSharpStyle.DecipherOnly
+                | X509KeyUsageCSharpStyle.KeyCertSign
+                | X509KeyUsageCSharpStyle.DataEncipherment
+            ),
+            "0303001480"
+        )]
         public static void VerifyReadNamedBitListEncodings(
             AsnEncodingRules ruleSet,
             Type enumType,
             long enumValue,
-            string inputHex)
+            string inputHex
+        )
         {
             byte[] inputBytes = inputHex.HexToByteArray();
 
@@ -113,22 +131,26 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules.BER,
             typeof(ULongFlags),
             (ulong)(ULongFlags.Mid | ULongFlags.Max),
-            "0309000000000080000001")]
+            "0309000000000080000001"
+        )]
         [InlineData(
             AsnEncodingRules.CER,
             typeof(ULongFlags),
             (ulong)(ULongFlags.Min | ULongFlags.Mid),
-            "0306078000000080")]
+            "0306078000000080"
+        )]
         [InlineData(
             AsnEncodingRules.DER,
             typeof(ULongFlags),
             (ulong)(ULongFlags.Min | ULongFlags.Max),
-            "0309008000000000000001")]
+            "0309008000000000000001"
+        )]
         public static void VerifyReadNamedBitListEncodings_ULong(
             AsnEncodingRules ruleSet,
             Type enumType,
             ulong enumValue,
-            string inputHex)
+            string inputHex
+        )
         {
             byte[] inputBytes = inputHex.HexToByteArray();
 
@@ -166,7 +188,8 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "flagsEnumType",
-                () => reader.ReadNamedBitListValue(null!));
+                () => reader.ReadNamedBitListValue(null!)
+            );
 
             Assert.True(reader.HasData, "reader.HasData");
         }
@@ -182,7 +205,8 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AssertExtensions.Throws<ArgumentException>(
                 "flagsEnumType",
-                () => reader.ReadNamedBitListValue<AsnEncodingRules>());
+                () => reader.ReadNamedBitListValue<AsnEncodingRules>()
+            );
 
             Assert.True(reader.HasData, "reader.HasData");
         }
@@ -197,8 +221,9 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AsnReader reader = new AsnReader(inputHex.HexToByteArray(), ruleSet);
 
-            Assert.Throws<AsnContentException>(
-                () => reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>());
+            Assert.Throws<AsnContentException>(() =>
+                reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>()
+            );
 
             Assert.True(reader.HasData, "reader.HasData");
         }
@@ -212,8 +237,9 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AsnReader reader = new AsnReader(inputHex.HexToByteArray(), ruleSet);
 
-            Assert.Throws<AsnContentException>(
-                () => reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>());
+            Assert.Throws<AsnContentException>(() =>
+                reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>()
+            );
 
             Assert.True(reader.HasData, "reader.HasData");
         }
@@ -227,8 +253,9 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AsnReader reader = new AsnReader(inputHex.HexToByteArray(), ruleSet);
 
-            Assert.Throws<AsnContentException>(
-                () => reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>());
+            Assert.Throws<AsnContentException>(() =>
+                reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>()
+            );
 
             Assert.True(reader.HasData, "reader.HasData");
         }
@@ -244,18 +271,23 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AssertExtensions.Throws<ArgumentException>(
                 "expectedTag",
-                () => reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>(Asn1Tag.Null));
+                () => reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>(Asn1Tag.Null)
+            );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
-            Assert.Throws<AsnContentException>(
-                () => reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>(new Asn1Tag(TagClass.ContextSpecific, 0)));
+            Assert.Throws<AsnContentException>(() =>
+                reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>(
+                    new Asn1Tag(TagClass.ContextSpecific, 0)
+                )
+            );
 
             Assert.True(reader.HasData, "HasData after wrong tag");
 
             Assert.Equal(
                 X509KeyUsageCSharpStyle.CrlSign,
-                reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>());
+                reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>()
+            );
             Assert.False(reader.HasData, "HasData after read");
         }
 
@@ -270,28 +302,39 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AssertExtensions.Throws<ArgumentException>(
                 "expectedTag",
-                () => reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>(Asn1Tag.Null));
+                () => reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>(Asn1Tag.Null)
+            );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
-            Assert.Throws<AsnContentException>(
-                () => reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>());
+            Assert.Throws<AsnContentException>(() =>
+                reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>()
+            );
 
             Assert.True(reader.HasData, "HasData after default tag");
 
-            Assert.Throws<AsnContentException>(
-                () => reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>(new Asn1Tag(TagClass.Application, 0)));
+            Assert.Throws<AsnContentException>(() =>
+                reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>(
+                    new Asn1Tag(TagClass.Application, 0)
+                )
+            );
 
             Assert.True(reader.HasData, "HasData after wrong custom class");
 
-            Assert.Throws<AsnContentException>(
-                () => reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>(new Asn1Tag(TagClass.ContextSpecific, 1)));
+            Assert.Throws<AsnContentException>(() =>
+                reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>(
+                    new Asn1Tag(TagClass.ContextSpecific, 1)
+                )
+            );
 
             Assert.True(reader.HasData, "HasData after wrong custom tag value");
 
             Assert.Equal(
                 X509KeyUsageCSharpStyle.KeyCertSign,
-                reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>(new Asn1Tag(TagClass.ContextSpecific, 7)));
+                reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>(
+                    new Asn1Tag(TagClass.ContextSpecific, 7)
+                )
+            );
 
             Assert.False(reader.HasData, "HasData after reading value");
         }
@@ -307,7 +350,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             string inputHex,
             TagClass tagClass,
-            int tagValue)
+            int tagValue
+        )
         {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
@@ -315,7 +359,9 @@ namespace System.Formats.Asn1.Tests.Reader
             Assert.Equal(
                 X509KeyUsageCSharpStyle.DecipherOnly,
                 reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>(
-                    new Asn1Tag(tagClass, tagValue, true)));
+                    new Asn1Tag(tagClass, tagValue, true)
+                )
+            );
 
             Assert.False(reader.HasData);
 
@@ -324,7 +370,9 @@ namespace System.Formats.Asn1.Tests.Reader
             Assert.Equal(
                 X509KeyUsageCSharpStyle.DecipherOnly,
                 reader.ReadNamedBitListValue<X509KeyUsageCSharpStyle>(
-                    new Asn1Tag(tagClass, tagValue, false)));
+                    new Asn1Tag(tagClass, tagValue, false)
+                )
+            );
 
             Assert.False(reader.HasData);
         }
@@ -373,25 +421,35 @@ namespace System.Formats.Asn1.Tests.Reader
         {
             const string InputHex =
                 // Tag
-                "DF836B" +
+                "DF836B"
+                +
                 // Length
-                "820101" +
+                "820101"
+                +
                 // Unused bit count
-                "00" +
+                "00"
+                +
                 // Reversed bits for byte patterns 0x00-0x1F
-                "008040C020A060E0109050D030B070F0088848C828A868E8189858D838B878F8" +
+                "008040C020A060E0109050D030B070F0088848C828A868E8189858D838B878F8"
+                +
                 // Reversed bits for byte patterns 0x20-0x3F
-                "048444C424A464E4149454D434B474F40C8C4CCC2CAC6CEC1C9C5CDC3CBC7CFC" +
+                "048444C424A464E4149454D434B474F40C8C4CCC2CAC6CEC1C9C5CDC3CBC7CFC"
+                +
                 // Reversed bits for byte patterns 0x40-0x5F
-                "028242C222A262E2129252D232B272F20A8A4ACA2AAA6AEA1A9A5ADA3ABA7AFA" +
+                "028242C222A262E2129252D232B272F20A8A4ACA2AAA6AEA1A9A5ADA3ABA7AFA"
+                +
                 // Reversed bits for byte patterns 0x60-0x7F
-                "068646C626A666E6169656D636B676F60E8E4ECE2EAE6EEE1E9E5EDE3EBE7EFE" +
+                "068646C626A666E6169656D636B676F60E8E4ECE2EAE6EEE1E9E5EDE3EBE7EFE"
+                +
                 // Reversed bits for byte patterns 0x80-0x9F
-                "018141C121A161E1119151D131B171F1098949C929A969E9199959D939B979F9" +
+                "018141C121A161E1119151D131B171F1098949C929A969E9199959D939B979F9"
+                +
                 // Reversed bits for byte patterns 0xA0-0xBF
-                "058545C525A565E5159555D535B575F50D8D4DCD2DAD6DED1D9D5DDD3DBD7DFD" +
+                "058545C525A565E5159555D535B575F50D8D4DCD2DAD6DED1D9D5DDD3DBD7DFD"
+                +
                 // Reversed bits for byte patterns 0xC0-0xDF
-                "038343C323A363E3139353D333B373F30B8B4BCB2BAB6BEB1B9B5BDB3BBB7BFB" +
+                "038343C323A363E3139353D333B373F30B8B4BCB2BAB6BEB1B9B5BDB3BBB7BFB"
+                +
                 // Reversed bits for byte patterns 0xE0-0xFF
                 "078747C727A767E7179757D737B777F70F8F4FCF2FAF6FEF1F9F5FDF3FBF7FFF";
 
@@ -483,7 +541,8 @@ namespace System.Formats.Asn1.Tests.Reader
 
             X509KeyUsageExtension kuExt = new X509KeyUsageExtension(
                 X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.CrlSign,
-                critical: false);
+                critical: false
+            );
 
             BitArray expected = new BitArray(7);
             expected.Set(6, true);
@@ -504,7 +563,8 @@ namespace System.Formats.Asn1.Tests.Reader
         {
             X509KeyUsageExtension kuExt = new X509KeyUsageExtension(
                 X509KeyUsageFlags.KeyAgreement | X509KeyUsageFlags.DecipherOnly,
-                critical: false);
+                critical: false
+            );
 
             BitArray expected = new BitArray(9);
             expected.Set(4, true);

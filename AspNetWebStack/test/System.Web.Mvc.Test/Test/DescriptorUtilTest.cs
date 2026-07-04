@@ -28,7 +28,13 @@ namespace System.Web.Mvc.Test
             // Arrange
             string moduleVersionId = typeof(DescriptorUtilTest).Module.ModuleVersionId.ToString();
             string metadataToken = typeof(DescriptorUtilTest).MetadataToken.ToString();
-            string expected = String.Format("[{0}]{1}[{2}]{3}", moduleVersionId.Length, moduleVersionId, metadataToken.Length, metadataToken);
+            string expected = String.Format(
+                "[{0}]{1}[{2}]{3}",
+                moduleVersionId.Length,
+                moduleVersionId,
+                metadataToken.Length,
+                metadataToken
+            );
             StringBuilder builder = new StringBuilder();
 
             // Act

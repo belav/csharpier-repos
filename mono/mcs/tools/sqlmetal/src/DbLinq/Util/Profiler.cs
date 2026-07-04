@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Text;
 
 namespace DbLinq.Util
 {
@@ -17,7 +17,7 @@ namespace DbLinq.Util
 
         private static Stopwatch Timer
         {
-            get 
+            get
             {
                 if (timer == null)
                     timer = new Stopwatch();
@@ -27,8 +27,10 @@ namespace DbLinq.Util
 
         [ThreadStatic]
         private static long prevTicks;
+
         [ThreadStatic]
         private static bool profiling;
+
         [ThreadStatic]
         private static TextWriter log;
 
@@ -40,10 +42,7 @@ namespace DbLinq.Util
                     log = Console.Out;
                 return log;
             }
-            set 
-            { 
-                log = value; 
-            }
+            set { log = value; }
         }
 
         [Conditional("DEBUG")]
@@ -61,7 +60,11 @@ namespace DbLinq.Util
             if (profiling)
             {
                 Timer.Stop();
-                Log.Write("#AT(time={0:D12}, elapsed={1:D12}) ", Timer.ElapsedTicks, Timer.ElapsedTicks - prevTicks);
+                Log.Write(
+                    "#AT(time={0:D12}, elapsed={1:D12}) ",
+                    Timer.ElapsedTicks,
+                    Timer.ElapsedTicks - prevTicks
+                );
                 prevTicks = Timer.ElapsedTicks;
                 Log.WriteLine(format, args);
                 Timer.Start();

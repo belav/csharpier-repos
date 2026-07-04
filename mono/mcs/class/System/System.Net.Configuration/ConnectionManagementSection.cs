@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,47 +34,51 @@
 
 using System.Configuration;
 
-namespace System.Net.Configuration 
+namespace System.Net.Configuration
 {
-	public sealed class ConnectionManagementSection : ConfigurationSection
-	{
-		#region Fields
+    public sealed class ConnectionManagementSection : ConfigurationSection
+    {
+        #region Fields
 
-		static ConfigurationProperty connectionManagementProp;
-		static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty connectionManagementProp;
+        static ConfigurationPropertyCollection properties;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		static ConnectionManagementSection ()
-		{
-			connectionManagementProp = new ConfigurationProperty ("ConnectionManagement", typeof (ConnectionManagementElementCollection),
-									      null, ConfigurationPropertyOptions.IsDefaultCollection);
+        static ConnectionManagementSection()
+        {
+            connectionManagementProp = new ConfigurationProperty(
+                "ConnectionManagement",
+                typeof(ConnectionManagementElementCollection),
+                null,
+                ConfigurationPropertyOptions.IsDefaultCollection
+            );
 
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (connectionManagementProp);
-		}
+            properties = new ConfigurationPropertyCollection();
+            properties.Add(connectionManagementProp);
+        }
 
-		public ConnectionManagementSection ()
-		{
-		}
+        public ConnectionManagementSection() { }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		[ConfigurationProperty ("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-		public ConnectionManagementElementCollection ConnectionManagement {
-			get { return (ConnectionManagementElementCollection) base [connectionManagementProp]; }
-		}
+        [ConfigurationProperty("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        public ConnectionManagementElementCollection ConnectionManagement
+        {
+            get { return (ConnectionManagementElementCollection)base[connectionManagementProp]; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
 
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }
 
 #endif

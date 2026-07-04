@@ -13,13 +13,16 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal;
 /// </summary>
 public class LikeTranslator : IMethodCallTranslator
 {
-    private static readonly MethodInfo MethodInfo
-        = typeof(DbFunctionsExtensions).GetRuntimeMethod(
-            nameof(DbFunctionsExtensions.Like), new[] { typeof(DbFunctions), typeof(string), typeof(string) })!;
+    private static readonly MethodInfo MethodInfo = typeof(DbFunctionsExtensions).GetRuntimeMethod(
+        nameof(DbFunctionsExtensions.Like),
+        new[] { typeof(DbFunctions), typeof(string), typeof(string) }
+    )!;
 
-    private static readonly MethodInfo MethodInfoWithEscape
-        = typeof(DbFunctionsExtensions).GetRuntimeMethod(
-            nameof(DbFunctionsExtensions.Like), new[] { typeof(DbFunctions), typeof(string), typeof(string), typeof(string) })!;
+    private static readonly MethodInfo MethodInfoWithEscape =
+        typeof(DbFunctionsExtensions).GetRuntimeMethod(
+            nameof(DbFunctionsExtensions.Like),
+            new[] { typeof(DbFunctions), typeof(string), typeof(string), typeof(string) }
+        )!;
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -44,7 +47,8 @@ public class LikeTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         if (Equals(method, MethodInfo))
         {

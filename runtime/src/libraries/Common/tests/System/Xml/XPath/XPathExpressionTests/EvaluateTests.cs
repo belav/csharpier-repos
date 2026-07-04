@@ -13,7 +13,8 @@ namespace XPathTests.XPathExpressionTests
 {
     public class EvaluateTests
     {
-        private const string xml = @"<DocumentElement>
+        private const string xml =
+            @"<DocumentElement>
     <Level1 Data='0'>
         <Name>first</Name>
         <Level2 Data='1'></Level2>
@@ -32,7 +33,11 @@ namespace XPathTests.XPathExpressionTests
     </Level1>
 </DocumentElement>";
 
-        private static void EvaluateTestNonCompiled<T>(Utils.NavigatorKind kind, string toEvaluate, T expected)
+        private static void EvaluateTestNonCompiled<T>(
+            Utils.NavigatorKind kind,
+            string toEvaluate,
+            T expected
+        )
         {
             var navigator = Utils.CreateNavigator(kind, xml);
             var result = navigator.Evaluate(toEvaluate);
@@ -41,7 +46,11 @@ namespace XPathTests.XPathExpressionTests
             Assert.Equal(expected, convertedResult);
         }
 
-        private static void EvaluateTestCompiledXPathExpression<T>(Utils.NavigatorKind kind, string toEvaluate, T expected)
+        private static void EvaluateTestCompiledXPathExpression<T>(
+            Utils.NavigatorKind kind,
+            string toEvaluate,
+            T expected
+        )
         {
             var navigator = Utils.CreateNavigator(kind, xml);
             var xPathExpression = XPathExpression.Compile(toEvaluate);
@@ -51,17 +60,28 @@ namespace XPathTests.XPathExpressionTests
             Assert.Equal(expected, convertedResult);
         }
 
-
-        private static void EvaluateTestsBoth<T>(Utils.NavigatorKind kind, string toEvaluate, T expected)
+        private static void EvaluateTestsBoth<T>(
+            Utils.NavigatorKind kind,
+            string toEvaluate,
+            T expected
+        )
         {
             EvaluateTestNonCompiled(kind, toEvaluate, expected);
             EvaluateTestCompiledXPathExpression(kind, toEvaluate, expected);
         }
 
-        private static void EvaluateTestsErrors(Utils.NavigatorKind kind, string toEvaluate, string exceptionString)
+        private static void EvaluateTestsErrors(
+            Utils.NavigatorKind kind,
+            string toEvaluate,
+            string exceptionString
+        )
         {
-            Assert.Throws<XPathException>(() => EvaluateTestCompiledXPathExpression<object>(kind, toEvaluate, null));
-            Assert.Throws<XPathException>(() => EvaluateTestNonCompiled<object>(kind, toEvaluate, null));
+            Assert.Throws<XPathException>(() =>
+                EvaluateTestCompiledXPathExpression<object>(kind, toEvaluate, null)
+            );
+            Assert.Throws<XPathException>(() =>
+                EvaluateTestNonCompiled<object>(kind, toEvaluate, null)
+            );
         }
 
         /// <summary>
@@ -129,8 +149,11 @@ namespace XPathTests.XPathExpressionTests
             EvaluateTestsErrors(kind, "string(1, 2)", "Xp_InvalidNumArgs");
         }
 
-
-        private static void EvaluateTestNonCompiledNodeset(Utils.NavigatorKind kind, string toEvaluate, string[] expected)
+        private static void EvaluateTestNonCompiledNodeset(
+            Utils.NavigatorKind kind,
+            string toEvaluate,
+            string[] expected
+        )
         {
             var navigator = Utils.CreateNavigator(kind, xml);
             var iter = (XPathNodeIterator)navigator.Evaluate(toEvaluate);
@@ -142,7 +165,11 @@ namespace XPathTests.XPathExpressionTests
             }
         }
 
-        private static void EvaluateTestCompiledNodeset(Utils.NavigatorKind kind, string toEvaluate, string[] expected)
+        private static void EvaluateTestCompiledNodeset(
+            Utils.NavigatorKind kind,
+            string toEvaluate,
+            string[] expected
+        )
         {
             var navigator = Utils.CreateNavigator(kind, xml);
             var xPathExpression = XPathExpression.Compile(toEvaluate);
@@ -165,8 +192,16 @@ namespace XPathTests.XPathExpressionTests
         [InlineData(Utils.NavigatorKind.XDocument)]
         public static void Variation_7(Utils.NavigatorKind kind)
         {
-            EvaluateTestCompiledNodeset(kind, "DocumentElement/child::*", new[] { "first", "second", "third", "last" });
-            EvaluateTestNonCompiledNodeset(kind, "DocumentElement/child::*", new[] { "first", "second", "third", "last" });
+            EvaluateTestCompiledNodeset(
+                kind,
+                "DocumentElement/child::*",
+                new[] { "first", "second", "third", "last" }
+            );
+            EvaluateTestNonCompiledNodeset(
+                kind,
+                "DocumentElement/child::*",
+                new[] { "first", "second", "third", "last" }
+            );
         }
 
         /// <summary>
@@ -260,7 +295,9 @@ namespace XPathTests.XPathExpressionTests
         [Fact]
         public static void EvaluateTextNode_4()
         {
-            XElement element = XElement.Parse("<root>1<element>2</element><element>3</element>4</root>");
+            XElement element = XElement.Parse(
+                "<root>1<element>2</element><element>3</element>4</root>"
+            );
             IEnumerable result = (IEnumerable)element.XPathEvaluate("/element/text()[1]");
             Assert.Equal(2, result.Cast<XText>().Count());
             Assert.Equal("2", result.Cast<XText>().First().ToString());

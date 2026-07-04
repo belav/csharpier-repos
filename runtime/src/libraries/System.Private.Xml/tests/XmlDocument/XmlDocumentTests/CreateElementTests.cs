@@ -39,7 +39,10 @@ namespace System.Xml.XmlDocumentTests
             newNode.SetAttribute("newAttribute", "newAttributeValue");
             newNode.InnerText = "this is a text node";
 
-            Assert.Equal("<newElem newAttribute=\"newAttributeValue\">this is a text node</newElem>", newNode.OuterXml);
+            Assert.Equal(
+                "<newElem newAttribute=\"newAttributeValue\">this is a text node</newElem>",
+                newNode.OuterXml
+            );
         }
 
         [Fact]
@@ -47,7 +50,10 @@ namespace System.Xml.XmlDocumentTests
         {
             var xmlDocument = new XmlDocument();
 
-            AssertExtensions.Throws<ArgumentException>(null, () => xmlDocument.CreateElement(string.Empty));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => xmlDocument.CreateElement(string.Empty)
+            );
         }
 
         [Fact]

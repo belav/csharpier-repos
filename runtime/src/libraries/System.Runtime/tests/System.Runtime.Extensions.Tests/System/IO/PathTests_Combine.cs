@@ -16,7 +16,10 @@ namespace System.IO.Tests
             yield return new object[] { new string[] { "abc" } };
             yield return new object[] { new string[] { "abc", "def" } };
             yield return new object[] { new string[] { "abc", "def", "ghi", "jkl", "mno" } };
-            yield return new object[] { new string[] { "abc" + s_separator + "def", "def", "ghi", "jkl", "mno" } };
+            yield return new object[]
+            {
+                new string[] { "abc" + s_separator + "def", "def", "ghi", "jkl", "mno" },
+            };
 
             // All paths are empty
             yield return new object[] { new string[] { "" } };
@@ -27,9 +30,31 @@ namespace System.IO.Tests
 
             // Elements are all separated
             yield return new object[] { new string[] { "abc" + s_separator, "def" + s_separator } };
-            yield return new object[] { new string[] { "abc" + s_separator, "def" + s_separator, "ghi" + s_separator } };
-            yield return new object[] { new string[] { "abc" + s_separator, "def" + s_separator, "ghi" + s_separator, "jkl" + s_separator } };
-            yield return new object[] { new string[] { "abc" + s_separator, "def" + s_separator, "ghi" + s_separator, "jkl" + s_separator, "mno" + s_separator } };
+            yield return new object[]
+            {
+                new string[] { "abc" + s_separator, "def" + s_separator, "ghi" + s_separator },
+            };
+            yield return new object[]
+            {
+                new string[]
+                {
+                    "abc" + s_separator,
+                    "def" + s_separator,
+                    "ghi" + s_separator,
+                    "jkl" + s_separator,
+                },
+            };
+            yield return new object[]
+            {
+                new string[]
+                {
+                    "abc" + s_separator,
+                    "def" + s_separator,
+                    "ghi" + s_separator,
+                    "jkl" + s_separator,
+                    "mno" + s_separator,
+                },
+            };
         }
 
         public static IEnumerable<string> Combine_CommonCases_Input_TestData()
@@ -90,7 +115,8 @@ namespace System.IO.Tests
         public static void Combine(string[] paths)
         {
             string expected = string.Empty;
-            if (paths.Length > 0) expected = paths[0];
+            if (paths.Length > 0)
+                expected = paths[0];
             for (int i = 1; i < paths.Length; i++)
             {
                 expected = Path.Combine(expected, paths[i]);
@@ -139,7 +165,7 @@ namespace System.IO.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Tests Windows-specific invalid paths
+        [PlatformSpecific(TestPlatforms.Windows)] // Tests Windows-specific invalid paths
         public static void ContainsInvalidCharWithoutRooted_Windows_Core()
         {
             Assert.Equal("ab|cd", Path.Combine("ab|cd"));
@@ -155,7 +181,7 @@ namespace System.IO.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Tests Windows-specific invalid paths
+        [PlatformSpecific(TestPlatforms.Windows)] // Tests Windows-specific invalid paths
         public static void ContainsInvalidCharWithRooted_Windows_core()
         {
             Assert.Equal(s_separator + "abc", Path.Combine("ab|cd", s_separator + "abc"));
@@ -163,7 +189,8 @@ namespace System.IO.Tests
             Assert.Equal(s_separator + "abc", Path.Combine("ab\tcd", s_separator + "abc"));
         }
 
-        private static void VerifyException<T>(string[] paths) where T : Exception
+        private static void VerifyException<T>(string[] paths)
+            where T : Exception
         {
             Assert.Throws<T>(() => Path.Combine(paths));
 
@@ -199,7 +226,8 @@ namespace System.IO.Tests
             }
         }
 
-        private static void CommonCasesException<T>(string testing) where T : Exception
+        private static void CommonCasesException<T>(string testing)
+            where T : Exception
         {
             VerifyException<T>(new string[] { testing });
 
@@ -222,7 +250,8 @@ namespace System.IO.Tests
             VerifyException<T>(new string[] { testing, "abc", "def", "ghi", "jkl" });
         }
 
-        private static void CommonCasesException<T>(string testing, string testing2) where T : Exception
+        private static void CommonCasesException<T>(string testing, string testing2)
+            where T : Exception
         {
             VerifyException<T>(new string[] { testing, testing2 });
 

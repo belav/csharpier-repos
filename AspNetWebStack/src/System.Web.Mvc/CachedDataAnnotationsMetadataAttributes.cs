@@ -23,8 +23,11 @@ namespace System.Web.Mvc
             ScaffoldColumn = attributes.OfType<ScaffoldColumnAttribute>().FirstOrDefault();
 
             var uiHintAttributes = attributes.OfType<UIHintAttribute>();
-            UIHint = uiHintAttributes.FirstOrDefault(a => String.Equals(a.PresentationLayer, "MVC", StringComparison.OrdinalIgnoreCase))
-                     ?? uiHintAttributes.FirstOrDefault(a => String.IsNullOrEmpty(a.PresentationLayer));
+            UIHint =
+                uiHintAttributes.FirstOrDefault(a =>
+                    String.Equals(a.PresentationLayer, "MVC", StringComparison.OrdinalIgnoreCase)
+                )
+                ?? uiHintAttributes.FirstOrDefault(a => String.IsNullOrEmpty(a.PresentationLayer));
 
             if (DisplayFormat == null && DataType != null)
             {

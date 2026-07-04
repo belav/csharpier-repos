@@ -50,7 +50,7 @@ using System.Globalization;
 
 namespace Newtonsoft.Json.Tests.Documentation
 {
-    #region JsonConverterAttribute
+#region JsonConverterAttribute
     [JsonConverter(typeof(PersonConverter))]
     public class Person
     {
@@ -62,12 +62,13 @@ namespace Newtonsoft.Json.Tests.Documentation
         public string Name { get; set; }
         public IList<string> Likes { get; private set; }
     }
-    #endregion
+#endregion
 
-    #region JsonConverterContractResolver
+#region JsonConverterContractResolver
     public class ConverterContractResolver : DefaultContractResolver
     {
-        public new static readonly ConverterContractResolver Instance = new ConverterContractResolver();
+        public static new readonly ConverterContractResolver Instance =
+            new ConverterContractResolver();
 
         protected override JsonContract CreateContract(Type objectType)
         {
@@ -82,22 +83,26 @@ namespace Newtonsoft.Json.Tests.Documentation
             return contract;
         }
     }
-    #endregion
+#endregion
 
     public class PersonConverter : JsonConverter
     {
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-        }
+        public override void WriteJson(
+            JsonWriter writer,
+            object value,
+            JsonSerializer serializer
+        ) { }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        )
         {
             JObject o = (JObject)JToken.ReadFrom(reader);
 
-            Person p = new Person
-            {
-                Name = (string)o["Name"]
-            };
+            Person p = new Person { Name = (string)o["Name"] };
 
             return p;
         }
@@ -113,7 +118,8 @@ namespace Newtonsoft.Json.Tests.Documentation
     {
         private static class AppSettings
         {
-            public static readonly IContractResolver SnakeCaseContractResolver = new DefaultContractResolver();
+            public static readonly IContractResolver SnakeCaseContractResolver =
+                new DefaultContractResolver();
         }
 
         [Test]
@@ -121,39 +127,45 @@ namespace Newtonsoft.Json.Tests.Documentation
         {
             Person person = new Person();
 
-            #region ReuseContractResolver
+#region ReuseContractResolver
             // BAD - a new contract resolver is created each time, forcing slow reflection to be used
-            string json1 = JsonConvert.SerializeObject(person, new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented,
-                ContractResolver = new DefaultContractResolver
+            string json1 = JsonConvert.SerializeObject(
+                person,
+                new JsonSerializerSettings
                 {
-                    NamingStrategy = new SnakeCaseNamingStrategy()
+                    Formatting = Formatting.Indented,
+                    ContractResolver = new DefaultContractResolver
+                    {
+                        NamingStrategy = new SnakeCaseNamingStrategy(),
+                    },
                 }
-            });
+            );
 
             // GOOD - reuse the contract resolver from a shared location
-            string json2 = JsonConvert.SerializeObject(person, new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented,
-                ContractResolver = AppSettings.SnakeCaseContractResolver
-            });
+            string json2 = JsonConvert.SerializeObject(
+                person,
+                new JsonSerializerSettings
+                {
+                    Formatting = Formatting.Indented,
+                    ContractResolver = AppSettings.SnakeCaseContractResolver,
+                }
+            );
 
             // GOOD - an internal contract resolver is used
-            string json3 = JsonConvert.SerializeObject(person, new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented
-            });
-            #endregion
+            string json3 = JsonConvert.SerializeObject(
+                person,
+                new JsonSerializerSettings { Formatting = Formatting.Indented }
+            );
+#endregion
         }
 
         [Test]
         public void ConverterContractResolverTest()
         {
-            string json = JsonConvert.SerializeObject(new DateTime(2000, 10, 10, 10, 10, 10, DateTimeKind.Utc), new JsonSerializerSettings
-            {
-                ContractResolver = ConverterContractResolver.Instance
-            });
+            string json = JsonConvert.SerializeObject(
+                new DateTime(2000, 10, 10, 10, 10, 10, DateTimeKind.Utc),
+                new JsonSerializerSettings { ContractResolver = ConverterContractResolver.Instance }
+            );
 
             Console.WriteLine(json);
         }
@@ -174,7 +186,7 @@ namespace Newtonsoft.Json.Tests.Documentation
         [Test]
         public void DeserializeString()
         {
-            #region DeserializeString
+#region DeserializeString
             HttpClient client = new HttpClient();
 
             // read the json into a string
@@ -182,13 +194,13 @@ namespace Newtonsoft.Json.Tests.Documentation
             string json = client.GetStringAsync("http://www.test.com/large.json").Result;
 
             Person p = JsonConvert.DeserializeObject<Person>(json);
-            #endregion
+#endregion
         }
 
         [Test]
         public void DeserializeStream()
         {
-            #region DeserializeStream
+#region DeserializeStream
             HttpClient client = new HttpClient();
 
             using (Stream s = client.GetStreamAsync("http://www.test.com/large.json").Result)
@@ -201,13 +213,13 @@ namespace Newtonsoft.Json.Tests.Documentation
                 // json size doesn't matter because only a small piece is read at a time from the HTTP request
                 Person p = serializer.Deserialize<Person>(reader);
             }
-            #endregion
+#endregion
         }
     }
 
     public static class PersonWriter
     {
-        #region ReaderWriter
+#region ReaderWriter
         public static string ToJson(this Person p)
         {
             StringWriter sw = new StringWriter();
@@ -234,7 +246,7 @@ namespace Newtonsoft.Json.Tests.Documentation
 
             return sw.ToString();
         }
-        #endregion
+#endregion
 
         public static Person ToPerson(this string s)
         {

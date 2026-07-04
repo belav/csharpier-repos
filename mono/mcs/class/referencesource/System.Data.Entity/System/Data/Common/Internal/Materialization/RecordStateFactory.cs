@@ -14,12 +14,12 @@ namespace System.Data.Common.Internal.Materialization
 {
     /// <summary>
     /// An immutable class used to generate new RecordStates, which are used
-    /// at runtime to produce value-layer (aka DataReader) results.  
-    /// 
-    /// Contains static information collected by the Translator visitor.  The 
+    /// at runtime to produce value-layer (aka DataReader) results.
+    ///
+    /// Contains static information collected by the Translator visitor.  The
     /// expressions produced by the Translator are compiled.  The RecordStates
     /// will refer to this object for all static information.
-    /// 
+    ///
     /// This class is cached in the query cache as part of the CoordinatorFactory.
     /// </summary>
     internal class RecordStateFactory
@@ -84,8 +84,8 @@ namespace System.Data.Common.Internal.Materialization
 
         /// <summary>
         /// Description of this RecordStateFactory, used for debugging only; while this
-        /// is not  needed in retail code, it is pretty important because it's the only 
-        /// description we'll have once we compile the Expressions; debugging a problem 
+        /// is not  needed in retail code, it is pretty important because it's the only
+        /// description we'll have once we compile the Expressions; debugging a problem
         /// with retail bits would be pretty hard without this.
         /// </summary>
         private readonly string Description;
@@ -94,16 +94,31 @@ namespace System.Data.Common.Internal.Materialization
 
         #region constructor
 
-        public RecordStateFactory(int stateSlotNumber, int columnCount, RecordStateFactory[] nestedRecordStateFactories, DataRecordInfo dataRecordInfo, Expression gatherData, string[] propertyNames, TypeUsage[] typeUsages)
+        public RecordStateFactory(
+            int stateSlotNumber,
+            int columnCount,
+            RecordStateFactory[] nestedRecordStateFactories,
+            DataRecordInfo dataRecordInfo,
+            Expression gatherData,
+            string[] propertyNames,
+            TypeUsage[] typeUsages
+        )
         {
             this.StateSlotNumber = stateSlotNumber;
             this.ColumnCount = columnCount;
-            this.NestedRecordStateFactories = new System.Collections.ObjectModel.ReadOnlyCollection<RecordStateFactory>(nestedRecordStateFactories);
+            this.NestedRecordStateFactories =
+                new System.Collections.ObjectModel.ReadOnlyCollection<RecordStateFactory>(
+                    nestedRecordStateFactories
+                );
             this.DataRecordInfo = dataRecordInfo;
             this.GatherData = Translator.Compile<bool>(gatherData);
             this.Description = gatherData.ToString();
-            this.ColumnNames = new System.Collections.ObjectModel.ReadOnlyCollection<string>(propertyNames);
-            this.TypeUsages = new System.Collections.ObjectModel.ReadOnlyCollection<TypeUsage>(typeUsages);
+            this.ColumnNames = new System.Collections.ObjectModel.ReadOnlyCollection<string>(
+                propertyNames
+            );
+            this.TypeUsages = new System.Collections.ObjectModel.ReadOnlyCollection<TypeUsage>(
+                typeUsages
+            );
 
             this.FieldNameLookup = new FieldNameLookup(this.ColumnNames, -1);
 
@@ -126,7 +141,9 @@ namespace System.Data.Common.Internal.Materialization
                         break;
                 }
             }
-            this.IsColumnNested = new System.Collections.ObjectModel.ReadOnlyCollection<bool>(isColumnNested);
+            this.IsColumnNested = new System.Collections.ObjectModel.ReadOnlyCollection<bool>(
+                isColumnNested
+            );
         }
 
         #endregion
@@ -143,5 +160,4 @@ namespace System.Data.Common.Internal.Materialization
 
         #endregion
     }
-
 }

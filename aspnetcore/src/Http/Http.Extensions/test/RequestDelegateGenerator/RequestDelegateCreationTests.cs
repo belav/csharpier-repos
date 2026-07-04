@@ -329,8 +329,8 @@ app.MapPost("/", postServiceWithDefault);
         }
         else
         {
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                () => endpoint.RequestDelegate(httpContext)
+            await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                endpoint.RequestDelegate(httpContext)
             );
             Assert.False(httpContext.RequestAborted.IsCancellationRequested);
         }
@@ -362,8 +362,8 @@ app.MapGet("/multipleFromService", ([FromServices]TestService? svc, [FromService
 
         // fromServiceRequired throws on null input
         httpContext.RequestServices = emptyServices;
-        await Assert.ThrowsAsync<InvalidOperationException>(
-            () => endpoints[0].RequestDelegate(httpContext)
+        await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            endpoints[0].RequestDelegate(httpContext)
         );
         Assert.False(httpContext.RequestAborted.IsCancellationRequested);
 

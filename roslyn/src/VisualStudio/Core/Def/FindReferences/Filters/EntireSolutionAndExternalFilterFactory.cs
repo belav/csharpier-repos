@@ -20,9 +20,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences.
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EntireSolutionAndExternalFilterFactory()
-        {
-        }
+        public EntireSolutionAndExternalFilterFactory() { }
 
         public IErrorListFilterHandler CreateFilter(IWpfTableControl tableControl)
         {
@@ -38,7 +36,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences.
             /// its unqiue compared to the rest of <see cref="PredefinedScopeFilterIds"/>
             /// </summary>
             public override int FilterId => 40;
-            public override string FilterDisplayName => ServicesVSResources.Entire_solution_and_external_sources;
+            public override string FilterDisplayName =>
+                ServicesVSResources.Entire_solution_and_external_sources;
 
             public override bool IncludeExact => true;
             public override bool IncludeExactMetadata => true;

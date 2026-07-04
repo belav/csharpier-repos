@@ -12,10 +12,7 @@ public class FunnyStringsTests
     [Fact]
     public void Invalid()
     {
-        var firstModel = new FirstModel
-        {
-            P1 = "XXX",
-        };
+        var firstModel = new FirstModel { P1 = "XXX" };
 
         var validator = default(FirstValidator);
         var vr = validator.Validate("FunnyStrings", firstModel);
@@ -26,10 +23,7 @@ public class FunnyStringsTests
     [Fact]
     public void Valid()
     {
-        var firstModel = new FirstModel
-        {
-            P1 = "\"\r\n\\",
-        };
+        var firstModel = new FirstModel { P1 = "\"\r\n\\" };
 
         var validator = default(FirstValidator);
         Assert.Equal(ValidateOptionsResult.Success, validator.Validate("FunnyStrings", firstModel));

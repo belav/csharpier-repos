@@ -33,7 +33,8 @@ namespace System.Text
         public override int MaxCharCount => 1;
 
         public override bool Equals([NotNullWhen(true)] object? value) =>
-            value is InternalDecoderBestFitFallback that && encoding.CodePage == that.encoding.CodePage;
+            value is InternalDecoderBestFitFallback that
+            && encoding.CodePage == that.encoding.CodePage;
 
         public override int GetHashCode() => encoding.CodePage;
     }
@@ -81,7 +82,10 @@ namespace System.Text
         public override bool Fallback(byte[] bytesUnknown, int index)
         {
             // We expect no previous fallback in our buffer
-            Debug.Assert(iCount < 1, "[DecoderReplacementFallbackBuffer.Fallback] Calling fallback without a previously empty buffer");
+            Debug.Assert(
+                iCount < 1,
+                "[DecoderReplacementFallbackBuffer.Fallback] Calling fallback without a previously empty buffer"
+            );
 
             cBestFit = TryBestFit(bytesUnknown);
             if (cBestFit == '\0')
@@ -128,10 +132,7 @@ namespace System.Text
         // How many characters left to output?
         public override int Remaining
         {
-            get
-            {
-                return (iCount > 0) ? iCount : 0;
-            }
+            get { return (iCount > 0) ? iCount : 0; }
         }
 
         // Clear the buffer
@@ -163,7 +164,10 @@ namespace System.Text
                 cCheck = unchecked((char)((bytesCheck[0] << 8) + bytesCheck[1]));
 
             // Check trivial out of range case
-            if (cCheck < _oFallback.arrayBestFit[0] || cCheck > _oFallback.arrayBestFit[highBound - 2])
+            if (
+                cCheck < _oFallback.arrayBestFit[0]
+                || cCheck > _oFallback.arrayBestFit[highBound - 2]
+            )
                 return '\0';
 
             // Binary search the array
@@ -179,8 +183,10 @@ namespace System.Text
                 if (cTest == cCheck)
                 {
                     // We found it
-                    Debug.Assert(index + 1 < _oFallback.arrayBestFit.Length,
-                        "[InternalDecoderBestFitFallbackBuffer.TryBestFit]Expected replacement character at end of array");
+                    Debug.Assert(
+                        index + 1 < _oFallback.arrayBestFit.Length,
+                        "[InternalDecoderBestFitFallbackBuffer.TryBestFit]Expected replacement character at end of array"
+                    );
                     return _oFallback.arrayBestFit[index + 1];
                 }
                 else if (cTest < cCheck)
@@ -200,8 +206,10 @@ namespace System.Text
                 if (_oFallback.arrayBestFit[index] == cCheck)
                 {
                     // We found it
-                    Debug.Assert(index + 1 < _oFallback.arrayBestFit.Length,
-                        "[InternalDecoderBestFitFallbackBuffer.TryBestFit]Expected replacement character at end of array");
+                    Debug.Assert(
+                        index + 1 < _oFallback.arrayBestFit.Length,
+                        "[InternalDecoderBestFitFallbackBuffer.TryBestFit]Expected replacement character at end of array"
+                    );
                     return _oFallback.arrayBestFit[index + 1];
                 }
             }

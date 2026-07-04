@@ -40,9 +40,7 @@ public class Test_GitHub_10940
         }
     }
 
-    Test_GitHub_10940(string s, decimal d)
-    {
-    }
+    Test_GitHub_10940(string s, decimal d) { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int M(ValueSourceBase vs)

@@ -4,14 +4,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
-using NodeId = int;
 using Distance = int;
+using NodeId = int;
 
 namespace System.Collections.Tests
 {
     public partial class PriorityQueue_NonGeneric_Tests
     {
         public record struct Graph(Edge[][] nodes);
+
         public record struct Edge(NodeId neighbor, Distance weight);
 
         [Fact]
@@ -69,8 +70,7 @@ namespace System.Collections.Tests
                         queue.Enqueue(edge.neighbor, newDistance);
                     }
                 }
-            }
-            while (queue.Count > 0);
+            } while (queue.Count > 0);
 
             return distances.Select((distance, nodeId) => (nodeId, distance)).ToArray();
         }

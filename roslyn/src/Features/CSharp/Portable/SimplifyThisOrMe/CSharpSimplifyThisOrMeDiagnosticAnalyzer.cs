@@ -20,14 +20,17 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyThisOrMe
             SyntaxKind,
             ExpressionSyntax,
             ThisExpressionSyntax,
-            MemberAccessExpressionSyntax>
+            MemberAccessExpressionSyntax
+        >
     {
         protected override ISyntaxKinds SyntaxKinds => CSharpSyntaxKinds.Instance;
 
-        protected override ISimplification Simplification
-            => CSharpSimplification.Instance;
+        protected override ISimplification Simplification => CSharpSimplification.Instance;
 
-        protected override AbstractMemberAccessExpressionSimplifier<ExpressionSyntax, MemberAccessExpressionSyntax, ThisExpressionSyntax> Simplifier
-            => MemberAccessExpressionSimplifier.Instance;
+        protected override AbstractMemberAccessExpressionSimplifier<
+            ExpressionSyntax,
+            MemberAccessExpressionSyntax,
+            ThisExpressionSyntax
+        > Simplifier => MemberAccessExpressionSimplifier.Instance;
     }
 }

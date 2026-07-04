@@ -9,22 +9,20 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data.Metadata.Edm;
 using System.Data.Common;
 using System.Data.Common.Utils;
 using System.Data.Mapping;
+using System.Data.Metadata.Edm;
 using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
+using System.Text;
 
 namespace System.Data.Mapping
 {
     internal abstract class BaseMetadataMappingVisitor
     {
-        protected BaseMetadataMappingVisitor()
-        {
-        }
+        protected BaseMetadataMappingVisitor() { }
 
         protected virtual void Visit(StorageEntityContainerMapping storageEntityContainerMapping)
         {
@@ -50,7 +48,13 @@ namespace System.Data.Mapping
                     Visit((AssociationSet)entitySetBase);
                     break;
                 default:
-                    Debug.Fail(string.Format(CultureInfo.InvariantCulture, "Found type '{0}', did we add a new type?", entitySetBase.BuiltInTypeKind));
+                    Debug.Fail(
+                        string.Format(
+                            CultureInfo.InvariantCulture,
+                            "Found type '{0}', did we add a new type?",
+                            entitySetBase.BuiltInTypeKind
+                        )
+                    );
                     break;
             }
         }
@@ -87,6 +91,7 @@ namespace System.Data.Mapping
                 Visit(end);
             }
         }
+
         protected virtual void Visit(EntityType entityType)
         {
             foreach (var kmember in entityType.KeyMembers)
@@ -141,10 +146,12 @@ namespace System.Data.Mapping
             Visit(associationSetEnd.EntitySet);
             Visit(associationSetEnd.ParentAssociationSet);
         }
+
         protected virtual void Visit(EdmProperty edmProperty)
         {
             Visit(edmProperty.TypeUsage);
         }
+
         protected virtual void Visit(NavigationProperty navigationProperty)
         {
             Visit(navigationProperty.FromEndMember);
@@ -157,6 +164,7 @@ namespace System.Data.Mapping
         {
             Visit(edmMember.TypeUsage);
         }
+
         protected virtual void Visit(AssociationEndMember associationEndMember)
         {
             Visit(associationEndMember.TypeUsage);
@@ -176,10 +184,12 @@ namespace System.Data.Mapping
             }
             Visit(referentialConstraint.ToRole);
         }
+
         protected virtual void Visit(RelationshipEndMember relationshipEndMember)
         {
             Visit(relationshipEndMember.TypeUsage);
         }
+
         protected virtual void Visit(TypeUsage typeUsage)
         {
             Visit(typeUsage.EdmType);
@@ -188,6 +198,7 @@ namespace System.Data.Mapping
                 Visit(facet);
             }
         }
+
         protected virtual void Visit(RelationshipType relationshipType)
         {
             // switching node, will not be add to the seen list
@@ -203,11 +214,18 @@ namespace System.Data.Mapping
                     Visit((AssociationType)relationshipType);
                     break;
                 default:
-                    Debug.Fail(String.Format(CultureInfo.InvariantCulture, "Found type '{0}', did we add a new type?", relationshipType.BuiltInTypeKind));
+                    Debug.Fail(
+                        String.Format(
+                            CultureInfo.InvariantCulture,
+                            "Found type '{0}', did we add a new type?",
+                            relationshipType.BuiltInTypeKind
+                        )
+                    );
                     break;
             }
             #endregion
         }
+
         protected virtual void Visit(EdmType edmType)
         {
             // switching node, will not be add to the seen list
@@ -244,15 +262,23 @@ namespace System.Data.Mapping
                     Visit((EnumType)edmType);
                     break;
                 default:
-                    Debug.Fail(String.Format(CultureInfo.InvariantCulture, "Found type '{0}', did we add a new type?", edmType.BuiltInTypeKind));
+                    Debug.Fail(
+                        String.Format(
+                            CultureInfo.InvariantCulture,
+                            "Found type '{0}', did we add a new type?",
+                            edmType.BuiltInTypeKind
+                        )
+                    );
                     break;
             }
             #endregion
         }
+
         protected virtual void Visit(Facet facet)
         {
             Visit(facet.FacetType);
         }
+
         protected virtual void Visit(EdmFunction edmFunction)
         {
             Visit(edmFunction.BaseType);
@@ -272,9 +298,9 @@ namespace System.Data.Mapping
                 Visit(returnParameter);
             }
         }
-        protected virtual void Visit(PrimitiveType primitiveType)
-        {
-        }
+
+        protected virtual void Visit(PrimitiveType primitiveType) { }
+
         protected virtual void Visit(ComplexType complexType)
         {
             Visit(complexType.BaseType);
@@ -287,11 +313,13 @@ namespace System.Data.Mapping
                 Visit(property);
             }
         }
+
         protected virtual void Visit(RefType refType)
         {
             Visit(refType.BaseType);
             Visit(refType.ElementType);
         }
+
         protected virtual void Visit(EnumType enumType)
         {
             foreach (var member in enumType.Members)
@@ -299,14 +327,15 @@ namespace System.Data.Mapping
                 Visit(member);
             }
         }
-        protected virtual void Visit(EnumMember enumMember)
-        {
-        }
+
+        protected virtual void Visit(EnumMember enumMember) { }
+
         protected virtual void Visit(CollectionType collectionType)
         {
             Visit(collectionType.BaseType);
             Visit(collectionType.TypeUsage);
         }
+
         protected virtual void Visit(EntityTypeBase entityTypeBase)
         {
             // switching node
@@ -323,18 +352,25 @@ namespace System.Data.Mapping
                     Visit((EntityType)entityTypeBase);
                     break;
                 default:
-                    Debug.Fail(String.Format(CultureInfo.InvariantCulture, "Found type '{0}', did we add a new type?", entityTypeBase.BuiltInTypeKind));
+                    Debug.Fail(
+                        String.Format(
+                            CultureInfo.InvariantCulture,
+                            "Found type '{0}', did we add a new type?",
+                            entityTypeBase.BuiltInTypeKind
+                        )
+                    );
                     break;
             }
         }
+
         protected virtual void Visit(FunctionParameter functionParameter)
         {
             Visit(functionParameter.DeclaringFunction);
             Visit(functionParameter.TypeUsage);
         }
-        protected virtual void Visit(DbProviderManifest providerManifest)
-        {
-        }
+
+        protected virtual void Visit(DbProviderManifest providerManifest) { }
+
         protected virtual void Visit(StorageTypeMapping storageTypeMapping)
         {
             foreach (var type in storageTypeMapping.IsOfTypes)
@@ -354,6 +390,7 @@ namespace System.Data.Mapping
                 Visit(type);
             }
         }
+
         protected virtual void Visit(StorageMappingFragment storageMappingFragment)
         {
             foreach (var property in storageMappingFragment.AllProperties)
@@ -363,6 +400,7 @@ namespace System.Data.Mapping
 
             Visit((EntitySetBase)storageMappingFragment.TableSet);
         }
+
         protected virtual void Visit(StoragePropertyMapping storagePropertyMapping)
         {
             // this is a switching node, so no object header and footer will be add for this node,
@@ -382,9 +420,16 @@ namespace System.Data.Mapping
             }
             else
             {
-                Debug.Fail(String.Format(CultureInfo.InvariantCulture, "Found type '{0}', did we add a new type?", storagePropertyMapping.GetType()));
+                Debug.Fail(
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        "Found type '{0}', did we add a new type?",
+                        storagePropertyMapping.GetType()
+                    )
+                );
             }
         }
+
         protected virtual void Visit(StorageComplexPropertyMapping storageComplexPropertyMapping)
         {
             Visit(storageComplexPropertyMapping.EdmProperty);
@@ -393,11 +438,15 @@ namespace System.Data.Mapping
                 Visit(mapping);
             }
         }
-        protected virtual void Visit(StorageConditionPropertyMapping storageConditionPropertyMapping)
+
+        protected virtual void Visit(
+            StorageConditionPropertyMapping storageConditionPropertyMapping
+        )
         {
             Visit(storageConditionPropertyMapping.ColumnProperty);
             Visit(storageConditionPropertyMapping.EdmProperty);
         }
+
         protected virtual void Visit(StorageScalarPropertyMapping storageScalarPropertyMapping)
         {
             Visit(storageScalarPropertyMapping.ColumnProperty);

@@ -1,31 +1,31 @@
 //------------------------------------------------------------------------------
 // <copyright file="FileVersionInfo.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Diagnostics {
-    using Microsoft.Win32;
-    using System.Runtime.Serialization.Formatters;
-    using System.Text;
+namespace System.Diagnostics
+{
+    using System;
     using System.Configuration.Assemblies;
-    using System.Runtime.InteropServices;
+    using System.Globalization;
     using System.IO;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization.Formatters;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
-    using System;
-    using System.Globalization;
-    using System.Runtime.Versioning;
+    using System.Text;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>Provides version information for a physical file on disk.</para>
     /// </devdoc>
     [
     // Disabling partial trust scenarios
-    PermissionSet(SecurityAction.LinkDemand, Name="FullTrust")
-    ]
-    public sealed class FileVersionInfo {
-
+    PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust")]
+    public sealed class FileVersionInfo
+    {
         private string fileName;
         private string companyName;
         private string fileDescription;
@@ -50,71 +50,68 @@ namespace System.Diagnostics {
         private int productPrivate;
         private int fileFlags;
 
-        private FileVersionInfo(string fileName) {
+        private FileVersionInfo(string fileName)
+        {
             this.fileName = fileName;
         }
 
         /// <devdoc>
         ///    <para>Gets the comments associated with the file.</para>
         /// </devdoc>
-        public string Comments {
-            get {
-                return comments;
-            }
+        public string Comments
+        {
+            get { return comments; }
         }
 
         /// <devdoc>
         ///    <para>Gets the name of the company that produced the file.</para>
         /// </devdoc>
-        public string CompanyName {
-            get {
-                return companyName;
-            }
+        public string CompanyName
+        {
+            get { return companyName; }
         }
 
         /// <devdoc>
         ///    <para>Gets the build number of the file.</para>
         /// </devdoc>
-        public int FileBuildPart {
-            get {
-                return fileBuild;
-            }
+        public int FileBuildPart
+        {
+            get { return fileBuild; }
         }
 
         /// <devdoc>
         ///    <para>Gets the description of the file.</para>
         /// </devdoc>
-        public string FileDescription {
-            get {
-                return fileDescription;
-            }
+        public string FileDescription
+        {
+            get { return fileDescription; }
         }
 
         /// <devdoc>
         ///    <para>Gets the major part of the version number.</para>
         /// </devdoc>
-        public int FileMajorPart {
-            get {
-                return fileMajor;
-            }
+        public int FileMajorPart
+        {
+            get { return fileMajor; }
         }
 
         /// <devdoc>
         ///    <para>Gets the minor
         ///       part of the version number of the file.</para>
         /// </devdoc>
-        public int FileMinorPart {
-            get {
-                return fileMinor;
-            }
+        public int FileMinorPart
+        {
+            get { return fileMinor; }
         }
 
         /// <devdoc>
         ///    <para>Gets the name of the file that this instance of System.Windows.Forms.FileVersionInfo
         ///       describes.</para>
         /// </devdoc>
-        public string FileName {
-            get {
+        public string FileName
+        {
+            get
+            {
                 new FileIOPermission(FileIOPermissionAccess.PathDiscovery, fileName).Demand();
                 return fileName;
             }
@@ -123,76 +120,68 @@ namespace System.Diagnostics {
         /// <devdoc>
         ///    <para>Gets the file private part number.</para>
         /// </devdoc>
-        public int FilePrivatePart {
-            get {
-                return filePrivate;
-            }
+        public int FilePrivatePart
+        {
+            get { return filePrivate; }
         }
 
         /// <devdoc>
         ///    <para>Gets the file version number.</para>
         /// </devdoc>
-        public string FileVersion {
-            get {
-                return fileVersion;
-            }
+        public string FileVersion
+        {
+            get { return fileVersion; }
         }
 
         /// <devdoc>
         ///    <para>Gets the internal name of the file, if one exists.</para>
         /// </devdoc>
-        public string InternalName {
-            get {
-                return internalName;
-            }
+        public string InternalName
+        {
+            get { return internalName; }
         }
 
         /// <devdoc>
         ///    <para>Gets a value that specifies whether the file
         ///       contains debugging information or is compiled with debugging features enabled.</para>
         /// </devdoc>
-        public bool IsDebug {
-            get {
-                return (fileFlags & NativeMethods.VS_FF_DEBUG) != 0;
-            }
+        public bool IsDebug
+        {
+            get { return (fileFlags & NativeMethods.VS_FF_DEBUG) != 0; }
         }
 
         /// <devdoc>
         ///    <para>Gets a value that specifies whether the file has been modified and is not identical to
         ///       the original shipping file of the same version number.</para>
         /// </devdoc>
-        public bool IsPatched {
-            get {
-                return (fileFlags & NativeMethods.VS_FF_PATCHED) != 0;
-            }
+        public bool IsPatched
+        {
+            get { return (fileFlags & NativeMethods.VS_FF_PATCHED) != 0; }
         }
 
         /// <devdoc>
         ///    <para>Gets a value that specifies whether the file was built using standard release procedures.</para>
         /// </devdoc>
-        public bool IsPrivateBuild {
-            get {
-                return (fileFlags & NativeMethods.VS_FF_PRIVATEBUILD) != 0;
-            }
+        public bool IsPrivateBuild
+        {
+            get { return (fileFlags & NativeMethods.VS_FF_PRIVATEBUILD) != 0; }
         }
 
         /// <devdoc>
         ///    <para>Gets a value that specifies whether the file
         ///       is a development version, rather than a commercially released product.</para>
         /// </devdoc>
-        public bool IsPreRelease {
-            get {
-                return (fileFlags & NativeMethods.VS_FF_PRERELEASE) != 0;
-            }
+        public bool IsPreRelease
+        {
+            get { return (fileFlags & NativeMethods.VS_FF_PRERELEASE) != 0; }
         }
 
         /// <devdoc>
         ///    <para>Gets a value that specifies whether the file is a special build.</para>
         /// </devdoc>
-        public bool IsSpecialBuild {
-            get {
-                return (fileFlags & NativeMethods.VS_FF_SPECIALBUILD) != 0;
-            }
+        public bool IsSpecialBuild
+        {
+            get { return (fileFlags & NativeMethods.VS_FF_SPECIALBUILD) != 0; }
         }
 
         /// <devdoc>
@@ -200,134 +189,135 @@ namespace System.Diagnostics {
         ///       Gets the default language string for the version info block.
         ///    </para>
         /// </devdoc>
-        public string Language {
-            get {
-                return language;
-            }
+        public string Language
+        {
+            get { return language; }
         }
-        
+
         /// <devdoc>
         ///    <para>Gets all copyright notices that apply to the specified file.</para>
         /// </devdoc>
-        public string LegalCopyright {
-            get {
-                return legalCopyright;
-            }
+        public string LegalCopyright
+        {
+            get { return legalCopyright; }
         }
 
         /// <devdoc>
         ///    <para>Gets the trademarks and registered trademarks that apply to the file.</para>
         /// </devdoc>
-        public string LegalTrademarks {
-            get {
-                return legalTrademarks;
-            }
+        public string LegalTrademarks
+        {
+            get { return legalTrademarks; }
         }
 
         /// <devdoc>
         ///    <para>Gets the name the file was created with.</para>
         /// </devdoc>
-        public string OriginalFilename {
-            get {
-                return originalFilename;
-            }
+        public string OriginalFilename
+        {
+            get { return originalFilename; }
         }
 
         /// <devdoc>
         ///    <para>Gets information about a private version of the file.</para>
         /// </devdoc>
-        public string PrivateBuild {
-            get {
-                return privateBuild;
-            }
+        public string PrivateBuild
+        {
+            get { return privateBuild; }
         }
 
         /// <devdoc>
         ///    <para>Gets the build number of the product this file is associated with.</para>
         /// </devdoc>
-        public int ProductBuildPart {
-            get {
-                return productBuild;
-            }
+        public int ProductBuildPart
+        {
+            get { return productBuild; }
         }
 
         /// <devdoc>
         ///    <para>Gets the major part of the version number for the product this file is associated with.</para>
         /// </devdoc>
-        public int ProductMajorPart {
-            get {
-                return productMajor;
-            }
+        public int ProductMajorPart
+        {
+            get { return productMajor; }
         }
 
         /// <devdoc>
         ///    <para>Gets the minor part of the version number for the product the file is associated with.</para>
         /// </devdoc>
-        public int ProductMinorPart {
-            get {
-                return productMinor;
-            }
+        public int ProductMinorPart
+        {
+            get { return productMinor; }
         }
 
         /// <devdoc>
         ///    <para>Gets the name of the product this file is distributed with.</para>
         /// </devdoc>
-        public string ProductName {
-            get {
-                return productName;
-            }
+        public string ProductName
+        {
+            get { return productName; }
         }
 
         /// <devdoc>
         ///    <para>Gets the private part number of the product this file is associated with.</para>
         /// </devdoc>
-        public int ProductPrivatePart {
-            get {
-                return productPrivate;
-            }
+        public int ProductPrivatePart
+        {
+            get { return productPrivate; }
         }
 
         /// <devdoc>
         ///    <para>Gets the version of the product this file is distributed with.</para>
         /// </devdoc>
-        public string ProductVersion {
-            get {
-                return productVersion;
-            }
+        public string ProductVersion
+        {
+            get { return productVersion; }
         }
 
         /// <devdoc>
         ///    <para>Gets the special build information for the file.</para>
         /// </devdoc>
-        public string SpecialBuild {
-            get {
-                return specialBuild;
-            }
+        public string SpecialBuild
+        {
+            get { return specialBuild; }
         }
 
-        private static string ConvertTo8DigitHex(int value) {
+        private static string ConvertTo8DigitHex(int value)
+        {
             string s = Convert.ToString(value, 16);
-            s = s.ToUpper(CultureInfo.InvariantCulture);           
-            if (s.Length == 8) {
+            s = s.ToUpper(CultureInfo.InvariantCulture);
+            if (s.Length == 8)
+            {
                 return s;
             }
-            else {
+            else
+            {
                 StringBuilder b = new StringBuilder(8);
-                for (int l = s.Length;l<8; l++) {
+                for (int l = s.Length; l < 8; l++)
+                {
                     b.Append("0");
                 }
                 b.Append(s);
                 return b.ToString();
             }
         }
-        
+
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Process, ResourceScope.Process)]
-        private static NativeMethods.VS_FIXEDFILEINFO GetFixedFileInfo(IntPtr memPtr) {
+        private static NativeMethods.VS_FIXEDFILEINFO GetFixedFileInfo(IntPtr memPtr)
+        {
             IntPtr memRef = IntPtr.Zero;
             int memLen;
 
-            if (UnsafeNativeMethods.VerQueryValue(new HandleRef(null, memPtr), "\\", ref memRef, out memLen)) {
+            if (
+                UnsafeNativeMethods.VerQueryValue(
+                    new HandleRef(null, memPtr),
+                    "\\",
+                    ref memRef,
+                    out memLen
+                )
+            )
+            {
                 NativeMethods.VS_FIXEDFILEINFO fixedFileInfo = new NativeMethods.VS_FIXEDFILEINFO();
                 Marshal.PtrToStructure(memRef, fixedFileInfo);
                 return fixedFileInfo;
@@ -336,25 +326,35 @@ namespace System.Diagnostics {
             return new NativeMethods.VS_FIXEDFILEINFO();
         }
 
-        private static string GetFileVersionLanguage( IntPtr memPtr ) {
-            int langid = GetVarEntry( memPtr ) >> 16;
-            
-            StringBuilder lang = new StringBuilder( 256 );
-            UnsafeNativeMethods.VerLanguageName( langid, lang, lang.Capacity );
+        private static string GetFileVersionLanguage(IntPtr memPtr)
+        {
+            int langid = GetVarEntry(memPtr) >> 16;
+
+            StringBuilder lang = new StringBuilder(256);
+            UnsafeNativeMethods.VerLanguageName(langid, lang, lang.Capacity);
             return lang.ToString();
         }
-        
+
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Process, ResourceScope.Process)]
-        private static string GetFileVersionString(IntPtr memPtr, string name) {
+        private static string GetFileVersionString(IntPtr memPtr, string name)
+        {
             string data = "";
 
             IntPtr memRef = IntPtr.Zero;
             int memLen;
 
-            if (UnsafeNativeMethods.VerQueryValue(new HandleRef(null, memPtr), name, ref memRef, out memLen)) {
-
-                if (memRef != IntPtr.Zero) {
+            if (
+                UnsafeNativeMethods.VerQueryValue(
+                    new HandleRef(null, memPtr),
+                    name,
+                    ref memRef,
+                    out memLen
+                )
+            )
+            {
+                if (memRef != IntPtr.Zero)
+                {
                     data = Marshal.PtrToStringAuto(memRef);
                 }
             }
@@ -363,38 +363,85 @@ namespace System.Diagnostics {
 
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Process, ResourceScope.Process)]
-        private static int GetVarEntry(IntPtr memPtr) {
+        private static int GetVarEntry(IntPtr memPtr)
+        {
             IntPtr memRef = IntPtr.Zero;
             int memLen;
 
-            if (UnsafeNativeMethods.VerQueryValue(new HandleRef(null, memPtr), "\\VarFileInfo\\Translation", ref memRef, out memLen)) {
-                return(Marshal.ReadInt16(memRef) << 16) + Marshal.ReadInt16((IntPtr)((long)memRef + 2));
+            if (
+                UnsafeNativeMethods.VerQueryValue(
+                    new HandleRef(null, memPtr),
+                    "\\VarFileInfo\\Translation",
+                    ref memRef,
+                    out memLen
+                )
+            )
+            {
+                return (Marshal.ReadInt16(memRef) << 16)
+                    + Marshal.ReadInt16((IntPtr)((long)memRef + 2));
             }
 
             return 0x040904E4;
         }
 
-        // 
+        //
         // This function tries to find version informaiton for a specific codepage.
         // Returns true when version information is found.
         //
-        private bool GetVersionInfoForCodePage(IntPtr memIntPtr, string codepage) {
+        private bool GetVersionInfoForCodePage(IntPtr memIntPtr, string codepage)
+        {
             string template = "\\\\StringFileInfo\\\\{0}\\\\{1}";
 
-            companyName = GetFileVersionString(memIntPtr, string.Format(CultureInfo.InvariantCulture, template, codepage, "CompanyName"));
-            fileDescription = GetFileVersionString(memIntPtr, string.Format(CultureInfo.InvariantCulture, template, codepage, "FileDescription"));
-            fileVersion = GetFileVersionString(memIntPtr, string.Format(CultureInfo.InvariantCulture, template, codepage, "FileVersion"));
-            internalName = GetFileVersionString(memIntPtr, string.Format(CultureInfo.InvariantCulture, template, codepage, "InternalName"));
-            legalCopyright = GetFileVersionString(memIntPtr, string.Format(CultureInfo.InvariantCulture, template, codepage, "LegalCopyright"));
-            originalFilename = GetFileVersionString(memIntPtr, string.Format(CultureInfo.InvariantCulture, template, codepage, "OriginalFilename"));
-            productName = GetFileVersionString(memIntPtr, string.Format(CultureInfo.InvariantCulture, template, codepage, "ProductName"));
-            productVersion = GetFileVersionString(memIntPtr, string.Format(CultureInfo.InvariantCulture, template, codepage, "ProductVersion"));
-            comments = GetFileVersionString(memIntPtr, string.Format(CultureInfo.InvariantCulture, template, codepage, "Comments"));
-            legalTrademarks = GetFileVersionString(memIntPtr, string.Format(CultureInfo.InvariantCulture, template, codepage, "LegalTrademarks"));
-            privateBuild = GetFileVersionString(memIntPtr, string.Format(CultureInfo.InvariantCulture, template, codepage, "PrivateBuild"));
-            specialBuild = GetFileVersionString(memIntPtr, string.Format(CultureInfo.InvariantCulture, template, codepage, "SpecialBuild"));
+            companyName = GetFileVersionString(
+                memIntPtr,
+                string.Format(CultureInfo.InvariantCulture, template, codepage, "CompanyName")
+            );
+            fileDescription = GetFileVersionString(
+                memIntPtr,
+                string.Format(CultureInfo.InvariantCulture, template, codepage, "FileDescription")
+            );
+            fileVersion = GetFileVersionString(
+                memIntPtr,
+                string.Format(CultureInfo.InvariantCulture, template, codepage, "FileVersion")
+            );
+            internalName = GetFileVersionString(
+                memIntPtr,
+                string.Format(CultureInfo.InvariantCulture, template, codepage, "InternalName")
+            );
+            legalCopyright = GetFileVersionString(
+                memIntPtr,
+                string.Format(CultureInfo.InvariantCulture, template, codepage, "LegalCopyright")
+            );
+            originalFilename = GetFileVersionString(
+                memIntPtr,
+                string.Format(CultureInfo.InvariantCulture, template, codepage, "OriginalFilename")
+            );
+            productName = GetFileVersionString(
+                memIntPtr,
+                string.Format(CultureInfo.InvariantCulture, template, codepage, "ProductName")
+            );
+            productVersion = GetFileVersionString(
+                memIntPtr,
+                string.Format(CultureInfo.InvariantCulture, template, codepage, "ProductVersion")
+            );
+            comments = GetFileVersionString(
+                memIntPtr,
+                string.Format(CultureInfo.InvariantCulture, template, codepage, "Comments")
+            );
+            legalTrademarks = GetFileVersionString(
+                memIntPtr,
+                string.Format(CultureInfo.InvariantCulture, template, codepage, "LegalTrademarks")
+            );
+            privateBuild = GetFileVersionString(
+                memIntPtr,
+                string.Format(CultureInfo.InvariantCulture, template, codepage, "PrivateBuild")
+            );
+            specialBuild = GetFileVersionString(
+                memIntPtr,
+                string.Format(CultureInfo.InvariantCulture, template, codepage, "SpecialBuild")
+            );
 
-            language = GetFileVersionLanguage( memIntPtr );
+            language = GetFileVersionLanguage(memIntPtr);
 
             NativeMethods.VS_FIXEDFILEINFO ffi = GetFixedFileInfo(memIntPtr);
             fileMajor = HIWORD(ffi.dwFileVersionMS);
@@ -406,8 +453,8 @@ namespace System.Diagnostics {
             productBuild = HIWORD(ffi.dwProductVersionLS);
             productPrivate = LOWORD(ffi.dwProductVersionLS);
             fileFlags = ffi.dwFileFlags;
-            
-            // fileVersion is chosen based on best guess. Other fields can be used if appropriate. 
+
+            // fileVersion is chosen based on best guess. Other fields can be used if appropriate.
             return (fileVersion != string.Empty);
         }
 
@@ -416,8 +463,9 @@ namespace System.Diagnostics {
         //
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        [FileIOPermission(SecurityAction.Assert, AllFiles=FileIOPermissionAccess.PathDiscovery)]
-        static string GetFullPathWithAssert(string fileName) {
+        [FileIOPermission(SecurityAction.Assert, AllFiles = FileIOPermissionAccess.PathDiscovery)]
+        static string GetFullPathWithAssert(string fileName)
+        {
             return Path.GetFullPath(fileName);
         }
 
@@ -426,22 +474,24 @@ namespace System.Diagnostics {
         /// </devdoc>
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
-        public unsafe static FileVersionInfo GetVersionInfo(string fileName) {
+        public static unsafe FileVersionInfo GetVersionInfo(string fileName)
+        {
             // Check for the existence of the file. File.Exists returns false
             // if Read permission is denied.
-            if (!File.Exists(fileName)) {
-                // 
-                // The previous version of this code in the success case would require 
-                // one imperative Assert for PathDiscovery permission, one Demand for 
+            if (!File.Exists(fileName))
+            {
+                //
+                // The previous version of this code in the success case would require
+                // one imperative Assert for PathDiscovery permission, one Demand for
                 // PathDiscovery permission (blocked by the Assert), and 2 demands for
-                // Read permission. It turns out that File.Exists does a demand for 
-                // Read permission, so in the success case, we only need to do a single Demand. 
+                // Read permission. It turns out that File.Exists does a demand for
+                // Read permission, so in the success case, we only need to do a single Demand.
                 // In the success case, this change increases the performance of this
                 // function dramatically.
-                // 
-                // In the failure case, we want to remain backwardly compatible by throwing 
-                // a SecurityException in the case where Read access is denied 
-                // (it can be argued that this is less secure than throwing a FileNotFoundException, 
+                //
+                // In the failure case, we want to remain backwardly compatible by throwing
+                // a SecurityException in the case where Read access is denied
+                // (it can be argued that this is less secure than throwing a FileNotFoundException,
                 // but perhaps not so much as to be worth a breaking change).
                 // File.Exists eats a SecurityException, so we need to Demand for it
                 // here. Since performance in the failure case is not crucial, as an
@@ -456,46 +506,71 @@ namespace System.Diagnostics {
                 throw new FileNotFoundException(fileName);
             }
 
-            int handle;  // This variable is not used, but we need an out variable.
+            int handle; // This variable is not used, but we need an out variable.
             int infoSize = UnsafeNativeMethods.GetFileVersionInfoSize(fileName, out handle);
             FileVersionInfo versionInfo = new FileVersionInfo(fileName);
 
-            if (infoSize != 0) {
+            if (infoSize != 0)
+            {
                 byte[] mem = new byte[infoSize];
-                fixed (byte* memPtr = mem) {
-                    IntPtr memIntPtr = new IntPtr((void*) memPtr);                    
-                    if (UnsafeNativeMethods.GetFileVersionInfo(fileName, 0, infoSize, new HandleRef(null, memIntPtr))) {
+                fixed (byte* memPtr = mem)
+                {
+                    IntPtr memIntPtr = new IntPtr((void*)memPtr);
+                    if (
+                        UnsafeNativeMethods.GetFileVersionInfo(
+                            fileName,
+                            0,
+                            infoSize,
+                            new HandleRef(null, memIntPtr)
+                        )
+                    )
+                    {
                         int langid = GetVarEntry(memIntPtr);
-                        if( !versionInfo.GetVersionInfoForCodePage(memIntPtr, ConvertTo8DigitHex(langid))) {
-                            // Some dlls might not contain correct codepage information. In this case we will fail during lookup. 
+                        if (
+                            !versionInfo.GetVersionInfoForCodePage(
+                                memIntPtr,
+                                ConvertTo8DigitHex(langid)
+                            )
+                        )
+                        {
+                            // Some dlls might not contain correct codepage information. In this case we will fail during lookup.
                             // Explorer will take a few shots in dark by trying following ID:
                             //
                             // 040904B0 // US English + CP_UNICODE
                             // 040904E4 // US English + CP_USASCII
                             // 04090000 // US English + unknown codepage
                             // Explorer also randomly guess 041D04B0=Swedish+CP_UNICODE and 040704B0=German+CP_UNICODE) sometimes.
-                            // We will try to simulate similiar behavior here.            
-                            int[] ids = new int[] {0x040904B0, 0x040904E4, 0x04090000};
-                            foreach( int id in ids) {
-                                if( id != langid) { 
-                                    if(versionInfo.GetVersionInfoForCodePage(memIntPtr, ConvertTo8DigitHex(id))) {
+                            // We will try to simulate similiar behavior here.
+                            int[] ids = new int[] { 0x040904B0, 0x040904E4, 0x04090000 };
+                            foreach (int id in ids)
+                            {
+                                if (id != langid)
+                                {
+                                    if (
+                                        versionInfo.GetVersionInfoForCodePage(
+                                            memIntPtr,
+                                            ConvertTo8DigitHex(id)
+                                        )
+                                    )
+                                    {
                                         break;
                                     }
-                                }                               
+                                }
                             }
                         }
-
                     }
                 }
             }
-            return versionInfo;         
+            return versionInfo;
         }
 
-        private static int HIWORD(int dword) {
+        private static int HIWORD(int dword)
+        {
             return NativeMethods.Util.HIWORD(dword);
         }
 
-        private static int LOWORD(int dword) {
+        private static int LOWORD(int dword)
+        {
             return NativeMethods.Util.LOWORD(dword);
         }
 
@@ -503,24 +578,50 @@ namespace System.Diagnostics {
         /// <para>Returns a partial list of properties in System.Windows.Forms.FileVersionInfo
         /// and their values.</para>
         /// </devdoc>
-        public override string ToString() {
+        public override string ToString()
+        {
             StringBuilder sb = new StringBuilder(128);
             String nl = "\r\n";
-            sb.Append("File:             ");   sb.Append(FileName);   sb.Append(nl);
-            sb.Append("InternalName:     ");   sb.Append(InternalName);   sb.Append(nl);
-            sb.Append("OriginalFilename: ");   sb.Append(OriginalFilename);   sb.Append(nl);
-            sb.Append("FileVersion:      ");   sb.Append(FileVersion);   sb.Append(nl);
-            sb.Append("FileDescription:  ");   sb.Append(FileDescription);   sb.Append(nl);
-            sb.Append("Product:          ");   sb.Append(ProductName);   sb.Append(nl);
-            sb.Append("ProductVersion:   ");   sb.Append(ProductVersion);   sb.Append(nl);
-            sb.Append("Debug:            ");   sb.Append(IsDebug.ToString());   sb.Append(nl);
-            sb.Append("Patched:          ");   sb.Append(IsPatched.ToString());   sb.Append(nl);
-            sb.Append("PreRelease:       ");   sb.Append(IsPreRelease.ToString());   sb.Append(nl);
-            sb.Append("PrivateBuild:     ");   sb.Append(IsPrivateBuild.ToString());   sb.Append(nl);
-            sb.Append("SpecialBuild:     ");   sb.Append(IsSpecialBuild.ToString());   sb.Append(nl);
-            sb.Append("Language:         ");   sb.Append(Language);  sb.Append(nl);
+            sb.Append("File:             ");
+            sb.Append(FileName);
+            sb.Append(nl);
+            sb.Append("InternalName:     ");
+            sb.Append(InternalName);
+            sb.Append(nl);
+            sb.Append("OriginalFilename: ");
+            sb.Append(OriginalFilename);
+            sb.Append(nl);
+            sb.Append("FileVersion:      ");
+            sb.Append(FileVersion);
+            sb.Append(nl);
+            sb.Append("FileDescription:  ");
+            sb.Append(FileDescription);
+            sb.Append(nl);
+            sb.Append("Product:          ");
+            sb.Append(ProductName);
+            sb.Append(nl);
+            sb.Append("ProductVersion:   ");
+            sb.Append(ProductVersion);
+            sb.Append(nl);
+            sb.Append("Debug:            ");
+            sb.Append(IsDebug.ToString());
+            sb.Append(nl);
+            sb.Append("Patched:          ");
+            sb.Append(IsPatched.ToString());
+            sb.Append(nl);
+            sb.Append("PreRelease:       ");
+            sb.Append(IsPreRelease.ToString());
+            sb.Append(nl);
+            sb.Append("PrivateBuild:     ");
+            sb.Append(IsPrivateBuild.ToString());
+            sb.Append(nl);
+            sb.Append("SpecialBuild:     ");
+            sb.Append(IsSpecialBuild.ToString());
+            sb.Append(nl);
+            sb.Append("Language:         ");
+            sb.Append(Language);
+            sb.Append(nl);
             return sb.ToString();
         }
-
     }
 }

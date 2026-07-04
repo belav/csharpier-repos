@@ -11,11 +11,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class AddKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public AddKeywordRecommender()
-            : base(SyntaxKind.AddKeyword)
-        {
-        }
+            : base(SyntaxKind.AddKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-            => context.TargetToken.IsAccessorDeclarationContext<EventDeclarationSyntax>(position, SyntaxKind.AddKeyword);
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) =>
+            context.TargetToken.IsAccessorDeclarationContext<EventDeclarationSyntax>(
+                position,
+                SyntaxKind.AddKeyword
+            );
     }
 }

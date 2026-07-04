@@ -5,22 +5,27 @@
 namespace System.ServiceModel.Routing
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Collections.Generic;
-    using System.Runtime;
-    using System.ServiceModel.Description;
-    using System.ServiceModel.Channels;
     using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Runtime;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.Threading;
 
     class SessionChannels
     {
         Guid activityID;
+
         [Fx.Tag.SynchronizationObject]
         Dictionary<RoutingEndpointTrait, IRoutingClient> sessions;
         List<IRoutingClient> sessionList;
 
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "gets called in RoutingService.ctor()")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "gets called in RoutingService.ctor()"
+        )]
         public SessionChannels(Guid activityID)
         {
             this.activityID = activityID;
@@ -39,7 +44,11 @@ namespace System.ServiceModel.Routing
             this.AbortChannel(client.Key);
         }
 
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "BeginClose is called by RoutingChannelExtension.AttachService")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "BeginClose is called by RoutingChannelExtension.AttachService"
+        )]
         public IAsyncResult BeginClose(TimeSpan timeout, AsyncCallback callback, object state)
         {
             List<ICommunicationObject> localClients = null;
@@ -48,7 +57,9 @@ namespace System.ServiceModel.Routing
             {
                 if (this.sessions.Count > 0)
                 {
-                    localClients = this.sessionList.ConvertAll<ICommunicationObject>((client) => (ICommunicationObject)client);
+                    localClients = this.sessionList.ConvertAll<ICommunicationObject>(
+                        (client) => (ICommunicationObject)client
+                    );
                     this.sessionList.Clear();
                     this.sessions.Clear();
                 }
@@ -56,13 +67,15 @@ namespace System.ServiceModel.Routing
 
             if (localClients != null && localClients.Count > 0)
             {
-                localClients.ForEach((client) =>
-                {
-                    if (TD.RoutingServiceClosingClientIsEnabled())
+                localClients.ForEach(
+                    (client) =>
                     {
-                        TD.RoutingServiceClosingClient(((IRoutingClient)client).Key.ToString());
+                        if (TD.RoutingServiceClosingClientIsEnabled())
+                        {
+                            TD.RoutingServiceClosingClient(((IRoutingClient)client).Key.ToString());
+                        }
                     }
-                });
+                );
                 return new CloseCollectionAsyncResult(timeout, callback, state, localClients);
             }
             else
@@ -83,7 +96,11 @@ namespace System.ServiceModel.Routing
             }
         }
 
-        internal IRoutingClient GetOrCreateClient<TContract>(RoutingEndpointTrait key, RoutingService service, bool impersonating)
+        internal IRoutingClient GetOrCreateClient<TContract>(
+            RoutingEndpointTrait key,
+            RoutingService service,
+            bool impersonating
+        )
         {
             IRoutingClient value;
             lock (this.sessions)

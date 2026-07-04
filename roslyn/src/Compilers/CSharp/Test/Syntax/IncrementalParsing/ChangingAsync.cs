@@ -17,7 +17,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
         public void AddAsync()
         {
             string oldText =
-@"class Test
+                @"class Test
 {
     public static void F()
     {
@@ -25,20 +25,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
     }
 }";
 
-            ParseAndVerify(oldText, validator: oldTree =>
-            {
-                var newTree = oldTree.WithInsertBefore("public", "async ");
+            ParseAndVerify(
+                oldText,
+                validator: oldTree =>
+                {
+                    var newTree = oldTree.WithInsertBefore("public", "async ");
 
-                Assert.Equal(default(SyntaxNodeOrToken), oldTree.FindNodeOrTokenByKind(SyntaxKind.AwaitExpression));
-                Assert.NotEqual(default(SyntaxNodeOrToken), newTree.FindNodeOrTokenByKind(SyntaxKind.AwaitExpression));
-            });
+                    Assert.Equal(
+                        default(SyntaxNodeOrToken),
+                        oldTree.FindNodeOrTokenByKind(SyntaxKind.AwaitExpression)
+                    );
+                    Assert.NotEqual(
+                        default(SyntaxNodeOrToken),
+                        newTree.FindNodeOrTokenByKind(SyntaxKind.AwaitExpression)
+                    );
+                }
+            );
         }
 
         [Fact]
         public void RemoveAsync()
         {
             string oldText =
-@"class Test
+                @"class Test
 {
     async public static void F()
     {
@@ -46,23 +55,44 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
     }
 }";
 
-            ParseAndVerify(oldText, validator: oldTree =>
-            {
-                var newTree = oldTree.WithRemoveFirst("async");
+            ParseAndVerify(
+                oldText,
+                validator: oldTree =>
+                {
+                    var newTree = oldTree.WithRemoveFirst("async");
 
-                Assert.NotEqual(default(SyntaxNodeOrToken), oldTree.FindNodeOrTokenByKind(SyntaxKind.AwaitExpression));
-                Assert.Equal(default(SyntaxNodeOrToken), newTree.FindNodeOrTokenByKind(SyntaxKind.AwaitExpression));
-            });
+                    Assert.NotEqual(
+                        default(SyntaxNodeOrToken),
+                        oldTree.FindNodeOrTokenByKind(SyntaxKind.AwaitExpression)
+                    );
+                    Assert.Equal(
+                        default(SyntaxNodeOrToken),
+                        newTree.FindNodeOrTokenByKind(SyntaxKind.AwaitExpression)
+                    );
+                }
+            );
         }
 
         #region Helpers
         private static void ParseAndVerify(string text, Action<SyntaxTree> validator)
         {
-            ParseAndValidate(text, validator, TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp5));
-            ParseAndValidate(text, validator, TestOptions.Script.WithLanguageVersion(LanguageVersion.CSharp5));
+            ParseAndValidate(
+                text,
+                validator,
+                TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp5)
+            );
+            ParseAndValidate(
+                text,
+                validator,
+                TestOptions.Script.WithLanguageVersion(LanguageVersion.CSharp5)
+            );
         }
 
-        private static void ParseAndValidate(string text, Action<SyntaxTree> validator, CSharpParseOptions options = null)
+        private static void ParseAndValidate(
+            string text,
+            Action<SyntaxTree> validator,
+            CSharpParseOptions options = null
+        )
         {
             var oldTree = SyntaxFactory.ParseSyntaxTree(text);
             validator(oldTree);

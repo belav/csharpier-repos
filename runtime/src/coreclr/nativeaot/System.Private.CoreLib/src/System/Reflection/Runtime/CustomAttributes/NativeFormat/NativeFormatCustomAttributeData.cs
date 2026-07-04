@@ -13,7 +13,6 @@ using System.Reflection.Runtime.MethodInfos;
 using System.Reflection.Runtime.MethodInfos.NativeFormat;
 using System.Reflection.Runtime.TypeInfos;
 using System.Reflection.Runtime.TypeInfos.NativeFormat;
-
 using Internal.LowLevelLinq;
 using Internal.Metadata.NativeFormat;
 using Internal.Reflection.Augments;
@@ -27,7 +26,10 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
     //
     internal sealed class NativeFormatCustomAttributeData : RuntimeCustomAttributeData
     {
-        internal NativeFormatCustomAttributeData(MetadataReader reader, CustomAttributeHandle customAttributeHandle)
+        internal NativeFormatCustomAttributeData(
+            MetadataReader reader,
+            CustomAttributeHandle customAttributeHandle
+        )
         {
             _reader = reader;
             _customAttribute = customAttributeHandle.GetCustomAttribute(reader);
@@ -40,7 +42,10 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
                 Type lazyAttributeType = _lazyAttributeType;
                 if (lazyAttributeType == null)
                 {
-                    lazyAttributeType = _lazyAttributeType = _customAttribute.GetAttributeTypeHandle(_reader).Resolve(_reader, new TypeContext(null, null)).ToType();
+                    lazyAttributeType = _lazyAttributeType = _customAttribute
+                        .GetAttributeTypeHandle(_reader)
+                        .Resolve(_reader, new TypeContext(null, null))
+                        .ToType();
                 }
                 return lazyAttributeType;
             }
@@ -48,8 +53,11 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
 
         public sealed override ConstructorInfo Constructor
         {
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2072:UnrecognizedReflectionPattern",
-                Justification = "Metadata generation ensures custom attribute constructors are resolvable.")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2072:UnrecognizedReflectionPattern",
+                Justification = "Metadata generation ensures custom attribute constructors are resolvable."
+            )]
             get
             {
                 MetadataReader reader = _reader;
@@ -57,19 +65,36 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
 
                 if (constructorHandleType == HandleType.QualifiedMethod)
                 {
-                    QualifiedMethod qualifiedMethod = _customAttribute.Constructor.ToQualifiedMethodHandle(reader).GetQualifiedMethod(reader);
+                    QualifiedMethod qualifiedMethod = _customAttribute
+                        .Constructor.ToQualifiedMethodHandle(reader)
+                        .GetQualifiedMethod(reader);
                     TypeDefinitionHandle declaringType = qualifiedMethod.EnclosingType;
                     MethodHandle methodHandle = qualifiedMethod.Method;
-                    NativeFormatRuntimeNamedTypeInfo attributeType = NativeFormatRuntimeNamedTypeInfo.GetRuntimeNamedTypeInfo(reader, declaringType, default(RuntimeTypeHandle));
-                    return RuntimePlainConstructorInfo<NativeFormatMethodCommon>.GetRuntimePlainConstructorInfo(new NativeFormatMethodCommon(methodHandle, attributeType, attributeType));
+                    NativeFormatRuntimeNamedTypeInfo attributeType =
+                        NativeFormatRuntimeNamedTypeInfo.GetRuntimeNamedTypeInfo(
+                            reader,
+                            declaringType,
+                            default(RuntimeTypeHandle)
+                        );
+                    return RuntimePlainConstructorInfo<NativeFormatMethodCommon>.GetRuntimePlainConstructorInfo(
+                        new NativeFormatMethodCommon(methodHandle, attributeType, attributeType)
+                    );
                 }
                 else if (constructorHandleType == HandleType.MemberReference)
                 {
-                    MemberReference memberReference = _customAttribute.Constructor.ToMemberReferenceHandle(reader).GetMemberReference(reader);
+                    MemberReference memberReference = _customAttribute
+                        .Constructor.ToMemberReferenceHandle(reader)
+                        .GetMemberReference(reader);
 
                     // There is no chance a custom attribute type will be an open type specification so we can safely pass in the empty context here.
-                    TypeContext typeContext = new TypeContext(Array.Empty<RuntimeTypeInfo>(), Array.Empty<RuntimeTypeInfo>());
-                    RuntimeTypeInfo attributeRuntimeTypeInfo = memberReference.Parent.Resolve(reader, typeContext);
+                    TypeContext typeContext = new TypeContext(
+                        Array.Empty<RuntimeTypeInfo>(),
+                        Array.Empty<RuntimeTypeInfo>()
+                    );
+                    RuntimeTypeInfo attributeRuntimeTypeInfo = memberReference.Parent.Resolve(
+                        reader,
+                        typeContext
+                    );
                     Type attributeType = attributeRuntimeTypeInfo.ToType();
                     MethodSignature sig = memberReference.Signature.ParseMethodSignature(reader);
                     HandleCollection parameters = sig.Parameters;
@@ -82,7 +107,9 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
                     foreach (Handle _parameterHandle in parameters)
                     {
                         Handle parameterHandle = _parameterHandle;
-                        expectedParameterTypes[index++] = parameterHandle.Resolve(reader, attributeRuntimeTypeInfo.TypeContext).ToType();
+                        expectedParameterTypes[index++] = parameterHandle
+                            .Resolve(reader, attributeRuntimeTypeInfo.TypeContext)
+                            .ToType();
                     }
                     return ResolveAttributeConstructor(attributeType, expectedParameterTypes);
                 }
@@ -96,7 +123,9 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
         //
         // If throwIfMissingMetadata is false, returns null rather than throwing a missing metadata exception.
         //
-        internal sealed override IList<CustomAttributeTypedArgument> GetConstructorArguments(bool throwIfMissingMetadata)
+        internal sealed override IList<CustomAttributeTypedArgument> GetConstructorArguments(
+            bool throwIfMissingMetadata
+        )
         {
             int index = 0;
 
@@ -105,23 +134,38 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
             switch (handleType)
             {
                 case HandleType.QualifiedMethod:
-                    parameterTypeSignatureHandles = _customAttribute.Constructor.ToQualifiedMethodHandle(_reader).GetQualifiedMethod(_reader).Method.GetMethod(_reader).Signature.GetMethodSignature(_reader).Parameters;
+                    parameterTypeSignatureHandles = _customAttribute
+                        .Constructor.ToQualifiedMethodHandle(_reader)
+                        .GetQualifiedMethod(_reader)
+                        .Method.GetMethod(_reader)
+                        .Signature.GetMethodSignature(_reader)
+                        .Parameters;
                     break;
 
                 case HandleType.MemberReference:
-                    parameterTypeSignatureHandles = _customAttribute.Constructor.ToMemberReferenceHandle(_reader).GetMemberReference(_reader).Signature.ToMethodSignatureHandle(_reader).GetMethodSignature(_reader).Parameters;
+                    parameterTypeSignatureHandles = _customAttribute
+                        .Constructor.ToMemberReferenceHandle(_reader)
+                        .GetMemberReference(_reader)
+                        .Signature.ToMethodSignatureHandle(_reader)
+                        .GetMethodSignature(_reader)
+                        .Parameters;
                     break;
                 default:
                     throw new BadImageFormatException();
             }
             Handle[] ctorTypeHandles = parameterTypeSignatureHandles.ToArray();
 
-            LowLevelListWithIList<CustomAttributeTypedArgument> customAttributeTypedArguments = new LowLevelListWithIList<CustomAttributeTypedArgument>();
+            LowLevelListWithIList<CustomAttributeTypedArgument> customAttributeTypedArguments =
+                new LowLevelListWithIList<CustomAttributeTypedArgument>();
             foreach (Handle fixedArgumentHandle in _customAttribute.FixedArguments)
             {
                 Handle typeHandle = ctorTypeHandles[index];
                 Exception? exception = null;
-                RuntimeTypeInfo? argumentType = typeHandle.TryResolve(_reader, AttributeType.ToRuntimeTypeInfo().TypeContext, ref exception);
+                RuntimeTypeInfo? argumentType = typeHandle.TryResolve(
+                    _reader,
+                    AttributeType.ToRuntimeTypeInfo().TypeContext,
+                    ref exception
+                );
                 if (argumentType == null)
                 {
                     if (throwIfMissingMetadata)
@@ -140,7 +184,10 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
                 }
                 else
                 {
-                    customAttributeTypedArgument = WrapInCustomAttributeTypedArgument(value, argumentType.ToType());
+                    customAttributeTypedArgument = WrapInCustomAttributeTypedArgument(
+                        value,
+                        argumentType.ToType()
+                    );
                 }
 
                 customAttributeTypedArguments.Add(customAttributeTypedArgument);
@@ -153,9 +200,12 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
         //
         // If throwIfMissingMetadata is false, returns null rather than throwing a missing metadata exception.
         //
-        internal sealed override IList<CustomAttributeNamedArgument> GetNamedArguments(bool throwIfMissingMetadata)
+        internal sealed override IList<CustomAttributeNamedArgument> GetNamedArguments(
+            bool throwIfMissingMetadata
+        )
         {
-            LowLevelListWithIList<CustomAttributeNamedArgument> customAttributeNamedArguments = new LowLevelListWithIList<CustomAttributeNamedArgument>();
+            LowLevelListWithIList<CustomAttributeNamedArgument> customAttributeNamedArguments =
+                new LowLevelListWithIList<CustomAttributeNamedArgument>();
             foreach (NamedArgumentHandle namedArgumentHandle in _customAttribute.NamedArguments)
             {
                 NamedArgument namedArgument = namedArgumentHandle.GetNamedArgument(_reader);
@@ -163,7 +213,11 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
                 bool isField = (namedArgument.Flags == NamedArgumentMemberKind.Field);
 
                 Exception? exception = null;
-                RuntimeTypeInfo? argumentType = namedArgument.Type.TryResolve(_reader, AttributeType.ToRuntimeTypeInfo().TypeContext, ref exception);
+                RuntimeTypeInfo? argumentType = namedArgument.Type.TryResolve(
+                    _reader,
+                    AttributeType.ToRuntimeTypeInfo().TypeContext,
+                    ref exception
+                );
                 if (argumentType == null)
                 {
                     if (throwIfMissingMetadata)
@@ -181,26 +235,52 @@ namespace System.Reflection.Runtime.CustomAttributes.NativeFormat
                     else
                         return null;
                 }
-                CustomAttributeTypedArgument typedValue = WrapInCustomAttributeTypedArgument(value, argumentType.ToType());
+                CustomAttributeTypedArgument typedValue = WrapInCustomAttributeTypedArgument(
+                    value,
+                    argumentType.ToType()
+                );
 
-                customAttributeNamedArguments.Add(CreateCustomAttributeNamedArgument(this.AttributeType, memberName, isField, typedValue));
+                customAttributeNamedArguments.Add(
+                    CreateCustomAttributeNamedArgument(
+                        this.AttributeType,
+                        memberName,
+                        isField,
+                        typedValue
+                    )
+                );
             }
             return customAttributeNamedArguments;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-            Justification = "Metadata generation ensures fields/properties referenced from attributes are preserved.")]
-        private static CustomAttributeNamedArgument CreateCustomAttributeNamedArgument(Type attributeType, string memberName, bool isField, CustomAttributeTypedArgument typedValue)
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:UnrecognizedReflectionPattern",
+            Justification = "Metadata generation ensures fields/properties referenced from attributes are preserved."
+        )]
+        private static CustomAttributeNamedArgument CreateCustomAttributeNamedArgument(
+            Type attributeType,
+            string memberName,
+            bool isField,
+            CustomAttributeTypedArgument typedValue
+        )
         {
             MemberInfo? memberInfo;
 
             if (isField)
-                memberInfo = attributeType.GetField(memberName, BindingFlags.Public | BindingFlags.Instance);
+                memberInfo = attributeType.GetField(
+                    memberName,
+                    BindingFlags.Public | BindingFlags.Instance
+                );
             else
-                memberInfo = attributeType.GetProperty(memberName, BindingFlags.Public | BindingFlags.Instance);
+                memberInfo = attributeType.GetProperty(
+                    memberName,
+                    BindingFlags.Public | BindingFlags.Instance
+                );
 
             if (memberInfo == null)
-                throw ReflectionCoreExecution.ExecutionEnvironment.CreateMissingMetadataException(attributeType);
+                throw ReflectionCoreExecution.ExecutionEnvironment.CreateMissingMetadataException(
+                    attributeType
+                );
 
             return new CustomAttributeNamedArgument(memberInfo, typedValue);
         }

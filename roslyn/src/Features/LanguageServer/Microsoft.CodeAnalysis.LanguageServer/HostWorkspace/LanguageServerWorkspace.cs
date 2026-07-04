@@ -46,15 +46,17 @@ internal class LanguageServerWorkspace : Workspace, ILspWorkspace
     public ProjectSystemProjectFactory ProjectSystemProjectFactory { private get; set; } = null!;
 
     public LanguageServerWorkspace(HostServices host)
-        : base(host, WorkspaceKind.Host)
-    {
-    }
+        : base(host, WorkspaceKind.Host) { }
 
     protected internal override bool PartialSemanticsEnabled => true;
 
     bool ILspWorkspace.SupportsMutation => true;
 
-    ValueTask ILspWorkspace.UpdateTextIfPresentAsync(DocumentId documentId, SourceText sourceText, CancellationToken cancellationToken)
+    ValueTask ILspWorkspace.UpdateTextIfPresentAsync(
+        DocumentId documentId,
+        SourceText sourceText,
+        CancellationToken cancellationToken
+    )
     {
         // We need to ensure that our changes, and the changes made by the ProjectSystemProjectFactory don't interleave.
         // Specifically, ProjectSystemProjectFactory often makes several changes in a row that it thinks cannot be
@@ -67,24 +69,44 @@ internal class LanguageServerWorkspace : Workspace, ILspWorkspace
         return this.ProjectSystemProjectFactory.ApplyChangeToWorkspaceAsync(
             _ =>
             {
-                this.OnDocumentTextChanged(documentId, sourceText, PreservationMode.PreserveIdentity, requireDocumentPresent: false);
+                this.OnDocumentTextChanged(
+                    documentId,
+                    sourceText,
+                    PreservationMode.PreserveIdentity,
+                    requireDocumentPresent: false
+                );
                 return ValueTask.CompletedTask;
             },
-            cancellationToken);
+            cancellationToken
+        );
     }
 
-    internal override ValueTask TryOnDocumentOpenedAsync(DocumentId documentId, SourceTextContainer textContainer, bool isCurrentContext, CancellationToken cancellationToken)
+    internal override ValueTask TryOnDocumentOpenedAsync(
+        DocumentId documentId,
+        SourceTextContainer textContainer,
+        bool isCurrentContext,
+        CancellationToken cancellationToken
+    )
     {
         return this.ProjectSystemProjectFactory.ApplyChangeToWorkspaceAsync(
             _ =>
             {
-                this.OnDocumentOpened(documentId, textContainer, isCurrentContext, requireDocumentPresentAndClosed: false);
+                this.OnDocumentOpened(
+                    documentId,
+                    textContainer,
+                    isCurrentContext,
+                    requireDocumentPresentAndClosed: false
+                );
                 return ValueTask.CompletedTask;
             },
-            cancellationToken);
+            cancellationToken
+        );
     }
 
-    internal override ValueTask TryOnDocumentClosedAsync(DocumentId documentId, CancellationToken cancellationToken)
+    internal override ValueTask TryOnDocumentClosedAsync(
+        DocumentId documentId,
+        CancellationToken cancellationToken
+    )
     {
         return this.ProjectSystemProjectFactory.ApplyChangeToWorkspaceAsync(
             async w =>
@@ -109,9 +131,14 @@ internal class LanguageServerWorkspace : Workspace, ILspWorkspace
                         loader = this.ProjectSystemProjectFactory.CreateFileTextLoader(filePath);
                     }
 
-                    this.OnDocumentClosedEx(documentId, loader, requireDocumentPresentAndOpen: false);
+                    this.OnDocumentClosedEx(
+                        documentId,
+                        loader,
+                        requireDocumentPresentAndOpen: false
+                    );
                 }
             },
-            cancellationToken);
+            cancellationToken
+        );
     }
 }

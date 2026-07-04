@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,81 +26,90 @@
 //	Jonathan Pobst (monkey@jpobst.com)
 //
 
-using System.Windows.Forms.Layout;
 using System.ComponentModel;
-using System.Runtime.InteropServices;
 using System.Drawing;
+using System.Runtime.InteropServices;
+using System.Windows.Forms.Layout;
 
 namespace System.Windows.Forms
 {
-	[ComVisibleAttribute (true)]
-	[ClassInterfaceAttribute (ClassInterfaceType.AutoDispatch)]
-	[ProvideProperty ("FlowBreak", typeof (Control))]
-	[DefaultProperty ("FlowDirection")]
-	[Docking (DockingBehavior.Ask)]
-	[Designer ("System.Windows.Forms.Design.FlowLayoutPanelDesigner, " + Consts.AssemblySystem_Design, "System.ComponentModel.Design.IDesigner")]
-	public class FlowLayoutPanel : Panel, IExtenderProvider
-	{
-		private FlowLayoutSettings settings;
+    [ComVisibleAttribute(true)]
+    [ClassInterfaceAttribute(ClassInterfaceType.AutoDispatch)]
+    [ProvideProperty("FlowBreak", typeof(Control))]
+    [DefaultProperty("FlowDirection")]
+    [Docking(DockingBehavior.Ask)]
+    [Designer(
+        "System.Windows.Forms.Design.FlowLayoutPanelDesigner, " + Consts.AssemblySystem_Design,
+        "System.ComponentModel.Design.IDesigner"
+    )]
+    public class FlowLayoutPanel : Panel, IExtenderProvider
+    {
+        private FlowLayoutSettings settings;
 
-		public FlowLayoutPanel () : base ()
-		{
-			CreateDockPadding ();
-		}
+        public FlowLayoutPanel()
+            : base()
+        {
+            CreateDockPadding();
+        }
 
-		#region Properties
-		[Localizable (true)]
-		[DefaultValue (FlowDirection.LeftToRight)]
-		public FlowDirection FlowDirection {
-			get { return LayoutSettings.FlowDirection; }
-			set { LayoutSettings.FlowDirection = value; }
-		}
+        #region Properties
+        [Localizable(true)]
+        [DefaultValue(FlowDirection.LeftToRight)]
+        public FlowDirection FlowDirection
+        {
+            get { return LayoutSettings.FlowDirection; }
+            set { LayoutSettings.FlowDirection = value; }
+        }
 
-		[LocalizableAttribute (true)]
-		[DefaultValue (true)]
-		public bool WrapContents {
-			get { return LayoutSettings.WrapContents; }
-			set { LayoutSettings.WrapContents = value; }
-		}
+        [LocalizableAttribute(true)]
+        [DefaultValue(true)]
+        public bool WrapContents
+        {
+            get { return LayoutSettings.WrapContents; }
+            set { LayoutSettings.WrapContents = value; }
+        }
 
-		public override LayoutEngine LayoutEngine {
-			get { return System.Windows.Forms.Layout.FlowLayout.Instance; }
-		}
+        public override LayoutEngine LayoutEngine
+        {
+            get { return System.Windows.Forms.Layout.FlowLayout.Instance; }
+        }
 
-		internal FlowLayoutSettings LayoutSettings {
-			get { 
-				if (this.settings == null)
-					this.settings = new FlowLayoutSettings (this);
-					
-				return this.settings;
-			}
-		}
-		#endregion
+        internal FlowLayoutSettings LayoutSettings
+        {
+            get
+            {
+                if (this.settings == null)
+                    this.settings = new FlowLayoutSettings(this);
 
-		#region Public Methods
-		[DefaultValue (false)]
-		[DisplayName ("FlowBreak")]
-		public bool GetFlowBreak (Control control)
-		{
-			return LayoutSettings.GetFlowBreak (control);
-		}
+                return this.settings;
+            }
+        }
+        #endregion
 
-		[DisplayName ("FlowBreak")]
-		public void SetFlowBreak (Control control, bool value)
-		{
-			LayoutSettings.SetFlowBreak (control, value);
-		}		
-		#endregion
-		
-		#region IExtenderProvider Members
-		bool IExtenderProvider.CanExtend (object obj)
-		{
-			if (obj is Control)
-				if ((obj as Control).Parent == this)
-					return true;
+        #region Public Methods
+        [DefaultValue(false)]
+        [DisplayName("FlowBreak")]
+        public bool GetFlowBreak(Control control)
+        {
+            return LayoutSettings.GetFlowBreak(control);
+        }
 
-			return false;
-		}
-		#endregion
-	}
+        [DisplayName("FlowBreak")]
+        public void SetFlowBreak(Control control, bool value)
+        {
+            LayoutSettings.SetFlowBreak(control, value);
+        }
+        #endregion
+
+        #region IExtenderProvider Members
+        bool IExtenderProvider.CanExtend(object obj)
+        {
+            if (obj is Control)
+                if ((obj as Control).Parent == this)
+                    return true;
+
+            return false;
+        }
+        #endregion
+    }
 }

@@ -30,7 +30,9 @@ namespace MS.Internal.Xml.XPath
             _opnd2 = opnd2;
             _isOr = (op == Operator.Op.OR);
         }
-        private BooleanExpr(BooleanExpr other) : base(other)
+
+        private BooleanExpr(BooleanExpr other)
+            : base(other)
         {
             _opnd1 = Clone(other._opnd1);
             _opnd2 = Clone(other._opnd2);
@@ -53,7 +55,14 @@ namespace MS.Internal.Xml.XPath
             return _opnd2.Evaluate(nodeIterator);
         }
 
-        public override XPathNodeIterator Clone() { return new BooleanExpr(this); }
-        public override XPathResultType StaticType { get { return XPathResultType.Boolean; } }
+        public override XPathNodeIterator Clone()
+        {
+            return new BooleanExpr(this);
+        }
+
+        public override XPathResultType StaticType
+        {
+            get { return XPathResultType.Boolean; }
+        }
     }
 }

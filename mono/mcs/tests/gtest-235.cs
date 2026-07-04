@@ -3,9 +3,9 @@ using System;
 
 class GettingStarted
 {
-	public static void Main ()
-	{
-		MyList<string> names = new MyList<string> ();
-		names.AddAll<string> ();
-	}
+    public static void Main()
+    {
+        MyList<string> names = new MyList<string>();
+        names.AddAll<string>();
+    }
 }

@@ -7,6 +7,6 @@ namespace System.Diagnostics
     {
         Unknown = -1,
         SingleInstance = 0,
-        MultiInstance = 1
+        MultiInstance = 1,
     }
 }

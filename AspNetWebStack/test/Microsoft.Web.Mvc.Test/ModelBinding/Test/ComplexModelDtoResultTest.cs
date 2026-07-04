@@ -13,7 +13,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new ComplexModelDtoResult("some string", null); }, "validationNode");
+                delegate
+                {
+                    new ComplexModelDtoResult("some string", null);
+                },
+                "validationNode"
+            );
         }
 
         [Fact]

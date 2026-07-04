@@ -31,10 +31,10 @@ namespace System.Workflow.Activities.Design
             }
             this.serviceProvider = serviceProvider;
             //Set dialog fonts
-            IUIService uisvc = (IUIService) this.serviceProvider.GetService(typeof(IUIService));
+            IUIService uisvc = (IUIService)this.serviceProvider.GetService(typeof(IUIService));
             if (uisvc != null)
             {
-                this.Font = (Font) uisvc.Styles["DialogFont"];
+                this.Font = (Font)uisvc.Styles["DialogFont"];
             }
             InitializeComponent();
             this.serviceContracts = new ServiceContractListItemList(this.operationsListBox);
@@ -44,10 +44,7 @@ namespace System.Workflow.Activities.Design
 
         public OperationInfoBase SelectedOperation
         {
-            get
-            {
-                return selectedOperation;
-            }
+            get { return selectedOperation; }
             internal set
             {
                 if (value == null)
@@ -59,7 +56,10 @@ namespace System.Workflow.Activities.Design
             }
         }
 
-        public void AddServiceOperation(OperationInfoBase operationInfo, Activity implementingActivity)
+        public void AddServiceOperation(
+            OperationInfoBase operationInfo,
+            Activity implementingActivity
+        )
         {
             if (operationInfo == null)
             {
@@ -69,7 +69,7 @@ namespace System.Workflow.Activities.Design
             TypedOperationInfo typedOperationInfo = operationInfo as TypedOperationInfo;
             OperationInfo workflowOperationInfo = operationInfo as OperationInfo;
             string contractName = operationInfo.GetContractFullName(null);
-            // Do not add operation if the contractName is not valid. Not throwing here gives the user to fix 
+            // Do not add operation if the contractName is not valid. Not throwing here gives the user to fix
             // a broken contract/operation by selecting a different operation from the UI.
             if (String.IsNullOrEmpty(contractName))
             {
@@ -107,13 +107,15 @@ namespace System.Workflow.Activities.Design
                     serviceContract.IsCustomContract = true;
                     AddServiceContract(serviceContract);
                 }
-                WorkflowServiceOperationListItem workflowOperationItem = new WorkflowServiceOperationListItem();
-                workflowOperationItem.Validating += new CancelEventHandler(ServiceOperationValidating);
+                WorkflowServiceOperationListItem workflowOperationItem =
+                    new WorkflowServiceOperationListItem();
+                workflowOperationItem.Validating += new CancelEventHandler(
+                    ServiceOperationValidating
+                );
                 workflowOperationItem.Operation = workflowOperationInfo;
                 workflowOperationItem.ImplementingActivities.Add(implementingActivity);
                 serviceContract.AddOperation(workflowOperationItem);
             }
-
         }
 
         protected override void OnHelpButtonClicked(CancelEventArgs e)
@@ -138,11 +140,18 @@ namespace System.Workflow.Activities.Design
 
         private void addOperationButton_Click(object sender, EventArgs e)
         {
-            ServiceContractListItem serviceContractListItem = this.operationsListBox.SelectedItem as ServiceContractListItem;
+            ServiceContractListItem serviceContractListItem =
+                this.operationsListBox.SelectedItem as ServiceContractListItem;
             Fx.Assert(serviceContractListItem != null, "service contract list item cannot be null");
-            Fx.Assert(serviceContractListItem.IsCustomContract, " this should work only on a custom contract item");
-            WorkflowServiceOperationListItem newWorkflowServiceOperationListItem = serviceContractListItem.CreateOperation();
-            newWorkflowServiceOperationListItem.Validating += new CancelEventHandler(ServiceOperationValidating);
+            Fx.Assert(
+                serviceContractListItem.IsCustomContract,
+                " this should work only on a custom contract item"
+            );
+            WorkflowServiceOperationListItem newWorkflowServiceOperationListItem =
+                serviceContractListItem.CreateOperation();
+            newWorkflowServiceOperationListItem.Validating += new CancelEventHandler(
+                ServiceOperationValidating
+            );
             this.AddServiceOperation(newWorkflowServiceOperationListItem);
             serviceContractListItem.SelectionOperation(newWorkflowServiceOperationListItem);
         }
@@ -157,11 +166,14 @@ namespace System.Workflow.Activities.Design
                 operationsListBox.Items.Add(serviceContractListItem);
             }
         }
+
         private void AddServiceOperation(ServiceOperationListItem serviceOperation)
         {
             if (serviceOperation == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("serviceOperation");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "serviceOperation"
+                );
             }
             String key = serviceOperation.ContractName;
             ServiceContractListItem serviceContract = this.serviceContracts.Find(key);
@@ -177,8 +189,12 @@ namespace System.Workflow.Activities.Design
 
         private void GetHelp()
         {
-            DesignerHelpers.ShowHelpFromKeyword(this.serviceProvider, typeof(OperationPickerDialog).FullName + ".UI");
+            DesignerHelpers.ShowHelpFromKeyword(
+                this.serviceProvider,
+                typeof(OperationPickerDialog).FullName + ".UI"
+            );
         }
+
         private List<MethodInfo> GetMethodsFromInterface(Type serviceContractInterfaceType)
         {
             List<MethodInfo> methodInfos = new List<MethodInfo>();
@@ -204,7 +220,6 @@ namespace System.Workflow.Activities.Design
 
         private void ImportContract(Type serviceContractType)
         {
-
             foreach (MethodInfo methodInfo in GetMethodsFromInterface(serviceContractType))
             {
                 if (!ServiceOperationHelpers.IsValidServiceOperation(methodInfo))
@@ -213,21 +228,35 @@ namespace System.Workflow.Activities.Design
                 }
                 TypedServiceOperationListItem operationItem = new TypedServiceOperationListItem();
                 operationItem.Validating += new CancelEventHandler(ServiceOperationValidating);
-                operationItem.Name = ServiceOperationHelpers.GetOperationName(this.serviceProvider, methodInfo);
+                operationItem.Name = ServiceOperationHelpers.GetOperationName(
+                    this.serviceProvider,
+                    methodInfo
+                );
                 operationItem.Operation.ContractType = serviceContractType;
-                operationItem.Operation.Name = ServiceOperationHelpers.GetOperationName(this.serviceProvider, methodInfo);
+                operationItem.Operation.Name = ServiceOperationHelpers.GetOperationName(
+                    this.serviceProvider,
+                    methodInfo
+                );
                 this.AddServiceOperation(operationItem);
             }
         }
 
         void ImportContractButtonClicked(object sender, EventArgs e)
         {
-            using (TypeBrowserDialog typeBrowserDialog = new TypeBrowserDialog(serviceProvider as IServiceProvider, new ServiceContractsTypeFilterProvider(), "System.String"))
+            using (
+                TypeBrowserDialog typeBrowserDialog = new TypeBrowserDialog(
+                    serviceProvider as IServiceProvider,
+                    new ServiceContractsTypeFilterProvider(),
+                    "System.String"
+                )
+            )
             {
                 typeBrowserDialog.ShowDialog();
                 if (typeBrowserDialog.SelectedType != null)
                 {
-                    ServiceContractListItem contractItem = new ServiceContractListItem(this.operationsListBox);
+                    ServiceContractListItem contractItem = new ServiceContractListItem(
+                        this.operationsListBox
+                    );
                     contractItem.Validating += new CancelEventHandler(ServiceContractValidating);
                     contractItem.Name = typeBrowserDialog.SelectedType.FullName;
                     contractItem.ContractType = typeBrowserDialog.SelectedType;
@@ -251,8 +280,11 @@ namespace System.Workflow.Activities.Design
             contractItem.Validating += new CancelEventHandler(ServiceContractValidating);
             contractItem.IsCustomContract = true;
             this.AddServiceContract(contractItem);
-            WorkflowServiceOperationListItem newWorkflowServiceOperationListItem = contractItem.CreateOperation();
-            newWorkflowServiceOperationListItem.Validating += new CancelEventHandler(ServiceOperationValidating);
+            WorkflowServiceOperationListItem newWorkflowServiceOperationListItem =
+                contractItem.CreateOperation();
+            newWorkflowServiceOperationListItem.Validating += new CancelEventHandler(
+                ServiceOperationValidating
+            );
             this.AddServiceOperation(newWorkflowServiceOperationListItem);
             contractItem.SelectionOperation(newWorkflowServiceOperationListItem);
         }
@@ -266,11 +298,11 @@ namespace System.Workflow.Activities.Design
             }
             if (selectedObject is TypedServiceOperationListItem)
             {
-                selectedOperation = ((TypedServiceOperationListItem) selectedObject).Operation;
+                selectedOperation = ((TypedServiceOperationListItem)selectedObject).Operation;
             }
             else if (selectedObject is WorkflowServiceOperationListItem)
             {
-                selectedOperation = ((WorkflowServiceOperationListItem) selectedObject).Operation;
+                selectedOperation = ((WorkflowServiceOperationListItem)selectedObject).Operation;
             }
             else
             {
@@ -296,11 +328,12 @@ namespace System.Workflow.Activities.Design
             }
             this.importContractButton.Click += new EventHandler(ImportContractButtonClicked);
             this.operationsListBox.DoubleClick += new EventHandler(operationsListBox_DoubleClick);
-            this.operationsListBox.SelectedIndexChanged += new EventHandler(operationsListBox_SelectedIndexChanged);
+            this.operationsListBox.SelectedIndexChanged += new EventHandler(
+                operationsListBox_SelectedIndexChanged
+            );
             this.addOperationButton.Click += new EventHandler(addOperationButton_Click);
             this.toolStripButton1.Click += new EventHandler(NewContractButtonClicked);
             this.okButton.Click += new EventHandler(okButton_Click);
-
 
             // This is to make the selected operation the selected item in the operationsListBox.
             // This needs to be done to work around the Microsoft bug causing selection events to not fire till form is loaded.
@@ -316,7 +349,6 @@ namespace System.Workflow.Activities.Design
                 }
             }
         }
-
 
         void operationsListBox_DoubleClick(object sender, EventArgs e)
         {
@@ -349,19 +381,25 @@ namespace System.Workflow.Activities.Design
                 else
                 {
                     this.okButton.Enabled = false;
-                    ServiceContractListItem serviceContractListItem = this.operationsListBox.SelectedItem as ServiceContractListItem;
-                    if ((serviceContractListItem != null) && (serviceContractListItem.IsCustomContract))
+                    ServiceContractListItem serviceContractListItem =
+                        this.operationsListBox.SelectedItem as ServiceContractListItem;
+                    if (
+                        (serviceContractListItem != null)
+                        && (serviceContractListItem.IsCustomContract)
+                    )
                     {
                         this.addOperationButton.Visible = true;
                     }
                 }
             }
-
         }
 
         private void RemoveHelpListItem()
         {
-            if (this.operationsListBox.Items.Count > 0 && this.operationsListBox.Items[0] is HelpListItem)
+            if (
+                this.operationsListBox.Items.Count > 0
+                && this.operationsListBox.Items[0] is HelpListItem
+            )
             {
                 this.operationsListBox.Items.Clear();
             }
@@ -370,7 +408,9 @@ namespace System.Workflow.Activities.Design
         private void SelectServiceOperation(OperationInfoBase operationInfo)
         {
             Fx.Assert(operationInfo != null, "operationInfo cannot be null");
-            ServiceContractListItem serviceContract = this.serviceContracts.Find(operationInfo.GetContractFullName(null));
+            ServiceContractListItem serviceContract = this.serviceContracts.Find(
+                operationInfo.GetContractFullName(null)
+            );
             // Dont select operation if the contract cannot be found in the serviceContracts list
             if (serviceContract == null)
             {
@@ -383,15 +423,16 @@ namespace System.Workflow.Activities.Design
                 operationItem.Validating += new CancelEventHandler(ServiceOperationValidating);
 
                 operationItem.Name = operationInfo.Name;
-                ((WorkflowServiceOperationListItem) operationItem).Operation = operationInfo as OperationInfo;
-
+                ((WorkflowServiceOperationListItem)operationItem).Operation =
+                    operationInfo as OperationInfo;
             }
             else if (operationInfo is TypedOperationInfo)
             {
                 operationItem = new TypedServiceOperationListItem();
                 operationItem.Validating += new CancelEventHandler(ServiceOperationValidating);
                 operationItem.Name = operationInfo.Name;
-                ((TypedServiceOperationListItem) operationItem).Operation = operationInfo as TypedOperationInfo;
+                ((TypedServiceOperationListItem)operationItem).Operation =
+                    operationInfo as TypedOperationInfo;
             }
 
             serviceContract.SelectionOperation(operationItem);
@@ -399,15 +440,22 @@ namespace System.Workflow.Activities.Design
 
         void ServiceContractValidating(object sender, CancelEventArgs e)
         {
-            ServiceContractListItem serviceContractListItem = (ServiceContractListItem) sender;
+            ServiceContractListItem serviceContractListItem = (ServiceContractListItem)sender;
 
             if (string.IsNullOrEmpty(serviceContractListItem.Name))
             {
                 e.Cancel = true;
                 string errorString = SR2.GetString(SR2.ContractNameCannotBeEmpty);
-                DesignerHelpers.ShowMessage(this.serviceProvider, errorString, System.Workflow.ComponentModel.Design.DR.GetString(System.Workflow.ComponentModel.Design.DR.WorkflowDesignerTitle), MessageBoxButtons.OK,
-                    MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
-
+                DesignerHelpers.ShowMessage(
+                    this.serviceProvider,
+                    errorString,
+                    System.Workflow.ComponentModel.Design.DR.GetString(
+                        System.Workflow.ComponentModel.Design.DR.WorkflowDesignerTitle
+                    ),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1
+                );
             }
             bool duplicatesFound = false;
             foreach (ServiceContractListItem foundContract in serviceContracts)
@@ -418,7 +466,10 @@ namespace System.Workflow.Activities.Design
                 }
 
                 // allow reimport of existing imported contracts
-                if (!serviceContractListItem.IsCustomContract && serviceContractListItem.ContractType.Equals(foundContract.ContractType))
+                if (
+                    !serviceContractListItem.IsCustomContract
+                    && serviceContractListItem.ContractType.Equals(foundContract.ContractType)
+                )
                 {
                     continue;
                 }
@@ -428,40 +479,55 @@ namespace System.Workflow.Activities.Design
                     duplicatesFound = true;
                     break;
                 }
-
             }
             // contract names must be unique
             if (duplicatesFound)
             {
-
                 e.Cancel = true;
                 string errorString = SR2.GetString(SR2.ContractNameMustBeUnique);
-                DesignerHelpers.ShowMessage(this.serviceProvider, errorString, System.Workflow.ComponentModel.Design.DR.GetString(System.Workflow.ComponentModel.Design.DR.WorkflowDesignerTitle), MessageBoxButtons.OK,
-                    MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
-
+                DesignerHelpers.ShowMessage(
+                    this.serviceProvider,
+                    errorString,
+                    System.Workflow.ComponentModel.Design.DR.GetString(
+                        System.Workflow.ComponentModel.Design.DR.WorkflowDesignerTitle
+                    ),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1
+                );
             }
         }
 
-
-
-
         void ServiceOperationValidating(object sender, CancelEventArgs e)
         {
-
-            ServiceOperationListItem serviceOperationListItem = (ServiceOperationListItem) sender;
+            ServiceOperationListItem serviceOperationListItem = (ServiceOperationListItem)sender;
             string newOperationName = serviceOperationListItem.Name;
             string contractName = serviceOperationListItem.ContractName;
             if (string.IsNullOrEmpty(newOperationName))
             {
                 e.Cancel = true;
                 string errorString = SR2.GetString(SR2.OperationNameCannotBeEmpty);
-                DesignerHelpers.ShowMessage(this.serviceProvider, errorString, System.Workflow.ComponentModel.Design.DR.GetString(System.Workflow.ComponentModel.Design.DR.WorkflowDesignerTitle), MessageBoxButtons.OK,
-                    MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                DesignerHelpers.ShowMessage(
+                    this.serviceProvider,
+                    errorString,
+                    System.Workflow.ComponentModel.Design.DR.GetString(
+                        System.Workflow.ComponentModel.Design.DR.WorkflowDesignerTitle
+                    ),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1
+                );
             }
 
-            Fx.Assert(!string.IsNullOrEmpty(contractName), "contract name should be valid to run this check");
+            Fx.Assert(
+                !string.IsNullOrEmpty(contractName),
+                "contract name should be valid to run this check"
+            );
             ServiceContractListItem contractListItem = serviceContracts.Find(contractName);
-            Fx.Assert(contractListItem != null, "contract should be present in the list to run this check");
+            Fx.Assert(
+                contractListItem != null,
+                "contract should be present in the list to run this check"
+            );
 
             // operation names must be unique inside a contract
             bool duplicatesFound = false;
@@ -476,29 +542,30 @@ namespace System.Workflow.Activities.Design
                     duplicatesFound = true;
                     break;
                 }
-
             }
             if (duplicatesFound)
             {
-
                 e.Cancel = true;
                 string errorString = SR2.GetString(SR2.OperationNameMustBeUnique);
-                DesignerHelpers.ShowMessage(this.serviceProvider, errorString, System.Workflow.ComponentModel.Design.DR.GetString(System.Workflow.ComponentModel.Design.DR.WorkflowDesignerTitle), MessageBoxButtons.OK,
-                    MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
-
+                DesignerHelpers.ShowMessage(
+                    this.serviceProvider,
+                    errorString,
+                    System.Workflow.ComponentModel.Design.DR.GetString(
+                        System.Workflow.ComponentModel.Design.DR.WorkflowDesignerTitle
+                    ),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1
+                );
             }
-
         }
 
         [ListItemView(typeof(HelpListItemViewControl))]
         [ListItemDetailView(typeof(ListItemViewControl))]
-        private class HelpListItem
-        {
-        }
+        private class HelpListItem { }
 
         private class HelpListItemViewControl : ListItemViewControl
         {
-
             protected override void OnLoad(EventArgs e)
             {
                 this.Width = this.Parent.Width - 10;
@@ -513,11 +580,11 @@ namespace System.Workflow.Activities.Design
 
         private class ServiceContractsTypeFilterProvider : ITypeFilterProvider
         {
-
             string ITypeFilterProvider.FilterDescription
             {
                 get { return SR2.GetString(SR2.ChooseAServiceContractFromBelow); }
             }
+
             bool ITypeFilterProvider.CanFilterType(Type type, bool throwOnError)
             {
                 if (!type.IsInterface)
@@ -534,7 +601,5 @@ namespace System.Workflow.Activities.Design
                 }
             }
         }
-
-
     }
 }

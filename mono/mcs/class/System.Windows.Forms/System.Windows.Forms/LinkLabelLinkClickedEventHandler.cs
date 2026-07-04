@@ -1,6 +1,6 @@
 //
 // System.LinkLabelLinkClickEventHandler.cs
-//  
+//
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
 // "Software"), to deal in the Software without restriction, including
@@ -28,11 +28,12 @@
 //
 //
 
-
 // COMPLETE
 
-namespace System.Windows.Forms 
+namespace System.Windows.Forms
 {
-	public delegate void LinkLabelLinkClickedEventHandler (object sender, LinkLabelLinkClickedEventArgs e);
-	
+    public delegate void LinkLabelLinkClickedEventHandler(
+        object sender,
+        LinkLabelLinkClickedEventArgs e
+    );
 }

@@ -4,7 +4,5 @@
 
 namespace System.Activities.Core.Presentation
 {
-    class StartNode
-    {
-    }
+    class StartNode { }
 }

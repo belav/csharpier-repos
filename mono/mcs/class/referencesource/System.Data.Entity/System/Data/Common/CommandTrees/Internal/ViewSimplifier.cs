@@ -7,41 +7,43 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Data.Common.CommandTrees;
 using System.Collections.Generic;
-using System.Data.Metadata.Edm;
-using System.Diagnostics;
-using System.Data.Common.Utils;
-using System.Linq;
-using System.Globalization;
+using System.Data.Common.CommandTrees;
 using System.Data.Common.CommandTrees.ExpressionBuilder;
 using System.Data.Common.CommandTrees.Internal;
+using System.Data.Common.Utils;
+using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
 
 namespace System.Data.Common.CommandTrees.Internal
 {
-
     /// <summary>
     /// Utility class that walks a mapping view and returns a simplified expression with projection
     /// nodes collapsed. Specifically recognizes the following common pattern in mapping views:
-    /// 
+    ///
     ///     outerProject(outerBinding(innerProject(innerBinding, innerNew)), outerProjection)
-    ///     
+    ///
     /// Recognizes simple disciminator patterns of the form:
-    /// 
-    ///     select 
+    ///
+    ///     select
     ///         case when Disc = value1 then value Type1(...)
     ///         case when Disc = value2 then value Type2(...)
     ///         ...
-    ///         
+    ///
     /// Recognizes redundant case statement of the form:
-    /// 
+    ///
     ///     select
     ///         case when (case when Predicate1 then true else false) ...
-    /// 
+    ///
     /// </summary>
     internal class ViewSimplifier
     {
-        internal static DbQueryCommandTree SimplifyView(EntitySetBase extent, DbQueryCommandTree view)
+        internal static DbQueryCommandTree SimplifyView(
+            EntitySetBase extent,
+            DbQueryCommandTree view
+        )
         {
             ViewSimplifier vs = new ViewSimplifier(view.MetadataWorkspace, extent);
             view = vs.Simplify(view);
@@ -61,22 +63,29 @@ namespace System.Data.Common.CommandTrees.Internal
         {
             var simplifier = PatternMatchRuleProcessor.Create(
                 // determines if an expression is of the form outerProject(outerProjection(innerProject(innerNew)))
-                PatternMatchRule.Create(Pattern_CollapseNestedProjection, ViewSimplifier.CollapseNestedProjection),
-                
+                PatternMatchRule.Create(
+                    Pattern_CollapseNestedProjection,
+                    ViewSimplifier.CollapseNestedProjection
+                ),
                 // A case statement can potentially be simplified
                 PatternMatchRule.Create(Pattern_Case, ViewSimplifier.SimplifyCaseStatement),
-
                 // Nested TPH discriminator pattern can be converted to the expected TPH discriminator pattern
-                PatternMatchRule.Create(Pattern_NestedTphDiscriminator, ViewSimplifier.SimplifyNestedTphDiscriminator),
-
+                PatternMatchRule.Create(
+                    Pattern_NestedTphDiscriminator,
+                    ViewSimplifier.SimplifyNestedTphDiscriminator
+                ),
                 // Entity constructors may be augmented with FK-based related entity refs
                 PatternMatchRule.Create(Pattern_EntityConstructor, this.AddFkRelatedEntityRefs)
             );
-                
+
             DbExpression queryExpression = view.Query;
             queryExpression = simplifier(queryExpression);
 
-            view = DbQueryCommandTree.FromValidExpression(view.MetadataWorkspace, view.DataSpace, queryExpression);
+            view = DbQueryCommandTree.FromValidExpression(
+                view.MetadataWorkspace,
+                view.DataSpace,
+                queryExpression
+            );
             return view;
         }
 
@@ -87,10 +96,13 @@ namespace System.Data.Common.CommandTrees.Internal
                 Patterns.AnyExpression,
                 Patterns.And(
                     Patterns.MatchEntityType,
-                    Patterns.Or
-                    (
+                    Patterns.Or(
                         Patterns.MatchNewInstance(),
-                        Patterns.MatchCase(Patterns.AnyExpressions, Patterns.MatchForAll(Patterns.MatchNewInstance()), Patterns.MatchNewInstance())
+                        Patterns.MatchCase(
+                            Patterns.AnyExpressions,
+                            Patterns.MatchForAll(Patterns.MatchNewInstance()),
+                            Patterns.MatchNewInstance()
+                        )
                     )
                 )
             );
@@ -108,8 +120,10 @@ namespace System.Data.Common.CommandTrees.Internal
                 return null;
             }
 
-            if(this.extent.BuiltInTypeKind != BuiltInTypeKind.EntitySet ||
-               this.extent.EntityContainer.DataSpace != DataSpace.CSpace)
+            if (
+                this.extent.BuiltInTypeKind != BuiltInTypeKind.EntitySet
+                || this.extent.EntityContainer.DataSpace != DataSpace.CSpace
+            )
             {
                 this.doNotProcess = true;
                 return null;
@@ -117,19 +131,20 @@ namespace System.Data.Common.CommandTrees.Internal
 
             // Get a reference to the entity set being simplified, and find all the foreign key
             // (foreign key) associations for which the association set references that entity set,
-            // with either association end. 
+            // with either association end.
             //
             EntitySet targetSet = (EntitySet)this.extent;
-            var relSets = 
-                targetSet.EntityContainer.BaseEntitySets
-                .Where(es => es.BuiltInTypeKind == BuiltInTypeKind.AssociationSet)
+            var relSets = targetSet
+                .EntityContainer.BaseEntitySets.Where(es =>
+                    es.BuiltInTypeKind == BuiltInTypeKind.AssociationSet
+                )
                 .Cast<AssociationSet>()
-                .Where(assocSet => 
-                          assocSet.ElementType.IsForeignKey &&
-                          assocSet.AssociationSetEnds.Any(se => se.EntitySet == targetSet)
-                       )
+                .Where(assocSet =>
+                    assocSet.ElementType.IsForeignKey
+                    && assocSet.AssociationSetEnds.Any(se => se.EntitySet == targetSet)
+                )
                 .ToList();
-            
+
             // If no foreign key association sets that reference the entity set are present, then
             // no further processing is necessary, because FK-based related entity references cannot
             // be computed and added to the entities constructed for the entity set.
@@ -146,7 +161,8 @@ namespace System.Data.Common.CommandTrees.Internal
             // from the dependent end (this entity set) to the the principal end (the entity set that
             // is referenced by the other association set end of the relationship set).
             //
-            var principalSetsAndDependentTypes = new HashSet<Tuple<EntityType, AssociationSetEnd, ReferentialConstraint>>();
+            var principalSetsAndDependentTypes =
+                new HashSet<Tuple<EntityType, AssociationSetEnd, ReferentialConstraint>>();
             foreach (AssociationSet relSet in relSets)
             {
                 // Retrieve the single referential constraint from the foreign key association, and
@@ -155,10 +171,15 @@ namespace System.Data.Common.CommandTrees.Internal
                 //
                 var fkConstraint = relSet.ElementType.ReferentialConstraints[0];
                 var dependentSetEnd = relSet.AssociationSetEnds[fkConstraint.ToRole.Name];
-                
+
                 if (dependentSetEnd.EntitySet == targetSet)
                 {
-                    EntityType requiredSourceNavType = (EntityType)TypeHelpers.GetEdmType<RefType>(dependentSetEnd.CorrespondingAssociationEndMember.TypeUsage).ElementType;
+                    EntityType requiredSourceNavType = (EntityType)
+                        TypeHelpers
+                            .GetEdmType<RefType>(
+                                dependentSetEnd.CorrespondingAssociationEndMember.TypeUsage
+                            )
+                            .ElementType;
                     var principalSetEnd = relSet.AssociationSetEnds[fkConstraint.FromRole.Name];
 
                     // Record the entity type that an element of this dependent entity set must have in order
@@ -168,7 +189,9 @@ namespace System.Data.Common.CommandTrees.Internal
                     // later to construct a related entity ref for any entity constructor expression in the view
                     // that produces an entity of the required source type or a subtype.
                     //
-                    principalSetsAndDependentTypes.Add(Tuple.Create(requiredSourceNavType, principalSetEnd, fkConstraint));
+                    principalSetsAndDependentTypes.Add(
+                        Tuple.Create(requiredSourceNavType, principalSetEnd, fkConstraint)
+                    );
                 }
             }
 
@@ -183,7 +206,7 @@ namespace System.Data.Common.CommandTrees.Internal
             }
 
             // This rule supports a view that is capped with a projection of the form
-            // (input).Project(x => new Entity()) 
+            // (input).Project(x => new Entity())
             // or
             // (input).Project(x => CASE WHEN (condition1) THEN new Entity1() ELSE WHEN (condition2) THEN new Entity2()... ELSE new EntityN())
             // where every new instance expression Entity1()...EntityN() constructs an entity of a type
@@ -199,7 +222,8 @@ namespace System.Data.Common.CommandTrees.Internal
             if (entityProject.Projection.ExpressionKind == DbExpressionKind.Case)
             {
                 // If the projection is a DbCaseExpression, then every result must be a DbNewInstanceExpression
-                DbCaseExpression discriminatedConstructor = (DbCaseExpression)entityProject.Projection;
+                DbCaseExpression discriminatedConstructor = (DbCaseExpression)
+                    entityProject.Projection;
                 conditions = new List<DbExpression>(discriminatedConstructor.When.Count);
                 for (int idx = 0; idx < discriminatedConstructor.When.Count; idx++)
                 {
@@ -213,26 +237,45 @@ namespace System.Data.Common.CommandTrees.Internal
                 // Otherwise, the projection must be a single DbNewInstanceExpression
                 constructors.Add((DbNewInstanceExpression)entityProject.Projection);
             }
-                        
+
             bool rebuildView = false;
             for (int idx = 0; idx < constructors.Count; idx++)
             {
                 DbNewInstanceExpression entityConstructor = constructors[idx];
-                EntityType constructedEntityType = TypeHelpers.GetEdmType<EntityType>(entityConstructor.ResultType);
+                EntityType constructedEntityType = TypeHelpers.GetEdmType<EntityType>(
+                    entityConstructor.ResultType
+                );
 
-                List<DbRelatedEntityRef> relatedRefs = 
-                    principalSetsAndDependentTypes
-                    .Where(psdt => constructedEntityType == psdt.Item1 || constructedEntityType.IsSubtypeOf(psdt.Item1))
-                    .Select(psdt => RelatedEntityRefFromAssociationSetEnd(constructedEntityType, entityConstructor, psdt.Item2, psdt.Item3)).ToList();
+                List<DbRelatedEntityRef> relatedRefs = principalSetsAndDependentTypes
+                    .Where(psdt =>
+                        constructedEntityType == psdt.Item1
+                        || constructedEntityType.IsSubtypeOf(psdt.Item1)
+                    )
+                    .Select(psdt =>
+                        RelatedEntityRefFromAssociationSetEnd(
+                            constructedEntityType,
+                            entityConstructor,
+                            psdt.Item2,
+                            psdt.Item3
+                        )
+                    )
+                    .ToList();
 
                 if (relatedRefs.Count > 0)
                 {
                     if (entityConstructor.HasRelatedEntityReferences)
                     {
-                        relatedRefs = entityConstructor.RelatedEntityReferences.Concat(relatedRefs).ToList();
+                        relatedRefs = entityConstructor
+                            .RelatedEntityReferences.Concat(relatedRefs)
+                            .ToList();
                     }
 
-                    entityConstructor = DbExpressionBuilder.CreateNewEntityWithRelationshipsExpression(constructedEntityType, entityConstructor.Arguments, relatedRefs);
+                    entityConstructor =
+                        DbExpressionBuilder.CreateNewEntityWithRelationshipsExpression(
+                            constructedEntityType,
+                            entityConstructor.Arguments,
+                            relatedRefs
+                        );
                     constructors[idx] = entityConstructor;
                     rebuildView = true;
                 }
@@ -250,7 +293,7 @@ namespace System.Data.Common.CommandTrees.Internal
                 if (conditions != null)
                 {
                     // The original view definition projection was a DbCaseExpression.
-                    // The new expression is also a DbCaseExpression that uses the conditions from the 
+                    // The new expression is also a DbCaseExpression that uses the conditions from the
                     // original expression together with the updated result expressions to produce the
                     // new capping projection.
                     //
@@ -262,7 +305,9 @@ namespace System.Data.Common.CommandTrees.Internal
                         thens.Add(constructors[idx]);
                     }
 
-                    result = entityProject.Input.Project(DbExpressionBuilder.Case(whens, thens, constructors[conditions.Count]));
+                    result = entityProject.Input.Project(
+                        DbExpressionBuilder.Case(whens, thens, constructors[conditions.Count])
+                    );
                 }
                 else
                 {
@@ -277,11 +322,17 @@ namespace System.Data.Common.CommandTrees.Internal
             return result;
         }
 
-        private static DbRelatedEntityRef RelatedEntityRefFromAssociationSetEnd(EntityType constructedEntityType, DbNewInstanceExpression entityConstructor, AssociationSetEnd principalSetEnd, ReferentialConstraint fkConstraint)
+        private static DbRelatedEntityRef RelatedEntityRefFromAssociationSetEnd(
+            EntityType constructedEntityType,
+            DbNewInstanceExpression entityConstructor,
+            AssociationSetEnd principalSetEnd,
+            ReferentialConstraint fkConstraint
+        )
         {
-            EntityType principalEntityType = (EntityType)TypeHelpers.GetEdmType<RefType>(fkConstraint.FromRole.TypeUsage).ElementType;
+            EntityType principalEntityType = (EntityType)
+                TypeHelpers.GetEdmType<RefType>(fkConstraint.FromRole.TypeUsage).ElementType;
             IList<DbExpression> principalKeyValues = null;
-            
+
             // Create Entity Property/DbExpression value pairs from the entity constructor DbExpression,
             // then join these with the principal/dependent property pairs from the FK constraint
             // to produce principal property name/DbExpression value pairs from which to create the principal ref.
@@ -294,9 +345,13 @@ namespace System.Data.Common.CommandTrees.Internal
             //    select new { PrincipalProperty = ft.PrincipalProperty.Name, Value = pv.Value };
             //
             var keyPropAndValue =
-                from pv in constructedEntityType.Properties.Select((p, idx) => Tuple.Create(p, entityConstructor.Arguments[idx])) // new { DependentProperty = p, Value = entityConstructor.Arguments[idx] })
-                join ft in fkConstraint.FromProperties.Select((fp, idx) => Tuple.Create(fp, fkConstraint.ToProperties[idx])) //new { PrincipalProperty = fp, DependentProperty = fkConstraint.ToProperties[idx] })
-                on pv.Item1 equals ft.Item2 //pv.DependentProperty equals ft.DependentProperty
+                from pv in constructedEntityType.Properties.Select(
+                    (p, idx) => Tuple.Create(p, entityConstructor.Arguments[idx])
+                ) // new { DependentProperty = p, Value = entityConstructor.Arguments[idx] })
+                join ft in fkConstraint.FromProperties.Select(
+                    (fp, idx) => Tuple.Create(fp, fkConstraint.ToProperties[idx])
+                ) //new { PrincipalProperty = fp, DependentProperty = fkConstraint.ToProperties[idx] })
+                    on pv.Item1 equals ft.Item2 //pv.DependentProperty equals ft.DependentProperty
                 select Tuple.Create(ft.Item1.Name, pv.Item2); // new { PrincipalProperty = ft.PrincipalProperty.Name, Value = pv.Value };
 
             // If there is only a single property in the principal's key, then there is no ordering concern.
@@ -308,19 +363,35 @@ namespace System.Data.Common.CommandTrees.Internal
             if (fkConstraint.FromProperties.Count == 1)
             {
                 var singleKeyNameAndValue = keyPropAndValue.Single();
-                Debug.Assert(singleKeyNameAndValue.Item1 == fkConstraint.FromProperties[0].Name, "Unexpected single key property name");
+                Debug.Assert(
+                    singleKeyNameAndValue.Item1 == fkConstraint.FromProperties[0].Name,
+                    "Unexpected single key property name"
+                );
                 principalKeyValues = new[] { singleKeyNameAndValue.Item2 };
             }
             else
             {
-                var keyValueMap = keyPropAndValue.ToDictionary(pav => pav.Item1, pav => pav.Item2, StringComparer.Ordinal);
-                principalKeyValues = principalEntityType.KeyMemberNames.Select(memberName => keyValueMap[memberName]).ToList();
+                var keyValueMap = keyPropAndValue.ToDictionary(
+                    pav => pav.Item1,
+                    pav => pav.Item2,
+                    StringComparer.Ordinal
+                );
+                principalKeyValues = principalEntityType
+                    .KeyMemberNames.Select(memberName => keyValueMap[memberName])
+                    .ToList();
             }
-                        
+
             // Create the ref to the principal entity based on the (now correctly ordered) key value expressions.
             //
-            DbRefExpression principalRef = principalSetEnd.EntitySet.CreateRef(principalEntityType, principalKeyValues);
-            DbRelatedEntityRef result = DbExpressionBuilder.CreateRelatedEntityRef(fkConstraint.ToRole, fkConstraint.FromRole, principalRef);
+            DbRefExpression principalRef = principalSetEnd.EntitySet.CreateRef(
+                principalEntityType,
+                principalKeyValues
+            );
+            DbRelatedEntityRef result = DbExpressionBuilder.CreateRelatedEntityRef(
+                fkConstraint.ToRole,
+                fkConstraint.FromRole,
+                principalRef
+            );
 
             return result;
         }
@@ -330,7 +401,7 @@ namespace System.Data.Common.CommandTrees.Internal
         #region Nested TPH Discriminator simplification
 
         /// <summary>
-        /// Matches the nested TPH discriminator pattern produced by view generation 
+        /// Matches the nested TPH discriminator pattern produced by view generation
         /// </summary>
         private static readonly Func<DbExpression, bool> Pattern_NestedTphDiscriminator =
             Patterns.MatchProject(
@@ -355,7 +426,7 @@ namespace System.Data.Common.CommandTrees.Internal
                                         Patterns.MatchKind(DbExpressionKind.Property),
                                         Patterns.MatchKind(DbExpressionKind.Case)
                                     )
-                                 )
+                                )
                             )
                         )
                     ),
@@ -373,10 +444,10 @@ namespace System.Data.Common.CommandTrees.Internal
                     )
                 )
             );
-                
+
         /// <summary>
         /// Converts the DbExpression equivalent of:
-        /// 
+        ///
         /// SELECT CASE
         ///     WHEN a._from0 THEN SUBTYPE1()
         ///     ...
@@ -392,13 +463,13 @@ namespace System.Data.Common.CommandTrees.Internal
         ///     WHERE b.Discriminator = SUBTYPE1_Value... OR x.Discriminator = SUBTYPE_n_Value
         /// AS a
         /// WHERE a._from0... OR a._from[n-1]
-        /// 
+        ///
         /// into the DbExpression equivalent of the following, which is matched as a TPH discriminator
         /// by the <see cref="System.Data.Mapping.ViewGeneration.GeneratedView"/> class and so allows a <see cref="System.Data.Mapping.ViewGeneration.DiscriminatorMap"/>
         /// to be produced for the view, which would not otherwise be possible. Note that C1 through Cn
         /// are only allowed to be scalars or complex type constructors based on direct property references
         /// to the store entity set's scalar properties.
-        /// 
+        ///
         /// SELECT CASE
         ///     WHEN y.Discriminator = SUBTTYPE1_Value THEN SUBTYPE1()
         ///     ...
@@ -406,72 +477,111 @@ namespace System.Data.Common.CommandTrees.Internal
         ///     ELSE SUBTYPE_n()
         /// FROM
         ///     SELECT x.C1..., x.Cn, Discriminator FROM TSet AS x
-        ///     WHERE x.Discriminator = SUBTYPE1_Value... OR x.Discriminator = SUBTYPE_n_Value 
+        ///     WHERE x.Discriminator = SUBTYPE1_Value... OR x.Discriminator = SUBTYPE_n_Value
         /// AS y
-        ///     
+        ///
         /// </summary>
         private static DbExpression SimplifyNestedTphDiscriminator(DbExpression expression)
         {
             DbProjectExpression entityProjection = (DbProjectExpression)expression;
-            DbFilterExpression booleanColumnFilter = (DbFilterExpression)entityProjection.Input.Expression;
-            DbProjectExpression rowProjection = (DbProjectExpression)booleanColumnFilter.Input.Expression;
-            DbFilterExpression discriminatorFilter = (DbFilterExpression)rowProjection.Input.Expression;
-            
+            DbFilterExpression booleanColumnFilter = (DbFilterExpression)
+                entityProjection.Input.Expression;
+            DbProjectExpression rowProjection = (DbProjectExpression)
+                booleanColumnFilter.Input.Expression;
+            DbFilterExpression discriminatorFilter = (DbFilterExpression)
+                rowProjection.Input.Expression;
+
             List<DbExpression> predicates = FlattenOr(booleanColumnFilter.Predicate).ToList();
-            List<DbPropertyExpression> propertyPredicates =
-                predicates.OfType<DbPropertyExpression>()
-                .Where(px => px.Instance.ExpressionKind == DbExpressionKind.VariableReference &&
-                             ((DbVariableReferenceExpression)px.Instance).VariableName == booleanColumnFilter.Input.VariableName).ToList();
-            if (predicates.Count != propertyPredicates.Count)    
+            List<DbPropertyExpression> propertyPredicates = predicates
+                .OfType<DbPropertyExpression>()
+                .Where(px =>
+                    px.Instance.ExpressionKind == DbExpressionKind.VariableReference
+                    && ((DbVariableReferenceExpression)px.Instance).VariableName
+                        == booleanColumnFilter.Input.VariableName
+                )
+                .ToList();
+            if (predicates.Count != propertyPredicates.Count)
             {
                 return null;
             }
 
-            List<string> predicateColumnNames = propertyPredicates.Select(px => px.Property.Name).ToList();
-                           
-            Dictionary<object, DbComparisonExpression> discriminatorPredicates = new Dictionary<object, DbComparisonExpression>();
-            if (!TypeSemantics.IsEntityType(discriminatorFilter.Input.VariableType) ||
-                !TryMatchDiscriminatorPredicate(discriminatorFilter, (compEx, discValue) => discriminatorPredicates.Add(discValue, compEx)))
+            List<string> predicateColumnNames = propertyPredicates
+                .Select(px => px.Property.Name)
+                .ToList();
+
+            Dictionary<object, DbComparisonExpression> discriminatorPredicates =
+                new Dictionary<object, DbComparisonExpression>();
+            if (
+                !TypeSemantics.IsEntityType(discriminatorFilter.Input.VariableType)
+                || !TryMatchDiscriminatorPredicate(
+                    discriminatorFilter,
+                    (compEx, discValue) => discriminatorPredicates.Add(discValue, compEx)
+                )
+            )
             {
                 return null;
             }
 
-            EdmProperty discriminatorProp = (EdmProperty)((DbPropertyExpression)((DbComparisonExpression)discriminatorPredicates.First().Value).Left).Property;
-            DbNewInstanceExpression rowConstructor = (DbNewInstanceExpression)rowProjection.Projection;
+            EdmProperty discriminatorProp = (EdmProperty)
+                (
+                    (DbPropertyExpression)
+                        ((DbComparisonExpression)discriminatorPredicates.First().Value).Left
+                ).Property;
+            DbNewInstanceExpression rowConstructor = (DbNewInstanceExpression)
+                rowProjection.Projection;
             RowType resultRow = TypeHelpers.GetEdmType<RowType>(rowConstructor.ResultType);
-            Dictionary<string, DbComparisonExpression> inputPredicateMap = new Dictionary<string, DbComparisonExpression>();
-            Dictionary<string, DbComparisonExpression> selectorPredicateMap = new Dictionary<string, DbComparisonExpression>();
-            Dictionary<string, DbExpression> columnValues = new Dictionary<string, DbExpression>(rowConstructor.Arguments.Count);
+            Dictionary<string, DbComparisonExpression> inputPredicateMap =
+                new Dictionary<string, DbComparisonExpression>();
+            Dictionary<string, DbComparisonExpression> selectorPredicateMap =
+                new Dictionary<string, DbComparisonExpression>();
+            Dictionary<string, DbExpression> columnValues = new Dictionary<string, DbExpression>(
+                rowConstructor.Arguments.Count
+            );
             for (int idx = 0; idx < rowConstructor.Arguments.Count; idx++)
             {
                 string propName = resultRow.Properties[idx].Name;
                 DbExpression columnVal = rowConstructor.Arguments[idx];
                 if (predicateColumnNames.Contains(propName))
                 {
-                    if(columnVal.ExpressionKind != DbExpressionKind.Case)
+                    if (columnVal.ExpressionKind != DbExpressionKind.Case)
                     {
                         return null;
                     }
                     DbCaseExpression casePredicate = (DbCaseExpression)columnVal;
-                    if(casePredicate.When.Count != 1 ||
-                       !TypeSemantics.IsBooleanType(casePredicate.Then[0].ResultType) || !TypeSemantics.IsBooleanType(casePredicate.Else.ResultType) ||
-                        casePredicate.Then[0].ExpressionKind != DbExpressionKind.Constant || casePredicate.Else.ExpressionKind != DbExpressionKind.Constant ||
-                        (bool)((DbConstantExpression)casePredicate.Then[0]).Value != true || (bool)((DbConstantExpression)casePredicate.Else).Value != false)
+                    if (
+                        casePredicate.When.Count != 1
+                        || !TypeSemantics.IsBooleanType(casePredicate.Then[0].ResultType)
+                        || !TypeSemantics.IsBooleanType(casePredicate.Else.ResultType)
+                        || casePredicate.Then[0].ExpressionKind != DbExpressionKind.Constant
+                        || casePredicate.Else.ExpressionKind != DbExpressionKind.Constant
+                        || (bool)((DbConstantExpression)casePredicate.Then[0]).Value != true
+                        || (bool)((DbConstantExpression)casePredicate.Else).Value != false
+                    )
                     {
                         return null;
                     }
 
                     DbPropertyExpression comparedProp;
                     object constValue;
-                    if(!TryMatchPropertyEqualsValue(casePredicate.When[0], rowProjection.Input.VariableName, out comparedProp, out constValue) ||
-                       comparedProp.Property != discriminatorProp ||
-                       !discriminatorPredicates.ContainsKey(constValue))
+                    if (
+                        !TryMatchPropertyEqualsValue(
+                            casePredicate.When[0],
+                            rowProjection.Input.VariableName,
+                            out comparedProp,
+                            out constValue
+                        )
+                        || comparedProp.Property != discriminatorProp
+                        || !discriminatorPredicates.ContainsKey(constValue)
+                    )
                     {
                         return null;
                     }
 
                     inputPredicateMap.Add(propName, discriminatorPredicates[constValue]);
-                    selectorPredicateMap.Add(propName, (DbComparisonExpression)casePredicate.When[0]);
+                    selectorPredicateMap.Add(
+                        propName,
+                        (DbComparisonExpression)casePredicate.When[0]
+                    );
                 }
                 else
                 {
@@ -480,39 +590,63 @@ namespace System.Data.Common.CommandTrees.Internal
             }
 
             // Build a new discriminator-based filter that only includes the same rows allowed by the higher '_from0' column-based filter
-            DbExpression newDiscriminatorPredicate = Helpers.BuildBalancedTreeInPlace<DbExpression>(new List<DbExpression>(inputPredicateMap.Values), (left, right) => DbExpressionBuilder.Or(left, right));
+            DbExpression newDiscriminatorPredicate = Helpers.BuildBalancedTreeInPlace<DbExpression>(
+                new List<DbExpression>(inputPredicateMap.Values),
+                (left, right) => DbExpressionBuilder.Or(left, right)
+            );
             discriminatorFilter = discriminatorFilter.Input.Filter(newDiscriminatorPredicate);
 
             DbCaseExpression entitySelector = (DbCaseExpression)entityProjection.Projection;
             List<DbExpression> newWhens = new List<DbExpression>(entitySelector.When.Count);
             List<DbExpression> newThens = new List<DbExpression>(entitySelector.Then.Count);
-            
+
             for (int idx = 0; idx < entitySelector.When.Count; idx++)
             {
                 DbPropertyExpression propWhen = (DbPropertyExpression)entitySelector.When[idx];
-                DbNewInstanceExpression entityThen = (DbNewInstanceExpression)entitySelector.Then[idx];
+                DbNewInstanceExpression entityThen = (DbNewInstanceExpression)
+                    entitySelector.Then[idx];
 
                 DbComparisonExpression discriminatorWhen;
-                if (!selectorPredicateMap.TryGetValue(propWhen.Property.Name, out discriminatorWhen))
+                if (
+                    !selectorPredicateMap.TryGetValue(propWhen.Property.Name, out discriminatorWhen)
+                )
                 {
                     return null;
                 }
                 newWhens.Add(discriminatorWhen);
 
-                DbExpression inputBoundEntityConstructor = ValueSubstituter.Substitute(entityThen, entityProjection.Input.VariableName, columnValues);
+                DbExpression inputBoundEntityConstructor = ValueSubstituter.Substitute(
+                    entityThen,
+                    entityProjection.Input.VariableName,
+                    columnValues
+                );
                 newThens.Add(inputBoundEntityConstructor);
             }
 
-            DbExpression newElse = ValueSubstituter.Substitute(entitySelector.Else, entityProjection.Input.VariableName, columnValues);
-            DbCaseExpression newEntitySelector = DbExpressionBuilder.Case(newWhens, newThens, newElse);
+            DbExpression newElse = ValueSubstituter.Substitute(
+                entitySelector.Else,
+                entityProjection.Input.VariableName,
+                columnValues
+            );
+            DbCaseExpression newEntitySelector = DbExpressionBuilder.Case(
+                newWhens,
+                newThens,
+                newElse
+            );
 
-            DbExpression result = discriminatorFilter.BindAs(rowProjection.Input.VariableName).Project(newEntitySelector);
+            DbExpression result = discriminatorFilter
+                .BindAs(rowProjection.Input.VariableName)
+                .Project(newEntitySelector);
             return result;
         }
 
         private class ValueSubstituter : DefaultExpressionVisitor
         {
-            internal static DbExpression Substitute(DbExpression original, string referencedVariable, Dictionary<string, DbExpression> propertyValues)
+            internal static DbExpression Substitute(
+                DbExpression original,
+                string referencedVariable,
+                Dictionary<string, DbExpression> propertyValues
+            )
             {
                 Debug.Assert(original != null, "Original expression cannot be null");
                 ValueSubstituter visitor = new ValueSubstituter(referencedVariable, propertyValues);
@@ -536,9 +670,14 @@ namespace System.Data.Common.CommandTrees.Internal
                 DbExpression result = null;
 
                 DbExpression replacementValue;
-                if (expression.Instance.ExpressionKind == DbExpressionKind.VariableReference &&
-                    (((DbVariableReferenceExpression)expression.Instance).VariableName == this.variableName) &&
-                    this.replacements.TryGetValue(expression.Property.Name, out replacementValue))
+                if (
+                    expression.Instance.ExpressionKind == DbExpressionKind.VariableReference
+                    && (
+                        ((DbVariableReferenceExpression)expression.Instance).VariableName
+                        == this.variableName
+                    )
+                    && this.replacements.TryGetValue(expression.Property.Name, out replacementValue)
+                )
                 {
                     result = replacementValue;
                 }
@@ -555,9 +694,11 @@ namespace System.Data.Common.CommandTrees.Internal
         #region Case Statement Simplification
 
         /// <summary>
-        /// Matches any Case expression 
+        /// Matches any Case expression
         /// </summary>
-        private static readonly Func<DbExpression, bool> Pattern_Case = Patterns.MatchKind(DbExpressionKind.Case);
+        private static readonly Func<DbExpression, bool> Pattern_Case = Patterns.MatchKind(
+            DbExpressionKind.Case
+        );
 
         private static DbExpression SimplifyCaseStatement(DbExpression expression)
         {
@@ -565,7 +706,9 @@ namespace System.Data.Common.CommandTrees.Internal
 
             // try simplifying predicates
             bool predicateSimplified = false;
-            List<DbExpression> rewrittenPredicates = new List<DbExpression>(caseExpression.When.Count);
+            List<DbExpression> rewrittenPredicates = new List<DbExpression>(
+                caseExpression.When.Count
+            );
             foreach (var when in caseExpression.When)
             {
                 DbExpression simplifiedPredicate;
@@ -580,28 +723,53 @@ namespace System.Data.Common.CommandTrees.Internal
                 }
             }
 
-            if (!predicateSimplified) { return null; }
+            if (!predicateSimplified)
+            {
+                return null;
+            }
 
-            caseExpression = DbExpressionBuilder.Case(rewrittenPredicates, caseExpression.Then, caseExpression.Else);
+            caseExpression = DbExpressionBuilder.Case(
+                rewrittenPredicates,
+                caseExpression.Then,
+                caseExpression.Else
+            );
             return caseExpression;
         }
 
-        private static bool TrySimplifyPredicate(DbExpression predicate, out DbExpression simplified)
+        private static bool TrySimplifyPredicate(
+            DbExpression predicate,
+            out DbExpression simplified
+        )
         {
             simplified = null;
-            if (predicate.ExpressionKind != DbExpressionKind.Case) { return false; }
+            if (predicate.ExpressionKind != DbExpressionKind.Case)
+            {
+                return false;
+            }
             var caseExpression = (DbCaseExpression)predicate;
-            if (caseExpression.Then.Count != 1 && caseExpression.Then[0].ExpressionKind == DbExpressionKind.Constant)
+            if (
+                caseExpression.Then.Count != 1
+                && caseExpression.Then[0].ExpressionKind == DbExpressionKind.Constant
+            )
             {
                 return false;
             }
             var then = (DbConstantExpression)caseExpression.Then[0];
-            if (!true.Equals(then.Value)) { return false; }
+            if (!true.Equals(then.Value))
+            {
+                return false;
+            }
             if (caseExpression.Else != null)
             {
-                if (caseExpression.Else.ExpressionKind != DbExpressionKind.Constant) { return false; }
+                if (caseExpression.Else.ExpressionKind != DbExpressionKind.Constant)
+                {
+                    return false;
+                }
                 var when = (DbConstantExpression)caseExpression.Else;
-                if (!false.Equals(when.Value)) { return false; }
+                if (!false.Equals(when.Value))
+                {
+                    return false;
+                }
             }
             simplified = caseExpression.When[0];
             return true;
@@ -610,7 +778,7 @@ namespace System.Data.Common.CommandTrees.Internal
         #endregion
 
         #region Nested Projection Collapsing
-                
+
         /// <summary>
         /// Determines if an expression is of the form outerProject(outerProjection(innerProject(innerNew)))
         /// </summary>
@@ -619,8 +787,8 @@ namespace System.Data.Common.CommandTrees.Internal
                 Patterns.MatchProject(
                     Patterns.AnyExpression,
                     Patterns.MatchKind(DbExpressionKind.NewInstance)
-                 ),
-                 Patterns.AnyExpression
+                ),
+                Patterns.AnyExpression
             );
 
         /// <summary>
@@ -635,7 +803,9 @@ namespace System.Data.Common.CommandTrees.Internal
 
             // get membername -> expression bindings for the inner select so that we know how map property
             // references to the inner projection
-            Dictionary<string, DbExpression> bindings = new Dictionary<string, DbExpression>(innerNew.Arguments.Count);
+            Dictionary<string, DbExpression> bindings = new Dictionary<string, DbExpression>(
+                innerNew.Arguments.Count
+            );
             TypeUsage innerResultTypeUsage = innerNew.ResultType;
             RowType innerResultType = (RowType)innerResultTypeUsage.EdmType;
 
@@ -650,20 +820,25 @@ namespace System.Data.Common.CommandTrees.Internal
 
             // replace all property references to the inner projection
             var replacementOuterProjection = collapser.CollapseProjection(outerProjection);
-            
+
             // make sure the collapsing was successful; if not, give up on simplification
-            if (collapser.IsDoomed) { return null; }
-            
+            if (collapser.IsDoomed)
+            {
+                return null;
+            }
+
             // set replacement value so that the expression replacer infrastructure can substitute
             // the collapsed projection in the expression tree
             // continue collapsing projection until the pattern no longer matches
-            DbProjectExpression replacementOuterProject = innerProject.Input.Project(replacementOuterProjection);
+            DbProjectExpression replacementOuterProject = innerProject.Input.Project(
+                replacementOuterProjection
+            );
             return replacementOuterProject;
         }
 
         /// <summary>
         /// This expression visitor supports collapsing a nested projection matching the pattern described above.
-        /// 
+        ///
         /// For instance:
         ///
         ///     select T.a as x, T.b as y, true as z from (select E.a as x, E.b as y from Extent E)
@@ -672,24 +847,24 @@ namespace System.Data.Common.CommandTrees.Internal
         ///
         ///     select E.a, E.b, true as z from Extent E
         ///
-        /// In general, 
+        /// In general,
         ///
         ///     outerProject(
         ///         outerBinding(
         ///             innerProject(innerBinding, innerNew)
-        ///         ), 
+        ///         ),
         ///         outerNew)
         ///
         /// resolves to:
         ///
         ///     replacementOuterProject(
-        ///         innerBinding, 
+        ///         innerBinding,
         ///         replacementOuterNew)
         ///
         /// The outer projection is bound to the inner input source (outerBinding -> innerBinding) and
         /// the outer new instance expression has its properties remapped to the inner new instance
         /// expression member expressions.
-        /// 
+        ///
         /// This replacer is used to simplify argument value in a new instance expression OuterNew
         /// from an expression of the form:
         ///
@@ -705,8 +880,11 @@ namespace System.Data.Common.CommandTrees.Internal
             private Dictionary<string, DbExpression> m_varRefMemberBindings;
             private DbExpressionBinding m_outerBinding;
             private bool m_doomed;
-            internal ProjectionCollapser(Dictionary<string, DbExpression> varRefMemberBindings,
-                DbExpressionBinding outerBinding)
+
+            internal ProjectionCollapser(
+                Dictionary<string, DbExpression> varRefMemberBindings,
+                DbExpressionBinding outerBinding
+            )
                 : base()
             {
                 m_varRefMemberBindings = varRefMemberBindings;
@@ -723,8 +901,10 @@ namespace System.Data.Common.CommandTrees.Internal
             public override DbExpression Visit(DbPropertyExpression property)
             {
                 // check for a property of the outer projection binding (that can be remapped)
-                if (property.Instance.ExpressionKind == DbExpressionKind.VariableReference &&
-                        IsOuterBindingVarRef((DbVariableReferenceExpression)property.Instance))
+                if (
+                    property.Instance.ExpressionKind == DbExpressionKind.VariableReference
+                    && IsOuterBindingVarRef((DbVariableReferenceExpression)property.Instance)
+                )
                 {
                     return m_varRefMemberBindings[property.Property.Name];
                 }
@@ -764,12 +944,21 @@ namespace System.Data.Common.CommandTrees.Internal
 
         internal static IEnumerable<DbExpression> FlattenOr(DbExpression expression)
         {
-            return Helpers.GetLeafNodes(expression,
+            return Helpers.GetLeafNodes(
+                expression,
                 exp => (exp.ExpressionKind != DbExpressionKind.Or),
-                exp => { DbOrExpression orExp = (DbOrExpression)exp; return new[] { orExp.Left, orExp.Right }; });
+                exp =>
+                {
+                    DbOrExpression orExp = (DbOrExpression)exp;
+                    return new[] { orExp.Left, orExp.Right };
+                }
+            );
         }
 
-        internal static bool TryMatchDiscriminatorPredicate(DbFilterExpression filter, Action<DbComparisonExpression, object> onMatchedComparison)
+        internal static bool TryMatchDiscriminatorPredicate(
+            DbFilterExpression filter,
+            Action<DbComparisonExpression, object> onMatchedComparison
+        )
         {
             EdmProperty discriminatorProperty = null;
 
@@ -778,7 +967,14 @@ namespace System.Data.Common.CommandTrees.Internal
             {
                 DbPropertyExpression currentDiscriminator;
                 object discriminatorValue;
-                if (!TryMatchPropertyEqualsValue(term, filter.Input.VariableName, out currentDiscriminator, out discriminatorValue))
+                if (
+                    !TryMatchPropertyEqualsValue(
+                        term,
+                        filter.Input.VariableName,
+                        out currentDiscriminator,
+                        out discriminatorValue
+                    )
+                )
                 {
                     return false;
                 }
@@ -799,20 +995,40 @@ namespace System.Data.Common.CommandTrees.Internal
             return true;
         }
 
-        internal static bool TryMatchPropertyEqualsValue(DbExpression expression, string propertyVariable, out DbPropertyExpression property, out object value)
+        internal static bool TryMatchPropertyEqualsValue(
+            DbExpression expression,
+            string propertyVariable,
+            out DbPropertyExpression property,
+            out object value
+        )
         {
             property = null;
             value = null;
             // make sure when is of the form Discriminator = Constant
-            if (expression.ExpressionKind != DbExpressionKind.Equals) { return false; }
+            if (expression.ExpressionKind != DbExpressionKind.Equals)
+            {
+                return false;
+            }
             var equals = (DbBinaryExpression)expression;
-            if (equals.Left.ExpressionKind != DbExpressionKind.Property) { return false; }
+            if (equals.Left.ExpressionKind != DbExpressionKind.Property)
+            {
+                return false;
+            }
             property = (DbPropertyExpression)equals.Left;
-            if (!TryMatchConstant(equals.Right, out value)) { return false; }
+            if (!TryMatchConstant(equals.Right, out value))
+            {
+                return false;
+            }
 
             // verify the property is a property of the input variable
-            if (property.Instance.ExpressionKind != DbExpressionKind.VariableReference ||
-                ((DbVariableReferenceExpression)property.Instance).VariableName != propertyVariable) { return false; }
+            if (
+                property.Instance.ExpressionKind != DbExpressionKind.VariableReference
+                || ((DbVariableReferenceExpression)property.Instance).VariableName
+                    != propertyVariable
+            )
+            {
+                return false;
+            }
 
             return true;
         }
@@ -824,8 +1040,10 @@ namespace System.Data.Common.CommandTrees.Internal
                 value = ((DbConstantExpression)expression).Value;
                 return true;
             }
-            if (expression.ExpressionKind == DbExpressionKind.Cast &&
-                expression.ResultType.EdmType.BuiltInTypeKind == BuiltInTypeKind.PrimitiveType)
+            if (
+                expression.ExpressionKind == DbExpressionKind.Cast
+                && expression.ResultType.EdmType.BuiltInTypeKind == BuiltInTypeKind.PrimitiveType
+            )
             {
                 var castExpression = (DbCastExpression)expression;
                 if (TryMatchConstant(castExpression.Argument, out value))
@@ -834,7 +1052,11 @@ namespace System.Data.Common.CommandTrees.Internal
                     var primitiveType = (PrimitiveType)expression.ResultType.EdmType;
 
                     // constant literals have already been validated by view gen...
-                    value = Convert.ChangeType(value, primitiveType.ClrEquivalentType, CultureInfo.InvariantCulture);
+                    value = Convert.ChangeType(
+                        value,
+                        primitiveType.ClrEquivalentType,
+                        CultureInfo.InvariantCulture
+                    );
                     return true;
                 }
             }

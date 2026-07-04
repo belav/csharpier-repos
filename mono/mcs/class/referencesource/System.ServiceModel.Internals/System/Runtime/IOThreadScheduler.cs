@@ -4,8 +4,8 @@
 
 namespace System.Runtime
 {
-    using System.Threading;
     using System.Security;
+    using System.Threading;
 
     // IOThreadScheduler takes no locks due to contention problems on multiproc.
     [Fx.Tag.SynchronizationPrimitive(Fx.Tag.BlocksUsing.NonBlocking)]
@@ -18,16 +18,16 @@ namespace System.Runtime
         [Fx.Tag.SecurityNote(Miscellaneous = "can be called outside user context")]
         static class Bits
         {
-            public const int HiShift     = 32 / 2;
+            public const int HiShift = 32 / 2;
 
-            public const int HiOne       = 1 << HiShift;
-            public const int LoHiBit     = HiOne >> 1;
-            public const int HiHiBit     = LoHiBit << HiShift;
+            public const int HiOne = 1 << HiShift;
+            public const int LoHiBit = HiOne >> 1;
+            public const int HiHiBit = LoHiBit << HiShift;
             public const int LoCountMask = LoHiBit - 1;
             public const int HiCountMask = LoCountMask << HiShift;
-            public const int LoMask      = LoCountMask | LoHiBit;
-            public const int HiMask      = HiCountMask | HiHiBit;
-            public const int HiBits      = LoHiBit | HiHiBit;
+            public const int LoMask = LoCountMask | LoHiBit;
+            public const int HiMask = HiCountMask | HiHiBit;
+            public const int HiBits = LoHiBit | HiHiBit;
 
             public static int Count(int slot)
             {
@@ -55,12 +55,16 @@ namespace System.Runtime
         readonly ScheduledOverlapped overlapped;
 
         [Fx.Tag.Queue(typeof(Slot), Scope = Fx.Tag.Strings.AppDomain)]
-        [Fx.Tag.SecurityNote(Critical = "holds callbacks which get called outside of the app security context")]
+        [Fx.Tag.SecurityNote(
+            Critical = "holds callbacks which get called outside of the app security context"
+        )]
         [SecurityCritical]
         readonly Slot[] slots;
 
         [Fx.Tag.Queue(typeof(Slot), Scope = Fx.Tag.Strings.AppDomain)]
-        [Fx.Tag.SecurityNote(Critical = "holds callbacks which get called outside of the app security context")]
+        [Fx.Tag.SecurityNote(
+            Critical = "holds callbacks which get called outside of the app security context"
+        )]
         [SecurityCritical]
         readonly Slot[] slotsLowPri;
 
@@ -75,16 +79,24 @@ namespace System.Runtime
         //
         // When the tail is *two* slots ahead of the head (equivalent to a count of -1), that means the IOTS is
         // idle.  Hence, we start out headTail with a -2 (equivalent) in the head and zero in the tail.
-        [Fx.Tag.SynchronizationObject(Blocking = false, Kind = Fx.Tag.SynchronizationKind.InterlockedNoSpin)]
+        [Fx.Tag.SynchronizationObject(
+            Blocking = false,
+            Kind = Fx.Tag.SynchronizationKind.InterlockedNoSpin
+        )]
         int headTail = -2 << Bits.HiShift;
 
         // This field is the same except that it governs the low-priority work items.  It doesn't have a concept
         // of idle (-2) so starts empty (-1).
-        [Fx.Tag.SynchronizationObject(Blocking = false, Kind = Fx.Tag.SynchronizationKind.InterlockedNoSpin)]
+        [Fx.Tag.SynchronizationObject(
+            Blocking = false,
+            Kind = Fx.Tag.SynchronizationKind.InterlockedNoSpin
+        )]
         int headTailLowPri = -1 << Bits.HiShift;
 
-        [Fx.Tag.SecurityNote(Critical = "creates a ScheduledOverlapped, touches slots, can be called outside of user context",
-            Safe = "The scheduled overlapped is only used internally, and flows security.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "creates a ScheduledOverlapped, touches slots, can be called outside of user context",
+            Safe = "The scheduled overlapped is only used internally, and flows security."
+        )]
         [SecuritySafeCritical]
         IOThreadScheduler(int capacity, int capacityLowPri)
         {
@@ -98,12 +110,17 @@ namespace System.Runtime
             Fx.Assert((this.slots.Length & SlotMask) == 0, "Capacity must be a power of two.");
 
             this.slotsLowPri = new Slot[capacityLowPri];
-            Fx.Assert((this.slotsLowPri.Length & SlotMaskLowPri) == 0, "Low-priority capacity must be a power of two.");
+            Fx.Assert(
+                (this.slotsLowPri.Length & SlotMaskLowPri) == 0,
+                "Low-priority capacity must be a power of two."
+            );
 
             this.overlapped = new ScheduledOverlapped();
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls into critical class CriticalHelper, doesn't flow context")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls into critical class CriticalHelper, doesn't flow context"
+        )]
         [SecurityCritical]
         public static void ScheduleCallbackNoFlow(Action<object> callback, object state)
         {
@@ -115,7 +132,8 @@ namespace System.Runtime
             bool queued = false;
             while (!queued)
             {
-                try { } finally
+                try { }
+                finally
                 {
                     // Called in a finally because it needs to run uninterrupted in order to maintain consistency.
                     queued = IOThreadScheduler.current.ScheduleCallbackHelper(callback, state);
@@ -123,7 +141,9 @@ namespace System.Runtime
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls into critical class CriticalHelper, doesn't flow context")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls into critical class CriticalHelper, doesn't flow context"
+        )]
         [SecurityCritical]
         public static void ScheduleCallbackLowPriNoFlow(Action<object> callback, object state)
         {
@@ -135,16 +155,22 @@ namespace System.Runtime
             bool queued = false;
             while (!queued)
             {
-                try { } finally
+                try { }
+                finally
                 {
                     // Called in a finally because it needs to run uninterrupted in order to maintain consistency.
-                    queued = IOThreadScheduler.current.ScheduleCallbackLowPriHelper(callback, state);
+                    queued = IOThreadScheduler.current.ScheduleCallbackLowPriHelper(
+                        callback,
+                        state
+                    );
                 }
             }
         }
 
         // Returns true if successfully scheduled, false otherwise.
-        [Fx.Tag.SecurityNote(Critical = "calls into ScheduledOverlapped to post it, touches slots, can be called outside user context.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "calls into ScheduledOverlapped to post it, touches slots, can be called outside user context."
+        )]
         [SecurityCritical]
         bool ScheduleCallbackHelper(Action<object> callback, object state)
         {
@@ -170,14 +196,21 @@ namespace System.Runtime
             }
 
             bool wrapped;
-            bool queued = this.slots[slot >> Bits.HiShift & SlotMask].TryEnqueueWorkItem(callback, state, out wrapped);
+            bool queued = this.slots[slot >> Bits.HiShift & SlotMask]
+                .TryEnqueueWorkItem(callback, state, out wrapped);
 
             if (wrapped)
             {
                 // Wrapped around the circular buffer.  Create a new, bigger IOThreadScheduler.
-                IOThreadScheduler next =
-                    new IOThreadScheduler(Math.Min(this.slots.Length * 2, MaximumCapacity), this.slotsLowPri.Length);
-                Interlocked.CompareExchange<IOThreadScheduler>(ref IOThreadScheduler.current, next, this);
+                IOThreadScheduler next = new IOThreadScheduler(
+                    Math.Min(this.slots.Length * 2, MaximumCapacity),
+                    this.slotsLowPri.Length
+                );
+                Interlocked.CompareExchange<IOThreadScheduler>(
+                    ref IOThreadScheduler.current,
+                    next,
+                    this
+                );
             }
 
             if (wasIdle)
@@ -190,7 +223,9 @@ namespace System.Runtime
         }
 
         // Returns true if successfully scheduled, false otherwise.
-        [Fx.Tag.SecurityNote(Critical = "calls into ScheduledOverlapped to post it, touches slots, can be called outside user context.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "calls into ScheduledOverlapped to post it, touches slots, can be called outside user context."
+        )]
         [SecurityCritical]
         bool ScheduleCallbackLowPriHelper(Action<object> callback, object state)
         {
@@ -210,7 +245,11 @@ namespace System.Runtime
                 {
                     // Use a temporary local here to store the result of the Interlocked.CompareExchange.  This
                     // works around a codegen bug in the 32-bit JIT (TFS 749182).
-                    int interlockedResult = Interlocked.CompareExchange(ref this.headTail, ht + Bits.HiOne, ht);
+                    int interlockedResult = Interlocked.CompareExchange(
+                        ref this.headTail,
+                        ht + Bits.HiOne,
+                        ht
+                    );
                     if (ht == interlockedResult)
                     {
                         wasIdle = true;
@@ -228,14 +267,20 @@ namespace System.Runtime
             }
 
             bool wrapped;
-            bool queued = this.slotsLowPri[slot >> Bits.HiShift & SlotMaskLowPri].TryEnqueueWorkItem(
-                callback, state, out wrapped);
+            bool queued = this.slotsLowPri[slot >> Bits.HiShift & SlotMaskLowPri]
+                .TryEnqueueWorkItem(callback, state, out wrapped);
 
             if (wrapped)
             {
-                IOThreadScheduler next =
-                    new IOThreadScheduler(this.slots.Length, Math.Min(this.slotsLowPri.Length * 2, MaximumCapacity));
-                Interlocked.CompareExchange<IOThreadScheduler>(ref IOThreadScheduler.current, next, this);
+                IOThreadScheduler next = new IOThreadScheduler(
+                    this.slots.Length,
+                    Math.Min(this.slotsLowPri.Length * 2, MaximumCapacity)
+                );
+                Interlocked.CompareExchange<IOThreadScheduler>(
+                    ref IOThreadScheduler.current,
+                    next,
+                    this
+                );
             }
 
             if (wasIdle)
@@ -247,7 +292,9 @@ namespace System.Runtime
             return queued;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "calls into ScheduledOverlapped to post it, touches slots, may be called outside of user context")]
+        [Fx.Tag.SecurityNote(
+            Critical = "calls into ScheduledOverlapped to post it, touches slots, may be called outside of user context"
+        )]
         [SecurityCritical]
         void CompletionCallback(out Action<object> callback, out object state)
         {
@@ -266,17 +313,35 @@ namespace System.Runtime
                     slotLowPri = this.headTailLowPri;
                     while (Bits.CountNoIdle(slotLowPri) != 0)
                     {
-                        if (slotLowPri == (slotLowPri = Interlocked.CompareExchange(ref this.headTailLowPri,
-                            Bits.IncrementLo(slotLowPri), slotLowPri)))
+                        if (
+                            slotLowPri
+                            == (
+                                slotLowPri = Interlocked.CompareExchange(
+                                    ref this.headTailLowPri,
+                                    Bits.IncrementLo(slotLowPri),
+                                    slotLowPri
+                                )
+                            )
+                        )
                         {
                             this.overlapped.Post(this);
-                            this.slotsLowPri[slotLowPri & SlotMaskLowPri].DequeueWorkItem(out callback, out state);
+                            this.slotsLowPri[slotLowPri & SlotMaskLowPri]
+                                .DequeueWorkItem(out callback, out state);
                             return;
                         }
                     }
                 }
 
-                if (slot == (slot = Interlocked.CompareExchange(ref this.headTail, Bits.IncrementLo(slot), slot)))
+                if (
+                    slot
+                    == (
+                        slot = Interlocked.CompareExchange(
+                            ref this.headTail,
+                            Bits.IncrementLo(slot),
+                            slot
+                        )
+                    )
+                )
                 {
                     if (!wasEmpty)
                     {
@@ -300,7 +365,14 @@ namespace System.Runtime
                         // Whoops, go back from being idle (unless someone else already did).  If we go back, start
                         // over.  (We still owe a Post.)
                         slot = Bits.IncrementLo(slot);
-                        if (slot == Interlocked.CompareExchange(ref this.headTail, slot + Bits.HiOne, slot))
+                        if (
+                            slot
+                            == Interlocked.CompareExchange(
+                                ref this.headTail,
+                                slot + Bits.HiOne,
+                                slot
+                            )
+                        )
                         {
                             slot += Bits.HiOne;
                             continue;
@@ -330,7 +402,16 @@ namespace System.Runtime
             {
                 if (Bits.Count(slot) > 0)
                 {
-                    if (slot == (slot = Interlocked.CompareExchange(ref this.headTail, Bits.IncrementLo(slot), slot)))
+                    if (
+                        slot
+                        == (
+                            slot = Interlocked.CompareExchange(
+                                ref this.headTail,
+                                Bits.IncrementLo(slot),
+                                slot
+                            )
+                        )
+                    )
                     {
                         this.slots[slot & SlotMask].DequeueWorkItem(out callback, out state);
                         return true;
@@ -341,10 +422,19 @@ namespace System.Runtime
                 slotLowPri = this.headTailLowPri;
                 if (Bits.CountNoIdle(slotLowPri) > 0)
                 {
-                    if (slotLowPri == (slotLowPri = Interlocked.CompareExchange(ref this.headTailLowPri,
-                        Bits.IncrementLo(slotLowPri), slotLowPri)))
+                    if (
+                        slotLowPri
+                        == (
+                            slotLowPri = Interlocked.CompareExchange(
+                                ref this.headTailLowPri,
+                                Bits.IncrementLo(slotLowPri),
+                                slotLowPri
+                            )
+                        )
+                    )
                     {
-                        this.slotsLowPri[slotLowPri & SlotMaskLowPri].DequeueWorkItem(out callback, out state);
+                        this.slotsLowPri[slotLowPri & SlotMaskLowPri]
+                            .DequeueWorkItem(out callback, out state);
                         return true;
                     }
                     slot = this.headTail;
@@ -363,24 +453,17 @@ namespace System.Runtime
         {
             [Fx.Tag.SecurityNote(Critical = "touches slots, may be called outside of user context")]
             [SecurityCritical]
-            get
-            {
-                return this.slots.Length - 1;
-            }
+            get { return this.slots.Length - 1; }
         }
 
         int SlotMaskLowPri
         {
             [Fx.Tag.SecurityNote(Critical = "touches slots, may be called outside of user context")]
             [SecurityCritical]
-            get
-            {
-                return this.slotsLowPri.Length - 1;
-            }
+            get { return this.slotsLowPri.Length - 1; }
         }
 
         //
-
 
         ~IOThreadScheduler()
         {
@@ -423,7 +506,10 @@ namespace System.Runtime
 
             if (this.slotsLowPri != null)
             {
-                Fx.Assert(Bits.CountNoIdle(this.headTailLowPri) == 0, "IOTS finalized with low-priority items queued.");
+                Fx.Assert(
+                    Bits.CountNoIdle(this.headTailLowPri) == 0,
+                    "IOTS finalized with low-priority items queued."
+                );
 
                 for (int i = 0; i < this.slotsLowPri.Length; i++)
                 {
@@ -431,8 +517,7 @@ namespace System.Runtime
                 }
             }
         }
-
-#endif 
+#endif
 
         // TryEnqueueWorkItem and DequeueWorkItem use the slot's 'gate' field for synchronization.  Because the
         // slot array is circular and there are no locks, we must assume that multiple threads can be entering each
@@ -475,7 +560,9 @@ namespace System.Runtime
             Action<object> callback;
             object state;
 
-            [Fx.Tag.SecurityNote(Miscellaneous = "called by critical code, can be called outside user context")]
+            [Fx.Tag.SecurityNote(
+                Miscellaneous = "called by critical code, can be called outside user context"
+            )]
             public bool TryEnqueueWorkItem(Action<object> callback, object state, out bool wrapped)
             {
                 // Register our arrival and check the state of this slot.  If the slot was already full, we wrapped.
@@ -511,8 +598,10 @@ namespace System.Runtime
                 this.callback = null;
 
                 // Indicate that the slot is clear.  We might be able to bypass setting the high bit.
-                if (gateSnapshot >> Bits.HiShift != (gateSnapshot & Bits.LoCountMask) ||
-                    Interlocked.CompareExchange(ref this.gate, 0, gateSnapshot) != gateSnapshot)
+                if (
+                    gateSnapshot >> Bits.HiShift != (gateSnapshot & Bits.LoCountMask)
+                    || Interlocked.CompareExchange(ref this.gate, 0, gateSnapshot) != gateSnapshot
+                )
                 {
                     gateSnapshot = Interlocked.Add(ref this.gate, Bits.HiHiBit);
                     if (Bits.IsComplete(gateSnapshot))
@@ -524,7 +613,9 @@ namespace System.Runtime
                 return false;
             }
 
-            [Fx.Tag.SecurityNote(Miscellaneous = "called by critical code, can be called outside user context")]
+            [Fx.Tag.SecurityNote(
+                Miscellaneous = "called by critical code, can be called outside user context"
+            )]
             public void DequeueWorkItem(out Action<object> callback, out object state)
             {
                 // Stake our claim on the item.
@@ -551,8 +642,11 @@ namespace System.Runtime
 
                     // Indicate that the slot is clear.
                     // We should be able to bypass setting the high-bit in the common case.
-                    if ((gateSnapshot & Bits.LoCountMask) != 1 ||
-                        Interlocked.CompareExchange(ref this.gate, 0, gateSnapshot) != gateSnapshot)
+                    if (
+                        (gateSnapshot & Bits.LoCountMask) != 1
+                        || Interlocked.CompareExchange(ref this.gate, 0, gateSnapshot)
+                            != gateSnapshot
+                    )
                     {
                         gateSnapshot = Interlocked.Add(ref this.gate, Bits.HiHiBit);
                         if (Bits.IsComplete(gateSnapshot))
@@ -591,7 +685,9 @@ namespace System.Runtime
         // Therefore, we are passing the reference, when we post a pending callback and reset it, once the callback was
         // invoked; during that time the scheduler is rooted but in that time we don't want that it would be collected
         // by the GC anyway.
-        [Fx.Tag.SecurityNote(Critical = "manages NativeOverlapped instance, can be called outside user context")]
+        [Fx.Tag.SecurityNote(
+            Critical = "manages NativeOverlapped instance, can be called outside user context"
+        )]
         [SecurityCritical]
         unsafe class ScheduledOverlapped
         {
@@ -601,10 +697,14 @@ namespace System.Runtime
             public ScheduledOverlapped()
             {
                 this.nativeOverlapped = (new Overlapped()).UnsafePack(
-                    Fx.ThunkCallback(new IOCompletionCallback(IOCallback)), null);
+                    Fx.ThunkCallback(new IOCompletionCallback(IOCallback)),
+                    null
+                );
             }
 
-            [Fx.Tag.SecurityNote(Miscellaneous = "note that in some hosts this runs without any user context on the stack")]
+            [Fx.Tag.SecurityNote(
+                Miscellaneous = "note that in some hosts this runs without any user context on the stack"
+            )]
             void IOCallback(uint errorCode, uint numBytes, NativeOverlapped* nativeOverlapped)
             {
                 // Unhook the IOThreadScheduler ASAP to prevent it from leaking.
@@ -614,7 +714,8 @@ namespace System.Runtime
 
                 Action<object> callback;
                 object state;
-                try { } finally
+                try { }
+                finally
                 {
                     // Called in a finally because it needs to run uninterrupted in order to maintain consistency.
                     iots.CompletionCallback(out callback, out state);
@@ -630,7 +731,8 @@ namespace System.Runtime
                         callback(state);
                     }
 
-                    try { } finally
+                    try { }
+                    finally
                     {
                         // Called in a finally because it needs to run uninterrupted in order to maintain consistency.
                         found = iots.TryCoalesce(out callback, out state);
@@ -640,7 +742,10 @@ namespace System.Runtime
 
             public void Post(IOThreadScheduler iots)
             {
-                Fx.Assert(this.scheduler == null, "Post called on an overlapped that is already posted.");
+                Fx.Assert(
+                    this.scheduler == null,
+                    "Post called on an overlapped that is already posted."
+                );
                 Fx.Assert(iots != null, "Post called with a null scheduler.");
 
                 this.scheduler = iots;
@@ -652,7 +757,9 @@ namespace System.Runtime
             {
                 if (this.scheduler != null)
                 {
-                    throw Fx.AssertAndThrowFatal("Cleanup called on an overlapped that is in-flight.");
+                    throw Fx.AssertAndThrowFatal(
+                        "Cleanup called on an overlapped that is in-flight."
+                    );
                 }
                 Overlapped.Free(this.nativeOverlapped);
             }

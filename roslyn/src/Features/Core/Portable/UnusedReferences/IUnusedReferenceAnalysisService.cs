@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.UnusedReferences
             string projectFilePath,
             string projectAssetsFilePath,
             ImmutableArray<ReferenceInfo> projectReferences,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 
     internal interface IRemoteUnusedReferenceAnalysisService
@@ -27,6 +28,7 @@ namespace Microsoft.CodeAnalysis.UnusedReferences
             string projectFilePath,
             string projectAssetsFilePath,
             ImmutableArray<ReferenceInfo> projectReferences,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

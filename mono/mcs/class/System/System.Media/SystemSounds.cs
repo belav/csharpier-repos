@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,45 +25,35 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-namespace System.Media {
+namespace System.Media
+{
+    public sealed class SystemSounds
+    {
+        private SystemSounds() { }
 
-	public sealed class SystemSounds {
+        public static SystemSound Asterisk
+        {
+            get { return new SystemSound("Asterisk"); }
+        }
 
-		private SystemSounds ()
-		{
-		}
+        public static SystemSound Beep
+        {
+            get { return new SystemSound("Beep"); }
+        }
 
-		public static SystemSound Asterisk {
-			get {
-				return new SystemSound ("Asterisk");
-			}
-		}
+        public static SystemSound Exclamation
+        {
+            get { return new SystemSound("Exclamation"); }
+        }
 
-		public static SystemSound Beep {
-			get {
-				return new SystemSound ("Beep");
-			}
-		}
+        public static SystemSound Hand
+        {
+            get { return new SystemSound("Hand"); }
+        }
 
-		public static SystemSound Exclamation {
-			get {
-				return new SystemSound ("Exclamation");
-			}
-		}
-
-		public static SystemSound Hand {
-			get {
-				return new SystemSound ("Hand");
-			}
-		}
-
-		public static SystemSound Question {
-			get {
-				return new SystemSound ("Question");
-			}
-		}
-
-	}
+        public static SystemSound Question
+        {
+            get { return new SystemSound("Question"); }
+        }
+    }
 }
-
-

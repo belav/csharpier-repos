@@ -8,15 +8,15 @@ namespace System.Text
 {
     public sealed class EncoderReplacementFallback : EncoderFallback
     {
-        internal static readonly EncoderReplacementFallback s_default = new EncoderReplacementFallback();
+        internal static readonly EncoderReplacementFallback s_default =
+            new EncoderReplacementFallback();
 
         // Our variables
         private readonly string _strDefault;
 
         // Construction.  Default replacement fallback uses no best fit and ? replacement string
-        public EncoderReplacementFallback() : this("?")
-        {
-        }
+        public EncoderReplacementFallback()
+            : this("?") { }
 
         public EncoderReplacementFallback(string replacement)
         {
@@ -34,7 +34,7 @@ namespace System.Text
                     {
                         // if already had a high one, stop
                         if (bFoundHigh)
-                            break;  // break & throw at the bFoundHIgh below
+                            break; // break & throw at the bFoundHIgh below
                         bFoundHigh = true;
                     }
                     else
@@ -56,7 +56,10 @@ namespace System.Text
                     break;
             }
             if (bFoundHigh)
-                throw new ArgumentException(SR.Argument_InvalidCharSequenceNoIndex, nameof(replacement));
+                throw new ArgumentException(
+                    SR.Argument_InvalidCharSequenceNoIndex,
+                    nameof(replacement)
+                );
 
             _strDefault = replacement;
         }
@@ -70,8 +73,7 @@ namespace System.Text
         public override int MaxCharCount => _strDefault.Length;
 
         public override bool Equals([NotNullWhen(true)] object? value) =>
-            value is EncoderReplacementFallback that &&
-            _strDefault == that._strDefault;
+            value is EncoderReplacementFallback that && _strDefault == that._strDefault;
 
         public override int GetHashCode() => _strDefault.GetHashCode();
     }
@@ -98,9 +100,14 @@ namespace System.Text
             if (_fallbackCount >= 1)
             {
                 // If we're recursive we may still have something in our buffer that makes this a surrogate
-                if (char.IsHighSurrogate(charUnknown) && _fallbackCount >= 0 &&
-                    char.IsLowSurrogate(_strDefault[_fallbackIndex + 1]))
-                    ThrowLastCharRecursive(char.ConvertToUtf32(charUnknown, _strDefault[_fallbackIndex + 1]));
+                if (
+                    char.IsHighSurrogate(charUnknown)
+                    && _fallbackCount >= 0
+                    && char.IsLowSurrogate(_strDefault[_fallbackIndex + 1])
+                )
+                    ThrowLastCharRecursive(
+                        char.ConvertToUtf32(charUnknown, _strDefault[_fallbackIndex + 1])
+                    );
 
                 // Nope, just one character
                 ThrowLastCharRecursive(unchecked((int)charUnknown));
@@ -118,12 +125,16 @@ namespace System.Text
         {
             // Double check input surrogate pair
             if (!char.IsHighSurrogate(charUnknownHigh))
-                throw new ArgumentOutOfRangeException(nameof(charUnknownHigh),
-                    SR.Format(SR.ArgumentOutOfRange_Range, 0xD800, 0xDBFF));
+                throw new ArgumentOutOfRangeException(
+                    nameof(charUnknownHigh),
+                    SR.Format(SR.ArgumentOutOfRange_Range, 0xD800, 0xDBFF)
+                );
 
             if (!char.IsLowSurrogate(charUnknownLow))
-                throw new ArgumentOutOfRangeException(nameof(charUnknownLow),
-                    SR.Format(SR.ArgumentOutOfRange_Range, 0xDC00, 0xDFFF));
+                throw new ArgumentOutOfRangeException(
+                    nameof(charUnknownLow),
+                    SR.Format(SR.ArgumentOutOfRange_Range, 0xDC00, 0xDFFF)
+                );
 
             // If we had a buffer already we're being recursive, throw, it's probably at the suspect
             // character in our array.
@@ -157,8 +168,10 @@ namespace System.Text
             }
 
             // Now make sure its in the expected range
-            Debug.Assert(_fallbackIndex < _strDefault.Length && _fallbackIndex >= 0,
-                            "Index exceeds buffer range");
+            Debug.Assert(
+                _fallbackIndex < _strDefault.Length && _fallbackIndex >= 0,
+                "Index exceeds buffer range"
+            );
 
             return _strDefault[_fallbackIndex];
         }
@@ -179,8 +192,10 @@ namespace System.Text
 
         // How many characters left to output?
         public override int Remaining =>
-                // Our count is 0 for 1 character left.
-                (_fallbackCount < 0) ? 0 : _fallbackCount;
+            // Our count is 0 for 1 character left.
+            (_fallbackCount < 0)
+                ? 0
+                : _fallbackCount;
 
         // Clear the buffer
         public override unsafe void Reset()

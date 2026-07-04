@@ -23,20 +23,29 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
     using static SyntaxFactory;
     using static UseIsNullCheckHelpers;
 
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UseIsNullCheckForCastAndEqualityOperator), Shared]
-    internal class CSharpUseIsNullCheckForCastAndEqualityOperatorCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UseIsNullCheckForCastAndEqualityOperator
+        ),
+        Shared
+    ]
+    internal class CSharpUseIsNullCheckForCastAndEqualityOperatorCodeFixProvider
+        : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpUseIsNullCheckForCastAndEqualityOperatorCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpUseIsNullCheckForCastAndEqualityOperatorCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.UseIsNullCheckDiagnosticId);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.UseIsNullCheckDiagnosticId);
 
-        private static bool IsSupportedDiagnostic(Diagnostic diagnostic)
-            => diagnostic.Properties[UseIsNullConstants.Kind] == UseIsNullConstants.CastAndEqualityKey;
+        private static bool IsSupportedDiagnostic(Diagnostic diagnostic) =>
+            diagnostic.Properties[UseIsNullConstants.Kind] == UseIsNullConstants.CastAndEqualityKey;
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
@@ -48,26 +57,36 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
 
                 context.RegisterCodeFix(
                     CodeAction.Create(title, GetDocumentUpdater(context), title),
-                    context.Diagnostics);
+                    context.Diagnostics
+                );
             }
 
             return Task.CompletedTask;
         }
 
         protected override Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var diagnostic in diagnostics)
             {
                 if (!IsSupportedDiagnostic(diagnostic))
                     continue;
 
-                var binary = (BinaryExpressionSyntax)diagnostic.Location.FindNode(getInnermostNodeForTie: true, cancellationToken: cancellationToken);
+                var binary = (BinaryExpressionSyntax)
+                    diagnostic.Location.FindNode(
+                        getInnermostNodeForTie: true,
+                        cancellationToken: cancellationToken
+                    );
 
                 editor.ReplaceNode(
                     binary,
-                    (current, g) => Rewrite((BinaryExpressionSyntax)current));
+                    (current, g) => Rewrite((BinaryExpressionSyntax)current)
+                );
             }
 
             return Task.CompletedTask;
@@ -82,32 +101,37 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
             if (SupportsIsNotPattern(binary.SyntaxTree.Options))
             {
                 // convert:  (object)expr != null   to    expr is not null
-                return isPattern.WithPattern(
-                    UnaryPattern(isPattern.Pattern));
+                return isPattern.WithPattern(UnaryPattern(isPattern.Pattern));
             }
             else
             {
                 // convert:  (object)expr != null   to    expr is object
                 return BinaryExpression(
-                    SyntaxKind.IsExpression,
-                    isPattern.Expression,
-                    PredefinedType(Token(SyntaxKind.ObjectKeyword))).WithTriviaFrom(isPattern);
+                        SyntaxKind.IsExpression,
+                        isPattern.Expression,
+                        PredefinedType(Token(SyntaxKind.ObjectKeyword))
+                    )
+                    .WithTriviaFrom(isPattern);
             }
         }
 
-        private static IsPatternExpressionSyntax RewriteWorker(BinaryExpressionSyntax binary)
-            => binary.Right.IsKind(SyntaxKind.NullLiteralExpression)
+        private static IsPatternExpressionSyntax RewriteWorker(BinaryExpressionSyntax binary) =>
+            binary.Right.IsKind(SyntaxKind.NullLiteralExpression)
                 ? Rewrite(binary, binary.Left, binary.Right)
                 : Rewrite(binary, binary.Right, binary.Left);
 
         private static IsPatternExpressionSyntax Rewrite(
-            BinaryExpressionSyntax binary, ExpressionSyntax expr, ExpressionSyntax nullLiteral)
+            BinaryExpressionSyntax binary,
+            ExpressionSyntax expr,
+            ExpressionSyntax nullLiteral
+        )
         {
             var castExpr = (CastExpressionSyntax)expr;
             return IsPatternExpression(
                 castExpr.Expression.WithTriviaFrom(binary.Left),
                 Token(SyntaxKind.IsKeyword).WithTriviaFrom(binary.OperatorToken),
-                ConstantPattern(nullLiteral).WithTriviaFrom(binary.Right));
+                ConstantPattern(nullLiteral).WithTriviaFrom(binary.Right)
+            );
         }
     }
 }

@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
     using System;
     using System.Threading;
     using System.Threading.Tasks;
@@ -13,30 +14,61 @@ namespace System.Web.UI {
 
     // Public class to serve as an interface between ASP.NET's synchronization systems and the user code to be executed asynchronously
 
-    public sealed class PageAsyncTask {
+    public sealed class PageAsyncTask
+    {
+        // APM
+        public PageAsyncTask(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            EndEventHandler timeoutHandler,
+            Object state
+        )
+            : this(beginHandler, endHandler, timeoutHandler, state, executeInParallel: false) { }
 
         // APM
-        public PageAsyncTask(BeginEventHandler beginHandler, EndEventHandler endHandler, EndEventHandler timeoutHandler, Object state)
-            : this(beginHandler, endHandler, timeoutHandler, state, executeInParallel: false) {
-        }
+        public PageAsyncTask(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            EndEventHandler timeoutHandler,
+            Object state,
+            bool executeInParallel
+        )
+            : this(
+                beginHandler,
+                endHandler,
+                timeoutHandler,
+                state,
+                executeInParallel,
+                currentMode: SynchronizationContextUtil.CurrentMode
+            ) { }
 
         // APM
-        public PageAsyncTask(BeginEventHandler beginHandler, EndEventHandler endHandler, EndEventHandler timeoutHandler, Object state, bool executeInParallel)
-            : this(beginHandler, endHandler, timeoutHandler, state, executeInParallel, currentMode: SynchronizationContextUtil.CurrentMode) {
-        }
-
-        // APM
-        internal PageAsyncTask(BeginEventHandler beginHandler, EndEventHandler endHandler, EndEventHandler timeoutHandler, Object state, bool executeInParallel, SynchronizationContextMode currentMode) {
-            if (beginHandler == null) {
+        internal PageAsyncTask(
+            BeginEventHandler beginHandler,
+            EndEventHandler endHandler,
+            EndEventHandler timeoutHandler,
+            Object state,
+            bool executeInParallel,
+            SynchronizationContextMode currentMode
+        )
+        {
+            if (beginHandler == null)
+            {
                 throw new ArgumentNullException("beginHandler");
             }
-            if (endHandler == null) {
+            if (endHandler == null)
+            {
                 throw new ArgumentNullException("endHandler");
             }
 
             // Only the legacy PageAsyncTaskManager supports timing out APM methods or executing them in parallel
-            if (timeoutHandler != null || executeInParallel) {
-                SynchronizationContextUtil.ValidateMode(currentMode, requiredMode: SynchronizationContextMode.Legacy, specificErrorMessage: SR.SynchronizationContextUtil_PageAsyncTaskTimeoutHandlerParallelNotCompatible);
+            if (timeoutHandler != null || executeInParallel)
+            {
+                SynchronizationContextUtil.ValidateMode(
+                    currentMode,
+                    requiredMode: SynchronizationContextMode.Legacy,
+                    specificErrorMessage: SR.SynchronizationContextUtil_PageAsyncTaskTimeoutHandlerParallelNotCompatible
+                );
             }
 
             BeginHandler = beginHandler;
@@ -48,21 +80,28 @@ namespace System.Web.UI {
 
         // TAP
         public PageAsyncTask(Func<Task> handler)
-            : this(WrapParameterlessTaskHandler(handler)) {
-        }
+            : this(WrapParameterlessTaskHandler(handler)) { }
 
         public PageAsyncTask(Func<CancellationToken, Task> handler)
-            : this(handler, currentMode: SynchronizationContextUtil.CurrentMode) {
-        }
+            : this(handler, currentMode: SynchronizationContextUtil.CurrentMode) { }
 
         // TAP
-        internal PageAsyncTask(Func<CancellationToken, Task> handler, SynchronizationContextMode currentMode) {
-            if (handler == null) {
+        internal PageAsyncTask(
+            Func<CancellationToken, Task> handler,
+            SynchronizationContextMode currentMode
+        )
+        {
+            if (handler == null)
+            {
                 throw new ArgumentNullException("handler");
             }
 
             // The legacy PageAsyncTaskManager doesn't support TAP methods
-            SynchronizationContextUtil.ValidateMode(currentMode, requiredMode: SynchronizationContextMode.Normal, specificErrorMessage: SR.SynchronizationContextUtil_TaskReturningPageAsyncMethodsNotCompatible);
+            SynchronizationContextUtil.ValidateMode(
+                currentMode,
+                requiredMode: SynchronizationContextMode.Normal,
+                specificErrorMessage: SR.SynchronizationContextUtil_TaskReturningPageAsyncMethodsNotCompatible
+            );
 
             TaskHandler = handler;
         }
@@ -80,11 +119,11 @@ namespace System.Web.UI {
         // For TAP
         internal Func<CancellationToken, Task> TaskHandler { get; private set; }
 
-        private static Func<CancellationToken, Task> WrapParameterlessTaskHandler(Func<Task> handler) {
-            return (handler != null)
-                ? (Func<CancellationToken, Task>)(_ => handler())
-                : null;
+        private static Func<CancellationToken, Task> WrapParameterlessTaskHandler(
+            Func<Task> handler
+        )
+        {
+            return (handler != null) ? (Func<CancellationToken, Task>)(_ => handler()) : null;
         }
-
     }
 }

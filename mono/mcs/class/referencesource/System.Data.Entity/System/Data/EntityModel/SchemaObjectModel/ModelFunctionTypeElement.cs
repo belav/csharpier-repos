@@ -21,13 +21,16 @@ namespace System.Data.EntityModel.SchemaObjectModel
         internal ModelFunctionTypeElement(SchemaElement parentElement)
             : base(parentElement)
         {
-            _typeUsageBuilder = new TypeUsageBuilder(this);  
+            _typeUsageBuilder = new TypeUsageBuilder(this);
         }
 
         internal abstract void WriteIdentity(StringBuilder builder);
 
         internal abstract TypeUsage GetTypeUsage();
-        
-        internal abstract bool ResolveNameAndSetTypeUsage(Converter.ConversionCache convertedItemCache, Dictionary<Som.SchemaElement, GlobalItem> newGlobalItems);
+
+        internal abstract bool ResolveNameAndSetTypeUsage(
+            Converter.ConversionCache convertedItemCache,
+            Dictionary<Som.SchemaElement, GlobalItem> newGlobalItems
+        );
     }
 }

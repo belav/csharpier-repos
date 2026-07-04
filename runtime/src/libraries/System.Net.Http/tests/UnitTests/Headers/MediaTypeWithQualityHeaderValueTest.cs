@@ -3,7 +3,6 @@
 
 using System.Linq;
 using System.Net.Http.Headers;
-
 using Xunit;
 
 namespace System.Net.Http.Tests
@@ -14,8 +13,11 @@ namespace System.Net.Http.Tests
         public void Clone_Call_CloneFieldsMatchSourceFields()
         {
             // This test just verifies that MediaTypeWithQualityHeaderValue calls the correct base implementation.
-            MediaTypeWithQualityHeaderValue source = new MediaTypeWithQualityHeaderValue("application/xml");
-            MediaTypeWithQualityHeaderValue clone = (MediaTypeWithQualityHeaderValue)((ICloneable)source).Clone();
+            MediaTypeWithQualityHeaderValue source = new MediaTypeWithQualityHeaderValue(
+                "application/xml"
+            );
+            MediaTypeWithQualityHeaderValue clone = (MediaTypeWithQualityHeaderValue)
+                ((ICloneable)source).Clone();
             Assert.Equal(source.MediaType, clone.MediaType);
             Assert.Equal(0, clone.Parameters.Count);
 
@@ -40,7 +42,10 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_AddNameAndQuality_QualityParameterAdded()
         {
-            MediaTypeWithQualityHeaderValue mediaType = new MediaTypeWithQualityHeaderValue("application/xml", 0.08);
+            MediaTypeWithQualityHeaderValue mediaType = new MediaTypeWithQualityHeaderValue(
+                "application/xml",
+                0.08
+            );
             Assert.Equal(0.08, mediaType.Quality);
             Assert.Equal("application/xml", mediaType.MediaType);
             Assert.Equal(1, mediaType.Parameters.Count);
@@ -49,7 +54,9 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Quality_SetCharSetAndValidateObject_ParametersEntryForCharSetAdded()
         {
-            MediaTypeWithQualityHeaderValue mediaType = new MediaTypeWithQualityHeaderValue("text/plain");
+            MediaTypeWithQualityHeaderValue mediaType = new MediaTypeWithQualityHeaderValue(
+                "text/plain"
+            );
             mediaType.Quality = 0.563156454;
             Assert.Equal(0.563, mediaType.Quality);
             Assert.Equal(1, mediaType.Parameters.Count);
@@ -65,7 +72,9 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Quality_AddQualityParameterThenUseProperty_ParametersEntryIsOverwritten()
         {
-            MediaTypeWithQualityHeaderValue mediaType = new MediaTypeWithQualityHeaderValue("text/plain");
+            MediaTypeWithQualityHeaderValue mediaType = new MediaTypeWithQualityHeaderValue(
+                "text/plain"
+            );
 
             NameValueHeaderValue quality = new NameValueHeaderValue("q", "0.132");
             mediaType.Parameters.Add(quality);
@@ -85,7 +94,9 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Quality_AddQualityParameterUpperCase_CaseInsensitiveComparison()
         {
-            MediaTypeWithQualityHeaderValue mediaType = new MediaTypeWithQualityHeaderValue("text/plain");
+            MediaTypeWithQualityHeaderValue mediaType = new MediaTypeWithQualityHeaderValue(
+                "text/plain"
+            );
 
             NameValueHeaderValue quality = new NameValueHeaderValue("Q", "0.132");
             mediaType.Parameters.Add(quality);
@@ -97,22 +108,34 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Quality_LessThanZero_Throw()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => {
-                MediaTypeWithQualityHeaderValue mediaType = new MediaTypeWithQualityHeaderValue("application/xml", -0.01); });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                MediaTypeWithQualityHeaderValue mediaType = new MediaTypeWithQualityHeaderValue(
+                    "application/xml",
+                    -0.01
+                );
+            });
         }
 
         [Fact]
         public void Quality_GreaterThanOne_Throw()
         {
-            MediaTypeWithQualityHeaderValue mediaType = new MediaTypeWithQualityHeaderValue("application/xml");
+            MediaTypeWithQualityHeaderValue mediaType = new MediaTypeWithQualityHeaderValue(
+                "application/xml"
+            );
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => { mediaType.Quality = 1.01; });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                mediaType.Quality = 1.01;
+            });
         }
 
         [Fact]
         public void Parse_SetOfValidValueStrings_ParsedCorrectly()
         {
-            MediaTypeWithQualityHeaderValue expected = new MediaTypeWithQualityHeaderValue("text/plain");
+            MediaTypeWithQualityHeaderValue expected = new MediaTypeWithQualityHeaderValue(
+                "text/plain"
+            );
             CheckValidParse("text/plain", expected);
             CheckValidParse(" text/plain  ", expected);
 
@@ -123,7 +146,9 @@ namespace System.Net.Http.Tests
             CheckValidParse(" text   /  plain ;  charset =   utf-8 ", expected);
             CheckValidParse("  text/plain;charset=utf-8", expected);
 
-            MediaTypeWithQualityHeaderValue value1 = new MediaTypeWithQualityHeaderValue("text/plain");
+            MediaTypeWithQualityHeaderValue value1 = new MediaTypeWithQualityHeaderValue(
+                "text/plain"
+            );
             value1.CharSet = "iso-8859-1";
             value1.Quality = 1.0;
 
@@ -149,8 +174,12 @@ namespace System.Net.Http.Tests
             CheckInvalidParse("text/plain; charset=utf-8,");
             CheckInvalidParse("textplain");
             CheckInvalidParse("text/");
-            CheckInvalidParse(",, , ,,text/plain; charset=iso-8859-1; q=1.0, */xml; charset=utf-8; q=0.5,,,");
-            CheckInvalidParse(",, , ,,text/plain; charset=iso-8859-1; q=1.0,\r\n */xml; charset=utf-8; q=0.5,,,");
+            CheckInvalidParse(
+                ",, , ,,text/plain; charset=iso-8859-1; q=1.0, */xml; charset=utf-8; q=0.5,,,"
+            );
+            CheckInvalidParse(
+                ",, , ,,text/plain; charset=iso-8859-1; q=1.0,\r\n */xml; charset=utf-8; q=0.5,,,"
+            );
             CheckInvalidParse("text/plain; charset=iso-8859-1; q=1.0, */xml; charset=utf-8; q=0.5");
             CheckInvalidParse(" , */xml; charset=utf-8; q=0.5 ");
             CheckInvalidParse("text/plain; charset=iso-8859-1; q=1.0 , ");
@@ -188,7 +217,10 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(() => { MediaTypeWithQualityHeaderValue.Parse(input); });
+            Assert.Throws<FormatException>(() =>
+            {
+                MediaTypeWithQualityHeaderValue.Parse(input);
+            });
 
             MediaTypeWithQualityHeaderValue result = null;
             Assert.False(MediaTypeWithQualityHeaderValue.TryParse(input, out result));

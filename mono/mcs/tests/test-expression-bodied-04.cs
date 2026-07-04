@@ -2,15 +2,11 @@
 
 class VV
 {
-    VV () => Test ();
+    VV() => Test();
 
-    ~VV () => Test ();
+    ~VV() => Test();
 
-    void Test ()
-    {
-    }
+    void Test() { }
 
-    public static void Main ()
-    {
-    }
+    public static void Main() { }
 }

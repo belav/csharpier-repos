@@ -2,39 +2,45 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Configuration;
 using System.DirectoryServices;
 using System.Security.Principal;
-using System.Configuration;
-using System.Workflow.Runtime.Configuration;
+using System.Text;
 using System.Workflow.Activities.Configuration;
+using System.Workflow.Runtime.Configuration;
 
 #endregion
 
 namespace System.Workflow.Activities
 {
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public static class ActiveDirectoryRoleFactory
     {
         private static DirectoryGroupQuery s_directoryGroupQuery = new DirectoryGroupQuery();
-        private static String s_configurationSectionName = "System.Workflow.Runtime.Hosting.ADRoleFactory";
+        private static String s_configurationSectionName =
+            "System.Workflow.Runtime.Hosting.ADRoleFactory";
         private static ActiveDirectoryRoleFactoryConfiguration s_configuration;
         private static DirectoryEntry s_rootEntry;
 
         static ActiveDirectoryRoleFactory()
         {
-            s_configuration = (ActiveDirectoryRoleFactoryConfiguration)ConfigurationManager.GetSection(s_configurationSectionName);
+            s_configuration = (ActiveDirectoryRoleFactoryConfiguration)
+                ConfigurationManager.GetSection(s_configurationSectionName);
             if (s_configuration == null)
                 s_configuration = new ActiveDirectoryRoleFactoryConfiguration();
         }
-
 
         public static ActiveDirectoryRole CreateFromAlias(String alias)
         {
             if (alias == null)
                 throw new ArgumentNullException("alias");
 
-            ActiveDirectoryRole role = new ActiveDirectoryRole(GetRootEntry(), new DirectoryRootQuery("sAMAccountName", alias, DirectoryQueryOperation.Equal));
+            ActiveDirectoryRole role = new ActiveDirectoryRole(
+                GetRootEntry(),
+                new DirectoryRootQuery("sAMAccountName", alias, DirectoryQueryOperation.Equal)
+            );
             role.Operations.Add(s_directoryGroupQuery);
             ValidateRole(role);
             return role;
@@ -45,7 +51,10 @@ namespace System.Workflow.Activities
             if (sid == null)
                 throw new ArgumentNullException("sid");
 
-            ActiveDirectoryRole role = new ActiveDirectoryRole(GetRootEntry(), new DirectoryRootQuery("objectSID", sid.ToString(), DirectoryQueryOperation.Equal));
+            ActiveDirectoryRole role = new ActiveDirectoryRole(
+                GetRootEntry(),
+                new DirectoryRootQuery("objectSID", sid.ToString(), DirectoryQueryOperation.Equal)
+            );
             role.Operations.Add(s_directoryGroupQuery);
             ValidateRole(role);
             return role;
@@ -56,7 +65,10 @@ namespace System.Workflow.Activities
             if (emailAddress == null)
                 throw new ArgumentNullException("emailAddress");
 
-            ActiveDirectoryRole role = new ActiveDirectoryRole(GetRootEntry(), new DirectoryRootQuery("mail", emailAddress, DirectoryQueryOperation.Equal));
+            ActiveDirectoryRole role = new ActiveDirectoryRole(
+                GetRootEntry(),
+                new DirectoryRootQuery("mail", emailAddress, DirectoryQueryOperation.Equal)
+            );
             role.Operations.Add(s_directoryGroupQuery);
             ValidateRole(role);
             return role;
@@ -66,9 +78,11 @@ namespace System.Workflow.Activities
         {
             if (s_rootEntry == null)
             {
-                if (s_configuration == null ||
-                    s_configuration.RootPath == null ||
-                    s_configuration.RootPath.Length == 0)
+                if (
+                    s_configuration == null
+                    || s_configuration.RootPath == null
+                    || s_configuration.RootPath.Length == 0
+                )
                 {
                     s_rootEntry = new DirectoryEntry();
                 }
@@ -83,10 +97,7 @@ namespace System.Workflow.Activities
 
         public static ActiveDirectoryRoleFactoryConfiguration Configuration
         {
-            get
-            {
-                return s_configuration;
-            }
+            get { return s_configuration; }
         }
 
         private static void ValidateRole(ActiveDirectoryRole adRole)
@@ -94,6 +105,5 @@ namespace System.Workflow.Activities
             if (adRole.GetEntries().Count == 0)
                 throw new ArgumentException(SR.GetString(SR.Error_NoMatchingActiveDirectoryEntry));
         }
-
     }
 }

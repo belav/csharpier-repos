@@ -9,16 +9,46 @@ namespace System.Reflection.Emit.Tests
     {
         [Theory]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/2389", TestRuntimes.Mono)]
-        [InlineData(MethodAttributes.Public, CallingConventions.HasThis, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)]
-        [InlineData(MethodAttributes.Private, CallingConventions.HasThis, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)]
-        [InlineData(MethodAttributes.Public | MethodAttributes.Static, CallingConventions.Any, BindingFlags.Public | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Instance)]
-        public void AddOtherMethod(MethodAttributes attributes, CallingConventions callingConventions, BindingFlags bindingFlags)
+        [InlineData(
+            MethodAttributes.Public,
+            CallingConventions.HasThis,
+            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+        )]
+        [InlineData(
+            MethodAttributes.Private,
+            CallingConventions.HasThis,
+            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+        )]
+        [InlineData(
+            MethodAttributes.Public | MethodAttributes.Static,
+            CallingConventions.Any,
+            BindingFlags.Public
+                | BindingFlags.Static
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+        )]
+        public void AddOtherMethod(
+            MethodAttributes attributes,
+            CallingConventions callingConventions,
+            BindingFlags bindingFlags
+        )
         {
             Type[] paramTypes = new Type[] { typeof(int) };
 
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
-            PropertyBuilder property = type.DefineProperty("TestProperty", PropertyAttributes.None, typeof(int), new Type[0]);
-            MethodBuilder method = type.DefineMethod("TestMethod", attributes, callingConventions, typeof(int), paramTypes);
+            PropertyBuilder property = type.DefineProperty(
+                "TestProperty",
+                PropertyAttributes.None,
+                typeof(int),
+                new Type[0]
+            );
+            MethodBuilder method = type.DefineMethod(
+                "TestMethod",
+                attributes,
+                callingConventions,
+                typeof(int),
+                paramTypes
+            );
 
             ILGenerator methodILGenerator = method.GetILGenerator();
             methodILGenerator.Emit(OpCodes.Ldarg_0);
@@ -38,9 +68,17 @@ namespace System.Reflection.Emit.Tests
         public void AddOtherMethod_NullMethodBuilder_ThrowsArgumentNullExceptio()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
-            PropertyBuilder property = type.DefineProperty("TestProperty", PropertyAttributes.None, typeof(int), new Type[0]);
+            PropertyBuilder property = type.DefineProperty(
+                "TestProperty",
+                PropertyAttributes.None,
+                typeof(int),
+                new Type[0]
+            );
 
-            AssertExtensions.Throws<ArgumentNullException>("mdBuilder", () => property.AddOtherMethod(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "mdBuilder",
+                () => property.AddOtherMethod(null)
+            );
         }
 
         [Fact]
@@ -49,8 +87,19 @@ namespace System.Reflection.Emit.Tests
             Type[] paramTypes = new Type[] { typeof(int) };
 
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
-            PropertyBuilder property = type.DefineProperty("TestProperty", PropertyAttributes.None, typeof(int), new Type[0]);
-            MethodBuilder method = type.DefineMethod("TestMethod", MethodAttributes.Public, CallingConventions.HasThis, typeof(int), paramTypes);
+            PropertyBuilder property = type.DefineProperty(
+                "TestProperty",
+                PropertyAttributes.None,
+                typeof(int),
+                new Type[0]
+            );
+            MethodBuilder method = type.DefineMethod(
+                "TestMethod",
+                MethodAttributes.Public,
+                CallingConventions.HasThis,
+                typeof(int),
+                paramTypes
+            );
             ILGenerator methodILGenerator = method.GetILGenerator();
 
             methodILGenerator.Emit(OpCodes.Ldarg_0);

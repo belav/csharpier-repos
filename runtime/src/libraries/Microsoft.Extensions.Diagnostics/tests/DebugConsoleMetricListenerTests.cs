@@ -16,81 +16,107 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void ListenerCanResolveLocalMetrics()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                var services = new ServiceCollection();
-                services.AddMetrics(builder =>
+            RemoteExecutor
+                .Invoke(() =>
                 {
-                    builder.AddListener<DebugConsoleMetricListener>();
-                    builder.EnableMetrics("TestMeter", scopes: MeterScope.Local, listenerName: ConsoleMetrics.DebugListenerName);
-                });
-                using var sp = services.BuildServiceProvider();
-                // Make sure the subscription manager is started.
-                sp.GetRequiredService<IStartupValidator>().Validate();
+                    var services = new ServiceCollection();
+                    services.AddMetrics(builder =>
+                    {
+                        builder.AddListener<DebugConsoleMetricListener>();
+                        builder.EnableMetrics(
+                            "TestMeter",
+                            scopes: MeterScope.Local,
+                            listenerName: ConsoleMetrics.DebugListenerName
+                        );
+                    });
+                    using var sp = services.BuildServiceProvider();
+                    // Make sure the subscription manager is started.
+                    sp.GetRequiredService<IStartupValidator>().Validate();
 
-                var listener = sp.GetRequiredService<IMetricsListener>();
-                var consoleListener = Assert.IsType<DebugConsoleMetricListener>(listener);
-                var output = new StringWriter();
-                consoleListener._textWriter = output;
+                    var listener = sp.GetRequiredService<IMetricsListener>();
+                    var consoleListener = Assert.IsType<DebugConsoleMetricListener>(listener);
+                    var output = new StringWriter();
+                    consoleListener._textWriter = output;
 
-                var factory = sp.GetRequiredService<IMeterFactory>();
-                var meter = factory.Create("TestMeter");
-                var counter = meter.CreateCounter<int>("counter", "blip", "I count blips");
-                counter.Add(4);
-                counter.Add(1);
+                    var factory = sp.GetRequiredService<IMeterFactory>();
+                    var meter = factory.Create("TestMeter");
+                    var counter = meter.CreateCounter<int>("counter", "blip", "I count blips");
+                    counter.Add(4);
+                    counter.Add(1);
 
-                // The rule doesn't match, we shouldn't get this output.
-                var negativeMeter = factory.Create("NegativeMeter");
-                counter = negativeMeter.CreateCounter<int>("counter", "blop", "I count blops");
-                counter.Add(1);
+                    // The rule doesn't match, we shouldn't get this output.
+                    var negativeMeter = factory.Create("NegativeMeter");
+                    counter = negativeMeter.CreateCounter<int>("counter", "blop", "I count blops");
+                    counter.Add(1);
 
-                // Meters from the factory can't be disposed, you have to dispose the whole factory.
-                sp.Dispose();
+                    // Meters from the factory can't be disposed, you have to dispose the whole factory.
+                    sp.Dispose();
 
-                Assert.Equal("TestMeter-counter Started; Description: I count blips." + Environment.NewLine
-                    + "TestMeter-counter 4 blip" + Environment.NewLine
-                    + "TestMeter-counter 1 blip" + Environment.NewLine
-                    + "TestMeter-counter Stopped." + Environment.NewLine, output.ToString());
-            }).Dispose();
+                    Assert.Equal(
+                        "TestMeter-counter Started; Description: I count blips."
+                            + Environment.NewLine
+                            + "TestMeter-counter 4 blip"
+                            + Environment.NewLine
+                            + "TestMeter-counter 1 blip"
+                            + Environment.NewLine
+                            + "TestMeter-counter Stopped."
+                            + Environment.NewLine,
+                        output.ToString()
+                    );
+                })
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void ListenerCanResolveGlobalMetrics()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                ServiceCollection services = new ServiceCollection();
-                services.AddMetrics(builder =>
+            RemoteExecutor
+                .Invoke(() =>
                 {
-                    builder.AddListener<DebugConsoleMetricListener>();
-                    builder.EnableMetrics("TestMeter", scopes: MeterScope.Global, listenerName: ConsoleMetrics.DebugListenerName);
-                });
-                using var sp = services.BuildServiceProvider();
-                // Make sure the subscription manager is started.
-                sp.GetRequiredService<IStartupValidator>().Validate();
+                    ServiceCollection services = new ServiceCollection();
+                    services.AddMetrics(builder =>
+                    {
+                        builder.AddListener<DebugConsoleMetricListener>();
+                        builder.EnableMetrics(
+                            "TestMeter",
+                            scopes: MeterScope.Global,
+                            listenerName: ConsoleMetrics.DebugListenerName
+                        );
+                    });
+                    using var sp = services.BuildServiceProvider();
+                    // Make sure the subscription manager is started.
+                    sp.GetRequiredService<IStartupValidator>().Validate();
 
-                var listener = sp.GetRequiredService<IMetricsListener>();
-                var consoleListener = Assert.IsType<DebugConsoleMetricListener>(listener);
-                var output = new StringWriter();
-                consoleListener._textWriter = output;
+                    var listener = sp.GetRequiredService<IMetricsListener>();
+                    var consoleListener = Assert.IsType<DebugConsoleMetricListener>(listener);
+                    var output = new StringWriter();
+                    consoleListener._textWriter = output;
 
-                var meter = new Meter("TestMeter");
-                var counter = meter.CreateCounter<int>("counter", "blip", "I count blips");
-                counter.Add(4);
-                counter.Add(1);
+                    var meter = new Meter("TestMeter");
+                    var counter = meter.CreateCounter<int>("counter", "blip", "I count blips");
+                    counter.Add(4);
+                    counter.Add(1);
 
-                // The rule doesn't match, we shouldn't get this output.
-                var negativeMeter = new Meter("NegativeMeter");
-                counter = negativeMeter.CreateCounter<int>("counter", "blop", "I count blops");
-                counter.Add(1);
+                    // The rule doesn't match, we shouldn't get this output.
+                    var negativeMeter = new Meter("NegativeMeter");
+                    counter = negativeMeter.CreateCounter<int>("counter", "blop", "I count blops");
+                    counter.Add(1);
 
-                meter.Dispose();
+                    meter.Dispose();
 
-                Assert.Equal("TestMeter-counter Started; Description: I count blips." + Environment.NewLine
-                    + "TestMeter-counter 4 blip" + Environment.NewLine
-                    + "TestMeter-counter 1 blip" + Environment.NewLine
-                    + "TestMeter-counter Stopped." + Environment.NewLine, output.ToString());
-            }).Dispose();
+                    Assert.Equal(
+                        "TestMeter-counter Started; Description: I count blips."
+                            + Environment.NewLine
+                            + "TestMeter-counter 4 blip"
+                            + Environment.NewLine
+                            + "TestMeter-counter 1 blip"
+                            + Environment.NewLine
+                            + "TestMeter-counter Stopped."
+                            + Environment.NewLine,
+                        output.ToString()
+                    );
+                })
+                .Dispose();
         }
     }
 }

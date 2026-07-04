@@ -15,6 +15,6 @@ public static class TableExpressionExtensions
     ///     If the given <paramref name="table" /> is a <see cref="JoinExpressionBase" />, returns the table it joins to. Otherwise, returns
     ///     <paramref name="table" />.
     /// </summary>
-    public static TableExpressionBase UnwrapJoin(this TableExpressionBase table)
-        => table is JoinExpressionBase join ? join.Table : table;
+    public static TableExpressionBase UnwrapJoin(this TableExpressionBase table) =>
+        table is JoinExpressionBase join ? join.Table : table;
 }

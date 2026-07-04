@@ -41,7 +41,9 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.MSBuild
         [InlineData("wpfusercontrollib")]
         [InlineData("wpflib")]
         [InlineData("wpfcustomcontrollib")]
-        public async Task CSharpTemplateProject_WindowsOnly_LoadWithNoDiagnostics(string templateName)
+        public async Task CSharpTemplateProject_WindowsOnly_LoadWithNoDiagnostics(
+            string templateName
+        )
         {
             var ignoredDiagnostics = templateName switch
             {
@@ -50,7 +52,11 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.MSBuild
                 _ => Array.Empty<string>(),
             };
 
-            await AssertTemplateProjectLoadsCleanlyAsync(templateName, LanguageNames.CSharp, ignoredDiagnostics);
+            await AssertTemplateProjectLoadsCleanlyAsync(
+                templateName,
+                LanguageNames.CSharp,
+                ignoredDiagnostics
+            );
         }
 
         [MSBuildTheory]
@@ -75,7 +81,11 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.MSBuild
                 _ => Array.Empty<string>(),
             };
 
-            await AssertTemplateProjectLoadsCleanlyAsync(templateName, LanguageNames.CSharp, ignoredDiagnostics);
+            await AssertTemplateProjectLoadsCleanlyAsync(
+                templateName,
+                LanguageNames.CSharp,
+                ignoredDiagnostics
+            );
         }
 
         [MSBuildTheory]
@@ -92,10 +102,18 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.MSBuild
                 _ => Array.Empty<string>(),
             };
 
-            await AssertTemplateProjectLoadsCleanlyAsync(templateName, LanguageNames.VisualBasic, ignoredDiagnostics);
+            await AssertTemplateProjectLoadsCleanlyAsync(
+                templateName,
+                LanguageNames.VisualBasic,
+                ignoredDiagnostics
+            );
         }
 
-        private async Task AssertTemplateProjectLoadsCleanlyAsync(string templateName, string languageName, string[] ignoredDiagnostics = null)
+        private async Task AssertTemplateProjectLoadsCleanlyAsync(
+            string templateName,
+            string languageName,
+            string[] ignoredDiagnostics = null
+        )
         {
             var logger = new TestLogger();
 
@@ -103,13 +121,19 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.MSBuild
             {
                 if (ignoredDiagnostics is not null)
                 {
-                    TestOutputHelper.WriteLine($"Ignoring compiler diagnostics: \"{string.Join("\", \"", ignoredDiagnostics)}\"");
+                    TestOutputHelper.WriteLine(
+                        $"Ignoring compiler diagnostics: \"{string.Join("\", \"", ignoredDiagnostics)}\""
+                    );
                 }
 
                 // Clean up previous run
                 CleanupProject(templateName, languageName);
 
-                var projectFilePath = await GenerateProjectFromTemplateAsync(templateName, languageName, TestOutputHelper);
+                var projectFilePath = await GenerateProjectFromTemplateAsync(
+                    templateName,
+                    languageName,
+                    TestOutputHelper
+                );
 
                 await AssertProjectLoadsCleanlyAsync(projectFilePath, logger, ignoredDiagnostics);
 
@@ -123,23 +147,44 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.MSBuild
             }
         }
 
-        private static async Task<string> GenerateProjectFromTemplateAsync(string templateName, string languageName, ITestOutputHelper outputHelper)
+        private static async Task<string> GenerateProjectFromTemplateAsync(
+            string templateName,
+            string languageName,
+            ITestOutputHelper outputHelper
+        )
         {
             var projectPath = GetProjectPath(templateName, languageName);
             var projectFilePath = GetProjectFilePath(projectPath, languageName);
 
-            var exitCode = await DotNetHelper.NewProjectAsync(templateName, projectPath, languageName, outputHelper);
+            var exitCode = await DotNetHelper.NewProjectAsync(
+                templateName,
+                projectPath,
+                languageName,
+                outputHelper
+            );
             Assert.Equal(0, exitCode);
 
             return projectFilePath;
         }
 
-        private static async Task AssertProjectLoadsCleanlyAsync(string projectFilePath, ILogger logger, string[] ignoredDiagnostics)
+        private static async Task AssertProjectLoadsCleanlyAsync(
+            string projectFilePath,
+            ILogger logger,
+            string[] ignoredDiagnostics
+        )
         {
             var binaryLogPath = Path.ChangeExtension(projectFilePath, ".binlog");
 
             MSBuildRegistrar.RegisterInstance();
-            using var workspace = (MSBuildWorkspace)await MSBuildWorkspaceLoader.LoadAsync(projectFilePath, WorkspaceType.Project, binaryLogPath, logWorkspaceWarnings: true, logger, CancellationToken.None);
+            using var workspace = (MSBuildWorkspace)
+                await MSBuildWorkspaceLoader.LoadAsync(
+                    projectFilePath,
+                    WorkspaceType.Project,
+                    binaryLogPath,
+                    logWorkspaceWarnings: true,
+                    logger,
+                    CancellationToken.None
+                );
 
             Assert.Empty(workspace.Diagnostics);
 
@@ -147,8 +192,12 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.MSBuild
             var compilation = await project.GetCompilationAsync();
 
             // Unnecessary using directives are reported with a severty of Hidden
-            var diagnostics = compilation.GetDiagnostics()
-                .Where(diagnostic => diagnostic.Severity > DiagnosticSeverity.Hidden && ignoredDiagnostics?.Contains(diagnostic.Id) != true);
+            var diagnostics = compilation
+                .GetDiagnostics()
+                .Where(diagnostic =>
+                    diagnostic.Severity > DiagnosticSeverity.Hidden
+                    && ignoredDiagnostics?.Contains(diagnostic.Id) != true
+                );
 
             Assert.Empty(diagnostics);
         }
@@ -177,7 +226,11 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.MSBuild
             {
                 LanguageNames.CSharp => "csproj",
                 LanguageNames.VisualBasic => "vbproj",
-                _ => throw new ArgumentOutOfRangeException(nameof(languageName), actualValue: languageName, message: "Only C# and VB.Net project are supported.")
+                _ => throw new ArgumentOutOfRangeException(
+                    nameof(languageName),
+                    actualValue: languageName,
+                    message: "Only C# and VB.Net project are supported."
+                ),
             };
             return Path.Combine(projectPath, $"{projectName}.{projectExtension}");
         }

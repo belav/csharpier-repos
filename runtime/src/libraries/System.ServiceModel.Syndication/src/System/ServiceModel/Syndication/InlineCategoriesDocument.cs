@@ -10,15 +10,16 @@ namespace System.ServiceModel.Syndication
     {
         private Collection<SyndicationCategory> _categories;
 
-        public InlineCategoriesDocument()
-        {
-        }
+        public InlineCategoriesDocument() { }
 
-        public InlineCategoriesDocument(IEnumerable<SyndicationCategory> categories) : this(categories, false, null)
-        {
-        }
+        public InlineCategoriesDocument(IEnumerable<SyndicationCategory> categories)
+            : this(categories, false, null) { }
 
-        public InlineCategoriesDocument(IEnumerable<SyndicationCategory> categories, bool isFixed, string scheme)
+        public InlineCategoriesDocument(
+            IEnumerable<SyndicationCategory> categories,
+            bool isFixed,
+            string scheme
+        )
         {
             if (categories != null)
             {
@@ -44,6 +45,7 @@ namespace System.ServiceModel.Syndication
 
         internal override bool IsInline => true;
 
-        protected internal virtual SyndicationCategory CreateCategory() => new SyndicationCategory();
+        protected internal virtual SyndicationCategory CreateCategory() =>
+            new SyndicationCategory();
     }
 }

@@ -16,10 +16,17 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal static class SymbolInfoFactory
     {
-        internal static SymbolInfo Create(ImmutableArray<Symbol> symbols, LookupResultKind resultKind, bool isDynamic)
-            => Create(OneOrMany.Create(symbols.NullToEmpty()), resultKind, isDynamic);
+        internal static SymbolInfo Create(
+            ImmutableArray<Symbol> symbols,
+            LookupResultKind resultKind,
+            bool isDynamic
+        ) => Create(OneOrMany.Create(symbols.NullToEmpty()), resultKind, isDynamic);
 
-        internal static SymbolInfo Create(OneOrMany<Symbol> symbols, LookupResultKind resultKind, bool isDynamic)
+        internal static SymbolInfo Create(
+            OneOrMany<Symbol> symbols,
+            LookupResultKind resultKind,
+            bool isDynamic
+        )
         {
             if (isDynamic)
             {
@@ -46,7 +53,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                return new SymbolInfo(getPublicSymbols(symbols), (symbols.Count > 0) ? resultKind.ToCandidateReason() : CandidateReason.None);
+                return new SymbolInfo(
+                    getPublicSymbols(symbols),
+                    (symbols.Count > 0) ? resultKind.ToCandidateReason() : CandidateReason.None
+                );
             }
 
             static ImmutableArray<ISymbol> getPublicSymbols(OneOrMany<Symbol> symbols)

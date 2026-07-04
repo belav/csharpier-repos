@@ -94,9 +94,9 @@ namespace System.Net.Security
         /// <see cref="NegotiateAuthenticationServerOptions.RequiredProtectionLevel" />.
         /// </remarks>
         public ProtectionLevel ProtectionLevel =>
-            !IsSigned ? ProtectionLevel.None :
-            !IsEncrypted ? ProtectionLevel.Sign :
-            ProtectionLevel.EncryptAndSign;
+            !IsSigned ? ProtectionLevel.None
+            : !IsEncrypted ? ProtectionLevel.Sign
+            : ProtectionLevel.EncryptAndSign;
 
         /// <summary>
         /// Indicates whether data signing was negotiated.
@@ -170,7 +170,10 @@ namespace System.Net.Security
 
                     if (IsServer)
                     {
-                        Debug.Assert(!OperatingSystem.IsTvOS(), "Server authentication is not supported on tvOS");
+                        Debug.Assert(
+                            !OperatingSystem.IsTvOS(),
+                            "Server authentication is not supported on tvOS"
+                        );
                         _remoteIdentity = identity = _pal.RemoteIdentity;
                     }
                     else
@@ -186,7 +189,8 @@ namespace System.Net.Security
         /// One of the <see cref="TokenImpersonationLevel" /> values, indicating the negotiated
         /// level of impresonation.
         /// </summary>
-        public System.Security.Principal.TokenImpersonationLevel ImpersonationLevel => _pal.ImpersonationLevel;
+        public System.Security.Principal.TokenImpersonationLevel ImpersonationLevel =>
+            _pal.ImpersonationLevel;
 
         /// <summary>
         /// Evaluates an authentication token sent by the other party and returns a token in response.
@@ -205,7 +209,10 @@ namespace System.Net.Security
         /// When <see cref="NegotiateAuthenticationStatusCode.ContinueNeeded" /> is returned the
         /// return value is an authentication token to be transported to the other party.
         /// </remarks>
-        public byte[]? GetOutgoingBlob(ReadOnlySpan<byte> incomingBlob, out NegotiateAuthenticationStatusCode statusCode)
+        public byte[]? GetOutgoingBlob(
+            ReadOnlySpan<byte> incomingBlob,
+            out NegotiateAuthenticationStatusCode statusCode
+        )
         {
             if (_isDisposed)
             {
@@ -221,11 +228,17 @@ namespace System.Net.Security
                 {
                     statusCode = NegotiateAuthenticationStatusCode.TargetUnknown;
                 }
-                else if (_requiredImpersonationLevel != TokenImpersonationLevel.None && ImpersonationLevel < _requiredImpersonationLevel)
+                else if (
+                    _requiredImpersonationLevel != TokenImpersonationLevel.None
+                    && ImpersonationLevel < _requiredImpersonationLevel
+                )
                 {
                     statusCode = NegotiateAuthenticationStatusCode.ImpersonationValidationFailed;
                 }
-                else if (_requiredProtectionLevel != ProtectionLevel.None && ProtectionLevel < _requiredProtectionLevel)
+                else if (
+                    _requiredProtectionLevel != ProtectionLevel.None
+                    && ProtectionLevel < _requiredProtectionLevel
+                )
                 {
                     statusCode = NegotiateAuthenticationStatusCode.SecurityQosFailed;
                 }
@@ -251,7 +264,10 @@ namespace System.Net.Security
         /// When <see cref="NegotiateAuthenticationStatusCode.ContinueNeeded" /> is returned the
         /// return value is an authentication token to be transported to the other party.
         /// </remarks>
-        public string? GetOutgoingBlob(string? incomingBlob, out NegotiateAuthenticationStatusCode statusCode)
+        public string? GetOutgoingBlob(
+            string? incomingBlob,
+            out NegotiateAuthenticationStatusCode statusCode
+        )
         {
             byte[]? decodedIncomingBlob = null;
             if (!string.IsNullOrEmpty(incomingBlob))
@@ -287,7 +303,12 @@ namespace System.Net.Security
         /// level.
         /// </remarks>
         /// <exception cref="InvalidOperationException">Authentication failed or has not occurred.</exception>
-        public NegotiateAuthenticationStatusCode Wrap(ReadOnlySpan<byte> input, IBufferWriter<byte> outputWriter, bool requestEncryption, out bool isEncrypted)
+        public NegotiateAuthenticationStatusCode Wrap(
+            ReadOnlySpan<byte> input,
+            IBufferWriter<byte> outputWriter,
+            bool requestEncryption,
+            out bool isEncrypted
+        )
         {
             if (!IsAuthenticated || _isDisposed)
             {
@@ -314,7 +335,11 @@ namespace System.Net.Security
         /// Other <see cref="NegotiateAuthenticationStatusCode" /> values on failure.
         /// </returns>
         /// <exception cref="InvalidOperationException">Authentication failed or has not occurred.</exception>
-        public NegotiateAuthenticationStatusCode Unwrap(ReadOnlySpan<byte> input, IBufferWriter<byte> outputWriter, out bool wasEncrypted)
+        public NegotiateAuthenticationStatusCode Unwrap(
+            ReadOnlySpan<byte> input,
+            IBufferWriter<byte> outputWriter,
+            out bool wasEncrypted
+        )
         {
             if (!IsAuthenticated || _isDisposed)
             {
@@ -342,14 +367,24 @@ namespace System.Net.Security
         /// Other <see cref="NegotiateAuthenticationStatusCode" /> values on failure.
         /// </returns>
         /// <exception cref="InvalidOperationException">Authentication failed or has not occurred.</exception>
-        public NegotiateAuthenticationStatusCode UnwrapInPlace(Span<byte> input, out int unwrappedOffset, out int unwrappedLength, out bool wasEncrypted)
+        public NegotiateAuthenticationStatusCode UnwrapInPlace(
+            Span<byte> input,
+            out int unwrappedOffset,
+            out int unwrappedLength,
+            out bool wasEncrypted
+        )
         {
             if (!IsAuthenticated || _isDisposed)
             {
                 throw new InvalidOperationException(SR.net_auth_noauth);
             }
 
-            return _pal.UnwrapInPlace(input, out unwrappedOffset, out unwrappedLength, out wasEncrypted);
+            return _pal.UnwrapInPlace(
+                input,
+                out unwrappedOffset,
+                out unwrappedLength,
+                out wasEncrypted
+            );
         }
 
         /// <summary>
@@ -401,25 +436,33 @@ namespace System.Net.Security
 
             if (_pal.Package == NegotiationInfoClass.Kerberos)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, SR.net_log_listener_no_spn_kerberos);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, SR.net_log_listener_no_spn_kerberos);
                 return true;
             }
 
             if (_extendedProtectionPolicy.PolicyEnforcement == PolicyEnforcement.Never)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, SR.net_log_listener_no_spn_disabled);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, SR.net_log_listener_no_spn_disabled);
                 return true;
             }
 
-            if (_isSecureConnection &&  _extendedProtectionPolicy.ProtectionScenario == ProtectionScenario.TransportSelected)
+            if (
+                _isSecureConnection
+                && _extendedProtectionPolicy.ProtectionScenario
+                    == ProtectionScenario.TransportSelected
+            )
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, SR.net_log_listener_no_spn_cbt);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, SR.net_log_listener_no_spn_cbt);
                 return true;
             }
 
             if (_extendedProtectionPolicy.CustomServiceNames == null)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, SR.net_log_listener_no_spns);
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(this, SR.net_log_listener_no_spns);
                 return true;
             }
 
@@ -429,17 +472,20 @@ namespace System.Net.Security
             {
                 if (_extendedProtectionPolicy.PolicyEnforcement == PolicyEnforcement.WhenSupported)
                 {
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, SR.net_log_listener_no_spn_whensupported);
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info(this, SR.net_log_listener_no_spn_whensupported);
                     return true;
                 }
                 else
                 {
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, SR.net_log_listener_spn_failed_always);
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Info(this, SR.net_log_listener_spn_failed_always);
                     return false;
                 }
             }
 
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, SR.net_log_listener_spn, clientSpn);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, SR.net_log_listener_spn, clientSpn);
             bool found = _extendedProtectionPolicy.CustomServiceNames.Contains(clientSpn);
 
             if (NetEventSource.Log.IsEnabled())

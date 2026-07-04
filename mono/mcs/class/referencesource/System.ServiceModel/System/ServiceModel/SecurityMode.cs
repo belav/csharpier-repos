@@ -8,17 +8,19 @@ namespace System.ServiceModel
         None,
         Transport,
         Message,
-        TransportWithMessageCredential
+        TransportWithMessageCredential,
     }
 
     static class SecurityModeHelper
     {
         internal static bool IsDefined(SecurityMode value)
         {
-            return (value == SecurityMode.None ||
-                value == SecurityMode.Transport ||
-                value == SecurityMode.Message ||
-                value == SecurityMode.TransportWithMessageCredential);
+            return (
+                value == SecurityMode.None
+                || value == SecurityMode.Transport
+                || value == SecurityMode.Message
+                || value == SecurityMode.TransportWithMessageCredential
+            );
         }
 
         internal static SecurityMode ToSecurityMode(UnifiedSecurityMode value)

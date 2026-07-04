@@ -14,14 +14,16 @@ namespace System.Security.Cryptography
             /// <summary>
             /// Given a second party's public key, derive shared key material
             /// </summary>
-            public override byte[] DeriveKeyMaterial(ECDiffieHellmanPublicKey otherPartyPublicKey) =>
-                DeriveKeyFromHash(otherPartyPublicKey, HashAlgorithmName.SHA256, null, null);
+            public override byte[] DeriveKeyMaterial(
+                ECDiffieHellmanPublicKey otherPartyPublicKey
+            ) => DeriveKeyFromHash(otherPartyPublicKey, HashAlgorithmName.SHA256, null, null);
 
             public override byte[] DeriveKeyFromHash(
                 ECDiffieHellmanPublicKey otherPartyPublicKey,
                 HashAlgorithmName hashAlgorithm,
                 byte[]? secretPrepend,
-                byte[]? secretAppend)
+                byte[]? secretAppend
+            )
             {
                 ArgumentNullException.ThrowIfNull(otherPartyPublicKey);
                 ArgumentException.ThrowIfNullOrEmpty(hashAlgorithm.Name, nameof(hashAlgorithm));
@@ -33,7 +35,8 @@ namespace System.Security.Cryptography
                     hashAlgorithm,
                     secretPrepend,
                     secretAppend,
-                    DeriveSecretAgreement);
+                    DeriveSecretAgreement
+                );
             }
 
             public override byte[] DeriveKeyFromHmac(
@@ -41,7 +44,8 @@ namespace System.Security.Cryptography
                 HashAlgorithmName hashAlgorithm,
                 byte[]? hmacKey,
                 byte[]? secretPrepend,
-                byte[]? secretAppend)
+                byte[]? secretAppend
+            )
             {
                 ArgumentNullException.ThrowIfNull(otherPartyPublicKey);
                 ArgumentException.ThrowIfNullOrEmpty(hashAlgorithm.Name, nameof(hashAlgorithm));
@@ -54,10 +58,15 @@ namespace System.Security.Cryptography
                     hmacKey,
                     secretPrepend,
                     secretAppend,
-                    DeriveSecretAgreement);
+                    DeriveSecretAgreement
+                );
             }
 
-            public override byte[] DeriveKeyTls(ECDiffieHellmanPublicKey otherPartyPublicKey, byte[] prfLabel, byte[] prfSeed)
+            public override byte[] DeriveKeyTls(
+                ECDiffieHellmanPublicKey otherPartyPublicKey,
+                byte[] prfLabel,
+                byte[] prfSeed
+            )
             {
                 ArgumentNullException.ThrowIfNull(otherPartyPublicKey);
                 ArgumentNullException.ThrowIfNull(prfLabel);
@@ -69,10 +78,13 @@ namespace System.Security.Cryptography
                     otherPartyPublicKey,
                     prfLabel,
                     prfSeed,
-                    DeriveSecretAgreement);
+                    DeriveSecretAgreement
+                );
             }
 
-            public override byte[] DeriveRawSecretAgreement(ECDiffieHellmanPublicKey otherPartyPublicKey)
+            public override byte[] DeriveRawSecretAgreement(
+                ECDiffieHellmanPublicKey otherPartyPublicKey
+            )
             {
                 ArgumentNullException.ThrowIfNull(otherPartyPublicKey);
                 ThrowIfDisposed();
@@ -85,7 +97,10 @@ namespace System.Security.Cryptography
             /// <summary>
             /// Get the secret agreement generated between two parties
             /// </summary>
-            private byte[]? DeriveSecretAgreement(ECDiffieHellmanPublicKey otherPartyPublicKey, IncrementalHash? hasher)
+            private byte[]? DeriveSecretAgreement(
+                ECDiffieHellmanPublicKey otherPartyPublicKey,
+                IncrementalHash? hasher
+            )
             {
                 Debug.Assert(otherPartyPublicKey != null);
                 Debug.Assert(_key is not null); // Callers should have checked for null
@@ -94,17 +109,17 @@ namespace System.Security.Cryptography
                 // which will throw an OpenSslCryptoException if no private key is available
                 ECParameters thisKeyExplicit = ExportExplicitParameters(true);
                 bool thisIsNamed = Interop.AndroidCrypto.EcKeyHasCurveName(_key.Value);
-                ECDiffieHellmanAndroidPublicKey? otherKey = otherPartyPublicKey as ECDiffieHellmanAndroidPublicKey;
+                ECDiffieHellmanAndroidPublicKey? otherKey =
+                    otherPartyPublicKey as ECDiffieHellmanAndroidPublicKey;
                 bool disposeOtherKey = false;
 
                 if (otherKey == null)
                 {
                     disposeOtherKey = true;
 
-                    ECParameters otherParameters =
-                        thisIsNamed
-                            ? otherPartyPublicKey.ExportParameters()
-                            : otherPartyPublicKey.ExportExplicitParameters();
+                    ECParameters otherParameters = thisIsNamed
+                        ? otherPartyPublicKey.ExportParameters()
+                        : otherPartyPublicKey.ExportExplicitParameters();
 
                     otherKey = new ECDiffieHellmanAndroidPublicKey(otherParameters);
                 }
@@ -121,7 +136,10 @@ namespace System.Security.Cryptography
                 {
                     if (otherKey.KeySize != KeySize)
                     {
-                        throw new ArgumentException(SR.Cryptography_ArgECDHKeySizeMismatch, nameof(otherPartyPublicKey));
+                        throw new ArgumentException(
+                            SR.Cryptography_ArgECDHKeySizeMismatch,
+                            nameof(otherPartyPublicKey)
+                        );
                     }
 
                     if (otherIsNamed == thisIsNamed)
@@ -164,12 +182,22 @@ namespace System.Security.Cryptography
                         secret = stackalloc byte[secretLength];
                     }
 
-                    if (!Interop.AndroidCrypto.EcdhDeriveKey(ourKey, theirKey, secret, out int usedBufferLength))
+                    if (
+                        !Interop.AndroidCrypto.EcdhDeriveKey(
+                            ourKey,
+                            theirKey,
+                            secret,
+                            out int usedBufferLength
+                        )
+                    )
                     {
                         throw new CryptographicException();
                     }
 
-                    Debug.Assert(secretLength == usedBufferLength, $"Expected secret length {secretLength} does not match actual secret length {usedBufferLength}.");
+                    Debug.Assert(
+                        secretLength == usedBufferLength,
+                        $"Expected secret length {secretLength} does not match actual secret length {usedBufferLength}."
+                    );
 
                     if (hasher == null)
                     {

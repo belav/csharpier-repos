@@ -92,14 +92,14 @@ public class CSharpUtilities : ICSharpUtilities
         "virtual",
         "void",
         "volatile",
-        "while"
+        "while",
     };
 
-    private static readonly Regex InvalidCharsRegex
-        = new(
-            @"[^\p{Ll}\p{Lu}\p{Lt}\p{Lo}\p{Nd}\p{Nl}\p{Mn}\p{Mc}\p{Cf}\p{Pc}\p{Lm}]",
-            default,
-            TimeSpan.FromMilliseconds(1000.0));
+    private static readonly Regex InvalidCharsRegex = new(
+        @"[^\p{Ll}\p{Lu}\p{Lt}\p{Lo}\p{Nd}\p{Nl}\p{Mn}\p{Mc}\p{Cf}\p{Pc}\p{Lm}]",
+        default,
+        TimeSpan.FromMilliseconds(1000.0)
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -107,8 +107,7 @@ public class CSharpUtilities : ICSharpUtilities
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool IsCSharpKeyword(string identifier)
-        => CSharpKeywords.Contains(identifier);
+    public virtual bool IsCSharpKeyword(string identifier) => CSharpKeywords.Contains(identifier);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -119,8 +118,14 @@ public class CSharpUtilities : ICSharpUtilities
     public virtual string GenerateCSharpIdentifier(
         string identifier,
         ICollection<string>? existingIdentifiers,
-        Func<string, string>? singularizePluralizer)
-        => GenerateCSharpIdentifier(identifier, existingIdentifiers, singularizePluralizer, Uniquifier);
+        Func<string, string>? singularizePluralizer
+    ) =>
+        GenerateCSharpIdentifier(
+            identifier,
+            existingIdentifiers,
+            singularizePluralizer,
+            Uniquifier
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -132,7 +137,8 @@ public class CSharpUtilities : ICSharpUtilities
         string identifier,
         ICollection<string>? existingIdentifiers,
         Func<string, string>? singularizePluralizer,
-        Func<string, ICollection<string>?, string> uniquifier)
+        Func<string, ICollection<string>?, string> uniquifier
+    )
     {
         var proposedIdentifier =
             identifier.Length > 1 && identifier[0] == '@'
@@ -144,9 +150,7 @@ public class CSharpUtilities : ICSharpUtilities
         }
 
         var firstChar = proposedIdentifier[0];
-        if (!char.IsLetter(firstChar)
-            && firstChar != '_'
-            && firstChar != '@')
+        if (!char.IsLetter(firstChar) && firstChar != '_' && firstChar != '@')
         {
             proposedIdentifier = "_" + proposedIdentifier;
         }
@@ -171,7 +175,8 @@ public class CSharpUtilities : ICSharpUtilities
     /// </summary>
     public virtual string Uniquifier(
         string proposedIdentifier,
-        ICollection<string>? existingIdentifiers)
+        ICollection<string>? existingIdentifiers
+    )
     {
         if (existingIdentifiers == null)
         {
@@ -238,9 +243,7 @@ public class CSharpUtilities : ICSharpUtilities
     {
         if (ch < 'a')
         {
-            return ch < 'A'
-                ? ch is >= '0' and <= '9'
-                : ch is <= 'Z' or '_';
+            return ch < 'A' ? ch is >= '0' and <= '9' : ch is <= 'Z' or '_';
         }
 
         if (ch <= 'z')

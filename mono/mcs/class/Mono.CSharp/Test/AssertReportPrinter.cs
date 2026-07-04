@@ -31,11 +31,11 @@ using NUnit.Framework;
 
 namespace MonoTests
 {
-	class AssertReportPrinter : ReportPrinter
-	{
-		public override void Print (AbstractMessage msg, bool showFullPath)
-		{
-			Assert.Fail (msg.Text);
-		}
-	}
+    class AssertReportPrinter : ReportPrinter
+    {
+        public override void Print(AbstractMessage msg, bool showFullPath)
+        {
+            Assert.Fail(msg.Text);
+        }
+    }
 }

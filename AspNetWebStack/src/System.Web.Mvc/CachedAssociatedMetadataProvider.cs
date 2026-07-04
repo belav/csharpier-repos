@@ -8,12 +8,17 @@ using System.Runtime.Caching;
 
 namespace System.Web.Mvc
 {
-    public abstract class CachedAssociatedMetadataProvider<TModelMetadata> : AssociatedMetadataProvider
+    public abstract class CachedAssociatedMetadataProvider<TModelMetadata>
+        : AssociatedMetadataProvider
         where TModelMetadata : ModelMetadata
     {
-        private static ConcurrentDictionary<Type, string> _typeIds = new ConcurrentDictionary<Type, string>();
+        private static ConcurrentDictionary<Type, string> _typeIds =
+            new ConcurrentDictionary<Type, string>();
         private string _cacheKeyPrefix;
-        private CacheItemPolicy _cacheItemPolicy = new CacheItemPolicy { SlidingExpiration = TimeSpan.FromMinutes(20) };
+        private CacheItemPolicy _cacheItemPolicy = new CacheItemPolicy
+        {
+            SlidingExpiration = TimeSpan.FromMinutes(20),
+        };
         private ObjectCache _prototypeCache;
 
         protected internal CacheItemPolicy CacheItemPolicy
@@ -40,7 +45,13 @@ namespace System.Web.Mvc
             set { _prototypeCache = value; }
         }
 
-        protected sealed override ModelMetadata CreateMetadata(IEnumerable<Attribute> attributes, Type containerType, Func<object> modelAccessor, Type modelType, string propertyName)
+        protected sealed override ModelMetadata CreateMetadata(
+            IEnumerable<Attribute> attributes,
+            Type containerType,
+            Func<object> modelAccessor,
+            Type modelType,
+            string propertyName
+        )
         {
             // If metadata is being created for a property then containerType != null && propertyName != null
             // If metadata is being created for a type then containerType == null && propertyName == null, so we have to use modelType for the cache key.
@@ -49,7 +60,12 @@ namespace System.Web.Mvc
             TModelMetadata prototype = PrototypeCache.Get(cacheKey) as TModelMetadata;
             if (prototype == null)
             {
-                prototype = CreateMetadataPrototype(attributes, containerType, modelType, propertyName);
+                prototype = CreateMetadataPrototype(
+                    attributes,
+                    containerType,
+                    modelType,
+                    propertyName
+                );
                 PrototypeCache.Add(cacheKey, prototype, CacheItemPolicy);
             }
 
@@ -57,10 +73,18 @@ namespace System.Web.Mvc
         }
 
         // New override for creating the prototype metadata (without the accessor)
-        protected abstract TModelMetadata CreateMetadataPrototype(IEnumerable<Attribute> attributes, Type containerType, Type modelType, string propertyName);
+        protected abstract TModelMetadata CreateMetadataPrototype(
+            IEnumerable<Attribute> attributes,
+            Type containerType,
+            Type modelType,
+            string propertyName
+        );
 
         // New override for applying the prototype + modelAccess to yield the final metadata
-        protected abstract TModelMetadata CreateMetadataFromPrototype(TModelMetadata prototype, Func<object> modelAccessor);
+        protected abstract TModelMetadata CreateMetadataFromPrototype(
+            TModelMetadata prototype,
+            Func<object> modelAccessor
+        );
 
         internal string GetCacheKey(Type type, string propertyName = null)
         {
@@ -68,22 +92,36 @@ namespace System.Web.Mvc
             return CacheKeyPrefix + GetTypeId(type) + propertyName;
         }
 
-        public sealed override ModelMetadata GetMetadataForProperty(Func<object> modelAccessor, Type containerType, string propertyName)
+        public sealed override ModelMetadata GetMetadataForProperty(
+            Func<object> modelAccessor,
+            Type containerType,
+            string propertyName
+        )
         {
             return base.GetMetadataForProperty(modelAccessor, containerType, propertyName);
         }
 
-        protected sealed override ModelMetadata GetMetadataForProperty(Func<object> modelAccessor, Type containerType, PropertyDescriptor propertyDescriptor)
+        protected sealed override ModelMetadata GetMetadataForProperty(
+            Func<object> modelAccessor,
+            Type containerType,
+            PropertyDescriptor propertyDescriptor
+        )
         {
             return base.GetMetadataForProperty(modelAccessor, containerType, propertyDescriptor);
         }
 
-        public sealed override IEnumerable<ModelMetadata> GetMetadataForProperties(object container, Type containerType)
+        public sealed override IEnumerable<ModelMetadata> GetMetadataForProperties(
+            object container,
+            Type containerType
+        )
         {
             return base.GetMetadataForProperties(container, containerType);
         }
 
-        public sealed override ModelMetadata GetMetadataForType(Func<object> modelAccessor, Type modelType)
+        public sealed override ModelMetadata GetMetadataForType(
+            Func<object> modelAccessor,
+            Type modelType
+        )
         {
             return base.GetMetadataForType(modelAccessor, modelType);
         }

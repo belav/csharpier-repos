@@ -22,7 +22,10 @@ namespace System.Web.WebPages.ApplicationParts
 
             if (String.IsNullOrEmpty(path))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "path");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "path"
+                );
             }
 
             _applicationPart = applicationPart;
@@ -54,9 +57,14 @@ namespace System.Web.WebPages.ApplicationParts
             {
                 if (stream == null)
                 {
-                    throw new HttpException(404, String.Format(
-                        CultureInfo.CurrentCulture,
-                        WebPageResources.ApplicationPart_ResourceNotFound, _path));
+                    throw new HttpException(
+                        404,
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            WebPageResources.ApplicationPart_ResourceNotFound,
+                            _path
+                        )
+                    );
                 }
 
                 // Set the mime type based on the file extension

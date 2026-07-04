@@ -15,31 +15,31 @@ namespace System.Runtime.DurableInstancing
         const string InstanceKeyName = "instancePersistenceInstanceKey";
 
         public InstanceKeyCompleteException()
-            : this(SRCore.KeyNotReadyDefault, null)
-        {
-        }
+            : this(SRCore.KeyNotReadyDefault, null) { }
 
         public InstanceKeyCompleteException(string message)
-            : this(message, null)
-        {
-        }
+            : this(message, null) { }
 
         public InstanceKeyCompleteException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         public InstanceKeyCompleteException(XName commandName, InstanceKey instanceKey)
-            : this(commandName, instanceKey, null)
-        {
-        }
+            : this(commandName, instanceKey, null) { }
 
-        public InstanceKeyCompleteException(XName commandName, InstanceKey instanceKey, Exception innerException)
-            : this(commandName, Guid.Empty, instanceKey, ToMessage(instanceKey), innerException)
-        {
-        }
+        public InstanceKeyCompleteException(
+            XName commandName,
+            InstanceKey instanceKey,
+            Exception innerException
+        )
+            : this(commandName, Guid.Empty, instanceKey, ToMessage(instanceKey), innerException) { }
 
-        public InstanceKeyCompleteException(XName commandName, Guid instanceId, InstanceKey instanceKey, string message, Exception innerException)
+        public InstanceKeyCompleteException(
+            XName commandName,
+            Guid instanceId,
+            InstanceKey instanceKey,
+            string message,
+            Exception innerException
+        )
             : base(commandName, instanceId, message, innerException)
         {
             InstanceKey = instanceKey;
@@ -57,12 +57,19 @@ namespace System.Runtime.DurableInstancing
 
         [Fx.Tag.SecurityNote(Critical = "Overrides critical inherited method")]
         [SecurityCritical]
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.SecureGetObjectDataOverrides,
-            Justification = "Method is SecurityCritical")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.SecureGetObjectDataOverrides,
+            Justification = "Method is SecurityCritical"
+        )]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
-            info.AddValue(InstanceKeyName, (InstanceKey != null && InstanceKey.IsValid) ? InstanceKey.Value : Guid.Empty, typeof(Guid));
+            info.AddValue(
+                InstanceKeyName,
+                (InstanceKey != null && InstanceKey.IsValid) ? InstanceKey.Value : Guid.Empty,
+                typeof(Guid)
+            );
         }
 
         static string ToMessage(InstanceKey instanceKey)

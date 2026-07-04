@@ -37,70 +37,92 @@ public class SqliteQueryableAggregateMethodTranslator : IAggregateMethodCallTran
         MethodInfo method,
         EnumerableExpression source,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         if (method.DeclaringType == typeof(Queryable))
         {
-            var methodInfo = method.IsGenericMethod
-                ? method.GetGenericMethodDefinition()
-                : method;
+            var methodInfo = method.IsGenericMethod ? method.GetGenericMethodDefinition() : method;
             switch (methodInfo.Name)
             {
                 case nameof(Queryable.Average)
-                    when (QueryableMethods.IsAverageWithoutSelector(methodInfo)
-                        || QueryableMethods.IsAverageWithSelector(methodInfo))
-                    && source.Selector is SqlExpression averageSqlExpression:
+                    when (
+                        QueryableMethods.IsAverageWithoutSelector(methodInfo)
+                        || QueryableMethods.IsAverageWithSelector(methodInfo)
+                    ) && source.Selector is SqlExpression averageSqlExpression:
                     var averageArgumentType = GetProviderType(averageSqlExpression);
                     if (averageArgumentType == typeof(decimal))
                     {
                         throw new NotSupportedException(
                             SqliteStrings.AggregateOperationNotSupported(
-                                nameof(Queryable.Average), averageArgumentType.ShortDisplayName()));
+                                nameof(Queryable.Average),
+                                averageArgumentType.ShortDisplayName()
+                            )
+                        );
                     }
 
                     break;
 
                 case nameof(Queryable.Max)
-                    when (methodInfo == QueryableMethods.MaxWithoutSelector
-                        || methodInfo == QueryableMethods.MaxWithSelector)
-                    && source.Selector is SqlExpression maxSqlExpression:
+                    when (
+                        methodInfo == QueryableMethods.MaxWithoutSelector
+                        || methodInfo == QueryableMethods.MaxWithSelector
+                    ) && source.Selector is SqlExpression maxSqlExpression:
                     var maxArgumentType = GetProviderType(maxSqlExpression);
-                    if (maxArgumentType == typeof(DateTimeOffset)
+                    if (
+                        maxArgumentType == typeof(DateTimeOffset)
                         || maxArgumentType == typeof(decimal)
                         || maxArgumentType == typeof(TimeSpan)
-                        || maxArgumentType == typeof(ulong))
+                        || maxArgumentType == typeof(ulong)
+                    )
                     {
                         throw new NotSupportedException(
-                            SqliteStrings.AggregateOperationNotSupported(nameof(Queryable.Max), maxArgumentType.ShortDisplayName()));
+                            SqliteStrings.AggregateOperationNotSupported(
+                                nameof(Queryable.Max),
+                                maxArgumentType.ShortDisplayName()
+                            )
+                        );
                     }
 
                     break;
 
                 case nameof(Queryable.Min)
-                    when (methodInfo == QueryableMethods.MinWithoutSelector
-                        || methodInfo == QueryableMethods.MinWithSelector)
-                    && source.Selector is SqlExpression minSqlExpression:
+                    when (
+                        methodInfo == QueryableMethods.MinWithoutSelector
+                        || methodInfo == QueryableMethods.MinWithSelector
+                    ) && source.Selector is SqlExpression minSqlExpression:
                     var minArgumentType = GetProviderType(minSqlExpression);
-                    if (minArgumentType == typeof(DateTimeOffset)
+                    if (
+                        minArgumentType == typeof(DateTimeOffset)
                         || minArgumentType == typeof(decimal)
                         || minArgumentType == typeof(TimeSpan)
-                        || minArgumentType == typeof(ulong))
+                        || minArgumentType == typeof(ulong)
+                    )
                     {
                         throw new NotSupportedException(
-                            SqliteStrings.AggregateOperationNotSupported(nameof(Queryable.Min), minArgumentType.ShortDisplayName()));
+                            SqliteStrings.AggregateOperationNotSupported(
+                                nameof(Queryable.Min),
+                                minArgumentType.ShortDisplayName()
+                            )
+                        );
                     }
 
                     break;
 
                 case nameof(Queryable.Sum)
-                    when (QueryableMethods.IsSumWithoutSelector(methodInfo)
-                        || QueryableMethods.IsSumWithSelector(methodInfo))
-                    && source.Selector is SqlExpression sumSqlExpression:
+                    when (
+                        QueryableMethods.IsSumWithoutSelector(methodInfo)
+                        || QueryableMethods.IsSumWithSelector(methodInfo)
+                    ) && source.Selector is SqlExpression sumSqlExpression:
                     var sumArgumentType = GetProviderType(sumSqlExpression);
                     if (sumArgumentType == typeof(decimal))
                     {
                         throw new NotSupportedException(
-                            SqliteStrings.AggregateOperationNotSupported(nameof(Queryable.Sum), sumArgumentType.ShortDisplayName()));
+                            SqliteStrings.AggregateOperationNotSupported(
+                                nameof(Queryable.Sum),
+                                sumArgumentType.ShortDisplayName()
+                            )
+                        );
                     }
 
                     break;
@@ -110,8 +132,8 @@ public class SqliteQueryableAggregateMethodTranslator : IAggregateMethodCallTran
         return null;
     }
 
-    private static Type? GetProviderType(SqlExpression expression)
-        => expression.TypeMapping?.Converter?.ProviderClrType
-            ?? expression.TypeMapping?.ClrType
-            ?? expression.Type;
+    private static Type? GetProviderType(SqlExpression expression) =>
+        expression.TypeMapping?.Converter?.ProviderClrType
+        ?? expression.TypeMapping?.ClrType
+        ?? expression.Type;
 }

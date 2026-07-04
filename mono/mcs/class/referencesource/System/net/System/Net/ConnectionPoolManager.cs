@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="ConnectionPoolManager.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Net
@@ -9,27 +9,30 @@ namespace System.Net
     using System;
     using System.Collections;
     using System.Diagnostics;
+    using System.Globalization;
     using System.Security;
     using System.Security.Permissions;
     using System.Threading;
-    using System.Globalization;
 
-    internal class ConnectionPoolManager {
-        private static Hashtable m_ConnectionPools = new Hashtable();   // Hashtable used for connection pools
+    internal class ConnectionPoolManager
+    {
+        private static Hashtable m_ConnectionPools = new Hashtable(); // Hashtable used for connection pools
         private static object s_InternalSyncObject;
 
-        private ConnectionPoolManager() {
-        }
+        private ConnectionPoolManager() { }
 
-        private static object InternalSyncObject {
-            get {
-                if (s_InternalSyncObject == null) {
+        private static object InternalSyncObject
+        {
+            get
+            {
+                if (s_InternalSyncObject == null)
+                {
                     object o = new Object();
                     Interlocked.CompareExchange(ref s_InternalSyncObject, o, null);
                 }
                 return s_InternalSyncObject;
             }
-        } 
+        }
 
         /*internal static ConnectionPool[] ConnectionPools {
             get {
@@ -41,16 +44,34 @@ namespace System.Net
             }
         }
         */
-        private static string GenerateKey(string hostName, int port, string groupName) {
-            return hostName+"\r"+port.ToString(NumberFormatInfo.InvariantInfo)+"\r"+groupName;
+        private static string GenerateKey(string hostName, int port, string groupName)
+        {
+            return hostName
+                + "\r"
+                + port.ToString(NumberFormatInfo.InvariantInfo)
+                + "\r"
+                + groupName;
         }
 
-        internal static ConnectionPool GetConnectionPool(ServicePoint servicePoint, string groupName, CreateConnectionDelegate createConnectionCallback) {
+        internal static ConnectionPool GetConnectionPool(
+            ServicePoint servicePoint,
+            string groupName,
+            CreateConnectionDelegate createConnectionCallback
+        )
+        {
             string key = GenerateKey(servicePoint.Host, servicePoint.Port, groupName);
-            lock(InternalSyncObject) {
-                ConnectionPool connectionPool = (ConnectionPool) m_ConnectionPools[key];
-                if (connectionPool == null) {                    
-                    connectionPool = new ConnectionPool(servicePoint, servicePoint.ConnectionLimit, 0, servicePoint.MaxIdleTime, createConnectionCallback);
+            lock (InternalSyncObject)
+            {
+                ConnectionPool connectionPool = (ConnectionPool)m_ConnectionPools[key];
+                if (connectionPool == null)
+                {
+                    connectionPool = new ConnectionPool(
+                        servicePoint,
+                        servicePoint.ConnectionLimit,
+                        0,
+                        servicePoint.MaxIdleTime,
+                        createConnectionCallback
+                    );
                     m_ConnectionPools[key] = connectionPool;
                 }
                 return connectionPool;
@@ -62,7 +83,7 @@ namespace System.Net
             string key = hostName + "\r" + port.ToString(NumberFormatInfo.InvariantInfo) + "\r" + groupName;
             lock(InternalSyncObject) {
                 ConnectionPool connectionPool = (ConnectionPool) m_ConnectionPools[key];
-                if (connectionPool == null) {                    
+                if (connectionPool == null) {
                     ServicePoint servicePoint = ServicePointManager.FindServicePoint(new Uri("sockets://" + hostName + ":" + port.ToString(NumberFormatInfo.InvariantInfo)), null);
                     connectionPool = new ConnectionPool(servicePoint, m_DefaultMaxPool, 0,  servicePoint.MaxIdleTime, createConnectionCallback);
                     m_ConnectionPools[key] = connectionPool;
@@ -72,11 +93,13 @@ namespace System.Net
         }
         */
 
-        internal static bool RemoveConnectionPool(ServicePoint servicePoint, string groupName) {
+        internal static bool RemoveConnectionPool(ServicePoint servicePoint, string groupName)
+        {
             string key = GenerateKey(servicePoint.Host, servicePoint.Port, groupName);
-            lock(InternalSyncObject) {
+            lock (InternalSyncObject)
+            {
                 ConnectionPool connectionPool = (ConnectionPool)(m_ConnectionPools[key]);
-                if(connectionPool != null)
+                if (connectionPool != null)
                 {
                     m_ConnectionPools[key] = null;
                     m_ConnectionPools.Remove(key);
@@ -86,7 +109,7 @@ namespace System.Net
             return false;
         }
 
-        // Gets the connection pool for the specified service point (if it exists) and 
+        // Gets the connection pool for the specified service point (if it exists) and
         // invokes ForceCleanup to gracefully clean up any connections in the pool.
         //
         // preconditions: none
@@ -97,11 +120,14 @@ namespace System.Net
         // Note: this will not destroy the connection pool itself so any future objects that
         // need that connection pool will still be able to access it to create new connections
         // and any objects using connections in the pool will still be able to return them
-        internal static void CleanupConnectionPool(ServicePoint servicePoint, string groupName) {
+        internal static void CleanupConnectionPool(ServicePoint servicePoint, string groupName)
+        {
             string key = GenerateKey(servicePoint.Host, servicePoint.Port, groupName);
-            lock (InternalSyncObject) {
+            lock (InternalSyncObject)
+            {
                 ConnectionPool connectionPool = (ConnectionPool)(m_ConnectionPools[key]);
-                if (connectionPool != null) {
+                if (connectionPool != null)
+                {
                     connectionPool.ForceCleanup();
                 }
             }

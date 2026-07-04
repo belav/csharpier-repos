@@ -42,7 +42,8 @@ namespace Roslyn.Utilities
             Stream stream,
             string filePath,
             DiagnosticBag diagnostics,
-            CommonMessageProvider messageProvider)
+            CommonMessageProvider messageProvider
+        )
         {
             Stream = stream;
             _failed = null;

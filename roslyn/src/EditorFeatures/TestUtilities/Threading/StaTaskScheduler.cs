@@ -22,14 +22,28 @@ namespace Roslyn.Test.Utilities
         /// <summary>The STA threads used by the scheduler.</summary>
         public Thread StaThread { get; }
 
-        public bool IsRunningInScheduler => StaThread.ManagedThreadId == Environment.CurrentManagedThreadId;
+        public bool IsRunningInScheduler =>
+            StaThread.ManagedThreadId == Environment.CurrentManagedThreadId;
 
         static StaTaskScheduler()
         {
             // Overwrite xunit's app domain handling to not call AppDomain.Unload
-            var getDefaultDomain = typeof(AppDomain).GetMethod("GetDefaultDomain", BindingFlags.NonPublic | BindingFlags.Static);
+            var getDefaultDomain = typeof(AppDomain).GetMethod(
+                "GetDefaultDomain",
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             var defaultDomain = (AppDomain)getDefaultDomain.Invoke(null, null);
-            var hook = (XunitDisposeHook)defaultDomain.CreateInstanceFromAndUnwrap(typeof(XunitDisposeHook).Assembly.CodeBase, typeof(XunitDisposeHook).FullName, ignoreCase: false, BindingFlags.CreateInstance, binder: null, args: null, culture: null, activationAttributes: null);
+            var hook = (XunitDisposeHook)
+                defaultDomain.CreateInstanceFromAndUnwrap(
+                    typeof(XunitDisposeHook).Assembly.CodeBase,
+                    typeof(XunitDisposeHook).FullName,
+                    ignoreCase: false,
+                    BindingFlags.CreateInstance,
+                    binder: null,
+                    args: null,
+                    culture: null,
+                    activationAttributes: null
+                );
             hook.Execute();
 
             // We've created an STA thread, which has some extra requirements for COM Runtime
@@ -96,13 +110,13 @@ namespace Roslyn.Test.Utilities
             }
 
             // Work around the WeakEventTable Shutdown race conditions
-            AppContext.SetSwitch("Switch.MS.Internal.DoNotInvokeInWeakEventTableShutdownListener", isEnabled: true);
+            AppContext.SetSwitch(
+                "Switch.MS.Internal.DoNotInvokeInWeakEventTableShutdownListener",
+                isEnabled: true
+            );
         }
 
-        public DispatcherSynchronizationContext DispatcherSynchronizationContext
-        {
-            get;
-        }
+        public DispatcherSynchronizationContext DispatcherSynchronizationContext { get; }
 
         /// <summary>
         /// Cleans up the scheduler by indicating that no more tasks will be queued.

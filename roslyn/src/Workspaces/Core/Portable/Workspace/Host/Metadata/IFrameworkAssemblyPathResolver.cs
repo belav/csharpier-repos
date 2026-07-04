@@ -5,8 +5,8 @@
 namespace Microsoft.CodeAnalysis.Host
 {
     /// <summary>
-    /// Provides a way to map from an assembly name to the actual path of the .NET Framework 
-    /// assembly with that name in the context of a specified project.  For example, if the 
+    /// Provides a way to map from an assembly name to the actual path of the .NET Framework
+    /// assembly with that name in the context of a specified project.  For example, if the
     /// assembly name is "System.Data" then a project targeting .NET 2.0 would resolve this
     /// to a different path than a project targeting .NET 4.5.
     /// </summary>
@@ -19,7 +19,11 @@ namespace Microsoft.CodeAnalysis.Host
         /// exist in the assembly.</param>
         /// <param name="projectId">The project context to search within.</param>
         /// <param name="assemblyName">The name of the assembly to try to resolve.</param>
-        string? ResolveAssemblyPath(ProjectId projectId, string assemblyName, string? fullyQualifiedName);
+        string? ResolveAssemblyPath(
+            ProjectId projectId,
+            string assemblyName,
+            string? fullyQualifiedName
+        );
 
         // bool CanResolveType(ProjectId projectId, string assemblyName, string fullyQualifiedTypeName);
     }

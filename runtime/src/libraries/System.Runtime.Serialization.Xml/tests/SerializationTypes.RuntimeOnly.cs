@@ -59,19 +59,13 @@ namespace SerializationTypes
         private Dictionary<bool, char> _ro1 = new Dictionary<bool, char>();
         public Dictionary<bool, char> RO1
         {
-            get
-            {
-                return _ro1;
-            }
+            get { return _ro1; }
         }
 
         private IDictionary<bool, char> _ro2 = new Dictionary<bool, char>();
         public IDictionary<bool, char> RO2
         {
-            get
-            {
-                return _ro2;
-            }
+            get { return _ro2; }
         }
     }
 
@@ -126,14 +120,8 @@ namespace SerializationTypes
 
         public object this[object key]
         {
-            get
-            {
-                return _d[key];
-            }
-            set
-            {
-                _d[key] = value;
-            }
+            get { return _d[key]; }
+            set { _d[key] = value; }
         }
 
         public void CopyTo(Array array, int index)
@@ -185,8 +173,14 @@ namespace SerializationTypes
             WithEnums.Add(MyEnum.One, MyEnum.One);
 
             WithStructs = new Dictionary<StructNotSerializable, StructNotSerializable>();
-            WithStructs.Add(new StructNotSerializable() { value = 10 }, new StructNotSerializable() { value = 12 });
-            WithStructs.Add(new StructNotSerializable() { value = int.MaxValue }, new StructNotSerializable() { value = int.MinValue });
+            WithStructs.Add(
+                new StructNotSerializable() { value = 10 },
+                new StructNotSerializable() { value = 12 }
+            );
+            WithStructs.Add(
+                new StructNotSerializable() { value = int.MaxValue },
+                new StructNotSerializable() { value = int.MinValue }
+            );
 
             WithNullables = new Dictionary<Nullable<short>, Nullable<bool>>();
             WithNullables.Add(short.MinValue, true);
@@ -208,19 +202,13 @@ namespace SerializationTypes
         private MyDictionary _ro1 = new MyDictionary();
         public MyDictionary RO1
         {
-            get
-            {
-                return _ro1;
-            }
+            get { return _ro1; }
         }
 
         private IDictionary _ro2 = new MyDictionary();
         public IDictionary RO2
         {
-            get
-            {
-                return _ro2;
-            }
+            get { return _ro2; }
         }
     }
 
@@ -235,14 +223,8 @@ namespace SerializationTypes
 
         public IDictionary<string, string> DictionaryProperty
         {
-            get
-            {
-                return _dictionaryProperty;
-            }
-            set
-            {
-                _dictionaryProperty = value;
-            }
+            get { return _dictionaryProperty; }
+            set { _dictionaryProperty = value; }
         }
 
         public TypeWithIDictionaryPropertyInitWithConcreteType()
@@ -264,19 +246,13 @@ namespace SerializationTypes
         private List<char> _ro1 = new List<char>();
         public List<char> RO1
         {
-            get
-            {
-                return _ro1;
-            }
+            get { return _ro1; }
         }
 
         private IList<char> _ro2 = new List<char>();
         public IList<char> RO2
         {
-            get
-            {
-                return _ro2;
-            }
+            get { return _ro2; }
         }
     }
 
@@ -293,19 +269,13 @@ namespace SerializationTypes
         private MyCollection<string> _ro1 = new MyCollection<string>();
         public MyCollection<string> RO1
         {
-            get
-            {
-                return _ro1;
-            }
+            get { return _ro1; }
         }
 
         private ICollection<string> _ro2 = new MyCollection<string>();
         public ICollection<string> RO2
         {
-            get
-            {
-                return _ro2;
-            }
+            get { return _ro2; }
         }
     }
 
@@ -322,19 +292,13 @@ namespace SerializationTypes
         private MyList _ro1 = new MyList();
         public MyList RO1
         {
-            get
-            {
-                return _ro1;
-            }
+            get { return _ro1; }
         }
 
         private IList _ro2 = new MyList();
         public IList RO2
         {
-            get
-            {
-                return _ro2;
-            }
+            get { return _ro2; }
         }
     }
 
@@ -342,9 +306,7 @@ namespace SerializationTypes
     {
         private List<T> _items = new List<T>();
 
-        public MyEnumerable()
-        {
-        }
+        public MyEnumerable() { }
 
         public MyEnumerable(params T[] values)
         {
@@ -358,10 +320,7 @@ namespace SerializationTypes
 
         public int Count
         {
-            get
-            {
-                return _items.Count;
-            }
+            get { return _items.Count; }
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -388,10 +347,7 @@ namespace SerializationTypes
         private MyEnumerable<string> _ro1 = new MyEnumerable<string>();
         public MyEnumerable<string> RO1
         {
-            get
-            {
-                return _ro1;
-            }
+            get { return _ro1; }
         }
     }
 
@@ -399,9 +355,7 @@ namespace SerializationTypes
     {
         private List<object> _items = new List<object>();
 
-        public MyCollection()
-        {
-        }
+        public MyCollection() { }
 
         public MyCollection(params object[] values)
         {
@@ -410,10 +364,7 @@ namespace SerializationTypes
 
         public object this[int index]
         {
-            get
-            {
-                return _items[index];
-            }
+            get { return _items[index]; }
         }
 
         public void Add(object value)
@@ -460,10 +411,7 @@ namespace SerializationTypes
         private MyCollection _ro1 = new MyCollection();
         public MyCollection RO1
         {
-            get
-            {
-                return _ro1;
-            }
+            get { return _ro1; }
         }
     }
 
@@ -471,9 +419,7 @@ namespace SerializationTypes
     {
         private List<object> _items = new List<object>();
 
-        public MyEnumerable()
-        {
-        }
+        public MyEnumerable() { }
 
         public MyEnumerable(params object[] values)
         {
@@ -492,18 +438,12 @@ namespace SerializationTypes
 
         public object this[int index]
         {
-            get
-            {
-                return _items[index];
-            }
+            get { return _items[index]; }
         }
 
         public int Count
         {
-            get
-            {
-                return _items.Count;
-            }
+            get { return _items.Count; }
         }
     }
 
@@ -520,10 +460,7 @@ namespace SerializationTypes
         private MyEnumerable _ro1 = new MyEnumerable();
         public MyEnumerable RO1
         {
-            get
-            {
-                return _ro1;
-            }
+            get { return _ro1; }
         }
     }
 
@@ -598,10 +535,12 @@ namespace SerializationTypes
     {
         [DataMember]
         public CircularLink Link;
+
         [DataMember]
         public CircularLink RandomHangingLink;
 
         public CircularLink() { }
+
         public CircularLink(bool init)
         {
             Link = new CircularLink();
@@ -620,7 +559,9 @@ namespace SerializationTypes
     public class CircularLinkDerived : CircularLink
     {
         public CircularLinkDerived() { }
-        public CircularLinkDerived(bool init) : base(init) { }
+
+        public CircularLinkDerived(bool init)
+            : base(init) { }
     }
 
     [DataContract]
@@ -643,6 +584,7 @@ namespace SerializationTypes
         public string BaseData = string.Empty;
 
         public SimpleBase() { }
+
         public SimpleBase(bool init) { }
     }
 
@@ -655,10 +597,12 @@ namespace SerializationTypes
     {
         [DataMember]
         public T genericData1;
+
         [DataMember]
         public K genericData2;
 
         public GenericBase2() { }
+
         public GenericBase2(bool init)
         {
             genericData1 = new T();
@@ -673,7 +617,9 @@ namespace SerializationTypes
         public string DerivedData = string.Empty;
 
         public SimpleBaseDerived() { }
-        public SimpleBaseDerived(bool init) : base(init) { }
+
+        public SimpleBaseDerived(bool init)
+            : base(init) { }
     }
 
     [DataContract(IsReference = true)]
@@ -683,7 +629,9 @@ namespace SerializationTypes
         public string DerivedData = string.Empty;
 
         public SimpleBaseDerived2() { }
-        public SimpleBaseDerived2(bool init) : base(init) { }
+
+        public SimpleBaseDerived2(bool init)
+            : base(init) { }
     }
 
     [DataContract(IsReference = true)]
@@ -695,6 +643,7 @@ namespace SerializationTypes
         public object GenericData;
 
         public GenericContainer() { }
+
         public GenericContainer(bool init)
         {
             GenericData = new GenericBase<SimpleBaseContainer>(init);
@@ -702,12 +651,14 @@ namespace SerializationTypes
     }
 
     [DataContract(IsReference = true)]
-    public class GenericBase<T> where T : new()
+    public class GenericBase<T>
+        where T : new()
     {
         [DataMember]
         public object genericData;
 
         public GenericBase() { }
+
         public GenericBase(bool init)
         {
             genericData = new T();
@@ -720,10 +671,12 @@ namespace SerializationTypes
     {
         [DataMember]
         public SimpleBase Base1;
+
         [DataMember]
         public object Base2;
 
         public SimpleBaseContainer() { }
+
         public SimpleBaseContainer(bool init)
         {
             Base1 = new SimpleBaseDerived();
@@ -741,9 +694,13 @@ namespace SerializationTypes
         public DuplicateTypeNamesTest.ns2.EnumA EnumA2;
 
         public WithDuplicateNames() { }
+
         public WithDuplicateNames(bool init)
         {
-            ClassA1 = new DuplicateTypeNamesTest.ns1.ClassA() { Name = "Hello World! \u6F22 \u00F1" };
+            ClassA1 = new DuplicateTypeNamesTest.ns1.ClassA()
+            {
+                Name = "Hello World! \u6F22 \u00F1",
+            };
             StructA1 = new DuplicateTypeNamesTest.ns1.StructA() { Text = "" };
             EnumA1 = DuplicateTypeNamesTest.ns1.EnumA.two;
             ClassA2 = new DuplicateTypeNamesTest.ns2.ClassA() { Nombre = "" };
@@ -861,13 +818,16 @@ namespace SerializationTypes
 
         public new string Name3 { get; set; }
 
-        new internal string Name4 { get; set; }
+        internal new string Name4 { get; set; }
 
         public new string Name5 { get; set; }
 
         public override string Name6 { get; set; }
 
-        public override string Name7 { set { base.Name7 = value; } }
+        public override string Name7
+        {
+            set { base.Name7 = value; }
+        }
     }
 
     public class DerivedTypeWithDifferentOverrides2 : DerivedTypeWithDifferentOverrides
@@ -878,11 +838,11 @@ namespace SerializationTypes
 
         public new string Name3 { get; set; }
 
-        new internal string Name4 { get; set; }
+        internal new string Name4 { get; set; }
 
-        new internal string Name5 { get; set; }
+        internal new string Name5 { get; set; }
 
-        new internal string Name6 { get; set; }
+        internal new string Name6 { get; set; }
     }
 
     [DataContract]
@@ -990,6 +950,7 @@ namespace SerializationTypes
         public SimpleDC RefData;
 
         public SimpleDCWithRef() { }
+
         public SimpleDCWithRef(bool init)
         {
             Data = new SimpleDC(true);
@@ -1004,6 +965,7 @@ namespace SerializationTypes
         public LinkedList<SimpleDCWithRef> Data;
 
         public ContainsLinkedList() { }
+
         public ContainsLinkedList(bool init)
         {
             this.Data = new LinkedList<SimpleDCWithRef>();
@@ -1033,7 +995,9 @@ namespace SerializationTypes
     public class SimpleCDC : ICollection<string>
     {
         private List<string> _data = new List<string>();
+
         public SimpleCDC() { }
+
         public SimpleCDC(bool init)
         {
             _data.Add("One");
@@ -1103,6 +1067,7 @@ namespace SerializationTypes
     {
         public string header;
         public string body;
+
         [XmlNamespaceDeclarations]
         public XmlSerializerNamespaces xmlns;
     }
@@ -1116,7 +1081,10 @@ namespace SerializationTypes
     [DataContract]
     public class MyDerivedCollectionContainer
     {
-        public MyDerivedCollectionContainer() { Items = new MyDerivedCollection(); }
+        public MyDerivedCollectionContainer()
+        {
+            Items = new MyDerivedCollection();
+        }
 
         [DataMember]
         public MyDerivedCollection Items { get; set; }
@@ -1141,7 +1109,9 @@ namespace SerializationTypes
 
     public enum UShortEnum : ushort
     {
-        Option0, Option1, Option2
+        Option0,
+        Option1,
+        Option2,
     }
 
     public class TypeWithNestedGenericClassImplementingIXmlSerialiable
@@ -1218,22 +1188,14 @@ namespace SerializationTypes
     public class TypeWithUriTypeProperty
     {
         [DataMember]
-        public Uri ConfigUri
-        {
-            get;
-            set;
-        }
+        public Uri ConfigUri { get; set; }
     }
 
     [DataContract]
     public class TypeWithDateTimeOffsetTypeProperty
     {
         [DataMember]
-        public DateTimeOffset ModifiedTime
-        {
-            get;
-            set;
-        }
+        public DateTimeOffset ModifiedTime { get; set; }
     }
 
     public class TypeWithCommonTypeProperties
@@ -1282,9 +1244,7 @@ namespace SerializationTypes
     [DataContract(Namespace = "SerializationTypes.GenericTypeWithPrivateSetter")]
     public class GenericTypeWithPrivateSetter<T>
     {
-        public GenericTypeWithPrivateSetter()
-        {
-        }
+        public GenericTypeWithPrivateSetter() { }
 
         public GenericTypeWithPrivateSetter(string value)
         {
@@ -1303,7 +1263,12 @@ namespace SerializationTypes
         {
             return _innerCollection.GetEnumerator();
         }
-        public int Count { get { return _innerCollection.Count; } }
+
+        public int Count
+        {
+            get { return _innerCollection.Count; }
+        }
+
         public void Add(object item)
         {
             _innerCollection.Add((string)item);
@@ -1332,7 +1297,8 @@ namespace SerializationTypes
     [DataContract]
     public class ArticleBase : IArticle
     {
-        public ArticleBase() : this("Untitled", "Uncategorized") { }
+        public ArticleBase()
+            : this("Untitled", "Uncategorized") { }
 
         public ArticleBase(string title, string category)
         {
@@ -1343,12 +1309,20 @@ namespace SerializationTypes
         private string _title;
 
         [DataMember]
-        public string Title { get { return _title; } set { _title = value; } }
+        public string Title
+        {
+            get { return _title; }
+            set { _title = value; }
+        }
 
         private string _category;
 
         [DataMember]
-        public string Category { get { return _category; } set { _category = value; } }
+        public string Category
+        {
+            get { return _category; }
+            set { _category = value; }
+        }
 
         public override string ToString()
         {
@@ -1358,12 +1332,14 @@ namespace SerializationTypes
 
     public class NewsArticle : ArticleBase
     {
-        public NewsArticle() : base("Untitled News", "News") { }
+        public NewsArticle()
+            : base("Untitled News", "News") { }
     }
 
     public class SummaryArticle : ArticleBase
     {
-        public SummaryArticle() : base("Untitled Summary", "Summary") { }
+        public SummaryArticle()
+            : base("Untitled Summary", "Summary") { }
     }
 
     [DataContract]
@@ -1407,14 +1383,8 @@ namespace SerializationTypes
 
         public T this[int index]
         {
-            get
-            {
-                return _internalList[index];
-            }
-            set
-            {
-                _internalList[index] = value;
-            }
+            get { return _internalList[index]; }
+            set { _internalList[index] = value; }
         }
 
         public void Add(T item)
@@ -1484,29 +1454,32 @@ namespace SerializationTypes
 
         public static string StaticProperty { get; private set; }
 
-
         [XmlElement("PropWithXmlElementAttr")]
         public List<string> PropertyWithXmlElementAttribute { get; private set; }
         public MyGenericList<int> IntList { get; private set; }
         public List<string> StringList { get; private set; }
-        public List<string> AnotherStringList { get { return _anotherStringList; } }
+        public List<string> AnotherStringList
+        {
+            get { return _anotherStringList; }
+        }
 
         private List<int> PrivateIntListField;
         public List<int> PublicIntListField;
+
         [XmlElement("FieldWithXmlElementAttr")]
         public List<int> PublicIntListFieldWithXmlElementAttribute;
     }
 
-    public abstract class HighScoreManager<T> where T : HighScoreManager<T>.HighScoreBase
+    public abstract class HighScoreManager<T>
+        where T : HighScoreManager<T>.HighScoreBase
     {
-        public abstract class HighScoreBase
-        {
-        }
+        public abstract class HighScoreBase { }
     }
 
     public class HighScores : HighScoreManager<HighScores.BridgeGameHighScore>
     {
-        public class BridgeGameHighScore : HighScoreManager<HighScores.BridgeGameHighScore>.HighScoreBase
+        public class BridgeGameHighScore
+            : HighScoreManager<HighScores.BridgeGameHighScore>.HighScoreBase
         {
             public int Id { get; set; }
             public string Name { get; set; }
@@ -1521,6 +1494,7 @@ namespace SerializationTypes
         }
 
         public uint Level { get; private set; }
+
         public class LevelData
         {
             public string Name { get; set; }
@@ -1553,6 +1527,7 @@ namespace SerializationTypes
         }
 
         public uint Level { get; private set; }
+
         public class LevelData
         {
             public string Name { get; set; }
@@ -1585,9 +1560,7 @@ namespace SerializationTypes
     }
 
     [DataContract]
-    public class DerivedTypeWithDataMemberInBaseType : BaseTypeWithDataMember
-    {
-    }
+    public class DerivedTypeWithDataMemberInBaseType : BaseTypeWithDataMember { }
 
     [DataContract]
     public class TypeAsEmbeddedDataMember
@@ -1601,9 +1574,7 @@ namespace SerializationTypes
         public PocoTypeAsEmbeddedDataMember EmbeddedDataMember { get; set; }
     }
 
-    public class PocoDerivedTypeWithDataMemberInBaseType : PocoBaseTypeWithDataMember
-    {
-    }
+    public class PocoDerivedTypeWithDataMemberInBaseType : PocoBaseTypeWithDataMember { }
 
     public class PocoTypeAsEmbeddedDataMember
     {
@@ -1613,6 +1584,7 @@ namespace SerializationTypes
     public class SpotlightDescription
     {
         public SpotlightDescription() { }
+
         public bool IsDynamic { get; set; }
         public string Value { get; set; }
     }
@@ -1623,12 +1595,13 @@ namespace SerializationTypes
         LaunchURL,
         LaunchSection,
         LaunchVideo,
-        LaunchImage
+        LaunchImage,
     }
 
     public class SerializableSlide
     {
         public SerializableSlide() { }
+
         public SpotlightDescription Description { get; set; }
         public string DisplayCondition { get; set; }
         public string EventData { get; set; }
@@ -1653,19 +1626,17 @@ namespace SerializationTypes
         {
             ID = id;
         }
+
         public string ID { get; set; }
     }
 
     public class TypeWithPropertyWithoutDefaultCtor
     {
-        public TypeWithPropertyWithoutDefaultCtor()
-        {
-        }
+        public TypeWithPropertyWithoutDefaultCtor() { }
 
         public string Name { get; set; }
         public TypeWithNoDefaultCtor MemberWithInvalidDataContract { get; set; }
     }
-
 
     [DataContract(Name = "DCWith.InName")]
     public class DataContractWithDotInName
@@ -1681,7 +1652,9 @@ namespace SerializationTypes
         public string Name { get; set; }
     }
 
-    [DataContract(Name = "DCWith{}[]().,:;+-*/%&|^!~=<>?++--&&||<<>>==!=<=>=+=-=*=/=%=&=|=^=<<=>>=->InName")]
+    [DataContract(
+        Name = "DCWith{}[]().,:;+-*/%&|^!~=<>?++--&&||<<>>==!=<=>=+=-=*=/=%=&=|=^=<<=>>=->InName"
+    )]
     public class DataContractWithOperatorsInName
     {
         [DataMember]
@@ -1695,26 +1668,35 @@ namespace SerializationTypes
         public string Name { get; set; }
     }
 
-    [CollectionDataContract(Name = "MyHeaders", Namespace = "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect", ItemName = "MyHeader", KeyName = "MyKey", ValueName = "MyValue")]
+    [CollectionDataContract(
+        Name = "MyHeaders",
+        Namespace = "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect",
+        ItemName = "MyHeader",
+        KeyName = "MyKey",
+        ValueName = "MyValue"
+    )]
     public sealed class CollectionDataContractWithCustomKeyName : Dictionary<int, int>
     {
-        public CollectionDataContractWithCustomKeyName()
-        {
-        }
+        public CollectionDataContractWithCustomKeyName() { }
     }
 
     // Dictionary<int, int> is already used above so there will be a conflict.
-    [CollectionDataContract(Name = "MyHeaders2", Namespace = "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect", ItemName = "MyHeader2", KeyName = "MyKey2", ValueName = "MyValue2")]
+    [CollectionDataContract(
+        Name = "MyHeaders2",
+        Namespace = "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect",
+        ItemName = "MyHeader2",
+        KeyName = "MyKey2",
+        ValueName = "MyValue2"
+    )]
     public sealed class CollectionDataContractWithCustomKeyNameDuplicate : Dictionary<int, int>
     {
-        public CollectionDataContractWithCustomKeyNameDuplicate()
-        {
-        }
+        public CollectionDataContractWithCustomKeyNameDuplicate() { }
     }
 
     public class CollectionWithoutDefaultConstructor : MyCollection<string>
     {
-        internal CollectionWithoutDefaultConstructor(string name) : base()
+        internal CollectionWithoutDefaultConstructor(string name)
+            : base()
         {
             Name = name;
         }
@@ -1726,16 +1708,19 @@ namespace SerializationTypes
     {
         public TypeWithCollectionWithoutDefaultConstructor()
         {
-            _collectionWithoutDefaultConstructor = new CollectionWithoutDefaultConstructor("MyName");
+            _collectionWithoutDefaultConstructor = new CollectionWithoutDefaultConstructor(
+                "MyName"
+            );
         }
 
         CollectionWithoutDefaultConstructor _collectionWithoutDefaultConstructor;
-        public CollectionWithoutDefaultConstructor CollectionProperty { get { return _collectionWithoutDefaultConstructor; } }
+        public CollectionWithoutDefaultConstructor CollectionProperty
+        {
+            get { return _collectionWithoutDefaultConstructor; }
+        }
     }
 
-    public class TypeMissingSerializationCodeBase
-    {
-    }
+    public class TypeMissingSerializationCodeBase { }
 
     public class TypeMissingSerializationCodeDerived : TypeMissingSerializationCodeBase
     {
@@ -1753,7 +1738,12 @@ namespace SerializationTypes
 
     public class TypeWith2DArrayProperty1
     {
-        [System.Xml.Serialization.XmlArrayItemAttribute("SimpleType", typeof(SimpleType), NestingLevel = 1, IsNullable = false)]
+        [System.Xml.Serialization.XmlArrayItemAttribute(
+            "SimpleType",
+            typeof(SimpleType),
+            NestingLevel = 1,
+            IsNullable = false
+        )]
         public SimpleType[][] TwoDArrayOfSimpleType;
     }
 
@@ -1771,6 +1761,7 @@ namespace SerializationTypes
     {
         public string P1 { get; set; }
         public int P2 { get; set; }
+
         public override bool Equals(object obj)
         {
             TypeWithPrimitiveProperties other = obj as TypeWithPrimitiveProperties;
@@ -1784,6 +1775,7 @@ namespace SerializationTypes
             }
             return this.P1 == other.P1 && this.P2 == other.P2;
         }
+
         public override int GetHashCode()
         {
             return P1.GetHashCode() ^ P2.GetHashCode();
@@ -1799,6 +1791,7 @@ namespace SerializationTypes
     public class TypeWithAllPrimitiveProperties
     {
         public bool BooleanMember { get; set; }
+
         //public byte[] ByteArrayMember { get; set; }
         public char CharMember { get; set; }
         public DateTime DateTimeMember { get; set; }
@@ -1806,6 +1799,7 @@ namespace SerializationTypes
         public double DoubleMember { get; set; }
         public float FloatMember { get; set; }
         public Guid GuidMember { get; set; }
+
         //public byte[] HexBinaryMember { get; set; }
         public string StringMember { get; set; }
         public int IntMember { get; set; }
@@ -1815,9 +1809,7 @@ namespace SerializationTypes
     {
         private List<T> _items = new List<T>();
 
-        public TypeImplementsGenericICollection()
-        {
-        }
+        public TypeImplementsGenericICollection() { }
 
         public TypeImplementsGenericICollection(params T[] values)
         {
@@ -1921,14 +1913,8 @@ namespace SerializationTypes
 
         public object this[object key]
         {
-            get
-            {
-                return _d[key];
-            }
-            set
-            {
-                _d[key] = value;
-            }
+            get { return _d[key]; }
+            set { _d[key] = value; }
         }
 
         public void CopyTo(Array array, int index)
@@ -2095,7 +2081,9 @@ namespace SerializationTypes
             {
                 if (targetType != typeof(MyFileStreamReference))
                 {
-                    throw new ArgumentException("Target type for serialization must be MyFileStream");
+                    throw new ArgumentException(
+                        "Target type for serialization must be MyFileStream"
+                    );
                 }
                 return MyFileStreamReference.Create(myFileStream);
             }
@@ -2114,7 +2102,9 @@ namespace SerializationTypes
             {
                 if (targetType != typeof(MyFileStream))
                 {
-                    throw new ArgumentException("Target type for deserialization must be MyFileStream");
+                    throw new ArgumentException(
+                        "Target type for deserialization must be MyFileStream"
+                    );
                 }
                 return myFileStreamRef.ToMyFileStream();
             }
@@ -2149,7 +2139,8 @@ namespace SerializationTypes
             }
             else if (obj is NonSerializablePersonForStressSurrogate)
             {
-                NonSerializablePersonForStressSurrogate person = (NonSerializablePersonForStressSurrogate)obj;
+                NonSerializablePersonForStressSurrogate person =
+                    (NonSerializablePersonForStressSurrogate)obj;
                 return new NonSerializablePersonForStress(person.Name, person.Age);
             }
 
@@ -2161,22 +2152,16 @@ namespace SerializationTypes
             if (obj is NonSerializablePerson)
             {
                 NonSerializablePerson nsp = (NonSerializablePerson)obj;
-                NonSerializablePersonSurrogate serializablePerson = new NonSerializablePersonSurrogate
-                {
-                    Name = nsp.Name,
-                    Age = nsp.Age,
-                };
+                NonSerializablePersonSurrogate serializablePerson =
+                    new NonSerializablePersonSurrogate { Name = nsp.Name, Age = nsp.Age };
 
                 return serializablePerson;
             }
             else if (obj is NonSerializablePersonForStress)
             {
                 NonSerializablePersonForStress nsp = (NonSerializablePersonForStress)obj;
-                NonSerializablePersonForStressSurrogate serializablePerson = new NonSerializablePersonForStressSurrogate
-                {
-                    Name = nsp.Name,
-                    Age = nsp.Age,
-                };
+                NonSerializablePersonForStressSurrogate serializablePerson =
+                    new NonSerializablePersonForStressSurrogate { Name = nsp.Name, Age = nsp.Age };
 
                 return serializablePerson;
             }
@@ -2200,7 +2185,9 @@ namespace DuplicateTypeNamesTest.ns1
 
     public enum EnumA
     {
-        one, two, three,
+        one,
+        two,
+        three,
     }
 }
 
@@ -2218,7 +2205,9 @@ namespace DuplicateTypeNamesTest.ns2
 
     public enum EnumA
     {
-        uno, dos, tres,
+        uno,
+        dos,
+        tres,
     }
 }
 
@@ -2228,14 +2217,8 @@ public class TypeWithPrivateFieldAndPrivateGetPublicSetProperty
 
     public string Name
     {
-        private get
-        {
-            return _name;
-        }
-        set
-        {
-            _name = value;
-        }
+        private get { return _name; }
+        set { _name = value; }
     }
 
     public string GetName()
@@ -2257,10 +2240,7 @@ public class TypeWithoutPublicSetter
 
     public string PropertyWrapper
     {
-        get
-        {
-            return ValidProperty;
-        }
+        get { return ValidProperty; }
     }
 }
 
@@ -2274,16 +2254,13 @@ public class TypeWithCompilerGeneratedAttributeButWithoutPublicSetter
 public class TestableDerivedException : System.Exception
 {
     public TestableDerivedException()
-        : base()
-    { }
+        : base() { }
 
     public TestableDerivedException(string message)
-        : base(message)
-    { }
+        : base(message) { }
 
     public TestableDerivedException(string message, Exception innerException)
-        : base(message, innerException)
-    { }
+        : base(message, innerException) { }
 
     public string TestProperty { get; set; }
 }
@@ -2315,12 +2292,13 @@ public class NookAppLocalState
     public int IgnoreProperty;
 
     public bool IsFirstRunDuplicate { get; set; }
+
     // Nested Types
     public enum PaymentType
     {
         Unconfigured,
         Nook,
-        Microsoft
+        Microsoft,
     }
 }
 
@@ -2428,6 +2406,7 @@ public class NonSerializablePersonSurrogate
 {
     [DataMember(Name = "PersonName")]
     public string Name { get; set; }
+
     [DataMember(Name = "PersonAge")]
     public int Age { get; set; }
 }
@@ -2438,6 +2417,7 @@ public class NonSerializablePersonForStressSurrogate
 {
     [DataMember(Name = "PersonName")]
     public string Name { get; set; }
+
     [DataMember(Name = "PersonAge")]
     public int Age { get; set; }
 }
@@ -2449,19 +2429,17 @@ class MyFileStream : IDisposable
 
     internal string Name
     {
-        get
-        {
-            return this.stream.Name;
-        }
+        get { return this.stream.Name; }
     }
 
     internal MyFileStream(string fileName)
     {
         this.stream = new FileStream(
-                            fileName,
-                            FileMode.OpenOrCreate,
-                            FileAccess.ReadWrite,
-                            FileShare.ReadWrite);
+            fileName,
+            FileMode.OpenOrCreate,
+            FileAccess.ReadWrite,
+            FileShare.ReadWrite
+        );
     }
 
     internal void WriteLine(string line)
@@ -2580,22 +2558,13 @@ public class TypeWithEnumerableInterfaceGetOnlyCollection
 }
 
 [CollectionDataContract]
-public class RecursiveCollection : List<RecursiveCollection2>
-{
-
-}
+public class RecursiveCollection : List<RecursiveCollection2> { }
 
 [CollectionDataContract]
-public class RecursiveCollection2 : List<RecursiveCollection3>
-{
-
-}
+public class RecursiveCollection2 : List<RecursiveCollection3> { }
 
 [CollectionDataContract]
-public class RecursiveCollection3 : List<RecursiveCollection>
-{
-
-}
+public class RecursiveCollection3 : List<RecursiveCollection> { }
 
 [DataContract]
 public class TypeWithListOfReferenceChildren
@@ -2609,6 +2578,7 @@ public class TypeOfReferenceChild
 {
     [DataMember]
     public TypeWithListOfReferenceChildren Root { get; set; }
+
     [DataMember]
     public string Name { get; set; }
 }
@@ -2616,9 +2586,7 @@ public class TypeOfReferenceChild
 [DataContract]
 public sealed class TypeWithInternalDefaultConstructor
 {
-    internal TypeWithInternalDefaultConstructor()
-    {
-    }
+    internal TypeWithInternalDefaultConstructor() { }
 
     internal static TypeWithInternalDefaultConstructor CreateInstance()
     {
@@ -2631,9 +2599,7 @@ public sealed class TypeWithInternalDefaultConstructor
 
 public sealed class TypeWithInternalDefaultConstructorWithoutDataContractAttribute
 {
-    internal TypeWithInternalDefaultConstructorWithoutDataContractAttribute()
-    {
-    }
+    internal TypeWithInternalDefaultConstructorWithoutDataContractAttribute() { }
 
     internal static TypeWithInternalDefaultConstructorWithoutDataContractAttribute CreateInstance()
     {
@@ -2649,6 +2615,7 @@ public class TypeWithEmitDefaultValueFalse
 {
     [DataMember(EmitDefaultValue = false)]
     public string Name = null;
+
     [DataMember(EmitDefaultValue = false)]
     public int ID = 0;
 }
@@ -2661,10 +2628,7 @@ public class TypeWithNonDefaultNamcespace
 }
 
 [CollectionDataContract(Namespace = "CollectionNamespace")]
-public class CollectionOfTypeWithNonDefaultNamcespace : List<TypeWithNonDefaultNamcespace>
-{
-
-}
+public class CollectionOfTypeWithNonDefaultNamcespace : List<TypeWithNonDefaultNamcespace> { }
 
 #region Type for Xml_ConstructorWithXmlAttributeOverrides
 
@@ -2714,7 +2678,13 @@ public class DTOContainer
 [DataContract]
 public class DTOResolver : DataContractResolver
 {
-    public override bool TryResolveType(Type dcType, Type declaredType, DataContractResolver knownTypeResolver, out XmlDictionaryString typeName, out XmlDictionaryString typeNamespace)
+    public override bool TryResolveType(
+        Type dcType,
+        Type declaredType,
+        DataContractResolver knownTypeResolver,
+        out XmlDictionaryString typeName,
+        out XmlDictionaryString typeNamespace
+    )
     {
         string resolvedTypeName = string.Empty;
         string resolvedNamespace = string.Empty;
@@ -2733,9 +2703,15 @@ public class DTOResolver : DataContractResolver
                 }
                 break;
             default:
-                {
-                    return knownTypeResolver.TryResolveType(dcType, declaredType, null, out typeName, out typeNamespace);
-                }
+            {
+                return knownTypeResolver.TryResolveType(
+                    dcType,
+                    declaredType,
+                    null,
+                    out typeName,
+                    out typeNamespace
+                );
+            }
         }
         XmlDictionary dic = new XmlDictionary();
         typeName = dic.Add(resolvedTypeName);
@@ -2743,7 +2719,12 @@ public class DTOResolver : DataContractResolver
         return true;
     }
 
-    public override Type ResolveName(string typeName, string typeNamespace, Type declaredType, DataContractResolver knownTypeResolver)
+    public override Type ResolveName(
+        string typeName,
+        string typeNamespace,
+        Type declaredType,
+        DataContractResolver knownTypeResolver
+    )
     {
         switch (typeNamespace)
         {
@@ -2752,18 +2733,19 @@ public class DTOResolver : DataContractResolver
                     switch (typeName)
                     {
                         case "ObjectContainer":
-                            {
-                                return typeof(ObjectContainer);
-                            }
+                        {
+                            return typeof(ObjectContainer);
+                        }
                         case "DTOContainer":
-                            {
-                                return typeof(DTOContainer);
-                            }
+                        {
+                            return typeof(DTOContainer);
+                        }
                         case "DTO":
-                            {
-                                return typeof(DateTimeOffset);
-                            }
-                        default: break;
+                        {
+                            return typeof(DateTimeOffset);
+                        }
+                        default:
+                            break;
                     }
                 }
                 break;
@@ -2785,17 +2767,12 @@ class Person : IExtensibleDataObject
     private ExtensionDataObject extensionDataObject_value;
     public ExtensionDataObject ExtensionData
     {
-        get
-        {
-            return extensionDataObject_value;
-        }
-        set
-        {
-            extensionDataObject_value = value;
-        }
+        get { return extensionDataObject_value; }
+        set { extensionDataObject_value = value; }
     }
+
     [DataMember]
-    public string Name=string.Empty;
+    public string Name = string.Empty;
 }
 
 [DataContract(Name = "Person", Namespace = "http://www.msn.com/employees")]
@@ -2811,14 +2788,8 @@ class PersonV2 : IExtensibleDataObject
     private ExtensionDataObject extensionDataObject_value;
     public ExtensionDataObject ExtensionData
     {
-        get
-        {
-            return extensionDataObject_value;
-        }
-        set
-        {
-            extensionDataObject_value = value;
-        }
+        get { return extensionDataObject_value; }
+        set { extensionDataObject_value = value; }
     }
 }
 
@@ -2828,6 +2799,7 @@ public class Name
     [DataMember]
     public string firstName;
     public string middlename;
+
     [DataMember]
     public string lastName;
 }
@@ -2877,6 +2849,7 @@ public class Line
 public class MyReader : XmlSerializationReader
 {
     protected override void InitCallbacks() { }
+
     protected override void InitIDs() { }
 
     public static byte[] HexToBytes(string value)
@@ -2899,19 +2872,23 @@ class MyStreamProvider : IStreamProvider
 {
     Stream stream;
     bool streamReleased;
+
     public MyStreamProvider(Stream stream)
     {
         this.stream = stream;
         this.streamReleased = false;
     }
+
     public bool StreamReleased
     {
         get { return this.streamReleased; }
     }
+
     public Stream GetStream()
     {
         return this.stream;
     }
+
     public void ReleaseStream(Stream stream)
     {
         this.streamReleased = true;
@@ -2926,19 +2903,19 @@ public class ReaderWriterFactory
         Text,
         MTOM,
         WebData,
-        WrappedWebData
+        WrappedWebData,
     };
 
     public enum TransferMode
     {
         Buffered,
-        Streamed
+        Streamed,
     };
 
     public enum ReaderMode
     {
         Buffered,
-        Streamed
+        Streamed,
     };
 
     public static ReaderWriterType Binary = ReaderWriterType.Binary;
@@ -2947,16 +2924,38 @@ public class ReaderWriterFactory
     public static ReaderWriterType WebData = ReaderWriterType.WebData;
     public static ReaderWriterType WrappedWebData = ReaderWriterType.WrappedWebData;
 
-    public static XmlReader CreateXmlReader(ReaderWriterType rwType, byte[] buffer, Encoding encoding, XmlDictionaryReaderQuotas quotas, IXmlDictionary dictionary, OnXmlDictionaryReaderClose onClose)
+    public static XmlReader CreateXmlReader(
+        ReaderWriterType rwType,
+        byte[] buffer,
+        Encoding encoding,
+        XmlDictionaryReaderQuotas quotas,
+        IXmlDictionary dictionary,
+        OnXmlDictionaryReaderClose onClose
+    )
     {
         XmlReader result = null;
         switch (rwType)
         {
             case ReaderWriterType.Binary:
-                result = XmlDictionaryReader.CreateBinaryReader(buffer, 0, buffer.Length, dictionary, quotas, null, onClose);
+                result = XmlDictionaryReader.CreateBinaryReader(
+                    buffer,
+                    0,
+                    buffer.Length,
+                    dictionary,
+                    quotas,
+                    null,
+                    onClose
+                );
                 break;
             case ReaderWriterType.Text:
-                result = XmlDictionaryReader.CreateTextReader(buffer, 0, buffer.Length, encoding, quotas, onClose);
+                result = XmlDictionaryReader.CreateTextReader(
+                    buffer,
+                    0,
+                    buffer.Length,
+                    encoding,
+                    quotas,
+                    onClose
+                );
                 break;
             case ReaderWriterType.WebData:
                 if (quotas != XmlDictionaryReaderQuotas.Max)
@@ -2967,23 +2966,54 @@ public class ReaderWriterFactory
                 {
                     throw new Exception("Webdata readers do not support the OnClose callback!");
                 }
-                XmlParserContext context = new XmlParserContext(null, null, null, XmlSpace.Default, encoding);
-                result = XmlReader.Create(new MemoryStream(buffer), new XmlReaderSettings(), context);
+                XmlParserContext context = new XmlParserContext(
+                    null,
+                    null,
+                    null,
+                    XmlSpace.Default,
+                    encoding
+                );
+                result = XmlReader.Create(
+                    new MemoryStream(buffer),
+                    new XmlReaderSettings(),
+                    context
+                );
                 break;
             case ReaderWriterType.MTOM:
-                result = XmlDictionaryReader.CreateMtomReader(buffer, 0, buffer.Length, new Encoding[] { encoding }, null, quotas, int.MaxValue, onClose);
+                result = XmlDictionaryReader.CreateMtomReader(
+                    buffer,
+                    0,
+                    buffer.Length,
+                    new Encoding[] { encoding },
+                    null,
+                    quotas,
+                    int.MaxValue,
+                    onClose
+                );
                 break;
             case ReaderWriterType.WrappedWebData:
                 if (quotas != XmlDictionaryReaderQuotas.Max)
                 {
-                    throw new Exception("There is no overload to create the webdata readers with quotas!");
+                    throw new Exception(
+                        "There is no overload to create the webdata readers with quotas!"
+                    );
                 }
                 if (onClose != null)
                 {
                     throw new Exception("Webdata readers do not support the OnClose callback!");
                 }
-                XmlParserContext context2 = new XmlParserContext(null, null, null, XmlSpace.Default, encoding);
-                result = XmlReader.Create(new MemoryStream(buffer), new XmlReaderSettings(), context2);
+                XmlParserContext context2 = new XmlParserContext(
+                    null,
+                    null,
+                    null,
+                    XmlSpace.Default,
+                    encoding
+                );
+                result = XmlReader.Create(
+                    new MemoryStream(buffer),
+                    new XmlReaderSettings(),
+                    context2
+                );
                 result = XmlDictionaryReader.CreateDictionaryReader(result);
                 break;
             default:
@@ -2992,19 +3022,39 @@ public class ReaderWriterFactory
         return result;
     }
 
-    public static XmlReader CreateXmlReader(ReaderWriterType rwType, Stream stream, Encoding encoding, XmlDictionaryReaderQuotas quotas, IXmlDictionary dictionary, OnXmlDictionaryReaderClose onClose)
+    public static XmlReader CreateXmlReader(
+        ReaderWriterType rwType,
+        Stream stream,
+        Encoding encoding,
+        XmlDictionaryReaderQuotas quotas,
+        IXmlDictionary dictionary,
+        OnXmlDictionaryReaderClose onClose
+    )
     {
         XmlReader result = null;
         switch (rwType)
         {
             case ReaderWriterType.Binary:
-                result = XmlDictionaryReader.CreateBinaryReader(stream, dictionary, quotas, null, onClose);
+                result = XmlDictionaryReader.CreateBinaryReader(
+                    stream,
+                    dictionary,
+                    quotas,
+                    null,
+                    onClose
+                );
                 break;
             case ReaderWriterType.Text:
                 result = XmlDictionaryReader.CreateTextReader(stream, encoding, quotas, onClose);
                 break;
             case ReaderWriterType.MTOM:
-                result = XmlDictionaryReader.CreateMtomReader(stream, new Encoding[] { encoding }, null, quotas, int.MaxValue, onClose);
+                result = XmlDictionaryReader.CreateMtomReader(
+                    stream,
+                    new Encoding[] { encoding },
+                    null,
+                    quotas,
+                    int.MaxValue,
+                    onClose
+                );
                 break;
             case ReaderWriterType.WebData:
             case ReaderWriterType.WrappedWebData:
@@ -3016,7 +3066,13 @@ public class ReaderWriterFactory
                 {
                     throw new Exception("Webdata readers do not support the OnClose callback!");
                 }
-                XmlParserContext context = new XmlParserContext(null, null, null, XmlSpace.Default, encoding);
+                XmlParserContext context = new XmlParserContext(
+                    null,
+                    null,
+                    null,
+                    XmlSpace.Default,
+                    encoding
+                );
                 result = XmlReader.Create(stream, new XmlReaderSettings(), context);
                 if (rwType == ReaderWriterType.WrappedWebData)
                 {
@@ -3029,42 +3085,81 @@ public class ReaderWriterFactory
         return result;
     }
 
-    public static XmlReader CreateXmlReader(ReaderWriterType rwType, byte[] buffer, Encoding encoding, XmlDictionaryReaderQuotas quotas, IXmlDictionary dictionary)
+    public static XmlReader CreateXmlReader(
+        ReaderWriterType rwType,
+        byte[] buffer,
+        Encoding encoding,
+        XmlDictionaryReaderQuotas quotas,
+        IXmlDictionary dictionary
+    )
     {
         return CreateXmlReader(rwType, buffer, encoding, quotas, dictionary, null);
     }
 
-    public static XmlReader CreateXmlReader(ReaderWriterType rwType, Stream stream, Encoding encoding, XmlDictionaryReaderQuotas quotas, IXmlDictionary dictionary)
+    public static XmlReader CreateXmlReader(
+        ReaderWriterType rwType,
+        Stream stream,
+        Encoding encoding,
+        XmlDictionaryReaderQuotas quotas,
+        IXmlDictionary dictionary
+    )
     {
         return CreateXmlReader(rwType, stream, encoding, quotas, dictionary, null);
     }
 
-    public static XmlReader CreateXmlReader(ReaderWriterType rwType, byte[] buffer, Encoding encoding, XmlDictionaryReaderQuotas quotas)
+    public static XmlReader CreateXmlReader(
+        ReaderWriterType rwType,
+        byte[] buffer,
+        Encoding encoding,
+        XmlDictionaryReaderQuotas quotas
+    )
     {
         return CreateXmlReader(rwType, buffer, encoding, quotas, null);
     }
 
-    public static XmlReader CreateXmlReader(ReaderWriterType rwType, Stream stream, Encoding encoding, XmlDictionaryReaderQuotas quotas)
+    public static XmlReader CreateXmlReader(
+        ReaderWriterType rwType,
+        Stream stream,
+        Encoding encoding,
+        XmlDictionaryReaderQuotas quotas
+    )
     {
         return CreateXmlReader(rwType, stream, encoding, quotas, null);
     }
 
-    public static XmlReader CreateXmlReader(ReaderWriterType rwType, byte[] buffer, Encoding encoding)
+    public static XmlReader CreateXmlReader(
+        ReaderWriterType rwType,
+        byte[] buffer,
+        Encoding encoding
+    )
     {
         return CreateXmlReader(rwType, buffer, encoding, XmlDictionaryReaderQuotas.Max);
     }
 
-    public static XmlReader CreateXmlReader(ReaderWriterType rwType, Stream stream, Encoding encoding)
+    public static XmlReader CreateXmlReader(
+        ReaderWriterType rwType,
+        Stream stream,
+        Encoding encoding
+    )
     {
         return CreateXmlReader(rwType, stream, encoding, XmlDictionaryReaderQuotas.Max);
     }
 
-    public static XmlWriter CreateXmlWriter(ReaderWriterType rwType, Stream stream, Encoding encoding)
+    public static XmlWriter CreateXmlWriter(
+        ReaderWriterType rwType,
+        Stream stream,
+        Encoding encoding
+    )
     {
         return CreateXmlWriter(rwType, stream, encoding, null);
     }
 
-    public static XmlWriter CreateXmlWriter(ReaderWriterType rwType, Stream stream, Encoding encoding, IXmlDictionary dictionary)
+    public static XmlWriter CreateXmlWriter(
+        ReaderWriterType rwType,
+        Stream stream,
+        Encoding encoding,
+        IXmlDictionary dictionary
+    )
     {
         XmlWriter result = null;
         switch (rwType)
@@ -3076,7 +3171,16 @@ public class ReaderWriterFactory
                 result = XmlDictionaryWriter.CreateTextWriter(stream, encoding);
                 break;
             case ReaderWriterType.MTOM:
-                result = XmlDictionaryWriter.CreateMtomWriter(stream, encoding, int.MaxValue, "myStartInfo", null, null, true, false);
+                result = XmlDictionaryWriter.CreateMtomWriter(
+                    stream,
+                    encoding,
+                    int.MaxValue,
+                    "myStartInfo",
+                    null,
+                    null,
+                    true,
+                    false
+                );
                 break;
             case ReaderWriterType.WebData:
                 XmlWriterSettings settings = new XmlWriterSettings();
@@ -3094,7 +3198,6 @@ public class ReaderWriterFactory
         }
         return result;
     }
-
 }
 
 [DataContract]
@@ -3107,9 +3210,7 @@ public class TestData
 [Serializable]
 public class MyISerializableType : ISerializable
 {
-    public MyISerializableType()
-    {
-    }
+    public MyISerializableType() { }
 
     private string _stringValue;
 
@@ -3122,7 +3223,6 @@ public class MyISerializableType : ISerializable
     public void GetObjectData(SerializationInfo info, StreamingContext context)
     {
         info.AddValue(nameof(_stringValue), _stringValue, typeof(string));
-
     }
 
     public MyISerializableType(SerializationInfo info, StreamingContext context)
@@ -3150,23 +3250,13 @@ public class TypeWithSerializableAttributeAndNonSerializedField
 
     public string Member2
     {
-        get
-        {
-            return _member2;
-        }
-
-        set
-        {
-            _member2 = value;
-        }
+        get { return _member2; }
+        set { _member2 = value; }
     }
 
     public int Member3
     {
-        get
-        {
-            return _member3;
-        }
+        get { return _member3; }
     }
 
     public void SetMember3(int value)
@@ -3179,6 +3269,7 @@ public class TypeWithSerializableAttributeAndNonSerializedField
 public class TypeWithOptionalField
 {
     public int Member1;
+
     [OptionalField]
     public int Member2;
 }
@@ -3187,6 +3278,7 @@ public class TypeWithOptionalField
 public enum SerializableEnumWithNonSerializedValue
 {
     One = 1,
+
     [NonSerialized]
     Two = 2,
 }
@@ -3220,7 +3312,8 @@ public static class FragmentHelper
 {
     public static bool CanFragment(XmlDictionaryWriter writer)
     {
-        IFragmentCapableXmlDictionaryWriter fragmentWriter = writer as IFragmentCapableXmlDictionaryWriter;
+        IFragmentCapableXmlDictionaryWriter fragmentWriter =
+            writer as IFragmentCapableXmlDictionaryWriter;
         return fragmentWriter != null && fragmentWriter.CanFragment;
     }
 
@@ -3229,10 +3322,17 @@ public static class FragmentHelper
         Start(writer, stream, false);
     }
 
-    public static void Start(XmlDictionaryWriter writer, Stream stream, bool generateSelfContainedText)
+    public static void Start(
+        XmlDictionaryWriter writer,
+        Stream stream,
+        bool generateSelfContainedText
+    )
     {
         EnsureWriterCanFragment(writer);
-        ((IFragmentCapableXmlDictionaryWriter)writer).StartFragment(stream, generateSelfContainedText);
+        ((IFragmentCapableXmlDictionaryWriter)writer).StartFragment(
+            stream,
+            generateSelfContainedText
+        );
     }
 
     public static void End(XmlDictionaryWriter writer)
@@ -3251,13 +3351,21 @@ public static class FragmentHelper
     {
         if (!CanFragment(writer))
         {
-            throw new InvalidOperationException("Fragment cannot be done using writer " + writer.GetType());
+            throw new InvalidOperationException(
+                "Fragment cannot be done using writer " + writer.GetType()
+            );
         }
     }
 }
 
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.xmlsoap.org/ws/2003/03/addressing")]
-[System.Xml.Serialization.XmlRootAttribute("Action", Namespace = "http://schemas.xmlsoap.org/ws/2003/03/addressing", IsNullable = false)]
+[System.Xml.Serialization.XmlTypeAttribute(
+    Namespace = "http://schemas.xmlsoap.org/ws/2003/03/addressing"
+)]
+[System.Xml.Serialization.XmlRootAttribute(
+    "Action",
+    Namespace = "http://schemas.xmlsoap.org/ws/2003/03/addressing",
+    IsNullable = false
+)]
 public class AttributedURI
 {
     [XmlText]
@@ -3269,47 +3377,34 @@ public class AttributedURI
 [XmlSerializerAssembly(AssemblyName = "AssemblyAttrTestClass")]
 public class AssemblyAttrTestClass
 {
-    public string TestString { get; set;  }
+    public string TestString { get; set; }
 }
 
 public class MyXmlTextParser : IXmlTextParser
 {
     private XmlTextReader _myreader;
+
     public MyXmlTextParser(XmlTextReader reader)
     {
         _myreader = reader;
     }
+
     bool IXmlTextParser.Normalized
     {
-        get
-        {
-            return _myreader.Normalization;
-        }
-
-        set
-        {
-            _myreader.Normalization = value;
-        }
+        get { return _myreader.Normalization; }
+        set { _myreader.Normalization = value; }
     }
 
     WhitespaceHandling IXmlTextParser.WhitespaceHandling
     {
-        get
-        {
-            return _myreader.WhitespaceHandling;
-        }
-
-        set
-        {
-            _myreader.WhitespaceHandling = value;
-        }
+        get { return _myreader.WhitespaceHandling; }
+        set { _myreader.WhitespaceHandling = value; }
     }
 }
 
 [Serializable]
 public class SquareWithDeserializationCallback : IDeserializationCallback
 {
-
     public int Edge;
 
     [NonSerialized]
@@ -3335,10 +3430,9 @@ public class SampleTextWriter : IXmlTextWriterInitializer
 {
     public Encoding Encoding;
     public Stream Stream;
-    public SampleTextWriter()
-    {
 
-    }
+    public SampleTextWriter() { }
+
     public void SetOutput(Stream stream, Encoding encoding, bool ownsStream)
     {
         Encoding = encoding;
@@ -3346,10 +3440,7 @@ public class SampleTextWriter : IXmlTextWriterInitializer
     }
 }
 
-public class MycodeGenerator : XmlSerializationGeneratedCode
-{
-
-}
+public class MycodeGenerator : XmlSerializationGeneratedCode { }
 
 public class SoapEncodedTestType1
 {
@@ -3363,15 +3454,15 @@ public enum SoapEncodedTestEnum
 {
     [SoapEnum("Small")]
     A,
+
     [SoapEnum("Large")]
-    B
+    B,
 }
 
 public class SoapEncodedTestType2
 {
     [SoapElement(IsNullable = true)]
     public SoapEncodedTestType3 TestType3;
-
 }
 
 public class SoapEncodedTestType3
@@ -3384,6 +3475,7 @@ public class SoapEncodedTestType4
 {
     [SoapElement(IsNullable = true)]
     public int? IntValue;
+
     [SoapElement(IsNullable = true)]
     public double? DoubleValue;
 }
@@ -3404,6 +3496,7 @@ public class MyCircularLink
     public int IntValue;
 
     public MyCircularLink() { }
+
     public MyCircularLink(bool init)
     {
         Link = new MyCircularLink() { IntValue = 1 };
@@ -3411,6 +3504,7 @@ public class MyCircularLink
         Link.Link.Link = this;
     }
 }
+
 public class MyGroup
 {
     public string GroupName;
@@ -3456,9 +3550,7 @@ public partial class GetDataRequestBody
     [System.Runtime.Serialization.DataMemberAttribute(Order = 0)]
     public int value;
 
-    public GetDataRequestBody()
-    {
-    }
+    public GetDataRequestBody() { }
 
     public GetDataRequestBody(int value)
     {
@@ -3472,9 +3564,7 @@ public partial class GetDataUsingDataContractRequestBody
     [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false, Order = 0)]
     public CompositeTypeForXmlMembersMapping composite;
 
-    public GetDataUsingDataContractRequestBody()
-    {
-    }
+    public GetDataUsingDataContractRequestBody() { }
 
     public GetDataUsingDataContractRequestBody(CompositeTypeForXmlMembersMapping composite)
     {
@@ -3482,7 +3572,10 @@ public partial class GetDataUsingDataContractRequestBody
     }
 }
 
-[System.Runtime.Serialization.DataContractAttribute(Name = "CompositeType", Namespace = "http://tempuri.org/")]
+[System.Runtime.Serialization.DataContractAttribute(
+    Name = "CompositeType",
+    Namespace = "http://tempuri.org/"
+)]
 [System.SerializableAttribute()]
 public partial class CompositeTypeForXmlMembersMapping
 {
@@ -3494,27 +3587,15 @@ public partial class CompositeTypeForXmlMembersMapping
     [System.Runtime.Serialization.DataMemberAttribute(IsRequired = true)]
     public bool BoolValue
     {
-        get
-        {
-            return BoolValueField;
-        }
-        set
-        {
-            BoolValueField = value;
-        }
+        get { return BoolValueField; }
+        set { BoolValueField = value; }
     }
 
     [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false)]
     public string StringValue
     {
-        get
-        {
-            return StringValueField;
-        }
-        set
-        {
-            StringValueField = value;
-        }
+        get { return StringValueField; }
+        set { StringValueField = value; }
     }
 }
 
@@ -3543,10 +3624,7 @@ public delegate void MyDelegate();
 [Serializable]
 public class TypeWithDelegate : ISerializable
 {
-    public TypeWithDelegate()
-    {
-
-    }
+    public TypeWithDelegate() { }
 
     public TypeWithDelegate(SerializationInfo info, StreamingContext context)
     {
@@ -3567,15 +3645,7 @@ public class JsonTypes
 {
     public Dictionary<string, string> StringKeyValue
     {
-        get
-        {
-            return new Dictionary<string, string>()
-            {
-                {
-                   "Hi", "There"
-                }
-            };
-        }
+        get { return new Dictionary<string, string>() { { "Hi", "There" } }; }
     }
 
     public Dictionary<TestEnumValues, TestEnumValues> EnumKeyValue
@@ -3584,9 +3654,7 @@ public class JsonTypes
         {
             return new Dictionary<TestEnumValues, TestEnumValues>()
             {
-                {
-                    TestEnumValues.Value1, TestEnumValues.Value2
-                }
+                { TestEnumValues.Value1, TestEnumValues.Value2 },
             };
         }
     }
@@ -3598,8 +3666,9 @@ public class JsonTypes
             return new Dictionary<TestStruct, TestStruct>()
             {
                 {
-                    new TestStruct(){value1 = 12}, new TestStruct(){value1 = 15}
-                }
+                    new TestStruct() { value1 = 12 },
+                    new TestStruct() { value1 = 15 }
+                },
             };
         }
     }
@@ -3611,12 +3680,24 @@ public class JsonTypes
             return new Dictionary<TestClass, object>()
             {
                 {
-                    new TestClass(){intList = new List<int>(){1,2}, floatNum = 45f},
-                    new TestClass(){intList = new List<int>(){4,5}, floatNum = 90f}
+                    new TestClass()
+                    {
+                        intList = new List<int>() { 1, 2 },
+                        floatNum = 45f,
+                    },
+                    new TestClass()
+                    {
+                        intList = new List<int>() { 4, 5 },
+                        floatNum = 90f,
+                    }
                 },
                 {
-                    new TestClass(){intList = new List<int>(){6,7}, floatNum = 10f},
-                    new TestStruct(){value1 = 25}
+                    new TestClass()
+                    {
+                        intList = new List<int>() { 6, 7 },
+                        floatNum = 10f,
+                    },
+                    new TestStruct() { value1 = 25 }
                 },
             };
         }
@@ -3628,21 +3709,14 @@ public class JsonTypes
         [DataMember]
         private Dictionary<string, string> _dict = new Dictionary<string, string>()
         {
-            {
-              "Title", "Sherlocl Kholmes"
-            },
-            {
-              "Name", "study scarlet"
-            }
+            { "Title", "Sherlocl Kholmes" },
+            { "Name", "study scarlet" },
         };
     }
 
     public DateTimeFormat DTF_DMMMM
     {
-        get
-        {
-            return new DateTimeFormat("d, MMMM", CultureInfo.CreateSpecificCulture("es-AR"));
-        }
+        get { return new DateTimeFormat("d, MMMM", CultureInfo.CreateSpecificCulture("es-AR")); }
     }
 
     public DateTimeFormat DTF_hmsFt
@@ -3655,42 +3729,27 @@ public class JsonTypes
 
     public DateTimeFormat DTF_MMMM
     {
-        get
-        {
-            return new DateTimeFormat("MMMM", CultureInfo.CurrentCulture);
-        }
+        get { return new DateTimeFormat("MMMM", CultureInfo.CurrentCulture); }
     }
 
     public DateTimeFormat DTF_s
     {
-        get
-        {
-            return new DateTimeFormat("ss", CultureInfo.CreateSpecificCulture("de-DE"));
-        }
+        get { return new DateTimeFormat("ss", CultureInfo.CreateSpecificCulture("de-DE")); }
     }
 
     public DateTimeFormat DTF_yyyygg
     {
-        get
-        {
-            return new DateTimeFormat("yyyy gg", CultureInfo.InvariantCulture);
-        }
+        get { return new DateTimeFormat("yyyy gg", CultureInfo.InvariantCulture); }
     }
 
     public DateTimeFormat DTF_UTC
     {
-        get
-        {
-            return new DateTimeFormat("yyyy-MM-ddTHH:mm:ss.fffK", CultureInfo.InvariantCulture);
-        }
+        get { return new DateTimeFormat("yyyy-MM-ddTHH:mm:ss.fffK", CultureInfo.InvariantCulture); }
     }
 
     public DateTimeFormat DTF_DefaultFormatProviderIsDateTimeFormatInfoDotCurrentInfo
     {
-        get
-        {
-            return new DateTimeFormat("yyyy-MM-ddTHH:mm:ss.fffK");
-        }
+        get { return new DateTimeFormat("yyyy-MM-ddTHH:mm:ss.fffK"); }
     }
 
     [DataContract]
@@ -3698,10 +3757,13 @@ public class JsonTypes
     {
         [DataMember]
         public DateTime dt1 { get; set; }
+
         [DataMember]
         public DateTime dt2 { get; set; }
+
         [DataMember]
         public DateTime dt3 { get; set; }
+
         [DataMember]
         public DateTime dt4 { get; set; }
     }
@@ -3715,7 +3777,7 @@ public class JsonTypes
                 new DateTime(1, 1, 1, 3, 58, 32),
                 new DateTime(DateTime.Now.Year, 12, 20),
                 new DateTime(1998, 1, 1),
-                new DateTime(1, 1, 1, 3, 58, 32,DateTimeKind.Utc)
+                new DateTime(1, 1, 1, 3, 58, 32, DateTimeKind.Utc),
             };
         }
     }
@@ -3726,8 +3788,11 @@ public class JsonTypes
         {
             return new Dictionary<DateTime, DateTime>
             {
-                { new DateTime(1, 1, 1, 3, 58, 32), new DateTime(1, 1, 1, 3, 58, 32,DateTimeKind.Utc) },
-                { new DateTime(1998, 1, 1), new DateTime(DateTime.Now.Year, 12, 20) }
+                {
+                    new DateTime(1, 1, 1, 3, 58, 32),
+                    new DateTime(1, 1, 1, 3, 58, 32, DateTimeKind.Utc)
+                },
+                { new DateTime(1998, 1, 1), new DateTime(DateTime.Now.Year, 12, 20) },
             };
         }
     }
@@ -3738,14 +3803,9 @@ public class JsonTypes
         {
             return new List<object>()
             {
-                new Dictionary<string,string>()
-                {
-                    {
-                      "Title", "Sherlocl Kholmes"
-                    }
-                },
-                new int[]{1,2,3},
-                new object[]{"hi", 1, "there"}
+                new Dictionary<string, string>() { { "Title", "Sherlocl Kholmes" } },
+                new int[] { 1, 2, 3 },
+                new object[] { "hi", 1, "there" },
             };
         }
     }
@@ -3756,9 +3816,9 @@ public class JsonTypes
         {
             return new List<object>()
             {
-                new object[]{new KeyValuePair<string,string>("Title", "Sherlocl Kholmes")},
-                new object[]{1,2,3},
-                new object[]{"hi", 1, "there"}
+                new object[] { new KeyValuePair<string, string>("Title", "Sherlocl Kholmes") },
+                new object[] { 1, 2, 3 },
+                new object[] { "hi", 1, "there" },
             };
         }
     }
@@ -3767,7 +3827,7 @@ public class JsonTypes
 public enum TestEnumValues
 {
     Value1 = 3,
-    Value2 = 4
+    Value2 = 4,
 }
 
 public struct TestStruct
@@ -3849,33 +3909,47 @@ public class ImplementDictionary : IDictionary
     }
 
     #region IDictionary Members
-    public bool IsReadOnly { get { return false; } }
+    public bool IsReadOnly
+    {
+        get { return false; }
+    }
+
     public bool Contains(object key)
     {
         int index;
         return TryGetIndexOfKey(key, out index);
     }
-    public bool IsFixedSize { get { return false; } }
+
+    public bool IsFixedSize
+    {
+        get { return false; }
+    }
+
     public void Remove(object key)
     {
-        if (key == null) throw new ArgumentNullException(nameof(key));
+        if (key == null)
+            throw new ArgumentNullException(nameof(key));
         int index;
         if (TryGetIndexOfKey(key, out index))
         {
             Array.Copy(_items, index + 1, _items, index, _itemsInUse - index - 1);
             _itemsInUse--;
         }
-        else
-        {
-        }
+        else { }
     }
-    public void Clear() { _itemsInUse = 0; }
+
+    public void Clear()
+    {
+        _itemsInUse = 0;
+    }
+
     public void Add(object key, object value)
     {
         if (_itemsInUse == _items.Length)
             throw new InvalidOperationException("The dictionary cannot hold any more items.");
         _items[_itemsInUse++] = new DictionaryEntry(key, value);
     }
+
     public ICollection Keys
     {
         get
@@ -3923,14 +3997,17 @@ public class ImplementDictionary : IDictionary
             }
         }
     }
+
     private bool TryGetIndexOfKey(object key, out int index)
     {
         for (index = 0; index < _itemsInUse; index++)
         {
-            if (_items[index].Key.Equals(key)) return true;
+            if (_items[index].Key.Equals(key))
+                return true;
         }
         return false;
     }
+
     private class ImplementDictionaryEnumerator : IDictionaryEnumerator
     {
         private DictionaryEntry[] _items;
@@ -3942,27 +4019,54 @@ public class ImplementDictionary : IDictionary
             Array.Copy(sd._items, _items, sd.Count);
         }
 
-        public object Current { get { ValidateIndex(); return _items[_index]; } }
+        public object Current
+        {
+            get
+            {
+                ValidateIndex();
+                return _items[_index];
+            }
+        }
 
         public DictionaryEntry Entry
         {
             get { return (DictionaryEntry)Current; }
         }
 
-        public object Key { get { ValidateIndex(); return _items[_index].Key; } }
+        public object Key
+        {
+            get
+            {
+                ValidateIndex();
+                return _items[_index].Key;
+            }
+        }
 
-        public object Value { get { ValidateIndex(); return _items[_index].Value; } }
+        public object Value
+        {
+            get
+            {
+                ValidateIndex();
+                return _items[_index].Value;
+            }
+        }
 
         public bool MoveNext()
         {
-            if (_index < _items.Length - 1) { _index++; return true; }
+            if (_index < _items.Length - 1)
+            {
+                _index++;
+                return true;
+            }
             return false;
         }
 
         private void ValidateIndex()
         {
             if (_index < 0 || _index >= _items.Length)
-                throw new InvalidOperationException("Enumerator is before or after the collection.");
+                throw new InvalidOperationException(
+                    "Enumerator is before or after the collection."
+                );
         }
 
         public void Reset()
@@ -3970,6 +4074,7 @@ public class ImplementDictionary : IDictionary
             _index = -1;
         }
     }
+
     public IDictionaryEnumerator GetEnumerator()
     {
         return new ImplementDictionaryEnumerator(this);
@@ -3977,10 +4082,23 @@ public class ImplementDictionary : IDictionary
     #endregion
 
     #region ICollection Members
-    public bool IsSynchronized { get { return false; } }
-    public object SyncRoot { get { throw new NotImplementedException(); } }
-    public int Count { get { return _itemsInUse; } }
-    public void CopyTo(Array array, int index) { throw new NotImplementedException(); }
+    public bool IsSynchronized
+    {
+        get { return false; }
+    }
+    public object SyncRoot
+    {
+        get { throw new NotImplementedException(); }
+    }
+    public int Count
+    {
+        get { return _itemsInUse; }
+    }
+
+    public void CopyTo(Array array, int index)
+    {
+        throw new NotImplementedException();
+    }
     #endregion
 
     #region IEnumerable Members
@@ -3998,6 +4116,7 @@ public class BaseType
     [DataMember]
     public string StrBase = "base";
 }
+
 [DataContract]
 public class DerivedType : BaseType
 {
@@ -4023,7 +4142,7 @@ public enum GroupType
 {
     Small,
     Medium,
-    Large
+    Large,
 }
 
 public class Group3WithXmlTextAttr
@@ -4073,9 +4192,7 @@ public class People
         Name = "smith";
     }
 
-    public People()
-    {
-    }
+    public People() { }
 
     [DataMember]
     public int Age;
@@ -4097,6 +4214,7 @@ public class SoapComplexTypeWithArray
     public List<int> IntList;
     public List<string> StringList;
 }
+
 [KnownType("KnownTypes")]
 [DataContract]
 public class EmployeeC
@@ -4118,9 +4236,8 @@ public class EmployeeC
 [DataContract]
 public class Manager : EmployeeC
 {
-    public Manager(string name) : base(name)
-    {
-    }
+    public Manager(string name)
+        : base(name) { }
 
     [DataMember]
     public int age;
@@ -4134,34 +4251,34 @@ public class MyArgumentException : Exception, ISerializable
 {
     private string _paramName;
 
-    public MyArgumentException() : base() { }
+    public MyArgumentException()
+        : base() { }
 
-    public MyArgumentException(string message) : base(message)
-    {
-    }
+    public MyArgumentException(string message)
+        : base(message) { }
 
-    public MyArgumentException(string message, string paramName) : base(message)
+    public MyArgumentException(string message, string paramName)
+        : base(message)
     {
         _paramName = paramName;
     }
 
 #if NET8_0_OR_GREATER
-    [Obsolete("Exception..ctor(SerializationInfo, StreamingContext) is obsolete.", DiagnosticId = "SYSLIB0051")]
+    [Obsolete(
+        "Exception..ctor(SerializationInfo, StreamingContext) is obsolete.",
+        DiagnosticId = "SYSLIB0051"
+    )]
 #endif
-    protected MyArgumentException(SerializationInfo info, StreamingContext context) : base(info, context) {
+    protected MyArgumentException(SerializationInfo info, StreamingContext context)
+        : base(info, context)
+    {
         _paramName = info.GetString("ParamName");
     }
 
     public string ParamName
     {
-        get
-        {
-            return _paramName;
-        }
-        internal set
-        {
-            _paramName = value;
-        }
+        get { return _paramName; }
+        internal set { _paramName = value; }
     }
 
 #if NET8_0_OR_GREATER
@@ -4193,7 +4310,9 @@ public class DC
 public class SampleICollectionTExplicitWithoutDC : ICollection<DC>
 {
     private List<DC> _internalList = new List<DC>();
+
     public SampleICollectionTExplicitWithoutDC() { }
+
     public SampleICollectionTExplicitWithoutDC(bool init)
     {
         DC dc1 = new DC();
@@ -4250,17 +4369,24 @@ public class SampleICollectionTExplicitWithoutDC : ICollection<DC>
 
 public class NetNativeTestData
 {
-    public static NetNativeTestData[] InvalidTypes = new NetNativeTestData[] {
-            new NetNativeTestData(typeof(Invalid_Class_No_Parameterless_Ctor),
-                () => new Invalid_Class_No_Parameterless_Ctor("test"),
-                "Type 'Invalid_Class_No_Parameterless_Ctor' cannot be serialized. Consider marking it with the DataContractAttribute attribute, and marking all of its members you want serialized with the DataMemberAttribute attribute.  If the type is a collection, consider marking it with the CollectionDataContractAttribute.  See the Microsoft .NET Framework documentation for other supported types."),
-            new NetNativeTestData(typeof(Invalid_Class_Derived_With_DataContract),
-                () => new Invalid_Class_Derived_With_DataContract(),
-                "Type 'Invalid_Class_Derived_With_DataContract' cannot inherit from a type that is not marked with DataContractAttribute or SerializableAttribute.  Consider marking the base type 'Invalid_Class_Base_Without_DataContract' with DataContractAttribute or SerializableAttribute, or removing them from the derived type." ),
-            new NetNativeTestData(typeof(Invalid_Class_KnownType_Invalid_Type),
-                () => new Invalid_Class_KnownType_Invalid_Type(),
-                "Type 'Invalid_Class_No_Parameterless_Ctor' cannot be serialized. Consider marking it with the DataContractAttribute attribute, and marking all of its members you want serialized with the DataMemberAttribute attribute.  If the type is a collection, consider marking it with the CollectionDataContractAttribute.  See the Microsoft .NET Framework documentation for other supported types." ),
-        };
+    public static NetNativeTestData[] InvalidTypes = new NetNativeTestData[]
+    {
+        new NetNativeTestData(
+            typeof(Invalid_Class_No_Parameterless_Ctor),
+            () => new Invalid_Class_No_Parameterless_Ctor("test"),
+            "Type 'Invalid_Class_No_Parameterless_Ctor' cannot be serialized. Consider marking it with the DataContractAttribute attribute, and marking all of its members you want serialized with the DataMemberAttribute attribute.  If the type is a collection, consider marking it with the CollectionDataContractAttribute.  See the Microsoft .NET Framework documentation for other supported types."
+        ),
+        new NetNativeTestData(
+            typeof(Invalid_Class_Derived_With_DataContract),
+            () => new Invalid_Class_Derived_With_DataContract(),
+            "Type 'Invalid_Class_Derived_With_DataContract' cannot inherit from a type that is not marked with DataContractAttribute or SerializableAttribute.  Consider marking the base type 'Invalid_Class_Base_Without_DataContract' with DataContractAttribute or SerializableAttribute, or removing them from the derived type."
+        ),
+        new NetNativeTestData(
+            typeof(Invalid_Class_KnownType_Invalid_Type),
+            () => new Invalid_Class_KnownType_Invalid_Type(),
+            "Type 'Invalid_Class_No_Parameterless_Ctor' cannot be serialized. Consider marking it with the DataContractAttribute attribute, and marking all of its members you want serialized with the DataMemberAttribute attribute.  If the type is a collection, consider marking it with the CollectionDataContractAttribute.  See the Microsoft .NET Framework documentation for other supported types."
+        ),
+    };
 
     // This list exists solely to expose all the root objects being serialized.
     // Without this ILC removes our test data types
@@ -4268,10 +4394,10 @@ public class NetNativeTestData
     // Test data now added here will result in "serializer not found" exception at runtime.
     public static DataContractSerializer[] Serializers = new DataContractSerializer[]
     {
-            new DataContractSerializer(typeof(Invalid_Class_No_Parameterless_Ctor)),
-            new DataContractSerializer(typeof(List<Invalid_Class_No_Parameterless_Ctor>)),
-            new DataContractSerializer(typeof(Invalid_Class_Derived_With_DataContract)),
-            new DataContractSerializer(typeof(Invalid_Class_KnownType_Invalid_Type))
+        new DataContractSerializer(typeof(Invalid_Class_No_Parameterless_Ctor)),
+        new DataContractSerializer(typeof(List<Invalid_Class_No_Parameterless_Ctor>)),
+        new DataContractSerializer(typeof(Invalid_Class_Derived_With_DataContract)),
+        new DataContractSerializer(typeof(Invalid_Class_KnownType_Invalid_Type)),
     };
 
     public NetNativeTestData(Type type, Func<object> instantiate, string errorMessage)
@@ -4285,31 +4411,20 @@ public class NetNativeTestData
 
     public string ErrorMessage { get; set; }
 
-    public Func<object> Instantiate
-    {
-        get; set;
-    }
+    public Func<object> Instantiate { get; set; }
 }
-public abstract class Invalid_Class_Base_Without_DataContract
-{
 
-}
+public abstract class Invalid_Class_Base_Without_DataContract { }
 
 // Invalid because it is a derived [DataContract] class whose base class is not
 [DataContract]
-public class Invalid_Class_Derived_With_DataContract : Invalid_Class_Base_Without_DataContract
-{
-
-}
+public class Invalid_Class_Derived_With_DataContract : Invalid_Class_Base_Without_DataContract { }
 
 // Invalid because its [KnownType] is an invalid type
 [KnownType(typeof(Invalid_Class_No_Parameterless_Ctor))]
 public class Invalid_Class_KnownType_Invalid_Type
 {
-    public Invalid_Class_KnownType_Invalid_Type()
-    {
-
-    }
+    public Invalid_Class_KnownType_Invalid_Type() { }
 }
 
 public class Invalid_Class_No_Parameterless_Ctor
@@ -4324,12 +4439,17 @@ public class Invalid_Class_No_Parameterless_Ctor
 
 public class NativeJsonTestData
 {
-    public static NativeJsonTestData[] Json_InvalidTypes = new NativeJsonTestData[] {
-                new NativeJsonTestData(typeof(Invalid_Class_No_Parameterless_Ctor),
-                    () => new Invalid_Class_No_Parameterless_Ctor("test")),
-                new NativeJsonTestData(typeof(Invalid_Class_Derived_With_DataContract),
-                    () => new Invalid_Class_Derived_With_DataContract()),
-            };
+    public static NativeJsonTestData[] Json_InvalidTypes = new NativeJsonTestData[]
+    {
+        new NativeJsonTestData(
+            typeof(Invalid_Class_No_Parameterless_Ctor),
+            () => new Invalid_Class_No_Parameterless_Ctor("test")
+        ),
+        new NativeJsonTestData(
+            typeof(Invalid_Class_Derived_With_DataContract),
+            () => new Invalid_Class_Derived_With_DataContract()
+        ),
+    };
 
     // This list exists solely to expose all the root objects being serialized.
     // Without this ILC removes our test data types
@@ -4337,9 +4457,9 @@ public class NativeJsonTestData
     // Test data now added here will result in "serializer not found" exception at runtime.
     public static DataContractJsonSerializer[] JsonSerializers = new DataContractJsonSerializer[]
     {
-                new DataContractJsonSerializer(typeof(Invalid_Class_No_Parameterless_Ctor)),
-                new DataContractJsonSerializer(typeof(List<Invalid_Class_No_Parameterless_Ctor>)),
-                new DataContractJsonSerializer(typeof(Invalid_Class_Derived_With_DataContract)),
+        new DataContractJsonSerializer(typeof(Invalid_Class_No_Parameterless_Ctor)),
+        new DataContractJsonSerializer(typeof(List<Invalid_Class_No_Parameterless_Ctor>)),
+        new DataContractJsonSerializer(typeof(Invalid_Class_Derived_With_DataContract)),
     };
 
     public NativeJsonTestData(Type type, Func<object> instantiate)
@@ -4391,10 +4511,7 @@ public class TypeWithCollectionAndDateTimeOffset
     private List<int> _anIntList;
     public List<int> AnIntList
     {
-        get
-        {
-            return _anIntList;
-        }
+        get { return _anIntList; }
     }
 
     public DateTimeOffset DateTimeOffset { get; set; }
@@ -4422,13 +4539,17 @@ public class TypeWithCollectionAndDateTimeOffset
 [KnownType(typeof(ushort))]
 [KnownType(typeof(Uri))]
 [CollectionDataContract]
-public class TypeWithPrimitiveKnownTypes : List<object>
-{
+public class TypeWithPrimitiveKnownTypes : List<object> { }
 
+public enum TestEnum
+{
+    Off,
+    On,
+    Both,
 }
 
-public enum TestEnum { Off, On, Both }
 public class EnumTestBase { }
+
 public class EnumTestDerived : EnumTestBase
 {
     [XmlText]
@@ -4436,6 +4557,7 @@ public class EnumTestDerived : EnumTestBase
 }
 
 public class PrimiveAttributeTestBase { }
+
 public class PrimiveAttributeTestDerived : PrimiveAttributeTestBase
 {
     [XmlText]

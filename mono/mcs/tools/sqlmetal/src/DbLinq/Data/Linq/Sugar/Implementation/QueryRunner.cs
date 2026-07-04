@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,20 +21,18 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
-using System.Data;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Reflection;
-
 using DbLinq.Data.Linq.Database;
 using DbLinq.Data.Linq.Sql;
 using DbLinq.Data.Linq.Sugar.Expressions;
 using DbLinq.Util;
-
 #if MONO_STRICT
 using System.Data.Linq;
 #endif
@@ -75,12 +73,18 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                             if (reader.FieldCount == 0)
                                 continue;
 
-                            var row = rowObjectCreator(reader, selectQuery.DataContext._MappingContext);
+                            var row = rowObjectCreator(
+                                reader,
+                                selectQuery.DataContext._MappingContext
+                            );
                             // the conditions to register and watch an entity are:
                             // - not null (can this happen?)
                             // - registered in the model
-                            if (row != null && selectQuery.DataContext.ObjectTrackingEnabled && 
-                                    selectQuery.DataContext.Mapping.GetTable(row.GetType()) != null)
+                            if (
+                                row != null
+                                && selectQuery.DataContext.ObjectTrackingEnabled
+                                && selectQuery.DataContext.Mapping.GetTable(row.GetType()) != null
+                            )
                             {
                                 row = (T)selectQuery.DataContext.Register(row);
                             }
@@ -216,7 +220,6 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             var dataContext = insertQuery.DataContext;
             using (var dbCommand = insertQuery.GetCommand())
             {
-
                 // log first command
                 dataContext.WriteLog(dbCommand.Command);
 
@@ -225,7 +228,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 // the second reads output parameters
                 if (!string.IsNullOrEmpty(insertQuery.IdQuerySql.ToString()))
                 {
-                    var outputCommandTransaction = new ParameterizedQuery(dataContext, insertQuery.IdQuerySql, insertQuery.PrimaryKeyParameters);
+                    var outputCommandTransaction = new ParameterizedQuery(
+                        dataContext,
+                        insertQuery.IdQuerySql,
+                        insertQuery.PrimaryKeyParameters
+                    );
                     outputCommandTransaction.Target = target;
 
                     var outputCommand = outputCommandTransaction.GetCommandTransactional(false);
@@ -238,11 +245,18 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
 
                     using (var dataReader = outputCommand.Command.ExecuteReader())
                     {
-                        if (! dataReader.Read())
-                            throw new InvalidOperationException("Could not retrieve data for inserted row on " + target.GetType());
+                        if (!dataReader.Read())
+                            throw new InvalidOperationException(
+                                "Could not retrieve data for inserted row on " + target.GetType()
+                            );
 
                         int outputParameterIndex = 0;
-                        for (IEnumerator<ObjectOutputParameterExpression> output = insertQuery.OutputParameters.GetEnumerator(); output.MoveNext(); ++outputParameterIndex)
+                        for (
+                            IEnumerator<ObjectOutputParameterExpression> output =
+                                insertQuery.OutputParameters.GetEnumerator();
+                            output.MoveNext();
+                            ++outputParameterIndex
+                        )
                         {
                             var outputDbParameter = dataReader.GetValue(outputParameterIndex);
                             SetOutputParameterValue(target, output.Current, outputDbParameter);
@@ -253,7 +267,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             }
         }
 
-        protected virtual void SetOutputParameterValue(object target, ObjectOutputParameterExpression outputParameter, object value)
+        protected virtual void SetOutputParameterValue(
+            object target,
+            ObjectOutputParameterExpression outputParameter,
+            object value
+        )
         {
             // depending on vendor, we can have DBNull or null
             // so we handle both
@@ -269,7 +287,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="target">Entity to be flushed</param>
         /// <param name="updateQuery">SQL update query</param>
         /// <param name="modifiedMembers">List of modified members, or null to update all members</param>
-        public void Update(object target, UpsertQuery updateQuery, IList<MemberInfo> modifiedMembers)
+        public void Update(
+            object target,
+            UpsertQuery updateQuery,
+            IList<MemberInfo> modifiedMembers
+        )
         {
             Upsert(target, updateQuery);
         }
@@ -284,7 +306,6 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             deleteQuery.Target = target;
             using (var dbCommand = deleteQuery.GetCommand())
             {
-
                 // log command
                 deleteQuery.DataContext.WriteLog(dbCommand.Command);
 
@@ -299,7 +320,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="dbCommand"></param>
         /// <param name="parameterNames"></param>
         /// <param name="parameterValues"></param>
-        private void FeedParameters(IDbCommand dbCommand, IList<string> parameterNames, IList<object> parameterValues)
+        private void FeedParameters(
+            IDbCommand dbCommand,
+            IList<string> parameterNames,
+            IList<object> parameterValues
+        )
         {
             for (int parameterIndex = 0; parameterIndex < parameterNames.Count; parameterIndex++)
             {
@@ -321,7 +346,6 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             directQuery.parameterValues = parameters;
             using (var dbCommand = directQuery.GetCommand())
             {
-
                 // log command
                 directQuery.DataContext.WriteLog(dbCommand.Command);
 
@@ -334,12 +358,20 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         }
 
         // TODO: move method?
-        protected virtual Delegate GetTableBuilder(Type elementType, IDataReader dataReader, DataContext dataContext)
+        protected virtual Delegate GetTableBuilder(
+            Type elementType,
+            IDataReader dataReader,
+            DataContext dataContext
+        )
         {
             var fields = new List<string>();
             for (int fieldIndex = 0; fieldIndex < dataReader.FieldCount; fieldIndex++)
                 fields.Add(dataReader.GetName(fieldIndex));
-            return dataContext.QueryBuilder.GetTableReader(elementType, fields, new QueryContext(dataContext));
+            return dataContext.QueryBuilder.GetTableReader(
+                elementType,
+                fields,
+                new QueryContext(dataContext)
+            );
         }
 
         /// <summary>
@@ -349,12 +381,15 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="directQuery"></param>
         /// <param name="parameters"></param>
         /// <returns></returns>
-        public IEnumerable ExecuteSelect(Type tableType, DirectQuery directQuery, params object[] parameters)
+        public IEnumerable ExecuteSelect(
+            Type tableType,
+            DirectQuery directQuery,
+            params object[] parameters
+        )
         {
             directQuery.parameterValues = parameters;
             using (var dbCommand = directQuery.GetCommand())
             {
-
                 // log query
                 directQuery.DataContext.WriteLog(dbCommand.Command);
 
@@ -362,7 +397,13 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
                 {
                     // Did you know? "return EnumerateResult(tableType, dataReader, dataContext);" disposes resources first
                     // before the enumerator is used
-                    foreach (var result in EnumerateResult(tableType, dataReader, directQuery.DataContext))
+                    foreach (
+                        var result in EnumerateResult(
+                            tableType,
+                            dataReader,
+                            directQuery.DataContext
+                        )
+                    )
                         yield return result;
                 }
             }
@@ -376,7 +417,11 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="dataReader"></param>
         /// <param name="dataContext"></param>
         /// <returns></returns>
-        public IEnumerable EnumerateResult(Type tableType, IDataReader dataReader, DataContext dataContext)
+        public IEnumerable EnumerateResult(
+            Type tableType,
+            IDataReader dataReader,
+            DataContext dataContext
+        )
         {
             return EnumerateResult(tableType, true, dataReader, dataContext);
         }
@@ -390,7 +435,12 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         /// <param name="dataReader"></param>
         /// <param name="dataContext"></param>
         /// <returns></returns>
-        protected virtual IEnumerable EnumerateResult(Type tableType, bool dynamicallyReadShape, IDataReader dataReader, DataContext dataContext)
+        protected virtual IEnumerable EnumerateResult(
+            Type tableType,
+            bool dynamicallyReadShape,
+            IDataReader dataReader,
+            DataContext dataContext
+        )
         {
             Delegate tableBuilder = null;
             while (dataReader.Read())

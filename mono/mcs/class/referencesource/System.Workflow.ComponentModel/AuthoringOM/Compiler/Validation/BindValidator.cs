@@ -2,11 +2,11 @@ namespace System.Workflow.ComponentModel.Compiler
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.Design;
+    using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
     using System.Workflow.ComponentModel.Design;
     using System.Workflow.ComponentModel.Serialization;
-    using System.ComponentModel.Design;
-    using System.Diagnostics.CodeAnalysis;
 
     #region Class BindValidator
     internal static class BindValidatorHelper
@@ -14,10 +14,12 @@ namespace System.Workflow.ComponentModel.Compiler
         internal static Type GetActivityType(IServiceProvider serviceProvider, Activity refActivity)
         {
             Type type = null;
-            string typeName = refActivity.GetValue(WorkflowMarkupSerializer.XClassProperty) as string;
+            string typeName =
+                refActivity.GetValue(WorkflowMarkupSerializer.XClassProperty) as string;
             if (refActivity.Site != null && !string.IsNullOrEmpty(typeName))
             {
-                ITypeProvider typeProvider = serviceProvider.GetService(typeof(ITypeProvider)) as ITypeProvider;
+                ITypeProvider typeProvider =
+                    serviceProvider.GetService(typeof(ITypeProvider)) as ITypeProvider;
                 if (typeProvider != null && !string.IsNullOrEmpty(typeName))
                     type = typeProvider.GetType(typeName, false);
             }
@@ -41,31 +43,49 @@ namespace System.Workflow.ComponentModel.Compiler
 
             FieldBind bind = obj as FieldBind;
             if (bind == null)
-                throw new ArgumentException(SR.GetString(SR.Error_UnexpectedArgumentType, typeof(FieldBind).FullName), "obj");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_UnexpectedArgumentType, typeof(FieldBind).FullName),
+                    "obj"
+                );
 
-            PropertyValidationContext validationContext = manager.Context[typeof(PropertyValidationContext)] as PropertyValidationContext;
+            PropertyValidationContext validationContext =
+                manager.Context[typeof(PropertyValidationContext)] as PropertyValidationContext;
             if (validationContext == null)
-                throw new InvalidOperationException(SR.GetString(SR.Error_ContextStackItemMissing, typeof(BindValidationContext).Name));
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        SR.Error_ContextStackItemMissing,
+                        typeof(BindValidationContext).Name
+                    )
+                );
 
             Activity activity = manager.Context[typeof(Activity)] as Activity;
             if (activity == null)
-                throw new InvalidOperationException(SR.GetString(SR.Error_ContextStackItemMissing, typeof(Activity).Name));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_ContextStackItemMissing, typeof(Activity).Name)
+                );
 
             ValidationError error = null;
             if (string.IsNullOrEmpty(bind.Name))
             {
-                error = new ValidationError(SR.GetString(SR.Error_PropertyNotSet, "Name"), ErrorNumbers.Error_PropertyNotSet);
+                error = new ValidationError(
+                    SR.GetString(SR.Error_PropertyNotSet, "Name"),
+                    ErrorNumbers.Error_PropertyNotSet
+                );
                 error.PropertyName = GetFullPropertyName(manager) + ".Name";
             }
             else
             {
-                BindValidationContext validationBindContext = manager.Context[typeof(BindValidationContext)] as BindValidationContext;
+                BindValidationContext validationBindContext =
+                    manager.Context[typeof(BindValidationContext)] as BindValidationContext;
                 if (validationBindContext == null)
                 {
                     Type baseType = BindHelpers.GetBaseType(manager, validationContext);
                     if (baseType != null)
                     {
-                        AccessTypes accessType = BindHelpers.GetAccessType(manager, validationContext);
+                        AccessTypes accessType = BindHelpers.GetAccessType(
+                            manager,
+                            validationContext
+                        );
                         validationBindContext = new BindValidationContext(baseType, accessType);
                     }
                     //else
@@ -78,7 +98,14 @@ namespace System.Workflow.ComponentModel.Compiler
                 {
                     Type targetType = validationBindContext.TargetType;
                     if (error == null)
-                        validationErrors.AddRange(this.ValidateField(manager, activity, bind, new BindValidationContext(targetType, validationBindContext.Access)));
+                        validationErrors.AddRange(
+                            this.ValidateField(
+                                manager,
+                                activity,
+                                bind,
+                                new BindValidationContext(targetType, validationBindContext.Access)
+                            )
+                        );
                 }
             }
             if (error != null)
@@ -87,7 +114,12 @@ namespace System.Workflow.ComponentModel.Compiler
             return validationErrors;
         }
 
-        private ValidationErrorCollection ValidateField(ValidationManager manager, Activity activity, FieldBind bind, BindValidationContext validationContext)
+        private ValidationErrorCollection ValidateField(
+            ValidationManager manager,
+            Activity activity,
+            FieldBind bind,
+            BindValidationContext validationContext
+        )
         {
             ValidationErrorCollection validationErrors = new ValidationErrorCollection();
 
@@ -99,26 +131,45 @@ namespace System.Workflow.ComponentModel.Compiler
 
             if (dataSourceActivity == null)
             {
-                ValidationError error = new ValidationError(SR.GetString(SR.Error_NoEnclosingContext, activity.Name), ErrorNumbers.Error_NoEnclosingContext);
+                ValidationError error = new ValidationError(
+                    SR.GetString(SR.Error_NoEnclosingContext, activity.Name),
+                    ErrorNumbers.Error_NoEnclosingContext
+                );
                 error.PropertyName = GetFullPropertyName(manager) + ".Name";
                 validationErrors.Add(error);
             }
             else
             {
                 ValidationError error = null;
-                // 
+                //
                 System.Type resolvedType = Helpers.GetDataSourceClass(dataSourceActivity, manager);
                 if (resolvedType == null)
                 {
-                    error = new ValidationError(SR.GetString(SR.Error_TypeNotResolvedInFieldName, "Name"), ErrorNumbers.Error_TypeNotResolvedInFieldName);
+                    error = new ValidationError(
+                        SR.GetString(SR.Error_TypeNotResolvedInFieldName, "Name"),
+                        ErrorNumbers.Error_TypeNotResolvedInFieldName
+                    );
                     error.PropertyName = GetFullPropertyName(manager);
                 }
                 else
                 {
-                    FieldInfo fieldInfo = resolvedType.GetField(dsName, BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance | BindingFlags.FlattenHierarchy);
+                    FieldInfo fieldInfo = resolvedType.GetField(
+                        dsName,
+                        BindingFlags.Public
+                            | BindingFlags.Static
+                            | BindingFlags.Instance
+                            | BindingFlags.FlattenHierarchy
+                    );
                     if (fieldInfo == null)
                     {
-                        error = new ValidationError(SR.GetString(SR.Error_FieldNotExists, GetFullPropertyName(manager), dsName), ErrorNumbers.Error_FieldNotExists);
+                        error = new ValidationError(
+                            SR.GetString(
+                                SR.Error_FieldNotExists,
+                                GetFullPropertyName(manager),
+                                dsName
+                            ),
+                            ErrorNumbers.Error_FieldNotExists
+                        );
                         error.PropertyName = GetFullPropertyName(manager);
                     }
                     //else if (dataSourceActivity != activityContext && !fieldInfo.IsAssembly && !fieldInfo.IsPublic)
@@ -128,15 +179,40 @@ namespace System.Workflow.ComponentModel.Compiler
                     //}
                     else if (fieldInfo.FieldType == null)
                     {
-                        error = new ValidationError(SR.GetString(SR.Error_FieldTypeNotResolved, GetFullPropertyName(manager), dsName), ErrorNumbers.Error_FieldTypeNotResolved);
+                        error = new ValidationError(
+                            SR.GetString(
+                                SR.Error_FieldTypeNotResolved,
+                                GetFullPropertyName(manager),
+                                dsName
+                            ),
+                            ErrorNumbers.Error_FieldTypeNotResolved
+                        );
                         error.PropertyName = GetFullPropertyName(manager);
                     }
                     else
                     {
                         MemberInfo memberInfo = fieldInfo;
-                        if ((bind.Path == null || bind.Path.Length == 0) && (validationContext.TargetType != null && !ActivityBindValidator.DoesTargetTypeMatch(validationContext.TargetType, fieldInfo.FieldType, validationContext.Access)))
+                        if (
+                            (bind.Path == null || bind.Path.Length == 0)
+                            && (
+                                validationContext.TargetType != null
+                                && !ActivityBindValidator.DoesTargetTypeMatch(
+                                    validationContext.TargetType,
+                                    fieldInfo.FieldType,
+                                    validationContext.Access
+                                )
+                            )
+                        )
                         {
-                            error = new ValidationError(SR.GetString(SR.Error_FieldTypeMismatch, GetFullPropertyName(manager), fieldInfo.FieldType.FullName, validationContext.TargetType.FullName), ErrorNumbers.Error_FieldTypeMismatch);
+                            error = new ValidationError(
+                                SR.GetString(
+                                    SR.Error_FieldTypeMismatch,
+                                    GetFullPropertyName(manager),
+                                    fieldInfo.FieldType.FullName,
+                                    validationContext.TargetType.FullName
+                                ),
+                                ErrorNumbers.Error_FieldTypeMismatch
+                            );
                             error.PropertyName = GetFullPropertyName(manager);
                         }
                         else if (!string.IsNullOrEmpty(bind.Path))
@@ -144,19 +220,30 @@ namespace System.Workflow.ComponentModel.Compiler
                             memberInfo = MemberBind.GetMemberInfo(fieldInfo.FieldType, bind.Path);
                             if (memberInfo == null)
                             {
-                                error = new ValidationError(SR.GetString(SR.Error_InvalidMemberPath, dsName, bind.Path), ErrorNumbers.Error_InvalidMemberPath);
+                                error = new ValidationError(
+                                    SR.GetString(SR.Error_InvalidMemberPath, dsName, bind.Path),
+                                    ErrorNumbers.Error_InvalidMemberPath
+                                );
                                 error.PropertyName = GetFullPropertyName(manager) + ".Path";
                             }
                             else
                             {
-                                IDisposable localContextScope = (WorkflowCompilationContext.Current == null ? WorkflowCompilationContext.CreateScope(manager) : null);
+                                IDisposable localContextScope = (
+                                    WorkflowCompilationContext.Current == null
+                                        ? WorkflowCompilationContext.CreateScope(manager)
+                                        : null
+                                );
                                 try
                                 {
                                     if (WorkflowCompilationContext.Current.CheckTypes)
                                     {
-                                        error = MemberBind.ValidateTypesInPath(fieldInfo.FieldType, bind.Path);
+                                        error = MemberBind.ValidateTypesInPath(
+                                            fieldInfo.FieldType,
+                                            bind.Path
+                                        );
                                         if (error != null)
-                                            error.PropertyName = GetFullPropertyName(manager) + ".Path";
+                                            error.PropertyName =
+                                                GetFullPropertyName(manager) + ".Path";
                                     }
                                 }
                                 finally
@@ -169,10 +256,26 @@ namespace System.Workflow.ComponentModel.Compiler
 
                                 if (error == null)
                                 {
-                                    Type memberType = (memberInfo is FieldInfo ? (memberInfo as FieldInfo).FieldType : (memberInfo as PropertyInfo).PropertyType);
-                                    if (!ActivityBindValidator.DoesTargetTypeMatch(validationContext.TargetType, memberType, validationContext.Access))
+                                    Type memberType = (
+                                        memberInfo is FieldInfo
+                                            ? (memberInfo as FieldInfo).FieldType
+                                            : (memberInfo as PropertyInfo).PropertyType
+                                    );
+                                    if (
+                                        !ActivityBindValidator.DoesTargetTypeMatch(
+                                            validationContext.TargetType,
+                                            memberType,
+                                            validationContext.Access
+                                        )
+                                    )
                                     {
-                                        error = new ValidationError(SR.GetString(SR.Error_TargetTypeDataSourcePathMismatch, validationContext.TargetType.FullName), ErrorNumbers.Error_TargetTypeDataSourcePathMismatch);
+                                        error = new ValidationError(
+                                            SR.GetString(
+                                                SR.Error_TargetTypeDataSourcePathMismatch,
+                                                validationContext.TargetType.FullName
+                                            ),
+                                            ErrorNumbers.Error_TargetTypeDataSourcePathMismatch
+                                        );
                                         error.PropertyName = GetFullPropertyName(manager) + ".Path";
                                     }
                                 }
@@ -183,24 +286,53 @@ namespace System.Workflow.ComponentModel.Compiler
                             if (memberInfo is PropertyInfo)
                             {
                                 PropertyInfo pathPropertyInfo = memberInfo as PropertyInfo;
-                                if (!pathPropertyInfo.CanRead && ((validationContext.Access & AccessTypes.Read) != 0))
+                                if (
+                                    !pathPropertyInfo.CanRead
+                                    && ((validationContext.Access & AccessTypes.Read) != 0)
+                                )
                                 {
-                                    error = new ValidationError(SR.GetString(SR.Error_PropertyNoGetter, pathPropertyInfo.Name, bind.Path), ErrorNumbers.Error_PropertyNoGetter);
+                                    error = new ValidationError(
+                                        SR.GetString(
+                                            SR.Error_PropertyNoGetter,
+                                            pathPropertyInfo.Name,
+                                            bind.Path
+                                        ),
+                                        ErrorNumbers.Error_PropertyNoGetter
+                                    );
                                     error.PropertyName = GetFullPropertyName(manager) + ".Path";
                                 }
-                                else if (!pathPropertyInfo.CanWrite && ((validationContext.Access & AccessTypes.Write) != 0))
+                                else if (
+                                    !pathPropertyInfo.CanWrite
+                                    && ((validationContext.Access & AccessTypes.Write) != 0)
+                                )
                                 {
-                                    error = new ValidationError(SR.GetString(SR.Error_PropertyNoSetter, pathPropertyInfo.Name, bind.Path), ErrorNumbers.Error_PropertyNoSetter);
+                                    error = new ValidationError(
+                                        SR.GetString(
+                                            SR.Error_PropertyNoSetter,
+                                            pathPropertyInfo.Name,
+                                            bind.Path
+                                        ),
+                                        ErrorNumbers.Error_PropertyNoSetter
+                                    );
                                     error.PropertyName = GetFullPropertyName(manager) + ".Path";
                                 }
                             }
                             else if (memberInfo is FieldInfo)
                             {
                                 FieldInfo pathFieldInfo = memberInfo as FieldInfo;
-                                if (((pathFieldInfo.Attributes & (FieldAttributes.InitOnly | FieldAttributes.Literal)) != 0) &&
-                                    ((validationContext.Access & AccessTypes.Write) != 0))
+                                if (
+                                    (
+                                        (
+                                            pathFieldInfo.Attributes
+                                            & (FieldAttributes.InitOnly | FieldAttributes.Literal)
+                                        ) != 0
+                                    ) && ((validationContext.Access & AccessTypes.Write) != 0)
+                                )
                                 {
-                                    error = new ValidationError(SR.GetString(SR.Error_ReadOnlyField, pathFieldInfo.Name), ErrorNumbers.Error_ReadOnlyField);
+                                    error = new ValidationError(
+                                        SR.GetString(SR.Error_ReadOnlyField, pathFieldInfo.Name),
+                                        ErrorNumbers.Error_ReadOnlyField
+                                    );
                                     error.PropertyName = GetFullPropertyName(manager) + ".Path";
                                 }
                             }
@@ -226,31 +358,49 @@ namespace System.Workflow.ComponentModel.Compiler
 
             PropertyBind bind = obj as PropertyBind;
             if (bind == null)
-                throw new ArgumentException(SR.GetString(SR.Error_UnexpectedArgumentType, typeof(PropertyBind).FullName), "obj");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_UnexpectedArgumentType, typeof(PropertyBind).FullName),
+                    "obj"
+                );
 
-            PropertyValidationContext validationContext = manager.Context[typeof(PropertyValidationContext)] as PropertyValidationContext;
+            PropertyValidationContext validationContext =
+                manager.Context[typeof(PropertyValidationContext)] as PropertyValidationContext;
             if (validationContext == null)
-                throw new InvalidOperationException(SR.GetString(SR.Error_ContextStackItemMissing, typeof(BindValidationContext).Name));
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        SR.Error_ContextStackItemMissing,
+                        typeof(BindValidationContext).Name
+                    )
+                );
 
             Activity activity = manager.Context[typeof(Activity)] as Activity;
             if (activity == null)
-                throw new InvalidOperationException(SR.GetString(SR.Error_ContextStackItemMissing, typeof(Activity).Name));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_ContextStackItemMissing, typeof(Activity).Name)
+                );
 
             ValidationError error = null;
             if (string.IsNullOrEmpty(bind.Name))
             {
-                error = new ValidationError(SR.GetString(SR.Error_PropertyNotSet, "Name"), ErrorNumbers.Error_PropertyNotSet);
+                error = new ValidationError(
+                    SR.GetString(SR.Error_PropertyNotSet, "Name"),
+                    ErrorNumbers.Error_PropertyNotSet
+                );
                 error.PropertyName = GetFullPropertyName(manager) + ".Name";
             }
             else
             {
-                BindValidationContext validationBindContext = manager.Context[typeof(BindValidationContext)] as BindValidationContext;
+                BindValidationContext validationBindContext =
+                    manager.Context[typeof(BindValidationContext)] as BindValidationContext;
                 if (validationBindContext == null)
                 {
                     Type baseType = BindHelpers.GetBaseType(manager, validationContext);
                     if (baseType != null)
                     {
-                        AccessTypes accessType = BindHelpers.GetAccessType(manager, validationContext);
+                        AccessTypes accessType = BindHelpers.GetAccessType(
+                            manager,
+                            validationContext
+                        );
                         validationBindContext = new BindValidationContext(baseType, accessType);
                     }
                 }
@@ -258,7 +408,14 @@ namespace System.Workflow.ComponentModel.Compiler
                 {
                     Type targetType = validationBindContext.TargetType;
                     if (error == null)
-                        validationErrors.AddRange(this.ValidateBindProperty(manager, activity, bind, new BindValidationContext(targetType, validationBindContext.Access)));
+                        validationErrors.AddRange(
+                            this.ValidateBindProperty(
+                                manager,
+                                activity,
+                                bind,
+                                new BindValidationContext(targetType, validationBindContext.Access)
+                            )
+                        );
                 }
             }
             if (error != null)
@@ -267,7 +424,12 @@ namespace System.Workflow.ComponentModel.Compiler
             return validationErrors;
         }
 
-        private ValidationErrorCollection ValidateBindProperty(ValidationManager manager, Activity activity, PropertyBind bind, BindValidationContext validationContext)
+        private ValidationErrorCollection ValidateBindProperty(
+            ValidationManager manager,
+            Activity activity,
+            PropertyBind bind,
+            BindValidationContext validationContext
+        )
         {
             ValidationErrorCollection validationErrors = new ValidationErrorCollection();
 
@@ -279,7 +441,10 @@ namespace System.Workflow.ComponentModel.Compiler
 
             if (dataSourceActivity == null)
             {
-                ValidationError error = new ValidationError(SR.GetString(SR.Error_NoEnclosingContext, activity.Name), ErrorNumbers.Error_NoEnclosingContext);
+                ValidationError error = new ValidationError(
+                    SR.GetString(SR.Error_NoEnclosingContext, activity.Name),
+                    ErrorNumbers.Error_NoEnclosingContext
+                );
                 error.PropertyName = GetFullPropertyName(manager) + ".Name";
                 validationErrors.Add(error);
             }
@@ -293,67 +458,144 @@ namespace System.Workflow.ComponentModel.Compiler
                 {
                     resolvedType = BindValidatorHelper.GetActivityType(manager, dataSourceActivity);
                     if (resolvedType != null)
-                        propertyInfo = resolvedType.GetProperty(dsName, BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance);
+                        propertyInfo = resolvedType.GetProperty(
+                            dsName,
+                            BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance
+                        );
                 }
 
                 if (resolvedType == null)
                 {
-                    error = new ValidationError(SR.GetString(SR.Error_TypeNotResolvedInPropertyName, "Name"), ErrorNumbers.Error_TypeNotResolvedInPropertyName);
+                    error = new ValidationError(
+                        SR.GetString(SR.Error_TypeNotResolvedInPropertyName, "Name"),
+                        ErrorNumbers.Error_TypeNotResolvedInPropertyName
+                    );
                     error.PropertyName = GetFullPropertyName(manager);
                 }
                 else
                 {
                     if (propertyInfo == null)
                     {
-                        error = new ValidationError(SR.GetString(SR.Error_PropertyNotExists, GetFullPropertyName(manager), dsName), ErrorNumbers.Error_PropertyNotExists);
+                        error = new ValidationError(
+                            SR.GetString(
+                                SR.Error_PropertyNotExists,
+                                GetFullPropertyName(manager),
+                                dsName
+                            ),
+                            ErrorNumbers.Error_PropertyNotExists
+                        );
                         error.PropertyName = GetFullPropertyName(manager);
                     }
                     else if (!propertyInfo.CanRead)
                     {
-                        error = new ValidationError(SR.GetString(SR.Error_PropertyReferenceNoGetter, GetFullPropertyName(manager), dsName), ErrorNumbers.Error_PropertyReferenceNoGetter);
+                        error = new ValidationError(
+                            SR.GetString(
+                                SR.Error_PropertyReferenceNoGetter,
+                                GetFullPropertyName(manager),
+                                dsName
+                            ),
+                            ErrorNumbers.Error_PropertyReferenceNoGetter
+                        );
                         error.PropertyName = GetFullPropertyName(manager);
                     }
                     else if (propertyInfo.GetGetMethod() == null)
                     {
-                        error = new ValidationError(SR.GetString(SR.Error_PropertyReferenceGetterNoAccess, GetFullPropertyName(manager), dsName), ErrorNumbers.Error_PropertyReferenceGetterNoAccess);
+                        error = new ValidationError(
+                            SR.GetString(
+                                SR.Error_PropertyReferenceGetterNoAccess,
+                                GetFullPropertyName(manager),
+                                dsName
+                            ),
+                            ErrorNumbers.Error_PropertyReferenceGetterNoAccess
+                        );
                         error.PropertyName = GetFullPropertyName(manager);
                     }
-                    else if (dataSourceActivity != activityContext && !propertyInfo.GetGetMethod().IsAssembly && !propertyInfo.GetGetMethod().IsPublic)
+                    else if (
+                        dataSourceActivity != activityContext
+                        && !propertyInfo.GetGetMethod().IsAssembly
+                        && !propertyInfo.GetGetMethod().IsPublic
+                    )
                     {
-                        error = new ValidationError(SR.GetString(SR.Error_PropertyNotAccessible, GetFullPropertyName(manager), dsName), ErrorNumbers.Error_PropertyNotAccessible);
+                        error = new ValidationError(
+                            SR.GetString(
+                                SR.Error_PropertyNotAccessible,
+                                GetFullPropertyName(manager),
+                                dsName
+                            ),
+                            ErrorNumbers.Error_PropertyNotAccessible
+                        );
                         error.PropertyName = GetFullPropertyName(manager);
                     }
                     else if (propertyInfo.PropertyType == null)
                     {
-                        error = new ValidationError(SR.GetString(SR.Error_PropertyTypeNotResolved, GetFullPropertyName(manager), dsName), ErrorNumbers.Error_PropertyTypeNotResolved);
+                        error = new ValidationError(
+                            SR.GetString(
+                                SR.Error_PropertyTypeNotResolved,
+                                GetFullPropertyName(manager),
+                                dsName
+                            ),
+                            ErrorNumbers.Error_PropertyTypeNotResolved
+                        );
                         error.PropertyName = GetFullPropertyName(manager);
                     }
                     else
                     {
                         MemberInfo memberInfo = propertyInfo;
-                        if ((bind.Path == null || bind.Path.Length == 0) && (validationContext.TargetType != null && !ActivityBindValidator.DoesTargetTypeMatch(validationContext.TargetType, propertyInfo.PropertyType, validationContext.Access)))
+                        if (
+                            (bind.Path == null || bind.Path.Length == 0)
+                            && (
+                                validationContext.TargetType != null
+                                && !ActivityBindValidator.DoesTargetTypeMatch(
+                                    validationContext.TargetType,
+                                    propertyInfo.PropertyType,
+                                    validationContext.Access
+                                )
+                            )
+                        )
                         {
-                            error = new ValidationError(SR.GetString(SR.Error_PropertyTypeMismatch, GetFullPropertyName(manager), propertyInfo.PropertyType.FullName, validationContext.TargetType.FullName), ErrorNumbers.Error_PropertyTypeMismatch);
+                            error = new ValidationError(
+                                SR.GetString(
+                                    SR.Error_PropertyTypeMismatch,
+                                    GetFullPropertyName(manager),
+                                    propertyInfo.PropertyType.FullName,
+                                    validationContext.TargetType.FullName
+                                ),
+                                ErrorNumbers.Error_PropertyTypeMismatch
+                            );
                             error.PropertyName = GetFullPropertyName(manager);
                         }
                         else if (!string.IsNullOrEmpty(bind.Path))
                         {
-                            memberInfo = MemberBind.GetMemberInfo(propertyInfo.PropertyType, bind.Path);
+                            memberInfo = MemberBind.GetMemberInfo(
+                                propertyInfo.PropertyType,
+                                bind.Path
+                            );
                             if (memberInfo == null)
                             {
-                                error = new ValidationError(SR.GetString(SR.Error_InvalidMemberPath, dsName, bind.Path), ErrorNumbers.Error_InvalidMemberPath);
+                                error = new ValidationError(
+                                    SR.GetString(SR.Error_InvalidMemberPath, dsName, bind.Path),
+                                    ErrorNumbers.Error_InvalidMemberPath
+                                );
                                 error.PropertyName = GetFullPropertyName(manager) + ".Path";
                             }
                             else
                             {
-                                IDisposable localContextScope = (WorkflowCompilationContext.Current == null ? WorkflowCompilationContext.CreateScope(manager) : null);
+                                IDisposable localContextScope = (
+                                    WorkflowCompilationContext.Current == null
+                                        ? WorkflowCompilationContext.CreateScope(manager)
+                                        : null
+                                );
                                 try
                                 {
                                     if (WorkflowCompilationContext.Current.CheckTypes)
                                     {
-                                        error = MemberBind.ValidateTypesInPath(propertyInfo.PropertyType, bind.Path);
+                                        error = MemberBind.ValidateTypesInPath(
+                                            propertyInfo.PropertyType,
+                                            bind.Path
+                                        );
                                         if (error != null)
-                                            error.PropertyName = GetFullPropertyName(manager) + ".Path";
+                                            error.PropertyName =
+                                                GetFullPropertyName(manager) + ".Path";
                                     }
                                 }
                                 finally
@@ -366,10 +608,26 @@ namespace System.Workflow.ComponentModel.Compiler
 
                                 if (error == null)
                                 {
-                                    Type memberType = (memberInfo is FieldInfo ? (memberInfo as FieldInfo).FieldType : (memberInfo as PropertyInfo).PropertyType);
-                                    if (!ActivityBindValidator.DoesTargetTypeMatch(validationContext.TargetType, memberType, validationContext.Access))
+                                    Type memberType = (
+                                        memberInfo is FieldInfo
+                                            ? (memberInfo as FieldInfo).FieldType
+                                            : (memberInfo as PropertyInfo).PropertyType
+                                    );
+                                    if (
+                                        !ActivityBindValidator.DoesTargetTypeMatch(
+                                            validationContext.TargetType,
+                                            memberType,
+                                            validationContext.Access
+                                        )
+                                    )
                                     {
-                                        error = new ValidationError(SR.GetString(SR.Error_TargetTypeDataSourcePathMismatch, validationContext.TargetType.FullName), ErrorNumbers.Error_TargetTypeDataSourcePathMismatch);
+                                        error = new ValidationError(
+                                            SR.GetString(
+                                                SR.Error_TargetTypeDataSourcePathMismatch,
+                                                validationContext.TargetType.FullName
+                                            ),
+                                            ErrorNumbers.Error_TargetTypeDataSourcePathMismatch
+                                        );
                                         error.PropertyName = GetFullPropertyName(manager) + ".Path";
                                     }
                                 }
@@ -380,24 +638,53 @@ namespace System.Workflow.ComponentModel.Compiler
                             if (memberInfo is PropertyInfo)
                             {
                                 PropertyInfo pathPropertyInfo = memberInfo as PropertyInfo;
-                                if (!pathPropertyInfo.CanRead && ((validationContext.Access & AccessTypes.Read) != 0))
+                                if (
+                                    !pathPropertyInfo.CanRead
+                                    && ((validationContext.Access & AccessTypes.Read) != 0)
+                                )
                                 {
-                                    error = new ValidationError(SR.GetString(SR.Error_PropertyNoGetter, pathPropertyInfo.Name, bind.Path), ErrorNumbers.Error_PropertyNoGetter);
+                                    error = new ValidationError(
+                                        SR.GetString(
+                                            SR.Error_PropertyNoGetter,
+                                            pathPropertyInfo.Name,
+                                            bind.Path
+                                        ),
+                                        ErrorNumbers.Error_PropertyNoGetter
+                                    );
                                     error.PropertyName = GetFullPropertyName(manager) + ".Path";
                                 }
-                                else if (!pathPropertyInfo.CanWrite && ((validationContext.Access & AccessTypes.Write) != 0))
+                                else if (
+                                    !pathPropertyInfo.CanWrite
+                                    && ((validationContext.Access & AccessTypes.Write) != 0)
+                                )
                                 {
-                                    error = new ValidationError(SR.GetString(SR.Error_PropertyNoSetter, pathPropertyInfo.Name, bind.Path), ErrorNumbers.Error_PropertyNoSetter);
+                                    error = new ValidationError(
+                                        SR.GetString(
+                                            SR.Error_PropertyNoSetter,
+                                            pathPropertyInfo.Name,
+                                            bind.Path
+                                        ),
+                                        ErrorNumbers.Error_PropertyNoSetter
+                                    );
                                     error.PropertyName = GetFullPropertyName(manager) + ".Path";
                                 }
                             }
                             else if (memberInfo is FieldInfo)
                             {
                                 FieldInfo pathFieldInfo = memberInfo as FieldInfo;
-                                if (((pathFieldInfo.Attributes & (FieldAttributes.InitOnly | FieldAttributes.Literal)) != 0) &&
-                                    ((validationContext.Access & AccessTypes.Write) != 0))
+                                if (
+                                    (
+                                        (
+                                            pathFieldInfo.Attributes
+                                            & (FieldAttributes.InitOnly | FieldAttributes.Literal)
+                                        ) != 0
+                                    ) && ((validationContext.Access & AccessTypes.Write) != 0)
+                                )
                                 {
-                                    error = new ValidationError(SR.GetString(SR.Error_ReadOnlyField, pathFieldInfo.Name), ErrorNumbers.Error_ReadOnlyField);
+                                    error = new ValidationError(
+                                        SR.GetString(SR.Error_ReadOnlyField, pathFieldInfo.Name),
+                                        ErrorNumbers.Error_ReadOnlyField
+                                    );
                                     error.PropertyName = GetFullPropertyName(manager) + ".Path";
                                 }
                             }
@@ -423,31 +710,49 @@ namespace System.Workflow.ComponentModel.Compiler
 
             MethodBind bind = obj as MethodBind;
             if (bind == null)
-                throw new ArgumentException(SR.GetString(SR.Error_UnexpectedArgumentType, typeof(MethodBind).FullName), "obj");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_UnexpectedArgumentType, typeof(MethodBind).FullName),
+                    "obj"
+                );
 
-            PropertyValidationContext validationContext = manager.Context[typeof(PropertyValidationContext)] as PropertyValidationContext;
+            PropertyValidationContext validationContext =
+                manager.Context[typeof(PropertyValidationContext)] as PropertyValidationContext;
             if (validationContext == null)
-                throw new InvalidOperationException(SR.GetString(SR.Error_ContextStackItemMissing, typeof(BindValidationContext).Name));
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        SR.Error_ContextStackItemMissing,
+                        typeof(BindValidationContext).Name
+                    )
+                );
 
             Activity activity = manager.Context[typeof(Activity)] as Activity;
             if (activity == null)
-                throw new InvalidOperationException(SR.GetString(SR.Error_ContextStackItemMissing, typeof(Activity).Name));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_ContextStackItemMissing, typeof(Activity).Name)
+                );
 
             ValidationError error = null;
             if (string.IsNullOrEmpty(bind.Name))
             {
-                error = new ValidationError(SR.GetString(SR.Error_PropertyNotSet, "Name"), ErrorNumbers.Error_PropertyNotSet);
+                error = new ValidationError(
+                    SR.GetString(SR.Error_PropertyNotSet, "Name"),
+                    ErrorNumbers.Error_PropertyNotSet
+                );
                 error.PropertyName = GetFullPropertyName(manager) + ".Name";
             }
             else
             {
-                BindValidationContext validationBindContext = manager.Context[typeof(BindValidationContext)] as BindValidationContext;
+                BindValidationContext validationBindContext =
+                    manager.Context[typeof(BindValidationContext)] as BindValidationContext;
                 if (validationBindContext == null)
                 {
                     Type baseType = BindHelpers.GetBaseType(manager, validationContext);
                     if (baseType != null)
                     {
-                        AccessTypes accessType = BindHelpers.GetAccessType(manager, validationContext);
+                        AccessTypes accessType = BindHelpers.GetAccessType(
+                            manager,
+                            validationContext
+                        );
                         validationBindContext = new BindValidationContext(baseType, accessType);
                     }
                     //else
@@ -460,7 +765,14 @@ namespace System.Workflow.ComponentModel.Compiler
                 {
                     Type targetType = validationBindContext.TargetType;
                     if (error == null)
-                        validationErrors.AddRange(this.ValidateMethod(manager, activity, bind, new BindValidationContext(targetType, validationBindContext.Access)));
+                        validationErrors.AddRange(
+                            this.ValidateMethod(
+                                manager,
+                                activity,
+                                bind,
+                                new BindValidationContext(targetType, validationBindContext.Access)
+                            )
+                        );
                 }
             }
             if (error != null)
@@ -469,12 +781,20 @@ namespace System.Workflow.ComponentModel.Compiler
             return validationErrors;
         }
 
-        private ValidationErrorCollection ValidateMethod(ValidationManager manager, Activity activity, MethodBind bind, BindValidationContext validationBindContext)
+        private ValidationErrorCollection ValidateMethod(
+            ValidationManager manager,
+            Activity activity,
+            MethodBind bind,
+            BindValidationContext validationBindContext
+        )
         {
             ValidationErrorCollection validationErrors = new ValidationErrorCollection();
             if ((validationBindContext.Access & AccessTypes.Write) != 0)
             {
-                ValidationError error = new ValidationError(SR.GetString(SR.Error_HandlerReadOnly), ErrorNumbers.Error_HandlerReadOnly);
+                ValidationError error = new ValidationError(
+                    SR.GetString(SR.Error_HandlerReadOnly),
+                    ErrorNumbers.Error_HandlerReadOnly
+                );
                 error.PropertyName = GetFullPropertyName(manager);
                 validationErrors.Add(error);
             }
@@ -482,7 +802,13 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 if (!TypeProvider.IsAssignable(typeof(Delegate), validationBindContext.TargetType))
                 {
-                    ValidationError error = new ValidationError(SR.GetString(SR.Error_TypeNotDelegate, validationBindContext.TargetType.FullName), ErrorNumbers.Error_TypeNotDelegate);
+                    ValidationError error = new ValidationError(
+                        SR.GetString(
+                            SR.Error_TypeNotDelegate,
+                            validationBindContext.TargetType.FullName
+                        ),
+                        ErrorNumbers.Error_TypeNotDelegate
+                    );
                     error.PropertyName = GetFullPropertyName(manager);
                     validationErrors.Add(error);
                 }
@@ -492,11 +818,18 @@ namespace System.Workflow.ComponentModel.Compiler
                     Activity activityContext = Helpers.GetEnclosingActivity(activity);
                     Activity dataSourceActivity = activityContext;
                     if (dsName.IndexOf('.') != -1 && dataSourceActivity != null)
-                        dataSourceActivity = Helpers.GetDataSourceActivity(activity, bind.Name, out dsName);
+                        dataSourceActivity = Helpers.GetDataSourceActivity(
+                            activity,
+                            bind.Name,
+                            out dsName
+                        );
 
                     if (dataSourceActivity == null)
                     {
-                        ValidationError error = new ValidationError(SR.GetString(SR.Error_NoEnclosingContext, activity.Name), ErrorNumbers.Error_NoEnclosingContext);
+                        ValidationError error = new ValidationError(
+                            SR.GetString(SR.Error_NoEnclosingContext, activity.Name),
+                            ErrorNumbers.Error_NoEnclosingContext
+                        );
                         error.PropertyName = GetFullPropertyName(manager) + ".Name";
                         validationErrors.Add(error);
                     }
@@ -504,10 +837,16 @@ namespace System.Workflow.ComponentModel.Compiler
                     {
                         string message = string.Empty;
                         int errorNumber = -1;
-                        System.Type resolvedType = Helpers.GetDataSourceClass(dataSourceActivity, manager);
+                        System.Type resolvedType = Helpers.GetDataSourceClass(
+                            dataSourceActivity,
+                            manager
+                        );
                         if (resolvedType == null)
                         {
-                            message = SR.GetString(SR.Error_TypeNotResolvedInMethodName, GetFullPropertyName(manager) + ".Name");
+                            message = SR.GetString(
+                                SR.Error_TypeNotResolvedInMethodName,
+                                GetFullPropertyName(manager) + ".Name"
+                            );
                             errorNumber = ErrorNumbers.Error_TypeNotResolvedInMethodName;
                         }
                         else
@@ -518,42 +857,79 @@ namespace System.Workflow.ComponentModel.Compiler
                             }
                             catch (Exception e)
                             {
-                                validationErrors.Add(new ValidationError(e.Message, ErrorNumbers.Error_InvalidIdentifier));
+                                validationErrors.Add(
+                                    new ValidationError(
+                                        e.Message,
+                                        ErrorNumbers.Error_InvalidIdentifier
+                                    )
+                                );
                             }
 
                             // get the invoke method
-                            MethodInfo invokeMethod = validationBindContext.TargetType.GetMethod("Invoke");
+                            MethodInfo invokeMethod = validationBindContext.TargetType.GetMethod(
+                                "Invoke"
+                            );
                             if (invokeMethod == null)
-                                throw new Exception(SR.GetString(SR.Error_DelegateNoInvoke, validationBindContext.TargetType.FullName));
+                                throw new Exception(
+                                    SR.GetString(
+                                        SR.Error_DelegateNoInvoke,
+                                        validationBindContext.TargetType.FullName
+                                    )
+                                );
 
                             // resolve the method
                             List<Type> paramTypes = new List<Type>();
                             foreach (ParameterInfo paramInfo in invokeMethod.GetParameters())
                                 paramTypes.Add(paramInfo.ParameterType);
 
-                            MethodInfo methodInfo = Helpers.GetMethodExactMatch(resolvedType, dsName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.FlattenHierarchy, null, paramTypes.ToArray(), null);
+                            MethodInfo methodInfo = Helpers.GetMethodExactMatch(
+                                resolvedType,
+                                dsName,
+                                BindingFlags.Public
+                                    | BindingFlags.Instance
+                                    | BindingFlags.Static
+                                    | BindingFlags.FlattenHierarchy,
+                                null,
+                                paramTypes.ToArray(),
+                                null
+                            );
                             if (methodInfo == null)
                             {
-                                if (resolvedType.GetMethod(dsName, BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.FlattenHierarchy) != null)
+                                if (
+                                    resolvedType.GetMethod(
+                                        dsName,
+                                        BindingFlags.Public
+                                            | BindingFlags.Instance
+                                            | BindingFlags.Static
+                                            | BindingFlags.FlattenHierarchy
+                                    ) != null
+                                )
                                 {
-                                    message = SR.GetString(SR.Error_MethodSignatureMismatch, GetFullPropertyName(manager) + ".Name");
+                                    message = SR.GetString(
+                                        SR.Error_MethodSignatureMismatch,
+                                        GetFullPropertyName(manager) + ".Name"
+                                    );
                                     errorNumber = ErrorNumbers.Error_MethodSignatureMismatch;
                                 }
                                 else
                                 {
-                                    message = SR.GetString(SR.Error_MethodNotExists, GetFullPropertyName(manager) + ".Name", bind.Name);
+                                    message = SR.GetString(
+                                        SR.Error_MethodNotExists,
+                                        GetFullPropertyName(manager) + ".Name",
+                                        bind.Name
+                                    );
                                     errorNumber = ErrorNumbers.Error_MethodNotExists;
                                 }
                             }
-                            // 
-
-
-
-
+                            //
 
                             else if (!invokeMethod.ReturnType.Equals(methodInfo.ReturnType))
                             {
-                                message = SR.GetString(SR.Error_MethodReturnTypeMismatch, GetFullPropertyName(manager), invokeMethod.ReturnType.FullName);
+                                message = SR.GetString(
+                                    SR.Error_MethodReturnTypeMismatch,
+                                    GetFullPropertyName(manager),
+                                    invokeMethod.ReturnType.FullName
+                                );
                                 errorNumber = ErrorNumbers.Error_MethodReturnTypeMismatch;
                             }
                         }
@@ -568,7 +944,6 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             return validationErrors;
         }
-
     }
 
     #endregion
@@ -576,27 +951,45 @@ namespace System.Workflow.ComponentModel.Compiler
     #region Class ActivityBindValidator
     internal sealed class ActivityBindValidator : Validator
     {
-        [SuppressMessage("Microsoft.Globalization", "CA1307:SpecifyStringComparison", Justification = "There is no security issue since this is a design time class")]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1307:SpecifyStringComparison",
+            Justification = "There is no security issue since this is a design time class"
+        )]
         public override ValidationErrorCollection Validate(ValidationManager manager, object obj)
         {
             ValidationErrorCollection validationErrors = base.Validate(manager, obj);
 
             ActivityBind bind = obj as ActivityBind;
             if (bind == null)
-                throw new ArgumentException(SR.GetString(SR.Error_UnexpectedArgumentType, typeof(ActivityBind).FullName), "obj");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_UnexpectedArgumentType, typeof(ActivityBind).FullName),
+                    "obj"
+                );
 
             Activity activity = manager.Context[typeof(Activity)] as Activity;
             if (activity == null)
-                throw new InvalidOperationException(SR.GetString(SR.Error_ContextStackItemMissing, typeof(Activity).Name));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_ContextStackItemMissing, typeof(Activity).Name)
+                );
 
-            PropertyValidationContext validationContext = manager.Context[typeof(PropertyValidationContext)] as PropertyValidationContext;
+            PropertyValidationContext validationContext =
+                manager.Context[typeof(PropertyValidationContext)] as PropertyValidationContext;
             if (validationContext == null)
-                throw new InvalidOperationException(SR.GetString(SR.Error_ContextStackItemMissing, typeof(BindValidationContext).Name));
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        SR.Error_ContextStackItemMissing,
+                        typeof(BindValidationContext).Name
+                    )
+                );
 
             ValidationError error = null;
             if (string.IsNullOrEmpty(bind.Name))
             {
-                error = new ValidationError(SR.GetString(SR.Error_IDNotSetForActivitySource), ErrorNumbers.Error_IDNotSetForActivitySource);
+                error = new ValidationError(
+                    SR.GetString(SR.Error_IDNotSetForActivitySource),
+                    ErrorNumbers.Error_IDNotSetForActivitySource
+                );
                 error.PropertyName = GetFullPropertyName(manager) + ".Name";
                 validationErrors.Add(error);
             }
@@ -606,16 +999,25 @@ namespace System.Workflow.ComponentModel.Compiler
                 if (refActivity == null)
                 {
                     if (bind.Name.StartsWith("/"))
-                        error = new ValidationError(SR.GetString(SR.Error_CannotResolveRelativeActivity, bind.Name), ErrorNumbers.Error_CannotResolveRelativeActivity);
+                        error = new ValidationError(
+                            SR.GetString(SR.Error_CannotResolveRelativeActivity, bind.Name),
+                            ErrorNumbers.Error_CannotResolveRelativeActivity
+                        );
                     else
-                        error = new ValidationError(SR.GetString(SR.Error_CannotResolveActivity, bind.Name), ErrorNumbers.Error_CannotResolveActivity);
+                        error = new ValidationError(
+                            SR.GetString(SR.Error_CannotResolveActivity, bind.Name),
+                            ErrorNumbers.Error_CannotResolveActivity
+                        );
                     error.PropertyName = GetFullPropertyName(manager) + ".Name";
                     validationErrors.Add(error);
                 }
 
                 if (String.IsNullOrEmpty(bind.Path))
                 {
-                    error = new ValidationError(SR.GetString(SR.Error_PathNotSetForActivitySource), ErrorNumbers.Error_PathNotSetForActivitySource);
+                    error = new ValidationError(
+                        SR.GetString(SR.Error_PathNotSetForActivitySource),
+                        ErrorNumbers.Error_PathNotSetForActivitySource
+                    );
                     error.PropertyName = GetFullPropertyName(manager) + ".Path";
                     validationErrors.Add(error);
                 }
@@ -647,14 +1049,23 @@ namespace System.Workflow.ComponentModel.Compiler
                             memberInfo = MemberBind.GetMemberInfo(declaringType, memberName);
 
                             //it could be an indexer property that requires [..] part to get correctly resolved
-                            if (memberInfo == null && path.StartsWith("[", StringComparison.Ordinal))
+                            if (
+                                memberInfo == null
+                                && path.StartsWith("[", StringComparison.Ordinal)
+                            )
                             {
                                 string indexerPart = bind.Path.Substring(indexOfSeparator);
                                 int closingBracketIndex = indexerPart.IndexOf(']');
                                 if (closingBracketIndex != -1)
                                 {
-                                    string firstIndexerPart = indexerPart.Substring(0, closingBracketIndex + 1); //strip potential long path like Item[0].Foo
-                                    path = (closingBracketIndex + 1 < indexerPart.Length) ? indexerPart.Substring(closingBracketIndex + 1) : string.Empty;
+                                    string firstIndexerPart = indexerPart.Substring(
+                                        0,
+                                        closingBracketIndex + 1
+                                    ); //strip potential long path like Item[0].Foo
+                                    path =
+                                        (closingBracketIndex + 1 < indexerPart.Length)
+                                            ? indexerPart.Substring(closingBracketIndex + 1)
+                                            : string.Empty;
                                     path = path.StartsWith(".") ? path.Substring(1) : path;
                                     indexerPart = firstIndexerPart;
                                 }
@@ -668,7 +1079,10 @@ namespace System.Workflow.ComponentModel.Compiler
                     object actualBind = null; //now there are two different class hierarchies - ActivityBind is not related to the BindBase/MemberBind
                     if (memberInfo != null)
                     {
-                        string qualifier = (!String.IsNullOrEmpty(refActivity.QualifiedName)) ? refActivity.QualifiedName : bind.Name;
+                        string qualifier =
+                            (!String.IsNullOrEmpty(refActivity.QualifiedName))
+                                ? refActivity.QualifiedName
+                                : bind.Name;
 
                         if (memberInfo is FieldInfo)
                         {
@@ -684,7 +1098,14 @@ namespace System.Workflow.ComponentModel.Compiler
                             }
                             else
                             {
-                                error = new ValidationError(SR.GetString(SR.Error_InvalidMemberType, memberName, GetFullPropertyName(manager)), ErrorNumbers.Error_InvalidMemberType);
+                                error = new ValidationError(
+                                    SR.GetString(
+                                        SR.Error_InvalidMemberType,
+                                        memberName,
+                                        GetFullPropertyName(manager)
+                                    ),
+                                    ErrorNumbers.Error_InvalidMemberType
+                                );
                                 error.PropertyName = GetFullPropertyName(manager);
                                 validationErrors.Add(error);
                             }
@@ -709,7 +1130,11 @@ namespace System.Workflow.ComponentModel.Compiler
                             validator = this;
                         }
                     }
-                    else if (memberInfo == null && baseType != null && typeof(Delegate).IsAssignableFrom(baseType))
+                    else if (
+                        memberInfo == null
+                        && baseType != null
+                        && typeof(Delegate).IsAssignableFrom(baseType)
+                    )
                     {
                         actualBind = bind;
                         validator = this;
@@ -724,7 +1149,16 @@ namespace System.Workflow.ComponentModel.Compiler
                     }
                     else if (error == null)
                     {
-                        error = new ValidationError(SR.GetString(SR.Error_PathCouldNotBeResolvedToMember, bind.Path, (!string.IsNullOrEmpty(refActivity.QualifiedName)) ? refActivity.QualifiedName : refActivity.GetType().Name), ErrorNumbers.Error_PathCouldNotBeResolvedToMember);
+                        error = new ValidationError(
+                            SR.GetString(
+                                SR.Error_PathCouldNotBeResolvedToMember,
+                                bind.Path,
+                                (!string.IsNullOrEmpty(refActivity.QualifiedName))
+                                    ? refActivity.QualifiedName
+                                    : refActivity.GetType().Name
+                            ),
+                            ErrorNumbers.Error_PathCouldNotBeResolvedToMember
+                        );
                         error.PropertyName = GetFullPropertyName(manager);
                         validationErrors.Add(error);
                     }
@@ -746,24 +1180,36 @@ namespace System.Workflow.ComponentModel.Compiler
                 return false;
         }
 
-        private ValidationErrorCollection ValidateActivityBind(ValidationManager manager, object obj)
+        private ValidationErrorCollection ValidateActivityBind(
+            ValidationManager manager,
+            object obj
+        )
         {
             ValidationErrorCollection validationErrors = base.Validate(manager, obj);
 
             ActivityBind bind = obj as ActivityBind;
 
-            PropertyValidationContext validationContext = manager.Context[typeof(PropertyValidationContext)] as PropertyValidationContext;
+            PropertyValidationContext validationContext =
+                manager.Context[typeof(PropertyValidationContext)] as PropertyValidationContext;
             if (validationContext == null)
-                throw new InvalidOperationException(SR.GetString(SR.Error_ContextStackItemMissing, typeof(BindValidationContext).Name));
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        SR.Error_ContextStackItemMissing,
+                        typeof(BindValidationContext).Name
+                    )
+                );
 
             Activity activity = manager.Context[typeof(Activity)] as Activity;
             if (activity == null)
-                throw new InvalidOperationException(SR.GetString(SR.Error_ContextStackItemMissing, typeof(Activity).Name));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_ContextStackItemMissing, typeof(Activity).Name)
+                );
 
             ValidationError error = null;
 
             //Redirect from here to FieldBind/MethodBind by creating their instances
-            BindValidationContext validationBindContext = manager.Context[typeof(BindValidationContext)] as BindValidationContext;
+            BindValidationContext validationBindContext =
+                manager.Context[typeof(BindValidationContext)] as BindValidationContext;
             if (validationBindContext == null)
             {
                 Type baseType = BindHelpers.GetBaseType(manager, validationContext);
@@ -782,7 +1228,13 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 Type targetType = validationBindContext.TargetType;
                 if (error == null)
-                    validationErrors.AddRange(this.ValidateActivity(manager, bind, new BindValidationContext(targetType, validationBindContext.Access)));
+                    validationErrors.AddRange(
+                        this.ValidateActivity(
+                            manager,
+                            bind,
+                            new BindValidationContext(targetType, validationBindContext.Access)
+                        )
+                    );
             }
 
             if (error != null)
@@ -791,46 +1243,83 @@ namespace System.Workflow.ComponentModel.Compiler
             return validationErrors;
         }
 
-        private ValidationErrorCollection ValidateActivity(ValidationManager manager, ActivityBind bind, BindValidationContext validationContext)
+        private ValidationErrorCollection ValidateActivity(
+            ValidationManager manager,
+            ActivityBind bind,
+            BindValidationContext validationContext
+        )
         {
             ValidationError error = null;
             ValidationErrorCollection validationErrors = new ValidationErrorCollection();
 
             Activity activity = manager.Context[typeof(Activity)] as Activity;
             if (activity == null)
-                throw new InvalidOperationException(SR.GetString(SR.Error_ContextStackItemMissing, typeof(Activity).Name));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_ContextStackItemMissing, typeof(Activity).Name)
+                );
 
             Activity refActivity = Helpers.ParseActivityForBind(activity, bind.Name);
             if (refActivity == null)
             {
-                error = (bind.Name.StartsWith("/", StringComparison.Ordinal)) ? new ValidationError(SR.GetString(SR.Error_CannotResolveRelativeActivity, bind.Name), ErrorNumbers.Error_CannotResolveRelativeActivity) : new ValidationError(SR.GetString(SR.Error_CannotResolveActivity, bind.Name), ErrorNumbers.Error_CannotResolveActivity);
+                error =
+                    (bind.Name.StartsWith("/", StringComparison.Ordinal))
+                        ? new ValidationError(
+                            SR.GetString(SR.Error_CannotResolveRelativeActivity, bind.Name),
+                            ErrorNumbers.Error_CannotResolveRelativeActivity
+                        )
+                        : new ValidationError(
+                            SR.GetString(SR.Error_CannotResolveActivity, bind.Name),
+                            ErrorNumbers.Error_CannotResolveActivity
+                        );
                 error.PropertyName = GetFullPropertyName(manager) + ".Name";
             }
             else if (bind.Path == null || bind.Path.Length == 0)
             {
-                error = new ValidationError(SR.GetString(SR.Error_PathNotSetForActivitySource), ErrorNumbers.Error_PathNotSetForActivitySource);
+                error = new ValidationError(
+                    SR.GetString(SR.Error_PathNotSetForActivitySource),
+                    ErrorNumbers.Error_PathNotSetForActivitySource
+                );
                 error.PropertyName = GetFullPropertyName(manager) + ".Path";
             }
             else
             {
-                // 
+                //
 
-                if (!bind.Name.StartsWith("/", StringComparison.Ordinal) && !ValidationHelpers.IsActivitySourceInOrder(refActivity, activity))
+                if (
+                    !bind.Name.StartsWith("/", StringComparison.Ordinal)
+                    && !ValidationHelpers.IsActivitySourceInOrder(refActivity, activity)
+                )
                 {
-                    error = new ValidationError(SR.GetString(SR.Error_BindActivityReference, refActivity.QualifiedName, activity.QualifiedName), ErrorNumbers.Error_BindActivityReference, true);
+                    error = new ValidationError(
+                        SR.GetString(
+                            SR.Error_BindActivityReference,
+                            refActivity.QualifiedName,
+                            activity.QualifiedName
+                        ),
+                        ErrorNumbers.Error_BindActivityReference,
+                        true
+                    );
                     error.PropertyName = GetFullPropertyName(manager) + ".Name";
                 }
 
-                IDesignerHost designerHost = manager.GetService(typeof(IDesignerHost)) as IDesignerHost;
-                WorkflowDesignerLoader loader = manager.GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
+                IDesignerHost designerHost =
+                    manager.GetService(typeof(IDesignerHost)) as IDesignerHost;
+                WorkflowDesignerLoader loader =
+                    manager.GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
                 if (designerHost != null && loader != null)
                 {
                     Type refActivityType = null;
                     if (designerHost.RootComponent == refActivity)
                     {
-                        ITypeProvider typeProvider = manager.GetService(typeof(ITypeProvider)) as ITypeProvider;
+                        ITypeProvider typeProvider =
+                            manager.GetService(typeof(ITypeProvider)) as ITypeProvider;
                         if (typeProvider == null)
-                            throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(ITypeProvider).FullName));
+                            throw new InvalidOperationException(
+                                SR.GetString(
+                                    SR.General_MissingService,
+                                    typeof(ITypeProvider).FullName
+                                )
+                            );
 
                         refActivityType = typeProvider.GetType(designerHost.RootComponentClassName);
                     }
@@ -841,10 +1330,23 @@ namespace System.Workflow.ComponentModel.Compiler
 
                     if (refActivityType != null)
                     {
-                        MemberInfo memberInfo = MemberBind.GetMemberInfo(refActivityType, bind.Path);
-                        if (memberInfo == null || (memberInfo is PropertyInfo && !(memberInfo as PropertyInfo).CanRead))
+                        MemberInfo memberInfo = MemberBind.GetMemberInfo(
+                            refActivityType,
+                            bind.Path
+                        );
+                        if (
+                            memberInfo == null
+                            || (memberInfo is PropertyInfo && !(memberInfo as PropertyInfo).CanRead)
+                        )
                         {
-                            error = new ValidationError(SR.GetString(SR.Error_InvalidMemberPath, refActivity.QualifiedName, bind.Path), ErrorNumbers.Error_InvalidMemberPath);
+                            error = new ValidationError(
+                                SR.GetString(
+                                    SR.Error_InvalidMemberPath,
+                                    refActivity.QualifiedName,
+                                    bind.Path
+                                ),
+                                ErrorNumbers.Error_InvalidMemberPath
+                            );
                             error.PropertyName = GetFullPropertyName(manager) + ".Path";
                         }
                         else
@@ -857,16 +1359,43 @@ namespace System.Workflow.ComponentModel.Compiler
                             else if (memberInfo is EventInfo)
                                 memberType = ((EventInfo)(memberInfo)).EventHandlerType;
 
-                            if (!DoesTargetTypeMatch(validationContext.TargetType, memberType, validationContext.Access))
+                            if (
+                                !DoesTargetTypeMatch(
+                                    validationContext.TargetType,
+                                    memberType,
+                                    validationContext.Access
+                                )
+                            )
                             {
-                                if (typeof(WorkflowParameterBinding).IsAssignableFrom(memberInfo.DeclaringType))
+                                if (
+                                    typeof(WorkflowParameterBinding).IsAssignableFrom(
+                                        memberInfo.DeclaringType
+                                    )
+                                )
                                 {
-                                    error = new ValidationError(SR.GetString(SR.Warning_ParameterBinding, bind.Path, refActivity.QualifiedName, validationContext.TargetType.FullName), ErrorNumbers.Warning_ParameterBinding, true);
+                                    error = new ValidationError(
+                                        SR.GetString(
+                                            SR.Warning_ParameterBinding,
+                                            bind.Path,
+                                            refActivity.QualifiedName,
+                                            validationContext.TargetType.FullName
+                                        ),
+                                        ErrorNumbers.Warning_ParameterBinding,
+                                        true
+                                    );
                                     error.PropertyName = GetFullPropertyName(manager) + ".Path";
                                 }
                                 else
                                 {
-                                    error = new ValidationError(SR.GetString(SR.Error_TargetTypeMismatch, memberInfo.Name, memberType.FullName, validationContext.TargetType.FullName), ErrorNumbers.Error_TargetTypeMismatch);
+                                    error = new ValidationError(
+                                        SR.GetString(
+                                            SR.Error_TargetTypeMismatch,
+                                            memberInfo.Name,
+                                            memberType.FullName,
+                                            validationContext.TargetType.FullName
+                                        ),
+                                        ErrorNumbers.Error_TargetTypeMismatch
+                                    );
                                     error.PropertyName = GetFullPropertyName(manager) + ".Path";
                                 }
                             }
@@ -875,15 +1404,31 @@ namespace System.Workflow.ComponentModel.Compiler
                 }
                 else
                 {
-                    MemberInfo memberInfo = MemberBind.GetMemberInfo(refActivity.GetType(), bind.Path);
-                    if (memberInfo == null || (memberInfo is PropertyInfo && !(memberInfo as PropertyInfo).CanRead))
+                    MemberInfo memberInfo = MemberBind.GetMemberInfo(
+                        refActivity.GetType(),
+                        bind.Path
+                    );
+                    if (
+                        memberInfo == null
+                        || (memberInfo is PropertyInfo && !(memberInfo as PropertyInfo).CanRead)
+                    )
                     {
-                        error = new ValidationError(SR.GetString(SR.Error_InvalidMemberPath, refActivity.QualifiedName, bind.Path), ErrorNumbers.Error_InvalidMemberPath);
+                        error = new ValidationError(
+                            SR.GetString(
+                                SR.Error_InvalidMemberPath,
+                                refActivity.QualifiedName,
+                                bind.Path
+                            ),
+                            ErrorNumbers.Error_InvalidMemberPath
+                        );
                         error.PropertyName = GetFullPropertyName(manager) + ".Path";
                     }
                     else
                     {
-                        DependencyProperty dependencyProperty = DependencyProperty.FromName(memberInfo.Name, memberInfo.DeclaringType);
+                        DependencyProperty dependencyProperty = DependencyProperty.FromName(
+                            memberInfo.Name,
+                            memberInfo.DeclaringType
+                        );
                         object value = BindHelpers.ResolveActivityPath(refActivity, bind.Path);
                         if (value == null)
                         {
@@ -895,16 +1440,44 @@ namespace System.Workflow.ComponentModel.Compiler
                             else if (memberInfo is EventInfo)
                                 memberType = ((EventInfo)(memberInfo)).EventHandlerType;
 
-                            if (!TypeProvider.IsAssignable(typeof(ActivityBind), memberType) && !DoesTargetTypeMatch(validationContext.TargetType, memberType, validationContext.Access))
+                            if (
+                                !TypeProvider.IsAssignable(typeof(ActivityBind), memberType)
+                                && !DoesTargetTypeMatch(
+                                    validationContext.TargetType,
+                                    memberType,
+                                    validationContext.Access
+                                )
+                            )
                             {
-                                if (typeof(WorkflowParameterBinding).IsAssignableFrom(memberInfo.DeclaringType))
+                                if (
+                                    typeof(WorkflowParameterBinding).IsAssignableFrom(
+                                        memberInfo.DeclaringType
+                                    )
+                                )
                                 {
-                                    error = new ValidationError(SR.GetString(SR.Warning_ParameterBinding, bind.Path, refActivity.QualifiedName, validationContext.TargetType.FullName), ErrorNumbers.Warning_ParameterBinding, true);
+                                    error = new ValidationError(
+                                        SR.GetString(
+                                            SR.Warning_ParameterBinding,
+                                            bind.Path,
+                                            refActivity.QualifiedName,
+                                            validationContext.TargetType.FullName
+                                        ),
+                                        ErrorNumbers.Warning_ParameterBinding,
+                                        true
+                                    );
                                     error.PropertyName = GetFullPropertyName(manager) + ".Path";
                                 }
                                 else
                                 {
-                                    error = new ValidationError(SR.GetString(SR.Error_TargetTypeMismatch, memberInfo.Name, memberType.FullName, validationContext.TargetType.FullName), ErrorNumbers.Error_TargetTypeMismatch);
+                                    error = new ValidationError(
+                                        SR.GetString(
+                                            SR.Error_TargetTypeMismatch,
+                                            memberInfo.Name,
+                                            memberType.FullName,
+                                            validationContext.TargetType.FullName
+                                        ),
+                                        ErrorNumbers.Error_TargetTypeMismatch
+                                    );
                                     error.PropertyName = GetFullPropertyName(manager) + ".Path";
                                 }
                             }
@@ -917,7 +1490,9 @@ namespace System.Workflow.ComponentModel.Compiler
                             bool bindRecursionContextAdded = false;
 
                             // Check for recursion
-                            BindRecursionContext recursionContext = manager.Context[typeof(BindRecursionContext)] as BindRecursionContext;
+                            BindRecursionContext recursionContext =
+                                manager.Context[typeof(BindRecursionContext)]
+                                as BindRecursionContext;
                             if (recursionContext == null)
                             {
                                 recursionContext = new BindRecursionContext();
@@ -926,7 +1501,10 @@ namespace System.Workflow.ComponentModel.Compiler
                             }
                             if (recursionContext.Contains(activity, bind))
                             {
-                                error = new ValidationError(SR.GetString(SR.Bind_ActivityDataSourceRecursionDetected), ErrorNumbers.Bind_ActivityDataSourceRecursionDetected);
+                                error = new ValidationError(
+                                    SR.GetString(SR.Bind_ActivityDataSourceRecursionDetected),
+                                    ErrorNumbers.Bind_ActivityDataSourceRecursionDetected
+                                );
                                 error.PropertyName = GetFullPropertyName(manager) + ".Path";
                             }
                             else
@@ -935,19 +1513,49 @@ namespace System.Workflow.ComponentModel.Compiler
 
                                 PropertyValidationContext propertyValidationContext = null;
                                 if (dependencyProperty != null)
-                                    propertyValidationContext = new PropertyValidationContext(refActivity, dependencyProperty);
+                                    propertyValidationContext = new PropertyValidationContext(
+                                        refActivity,
+                                        dependencyProperty
+                                    );
                                 else
-                                    propertyValidationContext = new PropertyValidationContext(refActivity, memberInfo as PropertyInfo, memberInfo.Name);
+                                    propertyValidationContext = new PropertyValidationContext(
+                                        refActivity,
+                                        memberInfo as PropertyInfo,
+                                        memberInfo.Name
+                                    );
 
-                                validationErrors.AddRange(ValidationHelpers.ValidateProperty(manager, refActivity, referencedBind, propertyValidationContext, validationContext));
+                                validationErrors.AddRange(
+                                    ValidationHelpers.ValidateProperty(
+                                        manager,
+                                        refActivity,
+                                        referencedBind,
+                                        propertyValidationContext,
+                                        validationContext
+                                    )
+                                );
                             }
 
                             if (bindRecursionContextAdded)
                                 manager.Context.Pop();
                         }
-                        else if (validationContext.TargetType != null && !DoesTargetTypeMatch(validationContext.TargetType, value.GetType(), validationContext.Access))
+                        else if (
+                            validationContext.TargetType != null
+                            && !DoesTargetTypeMatch(
+                                validationContext.TargetType,
+                                value.GetType(),
+                                validationContext.Access
+                            )
+                        )
                         {
-                            error = new ValidationError(SR.GetString(SR.Error_TargetTypeMismatch, memberInfo.Name, value.GetType().FullName, validationContext.TargetType.FullName), ErrorNumbers.Error_TargetTypeMismatch);
+                            error = new ValidationError(
+                                SR.GetString(
+                                    SR.Error_TargetTypeMismatch,
+                                    memberInfo.Name,
+                                    value.GetType().FullName,
+                                    validationContext.TargetType.FullName
+                                ),
+                                ErrorNumbers.Error_TargetTypeMismatch
+                            );
                             error.PropertyName = GetFullPropertyName(manager) + ".Path";
                         }
                     }

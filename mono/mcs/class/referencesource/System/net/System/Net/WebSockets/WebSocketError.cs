@@ -17,6 +17,6 @@ namespace System.Net.WebSockets
         UnsupportedProtocol = 6,
         HeaderError = 7,
         ConnectionClosedPrematurely = 8,
-        InvalidState = 9
+        InvalidState = 9,
     }
 }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,23 +30,25 @@
 
 namespace System.Management.Instrumentation
 {
-	[AttributeUsage(AttributeTargets.Class | 
-			AttributeTargets.Struct |
-			AttributeTargets.Method | 
-			AttributeTargets.Property |
-			AttributeTargets.Field)]
-        public class ManagedNameAttribute : Attribute {
-		public ManagedNameAttribute (string name)
-		{
-			_name = name;
-		}
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Method
+            | AttributeTargets.Property
+            | AttributeTargets.Field
+    )]
+    public class ManagedNameAttribute : Attribute
+    {
+        public ManagedNameAttribute(string name)
+        {
+            _name = name;
+        }
 
-		public string Name {
-			get {
-				return _name;
-			}
-		}
+        public string Name
+        {
+            get { return _name; }
+        }
 
-		private string _name;
-	}
+        private string _name;
+    }
 }

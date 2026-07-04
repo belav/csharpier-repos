@@ -16,14 +16,20 @@ namespace System.Reflection.Tests
         [Fact]
         public static void TestBaseClassMembers()
         {
-            VerifyMembers(typeof(TypeInfoMemberBaseClass).Project(), TypeInfoMemberBaseClass.PublicFieldNames);
+            VerifyMembers(
+                typeof(TypeInfoMemberBaseClass).Project(),
+                TypeInfoMemberBaseClass.PublicFieldNames
+            );
         }
 
         // Verify Declared fields for a Derived class
         [Fact]
         public static void TestDerivedClassMembers()
         {
-            VerifyMembers(typeof(TypeInfoMemberSubClass).Project(), TypeInfoMemberSubClass.PublicFieldNames);
+            VerifyMembers(
+                typeof(TypeInfoMemberSubClass).Project(),
+                TypeInfoMemberSubClass.PublicFieldNames
+            );
         }
 
         //private helper methods
@@ -72,8 +78,18 @@ namespace System.Reflection.Tests
     {
         public static int Members = 9;
 
-        public static string[] PublicFieldNames = new string[] { "SubPubfld1", "Pubfld1", "Pubfld2", "Pubfld3", "Pubfld4", "Pubfld5", "Pubfld6",
-                                                                 "Members",  "PublicFieldNames"};
+        public static string[] PublicFieldNames = new string[]
+        {
+            "SubPubfld1",
+            "Pubfld1",
+            "Pubfld2",
+            "Pubfld3",
+            "Pubfld4",
+            "Pubfld5",
+            "Pubfld6",
+            "Members",
+            "PublicFieldNames",
+        };
 
         public string SubPubfld1 = "";
         public string Pubfld1 = "";
@@ -92,8 +108,19 @@ namespace System.Reflection.Tests
 
         public static string[] NewFieldNames = new string[] { "Pubfld1", "Pubfld2", "Pubfld3" };
 
-        public static new string[] PublicFieldNames = new string[] { "Pubfld1", "Pubfld2", "Pubfld3", "Pubfld4", "Pubfld5", "Pubfld6",
-                                                                 "Members", "InheritedFieldNames", "NewFieldNames", "PublicFieldNames"};
+        public static new string[] PublicFieldNames = new string[]
+        {
+            "Pubfld1",
+            "Pubfld2",
+            "Pubfld3",
+            "Pubfld4",
+            "Pubfld5",
+            "Pubfld6",
+            "Members",
+            "InheritedFieldNames",
+            "NewFieldNames",
+            "PublicFieldNames",
+        };
         public new string Pubfld1 = "";
         public new readonly string Pubfld2 = "";
         public new volatile string Pubfld3 = "";

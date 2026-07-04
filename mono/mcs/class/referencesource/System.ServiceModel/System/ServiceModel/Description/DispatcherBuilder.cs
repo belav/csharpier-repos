@@ -25,7 +25,10 @@ namespace System.ServiceModel.Description
             MsmqIntegrationBinding binding = endpoint.Binding as MsmqIntegrationBinding;
             if (null != binding)
             {
-                Type[] types = ProcessDescriptionForMsmqIntegration(endpoint, binding.TargetSerializationTypes);
+                Type[] types = ProcessDescriptionForMsmqIntegration(
+                    endpoint,
+                    binding.TargetSerializationTypes
+                );
                 binding.TargetSerializationTypes = types;
             }
             else
@@ -33,17 +36,24 @@ namespace System.ServiceModel.Description
                 CustomBinding customBinding = endpoint.Binding as CustomBinding;
                 if (null != customBinding)
                 {
-                    MsmqIntegrationBindingElement element = customBinding.Elements.Find<MsmqIntegrationBindingElement>();
+                    MsmqIntegrationBindingElement element =
+                        customBinding.Elements.Find<MsmqIntegrationBindingElement>();
                     if (null != element)
                     {
-                        Type[] types = ProcessDescriptionForMsmqIntegration(endpoint, element.TargetSerializationTypes);
+                        Type[] types = ProcessDescriptionForMsmqIntegration(
+                            endpoint,
+                            element.TargetSerializationTypes
+                        );
                         element.TargetSerializationTypes = types;
                     }
                 }
             }
         }
 
-        static Type[] ProcessDescriptionForMsmqIntegration(ServiceEndpoint endpoint, Type[] existingSerializationTypes)
+        static Type[] ProcessDescriptionForMsmqIntegration(
+            ServiceEndpoint endpoint,
+            Type[] existingSerializationTypes
+        )
         {
             List<Type> targetSerializationTypes;
             if (existingSerializationTypes == null)
@@ -70,24 +80,35 @@ namespace System.ServiceModel.Description
                 // We need to change style for each operation
                 foreach (MessageDescription messageDescription in operationDesc.Messages)
                 {
-                    messageDescription.Body.WrapperName = messageDescription.Body.WrapperNamespace = null;
+                    messageDescription.Body.WrapperName = messageDescription.Body.WrapperNamespace =
+                        null;
                 }
             }
             return targetSerializationTypes.ToArray();
         }
 
-        internal static ClientRuntime BuildProxyBehavior(ServiceEndpoint serviceEndpoint, out BindingParameterCollection parameters)
+        internal static ClientRuntime BuildProxyBehavior(
+            ServiceEndpoint serviceEndpoint,
+            out BindingParameterCollection parameters
+        )
         {
             parameters = new BindingParameterCollection();
-            SecurityContractInformationEndpointBehavior.ClientInstance.AddBindingParameters(serviceEndpoint, parameters);
+            SecurityContractInformationEndpointBehavior.ClientInstance.AddBindingParameters(
+                serviceEndpoint,
+                parameters
+            );
 
             AddBindingParameters(serviceEndpoint, parameters);
 
             ContractDescription contractDescription = serviceEndpoint.Contract;
-            ClientRuntime clientRuntime = new ClientRuntime(contractDescription.Name, contractDescription.Namespace);
+            ClientRuntime clientRuntime = new ClientRuntime(
+                contractDescription.Name,
+                contractDescription.Namespace
+            );
             clientRuntime.ContractClientType = contractDescription.ContractType;
 
-            IdentityVerifier identityVerifier = serviceEndpoint.Binding.GetProperty<IdentityVerifier>(parameters);
+            IdentityVerifier identityVerifier =
+                serviceEndpoint.Binding.GetProperty<IdentityVerifier>(parameters);
             if (identityVerifier != null)
             {
                 clientRuntime.IdentityVerifier = identityVerifier;
@@ -103,7 +124,11 @@ namespace System.ServiceModel.Description
                 }
                 else
                 {
-                    DispatcherBuilder.BuildDispatchOperation(operation, clientRuntime.CallbackDispatchRuntime, null);
+                    DispatcherBuilder.BuildDispatchOperation(
+                        operation,
+                        clientRuntime.CallbackDispatchRuntime,
+                        null
+                    );
                 }
             }
 
@@ -117,15 +142,29 @@ namespace System.ServiceModel.Description
             EndpointDispatcher endpointDispatcher;
             EndpointFilterProvider provider;
 
-            public EndpointInfo(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher, EndpointFilterProvider provider)
+            public EndpointInfo(
+                ServiceEndpoint endpoint,
+                EndpointDispatcher endpointDispatcher,
+                EndpointFilterProvider provider
+            )
             {
                 this.endpoint = endpoint;
                 this.endpointDispatcher = endpointDispatcher;
                 this.provider = provider;
             }
-            public ServiceEndpoint Endpoint { get { return this.endpoint; } }
-            public EndpointFilterProvider FilterProvider { get { return this.provider; } }
-            public EndpointDispatcher EndpointDispatcher { get { return this.endpointDispatcher; } }
+
+            public ServiceEndpoint Endpoint
+            {
+                get { return this.endpoint; }
+            }
+            public EndpointFilterProvider FilterProvider
+            {
+                get { return this.provider; }
+            }
+            public EndpointDispatcher EndpointDispatcher
+            {
+                get { return this.endpointDispatcher; }
+            }
         }
 
         internal class ListenUriInfo
@@ -168,12 +207,21 @@ namespace System.ServiceModel.Description
                 }
 
                 return (this.listenUriMode == other.listenUriMode)
-                    && EndpointAddress.UriEquals(this.listenUri, other.listenUri, true /* ignoreCase */, true /* includeHost */);
+                    && EndpointAddress.UriEquals(
+                        this.listenUri,
+                        other.listenUri,
+                        true /* ignoreCase */
+                        ,
+                        true /* includeHost */
+                    );
             }
 
             public override int GetHashCode()
             {
-                return EndpointAddress.UriGetHashCode(this.listenUri, true /* includeHost */);
+                return EndpointAddress.UriGetHashCode(
+                    this.listenUri,
+                    true /* includeHost */
+                );
             }
         }
 
@@ -187,14 +235,32 @@ namespace System.ServiceModel.Description
         void ValidateDescription(ServiceDescription description, ServiceHostBase serviceHost)
         {
             description.EnsureInvariants();
-            (PartialTrustValidationBehavior.Instance as IServiceBehavior).Validate(description, serviceHost);
+            (PartialTrustValidationBehavior.Instance as IServiceBehavior).Validate(
+                description,
+                serviceHost
+            );
 #pragma warning disable 0618
-            (PeerValidationBehavior.Instance as IServiceBehavior).Validate(description, serviceHost);
+            (PeerValidationBehavior.Instance as IServiceBehavior).Validate(
+                description,
+                serviceHost
+            );
 #pragma warning restore 0618
-            (TransactionValidationBehavior.Instance as IServiceBehavior).Validate(description, serviceHost);
-            (System.ServiceModel.MsmqIntegration.MsmqIntegrationValidationBehavior.Instance as IServiceBehavior).Validate(description, serviceHost);
-            (SecurityValidationBehavior.Instance as IServiceBehavior).Validate(description, serviceHost);
-            (new UniqueContractNameValidationBehavior() as IServiceBehavior).Validate(description, serviceHost);
+            (TransactionValidationBehavior.Instance as IServiceBehavior).Validate(
+                description,
+                serviceHost
+            );
+            (
+                System.ServiceModel.MsmqIntegration.MsmqIntegrationValidationBehavior.Instance
+                as IServiceBehavior
+            ).Validate(description, serviceHost);
+            (SecurityValidationBehavior.Instance as IServiceBehavior).Validate(
+                description,
+                serviceHost
+            );
+            (new UniqueContractNameValidationBehavior() as IServiceBehavior).Validate(
+                description,
+                serviceHost
+            );
             for (int i = 0; i < description.Behaviors.Count; i++)
             {
                 IServiceBehavior iServiceBehavior = description.Behaviors[i];
@@ -217,7 +283,10 @@ namespace System.ServiceModel.Description
             }
         }
 
-        static void AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection parameters)
+        static void AddBindingParameters(
+            ServiceEndpoint endpoint,
+            BindingParameterCollection parameters
+        )
         {
             foreach (IContractBehavior icb in endpoint.Contract.Behaviors)
             {
@@ -236,12 +305,14 @@ namespace System.ServiceModel.Description
             }
         }
 
-        Type BuildChannelListener(StuffPerListenUriInfo stuff,
-                                  ServiceHostBase serviceHost,
-                                  Uri listenUri,
-                                  ListenUriMode listenUriMode,
-                                  bool supportContextSession,
-                                  out IChannelListener result)
+        Type BuildChannelListener(
+            StuffPerListenUriInfo stuff,
+            ServiceHostBase serviceHost,
+            Uri listenUri,
+            ListenUriMode listenUriMode,
+            bool supportContextSession,
+            out IChannelListener result
+        )
         {
             Binding originalBinding = stuff.Endpoints[0].Binding;
             CustomBinding binding = new CustomBinding(originalBinding);
@@ -249,7 +320,13 @@ namespace System.ServiceModel.Description
 
             Uri listenUriBaseAddress;
             string listenUriRelativeAddress;
-            GetBaseAndRelativeAddresses(serviceHost, listenUri, binding.Scheme, out listenUriBaseAddress, out listenUriRelativeAddress);
+            GetBaseAndRelativeAddresses(
+                serviceHost,
+                listenUri,
+                binding.Scheme,
+                out listenUriBaseAddress,
+                out listenUriRelativeAddress
+            );
 
             InternalDuplexBindingElement internalDuplex = null;
             InternalDuplexBindingElement.AddDuplexListenerSupport(binding, ref internalDuplex);
@@ -305,7 +382,12 @@ namespace System.ServiceModel.Description
 
             if ((sessionContractName != null) && (datagramContractName != null))
             {
-                string text = SR.GetString(SR.SFxCannotRequireBothSessionAndDatagram3, datagramContractName, sessionContractName, binding.Name);
+                string text = SR.GetString(
+                    SR.SFxCannotRequireBothSessionAndDatagram3,
+                    datagramContractName,
+                    sessionContractName,
+                    binding.Name
+                );
                 Exception error = new InvalidOperationException(text);
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(error);
             }
@@ -336,13 +418,23 @@ namespace System.ServiceModel.Description
                 supportedChannelTypes.Add(typeof(IDuplexSessionChannel));
             }
             // now we know what channel types we can use to support the contracts at this ListenUri
-            Type returnValue = DispatcherBuilder.MaybeCreateListener(true, supportedChannelTypes.ToArray(), binding, parameters,
-                                                                     listenUriBaseAddress, listenUriRelativeAddress, listenUriMode, serviceHost.ServiceThrottle, out result,
-                                                                     supportContextSession && sessionContractName != null);
+            Type returnValue = DispatcherBuilder.MaybeCreateListener(
+                true,
+                supportedChannelTypes.ToArray(),
+                binding,
+                parameters,
+                listenUriBaseAddress,
+                listenUriRelativeAddress,
+                listenUriMode,
+                serviceHost.ServiceThrottle,
+                out result,
+                supportContextSession && sessionContractName != null
+            );
             if (result == null)
             {
                 // we put a lot of work into creating a good error message, as this is a common case
-                Dictionary<Type, byte> setOfChannelTypesSupportedByBinding = new Dictionary<Type, byte>();
+                Dictionary<Type, byte> setOfChannelTypesSupportedByBinding =
+                    new Dictionary<Type, byte>();
                 if (binding.CanBuildChannelListener<IInputChannel>())
                 {
                     setOfChannelTypesSupportedByBinding.Add(typeof(IInputChannel), 0);
@@ -368,32 +460,60 @@ namespace System.ServiceModel.Description
                     setOfChannelTypesSupportedByBinding.Add(typeof(IDuplexSessionChannel), 0);
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(ChannelRequirements.CantCreateListenerException(
-                                                                              setOfChannelTypesSupportedByBinding.Keys, supportedChannelTypes, originalBinding.Name));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    ChannelRequirements.CantCreateListenerException(
+                        setOfChannelTypesSupportedByBinding.Keys,
+                        supportedChannelTypes,
+                        originalBinding.Name
+                    )
+                );
             }
             return returnValue;
         }
 
-        static internal Type MaybeCreateListener(bool actuallyCreate, Type[] supportedChannels,
-                                                 Binding binding, BindingParameterCollection parameters,
-                                                 Uri listenUriBaseAddress, string listenUriRelativeAddress,
-                                                 ListenUriMode listenUriMode, ServiceThrottle throttle,
-                                                 out IChannelListener result)
+        internal static Type MaybeCreateListener(
+            bool actuallyCreate,
+            Type[] supportedChannels,
+            Binding binding,
+            BindingParameterCollection parameters,
+            Uri listenUriBaseAddress,
+            string listenUriRelativeAddress,
+            ListenUriMode listenUriMode,
+            ServiceThrottle throttle,
+            out IChannelListener result
+        )
         {
-            return MaybeCreateListener(actuallyCreate, supportedChannels, binding, parameters, listenUriBaseAddress, listenUriRelativeAddress, listenUriMode, throttle,
-                out result, false);
+            return MaybeCreateListener(
+                actuallyCreate,
+                supportedChannels,
+                binding,
+                parameters,
+                listenUriBaseAddress,
+                listenUriRelativeAddress,
+                listenUriMode,
+                throttle,
+                out result,
+                false
+            );
         }
 
-        static Type MaybeCreateListener(bool actuallyCreate, Type[] supportedChannels,
-                                                 Binding binding, BindingParameterCollection parameters,
-                                                 Uri listenUriBaseAddress, string listenUriRelativeAddress,
-                                                 ListenUriMode listenUriMode, ServiceThrottle throttle,
-                                                 out IChannelListener result, bool supportContextSession)
+        static Type MaybeCreateListener(
+            bool actuallyCreate,
+            Type[] supportedChannels,
+            Binding binding,
+            BindingParameterCollection parameters,
+            Uri listenUriBaseAddress,
+            string listenUriRelativeAddress,
+            ListenUriMode listenUriMode,
+            ServiceThrottle throttle,
+            out IChannelListener result,
+            bool supportContextSession
+        )
         {
             // if actuallyCreate is true, then this behaves like CreateListener()
             // else this behaves like CanCreateListener()
             // result is channel type that was (would be) created, null if can't create
-            // 
+            //
             // Ugly API helps refactor common code in these two similar-but-different methods
 
             result = null;
@@ -408,7 +528,12 @@ namespace System.ServiceModel.Description
                     {
                         if (actuallyCreate)
                         {
-                            result = binding.BuildChannelListener<IInputChannel>(listenUriBaseAddress, listenUriRelativeAddress, listenUriMode, parameters);
+                            result = binding.BuildChannelListener<IInputChannel>(
+                                listenUriBaseAddress,
+                                listenUriRelativeAddress,
+                                listenUriMode,
+                                parameters
+                            );
                         }
                         return typeof(IInputChannel);
                     }
@@ -419,7 +544,12 @@ namespace System.ServiceModel.Description
                     {
                         if (actuallyCreate)
                         {
-                            result = binding.BuildChannelListener<IReplyChannel>(listenUriBaseAddress, listenUriRelativeAddress, listenUriMode, parameters);
+                            result = binding.BuildChannelListener<IReplyChannel>(
+                                listenUriBaseAddress,
+                                listenUriRelativeAddress,
+                                listenUriMode,
+                                parameters
+                            );
                         }
                         return typeof(IReplyChannel);
                     }
@@ -430,7 +560,12 @@ namespace System.ServiceModel.Description
                     {
                         if (actuallyCreate)
                         {
-                            result = binding.BuildChannelListener<IDuplexChannel>(listenUriBaseAddress, listenUriRelativeAddress, listenUriMode, parameters);
+                            result = binding.BuildChannelListener<IDuplexChannel>(
+                                listenUriBaseAddress,
+                                listenUriRelativeAddress,
+                                listenUriMode,
+                                parameters
+                            );
                         }
                         return typeof(IDuplexChannel);
                     }
@@ -441,7 +576,12 @@ namespace System.ServiceModel.Description
                     {
                         if (actuallyCreate)
                         {
-                            result = binding.BuildChannelListener<IInputSessionChannel>(listenUriBaseAddress, listenUriRelativeAddress, listenUriMode, parameters);
+                            result = binding.BuildChannelListener<IInputSessionChannel>(
+                                listenUriBaseAddress,
+                                listenUriRelativeAddress,
+                                listenUriMode,
+                                parameters
+                            );
                         }
                         return typeof(IInputSessionChannel);
                     }
@@ -452,7 +592,12 @@ namespace System.ServiceModel.Description
                     {
                         if (actuallyCreate)
                         {
-                            result = binding.BuildChannelListener<IReplySessionChannel>(listenUriBaseAddress, listenUriRelativeAddress, listenUriMode, parameters);
+                            result = binding.BuildChannelListener<IReplySessionChannel>(
+                                listenUriBaseAddress,
+                                listenUriRelativeAddress,
+                                listenUriMode,
+                                parameters
+                            );
                         }
                         return typeof(IReplySessionChannel);
                     }
@@ -463,7 +608,12 @@ namespace System.ServiceModel.Description
                     {
                         if (actuallyCreate)
                         {
-                            result = binding.BuildChannelListener<IDuplexSessionChannel>(listenUriBaseAddress, listenUriRelativeAddress, listenUriMode, parameters);
+                            result = binding.BuildChannelListener<IDuplexSessionChannel>(
+                                listenUriBaseAddress,
+                                listenUriRelativeAddress,
+                                listenUriMode,
+                                parameters
+                            );
                         }
                         return typeof(IDuplexSessionChannel);
                     }
@@ -482,7 +632,13 @@ namespace System.ServiceModel.Description
                     {
                         if (actuallyCreate)
                         {
-                            IChannelListener<IInputSessionChannel> temp = binding.BuildChannelListener<IInputSessionChannel>(listenUriBaseAddress, listenUriRelativeAddress, listenUriMode, parameters);
+                            IChannelListener<IInputSessionChannel> temp =
+                                binding.BuildChannelListener<IInputSessionChannel>(
+                                    listenUriBaseAddress,
+                                    listenUriRelativeAddress,
+                                    listenUriMode,
+                                    parameters
+                                );
                             result = DatagramAdapter.GetInputListener(temp, throttle, binding);
                         }
                         return typeof(IInputSessionChannel);
@@ -495,7 +651,13 @@ namespace System.ServiceModel.Description
                     {
                         if (actuallyCreate)
                         {
-                            IChannelListener<IReplySessionChannel> temp = binding.BuildChannelListener<IReplySessionChannel>(listenUriBaseAddress, listenUriRelativeAddress, listenUriMode, parameters);
+                            IChannelListener<IReplySessionChannel> temp =
+                                binding.BuildChannelListener<IReplySessionChannel>(
+                                    listenUriBaseAddress,
+                                    listenUriRelativeAddress,
+                                    listenUriMode,
+                                    parameters
+                                );
                             result = DatagramAdapter.GetReplyListener(temp, throttle, binding);
                         }
                         return typeof(IReplySessionChannel);
@@ -504,16 +666,23 @@ namespace System.ServiceModel.Description
 
                 if (supportContextSession)
                 {
-                    // and for SessionMode.Required, it is possible that the InstanceContextProvider is handling the session management, so 
+                    // and for SessionMode.Required, it is possible that the InstanceContextProvider is handling the session management, so
                     // accept datagram variants if that is the case
                     if (channelType == typeof(IReplySessionChannel))
                     {
-                        if (binding.CanBuildChannelListener<IReplyChannel>(parameters)
-                            && binding.GetProperty<IContextSessionProvider>(parameters) != null)
+                        if (
+                            binding.CanBuildChannelListener<IReplyChannel>(parameters)
+                            && binding.GetProperty<IContextSessionProvider>(parameters) != null
+                        )
                         {
                             if (actuallyCreate)
                             {
-                                result = binding.BuildChannelListener<IReplyChannel>(listenUriBaseAddress, listenUriRelativeAddress, listenUriMode, parameters);
+                                result = binding.BuildChannelListener<IReplyChannel>(
+                                    listenUriBaseAddress,
+                                    listenUriRelativeAddress,
+                                    listenUriMode,
+                                    parameters
+                                );
                             }
                             return typeof(IReplyChannel);
                         }
@@ -533,8 +702,11 @@ namespace System.ServiceModel.Description
                     return;
                 }
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                                                                          SR.GetString(SR.ServiceHasZeroAppEndpoints, description.ConfigurationName)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(
+                    SR.GetString(SR.ServiceHasZeroAppEndpoints, description.ConfigurationName)
+                )
+            );
         }
 
         static Uri EnsureListenUri(ServiceHostBase serviceHost, ServiceEndpoint endpoint)
@@ -546,13 +718,31 @@ namespace System.ServiceModel.Description
             }
             if (listenUri == null)
             {
-                AspNetEnvironment.Current.ProcessNotMatchedEndpointAddress(listenUri, endpoint.Binding.Name);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxEndpointNoMatchingScheme, endpoint.Binding.Scheme, endpoint.Binding.Name, serviceHost.GetBaseAddressSchemes())));
+                AspNetEnvironment.Current.ProcessNotMatchedEndpointAddress(
+                    listenUri,
+                    endpoint.Binding.Name
+                );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SFxEndpointNoMatchingScheme,
+                            endpoint.Binding.Scheme,
+                            endpoint.Binding.Name,
+                            serviceHost.GetBaseAddressSchemes()
+                        )
+                    )
+                );
             }
             return listenUri;
         }
 
-        void GetBaseAndRelativeAddresses(ServiceHostBase serviceHost, Uri listenUri, string scheme, out Uri listenUriBaseAddress, out string listenUriRelativeAddress)
+        void GetBaseAndRelativeAddresses(
+            ServiceHostBase serviceHost,
+            Uri listenUri,
+            string scheme,
+            out Uri listenUriBaseAddress,
+            out string listenUriRelativeAddress
+        )
         {
             // set the ListenUri (old EndpointListener EnsureListenUri() logic)
             listenUriBaseAddress = listenUri;
@@ -567,10 +757,17 @@ namespace System.ServiceModel.Description
                 }
                 string baseAddressString = baseAddress.ToString();
                 string thisAddressString = listenUri.ToString();
-                if (thisAddressString.StartsWith(baseAddressString, StringComparison.OrdinalIgnoreCase))
+                if (
+                    thisAddressString.StartsWith(
+                        baseAddressString,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     listenUriBaseAddress = baseAddress;
-                    listenUriRelativeAddress = thisAddressString.Substring(baseAddressString.Length);
+                    listenUriRelativeAddress = thisAddressString.Substring(
+                        baseAddressString.Length
+                    );
                 }
             }
         }
@@ -579,7 +776,8 @@ namespace System.ServiceModel.Description
         {
             if (PerformanceCounters.PerformanceCountersEnabled)
             {
-                ServicePerformanceCountersBase tempCounters = PerformanceCountersFactory.CreateServiceCounters(serviceHost);
+                ServicePerformanceCountersBase tempCounters =
+                    PerformanceCountersFactory.CreateServiceCounters(serviceHost);
                 if (tempCounters != null && tempCounters.Initialized)
                 {
                     serviceHost.Counters = tempCounters;
@@ -588,7 +786,9 @@ namespace System.ServiceModel.Description
             // Some perf. counters are enabled by default
             else if (PerformanceCounters.MinimalPerformanceCountersEnabled)
             {
-                DefaultPerformanceCounters tempCounters = new DefaultPerformanceCounters(serviceHost);
+                DefaultPerformanceCounters tempCounters = new DefaultPerformanceCounters(
+                    serviceHost
+                );
                 if (tempCounters.Initialized)
                 {
                     serviceHost.DefaultCounters = tempCounters;
@@ -597,34 +797,54 @@ namespace System.ServiceModel.Description
         }
 
         //This method generates the BindingParameterCollection in the same way it is created during DispatcherBuilder.InitializeServiceHost
-        internal static BindingParameterCollection GetBindingParameters(ServiceHostBase serviceHost, Collection<ServiceEndpoint> endpoints)
+        internal static BindingParameterCollection GetBindingParameters(
+            ServiceHostBase serviceHost,
+            Collection<ServiceEndpoint> endpoints
+        )
         {
             BindingParameterCollection parameters = new BindingParameterCollection();
             parameters.Add(new ThreadSafeMessageFilterTable<EndpointAddress>());
 
             foreach (IServiceBehavior behavior in serviceHost.Description.Behaviors)
             {
-                behavior.AddBindingParameters(serviceHost.Description, serviceHost, endpoints, parameters);
+                behavior.AddBindingParameters(
+                    serviceHost.Description,
+                    serviceHost,
+                    endpoints,
+                    parameters
+                );
             }
 
             foreach (ServiceEndpoint endpoint in endpoints)
             {
-                DispatcherBuilder.SecurityContractInformationEndpointBehavior.ServerInstance.AddBindingParameters(endpoint, parameters);
+                DispatcherBuilder.SecurityContractInformationEndpointBehavior.ServerInstance.AddBindingParameters(
+                    endpoint,
+                    parameters
+                );
                 DispatcherBuilder.AddBindingParameters(endpoint, parameters);
             }
 
             return parameters;
         }
 
-        internal static ListenUriInfo GetListenUriInfoForEndpoint(ServiceHostBase host, ServiceEndpoint endpoint)
+        internal static ListenUriInfo GetListenUriInfoForEndpoint(
+            ServiceHostBase host,
+            ServiceEndpoint endpoint
+        )
         {
             Uri listenUri = EnsureListenUri(host, endpoint);
             return new ListenUriInfo(listenUri, endpoint.ListenUriMode);
         }
 
-        public void InitializeServiceHost(ServiceDescription description, ServiceHostBase serviceHost)
+        public void InitializeServiceHost(
+            ServiceDescription description,
+            ServiceHostBase serviceHost
+        )
         {
-            if (serviceHost.ImplementedContracts != null && serviceHost.ImplementedContracts.Count > 0)
+            if (
+                serviceHost.ImplementedContracts != null
+                && serviceHost.ImplementedContracts.Count > 0
+            )
             {
                 EnsureThereAreApplicationEndpoints(description);
             }
@@ -632,13 +852,14 @@ namespace System.ServiceModel.Description
 
             AspNetEnvironment.Current.AddHostingBehavior(serviceHost, description);
 
-            ServiceBehaviorAttribute instanceSettings = description.Behaviors.Find<ServiceBehaviorAttribute>();
+            ServiceBehaviorAttribute instanceSettings =
+                description.Behaviors.Find<ServiceBehaviorAttribute>();
             InitializeServicePerformanceCounters(serviceHost);
 
-            Dictionary<ListenUriInfo, StuffPerListenUriInfo> stuffPerListenUriInfo
-                = new Dictionary<ListenUriInfo, StuffPerListenUriInfo>();
-            Dictionary<EndpointAddress, Collection<EndpointInfo>> endpointInfosPerEndpointAddress
-                = new Dictionary<EndpointAddress, Collection<EndpointInfo>>();
+            Dictionary<ListenUriInfo, StuffPerListenUriInfo> stuffPerListenUriInfo =
+                new Dictionary<ListenUriInfo, StuffPerListenUriInfo>();
+            Dictionary<EndpointAddress, Collection<EndpointInfo>> endpointInfosPerEndpointAddress =
+                new Dictionary<EndpointAddress, Collection<EndpointInfo>>();
 
             // Ensure ListenUri and group endpoints per ListenUri
             for (int i = 0; i < description.Endpoints.Count; i++)
@@ -658,17 +879,24 @@ namespace System.ServiceModel.Description
 
                 if (requiresReceiveContext)
                 {
-                    IReceiveContextSettings receiveContextSettings = endpoint.Binding.GetProperty<IReceiveContextSettings>(new BindingParameterCollection());
+                    IReceiveContextSettings receiveContextSettings =
+                        endpoint.Binding.GetProperty<IReceiveContextSettings>(
+                            new BindingParameterCollection()
+                        );
 
                     if (receiveContextSettings == null)
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                             new InvalidOperationException(
-                            SR.GetString(SR.SFxReceiveContextSettingsPropertyMissing,
-                            endpoint.Contract.Name,
-                            typeof(ReceiveContextEnabledAttribute).Name,
-                            endpoint.Address.Uri.AbsoluteUri,
-                            typeof(IReceiveContextSettings).Name)));
+                                SR.GetString(
+                                    SR.SFxReceiveContextSettingsPropertyMissing,
+                                    endpoint.Contract.Name,
+                                    typeof(ReceiveContextEnabledAttribute).Name,
+                                    endpoint.Address.Uri.AbsoluteUri,
+                                    typeof(IReceiveContextSettings).Name
+                                )
+                            )
+                        );
                     }
                     //Enable ReceiveContext on the binding.
                     receiveContextSettings.Enabled = true;
@@ -682,7 +910,9 @@ namespace System.ServiceModel.Description
                 stuffPerListenUriInfo[listenUriInfo].Endpoints.Add(endpoint);
             }
 
-            foreach (KeyValuePair<ListenUriInfo, StuffPerListenUriInfo> stuff in stuffPerListenUriInfo)
+            foreach (
+                KeyValuePair<ListenUriInfo, StuffPerListenUriInfo> stuff in stuffPerListenUriInfo
+            )
             {
                 Uri listenUri = stuff.Key.ListenUri;
                 ListenUriMode listenUriMode = stuff.Key.ListenUriMode;
@@ -690,7 +920,8 @@ namespace System.ServiceModel.Description
                 Binding binding = stuff.Value.Endpoints[0].Binding;
                 EndpointIdentity identity = stuff.Value.Endpoints[0].Address.Identity;
                 // same EndpointAddressTable instance must be shared between channelDispatcher and parameters
-                ThreadSafeMessageFilterTable<EndpointAddress> endpointAddressTable = new ThreadSafeMessageFilterTable<EndpointAddress>();
+                ThreadSafeMessageFilterTable<EndpointAddress> endpointAddressTable =
+                    new ThreadSafeMessageFilterTable<EndpointAddress>();
                 parameters.Add(endpointAddressTable);
 
                 bool supportContextSession = false;
@@ -701,7 +932,12 @@ namespace System.ServiceModel.Description
                     {
                         supportContextSession = true;
                     }
-                    behavior.AddBindingParameters(description, serviceHost, stuff.Value.Endpoints, parameters);
+                    behavior.AddBindingParameters(
+                        description,
+                        serviceHost,
+                        stuff.Value.Endpoints,
+                        parameters
+                    );
                 }
                 for (int i = 0; i < stuff.Value.Endpoints.Count; i++)
                 {
@@ -711,37 +947,62 @@ namespace System.ServiceModel.Description
                     // ensure all endpoints with this ListenUriInfo have same binding
                     if (endpoint.Binding != binding)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ABindingInstanceHasAlreadyBeenAssociatedTo1, viaString)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.ABindingInstanceHasAlreadyBeenAssociatedTo1,
+                                    viaString
+                                )
+                            )
+                        );
                     }
 
                     // ensure all endpoints with this ListenUriInfo have same identity
                     if (!object.Equals(endpoint.Address.Identity, identity))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                                                                                      SR.GetString(SR.SFxWhenMultipleEndpointsShareAListenUriTheyMustHaveSameIdentity, viaString)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxWhenMultipleEndpointsShareAListenUriTheyMustHaveSameIdentity,
+                                    viaString
+                                )
+                            )
+                        );
                     }
 
                     // add binding parameters (endpoint scope and below)
                     AddMsmqIntegrationContractInformation(endpoint);
-                    SecurityContractInformationEndpointBehavior.ServerInstance.AddBindingParameters(endpoint, parameters);
+                    SecurityContractInformationEndpointBehavior.ServerInstance.AddBindingParameters(
+                        endpoint,
+                        parameters
+                    );
                     AddBindingParameters(endpoint, parameters);
                 }
 
                 // build IChannelListener and ChannelDispatcher
                 IChannelListener listener;
-                Type channelType = this.BuildChannelListener(stuff.Value,
-                                                             serviceHost,
-                                                             listenUri,
-                                                             listenUriMode,
-                                                             supportContextSession,
-                                                             out listener);
+                Type channelType = this.BuildChannelListener(
+                    stuff.Value,
+                    serviceHost,
+                    listenUri,
+                    listenUriMode,
+                    supportContextSession,
+                    out listener
+                );
 
-                XmlQualifiedName bindingQname = new XmlQualifiedName(binding.Name, binding.Namespace);
-                ChannelDispatcher channelDispatcher = new ChannelDispatcher(listener, bindingQname.ToString(), binding);
+                XmlQualifiedName bindingQname = new XmlQualifiedName(
+                    binding.Name,
+                    binding.Namespace
+                );
+                ChannelDispatcher channelDispatcher = new ChannelDispatcher(
+                    listener,
+                    bindingQname.ToString(),
+                    binding
+                );
                 channelDispatcher.SetEndpointAddressTable(endpointAddressTable);
                 stuff.Value.ChannelDispatcher = channelDispatcher;
 
-                bool canReceiveInTransaction = false;   // at least one operation is TransactionScopeRequired
+                bool canReceiveInTransaction = false; // at least one operation is TransactionScopeRequired
                 int transactedBatchSize = int.MaxValue;
 
                 for (int i = 0; i < stuff.Value.Endpoints.Count; i++)
@@ -750,12 +1011,19 @@ namespace System.ServiceModel.Description
                     string viaString = listenUri.AbsoluteUri;
 
                     EndpointFilterProvider provider = new EndpointFilterProvider();
-                    EndpointDispatcher dispatcher = DispatcherBuilder.BuildDispatcher(serviceHost, description, endpoint, endpoint.Contract, provider);
+                    EndpointDispatcher dispatcher = DispatcherBuilder.BuildDispatcher(
+                        serviceHost,
+                        description,
+                        endpoint,
+                        endpoint.Contract,
+                        provider
+                    );
 
                     for (int j = 0; j < endpoint.Contract.Operations.Count; j++)
                     {
                         OperationDescription operation = endpoint.Contract.Operations[j];
-                        OperationBehaviorAttribute operationBehavior = operation.Behaviors.Find<OperationBehaviorAttribute>();
+                        OperationBehaviorAttribute operationBehavior =
+                            operation.Behaviors.Find<OperationBehaviorAttribute>();
                         if (null != operationBehavior && operationBehavior.TransactionScopeRequired)
                         {
                             canReceiveInTransaction = true;
@@ -765,13 +1033,18 @@ namespace System.ServiceModel.Description
 
                     if (!endpointInfosPerEndpointAddress.ContainsKey(endpoint.Address))
                     {
-                        endpointInfosPerEndpointAddress.Add(endpoint.Address, new Collection<EndpointInfo>());
+                        endpointInfosPerEndpointAddress.Add(
+                            endpoint.Address,
+                            new Collection<EndpointInfo>()
+                        );
                     }
-                    endpointInfosPerEndpointAddress[endpoint.Address].Add(new EndpointInfo(endpoint, dispatcher, provider));
+                    endpointInfosPerEndpointAddress[endpoint.Address]
+                        .Add(new EndpointInfo(endpoint, dispatcher, provider));
 
                     channelDispatcher.Endpoints.Add(dispatcher);
 
-                    TransactedBatchingBehavior batchBehavior = endpoint.Behaviors.Find<TransactedBatchingBehavior>();
+                    TransactedBatchingBehavior batchBehavior =
+                        endpoint.Behaviors.Find<TransactedBatchingBehavior>();
                     if (batchBehavior == null)
                     {
                         transactedBatchSize = 0;
@@ -779,17 +1052,36 @@ namespace System.ServiceModel.Description
                     else
                     {
                         if (!canReceiveInTransaction)
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MsmqBatchRequiresTransactionScope)));
-                        transactedBatchSize = System.Math.Min(transactedBatchSize, batchBehavior.MaxBatchSize);
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.MsmqBatchRequiresTransactionScope)
+                                )
+                            );
+                        transactedBatchSize = System.Math.Min(
+                            transactedBatchSize,
+                            batchBehavior.MaxBatchSize
+                        );
                     }
-                    if (PerformanceCounters.PerformanceCountersEnabled || PerformanceCounters.MinimalPerformanceCountersEnabled)
+                    if (
+                        PerformanceCounters.PerformanceCountersEnabled
+                        || PerformanceCounters.MinimalPerformanceCountersEnabled
+                    )
                     {
-                        PerformanceCounters.AddPerformanceCountersForEndpoint(serviceHost, endpoint.Contract, dispatcher);
+                        PerformanceCounters.AddPerformanceCountersForEndpoint(
+                            serviceHost,
+                            endpoint.Contract,
+                            dispatcher
+                        );
                     }
                 } // end foreach "endpoint"
 
                 // Clear performance counter cache.
-                if ((PerformanceCounters.PerformanceCountersEnabled || PerformanceCounters.MinimalPerformanceCountersEnabled) && ServiceModelAppSettings.EnsureUniquePerformanceCounterInstanceNames)
+                if (
+                    (
+                        PerformanceCounters.PerformanceCountersEnabled
+                        || PerformanceCounters.MinimalPerformanceCountersEnabled
+                    ) && ServiceModelAppSettings.EnsureUniquePerformanceCounterInstanceNames
+                )
                 {
                     System.Diagnostics.PerformanceCounter.CloseSharedResources();
                 }
@@ -799,7 +1091,8 @@ namespace System.ServiceModel.Description
                     BindingElementCollection bindingElements = binding.CreateBindingElements();
                     foreach (BindingElement bindingElement in bindingElements)
                     {
-                        ITransactedBindingElement txElement = bindingElement as ITransactedBindingElement;
+                        ITransactedBindingElement txElement =
+                            bindingElement as ITransactedBindingElement;
                         if (null != txElement && txElement.TransactedReceiveEnabled)
                         {
                             channelDispatcher.IsTransactedReceive = true;
@@ -810,7 +1103,8 @@ namespace System.ServiceModel.Description
                 }
 
                 //Set the mode of operation for ChannelDispatcher based on binding Settings.
-                IReceiveContextSettings receiveContextSettings = binding.GetProperty<IReceiveContextSettings>(new BindingParameterCollection());
+                IReceiveContextSettings receiveContextSettings =
+                    binding.GetProperty<IReceiveContextSettings>(new BindingParameterCollection());
 
                 if (receiveContextSettings != null)
                 {
@@ -826,13 +1120,17 @@ namespace System.ServiceModel.Description
                 serviceBehavior.ApplyDispatchBehavior(description, serviceHost);
             }
 
-            foreach (KeyValuePair<ListenUriInfo, StuffPerListenUriInfo> stuff in stuffPerListenUriInfo)
+            foreach (
+                KeyValuePair<ListenUriInfo, StuffPerListenUriInfo> stuff in stuffPerListenUriInfo
+            )
             {
                 for (int i = 0; i < stuff.Value.Endpoints.Count; i++)
                 {
                     ServiceEndpoint endpoint = stuff.Value.Endpoints[i];
                     // rediscover which dispatcher goes with this endpoint
-                    Collection<EndpointInfo> infos = endpointInfosPerEndpointAddress[endpoint.Address];
+                    Collection<EndpointInfo> infos = endpointInfosPerEndpointAddress[
+                        endpoint.Address
+                    ];
                     EndpointInfo info = null;
                     foreach (EndpointInfo ei in infos)
                     {
@@ -847,25 +1145,41 @@ namespace System.ServiceModel.Description
                     for (int k = 0; k < endpoint.Contract.Behaviors.Count; k++)
                     {
                         IContractBehavior behavior = endpoint.Contract.Behaviors[k];
-                        behavior.ApplyDispatchBehavior(endpoint.Contract, endpoint, dispatcher.DispatchRuntime);
+                        behavior.ApplyDispatchBehavior(
+                            endpoint.Contract,
+                            endpoint,
+                            dispatcher.DispatchRuntime
+                        );
                     }
                     // run endpoint behaviors
-                    BindingInformationEndpointBehavior.Instance.ApplyDispatchBehavior(endpoint, dispatcher);
-                    TransactionContractInformationEndpointBehavior.Instance.ApplyDispatchBehavior(endpoint, dispatcher);
+                    BindingInformationEndpointBehavior.Instance.ApplyDispatchBehavior(
+                        endpoint,
+                        dispatcher
+                    );
+                    TransactionContractInformationEndpointBehavior.Instance.ApplyDispatchBehavior(
+                        endpoint,
+                        dispatcher
+                    );
                     for (int j = 0; j < endpoint.Behaviors.Count; j++)
                     {
                         IEndpointBehavior eb = endpoint.Behaviors[j];
                         eb.ApplyDispatchBehavior(endpoint, dispatcher);
                     }
                     // run operation behaviors
-                    DispatcherBuilder.BindOperations(endpoint.Contract, null, dispatcher.DispatchRuntime);
+                    DispatcherBuilder.BindOperations(
+                        endpoint.Contract,
+                        null,
+                        dispatcher.DispatchRuntime
+                    );
                 }
             }
 
             this.EnsureRequiredRuntimeProperties(endpointInfosPerEndpointAddress);
 
             // Warn about obvious demux conflicts
-            foreach (Collection<EndpointInfo> endpointInfos in endpointInfosPerEndpointAddress.Values)
+            foreach (
+                Collection<EndpointInfo> endpointInfos in endpointInfosPerEndpointAddress.Values
+            )
             {
                 // all elements of endpointInfos share the same Address (and thus EndpointListener.AddressFilter)
                 if (endpointInfos.Count > 1)
@@ -877,22 +1191,36 @@ namespace System.ServiceModel.Description
                             // if not same ListenUri, won't conflict
                             // if not same ChannelType, may not conflict (some transports demux based on this)
                             // if they share a ChannelDispatcher, this means same ListenUri and same ChannelType
-                            if (endpointInfos[i].EndpointDispatcher.ChannelDispatcher ==
-                                endpointInfos[j].EndpointDispatcher.ChannelDispatcher)
+                            if (
+                                endpointInfos[i].EndpointDispatcher.ChannelDispatcher
+                                == endpointInfos[j].EndpointDispatcher.ChannelDispatcher
+                            )
                             {
                                 EndpointFilterProvider iProvider = endpointInfos[i].FilterProvider;
                                 EndpointFilterProvider jProvider = endpointInfos[j].FilterProvider;
                                 // if not default EndpointFilterProvider, we won't try to throw, you're on your own
                                 string commonAction;
-                                if (iProvider != null && jProvider != null
-                                    && HaveCommonInitiatingActions(iProvider, jProvider, out commonAction))
+                                if (
+                                    iProvider != null
+                                    && jProvider != null
+                                    && HaveCommonInitiatingActions(
+                                        iProvider,
+                                        jProvider,
+                                        out commonAction
+                                    )
+                                )
                                 {
                                     // you will definitely get a MultipleFiltersMatchedException at runtime,
                                     // so let's go ahead and throw now
                                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                                         new InvalidOperationException(
-                                            SR.GetString(SR.SFxDuplicateInitiatingActionAtSameVia,
-                                                         endpointInfos[i].Endpoint.ListenUri, commonAction)));
+                                            SR.GetString(
+                                                SR.SFxDuplicateInitiatingActionAtSameVia,
+                                                endpointInfos[i].Endpoint.ListenUri,
+                                                commonAction
+                                            )
+                                        )
+                                    );
                                 }
                             }
                         }
@@ -901,9 +1229,13 @@ namespace System.ServiceModel.Description
             }
         }
 
-        void EnsureRequiredRuntimeProperties(Dictionary<EndpointAddress, Collection<EndpointInfo>> endpointInfosPerEndpointAddress)
+        void EnsureRequiredRuntimeProperties(
+            Dictionary<EndpointAddress, Collection<EndpointInfo>> endpointInfosPerEndpointAddress
+        )
         {
-            foreach (Collection<EndpointInfo> endpointInfos in endpointInfosPerEndpointAddress.Values)
+            foreach (
+                Collection<EndpointInfo> endpointInfos in endpointInfosPerEndpointAddress.Values
+            )
             {
                 for (int i = 0; i < endpointInfos.Count; i++)
                 {
@@ -911,17 +1243,26 @@ namespace System.ServiceModel.Description
 
                     if (dispatch.InstanceContextProvider == null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxRequiredRuntimePropertyMissing, "InstanceContextProvider")));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.SFxRequiredRuntimePropertyMissing,
+                                    "InstanceContextProvider"
+                                )
+                            )
+                        );
                     }
                 }
             }
         }
 
-        static EndpointDispatcher BuildDispatcher(ServiceHostBase service,
-                                                  ServiceDescription serviceDescription,
-                                                  ServiceEndpoint endpoint,
-                                                  ContractDescription contractDescription,
-                                                  EndpointFilterProvider provider)
+        static EndpointDispatcher BuildDispatcher(
+            ServiceHostBase service,
+            ServiceDescription serviceDescription,
+            ServiceEndpoint endpoint,
+            ContractDescription contractDescription,
+            EndpointFilterProvider provider
+        )
         {
             if (service == null)
             {
@@ -929,21 +1270,33 @@ namespace System.ServiceModel.Description
             }
             if (serviceDescription == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("serviceDescription");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "serviceDescription"
+                );
             }
             if (contractDescription == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("contractDescription");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "contractDescription"
+                );
             }
 
             EndpointAddress address = endpoint.Address;
-            EndpointDispatcher dispatcher = new EndpointDispatcher(address, contractDescription.Name, contractDescription.Namespace, endpoint.Id, endpoint.InternalIsSystemEndpoint(serviceDescription));
+            EndpointDispatcher dispatcher = new EndpointDispatcher(
+                address,
+                contractDescription.Name,
+                contractDescription.Namespace,
+                endpoint.Id,
+                endpoint.InternalIsSystemEndpoint(serviceDescription)
+            );
 
             DispatchRuntime dispatch = dispatcher.DispatchRuntime;
             if (contractDescription.CallbackContractType != null)
             {
-                dispatch.CallbackClientRuntime.CallbackClientType = contractDescription.CallbackContractType;
-                dispatch.CallbackClientRuntime.ContractClientType = contractDescription.ContractType;
+                dispatch.CallbackClientRuntime.CallbackClientType =
+                    contractDescription.CallbackContractType;
+                dispatch.CallbackClientRuntime.ContractClientType =
+                    contractDescription.ContractType;
             }
 
             for (int i = 0; i < contractDescription.Operations.Count; i++)
@@ -956,7 +1309,10 @@ namespace System.ServiceModel.Description
                 }
                 else
                 {
-                    DispatcherBuilder.BuildProxyOperation(operation, dispatch.CallbackClientRuntime);
+                    DispatcherBuilder.BuildProxyOperation(
+                        operation,
+                        dispatch.CallbackClientRuntime
+                    );
                 }
             }
 
@@ -977,8 +1333,12 @@ namespace System.ServiceModel.Description
             }
             else
             {
-                child = new ClientOperation(parent, operation.Name, operation.Messages[0].Action,
-                                            operation.Messages[1].Action);
+                child = new ClientOperation(
+                    parent,
+                    operation.Name,
+                    operation.Messages[0].Action,
+                    operation.Messages[1].Action
+                );
             }
             child.TaskMethod = operation.TaskMethod;
             child.TaskTResult = operation.TaskTResult;
@@ -992,13 +1352,25 @@ namespace System.ServiceModel.Description
             for (int i = 0; i < operation.Faults.Count; i++)
             {
                 FaultDescription fault = operation.Faults[i];
-                child.FaultContractInfos.Add(new FaultContractInfo(fault.Action, fault.DetailType, fault.ElementName, fault.Namespace, operation.KnownTypes));
+                child.FaultContractInfos.Add(
+                    new FaultContractInfo(
+                        fault.Action,
+                        fault.DetailType,
+                        fault.ElementName,
+                        fault.Namespace,
+                        operation.KnownTypes
+                    )
+                );
             }
 
             parent.Operations.Add(child);
         }
 
-        static void BuildDispatchOperation(OperationDescription operation, DispatchRuntime parent, EndpointFilterProvider provider)
+        static void BuildDispatchOperation(
+            OperationDescription operation,
+            DispatchRuntime parent,
+            EndpointFilterProvider provider
+        )
         {
             string requestAction = operation.Messages[0].Action;
             DispatchOperation child = null;
@@ -1019,7 +1391,15 @@ namespace System.ServiceModel.Description
             for (int i = 0; i < operation.Faults.Count; i++)
             {
                 FaultDescription fault = operation.Faults[i];
-                child.FaultContractInfos.Add(new FaultContractInfo(fault.Action, fault.DetailType, fault.ElementName, fault.Namespace, operation.KnownTypes));
+                child.FaultContractInfos.Add(
+                    new FaultContractInfo(
+                        fault.Action,
+                        fault.DetailType,
+                        fault.ElementName,
+                        fault.Namespace,
+                        operation.KnownTypes
+                    )
+                );
             }
 
             child.IsInsideTransactedReceiveScope = operation.IsInsideTransactedReceiveScope;
@@ -1040,15 +1420,21 @@ namespace System.ServiceModel.Description
             {
                 if (parent.HasMatchAllOperation)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxMultipleContractStarOperations0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxMultipleContractStarOperations0)
+                        )
+                    );
                 }
 
                 parent.UnhandledDispatchOperation = child;
             }
-
         }
 
-        static void ApplyClientBehavior(ServiceEndpoint serviceEndpoint, ClientRuntime clientRuntime)
+        static void ApplyClientBehavior(
+            ServiceEndpoint serviceEndpoint,
+            ClientRuntime clientRuntime
+        )
         {
             // contract behaviors
             ContractDescription contractDescription = serviceEndpoint.Contract;
@@ -1058,8 +1444,14 @@ namespace System.ServiceModel.Description
                 behavior.ApplyClientBehavior(contractDescription, serviceEndpoint, clientRuntime);
             }
             // endpoint behaviors
-            BindingInformationEndpointBehavior.Instance.ApplyClientBehavior(serviceEndpoint, clientRuntime);
-            TransactionContractInformationEndpointBehavior.Instance.ApplyClientBehavior(serviceEndpoint, clientRuntime);
+            BindingInformationEndpointBehavior.Instance.ApplyClientBehavior(
+                serviceEndpoint,
+                clientRuntime
+            );
+            TransactionContractInformationEndpointBehavior.Instance.ApplyClientBehavior(
+                serviceEndpoint,
+                clientRuntime
+            );
             for (int i = 0; i < serviceEndpoint.Behaviors.Count; i++)
             {
                 IEndpointBehavior behavior = serviceEndpoint.Behaviors[i];
@@ -1069,14 +1461,21 @@ namespace System.ServiceModel.Description
             DispatcherBuilder.BindOperations(contractDescription, clientRuntime, null);
         }
 
-        static void BindOperations(ContractDescription contract, ClientRuntime proxy, DispatchRuntime dispatch)
+        static void BindOperations(
+            ContractDescription contract,
+            ClientRuntime proxy,
+            DispatchRuntime dispatch
+        )
         {
             if (!(((proxy == null) != (dispatch == null))))
             {
-                throw Fx.AssertAndThrowFatal("DispatcherBuilder.BindOperations: ((proxy == null) != (dispatch == null))");
+                throw Fx.AssertAndThrowFatal(
+                    "DispatcherBuilder.BindOperations: ((proxy == null) != (dispatch == null))"
+                );
             }
 
-            MessageDirection local = (proxy == null) ? MessageDirection.Input : MessageDirection.Output;
+            MessageDirection local =
+                (proxy == null) ? MessageDirection.Input : MessageDirection.Output;
 
             for (int i = 0; i < contract.Operations.Count; i++)
             {
@@ -1111,7 +1510,11 @@ namespace System.ServiceModel.Description
                     {
                         dispatchOperation = dispatch.Operations[operation.Name];
                     }
-                    if (dispatchOperation == null && dispatch.UnhandledDispatchOperation != null && dispatch.UnhandledDispatchOperation.Name == operation.Name)
+                    if (
+                        dispatchOperation == null
+                        && dispatch.UnhandledDispatchOperation != null
+                        && dispatch.UnhandledDispatchOperation.Name == operation.Name
+                    )
                     {
                         dispatchOperation = dispatch.UnhandledDispatchOperation;
                     }
@@ -1132,7 +1535,9 @@ namespace System.ServiceModel.Description
         {
             if (contractDescription == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("contractDescription"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("contractDescription")
+                );
             }
 
             ChannelRequirements reqs;
@@ -1167,14 +1572,20 @@ namespace System.ServiceModel.Description
                 }
                 else
                 {
-                    throw Fx.AssertAndThrowFatal("DispatcherBuilder.GetSupportedChannelTypes: Unexpected channel type");
+                    throw Fx.AssertAndThrowFatal(
+                        "DispatcherBuilder.GetSupportedChannelTypes: Unexpected channel type"
+                    );
                 }
             }
 
             return supportedChannels;
         }
 
-        static bool HaveCommonInitiatingActions(EndpointFilterProvider x, EndpointFilterProvider y, out string commonAction)
+        static bool HaveCommonInitiatingActions(
+            EndpointFilterProvider x,
+            EndpointFilterProvider y,
+            out string commonAction
+        )
         {
             commonAction = null;
             foreach (string action in x.InitiatingActions)
@@ -1202,38 +1613,63 @@ namespace System.ServiceModel.Description
                     return instance;
                 }
             }
+
             public void Validate(ServiceEndpoint serviceEndpoint) { }
-            public void AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection parameters) { }
+
+            public void AddBindingParameters(
+                ServiceEndpoint endpoint,
+                BindingParameterCollection parameters
+            ) { }
+
             public void ApplyClientBehavior(ServiceEndpoint serviceEndpoint, ClientRuntime behavior)
             {
                 behavior.ManualAddressing = this.IsManualAddressing(serviceEndpoint.Binding);
                 behavior.EnableFaults = !this.IsMulticast(serviceEndpoint.Binding);
                 if (serviceEndpoint.Contract.IsDuplex())
                 {
-                    behavior.CallbackDispatchRuntime.ChannelDispatcher.MessageVersion = serviceEndpoint.Binding.MessageVersion;
+                    behavior.CallbackDispatchRuntime.ChannelDispatcher.MessageVersion =
+                        serviceEndpoint.Binding.MessageVersion;
                 }
             }
-            public void ApplyDispatchBehavior(ServiceEndpoint serviceEndpoint, EndpointDispatcher endpointDispatcher)
+
+            public void ApplyDispatchBehavior(
+                ServiceEndpoint serviceEndpoint,
+                EndpointDispatcher endpointDispatcher
+            )
             {
-                IBindingRuntimePreferences runtimePreferences = serviceEndpoint.Binding as IBindingRuntimePreferences;
+                IBindingRuntimePreferences runtimePreferences =
+                    serviceEndpoint.Binding as IBindingRuntimePreferences;
                 if (runtimePreferences != null)
                 {
                     // it is ok to go up to the ChannelDispatcher here, since
                     // all endpoints that share a ChannelDispatcher also share the same binding
-                    endpointDispatcher.ChannelDispatcher.ReceiveSynchronously = runtimePreferences.ReceiveSynchronously;
+                    endpointDispatcher.ChannelDispatcher.ReceiveSynchronously =
+                        runtimePreferences.ReceiveSynchronously;
                 }
 
-                endpointDispatcher.ChannelDispatcher.ManualAddressing = this.IsManualAddressing(serviceEndpoint.Binding);
-                endpointDispatcher.ChannelDispatcher.EnableFaults = !this.IsMulticast(serviceEndpoint.Binding);
-                endpointDispatcher.ChannelDispatcher.MessageVersion = serviceEndpoint.Binding.MessageVersion;
+                endpointDispatcher.ChannelDispatcher.ManualAddressing = this.IsManualAddressing(
+                    serviceEndpoint.Binding
+                );
+                endpointDispatcher.ChannelDispatcher.EnableFaults = !this.IsMulticast(
+                    serviceEndpoint.Binding
+                );
+                endpointDispatcher.ChannelDispatcher.MessageVersion = serviceEndpoint
+                    .Binding
+                    .MessageVersion;
             }
 
             bool IsManualAddressing(Binding binding)
             {
-                TransportBindingElement transport = binding.CreateBindingElements().Find<TransportBindingElement>();
+                TransportBindingElement transport = binding
+                    .CreateBindingElements()
+                    .Find<TransportBindingElement>();
                 if (transport == null)
                 {
-                    string text = SR.GetString(SR.SFxBindingMustContainTransport2, binding.Name, binding.Namespace);
+                    string text = SR.GetString(
+                        SR.SFxBindingMustContainTransport2,
+                        binding.Name,
+                        binding.Namespace
+                    );
                     Exception error = new InvalidOperationException(text);
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(error);
                 }
@@ -1242,10 +1678,14 @@ namespace System.ServiceModel.Description
 
             bool IsMulticast(Binding binding)
             {
-                IBindingMulticastCapabilities multicast = binding.GetProperty<IBindingMulticastCapabilities>(new BindingParameterCollection());
+                IBindingMulticastCapabilities multicast =
+                    binding.GetProperty<IBindingMulticastCapabilities>(
+                        new BindingParameterCollection()
+                    );
                 return (multicast != null) && multicast.IsMulticast;
             }
         }
+
         class TransactionContractInformationEndpointBehavior : IEndpointBehavior
         {
             static TransactionContractInformationEndpointBehavior instance;
@@ -1260,22 +1700,44 @@ namespace System.ServiceModel.Description
                     return instance;
                 }
             }
+
             public void Validate(ServiceEndpoint serviceEndpoint) { }
-            public void AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection parameters) { }
+
+            public void AddBindingParameters(
+                ServiceEndpoint endpoint,
+                BindingParameterCollection parameters
+            ) { }
+
             public void ApplyClientBehavior(ServiceEndpoint serviceEndpoint, ClientRuntime behavior)
             {
-                behavior.AddTransactionFlowProperties = UsesTransactionFlowProperties(serviceEndpoint.Binding.CreateBindingElements(),
-                                                                                      serviceEndpoint.Contract);
+                behavior.AddTransactionFlowProperties = UsesTransactionFlowProperties(
+                    serviceEndpoint.Binding.CreateBindingElements(),
+                    serviceEndpoint.Contract
+                );
             }
-            public void ApplyDispatchBehavior(ServiceEndpoint serviceEndpoint, EndpointDispatcher endpointDispatcher)
+
+            public void ApplyDispatchBehavior(
+                ServiceEndpoint serviceEndpoint,
+                EndpointDispatcher endpointDispatcher
+            )
             {
-                endpointDispatcher.DispatchRuntime.IgnoreTransactionMessageProperty = !UsesTransactionFlowProperties(
-                    serviceEndpoint.Binding.CreateBindingElements(), serviceEndpoint.Contract);
+                endpointDispatcher.DispatchRuntime.IgnoreTransactionMessageProperty =
+                    !UsesTransactionFlowProperties(
+                        serviceEndpoint.Binding.CreateBindingElements(),
+                        serviceEndpoint.Contract
+                    );
             }
-            static bool UsesTransactionFlowProperties(BindingElementCollection bindingElements, ContractDescription contract)
+
+            static bool UsesTransactionFlowProperties(
+                BindingElementCollection bindingElements,
+                ContractDescription contract
+            )
             {
-                BindingElementCollection bindingElementCollection = new BindingElementCollection(bindingElements);
-                TransactionFlowBindingElement txBE = bindingElementCollection.Find<TransactionFlowBindingElement>();
+                BindingElementCollection bindingElementCollection = new BindingElementCollection(
+                    bindingElements
+                );
+                TransactionFlowBindingElement txBE =
+                    bindingElementCollection.Find<TransactionFlowBindingElement>();
                 if (txBE == null)
                 {
                     return false;
@@ -1287,10 +1749,12 @@ namespace System.ServiceModel.Description
         class SecurityContractInformationEndpointBehavior : IEndpointBehavior
         {
             bool isForClient;
+
             SecurityContractInformationEndpointBehavior(bool isForClient)
             {
                 this.isForClient = isForClient;
             }
+
             static SecurityContractInformationEndpointBehavior serverInstance;
             public static SecurityContractInformationEndpointBehavior ServerInstance
             {
@@ -1315,10 +1779,23 @@ namespace System.ServiceModel.Description
                     return clientInstance;
                 }
             }
+
             public void Validate(ServiceEndpoint serviceEndpoint) { }
-            public void ApplyDispatchBehavior(ServiceEndpoint serviceEndpoint, EndpointDispatcher endpointDispatcher) { }
-            public void ApplyClientBehavior(ServiceEndpoint serviceEndpoint, ClientRuntime behavior) { }
-            public void AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection parameters)
+
+            public void ApplyDispatchBehavior(
+                ServiceEndpoint serviceEndpoint,
+                EndpointDispatcher endpointDispatcher
+            ) { }
+
+            public void ApplyClientBehavior(
+                ServiceEndpoint serviceEndpoint,
+                ClientRuntime behavior
+            ) { }
+
+            public void AddBindingParameters(
+                ServiceEndpoint endpoint,
+                BindingParameterCollection parameters
+            )
             {
                 // get Contract info security needs, and put in BindingParameterCollection
                 ISecurityCapabilities isc = null;
@@ -1327,7 +1804,8 @@ namespace System.ServiceModel.Description
                 {
                     if (!(elements[i] is ITransportTokenAssertionProvider))
                     {
-                        ISecurityCapabilities tmp = elements[i].GetIndividualProperty<ISecurityCapabilities>();
+                        ISecurityCapabilities tmp = elements[i]
+                            .GetIndividualProperty<ISecurityCapabilities>();
                         if (tmp != null)
                         {
                             isc = tmp;
@@ -1338,23 +1816,40 @@ namespace System.ServiceModel.Description
                 if (isc != null)
                 {
                     // ensure existence of binding parameter
-                    ChannelProtectionRequirements requirements = parameters.Find<ChannelProtectionRequirements>();
+                    ChannelProtectionRequirements requirements =
+                        parameters.Find<ChannelProtectionRequirements>();
                     if (requirements == null)
                     {
                         requirements = new ChannelProtectionRequirements();
                         parameters.Add(requirements);
                     }
 
-                    MessageEncodingBindingElement encoding = elements.Find<MessageEncodingBindingElement>();
+                    MessageEncodingBindingElement encoding =
+                        elements.Find<MessageEncodingBindingElement>();
                     // use endpoint.Binding.Version
-                    if (encoding != null && encoding.MessageVersion.Addressing == AddressingVersion.None)
+                    if (
+                        encoding != null
+                        && encoding.MessageVersion.Addressing == AddressingVersion.None
+                    )
                     {
                         // This binding does not support response actions, so...
-                        requirements.Add(ChannelProtectionRequirements.CreateFromContractAndUnionResponseProtectionRequirements(endpoint.Contract, isc, isForClient));
+                        requirements.Add(
+                            ChannelProtectionRequirements.CreateFromContractAndUnionResponseProtectionRequirements(
+                                endpoint.Contract,
+                                isc,
+                                isForClient
+                            )
+                        );
                     }
                     else
                     {
-                        requirements.Add(ChannelProtectionRequirements.CreateFromContract(endpoint.Contract, isc, isForClient));
+                        requirements.Add(
+                            ChannelProtectionRequirements.CreateFromContract(
+                                endpoint.Contract,
+                                isc,
+                                isForClient
+                            )
+                        );
                     }
                 }
             }

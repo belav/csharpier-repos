@@ -9,8 +9,10 @@ namespace System.ComponentModel.DataAnnotations
     /// <summary>
     ///     Specifies the minimum length of collection/string data allowed in a property.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
-        AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
+        AllowMultiple = false
+    )]
     public class MinLengthAttribute : ValidationAttribute
     {
         /// <summary>
@@ -45,7 +47,11 @@ namespace System.ComponentModel.DataAnnotations
         ///     <c>false</c>
         /// </returns>
         /// <exception cref="InvalidOperationException">Length is less than zero.</exception>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode", Justification = "The ctor is marked with RequiresUnreferencedCode.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "The ctor is marked with RequiresUnreferencedCode."
+        )]
         public override bool IsValid(object? value)
         {
             // Check the lengths for legality
@@ -64,7 +70,9 @@ namespace System.ComponentModel.DataAnnotations
             }
             else if (!CountPropertyHelper.TryGetCount(value, out length))
             {
-                throw new InvalidCastException(SR.Format(SR.LengthAttribute_InvalidValueType, value.GetType()));
+                throw new InvalidCastException(
+                    SR.Format(SR.LengthAttribute_InvalidValueType, value.GetType())
+                );
             }
 
             return length >= Length;

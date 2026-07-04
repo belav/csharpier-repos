@@ -192,26 +192,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EncapsulateField
         [Trait(Traits.Feature, Traits.Features.Interactive)]
         public void EncapsulateFieldCommandDisabledInSubmission()
         {
-            using var workspace = TestWorkspace.Create(XElement.Parse("""
-                <Workspace>
-                    <Submission Language="C#" CommonReferences="true">  
-                        class C
-                        {
-                            object $$goo;
-                        }
-                    </Submission>
-                </Workspace>
-                """),
+            using var workspace = TestWorkspace.Create(
+                XElement.Parse(
+                    """
+                    <Workspace>
+                        <Submission Language="C#" CommonReferences="true">  
+                            class C
+                            {
+                                object $$goo;
+                            }
+                        </Submission>
+                    </Workspace>
+                    """
+                ),
                 workspaceKind: WorkspaceKind.Interactive,
-                composition: EditorTestCompositions.EditorFeaturesWpf);
+                composition: EditorTestCompositions.EditorFeaturesWpf
+            );
             // Force initialization.
-            workspace.GetOpenDocumentIds().Select(id => workspace.GetTestDocument(id).GetTextView()).ToList();
+            workspace
+                .GetOpenDocumentIds()
+                .Select(id => workspace.GetTestDocument(id).GetTextView())
+                .ToList();
 
             var textView = workspace.Documents.Single().GetTextView();
 
-            var handler = workspace.ExportProvider.GetCommandHandler<EncapsulateFieldCommandHandler>(PredefinedCommandHandlerNames.EncapsulateField, ContentTypeNames.CSharpContentType);
+            var handler =
+                workspace.ExportProvider.GetCommandHandler<EncapsulateFieldCommandHandler>(
+                    PredefinedCommandHandlerNames.EncapsulateField,
+                    ContentTypeNames.CSharpContentType
+                );
 
-            var state = handler.GetCommandState(new EncapsulateFieldCommandArgs(textView, textView.TextBuffer));
+            var state = handler.GetCommandState(
+                new EncapsulateFieldCommandArgs(textView, textView.TextBuffer)
+            );
             Assert.True(state.IsUnspecified);
         }
     }

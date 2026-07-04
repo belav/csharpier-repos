@@ -4,7 +4,8 @@
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework;
 
-public interface ITextDocumentIdentifierHandler<TRequest, TTextDocumentIdentifier> : ITextDocumentIdentifierHandler
+public interface ITextDocumentIdentifierHandler<TRequest, TTextDocumentIdentifier>
+    : ITextDocumentIdentifierHandler
 {
     /// <summary>
     /// Gets the identifier of the document from the request, if the request provides one.
@@ -12,6 +13,4 @@ public interface ITextDocumentIdentifierHandler<TRequest, TTextDocumentIdentifie
     TTextDocumentIdentifier GetTextDocumentIdentifier(TRequest request);
 }
 
-public interface ITextDocumentIdentifierHandler
-{
-}
+public interface ITextDocumentIdentifierHandler { }

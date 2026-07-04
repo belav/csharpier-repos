@@ -1,6 +1,6 @@
-//------------------------------------------------------------  
-// Copyright (c) Microsoft Corporation.  All rights reserved.   
-//------------------------------------------------------------  
+//------------------------------------------------------------
+// Copyright (c) Microsoft Corporation.  All rights reserved.
+//------------------------------------------------------------
 
 namespace System.ServiceModel.Channels
 {
@@ -21,7 +21,12 @@ namespace System.ServiceModel.Channels
         MessageEncoder encoder;
         SecurityTokenProviderContainer certificateTokenProvider;
 
-        public MsmqOutputSessionChannel(MsmqChannelFactory<IOutputSessionChannel> factory, EndpointAddress to, Uri via, bool manualAddressing)
+        public MsmqOutputSessionChannel(
+            MsmqChannelFactory<IOutputSessionChannel> factory,
+            EndpointAddress to,
+            Uri via,
+            bool manualAddressing
+        )
             : base(factory, to, via, manualAddressing, factory.MessageVersion)
         {
             this.factory = factory;
@@ -46,7 +51,10 @@ namespace System.ServiceModel.Channels
 
             if (sessionGramSize > int.MaxValue)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.MsmqSessionGramSizeMustBeInIntegerRange)));
+                    new InvalidOperationException(
+                        SR.GetString(SR.MsmqSessionGramSizeMustBeInIntegerRange)
+                    )
+                );
 
             return (int)sessionGramSize;
         }
@@ -57,7 +65,13 @@ namespace System.ServiceModel.Channels
             for (int i = 0; i < this.buffers.Count; i++)
             {
                 ArraySegment<byte> buffer = this.buffers[i];
-                Buffer.BlockCopy(buffer.Array, buffer.Offset, sessionGramBuffer, sessionGramOffset, buffer.Count);
+                Buffer.BlockCopy(
+                    buffer.Array,
+                    buffer.Offset,
+                    sessionGramBuffer,
+                    sessionGramOffset,
+                    buffer.Count
+                );
                 sessionGramOffset += buffer.Count;
             }
         }
@@ -79,7 +93,7 @@ namespace System.ServiceModel.Channels
         void OnCloseCore(bool isAborting, TimeSpan timeout)
         {
             // Dump the messages into the queue as a big bag.
-            // no MSMQ send if aborting 
+            // no MSMQ send if aborting
             // no MSMQ send if the channel has only a preamble (no actual messages sent)
             if (!isAborting && this.buffers.Count > 1)
             {
@@ -92,9 +106,20 @@ namespace System.ServiceModel.Channels
 
                 int size = CalcSessionGramSize();
 
-                using (MsmqOutputMessage<IOutputSessionChannel> msmqMessage = new MsmqOutputMessage<IOutputSessionChannel>(this.Factory, size, this.RemoteAddress))
+                using (
+                    MsmqOutputMessage<IOutputSessionChannel> msmqMessage =
+                        new MsmqOutputMessage<IOutputSessionChannel>(
+                            this.Factory,
+                            size,
+                            this.RemoteAddress
+                        )
+                )
                 {
-                    msmqMessage.ApplyCertificateIfNeeded(this.certificateTokenProvider, this.factory.MsmqTransportSecurity.MsmqAuthenticationMode, timeout);
+                    msmqMessage.ApplyCertificateIfNeeded(
+                        this.certificateTokenProvider,
+                        this.factory.MsmqTransportSecurity.MsmqAuthenticationMode,
+                        timeout
+                    );
                     msmqMessage.Body.EnsureBufferLength(size);
                     msmqMessage.Body.BufferLength = size;
                     CopySessionGramToBuffer(msmqMessage.Body.Buffer);
@@ -102,9 +127,16 @@ namespace System.ServiceModel.Channels
                     bool lockHeld = false;
                     try
                     {
-                        Msmq.EnterXPSendLock(out lockHeld, this.factory.MsmqTransportSecurity.MsmqProtectionLevel);
+                        Msmq.EnterXPSendLock(
+                            out lockHeld,
+                            this.factory.MsmqTransportSecurity.MsmqProtectionLevel
+                        );
                         this.msmqQueue.Send(msmqMessage, MsmqTransactionMode.CurrentOrSingle);
-                        MsmqDiagnostics.SessiongramSent(this.Session.Id, msmqMessage.MessageId, this.buffers.Count);
+                        MsmqDiagnostics.SessiongramSent(
+                            this.Session.Id,
+                            msmqMessage.MessageId,
+                            this.buffers.Count
+                        );
                     }
                     catch (MsmqException ex)
                     {
@@ -139,7 +171,11 @@ namespace System.ServiceModel.Channels
             this.OnCloseCore(true, TimeSpan.Zero);
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             this.OnCloseCore(false, timeout);
             return new CompletedAsyncResult(callback, state);
@@ -158,18 +194,29 @@ namespace System.ServiceModel.Channels
         void OnOpenCore(TimeSpan timeout)
         {
             if (null == Transaction.Current)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new InvalidOperationException(SR.GetString(SR.MsmqTransactionCurrentRequired)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                    new InvalidOperationException(SR.GetString(SR.MsmqTransactionCurrentRequired))
+                );
             this.associatedTx = Transaction.Current;
-            this.associatedTx.EnlistVolatile(new TransactionEnlistment(this, this.associatedTx), EnlistmentOptions.None);
-            this.msmqQueue = new MsmqQueue(this.Factory.AddressTranslator.UriToFormatName(this.RemoteAddress.Uri),
-                                           UnsafeNativeMethods.MQ_SEND_ACCESS);
+            this.associatedTx.EnlistVolatile(
+                new TransactionEnlistment(this, this.associatedTx),
+                EnlistmentOptions.None
+            );
+            this.msmqQueue = new MsmqQueue(
+                this.Factory.AddressTranslator.UriToFormatName(this.RemoteAddress.Uri),
+                UnsafeNativeMethods.MQ_SEND_ACCESS
+            );
             if (certificateTokenProvider != null)
             {
                 certificateTokenProvider.Open(timeout);
             }
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             OnOpenCore(timeout);
             return new CompletedAsyncResult(callback, state);
@@ -185,7 +232,12 @@ namespace System.ServiceModel.Channels
             OnOpenCore(timeout);
         }
 
-        protected override IAsyncResult OnBeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             OnSend(message, timeout);
             return new CompletedAsyncResult(callback, state);
@@ -212,44 +264,74 @@ namespace System.ServiceModel.Channels
             if (this.associatedTx != Transaction.Current)
             {
                 this.Fault();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new InvalidOperationException(SR.GetString(SR.MsmqSameTransactionExpected)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                    new InvalidOperationException(SR.GetString(SR.MsmqSameTransactionExpected))
+                );
             }
 
             if (TransactionStatus.Active != Transaction.Current.TransactionInformation.Status)
             {
                 this.Fault();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new InvalidOperationException(SR.GetString(SR.MsmqTransactionNotActive)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                    new InvalidOperationException(SR.GetString(SR.MsmqTransactionNotActive))
+                );
             }
         }
 
         ArraySegment<byte> EncodeSessionPreamble()
         {
             EncodedVia encodedVia = new EncodedVia(this.Via.AbsoluteUri);
-            EncodedContentType encodedContentType = EncodedContentType.Create(this.encoder.ContentType);
+            EncodedContentType encodedContentType = EncodedContentType.Create(
+                this.encoder.ContentType
+            );
 
-            int startSize = ClientSimplexEncoder.ModeBytes.Length
+            int startSize =
+                ClientSimplexEncoder.ModeBytes.Length
                 + SessionEncoder.CalcStartSize(encodedVia, encodedContentType)
                 + ClientSimplexEncoder.PreambleEndBytes.Length;
             byte[] startBytes = this.Factory.BufferManager.TakeBuffer(startSize);
-            Buffer.BlockCopy(ClientSimplexEncoder.ModeBytes, 0, startBytes, 0, ClientSimplexEncoder.ModeBytes.Length);
-            SessionEncoder.EncodeStart(startBytes, ClientSimplexEncoder.ModeBytes.Length, encodedVia, encodedContentType);
-            Buffer.BlockCopy(ClientSimplexEncoder.PreambleEndBytes, 0, startBytes, startSize - ClientSimplexEncoder.PreambleEndBytes.Length, ClientSimplexEncoder.PreambleEndBytes.Length);
+            Buffer.BlockCopy(
+                ClientSimplexEncoder.ModeBytes,
+                0,
+                startBytes,
+                0,
+                ClientSimplexEncoder.ModeBytes.Length
+            );
+            SessionEncoder.EncodeStart(
+                startBytes,
+                ClientSimplexEncoder.ModeBytes.Length,
+                encodedVia,
+                encodedContentType
+            );
+            Buffer.BlockCopy(
+                ClientSimplexEncoder.PreambleEndBytes,
+                0,
+                startBytes,
+                startSize - ClientSimplexEncoder.PreambleEndBytes.Length,
+                ClientSimplexEncoder.PreambleEndBytes.Length
+            );
 
             return new ArraySegment<byte>(startBytes, 0, startSize);
         }
 
         ArraySegment<byte> EncodeEndMarker()
         {
-            return new ArraySegment<byte>(SessionEncoder.EndBytes, 0, SessionEncoder.EndBytes.Length);
+            return new ArraySegment<byte>(
+                SessionEncoder.EndBytes,
+                0,
+                SessionEncoder.EndBytes.Length
+            );
         }
 
         // Stick a message into a buffer
         ArraySegment<byte> EncodeMessage(Message message)
         {
-            ArraySegment<byte> messageData = this.encoder.WriteMessage(message,
-                                                                       int.MaxValue,
-                                                                       this.Factory.BufferManager,
-                                                                       SessionEncoder.MaxMessageFrameSize);
+            ArraySegment<byte> messageData = this.encoder.WriteMessage(
+                message,
+                int.MaxValue,
+                this.Factory.BufferManager,
+                SessionEncoder.MaxMessageFrameSize
+            );
 
             return SessionEncoder.EncodeMessageFrame(messageData);
         }
@@ -286,7 +368,11 @@ namespace System.ServiceModel.Channels
                 if (this.channel.State != CommunicationState.Closed)
                 {
                     channel.Fault();
-                    Exception e = DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MsmqSessionChannelsMustBeClosed)));
+                    Exception e = DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.MsmqSessionChannelsMustBeClosed)
+                        )
+                    );
                     preparingEnlistment.ForceRollback(e);
                 }
                 else

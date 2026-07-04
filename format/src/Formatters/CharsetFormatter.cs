@@ -30,18 +30,25 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             AnalyzerConfigOptions analyzerConfigOptions,
             FormatOptions formatOptions,
             ILogger logger,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return Task.Run(() =>
             {
-                if (!TryGetCharset(analyzerConfigOptions, out var encoding)
+                if (
+                    !TryGetCharset(analyzerConfigOptions, out var encoding)
                     || sourceText.Encoding?.Equals(encoding) == true
-                    || IsEncodingEquivalent(sourceText, encoding))
+                    || IsEncodingEquivalent(sourceText, encoding)
+                )
                 {
                     return sourceText;
                 }
 
-                return SourceText.From(sourceText.ToString(), encoding, sourceText.ChecksumAlgorithm);
+                return SourceText.From(
+                    sourceText.ToString(),
+                    encoding,
+                    sourceText.ChecksumAlgorithm
+                );
             });
         }
 
@@ -70,10 +77,15 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             return stream.ToArray();
         }
 
-        private static bool TryGetCharset(AnalyzerConfigOptions analyzerConfigOptions, [NotNullWhen(true)] out Encoding? encoding)
+        private static bool TryGetCharset(
+            AnalyzerConfigOptions analyzerConfigOptions,
+            [NotNullWhen(true)] out Encoding? encoding
+        )
         {
-            if (analyzerConfigOptions != null &&
-                analyzerConfigOptions.TryGetValue("charset", out var charsetOption))
+            if (
+                analyzerConfigOptions != null
+                && analyzerConfigOptions.TryGetValue("charset", out var charsetOption)
+            )
             {
                 encoding = GetCharset(charsetOption);
                 return true;
@@ -88,9 +100,9 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             return charsetOption switch
             {
                 "latin1" => Latin1,
-                "utf-8-bom" => Encoding.UTF8,// UTF-8 with BOM Marker
-                "utf-16be" => Encoding.BigEndianUnicode,// Big Endian with BOM Marker
-                "utf-16le" => Encoding.Unicode,// Little Endian with BOM Marker
+                "utf-8-bom" => Encoding.UTF8, // UTF-8 with BOM Marker
+                "utf-16be" => Encoding.BigEndianUnicode, // Big Endian with BOM Marker
+                "utf-16le" => Encoding.Unicode, // Little Endian with BOM Marker
                 _ => Utf8,
             };
         }

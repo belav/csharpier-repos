@@ -7,15 +7,15 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Metadata.Edm;
 using System.Text;
 using System.Xml;
-using System.Data.Metadata.Edm;
 
-namespace System.Data.Mapping {
+namespace System.Data.Mapping
+{
     /// <summary>
     /// Mapping metadata for complex member maps.
     /// </summary>
@@ -28,7 +28,11 @@ namespace System.Data.Mapping {
         /// <param name="edmProperty"></param>
         /// <param name="clrProperty"></param>
         /// <param name="complexTypeMapping"></param>
-        internal ObjectComplexPropertyMapping(EdmProperty edmProperty, EdmProperty clrProperty, ObjectTypeMapping complexTypeMapping)
+        internal ObjectComplexPropertyMapping(
+            EdmProperty edmProperty,
+            EdmProperty clrProperty,
+            ObjectTypeMapping complexTypeMapping
+        )
             : base(edmProperty, clrProperty)
         {
             m_objectTypeMapping = complexTypeMapping;
@@ -45,10 +49,7 @@ namespace System.Data.Mapping {
         /// </summary>
         internal override MemberMappingKind MemberMappingKind
         {
-            get
-            {
-                return MemberMappingKind.ComplexPropertyMapping;
-            }
+            get { return MemberMappingKind.ComplexPropertyMapping; }
         }
         #endregion
     }

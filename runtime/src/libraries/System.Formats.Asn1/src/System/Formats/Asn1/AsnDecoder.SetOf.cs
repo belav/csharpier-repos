@@ -3,7 +3,7 @@
 
 namespace System.Formats.Asn1
 {
-   public static partial class AsnDecoder
+    public static partial class AsnDecoder
     {
         /// <summary>
         ///   Reads a Set-Of value from <paramref name="source"/> with a specified tag
@@ -65,7 +65,8 @@ namespace System.Formats.Asn1
             out int contentLength,
             out int bytesConsumed,
             bool skipSortOrderValidation = false,
-            Asn1Tag? expectedTag = null)
+            Asn1Tag? expectedTag = null
+        )
         {
             Asn1Tag tag = ReadTagAndLength(source, ruleSet, out int? length, out int headerLength);
             CheckExpectedTag(tag, expectedTag ?? Asn1Tag.SetOf, UniversalTagNumber.SetOf);
@@ -76,7 +77,9 @@ namespace System.Formats.Asn1
                 throw new AsnContentException(
                     SR.Format(
                         SR.ContentException_ConstructedEncodingRequired,
-                        UniversalTagNumber.SetOf));
+                        UniversalTagNumber.SetOf
+                    )
+                );
             }
 
             int suffix;
@@ -98,8 +101,7 @@ namespace System.Formats.Asn1
             {
                 // T-REC-X.690-201508 sec 11.6
                 // BER data is not required to be sorted.
-                if (ruleSet == AsnEncodingRules.DER ||
-                    ruleSet == AsnEncodingRules.CER)
+                if (ruleSet == AsnEncodingRules.DER || ruleSet == AsnEncodingRules.CER)
                 {
                     ReadOnlySpan<byte> remaining = contents;
                     ReadOnlySpan<byte> previous = default;
@@ -216,7 +218,8 @@ namespace System.Formats.Asn1
                 out int contentLength,
                 out int bytesConsumed,
                 skipSortOrderValidation,
-                expectedTag);
+                expectedTag
+            );
 
             AsnReader ret = CloneAtSlice(contentOffset, contentLength);
             _data = _data.Slice(bytesConsumed);

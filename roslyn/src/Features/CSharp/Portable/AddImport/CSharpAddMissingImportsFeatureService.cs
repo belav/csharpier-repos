@@ -21,13 +21,15 @@ namespace Microsoft.CodeAnalysis.CSharp.AddMissingImports
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpAddMissingImportsFeatureService()
-        {
-        }
+        public CSharpAddMissingImportsFeatureService() { }
 
-        protected sealed override ImmutableArray<string> FixableDiagnosticIds => AddImportDiagnosticIds.FixableDiagnosticIds;
+        protected sealed override ImmutableArray<string> FixableDiagnosticIds =>
+            AddImportDiagnosticIds.FixableDiagnosticIds;
 
-        protected override ImmutableArray<AbstractFormattingRule> GetFormatRules(SourceText text)
-            => ImmutableArray.Create<AbstractFormattingRule>(new CleanUpNewLinesFormatter(text), new IndentBlockFormattingRule());
+        protected override ImmutableArray<AbstractFormattingRule> GetFormatRules(SourceText text) =>
+            ImmutableArray.Create<AbstractFormattingRule>(
+                new CleanUpNewLinesFormatter(text),
+                new IndentBlockFormattingRule()
+            );
     }
 }

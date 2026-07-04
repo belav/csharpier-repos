@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -17,11 +17,10 @@ namespace System.Runtime.InteropServices.ComTypes
 {
     using System;
 
-    [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Unicode)]
-
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     public struct CONNECTDATA
-    {   
-        [MarshalAs(UnmanagedType.Interface)] 
+    {
+        [MarshalAs(UnmanagedType.Interface)]
         public Object pUnk;
         public int dwCookie;
     }
@@ -32,7 +31,12 @@ namespace System.Runtime.InteropServices.ComTypes
     public interface IEnumConnections
     {
         [PreserveSig]
-        int Next(int celt, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0), Out] CONNECTDATA[] rgelt, IntPtr pceltFetched);
+        int Next(
+            int celt,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0), Out] CONNECTDATA[] rgelt,
+            IntPtr pceltFetched
+        );
+
         [PreserveSig]
         int Skip(int celt);
         void Reset();

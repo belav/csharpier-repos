@@ -26,7 +26,8 @@ public interface IEntityEntryGraphIterator
     /// <typeparam name="TState">The type of the state object.</typeparam>
     void TraverseGraph<TState>(
         EntityEntryGraphNode<TState> node,
-        Func<EntityEntryGraphNode<TState>, bool> handleNode);
+        Func<EntityEntryGraphNode<TState>, bool> handleNode
+    );
 
     /// <summary>
     ///     Traverses a graph of entities allowing an action to be taken at each node.
@@ -40,5 +41,6 @@ public interface IEntityEntryGraphIterator
     Task TraverseGraphAsync<TState>(
         EntityEntryGraphNode<TState> node,
         Func<EntityEntryGraphNode<TState>, CancellationToken, Task<bool>> handleNode,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default
+    );
 }

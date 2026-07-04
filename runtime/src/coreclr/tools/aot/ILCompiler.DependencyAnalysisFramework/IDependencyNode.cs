@@ -7,38 +7,31 @@ namespace ILCompiler.DependencyAnalysisFramework
 {
     public interface IDependencyNode
     {
-        bool Marked
-        {
-            get;
-        }
+        bool Marked { get; }
     }
 
     public interface IDependencyNode<DependencyContextType> : IDependencyNode
     {
-        bool InterestingForDynamicDependencyAnalysis
-        {
-            get;
-        }
+        bool InterestingForDynamicDependencyAnalysis { get; }
 
-        bool HasDynamicDependencies
-        {
-            get;
-        }
+        bool HasDynamicDependencies { get; }
 
-        bool HasConditionalStaticDependencies
-        {
-            get;
-        }
+        bool HasConditionalStaticDependencies { get; }
 
-        bool StaticDependenciesAreComputed
-        {
-            get;
-        }
+        bool StaticDependenciesAreComputed { get; }
 
-        IEnumerable<DependencyNodeCore<DependencyContextType>.DependencyListEntry> GetStaticDependencies(DependencyContextType context);
+        IEnumerable<DependencyNodeCore<DependencyContextType>.DependencyListEntry> GetStaticDependencies(
+            DependencyContextType context
+        );
 
-        IEnumerable<DependencyNodeCore<DependencyContextType>.CombinedDependencyListEntry> GetConditionalStaticDependencies(DependencyContextType context);
+        IEnumerable<DependencyNodeCore<DependencyContextType>.CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            DependencyContextType context
+        );
 
-        IEnumerable<DependencyNodeCore<DependencyContextType>.CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<DependencyContextType>> markedNodes, int firstNode, DependencyContextType context);
+        IEnumerable<DependencyNodeCore<DependencyContextType>.CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<DependencyContextType>> markedNodes,
+            int firstNode,
+            DependencyContextType context
+        );
     }
 }

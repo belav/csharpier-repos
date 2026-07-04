@@ -7,7 +7,11 @@ namespace System.Runtime
 {
     public static class ControlledExecution
     {
-        [Obsolete(Obsoletions.ControlledExecutionRunMessage, DiagnosticId = Obsoletions.ControlledExecutionRunDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.ControlledExecutionRunMessage,
+            DiagnosticId = Obsoletions.ControlledExecutionRunDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public static void Run(Action action, CancellationToken cancellationToken)
         {
             throw new PlatformNotSupportedException();

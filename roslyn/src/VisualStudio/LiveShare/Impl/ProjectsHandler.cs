@@ -19,7 +19,11 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare
     /// </summary>
     internal class ProjectsHandler : ILspRequestHandler<object, object[], Solution>
     {
-        public async Task<object[]> HandleAsync(object param, RequestContext<Solution> requestContext, CancellationToken cancellationToken)
+        public async Task<object[]> HandleAsync(
+            object param,
+            RequestContext<Solution> requestContext,
+            CancellationToken cancellationToken
+        )
         {
             var projects = new ArrayBuilder<CustomProtocol.Project>();
             var solution = requestContext.Context;
@@ -37,14 +41,20 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare
                     }
                 }
 #pragma warning disable 0612
-                await requestContext.ProtocolConverter.RegisterExternalFilesAsync(externalUris.ToArrayAndFree()).ConfigureAwait(false);
+                await requestContext
+                    .ProtocolConverter.RegisterExternalFilesAsync(externalUris.ToArrayAndFree())
+                    .ConfigureAwait(false);
 #pragma warning restore 0612
 
                 var lspProject = new CustomProtocol.Project
                 {
                     Name = project.Name,
-                    SourceFiles = project.Documents.Select(d => requestContext.ProtocolConverter.ToProtocolUri(new Uri(d.FilePath))).ToArray(),
-                    Language = project.Language
+                    SourceFiles = project
+                        .Documents.Select(d =>
+                            requestContext.ProtocolConverter.ToProtocolUri(new Uri(d.FilePath))
+                        )
+                        .ToArray(),
+                    Language = project.Language,
                 };
 
                 projects.Add(lspProject);

@@ -43,20 +43,37 @@ namespace System.Transactions.Tests
             // We can use this array for both EnlistPromotableSinglePhase and SetDistributedTransactionIdentifier
             if (s_enlistPromotableSinglePhaseMethodInfo == null)
             {
-                Type[] parameterTypes = new Type[] { typeof(IPromotableSinglePhaseNotification), typeof(Guid) };
-                s_enlistPromotableSinglePhaseMethodInfo = typeof(Transaction).GetTypeInfo().GetMethod("EnlistPromotableSinglePhase", parameterTypes);
-                s_setDistributedTransactionIdentifierMethodInfo = typeof(Transaction).GetTypeInfo().GetMethod("SetDistributedTransactionIdentifier", parameterTypes);
-                s_getPromotedTokenMethodInfo = typeof(Transaction).GetTypeInfo().GetMethod("GetPromotedToken");
+                Type[] parameterTypes = new Type[]
+                {
+                    typeof(IPromotableSinglePhaseNotification),
+                    typeof(Guid),
+                };
+                s_enlistPromotableSinglePhaseMethodInfo = typeof(Transaction)
+                    .GetTypeInfo()
+                    .GetMethod("EnlistPromotableSinglePhase", parameterTypes);
+                s_setDistributedTransactionIdentifierMethodInfo = typeof(Transaction)
+                    .GetTypeInfo()
+                    .GetMethod("SetDistributedTransactionIdentifier", parameterTypes);
+                s_getPromotedTokenMethodInfo = typeof(Transaction)
+                    .GetTypeInfo()
+                    .GetMethod("GetPromotedToken");
 
                 // And the PropertyInfo objects for PromoterType
-                s_promoterTypePropertyInfo = typeof(Transaction).GetTypeInfo().GetProperty("PromoterType", typeof(Guid));
+                s_promoterTypePropertyInfo = typeof(Transaction)
+                    .GetTypeInfo()
+                    .GetProperty("PromoterType", typeof(Guid));
             }
 
-            bool allMethodsAreThere = ((s_enlistPromotableSinglePhaseMethodInfo != null) &&
-                (s_setDistributedTransactionIdentifierMethodInfo != null) &&
-                (s_getPromotedTokenMethodInfo != null) &&
-                (s_promoterTypePropertyInfo != null));
-            Assert.True(allMethodsAreThere, "At least one of the expected new methods or properties is not implemented by the available System.Transactions.");
+            bool allMethodsAreThere = (
+                (s_enlistPromotableSinglePhaseMethodInfo != null)
+                && (s_setDistributedTransactionIdentifierMethodInfo != null)
+                && (s_getPromotedTokenMethodInfo != null)
+                && (s_promoterTypePropertyInfo != null)
+            );
+            Assert.True(
+                allMethodsAreThere,
+                "At least one of the expected new methods or properties is not implemented by the available System.Transactions."
+            );
         }
 
         #region Helper Methods
@@ -71,7 +88,11 @@ namespace System.Transactions.Tests
             cloneToComplete.Complete();
         }
 
-        private static void Promote(string testCaseDescription, byte[] promotedTokenToCompare, Transaction txToPromote = null)
+        private static void Promote(
+            string testCaseDescription,
+            byte[] promotedTokenToCompare,
+            Transaction txToPromote = null
+        )
         {
             if (txToPromote == null)
             {
@@ -79,13 +100,15 @@ namespace System.Transactions.Tests
             }
 
             IPromotableSinglePhaseNotification shouldBeNull = null;
-            shouldBeNull = CreatePSPEEnlistment(NonMsdtcPromoterTests.PromoterType1,
+            shouldBeNull = CreatePSPEEnlistment(
+                NonMsdtcPromoterTests.PromoterType1,
                 NonMsdtcPromoterTests.PromotedToken1,
                 null,
-                /*nonMSDTC = */ true,
+                /*nonMSDTC = */true,
                 txToPromote,
                 /*spcResponse=*/TransactionStatus.Committed,
-                /*expectRejection = */ true);
+                /*expectRejection = */true
+            );
 
             Assert.Null(shouldBeNull);
 
@@ -132,7 +155,8 @@ namespace System.Transactions.Tests
             AutoResetEvent outcomeReceived,
             Transaction tx = null,
             EnlistmentOptions options = EnlistmentOptions.None,
-            bool votePrepared = true)
+            bool votePrepared = true
+        )
         {
             MyEnlistment enlistment = new MyEnlistment(outcomeReceived, votePrepared);
             Transaction txToEnlist = Transaction.Current;
@@ -159,7 +183,7 @@ namespace System.Transactions.Tests
             bool failGetPromoterType = false,
             bool failGetId = false,
             bool incorrectNotificationObjectToSetDistributedTransactionId = false
-           )
+        )
         {
             IPromotableSinglePhaseNotification enlistment = null;
 
@@ -170,7 +194,8 @@ namespace System.Transactions.Tests
             }
             if (nonMSDTC)
             {
-                NonMSDTCPromoterEnlistment nonMSDTCEnlistment = new NonMSDTCPromoterEnlistment(promoterType,
+                NonMSDTCPromoterEnlistment nonMSDTCEnlistment = new NonMSDTCPromoterEnlistment(
+                    promoterType,
                     promotedToken,
                     outcomeReceived,
                     spcResponse,
@@ -179,7 +204,8 @@ namespace System.Transactions.Tests
                     failSPC,
                     failGetPromoterType,
                     failGetId,
-                    incorrectNotificationObjectToSetDistributedTransactionId);
+                    incorrectNotificationObjectToSetDistributedTransactionId
+                );
                 if (nonMSDTCEnlistment.Enlist(txToEnlist, expectRejection, comparePromotedToken))
                 {
                     enlistment = nonMSDTCEnlistment;
@@ -195,7 +221,10 @@ namespace System.Transactions.Tests
             return enlistment;
         }
 
-        private static DependentTransaction CreateDependentClone(bool blocking, Transaction tx = null)
+        private static DependentTransaction CreateDependentClone(
+            bool blocking,
+            Transaction tx = null
+        )
         {
             DependentTransaction clone = null;
             if (tx == null)
@@ -203,7 +232,11 @@ namespace System.Transactions.Tests
                 tx = Transaction.Current;
             }
 
-            clone = tx.DependentClone(blocking ? DependentCloneOption.BlockCommitUntilComplete : DependentCloneOption.RollbackIfNotComplete);
+            clone = tx.DependentClone(
+                blocking
+                    ? DependentCloneOption.BlockCommitUntilComplete
+                    : DependentCloneOption.RollbackIfNotComplete
+            );
 
             return clone;
         }
@@ -217,14 +250,28 @@ namespace System.Transactions.Tests
             {
                 Trace("Attempting TransactionInterop.GetDtcTransaction");
                 TransactionInterop.GetDtcTransaction(tx);
-                throw new ApplicationException("TransactionInterop.GetDtcTransaction unexpectedly succeeded.");
+                throw new ApplicationException(
+                    "TransactionInterop.GetDtcTransaction unexpectedly succeeded."
+                );
             }
             catch (TransactionPromotionException ex)
             {
                 if (TxPromoterType(tx) != expectedPromoterType)
                 {
-                    Trace(string.Format("Exception {0} occurred, but transaction has an unexpected PromoterType of {1}", ex.ToString(), TxPromoterType(tx)));
-                    throw new ApplicationException(string.Format("Exception {0} occurred, but transaction has an unexpected PromoterType of {1}", ex.ToString(), TxPromoterType(tx)));
+                    Trace(
+                        string.Format(
+                            "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
+                            ex.ToString(),
+                            TxPromoterType(tx)
+                        )
+                    );
+                    throw new ApplicationException(
+                        string.Format(
+                            "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
+                            ex.ToString(),
+                            TxPromoterType(tx)
+                        )
+                    );
                 }
             }
 
@@ -233,14 +280,28 @@ namespace System.Transactions.Tests
                 Trace("Attempting TransactionInterop.GetExportCookie");
                 byte[] dummyWhereabouts = new byte[1];
                 TransactionInterop.GetExportCookie(tx, dummyWhereabouts);
-                throw new ApplicationException("TransactionInterop.GetExportCookie unexpectedly succeeded.");
+                throw new ApplicationException(
+                    "TransactionInterop.GetExportCookie unexpectedly succeeded."
+                );
             }
             catch (TransactionPromotionException ex)
             {
                 if (TxPromoterType(tx) != expectedPromoterType)
                 {
-                    Trace(string.Format("Exception {0} occurred, but transaction has an unexpected PromoterType of {1}", ex.ToString(), TxPromoterType(tx)));
-                    throw new ApplicationException(string.Format("Exception {0} occurred, but transaction has an unexpected PromoterType of {1}", ex.ToString(), TxPromoterType(tx)));
+                    Trace(
+                        string.Format(
+                            "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
+                            ex.ToString(),
+                            TxPromoterType(tx)
+                        )
+                    );
+                    throw new ApplicationException(
+                        string.Format(
+                            "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
+                            ex.ToString(),
+                            TxPromoterType(tx)
+                        )
+                    );
                 }
             }
 
@@ -249,14 +310,28 @@ namespace System.Transactions.Tests
                 Trace("Attempting TransactionInterop.GetTransmitterPropagationToken");
                 byte[] dummyWhereabouts = new byte[1];
                 TransactionInterop.GetTransmitterPropagationToken(tx);
-                throw new ApplicationException("TransactionInterop.GetTransmitterPropagationToken unexpectedly succeeded.");
+                throw new ApplicationException(
+                    "TransactionInterop.GetTransmitterPropagationToken unexpectedly succeeded."
+                );
             }
             catch (TransactionPromotionException ex)
             {
                 if (TxPromoterType(tx) != expectedPromoterType)
                 {
-                    Trace(string.Format("Exception {0} occurred, but transaction has an unexpected PromoterType of {1}", ex.ToString(), TxPromoterType(tx)));
-                    throw new ApplicationException(string.Format("Exception {0} occurred, but transaction has an unexpected PromoterType of {1}", ex.ToString(), TxPromoterType(tx)));
+                    Trace(
+                        string.Format(
+                            "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
+                            ex.ToString(),
+                            TxPromoterType(tx)
+                        )
+                    );
+                    throw new ApplicationException(
+                        string.Format(
+                            "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
+                            ex.ToString(),
+                            TxPromoterType(tx)
+                        )
+                    );
                 }
             }
 
@@ -264,15 +339,31 @@ namespace System.Transactions.Tests
             {
                 Trace("Attempting EnlistDurable");
                 DummyDurableEnlistment enlistment = new DummyDurableEnlistment();
-                tx.EnlistDurable(new Guid("611653C3-8536-4158-A990-00A8EE08B195"), enlistment, EnlistmentOptions.None);
+                tx.EnlistDurable(
+                    new Guid("611653C3-8536-4158-A990-00A8EE08B195"),
+                    enlistment,
+                    EnlistmentOptions.None
+                );
                 throw new ApplicationException("EnlistDurable unexpectedly succeeded.");
             }
             catch (TransactionPromotionException ex)
             {
                 if (TxPromoterType(tx) != expectedPromoterType)
                 {
-                    Trace(string.Format("Exception {0} occurred, but transaction has an unexpected PromoterType of {1}", ex.ToString(), TxPromoterType(tx)));
-                    throw new ApplicationException(string.Format("Exception {0} occurred, but transaction has an unexpected PromoterType of {1}", ex.ToString(), TxPromoterType(tx)));
+                    Trace(
+                        string.Format(
+                            "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
+                            ex.ToString(),
+                            TxPromoterType(tx)
+                        )
+                    );
+                    throw new ApplicationException(
+                        string.Format(
+                            "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
+                            ex.ToString(),
+                            TxPromoterType(tx)
+                        )
+                    );
                 }
             }
 
@@ -280,15 +371,31 @@ namespace System.Transactions.Tests
             {
                 Trace("Attempting EnlistDurableSPC");
                 DummyDurableEnlistmentSPC enlistment = new DummyDurableEnlistmentSPC();
-                tx.EnlistDurable(new Guid("611653C3-8536-4158-A990-00A8EE08B195"), enlistment, EnlistmentOptions.None);
+                tx.EnlistDurable(
+                    new Guid("611653C3-8536-4158-A990-00A8EE08B195"),
+                    enlistment,
+                    EnlistmentOptions.None
+                );
                 throw new ApplicationException("EnlistDurableSPC unexpectedly succeeded.");
             }
             catch (TransactionPromotionException ex)
             {
                 if (TxPromoterType(tx) != expectedPromoterType)
                 {
-                    Trace(string.Format("Exception {0} occurred, but transaction has an unexpected PromoterType of {1}", ex.ToString(), TxPromoterType(tx)));
-                    throw new ApplicationException(string.Format("Exception {0} occurred, but transaction has an unexpected PromoterType of {1}", ex.ToString(), TxPromoterType(tx)));
+                    Trace(
+                        string.Format(
+                            "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
+                            ex.ToString(),
+                            TxPromoterType(tx)
+                        )
+                    );
+                    throw new ApplicationException(
+                        string.Format(
+                            "Exception {0} occurred, but transaction has an unexpected PromoterType of {1}",
+                            ex.ToString(),
+                            TxPromoterType(tx)
+                        )
+                    );
                 }
             }
         }
@@ -310,14 +417,23 @@ namespace System.Transactions.Tests
             return true;
         }
 
-        private static bool EnlistPromotable(IPromotableSinglePhaseNotification promotableNotification, Transaction txToEnlist, Guid promoterType)
+        private static bool EnlistPromotable(
+            IPromotableSinglePhaseNotification promotableNotification,
+            Transaction txToEnlist,
+            Guid promoterType
+        )
         {
             object[] parameters = new object[] { promotableNotification, promoterType };
-            bool returnVal = (bool)s_enlistPromotableSinglePhaseMethodInfo.Invoke(txToEnlist, parameters);
+            bool returnVal = (bool)
+                s_enlistPromotableSinglePhaseMethodInfo.Invoke(txToEnlist, parameters);
             return returnVal;
         }
 
-        private static void SetDistributedTransactionId(IPromotableSinglePhaseNotification promotableNotification, Transaction txToSet, Guid distributedId)
+        private static void SetDistributedTransactionId(
+            IPromotableSinglePhaseNotification promotableNotification,
+            Transaction txToSet,
+            Guid distributedId
+        )
         {
             object[] parameters = new object[] { promotableNotification, distributedId };
             s_setDistributedTransactionIdentifierMethodInfo.Invoke(txToSet, parameters);
@@ -351,7 +467,8 @@ namespace System.Transactions.Tests
             private Guid _distributedTxId;
             private Transaction _enlistedTransaction;
 
-            public NonMSDTCPromoterEnlistment(Guid promoterType,
+            public NonMSDTCPromoterEnlistment(
+                Guid promoterType,
                 byte[] promotedTokenToReturn,
                 AutoResetEvent completionEvent,
                 TransactionStatus spcResponse = TransactionStatus.Committed,
@@ -361,7 +478,7 @@ namespace System.Transactions.Tests
                 bool failGetPromoterType = false,
                 bool failGetId = false,
                 bool incorrectNotificationObjectToSetDistributedTransactionId = false
-                )
+            )
             {
                 _promoterType = promoterType;
                 _promotedToken = promotedTokenToReturn;
@@ -372,20 +489,13 @@ namespace System.Transactions.Tests
                 _failSPC = failSPC;
                 _failGetPromoterType = failGetPromoterType;
                 _failGetId = failGetId;
-                _incorrectNotificationObjectToSetDistributedTransactionId = incorrectNotificationObjectToSetDistributedTransactionId;
+                _incorrectNotificationObjectToSetDistributedTransactionId =
+                    incorrectNotificationObjectToSetDistributedTransactionId;
             }
 
-            public bool Aborted
-            {
-                get;
-                private set;
-            }
+            public bool Aborted { get; private set; }
 
-            public bool Promoted
-            {
-                get;
-                private set;
-            }
+            public bool Promoted { get; private set; }
 
             public void Initialize()
             {
@@ -398,7 +508,11 @@ namespace System.Transactions.Tests
                 return;
             }
 
-            public bool Enlist(Transaction txToEnlist = null, bool expectRejection = false, bool comparePromotedToken = false)
+            public bool Enlist(
+                Transaction txToEnlist = null,
+                bool expectRejection = false,
+                bool comparePromotedToken = false
+            )
             {
                 if (txToEnlist == null)
                 {
@@ -422,12 +536,16 @@ namespace System.Transactions.Tests
                     }
                     else
                     {
-                        throw new ApplicationException("EnlistPromotableSinglePhase failed when expected to succeed");
+                        throw new ApplicationException(
+                            "EnlistPromotableSinglePhase failed when expected to succeed"
+                        );
                     }
                 }
                 else if (expectRejection)
                 {
-                    throw new ApplicationException("EnlistPromotableSinglePhase succeeded when expected to fail");
+                    throw new ApplicationException(
+                        "EnlistPromotableSinglePhase succeeded when expected to fail"
+                    );
                 }
 
                 _enlistedTransaction = txToEnlist;
@@ -449,33 +567,47 @@ namespace System.Transactions.Tests
 
                 if (_failSPC)
                 {
-                    Trace("NonMSDTCPromoterEnlistment.SinglePhaseCommit - Failing based on configuration");
-                    throw new ApplicationException("Failing SinglePhaseCommit based on configuration");
+                    Trace(
+                        "NonMSDTCPromoterEnlistment.SinglePhaseCommit - Failing based on configuration"
+                    );
+                    throw new ApplicationException(
+                        "Failing SinglePhaseCommit based on configuration"
+                    );
                 }
 
                 switch (_spcResponse)
                 {
                     case TransactionStatus.Committed:
-                        {
-                            singlePhaseEnlistment.Committed();
-                            break;
-                        }
+                    {
+                        singlePhaseEnlistment.Committed();
+                        break;
+                    }
 
                     case TransactionStatus.Aborted:
-                        {
-                            singlePhaseEnlistment.Aborted(new ApplicationException("Aborted by NonMSDTCPromoterEnlistment.SinglePhaseCommit"));
-                            break;
-                        }
+                    {
+                        singlePhaseEnlistment.Aborted(
+                            new ApplicationException(
+                                "Aborted by NonMSDTCPromoterEnlistment.SinglePhaseCommit"
+                            )
+                        );
+                        break;
+                    }
 
                     case TransactionStatus.InDoubt:
-                        {
-                            singlePhaseEnlistment.InDoubt(new ApplicationException("InDoubt by NonMSDTCPromoterEnlistment.SinglePhaseCommit"));
-                            break;
-                        }
+                    {
+                        singlePhaseEnlistment.InDoubt(
+                            new ApplicationException(
+                                "InDoubt by NonMSDTCPromoterEnlistment.SinglePhaseCommit"
+                            )
+                        );
+                        break;
+                    }
                     default:
-                        {
-                            throw new ApplicationException("InDoubt by NonMSDTCPromoterEnlistment.SinglePhaseCommit because of invalid TransactionStatus outcome value.");
-                        }
+                    {
+                        throw new ApplicationException(
+                            "InDoubt by NonMSDTCPromoterEnlistment.SinglePhaseCommit because of invalid TransactionStatus outcome value."
+                        );
+                    }
                 }
             }
 
@@ -493,17 +625,30 @@ namespace System.Transactions.Tests
                 // invoke this.enlistedTransaction.SetDistributedTransactionIdentifier(this, this.promoterType); via reflection
                 if (_incorrectNotificationObjectToSetDistributedTransactionId)
                 {
-                    NonMSDTCPromoterEnlistment incorrectNotificationObject = new NonMSDTCPromoterEnlistment(_promoterType, _promotedToken, _completionEvent);
+                    NonMSDTCPromoterEnlistment incorrectNotificationObject =
+                        new NonMSDTCPromoterEnlistment(
+                            _promoterType,
+                            _promotedToken,
+                            _completionEvent
+                        );
                     try
                     {
-                        SetDistributedTransactionId(incorrectNotificationObject, _enlistedTransaction, _distributedTxId);
-                        throw new ApplicationException("SetDistributedTransactionIdentifier did not throw the expected InvalidOperationException");
+                        SetDistributedTransactionId(
+                            incorrectNotificationObject,
+                            _enlistedTransaction,
+                            _distributedTxId
+                        );
+                        throw new ApplicationException(
+                            "SetDistributedTransactionIdentifier did not throw the expected InvalidOperationException"
+                        );
                     }
                     catch (TargetInvocationException ex)
                     {
                         if (!(ex.InnerException is InvalidOperationException))
                         {
-                            throw new ApplicationException("SetDistributedTransactionIdentifier did not throw the expected InvalidOperationException");
+                            throw new ApplicationException(
+                                "SetDistributedTransactionIdentifier did not throw the expected InvalidOperationException"
+                            );
                         }
                     }
                 }
@@ -538,7 +683,7 @@ namespace System.Transactions.Tests
                 EnlistmentOptions enlistOptions = EnlistmentOptions.None,
                 bool expectSuccessfulEnlist = true,
                 AutoResetEvent secondEnlistmentCompleted = null
-                )
+            )
             {
                 _outcomeReceived = outcomeReceived;
                 _votePrepared = votePrepared;
@@ -548,34 +693,21 @@ namespace System.Transactions.Tests
                 _secondEnlistmentCompleted = secondEnlistmentCompleted;
             }
 
-            public Transaction TransactionToEnlist
-            {
-                get;
-                set;
-            }
+            public Transaction TransactionToEnlist { get; set; }
 
             public bool CommittedOutcome
             {
-                get
-                {
-                    return _committed;
-                }
+                get { return _committed; }
             }
 
             public bool AbortedOutcome
             {
-                get
-                {
-                    return _aborted;
-                }
+                get { return _aborted; }
             }
 
             public bool InDoubtOutcome
             {
-                get
-                {
-                    return _indoubt;
-                }
+                get { return _indoubt; }
             }
 
             public void Commit(Enlistment enlistment)
@@ -598,22 +730,32 @@ namespace System.Transactions.Tests
             {
                 if (_enlistDuringPrepare)
                 {
-                    Trace(string.Format("MyEnlistment.Prepare - attempting another enlistment with options {0}", _enlistOptions.ToString()));
+                    Trace(
+                        string.Format(
+                            "MyEnlistment.Prepare - attempting another enlistment with options {0}",
+                            _enlistOptions.ToString()
+                        )
+                    );
                     try
                     {
                         MyEnlistment enlist2 = new MyEnlistment(
                             _secondEnlistmentCompleted,
-                            /*votePrepared=*/ true,
-                            /*enlistDuringPrepare=*/ false,
-                            _enlistOptions);
+                            /*votePrepared=*/true,
+                            /*enlistDuringPrepare=*/false,
+                            _enlistOptions
+                        );
                         this.TransactionToEnlist.EnlistVolatile(enlist2, _enlistOptions);
                         if (!_expectSuccessfulEnlist)
                         {
                             // Force rollback of the transaction because the second enlistment was unsuccessful.
-                            Trace("MyEnlistment.Prepare - Force Rollback because second enlistment succeeded unexpectedly");
+                            Trace(
+                                "MyEnlistment.Prepare - Force Rollback because second enlistment succeeded unexpectedly"
+                            );
                             _aborted = true;
                             _outcomeReceived.Set();
-                            preparingEnlistment.ForceRollback(new ApplicationException("MyEnlistment voted ForceRollback"));
+                            preparingEnlistment.ForceRollback(
+                                new ApplicationException("MyEnlistment voted ForceRollback")
+                            );
                             return;
                         }
                     }
@@ -621,11 +763,19 @@ namespace System.Transactions.Tests
                     {
                         if (_expectSuccessfulEnlist)
                         {
-                            Trace(string.Format("MyEnlistment.Prepare - Force Rollback because second enlistment failed unexpectedly - {0}; {1}", ex.GetType().ToString(), ex.ToString()));
+                            Trace(
+                                string.Format(
+                                    "MyEnlistment.Prepare - Force Rollback because second enlistment failed unexpectedly - {0}; {1}",
+                                    ex.GetType().ToString(),
+                                    ex.ToString()
+                                )
+                            );
                             // Force rollback of the transaction because the second enlistment was unsuccessful.
                             _aborted = true;
                             _outcomeReceived.Set();
-                            preparingEnlistment.ForceRollback(new ApplicationException("MyEnlistment voted ForceRollback"));
+                            preparingEnlistment.ForceRollback(
+                                new ApplicationException("MyEnlistment voted ForceRollback")
+                            );
                             return;
                         }
                     }
@@ -641,7 +791,9 @@ namespace System.Transactions.Tests
                     Trace("MyEnlistment.Prepare - Force Rollback");
                     _aborted = true;
                     _outcomeReceived.Set();
-                    preparingEnlistment.ForceRollback(new ApplicationException("MyEnlistment voted ForceRollback"));
+                    preparingEnlistment.ForceRollback(
+                        new ApplicationException("MyEnlistment voted ForceRollback")
+                    );
                 }
             }
 
@@ -717,14 +869,17 @@ namespace System.Transactions.Tests
             EnlistmentOptions options = EnlistmentOptions.None,
             bool commitTx = true,
             bool votePrepared = true,
-            Type expectedExceptionType = null)
+            Type expectedExceptionType = null
+        )
         {
-            string testCaseDescription = string.Format("TestCase_VolatileEnlistments; count = {0}; expectedOutcome = {1}; options = {2}; votePrepared = {3}, expectedExceptionType = {4}",
-                        count,
-                        expectedOutcome.ToString(),
-                        options.ToString(),
-                        votePrepared,
-                        expectedExceptionType);
+            string testCaseDescription = string.Format(
+                "TestCase_VolatileEnlistments; count = {0}; expectedOutcome = {1}; options = {2}; votePrepared = {3}, expectedExceptionType = {4}",
+                count,
+                expectedOutcome.ToString(),
+                options.ToString(),
+                votePrepared,
+                expectedExceptionType
+            );
 
             Trace("**** " + testCaseDescription + " ****");
 
@@ -741,7 +896,12 @@ namespace System.Transactions.Tests
                 {
                     for (int i = 0; i < count; i++)
                     {
-                        vols[i] = CreateVolatileEnlistment(enlistmentDoneEvts[i], null, options, votePrepared);
+                        vols[i] = CreateVolatileEnlistment(
+                            enlistmentDoneEvts[i],
+                            null,
+                            options,
+                            votePrepared
+                        );
                     }
                     if (commitTx)
                     {
@@ -762,10 +922,11 @@ namespace System.Transactions.Tests
             int passCount = 0;
             for (int i = 0; i < count; i++)
             {
-                if (((expectedOutcome == TransactionStatus.Committed) && vols[i].CommittedOutcome) ||
-                    ((expectedOutcome == TransactionStatus.Aborted) && vols[i].AbortedOutcome) ||
-                    ((expectedOutcome == TransactionStatus.InDoubt) && vols[i].InDoubtOutcome)
-                    )
+                if (
+                    ((expectedOutcome == TransactionStatus.Committed) && vols[i].CommittedOutcome)
+                    || ((expectedOutcome == TransactionStatus.Aborted) && vols[i].AbortedOutcome)
+                    || ((expectedOutcome == TransactionStatus.InDoubt) && vols[i].InDoubtOutcome)
+                )
                 {
                     passCount++;
                 }
@@ -775,7 +936,8 @@ namespace System.Transactions.Tests
             TestPassed();
         }
 
-        private static void TestCase_PSPENonMsdtc(bool commit,
+        private static void TestCase_PSPENonMsdtc(
+            bool commit,
             bool promote,
             TransactionStatus spcResponse,
             int p0BeforePSPE = 0,
@@ -784,7 +946,7 @@ namespace System.Transactions.Tests
             int p1AfterPSPE = 0,
             int p0AfterPromote = 0,
             int p1AfterPromote = 0
-            )
+        )
         {
             string testCaseDescription = string.Format(
                 "TestCase_PSPENonMsdtc commit={0}; promote={1}; spcResponse= {2}; p0BeforePSPE={3}; p0AfterPSPE={4}; p1BeforePSPE={5}; p1AfterPSPE={6}; p0AfterPromote={7}; p1AfterPromote={8}",
@@ -796,7 +958,8 @@ namespace System.Transactions.Tests
                 p1BeforePSPE,
                 p1AfterPSPE,
                 p0AfterPromote,
-                p1AfterPromote);
+                p1AfterPromote
+            );
 
             Trace("**** " + testCaseDescription + " ****");
 
@@ -816,7 +979,13 @@ namespace System.Transactions.Tests
             IPromotableSinglePhaseNotification enlistment = null;
             Transaction savedTransaction = null;
 
-            int numVolatiles = p0BeforePSPE + p0AfterPSPE + p1BeforePSPE + p1AfterPSPE + p0AfterPromote + p1AfterPromote;
+            int numVolatiles =
+                p0BeforePSPE
+                + p0AfterPSPE
+                + p1BeforePSPE
+                + p1AfterPSPE
+                + p0AfterPromote
+                + p1AfterPromote;
 
             AutoResetEvent[] enlistmentDoneEvts = new AutoResetEvent[numVolatiles];
             MyEnlistment[] vols = new MyEnlistment[numVolatiles];
@@ -836,7 +1005,12 @@ namespace System.Transactions.Tests
                     {
                         for (int i = 0; i < p0BeforePSPE; i++)
                         {
-                            vols[i] = CreateVolatileEnlistment(enlistmentDoneEvts[i], null, EnlistmentOptions.EnlistDuringPrepareRequired, /*votePrepared=*/ true);
+                            vols[i] = CreateVolatileEnlistment(
+                                enlistmentDoneEvts[i],
+                                null,
+                                EnlistmentOptions.EnlistDuringPrepareRequired, /*votePrepared=*/
+                                true
+                            );
                         }
                     }
 
@@ -844,18 +1018,24 @@ namespace System.Transactions.Tests
                     {
                         for (int i = 0; i < p1BeforePSPE; i++)
                         {
-                            vols[p0BeforePSPE + i] = CreateVolatileEnlistment(enlistmentDoneEvts[p0BeforePSPE + i], null, EnlistmentOptions.None, /*votePrepared=*/ true);
+                            vols[p0BeforePSPE + i] = CreateVolatileEnlistment(
+                                enlistmentDoneEvts[p0BeforePSPE + i],
+                                null,
+                                EnlistmentOptions.None, /*votePrepared=*/
+                                true
+                            );
                         }
                     }
 
-                    enlistment = CreatePSPEEnlistment(NonMsdtcPromoterTests.PromoterType1,
+                    enlistment = CreatePSPEEnlistment(
+                        NonMsdtcPromoterTests.PromoterType1,
                         NonMsdtcPromoterTests.PromotedToken1,
                         completedEvent,
-                        /*nonMSDTC = */ true,
-                        /*tx = */ null,
+                        /*nonMSDTC = */true,
+                        /*tx = */null,
                         spcResponse,
-                        /*expectRejection=*/ false
-                        );
+                        /*expectRejection=*/false
+                    );
 
                     if (p0AfterPSPE > 0)
                     {
@@ -863,7 +1043,10 @@ namespace System.Transactions.Tests
                         {
                             vols[p0BeforePSPE + p1BeforePSPE + i] = CreateVolatileEnlistment(
                                 enlistmentDoneEvts[p0BeforePSPE + p1BeforePSPE + i],
-                                null, EnlistmentOptions.EnlistDuringPrepareRequired, /*votePrepared=*/ true);
+                                null,
+                                EnlistmentOptions.EnlistDuringPrepareRequired, /*votePrepared=*/
+                                true
+                            );
                         }
                     }
 
@@ -871,9 +1054,15 @@ namespace System.Transactions.Tests
                     {
                         for (int i = 0; i < p1AfterPSPE; i++)
                         {
-                            vols[p0BeforePSPE + p1BeforePSPE + p0AfterPSPE + i] = CreateVolatileEnlistment(
-                                enlistmentDoneEvts[p0BeforePSPE + p1BeforePSPE + p0AfterPSPE + i],
-                                null, EnlistmentOptions.None, /*votePrepared=*/ true);
+                            vols[p0BeforePSPE + p1BeforePSPE + p0AfterPSPE + i] =
+                                CreateVolatileEnlistment(
+                                    enlistmentDoneEvts[
+                                        p0BeforePSPE + p1BeforePSPE + p0AfterPSPE + i
+                                    ],
+                                    null,
+                                    EnlistmentOptions.None, /*votePrepared=*/
+                                    true
+                                );
                         }
                     }
 
@@ -885,9 +1074,19 @@ namespace System.Transactions.Tests
                         {
                             for (int i = 0; i < p0AfterPromote; i++)
                             {
-                                vols[p0BeforePSPE + p1BeforePSPE + p0AfterPSPE + p1AfterPSPE + i] = CreateVolatileEnlistment(
-                                    enlistmentDoneEvts[p0BeforePSPE + p1BeforePSPE + p0AfterPSPE + p1AfterPSPE + i],
-                                    null, EnlistmentOptions.EnlistDuringPrepareRequired, /*votePrepared=*/ true);
+                                vols[p0BeforePSPE + p1BeforePSPE + p0AfterPSPE + p1AfterPSPE + i] =
+                                    CreateVolatileEnlistment(
+                                        enlistmentDoneEvts[
+                                            p0BeforePSPE
+                                                + p1BeforePSPE
+                                                + p0AfterPSPE
+                                                + p1AfterPSPE
+                                                + i
+                                        ],
+                                        null,
+                                        EnlistmentOptions.EnlistDuringPrepareRequired, /*votePrepared=*/
+                                        true
+                                    );
                             }
                         }
 
@@ -895,9 +1094,26 @@ namespace System.Transactions.Tests
                         {
                             for (int i = 0; i < p1AfterPromote; i++)
                             {
-                                vols[p0BeforePSPE + p1BeforePSPE + p0AfterPSPE + p1AfterPSPE + p0AfterPromote + i] = CreateVolatileEnlistment(
-                                    enlistmentDoneEvts[p0BeforePSPE + p1BeforePSPE + p0AfterPSPE + p1AfterPSPE + p0AfterPromote + i],
-                                    null, EnlistmentOptions.None, /*votePrepared=*/ true);
+                                vols[
+                                    p0BeforePSPE
+                                        + p1BeforePSPE
+                                        + p0AfterPSPE
+                                        + p1AfterPSPE
+                                        + p0AfterPromote
+                                        + i
+                                ] = CreateVolatileEnlistment(
+                                    enlistmentDoneEvts[
+                                        p0BeforePSPE
+                                            + p1BeforePSPE
+                                            + p0AfterPSPE
+                                            + p1AfterPSPE
+                                            + p0AfterPromote
+                                            + i
+                                    ],
+                                    null,
+                                    EnlistmentOptions.None, /*votePrepared=*/
+                                    true
+                                );
                             }
                         }
                     }
@@ -924,7 +1140,13 @@ namespace System.Transactions.Tests
 
                 if (spcResponse == TransactionStatus.Committed)
                 {
-                    Trace(string.Format("Caught unexpected exception {0}:{1}", ex.GetType().ToString(), ex.ToString()));
+                    Trace(
+                        string.Format(
+                            "Caught unexpected exception {0}:{1}",
+                            ex.GetType().ToString(),
+                            ex.ToString()
+                        )
+                    );
                     return;
                 }
             }
@@ -944,10 +1166,18 @@ namespace System.Transactions.Tests
                 {
                     if (commit)
                     {
-                        if (((spcResponse == TransactionStatus.Committed) && vols[i].CommittedOutcome) ||
-                            ((spcResponse == TransactionStatus.Aborted) && vols[i].AbortedOutcome) ||
-                            ((spcResponse == TransactionStatus.InDoubt) && vols[i].InDoubtOutcome)
-                           )
+                        if (
+                            (
+                                (spcResponse == TransactionStatus.Committed)
+                                && vols[i].CommittedOutcome
+                            )
+                            || (
+                                (spcResponse == TransactionStatus.Aborted) && vols[i].AbortedOutcome
+                            )
+                            || (
+                                (spcResponse == TransactionStatus.InDoubt) && vols[i].InDoubtOutcome
+                            )
+                        )
                         {
                             passCount++;
                         }
@@ -971,13 +1201,18 @@ namespace System.Transactions.Tests
 
             if (commit)
             {
-                Assert.False((spcResponse == TransactionStatus.Committed) && (nonDtcEnlistment.Aborted));
+                Assert.False(
+                    (spcResponse == TransactionStatus.Committed) && (nonDtcEnlistment.Aborted)
+                );
                 Assert.Equal(spcResponse, savedTransaction.TransactionInformation.Status);
             }
             else
             {
                 Assert.True(nonDtcEnlistment.Aborted);
-                Assert.Equal(TransactionStatus.Aborted, savedTransaction.TransactionInformation.Status);
+                Assert.Equal(
+                    TransactionStatus.Aborted,
+                    savedTransaction.TransactionInformation.Status
+                );
             }
 
             TestPassed();
@@ -992,7 +1227,8 @@ namespace System.Transactions.Tests
             int blockingBeforePSPE = 0,
             int blockingAfterPSPE = 0,
             int abortingAfterPromote = 0,
-            int blockingAfterPromote = 0)
+            int blockingAfterPromote = 0
+        )
         {
             string testCaseDescription = string.Format(
                 "TestCase_PSPENonMsdtcWithClones commit={0}; promote={1}; spcResponse= {2}; abortingBeforePSPE={3}; abortingAfterPSPE={4}; blockingBeforePSPE={5}; blockingAfterPSPE={6}; abortingAfterPromote={7}; blockingAfterPromote={8}",
@@ -1004,7 +1240,8 @@ namespace System.Transactions.Tests
                 blockingBeforePSPE,
                 blockingAfterPSPE,
                 abortingAfterPromote,
-                blockingAfterPromote);
+                blockingAfterPromote
+            );
 
             Trace("**** " + testCaseDescription + " ****");
 
@@ -1013,7 +1250,9 @@ namespace System.Transactions.Tests
             {
                 if ((abortingAfterPromote > 0) || (blockingAfterPromote > 0))
                 {
-                    Trace("Not promoting - Resetting abortingAfterPromote and blockingAfterPromote to 0.");
+                    Trace(
+                        "Not promoting - Resetting abortingAfterPromote and blockingAfterPromote to 0."
+                    );
                     abortingAfterPromote = 0;
                     blockingAfterPromote = 0;
                 }
@@ -1023,8 +1262,13 @@ namespace System.Transactions.Tests
 
             IPromotableSinglePhaseNotification enlistment = null;
 
-            int numClones = abortingBeforePSPE + abortingAfterPSPE + blockingBeforePSPE + blockingAfterPSPE + abortingAfterPromote + blockingAfterPromote;
-
+            int numClones =
+                abortingBeforePSPE
+                + abortingAfterPSPE
+                + blockingBeforePSPE
+                + blockingAfterPSPE
+                + abortingAfterPromote
+                + blockingAfterPromote;
 
             DependentTransaction[] clones = new DependentTransaction[numClones];
 
@@ -1036,7 +1280,9 @@ namespace System.Transactions.Tests
                     {
                         for (int i = 0; i < abortingBeforePSPE; i++)
                         {
-                            clones[i] = CreateDependentClone(/*blocking=*/false);
+                            clones[i] = CreateDependentClone( /*blocking=*/
+                                false
+                            );
                         }
                     }
 
@@ -1044,24 +1290,30 @@ namespace System.Transactions.Tests
                     {
                         for (int i = 0; i < blockingBeforePSPE; i++)
                         {
-                            clones[abortingBeforePSPE + i] = CreateDependentClone(/*blocking=*/true);
+                            clones[abortingBeforePSPE + i] = CreateDependentClone( /*blocking=*/
+                                true
+                            );
                         }
                     }
 
-                    enlistment = CreatePSPEEnlistment(NonMsdtcPromoterTests.PromoterType1,
+                    enlistment = CreatePSPEEnlistment(
+                        NonMsdtcPromoterTests.PromoterType1,
                         NonMsdtcPromoterTests.PromotedToken1,
                         completedEvent,
-                        /*nonMSDTC = */ true,
-                        /*tx = */ null,
+                        /*nonMSDTC = */true,
+                        /*tx = */null,
                         spcResponse,
-                        /*expectRejection=*/ false
-                        );
+                        /*expectRejection=*/false
+                    );
 
                     if (abortingAfterPSPE > 0)
                     {
                         for (int i = 0; i < abortingAfterPSPE; i++)
                         {
-                            clones[abortingBeforePSPE + blockingBeforePSPE + i] = CreateDependentClone(/*blocking=*/false);
+                            clones[abortingBeforePSPE + blockingBeforePSPE + i] =
+                                CreateDependentClone( /*blocking=*/
+                                    false
+                                );
                         }
                     }
 
@@ -1069,7 +1321,11 @@ namespace System.Transactions.Tests
                     {
                         for (int i = 0; i < blockingAfterPSPE; i++)
                         {
-                            clones[abortingBeforePSPE + blockingBeforePSPE + abortingAfterPSPE + i] = CreateDependentClone(/*blocking=*/true);
+                            clones[
+                                abortingBeforePSPE + blockingBeforePSPE + abortingAfterPSPE + i
+                            ] = CreateDependentClone( /*blocking=*/
+                                true
+                            );
                         }
                     }
 
@@ -1081,7 +1337,15 @@ namespace System.Transactions.Tests
                         {
                             for (int i = 0; i < abortingAfterPromote; i++)
                             {
-                                clones[abortingBeforePSPE + blockingBeforePSPE + abortingAfterPSPE + blockingAfterPSPE + i] = CreateDependentClone(/*blocking=*/false);
+                                clones[
+                                    abortingBeforePSPE
+                                        + blockingBeforePSPE
+                                        + abortingAfterPSPE
+                                        + blockingAfterPSPE
+                                        + i
+                                ] = CreateDependentClone( /*blocking=*/
+                                    false
+                                );
                             }
                         }
 
@@ -1089,7 +1353,16 @@ namespace System.Transactions.Tests
                         {
                             for (int i = 0; i < blockingAfterPromote; i++)
                             {
-                                clones[abortingBeforePSPE + blockingBeforePSPE + abortingAfterPSPE + blockingAfterPSPE + abortingAfterPromote + i] = CreateDependentClone(/*blocking=*/true);
+                                clones[
+                                    abortingBeforePSPE
+                                        + blockingBeforePSPE
+                                        + abortingAfterPSPE
+                                        + blockingAfterPSPE
+                                        + abortingAfterPromote
+                                        + i
+                                ] = CreateDependentClone( /*blocking=*/
+                                    true
+                                );
                             }
                         }
                     }
@@ -1126,13 +1399,16 @@ namespace System.Transactions.Tests
             TestPassed();
         }
 
-        private static void TestCase_AbortFromVolatile(bool promote, EnlistmentOptions enlistmentOptions = EnlistmentOptions.None)
+        private static void TestCase_AbortFromVolatile(
+            bool promote,
+            EnlistmentOptions enlistmentOptions = EnlistmentOptions.None
+        )
         {
             string testCaseDescription = string.Format(
                 "TestCase_AbortFromVolatile promote={0}; enlistmentOptions = {1}",
                 promote,
                 enlistmentOptions.ToString()
-                );
+            );
 
             Trace("**** " + testCaseDescription + " ****");
 
@@ -1147,14 +1423,15 @@ namespace System.Transactions.Tests
                 {
                     vol = CreateVolatileEnlistment(volCompleted, null, enlistmentOptions, false);
 
-                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(NonMsdtcPromoterTests.PromoterType1,
+                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
+                        NonMsdtcPromoterTests.PromoterType1,
                         NonMsdtcPromoterTests.PromotedToken1,
                         pspeCompleted,
-                        /*nonMSDTC = */ true,
-                        /*tx = */ null,
-                        /*spcResponse=*/ TransactionStatus.Committed,
-                        /*expectRejection=*/ false
-                        );
+                        /*nonMSDTC = */true,
+                        /*tx = */null,
+                        /*spcResponse=*/TransactionStatus.Committed,
+                        /*expectRejection=*/false
+                    );
 
                     if (promote)
                     {
@@ -1165,7 +1442,10 @@ namespace System.Transactions.Tests
                 }
             });
 
-            Assert.True(volCompleted.WaitOne(TimeSpan.FromSeconds(5)) && pspeCompleted.WaitOne(TimeSpan.FromSeconds(5)));
+            Assert.True(
+                volCompleted.WaitOne(TimeSpan.FromSeconds(5))
+                    && pspeCompleted.WaitOne(TimeSpan.FromSeconds(5))
+            );
 
             Assert.True(vol.AbortedOutcome);
 
@@ -1188,7 +1468,7 @@ namespace System.Transactions.Tests
             string testCaseDescription = string.Format(
                 "TestCase_AbortingCloneNotCompleted promote={0}",
                 promote
-                );
+            );
 
             Trace("**** " + testCaseDescription + " ****");
 
@@ -1199,15 +1479,18 @@ namespace System.Transactions.Tests
             {
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    CreateDependentClone(/*blocking=*/false);
-                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(NonMsdtcPromoterTests.PromoterType1,
+                    CreateDependentClone( /*blocking=*/
+                        false
+                    );
+                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
+                        NonMsdtcPromoterTests.PromoterType1,
                         NonMsdtcPromoterTests.PromotedToken1,
                         pspeCompleted,
-                        /*nonMSDTC = */ true,
-                        /*tx = */ null,
-                        /*spcResponse=*/ TransactionStatus.Committed,
-                        /*expectRejection=*/ false
-                        );
+                        /*nonMSDTC = */true,
+                        /*tx = */null,
+                        /*spcResponse=*/TransactionStatus.Committed,
+                        /*expectRejection=*/false
+                    );
 
                     if (promote)
                     {
@@ -1243,31 +1526,36 @@ namespace System.Transactions.Tests
             string testCaseDescription = string.Format(
                 "TestCase_BlockingCloneCompletedAfterCommit promote={0}",
                 promote
-                );
+            );
 
             Trace("**** " + testCaseDescription + " ****");
 
             AutoResetEvent pspeCompleted = new AutoResetEvent(false);
             NonMSDTCPromoterEnlistment pspe = null;
 
-            NoStressTrace(string.Format("There will be a 2 second delay here - {0}", DateTime.Now.ToString()));
+            NoStressTrace(
+                string.Format("There will be a 2 second delay here - {0}", DateTime.Now.ToString())
+            );
 
             try
             {
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    DependentTransaction clone = CreateDependentClone(/*blocking=*/true);
+                    DependentTransaction clone = CreateDependentClone( /*blocking=*/
+                        true
+                    );
 
                     Task.Run(() => CompleteDependentCloneThread(clone));
 
-                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(NonMsdtcPromoterTests.PromoterType1,
+                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
+                        NonMsdtcPromoterTests.PromoterType1,
                         NonMsdtcPromoterTests.PromotedToken1,
                         pspeCompleted,
-                        /*nonMSDTC = */ true,
-                        /*tx = */ null,
-                        /*spcResponse=*/ TransactionStatus.Committed,
-                        /*expectRejection=*/ false
-                        );
+                        /*nonMSDTC = */true,
+                        /*tx = */null,
+                        /*spcResponse=*/TransactionStatus.Committed,
+                        /*expectRejection=*/false
+                    );
 
                     if (promote)
                     {
@@ -1303,7 +1591,7 @@ namespace System.Transactions.Tests
             string testCaseDescription = string.Format(
                 "TestCase_TransactionTimeout promote={0}",
                 promote
-                );
+            );
 
             Trace("**** " + testCaseDescription + " ****");
 
@@ -1314,25 +1602,36 @@ namespace System.Transactions.Tests
             {
                 CommittableTransaction tx = new CommittableTransaction(TimeSpan.FromSeconds(1));
 
-                pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(NonMsdtcPromoterTests.PromoterType1,
+                pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
+                    NonMsdtcPromoterTests.PromoterType1,
                     NonMsdtcPromoterTests.PromotedToken1,
                     pspeCompleted,
-                    /*nonMSDTC = */ true,
+                    /*nonMSDTC = */true,
                     tx,
-                    /*spcResponse=*/ TransactionStatus.Committed,
-                    /*expectRejection=*/ false
-                    );
+                    /*spcResponse=*/TransactionStatus.Committed,
+                    /*expectRejection=*/false
+                );
 
                 if (promote)
                 {
                     Promote(testCaseDescription, NonMsdtcPromoterTests.PromotedToken1, tx);
                 }
 
-                NoStressTrace(string.Format("There will be a 3 second delay here - {0}", DateTime.Now.ToString()));
+                NoStressTrace(
+                    string.Format(
+                        "There will be a 3 second delay here - {0}",
+                        DateTime.Now.ToString()
+                    )
+                );
 
                 Task.Delay(TimeSpan.FromSeconds(3)).Wait();
 
-                NoStressTrace(string.Format("Woke up from sleep. Attempting Commit - {0}", DateTime.Now.ToString()));
+                NoStressTrace(
+                    string.Format(
+                        "Woke up from sleep. Attempting Commit - {0}",
+                        DateTime.Now.ToString()
+                    )
+                );
 
                 tx.Commit();
             });
@@ -1353,12 +1652,13 @@ namespace System.Transactions.Tests
             TestPassed(true);
         }
 
-        private static void TestCase_EnlistDuringPrepare(bool promote,
+        private static void TestCase_EnlistDuringPrepare(
+            bool promote,
             bool beforePromote,
             EnlistmentOptions firstOptions = EnlistmentOptions.None,
             EnlistmentOptions secondOptions = EnlistmentOptions.None,
             bool expectSecondEnlistSuccess = true
-            )
+        )
         {
             string testCaseDescription = string.Format(
                 "TestCase_EnlistDuringPrepare promote={0}; beforePromote={1}, firstOptions={2}, secondOptions={3}, expectSecondEnlistSuccess={4}",
@@ -1367,7 +1667,7 @@ namespace System.Transactions.Tests
                 firstOptions.ToString(),
                 secondOptions.ToString(),
                 expectSecondEnlistSuccess
-                );
+            );
 
             Trace("**** " + testCaseDescription + " ****");
 
@@ -1388,20 +1688,22 @@ namespace System.Transactions.Tests
                             true,
                             true,
                             secondOptions,
-                            /*expectSuccessfulEnlist=*/ expectSecondEnlistSuccess,
-                            vol2Completed);
+                            /*expectSuccessfulEnlist=*/expectSecondEnlistSuccess,
+                            vol2Completed
+                        );
                         vol.TransactionToEnlist = Transaction.Current;
                         Transaction.Current.EnlistVolatile(vol, firstOptions);
                     }
 
-                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(NonMsdtcPromoterTests.PromoterType1,
+                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
+                        NonMsdtcPromoterTests.PromoterType1,
                         NonMsdtcPromoterTests.PromotedToken1,
                         pspeCompleted,
-                        /*nonMSDTC = */ true,
-                        /*tx = */ null,
-                        /*spcResponse=*/ TransactionStatus.Committed,
-                        /*expectRejection=*/ false
-                        );
+                        /*nonMSDTC = */true,
+                        /*tx = */null,
+                        /*spcResponse=*/TransactionStatus.Committed,
+                        /*expectRejection=*/false
+                    );
 
                     if (promote)
                     {
@@ -1414,8 +1716,9 @@ namespace System.Transactions.Tests
                                 true,
                                 true,
                                 secondOptions,
-                                /*expectSuccessfulEnlist=*/ expectSecondEnlistSuccess,
-                                vol2Completed);
+                                /*expectSuccessfulEnlist=*/expectSecondEnlistSuccess,
+                                vol2Completed
+                            );
                             vol.TransactionToEnlist = Transaction.Current;
                             Transaction.Current.EnlistVolatile(vol, firstOptions);
                         }
@@ -1434,8 +1737,11 @@ namespace System.Transactions.Tests
                 vol2Completed.Set();
             }
 
-            Assert.True(volCompleted.WaitOne(TimeSpan.FromSeconds(5)) && vol2Completed.WaitOne(TimeSpan.FromSeconds(5)) &&
-                pspeCompleted.WaitOne(TimeSpan.FromSeconds(5)));
+            Assert.True(
+                volCompleted.WaitOne(TimeSpan.FromSeconds(5))
+                    && vol2Completed.WaitOne(TimeSpan.FromSeconds(5))
+                    && pspeCompleted.WaitOne(TimeSpan.FromSeconds(5))
+            );
 
             Assert.False(vol.AbortedOutcome);
 
@@ -1472,14 +1778,15 @@ namespace System.Transactions.Tests
                     Guid distId = Transaction.Current.TransactionInformation.DistributedIdentifier;
                     Assert.Equal(Guid.Empty, distId);
 
-                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(NonMsdtcPromoterTests.PromoterType1,
+                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
+                        NonMsdtcPromoterTests.PromoterType1,
                         NonMsdtcPromoterTests.PromotedToken1,
                         pspeCompleted,
-                        /*nonMSDTC = */ true,
-                        /*tx = */ null,
-                        /*spcResponse=*/ TransactionStatus.Committed,
-                        /*expectRejection=*/ false
-                        );
+                        /*nonMSDTC = */true,
+                        /*tx = */null,
+                        /*spcResponse=*/TransactionStatus.Committed,
+                        /*expectRejection=*/false
+                    );
 
                     txStatus = Transaction.Current.TransactionInformation.Status;
                     Assert.Equal(TransactionStatus.Active, txStatus);
@@ -1510,7 +1817,7 @@ namespace System.Transactions.Tests
             string testCaseDescription = string.Format(
                 "TestCase_DisposeCommittableTransaction promote={0}",
                 promote
-                );
+            );
 
             Trace("**** " + testCaseDescription + " ****");
 
@@ -1523,14 +1830,15 @@ namespace System.Transactions.Tests
                 CommittableTransaction tx = new CommittableTransaction(TimeSpan.FromMinutes(1));
                 savedTransaction = tx.Clone();
 
-                pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(NonMsdtcPromoterTests.PromoterType1,
+                pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
+                    NonMsdtcPromoterTests.PromoterType1,
                     NonMsdtcPromoterTests.PromotedToken1,
                     pspeCompleted,
-                    /*nonMSDTC = */ true,
+                    /*nonMSDTC = */true,
                     tx,
-                    /*spcResponse=*/ TransactionStatus.Committed,
-                    /*expectRejection=*/ false
-                    );
+                    /*spcResponse=*/TransactionStatus.Committed,
+                    /*expectRejection=*/false
+                );
 
                 if (promote)
                 {
@@ -1569,7 +1877,7 @@ namespace System.Transactions.Tests
             string testCaseDescription = string.Format(
                 "TestCase_OutcomeRegistration promote={0}",
                 promote
-                );
+            );
 
             Trace("**** " + testCaseDescription + " ****");
 
@@ -1582,38 +1890,57 @@ namespace System.Transactions.Tests
             {
                 tx = new CommittableTransaction(TimeSpan.FromSeconds(5));
 
-                tx.TransactionCompleted += delegate (object sender, TransactionEventArgs completedArgs)
+                tx.TransactionCompleted += delegate(
+                    object sender,
+                    TransactionEventArgs completedArgs
+                )
                 {
                     Trace("Completed event registered before PSPE");
                     numberOfCompletions++;
-                    Assert.Equal(TransactionStatus.Committed, completedArgs.Transaction.TransactionInformation.Status);
+                    Assert.Equal(
+                        TransactionStatus.Committed,
+                        completedArgs.Transaction.TransactionInformation.Status
+                    );
                 };
 
-                pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(NonMsdtcPromoterTests.PromoterType1,
+                pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
+                    NonMsdtcPromoterTests.PromoterType1,
                     NonMsdtcPromoterTests.PromotedToken1,
                     pspeCompleted,
-                    /*nonMSDTC = */ true,
+                    /*nonMSDTC = */true,
                     tx,
-                    /*spcResponse=*/ TransactionStatus.Committed,
-                    /*expectRejection=*/ false
-                    );
+                    /*spcResponse=*/TransactionStatus.Committed,
+                    /*expectRejection=*/false
+                );
 
-                tx.TransactionCompleted += delegate (object sender, TransactionEventArgs completedArgs)
+                tx.TransactionCompleted += delegate(
+                    object sender,
+                    TransactionEventArgs completedArgs
+                )
                 {
                     Trace("Completed event registered after PSPE");
                     numberOfCompletions++;
-                    Assert.Equal(TransactionStatus.Committed, completedArgs.Transaction.TransactionInformation.Status);
+                    Assert.Equal(
+                        TransactionStatus.Committed,
+                        completedArgs.Transaction.TransactionInformation.Status
+                    );
                 };
 
                 if (promote)
                 {
                     Promote(testCaseDescription, NonMsdtcPromoterTests.PromotedToken1, tx);
 
-                    tx.TransactionCompleted += delegate (object sender, TransactionEventArgs completedArgs)
+                    tx.TransactionCompleted += delegate(
+                        object sender,
+                        TransactionEventArgs completedArgs
+                    )
                     {
                         Trace("Completed event registered after promote");
                         numberOfCompletions++;
-                        Assert.Equal(TransactionStatus.Committed, completedArgs.Transaction.TransactionInformation.Status);
+                        Assert.Equal(
+                            TransactionStatus.Committed,
+                            completedArgs.Transaction.TransactionInformation.Status
+                        );
                     };
                 }
 
@@ -1624,11 +1951,14 @@ namespace System.Transactions.Tests
                 Assert.Null(ex);
             }
 
-            tx.TransactionCompleted += delegate (object sender, TransactionEventArgs completedArgs)
+            tx.TransactionCompleted += delegate(object sender, TransactionEventArgs completedArgs)
             {
                 Trace("Completed event registered after commit");
                 numberOfCompletions++;
-                Assert.Equal(TransactionStatus.Committed, completedArgs.Transaction.TransactionInformation.Status);
+                Assert.Equal(
+                    TransactionStatus.Committed,
+                    completedArgs.Transaction.TransactionInformation.Status
+                );
             };
 
             Assert.True(pspeCompleted.WaitOne(TimeSpan.FromSeconds(5)));
@@ -1662,20 +1992,27 @@ namespace System.Transactions.Tests
                 {
                     Assert.Equal(Guid.Empty, TxPromoterType(Transaction.Current));
 
-                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(NonMsdtcPromoterTests.PromoterType1,
+                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
+                        NonMsdtcPromoterTests.PromoterType1,
                         NonMsdtcPromoterTests.PromotedToken1,
                         pspeCompleted,
-                        /*nonMSDTC = */ true,
-                        /*tx = */ null,
-                        /*spcResponse=*/ TransactionStatus.Committed,
-                        /*expectRejection=*/ false
-                        );
+                        /*nonMSDTC = */true,
+                        /*tx = */null,
+                        /*spcResponse=*/TransactionStatus.Committed,
+                        /*expectRejection=*/false
+                    );
 
-                    Assert.Equal(NonMsdtcPromoterTests.PromoterType1, TxPromoterType(Transaction.Current));
+                    Assert.Equal(
+                        NonMsdtcPromoterTests.PromoterType1,
+                        TxPromoterType(Transaction.Current)
+                    );
 
                     Promote(testCaseDescription, NonMsdtcPromoterTests.PromotedToken1);
 
-                    Assert.Equal(NonMsdtcPromoterTests.PromoterType1, TxPromoterType(Transaction.Current));
+                    Assert.Equal(
+                        NonMsdtcPromoterTests.PromoterType1,
+                        TxPromoterType(Transaction.Current)
+                    );
 
                     ts.Complete();
                 }
@@ -1706,27 +2043,34 @@ namespace System.Transactions.Tests
             {
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(NonMsdtcPromoterTests.PromoterType1,
+                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
+                        NonMsdtcPromoterTests.PromoterType1,
                         NonMsdtcPromoterTests.PromotedToken1,
                         pspeCompleted,
-                        /*nonMSDTC = */ true,
-                        /*tx = */ null,
-                        /*spcResponse=*/ TransactionStatus.Committed,
-                        /*expectRejection=*/ false,
-                        /*comparePromotedToken=*/ false,
-                        /*failInitialize=*/ true,
-                        /*failPromote=*/ false,
-                        /*failSPC=*/ false,
-                        /*failGetPromoterType=*/ false,
-                        /*failGetId=*/ false
-                        );
+                        /*nonMSDTC = */true,
+                        /*tx = */null,
+                        /*spcResponse=*/TransactionStatus.Committed,
+                        /*expectRejection=*/false,
+                        /*comparePromotedToken=*/false,
+                        /*failInitialize=*/true,
+                        /*failPromote=*/false,
+                        /*failSPC=*/false,
+                        /*failGetPromoterType=*/false,
+                        /*failGetId=*/false
+                    );
                     bool shouldNotBeExecuted = true;
                     Assert.False(shouldNotBeExecuted);
                 }
             }
             catch (Exception ex)
             {
-                Assert.True(ex is ApplicationException || (ex is TargetInvocationException && ex.InnerException is ApplicationException));
+                Assert.True(
+                    ex is ApplicationException
+                        || (
+                            ex is TargetInvocationException
+                            && ex.InnerException is ApplicationException
+                        )
+                );
             }
 
             Trace("Fail Promote");
@@ -1734,20 +2078,21 @@ namespace System.Transactions.Tests
             {
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(NonMsdtcPromoterTests.PromoterType1,
+                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
+                        NonMsdtcPromoterTests.PromoterType1,
                         NonMsdtcPromoterTests.PromotedToken1,
                         pspeCompleted,
-                        /*nonMSDTC = */ true,
-                        /*tx = */ null,
-                        /*spcResponse=*/ TransactionStatus.Committed,
-                        /*expectRejection=*/ false,
-                        /*comparePromotedToken=*/ false,
-                        /*failInitialize=*/ false,
-                        /*failPromote=*/ true,
-                        /*failSPC=*/ false,
-                        /*failGetPromoterType=*/ false,
-                        /*failGetId=*/ false
-                        );
+                        /*nonMSDTC = */true,
+                        /*tx = */null,
+                        /*spcResponse=*/TransactionStatus.Committed,
+                        /*expectRejection=*/false,
+                        /*comparePromotedToken=*/false,
+                        /*failInitialize=*/false,
+                        /*failPromote=*/true,
+                        /*failSPC=*/false,
+                        /*failGetPromoterType=*/false,
+                        /*failGetId=*/false
+                    );
 
                     Promote(testCaseDescription, NonMsdtcPromoterTests.PromotedToken1);
                     ts.Complete();
@@ -1755,7 +2100,13 @@ namespace System.Transactions.Tests
             }
             catch (Exception ex)
             {
-                Assert.True(ex is ApplicationException || (ex is TargetInvocationException && ex.InnerException is ApplicationException));
+                Assert.True(
+                    ex is ApplicationException
+                        || (
+                            ex is TargetInvocationException
+                            && ex.InnerException is ApplicationException
+                        )
+                );
             }
 
             // The NonMSDTCPromoterEnlistment is coded to set "Promoted" at the beginning of Promote, before
@@ -1769,20 +2120,21 @@ namespace System.Transactions.Tests
             {
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(NonMsdtcPromoterTests.PromoterType1,
+                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
+                        NonMsdtcPromoterTests.PromoterType1,
                         NonMsdtcPromoterTests.PromotedToken1,
                         pspeCompleted,
-                        /*nonMSDTC = */ true,
-                        /*tx = */ null,
-                        /*spcResponse=*/ TransactionStatus.Committed,
-                        /*expectRejection=*/ false,
-                        /*comparePromotedToken=*/ false,
-                        /*failInitialize=*/ false,
-                        /*failPromote=*/ false,
-                        /*failSPC=*/ true,
-                        /*failGetPromoterType=*/ false,
-                        /*failGetId=*/ false
-                        );
+                        /*nonMSDTC = */true,
+                        /*tx = */null,
+                        /*spcResponse=*/TransactionStatus.Committed,
+                        /*expectRejection=*/false,
+                        /*comparePromotedToken=*/false,
+                        /*failInitialize=*/false,
+                        /*failPromote=*/false,
+                        /*failSPC=*/true,
+                        /*failGetPromoterType=*/false,
+                        /*failGetId=*/false
+                    );
 
                     Promote(testCaseDescription, NonMsdtcPromoterTests.PromotedToken1);
                     ts.Complete();
@@ -1790,7 +2142,13 @@ namespace System.Transactions.Tests
             }
             catch (Exception ex)
             {
-                Assert.True(ex is ApplicationException || (ex is TargetInvocationException && ex.InnerException is ApplicationException));
+                Assert.True(
+                    ex is ApplicationException
+                        || (
+                            ex is TargetInvocationException
+                            && ex.InnerException is ApplicationException
+                        )
+                );
             }
 
             // The NonMSDTCPromoterEnlistment is coded to set "Promoted" at the beginning of Promote, before
@@ -1810,40 +2168,69 @@ namespace System.Transactions.Tests
 
             AutoResetEvent pspeCompleted = new AutoResetEvent(false);
             NonMSDTCPromoterEnlistment pspe = null;
-            NonMSDTCPromoterEnlistment dummyPSPE = new NonMSDTCPromoterEnlistment(NonMsdtcPromoterTests.PromoterType1, NonMsdtcPromoterTests.PromotedToken1, pspeCompleted);
+            NonMSDTCPromoterEnlistment dummyPSPE = new NonMSDTCPromoterEnlistment(
+                NonMsdtcPromoterTests.PromoterType1,
+                NonMsdtcPromoterTests.PromotedToken1,
+                pspeCompleted
+            );
 
             Guid guidToSet = new Guid("236BC646-FE3B-41F9-99F7-08BF448D8420");
 
             using (TransactionScope ts = new TransactionScope())
             {
                 Trace("Before EnlistPromotable");
-                Exception ex = Assert.ThrowsAny<Exception>(() => SetDistributedTransactionId(dummyPSPE, Transaction.Current, guidToSet));
-                Assert.True(ex is TransactionException || (ex is TargetInvocationException && ex.InnerException is TransactionException));
+                Exception ex = Assert.ThrowsAny<Exception>(() =>
+                    SetDistributedTransactionId(dummyPSPE, Transaction.Current, guidToSet)
+                );
+                Assert.True(
+                    ex is TransactionException
+                        || (
+                            ex is TargetInvocationException
+                            && ex.InnerException is TransactionException
+                        )
+                );
 
-                pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(NonMsdtcPromoterTests.PromoterType1,
+                pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
+                    NonMsdtcPromoterTests.PromoterType1,
                     NonMsdtcPromoterTests.PromotedToken1,
                     pspeCompleted,
-                    /*nonMSDTC = */ true,
-                    /*tx = */ null,
-                    /*spcResponse=*/ TransactionStatus.Committed,
-                    /*expectRejection=*/ false,
-                    /*comparePromotedToken=*/ false,
-                    /*failInitialize=*/ false,
-                    /*failPromote=*/ false,
-                    /*failSPC=*/ false,
-                    /*failGetPromoterType=*/ false,
-                    /*failGetId=*/ false
-                    );
+                    /*nonMSDTC = */true,
+                    /*tx = */null,
+                    /*spcResponse=*/TransactionStatus.Committed,
+                    /*expectRejection=*/false,
+                    /*comparePromotedToken=*/false,
+                    /*failInitialize=*/false,
+                    /*failPromote=*/false,
+                    /*failSPC=*/false,
+                    /*failGetPromoterType=*/false,
+                    /*failGetId=*/false
+                );
 
                 Trace("After EnlistPromotable");
-                ex = Assert.ThrowsAny<Exception>(() => SetDistributedTransactionId(dummyPSPE, Transaction.Current, guidToSet));
-                Assert.True(ex is TransactionException || (ex is TargetInvocationException && ex.InnerException is TransactionException));
+                ex = Assert.ThrowsAny<Exception>(() =>
+                    SetDistributedTransactionId(dummyPSPE, Transaction.Current, guidToSet)
+                );
+                Assert.True(
+                    ex is TransactionException
+                        || (
+                            ex is TargetInvocationException
+                            && ex.InnerException is TransactionException
+                        )
+                );
 
                 Promote(testCaseDescription, NonMsdtcPromoterTests.PromotedToken1);
 
                 Trace("After Promotion");
-                ex = Assert.ThrowsAny<Exception>(() => SetDistributedTransactionId(dummyPSPE, Transaction.Current, guidToSet));
-                Assert.True(ex is TransactionException || (ex is TargetInvocationException && ex.InnerException is TransactionException));
+                ex = Assert.ThrowsAny<Exception>(() =>
+                    SetDistributedTransactionId(dummyPSPE, Transaction.Current, guidToSet)
+                );
+                Assert.True(
+                    ex is TransactionException
+                        || (
+                            ex is TargetInvocationException
+                            && ex.InnerException is TransactionException
+                        )
+                );
 
                 ts.Complete();
             }
@@ -1872,21 +2259,22 @@ namespace System.Transactions.Tests
             {
                 using (TransactionScope ts = new TransactionScope())
                 {
-                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(NonMsdtcPromoterTests.PromoterType1,
+                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
+                        NonMsdtcPromoterTests.PromoterType1,
                         NonMsdtcPromoterTests.PromotedToken1,
                         pspeCompleted,
-                        /*nonMSDTC = */ true,
-                        /*tx = */ null,
-                        /*spcResponse=*/ TransactionStatus.Committed,
-                        /*expectRejection=*/ false,
-                        /*comparePromotedToken=*/ false,
-                        /*failInitialize=*/ false,
-                        /*failPromote=*/ false,
-                        /*failSPC=*/ false,
-                        /*failGetPromoterType=*/ false,
-                        /*failGetId=*/ false,
-                        /*incorrectNotificationObjectToSetDistributedTransactionId=*/ true
-                        );
+                        /*nonMSDTC = */true,
+                        /*tx = */null,
+                        /*spcResponse=*/TransactionStatus.Committed,
+                        /*expectRejection=*/false,
+                        /*comparePromotedToken=*/false,
+                        /*failInitialize=*/false,
+                        /*failPromote=*/false,
+                        /*failSPC=*/false,
+                        /*failGetPromoterType=*/false,
+                        /*failGetId=*/false,
+                        /*incorrectNotificationObjectToSetDistributedTransactionId=*/true
+                    );
 
                     Promote(testCaseDescription, NonMsdtcPromoterTests.PromotedToken1);
 
@@ -1917,9 +2305,26 @@ namespace System.Transactions.Tests
         {
             TestCase_VolatileEnlistments(1, TransactionStatus.Committed);
             TestCase_VolatileEnlistments(5, TransactionStatus.Committed);
-            TestCase_VolatileEnlistments(1, TransactionStatus.Aborted, EnlistmentOptions.None, false);
-            TestCase_VolatileEnlistments(5, TransactionStatus.Aborted, EnlistmentOptions.None, false);
-            TestCase_VolatileEnlistments(1, TransactionStatus.Aborted, EnlistmentOptions.None, true, false, typeof(TransactionAbortedException));
+            TestCase_VolatileEnlistments(
+                1,
+                TransactionStatus.Aborted,
+                EnlistmentOptions.None,
+                false
+            );
+            TestCase_VolatileEnlistments(
+                5,
+                TransactionStatus.Aborted,
+                EnlistmentOptions.None,
+                false
+            );
+            TestCase_VolatileEnlistments(
+                1,
+                TransactionStatus.Aborted,
+                EnlistmentOptions.None,
+                true,
+                false,
+                typeof(TransactionAbortedException)
+            );
         }
 
         /// <summary>
@@ -1934,7 +2339,11 @@ namespace System.Transactions.Tests
         [InlineData(true, true, TransactionStatus.Aborted)]
         [InlineData(true, false, TransactionStatus.InDoubt)]
         [InlineData(true, true, TransactionStatus.InDoubt)]
-        public void PSPENonMSDTCWithVolatileEnlistments(bool commit, bool promote, TransactionStatus spcResponse)
+        public void PSPENonMSDTCWithVolatileEnlistments(
+            bool commit,
+            bool promote,
+            TransactionStatus spcResponse
+        )
         {
             TestCase_PSPENonMsdtc(commit, promote, spcResponse);
             TestCase_PSPENonMsdtc(commit, promote, spcResponse, 1);
@@ -1955,7 +2364,11 @@ namespace System.Transactions.Tests
         [InlineData(true, true, TransactionStatus.Aborted)]
         [InlineData(true, false, TransactionStatus.InDoubt)]
         [InlineData(true, true, TransactionStatus.InDoubt)]
-        public void PSPENonMSDTCWithDependentClones(bool commit, bool promote, TransactionStatus spcResponse)
+        public void PSPENonMSDTCWithDependentClones(
+            bool commit,
+            bool promote,
+            TransactionStatus spcResponse
+        )
         {
             TestCase_PSPENonMsdtcWithClones(commit, promote, spcResponse);
             TestCase_PSPENonMsdtcWithClones(commit, promote, spcResponse, 1);
@@ -1994,7 +2407,10 @@ namespace System.Transactions.Tests
         /// PSPE Non-MSDTC Blocking Clone Completed After Commit.
         /// </summary>
         [OuterLoop] // long delay
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(false)]
         [InlineData(true)]
         public void PSPENonMsdtcBlockingCloneCompletedAfterCommit(bool promote)
@@ -2007,7 +2423,10 @@ namespace System.Transactions.Tests
         /// PSPE Non-MSDTC Timeout.
         /// </summary>
         [OuterLoop] // long timeout
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(false)]
         [InlineData(true)]
         public void PSPENonMsdtcTimeout(bool promote)
@@ -2020,20 +2439,73 @@ namespace System.Transactions.Tests
         /// PSPE Non-MSDTC Enlist During Phase 0.
         /// </summary>
         [Theory]
-        [InlineData(false, true, EnlistmentOptions.EnlistDuringPrepareRequired, EnlistmentOptions.EnlistDuringPrepareRequired, true)]
-        [InlineData(false, true, EnlistmentOptions.EnlistDuringPrepareRequired, EnlistmentOptions.None, true)]
-        [InlineData(true, true, EnlistmentOptions.EnlistDuringPrepareRequired, EnlistmentOptions.EnlistDuringPrepareRequired, true)]
-        [InlineData(true, true, EnlistmentOptions.EnlistDuringPrepareRequired, EnlistmentOptions.None, true)]
-        [InlineData(true, false, EnlistmentOptions.EnlistDuringPrepareRequired, EnlistmentOptions.EnlistDuringPrepareRequired, true)]
+        [InlineData(
+            false,
+            true,
+            EnlistmentOptions.EnlistDuringPrepareRequired,
+            EnlistmentOptions.EnlistDuringPrepareRequired,
+            true
+        )]
+        [InlineData(
+            false,
+            true,
+            EnlistmentOptions.EnlistDuringPrepareRequired,
+            EnlistmentOptions.None,
+            true
+        )]
+        [InlineData(
+            true,
+            true,
+            EnlistmentOptions.EnlistDuringPrepareRequired,
+            EnlistmentOptions.EnlistDuringPrepareRequired,
+            true
+        )]
+        [InlineData(
+            true,
+            true,
+            EnlistmentOptions.EnlistDuringPrepareRequired,
+            EnlistmentOptions.None,
+            true
+        )]
+        [InlineData(
+            true,
+            false,
+            EnlistmentOptions.EnlistDuringPrepareRequired,
+            EnlistmentOptions.EnlistDuringPrepareRequired,
+            true
+        )]
         [InlineData(false, true, EnlistmentOptions.None, EnlistmentOptions.None, false)]
-        [InlineData(true, true, EnlistmentOptions.None, EnlistmentOptions.EnlistDuringPrepareRequired, false)]
+        [InlineData(
+            true,
+            true,
+            EnlistmentOptions.None,
+            EnlistmentOptions.EnlistDuringPrepareRequired,
+            false
+        )]
         [InlineData(true, true, EnlistmentOptions.None, EnlistmentOptions.None, false)]
-        [InlineData(true, false, EnlistmentOptions.None, EnlistmentOptions.EnlistDuringPrepareRequired, false)]
+        [InlineData(
+            true,
+            false,
+            EnlistmentOptions.None,
+            EnlistmentOptions.EnlistDuringPrepareRequired,
+            false
+        )]
         [InlineData(true, false, EnlistmentOptions.None, EnlistmentOptions.None, false)]
         public void PSPENonMsdtcEnlistDuringPhase0(
-            bool promote, bool beforePromote, EnlistmentOptions options, EnlistmentOptions secondOptions, bool expectSecondEnlistSuccess)
+            bool promote,
+            bool beforePromote,
+            EnlistmentOptions options,
+            EnlistmentOptions secondOptions,
+            bool expectSecondEnlistSuccess
+        )
         {
-            TestCase_EnlistDuringPrepare(promote, beforePromote, options, secondOptions, expectSecondEnlistSuccess);
+            TestCase_EnlistDuringPrepare(
+                promote,
+                beforePromote,
+                options,
+                secondOptions,
+                expectSecondEnlistSuccess
+            );
         }
 
         /// <summary>
@@ -2061,7 +2533,10 @@ namespace System.Transactions.Tests
         /// <summary>
         /// PSPE Non-MSDTC Completed Event.
         /// </summary>
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(false)]
         [InlineData(true)]
         public void PSPENonMsdtcCompletedEvent(bool promote)

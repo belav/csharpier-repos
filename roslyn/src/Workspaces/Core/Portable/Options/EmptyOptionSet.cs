@@ -10,10 +10,12 @@ public abstract partial class OptionSet
 {
     private sealed class EmptyOptionSet : OptionSet
     {
-        internal override object? GetInternalOptionValue(OptionKey optionKey)
-            => optionKey.Option.DefaultValue;
+        internal override object? GetInternalOptionValue(OptionKey optionKey) =>
+            optionKey.Option.DefaultValue;
 
-        internal override OptionSet WithChangedOptionInternal(OptionKey optionKey, object? internalValue)
-            => throw new NotSupportedException();
+        internal override OptionSet WithChangedOptionInternal(
+            OptionKey optionKey,
+            object? internalValue
+        ) => throw new NotSupportedException();
     }
 }

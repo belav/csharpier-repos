@@ -41,7 +41,14 @@ namespace System.Web.Mvc.Razor
         {
             if (_modelStatementFound && _endInheritsLocation.HasValue)
             {
-                Context.OnError(_endInheritsLocation.Value, String.Format(CultureInfo.CurrentCulture, MvcResources.MvcRazorCodeParser_CannotHaveModelAndInheritsKeyword, ModelTypeKeyword));
+                Context.OnError(
+                    _endInheritsLocation.Value,
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        MvcResources.MvcRazorCodeParser_CannotHaveModelAndInheritsKeyword,
+                        ModelTypeKeyword
+                    )
+                );
             }
         }
 
@@ -65,13 +72,24 @@ namespace System.Web.Mvc.Razor
 
             if (_modelStatementFound)
             {
-                Context.OnError(endModelLocation, String.Format(CultureInfo.CurrentCulture, MvcResources.MvcRazorCodeParser_OnlyOneModelStatementIsAllowed, ModelTypeKeyword));
+                Context.OnError(
+                    endModelLocation,
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        MvcResources.MvcRazorCodeParser_OnlyOneModelStatementIsAllowed,
+                        ModelTypeKeyword
+                    )
+                );
             }
             _modelStatementFound = true;
 
             if (EndOfFile || At(VBSymbolType.WhiteSpace) || At(VBSymbolType.NewLine))
             {
-                Context.OnError(endModelLocation, MvcResources.MvcRazorCodeParser_ModelKeywordMustBeFollowedByTypeName, ModelTypeKeyword);
+                Context.OnError(
+                    endModelLocation,
+                    MvcResources.MvcRazorCodeParser_ModelKeywordMustBeFollowedByTypeName,
+                    ModelTypeKeyword
+                );
             }
 
             // Just accept to a newline

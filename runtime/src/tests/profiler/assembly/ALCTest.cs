@@ -9,13 +9,22 @@ namespace Profiler.Tests
 {
     class ALCTest
     {
-        static readonly Guid AssemblyProfilerGuid = new Guid("19A49007-9E58-4E31-B655-83EC3B924E7B");
+        static readonly Guid AssemblyProfilerGuid = new Guid(
+            "19A49007-9E58-4E31-B655-83EC3B924E7B"
+        );
 
         public static int RunTest(String[] args)
         {
-            string currentAssemblyDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            string testAssemblyFullPath = Path.Combine(currentAssemblyDirectory, "..", "TestFile", "TestFile.dll");
-            
+            string currentAssemblyDirectory = Path.GetDirectoryName(
+                Assembly.GetExecutingAssembly().Location
+            );
+            string testAssemblyFullPath = Path.Combine(
+                currentAssemblyDirectory,
+                "..",
+                "TestFile",
+                "TestFile.dll"
+            );
+
             int exitCode = TestLibrary.Utilities.ExecuteAndUnload(testAssemblyFullPath, args);
             return exitCode;
         }
@@ -27,9 +36,11 @@ namespace Profiler.Tests
                 return RunTest(args);
             }
 
-            return ProfilerTestRunner.Run(profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
-                                          testName: "ALCTest",
-                                          profilerClsid: AssemblyProfilerGuid);
+            return ProfilerTestRunner.Run(
+                profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
+                testName: "ALCTest",
+                profilerClsid: AssemblyProfilerGuid
+            );
         }
     }
 }

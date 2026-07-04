@@ -12,9 +12,12 @@ namespace System.ComponentModel.Composition
 {
     internal static class ExceptionBuilder
     {
-        public static Exception CreateDiscoveryException(string messageFormat, params string[] arguments)
+        public static Exception CreateDiscoveryException(
+            string messageFormat,
+            params string[] arguments
+        )
         {
-            // DiscoveryError (Dev10:602872): This should go through the discovery error reporting when 
+            // DiscoveryError (Dev10:602872): This should go through the discovery error reporting when
             // we add a way to report discovery errors properly.
             return new InvalidOperationException(Format(messageFormat, arguments));
         }
@@ -44,7 +47,9 @@ namespace System.ComponentModel.Composition
             return new NotImplementedException(message);
         }
 
-        public static ArgumentException CreateExportDefinitionNotOnThisComposablePart(string parameterName)
+        public static ArgumentException CreateExportDefinitionNotOnThisComposablePart(
+            string parameterName
+        )
         {
             Assumes.NotNullOrEmpty(parameterName);
 
@@ -53,7 +58,9 @@ namespace System.ComponentModel.Composition
             return new ArgumentException(message, parameterName);
         }
 
-        public static ArgumentException CreateImportDefinitionNotOnThisComposablePart(string parameterName)
+        public static ArgumentException CreateImportDefinitionNotOnThisComposablePart(
+            string parameterName
+        )
         {
             Assumes.NotNullOrEmpty(parameterName);
 
@@ -62,20 +69,35 @@ namespace System.ComponentModel.Composition
             return new ArgumentException(message, parameterName);
         }
 
-        public static CompositionException CreateCannotGetExportedValue(ComposablePart part, ExportDefinition definition, Exception innerException)
+        public static CompositionException CreateCannotGetExportedValue(
+            ComposablePart part,
+            ExportDefinition definition,
+            Exception innerException
+        )
         {
             Assumes.NotNull(part, definition, innerException);
 
             return new CompositionException(
-                ErrorBuilder.CreateCannotGetExportedValue(part, definition, innerException));
+                ErrorBuilder.CreateCannotGetExportedValue(part, definition, innerException)
+            );
         }
 
-        public static ArgumentException CreateReflectionModelInvalidPartDefinition(string parameterName, Type partDefinitionType)
+        public static ArgumentException CreateReflectionModelInvalidPartDefinition(
+            string parameterName,
+            Type partDefinitionType
+        )
         {
             Assumes.NotNullOrEmpty(parameterName);
             Assumes.NotNull(partDefinitionType);
 
-            return new ArgumentException(string.Format(CultureInfo.CurrentCulture, Strings.ReflectionModel_InvalidPartDefinition, partDefinitionType), parameterName);
+            return new ArgumentException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    Strings.ReflectionModel_InvalidPartDefinition,
+                    partDefinitionType
+                ),
+                parameterName
+            );
         }
 
         public static ArgumentException ExportFactory_TooManyGenericParameters(string typeName)

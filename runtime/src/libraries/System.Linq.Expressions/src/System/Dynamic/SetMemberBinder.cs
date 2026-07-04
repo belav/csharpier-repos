@@ -47,7 +47,10 @@ namespace System.Dynamic
         /// <param name="target">The target of the dynamic set member operation.</param>
         /// <param name="args">An array of arguments of the dynamic set member operation.</param>
         /// <returns>The <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        public sealed override DynamicMetaObject Bind(DynamicMetaObject target, DynamicMetaObject[] args)
+        public sealed override DynamicMetaObject Bind(
+            DynamicMetaObject target,
+            DynamicMetaObject[] args
+        )
         {
             ArgumentNullException.ThrowIfNull(target);
             ArgumentNullException.ThrowIfNull(args);
@@ -70,7 +73,10 @@ namespace System.Dynamic
         /// <param name="target">The target of the dynamic set member operation.</param>
         /// <param name="value">The value to set to the member.</param>
         /// <returns>The <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        public DynamicMetaObject FallbackSetMember(DynamicMetaObject target, DynamicMetaObject value)
+        public DynamicMetaObject FallbackSetMember(
+            DynamicMetaObject target,
+            DynamicMetaObject value
+        )
         {
             return FallbackSetMember(target, value, null);
         }
@@ -82,6 +88,10 @@ namespace System.Dynamic
         /// <param name="value">The value to set to the member.</param>
         /// <param name="errorSuggestion">The binding result to use if binding fails, or null.</param>
         /// <returns>The <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        public abstract DynamicMetaObject FallbackSetMember(DynamicMetaObject target, DynamicMetaObject value, DynamicMetaObject? errorSuggestion);
+        public abstract DynamicMetaObject FallbackSetMember(
+            DynamicMetaObject target,
+            DynamicMetaObject value,
+            DynamicMetaObject? errorSuggestion
+        );
     }
 }

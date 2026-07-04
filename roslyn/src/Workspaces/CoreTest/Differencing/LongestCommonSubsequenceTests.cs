@@ -5,9 +5,9 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text;
 using Xunit;
-using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.Differencing.UnitTests
 {
@@ -17,20 +17,29 @@ namespace Microsoft.CodeAnalysis.Differencing.UnitTests
 
         private class LongestCommonSubsequenceString : LongestCommonSubsequence<string>
         {
-            protected override bool ItemsEqual(string oldSequence, int oldIndex, string newSequence, int newIndex)
-                => oldSequence[oldIndex] == newSequence[newIndex];
+            protected override bool ItemsEqual(
+                string oldSequence,
+                int oldIndex,
+                string newSequence,
+                int newIndex
+            ) => oldSequence[oldIndex] == newSequence[newIndex];
 
-            public IEnumerable<KeyValuePair<int, int>> GetMatchingPairs(string oldSequence, string newSequence)
-                => GetMatchingPairs(oldSequence, oldSequence.Length, newSequence, newSequence.Length);
+            public IEnumerable<KeyValuePair<int, int>> GetMatchingPairs(
+                string oldSequence,
+                string newSequence
+            ) => GetMatchingPairs(oldSequence, oldSequence.Length, newSequence, newSequence.Length);
 
-            public IEnumerable<SequenceEdit> GetEdits(string oldSequence, string newSequence)
-                => GetEdits(oldSequence, oldSequence.Length, newSequence, newSequence.Length);
+            public IEnumerable<SequenceEdit> GetEdits(string oldSequence, string newSequence) =>
+                GetEdits(oldSequence, oldSequence.Length, newSequence, newSequence.Length);
 
-            public double ComputeDistance(string oldSequence, string newSequence)
-                => ComputeDistance(oldSequence, oldSequence.Length, newSequence, newSequence.Length);
+            public double ComputeDistance(string oldSequence, string newSequence) =>
+                ComputeDistance(oldSequence, oldSequence.Length, newSequence, newSequence.Length);
         }
 
-        private static void VerifyMatchingPairs(IEnumerable<KeyValuePair<int, int>> actualPairs, string expectedPairsStr)
+        private static void VerifyMatchingPairs(
+            IEnumerable<KeyValuePair<int, int>> actualPairs,
+            string expectedPairsStr
+        )
         {
             var sb = new StringBuilder(expectedPairsStr.Length);
             foreach (var actPair in actualPairs)
@@ -42,7 +51,11 @@ namespace Microsoft.CodeAnalysis.Differencing.UnitTests
             Assert.Equal(expectedPairsStr, actualPairsStr);
         }
 
-        private static void VerifyEdits(string oldStr, string newStr, IEnumerable<SequenceEdit> edits)
+        private static void VerifyEdits(
+            string oldStr,
+            string newStr,
+            IEnumerable<SequenceEdit> edits
+        )
         {
             var oldChars = oldStr.ToCharArray();
             var newChars = new char[newStr.Length];
@@ -74,7 +87,13 @@ namespace Microsoft.CodeAnalysis.Differencing.UnitTests
             var editedStr = new String(newChars);
             Assert.Equal(editedStr, newStr);
 
-            Array.ForEach(oldChars, (c) => { Assert.Equal('\0', c); });
+            Array.ForEach(
+                oldChars,
+                (c) =>
+                {
+                    Assert.Equal('\0', c);
+                }
+            );
         }
 
         [Fact]

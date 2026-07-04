@@ -4,13 +4,13 @@
 namespace System.ServiceModel.ComIntegration
 {
     using System;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
-    using System.Globalization;
-    using System.Runtime.Serialization;
-    using System.Runtime.InteropServices;
     using System.ComponentModel;
+    using System.Globalization;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
 
     static class Error
     {
@@ -18,87 +18,105 @@ namespace System.ServiceModel.ComIntegration
 
         public static Exception ActivationAccessDenied()
         {
-            return CreateFault("ComActivationAccessDenied",
-                            SR.GetString(SR.ComActivationAccessDenied));
+            return CreateFault(
+                "ComActivationAccessDenied",
+                SR.GetString(SR.ComActivationAccessDenied)
+            );
         }
 
         public static Exception QFENotPresent()
         {
-            return CreateFault("ServiceHostStartingServiceErrorNoQFE",
-                            SR.GetString(SR.ComPlusServiceHostStartingServiceErrorNoQFE));
+            return CreateFault(
+                "ServiceHostStartingServiceErrorNoQFE",
+                SR.GetString(SR.ComPlusServiceHostStartingServiceErrorNoQFE)
+            );
         }
 
         public static Exception DirectoryNotFound(string directory)
         {
-            return CreateFault("DirectoryNotFound",
-                            SR.GetString(SR.TempDirectoryNotFound, directory));
+            return CreateFault(
+                "DirectoryNotFound",
+                SR.GetString(SR.TempDirectoryNotFound, directory)
+            );
         }
 
         public static Exception CannotAccessDirectory(string directory)
         {
-            return CreateFault("CannotAccessDirectory",
-                            SR.GetString(SR.CannotAccessDirectory, directory));
+            return CreateFault(
+                "CannotAccessDirectory",
+                SR.GetString(SR.CannotAccessDirectory, directory)
+            );
         }
 
         public static Exception ManifestCreationFailed(string file, string error)
         {
-            return CreateFault("ManifestCreationFailed",
-                            SR.GetString(SR.ComIntegrationManifestCreationFailed, file, error));
+            return CreateFault(
+                "ManifestCreationFailed",
+                SR.GetString(SR.ComIntegrationManifestCreationFailed, file, error)
+            );
         }
 
         public static Exception ActivationFailure()
         {
-            return CreateFault("ComActivationFailure",
-                            SR.GetString(SR.ComActivationFailure));
+            return CreateFault("ComActivationFailure", SR.GetString(SR.ComActivationFailure));
         }
 
         public static Exception UnexpectedThreadingModel()
         {
-            return CreateFault("UnexpectedThreadingModel",
-                            SR.GetString(SR.UnexpectedThreadingModel));
+            return CreateFault(
+                "UnexpectedThreadingModel",
+                SR.GetString(SR.UnexpectedThreadingModel)
+            );
         }
 
         public static Exception DllHostInitializerFoundNoServices()
         {
-            return CreateFault("DllHostInitializerFoundNoServices",
-                            SR.GetString(SR.ComDllHostInitializerFoundNoServices));
+            return CreateFault(
+                "DllHostInitializerFoundNoServices",
+                SR.GetString(SR.ComDllHostInitializerFoundNoServices)
+            );
         }
 
         public static Exception ServiceMonikerSupportLoadFailed(string dllname)
         {
-            return CreateFault("UnableToLoadServiceMonikerSupportDll",
-                            SR.GetString(SR.UnableToLoadDll, dllname));
+            return CreateFault(
+                "UnableToLoadServiceMonikerSupportDll",
+                SR.GetString(SR.UnableToLoadDll, dllname)
+            );
         }
-
 
         public static Exception CallAccessDenied()
         {
-            return CreateFault("ComAccessDenied",
-                            SR.GetString(SR.ComMessageAccessDenied));
+            return CreateFault("ComAccessDenied", SR.GetString(SR.ComMessageAccessDenied));
         }
 
         public static Exception RequiresWindowsSecurity()
         {
-            return CreateFault("ComWindowsIdentityRequired",
-                            SR.GetString(SR.ComRequiresWindowsSecurity));
+            return CreateFault(
+                "ComWindowsIdentityRequired",
+                SR.GetString(SR.ComRequiresWindowsSecurity)
+            );
         }
 
         public static Exception NoAsyncOperationsAllowed()
         {
-            return CreateFault("NoAsyncOperationsAllowed",
-                            SR.GetString(SR.ComNoAsyncOperationsAllowed));
+            return CreateFault(
+                "NoAsyncOperationsAllowed",
+                SR.GetString(SR.ComNoAsyncOperationsAllowed)
+            );
         }
 
         public static Exception DuplicateOperation()
         {
-            return CreateFault("DuplicateOperation",
-                            SR.GetString(SR.ComDuplicateOperation));
+            return CreateFault("DuplicateOperation", SR.GetString(SR.ComDuplicateOperation));
         }
 
         public static Exception InconsistentSessionRequirements()
         {
-            return CreateFault("ComInconsistentSessionRequirements",
-                            SR.GetString(SR.ComInconsistentSessionRequirements));
+            return CreateFault(
+                "ComInconsistentSessionRequirements",
+                SR.GetString(SR.ComInconsistentSessionRequirements)
+            );
         }
 
         public static Exception TransactionMismatch()
@@ -107,8 +125,7 @@ namespace System.ServiceModel.ComIntegration
             //       created by the TransactionBehavior when
             //       concurrent transactions are not supported.
             //
-            return CreateFault("Transactions",
-                            SR.GetString(SR.SFxTransactionsNotSupported));
+            return CreateFault("Transactions", SR.GetString(SR.SFxTransactionsNotSupported));
         }
 
         public static Exception ListenerInitFailed(string message)
@@ -116,12 +133,10 @@ namespace System.ServiceModel.ComIntegration
             return new ComPlusListenerInitializationException(message);
         }
 
-        public static Exception ListenerInitFailed(string message,
-                                                   Exception inner)
+        public static Exception ListenerInitFailed(string message, Exception inner)
         {
             return new ComPlusListenerInitializationException(message, inner);
         }
-
 
         static Exception CreateFault(string code, string reason)
         {
@@ -136,31 +151,25 @@ namespace System.ServiceModel.ComIntegration
     internal class ComPlusListenerInitializationException : Exception
     {
         public ComPlusListenerInitializationException()
-            : base()
-        {
-        }
-        public ComPlusListenerInitializationException(string message)
-            : base(message)
-        {
-        }
+            : base() { }
 
-        public ComPlusListenerInitializationException(string message,
-                                                      Exception inner)
-            : base(message, inner)
-        {
-        }
-        protected ComPlusListenerInitializationException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+        public ComPlusListenerInitializationException(string message)
+            : base(message) { }
+
+        public ComPlusListenerInitializationException(string message, Exception inner)
+            : base(message, inner) { }
+
+        protected ComPlusListenerInitializationException(
+            SerializationInfo info,
+            StreamingContext context
+        )
+            : base(info, context) { }
     }
 
     [Serializable]
     internal class ComPlusProxyProviderException : Exception
     {
         public ComPlusProxyProviderException(string message, Exception inner)
-            : base(message, inner)
-        {
-        }
+            : base(message, inner) { }
     }
 }

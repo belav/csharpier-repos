@@ -9,17 +9,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 {
     internal static class DirectiveCompletionProviderUtilities
     {
-        internal static bool TryGetStringLiteralToken(SyntaxTree tree, int position, SyntaxKind directiveKind, out SyntaxToken stringLiteral, CancellationToken cancellationToken)
+        internal static bool TryGetStringLiteralToken(
+            SyntaxTree tree,
+            int position,
+            SyntaxKind directiveKind,
+            out SyntaxToken stringLiteral,
+            CancellationToken cancellationToken
+        )
         {
             if (tree.IsEntirelyWithinStringLiteral(position, cancellationToken))
             {
-                var token = tree.GetRoot(cancellationToken).FindToken(position, findInsideTrivia: true);
+                var token = tree.GetRoot(cancellationToken)
+                    .FindToken(position, findInsideTrivia: true);
                 if (token.Kind() is SyntaxKind.EndOfDirectiveToken or SyntaxKind.EndOfFileToken)
                 {
                     token = token.GetPreviousToken(includeSkipped: true, includeDirectives: true);
                 }
 
-                if (token.Kind() == SyntaxKind.StringLiteralToken && token.Parent!.Kind() == directiveKind)
+                if (
+                    token.Kind() == SyntaxKind.StringLiteralToken
+                    && token.Parent!.Kind() == directiveKind
+                )
                 {
                     stringLiteral = token;
                     return true;

@@ -20,39 +20,21 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     {
         First = 1,
         Second = 2,
-        Third = 3
+        Third = 3,
     }
 
     public class MemberClass<T>
     {
-        public string Property_string
-        {
-            set;
-            get;
-        }
+        public string Property_string { set; get; }
 
-        public float?[] Property_FloatNullArr
-        {
-            get;
-            set;
-        }
+        public float?[] Property_FloatNullArr { get; set; }
 
-        public dynamic Property_Dynamic
-        {
-            get;
-            set;
-        }
+        public dynamic Property_Dynamic { get; set; }
 
-        public T Property_T
-        {
-            get;
-            set;
-        }
+        public T Property_T { get; set; }
         // Move declarations to the call site
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.genclass.genclass001.genclass001
 {
@@ -77,12 +59,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
             MemberClass<int> mc = new MemberClass<int>();
             mc.Property_string = "Test";
             dynamic dy = mc;
-            Func<string> func = delegate ()
+            Func<string> func = delegate()
             {
                 return dy.Property_string;
-            }
-
-            ;
+            };
             if (func() == "Test")
                 return 0;
             else
@@ -92,8 +72,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.genclass.genclass002.genclass002
 {
     // <Title> Tests generic class auto property used in query expression.</Title>
@@ -102,8 +80,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
     // <Code>
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class Test
     {
@@ -115,12 +93,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
 
         public static int MainMethod()
         {
-            var list = new List<string>()
-            {
-            null, "b", null, "a"
-            }
-
-            ;
+            var list = new List<string>() { null, "b", null, "a" };
             var mc = new MemberClass<string>();
             mc.Property_Dynamic = "a";
             dynamic dy = mc;
@@ -132,8 +105,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.genclass.genclass003.genclass003
 {
@@ -164,10 +135,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
             {
                 (string)dy.Property_string,
                 (string)dy.Property_T,
-                (string)dy.Property_Dynamic
-            }
-
-            ;
+                (string)dy.Property_Dynamic,
+            };
             if (list.Count == 3 && list[0] == "Test1" && list[1] == "Test2" && list[2] == "Test3")
                 return 0;
             else
@@ -176,8 +145,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.genclass.genclass005.genclass005
 {
@@ -203,12 +170,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
         {
             var mc = new MemberClass<Test>();
             dynamic dy = mc;
-            dy.Property_T = new Test()
-            {
-                _field = 10
-            }
-
-            ;
+            dy.Property_T = new Test() { _field = 10 };
             Func<int, int, Test> func = (int arg1, int arg2) => dy.Property_T;
             if (func(1, 2)._field == 10)
                 return 0;
@@ -218,8 +180,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.genclass.genclass006.genclass006
 {
@@ -268,8 +228,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.genclass.genclass007.genclass007
 {
     // <Title> Tests generic class auto property used inside #if, #else block.</Title>
@@ -295,11 +253,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
         public static int TestMethod()
         {
 #if c1
-MemberClass<int> mc = new MemberClass<int>();
-mc.Property_T = 0;
-dynamic dy = mc;
-return dy.Property_T;
- #else
+            MemberClass<int> mc = new MemberClass<int>();
+            mc.Property_T = 0;
+            dynamic dy = mc;
+            return dy.Property_T;
+#else
             MemberClass<int> mc = new MemberClass<int>();
             mc.Property_T = 1;
             dynamic dy = mc;
@@ -309,8 +267,6 @@ return dy.Property_T;
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.genclass.genclass008.genclass008
 {
@@ -371,8 +327,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.genclass.genclass009.genclass009
 {
     // <Title> Tests generic class auto property used in implicitly-typed variable initializer.</Title>
@@ -397,13 +351,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
             mc.Property_string = null;
             mc.Property_T = string.Empty;
             dynamic dy = mc;
-            var result = new object[]
-            {
-            dy.Property_Dynamic, dy.Property_string, dy.Property_T
-            }
-
-            ;
-            if (result.Length == 3 && (int)result[0] == 10 && result[1] == null && (string)result[2] == string.Empty)
+            var result = new object[] { dy.Property_Dynamic, dy.Property_string, dy.Property_T };
+            if (
+                result.Length == 3
+                && (int)result[0] == 10
+                && result[1] == null
+                && (string)result[2] == string.Empty
+            )
                 return 0;
             else
                 return 1;
@@ -411,8 +365,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.genclass.genclass010.genclass010
 {
@@ -428,17 +380,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
         public class InnerTest1
         {
             public int field;
+
             public static implicit operator InnerTest2(InnerTest1 t1)
             {
                 MemberClass<object> mc = new MemberClass<object>();
                 mc.Property_Dynamic = t1.field;
                 dynamic dy = mc;
-                return new InnerTest2()
-                {
-                    field = dy.Property_Dynamic
-                }
-
-                ;
+                return new InnerTest2() { field = dy.Property_Dynamic };
             }
         }
 
@@ -455,12 +403,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
 
         public static int MainMethod()
         {
-            InnerTest1 t1 = new InnerTest1()
-            {
-                field = 10
-            }
-
-            ;
+            InnerTest1 t1 = new InnerTest1() { field = 10 };
             InnerTest2 result1 = t1; //implicit
             InnerTest2 result2 = (InnerTest2)t1; //explicit
             return (result1.field == 10 && result2.field == 10) ? 0 : 1;
@@ -468,8 +411,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autoproperty.genclass.genclass012.genclass012
 {
@@ -506,12 +447,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
             var mc = new MemberClass<string>();
             mc.Property_T = s;
             dynamic dy = mc;
-            return new Test()
-            {
-                Field = dy.Property_T
-            }
-
-            ;
+            return new Test() { Field = dy.Property_T };
         }
     }
     //</Code>

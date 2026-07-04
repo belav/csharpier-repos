@@ -23,13 +23,11 @@ namespace PinStress
             _freed = false;
         }
 
-
         ~Node()
         {
             // in case someone forgets to call Free()
             Free();
         }
-
 
         public void Free()
         {
@@ -42,17 +40,11 @@ namespace PinStress
             }
         }
 
-
         public bool IsFree
         {
-            get
-            {
-                return _freed;
-            }
+            get { return _freed; }
         }
     }
-
-
 
     public class PinStress
     {
@@ -83,7 +75,14 @@ namespace PinStress
                     return 0;
                 }
 
-                if (!Single.TryParse(args[1], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out percentDelete))
+                if (
+                    !Single.TryParse(
+                        args[1],
+                        System.Globalization.NumberStyles.Float,
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        out percentDelete
+                    )
+                )
                 {
                     Console.WriteLine("Invalid percentDelete");
                     return 0;
@@ -94,7 +93,14 @@ namespace PinStress
                     return 0;
                 }
 
-                if (!Single.TryParse(args[2], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out percentFree))
+                if (
+                    !Single.TryParse(
+                        args[2],
+                        System.Globalization.NumberStyles.Float,
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        out percentFree
+                    )
+                )
                 {
                     Console.WriteLine("Invalid percentFree");
                     return 0;
@@ -124,7 +130,9 @@ namespace PinStress
             }
             else
             {
-                Console.WriteLine("USAGE: pinstress.exe <randomSeed> <percentDelete> <percentFree> <numNodes> <numPasses>");
+                Console.WriteLine(
+                    "USAGE: pinstress.exe <randomSeed> <percentDelete> <percentFree> <numNodes> <numPasses>"
+                );
                 Console.WriteLine("\t where percent* is a float between 0.0 and 1.0");
                 return 0;
             }

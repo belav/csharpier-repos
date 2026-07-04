@@ -1,5 +1,5 @@
-// 
-// System.Runtime.Remoting.Messaging/AsyncResult.cs 
+//
+// System.Runtime.Remoting.Messaging/AsyncResult.cs
 //
 // Authors:
 //   Joe Shaw (joe@ximian.com)
@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,168 +31,157 @@
 //
 
 using System;
-using System.Threading;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Threading;
 
-namespace System.Runtime.Remoting.Messaging {
-
-[System.Runtime.InteropServices.ComVisible (true)]
-[StructLayout (LayoutKind.Sequential)]
-public class AsyncResult : IAsyncResult, IMessageSink, IThreadPoolWorkItem {
-
+namespace System.Runtime.Remoting.Messaging
+{
+    [System.Runtime.InteropServices.ComVisible(true)]
+    [StructLayout(LayoutKind.Sequential)]
+    public class AsyncResult : IAsyncResult, IMessageSink, IThreadPoolWorkItem
+    {
 #pragma warning disable 169, 414, 649
-	object async_state;
-	WaitHandle handle;
-	object async_delegate;
-	IntPtr data;
-	object object_data;
-	bool sync_completed;
-	bool completed;
-	bool endinvoke_called;
-	object async_callback;
-	ExecutionContext current;
-	ExecutionContext original;
-	long add_time;
+        object async_state;
+        WaitHandle handle;
+        object async_delegate;
+        IntPtr data;
+        object object_data;
+        bool sync_completed;
+        bool completed;
+        bool endinvoke_called;
+        object async_callback;
+        ExecutionContext current;
+        ExecutionContext original;
+        long add_time;
 #pragma warning restore 169, 414, 649
 
 #if !DISABLE_REMOTING
-	// not part of MonoAsyncResult...
-	MonoMethodMessage call_message;
+        // not part of MonoAsyncResult...
+        MonoMethodMessage call_message;
 #endif
 #pragma warning disable 0414
-	IMessageCtrl message_ctrl;
+        IMessageCtrl message_ctrl;
 #pragma warning restore
-	IMessage reply_message;
-	WaitCallback orig_cb;
-	
-	internal AsyncResult ()
-	{
-	}
+        IMessage reply_message;
+        WaitCallback orig_cb;
 
-	public virtual object AsyncState
-	{
-		get {
-			return async_state;
-		}
-	}
+        internal AsyncResult() { }
 
-	public virtual WaitHandle AsyncWaitHandle {
-		get {
-			lock (this) {
-				if (handle == null)
-					handle = new ManualResetEvent (completed);
+        public virtual object AsyncState
+        {
+            get { return async_state; }
+        }
 
-				return handle;
-			}
-		}
-	}
+        public virtual WaitHandle AsyncWaitHandle
+        {
+            get
+            {
+                lock (this)
+                {
+                    if (handle == null)
+                        handle = new ManualResetEvent(completed);
 
-	public virtual bool CompletedSynchronously
-	{
-		get {
-			return sync_completed;
-		}
-	}
+                    return handle;
+                }
+            }
+        }
 
-	public virtual bool IsCompleted
-	{
-		get {
-			return completed;
-		}
-	}
-		
-	public bool EndInvokeCalled
-	{
-		get {
-			return endinvoke_called;
-		}
-		set {
-			endinvoke_called = value;
-		}
-	}
-		
-	public virtual object AsyncDelegate
-	{
-		get {
-			return async_delegate;
-		}
-	}
+        public virtual bool CompletedSynchronously
+        {
+            get { return sync_completed; }
+        }
 
-	public IMessageSink NextSink {
-		get {
-			return null;
-		}
-	}
+        public virtual bool IsCompleted
+        {
+            get { return completed; }
+        }
 
-	public virtual IMessageCtrl AsyncProcessMessage (IMessage msg, IMessageSink replySink)
-	{
-		// Never called
-		throw new NotSupportedException ();
-	}
+        public bool EndInvokeCalled
+        {
+            get { return endinvoke_called; }
+            set { endinvoke_called = value; }
+        }
 
-	public virtual IMessage GetReplyMessage()
-	{
-		return reply_message;
-	}
+        public virtual object AsyncDelegate
+        {
+            get { return async_delegate; }
+        }
 
-	public virtual void SetMessageCtrl (IMessageCtrl mc)
-	{
-		message_ctrl = mc;
-	}
+        public IMessageSink NextSink
+        {
+            get { return null; }
+        }
 
-	internal void SetCompletedSynchronously (bool completed)
-	{
-		sync_completed = completed;
-	}
+        public virtual IMessageCtrl AsyncProcessMessage(IMessage msg, IMessageSink replySink)
+        {
+            // Never called
+            throw new NotSupportedException();
+        }
 
-	internal IMessage EndInvoke ()
-	{
-		lock (this) {
-			if (completed)
-				return reply_message;
-		}
+        public virtual IMessage GetReplyMessage()
+        {
+            return reply_message;
+        }
 
-		AsyncWaitHandle.WaitOne ();
-		return reply_message;
-	}
+        public virtual void SetMessageCtrl(IMessageCtrl mc)
+        {
+            message_ctrl = mc;
+        }
 
-	public virtual IMessage SyncProcessMessage (IMessage msg)
-	{
-		reply_message = msg;
+        internal void SetCompletedSynchronously(bool completed)
+        {
+            sync_completed = completed;
+        }
 
-		lock (this) {
-			completed = true;
-			if (handle != null)
-				((ManualResetEvent) AsyncWaitHandle).Set ();
-		}
-		
-		if (async_callback != null) {
-			AsyncCallback ac = (AsyncCallback) async_callback;
-			ac (this);
-		}
+        internal IMessage EndInvoke()
+        {
+            lock (this)
+            {
+                if (completed)
+                    return reply_message;
+            }
 
-		return null;
-	}
-	
+            AsyncWaitHandle.WaitOne();
+            return reply_message;
+        }
+
+        public virtual IMessage SyncProcessMessage(IMessage msg)
+        {
+            reply_message = msg;
+
+            lock (this)
+            {
+                completed = true;
+                if (handle != null)
+                    ((ManualResetEvent)AsyncWaitHandle).Set();
+            }
+
+            if (async_callback != null)
+            {
+                AsyncCallback ac = (AsyncCallback)async_callback;
+                ac(this);
+            }
+
+            return null;
+        }
+
 #if !DISABLE_REMOTING
-	internal MonoMethodMessage CallMessage
-	{
-		get { return call_message; }
-		set { call_message = value; }
-	}
+        internal MonoMethodMessage CallMessage
+        {
+            get { return call_message; }
+            set { call_message = value; }
+        }
 #endif
 
-	void IThreadPoolWorkItem.ExecuteWorkItem()
-	{
-		Invoke ();
-	}
+        void IThreadPoolWorkItem.ExecuteWorkItem()
+        {
+            Invoke();
+        }
 
-	void IThreadPoolWorkItem.MarkAborted(ThreadAbortException tae)
-	{
-	}
+        void IThreadPoolWorkItem.MarkAborted(ThreadAbortException tae) { }
 
-	[MethodImplAttribute(MethodImplOptions.InternalCall)]
-	internal extern object Invoke ();
-}
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal extern object Invoke();
+    }
 }

@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Discovery.ExcludePathInfo.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,36 +30,36 @@
 
 using System.Xml.Serialization;
 
-namespace System.Web.Services.Discovery {
-	public sealed class ExcludePathInfo {
-		
-		#region Fields
-		
-		private string path;
+namespace System.Web.Services.Discovery
+{
+    public sealed class ExcludePathInfo
+    {
+        #region Fields
 
-		#endregion // Fields
+        private string path;
 
-		#region Constructors
+        #endregion // Fields
 
-		public ExcludePathInfo () 
-		{
-		}
-		
-		public ExcludePathInfo (string path)
-		{
-			this.path = path;
-		}
-		
-		#endregion // Constructors
+        #region Constructors
 
-		#region Properties
-		
-		[XmlAttribute("path")]
-		public string Path {
-			get { return path; }
-			set { path = value; }
-		}
-		
-		#endregion // Properties
-	}
+        public ExcludePathInfo() { }
+
+        public ExcludePathInfo(string path)
+        {
+            this.path = path;
+        }
+
+        #endregion // Constructors
+
+        #region Properties
+
+        [XmlAttribute("path")]
+        public string Path
+        {
+            get { return path; }
+            set { path = value; }
+        }
+
+        #endregion // Properties
+    }
 }

@@ -30,36 +30,31 @@ using System.Windows.Forms.Design;
 
 namespace System.Windows.Forms
 {
-	public class SelectedGridItemChangedEventArgs : EventArgs
-	{
-		#region	Local Variables
-		private GridItem new_selection;
-		private GridItem old_selection;
-		#endregion
+    public class SelectedGridItemChangedEventArgs : EventArgs
+    {
+        #region	Local Variables
+        private GridItem new_selection;
+        private GridItem old_selection;
+        #endregion
 
-		#region Constructors
-		public SelectedGridItemChangedEventArgs ( GridItem oldSel , GridItem newSel )
-		{
-			old_selection = oldSel;
-			new_selection = newSel;
-		}
-		#endregion	// Constructors
+        #region Constructors
+        public SelectedGridItemChangedEventArgs(GridItem oldSel, GridItem newSel)
+        {
+            old_selection = oldSel;
+            new_selection = newSel;
+        }
+        #endregion	// Constructors
 
-		#region Public Instance Properties
-		public GridItem NewSelection
-		{
-			get {
-				return new_selection;
-			}
-		}
+        #region Public Instance Properties
+        public GridItem NewSelection
+        {
+            get { return new_selection; }
+        }
 
-		public GridItem OldSelection
-		{
-			get {
-				return old_selection;
-			}
-		}
-		#endregion	// Public Instance Properties
-	}
+        public GridItem OldSelection
+        {
+            get { return old_selection; }
+        }
+        #endregion	// Public Instance Properties
+    }
 }
-

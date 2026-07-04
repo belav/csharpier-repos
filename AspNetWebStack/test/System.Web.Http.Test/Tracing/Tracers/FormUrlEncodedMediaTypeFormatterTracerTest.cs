@@ -8,9 +8,14 @@ using Microsoft.TestCommon;
 
 namespace System.Web.Http.Tracing.Tracers
 {
-    public class FormUrlEncodedMediaTypeFormatterTracerTest : ReadWriteMediaTypeFormatterTracerTestBase<FormUrlEncodedMediaTypeFormatter>
+    public class FormUrlEncodedMediaTypeFormatterTracerTest
+        : ReadWriteMediaTypeFormatterTracerTestBase<FormUrlEncodedMediaTypeFormatter>
     {
-        public override MediaTypeFormatter CreateTracer(FormUrlEncodedMediaTypeFormatter formatter, HttpRequestMessage request, ITraceWriter traceWriter)
+        public override MediaTypeFormatter CreateTracer(
+            FormUrlEncodedMediaTypeFormatter formatter,
+            HttpRequestMessage request,
+            ITraceWriter traceWriter
+        )
         {
             return new FormUrlEncodedMediaTypeFormatterTracer(formatter, traceWriter, request);
         }
@@ -20,9 +25,15 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage();
-            FormUrlEncodedMediaTypeFormatter innerFormatter = new FormUrlEncodedMediaTypeFormatter();
+            FormUrlEncodedMediaTypeFormatter innerFormatter =
+                new FormUrlEncodedMediaTypeFormatter();
             innerFormatter.MaxDepth = innerFormatter.MaxDepth + 1;
-            FormUrlEncodedMediaTypeFormatterTracer tracer = new FormUrlEncodedMediaTypeFormatterTracer(innerFormatter, new TestTraceWriter(), request);
+            FormUrlEncodedMediaTypeFormatterTracer tracer =
+                new FormUrlEncodedMediaTypeFormatterTracer(
+                    innerFormatter,
+                    new TestTraceWriter(),
+                    request
+                );
 
             // Act & Assert
             Assert.Equal(innerFormatter.MaxDepth, tracer.MaxDepth);
@@ -33,9 +44,15 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage();
-            FormUrlEncodedMediaTypeFormatter innerFormatter = new FormUrlEncodedMediaTypeFormatter();
+            FormUrlEncodedMediaTypeFormatter innerFormatter =
+                new FormUrlEncodedMediaTypeFormatter();
             innerFormatter.ReadBufferSize = innerFormatter.ReadBufferSize + 1;
-            FormUrlEncodedMediaTypeFormatterTracer tracer = new FormUrlEncodedMediaTypeFormatterTracer(innerFormatter, new TestTraceWriter(), request);
+            FormUrlEncodedMediaTypeFormatterTracer tracer =
+                new FormUrlEncodedMediaTypeFormatterTracer(
+                    innerFormatter,
+                    new TestTraceWriter(),
+                    request
+                );
 
             // Act & Assert
             Assert.Equal(innerFormatter.ReadBufferSize, tracer.ReadBufferSize);
@@ -46,7 +63,12 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             FormUrlEncodedMediaTypeFormatter expectedInner = new FormUrlEncodedMediaTypeFormatter();
-            FormUrlEncodedMediaTypeFormatterTracer productUnderTest = new FormUrlEncodedMediaTypeFormatterTracer(expectedInner, new TestTraceWriter(), new HttpRequestMessage());
+            FormUrlEncodedMediaTypeFormatterTracer productUnderTest =
+                new FormUrlEncodedMediaTypeFormatterTracer(
+                    expectedInner,
+                    new TestTraceWriter(),
+                    new HttpRequestMessage()
+                );
 
             // Act
             FormUrlEncodedMediaTypeFormatter actualInner = productUnderTest.Inner;
@@ -60,10 +82,17 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             FormUrlEncodedMediaTypeFormatter expectedInner = new FormUrlEncodedMediaTypeFormatter();
-            FormUrlEncodedMediaTypeFormatterTracer productUnderTest = new FormUrlEncodedMediaTypeFormatterTracer(expectedInner, new TestTraceWriter(), new HttpRequestMessage());
+            FormUrlEncodedMediaTypeFormatterTracer productUnderTest =
+                new FormUrlEncodedMediaTypeFormatterTracer(
+                    expectedInner,
+                    new TestTraceWriter(),
+                    new HttpRequestMessage()
+                );
 
             // Act
-            FormUrlEncodedMediaTypeFormatter actualInner = Decorator.GetInner(productUnderTest as FormUrlEncodedMediaTypeFormatter);
+            FormUrlEncodedMediaTypeFormatter actualInner = Decorator.GetInner(
+                productUnderTest as FormUrlEncodedMediaTypeFormatter
+            );
 
             // Assert
             Assert.Same(expectedInner, actualInner);

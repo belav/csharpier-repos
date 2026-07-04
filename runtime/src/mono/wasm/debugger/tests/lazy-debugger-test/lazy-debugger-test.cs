@@ -17,6 +17,7 @@ namespace DebuggerTests
     public class ClassToCheckFieldValue
     {
         public int valueToCheck;
+
         public ClassToCheckFieldValue()
         {
             valueToCheck = 20;

@@ -1,52 +1,57 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** File:    MarshalByRefObject.cs
 **
-**              
+**
 **
 ** Purpose: Defines the root type for all marshal by reference aka
 **          AppDomain bound types
-**          
+**
 **
 **
 ===========================================================*/
-namespace System {
-    
+namespace System
+{
     using System;
+    using System.Diagnostics.Contracts;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Remoting;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
     using System.Threading;
-    using System.Runtime.Remoting;
-#if FEATURE_REMOTING    
+    using CultureInfo = System.Globalization.CultureInfo;
+#if FEATURE_REMOTING
     using System.Runtime.Remoting.Lifetime;
     using System.Runtime.Remoting.Services;
 #endif
-    using System.Runtime.InteropServices;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
-    using CultureInfo = System.Globalization.CultureInfo;
 
     [Serializable]
-[System.Runtime.InteropServices.ComVisible(true)]
-    public abstract class MarshalByRefObject 
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public abstract class MarshalByRefObject
     {
-#if FEATURE_REMOTING    
-        private Object __identity;        
+#if FEATURE_REMOTING
+        private Object __identity;
 
-        private Object Identity { get { return __identity; } set { __identity = value; } }        
+        private Object Identity
+        {
+            get { return __identity; }
+            set { __identity = value; }
+        }
+
 #if FEATURE_COMINTEROP
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         internal IntPtr GetComIUnknown(bool fIsBeingMarshalled)
         {
             IntPtr pUnk;
-            if(RemotingServices.IsTransparentProxy(this))
+            if (RemotingServices.IsTransparentProxy(this))
             {
                 pUnk = RemotingServices.GetRealProxy(this).GetCOMIUnknown(fIsBeingMarshalled);
             }
@@ -57,14 +62,14 @@ namespace System {
             return pUnk;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern IntPtr GetComIUnknown(MarshalByRefObject o);
 #endif // FEATURE_COMINTEROP
 
         // (1) for remote COM objects IsInstance of can't be executed on
-        // the proxies, so we need this method to be executed on the 
+        // the proxies, so we need this method to be executed on the
         // actual object.
         // (2) for remote objects that do not have the complete type information
         // we intercept calls to check the type and execute it on the actual
@@ -77,20 +82,38 @@ namespace System {
         // for remote COM Objects the late binding methods can't be
         // executed on proxies, so we need this method to execute on
         // the real object
-        internal Object InvokeMember(String name,BindingFlags invokeAttr,Binder binder, 
-                            Object[] args,ParameterModifier[] modifiers,CultureInfo culture,String[] namedParameters)
+        internal Object InvokeMember(
+            String name,
+            BindingFlags invokeAttr,
+            Binder binder,
+            Object[] args,
+            ParameterModifier[] modifiers,
+            CultureInfo culture,
+            String[] namedParameters
+        )
         {
             Type t = GetType();
-            
+
             // Sanity check
-            if(!t.IsCOMObject)
-                throw new InvalidOperationException(Environment.GetResourceString("Arg_InvokeMember"));
+            if (!t.IsCOMObject)
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("Arg_InvokeMember")
+                );
 
             // Call into the runtime to invoke on the COM object.
-            return t.InvokeMember(name, invokeAttr, binder, this, args, modifiers, culture, namedParameters);
+            return t.InvokeMember(
+                name,
+                invokeAttr,
+                binder,
+                this,
+                args,
+                modifiers,
+                culture,
+                namedParameters
+            );
         }
 
-        // Returns a new cloned MBR instance that is a memberwise copy of this 
+        // Returns a new cloned MBR instance that is a memberwise copy of this
         // with the identity nulled out, so there are no identity conflicts
         // when the cloned object is marshalled
         protected MarshalByRefObject MemberwiseClone(bool cloneIdentity)
@@ -102,25 +125,23 @@ namespace System {
             return mbr;
         }
 
-
-        
         // A helper routine to extract the identity either from the marshalbyrefobject base
         // class if it is not a proxy, otherwise from the real proxy.
         // A flag is set to indicate whether the object passed in is a server or a proxy
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         internal static Identity GetIdentity(MarshalByRefObject obj, out bool fServer)
         {
             fServer = true;
             Identity id = null;
 
-            if(null != obj)
+            if (null != obj)
             {
-                if(!RemotingServices.IsTransparentProxy(obj))
+                if (!RemotingServices.IsTransparentProxy(obj))
                 {
                     id = (Identity)obj.Identity;
                 }
                 else
-                {                    
+                {
                     // Toggle flag to indicate that we have a proxy
                     fServer = false;
                     id = RemotingServices.GetRealProxy(obj).IdentityObject;
@@ -133,13 +154,15 @@ namespace System {
         // Another helper that delegates to the helper above
         internal static Identity GetIdentity(MarshalByRefObject obj)
         {
-            Contract.Assert(!RemotingServices.IsTransparentProxy(obj), "Use this method for server objects only");
+            Contract.Assert(
+                !RemotingServices.IsTransparentProxy(obj),
+                "Use this method for server objects only"
+            );
 
-            bool fServer;            
+            bool fServer;
             return GetIdentity(obj, out fServer);
         }
 
-       
         internal ServerIdentity __RaceSetServerIdentity(ServerIdentity id)
         {
             if (__identity == null)
@@ -155,48 +178,48 @@ namespace System {
             return (ServerIdentity)__identity;
         }
 
-
         internal void __ResetServerIdentity()
         {
             __identity = null;
         }
-        
-       // This method is used return a lifetime service object which
-       // is used to control the lifetime policy to the object.
-       // For the default Lifetime service this will be an object of typoe ILease.
-       // 
-        [System.Security.SecurityCritical]  // auto-generated_required
+
+        // This method is used return a lifetime service object which
+        // is used to control the lifetime policy to the object.
+        // For the default Lifetime service this will be an object of typoe ILease.
+        //
+        [System.Security.SecurityCritical] // auto-generated_required
         public Object GetLifetimeService()
         {
-            return LifetimeServices.GetLease(this); 
+            return LifetimeServices.GetLease(this);
         }
 
-       // This method is used return lifetime service object. This method
-       // can be overridden to return a LifetimeService object with properties unique to
-       // this object.
-       // For the default Lifetime service this will be an object of type ILease.
-       // 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        // This method is used return lifetime service object. This method
+        // can be overridden to return a LifetimeService object with properties unique to
+        // this object.
+        // For the default Lifetime service this will be an object of type ILease.
+        //
+        [System.Security.SecurityCritical] // auto-generated_required
         public virtual Object InitializeLifetimeService()
         {
             return LifetimeServices.GetLeaseInitial(this);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public virtual ObjRef CreateObjRef(Type requestedType)
         {
-            if(__identity == null)
+            if (__identity == null)
             {
-                throw new RemotingException(Environment.GetResourceString(
-                    "Remoting_NoIdentityEntry"));
-            }            
+                throw new RemotingException(
+                    Environment.GetResourceString("Remoting_NoIdentityEntry")
+                );
+            }
             return new ObjRef(this, requestedType);
         }
 
         // This is for casting interop ObjRefLite's.
-        // ObjRefLite's have been deprecated. These methods are not exposed 
+        // ObjRefLite's have been deprecated. These methods are not exposed
         // through any user APIs and would be removed in the future
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         internal bool CanCastToXmlType(String xmlTypeName, String xmlTypeNamespace)
         {
             Type castType = SoapServices.GetInteropTypeFromXmlType(xmlTypeName, xmlTypeNamespace);
@@ -204,8 +227,13 @@ namespace System {
             {
                 String typeNamespace;
                 String assemblyName;
-                if (!SoapServices.DecodeXmlNamespaceForClrTypeNamespace(xmlTypeNamespace, 
-                        out typeNamespace, out assemblyName))
+                if (
+                    !SoapServices.DecodeXmlNamespaceForClrTypeNamespace(
+                        xmlTypeNamespace,
+                        out typeNamespace,
+                        out assemblyName
+                    )
+                )
                     return false;
 
                 String typeName;
@@ -219,7 +247,7 @@ namespace System {
                     Assembly asm = Assembly.Load(assemblyName);
                     castType = asm.GetType(typeName, false, false);
                 }
-                catch 
+                catch
                 {
                     return false;
                 }
@@ -232,14 +260,14 @@ namespace System {
         } // CanCastToXmlType
 
         // helper method for calling CanCastToXmlType
-        // ObjRefLite's have been deprecated. These methods are not exposed 
+        // ObjRefLite's have been deprecated. These methods are not exposed
         // through any user APIs and would be removed in the future
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         internal static bool CanCastToXmlTypeHelper(RuntimeType castType, MarshalByRefObject o)
         {
             if (castType == null)
                 throw new ArgumentNullException("castType");
-        
+
             Contract.EndContractBlock();
             // MarshalByRefObject's can only be casted to MarshalByRefObject's or interfaces.
             if (!castType.IsInterface && !castType.IsMarshalByRef)
@@ -248,18 +276,24 @@ namespace System {
             // figure out xml type name
             String xmlTypeName = null;
             String xmlTypeNamespace = null;
-            if (!SoapServices.GetXmlTypeForInteropType(castType, out xmlTypeName, out xmlTypeNamespace))
+            if (
+                !SoapServices.GetXmlTypeForInteropType(
+                    castType,
+                    out xmlTypeName,
+                    out xmlTypeNamespace
+                )
+            )
             {
                 // There's no registered interop type name, so just use the default.
                 xmlTypeName = castType.Name;
-                xmlTypeNamespace =
-                    SoapServices.CodeXmlNamespaceForClrTypeNamespace(
-                        castType.Namespace, castType.GetRuntimeAssembly().GetSimpleName());
+                xmlTypeNamespace = SoapServices.CodeXmlNamespaceForClrTypeNamespace(
+                    castType.Namespace,
+                    castType.GetRuntimeAssembly().GetSimpleName()
+                );
             }
 
             return o.CanCastToXmlType(xmlTypeName, xmlTypeNamespace);
         } // CanCastToXmlType
-
 #endif // FEATURE_REMOTING
-    }            
+    }
 } // namespace    

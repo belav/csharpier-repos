@@ -11,13 +11,19 @@ namespace System.Reflection.PortableExecutable
     public readonly struct DebugDirectoryEntry
     {
         internal const int Size =
-            sizeof(uint) +   // Characteristics
-            sizeof(uint) +   // TimeDataStamp
-            sizeof(uint) +   // Version
-            sizeof(uint) +   // Type
-            sizeof(uint) +   // SizeOfData
-            sizeof(uint) +   // AddressOfRawData
-            sizeof(uint);    // PointerToRawData
+            sizeof(uint)
+            + // Characteristics
+            sizeof(uint)
+            + // TimeDataStamp
+            sizeof(uint)
+            + // Version
+            sizeof(uint)
+            + // Type
+            sizeof(uint)
+            + // SizeOfData
+            sizeof(uint)
+            + // AddressOfRawData
+            sizeof(uint); // PointerToRawData
 
         /// <summary>
         /// The time and date that the debug data was created if the PE/COFF file is not deterministic,
@@ -62,7 +68,8 @@ namespace System.Reflection.PortableExecutable
         /// <summary>
         /// True if the entry is a <see cref="DebugDirectoryEntryType.CodeView"/> entry pointing to a Portable PDB.
         /// </summary>
-        public bool IsPortableCodeView => MinorVersion == PortablePdbVersions.PortableCodeViewVersionMagic;
+        public bool IsPortableCodeView =>
+            MinorVersion == PortablePdbVersions.PortableCodeViewVersionMagic;
 
         public DebugDirectoryEntry(
             uint stamp,
@@ -71,7 +78,8 @@ namespace System.Reflection.PortableExecutable
             DebugDirectoryEntryType type,
             int dataSize,
             int dataRelativeVirtualAddress,
-            int dataPointer)
+            int dataPointer
+        )
         {
             Stamp = stamp;
             MajorVersion = majorVersion;

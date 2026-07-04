@@ -21,15 +21,19 @@ namespace Microsoft.CodeAnalysis.Formatting
             // Created lazily
             private ConcurrentDictionary<int, TriviaData> _map;
 
-            public readonly bool TryRemove(int pairIndex)
-                => _map?.TryRemove(pairIndex, out _) ?? false;
+            public readonly bool TryRemove(int pairIndex) =>
+                _map?.TryRemove(pairIndex, out _) ?? false;
 
             public void AddOrReplace(int key, TriviaData triviaInfo)
             {
                 // PERF: Set the concurrency level to 1 because, while the dictionary has to be thread-safe,
                 // there is very little contention in formatting. A lower concurrency level reduces object
                 // allocations which are used internally by ConcurrentDictionary for locking.
-                var map = InterlockedOperations.Initialize(ref _map, () => new ConcurrentDictionary<int, TriviaData>(concurrencyLevel: 1, capacity: 8));
+                var map = InterlockedOperations.Initialize(
+                    ref _map,
+                    () =>
+                        new ConcurrentDictionary<int, TriviaData>(concurrencyLevel: 1, capacity: 8)
+                );
                 map[key] = triviaInfo;
             }
 

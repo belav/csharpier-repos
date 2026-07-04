@@ -15,6 +15,6 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         None = 0,
         WithExplicitType,
-        WithInferredType
+        WithInferredType,
     }
 }

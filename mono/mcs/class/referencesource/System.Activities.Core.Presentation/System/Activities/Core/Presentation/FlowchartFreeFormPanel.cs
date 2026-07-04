@@ -10,8 +10,6 @@ namespace System.Activities.Core.Presentation
     // be InternalsVisibleTo System.Activities.Core.Presentation
     internal sealed class FlowchartFreeFormPanel : FreeFormPanel
     {
-        public FlowchartFreeFormPanel()
-        {
-        }
+        public FlowchartFreeFormPanel() { }
     }
 }

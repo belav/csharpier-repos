@@ -5,7 +5,6 @@
 #nullable disable
 
 using System.Collections.Immutable;
-
 #if CODE_STYLE
 using Microsoft.CodeAnalysis.Internal.Editing;
 #else
@@ -14,7 +13,9 @@ using Microsoft.CodeAnalysis.Editing;
 
 namespace Microsoft.CodeAnalysis.CodeGeneration
 {
-    internal abstract class CodeGenerationTypeSymbol : CodeGenerationNamespaceOrTypeSymbol, ITypeSymbol
+    internal abstract class CodeGenerationTypeSymbol
+        : CodeGenerationNamespaceOrTypeSymbol,
+            ITypeSymbol
     {
         public SpecialType SpecialType { get; protected set; }
 
@@ -26,8 +27,16 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             DeclarationModifiers modifiers,
             string name,
             SpecialType specialType,
-            NullableAnnotation nullableAnnotation)
-            : base(containingAssembly, containingType, attributes, declaredAccessibility, modifiers, name)
+            NullableAnnotation nullableAnnotation
+        )
+            : base(
+                containingAssembly,
+                containingType,
+                attributes,
+                declaredAccessibility,
+                modifiers,
+                name
+            )
         {
             this.SpecialType = specialType;
             this.NullableAnnotation = nullableAnnotation;
@@ -37,11 +46,11 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         public virtual INamedTypeSymbol BaseType => null;
 
-        public virtual ImmutableArray<INamedTypeSymbol> Interfaces
-            => ImmutableArray.Create<INamedTypeSymbol>();
+        public virtual ImmutableArray<INamedTypeSymbol> Interfaces =>
+            ImmutableArray.Create<INamedTypeSymbol>();
 
-        public ImmutableArray<INamedTypeSymbol> AllInterfaces
-            => ImmutableArray.Create<INamedTypeSymbol>();
+        public ImmutableArray<INamedTypeSymbol> AllInterfaces =>
+            ImmutableArray.Create<INamedTypeSymbol>();
 
         public bool IsReferenceType => false;
 
@@ -61,17 +70,29 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 
         public ISymbol FindImplementationForInterfaceMember(ISymbol interfaceMember) => null;
 
-        public string ToDisplayString(NullableFlowState topLevelNullability, SymbolDisplayFormat format = null)
-            => throw new System.NotImplementedException();
+        public string ToDisplayString(
+            NullableFlowState topLevelNullability,
+            SymbolDisplayFormat format = null
+        ) => throw new System.NotImplementedException();
 
-        public ImmutableArray<SymbolDisplayPart> ToDisplayParts(NullableFlowState topLevelNullability, SymbolDisplayFormat format = null)
-            => throw new System.NotImplementedException();
+        public ImmutableArray<SymbolDisplayPart> ToDisplayParts(
+            NullableFlowState topLevelNullability,
+            SymbolDisplayFormat format = null
+        ) => throw new System.NotImplementedException();
 
-        public string ToMinimalDisplayString(SemanticModel semanticModel, NullableFlowState topLevelNullability, int position, SymbolDisplayFormat format = null)
-            => throw new System.NotImplementedException();
+        public string ToMinimalDisplayString(
+            SemanticModel semanticModel,
+            NullableFlowState topLevelNullability,
+            int position,
+            SymbolDisplayFormat format = null
+        ) => throw new System.NotImplementedException();
 
-        public ImmutableArray<SymbolDisplayPart> ToMinimalDisplayParts(SemanticModel semanticModel, NullableFlowState topLevelNullability, int position, SymbolDisplayFormat format = null)
-            => throw new System.NotImplementedException();
+        public ImmutableArray<SymbolDisplayPart> ToMinimalDisplayParts(
+            SemanticModel semanticModel,
+            NullableFlowState topLevelNullability,
+            int position,
+            SymbolDisplayFormat format = null
+        ) => throw new System.NotImplementedException();
 
         public override bool IsNamespace => false;
 
@@ -97,9 +118,11 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             return CloneWithNullableAnnotation(nullableAnnotation);
         }
 
-        protected sealed override CodeGenerationSymbol Clone()
-            => CloneWithNullableAnnotation(this.NullableAnnotation);
+        protected sealed override CodeGenerationSymbol Clone() =>
+            CloneWithNullableAnnotation(this.NullableAnnotation);
 
-        protected abstract CodeGenerationTypeSymbol CloneWithNullableAnnotation(NullableAnnotation nullableAnnotation);
+        protected abstract CodeGenerationTypeSymbol CloneWithNullableAnnotation(
+            NullableAnnotation nullableAnnotation
+        );
     }
 }

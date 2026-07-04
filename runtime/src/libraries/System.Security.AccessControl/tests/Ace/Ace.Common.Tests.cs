@@ -7,14 +7,19 @@ using Xunit;
 
 namespace System.Security.AccessControl.Tests
 {
-    public abstract class QualifiedAce_Tests : KnownAce_Tests
-    {
-
-    }
+    public abstract class QualifiedAce_Tests : KnownAce_Tests { }
 
     public class CommonAce_Tests : QualifiedAce_Tests
     {
-        private static object[] CommonAce_CreateTestData(int intFlags, int intQualifier, int accessMask, string stringsid, bool isCallback, int opaqueLength, int offset)
+        private static object[] CommonAce_CreateTestData(
+            int intFlags,
+            int intQualifier,
+            int accessMask,
+            string stringsid,
+            bool isCallback,
+            int opaqueLength,
+            int offset
+        )
         {
             AceFlags flags = (AceFlags)intFlags;
             AceQualifier qualifier = (AceQualifier)intQualifier;
@@ -33,16 +38,24 @@ namespace System.Security.AccessControl.Tests
             switch (qualifier)
             {
                 case AceQualifier.AccessAllowed:
-                    binaryForm[offset + 0] = isCallback ? (byte)AceType.AccessAllowedCallback : (byte)AceType.AccessAllowed;
+                    binaryForm[offset + 0] = isCallback
+                        ? (byte)AceType.AccessAllowedCallback
+                        : (byte)AceType.AccessAllowed;
                     break;
                 case AceQualifier.AccessDenied:
-                    binaryForm[offset + 0] = isCallback ? (byte)AceType.AccessDeniedCallback : (byte)AceType.AccessDenied;
+                    binaryForm[offset + 0] = isCallback
+                        ? (byte)AceType.AccessDeniedCallback
+                        : (byte)AceType.AccessDenied;
                     break;
                 case AceQualifier.SystemAudit:
-                    binaryForm[offset + 0] = isCallback ? (byte)AceType.SystemAuditCallback : (byte)AceType.SystemAudit;
+                    binaryForm[offset + 0] = isCallback
+                        ? (byte)AceType.SystemAuditCallback
+                        : (byte)AceType.SystemAudit;
                     break;
                 case AceQualifier.SystemAlarm:
-                    binaryForm[offset + 0] = isCallback ? (byte)AceType.SystemAlarmCallback : (byte)AceType.SystemAlarm;
+                    binaryForm[offset + 0] = isCallback
+                        ? (byte)AceType.SystemAlarmCallback
+                        : (byte)AceType.SystemAlarm;
                     break;
                 default:
                     return null;
@@ -86,37 +99,81 @@ namespace System.Security.AccessControl.Tests
         [Fact]
         public void CommonAce_Constructor_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>("securityIdentifier", () => new CommonAce((AceFlags)0, (AceQualifier)0, 1, null, true, new byte[4]));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("qualifier", () => CommonAce_CreateTestData(8, 4, 1, "S-1-5-11", true, 4, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("qualifier", () => CommonAce_CreateTestData(8, -1, 1, "S-1-5-11", true, 4, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("opaque", () => CommonAce_CreateTestData(2, 1, 2, "S-1-5-11", true, 1, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("opaque", () => CommonAce_CreateTestData(2, 1, 2, "S-1-5-11", true, 17, 0));
-
+            AssertExtensions.Throws<ArgumentNullException>(
+                "securityIdentifier",
+                () => new CommonAce((AceFlags)0, (AceQualifier)0, 1, null, true, new byte[4])
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "qualifier",
+                () => CommonAce_CreateTestData(8, 4, 1, "S-1-5-11", true, 4, 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "qualifier",
+                () => CommonAce_CreateTestData(8, -1, 1, "S-1-5-11", true, 4, 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "opaque",
+                () => CommonAce_CreateTestData(2, 1, 2, "S-1-5-11", true, 1, 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "opaque",
+                () => CommonAce_CreateTestData(2, 1, 2, "S-1-5-11", true, 17, 0)
+            );
         }
 
         [Fact]
         public void CommonAce_CreateBinaryForm_Invalid()
         {
-            CommonAce ace = (CommonAce)CommonAce_CreateTestData(0, 0, 1, "S-1-5-11", false, 4, 0)[0];
-            AssertExtensions.Throws<ArgumentNullException>("binaryForm", () => CommonAce.CreateFromBinaryForm(null, 1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () => CommonAce.CreateFromBinaryForm(new byte[1], -1));
-            AssertExtensions.Throws<ArgumentException>("binaryForm", () => CommonAce.CreateFromBinaryForm(new byte[ace.BinaryLength + 1], 2));
-            AssertExtensions.Throws<ArgumentException>("binaryForm", () => CommonAce.CreateFromBinaryForm(new byte[ace.BinaryLength], 1));
+            CommonAce ace = (CommonAce)
+                CommonAce_CreateTestData(0, 0, 1, "S-1-5-11", false, 4, 0)[0];
+            AssertExtensions.Throws<ArgumentNullException>(
+                "binaryForm",
+                () => CommonAce.CreateFromBinaryForm(null, 1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "offset",
+                () => CommonAce.CreateFromBinaryForm(new byte[1], -1)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "binaryForm",
+                () => CommonAce.CreateFromBinaryForm(new byte[ace.BinaryLength + 1], 2)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "binaryForm",
+                () => CommonAce.CreateFromBinaryForm(new byte[ace.BinaryLength], 1)
+            );
         }
 
         [Fact]
         public void CommonAce_GetBinaryForm_Invalid()
         {
-            CommonAce ace = (CommonAce)CommonAce_CreateTestData(0, 0, 1, "S-1-5-11", false, 4, 0)[0];
-            AssertExtensions.Throws<ArgumentNullException>("binaryForm", () => ace.GetBinaryForm(null, 1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () => ace.GetBinaryForm(new byte[1], -1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("binaryForm", () => ace.GetBinaryForm(new byte[ace.BinaryLength + 1], 2));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("binaryForm", () => ace.GetBinaryForm(new byte[ace.BinaryLength], 1));
+            CommonAce ace = (CommonAce)
+                CommonAce_CreateTestData(0, 0, 1, "S-1-5-11", false, 4, 0)[0];
+            AssertExtensions.Throws<ArgumentNullException>(
+                "binaryForm",
+                () => ace.GetBinaryForm(null, 1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "offset",
+                () => ace.GetBinaryForm(new byte[1], -1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "binaryForm",
+                () => ace.GetBinaryForm(new byte[ace.BinaryLength + 1], 2)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "binaryForm",
+                () => ace.GetBinaryForm(new byte[ace.BinaryLength], 1)
+            );
         }
 
         [Theory]
         [MemberData(nameof(CommonAce_TestObjects))]
-        public void CommonAce_GetBinaryForm(GenericAce testAce, byte[] expectedBinaryForm, int testOffset)
+        public void CommonAce_GetBinaryForm(
+            GenericAce testAce,
+            byte[] expectedBinaryForm,
+            int testOffset
+        )
         {
             byte[] resultBinaryForm = new byte[testAce.BinaryLength + testOffset];
             testAce.GetBinaryForm(resultBinaryForm, testOffset);
@@ -125,7 +182,11 @@ namespace System.Security.AccessControl.Tests
 
         [Theory]
         [MemberData(nameof(CommonAce_TestObjects))]
-        public void CommonAce_CreateFromBinaryForm(GenericAce expectedAce, byte[] testBinaryForm, int testOffset)
+        public void CommonAce_CreateFromBinaryForm(
+            GenericAce expectedAce,
+            byte[] testBinaryForm,
+            int testOffset
+        )
         {
             GenericAce resultAce = CommonAce.CreateFromBinaryForm(testBinaryForm, testOffset);
             GenericAce_VerifyAces(expectedAce, resultAce);

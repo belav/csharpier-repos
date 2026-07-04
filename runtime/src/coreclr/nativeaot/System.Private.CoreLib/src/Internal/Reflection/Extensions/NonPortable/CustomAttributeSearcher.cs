@@ -29,7 +29,12 @@ namespace Internal.Reflection.Extensions.NonPortable
         //
         // Returns the effective set of custom attributes on a reflection element.
         //
-        public IEnumerable<CustomAttributeData> GetMatchingCustomAttributes(E element, Type optionalAttributeTypeFilter, bool inherit, bool skipTypeValidation = false)
+        public IEnumerable<CustomAttributeData> GetMatchingCustomAttributes(
+            E element,
+            Type optionalAttributeTypeFilter,
+            bool inherit,
+            bool skipTypeValidation = false
+        )
         {
             // Do all parameter validation here before we enter the iterator function (so that exceptions from validations
             // show up immediately rather than on the first MoveNext()).
@@ -39,8 +44,12 @@ namespace Internal.Reflection.Extensions.NonPortable
             if (!skipTypeValidation)
             {
                 ArgumentNullException.ThrowIfNull(optionalAttributeTypeFilter, "type");
-                if (!(optionalAttributeTypeFilter == typeof(Attribute) ||
-                      optionalAttributeTypeFilter.IsSubclassOf(typeof(Attribute))))
+                if (
+                    !(
+                        optionalAttributeTypeFilter == typeof(Attribute)
+                        || optionalAttributeTypeFilter.IsSubclassOf(typeof(Attribute))
+                    )
+                )
                     throw new ArgumentException(SR.Argument_MustHaveAttributeBaseClass);
 
                 typeFilterKnownToBeSealed = optionalAttributeTypeFilter.IsSealed;
@@ -49,47 +58,50 @@ namespace Internal.Reflection.Extensions.NonPortable
             Func<Type, bool> passesFilter;
             if (optionalAttributeTypeFilter == null)
             {
-                passesFilter =
-                    delegate (Type actualType)
-                    {
-                        return true;
-                    };
+                passesFilter = delegate(Type actualType)
+                {
+                    return true;
+                };
             }
             else if (optionalAttributeTypeFilter.IsGenericTypeDefinition)
             {
-                passesFilter =
-                    delegate (Type actualType)
+                passesFilter = delegate(Type actualType)
+                {
+                    if (
+                        actualType.IsConstructedGenericType
+                        && actualType.GetGenericTypeDefinition() == optionalAttributeTypeFilter
+                    )
                     {
-                        if (actualType.IsConstructedGenericType && actualType.GetGenericTypeDefinition() == optionalAttributeTypeFilter)
-                        {
-                            return true;
-                        }
+                        return true;
+                    }
 
-                        if (!typeFilterKnownToBeSealed)
+                    if (!typeFilterKnownToBeSealed)
+                    {
+                        for (Type? type = actualType.BaseType; type != null; type = type.BaseType)
                         {
-                            for (Type? type = actualType.BaseType; type != null; type = type.BaseType)
+                            if (
+                                type.IsConstructedGenericType
+                                && type.GetGenericTypeDefinition() == optionalAttributeTypeFilter
+                            )
                             {
-                                if (type.IsConstructedGenericType && type.GetGenericTypeDefinition() == optionalAttributeTypeFilter)
-                                {
-                                    return true;
-                                }
+                                return true;
                             }
                         }
+                    }
 
-                        return false;
-                    };
+                    return false;
+                };
             }
             else
             {
-                passesFilter =
-                    delegate (Type actualType)
-                    {
-                        if (optionalAttributeTypeFilter.Equals(actualType))
-                            return true;
-                        if (typeFilterKnownToBeSealed)
-                            return false;
-                        return optionalAttributeTypeFilter.IsAssignableFrom(actualType);
-                    };
+                passesFilter = delegate(Type actualType)
+                {
+                    if (optionalAttributeTypeFilter.Equals(actualType))
+                        return true;
+                    if (typeFilterKnownToBeSealed)
+                        return false;
+                    return optionalAttributeTypeFilter.IsAssignableFrom(actualType);
+                };
             }
 
             return GetMatchingCustomAttributesIterator(element, passesFilter, inherit);
@@ -104,23 +116,26 @@ namespace Internal.Reflection.Extensions.NonPortable
             return null;
         }
 
-
         //
         // Main iterator.
         //
-        private IEnumerable<CustomAttributeData> GetMatchingCustomAttributesIterator(E element, Func<Type, bool> rawPassesFilter, bool inherit)
+        private IEnumerable<CustomAttributeData> GetMatchingCustomAttributesIterator(
+            E element,
+            Func<Type, bool> rawPassesFilter,
+            bool inherit
+        )
         {
-            Func<Type, bool> passesFilter =
-                delegate (Type attributeType)
-                {
-                    // Windows prohibits instantiating WinRT custom attributes. Filter them from the search as the desktop CLR does.
-                    TypeAttributes typeAttributes = attributeType.Attributes;
-                    if (0 != (typeAttributes & TypeAttributes.WindowsRuntime))
-                        return false;
-                    return rawPassesFilter(attributeType);
-                };
+            Func<Type, bool> passesFilter = delegate(Type attributeType)
+            {
+                // Windows prohibits instantiating WinRT custom attributes. Filter them from the search as the desktop CLR does.
+                TypeAttributes typeAttributes = attributeType.Attributes;
+                if (0 != (typeAttributes & TypeAttributes.WindowsRuntime))
+                    return false;
+                return rawPassesFilter(attributeType);
+            };
 
-            LowLevelList<CustomAttributeData> immediateResults = new LowLevelList<CustomAttributeData>();
+            LowLevelList<CustomAttributeData> immediateResults =
+                new LowLevelList<CustomAttributeData>();
             foreach (CustomAttributeData cad in GetDeclaredCustomAttributes(element))
             {
                 if (passesFilter(cad.AttributeType))
@@ -143,7 +158,13 @@ namespace Internal.Reflection.Extensions.NonPortable
                     //
                     //   - Cache the results of retrieving the usage attribute.
                     //
-                    LowLevelDictionary<TypeUnificationKey, AttributeUsageAttribute> encounteredTypes = new LowLevelDictionary<TypeUnificationKey, AttributeUsageAttribute>(11);
+                    LowLevelDictionary<
+                        TypeUnificationKey,
+                        AttributeUsageAttribute
+                    > encounteredTypes = new LowLevelDictionary<
+                        TypeUnificationKey,
+                        AttributeUsageAttribute
+                    >(11);
 
                     for (int i = 0; i < immediateResults.Count; i++)
                     {
@@ -161,7 +182,9 @@ namespace Internal.Reflection.Extensions.NonPortable
                             if (!passesFilter(attributeType))
                                 continue;
                             AttributeUsageAttribute? usage;
-                            TypeUnificationKey attributeTypeKey = new TypeUnificationKey(attributeType);
+                            TypeUnificationKey attributeTypeKey = new TypeUnificationKey(
+                                attributeType
+                            );
                             if (!encounteredTypes.TryGetValue(attributeTypeKey, out usage))
                             {
                                 // Type was not encountered before. Only include it if it is inheritable.
@@ -179,8 +202,7 @@ namespace Internal.Reflection.Extensions.NonPortable
                                     yield return cad;
                             }
                         }
-                    }
-                    while ((element = GetParent(element)) != null);
+                    } while ((element = GetParent(element)) != null);
                 }
             }
         }
@@ -196,9 +218,14 @@ namespace Internal.Reflection.Extensions.NonPortable
             // Legacy: Why aren't we checking the parent types? Answer: Although AttributeUsageAttribute is itself marked inheritable, desktop Reflection
             // treats it as *non*-inheritable for the purpose of deciding whether another attribute class is inheritable.
             //
-            AttributeUsageAttribute? usage = attributeType.GetCustomAttribute<AttributeUsageAttribute>(inherit: false);
+            AttributeUsageAttribute? usage =
+                attributeType.GetCustomAttribute<AttributeUsageAttribute>(inherit: false);
             if (usage == null)
-                return new AttributeUsageAttribute(AttributeTargets.All) { AllowMultiple = false, Inherited = true };
+                return new AttributeUsageAttribute(AttributeTargets.All)
+                {
+                    AllowMultiple = false,
+                    Inherited = true,
+                };
             return usage;
         }
 

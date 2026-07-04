@@ -9,17 +9,23 @@ public abstract class TrackGraphTestBase
 {
     public class TrackGraphTest : TrackGraphTestBase
     {
-        protected override IList<string> TrackGraph(DbContext context, object root, Action<EntityEntryGraphNode> callback)
+        protected override IList<string> TrackGraph(
+            DbContext context,
+            object root,
+            Action<EntityEntryGraphNode> callback
+        )
         {
             var traversal = new List<string>();
 
             context.ChangeTracker.TrackGraph(
-                root, node =>
+                root,
+                node =>
                 {
                     callback(node);
 
                     traversal.Add(NodeString(node));
-                });
+                }
+            );
 
             return traversal;
         }
@@ -39,21 +45,21 @@ public abstract class TrackGraphTestBase
                     {
                         Id = 1,
                         CategoryId = 1,
-                        Details = new ProductDetails { Id = 1 }
+                        Details = new ProductDetails { Id = 1 },
                     },
                     new()
                     {
                         Id = 2,
                         CategoryId = 1,
-                        Details = new ProductDetails { Id = 2 }
+                        Details = new ProductDetails { Id = 2 },
                     },
                     new()
                     {
                         Id = 3,
                         CategoryId = 1,
-                        Details = new ProductDetails { Id = 3 }
-                    }
-                }
+                        Details = new ProductDetails { Id = 3 },
+                    },
+                },
             };
 
             var rootEntry = context.Attach(category);
@@ -81,13 +87,15 @@ public abstract class TrackGraphTestBase
             {
                 await graphIterator.TraverseGraphAsync(
                     new EntityEntryGraphNode<HashSet<object>>(rootEntry, visited, null, null),
-                    (node, _) => Task.FromResult(Callback(node)));
+                    (node, _) => Task.FromResult(Callback(node))
+                );
             }
             else
             {
                 graphIterator.TraverseGraph(
                     new EntityEntryGraphNode<HashSet<object>>(rootEntry, visited, null, null),
-                    Callback);
+                    Callback
+                );
             }
 
             Assert.Equal(
@@ -99,9 +107,10 @@ public abstract class TrackGraphTestBase
                     "Category:1 ---Products--> Product:2",
                     "Product:2 ---Details--> ProductDetails:2",
                     "Category:1 ---Products--> Product:3",
-                    "Product:3 ---Details--> ProductDetails:3"
+                    "Product:3 ---Details--> ProductDetails:3",
                 },
-                traversal);
+                traversal
+            );
 
             Assert.Equal(7, visited.Count);
         }
@@ -109,7 +118,11 @@ public abstract class TrackGraphTestBase
 
     public class TrackGraphTestWithState : TrackGraphTestBase
     {
-        protected override IList<string> TrackGraph(DbContext context, object root, Action<EntityEntryGraphNode> callback)
+        protected override IList<string> TrackGraph(
+            DbContext context,
+            object root,
+            Action<EntityEntryGraphNode> callback
+        )
         {
             var traversal = new List<string>();
 
@@ -128,7 +141,8 @@ public abstract class TrackGraphTestBase
                     traversal.Add(NodeString(node));
 
                     return node.Entry.State != EntityState.Detached;
-                });
+                }
+            );
 
             return traversal;
         }
@@ -137,21 +151,22 @@ public abstract class TrackGraphTestBase
     protected abstract IList<string> TrackGraph(
         DbContext context,
         object root,
-        Action<EntityEntryGraphNode> callback);
+        Action<EntityEntryGraphNode> callback
+    );
 
-    private static string NodeString(EntityEntryGraphNode node)
-        => EntryString(node.SourceEntry)
-            + " ---"
-            + node.InboundNavigation?.Name
-            + "--> "
-            + EntryString(node.Entry);
+    private static string NodeString(EntityEntryGraphNode node) =>
+        EntryString(node.SourceEntry)
+        + " ---"
+        + node.InboundNavigation?.Name
+        + "--> "
+        + EntryString(node.Entry);
 
-    private static string EntryString(EntityEntry entry)
-        => entry == null
+    private static string EntryString(EntityEntry entry) =>
+        entry == null
             ? "<None>"
             : entry.Metadata.DisplayName()
-            + ":"
-            + entry.Property(entry.Metadata.FindPrimaryKey().Properties[0].Name).CurrentValue;
+                + ":"
+                + entry.Property(entry.Metadata.FindPrimaryKey().Properties[0].Name).CurrentValue;
 
     [ConditionalTheory]
     [InlineData(false, false)]
@@ -163,12 +178,7 @@ public abstract class TrackGraphTestBase
         using var context = new EarlyLearningCenter(GetType().Name);
         var category = new NullbileCategory
         {
-            Products = new List<NullbileProduct>
-            {
-                new(),
-                new(),
-                new()
-            }
+            Products = new List<NullbileProduct> { new(), new(), new() },
         };
 
         if (setKeys)
@@ -191,11 +201,17 @@ public abstract class TrackGraphTestBase
                     "<None> -----> NullbileCategory:1",
                     "NullbileCategory:1 ---Products--> NullbileProduct:1",
                     "NullbileCategory:1 ---Products--> NullbileProduct:2",
-                    "NullbileCategory:1 ---Products--> NullbileProduct:3"
+                    "NullbileCategory:1 ---Products--> NullbileProduct:3",
                 },
                 TrackGraph(
                     context,
-                    category, node => node.Entry.State = node.Entry.IsKeySet ? EntityState.Unchanged : EntityState.Added));
+                    category,
+                    node =>
+                        node.Entry.State = node.Entry.IsKeySet
+                            ? EntityState.Unchanged
+                            : EntityState.Added
+                )
+            );
         }
 
         Assert.Equal(!setKeys, context.ChangeTracker.HasChanges());
@@ -248,10 +264,20 @@ public abstract class TrackGraphTestBase
         else
         {
             Assert.Equal(
-                new List<string> { "<None> -----> NullbileCategory:1", "NullbileCategory:1 ---Info--> NullbileCategoryInfo:1" },
+                new List<string>
+                {
+                    "<None> -----> NullbileCategory:1",
+                    "NullbileCategory:1 ---Info--> NullbileCategoryInfo:1",
+                },
                 TrackGraph(
                     context,
-                    category, node => node.Entry.State = node.Entry.IsKeySet ? EntityState.Unchanged : EntityState.Added));
+                    category,
+                    node =>
+                        node.Entry.State = node.Entry.IsKeySet
+                            ? EntityState.Unchanged
+                            : EntityState.Added
+                )
+            );
         }
 
         Assert.Equal(!setKeys, context.ChangeTracker.HasChanges());
@@ -274,10 +300,17 @@ public abstract class TrackGraphTestBase
     [InlineData(false, true, true)]
     [InlineData(true, false, true)]
     [InlineData(true, true, true)]
-    public void Can_attach_parent_with_owned_dependent(bool useAttach, bool setPrincipalKey, bool setDependentKey)
+    public void Can_attach_parent_with_owned_dependent(
+        bool useAttach,
+        bool setPrincipalKey,
+        bool setDependentKey
+    )
     {
         using var context = new EarlyLearningCenter(GetType().Name);
-        var sweet = new Sweet { Dreams = new Dreams { Are = new AreMade(), Made = new AreMade() } };
+        var sweet = new Sweet
+        {
+            Dreams = new Dreams { Are = new AreMade(), Made = new AreMade() },
+        };
 
         if (setPrincipalKey)
         {
@@ -288,8 +321,10 @@ public abstract class TrackGraphTestBase
         {
             var dreamsEntry = context.Entry(sweet).Reference(e => e.Dreams).TargetEntry;
             dreamsEntry.Property("SweetId").CurrentValue = 1;
-            dreamsEntry.Reference(e => e.Are).TargetEntry.Property("DreamsSweetId").CurrentValue = 1;
-            dreamsEntry.Reference(e => e.Made).TargetEntry.Property("DreamsSweetId").CurrentValue = 1;
+            dreamsEntry.Reference(e => e.Are).TargetEntry.Property("DreamsSweetId").CurrentValue =
+                1;
+            dreamsEntry.Reference(e => e.Made).TargetEntry.Property("DreamsSweetId").CurrentValue =
+                1;
         }
 
         if (useAttach)
@@ -304,16 +339,18 @@ public abstract class TrackGraphTestBase
                     "<None> -----> Sweet:1",
                     "Sweet:1 ---Dreams--> Dreams:1",
                     "Dreams:1 ---Are--> Dreams.Are#AreMade:1",
-                    "Dreams:1 ---Made--> Dreams.Made#AreMade:1"
+                    "Dreams:1 ---Made--> Dreams.Made#AreMade:1",
                 },
                 TrackGraph(
                     context,
                     sweet,
-                    node => node.Entry.State = node.Entry.Metadata.IsOwned()
-                        ? node.SourceEntry.State
-                        : node.Entry.IsKeySet
-                            ? EntityState.Unchanged
-                            : EntityState.Added));
+                    node =>
+                        node.Entry.State =
+                            node.Entry.Metadata.IsOwned() ? node.SourceEntry.State
+                            : node.Entry.IsKeySet ? EntityState.Unchanged
+                            : EntityState.Added
+                )
+            );
         }
 
         Assert.Equal(4, context.ChangeTracker.Entries().Count());
@@ -323,11 +360,16 @@ public abstract class TrackGraphTestBase
         var dependentEntry2b = context.Entry(sweet.Dreams.Made);
 
         var expectedPrincipalState = setPrincipalKey ? EntityState.Unchanged : EntityState.Added;
-        var expectedDependentState = setPrincipalKey || (setDependentKey && useAttach) ? EntityState.Unchanged : EntityState.Added;
+        var expectedDependentState =
+            setPrincipalKey || (setDependentKey && useAttach)
+                ? EntityState.Unchanged
+                : EntityState.Added;
 
         Assert.Equal(
-            expectedPrincipalState == EntityState.Added || expectedDependentState == EntityState.Added,
-            context.ChangeTracker.HasChanges());
+            expectedPrincipalState == EntityState.Added
+                || expectedDependentState == EntityState.Added,
+            context.ChangeTracker.HasChanges()
+        );
 
         Assert.Equal(expectedPrincipalState, context.Entry(sweet).State);
         Assert.Equal(expectedDependentState, dependentEntry.State);
@@ -335,9 +377,24 @@ public abstract class TrackGraphTestBase
         Assert.Equal(expectedDependentState, dependentEntry2b.State);
 
         Assert.Equal(1, sweet.Id);
-        Assert.Equal(1, dependentEntry.Property(dependentEntry.Metadata.FindPrimaryKey().Properties[0]).CurrentValue);
-        Assert.Equal(1, dependentEntry2a.Property(dependentEntry2a.Metadata.FindPrimaryKey().Properties[0]).CurrentValue);
-        Assert.Equal(1, dependentEntry2b.Property(dependentEntry2b.Metadata.FindPrimaryKey().Properties[0]).CurrentValue);
+        Assert.Equal(
+            1,
+            dependentEntry
+                .Property(dependentEntry.Metadata.FindPrimaryKey().Properties[0])
+                .CurrentValue
+        );
+        Assert.Equal(
+            1,
+            dependentEntry2a
+                .Property(dependentEntry2a.Metadata.FindPrimaryKey().Properties[0])
+                .CurrentValue
+        );
+        Assert.Equal(
+            1,
+            dependentEntry2b
+                .Property(dependentEntry2b.Metadata.FindPrimaryKey().Properties[0])
+                .CurrentValue
+        );
     }
 
     [ConditionalTheory]
@@ -345,22 +402,27 @@ public abstract class TrackGraphTestBase
     [InlineData(false, true)]
     [InlineData(true, false)]
     [InlineData(true, true)]
-    public void Can_attach_owned_dependent_with_reference_to_parent(bool useAttach, bool setDependentKey)
+    public void Can_attach_owned_dependent_with_reference_to_parent(
+        bool useAttach,
+        bool setDependentKey
+    )
     {
         using var context = new EarlyLearningCenter(GetType().Name);
         var dreams = new Dreams
         {
             Sweet = new Sweet { Id = 1 },
             Are = new AreMade(),
-            Made = new AreMade()
+            Made = new AreMade(),
         };
 
         if (setDependentKey)
         {
             var dreamsEntry = context.Entry(dreams);
             dreamsEntry.Property("SweetId").CurrentValue = 1;
-            dreamsEntry.Reference(e => e.Are).TargetEntry.Property("DreamsSweetId").CurrentValue = 1;
-            dreamsEntry.Reference(e => e.Made).TargetEntry.Property("DreamsSweetId").CurrentValue = 1;
+            dreamsEntry.Reference(e => e.Are).TargetEntry.Property("DreamsSweetId").CurrentValue =
+                1;
+            dreamsEntry.Reference(e => e.Made).TargetEntry.Property("DreamsSweetId").CurrentValue =
+                1;
         }
 
         if (useAttach)
@@ -375,12 +437,17 @@ public abstract class TrackGraphTestBase
                     "<None> -----> Dreams:1",
                     "Dreams:1 ---Are--> Dreams.Are#AreMade:1",
                     "Dreams:1 ---Made--> Dreams.Made#AreMade:1",
-                    "Dreams:1 ---Sweet--> Sweet:1"
+                    "Dreams:1 ---Sweet--> Sweet:1",
                 },
                 TrackGraph(
                     context,
                     dreams,
-                    node => node.Entry.State = node.Entry.IsKeySet ? EntityState.Unchanged : EntityState.Added));
+                    node =>
+                        node.Entry.State = node.Entry.IsKeySet
+                            ? EntityState.Unchanged
+                            : EntityState.Added
+                )
+            );
         }
 
         Assert.Equal(4, context.ChangeTracker.Entries().Count());
@@ -400,9 +467,24 @@ public abstract class TrackGraphTestBase
         Assert.Equal(expectedDependentState, dependentEntry2b.State);
 
         Assert.Equal(1, dreams.Sweet.Id);
-        Assert.Equal(1, dependentEntry.Property(dependentEntry.Metadata.FindPrimaryKey().Properties[0]).CurrentValue);
-        Assert.Equal(1, dependentEntry2a.Property(dependentEntry2a.Metadata.FindPrimaryKey().Properties[0]).CurrentValue);
-        Assert.Equal(1, dependentEntry2b.Property(dependentEntry2b.Metadata.FindPrimaryKey().Properties[0]).CurrentValue);
+        Assert.Equal(
+            1,
+            dependentEntry
+                .Property(dependentEntry.Metadata.FindPrimaryKey().Properties[0])
+                .CurrentValue
+        );
+        Assert.Equal(
+            1,
+            dependentEntry2a
+                .Property(dependentEntry2a.Metadata.FindPrimaryKey().Properties[0])
+                .CurrentValue
+        );
+        Assert.Equal(
+            1,
+            dependentEntry2b
+                .Property(dependentEntry2b.Metadata.FindPrimaryKey().Properties[0])
+                .CurrentValue
+        );
     }
 
     [ConditionalFact]
@@ -416,8 +498,8 @@ public abstract class TrackGraphTestBase
             {
                 new() { Id = 1 },
                 new() { Id = 2 },
-                new() { Id = 3 }
-            }
+                new() { Id = 3 },
+            },
         };
 
         Assert.Equal(
@@ -426,12 +508,10 @@ public abstract class TrackGraphTestBase
                 "<None> -----> Category:1",
                 "Category:1 ---Products--> Product:1",
                 "Category:1 ---Products--> Product:2",
-                "Category:1 ---Products--> Product:3"
+                "Category:1 ---Products--> Product:3",
             },
-            TrackGraph(
-                context,
-                category,
-                node => node.Entry.State = EntityState.Modified));
+            TrackGraph(context, category, node => node.Entry.State = EntityState.Modified)
+        );
 
         Assert.Equal(4, context.ChangeTracker.Entries().Count());
 
@@ -455,14 +535,16 @@ public abstract class TrackGraphTestBase
     public void Can_attach_child_with_reference_to_parent()
     {
         using var context = new EarlyLearningCenter(GetType().Name);
-        var product = new Product { Id = 1, Category = new Category { Id = 1 } };
+        var product = new Product
+        {
+            Id = 1,
+            Category = new Category { Id = 1 },
+        };
 
         Assert.Equal(
             new List<string> { "<None> -----> Product:1", "Product:1 ---Category--> Category:1" },
-            TrackGraph(
-                context,
-                product,
-                node => node.Entry.State = EntityState.Modified));
+            TrackGraph(context, product, node => node.Entry.State = EntityState.Modified)
+        );
 
         Assert.Equal(2, context.ChangeTracker.Entries().Count());
 
@@ -479,19 +561,25 @@ public abstract class TrackGraphTestBase
     public void Can_attach_parent_with_one_to_one_children()
     {
         using var context = new EarlyLearningCenter(GetType().Name);
-        var product = new Product { Id = 1, Details = new ProductDetails { Id = 1, Tag = new ProductDetailsTag { Id = 1 } } };
+        var product = new Product
+        {
+            Id = 1,
+            Details = new ProductDetails
+            {
+                Id = 1,
+                Tag = new ProductDetailsTag { Id = 1 },
+            },
+        };
 
         Assert.Equal(
             new List<string>
             {
                 "<None> -----> Product:1",
                 "Product:1 ---Details--> ProductDetails:1",
-                "ProductDetails:1 ---Tag--> ProductDetailsTag:1"
+                "ProductDetails:1 ---Tag--> ProductDetailsTag:1",
             },
-            TrackGraph(
-                context,
-                product,
-                node => node.Entry.State = EntityState.Unchanged));
+            TrackGraph(context, product, node => node.Entry.State = EntityState.Unchanged)
+        );
 
         Assert.Equal(3, context.ChangeTracker.Entries().Count());
 
@@ -509,19 +597,25 @@ public abstract class TrackGraphTestBase
     public void Can_attach_child_with_one_to_one_parents()
     {
         using var context = new EarlyLearningCenter(GetType().Name);
-        var tag = new ProductDetailsTag { Id = 1, Details = new ProductDetails { Id = 1, Product = new Product { Id = 1 } } };
+        var tag = new ProductDetailsTag
+        {
+            Id = 1,
+            Details = new ProductDetails
+            {
+                Id = 1,
+                Product = new Product { Id = 1 },
+            },
+        };
 
         Assert.Equal(
             new List<string>
             {
                 "<None> -----> ProductDetailsTag:1",
                 "ProductDetailsTag:1 ---Details--> ProductDetails:1",
-                "ProductDetails:1 ---Product--> Product:1"
+                "ProductDetails:1 ---Product--> Product:1",
             },
-            TrackGraph(
-                context,
-                tag,
-                node => node.Entry.State = EntityState.Unchanged));
+            TrackGraph(context, tag, node => node.Entry.State = EntityState.Unchanged)
+        );
 
         Assert.Equal(3, context.ChangeTracker.Entries().Count());
 
@@ -543,7 +637,7 @@ public abstract class TrackGraphTestBase
         {
             Id = 1,
             Product = new Product { Id = 1 },
-            Tag = new ProductDetailsTag { Id = 1 }
+            Tag = new ProductDetailsTag { Id = 1 },
         };
 
         Assert.Equal(
@@ -551,12 +645,10 @@ public abstract class TrackGraphTestBase
             {
                 "<None> -----> ProductDetails:1",
                 "ProductDetails:1 ---Product--> Product:1",
-                "ProductDetails:1 ---Tag--> ProductDetailsTag:1"
+                "ProductDetails:1 ---Tag--> ProductDetailsTag:1",
             },
-            TrackGraph(
-                context,
-                details,
-                node => node.Entry.State = EntityState.Unchanged));
+            TrackGraph(context, details, node => node.Entry.State = EntityState.Unchanged)
+        );
 
         Assert.Equal(3, context.ChangeTracker.Entries().Count());
 
@@ -574,8 +666,7 @@ public abstract class TrackGraphTestBase
     public void Entities_that_are_already_tracked_will_not_get_attached()
     {
         using var context = new EarlyLearningCenter(GetType().Name);
-        var existingProduct = context.Attach(
-            new Product { Id = 2, CategoryId = 1 }).Entity;
+        var existingProduct = context.Attach(new Product { Id = 2, CategoryId = 1 }).Entity;
 
         var category = new Category
         {
@@ -584,8 +675,8 @@ public abstract class TrackGraphTestBase
             {
                 new() { Id = 1 },
                 existingProduct,
-                new() { Id = 3 }
-            }
+                new() { Id = 3 },
+            },
         };
 
         Assert.Equal(
@@ -593,12 +684,10 @@ public abstract class TrackGraphTestBase
             {
                 "<None> -----> Category:1",
                 "Category:1 ---Products--> Product:1",
-                "Category:1 ---Products--> Product:3"
+                "Category:1 ---Products--> Product:3",
             },
-            TrackGraph(
-                context,
-                category,
-                node => node.Entry.State = EntityState.Modified));
+            TrackGraph(context, category, node => node.Entry.State = EntityState.Modified)
+        );
 
         Assert.Equal(4, context.ChangeTracker.Entries().Count());
 
@@ -631,21 +720,21 @@ public abstract class TrackGraphTestBase
                 {
                     Id = 1,
                     CategoryId = 1,
-                    Details = new ProductDetails { Id = 1 }
+                    Details = new ProductDetails { Id = 1 },
                 },
                 new()
                 {
                     Id = 2,
                     CategoryId = 1,
-                    Details = new ProductDetails { Id = 2 }
+                    Details = new ProductDetails { Id = 2 },
                 },
                 new()
                 {
                     Id = 3,
                     CategoryId = 1,
-                    Details = new ProductDetails { Id = 3 }
-                }
-            }
+                    Details = new ProductDetails { Id = 3 },
+                },
+            },
         };
 
         Assert.Equal(
@@ -656,21 +745,25 @@ public abstract class TrackGraphTestBase
                 "Product:1 ---Details--> ProductDetails:1",
                 "Category:1 ---Products--> Product:2",
                 "Category:1 ---Products--> Product:3",
-                "Product:3 ---Details--> ProductDetails:3"
+                "Product:3 ---Details--> ProductDetails:3",
             },
             TrackGraph(
                 context,
                 category,
                 node =>
                 {
-                    if (!(node.Entry.Entity is Product product)
-                        || product.Id != 2)
+                    if (!(node.Entry.Entity is Product product) || product.Id != 2)
                     {
                         node.Entry.State = EntityState.Unchanged;
                     }
-                }));
+                }
+            )
+        );
 
-        Assert.Equal(5, context.ChangeTracker.Entries().Count(e => e.State != EntityState.Detached));
+        Assert.Equal(
+            5,
+            context.ChangeTracker.Entries().Count(e => e.State != EntityState.Detached)
+        );
 
         Assert.False(context.ChangeTracker.HasChanges());
 
@@ -699,17 +792,22 @@ public abstract class TrackGraphTestBase
     public void Graph_iterator_does_not_go_visit_Apple()
     {
         using var context = new EarlyLearningCenter(GetType().Name);
-        var details = new ProductDetails { Id = 1, Product = new Product { Id = 1 } };
+        var details = new ProductDetails
+        {
+            Id = 1,
+            Product = new Product { Id = 1 },
+        };
         details.Product.Details = details;
 
         Assert.Equal(
             new List<string> { "<None> -----> ProductDetails:1" },
-            TrackGraph(
-                context,
-                details,
-                e => { }));
+            TrackGraph(context, details, e => { })
+        );
 
-        Assert.Equal(0, context.ChangeTracker.Entries().Count(e => e.State != EntityState.Detached));
+        Assert.Equal(
+            0,
+            context.ChangeTracker.Entries().Count(e => e.State != EntityState.Detached)
+        );
 
         Assert.False(context.ChangeTracker.HasChanges());
     }
@@ -726,7 +824,7 @@ public abstract class TrackGraphTestBase
         {
             Sweet = new Sweet { Id = 1 },
             Are = new AreMade(),
-            Made = new AreMade()
+            Made = new AreMade(),
         };
 
         context.Entry(dreams.Sweet).State = EntityState.Unchanged;
@@ -735,8 +833,10 @@ public abstract class TrackGraphTestBase
         {
             var dreamsEntry = context.Entry(dreams);
             dreamsEntry.Property("SweetId").CurrentValue = 1;
-            dreamsEntry.Reference(e => e.Are).TargetEntry.Property("DreamsSweetId").CurrentValue = 1;
-            dreamsEntry.Reference(e => e.Made).TargetEntry.Property("DreamsSweetId").CurrentValue = 1;
+            dreamsEntry.Reference(e => e.Are).TargetEntry.Property("DreamsSweetId").CurrentValue =
+                1;
+            dreamsEntry.Reference(e => e.Made).TargetEntry.Property("DreamsSweetId").CurrentValue =
+                1;
         }
 
         if (useAdd)
@@ -750,14 +850,18 @@ public abstract class TrackGraphTestBase
                 {
                     "<None> -----> Dreams:1",
                     "Dreams:1 ---Are--> Dreams.Are#AreMade:1",
-                    "Dreams:1 ---Made--> Dreams.Made#AreMade:1"
+                    "Dreams:1 ---Made--> Dreams.Made#AreMade:1",
                 },
                 TrackGraph(
                     context,
                     dreams,
-                    node => node.Entry.State = node.Entry.IsKeySet && !node.Entry.Metadata.IsOwned()
-                        ? EntityState.Unchanged
-                        : EntityState.Added));
+                    node =>
+                        node.Entry.State =
+                            node.Entry.IsKeySet && !node.Entry.Metadata.IsOwned()
+                                ? EntityState.Unchanged
+                                : EntityState.Added
+                )
+            );
         }
 
         Assert.Equal(4, context.ChangeTracker.Entries().Count());
@@ -777,9 +881,24 @@ public abstract class TrackGraphTestBase
         Assert.Equal(expectedDependentState, dependentEntry2b.State);
 
         Assert.Equal(1, dreams.Sweet.Id);
-        Assert.Equal(1, dependentEntry.Property(dependentEntry.Metadata.FindPrimaryKey().Properties[0]).CurrentValue);
-        Assert.Equal(1, dependentEntry2a.Property(dependentEntry2a.Metadata.FindPrimaryKey().Properties[0]).CurrentValue);
-        Assert.Equal(1, dependentEntry2b.Property(dependentEntry2b.Metadata.FindPrimaryKey().Properties[0]).CurrentValue);
+        Assert.Equal(
+            1,
+            dependentEntry
+                .Property(dependentEntry.Metadata.FindPrimaryKey().Properties[0])
+                .CurrentValue
+        );
+        Assert.Equal(
+            1,
+            dependentEntry2a
+                .Property(dependentEntry2a.Metadata.FindPrimaryKey().Properties[0])
+                .CurrentValue
+        );
+        Assert.Equal(
+            1,
+            dependentEntry2b
+                .Property(dependentEntry2b.Metadata.FindPrimaryKey().Properties[0])
+                .CurrentValue
+        );
     }
 
     [ConditionalTheory] // Issue #12590
@@ -787,7 +906,10 @@ public abstract class TrackGraphTestBase
     [InlineData(false, true)]
     [InlineData(true, false)]
     [InlineData(true, true)]
-    public void Dependents_are_detached_not_deleted_when_principal_is_detached(bool delayCascade, bool trackNewDependents)
+    public void Dependents_are_detached_not_deleted_when_principal_is_detached(
+        bool delayCascade,
+        bool trackNewDependents
+    )
     {
         using var context = new EarlyLearningCenter(GetType().Name);
 
@@ -798,8 +920,8 @@ public abstract class TrackGraphTestBase
             {
                 new() { Id = 1 },
                 new() { Id = 2 },
-                new() { Id = 3 }
-            }
+                new() { Id = 3 },
+            },
         };
 
         context.Attach(category);
@@ -840,7 +962,7 @@ public abstract class TrackGraphTestBase
             Assert.Equal(EntityState.Detached, product2Entry.State);
         }
 
-        var newCategory = new Category { Id = 1, };
+        var newCategory = new Category { Id = 1 };
 
         if (trackNewDependents)
         {
@@ -848,7 +970,7 @@ public abstract class TrackGraphTestBase
             {
                 new() { Id = 1 },
                 new() { Id = 2 },
-                new() { Id = 3 }
+                new() { Id = 3 },
             };
         }
 
@@ -856,7 +978,8 @@ public abstract class TrackGraphTestBase
         {
             Assert.Equal(
                 CoreStrings.IdentityConflict(nameof(Product), "{'Id'}"),
-                Assert.Throws<InvalidOperationException>(TrackGraph).Message);
+                Assert.Throws<InvalidOperationException>(TrackGraph).Message
+            );
         }
         else
         {
@@ -867,10 +990,11 @@ public abstract class TrackGraphTestBase
                         "<None> -----> Category:1",
                         "Category:1 ---Products--> Product:1",
                         "Category:1 ---Products--> Product:2",
-                        "Category:1 ---Products--> Product:3"
+                        "Category:1 ---Products--> Product:3",
                     }
                     : new List<string> { "<None> -----> Category:1" },
-                TrackGraph());
+                TrackGraph()
+            );
 
             if (trackNewDependents || delayCascade)
             {
@@ -925,11 +1049,8 @@ public abstract class TrackGraphTestBase
             }
         }
 
-        IList<string> TrackGraph()
-            => this.TrackGraph(
-                context,
-                newCategory,
-                node => node.Entry.State = EntityState.Modified);
+        IList<string> TrackGraph() =>
+            this.TrackGraph(context, newCategory, node => node.Entry.State = EntityState.Modified);
     }
 
     [ConditionalFact]
@@ -945,21 +1066,21 @@ public abstract class TrackGraphTestBase
                 {
                     Id = 1,
                     CategoryId = 1,
-                    Details = new ProductDetails { Id = 1 }
+                    Details = new ProductDetails { Id = 1 },
                 },
                 new()
                 {
                     Id = 2,
                     CategoryId = 1,
-                    Details = new ProductDetails { Id = 2 }
+                    Details = new ProductDetails { Id = 2 },
                 },
                 new()
                 {
                     Id = 3,
                     CategoryId = 1,
-                    Details = new ProductDetails { Id = 3 }
-                }
-            }
+                    Details = new ProductDetails { Id = 3 },
+                },
+            },
         };
 
         var visited = new HashSet<object>();
@@ -980,7 +1101,8 @@ public abstract class TrackGraphTestBase
                 traversal.Add(NodeString(node));
 
                 return true;
-            });
+            }
+        );
 
         Assert.Equal(
             new List<string>
@@ -991,25 +1113,28 @@ public abstract class TrackGraphTestBase
                 "Category:1 ---Products--> Product:2",
                 "Product:2 ---Details--> ProductDetails:2",
                 "Category:1 ---Products--> Product:3",
-                "Product:3 ---Details--> ProductDetails:3"
+                "Product:3 ---Details--> ProductDetails:3",
             },
-            traversal);
+            traversal
+        );
 
         Assert.Equal(7, visited.Count);
 
         Assert.False(context.ChangeTracker.HasChanges());
 
-        foreach (var entity in new object[] { category }
-                     .Concat(category.Products)
-                     .Concat(category.Products.Select(e => e.Details)))
+        foreach (
+            var entity in new object[] { category }
+                .Concat(category.Products)
+                .Concat(category.Products.Select(e => e.Details))
+        )
         {
             Assert.Equal(EntityState.Detached, context.Entry(entity).State);
         }
     }
 
     [ConditionalFact]
-    public void Can_attach_parent_with_some_new_and_some_existing_entities()
-        => KeyValueAttachTest(
+    public void Can_attach_parent_with_some_new_and_some_existing_entities() =>
+        KeyValueAttachTest(
             GetType().Name,
             (category, changeTracker) =>
             {
@@ -1019,15 +1144,19 @@ public abstract class TrackGraphTestBase
                         "<None> -----> Category:77",
                         "Category:77 ---Products--> Product:77",
                         "Category:77 ---Products--> Product:1",
-                        "Category:77 ---Products--> Product:78"
+                        "Category:77 ---Products--> Product:78",
                     },
                     TrackGraph(
                         changeTracker.Context,
                         category,
-                        node => node.Entry.State = node.Entry.Entity is Product { Id: 0 }
-                            ? EntityState.Added
-                            : EntityState.Unchanged));
-            });
+                        node =>
+                            node.Entry.State = node.Entry.Entity is Product { Id: 0 }
+                                ? EntityState.Added
+                                : EntityState.Unchanged
+                    )
+                );
+            }
+        );
 
     [ConditionalFact]
     public void Can_attach_graph_using_built_in_tracker()
@@ -1036,7 +1165,8 @@ public abstract class TrackGraphTestBase
 
         KeyValueAttachTest(
             GetType().Name,
-            (category, changeTracker) => changeTracker.TrackGraph(category, tracker.TrackEntity));
+            (category, changeTracker) => changeTracker.TrackGraph(category, tracker.TrackEntity)
+        );
     }
 
     [ConditionalFact]
@@ -1047,10 +1177,15 @@ public abstract class TrackGraphTestBase
         KeyValueAttachTest(
             GetType().Name,
             (category, changeTracker) => changeTracker.TrackGraph(category, tracker.TrackEntity),
-            expectModified: true);
+            expectModified: true
+        );
     }
 
-    private static void KeyValueAttachTest(string databaseName, Action<Category, ChangeTracker> tracker, bool expectModified = false)
+    private static void KeyValueAttachTest(
+        string databaseName,
+        Action<Category, ChangeTracker> tracker,
+        bool expectModified = false
+    )
     {
         using var context = new EarlyLearningCenter(databaseName);
         var category = new Category
@@ -1060,8 +1195,8 @@ public abstract class TrackGraphTestBase
             {
                 new() { Id = 77, CategoryId = expectModified ? 0 : 77 },
                 new() { Id = 0, CategoryId = expectModified ? 0 : 77 },
-                new() { Id = 78, CategoryId = expectModified ? 0 : 77 }
-            }
+                new() { Id = 78, CategoryId = expectModified ? 0 : 77 },
+            },
         };
 
         tracker(category, context.ChangeTracker);
@@ -1103,8 +1238,8 @@ public abstract class TrackGraphTestBase
             {
                 new() { Id = 77, CategoryId = 77 },
                 new() { Id = 0, CategoryId = 77 },
-                new() { Id = 78, CategoryId = 77 }
-            }
+                new() { Id = 78, CategoryId = 77 },
+            },
         };
 
         context.ChangeTracker.TrackGraph(category, tracker.TrackEntity);
@@ -1132,15 +1267,14 @@ public abstract class TrackGraphTestBase
     private class MyTracker : KeyValueEntityTracker
     {
         public MyTracker(bool updateExistingEntities)
-            : base(updateExistingEntities)
-        {
-        }
+            : base(updateExistingEntities) { }
 
         public override EntityState DetermineState(EntityEntry entry)
         {
             if (!entry.IsKeySet)
             {
-                entry.GetInfrastructure()[entry.Metadata.FindPrimaryKey().Properties.Single()] = 777;
+                entry.GetInfrastructure()[entry.Metadata.FindPrimaryKey().Properties.Single()] =
+                    777;
                 return EntityState.Added;
             }
 
@@ -1151,15 +1285,18 @@ public abstract class TrackGraphTestBase
     [ConditionalFact]
     public void TrackGraph_does_not_call_DetectChanges()
     {
-        var provider =
-            InMemoryTestHelpers.Instance.CreateServiceProvider(
-                new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>());
+        var provider = InMemoryTestHelpers.Instance.CreateServiceProvider(
+            new ServiceCollection().AddScoped<IChangeDetector, ChangeDetectorProxy>()
+        );
         using var context = new EarlyLearningCenter(GetType().Name, provider);
         var changeDetector = (ChangeDetectorProxy)context.GetService<IChangeDetector>();
 
         changeDetector.DetectChangesCalled = false;
 
-        context.ChangeTracker.TrackGraph(CreateSimpleGraph(2), e => e.Entry.State = EntityState.Unchanged);
+        context.ChangeTracker.TrackGraph(
+            CreateSimpleGraph(2),
+            e => e.Entry.State = EntityState.Unchanged
+        );
 
         Assert.False(changeDetector.DetectChangesCalled);
 
@@ -1181,21 +1318,21 @@ public abstract class TrackGraphTestBase
                 {
                     Id = 1,
                     CategoryId = 1,
-                    Details = new ProductDetails { Id = 1 }
+                    Details = new ProductDetails { Id = 1 },
                 },
                 new()
                 {
                     Id = 2,
                     CategoryId = 1,
-                    Details = new ProductDetails { Id = 2 }
+                    Details = new ProductDetails { Id = 2 },
                 },
                 new()
                 {
                     Id = 3,
                     CategoryId = 1,
-                    Details = new ProductDetails { Id = 3 }
-                }
-            }
+                    Details = new ProductDetails { Id = 3 },
+                },
+            },
         };
 
         context.Attach(category);
@@ -1204,7 +1341,9 @@ public abstract class TrackGraphTestBase
         var traversal = new List<string>();
 
         context.ChangeTracker.TrackGraph(
-            category, visited, e =>
+            category,
+            visited,
+            e =>
             {
                 if (e.NodeState.Contains(e.Entry.Entity))
                 {
@@ -1216,7 +1355,8 @@ public abstract class TrackGraphTestBase
                 traversal.Add(NodeString(e));
 
                 return true;
-            });
+            }
+        );
 
         Assert.Equal(
             new List<string>
@@ -1227,45 +1367,46 @@ public abstract class TrackGraphTestBase
                 "Category:1 ---Products--> Product:2",
                 "Product:2 ---Details--> ProductDetails:2",
                 "Category:1 ---Products--> Product:3",
-                "Product:3 ---Details--> ProductDetails:3"
+                "Product:3 ---Details--> ProductDetails:3",
             },
-            traversal);
+            traversal
+        );
 
         Assert.Equal(7, visited.Count);
     }
 
     private class TheShadows : DbContext
     {
-        protected internal override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Dark>(
-                b =>
-                {
-                    b.Property<int>("Id").ValueGeneratedOnAdd();
-                    b.Property<int>("SomeInt");
-                    b.Property<string>("SomeString");
-                });
+        protected internal override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<Dark>(b =>
+            {
+                b.Property<int>("Id").ValueGeneratedOnAdd();
+                b.Property<int>("SomeInt");
+                b.Property<string>("SomeString");
+            });
 
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                 .UseInMemoryDatabase(nameof(TheShadows));
     }
 
-    private class Dark
-    {
-    }
+    private class Dark { }
 
-    private static Product CreateSimpleGraph(int id)
-        => new() { Id = id, Category = new Category { Id = id } };
+    private static Product CreateSimpleGraph(int id) =>
+        new()
+        {
+            Id = id,
+            Category = new Category { Id = id },
+        };
 
     private class ChangeDetectorProxy : ChangeDetector
     {
         public ChangeDetectorProxy(
             IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> logger,
-            ILoggingOptions loggingOptions)
-            : base(logger, loggingOptions)
-        {
-        }
+            ILoggingOptions loggingOptions
+        )
+            : base(logger, loggingOptions) { }
 
         public bool DetectChangesCalled { get; set; }
 
@@ -1380,13 +1521,9 @@ public abstract class TrackGraphTestBase
         public OfThis OfThis { get; }
     }
 
-    private class AreMade
-    {
-    }
+    private class AreMade { }
 
-    private class OfThis : AreMade
-    {
-    }
+    private class OfThis : AreMade { }
 
     private class EarlyLearningCenter : DbContext
     {
@@ -1407,70 +1544,75 @@ public abstract class TrackGraphTestBase
 
         protected internal override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<NullbileProduct>(b =>
+            {
+                b.Property<int?>("Id");
+                b.Property<int?>("CategoryId");
+                b.HasKey("Id");
+            });
+
+            modelBuilder.Entity<NullbileCategoryInfo>(b =>
+            {
+                b.Property<int?>("Id");
+                b.Property<int?>("CategoryId");
+                b.HasKey("Id");
+            });
+
+            modelBuilder.Entity<NullbileCategory>(b =>
+            {
+                b.Property<int?>("Id");
+                b.HasKey("Id");
+                b.HasMany(e => e.Products).WithOne(e => e.Category).HasForeignKey("CategoryId");
+                b.HasOne(e => e.Info)
+                    .WithOne(e => e.Category)
+                    .HasForeignKey<NullbileCategoryInfo>("CategoryId");
+            });
+
             modelBuilder
-                .Entity<NullbileProduct>(
+                .Entity<Sweet>()
+                .OwnsOne(
+                    e => e.Dreams,
                     b =>
                     {
-                        b.Property<int?>("Id");
-                        b.Property<int?>("CategoryId");
-                        b.HasKey("Id");
-                    });
+                        b.WithOwner(e => e.Sweet);
+                        b.OwnsOne(e => e.Are);
+                        b.OwnsOne(e => e.Made);
+                        b.OwnsOne(e => e.OfThis);
+                    }
+                );
+
+            modelBuilder.Entity<Category>().HasMany(e => e.Products).WithOne(e => e.Category);
 
             modelBuilder
-                .Entity<NullbileCategoryInfo>(
-                    b =>
-                    {
-                        b.Property<int?>("Id");
-                        b.Property<int?>("CategoryId");
-                        b.HasKey("Id");
-                    });
-
-            modelBuilder
-                .Entity<NullbileCategory>(
-                    b =>
-                    {
-                        b.Property<int?>("Id");
-                        b.HasKey("Id");
-                        b.HasMany(e => e.Products).WithOne(e => e.Category).HasForeignKey("CategoryId");
-                        b.HasOne(e => e.Info).WithOne(e => e.Category).HasForeignKey<NullbileCategoryInfo>("CategoryId");
-                    });
-
-            modelBuilder.Entity<Sweet>().OwnsOne(
-                e => e.Dreams, b =>
-                {
-                    b.WithOwner(e => e.Sweet);
-                    b.OwnsOne(e => e.Are);
-                    b.OwnsOne(e => e.Made);
-                    b.OwnsOne(e => e.OfThis);
-                });
-
-            modelBuilder
-                .Entity<Category>().HasMany(e => e.Products).WithOne(e => e.Category);
-
-            modelBuilder
-                .Entity<ProductDetailsTag>().HasOne(e => e.TagDetails).WithOne(e => e.Tag)
+                .Entity<ProductDetailsTag>()
+                .HasOne(e => e.TagDetails)
+                .WithOne(e => e.Tag)
                 .HasForeignKey<ProductDetailsTagDetails>(e => e.Id);
 
             modelBuilder
-                .Entity<ProductDetails>().HasOne(e => e.Tag).WithOne(e => e.Details)
+                .Entity<ProductDetails>()
+                .HasOne(e => e.Tag)
+                .WithOne(e => e.Details)
                 .HasForeignKey<ProductDetailsTag>(e => e.Id);
 
             modelBuilder
-                .Entity<Product>().HasOne(e => e.Details).WithOne(e => e.Product)
+                .Entity<Product>()
+                .HasOne(e => e.Details)
+                .WithOne(e => e.Product)
                 .HasForeignKey<ProductDetails>(e => e.Id);
 
-            modelBuilder.Entity<OrderDetails>(
-                b =>
-                {
-                    b.HasKey(
-                        e => new { e.OrderId, e.ProductId });
-                    b.HasOne(e => e.Order).WithMany(e => e.OrderDetails).HasForeignKey(e => e.OrderId);
-                    b.HasOne(e => e.Product).WithMany(e => e.OrderDetails).HasForeignKey(e => e.ProductId);
-                });
+            modelBuilder.Entity<OrderDetails>(b =>
+            {
+                b.HasKey(e => new { e.OrderId, e.ProductId });
+                b.HasOne(e => e.Order).WithMany(e => e.OrderDetails).HasForeignKey(e => e.OrderId);
+                b.HasOne(e => e.Product)
+                    .WithMany(e => e.OrderDetails)
+                    .HasForeignKey(e => e.ProductId);
+            });
         }
 
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(_serviceProvider)
                 .UseInMemoryDatabase(_databaseName);
     }
@@ -1484,11 +1626,13 @@ public abstract class TrackGraphTestBase
             _updateExistingEntities = updateExistingEntities;
         }
 
-        public virtual void TrackEntity(EntityEntryGraphNode node)
-            => node.Entry.GetInfrastructure().SetEntityState(DetermineState(node.Entry), acceptChanges: true);
+        public virtual void TrackEntity(EntityEntryGraphNode node) =>
+            node
+                .Entry.GetInfrastructure()
+                .SetEntityState(DetermineState(node.Entry), acceptChanges: true);
 
-        public virtual EntityState DetermineState(EntityEntry entry)
-            => entry.IsKeySet
+        public virtual EntityState DetermineState(EntityEntry entry) =>
+            entry.IsKeySet
                 ? (_updateExistingEntities ? EntityState.Modified : EntityState.Unchanged)
                 : EntityState.Added;
     }

@@ -90,39 +90,31 @@ public class SqlServerTriggersTest : IClassFixture<SqlServerTriggersTest.SqlServ
         Assert.Equal(product.Version, productBackup.Version);
     }
 
-    protected TriggersContext CreateContext()
-        => (TriggersContext)Fixture.CreateContext();
+    protected TriggersContext CreateContext() => (TriggersContext)Fixture.CreateContext();
 
     protected class TriggersContext : PoolableDbContext
     {
         public TriggersContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductBackup> ProductBackups { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Product>(
-                eb =>
+            modelBuilder.Entity<Product>(eb =>
+            {
+                eb.ToTable(tb =>
                 {
-                    eb.ToTable(
-                        tb =>
-                        {
-                            tb.HasTrigger("TRG_InsertProduct");
-                            tb.HasTrigger("TRG_UpdateProduct");
-                            tb.HasTrigger("TRG_DeleteProduct");
-                        });
-                    eb.Property(e => e.Version)
-                        .ValueGeneratedOnAddOrUpdate()
-                        .IsConcurrencyToken();
-                    eb.Ignore(e => e.StoreUpdated);
+                    tb.HasTrigger("TRG_InsertProduct");
+                    tb.HasTrigger("TRG_UpdateProduct");
+                    tb.HasTrigger("TRG_DeleteProduct");
                 });
+                eb.Property(e => e.Version).ValueGeneratedOnAddOrUpdate().IsConcurrencyToken();
+                eb.Ignore(e => e.StoreUpdated);
+            });
 
-            modelBuilder.Entity<ProductBackup>()
-                .Property(e => e.Id).ValueGeneratedNever();
+            modelBuilder.Entity<ProductBackup>().Property(e => e.Id).ValueGeneratedNever();
         }
     }
 
@@ -143,13 +135,11 @@ public class SqlServerTriggersTest : IClassFixture<SqlServerTriggersTest.SqlServ
 
     public class SqlServerTriggersFixture : SharedStoreFixtureBase<PoolableDbContext>
     {
-        protected override string StoreName
-            => "SqlServerTriggers";
+        protected override string StoreName => "SqlServerTriggers";
 
         protected override Type ContextType { get; } = typeof(TriggersContext);
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
         protected override void Seed(PoolableDbContext context)
         {
@@ -167,7 +157,8 @@ BEGIN
 
     INSERT INTO ProductBackups
     SELECT * FROM INSERTED;
-END");
+END"
+            );
 
             context.Database.ExecuteSqlRaw(
                 @"
@@ -185,7 +176,8 @@ BEGIN
     INNER JOIN Products p
         ON b.Id = p.Id
     WHERE p.Id IN(SELECT INSERTED.Id FROM INSERTED);
-END");
+END"
+            );
 
             context.Database.ExecuteSqlRaw(
                 @"
@@ -199,7 +191,8 @@ BEGIN
 
     DELETE FROM ProductBackups
     WHERE Id IN(SELECT DELETED.Id FROM DELETED);
-END");
+END"
+            );
         }
     }
 }

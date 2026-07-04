@@ -26,9 +26,7 @@ public sealed class SqliteJsonByteArrayReaderWriter : JsonValueReaderWriter<byte
     /// </summary>
     public static SqliteJsonByteArrayReaderWriter Instance { get; } = new();
 
-    private SqliteJsonByteArrayReaderWriter()
-    {
-    }
+    private SqliteJsonByteArrayReaderWriter() { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -36,8 +34,10 @@ public sealed class SqliteJsonByteArrayReaderWriter : JsonValueReaderWriter<byte
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override byte[] FromJsonTyped(ref Utf8JsonReaderManager manager, object? existingObject = null)
-        => Convert.FromHexString(manager.CurrentReader.GetString()!);
+    public override byte[] FromJsonTyped(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    ) => Convert.FromHexString(manager.CurrentReader.GetString()!);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -45,6 +45,6 @@ public sealed class SqliteJsonByteArrayReaderWriter : JsonValueReaderWriter<byte
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override void ToJsonTyped(Utf8JsonWriter writer, byte[] value)
-        => writer.WriteStringValue(Convert.ToHexString(value));
+    public override void ToJsonTyped(Utf8JsonWriter writer, byte[] value) =>
+        writer.WriteStringValue(Convert.ToHexString(value));
 }

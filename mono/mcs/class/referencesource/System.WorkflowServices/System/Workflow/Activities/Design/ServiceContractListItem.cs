@@ -57,8 +57,6 @@ namespace System.Workflow.Activities.Design
             get { return operations; }
         }
 
-
-
         public void AddOperation(ServiceOperationListItem operation)
         {
             if (operation == null)
@@ -96,7 +94,8 @@ namespace System.Workflow.Activities.Design
 
         public WorkflowServiceOperationListItem CreateOperation()
         {
-            WorkflowServiceOperationListItem result = (WorkflowServiceOperationListItem) this.operations.CreateWithUniqueName();
+            WorkflowServiceOperationListItem result = (WorkflowServiceOperationListItem)
+                this.operations.CreateWithUniqueName();
             result.Operation.ContractName = this.Name;
             return result;
         }
@@ -124,6 +123,7 @@ namespace System.Workflow.Activities.Design
                 this.container.SetSelected(container.Items.IndexOf(operationListItem), true);
             }
         }
+
         public override string ToString()
         {
             return Name;

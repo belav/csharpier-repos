@@ -1,15 +1,10 @@
-public interface ITestBase<TInterface>
-{ }
+public interface ITestBase<TInterface> { }
 
-public interface ITestSub1 : ITestBase<ITestSub2>
-{ }
+public interface ITestSub1 : ITestBase<ITestSub2> { }
 
-public interface ITestSub2 : ITestSub1
-{ }
+public interface ITestSub2 : ITestSub1 { }
 
 class C
 {
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

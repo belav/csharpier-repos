@@ -18,7 +18,9 @@ namespace Internal.TypeSystem
                 if (_offset == FieldAndOffset.InvalidOffset)
                 {
                     if (IsStatic)
-                        OwningType.ComputeStaticFieldLayout(StaticLayoutKind.StaticRegionSizesAndFields);
+                        OwningType.ComputeStaticFieldLayout(
+                            StaticLayoutKind.StaticRegionSizesAndFields
+                        );
                     else
                         OwningType.ComputeInstanceLayout(InstanceLayoutKind.TypeAndFields);
 

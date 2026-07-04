@@ -85,7 +85,7 @@ public class InsertGCPoll
             i += GCPollNative.NextUInt64(1);
         }
     }
-    
+
     [Fact]
     public static int TestEntryPoint()
     {

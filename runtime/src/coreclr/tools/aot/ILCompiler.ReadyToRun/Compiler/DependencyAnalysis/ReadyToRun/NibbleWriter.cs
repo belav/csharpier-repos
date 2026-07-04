@@ -127,7 +127,8 @@ namespace ILCompiler.DependencyAnalysis
         /// <param name="signedValue">Signed value to encode in the nibble stream</param>
         public void WriteInt(int signedValue)
         {
-            uint value = (signedValue < 0) ? (((uint)(-signedValue) << 1) + 1) : ((uint)signedValue << 1);
+            uint value =
+                (signedValue < 0) ? (((uint)(-signedValue) << 1) + 1) : ((uint)signedValue << 1);
             WriteUInt(value);
         }
 
@@ -154,7 +155,13 @@ namespace ILCompiler.DependencyAnalysis
                     foreach (Blob blob in _largeBuffer.GetBlobs())
                     {
                         ArraySegment<byte> blobSegment = blob.GetBytes();
-                        Array.Copy(blobSegment.Array, blobSegment.Offset, output, startOffset, blob.Length);
+                        Array.Copy(
+                            blobSegment.Array,
+                            blobSegment.Offset,
+                            output,
+                            startOffset,
+                            blob.Length
+                        );
                         startOffset += blob.Length;
                     }
                 }

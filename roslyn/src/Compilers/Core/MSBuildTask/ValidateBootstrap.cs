@@ -30,23 +30,24 @@ namespace Microsoft.CodeAnalysis.BuildTasks
             set { _tasksAssemblyFullPath = NormalizePath(Path.GetFullPath(value!)); }
         }
 
-        public ValidateBootstrap()
-        {
-
-        }
+        public ValidateBootstrap() { }
 
         public override bool Execute()
         {
             if (TasksAssemblyFullPath is null)
             {
-                Log.LogError($"{nameof(ValidateBootstrap)} task must have a {nameof(TasksAssemblyFullPath)} parameter.");
+                Log.LogError(
+                    $"{nameof(ValidateBootstrap)} task must have a {nameof(TasksAssemblyFullPath)} parameter."
+                );
                 return false;
             }
 
             var fullPath = typeof(ValidateBootstrap).Assembly.Location;
             if (!StringComparer.OrdinalIgnoreCase.Equals(TasksAssemblyFullPath, fullPath))
             {
-                Log.LogError($"Bootstrap assembly {Path.GetFileName(fullPath)} incorrectly loaded from {fullPath} instead of {TasksAssemblyFullPath}");
+                Log.LogError(
+                    $"Bootstrap assembly {Path.GetFileName(fullPath)} incorrectly loaded from {fullPath} instead of {TasksAssemblyFullPath}"
+                );
                 return false;
             }
 

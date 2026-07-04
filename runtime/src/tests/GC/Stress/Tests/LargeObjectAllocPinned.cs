@@ -4,10 +4,11 @@
 // Regression Test for Bug# 145842(Possible GC hole with byrefs into the large heap)
 
 using System;
+
 internal class LargePinned
 {
     [System.Security.SecuritySafeCritical]
-    unsafe public static int Main()
+    public static unsafe int Main()
     {
         for (int i = 0; i < 25; i++)
         {

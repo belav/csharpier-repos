@@ -16,12 +16,11 @@ namespace System.Security.Cryptography.Pkcs
         private PfxAsn _decoded;
         private ReadOnlyMemory<byte> _authSafeContents;
 
-        public ReadOnlyCollection<Pkcs12SafeContents> AuthenticatedSafe { get; private set; } = null!; // Initialized using object initializer
+        public ReadOnlyCollection<Pkcs12SafeContents> AuthenticatedSafe { get; private set; } =
+            null!; // Initialized using object initializer
         public Pkcs12IntegrityMode IntegrityMode { get; private set; }
 
-        private Pkcs12Info()
-        {
-        }
+        private Pkcs12Info() { }
 
         public bool VerifyMac(string? password)
         {
@@ -37,7 +36,9 @@ namespace System.Security.Cryptography.Pkcs
                     SR.Format(
                         SR.Cryptography_Pkcs12_WrongModeForVerify,
                         Pkcs12IntegrityMode.Password,
-                        IntegrityMode));
+                        IntegrityMode
+                    )
+                );
             }
 
             return _decoded.VerifyMac(password, _authSafeContents.Span);
@@ -46,7 +47,8 @@ namespace System.Security.Cryptography.Pkcs
         public static Pkcs12Info Decode(
             ReadOnlyMemory<byte> encodedBytes,
             out int bytesConsumed,
-            bool skipCopy = false)
+            bool skipCopy = false
+        )
         {
             // Trim it to the first value
             int firstValueLength = PkcsHelpers.FirstBerValueLength(encodedBytes.Span);
@@ -79,7 +81,10 @@ namespace System.Security.Cryptography.Pkcs
             }
             else if (pfx.AuthSafe.ContentType == Oids.Pkcs7Signed)
             {
-                SignedDataAsn signedData = SignedDataAsn.Decode(pfx.AuthSafe.Content, AsnEncodingRules.BER);
+                SignedDataAsn signedData = SignedDataAsn.Decode(
+                    pfx.AuthSafe.Content,
+                    AsnEncodingRules.BER
+                );
 
                 mode = Pkcs12IntegrityMode.PublicKey;
 
@@ -102,13 +107,20 @@ namespace System.Security.Cryptography.Pkcs
             List<ContentInfoAsn> authSafeData = new List<ContentInfoAsn>();
             try
             {
-                AsnValueReader authSafeReader = new AsnValueReader(authSafeBytes.Span, AsnEncodingRules.BER);
+                AsnValueReader authSafeReader = new AsnValueReader(
+                    authSafeBytes.Span,
+                    AsnEncodingRules.BER
+                );
                 AsnValueReader sequenceReader = authSafeReader.ReadSequence();
 
                 authSafeReader.ThrowIfNotEmpty();
                 while (sequenceReader.HasData)
                 {
-                    ContentInfoAsn.Decode(ref sequenceReader, authSafeBytes, out ContentInfoAsn contentInfo);
+                    ContentInfoAsn.Decode(
+                        ref sequenceReader,
+                        authSafeBytes,
+                        out ContentInfoAsn contentInfo
+                    );
                     authSafeData.Add(contentInfo);
                 }
 
@@ -116,7 +128,9 @@ namespace System.Security.Cryptography.Pkcs
 
                 if (authSafeData.Count == 0)
                 {
-                    authSafe = new ReadOnlyCollection<Pkcs12SafeContents>(Array.Empty<Pkcs12SafeContents>());
+                    authSafe = new ReadOnlyCollection<Pkcs12SafeContents>(
+                        Array.Empty<Pkcs12SafeContents>()
+                    );
                 }
                 else
                 {

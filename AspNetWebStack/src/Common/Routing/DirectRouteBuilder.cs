@@ -50,7 +50,10 @@ namespace System.Web.Mvc.Routing
         /// <param name="targetIsAction">
         /// A value indicating whether the route is configured at the action or controller level.
         /// </param>
-        public DirectRouteBuilder(IReadOnlyCollection<TActionDescriptor> actions, bool targetIsAction)
+        public DirectRouteBuilder(
+            IReadOnlyCollection<TActionDescriptor> actions,
+            bool targetIsAction
+        )
         {
             if (actions == null)
             {
@@ -68,10 +71,7 @@ namespace System.Web.Mvc.Routing
         /// <inheritdoc/>
         public string Template
         {
-            get
-            {
-                return _template;
-            }
+            get { return _template; }
             set
             {
                 ParsedRoute = null;
@@ -80,18 +80,27 @@ namespace System.Web.Mvc.Routing
         }
 
         /// <inheritdoc/>
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly",
-            Justification = "Null and empty values are legitimate, separate options when constructing a route.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "Null and empty values are legitimate, separate options when constructing a route."
+        )]
         public TRouteDictionary Defaults { get; set; }
 
         /// <inheritdoc/>
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly",
-            Justification = "Null and empty values are legitimate, separate options when constructing a route.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "Null and empty values are legitimate, separate options when constructing a route."
+        )]
         public TRouteDictionary Constraints { get; set; }
 
         /// <inheritdoc/>
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly",
-            Justification = "Null and empty values are legitimate, separate options when constructing a route.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "Null and empty values are legitimate, separate options when constructing a route."
+        )]
         public TRouteDictionary DataTokens { get; set; }
 
         internal TParsedRoute ParsedRoute { get; set; }
@@ -131,7 +140,8 @@ namespace System.Web.Mvc.Routing
             defaults = Copy(Defaults) ?? new RouteValueDictionary();
 #endif
             TRouteDictionaryConcrete constraints = Copy(Constraints);
-            TRouteDictionaryConcrete dataTokens = Copy(DataTokens) ?? new TRouteDictionaryConcrete();
+            TRouteDictionaryConcrete dataTokens =
+                Copy(DataTokens) ?? new TRouteDictionaryConcrete();
 
             dataTokens[RouteDataTokenKeys.Actions] = _actions;
 
@@ -166,7 +176,14 @@ namespace System.Web.Mvc.Routing
             }
 
             HttpMessageHandler handler = null;
-            IHttpRoute route = new HttpRoute(Template, defaults, constraints, dataTokens, handler, ParsedRoute);
+            IHttpRoute route = new HttpRoute(
+                Template,
+                defaults,
+                constraints,
+                dataTokens,
+                handler,
+                ParsedRoute
+            );
 #else
             ControllerDescriptor controllerDescriptor = GetControllerDescriptor();
 
@@ -199,7 +216,13 @@ namespace System.Web.Mvc.Routing
                 }
             }
 
-            Route route = new Route(Template, defaults, constraints, dataTokens, routeHandler: null);
+            Route route = new Route(
+                Template,
+                defaults,
+                constraints,
+                dataTokens,
+                routeHandler: null
+            );
 
             ConstraintValidation.Validate(route);
 #endif
@@ -214,21 +237,42 @@ namespace System.Web.Mvc.Routing
 
             if (parsedRoute.PathSegments != null)
             {
-                foreach (var contentSegment in parsedRoute.PathSegments.OfType<PathContentSegment>())
+                foreach (
+                    var contentSegment in parsedRoute.PathSegments.OfType<PathContentSegment>()
+                )
                 {
                     if (contentSegment != null && contentSegment.Subsegments != null)
                     {
-                        foreach (var parameterSegment in contentSegment.Subsegments.OfType<PathParameterSubsegment>())
+                        foreach (
+                            var parameterSegment in contentSegment.Subsegments.OfType<PathParameterSubsegment>()
+                        )
                         {
                             if (parameterSegment != null)
                             {
-                                if (String.Equals(parameterSegment.ParameterName, "controller", StringComparison.OrdinalIgnoreCase))
+                                if (
+                                    String.Equals(
+                                        parameterSegment.ParameterName,
+                                        "controller",
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
+                                )
                                 {
-                                    throw Error.InvalidOperation(TResources.DirectRoute_InvalidParameter_Controller);
+                                    throw Error.InvalidOperation(
+                                        TResources.DirectRoute_InvalidParameter_Controller
+                                    );
                                 }
-                                else if (TargetIsAction && String.Equals(parameterSegment.ParameterName, "action", StringComparison.OrdinalIgnoreCase))
+                                else if (
+                                    TargetIsAction
+                                    && String.Equals(
+                                        parameterSegment.ParameterName,
+                                        "action",
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
+                                )
                                 {
-                                    throw Error.InvalidOperation(TResources.DirectRoute_InvalidParameter_Action);
+                                    throw Error.InvalidOperation(
+                                        TResources.DirectRoute_InvalidParameter_Action
+                                    );
                                 }
                             }
                         }
@@ -248,7 +292,9 @@ namespace System.Web.Mvc.Routing
 
             if (targetActions == null || targetActions.Length == 0)
             {
-                throw new InvalidOperationException(TResources.DirectRoute_MissingActionDescriptors);
+                throw new InvalidOperationException(
+                    TResources.DirectRoute_MissingActionDescriptors
+                );
             }
 #if ASPNETWEBAPI
             if (route.Handler != null)
@@ -258,7 +304,9 @@ namespace System.Web.Mvc.Routing
 #else
             if (route.RouteHandler != null)
             {
-                throw new InvalidOperationException(TResources.DirectRoute_RouteHandlerNotSupported);
+                throw new InvalidOperationException(
+                    TResources.DirectRoute_RouteHandlerNotSupported
+                );
             }
 #endif
         }

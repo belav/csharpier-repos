@@ -4,25 +4,24 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
     using System.ComponentModel;
 
-    public class WebPartDisplayModeCancelEventArgs : CancelEventArgs {
+    public class WebPartDisplayModeCancelEventArgs : CancelEventArgs
+    {
         private WebPartDisplayMode _newDisplayMode;
 
-        public WebPartDisplayModeCancelEventArgs(WebPartDisplayMode newDisplayMode) {
+        public WebPartDisplayModeCancelEventArgs(WebPartDisplayMode newDisplayMode)
+        {
             _newDisplayMode = newDisplayMode;
         }
 
-        public WebPartDisplayMode NewDisplayMode {
-            get {
-                return _newDisplayMode;
-            }
-            set {
-                _newDisplayMode = value;
-            }
+        public WebPartDisplayMode NewDisplayMode
+        {
+            get { return _newDisplayMode; }
+            set { _newDisplayMode = value; }
         }
     }
 }

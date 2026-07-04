@@ -1,20 +1,19 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Globalization;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using System.Runtime.InteropServices;
-using System.Text;
+using System.Security.Cryptography;
 using System.Security.Cryptography.Pkcs;
-using System.Security.Cryptography.Xml;
-using System.Security.Cryptography.X509Certificates;
-using Xunit;
-
-using Test.Cryptography;
 using System.Security.Cryptography.Pkcs.Tests;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Cryptography.Xml;
+using System.Text;
+using Test.Cryptography;
+using Xunit;
 
 namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 {
@@ -178,7 +177,9 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         }
 
         [Fact]
-        [OuterLoop(/* Leaks key on disk if interrupted */)]
+        [OuterLoop( /* Leaks key on disk if interrupted */
+
+        )]
         public static void PostEncrypt_Certs()
         {
             ContentInfo expectedContentInfo = new ContentInfo(new byte[] { 1, 2, 3 });
@@ -201,19 +202,22 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 
         private static void PostDecode_Encode(bool isRunningOnDesktop)
         {
-            byte[] encodedMessage =
-                ("3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"
+            byte[] encodedMessage = (
+                "3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"
                 + "414b65795472616e7366657231021031d935fb63e8cfab48a0bf7b397b67c0300d06092a864886f70d01010105000481805e"
                 + "bb2d08773594be9ec5d30c0707cf339f2b982a4f0797b74d520a0c973d668a9a6ad9d28066ef36e5b5620fef67f4d79ee50c"
                 + "25eb999f0c656548347d5676ac4b779f8fce2b87e6388fbe483bb0fcf78ab1f1ff29169600401fded7b2803a0bf96cc160c4"
                 + "96726216e986869eed578bda652855c85604a056201538ee56b6c4302b06092a864886f70d010701301406082a864886f70d"
-                + "030704083adadf63cd297a86800835edc437e31d0b70").HexToByteArray();
+                + "030704083adadf63cd297a86800835edc437e31d0b70"
+            ).HexToByteArray();
 
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(encodedMessage);
 
             // This should really have thrown an InvalidOperationException. Instead, you get... something back.
-            string expectedString = isRunningOnDesktop ? "35edc437e31d0b70000000000000" : "35edc437e31d0b70";
+            string expectedString = isRunningOnDesktop
+                ? "35edc437e31d0b70000000000000"
+                : "35edc437e31d0b70";
             byte[] expectedGarbage = expectedString.HexToByteArray();
             byte[] garbage = ecms.Encode();
             Assert.Equal(expectedGarbage, garbage);
@@ -235,13 +239,14 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 
         private static void PostDecode_ContentInfo(bool isRunningOnDesktop)
         {
-            byte[] encodedMessage =
-                ("3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"
+            byte[] encodedMessage = (
+                "3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"
                 + "414b65795472616e7366657231021031d935fb63e8cfab48a0bf7b397b67c0300d06092a864886f70d01010105000481805e"
                 + "bb2d08773594be9ec5d30c0707cf339f2b982a4f0797b74d520a0c973d668a9a6ad9d28066ef36e5b5620fef67f4d79ee50c"
                 + "25eb999f0c656548347d5676ac4b779f8fce2b87e6388fbe483bb0fcf78ab1f1ff29169600401fded7b2803a0bf96cc160c4"
                 + "96726216e986869eed578bda652855c85604a056201538ee56b6c4302b06092a864886f70d010701301406082a864886f70d"
-                + "030704083adadf63cd297a86800835edc437e31d0b70").HexToByteArray();
+                + "030704083adadf63cd297a86800835edc437e31d0b70"
+            ).HexToByteArray();
 
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(encodedMessage);
@@ -249,7 +254,9 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             // This gets you the encrypted inner content.
             ContentInfo contentInfo = ecms.ContentInfo;
             Assert.Equal(Oids.Pkcs7Data, contentInfo.ContentType.Value);
-            string expectedString = isRunningOnDesktop ? "35edc437e31d0b70000000000000" : "35edc437e31d0b70";
+            string expectedString = isRunningOnDesktop
+                ? "35edc437e31d0b70000000000000"
+                : "35edc437e31d0b70";
             byte[] expectedGarbage = expectedString.HexToByteArray();
             Assert.Equal(expectedGarbage, contentInfo.Content);
         }
@@ -272,7 +279,9 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         // State 4: Called Decode() + Decrypt()
         //
         [Theory]
-        [OuterLoop(/* Leaks key on disk if interrupted */)]
+        [OuterLoop( /* Leaks key on disk if interrupted */
+
+        )]
         [InlineData(false)]
 #if NETCOREAPP // API not supported on netfx
         [InlineData(true)]
@@ -282,16 +291,20 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             byte[] expectedContent = { 6, 3, 128, 33, 44 };
             EnvelopedCms ecms = new EnvelopedCms(new ContentInfo(expectedContent));
             ecms.Encrypt(new CmsRecipient(Certificates.RSAKeyTransfer1.GetCertificate()));
-            byte[] encodedMessage =
-                 ("3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"
+            byte[] encodedMessage = (
+                "3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"
                 + "414b65795472616e7366657231021031d935fb63e8cfab48a0bf7b397b67c0300d06092a864886f70d010101050004818067"
                 + "6bada56dcaf2e65226941242db73b5a5420a6212cd6af662db52fdc0ca63875cb69066f7074da0fc009ce724e2d73fb19380"
                 + "2deea8d92b069486a41c7c4fc3cd0174a918a559f79319039b40ae797bcacc909c361275ee2a5b1f0ff09fb5c19508e3f5ac"
                 + "051ac0f03603c27fb8993d49ac428f8bcfc23a90ef9b0fac0f423a302b06092a864886f70d010701301406082a864886f70d"
-                + "0307040828dc4d72ca3132e48008546cc90f2c5d4b79").HexToByteArray();
+                + "0307040828dc4d72ca3132e48008546cc90f2c5d4b79"
+            ).HexToByteArray();
             ecms.Decode(encodedMessage);
 
-            using (X509Certificate2 cer = Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 cer =
+                    Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey()
+            )
             {
                 if (cer == null)
                     return; // Sorry - CertLoader is not configured to load certs with private keys - we've tested as much as we can.
@@ -321,23 +334,29 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         }
 
         [Fact]
-        [OuterLoop(/* Leaks key on disk if interrupted */)]
+        [OuterLoop( /* Leaks key on disk if interrupted */
+
+        )]
         public static void PostDecrypt_RecipientInfos()
         {
             byte[] expectedContent = { 6, 3, 128, 33, 44 };
 
             EnvelopedCms ecms = new EnvelopedCms(new ContentInfo(expectedContent));
             ecms.Encrypt(new CmsRecipient(Certificates.RSAKeyTransfer1.GetCertificate()));
-            byte[] encodedMessage =
-                 ("3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"
+            byte[] encodedMessage = (
+                "3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"
                 + "414b65795472616e7366657231021031d935fb63e8cfab48a0bf7b397b67c0300d06092a864886f70d010101050004818067"
                 + "6bada56dcaf2e65226941242db73b5a5420a6212cd6af662db52fdc0ca63875cb69066f7074da0fc009ce724e2d73fb19380"
                 + "2deea8d92b069486a41c7c4fc3cd0174a918a559f79319039b40ae797bcacc909c361275ee2a5b1f0ff09fb5c19508e3f5ac"
                 + "051ac0f03603c27fb8993d49ac428f8bcfc23a90ef9b0fac0f423a302b06092a864886f70d010701301406082a864886f70d"
-                + "0307040828dc4d72ca3132e48008546cc90f2c5d4b79").HexToByteArray();
+                + "0307040828dc4d72ca3132e48008546cc90f2c5d4b79"
+            ).HexToByteArray();
             ecms.Decode(encodedMessage);
 
-            using (X509Certificate2 cer = Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 cer =
+                    Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey()
+            )
             {
                 if (cer == null)
                     return; // Sorry - CertLoader is not configured to load certs with private keys - we've tested as much as we can.
@@ -360,7 +379,9 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         }
 
         [Theory]
-        [OuterLoop(/* Leaks key on disk if interrupted */)]
+        [OuterLoop( /* Leaks key on disk if interrupted */
+
+        )]
         [InlineData(false)]
 #if NETCOREAPP // API not supported on netfx
         [InlineData(true)]
@@ -369,8 +390,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         {
             byte[] expectedContent = { 6, 3, 128, 33, 44 };
 
-            byte[] encodedMessage =
-                 ("308202b006092a864886f70d010703a08202a13082029d020100318202583081c5020100302e301a31183016060355040313"
+            byte[] encodedMessage = (
+                "308202b006092a864886f70d010703a08202a13082029d020100318202583081c5020100302e301a31183016060355040313"
                 + "0f5253414b65795472616e7366657231021031d935fb63e8cfab48a0bf7b397b67c0300d06092a864886f70d010101050004"
                 + "81801026d9fb60d1a55686b73cf859c8bd66b58defda5e23e3da5f535f1427e3c5f7a4a2a94373e8e3ba5488a7c6a1059bfb"
                 + "57301156698e7fca62671426d388fb3fb4373c9cb53132fda067598256bbfe8491b14dadaaf04d5fdfb2463f358ad0d6a594"
@@ -383,14 +404,24 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 + "81807517e594c353d41abff334c6162988b78e05df7d79457c146fbc886d2d8057f594fa3a96cd8df5842c9758baac1fcdd5"
                 + "d9672a9f8ef9426326cccaaf5954f2ae657f8c7b13aef2f811adb4954323aa8319a1e8f2ad4e5c96c1d3fbe413ae479e471b"
                 + "b701cbdfa145c9b64f5e1f69f472804995d56c31351553f779cf8efec237303c06092a864886f70d010701301d0609608648"
-                + "01650304012a041023a114c149d7d4017ce2f5ec7c5d53f980104e50ab3c15533743dd054ef3ff8b9d83").HexToByteArray();
+                + "01650304012a041023a114c149d7d4017ce2f5ec7c5d53f980104e50ab3c15533743dd054ef3ff8b9d83"
+            ).HexToByteArray();
 
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(encodedMessage);
 
-            using (X509Certificate2 cert1 = Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey())
-            using (X509Certificate2 cert2 = Certificates.RSAKeyTransfer2.TryGetCertificateWithPrivateKey())
-            using (X509Certificate2 cert3 = Certificates.RSAKeyTransfer3.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 cert1 =
+                    Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey()
+            )
+            using (
+                X509Certificate2 cert2 =
+                    Certificates.RSAKeyTransfer2.TryGetCertificateWithPrivateKey()
+            )
+            using (
+                X509Certificate2 cert3 =
+                    Certificates.RSAKeyTransfer3.TryGetCertificateWithPrivateKey()
+            )
             {
                 if (cert1 == null || cert2 == null || cert3 == null)
                     return; // Sorry - CertLoader is not configured to load certs with private keys - we've tested as much as we can.
@@ -431,13 +462,14 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         public static void PostEncode_DifferentData()
         {
             // This ensures that the decoding and encoding output different values to make sure Encrypt changes the state of the data.
-            byte[] encoded =
-                ("3082010206092A864886F70D010703A081F43081F10201003181C83081C5020100302E301A311830160603550403130F"
+            byte[] encoded = (
+                "3082010206092A864886F70D010703A081F43081F10201003181C83081C5020100302E301A311830160603550403130F"
                 + "5253414B65795472616E7366657231021031D935FB63E8CFAB48A0BF7B397B67C0300D06092A864886F70D0101010500"
                 + "04818009C16B674495C2C3D4763189C3274CF7A9142FBEEC8902ABDC9CE29910D541DF910E029A31443DC9A9F3B05F02"
                 + "DA1C38478C400261C734D6789C4197C20143C4312CEAA99ECB1849718326D4FC3B7FBB2D1D23281E31584A63E99F2C17"
                 + "132BCD8EDDB632967125CD0A4BAA1EFA8CE4C855F7C093339211BDF990CEF5CCE6CD74302106092A864886F70D010701"
-                + "301406082A864886F70D03070408779B3DE045826B18").HexToByteArray();
+                + "301406082A864886F70D03070408779B3DE045826B18"
+            ).HexToByteArray();
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(encoded);
             using (X509Certificate2 cert = Certificates.RSAKeyTransfer1.GetCertificate())
@@ -455,8 +487,13 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             if (expected.SequenceEqual(actual))
                 return;
 
-            if (actual.Length > expected.Length && actual.Take(expected.Length).SequenceEqual(expected))
-                throw new Exception("Returned content had extra bytes padded. If you're running this test on the .NET Framework, this is a known bug.");
+            if (
+                actual.Length > expected.Length
+                && actual.Take(expected.Length).SequenceEqual(expected)
+            )
+                throw new Exception(
+                    "Returned content had extra bytes padded. If you're running this test on the .NET Framework, this is a known bug."
+                );
 
             Assert.Equal<byte>(expected, actual);
         }

@@ -8,7 +8,8 @@ namespace System.IO.Tests
 {
     internal sealed class HGlobalSafeBuffer : SafeBuffer
     {
-        internal HGlobalSafeBuffer(int capacity) : base(true)
+        internal HGlobalSafeBuffer(int capacity)
+            : base(true)
         {
             SetHandle(Marshal.AllocHGlobal(capacity));
             Initialize((ulong)capacity);

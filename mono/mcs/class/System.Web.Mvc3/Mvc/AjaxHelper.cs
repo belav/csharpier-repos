@@ -1,26 +1,34 @@
-﻿namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc
+{
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Text;
     using System.Web.Routing;
     using System.Web.Script.Serialization;
 
-    public class AjaxHelper {
-
+    public class AjaxHelper
+    {
         private static string _globalizationScriptPath;
 
         public AjaxHelper(ViewContext viewContext, IViewDataContainer viewDataContainer)
-            : this(viewContext, viewDataContainer, RouteTable.Routes) {
-        }
+            : this(viewContext, viewDataContainer, RouteTable.Routes) { }
 
-        public AjaxHelper(ViewContext viewContext, IViewDataContainer viewDataContainer, RouteCollection routeCollection) {
-            if (viewContext == null) {
+        public AjaxHelper(
+            ViewContext viewContext,
+            IViewDataContainer viewDataContainer,
+            RouteCollection routeCollection
+        )
+        {
+            if (viewContext == null)
+            {
                 throw new ArgumentNullException("viewContext");
             }
-            if (viewDataContainer == null) {
+            if (viewDataContainer == null)
+            {
                 throw new ArgumentNullException("viewDataContainer");
             }
-            if (routeCollection == null) {
+            if (routeCollection == null)
+            {
                 throw new ArgumentNullException("routeCollection");
             }
             ViewContext = viewContext;
@@ -28,42 +36,39 @@
             RouteCollection = routeCollection;
         }
 
-        public static string GlobalizationScriptPath {
-            get {
-                if (String.IsNullOrEmpty(_globalizationScriptPath)) {
+        public static string GlobalizationScriptPath
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(_globalizationScriptPath))
+                {
                     _globalizationScriptPath = "~/Scripts/Globalization";
                 }
                 return _globalizationScriptPath;
             }
-            set {
-                _globalizationScriptPath = value;
-            }
+            set { _globalizationScriptPath = value; }
         }
 
-        public RouteCollection RouteCollection {
-            get;
-            private set;
+        public RouteCollection RouteCollection { get; private set; }
+
+        public ViewContext ViewContext { get; private set; }
+
+        public ViewDataDictionary ViewData
+        {
+            get { return ViewDataContainer.ViewData; }
         }
 
-        public ViewContext ViewContext {
-            get;
-            private set;
-        }
+        public IViewDataContainer ViewDataContainer { get; private set; }
 
-        public ViewDataDictionary ViewData {
-            get {
-                return ViewDataContainer.ViewData;
-            }
-        }
-
-        public IViewDataContainer ViewDataContainer {
-            get;
-            private set;
-        }
-
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Instance method for consistency with other helpers.")]
-        public string JavaScriptStringEncode(string message) {
-            if (String.IsNullOrEmpty(message)) {
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "Instance method for consistency with other helpers."
+        )]
+        public string JavaScriptStringEncode(string message)
+        {
+            if (String.IsNullOrEmpty(message))
+            {
                 return message;
             }
 

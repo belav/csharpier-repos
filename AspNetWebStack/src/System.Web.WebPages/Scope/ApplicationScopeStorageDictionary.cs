@@ -15,13 +15,9 @@ namespace System.Web.WebPages.Scope
             new ConcurrentDictionary<object, object>(ScopeStorageComparer.Instance);
 
         public ApplicationScopeStorageDictionary()
-            : this(new WebConfigScopeDictionary())
-        {
-        }
+            : this(new WebConfigScopeDictionary()) { }
 
         public ApplicationScopeStorageDictionary(WebConfigScopeDictionary webConfigState)
-            : base(baseScope: webConfigState, backingStore: _innerDictionary)
-        {
-        }
+            : base(baseScope: webConfigState, backingStore: _innerDictionary) { }
     }
 }

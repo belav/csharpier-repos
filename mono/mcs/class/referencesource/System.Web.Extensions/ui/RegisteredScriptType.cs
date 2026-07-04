@@ -4,11 +4,13 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
-    public enum RegisteredScriptType {
+namespace System.Web.UI
+{
+    public enum RegisteredScriptType
+    {
         ClientScriptInclude,
         ClientScriptBlock,
         ClientStartupScript,
-        OnSubmitStatement
+        OnSubmitStatement,
     }
 }

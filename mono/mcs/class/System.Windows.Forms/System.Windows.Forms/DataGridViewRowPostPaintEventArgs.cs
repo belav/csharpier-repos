@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,120 +26,176 @@
 using System.ComponentModel;
 using System.Drawing;
 
-namespace System.Windows.Forms {
+namespace System.Windows.Forms
+{
+    public class DataGridViewRowPostPaintEventArgs : EventArgs
+    {
+        private DataGridView dataGridView;
+        private Graphics graphics;
+        private Rectangle clipBounds;
+        private Rectangle rowBounds;
+        private int rowIndex;
+        private DataGridViewElementStates rowState;
+        private string errorText;
+        private DataGridViewCellStyle inheritedRowStyle;
+        private bool isFirstDisplayedRow;
+        private bool isLastVisibleRow;
 
-	public class DataGridViewRowPostPaintEventArgs : EventArgs {
+        public DataGridViewRowPostPaintEventArgs(
+            DataGridView dataGridView,
+            Graphics graphics,
+            Rectangle clipBounds,
+            Rectangle rowBounds,
+            int rowIndex,
+            DataGridViewElementStates rowState,
+            string errorText,
+            DataGridViewCellStyle inheritedRowStyle,
+            bool isFirstDisplayedRow,
+            bool isLastVisibleRow
+        )
+        {
+            this.dataGridView = dataGridView;
+            this.graphics = graphics;
+            this.clipBounds = clipBounds;
+            this.rowBounds = rowBounds;
+            this.rowIndex = rowIndex;
+            this.rowState = rowState;
+            this.errorText = errorText;
+            this.inheritedRowStyle = inheritedRowStyle;
+            this.isFirstDisplayedRow = isFirstDisplayedRow;
+            this.isLastVisibleRow = isLastVisibleRow;
+        }
 
-		private DataGridView dataGridView;
-		private Graphics graphics;
-		private Rectangle clipBounds;
-		private Rectangle rowBounds;
-		private int rowIndex;
-		private DataGridViewElementStates rowState;
-		private string errorText;
-		private DataGridViewCellStyle inheritedRowStyle;
-		private bool isFirstDisplayedRow;
-		private bool isLastVisibleRow;
+        public Rectangle ClipBounds
+        {
+            get { return clipBounds; }
+            set { clipBounds = value; }
+        }
 
-		public DataGridViewRowPostPaintEventArgs (DataGridView dataGridView, Graphics graphics, Rectangle clipBounds, Rectangle rowBounds, int rowIndex, DataGridViewElementStates rowState, string errorText, DataGridViewCellStyle inheritedRowStyle, bool isFirstDisplayedRow, bool isLastVisibleRow) {
-			this.dataGridView = dataGridView;
-			this.graphics = graphics;
-			this.clipBounds = clipBounds;
-			this.rowBounds = rowBounds;
-			this.rowIndex = rowIndex;
-			this.rowState = rowState;
-			this.errorText = errorText;
-			this.inheritedRowStyle = inheritedRowStyle;
-			this.isFirstDisplayedRow = isFirstDisplayedRow;
-			this.isLastVisibleRow = isLastVisibleRow;
-		}
+        public string ErrorText
+        {
+            get { return errorText; }
+        }
 
-		public Rectangle ClipBounds {
-			get { return clipBounds; }
-			set { clipBounds = value; }
-		}
+        public Graphics Graphics
+        {
+            get { return graphics; }
+        }
 
-		public string ErrorText {
-			get { return errorText; }
-		}
+        public DataGridViewCellStyle InheritedRowStyle
+        {
+            get { return inheritedRowStyle; }
+        }
 
-		public Graphics Graphics {
-			get { return graphics; }
-		}
+        public bool IsFirstDisplayedRow
+        {
+            get { return isFirstDisplayedRow; }
+        }
 
-		public DataGridViewCellStyle InheritedRowStyle {
-			get { return inheritedRowStyle; }
-		}
+        public bool IsLastVisibleRow
+        {
+            get { return isLastVisibleRow; }
+        }
 
-		public bool IsFirstDisplayedRow {
-			get { return isFirstDisplayedRow; }
-		}
+        public Rectangle RowBounds
+        {
+            get { return rowBounds; }
+        }
 
-		public bool IsLastVisibleRow {
-			get { return isLastVisibleRow; }
-		}
+        public int RowIndex
+        {
+            get { return rowIndex; }
+        }
 
-		public Rectangle RowBounds {
-			get { return rowBounds; }
-		}
+        public DataGridViewElementStates State
+        {
+            get { return rowState; }
+        }
 
-		public int RowIndex {
-			get { return rowIndex; }
-		}
+        public void DrawFocus(Rectangle bounds, bool cellsPaintSelectionBackground)
+        {
+            if (rowIndex < 0 || rowIndex >= dataGridView.Rows.Count)
+                throw new InvalidOperationException("Invalid RowIndex.");
 
-		public DataGridViewElementStates State {
-			get { return rowState; }
-		}
+            DataGridViewRow row = dataGridView.GetRowInternal(rowIndex);
 
-		public void DrawFocus (Rectangle bounds, bool cellsPaintSelectionBackground)
-		{
-			if (rowIndex < 0 || rowIndex >= dataGridView.Rows.Count)
-				throw new InvalidOperationException ("Invalid RowIndex.");
+            row.PaintCells(
+                graphics,
+                clipBounds,
+                bounds,
+                rowIndex,
+                rowState,
+                isFirstDisplayedRow,
+                isLastVisibleRow,
+                DataGridViewPaintParts.Focus
+            );
+        }
 
-			DataGridViewRow row = dataGridView.GetRowInternal (rowIndex);
+        public void PaintCells(Rectangle clipBounds, DataGridViewPaintParts paintParts)
+        {
+            if (rowIndex < 0 || rowIndex >= dataGridView.Rows.Count)
+                throw new InvalidOperationException("Invalid RowIndex.");
 
-			row.PaintCells (graphics, clipBounds, bounds, rowIndex, rowState, isFirstDisplayedRow, isLastVisibleRow, DataGridViewPaintParts.Focus);
-		}
+            DataGridViewRow row = dataGridView.GetRowInternal(rowIndex);
 
-		public void PaintCells (Rectangle clipBounds, DataGridViewPaintParts paintParts)
-		{
-			if (rowIndex < 0 || rowIndex >= dataGridView.Rows.Count)
-				throw new InvalidOperationException ("Invalid RowIndex.");
+            row.PaintCells(
+                graphics,
+                clipBounds,
+                rowBounds,
+                rowIndex,
+                rowState,
+                isFirstDisplayedRow,
+                isLastVisibleRow,
+                paintParts
+            );
+        }
 
-			DataGridViewRow row = dataGridView.GetRowInternal (rowIndex);
+        public void PaintCellsBackground(Rectangle clipBounds, bool cellsPaintSelectionBackground)
+        {
+            if (cellsPaintSelectionBackground)
+                PaintCells(clipBounds, DataGridViewPaintParts.All);
+            else
+                PaintCells(
+                    clipBounds,
+                    DataGridViewPaintParts.All & ~DataGridViewPaintParts.SelectionBackground
+                );
+        }
 
-			row.PaintCells (graphics, clipBounds, rowBounds, rowIndex, rowState, isFirstDisplayedRow, isLastVisibleRow, paintParts);
-		}
+        public void PaintCellsContent(Rectangle clipBounds)
+        {
+            PaintCells(
+                clipBounds,
+                DataGridViewPaintParts.ContentBackground | DataGridViewPaintParts.ContentForeground
+            );
+        }
 
-		public void PaintCellsBackground (Rectangle clipBounds, bool cellsPaintSelectionBackground)
-		{
-			if (cellsPaintSelectionBackground)
-				PaintCells (clipBounds, DataGridViewPaintParts.All);
-			else
-				PaintCells (clipBounds, DataGridViewPaintParts.All & ~DataGridViewPaintParts.SelectionBackground);
-		}
+        public void PaintHeader(bool paintSelectionBackground)
+        {
+            if (paintSelectionBackground)
+                PaintHeader(DataGridViewPaintParts.All);
+            else
+                PaintHeader(
+                    DataGridViewPaintParts.All & ~DataGridViewPaintParts.SelectionBackground
+                );
+        }
 
-		public void PaintCellsContent (Rectangle clipBounds)
-		{
-			PaintCells (clipBounds, DataGridViewPaintParts.ContentBackground | DataGridViewPaintParts.ContentForeground);
-		}
+        public void PaintHeader(DataGridViewPaintParts paintParts)
+        {
+            if (rowIndex < 0 || rowIndex >= dataGridView.Rows.Count)
+                throw new InvalidOperationException("Invalid RowIndex.");
 
-		public void PaintHeader (bool paintSelectionBackground)
-		{
-			if (paintSelectionBackground)
-				PaintHeader (DataGridViewPaintParts.All);
-			else
-				PaintHeader (DataGridViewPaintParts.All & ~DataGridViewPaintParts.SelectionBackground);
-		}
+            DataGridViewRow row = dataGridView.GetRowInternal(rowIndex);
 
-		public void PaintHeader (DataGridViewPaintParts paintParts)
-		{
-			if (rowIndex < 0 || rowIndex >= dataGridView.Rows.Count)
-				throw new InvalidOperationException ("Invalid RowIndex.");
-
-			DataGridViewRow row = dataGridView.GetRowInternal (rowIndex);
-
-			row.PaintHeader (graphics, clipBounds, rowBounds, rowIndex, rowState, isFirstDisplayedRow, isLastVisibleRow, paintParts);
-		}
-	}
+            row.PaintHeader(
+                graphics,
+                clipBounds,
+                rowBounds,
+                rowIndex,
+                rowState,
+                isFirstDisplayedRow,
+                isLastVisibleRow,
+                paintParts
+            );
+        }
+    }
 }

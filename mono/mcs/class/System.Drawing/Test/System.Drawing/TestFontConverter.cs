@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,39 +27,39 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-using NUnit.Framework;
 using System;
 using System.Drawing;
 using System.Security.Permissions;
+using NUnit.Framework;
 
-namespace MonoTests.System.Drawing{
+namespace MonoTests.System.Drawing
+{
+    [TestFixture]
+    [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+    public class FontNameConverterTest
+    {
+        [Test]
+        public void TestConvertFrom()
+        {
+            FontConverter.FontNameConverter f = new FontConverter.FontNameConverter();
+            // returns "Times" under Linux and "Times New Roman" under Windows
+            Assert.IsTrue((f.ConvertFrom("Times") as string).StartsWith("Times"), "string test");
+            Assert.IsTrue(f.GetStandardValuesSupported(), "standard values supported");
+            Assert.IsFalse(f.GetStandardValuesExclusive(), "standard values exclusive");
+        }
 
-	[TestFixture]
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-	public class FontNameConverterTest {
+        [Test]
+        public void ExTestConvertFrom()
+        {
+            FontConverter.FontNameConverter f = new FontConverter.FontNameConverter();
+            Assert.Throws<NotSupportedException>(() => f.ConvertFrom(null));
+        }
 
-		[Test]
-		public void TestConvertFrom ()
-		{
-			FontConverter.FontNameConverter f = new FontConverter.FontNameConverter ();
-			// returns "Times" under Linux and "Times New Roman" under Windows
-			Assert.IsTrue ((f.ConvertFrom ("Times") as string).StartsWith ("Times"), "string test");
-			Assert.IsTrue (f.GetStandardValuesSupported (), "standard values supported");
-			Assert.IsFalse (f.GetStandardValuesExclusive (), "standard values exclusive");
-		}
-
-		[Test]
-		public void ExTestConvertFrom ()
-		{
-			FontConverter.FontNameConverter f = new FontConverter.FontNameConverter ();
-			Assert.Throws<NotSupportedException> (() => f.ConvertFrom (null));
-		}
-
-		[Test]
-		public void ExTestConvertFrom2 ()
-		{
-			FontConverter.FontNameConverter f = new FontConverter.FontNameConverter ();
-			Assert.Throws<NotSupportedException> (() => f.ConvertFrom (1));
-		}
-	}
+        [Test]
+        public void ExTestConvertFrom2()
+        {
+            FontConverter.FontNameConverter f = new FontConverter.FontNameConverter();
+            Assert.Throws<NotSupportedException>(() => f.ConvertFrom(1));
+        }
+    }
 }

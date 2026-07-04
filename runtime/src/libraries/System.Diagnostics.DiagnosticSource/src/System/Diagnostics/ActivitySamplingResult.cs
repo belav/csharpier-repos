@@ -31,6 +31,6 @@ namespace System.Diagnostics
         /// Activity.IsRecorded is set true. For activities using W3C trace ids this sets a flag bit in the
         /// ID that will be propagated downstream requesting that trace is recorded everywhere.
         /// </summary>
-        AllDataAndRecorded
+        AllDataAndRecorded,
     }
 }

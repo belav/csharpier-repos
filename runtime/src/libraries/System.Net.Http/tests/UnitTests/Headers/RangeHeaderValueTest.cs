@@ -3,7 +3,6 @@
 
 using System.Linq;
 using System.Net.Http.Headers;
-
 using Xunit;
 
 namespace System.Net.Http.Tests
@@ -13,7 +12,10 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_InvalidRange_Throw()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => { new RangeHeaderValue(5, 2); });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new RangeHeaderValue(5, 2);
+            });
         }
 
         [Fact]
@@ -23,11 +25,32 @@ namespace System.Net.Http.Tests
             range.Unit = "myunit";
             Assert.Equal("myunit", range.Unit);
 
-            AssertExtensions.Throws<ArgumentNullException>("value", () => { range.Unit = null; });
-            AssertExtensions.Throws<ArgumentException>("value", () => { range.Unit = ""; });
-            Assert.Throws<FormatException>(() => { range.Unit = " x"; });
-            Assert.Throws<FormatException>(() => { range.Unit = "x "; });
-            Assert.Throws<FormatException>(() => { range.Unit = "x y"; });
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () =>
+                {
+                    range.Unit = null;
+                }
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                () =>
+                {
+                    range.Unit = "";
+                }
+            );
+            Assert.Throws<FormatException>(() =>
+            {
+                range.Unit = " x";
+            });
+            Assert.Throws<FormatException>(() =>
+            {
+                range.Unit = "x ";
+            });
+            Assert.Throws<FormatException>(() =>
+            {
+                range.Unit = "x y";
+            });
         }
 
         [Fact]
@@ -183,17 +206,27 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(() => { RangeHeaderValue.Parse(input); });
+            Assert.Throws<FormatException>(() =>
+            {
+                RangeHeaderValue.Parse(input);
+            });
 
             Assert.False(RangeHeaderValue.TryParse(input, out RangeHeaderValue result));
             Assert.Null(result);
         }
 
-        private static void CallGetRangeLength(string input, int startIndex, int expectedLength,
-            out RangeHeaderValue result)
+        private static void CallGetRangeLength(
+            string input,
+            int startIndex,
+            int expectedLength,
+            out RangeHeaderValue result
+        )
         {
             object temp = null;
-            Assert.Equal(expectedLength, RangeHeaderValue.GetRangeLength(input, startIndex, out temp));
+            Assert.Equal(
+                expectedLength,
+                RangeHeaderValue.GetRangeLength(input, startIndex, out temp)
+            );
             result = temp as RangeHeaderValue;
         }
 

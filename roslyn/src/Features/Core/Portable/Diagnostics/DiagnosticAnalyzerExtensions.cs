@@ -15,26 +15,35 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 {
     internal static class DiagnosticAnalyzerExtensions
     {
-        public static bool IsWorkspaceDiagnosticAnalyzer(this DiagnosticAnalyzer analyzer)
-            => analyzer is DocumentDiagnosticAnalyzer
+        public static bool IsWorkspaceDiagnosticAnalyzer(this DiagnosticAnalyzer analyzer) =>
+            analyzer is DocumentDiagnosticAnalyzer
             || analyzer is ProjectDiagnosticAnalyzer
             || analyzer == FileContentLoadAnalyzer.Instance
             || analyzer == GeneratorDiagnosticsPlaceholderAnalyzer.Instance;
 
-        public static bool IsBuiltInAnalyzer(this DiagnosticAnalyzer analyzer)
-            => analyzer is IBuiltInAnalyzer || analyzer.IsWorkspaceDiagnosticAnalyzer() || analyzer.IsCompilerAnalyzer();
+        public static bool IsBuiltInAnalyzer(this DiagnosticAnalyzer analyzer) =>
+            analyzer is IBuiltInAnalyzer
+            || analyzer.IsWorkspaceDiagnosticAnalyzer()
+            || analyzer.IsCompilerAnalyzer();
 
-        public static bool IsOpenFileOnly(this DiagnosticAnalyzer analyzer, SimplifierOptions? options)
-            => analyzer is IBuiltInAnalyzer builtInAnalyzer && builtInAnalyzer.OpenFileOnly(options);
+        public static bool IsOpenFileOnly(
+            this DiagnosticAnalyzer analyzer,
+            SimplifierOptions? options
+        ) => analyzer is IBuiltInAnalyzer builtInAnalyzer && builtInAnalyzer.OpenFileOnly(options);
 
-        public static ReportDiagnostic GetEffectiveSeverity(this DiagnosticDescriptor descriptor, CompilationOptions options)
+        public static ReportDiagnostic GetEffectiveSeverity(
+            this DiagnosticDescriptor descriptor,
+            CompilationOptions options
+        )
         {
             return options == null
                 ? descriptor.DefaultSeverity.ToReportDiagnostic()
                 : descriptor.GetEffectiveSeverity(options);
         }
 
-        public static (string analyzerId, VersionStamp version) GetAnalyzerIdAndVersion(this DiagnosticAnalyzer analyzer)
+        public static (string analyzerId, VersionStamp version) GetAnalyzerIdAndVersion(
+            this DiagnosticAnalyzer analyzer
+        )
         {
             // Get the unique ID for given diagnostic analyzer.
             // note that we also put version stamp so that we can detect changed analyzer.
@@ -52,10 +61,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return VersionStamp.Create(File.GetLastWriteTimeUtc(path));
         }
 
-        public static string GetAnalyzerAssemblyName(this DiagnosticAnalyzer analyzer)
-            => analyzer.GetType().Assembly.GetName().Name ?? throw ExceptionUtilities.Unreachable();
+        public static string GetAnalyzerAssemblyName(this DiagnosticAnalyzer analyzer) =>
+            analyzer.GetType().Assembly.GetName().Name ?? throw ExceptionUtilities.Unreachable();
 
-        public static void AppendAnalyzerMap(this Dictionary<string, DiagnosticAnalyzer> analyzerMap, IEnumerable<DiagnosticAnalyzer> analyzers)
+        public static void AppendAnalyzerMap(
+            this Dictionary<string, DiagnosticAnalyzer> analyzerMap,
+            IEnumerable<DiagnosticAnalyzer> analyzers
+        )
         {
             foreach (var analyzer in analyzers)
             {
@@ -64,7 +76,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
         }
 
-        public static IEnumerable<AnalyzerPerformanceInfo> ToAnalyzerPerformanceInfo(this IDictionary<DiagnosticAnalyzer, AnalyzerTelemetryInfo> analysisResult, DiagnosticAnalyzerInfoCache analyzerInfo)
-            => analysisResult.Select(kv => new AnalyzerPerformanceInfo(kv.Key.GetAnalyzerId(), analyzerInfo.IsTelemetryCollectionAllowed(kv.Key), kv.Value.ExecutionTime));
+        public static IEnumerable<AnalyzerPerformanceInfo> ToAnalyzerPerformanceInfo(
+            this IDictionary<DiagnosticAnalyzer, AnalyzerTelemetryInfo> analysisResult,
+            DiagnosticAnalyzerInfoCache analyzerInfo
+        ) =>
+            analysisResult.Select(kv => new AnalyzerPerformanceInfo(
+                kv.Key.GetAnalyzerId(),
+                analyzerInfo.IsTelemetryCollectionAllowed(kv.Key),
+                kv.Value.ExecutionTime
+            ));
     }
 }

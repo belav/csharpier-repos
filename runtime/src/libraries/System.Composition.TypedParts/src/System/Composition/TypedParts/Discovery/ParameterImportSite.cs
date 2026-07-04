@@ -14,7 +14,10 @@ namespace System.Composition.TypedParts.Discovery
             _pi = pi;
         }
 
-        public ParameterInfo Parameter { get { return _pi; } }
+        public ParameterInfo Parameter
+        {
+            get { return _pi; }
+        }
 
         public override string ToString()
         {

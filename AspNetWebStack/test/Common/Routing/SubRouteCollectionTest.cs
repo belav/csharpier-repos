@@ -1,11 +1,11 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
+using Microsoft.TestCommon;
+using Moq;
 #if !ASPNETWEBAPI
 using System.Web.Routing;
 #endif
-using Microsoft.TestCommon;
-using Moq;
 
 #if ASPNETWEBAPI
 namespace System.Web.Http.Routing
@@ -27,13 +27,18 @@ namespace System.Web.Mvc.Routing
             collection.Add(new RouteEntry("route", route1));
 
             var expectedError =
-                "A route named 'route' is already in the route collection. Route names must be unique.\r\n\r\n" +
-                "Duplicates:" + Environment.NewLine +
-                "api/Car" + Environment.NewLine +
-                "api/Person";
+                "A route named 'route' is already in the route collection. Route names must be unique.\r\n\r\n"
+                + "Duplicates:"
+                + Environment.NewLine
+                + "api/Car"
+                + Environment.NewLine
+                + "api/Person";
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => collection.Add(new RouteEntry("route", route2)), expectedError);
+            Assert.Throws<InvalidOperationException>(
+                () => collection.Add(new RouteEntry("route", route2)),
+                expectedError
+            );
         }
 #else
         [Fact]
@@ -47,13 +52,18 @@ namespace System.Web.Mvc.Routing
             collection.Add(new RouteEntry("route", route1));
 
             var expectedError =
-                "A route named 'route' is already in the route collection. Route names must be unique.\r\n\r\n" +
-                "Duplicates:" + Environment.NewLine +
-                "Person/Index" + Environment.NewLine +
-                "Home/Index";
+                "A route named 'route' is already in the route collection. Route names must be unique.\r\n\r\n"
+                + "Duplicates:"
+                + Environment.NewLine
+                + "Person/Index"
+                + Environment.NewLine
+                + "Home/Index";
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => collection.Add(new RouteEntry("route", route2)), expectedError);
+            Assert.Throws<InvalidOperationException>(
+                () => collection.Add(new RouteEntry("route", route2)),
+                expectedError
+            );
         }
 #endif
     }

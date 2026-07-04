@@ -10,7 +10,8 @@ namespace System.Diagnostics
     public partial class Process
     {
         private const int NanosecondsTo100NanosecondsFactor = 100;
-        private static volatile uint s_timeBase_numer, s_timeBase_denom;
+        private static volatile uint s_timeBase_numer,
+            s_timeBase_denom;
 
         private const int MicrosecondsToSecondsFactor = 1_000_000;
 
@@ -39,7 +40,12 @@ namespace System.Diagnostics
                 if (info == null)
                     throw new Win32Exception(SR.ProcessInformationUnavailable);
 
-                DateTime startTime = DateTime.UnixEpoch + TimeSpan.FromSeconds(info.Value.pbsd.pbi_start_tvsec + info.Value.pbsd.pbi_start_tvusec / (double)MicrosecondsToSecondsFactor);
+                DateTime startTime =
+                    DateTime.UnixEpoch
+                    + TimeSpan.FromSeconds(
+                        info.Value.pbsd.pbi_start_tvsec
+                            + info.Value.pbsd.pbi_start_tvusec / (double)MicrosecondsToSecondsFactor
+                    );
 
                 // The return value is expected to be in the local time zone.
                 return startTime.ToLocalTime();
@@ -124,14 +130,19 @@ namespace System.Diagnostics
 
             // By dividing by NanosecondsTo100NanosecondsFactor first, we lose some precision, but increase the range
             // where no overflow will happen.
-            return new TimeSpan(Convert.ToInt64(sysTime / NanosecondsTo100NanosecondsFactor * numer / denom));
+            return new TimeSpan(
+                Convert.ToInt64(sysTime / NanosecondsTo100NanosecondsFactor * numer / denom)
+            );
         }
 
         private static unsafe Interop.libSystem.mach_timebase_info_data_t GetTimeBase()
         {
             Interop.libSystem.mach_timebase_info_data_t timeBase = default;
             var returnCode = Interop.libSystem.mach_timebase_info(&timeBase);
-            Debug.Assert(returnCode == 0, $"Non-zero exit code from mach_timebase_info: {returnCode}");
+            Debug.Assert(
+                returnCode == 0,
+                $"Non-zero exit code from mach_timebase_info: {returnCode}"
+            );
             if (returnCode != 0)
             {
                 // Fallback: let's assume that the time values are in nanoseconds,

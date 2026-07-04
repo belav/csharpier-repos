@@ -169,8 +169,8 @@ public class HtmlLocalizerTest
         var content = htmlLocalizer.GetHtml("Hello", new object[] { });
 
         // Act
-        var exception = Assert.Throws<FormatException>(
-            () => content.WriteTo(TextWriter.Null, new HtmlTestEncoder())
+        var exception = Assert.Throws<FormatException>(() =>
+            content.WriteTo(TextWriter.Null, new HtmlTestEncoder())
         );
 
         // Assert

@@ -8,25 +8,33 @@
 //---------------------------------------------------------------------
 
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics;
 using System.Linq;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.QueryRewriting
 {
     // Goal: use the next view to get rewritingSoFar to be closer to the goal
-    internal class RewritingPass<T_Tile> where T_Tile : class
+    internal class RewritingPass<T_Tile>
+        where T_Tile : class
     {
         // region that rewriting needs to cover
         private readonly T_Tile m_toFill;
+
         // region that rewriting needs to be disjoint with
         private readonly T_Tile m_toAvoid;
         private readonly List<T_Tile> m_views;
         private readonly RewritingProcessor<T_Tile> m_qp;
-        private readonly Dictionary<T_Tile, TileOpKind> m_usedViews = new Dictionary<T_Tile, TileOpKind>();
+        private readonly Dictionary<T_Tile, TileOpKind> m_usedViews =
+            new Dictionary<T_Tile, TileOpKind>();
 
-        public RewritingPass(T_Tile toFill, T_Tile toAvoid, List<T_Tile> views, RewritingProcessor<T_Tile> qp)
+        public RewritingPass(
+            T_Tile toFill,
+            T_Tile toAvoid,
+            List<T_Tile> views,
+            RewritingProcessor<T_Tile> qp
+        )
         {
             m_toFill = toFill;
             m_toAvoid = toAvoid;
@@ -34,18 +42,41 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             m_qp = qp;
         }
 
-        public static bool RewriteQuery(T_Tile toFill, T_Tile toAvoid, out T_Tile rewriting, List<T_Tile> views, RewritingProcessor<T_Tile> qp)
+        public static bool RewriteQuery(
+            T_Tile toFill,
+            T_Tile toAvoid,
+            out T_Tile rewriting,
+            List<T_Tile> views,
+            RewritingProcessor<T_Tile> qp
+        )
         {
-            RewritingPass<T_Tile> rewritingPass = new RewritingPass<T_Tile>(toFill, toAvoid, views, qp);
+            RewritingPass<T_Tile> rewritingPass = new RewritingPass<T_Tile>(
+                toFill,
+                toAvoid,
+                views,
+                qp
+            );
             if (rewritingPass.RewriteQuery(out rewriting))
             {
-                RewritingSimplifier<T_Tile>.TrySimplifyUnionRewriting(ref rewriting, toFill, toAvoid, qp);
+                RewritingSimplifier<T_Tile>.TrySimplifyUnionRewriting(
+                    ref rewriting,
+                    toFill,
+                    toAvoid,
+                    qp
+                );
                 return true;
             }
             return false;
         }
 
-        private static bool RewriteQueryInternal(T_Tile toFill, T_Tile toAvoid, out T_Tile rewriting, List<T_Tile> views, HashSet<T_Tile> recentlyUsedViews, RewritingProcessor<T_Tile> qp)
+        private static bool RewriteQueryInternal(
+            T_Tile toFill,
+            T_Tile toAvoid,
+            out T_Tile rewriting,
+            List<T_Tile> views,
+            HashSet<T_Tile> recentlyUsedViews,
+            RewritingProcessor<T_Tile> qp
+        )
         {
             if (qp.REORDER_VIEWS && recentlyUsedViews.Count > 0)
             {
@@ -62,7 +93,12 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                 views = reorderedViews;
             }
 
-            RewritingPass<T_Tile> rewritingPass = new RewritingPass<T_Tile>(toFill, toAvoid, views, qp);
+            RewritingPass<T_Tile> rewritingPass = new RewritingPass<T_Tile>(
+                toFill,
+                toAvoid,
+                views,
+                qp
+            );
             return rewritingPass.RewriteQuery(out rewriting);
         }
 
@@ -113,14 +149,29 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             }
 
             // remove redundant joins and anti-semijoins
-            RewritingSimplifier<T_Tile>.TrySimplifyJoinRewriting(ref rewritingSoFar, m_toAvoid, m_usedViews, m_qp);
+            RewritingSimplifier<T_Tile>.TrySimplifyJoinRewriting(
+                ref rewritingSoFar,
+                m_toAvoid,
+                m_usedViews,
+                m_qp
+            );
 
             // find rewriting for missing tuples, if any
             T_Tile missingTuples = m_qp.AntiSemiJoin(m_toFill, rewritingSoFar);
             if (!m_qp.IsEmpty(missingTuples))
             {
                 T_Tile rewritingForMissingTuples;
-                if (false == RewritingPass<T_Tile>.RewriteQueryInternal(missingTuples, m_toAvoid, out rewritingForMissingTuples, m_views, new HashSet<T_Tile>(m_usedViews.Keys), m_qp))
+                if (
+                    false
+                    == RewritingPass<T_Tile>.RewriteQueryInternal(
+                        missingTuples,
+                        m_toAvoid,
+                        out rewritingForMissingTuples,
+                        m_views,
+                        new HashSet<T_Tile>(m_usedViews.Keys),
+                        m_qp
+                    )
+                )
                 {
                     rewriting = rewritingForMissingTuples;
                     return false; // failure

@@ -8,35 +8,33 @@
 //---------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Diagnostics;
 using System.CodeDom;
 using System.CodeDom.Compiler;
-using System.Globalization;
-using System.IO;
-using System.Web;
-using System.Web.Hosting;
-using System.Web.Compilation;
-using System.Xml;
+using System.Collections.Generic;
 using System.Data.Entity.Design;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Text;
+using System.Web;
+using System.Web.Compilation;
+using System.Web.Hosting;
+using System.Xml;
 
 namespace System.Data.Entity.Design.AspNet
 {
     /// <summary>
     /// The ASP .NET Build provider for the CSDL in ADO .NET
     /// </summary>
-    /// 
+    ///
     [BuildProviderAppliesTo(BuildProviderAppliesTo.Code)]
     public class EntityModelBuildProvider : System.Web.Compilation.BuildProvider
     {
         /// <summary>
         /// Default constructor
         /// </summary>
-        public EntityModelBuildProvider()
-        {
-        }
+        public EntityModelBuildProvider() { }
 
         /// <summary>
         /// We want ASP .NET to always reset the app domain when we have to rebuild
@@ -46,13 +44,16 @@ namespace System.Data.Entity.Design.AspNet
         public override BuildProviderResultFlags GetResultFlags(CompilerResults results)
         {
             return BuildProviderResultFlags.ShutdownAppDomainOnChange;
-        } 
+        }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="assemblyBuilder"></param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase"
+        )]
         public override void GenerateCode(AssemblyBuilder assemblyBuilder)
         {
             // look at the assembly builder to see which language we should use in the App_Code directory
@@ -68,17 +69,24 @@ namespace System.Data.Entity.Design.AspNet
 
             // generate the code for our CSDL file
             IList<EdmSchemaError> errors = null;
-            using (XmlReader input = XmlReader.Create(VirtualPathProvider.OpenFile(base.VirtualPath)))
+            using (
+                XmlReader input = XmlReader.Create(VirtualPathProvider.OpenFile(base.VirtualPath))
+            )
             {
                 using (StringWriter output = new StringWriter(CultureInfo.InvariantCulture))
                 {
                     // Read from input and generate into output, put errors in a class member
-                    var entityFrameworkVersion = GetEntityFrameworkVersion(BuildManager.TargetFramework.Version);
+                    var entityFrameworkVersion = GetEntityFrameworkVersion(
+                        BuildManager.TargetFramework.Version
+                    );
                     errors = generator.GenerateCode(input, output, entityFrameworkVersion);
                     if (errors.Count == 0)
                     {
                         output.Flush();
-                        assemblyBuilder.AddCodeCompileUnit(this, new CodeSnippetCompileUnit(output.ToString()));
+                        assemblyBuilder.AddCodeCompileUnit(
+                            this,
+                            new CodeSnippetCompileUnit(output.ToString())
+                        );
                     }
                 }
             }
@@ -104,8 +112,14 @@ namespace System.Data.Entity.Design.AspNet
 
         private static Version GetEntityFrameworkVersion(Version targetFrameworkVersion)
         {
-            Debug.Assert(targetFrameworkVersion != null, "targetFrameworkVersion should not be null.");
-            Debug.Assert(targetFrameworkVersion >= new Version(3, 5), "This assembly doesn't exist pre-3.5.");
+            Debug.Assert(
+                targetFrameworkVersion != null,
+                "targetFrameworkVersion should not be null."
+            );
+            Debug.Assert(
+                targetFrameworkVersion >= new Version(3, 5),
+                "This assembly doesn't exist pre-3.5."
+            );
 
             if (targetFrameworkVersion < new Version(4, 0))
             {

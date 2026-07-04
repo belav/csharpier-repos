@@ -45,8 +45,16 @@ namespace Roslyn.Hosting.Diagnostics.PerfMargin
         }
 
         private const double MinimumScale = 0.2;
-        private static readonly DoubleAnimation s_growAnimation = new DoubleAnimation(1.0, new Duration(TimeSpan.FromSeconds(1.0)), FillBehavior.HoldEnd);
-        private static readonly DoubleAnimation s_shrinkAnimation = new DoubleAnimation(0.0, new Duration(TimeSpan.FromSeconds(0.33333)), FillBehavior.HoldEnd);
+        private static readonly DoubleAnimation s_growAnimation = new DoubleAnimation(
+            1.0,
+            new Duration(TimeSpan.FromSeconds(1.0)),
+            FillBehavior.HoldEnd
+        );
+        private static readonly DoubleAnimation s_shrinkAnimation = new DoubleAnimation(
+            0.0,
+            new Duration(TimeSpan.FromSeconds(0.33333)),
+            FillBehavior.HoldEnd
+        );
 
         public void UpdateOnUIThread()
         {
@@ -65,7 +73,11 @@ namespace Roslyn.Hosting.Diagnostics.PerfMargin
             this.clipScale.ScaleX = Math.Max(this.clipScale.ScaleX, MinimumScale);
 
             var anim = _activityLevel.IsActive ? s_growAnimation : s_shrinkAnimation;
-            this.clipScale.BeginAnimation(ScaleTransform.ScaleXProperty, anim, HandoffBehavior.SnapshotAndReplace);
+            this.clipScale.BeginAnimation(
+                ScaleTransform.ScaleXProperty,
+                anim,
+                HandoffBehavior.SnapshotAndReplace
+            );
         }
     }
 }

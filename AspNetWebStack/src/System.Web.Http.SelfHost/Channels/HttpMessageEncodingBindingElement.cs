@@ -8,7 +8,7 @@ using System.Web.Http.SelfHost.Properties;
 namespace System.Web.Http.SelfHost.Channels
 {
     /// <summary>
-    /// Provides an <see cref="HttpMessageEncoderFactory"/> that returns a <see cref="MessageEncoder"/> 
+    /// Provides an <see cref="HttpMessageEncoderFactory"/> that returns a <see cref="MessageEncoder"/>
     /// that is able to produce and consume <see cref="HttpMessage"/> instances.
     /// </summary>
     internal sealed class HttpMessageEncodingBindingElement : MessageEncodingBindingElement
@@ -22,7 +22,6 @@ namespace System.Web.Http.SelfHost.Channels
         public override MessageVersion MessageVersion
         {
             get { return MessageVersion.None; }
-
             set
             {
                 if (value == null)
@@ -32,7 +31,10 @@ namespace System.Web.Http.SelfHost.Channels
 
                 if (value != MessageVersion.None)
                 {
-                    throw Error.NotSupported(SRResources.OnlyMessageVersionNoneSupportedOnHttpMessageEncodingBindingElement, typeof(HttpMessageEncodingBindingElement).Name);
+                    throw Error.NotSupported(
+                        SRResources.OnlyMessageVersionNoneSupportedOnHttpMessageEncodingBindingElement,
+                        typeof(HttpMessageEncodingBindingElement).Name
+                    );
                 }
             }
         }
@@ -54,9 +56,15 @@ namespace System.Web.Http.SelfHost.Channels
         /// <typeparam name="TChannel">The type of channel the channel factory produces.</typeparam>
         /// <param name="context">The <see cref="BindingContext"/> that provides context for the binding element</param>
         /// <returns>ALways false.</returns>
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
-            throw Error.NotSupported(SRResources.ChannelFactoryNotSupported, typeof(HttpMessageEncodingBindingElement).Name, typeof(IChannelFactory).Name);
+            throw Error.NotSupported(
+                SRResources.ChannelFactoryNotSupported,
+                typeof(HttpMessageEncodingBindingElement).Name,
+                typeof(IChannelFactory).Name
+            );
         }
 
         /// <summary>
@@ -74,7 +82,8 @@ namespace System.Web.Http.SelfHost.Channels
 
             context.BindingParameters.Add(this);
 
-            return IsChannelShapeSupported<TChannel>() && context.CanBuildInnerChannelListener<TChannel>();
+            return IsChannelShapeSupported<TChannel>()
+                && context.CanBuildInnerChannelListener<TChannel>();
         }
 
         /// <summary>
@@ -83,7 +92,9 @@ namespace System.Web.Http.SelfHost.Channels
         /// <typeparam name="TChannel">The type of channel the listener is built to accept.</typeparam>
         /// <param name="context">The <see cref="BindingContext"/> that provides context for the binding element</param>
         /// <returns>The <see cref="IChannelListener{TChannel}"/> of type <see cref="IChannel"/> initialized from the context.</returns>
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -92,19 +103,25 @@ namespace System.Web.Http.SelfHost.Channels
 
             if (!IsChannelShapeSupported<TChannel>())
             {
-                throw Error.NotSupported(SRResources.ChannelShapeNotSupported, typeof(HttpMessageEncodingBindingElement).Name, typeof(IReplyChannel).Name);
+                throw Error.NotSupported(
+                    SRResources.ChannelShapeNotSupported,
+                    typeof(HttpMessageEncodingBindingElement).Name,
+                    typeof(IReplyChannel).Name
+                );
             }
 
             context.BindingParameters.Add(this);
 
-            IChannelListener<IReplyChannel> innerListener = context.BuildInnerChannelListener<IReplyChannel>();
+            IChannelListener<IReplyChannel> innerListener =
+                context.BuildInnerChannelListener<IReplyChannel>();
 
             if (innerListener == null)
             {
                 return null;
             }
 
-            return (IChannelListener<TChannel>)new HttpMessageEncodingChannelListener(context.Binding, innerListener);
+            return (IChannelListener<TChannel>)
+                new HttpMessageEncodingChannelListener(context.Binding, innerListener);
         }
 
         /// <summary>
@@ -117,11 +134,11 @@ namespace System.Web.Http.SelfHost.Channels
         }
 
         /// <summary>
-        /// Creates a factory for producing message encoders that are able to 
+        /// Creates a factory for producing message encoders that are able to
         /// produce and consume <see cref="HttpMessage"/> instances.
         /// </summary>
         /// <returns>
-        /// The <see cref="MessageEncoderFactory"/> used to produce message encoders that are able to 
+        /// The <see cref="MessageEncoderFactory"/> used to produce message encoders that are able to
         /// produce and consume <see cref="HttpMessage"/> instances.
         /// </returns>
         public override MessageEncoderFactory CreateMessageEncoderFactory()

@@ -6,8 +6,6 @@ namespace System.ComponentModel.Composition.Extensibility
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = true)]
     public class CustomImportManyAttribute : ImportManyAttribute
     {
-        public CustomImportManyAttribute()
-        {
-        }
+        public CustomImportManyAttribute() { }
     }
 }

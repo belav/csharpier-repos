@@ -12,13 +12,18 @@ namespace System.Net.Mail
     internal sealed class SmtpNegotiateAuthenticationModule : ISmtpAuthenticationModule
     {
         private static readonly byte[] s_saslNoSecurtyLayerToken = new byte[] { 1, 0, 0, 0 };
-        private readonly Dictionary<object, NegotiateAuthentication> _sessions = new Dictionary<object, NegotiateAuthentication>();
+        private readonly Dictionary<object, NegotiateAuthentication> _sessions =
+            new Dictionary<object, NegotiateAuthentication>();
 
-        internal SmtpNegotiateAuthenticationModule()
-        {
-        }
+        internal SmtpNegotiateAuthenticationModule() { }
 
-        public Authorization? Authenticate(string? challenge, NetworkCredential? credential, object sessionCookie, string? spn, ChannelBinding? channelBindingToken)
+        public Authorization? Authenticate(
+            string? challenge,
+            NetworkCredential? credential,
+            object sessionCookie,
+            string? spn,
+            ChannelBinding? channelBindingToken
+        )
         {
             lock (_sessions)
             {
@@ -39,15 +44,15 @@ namespace System.Net.Mail
                         protectionLevel = ProtectionLevel.EncryptAndSign;
                     }
 
-                    _sessions[sessionCookie] = clientContext =
-                        new NegotiateAuthentication(
-                            new NegotiateAuthenticationClientOptions
-                            {
-                                Credential = credential,
-                                TargetName = spn,
-                                RequiredProtectionLevel = protectionLevel,
-                                Binding = channelBindingToken
-                            });
+                    _sessions[sessionCookie] = clientContext = new NegotiateAuthentication(
+                        new NegotiateAuthenticationClientOptions
+                        {
+                            Credential = credential,
+                            TargetName = spn,
+                            RequiredProtectionLevel = protectionLevel,
+                            Binding = channelBindingToken,
+                        }
+                    );
                 }
 
                 string? resp = null;
@@ -58,8 +63,10 @@ namespace System.Net.Mail
                     // If auth is not yet completed keep producing
                     // challenge responses with GetOutgoingBlob
                     resp = clientContext.GetOutgoingBlob(challenge, out statusCode);
-                    if (statusCode != NegotiateAuthenticationStatusCode.Completed &&
-                        statusCode != NegotiateAuthenticationStatusCode.ContinueNeeded)
+                    if (
+                        statusCode != NegotiateAuthenticationStatusCode.Completed
+                        && statusCode != NegotiateAuthenticationStatusCode.ContinueNeeded
+                    )
                     {
                         return null;
                     }
@@ -84,10 +91,7 @@ namespace System.Net.Mail
 
         public string AuthenticationType
         {
-            get
-            {
-                return "gssapi";
-            }
+            get { return "gssapi"; }
         }
 
         public void CloseContext(object sessionCookie)
@@ -108,7 +112,10 @@ namespace System.Net.Mail
         //
         // Returns null for failure, Base64 encoded string on
         // success.
-        private static string? GetSecurityLayerOutgoingBlob(string? challenge, NegotiateAuthentication clientContext)
+        private static string? GetSecurityLayerOutgoingBlob(
+            string? challenge,
+            NegotiateAuthentication clientContext
+        )
         {
             // must have a security layer challenge
 
@@ -122,7 +129,12 @@ namespace System.Net.Mail
             Span<byte> unwrappedChallenge;
             NegotiateAuthenticationStatusCode statusCode;
 
-            statusCode = clientContext.UnwrapInPlace(input, out int newOffset, out int newLength, out _);
+            statusCode = clientContext.UnwrapInPlace(
+                input,
+                out int newOffset,
+                out int newLength,
+                out _
+            );
             if (statusCode != NegotiateAuthenticationStatusCode.Completed)
             {
                 return null;

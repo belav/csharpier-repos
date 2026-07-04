@@ -27,10 +27,19 @@ namespace System.Text.RegularExpressions.Symbolic
     /// </summary>
     internal static class StateFlagsExtensions
     {
-        internal static bool IsInitial(this StateFlags info) => (info & StateFlags.IsInitialFlag) != 0;
-        internal static bool IsDeadend(this StateFlags info) => (info & StateFlags.IsDeadendFlag) != 0;
-        internal static bool IsNullable(this StateFlags info) => (info & StateFlags.IsNullableFlag) != 0;
-        internal static bool CanBeNullable(this StateFlags info) => (info & StateFlags.CanBeNullableFlag) != 0;
-        internal static bool SimulatesBacktracking(this StateFlags info) => (info & StateFlags.SimulatesBacktrackingFlag) != 0;
+        internal static bool IsInitial(this StateFlags info) =>
+            (info & StateFlags.IsInitialFlag) != 0;
+
+        internal static bool IsDeadend(this StateFlags info) =>
+            (info & StateFlags.IsDeadendFlag) != 0;
+
+        internal static bool IsNullable(this StateFlags info) =>
+            (info & StateFlags.IsNullableFlag) != 0;
+
+        internal static bool CanBeNullable(this StateFlags info) =>
+            (info & StateFlags.CanBeNullableFlag) != 0;
+
+        internal static bool SimulatesBacktracking(this StateFlags info) =>
+            (info & StateFlags.SimulatesBacktrackingFlag) != 0;
     }
 }

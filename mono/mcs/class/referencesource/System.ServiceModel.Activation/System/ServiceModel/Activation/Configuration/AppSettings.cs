@@ -11,7 +11,8 @@ namespace System.ServiceModel.Activation.Configuration
 
     internal static class AppSettings
     {
-        private const string UseClassicReadEntityBodyModeString = "wcf:serviceHostingEnvironment:useClassicReadEntityBodyMode";
+        private const string UseClassicReadEntityBodyModeString =
+            "wcf:serviceHostingEnvironment:useClassicReadEntityBodyMode";
         private static bool useClassicReadEntityBodyMode = false;
 
         private static volatile bool settingsInitalized = false;
@@ -26,8 +27,11 @@ namespace System.ServiceModel.Activation.Configuration
             }
         }
 
-        [SuppressMessage(FxCop.Category.ReliabilityBasic, "Reliability104:CaughtAndHandledExceptionsRule",
-            Justification = "Handle the configuration exceptions here to avoid regressions on customer's existing scenarios")]
+        [SuppressMessage(
+            FxCop.Category.ReliabilityBasic,
+            "Reliability104:CaughtAndHandledExceptionsRule",
+            Justification = "Handle the configuration exceptions here to avoid regressions on customer's existing scenarios"
+        )]
         private static void EnsureSettingsLoaded()
         {
             if (!settingsInitalized)
@@ -41,14 +45,18 @@ namespace System.ServiceModel.Activation.Configuration
                         {
                             appSettingsSection = ConfigurationManager.AppSettings;
                         }
-                        catch (ConfigurationErrorsException)
-                        {
-                        }
+                        catch (ConfigurationErrorsException) { }
                         finally
                         {
-                            if ((appSettingsSection == null) || !bool.TryParse(appSettingsSection[UseClassicReadEntityBodyModeString], out useClassicReadEntityBodyMode))
+                            if (
+                                (appSettingsSection == null)
+                                || !bool.TryParse(
+                                    appSettingsSection[UseClassicReadEntityBodyModeString],
+                                    out useClassicReadEntityBodyMode
+                                )
+                            )
                             {
-                                useClassicReadEntityBodyMode = false; 
+                                useClassicReadEntityBodyMode = false;
                             }
 
                             settingsInitalized = true;

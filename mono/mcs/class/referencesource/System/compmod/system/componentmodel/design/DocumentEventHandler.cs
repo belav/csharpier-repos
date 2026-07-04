@@ -1,12 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="DocumentEventHandler.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel.Design {
+namespace System.ComponentModel.Design
+{
     using System;
     using System.ComponentModel;
     using System.Diagnostics;
@@ -19,4 +20,3 @@ namespace System.ComponentModel.Design {
     [HostProtection(SharedState = true)]
     public delegate void DesignerEventHandler(object sender, DesignerEventArgs e);
 }
-

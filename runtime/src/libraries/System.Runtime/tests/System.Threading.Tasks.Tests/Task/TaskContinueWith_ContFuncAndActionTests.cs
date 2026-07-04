@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System.Diagnostics;
+using Xunit;
 
 namespace System.Threading.Tasks.Tests
 {
@@ -28,7 +28,9 @@ namespace System.Threading.Tasks.Tests
             RunContinueWithTaskTask(s_onlyOnRanToCompletion);
 
             RunContinueWithTaskTask(TaskContinuationOptions.ExecuteSynchronously);
-            RunContinueWithTaskTask(s_onlyOnRanToCompletion | TaskContinuationOptions.ExecuteSynchronously);
+            RunContinueWithTaskTask(
+                s_onlyOnRanToCompletion | TaskContinuationOptions.ExecuteSynchronously
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -38,7 +40,9 @@ namespace System.Threading.Tasks.Tests
             RunContinueWithTaskFuture(s_onlyOnRanToCompletion);
 
             RunContinueWithTaskFuture(TaskContinuationOptions.ExecuteSynchronously);
-            RunContinueWithTaskFuture(s_onlyOnRanToCompletion | TaskContinuationOptions.ExecuteSynchronously);
+            RunContinueWithTaskFuture(
+                s_onlyOnRanToCompletion | TaskContinuationOptions.ExecuteSynchronously
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -48,7 +52,9 @@ namespace System.Threading.Tasks.Tests
             RunContinueWithFutureTask(s_onlyOnRanToCompletion);
 
             RunContinueWithFutureTask(TaskContinuationOptions.ExecuteSynchronously);
-            RunContinueWithFutureTask(s_onlyOnRanToCompletion | TaskContinuationOptions.ExecuteSynchronously);
+            RunContinueWithFutureTask(
+                s_onlyOnRanToCompletion | TaskContinuationOptions.ExecuteSynchronously
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -58,7 +64,9 @@ namespace System.Threading.Tasks.Tests
             RunContinueWithFutureFuture(s_onlyOnRanToCompletion);
 
             RunContinueWithFutureFuture(TaskContinuationOptions.ExecuteSynchronously);
-            RunContinueWithFutureFuture(s_onlyOnRanToCompletion | TaskContinuationOptions.ExecuteSynchronously);
+            RunContinueWithFutureFuture(
+                s_onlyOnRanToCompletion | TaskContinuationOptions.ExecuteSynchronously
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -67,7 +75,9 @@ namespace System.Threading.Tasks.Tests
             RunContinueWithTaskTask(s_onlyOnCanceled);
             RunContinueWithTaskTask(s_onlyOnFaulted);
 
-            RunContinueWithTaskTask(s_onlyOnCanceled | TaskContinuationOptions.ExecuteSynchronously);
+            RunContinueWithTaskTask(
+                s_onlyOnCanceled | TaskContinuationOptions.ExecuteSynchronously
+            );
             RunContinueWithTaskTask(s_onlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously);
         }
 
@@ -77,8 +87,12 @@ namespace System.Threading.Tasks.Tests
             RunContinueWithTaskFuture(s_onlyOnCanceled);
             RunContinueWithTaskFuture(s_onlyOnFaulted);
 
-            RunContinueWithTaskFuture(s_onlyOnCanceled | TaskContinuationOptions.ExecuteSynchronously);
-            RunContinueWithTaskFuture(s_onlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously);
+            RunContinueWithTaskFuture(
+                s_onlyOnCanceled | TaskContinuationOptions.ExecuteSynchronously
+            );
+            RunContinueWithTaskFuture(
+                s_onlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -87,8 +101,12 @@ namespace System.Threading.Tasks.Tests
             RunContinueWithFutureTask(s_onlyOnCanceled);
             RunContinueWithFutureTask(s_onlyOnFaulted);
 
-            RunContinueWithFutureTask(s_onlyOnCanceled | TaskContinuationOptions.ExecuteSynchronously);
-            RunContinueWithFutureTask(s_onlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously);
+            RunContinueWithFutureTask(
+                s_onlyOnCanceled | TaskContinuationOptions.ExecuteSynchronously
+            );
+            RunContinueWithFutureTask(
+                s_onlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -97,8 +115,12 @@ namespace System.Threading.Tasks.Tests
             RunContinueWithFutureFuture(s_onlyOnCanceled);
             RunContinueWithFutureFuture(s_onlyOnFaulted);
 
-            RunContinueWithFutureFuture(s_onlyOnCanceled | TaskContinuationOptions.ExecuteSynchronously);
-            RunContinueWithFutureFuture(s_onlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously);
+            RunContinueWithFutureFuture(
+                s_onlyOnCanceled | TaskContinuationOptions.ExecuteSynchronously
+            );
+            RunContinueWithFutureFuture(
+                s_onlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously
+            );
         }
 
         // Exception tests.
@@ -109,7 +131,10 @@ namespace System.Threading.Tasks.Tests
             RunContinueWithTaskTask(s_onlyOnRanToCompletion, true);
 
             RunContinueWithTaskTask(TaskContinuationOptions.ExecuteSynchronously, true);
-            RunContinueWithTaskTask(s_onlyOnRanToCompletion | TaskContinuationOptions.ExecuteSynchronously, true);
+            RunContinueWithTaskTask(
+                s_onlyOnRanToCompletion | TaskContinuationOptions.ExecuteSynchronously,
+                true
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -119,7 +144,10 @@ namespace System.Threading.Tasks.Tests
             RunContinueWithTaskFuture(s_onlyOnRanToCompletion, true);
 
             RunContinueWithTaskFuture(TaskContinuationOptions.ExecuteSynchronously, true);
-            RunContinueWithTaskFuture(s_onlyOnRanToCompletion | TaskContinuationOptions.ExecuteSynchronously, true);
+            RunContinueWithTaskFuture(
+                s_onlyOnRanToCompletion | TaskContinuationOptions.ExecuteSynchronously,
+                true
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -129,7 +157,10 @@ namespace System.Threading.Tasks.Tests
             RunContinueWithFutureTask(s_onlyOnRanToCompletion, true);
 
             RunContinueWithFutureTask(TaskContinuationOptions.ExecuteSynchronously, true);
-            RunContinueWithFutureTask(s_onlyOnRanToCompletion | TaskContinuationOptions.ExecuteSynchronously, true);
+            RunContinueWithFutureTask(
+                s_onlyOnRanToCompletion | TaskContinuationOptions.ExecuteSynchronously,
+                true
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -139,7 +170,10 @@ namespace System.Threading.Tasks.Tests
             RunContinueWithFutureFuture(s_onlyOnRanToCompletion, true);
 
             RunContinueWithFutureFuture(TaskContinuationOptions.ExecuteSynchronously, true);
-            RunContinueWithFutureFuture(s_onlyOnRanToCompletion | TaskContinuationOptions.ExecuteSynchronously, true);
+            RunContinueWithFutureFuture(
+                s_onlyOnRanToCompletion | TaskContinuationOptions.ExecuteSynchronously,
+                true
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -148,17 +182,30 @@ namespace System.Threading.Tasks.Tests
             RunContinueWithTaskTask(s_onlyOnCanceled, true);
             RunContinueWithTaskTask(s_onlyOnFaulted, true);
 
-            RunContinueWithTaskTask(s_onlyOnCanceled | TaskContinuationOptions.ExecuteSynchronously, true);
-            RunContinueWithTaskTask(s_onlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously, true);
+            RunContinueWithTaskTask(
+                s_onlyOnCanceled | TaskContinuationOptions.ExecuteSynchronously,
+                true
+            );
+            RunContinueWithTaskTask(
+                s_onlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously,
+                true
+            );
         }
+
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void RunContinueWithTaskFuture_FaultedCanceled_OnException()
         {
             RunContinueWithTaskFuture(s_onlyOnCanceled, true);
             RunContinueWithTaskFuture(s_onlyOnFaulted, true);
 
-            RunContinueWithTaskFuture(s_onlyOnCanceled | TaskContinuationOptions.ExecuteSynchronously, true);
-            RunContinueWithTaskFuture(s_onlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously, true);
+            RunContinueWithTaskFuture(
+                s_onlyOnCanceled | TaskContinuationOptions.ExecuteSynchronously,
+                true
+            );
+            RunContinueWithTaskFuture(
+                s_onlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously,
+                true
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -167,8 +214,14 @@ namespace System.Threading.Tasks.Tests
             RunContinueWithFutureTask(s_onlyOnCanceled, true);
             RunContinueWithFutureTask(s_onlyOnFaulted, true);
 
-            RunContinueWithFutureTask(s_onlyOnCanceled | TaskContinuationOptions.ExecuteSynchronously, true);
-            RunContinueWithFutureTask(s_onlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously, true);
+            RunContinueWithFutureTask(
+                s_onlyOnCanceled | TaskContinuationOptions.ExecuteSynchronously,
+                true
+            );
+            RunContinueWithFutureTask(
+                s_onlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously,
+                true
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -177,8 +230,14 @@ namespace System.Threading.Tasks.Tests
             RunContinueWithFutureFuture(s_onlyOnCanceled, true);
             RunContinueWithFutureFuture(s_onlyOnFaulted, true);
 
-            RunContinueWithFutureFuture(s_onlyOnCanceled | TaskContinuationOptions.ExecuteSynchronously, true);
-            RunContinueWithFutureFuture(s_onlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously, true);
+            RunContinueWithFutureFuture(
+                s_onlyOnCanceled | TaskContinuationOptions.ExecuteSynchronously,
+                true
+            );
+            RunContinueWithFutureFuture(
+                s_onlyOnFaulted | TaskContinuationOptions.ExecuteSynchronously,
+                true
+            );
         }
 
         #endregion
@@ -186,120 +245,240 @@ namespace System.Threading.Tasks.Tests
         #region Helper Methods
 
         // Chains a Task continuation to a Task.
-        private static void RunContinueWithTaskTask(TaskContinuationOptions options, bool runNegativeCases = false)
+        private static void RunContinueWithTaskTask(
+            TaskContinuationOptions options,
+            bool runNegativeCases = false
+        )
         {
             bool ran = false;
             if (runNegativeCases)
             {
-                RunContinueWithBase_NegativeCases(options,
-                    delegate { ran = false; },
-                    delegate (Task t)
+                RunContinueWithBase_NegativeCases(
+                    options,
+                    delegate
                     {
-                        return t.ContinueWith(delegate (Task f) { ran = true; }, options);
+                        ran = false;
                     },
-                    delegate { return ran; },
+                    delegate(Task t)
+                    {
+                        return t.ContinueWith(
+                            delegate(Task f)
+                            {
+                                ran = true;
+                            },
+                            options
+                        );
+                    },
+                    delegate
+                    {
+                        return ran;
+                    },
                     false
-                    );
+                );
             }
             else
             {
-                RunContinueWithBase(options,
-                    delegate { ran = false; },
-                    delegate (Task t)
+                RunContinueWithBase(
+                    options,
+                    delegate
                     {
-                        return t.ContinueWith(delegate (Task f) { ran = true; }, options);
+                        ran = false;
                     },
-                    delegate { return ran; },
+                    delegate(Task t)
+                    {
+                        return t.ContinueWith(
+                            delegate(Task f)
+                            {
+                                ran = true;
+                            },
+                            options
+                        );
+                    },
+                    delegate
+                    {
+                        return ran;
+                    },
                     false
                 );
             }
         }
 
         // Chains a Task<T> continuation to a Task, with a Func<Task, T>.
-        private static void RunContinueWithTaskFuture(TaskContinuationOptions options, bool runNegativeCases = false)
+        private static void RunContinueWithTaskFuture(
+            TaskContinuationOptions options,
+            bool runNegativeCases = false
+        )
         {
             bool ran = false;
             if (runNegativeCases)
             {
-                RunContinueWithBase_NegativeCases(options,
-                    delegate { ran = false; },
-                    delegate (Task t)
+                RunContinueWithBase_NegativeCases(
+                    options,
+                    delegate
                     {
-                        return t.ContinueWith<int>(delegate (Task f) { ran = true; return 5; }, options);
+                        ran = false;
                     },
-                    delegate { return ran; },
+                    delegate(Task t)
+                    {
+                        return t.ContinueWith<int>(
+                            delegate(Task f)
+                            {
+                                ran = true;
+                                return 5;
+                            },
+                            options
+                        );
+                    },
+                    delegate
+                    {
+                        return ran;
+                    },
                     false
                 );
             }
             else
             {
-                RunContinueWithBase(options,
-                    delegate { ran = false; },
-                    delegate (Task t)
+                RunContinueWithBase(
+                    options,
+                    delegate
                     {
-                        return t.ContinueWith<int>(delegate (Task f) { ran = true; return 5; }, options);
+                        ran = false;
                     },
-                    delegate { return ran; },
+                    delegate(Task t)
+                    {
+                        return t.ContinueWith<int>(
+                            delegate(Task f)
+                            {
+                                ran = true;
+                                return 5;
+                            },
+                            options
+                        );
+                    },
+                    delegate
+                    {
+                        return ran;
+                    },
                     false
                 );
             }
         }
 
         // Chains a Task continuation to a Task<T>.
-        private static void RunContinueWithFutureTask(TaskContinuationOptions options, bool runNegativeCases = false)
+        private static void RunContinueWithFutureTask(
+            TaskContinuationOptions options,
+            bool runNegativeCases = false
+        )
         {
             bool ran = false;
             if (runNegativeCases)
             {
-                RunContinueWithBase_NegativeCases(options,
-                delegate { ran = false; },
-                delegate (Task t)
-                {
-                    return t.ContinueWith(delegate (Task f) { ran = true; }, options);
-                },
-                delegate { return ran; },
-                true
+                RunContinueWithBase_NegativeCases(
+                    options,
+                    delegate
+                    {
+                        ran = false;
+                    },
+                    delegate(Task t)
+                    {
+                        return t.ContinueWith(
+                            delegate(Task f)
+                            {
+                                ran = true;
+                            },
+                            options
+                        );
+                    },
+                    delegate
+                    {
+                        return ran;
+                    },
+                    true
                 );
             }
             else
             {
-                RunContinueWithBase(options,
-                delegate { ran = false; },
-                delegate (Task t)
-                {
-                    return t.ContinueWith(delegate (Task f) { ran = true; }, options);
-                },
-                delegate { return ran; },
-                true
+                RunContinueWithBase(
+                    options,
+                    delegate
+                    {
+                        ran = false;
+                    },
+                    delegate(Task t)
+                    {
+                        return t.ContinueWith(
+                            delegate(Task f)
+                            {
+                                ran = true;
+                            },
+                            options
+                        );
+                    },
+                    delegate
+                    {
+                        return ran;
+                    },
+                    true
                 );
             }
         }
 
         // Chains a Task<U> continuation to a Task<T>, with a Func<Task<T>, U>.
-        private static void RunContinueWithFutureFuture(TaskContinuationOptions options, bool runNegativeCases = false)
+        private static void RunContinueWithFutureFuture(
+            TaskContinuationOptions options,
+            bool runNegativeCases = false
+        )
         {
             bool ran = false;
             if (runNegativeCases)
             {
-                RunContinueWithBase_NegativeCases(options,
-                    delegate { ran = false; },
-                    delegate (Task t)
+                RunContinueWithBase_NegativeCases(
+                    options,
+                    delegate
                     {
-                        return t.ContinueWith<int>(delegate (Task f) { ran = true; return 5; }, options);
+                        ran = false;
                     },
-                    delegate { return ran; },
+                    delegate(Task t)
+                    {
+                        return t.ContinueWith<int>(
+                            delegate(Task f)
+                            {
+                                ran = true;
+                                return 5;
+                            },
+                            options
+                        );
+                    },
+                    delegate
+                    {
+                        return ran;
+                    },
                     true
-                    );
+                );
             }
             else
             {
-                RunContinueWithBase(options,
-                    delegate { ran = false; },
-                    delegate (Task t)
+                RunContinueWithBase(
+                    options,
+                    delegate
                     {
-                        return t.ContinueWith<int>(delegate (Task f) { ran = true; return 5; }, options);
+                        ran = false;
                     },
-                    delegate { return ran; },
+                    delegate(Task t)
+                    {
+                        return t.ContinueWith<int>(
+                            delegate(Task f)
+                            {
+                                ran = true;
+                                return 5;
+                            },
+                            options
+                        );
+                    },
+                    delegate
+                    {
+                        return ran;
+                    },
                     true
                 );
             }
@@ -311,25 +490,41 @@ namespace System.Threading.Tasks.Tests
             Action initRan,
             Func<Task, Task> continuationMaker,
             Func<bool> ranValue,
-            bool taskIsFuture)
+            bool taskIsFuture
+        )
         {
             Debug.WriteLine("    >> (1) ContinueWith after task finishes Successfully.");
             {
                 bool expect = (options & TaskContinuationOptions.NotOnRanToCompletion) == 0;
                 Task task;
-                if (taskIsFuture) task = Task<string>.Factory.StartNew(() => "");
-                else task = Task.Factory.StartNew(delegate { });
+                if (taskIsFuture)
+                    task = Task<string>.Factory.StartNew(() => "");
+                else
+                    task = Task.Factory.StartNew(delegate { });
                 task.Wait();
 
                 initRan();
                 bool cancel = false;
                 Task cont = continuationMaker(task);
-                try { cont.Wait(); }
-                catch (AggregateException ex) { if (ex.InnerExceptions[0] is TaskCanceledException) cancel = true; }
+                try
+                {
+                    cont.Wait();
+                }
+                catch (AggregateException ex)
+                {
+                    if (ex.InnerExceptions[0] is TaskCanceledException)
+                        cancel = true;
+                }
 
                 if (expect != ranValue() || expect == cancel)
                 {
-                    Assert.Fail(string.Format("RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}", ranValue(), cancel));
+                    Assert.Fail(
+                        string.Format(
+                            "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
+                            ranValue(),
+                            cancel
+                        )
+                    );
                 }
             }
 
@@ -338,8 +533,19 @@ namespace System.Threading.Tasks.Tests
                 bool expect = (options & TaskContinuationOptions.NotOnRanToCompletion) == 0;
                 ManualResetEvent mre = new ManualResetEvent(false);
                 Task task;
-                if (taskIsFuture) task = Task<string>.Factory.StartNew(() => { mre.WaitOne(); return ""; });
-                else task = Task.Factory.StartNew(delegate { mre.WaitOne(); });
+                if (taskIsFuture)
+                    task = Task<string>.Factory.StartNew(() =>
+                    {
+                        mre.WaitOne();
+                        return "";
+                    });
+                else
+                    task = Task.Factory.StartNew(
+                        delegate
+                        {
+                            mre.WaitOne();
+                        }
+                    );
 
                 initRan();
                 bool cancel = false;
@@ -348,12 +554,25 @@ namespace System.Threading.Tasks.Tests
                 mre.Set();
                 task.Wait();
 
-                try { cont.Wait(); }
-                catch (AggregateException ex) { if (ex.InnerExceptions[0] is TaskCanceledException) cancel = true; }
+                try
+                {
+                    cont.Wait();
+                }
+                catch (AggregateException ex)
+                {
+                    if (ex.InnerExceptions[0] is TaskCanceledException)
+                        cancel = true;
+                }
 
                 if (expect != ranValue() || expect == cancel)
                 {
-                    Assert.Fail(string.Format("RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}", ranValue(), cancel));
+                    Assert.Fail(
+                        string.Format(
+                            "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
+                            ranValue(),
+                            cancel
+                        )
+                    );
                 }
             }
         }
@@ -364,26 +583,57 @@ namespace System.Threading.Tasks.Tests
             Action initRan,
             Func<Task, Task> continuationMaker,
             Func<bool> ranValue,
-            bool taskIsFuture)
+            bool taskIsFuture
+        )
         {
             Debug.WriteLine("    >> (3) ContinueWith after task finishes Exceptionally.");
             {
                 bool expect = (options & TaskContinuationOptions.NotOnFaulted) == 0;
                 Task task;
-                if (taskIsFuture) task = Task<string>.Factory.StartNew(delegate { throw new Exception("Boom"); });
-                else task = Task.Factory.StartNew(delegate { throw new Exception("Boom"); });
-                try { task.Wait(); }
-                catch (AggregateException) { /*swallow(ouch)*/ }
+                if (taskIsFuture)
+                    task = Task<string>.Factory.StartNew(
+                        delegate
+                        {
+                            throw new Exception("Boom");
+                        }
+                    );
+                else
+                    task = Task.Factory.StartNew(
+                        delegate
+                        {
+                            throw new Exception("Boom");
+                        }
+                    );
+                try
+                {
+                    task.Wait();
+                }
+                catch (AggregateException)
+                { /*swallow(ouch)*/
+                }
 
                 initRan();
                 bool cancel = false;
                 Task cont = continuationMaker(task);
-                try { cont.Wait(); }
-                catch (AggregateException ex) { if (ex.InnerExceptions[0] is TaskCanceledException) cancel = true; }
+                try
+                {
+                    cont.Wait();
+                }
+                catch (AggregateException ex)
+                {
+                    if (ex.InnerExceptions[0] is TaskCanceledException)
+                        cancel = true;
+                }
 
                 if (expect != ranValue() || expect == cancel)
                 {
-                    Assert.Fail(string.Format("RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}", ranValue(), cancel));
+                    Assert.Fail(
+                        string.Format(
+                            "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
+                            ranValue(),
+                            cancel
+                        )
+                    );
                 }
             }
 
@@ -392,23 +642,55 @@ namespace System.Threading.Tasks.Tests
                 bool expect = (options & TaskContinuationOptions.NotOnFaulted) == 0;
                 ManualResetEvent mre = new ManualResetEvent(false);
                 Task task;
-                if (taskIsFuture) task = Task<string>.Factory.StartNew(delegate { mre.WaitOne(); throw new Exception("Boom"); });
-                else task = Task.Factory.StartNew(delegate { mre.WaitOne(); throw new Exception("Boom"); });
+                if (taskIsFuture)
+                    task = Task<string>.Factory.StartNew(
+                        delegate
+                        {
+                            mre.WaitOne();
+                            throw new Exception("Boom");
+                        }
+                    );
+                else
+                    task = Task.Factory.StartNew(
+                        delegate
+                        {
+                            mre.WaitOne();
+                            throw new Exception("Boom");
+                        }
+                    );
 
                 initRan();
                 bool cancel = false;
                 Task cont = continuationMaker(task);
 
                 mre.Set();
-                try { task.Wait(); }
-                catch (AggregateException) { /*swallow(ouch)*/ }
+                try
+                {
+                    task.Wait();
+                }
+                catch (AggregateException)
+                { /*swallow(ouch)*/
+                }
 
-                try { cont.Wait(); }
-                catch (AggregateException ex) { if (ex.InnerExceptions[0] is TaskCanceledException) cancel = true; }
+                try
+                {
+                    cont.Wait();
+                }
+                catch (AggregateException ex)
+                {
+                    if (ex.InnerExceptions[0] is TaskCanceledException)
+                        cancel = true;
+                }
 
                 if (expect != ranValue() || expect == cancel)
                 {
-                    Assert.Fail(string.Format("RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}", ranValue(), cancel));
+                    Assert.Fail(
+                        string.Format(
+                            "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
+                            ranValue(),
+                            cancel
+                        )
+                    );
                 }
             }
 
@@ -419,20 +701,49 @@ namespace System.Threading.Tasks.Tests
                 CancellationTokenSource cts = new CancellationTokenSource();
                 Task task;
                 ManualResetEvent cancellationMRE = new ManualResetEvent(false);
-                if (taskIsFuture) task = Task<string>.Factory.StartNew(() => { cancellationMRE.WaitOne(); throw new OperationCanceledException(cts.Token); }, cts.Token);
-                else task = Task.Factory.StartNew(delegate { cancellationMRE.WaitOne(); throw new OperationCanceledException(cts.Token); }, cts.Token);
+                if (taskIsFuture)
+                    task = Task<string>.Factory.StartNew(
+                        () =>
+                        {
+                            cancellationMRE.WaitOne();
+                            throw new OperationCanceledException(cts.Token);
+                        },
+                        cts.Token
+                    );
+                else
+                    task = Task.Factory.StartNew(
+                        delegate
+                        {
+                            cancellationMRE.WaitOne();
+                            throw new OperationCanceledException(cts.Token);
+                        },
+                        cts.Token
+                    );
                 cts.Cancel();
                 cancellationMRE.Set();
 
                 initRan();
                 bool cancel = false;
                 Task cont = continuationMaker(task);
-                try { cont.Wait(); }
-                catch (AggregateException ex) { if (ex.InnerExceptions[0] is TaskCanceledException) cancel = true; }
+                try
+                {
+                    cont.Wait();
+                }
+                catch (AggregateException ex)
+                {
+                    if (ex.InnerExceptions[0] is TaskCanceledException)
+                        cancel = true;
+                }
 
                 if (expect != ranValue() || expect == cancel)
                 {
-                    Assert.Fail(string.Format("RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}", ranValue, cancel));
+                    Assert.Fail(
+                        string.Format(
+                            "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
+                            ranValue,
+                            cancel
+                        )
+                    );
                 }
             }
 
@@ -447,9 +758,23 @@ namespace System.Threading.Tasks.Tests
                 ManualResetEvent cancellationMRE = new ManualResetEvent(false);
 
                 if (taskIsFuture)
-                    task = Task<string>.Factory.StartNew(() => { cancellationMRE.WaitOne(); throw new OperationCanceledException(ct); }, ct);
+                    task = Task<string>.Factory.StartNew(
+                        () =>
+                        {
+                            cancellationMRE.WaitOne();
+                            throw new OperationCanceledException(ct);
+                        },
+                        ct
+                    );
                 else
-                    task = Task.Factory.StartNew(delegate { cancellationMRE.WaitOne(); throw new OperationCanceledException(ct); }, ct);
+                    task = Task.Factory.StartNew(
+                        delegate
+                        {
+                            cancellationMRE.WaitOne();
+                            throw new OperationCanceledException(ct);
+                        },
+                        ct
+                    );
 
                 initRan();
                 bool cancel = false;
@@ -458,12 +783,25 @@ namespace System.Threading.Tasks.Tests
                 cts.Cancel();
                 cancellationMRE.Set();
 
-                try { cont.Wait(); }
-                catch (AggregateException ex) { if (ex.InnerExceptions[0] is TaskCanceledException) cancel = true; }
+                try
+                {
+                    cont.Wait();
+                }
+                catch (AggregateException ex)
+                {
+                    if (ex.InnerExceptions[0] is TaskCanceledException)
+                        cancel = true;
+                }
 
                 if (expect != ranValue() || expect == cancel)
                 {
-                    Assert.Fail(string.Format("RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}", ranValue(), cancel));
+                    Assert.Fail(
+                        string.Format(
+                            "RunContinueWithBase: >> Failed: continuation didn't run or get canceled when expected: ran = {0}, cancel = {1}",
+                            ranValue(),
+                            cancel
+                        )
+                    );
                 }
             }
         }

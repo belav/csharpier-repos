@@ -7,7 +7,10 @@ namespace System.Transactions.Tests;
 
 #nullable enable
 
-[SkipOnPlatform(TestPlatforms.Windows, "These tests assert that OleTx operations properly throw PlatformNotSupportedException on non-Windows platforms")]
+[SkipOnPlatform(
+    TestPlatforms.Windows,
+    "These tests assert that OleTx operations properly throw PlatformNotSupportedException on non-Windows platforms"
+)]
 public class OleTxNonWindowsUnsupportedTests
 {
     [Fact]
@@ -18,7 +21,9 @@ public class OleTxNonWindowsUnsupportedTests
         // Votes and outcomes don't matter, the 2nd enlistment fails in non-Windows
         var enlistment1 = new TestEnlistment(Phase1Vote.Prepared, EnlistmentOutcome.Aborted);
 
-        Assert.Throws<PlatformNotSupportedException>(() => tx.EnlistDurable(Guid.NewGuid(), enlistment1, EnlistmentOptions.None));
+        Assert.Throws<PlatformNotSupportedException>(() =>
+            tx.EnlistDurable(Guid.NewGuid(), enlistment1, EnlistmentOptions.None)
+        );
         Assert.Equal(TransactionStatus.Aborted, tx.TransactionInformation.Status);
     }
 
@@ -27,8 +32,14 @@ public class OleTxNonWindowsUnsupportedTests
     {
         var tx = new CommittableTransaction();
 
-        var promotableEnlistment1 = new TestPromotableSinglePhaseEnlistment(() => new byte[24], EnlistmentOutcome.Aborted);
-        var promotableEnlistment2 = new TestPromotableSinglePhaseEnlistment(null, EnlistmentOutcome.Aborted);
+        var promotableEnlistment1 = new TestPromotableSinglePhaseEnlistment(
+            () => new byte[24],
+            EnlistmentOutcome.Aborted
+        );
+        var promotableEnlistment2 = new TestPromotableSinglePhaseEnlistment(
+            null,
+            EnlistmentOutcome.Aborted
+        );
 
         // 1st promotable enlistment - no distributed transaction yet.
         Assert.True(tx.EnlistPromotableSinglePhase(promotableEnlistment1));
@@ -40,7 +51,9 @@ public class OleTxNonWindowsUnsupportedTests
 
         // Now enlist a durable enlistment, this will cause the escalation to a distributed transaction and fail on non-Windows.
         var durableEnlistment = new TestEnlistment(Phase1Vote.Prepared, EnlistmentOutcome.Aborted);
-        Assert.Throws<PlatformNotSupportedException>(() => tx.EnlistDurable(Guid.NewGuid(), durableEnlistment, EnlistmentOptions.None));
+        Assert.Throws<PlatformNotSupportedException>(() =>
+            tx.EnlistDurable(Guid.NewGuid(), durableEnlistment, EnlistmentOptions.None)
+        );
 
         Assert.True(promotableEnlistment1.PromoteCalled);
         Assert.False(promotableEnlistment2.PromoteCalled);
@@ -49,21 +62,24 @@ public class OleTxNonWindowsUnsupportedTests
     }
 
     [Fact]
-    public void TransmitterPropagationToken()
-        => Assert.Throws<PlatformNotSupportedException>(() =>
-            TransactionInterop.GetTransmitterPropagationToken(new CommittableTransaction()));
+    public void TransmitterPropagationToken() =>
+        Assert.Throws<PlatformNotSupportedException>(() =>
+            TransactionInterop.GetTransmitterPropagationToken(new CommittableTransaction())
+        );
 
     [Fact]
-    public void GetWhereabouts()
-        => Assert.Throws<PlatformNotSupportedException>(TransactionInterop.GetWhereabouts);
+    public void GetWhereabouts() =>
+        Assert.Throws<PlatformNotSupportedException>(TransactionInterop.GetWhereabouts);
 
     [Fact]
-    public void GetExportCookie()
-        => Assert.Throws<PlatformNotSupportedException>(() =>
-            TransactionInterop.GetExportCookie(new CommittableTransaction(), new byte[200]));
+    public void GetExportCookie() =>
+        Assert.Throws<PlatformNotSupportedException>(() =>
+            TransactionInterop.GetExportCookie(new CommittableTransaction(), new byte[200])
+        );
 
     [Fact]
-    public void GetDtcTransaction()
-        => Assert.Throws<PlatformNotSupportedException>(() =>
-            TransactionInterop.GetDtcTransaction(new CommittableTransaction()));
+    public void GetDtcTransaction() =>
+        Assert.Throws<PlatformNotSupportedException>(() =>
+            TransactionInterop.GetDtcTransaction(new CommittableTransaction())
+        );
 }

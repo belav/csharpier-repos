@@ -10,7 +10,10 @@ namespace System.Web.WebPages.Deployment.Test
 {
     public class TestFileSystem : IFileSystem
     {
-        private readonly Dictionary<string, MemoryStream> _files = new Dictionary<string, MemoryStream>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, MemoryStream> _files = new Dictionary<
+            string,
+            MemoryStream
+        >(StringComparer.OrdinalIgnoreCase);
 
         public void AddFile(string file, MemoryStream content = null)
         {
@@ -46,8 +49,8 @@ namespace System.Web.WebPages.Deployment.Test
         public IEnumerable<string> EnumerateFiles(string path)
         {
             return from file in _files.Keys
-                   where Path.GetDirectoryName(file).Equals(path, StringComparison.OrdinalIgnoreCase)
-                   select file;
+                where Path.GetDirectoryName(file).Equals(path, StringComparison.OrdinalIgnoreCase)
+                select file;
         }
     }
 }

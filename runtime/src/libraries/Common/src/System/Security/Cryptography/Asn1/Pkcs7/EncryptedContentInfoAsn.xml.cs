@@ -36,18 +36,28 @@ namespace System.Security.Cryptography.Asn1.Pkcs7
 
             if (EncryptedContent.HasValue)
             {
-                writer.WriteOctetString(EncryptedContent.Value.Span, new Asn1Tag(TagClass.ContextSpecific, 0));
+                writer.WriteOctetString(
+                    EncryptedContent.Value.Span,
+                    new Asn1Tag(TagClass.ContextSpecific, 0)
+                );
             }
 
             writer.PopSequence(tag);
         }
 
-        internal static EncryptedContentInfoAsn Decode(ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static EncryptedContentInfoAsn Decode(
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
-        internal static EncryptedContentInfoAsn Decode(Asn1Tag expectedTag, ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static EncryptedContentInfoAsn Decode(
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             try
             {
@@ -63,12 +73,21 @@ namespace System.Security.Cryptography.Asn1.Pkcs7
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out EncryptedContentInfoAsn decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out EncryptedContentInfoAsn decoded
+        )
         {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
-        internal static void Decode(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out EncryptedContentInfoAsn decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out EncryptedContentInfoAsn decoded
+        )
         {
             try
             {
@@ -80,7 +99,12 @@ namespace System.Security.Cryptography.Asn1.Pkcs7
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out EncryptedContentInfoAsn decoded)
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out EncryptedContentInfoAsn decoded
+        )
         {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
@@ -89,22 +113,37 @@ namespace System.Security.Cryptography.Asn1.Pkcs7
             ReadOnlySpan<byte> tmpSpan;
 
             decoded.ContentType = sequenceReader.ReadObjectIdentifier();
-            System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(ref sequenceReader, rebind, out decoded.ContentEncryptionAlgorithm);
+            System.Security.Cryptography.Asn1.AlgorithmIdentifierAsn.Decode(
+                ref sequenceReader,
+                rebind,
+                out decoded.ContentEncryptionAlgorithm
+            );
 
-            if (sequenceReader.HasData && sequenceReader.PeekTag().HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 0)))
+            if (
+                sequenceReader.HasData
+                && sequenceReader
+                    .PeekTag()
+                    .HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 0))
+            )
             {
-
-                if (sequenceReader.TryReadPrimitiveOctetString(out tmpSpan, new Asn1Tag(TagClass.ContextSpecific, 0)))
+                if (
+                    sequenceReader.TryReadPrimitiveOctetString(
+                        out tmpSpan,
+                        new Asn1Tag(TagClass.ContextSpecific, 0)
+                    )
+                )
                 {
-                    decoded.EncryptedContent = rebindSpan.Overlaps(tmpSpan, out offset) ? rebind.Slice(offset, tmpSpan.Length) : tmpSpan.ToArray();
+                    decoded.EncryptedContent = rebindSpan.Overlaps(tmpSpan, out offset)
+                        ? rebind.Slice(offset, tmpSpan.Length)
+                        : tmpSpan.ToArray();
                 }
                 else
                 {
-                    decoded.EncryptedContent = sequenceReader.ReadOctetString(new Asn1Tag(TagClass.ContextSpecific, 0));
+                    decoded.EncryptedContent = sequenceReader.ReadOctetString(
+                        new Asn1Tag(TagClass.ContextSpecific, 0)
+                    );
                 }
-
             }
-
 
             sequenceReader.ThrowIfNotEmpty();
         }

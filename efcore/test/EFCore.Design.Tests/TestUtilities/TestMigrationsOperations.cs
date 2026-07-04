@@ -15,8 +15,16 @@ public class TestMigrationsOperations : MigrationsOperations
         string rootNamespace,
         string language,
         bool nullable,
-        string[] args)
-        : base(reporter, assembly, startupAssembly, projectDir, rootNamespace, language, nullable, args)
-    {
-    }
+        string[] args
+    )
+        : base(
+            reporter,
+            assembly,
+            startupAssembly,
+            projectDir,
+            rootNamespace,
+            language,
+            nullable,
+            args
+        ) { }
 }

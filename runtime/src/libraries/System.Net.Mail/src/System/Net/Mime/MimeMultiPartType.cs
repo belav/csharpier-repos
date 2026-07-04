@@ -11,6 +11,6 @@ namespace System.Net.Mime
         Alternative = 1,
         Parallel = 2,
         Related = 3,
-        Unknown = -1
+        Unknown = -1,
     }
 }

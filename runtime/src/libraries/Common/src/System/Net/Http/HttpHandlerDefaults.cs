@@ -19,12 +19,15 @@ namespace System.Net.Http
         public const bool DefaultAutomaticRedirection = true;
         public const bool DefaultUseCookies = true;
         public const bool DefaultPreAuthenticate = false;
-        public const ClientCertificateOption DefaultClientCertificateOption = ClientCertificateOption.Manual;
+        public const ClientCertificateOption DefaultClientCertificateOption =
+            ClientCertificateOption.Manual;
         public const bool DefaultUseProxy = true;
         public const bool DefaultUseDefaultCredentials = false;
         public const bool DefaultCheckCertificateRevocationList = false;
         public static readonly TimeSpan DefaultPooledConnectionLifetime = Timeout.InfiniteTimeSpan;
-        public static readonly TimeSpan DefaultPooledConnectionIdleTimeout = TimeSpan.FromMinutes(1);
+        public static readonly TimeSpan DefaultPooledConnectionIdleTimeout = TimeSpan.FromMinutes(
+            1
+        );
         public static readonly TimeSpan DefaultExpect100ContinueTimeout = TimeSpan.FromSeconds(1);
         public static readonly TimeSpan DefaultConnectTimeout = Timeout.InfiniteTimeSpan;
     }

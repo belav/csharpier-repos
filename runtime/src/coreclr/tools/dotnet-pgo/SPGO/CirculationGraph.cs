@@ -9,7 +9,6 @@ namespace Microsoft.Diagnostics.Tools.Pgo
 {
     public sealed class CirculationGraph
     {
-
         public List<Node> Nodes;
         public List<Edge> Edges;
 
@@ -44,7 +43,14 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 long outFlow = n.NetOutFlow();
                 if (inFlow != outFlow)
                 {
-                    throw new Exception(string.Format("Node {0}: Has in-flow of {1} and out-flow of {2}", n.ID, inFlow, outFlow));
+                    throw new Exception(
+                        string.Format(
+                            "Node {0}: Has in-flow of {1} and out-flow of {2}",
+                            n.ID,
+                            inFlow,
+                            outFlow
+                        )
+                    );
                 }
             }
         }
@@ -122,7 +128,15 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         {
             if (this.Flow + delta < this.MinCapacity || this.Flow + delta > this.MaxCapacity)
             {
-                throw new Exception(string.Format("Edge {0}: Tried to assign flow of {1} with capacity range [{2}, {3}]", this.ID, this.Flow + delta, this.MinCapacity, this.MaxCapacity));
+                throw new Exception(
+                    string.Format(
+                        "Edge {0}: Tried to assign flow of {1} with capacity range [{2}, {3}]",
+                        this.ID,
+                        this.Flow + delta,
+                        this.MinCapacity,
+                        this.MaxCapacity
+                    )
+                );
             }
             this.Flow += delta;
             this.Free -= delta;
@@ -135,17 +149,39 @@ namespace Microsoft.Diagnostics.Tools.Pgo
         {
             if (this.Flow < this.MinCapacity || this.Flow > this.MaxCapacity)
             {
-                throw new Exception(string.Format("Edge {0}: Flow of {1} falls outside of capacity range [{2}, {3}]", this.ID, this.Flow, this.MinCapacity, this.MaxCapacity));
+                throw new Exception(
+                    string.Format(
+                        "Edge {0}: Flow of {1} falls outside of capacity range [{2}, {3}]",
+                        this.ID,
+                        this.Flow,
+                        this.MinCapacity,
+                        this.MaxCapacity
+                    )
+                );
             }
 
             if (this.Free != this.MaxCapacity - this.Flow)
             {
-                throw new Exception(string.Format("Edge {0}: Annotated with {1} free capacity, while should have {2}", this.ID, this.Free, this.MaxCapacity - this.Flow));
+                throw new Exception(
+                    string.Format(
+                        "Edge {0}: Annotated with {1} free capacity, while should have {2}",
+                        this.ID,
+                        this.Free,
+                        this.MaxCapacity - this.Flow
+                    )
+                );
             }
 
             if (this.Flow != -this.BackEdge.Flow)
             {
-                throw new Exception(string.Format("Edge {0}: Has {1} flow while backedge has {2}", this.ID, this.Flow, this.BackEdge.Flow));
+                throw new Exception(
+                    string.Format(
+                        "Edge {0}: Has {1} flow while backedge has {2}",
+                        this.ID,
+                        this.Flow,
+                        this.BackEdge.Flow
+                    )
+                );
             }
         }
 

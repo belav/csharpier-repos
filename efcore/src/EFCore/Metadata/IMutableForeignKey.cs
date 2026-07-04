@@ -133,16 +133,16 @@ public interface IMutableForeignKey : IReadOnlyForeignKey, IMutableAnnotatable
     ///     Gets all skip navigations using this foreign key.
     /// </summary>
     /// <returns>The skip navigations using this foreign key.</returns>
-    new IEnumerable<IMutableSkipNavigation> GetReferencingSkipNavigations()
-        => ((IReadOnlyForeignKey)this).GetReferencingSkipNavigations().Cast<IMutableSkipNavigation>();
+    new IEnumerable<IMutableSkipNavigation> GetReferencingSkipNavigations() =>
+        ((IReadOnlyForeignKey)this).GetReferencingSkipNavigations().Cast<IMutableSkipNavigation>();
 
     /// <summary>
     ///     Gets the entity type related to the given one.
     /// </summary>
     /// <param name="entityType">One of the entity types related by the foreign key.</param>
     /// <returns>The entity type related to the given one.</returns>
-    new IMutableEntityType GetRelatedEntityType(IReadOnlyEntityType entityType)
-        => (IMutableEntityType)((IReadOnlyForeignKey)this).GetRelatedEntityType(entityType);
+    new IMutableEntityType GetRelatedEntityType(IReadOnlyEntityType entityType) =>
+        (IMutableEntityType)((IReadOnlyForeignKey)this).GetRelatedEntityType(entityType);
 
     /// <summary>
     ///     Returns a navigation associated with this foreign key.
@@ -153,6 +153,6 @@ public interface IMutableForeignKey : IReadOnlyForeignKey, IMutableAnnotatable
     /// <returns>
     ///     A navigation associated with this foreign key or <see langword="null" />.
     /// </returns>
-    new IMutableNavigation? GetNavigation(bool pointsToPrincipal)
-        => pointsToPrincipal ? DependentToPrincipal : PrincipalToDependent;
+    new IMutableNavigation? GetNavigation(bool pointsToPrincipal) =>
+        pointsToPrincipal ? DependentToPrincipal : PrincipalToDependent;
 }

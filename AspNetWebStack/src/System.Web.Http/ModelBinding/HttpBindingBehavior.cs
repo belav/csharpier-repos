@@ -7,6 +7,6 @@ namespace System.Web.Http.ModelBinding
     {
         Optional = 0,
         Never,
-        Required
+        Required,
     }
 }

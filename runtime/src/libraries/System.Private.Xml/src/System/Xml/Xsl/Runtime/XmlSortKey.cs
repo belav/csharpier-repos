@@ -13,8 +13,8 @@ namespace System.Xml.Xsl.Runtime
     /// </summary>
     internal abstract class XmlSortKey : IComparable
     {
-        private int _priority;           // Original input ordering used to ensure that sort is stable
-        private XmlSortKey? _nextKey;     // Next sort key if there are multiple keys (null otherwise)
+        private int _priority; // Original input ordering used to ensure that sort is stable
+        private XmlSortKey? _nextKey; // Next sort key if there are multiple keys (null otherwise)
 
         /// <summary>
         /// Get or set this key's index, relative to other keys involved in a sort.  This priority will
@@ -92,7 +92,6 @@ namespace System.Xml.Xsl.Runtime
         public abstract int CompareTo(object? that);
     }
 
-
     /// <summary>
     /// Sort key for the empty sequence.  Empty sequence always compares sorts either before all other values,
     /// or after all other values.
@@ -131,7 +130,6 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// Sort key for xs:decimal values.
     /// </summary>
@@ -161,7 +159,6 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// Sort key for xs:integer values.
     /// </summary>
@@ -188,7 +185,6 @@ namespace System.Xml.Xsl.Runtime
             return (_longVal < that._longVal) ? -1 : 1;
         }
     }
-
 
     /// <summary>
     /// Sort key for xs:int values.
@@ -241,7 +237,9 @@ namespace System.Xml.Xsl.Runtime
         public override int CompareTo(object? obj)
         {
             XmlStringSortKey? that = obj as XmlStringSortKey;
-            int idx, cntCmp, result;
+            int idx,
+                cntCmp,
+                result;
 
             if (that == null)
                 return CompareToEmpty(obj);
@@ -254,9 +252,15 @@ namespace System.Xml.Xsl.Runtime
             }
             else
             {
-                Debug.Assert(_sortKeyBytes != null && that._sortKeyBytes != null, "Both keys must have non-null sortKeyBytes field");
+                Debug.Assert(
+                    _sortKeyBytes != null && that._sortKeyBytes != null,
+                    "Both keys must have non-null sortKeyBytes field"
+                );
 
-                cntCmp = (_sortKeyBytes.Length < that._sortKeyBytes.Length) ? _sortKeyBytes.Length : that._sortKeyBytes.Length;
+                cntCmp =
+                    (_sortKeyBytes.Length < that._sortKeyBytes.Length)
+                        ? _sortKeyBytes.Length
+                        : that._sortKeyBytes.Length;
                 for (idx = 0; idx < cntCmp; idx++)
                 {
                     if (_sortKeyBytes[idx] < that._sortKeyBytes[idx])
@@ -281,7 +285,7 @@ namespace System.Xml.Xsl.Runtime
                     result = 0;
             }
 
-        Done:
+            Done:
             // Use document order to break sorting tie
             if (result == 0)
                 return BreakSortingTie(that);
@@ -309,7 +313,10 @@ namespace System.Xml.Xsl.Runtime
                 // Greatest, Descending: isEmptyGreatest = false
                 // Least, Ascending: isEmptyGreatest = false
                 // Least, Descending: isEmptyGreatest = true
-                _dblVal = (collation.EmptyGreatest != collation.DescendingOrder) ? double.PositiveInfinity : double.NegativeInfinity;
+                _dblVal =
+                    (collation.EmptyGreatest != collation.DescendingOrder)
+                        ? double.PositiveInfinity
+                        : double.NegativeInfinity;
             }
             else
             {
@@ -339,13 +346,18 @@ namespace System.Xml.Xsl.Runtime
                         return BreakSortingTie(that);
 
                     // NaN sorts before or after all non-NaN values
-                    Debug.Assert(_dblVal == double.NegativeInfinity || _dblVal == double.PositiveInfinity);
+                    Debug.Assert(
+                        _dblVal == double.NegativeInfinity || _dblVal == double.PositiveInfinity
+                    );
                     return (_dblVal == double.NegativeInfinity) ? -1 : 1;
                 }
                 else if (that._isNaN)
                 {
                     // NaN sorts before or after all non-NaN values
-                    Debug.Assert(that._dblVal == double.NegativeInfinity || that._dblVal == double.PositiveInfinity);
+                    Debug.Assert(
+                        that._dblVal == double.NegativeInfinity
+                            || that._dblVal == double.PositiveInfinity
+                    );
                     return (that._dblVal == double.NegativeInfinity) ? 1 : -1;
                 }
 
@@ -356,14 +368,12 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// Sort key for DateTime values (just convert DateTime to ticks and use Long sort key).
     /// </summary>
     internal sealed class XmlDateTimeSortKey : XmlIntegerSortKey
     {
-        public XmlDateTimeSortKey(DateTime value, XmlCollation collation) : base(value.Ticks, collation)
-        {
-        }
+        public XmlDateTimeSortKey(DateTime value, XmlCollation collation)
+            : base(value.Ticks, collation) { }
     }
 }

@@ -30,16 +30,32 @@ namespace System.IO.FileSystem.Tests
         [InlineData(" c")]
         public void Ctor_InvalidPath_ThrowsArgumentException(string driveName)
         {
-            AssertExtensions.Throws<ArgumentException>("driveName", null, () => new DriveInfo(driveName));
+            AssertExtensions.Throws<ArgumentException>(
+                "driveName",
+                null,
+                () => new DriveInfo(driveName)
+            );
         }
 
         [Fact]
         public void TestConstructor()
         {
-            string[] variableInput = { "{0}", "{0}", "{0}:", "{0}:", @"{0}:\", @"{0}:\\", "{0}://" };
+            string[] variableInput =
+            {
+                "{0}",
+                "{0}",
+                "{0}:",
+                "{0}:",
+                @"{0}:\",
+                @"{0}:\\",
+                "{0}://",
+            };
 
             // Test Null
-            Assert.Throws<ArgumentNullException>(() => { new DriveInfo(null); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new DriveInfo(null);
+            });
 
             // Test Valid DriveLetter
             var validDriveLetter = GetValidDriveLettersOnMachine().First();
@@ -70,7 +86,10 @@ namespace System.IO.FileSystem.Tests
         [Fact]
         public void TestDriveProperties_AppContainer()
         {
-            DriveInfo validDrive = DriveInfo.GetDrives().Where(d => d.DriveType == DriveType.Fixed).First();
+            DriveInfo validDrive = DriveInfo
+                .GetDrives()
+                .Where(d => d.DriveType == DriveType.Fixed)
+                .First();
             bool isReady = validDrive.IsReady;
             Assert.NotNull(validDrive.Name);
             Assert.NotNull(validDrive.RootDirectory.Name);
@@ -96,13 +115,27 @@ namespace System.IO.FileSystem.Tests
         [Fact]
         public void TestDriveFormat()
         {
-            DriveInfo validDrive = DriveInfo.GetDrives().Where(d => d.DriveType == DriveType.Fixed).First();
+            DriveInfo validDrive = DriveInfo
+                .GetDrives()
+                .Where(d => d.DriveType == DriveType.Fixed)
+                .First();
             const int volNameLen = 50;
             StringBuilder volumeName = new StringBuilder(volNameLen);
             const int fileSystemNameLen = 50;
             StringBuilder fileSystemName = new StringBuilder(fileSystemNameLen);
-            int serialNumber, maxFileNameLen, fileSystemFlags;
-            bool r = GetVolumeInformation(validDrive.Name, volumeName, volNameLen, out serialNumber, out maxFileNameLen, out fileSystemFlags, fileSystemName, fileSystemNameLen);
+            int serialNumber,
+                maxFileNameLen,
+                fileSystemFlags;
+            bool r = GetVolumeInformation(
+                validDrive.Name,
+                volumeName,
+                volNameLen,
+                out serialNumber,
+                out maxFileNameLen,
+                out fileSystemFlags,
+                fileSystemName,
+                fileSystemNameLen
+            );
             var fileSystem = fileSystemName.ToString();
 
             if (r)
@@ -122,7 +155,10 @@ namespace System.IO.FileSystem.Tests
         [Fact]
         public void TestDriveType()
         {
-            var validDrive = DriveInfo.GetDrives().Where(d => d.DriveType == DriveType.Fixed).First();
+            var validDrive = DriveInfo
+                .GetDrives()
+                .Where(d => d.DriveType == DriveType.Fixed)
+                .First();
             var expectedDriveType = GetDriveType(validDrive.Name);
             Assert.Equal((DriveType)expectedDriveType, validDrive.DriveType);
 
@@ -187,14 +223,27 @@ namespace System.IO.FileSystem.Tests
             void DoDriveCheck()
             {
                 // Get Volume Label - valid drive
-                int serialNumber, maxFileNameLen, fileSystemFlags;
+                int serialNumber,
+                    maxFileNameLen,
+                    fileSystemFlags;
                 int volNameLen = 50;
                 int fileNameLen = 50;
                 StringBuilder volumeName = new StringBuilder(volNameLen);
                 StringBuilder fileSystemName = new StringBuilder(fileNameLen);
 
-                DriveInfo validDrive = DriveInfo.GetDrives().First(d => d.DriveType == DriveType.Fixed);
-                bool volumeInformationSuccess = GetVolumeInformation(validDrive.Name, volumeName, volNameLen, out serialNumber, out maxFileNameLen, out fileSystemFlags, fileSystemName, fileNameLen);
+                DriveInfo validDrive = DriveInfo
+                    .GetDrives()
+                    .First(d => d.DriveType == DriveType.Fixed);
+                bool volumeInformationSuccess = GetVolumeInformation(
+                    validDrive.Name,
+                    volumeName,
+                    volNameLen,
+                    out serialNumber,
+                    out maxFileNameLen,
+                    out fileSystemFlags,
+                    fileSystemName,
+                    fileNameLen
+                );
 
                 if (volumeInformationSuccess)
                 {
@@ -204,7 +253,8 @@ namespace System.IO.FileSystem.Tests
                 {
                     var name = validDrive.VolumeLabel;
                 }
-            };
+            }
+            ;
 
             if (PlatformDetection.IsInAppContainer)
             {
@@ -219,7 +269,10 @@ namespace System.IO.FileSystem.Tests
         [Fact]
         public void SetVolumeLabel_Roundtrips()
         {
-            DriveInfo drive = DriveInfo.GetDrives().Where(d => d.DriveType == DriveType.Fixed).First();
+            DriveInfo drive = DriveInfo
+                .GetDrives()
+                .Where(d => d.DriveType == DriveType.Fixed)
+                .First();
             // Inside an AppContainer access to VolumeLabel is denied.
             if (PlatformDetection.IsInAppContainer)
             {
@@ -240,16 +293,22 @@ namespace System.IO.FileSystem.Tests
         public void VolumeLabelOnNetworkOrCdRom_Throws()
         {
             // Test setting the volume label on a Network or CD-ROM
-            var noAccessDrive = DriveInfo.GetDrives().Where(d => d.DriveType == DriveType.Network || d.DriveType == DriveType.CDRom);
+            var noAccessDrive = DriveInfo
+                .GetDrives()
+                .Where(d => d.DriveType == DriveType.Network || d.DriveType == DriveType.CDRom);
             foreach (var adrive in noAccessDrive)
             {
                 if (adrive.IsReady)
                 {
-                    Exception e = Assert.ThrowsAny<Exception>(() => { adrive.VolumeLabel = null; });
+                    Exception e = Assert.ThrowsAny<Exception>(() =>
+                    {
+                        adrive.VolumeLabel = null;
+                    });
                     Assert.True(
-                        e is UnauthorizedAccessException ||
-                        e is IOException ||
-                        e is SecurityException);
+                        e is UnauthorizedAccessException
+                            || e is IOException
+                            || e is SecurityException
+                    );
                 }
             }
         }
@@ -257,14 +316,39 @@ namespace System.IO.FileSystem.Tests
         [DllImport("kernel32.dll", SetLastError = true)]
         internal static extern int GetLogicalDrives();
 
-        [DllImport("kernel32.dll", EntryPoint = "GetVolumeInformationW", CharSet = CharSet.Unicode, SetLastError = true, BestFitMapping = false)]
-        internal static extern bool GetVolumeInformation(string drive, StringBuilder volumeName, int volumeNameBufLen, out int volSerialNumber, out int maxFileNameLen, out int fileSystemFlags, StringBuilder fileSystemName, int fileSystemNameBufLen);
+        [DllImport(
+            "kernel32.dll",
+            EntryPoint = "GetVolumeInformationW",
+            CharSet = CharSet.Unicode,
+            SetLastError = true,
+            BestFitMapping = false
+        )]
+        internal static extern bool GetVolumeInformation(
+            string drive,
+            StringBuilder volumeName,
+            int volumeNameBufLen,
+            out int volSerialNumber,
+            out int maxFileNameLen,
+            out int fileSystemFlags,
+            StringBuilder fileSystemName,
+            int fileSystemNameBufLen
+        );
 
-        [DllImport("kernel32.dll", SetLastError = true, EntryPoint = "GetDriveTypeW", CharSet = CharSet.Unicode)]
+        [DllImport(
+            "kernel32.dll",
+            SetLastError = true,
+            EntryPoint = "GetDriveTypeW",
+            CharSet = CharSet.Unicode
+        )]
         internal static extern int GetDriveType(string drive);
 
         [DllImport("kernel32.dll", SetLastError = true)]
-        internal static extern bool GetDiskFreeSpaceEx(string drive, out long freeBytesForUser, out long totalBytes, out long freeBytes);
+        internal static extern bool GetDiskFreeSpaceEx(
+            string drive,
+            out long freeBytesForUser,
+            out long totalBytes,
+            out long freeBytes
+        );
 
         private IEnumerable<char> GetValidDriveLettersOnMachine()
         {

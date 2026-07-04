@@ -16,14 +16,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpAddAccessibilityModifiersDiagnosticAnalyzer,
-        CSharpAddAccessibilityModifiersCodeFixProvider>;
+        CSharpAddAccessibilityModifiersCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsAddAccessibilityModifiers)]
     public class AddAccessibilityModifiersTests
     {
         [Theory, CombinatorialData]
-        public void TestStandardProperty(AnalyzerProperty property)
-            => VerifyCS.VerifyStandardProperty(property);
+        public void TestStandardProperty(AnalyzerProperty property) =>
+            VerifyCS.VerifyStandardProperty(property);
 
         [Fact]
         public async Task TestAllConstructs()
@@ -151,23 +152,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestRefStructs()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 namespace Test
                 {
                     ref struct [|S1|] { }
                 }
-                """, """
+                """,
+                """
                 namespace Test
                 {
                     internal ref struct S1 { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -237,17 +242,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
         [Fact]
         public async Task TestReadOnlyStructs()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 namespace Test
                 {
                     readonly struct [|S1|] { }
                 }
-                """, """
+                """,
+                """
                 namespace Test
                 {
                     internal readonly struct S1 { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -260,67 +268,67 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
                     Sources =
                     {
                         """
-                        using System;
-                        namespace Outer
-                        {
-                            namespace Inner1.Inner2
+                            using System;
+                            namespace Outer
                             {
-                                internal partial class [|C|] : I
+                                namespace Inner1.Inner2
                                 {
-                                    private class [|NestedClass|] { }
+                                    internal partial class [|C|] : I
+                                    {
+                                        private class [|NestedClass|] { }
 
-                                    private struct [|NestedStruct|] { }
+                                        private struct [|NestedStruct|] { }
 
-                                    private int [|f1|];
-                                    private int [|f2|], f3;
-                                    public int f4;
+                                        private int [|f1|];
+                                        private int [|f2|], f3;
+                                        public int f4;
 
-                                    private event Action [|e1|], e2;
-                                    public event Action e3;
+                                        private event Action [|e1|], e2;
+                                        public event Action e3;
 
-                                    private event Action [|e4|] { add { } remove { } }
-                                    public event Action e5 { add { } remove { } }
-                                    event Action I.e6 { add { } remove { } }
+                                        private event Action [|e4|] { add { } remove { } }
+                                        public event Action e5 { add { } remove { } }
+                                        event Action I.e6 { add { } remove { } }
 
-                                    static C() { }
+                                        static C() { }
 
-                                    private [|C|]() { }
-                                    public C(int i) { }
+                                        private [|C|]() { }
+                                        public C(int i) { }
 
-                                    ~C() { }
+                                        ~C() { }
 
-                                    private void [|M1|]() { }
-                                    public void M2() { }
-                                    void I.M3() { }
-                                    partial void M4();
-                                    partial void M4() { }
+                                        private void [|M1|]() { }
+                                        public void M2() { }
+                                        void I.M3() { }
+                                        partial void M4();
+                                        partial void M4() { }
 
-                                    private int [|P1|] { get; }
-                                    public int P2 { get; }
-                                    int I.P3 { get; }
+                                        private int [|P1|] { get; }
+                                        public int P2 { get; }
+                                        int I.P3 { get; }
 
-                                    private int [|this|][int i] => throw null;
-                                    public int this[string s] => throw null;
-                                    int I.this[bool b] => throw null;
-                                }
+                                        private int [|this|][int i] => throw null;
+                                        public int this[string s] => throw null;
+                                        int I.this[bool b] => throw null;
+                                    }
 
-                                internal interface [|I|]
-                                {
-                                    event Action e6;
-                                    void M3();
-                                    int P3 { get; }
-                                    int this[bool b] { get; }
-                                }
+                                    internal interface [|I|]
+                                    {
+                                        event Action e6;
+                                        void M3();
+                                        int P3 { get; }
+                                        int this[bool b] { get; }
+                                    }
 
-                                internal delegate void [|D|]();
+                                    internal delegate void [|D|]();
 
-                                internal enum [|E|]
-                                {
-                                    EMember
+                                    internal enum [|E|]
+                                    {
+                                        EMember
+                                    }
                                 }
                             }
-                        }
-                        """,
+                            """,
                     },
                 },
                 FixedState =
@@ -328,72 +336,75 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
                     Sources =
                     {
                         """
-                        using System;
-                        namespace Outer
-                        {
-                            namespace Inner1.Inner2
+                            using System;
+                            namespace Outer
                             {
-                                partial class C : I
+                                namespace Inner1.Inner2
                                 {
-                                    class NestedClass { }
+                                    partial class C : I
+                                    {
+                                        class NestedClass { }
 
-                                    struct NestedStruct { }
+                                        struct NestedStruct { }
 
-                                    int f1;
-                                    int f2, f3;
-                                    public int f4;
+                                        int f1;
+                                        int f2, f3;
+                                        public int f4;
 
-                                    event Action e1, e2;
-                                    public event Action e3;
+                                        event Action e1, e2;
+                                        public event Action e3;
 
-                                    event Action e4 { add { } remove { } }
-                                    public event Action e5 { add { } remove { } }
-                                    event Action I.e6 { add { } remove { } }
+                                        event Action e4 { add { } remove { } }
+                                        public event Action e5 { add { } remove { } }
+                                        event Action I.e6 { add { } remove { } }
 
-                                    static C() { }
+                                        static C() { }
 
-                                    C() { }
-                                    public C(int i) { }
+                                        C() { }
+                                        public C(int i) { }
 
-                                    ~C() { }
+                                        ~C() { }
 
-                                    void M1() { }
-                                    public void M2() { }
-                                    void I.M3() { }
-                                    partial void M4();
-                                    partial void M4() { }
+                                        void M1() { }
+                                        public void M2() { }
+                                        void I.M3() { }
+                                        partial void M4();
+                                        partial void M4() { }
 
-                                    int P1 { get; }
-                                    public int P2 { get; }
-                                    int I.P3 { get; }
+                                        int P1 { get; }
+                                        public int P2 { get; }
+                                        int I.P3 { get; }
 
-                                    int this[int i] => throw null;
-                                    public int this[string s] => throw null;
-                                    int I.this[bool b] => throw null;
-                                }
+                                        int this[int i] => throw null;
+                                        public int this[string s] => throw null;
+                                        int I.this[bool b] => throw null;
+                                    }
 
-                                interface I
-                                {
-                                    event Action e6;
-                                    void M3();
-                                    int P3 { get; }
-                                    int this[bool b] { get; }
-                                }
+                                    interface I
+                                    {
+                                        event Action e6;
+                                        void M3();
+                                        int P3 { get; }
+                                        int this[bool b] { get; }
+                                    }
 
-                                delegate void D();
+                                    delegate void D();
 
-                                enum E
-                                {
-                                    EMember
+                                    enum E
+                                    {
+                                        EMember
+                                    }
                                 }
                             }
-                        }
-                        """,
+                            """,
                     },
                 },
                 Options =
                 {
-                    { CodeStyleOptions2.AccessibilityModifiersRequired, AccessibilityModifiersRequired.OmitIfDefault },
+                    {
+                        CodeStyleOptions2.AccessibilityModifiersRequired,
+                        AccessibilityModifiersRequired.OmitIfDefault
+                    },
                 },
             }.RunAsync();
         }
@@ -404,20 +415,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
             await new VerifyCS.Test
             {
                 TestCode = """
-                namespace Test
-                {
-                    internal ref struct [|S1|] { }
-                }
-                """,
+                    namespace Test
+                    {
+                        internal ref struct [|S1|] { }
+                    }
+                    """,
                 FixedCode = """
-                namespace Test
-                {
-                    ref struct S1 { }
-                }
-                """,
+                    namespace Test
+                    {
+                        ref struct S1 { }
+                    }
+                    """,
                 Options =
                 {
-                    { CodeStyleOptions2.AccessibilityModifiersRequired, AccessibilityModifiersRequired.OmitIfDefault },
+                    {
+                        CodeStyleOptions2.AccessibilityModifiersRequired,
+                        AccessibilityModifiersRequired.OmitIfDefault
+                    },
                 },
             }.RunAsync();
         }
@@ -428,20 +442,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
             await new VerifyCS.Test
             {
                 TestCode = """
-                namespace Test
-                {
-                    internal readonly struct [|S1|] { }
-                }
-                """,
+                    namespace Test
+                    {
+                        internal readonly struct [|S1|] { }
+                    }
+                    """,
                 FixedCode = """
-                namespace Test
-                {
-                    readonly struct S1 { }
-                }
-                """,
+                    namespace Test
+                    {
+                        readonly struct S1 { }
+                    }
+                    """,
                 Options =
                 {
-                    { CodeStyleOptions2.AccessibilityModifiersRequired, AccessibilityModifiersRequired.OmitIfDefault },
+                    {
+                        CodeStyleOptions2.AccessibilityModifiersRequired,
+                        AccessibilityModifiersRequired.OmitIfDefault
+                    },
                 },
             }.RunAsync();
         }
@@ -452,14 +469,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
             await new VerifyCS.Test
             {
                 TestCode = """
-                internal class [|C1|] { }
-                """,
+                    internal class [|C1|] { }
+                    """,
                 FixedCode = """
-                class C1 { }
-                """,
+                    class C1 { }
+                    """,
                 Options =
                 {
-                    { CodeStyleOptions2.AccessibilityModifiersRequired, AccessibilityModifiersRequired.OmitIfDefault },
+                    {
+                        CodeStyleOptions2.AccessibilityModifiersRequired,
+                        AccessibilityModifiersRequired.OmitIfDefault
+                    },
                 },
             }.RunAsync();
         }
@@ -467,7 +487,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
         [Fact]
         public async Task TestExternMethod()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 using System;
                 using System.Runtime.InteropServices;
 
@@ -486,13 +507,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
                     [DllImport("User32.dll", CharSet = CharSet.Unicode)]
                     private static extern int [|MessageBox|](IntPtr h, string m, string c, int type);
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestVolatile()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 internal class Program
                 {
                     volatile int [|x|];
@@ -503,13 +526,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
                 {
                     private volatile int x;
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48899")]
         public async Task TestAbstractMethod()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public abstract class TestClass
                 {
                     abstract string {|CS0621:[|Test|]|} { get; }
@@ -520,13 +545,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
                 {
                     protected abstract string Test { get; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/48899")]
         public async Task TestOverriddenMethod()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public abstract class TestClass
                 {
                     public abstract string Test { get; }
@@ -547,7 +574,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
                 {
                     public override string Test { get; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -556,15 +584,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
             await new VerifyCS.Test
             {
                 TestCode = """
-                namespace Test;
+                    namespace Test;
 
-                struct [|S1|] { }
-                """,
+                    struct [|S1|] { }
+                    """,
                 FixedCode = """
-                namespace Test;
+                    namespace Test;
 
-                internal struct S1 { }
-                """,
+                    internal struct S1 { }
+                    """,
                 LanguageVersion = LanguageVersion.CSharp10,
             }.RunAsync();
         }
@@ -624,7 +652,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
                 TestCode = source,
                 FixedCode = source,
                 LanguageVersion = LanguageVersion.CSharp12,
-                ReferenceAssemblies = Testing.ReferenceAssemblies.Net.Net60
+                ReferenceAssemblies = Testing.ReferenceAssemblies.Net.Net60,
             };
 
             await test.RunAsync();
@@ -743,11 +771,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
                 TestCode = source,
                 FixedCode = fixedSource,
                 LanguageVersion = LanguageVersion.CSharp12,
-                CodeActionEquivalenceKey = nameof(AnalyzersResources.Remove_accessibility_modifiers),
+                CodeActionEquivalenceKey = nameof(
+                    AnalyzersResources.Remove_accessibility_modifiers
+                ),
                 Options =
                 {
-                    { CodeStyleOptions2.AccessibilityModifiersRequired,AccessibilityModifiersRequired.OmitIfDefault }
-                }
+                    {
+                        CodeStyleOptions2.AccessibilityModifiersRequired,
+                        AccessibilityModifiersRequired.OmitIfDefault
+                    },
+                },
             };
 
             await test.RunAsync();

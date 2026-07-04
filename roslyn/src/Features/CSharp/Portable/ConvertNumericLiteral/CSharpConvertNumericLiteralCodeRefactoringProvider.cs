@@ -10,10 +10,21 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Microsoft.CodeAnalysis.CSharp.ConvertNumericLiteral;
 
-[ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.ConvertNumericLiteral), Shared]
+[
+    ExportCodeRefactoringProvider(
+        LanguageNames.CSharp,
+        Name = PredefinedCodeRefactoringProviderNames.ConvertNumericLiteral
+    ),
+    Shared
+]
 [method: ImportingConstructor]
-[method: SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+[method: SuppressMessage(
+    "RoslynDiagnosticsReliability",
+    "RS0033:Importing constructor should be [Obsolete]",
+    Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+)]
 internal sealed class CSharpConvertNumericLiteralCodeRefactoringProvider()
-    : AbstractConvertNumericLiteralCodeRefactoringProvider<LiteralExpressionSyntax>(hexPrefix: "0x", binaryPrefix: "0b")
-{
-}
+    : AbstractConvertNumericLiteralCodeRefactoringProvider<LiteralExpressionSyntax>(
+        hexPrefix: "0x",
+        binaryPrefix: "0b"
+    ) { }

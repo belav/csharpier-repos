@@ -10,7 +10,9 @@ namespace System.Diagnostics
     ///     a particular process.  Using this component, you can determine
     ///     information about the module.
     /// </devdoc>
-    [Designer("System.Diagnostics.Design.ProcessModuleDesigner, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [Designer(
+        "System.Diagnostics.Design.ProcessModuleDesigner, System.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public class ProcessModule : Component
     {
         private readonly string _fileName;
@@ -55,7 +57,8 @@ namespace System.Diagnostics
         /// <devdoc>
         ///     Returns version information about the module.
         /// </devdoc>
-        public FileVersionInfo FileVersionInfo => _fileVersionInfo ??= FileVersionInfo.GetVersionInfo(_fileName);
+        public FileVersionInfo FileVersionInfo =>
+            _fileVersionInfo ??= FileVersionInfo.GetVersionInfo(_fileName);
 
         public override string ToString() => $"{base.ToString()} ({ModuleName})";
     }

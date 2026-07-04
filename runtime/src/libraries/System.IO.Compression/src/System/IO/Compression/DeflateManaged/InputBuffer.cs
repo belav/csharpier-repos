@@ -17,9 +17,9 @@ namespace System.IO.Compression
 
     internal sealed class InputBuffer
     {
-        private Memory<byte> _buffer;     // memory to store input
-        private uint _bitBuffer;      // store the bits here, we can quickly shift in this buffer
-        private int _bitsInBuffer;    // number of bits available in bitBuffer
+        private Memory<byte> _buffer; // memory to store input
+        private uint _bitBuffer; // store the bits here, we can quickly shift in this buffer
+        private int _bitsInBuffer; // number of bits available in bitBuffer
 
         /// <summary>Total bits available in the input buffer.</summary>
         public int AvailableBits => _bitsInBuffer;
@@ -210,7 +210,10 @@ namespace System.IO.Compression
         /// <summary>Skip n bits in the buffer.</summary>
         public void SkipBits(int n)
         {
-            Debug.Assert(_bitsInBuffer >= n, "No enough bits in the buffer, Did you call EnsureBitsAvailable?");
+            Debug.Assert(
+                _bitsInBuffer >= n,
+                "No enough bits in the buffer, Did you call EnsureBitsAvailable?"
+            );
             _bitBuffer >>= n;
             _bitsInBuffer -= n;
         }

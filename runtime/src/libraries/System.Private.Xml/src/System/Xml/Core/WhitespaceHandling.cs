@@ -13,6 +13,6 @@ namespace System.Xml
         Significant = 1,
 
         // Do not return any Whitespace or SignificantWhitespace nodes.
-        None = 2
+        None = 2,
     }
 }

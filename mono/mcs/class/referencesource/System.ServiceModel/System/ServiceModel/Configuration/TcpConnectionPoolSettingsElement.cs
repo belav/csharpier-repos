@@ -13,11 +13,12 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class TcpConnectionPoolSettingsElement : ServiceModelConfigurationElement
     {
-        public TcpConnectionPoolSettingsElement()
-        {
-        }
+        public TcpConnectionPoolSettingsElement() { }
 
-        [ConfigurationProperty(ConfigurationStrings.GroupName, DefaultValue = ConnectionOrientedTransportDefaults.ConnectionPoolGroupName)]
+        [ConfigurationProperty(
+            ConfigurationStrings.GroupName,
+            DefaultValue = ConnectionOrientedTransportDefaults.ConnectionPoolGroupName
+        )]
         [StringValidator(MinLength = 0)]
         public string GroupName
         {
@@ -32,7 +33,10 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.LeaseTimeout, DefaultValue = TcpTransportDefaults.ConnectionLeaseTimeoutString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.LeaseTimeout,
+            DefaultValue = TcpTransportDefaults.ConnectionLeaseTimeoutString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan LeaseTimeout
@@ -41,7 +45,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.LeaseTimeout] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.IdleTimeout, DefaultValue = ConnectionOrientedTransportDefaults.IdleTimeoutString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.IdleTimeout,
+            DefaultValue = ConnectionOrientedTransportDefaults.IdleTimeoutString
+        )]
         [TypeConverter(typeof(TimeSpanOrInfiniteConverter))]
         [ServiceModelTimeSpanValidator(MinValueString = ConfigurationStrings.TimeSpanZero)]
         public TimeSpan IdleTimeout
@@ -50,7 +57,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.IdleTimeout] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxOutboundConnectionsPerEndpoint, DefaultValue = ConnectionOrientedTransportDefaults.MaxOutboundConnectionsPerEndpoint)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxOutboundConnectionsPerEndpoint,
+            DefaultValue = ConnectionOrientedTransportDefaults.MaxOutboundConnectionsPerEndpoint
+        )]
         [IntegerValidator(MinValue = 0)]
         public int MaxOutboundConnectionsPerEndpoint
         {
@@ -79,9 +89,18 @@ namespace System.ServiceModel.Configuration
             }
 
             SetPropertyValueIfNotDefaultValue(ConfigurationStrings.GroupName, settings.GroupName);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.IdleTimeout, settings.IdleTimeout);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.LeaseTimeout, settings.LeaseTimeout);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxOutboundConnectionsPerEndpoint, settings.MaxOutboundConnectionsPerEndpoint);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.IdleTimeout,
+                settings.IdleTimeout
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.LeaseTimeout,
+                settings.LeaseTimeout
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxOutboundConnectionsPerEndpoint,
+                settings.MaxOutboundConnectionsPerEndpoint
+            );
         }
 
         internal void CopyFrom(TcpConnectionPoolSettingsElement source)

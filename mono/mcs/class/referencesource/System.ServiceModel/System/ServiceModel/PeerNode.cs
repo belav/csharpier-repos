@@ -43,7 +43,13 @@ namespace System.ServiceModel
                     SynchronizationContext context = synchronizationContext;
                     if (context != null)
                     {
-                        context.Send(delegate(object state) { handler(source, args); }, null);
+                        context.Send(
+                            delegate(object state)
+                            {
+                                handler(source, args);
+                            },
+                            null
+                        );
                     }
                     else
                     {
@@ -52,17 +58,30 @@ namespace System.ServiceModel
                 }
                 catch (Exception e)
                 {
-                    if (Fx.IsFatal(e)) throw;
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCallback(SR.GetString(SR.NotificationException), e);
+                    if (Fx.IsFatal(e))
+                        throw;
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperCallback(
+                        SR.GetString(SR.NotificationException),
+                        e
+                    );
                 }
             }
         }
 
-        public bool IsOnline { get { return InnerNode.IsOnline; } }
+        public bool IsOnline
+        {
+            get { return InnerNode.IsOnline; }
+        }
 
-        internal bool IsOpen { get { return InnerNode.IsOpen; } }
+        internal bool IsOpen
+        {
+            get { return InnerNode.IsOpen; }
+        }
 
-        public int Port { get { return InnerNode.ListenerPort; } }
+        public int Port
+        {
+            get { return InnerNode.ListenerPort; }
+        }
 
         public PeerMessagePropagationFilter MessagePropagationFilter
         {
@@ -103,11 +122,25 @@ namespace System.ServiceModel
         {
             if (this.IsOpen)
             {
-                return SR.GetString(SR.PeerNodeToStringFormat, this.InnerNode.MeshId, this.InnerNode.NodeId, this.IsOnline, this.IsOpen, this.Port);
+                return SR.GetString(
+                    SR.PeerNodeToStringFormat,
+                    this.InnerNode.MeshId,
+                    this.InnerNode.NodeId,
+                    this.IsOnline,
+                    this.IsOpen,
+                    this.Port
+                );
             }
             else
             {
-                return SR.GetString(SR.PeerNodeToStringFormat, "", -1, this.IsOnline, this.IsOpen, -1);
+                return SR.GetString(
+                    SR.PeerNodeToStringFormat,
+                    "",
+                    -1,
+                    this.IsOnline,
+                    this.IsOpen,
+                    -1
+                );
             }
         }
 
@@ -115,7 +148,6 @@ namespace System.ServiceModel
         {
             get { return this.encoderElement; }
             set { this.encoderElement = value; }
-
         }
     }
 }

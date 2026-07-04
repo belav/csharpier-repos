@@ -7,16 +7,12 @@ public class ConfigurationDbContextSqliteTest
     : ConfigurationDbContextTestBase<ConfigurationDbContextSqliteTest.ConfigurationDbContextSqliteFixture>
 {
     public ConfigurationDbContextSqliteTest(ConfigurationDbContextSqliteFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class ConfigurationDbContextSqliteFixture : ConfigurationDbContextFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 
-        protected override string StoreName
-            => "ConfigurationDbContext";
+        protected override string StoreName => "ConfigurationDbContext";
     }
 }

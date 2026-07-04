@@ -20,21 +20,42 @@ namespace System.Formats.Asn1.Tests.Reader
         [InlineData("Zero length", AsnEncodingRules.CER, "0600")]
         [InlineData("Zero length", AsnEncodingRules.DER, "0600")]
         [InlineData("Constructed Definite Form", AsnEncodingRules.BER, "2605" + "0603883703")]
-        [InlineData("Constructed Indefinite Form", AsnEncodingRules.BER, "2680" + "0603883703" + "0000")]
-        [InlineData("Constructed Indefinite Form", AsnEncodingRules.CER, "2680" + "0603883703" + "0000")]
+        [InlineData(
+            "Constructed Indefinite Form",
+            AsnEncodingRules.BER,
+            "2680" + "0603883703" + "0000"
+        )]
+        [InlineData(
+            "Constructed Indefinite Form",
+            AsnEncodingRules.CER,
+            "2680" + "0603883703" + "0000"
+        )]
         [InlineData("Unresolved carry-bit (first sub-identifier)", AsnEncodingRules.BER, "060188")]
         [InlineData("Unresolved carry-bit (first sub-identifier)", AsnEncodingRules.CER, "060188")]
         [InlineData("Unresolved carry-bit (first sub-identifier)", AsnEncodingRules.DER, "060188")]
-        [InlineData("Unresolved carry-bit (later sub-identifier)", AsnEncodingRules.BER, "0603883781")]
-        [InlineData("Unresolved carry-bit (later sub-identifier)", AsnEncodingRules.CER, "0603883781")]
-        [InlineData("Unresolved carry-bit (later sub-identifier)", AsnEncodingRules.DER, "0603883781")]
+        [InlineData(
+            "Unresolved carry-bit (later sub-identifier)",
+            AsnEncodingRules.BER,
+            "0603883781"
+        )]
+        [InlineData(
+            "Unresolved carry-bit (later sub-identifier)",
+            AsnEncodingRules.CER,
+            "0603883781"
+        )]
+        [InlineData(
+            "Unresolved carry-bit (later sub-identifier)",
+            AsnEncodingRules.DER,
+            "0603883781"
+        )]
         [InlineData("Sub-Identifier with leading 0x80", AsnEncodingRules.BER, "060488378001")]
         [InlineData("Sub-Identifier with leading 0x80", AsnEncodingRules.CER, "060488378001")]
         [InlineData("Sub-Identifier with leading 0x80", AsnEncodingRules.DER, "060488378001")]
         public static void ReadObjectIdentifier_Throws(
             string description,
             AsnEncodingRules ruleSet,
-            string inputHex)
+            string inputHex
+        )
         {
             _ = description;
             byte[] inputData = inputHex.HexToByteArray();
@@ -58,11 +79,13 @@ namespace System.Formats.Asn1.Tests.Reader
             // their sample value of f81d4fae-7dec-11d0-a765-00a0c91e6bf6
             // this is
             // { joint-iso-itu-t(2) uuid(255) thatuuid(329800735698586629295641978511506172918) three(3) }
-            "2.255.329800735698586629295641978511506172918.3")]
+            "2.255.329800735698586629295641978511506172918.3"
+        )]
         public static void ReadObjectIdentifier_Success(
             AsnEncodingRules ruleSet,
             string inputHex,
-            string expectedValue)
+            string expectedValue
+        )
         {
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
@@ -76,10 +99,19 @@ namespace System.Formats.Asn1.Tests.Reader
         // content bytes to write down. Walk it backwards to 1.
         // This uses the OID from the last case of ReadObjectIdentifierAsString_Success, but
         // without the "255" arc (therefore the initial second arc is the UUID decimal value - 80)
-        [InlineData("061383F09DA7EBCFDEE0C7A1A7B2C0948CC8F9D776", "2.329800735698586629295641978511506172838")]
+        [InlineData(
+            "061383F09DA7EBCFDEE0C7A1A7B2C0948CC8F9D776",
+            "2.329800735698586629295641978511506172838"
+        )]
         // Drop the last byte, clear the high bit in the last remaining byte, secondArc = (secondArc + 80) >> 7 - 80.
-        [InlineData("061283F09DA7EBCFDEE0C7A1A7B2C0948CC8F957", "2.2576568247645208041372202957121141895")]
-        [InlineData("061183F09DA7EBCFDEE0C7A1A7B2C0948CC879", "2.20129439434728187823220335602508841")]
+        [InlineData(
+            "061283F09DA7EBCFDEE0C7A1A7B2C0948CC8F957",
+            "2.2576568247645208041372202957121141895"
+        )]
+        [InlineData(
+            "061183F09DA7EBCFDEE0C7A1A7B2C0948CC879",
+            "2.20129439434728187823220335602508841"
+        )]
         [InlineData("061083F09DA7EBCFDEE0C7A1A7B2C0948C48", "2.157261245583813967368908871894520")]
         [InlineData("060F83F09DA7EBCFDEE0C7A1A7B2C0940C", "2.1228603481123546620069600561596")]
         [InlineData("060E83F09DA7EBCFDEE0C7A1A7B2C014", "2.9598464696277707969293754308")]
@@ -116,12 +148,14 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AssertExtensions.Throws<ArgumentException>(
                 "expectedTag",
-                () => reader.ReadIntegerBytes(Asn1Tag.Null));
+                () => reader.ReadIntegerBytes(Asn1Tag.Null)
+            );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
-            Assert.Throws<AsnContentException>(
-                () => reader.ReadObjectIdentifier(new Asn1Tag(TagClass.ContextSpecific, 0)));
+            Assert.Throws<AsnContentException>(() =>
+                reader.ReadObjectIdentifier(new Asn1Tag(TagClass.ContextSpecific, 0))
+            );
 
             Assert.True(reader.HasData, "HasData after wrong tag");
 
@@ -140,7 +174,8 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AssertExtensions.Throws<ArgumentException>(
                 "expectedTag",
-                () => reader.ReadIntegerBytes(Asn1Tag.Null));
+                () => reader.ReadIntegerBytes(Asn1Tag.Null)
+            );
 
             Assert.True(reader.HasData, "HasData after bad universal tag");
 
@@ -148,19 +183,22 @@ namespace System.Formats.Asn1.Tests.Reader
 
             Assert.True(reader.HasData, "HasData after default tag");
 
-            Assert.Throws<AsnContentException>(
-                () => reader.ReadObjectIdentifier(new Asn1Tag(TagClass.Application, 0)));
+            Assert.Throws<AsnContentException>(() =>
+                reader.ReadObjectIdentifier(new Asn1Tag(TagClass.Application, 0))
+            );
 
             Assert.True(reader.HasData, "HasData after wrong custom class");
 
-            Assert.Throws<AsnContentException>(
-                () => reader.ReadObjectIdentifier(new Asn1Tag(TagClass.ContextSpecific, 1)));
+            Assert.Throws<AsnContentException>(() =>
+                reader.ReadObjectIdentifier(new Asn1Tag(TagClass.ContextSpecific, 1))
+            );
 
             Assert.True(reader.HasData, "HasData after wrong custom tag value");
 
             Assert.Equal(
                 "2.999",
-                reader.ReadObjectIdentifier(new Asn1Tag(TagClass.ContextSpecific, 7)));
+                reader.ReadObjectIdentifier(new Asn1Tag(TagClass.ContextSpecific, 7))
+            );
 
             Assert.False(reader.HasData, "HasData after reading value");
         }
@@ -176,7 +214,8 @@ namespace System.Formats.Asn1.Tests.Reader
             AsnEncodingRules ruleSet,
             string inputHex,
             TagClass tagClass,
-            int tagValue)
+            int tagValue
+        )
         {
             byte[] inputData = inputHex.HexToByteArray();
             Asn1Tag constructedTag = new Asn1Tag(tagClass, tagValue, true);
@@ -250,13 +289,13 @@ namespace System.Formats.Asn1.Tests.Reader
             new Span<byte>(inputData, 4, 145).Fill(0x80);
 
             const string ExpectedOid =
-                "2." +
-                "449423283715578976932326297697256183404494244735576643183575" +
-                "202894331689513752407831771193306018840052800284699678483394" +
-                "146974422036041556232118576598685310944419733562163713190755" +
-                "549003115235298632707380212514422095376705856157203684782776" +
-                "352068092908376276711465745599868114846199290762088390824060" +
-                "56034224";
+                "2."
+                + "449423283715578976932326297697256183404494244735576643183575"
+                + "202894331689513752407831771193306018840052800284699678483394"
+                + "146974422036041556232118576598685310944419733562163713190755"
+                + "549003115235298632707380212514422095376705856157203684782776"
+                + "352068092908376276711465745599868114846199290762088390824060"
+                + "56034224";
 
             AsnReader reader = new AsnReader(inputData, ruleSet);
 

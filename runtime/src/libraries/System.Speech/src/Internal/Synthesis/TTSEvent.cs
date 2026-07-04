@@ -6,7 +6,6 @@ using System.Speech.Synthesis.TtsEngine;
 
 namespace System.Speech.Internal.Synthesis
 {
-
     internal class TTSEvent
     {
         #region Constructors
@@ -19,7 +18,17 @@ namespace System.Speech.Internal.Synthesis
             _voice = voice;
         }
 
-        internal TTSEvent(TtsEventId id, Prompt prompt, Exception exception, VoiceInfo voice, TimeSpan audioPosition, long streamPosition, string bookmark, uint wParam, IntPtr lParam)
+        internal TTSEvent(
+            TtsEventId id,
+            Prompt prompt,
+            Exception exception,
+            VoiceInfo voice,
+            TimeSpan audioPosition,
+            long streamPosition,
+            string bookmark,
+            uint wParam,
+            IntPtr lParam
+        )
             : this(id, prompt, exception, voice)
         {
             _audioPosition = audioPosition;
@@ -28,13 +37,16 @@ namespace System.Speech.Internal.Synthesis
             _lParam = lParam;
         }
 
-        private TTSEvent()
-        {
-        }
+        private TTSEvent() { }
 
-        internal static TTSEvent CreatePhonemeEvent(string phoneme, string nextPhoneme,
-                                                    TimeSpan duration, SynthesizerEmphasis emphasis,
-                                                    Prompt prompt, TimeSpan audioPosition)
+        internal static TTSEvent CreatePhonemeEvent(
+            string phoneme,
+            string nextPhoneme,
+            TimeSpan duration,
+            SynthesizerEmphasis emphasis,
+            Prompt prompt,
+            TimeSpan audioPosition
+        )
         {
             TTSEvent ttsEvent = new();
             ttsEvent._evtId = TtsEventId.Phoneme;
@@ -54,102 +66,63 @@ namespace System.Speech.Internal.Synthesis
 
         internal TtsEventId Id
         {
-            get
-            {
-                return _evtId;
-            }
+            get { return _evtId; }
         }
 
         internal Exception Exception
         {
-            get
-            {
-                return _exception;
-            }
+            get { return _exception; }
         }
 
         internal Prompt Prompt
         {
-            get
-            {
-                return _prompt;
-            }
+            get { return _prompt; }
         }
 
         internal VoiceInfo Voice
         {
-            get
-            {
-                return _voice;
-            }
+            get { return _voice; }
         }
 
         internal TimeSpan AudioPosition
         {
-            get
-            {
-                return _audioPosition;
-            }
+            get { return _audioPosition; }
         }
 
         internal string Bookmark
         {
-            get
-            {
-                return _bookmark;
-            }
+            get { return _bookmark; }
         }
 
         internal IntPtr LParam
         {
-            get
-            {
-                return _lParam;
-            }
+            get { return _lParam; }
         }
 
         internal uint WParam
         {
-            get
-            {
-                return _wParam;
-            }
+            get { return _wParam; }
         }
 
         internal SynthesizerEmphasis PhonemeEmphasis
         {
-            get
-            {
-                return _phonemeEmphasis;
-            }
+            get { return _phonemeEmphasis; }
         }
 
         internal string Phoneme
         {
-            get
-            {
-                return _phoneme;
-            }
+            get { return _phoneme; }
         }
 
         internal string NextPhoneme
         {
-            get
-            {
-                return _nextPhoneme;
-            }
-            set
-            {
-                _nextPhoneme = value;
-            }
+            get { return _nextPhoneme; }
+            set { _nextPhoneme = value; }
         }
 
         internal TimeSpan PhonemeDuration
         {
-            get
-            {
-                return _phonemeDuration;
-            }
+            get { return _phonemeDuration; }
         }
 
         #endregion
@@ -173,6 +146,5 @@ namespace System.Speech.Internal.Synthesis
         private TimeSpan _phonemeDuration;
         private SynthesizerEmphasis _phonemeEmphasis;
         #endregion
-
     }
 }

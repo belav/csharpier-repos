@@ -18,6 +18,6 @@ namespace System.IO.Compression
         LGWin,
         LGBlock,
         LCModeling,
-        SizeHint
+        SizeHint,
     }
 }

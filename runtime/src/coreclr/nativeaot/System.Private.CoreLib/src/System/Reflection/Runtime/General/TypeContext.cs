@@ -15,7 +15,10 @@ namespace System.Reflection.Runtime.General
 
     internal struct TypeContext
     {
-        internal TypeContext(RuntimeTypeInfo[] genericTypeArguments, RuntimeTypeInfo[] genericMethodArguments)
+        internal TypeContext(
+            RuntimeTypeInfo[] genericTypeArguments,
+            RuntimeTypeInfo[] genericMethodArguments
+        )
         {
             _genericTypeArguments = genericTypeArguments;
             _genericMethodArguments = genericMethodArguments;
@@ -23,18 +26,12 @@ namespace System.Reflection.Runtime.General
 
         internal RuntimeTypeInfo[] GenericTypeArguments
         {
-            get
-            {
-                return _genericTypeArguments;
-            }
+            get { return _genericTypeArguments; }
         }
 
         internal RuntimeTypeInfo[] GenericMethodArguments
         {
-            get
-            {
-                return _genericMethodArguments;
-            }
+            get { return _genericMethodArguments; }
         }
 
         private readonly RuntimeTypeInfo[] _genericTypeArguments;

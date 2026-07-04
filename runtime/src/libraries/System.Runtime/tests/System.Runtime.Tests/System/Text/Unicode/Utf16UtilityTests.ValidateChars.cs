@@ -13,8 +13,14 @@ namespace System.Text.Unicode.Tests
 {
     public class Utf16UtilityTests
     {
-        private unsafe delegate char* GetPointerToFirstInvalidCharDel(char* pInputBuffer, int inputLength, out long utf8CodeUnitCountAdjustment, out int scalarCountAdjustment);
-        private static readonly Lazy<GetPointerToFirstInvalidCharDel> _getPointerToFirstInvalidCharFn = CreateGetPointerToFirstInvalidCharFn();
+        private unsafe delegate char* GetPointerToFirstInvalidCharDel(
+            char* pInputBuffer,
+            int inputLength,
+            out long utf8CodeUnitCountAdjustment,
+            out int scalarCountAdjustment
+        );
+        private static readonly Lazy<GetPointerToFirstInvalidCharDel> _getPointerToFirstInvalidCharFn =
+            CreateGetPointerToFirstInvalidCharFn();
 
         [Theory]
         [InlineData("", 0, 0)] // empty string is OK
@@ -28,9 +34,19 @@ namespace System.Text.Unicode.Tests
         [InlineData("<GRIN>", 1, 4)]
         [InlineData("X<GRIN>Z", 3, 6)]
         [InlineData("X<0000>Z", 3, 3)] // null chars are allowed
-        public void GetIndexOfFirstInvalidUtf16Sequence_WithSmallValidBuffers(string unprocessedInput, int expectedRuneCount, int expectedUtf8ByteCount)
+        public void GetIndexOfFirstInvalidUtf16Sequence_WithSmallValidBuffers(
+            string unprocessedInput,
+            int expectedRuneCount,
+            int expectedUtf8ByteCount
+        )
         {
-            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(unprocessedInput, -1 /* expectedIdxOfFirstInvalidChar */, expectedRuneCount, expectedUtf8ByteCount);
+            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(
+                unprocessedInput,
+                -1 /* expectedIdxOfFirstInvalidChar */
+                ,
+                expectedRuneCount,
+                expectedUtf8ByteCount
+            );
         }
 
         [Theory]
@@ -46,9 +62,19 @@ namespace System.Text.Unicode.Tests
         [InlineData("<GRIN><DC00><DC00>", 2, 1, 4)] // standalone low surrogate (preceded by a valid surrogate pair)
         [InlineData("<GRIN><DC00><D800>", 2, 1, 4)] // standalone low surrogate (preceded by a valid surrogate pair)
         [InlineData("<GRIN><0000><DC00><D800>", 3, 2, 5)] // standalone low surrogate (preceded by a valid null char)
-        public void GetIndexOfFirstInvalidUtf16Sequence_WithSmallInvalidBuffers(string unprocessedInput, int idxOfFirstInvalidChar, int expectedRuneCount, int expectedUtf8ByteCount)
+        public void GetIndexOfFirstInvalidUtf16Sequence_WithSmallInvalidBuffers(
+            string unprocessedInput,
+            int idxOfFirstInvalidChar,
+            int expectedRuneCount,
+            int expectedUtf8ByteCount
+        )
         {
-            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(unprocessedInput, idxOfFirstInvalidChar, expectedRuneCount, expectedUtf8ByteCount);
+            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(
+                unprocessedInput,
+                idxOfFirstInvalidChar,
+                expectedRuneCount,
+                expectedUtf8ByteCount
+            );
         }
 
         [Theory] // chars below presented as hex since Xunit doesn't like invalid UTF-16 string literals
@@ -57,9 +83,19 @@ namespace System.Text.Unicode.Tests
         [InlineData("<F1AF><8BD3><5037><BE29><DEFF><3E3A><DD71><6336>", 4, 4, 12)]
         [InlineData("<B978><0F25><DC23><D3BB><7352><4025><0B93><4107>", 2, 2, 6)]
         [InlineData("<887C><C980><012C><4797><DD5A><41D0><A104><5464>", 4, 4, 11)]
-        public void GetIndexOfFirstInvalidUtf16Sequence_WithEightRandomCharsContainingUnpairedSurrogates(string unprocessedInput, int idxOfFirstInvalidChar, int expectedRuneCount, int expectedUtf8ByteCount)
+        public void GetIndexOfFirstInvalidUtf16Sequence_WithEightRandomCharsContainingUnpairedSurrogates(
+            string unprocessedInput,
+            int idxOfFirstInvalidChar,
+            int expectedRuneCount,
+            int expectedUtf8ByteCount
+        )
         {
-            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(unprocessedInput, idxOfFirstInvalidChar, expectedRuneCount, expectedUtf8ByteCount);
+            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(
+                unprocessedInput,
+                idxOfFirstInvalidChar,
+                expectedRuneCount,
+                expectedUtf8ByteCount
+            );
         }
 
         [Fact]
@@ -68,32 +104,62 @@ namespace System.Text.Unicode.Tests
             // All ASCII
 
             char[] chars = Enumerable.Repeat('x', 128).ToArray();
-            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(chars, -1, expectedRuneCount: 128, expectedUtf8ByteCount: 128);
+            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(
+                chars,
+                -1,
+                expectedRuneCount: 128,
+                expectedUtf8ByteCount: 128
+            );
 
             // Throw a surrogate pair at the beginning
 
             chars[0] = '\uD800';
             chars[1] = '\uDFFF';
-            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(chars, -1, expectedRuneCount: 127, expectedUtf8ByteCount: 130);
+            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(
+                chars,
+                -1,
+                expectedRuneCount: 127,
+                expectedUtf8ByteCount: 130
+            );
 
             // Throw a surrogate pair near the end
 
             chars[124] = '\uD800';
             chars[125] = '\uDFFF';
-            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(chars, -1, expectedRuneCount: 126, expectedUtf8ByteCount: 132);
+            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(
+                chars,
+                -1,
+                expectedRuneCount: 126,
+                expectedUtf8ByteCount: 132
+            );
 
             // Throw a standalone surrogate code point at the *very* end
 
             chars[127] = '\uD800'; // high surrogate
-            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(chars, 127, expectedRuneCount: 125, expectedUtf8ByteCount: 131);
+            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(
+                chars,
+                127,
+                expectedRuneCount: 125,
+                expectedUtf8ByteCount: 131
+            );
 
             chars[127] = '\uDFFF'; // low surrogate
-            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(chars, 127, expectedRuneCount: 125, expectedUtf8ByteCount: 131);
+            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(
+                chars,
+                127,
+                expectedRuneCount: 125,
+                expectedUtf8ByteCount: 131
+            );
 
             // Make the final surrogate pair valid
 
             chars[126] = '\uD800'; // high surrogate
-            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(chars, -1, expectedRuneCount: 125, expectedUtf8ByteCount: 134);
+            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(
+                chars,
+                -1,
+                expectedRuneCount: 125,
+                expectedUtf8ByteCount: 134
+            );
 
             // Throw an invalid surrogate sequence in the middle (straddles a vector boundary)
 
@@ -102,18 +168,33 @@ namespace System.Text.Unicode.Tests
             chars[14] = '\uD800'; // high surrogate
             chars[15] = '\uDFFF'; // low surrogate
             chars[16] = '\uDFFF'; // low surrogate
-            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(chars, 13, expectedRuneCount: 12, expectedUtf8ByteCount: 16);
+            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(
+                chars,
+                13,
+                expectedRuneCount: 12,
+                expectedUtf8ByteCount: 16
+            );
 
             // Correct the surrogate sequence we just added
 
             chars[14] = '\uDC00'; // low surrogate
             chars[15] = '\uDBFF'; // high surrogate
-            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(chars, -1, expectedRuneCount: 123, expectedUtf8ByteCount: 139);
+            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(
+                chars,
+                -1,
+                expectedRuneCount: 123,
+                expectedUtf8ByteCount: 139
+            );
 
             // Corrupt the surrogate pair that's split across a vector boundary
 
             chars[16] = 'x'; // ASCII char (remember.. chars[15] is a high surrogate char)
-            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(chars, 15, expectedRuneCount: 13, expectedUtf8ByteCount: 20);
+            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(
+                chars,
+                15,
+                expectedRuneCount: 13,
+                expectedUtf8ByteCount: 20
+            );
         }
 
         [Fact]
@@ -134,17 +215,32 @@ namespace System.Text.Unicode.Tests
             for (int i = 0; i <= Vector<ushort>.Count; i++)
             {
                 // Expect all ASCII chars to be consumed, low surrogate char to be marked invalid.
-                GetIndexOfFirstInvalidUtf16Sequence_Test_Core(chars[(Vector<ushort>.Count - i)..], i, i, i);
+                GetIndexOfFirstInvalidUtf16Sequence_Test_Core(
+                    chars[(Vector<ushort>.Count - i)..],
+                    i,
+                    i,
+                    i
+                );
             }
         }
 
-        private static void GetIndexOfFirstInvalidUtf16Sequence_Test_Core(string unprocessedInput, int expectedIdxOfFirstInvalidChar, int expectedRuneCount, long expectedUtf8ByteCount)
+        private static void GetIndexOfFirstInvalidUtf16Sequence_Test_Core(
+            string unprocessedInput,
+            int expectedIdxOfFirstInvalidChar,
+            int expectedRuneCount,
+            long expectedUtf8ByteCount
+        )
         {
             char[] processedInput = ProcessInput(unprocessedInput).ToCharArray();
 
             // Run the test normally
 
-            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(processedInput, expectedIdxOfFirstInvalidChar, expectedRuneCount, expectedUtf8ByteCount);
+            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(
+                processedInput,
+                expectedIdxOfFirstInvalidChar,
+                expectedRuneCount,
+                expectedUtf8ByteCount
+            );
 
             // Put a bunch of ASCII data at the beginning (to test the call to ASCIIUtility at method entry)
 
@@ -157,7 +253,12 @@ namespace System.Text.Unicode.Tests
             expectedRuneCount += 128;
             expectedUtf8ByteCount += 128;
 
-            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(processedInput, expectedIdxOfFirstInvalidChar, expectedRuneCount, expectedUtf8ByteCount);
+            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(
+                processedInput,
+                expectedIdxOfFirstInvalidChar,
+                expectedRuneCount,
+                expectedUtf8ByteCount
+            );
 
             // Change the first few chars to a mixture of 2-byte and 3-byte UTF-8 sequences
             // This makes sure the vectorized code paths can properly handle these.
@@ -173,7 +274,12 @@ namespace System.Text.Unicode.Tests
 
             expectedUtf8ByteCount += 12;
 
-            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(processedInput, expectedIdxOfFirstInvalidChar, expectedRuneCount, expectedUtf8ByteCount);
+            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(
+                processedInput,
+                expectedIdxOfFirstInvalidChar,
+                expectedRuneCount,
+                expectedUtf8ByteCount
+            );
 
             // Throw some surrogate pairs into the mix to make sure they're also handled properly
             // by the vectorized code paths.
@@ -190,7 +296,12 @@ namespace System.Text.Unicode.Tests
             expectedRuneCount--;
             expectedUtf8ByteCount += 9;
 
-            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(processedInput, expectedIdxOfFirstInvalidChar, expectedRuneCount, expectedUtf8ByteCount);
+            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(
+                processedInput,
+                expectedIdxOfFirstInvalidChar,
+                expectedRuneCount,
+                expectedUtf8ByteCount
+            );
 
             // Split the next surrogate pair across the vector boundary (so that we
             // don't inadvertently treat this as a standalone surrogate sequence).
@@ -201,10 +312,20 @@ namespace System.Text.Unicode.Tests
             expectedRuneCount--;
             expectedUtf8ByteCount += 2;
 
-            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(processedInput, expectedIdxOfFirstInvalidChar, expectedRuneCount, expectedUtf8ByteCount);
+            GetIndexOfFirstInvalidUtf16Sequence_Test_Core(
+                processedInput,
+                expectedIdxOfFirstInvalidChar,
+                expectedRuneCount,
+                expectedUtf8ByteCount
+            );
         }
 
-        private static unsafe void GetIndexOfFirstInvalidUtf16Sequence_Test_Core(char[] input, int expectedRetVal, int expectedRuneCount, long expectedUtf8ByteCount)
+        private static unsafe void GetIndexOfFirstInvalidUtf16Sequence_Test_Core(
+            char[] input,
+            int expectedRetVal,
+            int expectedRuneCount,
+            long expectedUtf8ByteCount
+        )
         {
             // Arrange
 
@@ -219,13 +340,27 @@ namespace System.Text.Unicode.Tests
 
             fixed (char* pInputBuffer = &MemoryMarshal.GetReference(boundedMemory.Span))
             {
-                char* pFirstInvalidChar = _getPointerToFirstInvalidCharFn.Value(pInputBuffer, input.Length, out long utf8CodeUnitCountAdjustment, out int scalarCountAdjustment);
+                char* pFirstInvalidChar = _getPointerToFirstInvalidCharFn.Value(
+                    pInputBuffer,
+                    input.Length,
+                    out long utf8CodeUnitCountAdjustment,
+                    out int scalarCountAdjustment
+                );
 
                 long ptrDiff = pFirstInvalidChar - pInputBuffer;
-                Assert.True((ulong)ptrDiff <= (uint)input.Length, "ptrDiff was outside expected range.");
+                Assert.True(
+                    (ulong)ptrDiff <= (uint)input.Length,
+                    "ptrDiff was outside expected range."
+                );
 
-                Assert.True(utf8CodeUnitCountAdjustment >= 0, "UTF-16 code unit count adjustment must be non-negative.");
-                Assert.True(scalarCountAdjustment <= 0, "Scalar count adjustment must be 0 or negative.");
+                Assert.True(
+                    utf8CodeUnitCountAdjustment >= 0,
+                    "UTF-16 code unit count adjustment must be non-negative."
+                );
+                Assert.True(
+                    scalarCountAdjustment <= 0,
+                    "Scalar count adjustment must be 0 or negative."
+                );
 
                 actualRetVal = (ptrDiff == input.Length) ? -1 : (int)ptrDiff;
 
@@ -248,21 +383,31 @@ namespace System.Text.Unicode.Tests
         {
             return new Lazy<GetPointerToFirstInvalidCharDel>(() =>
             {
-                Type utf16UtilityType = Type.GetType("System.Text.Unicode.Utf16Utility, System.Private.CoreLib");
+                Type utf16UtilityType = Type.GetType(
+                    "System.Text.Unicode.Utf16Utility, System.Private.CoreLib"
+                );
 
                 if (utf16UtilityType is null)
                 {
-                    throw new Exception("Couldn't find Utf16Utility type in System.Private.CoreLib.");
+                    throw new Exception(
+                        "Couldn't find Utf16Utility type in System.Private.CoreLib."
+                    );
                 }
 
-                MethodInfo methodInfo = utf16UtilityType.GetMethod("GetPointerToFirstInvalidChar", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+                MethodInfo methodInfo = utf16UtilityType.GetMethod(
+                    "GetPointerToFirstInvalidChar",
+                    BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic
+                );
 
                 if (methodInfo is null)
                 {
-                    throw new Exception("Couldn't find GetPointerToFirstInvalidChar method on Utf8Utility.");
+                    throw new Exception(
+                        "Couldn't find GetPointerToFirstInvalidChar method on Utf8Utility."
+                    );
                 }
 
-                return (GetPointerToFirstInvalidCharDel)methodInfo.CreateDelegate(typeof(GetPointerToFirstInvalidCharDel));
+                return (GetPointerToFirstInvalidCharDel)
+                    methodInfo.CreateDelegate(typeof(GetPointerToFirstInvalidCharDel));
             });
         }
 
@@ -279,7 +424,15 @@ namespace System.Text.Unicode.Tests
             int idx;
             while ((idx = input.IndexOf('<')) >= 0)
             {
-                input = input[..idx] + (char)ushort.Parse(input.Substring(idx + 1, 4), NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture) + input[(idx + 6)..];
+                input =
+                    input[..idx]
+                    + (char)
+                        ushort.Parse(
+                            input.Substring(idx + 1, 4),
+                            NumberStyles.AllowHexSpecifier,
+                            CultureInfo.InvariantCulture
+                        )
+                    + input[(idx + 6)..];
             }
 
             return input;

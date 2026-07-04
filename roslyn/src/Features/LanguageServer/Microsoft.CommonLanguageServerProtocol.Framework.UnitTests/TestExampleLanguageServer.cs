@@ -6,12 +6,12 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.CommonLanguageServerProtocol.Framework.Example;
 using Microsoft.CommonLanguageServerProtocol.Framework;
+using Microsoft.CommonLanguageServerProtocol.Framework.Example;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Nerdbank.Streams;
 using StreamJsonRpc;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.CommonLanguageServerProtocol.Framework.UnitTests;
 
@@ -19,9 +19,21 @@ internal class TestExampleLanguageServer : ExampleLanguageServer
 {
     private readonly JsonRpc _clientRpc;
 
-    public TestExampleLanguageServer(Stream clientSteam, JsonRpc jsonRpc, ILspLogger logger, Action<IServiceCollection>? addExtraHandlers) : base(jsonRpc, logger, addExtraHandlers)
+    public TestExampleLanguageServer(
+        Stream clientSteam,
+        JsonRpc jsonRpc,
+        ILspLogger logger,
+        Action<IServiceCollection>? addExtraHandlers
+    )
+        : base(jsonRpc, logger, addExtraHandlers)
     {
-        _clientRpc = new JsonRpc(new HeaderDelimitedMessageHandler(clientSteam, clientSteam, CreateJsonMessageFormatter()))
+        _clientRpc = new JsonRpc(
+            new HeaderDelimitedMessageHandler(
+                clientSteam,
+                clientSteam,
+                CreateJsonMessageFormatter()
+            )
+        )
         {
             ExceptionStrategy = ExceptionProcessing.ISerializable,
         };
@@ -32,9 +44,17 @@ internal class TestExampleLanguageServer : ExampleLanguageServer
         Initialize();
     }
 
-    public async Task<TResponse> ExecuteRequestAsync<TRequest, TResponse>(string methodName, TRequest request, CancellationToken cancellationToken)
+    public async Task<TResponse> ExecuteRequestAsync<TRequest, TResponse>(
+        string methodName,
+        TRequest request,
+        CancellationToken cancellationToken
+    )
     {
-        var result = await _clientRpc.InvokeWithParameterObjectAsync<TResponse>(methodName, request, cancellationToken);
+        var result = await _clientRpc.InvokeWithParameterObjectAsync<TResponse>(
+            methodName,
+            request,
+            cancellationToken
+        );
 
         return result;
     }
@@ -54,7 +74,10 @@ internal class TestExampleLanguageServer : ExampleLanguageServer
         private readonly TaskCompletionSource<int> _shuttingDownSource;
         private readonly TaskCompletionSource<int> _exitingSource;
 
-        public TestLifeCycleManager(TaskCompletionSource<int> shuttingDownSource, TaskCompletionSource<int> exitingSource)
+        public TestLifeCycleManager(
+            TaskCompletionSource<int> shuttingDownSource,
+            TaskCompletionSource<int> exitingSource
+        )
         {
             _shuttingDownSource = shuttingDownSource;
             _exitingSource = exitingSource;
@@ -112,12 +135,18 @@ internal class TestExampleLanguageServer : ExampleLanguageServer
     {
         var (clientStream, serverStream) = FullDuplexStream.CreatePair();
 
-        var jsonRpc = new JsonRpc(new HeaderDelimitedMessageHandler(serverStream, serverStream, CreateJsonMessageFormatter()));
+        var jsonRpc = new JsonRpc(
+            new HeaderDelimitedMessageHandler(
+                serverStream,
+                serverStream,
+                CreateJsonMessageFormatter()
+            )
+        );
 
         var extraHandlers = (IServiceCollection serviceCollection) =>
-            {
-                serviceCollection.AddSingleton<IMethodHandler, ExtraDidOpenHandler>();
-            };
+        {
+            serviceCollection.AddSingleton<IMethodHandler, ExtraDidOpenHandler>();
+        };
 
         var server = new TestExampleLanguageServer(clientStream, jsonRpc, logger, extraHandlers);
 
@@ -130,9 +159,20 @@ internal class TestExampleLanguageServer : ExampleLanguageServer
     {
         var (clientStream, serverStream) = FullDuplexStream.CreatePair();
 
-        var jsonRpc = new JsonRpc(new HeaderDelimitedMessageHandler(serverStream, serverStream, CreateJsonMessageFormatter()));
+        var jsonRpc = new JsonRpc(
+            new HeaderDelimitedMessageHandler(
+                serverStream,
+                serverStream,
+                CreateJsonMessageFormatter()
+            )
+        );
 
-        var server = new TestExampleLanguageServer(clientStream, jsonRpc, logger, addExtraHandlers: null);
+        var server = new TestExampleLanguageServer(
+            clientStream,
+            jsonRpc,
+            logger,
+            addExtraHandlers: null
+        );
 
         jsonRpc.StartListening();
         server.InitializeTest();
@@ -146,27 +186,33 @@ internal class TestExampleLanguageServer : ExampleLanguageServer
 
     internal async Task<InitializeResult> InitializeServerAsync()
     {
-        var request = new InitializeParams
-        {
-            Capabilities = new ClientCapabilities
-            {
+        var request = new InitializeParams { Capabilities = new ClientCapabilities { } };
 
-            },
-        };
-
-        var result = await ExecuteRequestAsync<InitializeParams, InitializeResult>(Methods.InitializeName, request, CancellationToken.None);
+        var result = await ExecuteRequestAsync<InitializeParams, InitializeResult>(
+            Methods.InitializeName,
+            request,
+            CancellationToken.None
+        );
 
         return result;
     }
 }
 
 [LanguageServerEndpoint(Methods.TextDocumentDidOpenName)]
-public class ExtraDidOpenHandler :
-    IRequestHandler<DidOpenTextDocumentParams, SemanticTokensDeltaPartialResult, ExampleRequestContext>
+public class ExtraDidOpenHandler
+    : IRequestHandler<
+        DidOpenTextDocumentParams,
+        SemanticTokensDeltaPartialResult,
+        ExampleRequestContext
+    >
 {
     public bool MutatesSolutionState => throw new System.NotImplementedException();
 
-    public Task<SemanticTokensDeltaPartialResult> HandleRequestAsync(DidOpenTextDocumentParams request, ExampleRequestContext context, CancellationToken cancellationToken)
+    public Task<SemanticTokensDeltaPartialResult> HandleRequestAsync(
+        DidOpenTextDocumentParams request,
+        ExampleRequestContext context,
+        CancellationToken cancellationToken
+    )
     {
         throw new System.NotImplementedException();
     }

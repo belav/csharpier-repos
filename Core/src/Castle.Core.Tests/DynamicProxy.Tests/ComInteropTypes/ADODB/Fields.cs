@@ -14,13 +14,15 @@
 
 namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
 {
-	using System.Runtime.InteropServices;
+    using System.Runtime.InteropServices;
 
-	[ComImport]
-	[Guid("00000564-0000-0010-8000-00aa006d2ea4")]
-	[TypeLibType(TypeLibTypeFlags.FDispatchable | TypeLibTypeFlags.FDual | TypeLibTypeFlags.FNonExtensible)]
-	public interface Fields // : (inherited interfaces omitted)
-	{
-		// (member definitions omitted)
-	}
+    [ComImport]
+    [Guid("00000564-0000-0010-8000-00aa006d2ea4")]
+    [TypeLibType(
+        TypeLibTypeFlags.FDispatchable | TypeLibTypeFlags.FDual | TypeLibTypeFlags.FNonExtensible
+    )]
+    public interface Fields // : (inherited interfaces omitted)
+    {
+        // (member definitions omitted)
+    }
 }

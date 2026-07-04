@@ -94,32 +94,75 @@ namespace ILCompiler
 
         // The event IDs here must not collide with the ones used by DependencyAnalysis' PerfEventSource
         [Event(1, Level = EventLevel.Informational)]
-        private void LoadingStart() { WriteEvent(1); }
+        private void LoadingStart()
+        {
+            WriteEvent(1);
+        }
+
         [Event(2, Level = EventLevel.Informational)]
-        private void LoadingStop() { WriteEvent(2); }
+        private void LoadingStop()
+        {
+            WriteEvent(2);
+        }
 
         [Event(3, Level = EventLevel.Informational)]
-        private void EmittingStart() { WriteEvent(3); }
+        private void EmittingStart()
+        {
+            WriteEvent(3);
+        }
+
         [Event(4, Level = EventLevel.Informational)]
-        private void EmittingStop() { WriteEvent(4); }
+        private void EmittingStop()
+        {
+            WriteEvent(4);
+        }
 
         [Event(5, Level = EventLevel.Informational)]
-        private void CompilationStart() { WriteEvent(5); }
+        private void CompilationStart()
+        {
+            WriteEvent(5);
+        }
+
         [Event(6, Level = EventLevel.Informational)]
-        private void CompilationStop() { WriteEvent(6); }
+        private void CompilationStop()
+        {
+            WriteEvent(6);
+        }
 
         [Event(7, Level = EventLevel.Informational)]
-        private void JitStart() { WriteEvent(7); }
+        private void JitStart()
+        {
+            WriteEvent(7);
+        }
+
         [Event(8, Level = EventLevel.Informational)]
-        private void JitStop() { WriteEvent(8); }
+        private void JitStop()
+        {
+            WriteEvent(8);
+        }
 
         [Event(9, Level = EventLevel.Informational)]
-        private void JitMethodStart() { WriteEvent(9); }
+        private void JitMethodStart()
+        {
+            WriteEvent(9);
+        }
+
         [Event(10, Level = EventLevel.Informational)]
-        private void JitMethodStop() { WriteEvent(10); }
+        private void JitMethodStop()
+        {
+            WriteEvent(10);
+        }
+
         [Event(11, Level = EventLevel.Informational)]
-        private void CommandLineProcessingStart() { WriteEvent(11); }
+        private void CommandLineProcessingStart()
+        {
+            WriteEvent(11);
+        }
+
         [Event(12, Level = EventLevel.Informational)]
-        private void CommandLineProcessingStop() { WriteEvent(12); }
+        private void CommandLineProcessingStop()
+        {
+            WriteEvent(12);
+        }
     }
 }

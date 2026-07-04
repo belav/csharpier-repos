@@ -12,7 +12,7 @@ namespace System.Net
         // it), in which case the implementation will set all of the members to be non-null.  Thus, the
         // intent is that these be non-nullable.  Ideally the type would have been designed originally with
         // its ctor being internal-only.
-        #pragma warning disable CS8618
+#pragma warning disable CS8618
 
         /// <summary>Gets or sets the DNS name of the host.</summary>
         public string HostName { get; set; }

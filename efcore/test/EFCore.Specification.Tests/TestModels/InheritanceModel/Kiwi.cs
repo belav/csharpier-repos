@@ -11,7 +11,7 @@ public class Kiwi : Bird
 public enum Island : byte
 {
     North,
-    South
+    South,
 }
 
 public class KiwiQuery : BirdQuery

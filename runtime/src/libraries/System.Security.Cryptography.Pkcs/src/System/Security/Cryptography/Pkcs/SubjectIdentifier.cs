@@ -4,9 +4,7 @@
 using System.Diagnostics;
 using System.Security.Cryptography.Pkcs.Asn1;
 using System.Security.Cryptography.X509Certificates;
-
 using Internal.Cryptography;
-
 using X509IssuerSerial = System.Security.Cryptography.Xml.X509IssuerSerial;
 
 namespace System.Security.Cryptography.Pkcs
@@ -14,8 +12,9 @@ namespace System.Security.Cryptography.Pkcs
     public sealed class SubjectIdentifier
     {
         private const string DummySignerSubjectName = "CN=Dummy Signer";
-        internal static readonly byte[] DummySignerEncodedValue =
-            new X500DistinguishedName(DummySignerSubjectName).RawData;
+        internal static readonly byte[] DummySignerEncodedValue = new X500DistinguishedName(
+            DummySignerSubjectName
+        ).RawData;
 
         internal SubjectIdentifier(SubjectIdentifierType type, object value)
         {
@@ -41,14 +40,15 @@ namespace System.Security.Cryptography.Pkcs
         }
 
         internal SubjectIdentifier(SignerIdentifierAsn signerIdentifierAsn)
-            : this(signerIdentifierAsn.IssuerAndSerialNumber, signerIdentifierAsn.SubjectKeyIdentifier)
-        {
-
-        }
+            : this(
+                signerIdentifierAsn.IssuerAndSerialNumber,
+                signerIdentifierAsn.SubjectKeyIdentifier
+            ) { }
 
         internal SubjectIdentifier(
             IssuerAndSerialNumberAsn? issuerAndSerialNumber,
-            ReadOnlyMemory<byte>? subjectKeyIdentifier)
+            ReadOnlyMemory<byte>? subjectKeyIdentifier
+        )
         {
             if (issuerAndSerialNumber.HasValue)
             {
@@ -68,8 +68,7 @@ namespace System.Security.Cryptography.Pkcs
 
                 // If the serial number is zero and the subject is exactly "CN=Dummy Signer"
                 // then this is the special "NoSignature" signer.
-                if (!nonZero &&
-                    DummySignerEncodedValue.AsSpan().SequenceEqual(issuerNameSpan))
+                if (!nonZero && DummySignerEncodedValue.AsSpan().SequenceEqual(issuerNameSpan))
                 {
                     Type = SubjectIdentifierType.NoSignature;
                     Value = null;
@@ -102,23 +101,24 @@ namespace System.Security.Cryptography.Pkcs
             switch (Type)
             {
                 case SubjectIdentifierType.IssuerAndSerialNumber:
-                    {
-                        X509IssuerSerial issuerSerial = (X509IssuerSerial)Value!;
-                        byte[] serialNumber = issuerSerial.SerialNumber.ToSerialBytes();
-                        string issuer = issuerSerial.IssuerName;
-                        byte[] certSerialNumber = certificate.GetSerialNumber();
+                {
+                    X509IssuerSerial issuerSerial = (X509IssuerSerial)Value!;
+                    byte[] serialNumber = issuerSerial.SerialNumber.ToSerialBytes();
+                    string issuer = issuerSerial.IssuerName;
+                    byte[] certSerialNumber = certificate.GetSerialNumber();
 
-                        return PkcsHelpers.AreByteArraysEqual(certSerialNumber, serialNumber) && certificate.Issuer == issuer;
-                    }
+                    return PkcsHelpers.AreByteArraysEqual(certSerialNumber, serialNumber)
+                        && certificate.Issuer == issuer;
+                }
 
                 case SubjectIdentifierType.SubjectKeyIdentifier:
-                    {
-                        string skiString = (string)Value!;
-                        byte[] ski = skiString.ToSkiBytes();
-                        byte[] candidateSki = PkcsPal.Instance.GetSubjectKeyIdentifier(certificate);
+                {
+                    string skiString = (string)Value!;
+                    byte[] ski = skiString.ToSkiBytes();
+                    byte[] candidateSki = PkcsPal.Instance.GetSubjectKeyIdentifier(certificate);
 
-                        return PkcsHelpers.AreByteArraysEqual(ski, candidateSki);
-                    }
+                    return PkcsHelpers.AreByteArraysEqual(ski, candidateSki);
+                }
 
                 default:
                     // SubjectIdentifier can only be created by this package so if this an invalid type, it's the package's fault.
@@ -146,12 +146,12 @@ namespace System.Security.Cryptography.Pkcs
             switch (Type)
             {
                 case SubjectIdentifierType.IssuerAndSerialNumber:
-                    {
-                        X509IssuerSerial currentIssuerSerial = (X509IssuerSerial)currentId.Value!;
+                {
+                    X509IssuerSerial currentIssuerSerial = (X509IssuerSerial)currentId.Value!;
 
-                        return currentIssuerSerial.IssuerName == issuerSerial.IssuerName &&
-                            currentIssuerSerial.SerialNumber == issuerSerial.SerialNumber;
-                    }
+                    return currentIssuerSerial.IssuerName == issuerSerial.IssuerName
+                        && currentIssuerSerial.SerialNumber == issuerSerial.SerialNumber;
+                }
                 case SubjectIdentifierType.SubjectKeyIdentifier:
                     return (string)Value! == (string)currentId.Value!;
                 case SubjectIdentifierType.NoSignature:

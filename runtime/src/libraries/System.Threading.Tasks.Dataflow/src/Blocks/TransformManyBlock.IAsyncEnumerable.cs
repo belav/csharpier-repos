@@ -15,10 +15,8 @@ namespace System.Threading.Tasks.Dataflow
         /// will be made available as output from this <see cref="TransformManyBlock{TInput,TOutput}"/>.
         /// </param>
         /// <exception cref="ArgumentNullException">The <paramref name="transform"/> is <see langword="null" />.</exception>
-        public TransformManyBlock(Func<TInput, IAsyncEnumerable<TOutput>> transform) :
-            this(transform, ExecutionDataflowBlockOptions.Default)
-        {
-        }
+        public TransformManyBlock(Func<TInput, IAsyncEnumerable<TOutput>> transform)
+            : this(transform, ExecutionDataflowBlockOptions.Default) { }
 
         /// <summary>Initializes the <see cref="TransformManyBlock{TInput,TOutput}"/> with the specified function and <see cref="ExecutionDataflowBlockOptions"/>.</summary>
         /// <param name="transform">
@@ -27,22 +25,37 @@ namespace System.Threading.Tasks.Dataflow
         /// </param>
         /// <param name="dataflowBlockOptions">The options with which to configure this <see cref="TransformManyBlock{TInput,TOutput}"/>.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="transform"/> or <paramref name="dataflowBlockOptions"/> is <see langword="null" />.</exception>
-        public TransformManyBlock(Func<TInput, IAsyncEnumerable<TOutput>> transform, ExecutionDataflowBlockOptions dataflowBlockOptions)
+        public TransformManyBlock(
+            Func<TInput, IAsyncEnumerable<TOutput>> transform,
+            ExecutionDataflowBlockOptions dataflowBlockOptions
+        )
         {
             if (transform is null)
             {
                 throw new ArgumentNullException(nameof(transform));
             }
 
-            Initialize(messageWithId =>
-            {
-                Task t = ProcessMessageAsync(transform, messageWithId);
+            Initialize(
+                messageWithId =>
+                {
+                    Task t = ProcessMessageAsync(transform, messageWithId);
 #if DEBUG
-                // Task returned from ProcessMessageAsync is explicitly ignored.
-                // That function handles all exceptions.
-                t.ContinueWith(static t => Debug.Assert(t.IsCompletedSuccessfully), CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+                    // Task returned from ProcessMessageAsync is explicitly ignored.
+                    // That function handles all exceptions.
+                    t.ContinueWith(
+                        static t => Debug.Assert(t.IsCompletedSuccessfully),
+                        CancellationToken.None,
+                        TaskContinuationOptions.ExecuteSynchronously,
+                        TaskScheduler.Default
+                    );
 #endif
-            }, dataflowBlockOptions, ref _source, ref _target, ref _reorderingBuffer, TargetCoreOptions.UsesAsyncCompletion);
+                },
+                dataflowBlockOptions,
+                ref _source,
+                ref _target,
+                ref _reorderingBuffer,
+                TargetCoreOptions.UsesAsyncCompletion
+            );
         }
 
         // Note:
@@ -54,7 +67,10 @@ namespace System.Threading.Tasks.Dataflow
         /// <summary>Processes the message with a user-provided transform function that returns an async enumerable.</summary>
         /// <param name="transformFunction">The transform function to use to process the message.</param>
         /// <param name="messageWithId">The message to be processed.</param>
-        private async Task ProcessMessageAsync(Func<TInput, IAsyncEnumerable<TOutput>> transformFunction, KeyValuePair<TInput, long> messageWithId)
+        private async Task ProcessMessageAsync(
+            Func<TInput, IAsyncEnumerable<TOutput>> transformFunction,
+            KeyValuePair<TInput, long> messageWithId
+        )
         {
             try
             {
@@ -72,7 +88,12 @@ namespace System.Threading.Tasks.Dataflow
                     // and signaling completion, as the exception is part of the operation, and the completion
                     // conditions depend on this.
                     Common.StoreDataflowMessageValueIntoExceptionData(exc, messageWithId.Key);
-                    _target.Complete(exc, dropPendingMessages: true, storeExceptionEvenIfAlreadyCompleting: true, unwrapInnerExceptions: false);
+                    _target.Complete(
+                        exc,
+                        dropPendingMessages: true,
+                        storeExceptionEvenIfAlreadyCompleting: true,
+                        unwrapInnerExceptions: false
+                    );
                 }
             }
             finally
@@ -89,18 +110,22 @@ namespace System.Threading.Tasks.Dataflow
         /// <param name="messageWithId">The message with id.</param>
         /// <param name="outputItems">The output items to be persisted.</param>
         private async Task StoreOutputItemsAsync(
-            KeyValuePair<TInput, long> messageWithId, IAsyncEnumerable<TOutput>? outputItems)
+            KeyValuePair<TInput, long> messageWithId,
+            IAsyncEnumerable<TOutput>? outputItems
+        )
         {
             // If there's a reordering buffer, pass the data along to it.
             // The reordering buffer will handle all details, including bounding.
             if (_reorderingBuffer is not null)
             {
-                await StoreOutputItemsReorderedAsync(messageWithId.Value, outputItems).ConfigureAwait(false);
+                await StoreOutputItemsReorderedAsync(messageWithId.Value, outputItems)
+                    .ConfigureAwait(false);
             }
             // Otherwise, output the data directly.
             else if (outputItems is not null)
             {
-                await StoreOutputItemsNonReorderedWithIterationAsync(outputItems).ConfigureAwait(false);
+                await StoreOutputItemsNonReorderedWithIterationAsync(outputItems)
+                    .ConfigureAwait(false);
             }
             else if (_target.IsBounded)
             {
@@ -120,7 +145,10 @@ namespace System.Threading.Tasks.Dataflow
         private async Task StoreOutputItemsReorderedAsync(long id, IAsyncEnumerable<TOutput>? item)
         {
             Debug.Assert(_reorderingBuffer is not null, "Expected a reordering buffer");
-            Debug.Assert(id != Common.INVALID_REORDERING_ID, "This ID should never have been handed out.");
+            Debug.Assert(
+                id != Common.INVALID_REORDERING_ID,
+                "This ID should never have been handed out."
+            );
 
             // Grab info about the transform
             TargetCore<TInput> target = _target;
@@ -146,7 +174,8 @@ namespace System.Threading.Tasks.Dataflow
                 // If this is the next item, we can output it now.
                 if (_reorderingBuffer.IsNext(id))
                 {
-                    await StoreOutputItemsNonReorderedWithIterationAsync(item).ConfigureAwait(false);
+                    await StoreOutputItemsNonReorderedWithIterationAsync(item)
+                        .ConfigureAwait(false);
                     // here itemCopy remains null, so that base.AddItem will finish our interactions with the reordering buffer
                 }
                 else
@@ -193,7 +222,9 @@ namespace System.Threading.Tasks.Dataflow
         /// This method does not go through the reordering buffer.
         /// </summary>
         /// <param name="outputItems">The untrusted enumerable.</param>
-        private async Task StoreOutputItemsNonReorderedWithIterationAsync(IAsyncEnumerable<TOutput> outputItems)
+        private async Task StoreOutputItemsNonReorderedWithIterationAsync(
+            IAsyncEnumerable<TOutput> outputItems
+        )
         {
             // The _source we're adding to isn't thread-safe, so we need to determine
             // whether we need to lock.  If the block is configured with a max degree
@@ -201,8 +232,8 @@ namespace System.Threading.Tasks.Dataflow
             // we don't need to lock.  Similarly, if there's a reordering buffer, then
             // it guarantees that we're invoked serially, and we don't need to lock.
             bool isSerial =
-                _target.DataflowBlockOptions.MaxDegreeOfParallelism == 1 ||
-                _reorderingBuffer is not null;
+                _target.DataflowBlockOptions.MaxDegreeOfParallelism == 1
+                || _reorderingBuffer is not null;
 
             // If we're bounding, we need to increment the bounded count
             // for each individual item as we enumerate it.

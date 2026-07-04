@@ -23,7 +23,6 @@ public class AndroidApkFileReplacerTask : Task
 
     public string? KeyStorePath { get; set; }
 
-
     public override bool Execute()
     {
         var apkBuilder = new ApkBuilder(Log);

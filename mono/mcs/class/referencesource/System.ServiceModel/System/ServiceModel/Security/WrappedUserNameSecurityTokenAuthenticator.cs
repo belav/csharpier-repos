@@ -26,19 +26,22 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="wrappedUserNameSecurityTokenHandler">The UserNameSecurityTokenHandler to wrap.</param>
         /// <param name="exceptionMapper">Converts token validation exceptions to SOAP faults.</param>
-        public WrappedUserNameSecurityTokenAuthenticator( 
-            UserNameSecurityTokenHandler wrappedUserNameSecurityTokenHandler, 
-            ExceptionMapper exceptionMapper )
+        public WrappedUserNameSecurityTokenAuthenticator(
+            UserNameSecurityTokenHandler wrappedUserNameSecurityTokenHandler,
+            ExceptionMapper exceptionMapper
+        )
             : base()
         {
-            if ( wrappedUserNameSecurityTokenHandler == null )
+            if (wrappedUserNameSecurityTokenHandler == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "wrappedUserNameSecurityTokenHandler" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "wrappedUserNameSecurityTokenHandler"
+                );
             }
 
-            if ( exceptionMapper == null )
+            if (exceptionMapper == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "exceptionMapper" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("exceptionMapper");
             }
 
             _wrappedUserNameSecurityTokenHandler = wrappedUserNameSecurityTokenHandler;
@@ -51,16 +54,18 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="token">Token to be validated.</param>
         /// <returns>Read-only collection of IAuthorizationPolicy</returns>
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore( SecurityToken token )
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(
+            SecurityToken token
+        )
         {
             ReadOnlyCollection<ClaimsIdentity> identities = null;
             try
             {
-                identities = _wrappedUserNameSecurityTokenHandler.ValidateToken( token );
+                identities = _wrappedUserNameSecurityTokenHandler.ValidateToken(token);
             }
-            catch ( Exception ex )
+            catch (Exception ex)
             {
-                if ( !_exceptionMapper.HandleSecurityTokenProcessingException( ex ) )
+                if (!_exceptionMapper.HandleSecurityTokenProcessingException(ex))
                 {
                     throw;
                 }
@@ -72,9 +77,20 @@ namespace System.ServiceModel.Security
             return policies.AsReadOnly();
         }
 
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateUserNamePasswordCore( string userName, string password )
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateUserNamePasswordCore(
+            string userName,
+            string password
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError( new NotImplementedException( SR.GetString( SR.ID4008, "WrappedUserNameSecurityTokenAuthenticator", "ValidateUserNamePasswordCore" ) ) );
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException(
+                    SR.GetString(
+                        SR.ID4008,
+                        "WrappedUserNameSecurityTokenAuthenticator",
+                        "ValidateUserNamePasswordCore"
+                    )
+                )
+            );
         }
     }
 }

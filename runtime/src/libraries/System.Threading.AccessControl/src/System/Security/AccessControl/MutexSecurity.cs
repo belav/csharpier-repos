@@ -35,24 +35,37 @@ namespace System.Security.AccessControl
         ReadPermissions = 0x020000,
         ChangePermissions = 0x040000,
         TakeOwnership = 0x080000,
-        Synchronize = 0x100000,  // SYNCHRONIZE
-        FullControl = 0x1F0001
+        Synchronize = 0x100000, // SYNCHRONIZE
+        FullControl = 0x1F0001,
     }
-
 
     public sealed class MutexAccessRule : AccessRule
     {
         // Constructor for creating access rules for registry objects
 
-        public MutexAccessRule(IdentityReference identity, MutexRights eventRights, AccessControlType type)
-            : this(identity, (int)eventRights, false, InheritanceFlags.None, PropagationFlags.None, type)
-        {
-        }
+        public MutexAccessRule(
+            IdentityReference identity,
+            MutexRights eventRights,
+            AccessControlType type
+        )
+            : this(
+                identity,
+                (int)eventRights,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                type
+            ) { }
 
         public MutexAccessRule(string identity, MutexRights eventRights, AccessControlType type)
-            : this(new NTAccount(identity), (int)eventRights, false, InheritanceFlags.None, PropagationFlags.None, type)
-        {
-        }
+            : this(
+                new NTAccount(identity),
+                (int)eventRights,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                type
+            ) { }
 
         //
         // Internal constructor to be called by public constructors
@@ -64,35 +77,37 @@ namespace System.Security.AccessControl
             bool isInherited,
             InheritanceFlags inheritanceFlags,
             PropagationFlags propagationFlags,
-            AccessControlType type)
-            : base(
-                identity,
-                accessMask,
-                isInherited,
-                inheritanceFlags,
-                propagationFlags,
-                type)
-        {
-        }
+            AccessControlType type
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, type) { }
 
         public MutexRights MutexRights
         {
             get { return (MutexRights)base.AccessMask; }
         }
     }
-
 
     public sealed class MutexAuditRule : AuditRule
     {
         public MutexAuditRule(IdentityReference identity, MutexRights eventRights, AuditFlags flags)
-            : this(identity, (int)eventRights, false, InheritanceFlags.None, PropagationFlags.None, flags)
-        {
-        }
+            : this(
+                identity,
+                (int)eventRights,
+                false,
+                InheritanceFlags.None,
+                PropagationFlags.None,
+                flags
+            ) { }
 
-        internal MutexAuditRule(IdentityReference identity, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AuditFlags flags)
-            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags)
-        {
-        }
+        internal MutexAuditRule(
+            IdentityReference identity,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AuditFlags flags
+        )
+            : base(identity, accessMask, isInherited, inheritanceFlags, propagationFlags, flags) { }
 
         public MutexRights MutexRights
         {
@@ -100,13 +115,10 @@ namespace System.Security.AccessControl
         }
     }
 
-
     public sealed class MutexSecurity : NativeObjectSecurity
     {
         public MutexSecurity()
-            : base(true, ResourceType.KernelObject)
-        {
-        }
+            : base(true, ResourceType.KernelObject) { }
 
         public MutexSecurity(string name, AccessControlSections includeSections)
             : base(true, ResourceType.KernelObject, name, includeSections, HandleErrorCode, null)
@@ -120,7 +132,12 @@ namespace System.Security.AccessControl
             // Let the underlying ACL API's demand unmanaged code permission.
         }
 
-        private static Exception? HandleErrorCode(int errorCode, string? name, SafeHandle? handle, object? context)
+        private static Exception? HandleErrorCode(
+            int errorCode,
+            string? name,
+            SafeHandle? handle,
+            object? context
+        )
         {
             System.Exception? exception = null;
 
@@ -130,7 +147,9 @@ namespace System.Security.AccessControl
                 case Interop.Errors.ERROR_INVALID_HANDLE:
                 case Interop.Errors.ERROR_FILE_NOT_FOUND:
                     if ((name != null) && (name.Length != 0))
-                        exception = new WaitHandleCannotBeOpenedException(SR.Format(SR.WaitHandleCannotBeOpenedException_InvalidHandle, name));
+                        exception = new WaitHandleCannotBeOpenedException(
+                            SR.Format(SR.WaitHandleCannotBeOpenedException_InvalidHandle, name)
+                        );
                     else
                         exception = new WaitHandleCannotBeOpenedException();
                     break;
@@ -139,14 +158,42 @@ namespace System.Security.AccessControl
             return exception;
         }
 
-        public override AccessRule AccessRuleFactory(IdentityReference identityReference, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AccessControlType type)
+        public override AccessRule AccessRuleFactory(
+            IdentityReference identityReference,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AccessControlType type
+        )
         {
-            return new MutexAccessRule(identityReference, accessMask, isInherited, inheritanceFlags, propagationFlags, type);
+            return new MutexAccessRule(
+                identityReference,
+                accessMask,
+                isInherited,
+                inheritanceFlags,
+                propagationFlags,
+                type
+            );
         }
 
-        public override AuditRule AuditRuleFactory(IdentityReference identityReference, int accessMask, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AuditFlags flags)
+        public override AuditRule AuditRuleFactory(
+            IdentityReference identityReference,
+            int accessMask,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AuditFlags flags
+        )
         {
-            return new MutexAuditRule(identityReference, accessMask, isInherited, inheritanceFlags, propagationFlags, flags);
+            return new MutexAuditRule(
+                identityReference,
+                accessMask,
+                isInherited,
+                inheritanceFlags,
+                propagationFlags,
+                flags
+            );
         }
 
         internal AccessControlSections GetAccessControlSectionsFromChanges()
@@ -173,7 +220,7 @@ namespace System.Security.AccessControl
             {
                 AccessControlSections persistSections = GetAccessControlSectionsFromChanges();
                 if (persistSections == AccessControlSections.None)
-                    return;  // Don't need to persist anything.
+                    return; // Don't need to persist anything.
 
                 base.Persist(handle, persistSections);
                 OwnerModified = GroupModified = AuditRulesModified = AccessRulesModified = false;

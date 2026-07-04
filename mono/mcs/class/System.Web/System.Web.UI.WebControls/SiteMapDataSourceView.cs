@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,37 +38,37 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-	public class SiteMapDataSourceView : DataSourceView
-	{
-		SiteMapNodeCollection collection;
-		
-		public SiteMapDataSourceView (SiteMapDataSource owner, string name, SiteMapNode node)
-		: this (owner, name, new SiteMapNodeCollection (node))
-		{
-		}
-		
-		public SiteMapDataSourceView (SiteMapDataSource owner, string name, SiteMapNodeCollection collection)
-		: base (owner, name)
-		{
-			this.collection = collection;
-		}
-		
-		public IEnumerable Select (DataSourceSelectArguments arguments)
-		{
-			return ExecuteSelect (arguments);
-		}
+    public class SiteMapDataSourceView : DataSourceView
+    {
+        SiteMapNodeCollection collection;
 
-		protected internal override IEnumerable ExecuteSelect (DataSourceSelectArguments arguments)
-		{
-			arguments.RaiseUnsupportedCapabilitiesError (this);
-			return collection;
-		}
+        public SiteMapDataSourceView(SiteMapDataSource owner, string name, SiteMapNode node)
+            : this(owner, name, new SiteMapNodeCollection(node)) { }
 
-		protected override void OnDataSourceViewChanged (EventArgs e)
-		{
-			base.OnDataSourceViewChanged (e);
-		}
+        public SiteMapDataSourceView(
+            SiteMapDataSource owner,
+            string name,
+            SiteMapNodeCollection collection
+        )
+            : base(owner, name)
+        {
+            this.collection = collection;
+        }
 
-	}
+        public IEnumerable Select(DataSourceSelectArguments arguments)
+        {
+            return ExecuteSelect(arguments);
+        }
+
+        protected internal override IEnumerable ExecuteSelect(DataSourceSelectArguments arguments)
+        {
+            arguments.RaiseUnsupportedCapabilitiesError(this);
+            return collection;
+        }
+
+        protected override void OnDataSourceViewChanged(EventArgs e)
+        {
+            base.OnDataSourceViewChanged(e);
+        }
+    }
 }
-

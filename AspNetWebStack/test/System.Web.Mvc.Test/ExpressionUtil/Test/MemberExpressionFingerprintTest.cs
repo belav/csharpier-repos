@@ -18,7 +18,11 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             MemberInfo expectedMember = typeof(TimeSpan).GetProperty("Seconds");
 
             // Act
-            MemberExpressionFingerprint fingerprint = new MemberExpressionFingerprint(expectedNodeType, expectedType, expectedMember);
+            MemberExpressionFingerprint fingerprint = new MemberExpressionFingerprint(
+                expectedNodeType,
+                expectedType,
+                expectedMember
+            );
 
             // Assert
             Assert.Equal(expectedNodeType, fingerprint.NodeType);
@@ -35,8 +39,16 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             MemberInfo member = typeof(TimeSpan).GetProperty("Seconds");
 
             // Act
-            MemberExpressionFingerprint fingerprint1 = new MemberExpressionFingerprint(nodeType, type, member);
-            MemberExpressionFingerprint fingerprint2 = new MemberExpressionFingerprint(nodeType, type, member);
+            MemberExpressionFingerprint fingerprint1 = new MemberExpressionFingerprint(
+                nodeType,
+                type,
+                member
+            );
+            MemberExpressionFingerprint fingerprint2 = new MemberExpressionFingerprint(
+                nodeType,
+                type,
+                member
+            );
 
             // Assert
             Assert.Equal(fingerprint1, fingerprint2);
@@ -52,8 +64,15 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             MemberInfo member = typeof(TimeSpan).GetProperty("Seconds");
 
             // Act
-            MemberExpressionFingerprint fingerprint1 = new MemberExpressionFingerprint(nodeType, type, member);
-            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(nodeType, type);
+            MemberExpressionFingerprint fingerprint1 = new MemberExpressionFingerprint(
+                nodeType,
+                type,
+                member
+            );
+            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(
+                nodeType,
+                type
+            );
 
             // Assert
             Assert.NotEqual<ExpressionFingerprint>(fingerprint1, fingerprint2);
@@ -68,8 +87,16 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             MemberInfo member = typeof(TimeSpan).GetProperty("Seconds");
 
             // Act
-            MemberExpressionFingerprint fingerprint1 = new MemberExpressionFingerprint(nodeType, type, member);
-            MemberExpressionFingerprint fingerprint2 = new MemberExpressionFingerprint(nodeType, type, null /* member */);
+            MemberExpressionFingerprint fingerprint1 = new MemberExpressionFingerprint(
+                nodeType,
+                type,
+                member
+            );
+            MemberExpressionFingerprint fingerprint2 = new MemberExpressionFingerprint(
+                nodeType,
+                type,
+                null /* member */
+            );
 
             // Assert
             Assert.NotEqual(fingerprint1, fingerprint2);
@@ -84,8 +111,16 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             MemberInfo member = typeof(TimeSpan).GetProperty("Seconds");
 
             // Act
-            MemberExpressionFingerprint fingerprint1 = new MemberExpressionFingerprint(nodeType, type, member);
-            MemberExpressionFingerprint fingerprint2 = new MemberExpressionFingerprint(nodeType, typeof(object), member);
+            MemberExpressionFingerprint fingerprint1 = new MemberExpressionFingerprint(
+                nodeType,
+                type,
+                member
+            );
+            MemberExpressionFingerprint fingerprint2 = new MemberExpressionFingerprint(
+                nodeType,
+                typeof(object),
+                member
+            );
 
             // Assert
             Assert.NotEqual(fingerprint1, fingerprint2);

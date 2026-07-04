@@ -13,7 +13,11 @@ namespace System.Net.Http.Formatting
     /// Helper class to serialize <see cref="IEnumerable{T}"/> types by delegating them through a concrete implementation."/>.
     /// </summary>
     /// <typeparam name="T">The interface implementing <see cref="IEnumerable{T}"/> to proxy.</typeparam>
-    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification = "Enumerable conveys the meaning of collection")]
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1710:IdentifiersShouldHaveCorrectSuffix",
+        Justification = "Enumerable conveys the meaning of collection"
+    )]
     public sealed class DelegatingEnumerable<T> : IEnumerable<T>
     {
         private IEnumerable<T> _source;
@@ -52,7 +56,11 @@ namespace System.Net.Http.Formatting
         /// This method is not implemented but is required method for serialization to work. Do not use.
         /// </summary>
         /// <param name="item">The item to add. Unused.</param>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", Justification = "Required by XmlSerializer, never used.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            Justification = "Required by XmlSerializer, never used."
+        )]
         public void Add(object item)
         {
             throw new NotImplementedException();

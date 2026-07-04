@@ -11,8 +11,19 @@ namespace System.ServiceModel.Dispatcher
     {
         bool OwnsFormatter { get; }
 
-        object Invoke(object instance, object[] inputs, IInvokeReceivedNotification notification, out object[] outputs);
+        object Invoke(
+            object instance,
+            object[] inputs,
+            IInvokeReceivedNotification notification,
+            out object[] outputs
+        );
 
-        IAsyncResult InvokeBegin(object instance, object[] inputs, IInvokeReceivedNotification notification, AsyncCallback callback, object state);
-   }
+        IAsyncResult InvokeBegin(
+            object instance,
+            object[] inputs,
+            IInvokeReceivedNotification notification,
+            AsyncCallback callback,
+            object state
+        );
+    }
 }

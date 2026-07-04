@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -30,10 +30,8 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text.RegularExpressions;
-
 using DbLinq.Data.Linq.Sql;
 using DbLinq.Data.Linq.Sugar.Expressions;
-
 using DbLinq.Util;
 
 namespace DbLinq.Vendor.Implementation
@@ -55,7 +53,11 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="inputColumns">Columns to be inserted</param>
         /// <param name="inputValues">Values to be inserted into columns</param>
         /// <returns></returns>
-        public virtual SqlStatement GetInsert(SqlStatement table, IList<SqlStatement> inputColumns, IList<SqlStatement> inputValues)
+        public virtual SqlStatement GetInsert(
+            SqlStatement table,
+            IList<SqlStatement> inputColumns,
+            IList<SqlStatement> inputValues
+        )
         {
             if (inputColumns.Count == 0)
                 return SqlStatement.Empty;
@@ -78,7 +80,15 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="outputParameters">Expected output parameters</param>
         /// <param name="outputExpressions">Expressions (to help generate output parameters)</param>
         /// <returns></returns>
-        public virtual SqlStatement GetInsertIds(SqlStatement table, IList<SqlStatement> autoPKColumn, IList<SqlStatement> pkColumns, IList<SqlStatement> pkValues, IList<SqlStatement> outputColumns, IList<SqlStatement> outputParameters, IList<SqlStatement> outputExpressions)
+        public virtual SqlStatement GetInsertIds(
+            SqlStatement table,
+            IList<SqlStatement> autoPKColumn,
+            IList<SqlStatement> pkColumns,
+            IList<SqlStatement> pkValues,
+            IList<SqlStatement> outputColumns,
+            IList<SqlStatement> outputParameters,
+            IList<SqlStatement> outputExpressions
+        )
         {
             if (autoPKColumn.Count == outputParameters.Count)
                 return "SELECT @@IDENTITY";
@@ -94,7 +104,12 @@ namespace DbLinq.Vendor.Implementation
                 insertIds.AppendFormat("{0} = @@IDENTITY", autoPKColumn[0]);
                 valueSet = true;
             }
-            for (IEnumerator<SqlStatement> column = pkColumns.GetEnumerator(), value = pkValues.GetEnumerator(); column.MoveNext() && value.MoveNext();)
+            for (
+                IEnumerator<SqlStatement> column = pkColumns.GetEnumerator(),
+                    value = pkValues.GetEnumerator();
+                column.MoveNext() && value.MoveNext();
+
+            )
             {
                 if (valueSet)
                     insertIds.Append(" AND ");
@@ -115,10 +130,15 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="inputPKColumns">PK columns for reference</param>
         /// <param name="inputPKValues">PK values for reference</param>
         /// <returns></returns>
-        public SqlStatement GetUpdate(SqlStatement table, IList<SqlStatement> inputColumns,
+        public SqlStatement GetUpdate(
+            SqlStatement table,
+            IList<SqlStatement> inputColumns,
             IList<SqlStatement> inputValues,
-            IList<SqlStatement> outputParameters, IList<SqlStatement> outputExpressions,
-            IList<SqlStatement> inputPKColumns, IList<SqlStatement> inputPKValues)
+            IList<SqlStatement> outputParameters,
+            IList<SqlStatement> outputExpressions,
+            IList<SqlStatement> inputPKColumns,
+            IList<SqlStatement> inputPKValues
+        )
         {
             if (inputColumns.Count == 0)
                 return SqlStatement.Empty;
@@ -127,7 +147,12 @@ namespace DbLinq.Vendor.Implementation
             updateBuilder.Append(table);
             updateBuilder.Append(" SET ");
             bool valueSet = false;
-            for (IEnumerator<SqlStatement> column = inputColumns.GetEnumerator(), value = inputValues.GetEnumerator(); column.MoveNext() && value.MoveNext(); )
+            for (
+                IEnumerator<SqlStatement> column = inputColumns.GetEnumerator(),
+                    value = inputValues.GetEnumerator();
+                column.MoveNext() && value.MoveNext();
+
+            )
             {
                 if (valueSet)
                     updateBuilder.Append(", ");
@@ -136,7 +161,12 @@ namespace DbLinq.Vendor.Implementation
             }
             updateBuilder.Append(" WHERE ");
             valueSet = false;
-            for (IEnumerator<SqlStatement> column = inputPKColumns.GetEnumerator(), value = inputPKValues.GetEnumerator(); column.MoveNext() && value.MoveNext(); )
+            for (
+                IEnumerator<SqlStatement> column = inputPKColumns.GetEnumerator(),
+                    value = inputPKValues.GetEnumerator();
+                column.MoveNext() && value.MoveNext();
+
+            )
             {
                 if (valueSet)
                     updateBuilder.Append(" AND ");
@@ -153,7 +183,11 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="inputPKColumns">PK columns for reference</param>
         /// <param name="inputPKValues">PK values for reference</param>
         /// <returns></returns>
-        public SqlStatement GetDelete(SqlStatement table, IList<SqlStatement> inputPKColumns, IList<SqlStatement> inputPKValues)
+        public SqlStatement GetDelete(
+            SqlStatement table,
+            IList<SqlStatement> inputPKColumns,
+            IList<SqlStatement> inputPKValues
+        )
         {
             if (inputPKColumns.Count == 0)
                 return SqlStatement.Empty;
@@ -162,7 +196,12 @@ namespace DbLinq.Vendor.Implementation
             deleteBuilder.Append(table);
             deleteBuilder.Append(" WHERE ");
             bool valueSet = false;
-            for (IEnumerator<SqlStatement> column = inputPKColumns.GetEnumerator(), value = inputPKValues.GetEnumerator(); column.MoveNext() && value.MoveNext(); )
+            for (
+                IEnumerator<SqlStatement> column = inputPKColumns.GetEnumerator(),
+                    value = inputPKValues.GetEnumerator();
+                column.MoveNext() && value.MoveNext();
+
+            )
             {
                 if (valueSet)
                     deleteBuilder.Append(" AND ");
@@ -180,6 +219,7 @@ namespace DbLinq.Vendor.Implementation
         {
             get { return Environment.NewLine; }
         }
+
         /// <summary>
         /// Converts a constant value to a literal representation
         /// </summary>
@@ -222,94 +262,94 @@ namespace DbLinq.Vendor.Implementation
         {
             switch (operationType)
             {
-            case ExpressionType.Add:
-                return GetLiteralAdd(p[0], p[1]);
-            case ExpressionType.AddChecked:
-                return GetLiteralAddChecked(p[0], p[1]);
-            case ExpressionType.And:
-                return GetLiteralAnd(p[0], p[1]);
-            case ExpressionType.AndAlso:
-                return GetLiteralAndAlso(p[0], p[1]);
-            case ExpressionType.ArrayLength:
-                return GetLiteralArrayLength(p[0], p[1]);
-            case ExpressionType.ArrayIndex:
-                return GetLiteralArrayIndex(p[0], p[1]);
-            case ExpressionType.Call:
-                return GetLiteralCall(p[0]);
-            case ExpressionType.Coalesce:
-                return GetLiteralCoalesce(p[0], p[1]);
-            case ExpressionType.Conditional:
-                return GetLiteralConditional(p[0], p[1], p[2]);
-            //case ExpressionType.Constant:
-            //break;
-            case ExpressionType.Divide:
-                return GetLiteralDivide(p[0], p[1]);
-            case ExpressionType.Equal:
-                return GetLiteralEqual(p[0], p[1]);
-            case ExpressionType.ExclusiveOr:
-                return GetLiteralExclusiveOr(p[0], p[1]);
-            case ExpressionType.GreaterThan:
-                return GetLiteralGreaterThan(p[0], p[1]);
-            case ExpressionType.GreaterThanOrEqual:
-                return GetLiteralGreaterThanOrEqual(p[0], p[1]);
-            //case ExpressionType.Invoke:
-            //break;
-            //case ExpressionType.Lambda:
-            //break;
-            case ExpressionType.LeftShift:
-                return GetLiteralLeftShift(p[0], p[1]);
-            case ExpressionType.LessThan:
-                return GetLiteralLessThan(p[0], p[1]);
-            case ExpressionType.LessThanOrEqual:
-                return GetLiteralLessThanOrEqual(p[0], p[1]);
-            //case ExpressionType.ListInit:
-            //break;
-            //case ExpressionType.MemberAccess:
-            //    break;
-            //case ExpressionType.MemberInit:
-            //    break;
-            case ExpressionType.Modulo:
-                return GetLiteralModulo(p[0], p[1]);
-            case ExpressionType.Multiply:
-                return GetLiteralMultiply(p[0], p[1]);
-            case ExpressionType.MultiplyChecked:
-                return GetLiteralMultiplyChecked(p[0], p[1]);
-            case ExpressionType.Negate:
-                return GetLiteralNegate(p[0]);
-            case ExpressionType.UnaryPlus:
-                return GetLiteralUnaryPlus(p[0]);
-            case ExpressionType.NegateChecked:
-                return GetLiteralNegateChecked(p[0]);
-            //case ExpressionType.New:
-            //    break;
-            //case ExpressionType.NewArrayInit:
-            //    break;
-            //case ExpressionType.NewArrayBounds:
-            //    break;
-            case ExpressionType.Not:
-                return GetLiteralNot(p[0]);
-            case ExpressionType.NotEqual:
-                return GetLiteralNotEqual(p[0], p[1]);
-            case ExpressionType.Or:
-                return GetLiteralOr(p[0], p[1]);
-            case ExpressionType.OrElse:
-                return GetLiteralOrElse(p[0], p[1]);
-            //case ExpressionType.Parameter:
-            //    break;
-            case ExpressionType.Power:
-                return GetLiteralPower(p[0], p[1]);
-            //case ExpressionType.Quote:
-            //    break;
-            case ExpressionType.RightShift:
-                return GetLiteralRightShift(p[0], p[1]);
-            case ExpressionType.Subtract:
-                return GetLiteralSubtract(p[0], p[1]);
-            case ExpressionType.SubtractChecked:
-                return GetLiteralSubtractChecked(p[0], p[1]);
-            //case ExpressionType.TypeAs:
-            //    break;
-            //case ExpressionType.TypeIs:
-            //    break;
+                case ExpressionType.Add:
+                    return GetLiteralAdd(p[0], p[1]);
+                case ExpressionType.AddChecked:
+                    return GetLiteralAddChecked(p[0], p[1]);
+                case ExpressionType.And:
+                    return GetLiteralAnd(p[0], p[1]);
+                case ExpressionType.AndAlso:
+                    return GetLiteralAndAlso(p[0], p[1]);
+                case ExpressionType.ArrayLength:
+                    return GetLiteralArrayLength(p[0], p[1]);
+                case ExpressionType.ArrayIndex:
+                    return GetLiteralArrayIndex(p[0], p[1]);
+                case ExpressionType.Call:
+                    return GetLiteralCall(p[0]);
+                case ExpressionType.Coalesce:
+                    return GetLiteralCoalesce(p[0], p[1]);
+                case ExpressionType.Conditional:
+                    return GetLiteralConditional(p[0], p[1], p[2]);
+                //case ExpressionType.Constant:
+                //break;
+                case ExpressionType.Divide:
+                    return GetLiteralDivide(p[0], p[1]);
+                case ExpressionType.Equal:
+                    return GetLiteralEqual(p[0], p[1]);
+                case ExpressionType.ExclusiveOr:
+                    return GetLiteralExclusiveOr(p[0], p[1]);
+                case ExpressionType.GreaterThan:
+                    return GetLiteralGreaterThan(p[0], p[1]);
+                case ExpressionType.GreaterThanOrEqual:
+                    return GetLiteralGreaterThanOrEqual(p[0], p[1]);
+                //case ExpressionType.Invoke:
+                //break;
+                //case ExpressionType.Lambda:
+                //break;
+                case ExpressionType.LeftShift:
+                    return GetLiteralLeftShift(p[0], p[1]);
+                case ExpressionType.LessThan:
+                    return GetLiteralLessThan(p[0], p[1]);
+                case ExpressionType.LessThanOrEqual:
+                    return GetLiteralLessThanOrEqual(p[0], p[1]);
+                //case ExpressionType.ListInit:
+                //break;
+                //case ExpressionType.MemberAccess:
+                //    break;
+                //case ExpressionType.MemberInit:
+                //    break;
+                case ExpressionType.Modulo:
+                    return GetLiteralModulo(p[0], p[1]);
+                case ExpressionType.Multiply:
+                    return GetLiteralMultiply(p[0], p[1]);
+                case ExpressionType.MultiplyChecked:
+                    return GetLiteralMultiplyChecked(p[0], p[1]);
+                case ExpressionType.Negate:
+                    return GetLiteralNegate(p[0]);
+                case ExpressionType.UnaryPlus:
+                    return GetLiteralUnaryPlus(p[0]);
+                case ExpressionType.NegateChecked:
+                    return GetLiteralNegateChecked(p[0]);
+                //case ExpressionType.New:
+                //    break;
+                //case ExpressionType.NewArrayInit:
+                //    break;
+                //case ExpressionType.NewArrayBounds:
+                //    break;
+                case ExpressionType.Not:
+                    return GetLiteralNot(p[0]);
+                case ExpressionType.NotEqual:
+                    return GetLiteralNotEqual(p[0], p[1]);
+                case ExpressionType.Or:
+                    return GetLiteralOr(p[0], p[1]);
+                case ExpressionType.OrElse:
+                    return GetLiteralOrElse(p[0], p[1]);
+                //case ExpressionType.Parameter:
+                //    break;
+                case ExpressionType.Power:
+                    return GetLiteralPower(p[0], p[1]);
+                //case ExpressionType.Quote:
+                //    break;
+                case ExpressionType.RightShift:
+                    return GetLiteralRightShift(p[0], p[1]);
+                case ExpressionType.Subtract:
+                    return GetLiteralSubtract(p[0], p[1]);
+                case ExpressionType.SubtractChecked:
+                    return GetLiteralSubtractChecked(p[0], p[1]);
+                //case ExpressionType.TypeAs:
+                //    break;
+                //case ExpressionType.TypeIs:
+                //    break;
             }
             throw new ArgumentException(operationType.ToString());
         }
@@ -320,97 +360,99 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="operationType"></param>
         /// <param name="p"></param>
         /// <returns></returns>
-        public virtual SqlStatement GetLiteral(SpecialExpressionType operationType, IList<SqlStatement> p)
+        public virtual SqlStatement GetLiteral(
+            SpecialExpressionType operationType,
+            IList<SqlStatement> p
+        )
         {
             switch (operationType) // SETuse
             {
-            case SpecialExpressionType.IsNull:
-                return GetLiteralIsNull(p[0]);
-            case SpecialExpressionType.IsNotNull:
-                return GetLiteralIsNotNull(p[0]);
-            case SpecialExpressionType.Concat:
-                return GetLiteralStringConcat(p[0], p[1]);
-            case SpecialExpressionType.Count:
-                return GetLiteralCount(p[0]);
-            case SpecialExpressionType.Exists:
-                return GetLiteralExists(p[0]);
-            case SpecialExpressionType.Like:
-                return GetLiteralLike(p[0], p[1]);
-            case SpecialExpressionType.Min:
-                return GetLiteralMin(p[0]);
-            case SpecialExpressionType.Max:
-                return GetLiteralMax(p[0]);
-            case SpecialExpressionType.Sum:
-                return GetLiteralSum(p[0]);
-            case SpecialExpressionType.Average:
-                return GetLiteralAverage(p[0]);
-            case SpecialExpressionType.StringLength:
-                return GetLiteralStringLength(p[0]);
-            case SpecialExpressionType.ToUpper:
-                return GetLiteralStringToUpper(p[0]);
-            case SpecialExpressionType.ToLower:
-                return GetLiteralStringToLower(p[0]);
-            case SpecialExpressionType.In:
-                return GetLiteralIn(p[0], p[1]);
-            case SpecialExpressionType.Substring:
-                if (p.Count > 2)
-                    return GetLiteralSubString(p[0], p[1], p[2]);
-                return GetLiteralSubString(p[0], p[1]);
-            case SpecialExpressionType.Trim:
-            case SpecialExpressionType.LTrim:
-            case SpecialExpressionType.RTrim:
-                return GetLiteralTrim(p[0]);
-            case SpecialExpressionType.StringInsert:
-                return GetLiteralStringInsert(p[0], p[1], p[2]);
-            case SpecialExpressionType.Replace:
-                return GetLiteralStringReplace(p[0], p[1], p[2]);
-            case SpecialExpressionType.Remove:
-                if (p.Count > 2)
-                    return GetLiteralStringRemove(p[0], p[1], p[2]);
-                return GetLiteralStringRemove(p[0], p[1]);
-            case SpecialExpressionType.IndexOf:
-                if (p.Count == 2)
-                    return GetLiteralStringIndexOf(p[0], p[1]);
-                else if (p.Count == 3)
-                    return GetLiteralStringIndexOf(p[0], p[1], p[2]);
-                else if (p.Count == 4)
-                    return GetLiteralStringIndexOf(p[0], p[1], p[2], p[3]);
-                break;
-            case SpecialExpressionType.Year:
-            case SpecialExpressionType.Month:
-            case SpecialExpressionType.Day:
-            case SpecialExpressionType.Hour:
-            case SpecialExpressionType.Minute:
-            case SpecialExpressionType.Second:
-            case SpecialExpressionType.Millisecond:
-                return GetLiteralDateTimePart(p[0], operationType);
-            case SpecialExpressionType.Date:
-                return p[0];
-            case SpecialExpressionType.DateDiffInMilliseconds:
-                return GetLiteralDateDiff(p[0], p[1]);
-            case SpecialExpressionType.Abs:
-                return GetLiteralMathAbs(p[0]);
-            case SpecialExpressionType.Exp:
-                return GetLiteralMathExp(p[0]);
-            case SpecialExpressionType.Floor:
-                return GetLiteralMathFloor(p[0]);
-            case SpecialExpressionType.Ln:
-                return GetLiteralMathLn(p[0]);
+                case SpecialExpressionType.IsNull:
+                    return GetLiteralIsNull(p[0]);
+                case SpecialExpressionType.IsNotNull:
+                    return GetLiteralIsNotNull(p[0]);
+                case SpecialExpressionType.Concat:
+                    return GetLiteralStringConcat(p[0], p[1]);
+                case SpecialExpressionType.Count:
+                    return GetLiteralCount(p[0]);
+                case SpecialExpressionType.Exists:
+                    return GetLiteralExists(p[0]);
+                case SpecialExpressionType.Like:
+                    return GetLiteralLike(p[0], p[1]);
+                case SpecialExpressionType.Min:
+                    return GetLiteralMin(p[0]);
+                case SpecialExpressionType.Max:
+                    return GetLiteralMax(p[0]);
+                case SpecialExpressionType.Sum:
+                    return GetLiteralSum(p[0]);
+                case SpecialExpressionType.Average:
+                    return GetLiteralAverage(p[0]);
+                case SpecialExpressionType.StringLength:
+                    return GetLiteralStringLength(p[0]);
+                case SpecialExpressionType.ToUpper:
+                    return GetLiteralStringToUpper(p[0]);
+                case SpecialExpressionType.ToLower:
+                    return GetLiteralStringToLower(p[0]);
+                case SpecialExpressionType.In:
+                    return GetLiteralIn(p[0], p[1]);
+                case SpecialExpressionType.Substring:
+                    if (p.Count > 2)
+                        return GetLiteralSubString(p[0], p[1], p[2]);
+                    return GetLiteralSubString(p[0], p[1]);
+                case SpecialExpressionType.Trim:
+                case SpecialExpressionType.LTrim:
+                case SpecialExpressionType.RTrim:
+                    return GetLiteralTrim(p[0]);
+                case SpecialExpressionType.StringInsert:
+                    return GetLiteralStringInsert(p[0], p[1], p[2]);
+                case SpecialExpressionType.Replace:
+                    return GetLiteralStringReplace(p[0], p[1], p[2]);
+                case SpecialExpressionType.Remove:
+                    if (p.Count > 2)
+                        return GetLiteralStringRemove(p[0], p[1], p[2]);
+                    return GetLiteralStringRemove(p[0], p[1]);
+                case SpecialExpressionType.IndexOf:
+                    if (p.Count == 2)
+                        return GetLiteralStringIndexOf(p[0], p[1]);
+                    else if (p.Count == 3)
+                        return GetLiteralStringIndexOf(p[0], p[1], p[2]);
+                    else if (p.Count == 4)
+                        return GetLiteralStringIndexOf(p[0], p[1], p[2], p[3]);
+                    break;
+                case SpecialExpressionType.Year:
+                case SpecialExpressionType.Month:
+                case SpecialExpressionType.Day:
+                case SpecialExpressionType.Hour:
+                case SpecialExpressionType.Minute:
+                case SpecialExpressionType.Second:
+                case SpecialExpressionType.Millisecond:
+                    return GetLiteralDateTimePart(p[0], operationType);
+                case SpecialExpressionType.Date:
+                    return p[0];
+                case SpecialExpressionType.DateDiffInMilliseconds:
+                    return GetLiteralDateDiff(p[0], p[1]);
+                case SpecialExpressionType.Abs:
+                    return GetLiteralMathAbs(p[0]);
+                case SpecialExpressionType.Exp:
+                    return GetLiteralMathExp(p[0]);
+                case SpecialExpressionType.Floor:
+                    return GetLiteralMathFloor(p[0]);
+                case SpecialExpressionType.Ln:
+                    return GetLiteralMathLn(p[0]);
 
-            case SpecialExpressionType.Log:
-                if (p.Count == 1)
-                    return GetLiteralMathLog(p[0]);
-                else
-                    return GetLiteralMathLog(p[0], p[1]);
-            case SpecialExpressionType.Pow:
-                return GetLiteralMathPow(p[0], p[1]);
-            case SpecialExpressionType.Round:
-                return GetLiteralMathRound(p[0]);
-            case SpecialExpressionType.Sign:
-                return GetLiteralMathSign(p[0]);
-            case SpecialExpressionType.Sqrt:
-                return GetLiteralMathSqrt(p[0]);
-
+                case SpecialExpressionType.Log:
+                    if (p.Count == 1)
+                        return GetLiteralMathLog(p[0]);
+                    else
+                        return GetLiteralMathLog(p[0], p[1]);
+                case SpecialExpressionType.Pow:
+                    return GetLiteralMathPow(p[0], p[1]);
+                case SpecialExpressionType.Round:
+                    return GetLiteralMathRound(p[0]);
+                case SpecialExpressionType.Sign:
+                    return GetLiteralMathSign(p[0]);
+                case SpecialExpressionType.Sqrt:
+                    return GetLiteralMathSqrt(p[0]);
             }
             throw new ArgumentException(operationType.ToString());
         }
@@ -426,9 +468,11 @@ namespace DbLinq.Vendor.Implementation
             {
                 if (this.StringIndexStartsAtOne)
                     return 1;
-                else return 0;
+                else
+                    return 0;
             }
         }
+
         /// <summary>
         /// Gets the literal math SQRT.
         /// </summary>
@@ -547,18 +591,23 @@ namespace DbLinq.Vendor.Implementation
             return SqlStatement.Format("DATEDIFF(MILLISECOND,{0},{1})", dateA, dateB);
         }
 
-
         /// <summary>
         /// Gets the literal date time part.
         /// </summary>
         /// <param name="dateExpression">The date expression.</param>
         /// <param name="operationType">Type of the operation.</param>
         /// <returns></returns>
-        protected virtual SqlStatement GetLiteralDateTimePart(SqlStatement dateExpression, SpecialExpressionType operationType)
+        protected virtual SqlStatement GetLiteralDateTimePart(
+            SqlStatement dateExpression,
+            SpecialExpressionType operationType
+        )
         {
-            return SqlStatement.Format("EXTRACT({0} FROM {1})", operationType.ToString().ToUpper(), dateExpression);
+            return SqlStatement.Format(
+                "EXTRACT({0} FROM {1})",
+                operationType.ToString().ToUpper(),
+                dateExpression
+            );
         }
-
 
         /// <summary>
         /// Gets the literal string index of.
@@ -568,12 +617,19 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="startIndex">The start index.</param>
         /// <param name="count">The count.</param>
         /// <returns></returns>
-        protected virtual SqlStatement GetLiteralStringIndexOf(SqlStatement baseString, SqlStatement searchString, SqlStatement startIndex, SqlStatement count)
+        protected virtual SqlStatement GetLiteralStringIndexOf(
+            SqlStatement baseString,
+            SqlStatement searchString,
+            SqlStatement startIndex,
+            SqlStatement count
+        )
         {
             //trim left the string
             var substring = GetLiteralSubString(baseString, startIndex, count);
 
-            var substringIndexOf = SqlStatement.Format("STRPOS({0},{1})", substring, searchString).ToString();
+            var substringIndexOf = SqlStatement
+                .Format("STRPOS({0},{1})", substring, searchString)
+                .ToString();
             // TODO: the start index MUST be handled above at code generation
             var indexOf = GetLiteralAdd(substringIndexOf, startIndex);
 
@@ -588,13 +644,20 @@ namespace DbLinq.Vendor.Implementation
         /// <remarks>
         /// In the impleementation you should pay atention that in some database engines the indexes of arrays or strings are shifted one unit.
         /// ie: in .NET stringExpression.Substring(2,2) should be translated as SUBSTRING (stringExpression, 3 , 2) since the first element in sqlserver in a SqlStatement has index=1
-        protected virtual SqlStatement GetLiteralStringIndexOf(SqlStatement baseString, SqlStatement searchString, SqlStatement startIndex)
+        protected virtual SqlStatement GetLiteralStringIndexOf(
+            SqlStatement baseString,
+            SqlStatement searchString,
+            SqlStatement startIndex
+        )
         {
             var substring = GetLiteralSubString(baseString, startIndex);
 
             var substringIndexOf = SqlStatement.Format("STRPOS({0},{1})", substring, searchString);
 
-            return GetLiteralMultiply(GetLiteralAdd(substringIndexOf, startIndex), substringIndexOf);
+            return GetLiteralMultiply(
+                GetLiteralAdd(substringIndexOf, startIndex),
+                substringIndexOf
+            );
         }
 
         /// <summary>
@@ -603,7 +666,10 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="baseString">The base string.</param>
         /// <param name="searchString">The search string.</param>
         /// <returns></returns>
-        protected virtual SqlStatement GetLiteralStringIndexOf(SqlStatement baseString, SqlStatement searchString)
+        protected virtual SqlStatement GetLiteralStringIndexOf(
+            SqlStatement baseString,
+            SqlStatement searchString
+        )
         {
             return SqlStatement.Format("STRPOS({0},{1})", baseString, searchString);
         }
@@ -615,11 +681,24 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="startIndex">The start index.</param>
         /// <param name="count">The count.</param>
         /// <returns></returns>
-        protected virtual SqlStatement GetLiteralStringRemove(SqlStatement baseString, SqlStatement startIndex, SqlStatement count)
+        protected virtual SqlStatement GetLiteralStringRemove(
+            SqlStatement baseString,
+            SqlStatement startIndex,
+            SqlStatement count
+        )
         {
             return GetLiteralStringConcat(
-                    GetLiteralSubString(baseString, SqlStatement.Format(SpecificVendorStringIndexStart.ToString()), startIndex),
-                    GetLiteralSubString(baseString, GetLiteralAdd(startIndex, count).ToString(), GetLiteralStringLength(baseString)));
+                GetLiteralSubString(
+                    baseString,
+                    SqlStatement.Format(SpecificVendorStringIndexStart.ToString()),
+                    startIndex
+                ),
+                GetLiteralSubString(
+                    baseString,
+                    GetLiteralAdd(startIndex, count).ToString(),
+                    GetLiteralStringLength(baseString)
+                )
+            );
         }
 
         /// <summary>
@@ -628,7 +707,10 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="baseString">The base string.</param>
         /// <param name="startIndex">The start index.</param>
         /// <returns></returns>
-        protected virtual SqlStatement GetLiteralStringRemove(SqlStatement baseString, SqlStatement startIndex)
+        protected virtual SqlStatement GetLiteralStringRemove(
+            SqlStatement baseString,
+            SqlStatement startIndex
+        )
         {
             return GetLiteralSubString(baseString, "1", startIndex);
         }
@@ -640,9 +722,18 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="searchString">The search string.</param>
         /// <param name="replacementstring">The replacementstring.</param>
         /// <returns></returns>
-        protected SqlStatement GetLiteralStringReplace(SqlStatement stringExpresision, SqlStatement searchString, SqlStatement replacementstring)
+        protected SqlStatement GetLiteralStringReplace(
+            SqlStatement stringExpresision,
+            SqlStatement searchString,
+            SqlStatement replacementstring
+        )
         {
-            return SqlStatement.Format("REPLACE({0},{1},{2})", stringExpresision, searchString, replacementstring);
+            return SqlStatement.Format(
+                "REPLACE({0},{1},{2})",
+                stringExpresision,
+                searchString,
+                replacementstring
+            );
         }
 
         /// <summary>
@@ -652,16 +743,20 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="position">The position.</param>
         /// <param name="insertString">The insert string.</param>
         /// <returns></returns>
-        protected virtual SqlStatement GetLiteralStringInsert(SqlStatement stringExpression, SqlStatement position, SqlStatement insertString)
+        protected virtual SqlStatement GetLiteralStringInsert(
+            SqlStatement stringExpression,
+            SqlStatement position,
+            SqlStatement insertString
+        )
         {
-
             return this.GetLiteralStringConcat(
-                            this.GetLiteralStringConcat(
-                                            GetLiteralSubString(stringExpression, "1", position),
-                                            insertString),
-                            this.GetLiteralSubString(stringExpression, GetLiteralAdd(position, "1")));
+                this.GetLiteralStringConcat(
+                    GetLiteralSubString(stringExpression, "1", position),
+                    insertString
+                ),
+                this.GetLiteralSubString(stringExpression, GetLiteralAdd(position, "1"))
+            );
         }
-
 
         /// <summary>
         /// Returns an operation between two SELECT clauses (UNION, UNION ALL, etc.)
@@ -670,20 +765,24 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="selectA"></param>
         /// <param name="selectB"></param>
         /// <returns></returns>
-        public virtual SqlStatement GetLiteral(SelectOperatorType selectOperator, SqlStatement selectA, SqlStatement selectB)
+        public virtual SqlStatement GetLiteral(
+            SelectOperatorType selectOperator,
+            SqlStatement selectA,
+            SqlStatement selectB
+        )
         {
             switch (selectOperator)
             {
-            case SelectOperatorType.Union:
-                return GetLiteralUnion(selectA, selectB);
-            case SelectOperatorType.UnionAll:
-                return GetLiteralUnionAll(selectA, selectB);
-            case SelectOperatorType.Intersection:
-                return GetLiteralIntersect(selectA, selectB);
-            case SelectOperatorType.Exception:
-                return GetLiteralExcept(selectA, selectB);
-            default:
-                throw new ArgumentOutOfRangeException(selectOperator.ToString());
+                case SelectOperatorType.Union:
+                    return GetLiteralUnion(selectA, selectB);
+                case SelectOperatorType.UnionAll:
+                    return GetLiteralUnionAll(selectA, selectB);
+                case SelectOperatorType.Intersection:
+                    return GetLiteralIntersect(selectA, selectB);
+                case SelectOperatorType.Exception:
+                    return GetLiteralExcept(selectA, selectB);
+                default:
+                    throw new ArgumentOutOfRangeException(selectOperator.ToString());
             }
         }
 
@@ -786,7 +885,10 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="joinedTable"></param>
         /// <param name="joinExpression"></param>
         /// <returns></returns>
-        public virtual SqlStatement GetInnerJoinClause(SqlStatement joinedTable, SqlStatement joinExpression)
+        public virtual SqlStatement GetInnerJoinClause(
+            SqlStatement joinedTable,
+            SqlStatement joinExpression
+        )
         {
             return SqlStatement.Format("INNER JOIN {0} ON {1}", joinedTable, joinExpression);
         }
@@ -797,7 +899,10 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="joinedTable"></param>
         /// <param name="joinExpression"></param>
         /// <returns></returns>
-        public virtual SqlStatement GetLeftOuterJoinClause(SqlStatement joinedTable, SqlStatement joinExpression)
+        public virtual SqlStatement GetLeftOuterJoinClause(
+            SqlStatement joinedTable,
+            SqlStatement joinExpression
+        )
         {
             return SqlStatement.Format("LEFT JOIN {0} ON {1}", joinedTable, joinExpression);
         }
@@ -808,7 +913,10 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="joinedTable"></param>
         /// <param name="joinExpression"></param>
         /// <returns></returns>
-        public virtual SqlStatement GetRightOuterJoinClause(SqlStatement joinedTable, SqlStatement joinExpression)
+        public virtual SqlStatement GetRightOuterJoinClause(
+            SqlStatement joinedTable,
+            SqlStatement joinExpression
+        )
         {
             return SqlStatement.Format("RIGHT JOIN {0} ON {1}", joinedTable, joinExpression);
         }
@@ -983,7 +1091,11 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="b">The b.</param>
         /// <param name="c">The c.</param>
         /// <returns></returns>
-        protected virtual SqlStatement GetLiteralConditional(SqlStatement a, SqlStatement b, SqlStatement c)
+        protected virtual SqlStatement GetLiteralConditional(
+            SqlStatement a,
+            SqlStatement b,
+            SqlStatement c
+        )
         {
             throw new NotImplementedException();
         }
@@ -1299,7 +1411,6 @@ namespace DbLinq.Vendor.Implementation
             return SqlStatement.Format("LCASE({0})", a);
         }
 
-
         /// <summary>
         /// Gets the literal trim.
         /// </summary>
@@ -1337,7 +1448,11 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="startIndex">The start index.</param>
         /// <param name="count">The count.</param>
         /// <returns></returns>
-        protected virtual SqlStatement GetLiteralSubString(SqlStatement baseString, SqlStatement startIndex, SqlStatement count)
+        protected virtual SqlStatement GetLiteralSubString(
+            SqlStatement baseString,
+            SqlStatement startIndex,
+            SqlStatement count
+        )
         {
             //in standard sql base SqlStatement index is 1 instead 0
             return SqlStatement.Format("SUBSTR({0}, {1}, {2})", baseString, startIndex, count);
@@ -1349,7 +1464,10 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="baseString">The base string.</param>
         /// <param name="startIndex">The start index.</param>
         /// <returns></returns>
-        protected virtual SqlStatement GetLiteralSubString(SqlStatement baseString, SqlStatement startIndex)
+        protected virtual SqlStatement GetLiteralSubString(
+            SqlStatement baseString,
+            SqlStatement startIndex
+        )
         {
             //in standard sql base SqlStatement index is 1 instead 0
             return SqlStatement.Format("SUBSTR({0}, {1})", baseString, startIndex);
@@ -1455,7 +1573,12 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="offset">first row to be returned (starting from 0)</param>
         /// <param name="offsetAndLimit">limit+offset</param>
         /// <returns></returns>
-        public virtual SqlStatement GetLiteralLimit(SqlStatement select, SqlStatement limit, SqlStatement offset, SqlStatement offsetAndLimit)
+        public virtual SqlStatement GetLiteralLimit(
+            SqlStatement select,
+            SqlStatement limit,
+            SqlStatement offset,
+            SqlStatement offsetAndLimit
+        )
         {
             // default SQL syntax: LIMIT limit OFFSET offset
             return SqlStatement.Format("{0} LIMIT {1} OFFSET {2}", select, limit, offset);
@@ -1538,7 +1661,10 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="selectA">The select A.</param>
         /// <param name="selectB">The select B.</param>
         /// <returns></returns>
-        protected virtual SqlStatement GetLiteralUnionAll(SqlStatement selectA, SqlStatement selectB)
+        protected virtual SqlStatement GetLiteralUnionAll(
+            SqlStatement selectA,
+            SqlStatement selectB
+        )
         {
             return SqlStatement.Format("{0}{2}UNION ALL{2}{1}", selectA, selectB, NewLine);
         }
@@ -1549,7 +1675,10 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="selectA">The select A.</param>
         /// <param name="selectB">The select B.</param>
         /// <returns></returns>
-        protected virtual SqlStatement GetLiteralIntersect(SqlStatement selectA, SqlStatement selectB)
+        protected virtual SqlStatement GetLiteralIntersect(
+            SqlStatement selectA,
+            SqlStatement selectB
+        )
         {
             return SqlStatement.Format("{0}{2}INTERSECT{2}{1}", selectA, selectB, NewLine);
         }
@@ -1609,12 +1738,19 @@ namespace DbLinq.Vendor.Implementation
         /// Gets the safe name start quote.
         /// </summary>
         /// <value>The safe name start quote.</value>
-        protected virtual char SafeNameStartQuote { get { return '"'; } }
+        protected virtual char SafeNameStartQuote
+        {
+            get { return '"'; }
+        }
+
         /// <summary>
         /// Gets the safe name end quote.
         /// </summary>
         /// <value>The safe name end quote.</value>
-        protected virtual char SafeNameEndQuote { get { return '"'; } }
+        protected virtual char SafeNameEndQuote
+        {
+            get { return '"'; }
+        }
 
         /// <summary>
         /// Makes the name safe.
@@ -1626,21 +1762,24 @@ namespace DbLinq.Vendor.Implementation
             return namePart.Enquote(SafeNameStartQuote, SafeNameEndQuote);
         }
 
-        private static readonly Regex _fieldIdentifierEx = new Regex(@"\[(?<var>[\w.]+)\]",
-                                                                     RegexOptions.Singleline |
-                                                                     RegexOptions.ExplicitCapture |
-                                                                     RegexOptions.Compiled);
+        private static readonly Regex _fieldIdentifierEx = new Regex(
+            @"\[(?<var>[\w.]+)\]",
+            RegexOptions.Singleline | RegexOptions.ExplicitCapture | RegexOptions.Compiled
+        );
 
         public virtual string GetSafeQuery(string sqlString)
         {
             if (sqlString == null)
                 return null;
-            return _fieldIdentifierEx.Replace(sqlString, delegate(Match e)
-            {
-                var field = e.Groups[1].Value;
-                var safeField = GetSafeNamePart(field);
-                return safeField;
-            });
+            return _fieldIdentifierEx.Replace(
+                sqlString,
+                delegate(Match e)
+                {
+                    var field = e.Groups[1].Value;
+                    var safeField = GetSafeNamePart(field);
+                    return safeField;
+                }
+            );
         }
 
         // TODO: remove this

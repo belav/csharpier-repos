@@ -22,7 +22,10 @@ namespace System.Reflection
     /// </remarks>
     public class PathAssemblyResolver : MetadataAssemblyResolver
     {
-        private readonly Dictionary<string, List<string>> _fileToPaths = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, List<string>> _fileToPaths = new Dictionary<
+            string,
+            List<string>
+        >(StringComparer.OrdinalIgnoreCase);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="System.Reflection.PathAssemblyResolver"/> class.
@@ -37,11 +40,17 @@ namespace System.Reflection
             foreach (string path in assemblyPaths)
             {
                 if (string.IsNullOrEmpty(path))
-                    throw new ArgumentException(SR.Format(SR.Arg_InvalidPath, path), nameof(assemblyPaths));
+                    throw new ArgumentException(
+                        SR.Format(SR.Arg_InvalidPath, path),
+                        nameof(assemblyPaths)
+                    );
 
                 string file = Path.GetFileNameWithoutExtension(path);
                 if (file.Length == 0)
-                    throw new ArgumentException(SR.Format(SR.Arg_InvalidPath, path), nameof(assemblyPaths));
+                    throw new ArgumentException(
+                        SR.Format(SR.Arg_InvalidPath, path),
+                        nameof(assemblyPaths)
+                    );
 
                 List<string>? paths;
                 if (!_fileToPaths.TryGetValue(file, out paths))
@@ -65,26 +74,42 @@ namespace System.Reflection
                 {
                     Assembly assemblyFromPath = context.LoadFromAssemblyPath(path);
                     AssemblyName assemblyNameFromPath = assemblyFromPath.GetName();
-                    if (assemblyName.Name.Equals(assemblyNameFromPath.Name, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        assemblyName.Name.Equals(
+                            assemblyNameFromPath.Name,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
-                        ReadOnlySpan<byte> pktFromAssembly = assemblyNameFromPath.GetPublicKeyToken();
+                        ReadOnlySpan<byte> pktFromAssembly =
+                            assemblyNameFromPath.GetPublicKeyToken();
 
                         // Find exact match on PublicKeyToken including treating no PublicKeyToken as its own entry.
                         if (pktFromName.SequenceEqual(pktFromAssembly))
                         {
                             // Pick the highest version.
-                            if (candidateWithSamePkt == null || assemblyNameFromPath.Version > candidateWithSamePkt.GetName().Version)
+                            if (
+                                candidateWithSamePkt == null
+                                || assemblyNameFromPath.Version
+                                    > candidateWithSamePkt.GetName().Version
+                            )
                             {
                                 candidateWithSamePkt = assemblyFromPath;
                             }
                         }
                         // If assemblyName does not specify a PublicKeyToken, or assemblyName is marked 'Retargetable',
                         // then still consider those with a PublicKeyToken and take the highest version available.
-                        else if ((candidateWithSamePkt == null && pktFromName.IsEmpty) ||
-                            ((assemblyName.Flags & AssemblyNameFlags.Retargetable) != 0))
+                        else if (
+                            (candidateWithSamePkt == null && pktFromName.IsEmpty)
+                            || ((assemblyName.Flags & AssemblyNameFlags.Retargetable) != 0)
+                        )
                         {
                             // Pick the highest version.
-                            if (candidateIgnoringPkt == null || assemblyNameFromPath.Version > candidateIgnoringPkt.GetName().Version)
+                            if (
+                                candidateIgnoringPkt == null
+                                || assemblyNameFromPath.Version
+                                    > candidateIgnoringPkt.GetName().Version
+                            )
                             {
                                 candidateIgnoringPkt = assemblyFromPath;
                             }

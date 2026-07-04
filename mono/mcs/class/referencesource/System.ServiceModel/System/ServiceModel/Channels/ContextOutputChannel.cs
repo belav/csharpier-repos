@@ -12,11 +12,22 @@ namespace System.ServiceModel.Channels
     {
         ClientContextProtocol contextProtocol;
 
-        public ContextOutputChannel(ChannelManagerBase channelManager, IOutputChannel innerChannel,
-            ContextExchangeMechanism contextExchangeMechanism, Uri callbackAddress, bool contextManagementEnabled)
+        public ContextOutputChannel(
+            ChannelManagerBase channelManager,
+            IOutputChannel innerChannel,
+            ContextExchangeMechanism contextExchangeMechanism,
+            Uri callbackAddress,
+            bool contextManagementEnabled
+        )
             : base(channelManager, innerChannel)
         {
-            this.contextProtocol = new ClientContextProtocol(contextExchangeMechanism, this.InnerChannel.Via, this, callbackAddress, contextManagementEnabled);
+            this.contextProtocol = new ClientContextProtocol(
+                contextExchangeMechanism,
+                this.InnerChannel.Via,
+                this,
+                callbackAddress,
+                contextManagementEnabled
+            );
         }
 
         protected override ContextProtocol ContextProtocol

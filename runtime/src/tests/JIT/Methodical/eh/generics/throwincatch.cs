@@ -5,10 +5,7 @@ using System;
 using System.IO;
 using Xunit;
 
-
-public class GenException<T> : Exception
-{
-}
+public class GenException<T> : Exception { }
 
 public interface IGen
 {
@@ -56,12 +53,13 @@ public class Test_throwincatch
         StringWriter expectedOut = new StringWriter();
 
         // Write expected output to string writer object
-        Exception[] expList = new Exception[] {
+        Exception[] expList = new Exception[]
+        {
             new GenException<int>(),
             new GenException<double>(),
             new GenException<string>(),
             new GenException<object>(),
-            new GenException<Exception>()
+            new GenException<Exception>(),
         };
         for (int i = 0; i < expList.Length; i++)
         {
@@ -74,7 +72,6 @@ public class Test_throwincatch
 
         // Create and initialize test log object
         testLog = new TestUtil.TestLog(expectedOut);
-
     }
 
     [Fact]
@@ -84,12 +81,13 @@ public class Test_throwincatch
         testLog.StartRecording();
 
         // create test list
-        IGen[] genList = new IGen[] {
+        IGen[] genList = new IGen[]
+        {
             new Gen<int>(),
             new Gen<double>(),
             new Gen<string>(),
             new Gen<object>(),
-            new Gen<Exception>()
+            new Gen<Exception>(),
         };
 
         // run test
@@ -103,5 +101,4 @@ public class Test_throwincatch
 
         return testLog.VerifyOutput();
     }
-
 }

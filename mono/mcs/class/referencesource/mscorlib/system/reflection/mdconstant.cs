@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright(c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 namespace System.Reflection
 {
@@ -12,8 +12,13 @@ namespace System.Reflection
 
     internal static class MdConstant
     {
-        [System.Security.SecurityCritical]  // auto-generated
-        public static unsafe Object GetValue(MetadataImport scope, int token, RuntimeTypeHandle fieldTypeHandle, bool raw)
+        [System.Security.SecurityCritical] // auto-generated
+        public static unsafe Object GetValue(
+            MetadataImport scope,
+            int token,
+            RuntimeTypeHandle fieldTypeHandle,
+            bool raw
+        )
         {
             CorElementType corElementType = 0;
             long buffer = 0;
@@ -70,13 +75,15 @@ namespace System.Reflection
                     case CorElementType.U8:
                         defaultValue = buffer;
                         break;
-                
+
                     default:
-                        throw new FormatException(Environment.GetResourceString("Arg_BadLiteralFormat"));
+                        throw new FormatException(
+                            Environment.GetResourceString("Arg_BadLiteralFormat")
+                        );
                     #endregion
                 }
 
-                return RuntimeType.CreateEnum(fieldType, defaultValue);                       
+                return RuntimeType.CreateEnum(fieldType, defaultValue);
             }
             else if (fieldType == typeof(DateTime))
             {
@@ -88,7 +95,7 @@ namespace System.Reflection
 
                     case CorElementType.Void:
                         return DBNull.Value;
-                        
+
                     case CorElementType.I8:
                         defaultValue = buffer;
                         break;
@@ -96,10 +103,12 @@ namespace System.Reflection
                     case CorElementType.U8:
                         defaultValue = buffer;
                         break;
-                
+
                     default:
-                        throw new FormatException(Environment.GetResourceString("Arg_BadLiteralFormat"));
-                    #endregion  
+                        throw new FormatException(
+                            Environment.GetResourceString("Arg_BadLiteralFormat")
+                        );
+                    #endregion
                 }
 
                 return new DateTime(defaultValue);
@@ -139,14 +148,14 @@ namespace System.Reflection
 
                     case CorElementType.U8:
                         return (ulong)buffer;
-                
-                    case CorElementType.Boolean :
+
+                    case CorElementType.Boolean:
                         // The boolean value returned from the metadata engine is stored as a
                         // BOOL, which actually maps to an int. We need to read it out as an int
                         // to avoid problems on big-endian machines.
                         return (*(int*)&buffer != 0);
 
-                    case CorElementType.R4 :
+                    case CorElementType.R4:
                         return *(float*)&buffer;
 
                     case CorElementType.R8:
@@ -159,13 +168,14 @@ namespace System.Reflection
 
                     case CorElementType.Class:
                         return null;
-                    
+
                     default:
-                        throw new FormatException(Environment.GetResourceString("Arg_BadLiteralFormat"));
+                        throw new FormatException(
+                            Environment.GetResourceString("Arg_BadLiteralFormat")
+                        );
                     #endregion
                 }
             }
-        } 
+        }
     }
-
 }

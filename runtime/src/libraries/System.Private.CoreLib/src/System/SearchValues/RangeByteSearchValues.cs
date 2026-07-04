@@ -7,8 +7,10 @@ namespace System.Buffers
 {
     internal sealed class RangeByteSearchValues : SearchValues<byte>
     {
-        private readonly byte _lowInclusive, _highInclusive;
-        private readonly uint _lowUint, _highMinusLow;
+        private readonly byte _lowInclusive,
+            _highInclusive;
+        private readonly uint _lowUint,
+            _highMinusLow;
 
         public RangeByteSearchValues(byte lowInclusive, byte highInclusive)
         {
@@ -31,8 +33,7 @@ namespace System.Buffers
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal override bool ContainsCore(byte value) =>
-            value - _lowUint <= _highMinusLow;
+        internal override bool ContainsCore(byte value) => value - _lowUint <= _highMinusLow;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal override int IndexOfAny(ReadOnlySpan<byte> span) =>

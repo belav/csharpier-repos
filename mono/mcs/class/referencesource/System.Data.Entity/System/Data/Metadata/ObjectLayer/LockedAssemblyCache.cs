@@ -18,7 +18,11 @@ namespace System.Data.Metadata.Edm
     {
         private object _lockObject;
         private Dictionary<Assembly, ImmutableAssemblyCacheEntry> _globalAssemblyCache;
-        internal LockedAssemblyCache(object lockObject, Dictionary<Assembly, ImmutableAssemblyCacheEntry> globalAssemblyCache)
+
+        internal LockedAssemblyCache(
+            object lockObject,
+            Dictionary<Assembly, ImmutableAssemblyCacheEntry> globalAssemblyCache
+        )
         {
             _lockObject = lockObject;
             _globalAssemblyCache = globalAssemblyCache;
@@ -49,7 +53,10 @@ namespace System.Data.Metadata.Edm
                 Monitor.Exit(_lockObject);
             }
 
-            Debug.Assert(entered, "The cache is being accessed by a thread that isn't holding the lock");
+            Debug.Assert(
+                entered,
+                "The cache is being accessed by a thread that isn't holding the lock"
+            );
         }
 
         internal bool TryGetValue(Assembly assembly, out ImmutableAssemblyCacheEntry cacheEntry)

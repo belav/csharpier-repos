@@ -20,21 +20,23 @@ public class PropertyEntryTest
 
         using (var context = new UserContext())
         {
-            id = context.Add(
-                new User { Name = "A", LongName = "B" }).Entity.Id;
+            id = context.Add(new User { Name = "A", LongName = "B" }).Entity.Id;
 
             context.SaveChanges();
         }
 
         using (var context = new UserContext())
         {
-            var user = context.Attach(
-                new User
-                {
-                    Id = id,
-                    Name = "NewA",
-                    LongName = "NewB"
-                }).Entity;
+            var user = context
+                .Attach(
+                    new User
+                    {
+                        Id = id,
+                        Name = "NewA",
+                        LongName = "NewB",
+                    }
+                )
+                .Entity;
 
             context.Entry(user).Property(x => x.Name).IsModified = false;
             context.Entry(user).Property(x => x.LongName).IsModified = true;
@@ -61,8 +63,7 @@ public class PropertyEntryTest
 
         using (var context = new UserContext())
         {
-            id = context.Add(
-                new User { Name = "A", LongName = "B" }).Entity.Id;
+            id = context.Add(new User { Name = "A", LongName = "B" }).Entity.Id;
 
             context.SaveChanges();
         }
@@ -118,18 +119,17 @@ public class PropertyEntryTest
 
     private class UserContext : DbContext
     {
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                 .UseInMemoryDatabase(GetType().FullName!);
 
-        protected internal override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<User>(
-                b =>
-                {
-                    b.Property(e => e.Name).IsRequired();
-                    b.Property(e => e.LongName).IsRequired();
-                });
+        protected internal override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<User>(b =>
+            {
+                b.Property(e => e.Name).IsRequired();
+                b.Property(e => e.LongName).IsRequired();
+            });
     }
 
     [ConditionalFact]
@@ -138,21 +138,23 @@ public class PropertyEntryTest
         Guid id;
         using (var context = new UserContext())
         {
-            id = context.Add(
-                new User
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "A",
-                    LongName = "B"
-                }).Entity.Id;
+            id = context
+                .Add(
+                    new User
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = "A",
+                        LongName = "B",
+                    }
+                )
+                .Entity.Id;
 
             context.SaveChanges();
         }
 
         using (var context = new UserContext())
         {
-            var user = context.Update(
-                new User { Id = id }).Entity;
+            var user = context.Update(new User { Id = id }).Entity;
 
             user.Name = "A2";
             user.LongName = "B2";
@@ -173,12 +175,10 @@ public class PropertyEntryTest
     }
 
     [ConditionalFact]
-    public void Can_get_name()
-        => Can_get_name_helper<Wotty>();
+    public void Can_get_name() => Can_get_name_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_get_name_with_object_field()
-        => Can_get_name_helper<ObjectWotty>();
+    public void Can_get_name_with_object_field() => Can_get_name_helper<ObjectWotty>();
 
     private void Can_get_name_helper<TWotty>()
         where TWotty : IWotty, new()
@@ -190,22 +190,25 @@ public class PropertyEntryTest
                 {
                     Id = 1,
                     Primate = "Monkey",
-                    RequiredPrimate = "Tarsier"
-                })
+                    RequiredPrimate = "Tarsier",
+                }
+            )
             .GetInfrastructure();
 
         entry.SetEntityState(EntityState.Unchanged);
 
-        Assert.Equal("Primate", new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).Metadata.Name);
+        Assert.Equal(
+            "Primate",
+            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).Metadata.Name
+        );
     }
 
     [ConditionalFact]
-    public void Can_get_current_value()
-        => Can_get_current_value_helper<Wotty>();
+    public void Can_get_current_value() => Can_get_current_value_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_get_current_value_with_object_field()
-        => Can_get_current_value_helper<ObjectWotty>();
+    public void Can_get_current_value_with_object_field() =>
+        Can_get_current_value_helper<ObjectWotty>();
 
     private void Can_get_current_value_helper<TWotty>()
         where TWotty : IWotty, new()
@@ -217,23 +220,29 @@ public class PropertyEntryTest
                 {
                     Id = 1,
                     Primate = "Monkey",
-                    RequiredPrimate = "Tarsier"
-                })
+                    RequiredPrimate = "Tarsier",
+                }
+            )
             .GetInfrastructure();
 
         entry.SetEntityState(EntityState.Unchanged);
 
-        Assert.Equal("Monkey", new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).CurrentValue);
-        Assert.Equal("Tarsier", new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).CurrentValue);
+        Assert.Equal(
+            "Monkey",
+            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).CurrentValue
+        );
+        Assert.Equal(
+            "Tarsier",
+            new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).CurrentValue
+        );
     }
 
     [ConditionalFact]
-    public void Can_set_current_value()
-        => Can_set_current_value_helper<Wotty>();
+    public void Can_set_current_value() => Can_set_current_value_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_set_current_value_with_object_field()
-        => Can_set_current_value_helper<ObjectWotty>();
+    public void Can_set_current_value_with_object_field() =>
+        Can_set_current_value_helper<ObjectWotty>();
 
     private void Can_set_current_value_helper<TWotty>()
         where TWotty : IWotty, new()
@@ -243,13 +252,14 @@ public class PropertyEntryTest
         {
             Id = 1,
             Primate = "Monkey",
-            RequiredPrimate = "Tarsier"
+            RequiredPrimate = "Tarsier",
         };
         var entry = context.Entry(entity).GetInfrastructure();
         entry.SetEntityState(EntityState.Unchanged);
 
         new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).CurrentValue = "Chimp";
-        new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).CurrentValue = "Bushbaby";
+        new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).CurrentValue =
+            "Bushbaby";
 
         Assert.Equal("Chimp", entity.Primate);
         Assert.Equal("Bushbaby", entity.RequiredPrimate);
@@ -261,12 +271,11 @@ public class PropertyEntryTest
     }
 
     [ConditionalFact]
-    public void Can_set_current_value_to_null()
-        => Can_set_current_value_to_null_helper<Wotty>();
+    public void Can_set_current_value_to_null() => Can_set_current_value_to_null_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_set_current_value_to_null_with_object_field()
-        => Can_set_current_value_to_null_helper<ObjectWotty>();
+    public void Can_set_current_value_to_null_with_object_field() =>
+        Can_set_current_value_to_null_helper<ObjectWotty>();
 
     private void Can_set_current_value_to_null_helper<TWotty>()
         where TWotty : IWotty, new()
@@ -276,13 +285,14 @@ public class PropertyEntryTest
         {
             Id = 1,
             Primate = "Monkey",
-            RequiredPrimate = "Tarsier"
+            RequiredPrimate = "Tarsier",
         };
         var entry = context.Entry(entity).GetInfrastructure();
         entry.SetEntityState(EntityState.Unchanged);
 
         new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).CurrentValue = null;
-        new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).CurrentValue = null;
+        new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).CurrentValue =
+            null;
 
         Assert.Null(entity.Primate);
         Assert.Null(entity.RequiredPrimate);
@@ -294,12 +304,11 @@ public class PropertyEntryTest
     }
 
     [ConditionalFact]
-    public void Can_set_and_get_original_value()
-        => Can_set_and_get_original_value_helper<Wotty>();
+    public void Can_set_and_get_original_value() => Can_set_and_get_original_value_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_set_and_get_original_value_with_object_field()
-        => Can_set_and_get_original_value_helper<ObjectWotty>();
+    public void Can_set_and_get_original_value_with_object_field() =>
+        Can_set_and_get_original_value_helper<ObjectWotty>();
 
     private void Can_set_and_get_original_value_helper<TWotty>()
         where TWotty : IWotty, new()
@@ -309,39 +318,67 @@ public class PropertyEntryTest
         {
             Id = 1,
             Primate = "Monkey",
-            RequiredPrimate = "Tarsier"
+            RequiredPrimate = "Tarsier",
         };
         var entry = context.Entry(entity).GetInfrastructure();
         entry.SetEntityState(EntityState.Unchanged);
 
-        Assert.Equal("Monkey", new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue);
-        Assert.Equal("Tarsier", new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).OriginalValue);
+        Assert.Equal(
+            "Monkey",
+            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue
+        );
+        Assert.Equal(
+            "Tarsier",
+            new PropertyEntry(
+                entry,
+                entry.EntityType.FindProperty("RequiredPrimate")!
+            ).OriginalValue
+        );
 
         new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue = "Chimp";
-        new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).OriginalValue = "Bushbaby";
+        new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).OriginalValue =
+            "Bushbaby";
 
-        Assert.Equal("Chimp", new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue);
+        Assert.Equal(
+            "Chimp",
+            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue
+        );
         Assert.Equal("Monkey", entity.Primate);
 
-        Assert.Equal("Bushbaby", new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).OriginalValue);
+        Assert.Equal(
+            "Bushbaby",
+            new PropertyEntry(
+                entry,
+                entry.EntityType.FindProperty("RequiredPrimate")!
+            ).OriginalValue
+        );
         Assert.Equal("Tarsier", entity.RequiredPrimate);
 
         context.ChangeTracker.DetectChanges();
 
-        Assert.Equal("Chimp", new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue);
+        Assert.Equal(
+            "Chimp",
+            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue
+        );
         Assert.Equal("Monkey", entity.Primate);
 
-        Assert.Equal("Bushbaby", new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).OriginalValue);
+        Assert.Equal(
+            "Bushbaby",
+            new PropertyEntry(
+                entry,
+                entry.EntityType.FindProperty("RequiredPrimate")!
+            ).OriginalValue
+        );
         Assert.Equal("Tarsier", entity.RequiredPrimate);
     }
 
     [ConditionalFact]
-    public void Can_set_and_get_original_value_starting_null()
-        => Can_set_and_get_original_value_starting_null_helper<Wotty>();
+    public void Can_set_and_get_original_value_starting_null() =>
+        Can_set_and_get_original_value_starting_null_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_set_and_get_original_value_starting_null_with_object_field()
-        => Can_set_and_get_original_value_starting_null_helper<ObjectWotty>();
+    public void Can_set_and_get_original_value_starting_null_with_object_field() =>
+        Can_set_and_get_original_value_starting_null_helper<ObjectWotty>();
 
     private void Can_set_and_get_original_value_starting_null_helper<TWotty>()
         where TWotty : IWotty, new()
@@ -351,34 +388,59 @@ public class PropertyEntryTest
         var entry = context.Entry(entity).GetInfrastructure();
         entry.SetEntityState(EntityState.Unchanged);
 
-        Assert.Null(new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue);
-        Assert.Null(new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).OriginalValue);
+        Assert.Null(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue
+        );
+        Assert.Null(
+            new PropertyEntry(
+                entry,
+                entry.EntityType.FindProperty("RequiredPrimate")!
+            ).OriginalValue
+        );
 
         new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue = "Chimp";
-        new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).OriginalValue = "Bushbaby";
+        new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).OriginalValue =
+            "Bushbaby";
 
-        Assert.Equal("Chimp", new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue);
+        Assert.Equal(
+            "Chimp",
+            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue
+        );
         Assert.Null(entity.Primate);
 
-        Assert.Equal("Bushbaby", new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).OriginalValue);
+        Assert.Equal(
+            "Bushbaby",
+            new PropertyEntry(
+                entry,
+                entry.EntityType.FindProperty("RequiredPrimate")!
+            ).OriginalValue
+        );
         Assert.Null(entity.RequiredPrimate);
 
         context.ChangeTracker.DetectChanges();
 
-        Assert.Equal("Chimp", new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue);
+        Assert.Equal(
+            "Chimp",
+            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue
+        );
         Assert.Null(entity.Primate);
 
-        Assert.Equal("Bushbaby", new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).OriginalValue);
+        Assert.Equal(
+            "Bushbaby",
+            new PropertyEntry(
+                entry,
+                entry.EntityType.FindProperty("RequiredPrimate")!
+            ).OriginalValue
+        );
         Assert.Null(entity.RequiredPrimate);
     }
 
     [ConditionalFact]
-    public void Can_set_original_value_to_null()
-        => Can_set_original_value_to_null_helper<Wotty>();
+    public void Can_set_original_value_to_null() => Can_set_original_value_to_null_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_set_original_value_to_null_with_object_field()
-        => Can_set_original_value_to_null_helper<ObjectWotty>();
+    public void Can_set_original_value_to_null_with_object_field() =>
+        Can_set_original_value_to_null_helper<ObjectWotty>();
 
     private void Can_set_original_value_to_null_helper<TWotty>()
         where TWotty : IWotty, new()
@@ -388,30 +450,45 @@ public class PropertyEntryTest
         {
             Id = 1,
             Primate = "Monkey",
-            RequiredPrimate = "Tarsier"
+            RequiredPrimate = "Tarsier",
         };
         var entry = context.Entry(entity).GetInfrastructure();
         entry.SetEntityState(EntityState.Unchanged);
 
         new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue = null;
-        new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).OriginalValue = null;
+        new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).OriginalValue =
+            null;
 
-        Assert.Null(new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue);
-        Assert.Null(new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).OriginalValue);
+        Assert.Null(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue
+        );
+        Assert.Null(
+            new PropertyEntry(
+                entry,
+                entry.EntityType.FindProperty("RequiredPrimate")!
+            ).OriginalValue
+        );
 
         context.ChangeTracker.DetectChanges();
 
-        Assert.Null(new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue);
-        Assert.Null(new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).OriginalValue);
+        Assert.Null(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue
+        );
+        Assert.Null(
+            new PropertyEntry(
+                entry,
+                entry.EntityType.FindProperty("RequiredPrimate")!
+            ).OriginalValue
+        );
     }
 
     [ConditionalFact]
-    public void Can_set_and_clear_modified_on_Modified_entity()
-        => Can_set_and_clear_modified_on_Modified_entity_helper<Wotty>();
+    public void Can_set_and_clear_modified_on_Modified_entity() =>
+        Can_set_and_clear_modified_on_Modified_entity_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_set_and_clear_modified_on_Modified_entity_with_object_field()
-        => Can_set_and_clear_modified_on_Modified_entity_helper<ObjectWotty>();
+    public void Can_set_and_clear_modified_on_Modified_entity_with_object_field() =>
+        Can_set_and_clear_modified_on_Modified_entity_helper<ObjectWotty>();
 
     private void Can_set_and_clear_modified_on_Modified_entity_helper<TWotty>()
         where TWotty : IWotty, new()
@@ -422,49 +499,70 @@ public class PropertyEntryTest
         entry.SetEntityState(EntityState.Modified);
 
         Assert.True(new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified);
-        Assert.True(new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified);
+        Assert.True(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified
+        );
 
         context.ChangeTracker.DetectChanges();
 
         Assert.True(new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified);
-        Assert.True(new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified);
+        Assert.True(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified
+        );
 
         new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified = false;
-        new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified = false;
+        new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified =
+            false;
 
-        Assert.False(new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified);
-        Assert.False(new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified);
+        Assert.False(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified
+        );
+        Assert.False(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified
+        );
 
         context.ChangeTracker.DetectChanges();
 
-        Assert.False(new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified);
-        Assert.False(new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified);
+        Assert.False(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified
+        );
+        Assert.False(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified
+        );
 
         new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified = true;
-        new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified = true;
+        new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified =
+            true;
 
         Assert.True(new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified);
-        Assert.True(new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified);
+        Assert.True(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified
+        );
 
         context.ChangeTracker.DetectChanges();
 
         Assert.True(new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified);
-        Assert.True(new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified);
+        Assert.True(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Deleted)]
-    public void Can_set_and_clear_modified_on_Added_or_Deleted_entity(EntityState initialState)
-        => Can_set_and_clear_modified_on_Added_or_Deleted_entity_helper<Wotty>(initialState);
+    public void Can_set_and_clear_modified_on_Added_or_Deleted_entity(EntityState initialState) =>
+        Can_set_and_clear_modified_on_Added_or_Deleted_entity_helper<Wotty>(initialState);
 
     [ConditionalTheory]
     [InlineData(EntityState.Added)]
     [InlineData(EntityState.Deleted)]
-    public void Can_set_and_clear_modified_on_Added_or_Deleted_entity_with_object_field(EntityState initialState)
-        => Can_set_and_clear_modified_on_Added_or_Deleted_entity_helper<ObjectWotty>(initialState);
+    public void Can_set_and_clear_modified_on_Added_or_Deleted_entity_with_object_field(
+        EntityState initialState
+    ) => Can_set_and_clear_modified_on_Added_or_Deleted_entity_helper<ObjectWotty>(initialState);
 
-    private void Can_set_and_clear_modified_on_Added_or_Deleted_entity_helper<TWotty>(EntityState initialState)
+    private void Can_set_and_clear_modified_on_Added_or_Deleted_entity_helper<TWotty>(
+        EntityState initialState
+    )
         where TWotty : IWotty, new()
     {
         using var context = new PrimateContext();
@@ -472,41 +570,70 @@ public class PropertyEntryTest
         var entry = context.Entry(entity).GetInfrastructure();
         entry.SetEntityState(initialState);
 
-        Assert.False(new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified);
-        Assert.False(new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified);
+        Assert.False(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified
+        );
+        Assert.False(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified
+        );
 
         new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified = true;
-        new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified = true;
-        Assert.False(new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified);
-        Assert.False(new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified);
+        new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified =
+            true;
+        Assert.False(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified
+        );
+        Assert.False(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified
+        );
 
         context.ChangeTracker.DetectChanges();
-        Assert.False(new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified);
-        Assert.False(new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified);
+        Assert.False(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified
+        );
+        Assert.False(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified
+        );
 
         new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified = false;
-        new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified = false;
-        Assert.False(new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified);
-        Assert.False(new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified);
+        new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified =
+            false;
+        Assert.False(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified
+        );
+        Assert.False(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified
+        );
 
         context.ChangeTracker.DetectChanges();
-        Assert.False(new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified);
-        Assert.False(new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified);
+        Assert.False(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified
+        );
+        Assert.False(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified
+        );
     }
 
     [ConditionalTheory]
     [InlineData(EntityState.Detached)]
     [InlineData(EntityState.Unchanged)]
-    public void Can_set_and_clear_modified_on_Unchanged_or_Detached_entity(EntityState initialState)
-        => Can_set_and_clear_modified_on_Unchanged_or_Detached_entity_helper<Wotty>(initialState);
+    public void Can_set_and_clear_modified_on_Unchanged_or_Detached_entity(
+        EntityState initialState
+    ) => Can_set_and_clear_modified_on_Unchanged_or_Detached_entity_helper<Wotty>(initialState);
 
     [ConditionalTheory]
     [InlineData(EntityState.Detached)]
     [InlineData(EntityState.Unchanged)]
-    public void Can_set_and_clear_modified_on_Unchanged_or_Detached_entity_with_object_field(EntityState initialState)
-        => Can_set_and_clear_modified_on_Unchanged_or_Detached_entity_helper<ObjectWotty>(initialState);
+    public void Can_set_and_clear_modified_on_Unchanged_or_Detached_entity_with_object_field(
+        EntityState initialState
+    ) =>
+        Can_set_and_clear_modified_on_Unchanged_or_Detached_entity_helper<ObjectWotty>(
+            initialState
+        );
 
-    private void Can_set_and_clear_modified_on_Unchanged_or_Detached_entity_helper<TWotty>(EntityState initialState)
+    private void Can_set_and_clear_modified_on_Unchanged_or_Detached_entity_helper<TWotty>(
+        EntityState initialState
+    )
         where TWotty : IWotty, new()
     {
         using var context = new PrimateContext();
@@ -514,35 +641,53 @@ public class PropertyEntryTest
         var entry = context.Entry(entity).GetInfrastructure();
         entry.SetEntityState(initialState);
 
-        Assert.False(new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified);
-        Assert.False(new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified);
+        Assert.False(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified
+        );
+        Assert.False(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified
+        );
 
         new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified = true;
-        new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified = true;
+        new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified =
+            true;
         Assert.True(new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified);
-        Assert.True(new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified);
+        Assert.True(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified
+        );
 
         context.ChangeTracker.DetectChanges();
         Assert.True(new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified);
-        Assert.True(new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified);
+        Assert.True(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified
+        );
 
         new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified = false;
-        new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified = false;
-        Assert.False(new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified);
-        Assert.False(new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified);
+        new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified =
+            false;
+        Assert.False(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified
+        );
+        Assert.False(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified
+        );
 
         context.ChangeTracker.DetectChanges();
-        Assert.False(new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified);
-        Assert.False(new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified);
+        Assert.False(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified
+        );
+        Assert.False(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!).IsModified
+        );
     }
 
     [ConditionalFact]
-    public void Can_reject_changes_when_clearing_modified_flag()
-        => Can_reject_changes_when_clearing_modified_flag_helper<Wotty>();
+    public void Can_reject_changes_when_clearing_modified_flag() =>
+        Can_reject_changes_when_clearing_modified_flag_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_reject_changes_when_clearing_modified_flag_with_object_field()
-        => Can_reject_changes_when_clearing_modified_flag_helper<ObjectWotty>();
+    public void Can_reject_changes_when_clearing_modified_flag_with_object_field() =>
+        Can_reject_changes_when_clearing_modified_flag_helper<ObjectWotty>();
 
     private void Can_reject_changes_when_clearing_modified_flag_helper<TWotty>()
         where TWotty : IWotty, new()
@@ -553,19 +698,31 @@ public class PropertyEntryTest
             Id = 1,
             Primate = "Monkey",
             Marmate = "Bovril",
-            RequiredPrimate = "Tarsier"
+            RequiredPrimate = "Tarsier",
         };
         var entry = context.Entry(entity).GetInfrastructure();
         entry.SetEntityState(EntityState.Unchanged);
 
-        var primateEntry =
-            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!) { OriginalValue = "Chimp", IsModified = true };
+        var primateEntry = new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!)
+        {
+            OriginalValue = "Chimp",
+            IsModified = true,
+        };
 
-        var marmateEntry =
-            new PropertyEntry(entry, entry.EntityType.FindProperty("Marmate")!) { OriginalValue = "Marmite", IsModified = true };
+        var marmateEntry = new PropertyEntry(entry, entry.EntityType.FindProperty("Marmate")!)
+        {
+            OriginalValue = "Marmite",
+            IsModified = true,
+        };
 
-        var requiredEntry =
-            new PropertyEntry(entry, entry.EntityType.FindProperty("RequiredPrimate")!) { OriginalValue = "Bushbaby", IsModified = true };
+        var requiredEntry = new PropertyEntry(
+            entry,
+            entry.EntityType.FindProperty("RequiredPrimate")!
+        )
+        {
+            OriginalValue = "Bushbaby",
+            IsModified = true,
+        };
 
         Assert.Equal(EntityState.Modified, entry.EntityState);
         Assert.Equal("Monkey", entity.Primate);
@@ -619,12 +776,11 @@ public class PropertyEntryTest
     }
 
     [ConditionalFact]
-    public void Can_get_name_generic()
-        => Can_get_name_generic_helper<Wotty>();
+    public void Can_get_name_generic() => Can_get_name_generic_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_get_name_generic_with_object_field()
-        => Can_get_name_generic_helper<ObjectWotty>();
+    public void Can_get_name_generic_with_object_field() =>
+        Can_get_name_generic_helper<ObjectWotty>();
 
     private void Can_get_name_generic_helper<TWotty>()
         where TWotty : class, IWotty, new()
@@ -632,18 +788,23 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            new TWotty { Id = 1, Primate = "Monkey" });
+            new TWotty { Id = 1, Primate = "Monkey" }
+        );
 
-        Assert.Equal("Primate", new PropertyEntry<Wotty, string>(entry, entry.EntityType.FindProperty("Primate")!).Metadata.Name);
+        Assert.Equal(
+            "Primate",
+            new PropertyEntry<Wotty, string>(entry, entry.EntityType.FindProperty("Primate")!)
+                .Metadata
+                .Name
+        );
     }
 
     [ConditionalFact]
-    public void Can_get_current_value_generic()
-        => Can_get_current_value_generic_helper<Wotty>();
+    public void Can_get_current_value_generic() => Can_get_current_value_generic_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_get_current_value_generic_with_object_field()
-        => Can_get_current_value_generic_helper<ObjectWotty>();
+    public void Can_get_current_value_generic_with_object_field() =>
+        Can_get_current_value_generic_helper<ObjectWotty>();
 
     private void Can_get_current_value_generic_helper<TWotty>()
         where TWotty : class, IWotty, new()
@@ -651,18 +812,24 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            new TWotty { Id = 1, Primate = "Monkey" });
+            new TWotty { Id = 1, Primate = "Monkey" }
+        );
 
-        Assert.Equal("Monkey", new PropertyEntry<Wotty, string>(entry, entry.EntityType.FindProperty("Primate")!).CurrentValue);
+        Assert.Equal(
+            "Monkey",
+            new PropertyEntry<Wotty, string>(
+                entry,
+                entry.EntityType.FindProperty("Primate")!
+            ).CurrentValue
+        );
     }
 
     [ConditionalFact]
-    public void Can_set_current_value_generic()
-        => Can_set_current_value_generic_helper<Wotty>();
+    public void Can_set_current_value_generic() => Can_set_current_value_generic_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_set_current_value_generic_with_object_field()
-        => Can_set_current_value_generic_helper<ObjectWotty>();
+    public void Can_set_current_value_generic_with_object_field() =>
+        Can_set_current_value_generic_helper<ObjectWotty>();
 
     private void Can_set_current_value_generic_helper<TWotty>()
         where TWotty : class, IWotty, new()
@@ -672,20 +839,24 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            entity);
+            entity
+        );
 
-        new PropertyEntry<Wotty, string>(entry, entry.EntityType.FindProperty("Primate")!).CurrentValue = "Chimp";
+        new PropertyEntry<Wotty, string>(
+            entry,
+            entry.EntityType.FindProperty("Primate")!
+        ).CurrentValue = "Chimp";
 
         Assert.Equal("Chimp", entity.Primate);
     }
 
     [ConditionalFact]
-    public void Can_set_current_value_to_null_generic()
-        => Can_set_current_value_to_null_generic_helper<Wotty>();
+    public void Can_set_current_value_to_null_generic() =>
+        Can_set_current_value_to_null_generic_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_set_current_value_to_null_generic_with_object_field()
-        => Can_set_current_value_to_null_generic_helper<ObjectWotty>();
+    public void Can_set_current_value_to_null_generic_with_object_field() =>
+        Can_set_current_value_to_null_generic_helper<ObjectWotty>();
 
     private void Can_set_current_value_to_null_generic_helper<TWotty>()
         where TWotty : class, IWotty, new()
@@ -695,20 +866,24 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            entity);
+            entity
+        );
 
-        new PropertyEntry<Wotty, string?>(entry, entry.EntityType.FindProperty("Primate")!).CurrentValue = null;
+        new PropertyEntry<Wotty, string?>(
+            entry,
+            entry.EntityType.FindProperty("Primate")!
+        ).CurrentValue = null;
 
         Assert.Null(entity.Primate);
     }
 
     [ConditionalFact]
-    public void Can_set_and_get_original_value_generic()
-        => Can_set_and_get_original_value_generic_helper<Wotty>();
+    public void Can_set_and_get_original_value_generic() =>
+        Can_set_and_get_original_value_generic_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_set_and_get_original_value_generic_with_object_field()
-        => Can_set_and_get_original_value_generic_helper<ObjectWotty>();
+    public void Can_set_and_get_original_value_generic_with_object_field() =>
+        Can_set_and_get_original_value_generic_helper<ObjectWotty>();
 
     private void Can_set_and_get_original_value_generic_helper<TWotty>()
         where TWotty : class, IWotty, new()
@@ -718,23 +893,39 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            entity);
+            entity
+        );
 
-        Assert.Equal("Monkey", new PropertyEntry<Wotty, string>(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue);
+        Assert.Equal(
+            "Monkey",
+            new PropertyEntry<Wotty, string>(
+                entry,
+                entry.EntityType.FindProperty("Primate")!
+            ).OriginalValue
+        );
 
-        new PropertyEntry<Wotty, string>(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue = "Chimp";
+        new PropertyEntry<Wotty, string>(
+            entry,
+            entry.EntityType.FindProperty("Primate")!
+        ).OriginalValue = "Chimp";
 
-        Assert.Equal("Chimp", new PropertyEntry<Wotty, string>(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue);
+        Assert.Equal(
+            "Chimp",
+            new PropertyEntry<Wotty, string>(
+                entry,
+                entry.EntityType.FindProperty("Primate")!
+            ).OriginalValue
+        );
         Assert.Equal("Monkey", entity.Primate);
     }
 
     [ConditionalFact]
-    public void Can_set_original_value_to_null_generic()
-        => Can_set_original_value_to_null_generic_helper<Wotty>();
+    public void Can_set_original_value_to_null_generic() =>
+        Can_set_original_value_to_null_generic_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_set_original_value_to_null_generic_with_object_field()
-        => Can_set_original_value_to_null_generic_helper<ObjectWotty>();
+    public void Can_set_original_value_to_null_generic_with_object_field() =>
+        Can_set_original_value_to_null_generic_helper<ObjectWotty>();
 
     private void Can_set_original_value_to_null_generic_helper<TWotty>()
         where TWotty : class, IWotty, new()
@@ -742,20 +933,29 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            new TWotty { Id = 1, Primate = "Monkey" });
+            new TWotty { Id = 1, Primate = "Monkey" }
+        );
 
-        new PropertyEntry<Wotty, string?>(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue = null;
+        new PropertyEntry<Wotty, string?>(
+            entry,
+            entry.EntityType.FindProperty("Primate")!
+        ).OriginalValue = null;
 
-        Assert.Null(new PropertyEntry<Wotty, string>(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue);
+        Assert.Null(
+            new PropertyEntry<Wotty, string>(
+                entry,
+                entry.EntityType.FindProperty("Primate")!
+            ).OriginalValue
+        );
     }
 
     [ConditionalFact]
-    public void Can_set_and_clear_modified_generic()
-        => Can_set_and_clear_modified_generic_helper<Wotty>();
+    public void Can_set_and_clear_modified_generic() =>
+        Can_set_and_clear_modified_generic_helper<Wotty>();
 
     [ConditionalFact]
-    public void Can_set_and_clear_modified_generic_with_object_field()
-        => Can_set_and_clear_modified_generic_helper<ObjectWotty>();
+    public void Can_set_and_clear_modified_generic_with_object_field() =>
+        Can_set_and_clear_modified_generic_helper<ObjectWotty>();
 
     private void Can_set_and_clear_modified_generic_helper<TWotty>()
         where TWotty : class, IWotty, new()
@@ -765,17 +965,33 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            entity);
+            entity
+        );
 
-        Assert.False(new PropertyEntry<Wotty, string>(entry, entry.EntityType.FindProperty("Primate")!).IsModified);
+        Assert.False(
+            new PropertyEntry<Wotty, string>(
+                entry,
+                entry.EntityType.FindProperty("Primate")!
+            ).IsModified
+        );
 
         new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified = true;
 
-        Assert.True(new PropertyEntry<Wotty, string>(entry, entry.EntityType.FindProperty("Primate")!).IsModified);
+        Assert.True(
+            new PropertyEntry<Wotty, string>(
+                entry,
+                entry.EntityType.FindProperty("Primate")!
+            ).IsModified
+        );
 
         new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).IsModified = false;
 
-        Assert.False(new PropertyEntry<Wotty, string>(entry, entry.EntityType.FindProperty("Primate")!).IsModified);
+        Assert.False(
+            new PropertyEntry<Wotty, string>(
+                entry,
+                entry.EntityType.FindProperty("Primate")!
+            ).IsModified
+        );
     }
 
     [ConditionalFact]
@@ -786,13 +1002,20 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            entity);
+            entity
+        );
 
-        Assert.Equal("Monkey", new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue);
+        Assert.Equal(
+            "Monkey",
+            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue
+        );
 
         new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue = "Chimp";
 
-        Assert.Equal("Chimp", new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue);
+        Assert.Equal(
+            "Chimp",
+            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue
+        );
         Assert.Equal("Monkey", entity.Primate);
     }
 
@@ -802,11 +1025,14 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            new NotifyingWotty { Id = 1, Primate = "Monkey" });
+            new NotifyingWotty { Id = 1, Primate = "Monkey" }
+        );
 
         new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue = null;
 
-        Assert.Null(new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue);
+        Assert.Null(
+            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue
+        );
     }
 
     [ConditionalFact]
@@ -817,13 +1043,29 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            entity);
+            entity
+        );
 
-        Assert.Equal("Monkey", new PropertyEntry<NotifyingWotty, string>(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue);
+        Assert.Equal(
+            "Monkey",
+            new PropertyEntry<NotifyingWotty, string>(
+                entry,
+                entry.EntityType.FindProperty("Primate")!
+            ).OriginalValue
+        );
 
-        new PropertyEntry<NotifyingWotty, string>(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue = "Chimp";
+        new PropertyEntry<NotifyingWotty, string>(
+            entry,
+            entry.EntityType.FindProperty("Primate")!
+        ).OriginalValue = "Chimp";
 
-        Assert.Equal("Chimp", new PropertyEntry<NotifyingWotty, string>(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue);
+        Assert.Equal(
+            "Chimp",
+            new PropertyEntry<NotifyingWotty, string>(
+                entry,
+                entry.EntityType.FindProperty("Primate")!
+            ).OriginalValue
+        );
         Assert.Equal("Monkey", entity.Primate);
     }
 
@@ -833,11 +1075,20 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            new NotifyingWotty { Id = 1, Primate = "Monkey" });
+            new NotifyingWotty { Id = 1, Primate = "Monkey" }
+        );
 
-        new PropertyEntry<NotifyingWotty, string?>(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue = null;
+        new PropertyEntry<NotifyingWotty, string?>(
+            entry,
+            entry.EntityType.FindProperty("Primate")!
+        ).OriginalValue = null;
 
-        Assert.Null(new PropertyEntry<NotifyingWotty, string>(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue);
+        Assert.Null(
+            new PropertyEntry<NotifyingWotty, string>(
+                entry,
+                entry.EntityType.FindProperty("Primate")!
+            ).OriginalValue
+        );
     }
 
     [ConditionalFact]
@@ -848,13 +1099,29 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            entity);
+            entity
+        );
 
-        Assert.Equal("Monkey", new PropertyEntry(entry, entry.EntityType.FindProperty("ConcurrentPrimate")!).OriginalValue);
+        Assert.Equal(
+            "Monkey",
+            new PropertyEntry(
+                entry,
+                entry.EntityType.FindProperty("ConcurrentPrimate")!
+            ).OriginalValue
+        );
 
-        new PropertyEntry(entry, entry.EntityType.FindProperty("ConcurrentPrimate")!).OriginalValue = "Chimp";
+        new PropertyEntry(
+            entry,
+            entry.EntityType.FindProperty("ConcurrentPrimate")!
+        ).OriginalValue = "Chimp";
 
-        Assert.Equal("Chimp", new PropertyEntry(entry, entry.EntityType.FindProperty("ConcurrentPrimate")!).OriginalValue);
+        Assert.Equal(
+            "Chimp",
+            new PropertyEntry(
+                entry,
+                entry.EntityType.FindProperty("ConcurrentPrimate")!
+            ).OriginalValue
+        );
         Assert.Equal("Monkey", entity.ConcurrentPrimate);
     }
 
@@ -864,11 +1131,20 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            new FullyNotifyingWotty { Id = 1, ConcurrentPrimate = "Monkey" });
+            new FullyNotifyingWotty { Id = 1, ConcurrentPrimate = "Monkey" }
+        );
 
-        new PropertyEntry(entry, entry.EntityType.FindProperty("ConcurrentPrimate")!).OriginalValue = null;
+        new PropertyEntry(
+            entry,
+            entry.EntityType.FindProperty("ConcurrentPrimate")!
+        ).OriginalValue = null;
 
-        Assert.Null(new PropertyEntry(entry, entry.EntityType.FindProperty("ConcurrentPrimate")!).OriginalValue);
+        Assert.Null(
+            new PropertyEntry(
+                entry,
+                entry.EntityType.FindProperty("ConcurrentPrimate")!
+            ).OriginalValue
+        );
     }
 
     [ConditionalFact]
@@ -879,17 +1155,29 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            entity);
+            entity
+        );
 
         Assert.Equal(
             "Monkey",
-            new PropertyEntry<FullyNotifyingWotty, string>(entry, entry.EntityType.FindProperty("ConcurrentPrimate")!).OriginalValue);
+            new PropertyEntry<FullyNotifyingWotty, string>(
+                entry,
+                entry.EntityType.FindProperty("ConcurrentPrimate")!
+            ).OriginalValue
+        );
 
-        new PropertyEntry<FullyNotifyingWotty, string>(entry, entry.EntityType.FindProperty("ConcurrentPrimate")!).OriginalValue = "Chimp";
+        new PropertyEntry<FullyNotifyingWotty, string>(
+            entry,
+            entry.EntityType.FindProperty("ConcurrentPrimate")!
+        ).OriginalValue = "Chimp";
 
         Assert.Equal(
             "Chimp",
-            new PropertyEntry<FullyNotifyingWotty, string>(entry, entry.EntityType.FindProperty("ConcurrentPrimate")!).OriginalValue);
+            new PropertyEntry<FullyNotifyingWotty, string>(
+                entry,
+                entry.EntityType.FindProperty("ConcurrentPrimate")!
+            ).OriginalValue
+        );
         Assert.Equal("Monkey", entity.ConcurrentPrimate);
     }
 
@@ -899,12 +1187,20 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            new FullyNotifyingWotty { Id = 1, ConcurrentPrimate = "Monkey" });
+            new FullyNotifyingWotty { Id = 1, ConcurrentPrimate = "Monkey" }
+        );
 
-        new PropertyEntry<FullyNotifyingWotty, string?>(entry, entry.EntityType.FindProperty("ConcurrentPrimate")!).OriginalValue = null;
+        new PropertyEntry<FullyNotifyingWotty, string?>(
+            entry,
+            entry.EntityType.FindProperty("ConcurrentPrimate")!
+        ).OriginalValue = null;
 
         Assert.Null(
-            new PropertyEntry<FullyNotifyingWotty, string>(entry, entry.EntityType.FindProperty("ConcurrentPrimate")!).OriginalValue);
+            new PropertyEntry<FullyNotifyingWotty, string>(
+                entry,
+                entry.EntityType.FindProperty("ConcurrentPrimate")!
+            ).OriginalValue
+        );
     }
 
     [ConditionalFact]
@@ -915,17 +1211,22 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            entity);
+            entity
+        );
 
         var propertyEntry = new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!);
 
         Assert.Equal(
             CoreStrings.OriginalValueNotTracked("Primate", "FullyNotifyingWotty"),
-            Assert.Throws<InvalidOperationException>(() => propertyEntry.OriginalValue).Message);
+            Assert.Throws<InvalidOperationException>(() => propertyEntry.OriginalValue).Message
+        );
 
         Assert.Equal(
             CoreStrings.OriginalValueNotTracked("Primate", "FullyNotifyingWotty"),
-            Assert.Throws<InvalidOperationException>(() => propertyEntry.OriginalValue = "Chimp").Message);
+            Assert
+                .Throws<InvalidOperationException>(() => propertyEntry.OriginalValue = "Chimp")
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -936,17 +1237,25 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(),
             EntityState.Unchanged,
-            entity);
+            entity
+        );
 
-        var propertyEntry = new PropertyEntry<FullyNotifyingWotty, string>(entry, entry.EntityType.FindProperty("Primate")!);
+        var propertyEntry = new PropertyEntry<FullyNotifyingWotty, string>(
+            entry,
+            entry.EntityType.FindProperty("Primate")!
+        );
 
         Assert.Equal(
             CoreStrings.OriginalValueNotTracked("Primate", "FullyNotifyingWotty"),
-            Assert.Throws<InvalidOperationException>(() => propertyEntry.OriginalValue).Message);
+            Assert.Throws<InvalidOperationException>(() => propertyEntry.OriginalValue).Message
+        );
 
         Assert.Equal(
             CoreStrings.OriginalValueNotTracked("Primate", "FullyNotifyingWotty"),
-            Assert.Throws<InvalidOperationException>(() => propertyEntry.OriginalValue = "Chimp").Message);
+            Assert
+                .Throws<InvalidOperationException>(() => propertyEntry.OriginalValue = "Chimp")
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -957,13 +1266,20 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues),
             EntityState.Unchanged,
-            entity);
+            entity
+        );
 
-        Assert.Equal("Monkey", new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue);
+        Assert.Equal(
+            "Monkey",
+            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue
+        );
 
         new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue = "Chimp";
 
-        Assert.Equal("Chimp", new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue);
+        Assert.Equal(
+            "Chimp",
+            new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue
+        );
         Assert.Equal("Monkey", entity.Primate);
     }
 
@@ -975,15 +1291,29 @@ public class PropertyEntryTest
         var entry = InMemoryTestHelpers.Instance.CreateInternalEntry(
             BuildModel(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues),
             EntityState.Unchanged,
-            entity);
+            entity
+        );
 
         Assert.Equal(
-            "Monkey", new PropertyEntry<FullyNotifyingWotty, string>(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue);
+            "Monkey",
+            new PropertyEntry<FullyNotifyingWotty, string>(
+                entry,
+                entry.EntityType.FindProperty("Primate")!
+            ).OriginalValue
+        );
 
-        new PropertyEntry<FullyNotifyingWotty, string>(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue = "Chimp";
+        new PropertyEntry<FullyNotifyingWotty, string>(
+            entry,
+            entry.EntityType.FindProperty("Primate")!
+        ).OriginalValue = "Chimp";
 
         Assert.Equal(
-            "Chimp", new PropertyEntry<FullyNotifyingWotty, string>(entry, entry.EntityType.FindProperty("Primate")!).OriginalValue);
+            "Chimp",
+            new PropertyEntry<FullyNotifyingWotty, string>(
+                entry,
+                entry.EntityType.FindProperty("Primate")!
+            ).OriginalValue
+        );
         Assert.Equal("Monkey", entity.Primate);
     }
 
@@ -1001,18 +1331,18 @@ public class PropertyEntryTest
                         Charge = 1.0m,
                         Tag = new Tag { Text = "Ta1" },
                         Title = "Ti1",
-                        Tog = new Tog { Text = "To1" }
+                        Tog = new Tog { Text = "To1" },
                     },
                     Manufacturer = new Manufacturer
                     {
                         Name = "M1",
                         Rating = 7,
                         Tag = new Tag { Text = "Ta2" },
-                        Tog = new Tog { Text = "To2" }
+                        Tog = new Tog { Text = "To2" },
                     },
                     Rating = 8,
                     Species = "S1",
-                    Validation = false
+                    Validation = false,
                 },
                 Milk = new Milk
                 {
@@ -1021,18 +1351,18 @@ public class PropertyEntryTest
                         Charge = 1.0m,
                         Tag = new Tag { Text = "Ta1" },
                         Title = "Ti1",
-                        Tog = new Tog { Text = "To1" }
+                        Tog = new Tog { Text = "To1" },
                     },
                     Manufacturer = new Manufacturer
                     {
                         Name = "M1",
                         Rating = 7,
                         Tag = new Tag { Text = "Ta2" },
-                        Tog = new Tog { Text = "To2" }
+                        Tog = new Tog { Text = "To2" },
                     },
                     Rating = 8,
                     Species = "S1",
-                    Validation = false
+                    Validation = false,
                 },
                 FieldCulture = new FieldCulture
                 {
@@ -1041,18 +1371,18 @@ public class PropertyEntryTest
                         Charge = 1.0m,
                         Tag = new FieldTag { Text = "Ta1" },
                         Title = "Ti1",
-                        Tog = new FieldTog { Text = "To1" }
+                        Tog = new FieldTog { Text = "To1" },
                     },
                     Manufacturer = new FieldManufacturer
                     {
                         Name = "M1",
                         Rating = 7,
                         Tag = new FieldTag { Text = "Ta2" },
-                        Tog = new FieldTog { Text = "To2" }
+                        Tog = new FieldTog { Text = "To2" },
                     },
                     Rating = 8,
                     Species = "S1",
-                    Validation = false
+                    Validation = false,
                 },
                 FieldMilk = new FieldMilk
                 {
@@ -1061,20 +1391,21 @@ public class PropertyEntryTest
                         Charge = 1.0m,
                         Tag = new FieldTag { Text = "Ta1" },
                         Title = "Ti1",
-                        Tog = new FieldTog { Text = "To1" }
+                        Tog = new FieldTog { Text = "To1" },
                     },
                     Manufacturer = new FieldManufacturer
                     {
                         Name = "M1",
                         Rating = 7,
                         Tag = new FieldTag { Text = "Ta2" },
-                        Tog = new FieldTog { Text = "To2" }
+                        Tog = new FieldTog { Text = "To2" },
                     },
                     Rating = 8,
                     Species = "S1",
-                    Validation = false
-                }
-            });
+                    Validation = false,
+                },
+            }
+        );
 
         entry.State = EntityState.Unchanged;
 
@@ -1184,18 +1515,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             Milk = new Milk
             {
@@ -1204,18 +1535,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldCulture = new FieldCulture
             {
@@ -1224,18 +1555,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldMilk = new FieldMilk
             {
@@ -1244,19 +1575,19 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
-            }
+                Validation = false,
+            },
         };
 
         var entry = context.Entry(yogurt);
@@ -1273,22 +1604,52 @@ public class PropertyEntryTest
         Assert.Equal(yogurt.Culture, cultureEntry.CurrentValue);
         Assert.Equal(yogurt.Culture.Rating, cultureEntry.Property(e => e.Rating).CurrentValue);
         Assert.Equal(yogurt.Culture.Species, cultureEntry.Property(e => e.Species).CurrentValue);
-        Assert.Equal(yogurt.Culture.Subspecies, cultureEntry.Property(e => e.Subspecies).CurrentValue);
-        Assert.Equal(yogurt.Culture.Validation, cultureEntry.Property(e => e.Validation).CurrentValue);
+        Assert.Equal(
+            yogurt.Culture.Subspecies,
+            cultureEntry.Property(e => e.Subspecies).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.Culture.Validation,
+            cultureEntry.Property(e => e.Validation).CurrentValue
+        );
         Assert.Equal(yogurt.Culture.Manufacturer, cultureManufacturerEntry.CurrentValue);
-        Assert.Equal(yogurt.Culture.Manufacturer.Name, cultureManufacturerEntry.Property(e => e.Name).CurrentValue);
-        Assert.Equal(yogurt.Culture.Manufacturer.Rating, cultureManufacturerEntry.Property(e => e.Rating).CurrentValue);
+        Assert.Equal(
+            yogurt.Culture.Manufacturer.Name,
+            cultureManufacturerEntry.Property(e => e.Name).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.Culture.Manufacturer.Rating,
+            cultureManufacturerEntry.Property(e => e.Rating).CurrentValue
+        );
         Assert.Equal(yogurt.Culture.Manufacturer.Tog, cultureManTogEntry.CurrentValue);
-        Assert.Equal(yogurt.Culture.Manufacturer.Tog.Text, cultureManTogEntry.Property(e => e.Text).CurrentValue);
+        Assert.Equal(
+            yogurt.Culture.Manufacturer.Tog.Text,
+            cultureManTogEntry.Property(e => e.Text).CurrentValue
+        );
         Assert.Equal(yogurt.Culture.Manufacturer.Tag, cultureManTagEntry.CurrentValue);
-        Assert.Equal(yogurt.Culture.Manufacturer.Tag.Text, cultureManTagEntry.Property(e => e.Text).CurrentValue);
+        Assert.Equal(
+            yogurt.Culture.Manufacturer.Tag.Text,
+            cultureManTagEntry.Property(e => e.Text).CurrentValue
+        );
         Assert.Equal(yogurt.Culture.License, cultureLicenseEntry.CurrentValue);
-        Assert.Equal(yogurt.Culture.License.Title, cultureLicenseEntry.Property(e => e.Title).CurrentValue);
-        Assert.Equal(yogurt.Culture.License.Charge, cultureLicenseEntry.Property(e => e.Charge).CurrentValue);
+        Assert.Equal(
+            yogurt.Culture.License.Title,
+            cultureLicenseEntry.Property(e => e.Title).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.Culture.License.Charge,
+            cultureLicenseEntry.Property(e => e.Charge).CurrentValue
+        );
         Assert.Equal(yogurt.Culture.License.Tog, cultureLicTogEntry.CurrentValue);
-        Assert.Equal(yogurt.Culture.License.Tog.Text, cultureLicTogEntry.Property(e => e.Text).CurrentValue);
+        Assert.Equal(
+            yogurt.Culture.License.Tog.Text,
+            cultureLicTogEntry.Property(e => e.Text).CurrentValue
+        );
         Assert.Equal(yogurt.Culture.License.Tag, cultureLicTagEntry.CurrentValue);
-        Assert.Equal(yogurt.Culture.License.Tag.Text, cultureLicTagEntry.Property(e => e.Text).CurrentValue);
+        Assert.Equal(
+            yogurt.Culture.License.Tag.Text,
+            cultureLicTagEntry.Property(e => e.Text).CurrentValue
+        );
 
         var milkEntry = entry.ComplexProperty(e => e.Milk);
         var milkManufacturerEntry = milkEntry.ComplexProperty(e => e.Manufacturer);
@@ -1304,19 +1665,43 @@ public class PropertyEntryTest
         Assert.Equal(yogurt.Milk.Subspecies, milkEntry.Property(e => e.Subspecies).CurrentValue);
         Assert.Equal(yogurt.Milk.Validation, milkEntry.Property(e => e.Validation).CurrentValue);
         Assert.Equal(yogurt.Milk.Manufacturer, milkManufacturerEntry.CurrentValue);
-        Assert.Equal(yogurt.Milk.Manufacturer.Name, milkManufacturerEntry.Property(e => e.Name).CurrentValue);
-        Assert.Equal(yogurt.Milk.Manufacturer.Rating, milkManufacturerEntry.Property(e => e.Rating).CurrentValue);
+        Assert.Equal(
+            yogurt.Milk.Manufacturer.Name,
+            milkManufacturerEntry.Property(e => e.Name).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.Milk.Manufacturer.Rating,
+            milkManufacturerEntry.Property(e => e.Rating).CurrentValue
+        );
         Assert.Equal(yogurt.Milk.Manufacturer.Tog, milkManTogEntry.CurrentValue);
-        Assert.Equal(yogurt.Milk.Manufacturer.Tog.Text, milkManTogEntry.Property(e => e.Text).CurrentValue);
+        Assert.Equal(
+            yogurt.Milk.Manufacturer.Tog.Text,
+            milkManTogEntry.Property(e => e.Text).CurrentValue
+        );
         Assert.Equal(yogurt.Milk.Manufacturer.Tag, milkManTagEntry.CurrentValue);
-        Assert.Equal(yogurt.Milk.Manufacturer.Tag.Text, milkManTagEntry.Property(e => e.Text).CurrentValue);
+        Assert.Equal(
+            yogurt.Milk.Manufacturer.Tag.Text,
+            milkManTagEntry.Property(e => e.Text).CurrentValue
+        );
         Assert.Equal(yogurt.Milk.License, milkLicenseEntry.CurrentValue);
-        Assert.Equal(yogurt.Milk.License.Title, milkLicenseEntry.Property(e => e.Title).CurrentValue);
-        Assert.Equal(yogurt.Milk.License.Charge, milkLicenseEntry.Property(e => e.Charge).CurrentValue);
+        Assert.Equal(
+            yogurt.Milk.License.Title,
+            milkLicenseEntry.Property(e => e.Title).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.Milk.License.Charge,
+            milkLicenseEntry.Property(e => e.Charge).CurrentValue
+        );
         Assert.Equal(yogurt.Milk.License.Tog, milkLicTogEntry.CurrentValue);
-        Assert.Equal(yogurt.Milk.License.Tog.Text, milkLicTogEntry.Property(e => e.Text).CurrentValue);
+        Assert.Equal(
+            yogurt.Milk.License.Tog.Text,
+            milkLicTogEntry.Property(e => e.Text).CurrentValue
+        );
         Assert.Equal(yogurt.Milk.License.Tag, milkLicTagEntry.CurrentValue);
-        Assert.Equal(yogurt.Milk.License.Tag.Text, milkLicTagEntry.Property(e => e.Text).CurrentValue);
+        Assert.Equal(
+            yogurt.Milk.License.Tag.Text,
+            milkLicTagEntry.Property(e => e.Text).CurrentValue
+        );
 
         var fieldCultureEntry = entry.ComplexProperty(e => e.FieldCulture);
         var fieldCultureManufacturerEntry = fieldCultureEntry.ComplexProperty(e => e.Manufacturer);
@@ -1327,24 +1712,60 @@ public class PropertyEntryTest
         var fieldCultureLicTagEntry = fieldCultureLicenseEntry.ComplexProperty(e => e.Tag);
 
         Assert.Equal(yogurt.FieldCulture, fieldCultureEntry.CurrentValue);
-        Assert.Equal(yogurt.FieldCulture.Rating, fieldCultureEntry.Property(e => e.Rating).CurrentValue);
-        Assert.Equal(yogurt.FieldCulture.Species, fieldCultureEntry.Property(e => e.Species).CurrentValue);
-        Assert.Equal(yogurt.FieldCulture.Subspecies, fieldCultureEntry.Property(e => e.Subspecies).CurrentValue);
-        Assert.Equal(yogurt.FieldCulture.Validation, fieldCultureEntry.Property(e => e.Validation).CurrentValue);
+        Assert.Equal(
+            yogurt.FieldCulture.Rating,
+            fieldCultureEntry.Property(e => e.Rating).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.FieldCulture.Species,
+            fieldCultureEntry.Property(e => e.Species).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.FieldCulture.Subspecies,
+            fieldCultureEntry.Property(e => e.Subspecies).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.FieldCulture.Validation,
+            fieldCultureEntry.Property(e => e.Validation).CurrentValue
+        );
         Assert.Equal(yogurt.FieldCulture.Manufacturer, fieldCultureManufacturerEntry.CurrentValue);
-        Assert.Equal(yogurt.FieldCulture.Manufacturer.Name, fieldCultureManufacturerEntry.Property(e => e.Name).CurrentValue);
-        Assert.Equal(yogurt.FieldCulture.Manufacturer.Rating, fieldCultureManufacturerEntry.Property(e => e.Rating).CurrentValue);
+        Assert.Equal(
+            yogurt.FieldCulture.Manufacturer.Name,
+            fieldCultureManufacturerEntry.Property(e => e.Name).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.FieldCulture.Manufacturer.Rating,
+            fieldCultureManufacturerEntry.Property(e => e.Rating).CurrentValue
+        );
         Assert.Equal(yogurt.FieldCulture.Manufacturer.Tog, fieldCultureManTogEntry.CurrentValue);
-        Assert.Equal(yogurt.FieldCulture.Manufacturer.Tog.Text, fieldCultureManTogEntry.Property(e => e.Text).CurrentValue);
+        Assert.Equal(
+            yogurt.FieldCulture.Manufacturer.Tog.Text,
+            fieldCultureManTogEntry.Property(e => e.Text).CurrentValue
+        );
         Assert.Equal(yogurt.FieldCulture.Manufacturer.Tag, fieldCultureManTagEntry.CurrentValue);
-        Assert.Equal(yogurt.FieldCulture.Manufacturer.Tag.Text, fieldCultureManTagEntry.Property(e => e.Text).CurrentValue);
+        Assert.Equal(
+            yogurt.FieldCulture.Manufacturer.Tag.Text,
+            fieldCultureManTagEntry.Property(e => e.Text).CurrentValue
+        );
         Assert.Equal(yogurt.FieldCulture.License, fieldCultureLicenseEntry.CurrentValue);
-        Assert.Equal(yogurt.FieldCulture.License.Title, fieldCultureLicenseEntry.Property(e => e.Title).CurrentValue);
-        Assert.Equal(yogurt.FieldCulture.License.Charge, fieldCultureLicenseEntry.Property(e => e.Charge).CurrentValue);
+        Assert.Equal(
+            yogurt.FieldCulture.License.Title,
+            fieldCultureLicenseEntry.Property(e => e.Title).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.FieldCulture.License.Charge,
+            fieldCultureLicenseEntry.Property(e => e.Charge).CurrentValue
+        );
         Assert.Equal(yogurt.FieldCulture.License.Tog, fieldCultureLicTogEntry.CurrentValue);
-        Assert.Equal(yogurt.FieldCulture.License.Tog.Text, fieldCultureLicTogEntry.Property(e => e.Text).CurrentValue);
+        Assert.Equal(
+            yogurt.FieldCulture.License.Tog.Text,
+            fieldCultureLicTogEntry.Property(e => e.Text).CurrentValue
+        );
         Assert.Equal(yogurt.FieldCulture.License.Tag, fieldCultureLicTagEntry.CurrentValue);
-        Assert.Equal(yogurt.FieldCulture.License.Tag.Text, fieldCultureLicTagEntry.Property(e => e.Text).CurrentValue);
+        Assert.Equal(
+            yogurt.FieldCulture.License.Tag.Text,
+            fieldCultureLicTagEntry.Property(e => e.Text).CurrentValue
+        );
 
         var fieldMilkEntry = entry.ComplexProperty(e => e.FieldMilk);
         var fieldMilkManufacturerEntry = fieldMilkEntry.ComplexProperty(e => e.Manufacturer);
@@ -1356,23 +1777,56 @@ public class PropertyEntryTest
 
         Assert.Equal(yogurt.FieldMilk, fieldMilkEntry.CurrentValue);
         Assert.Equal(yogurt.FieldMilk.Rating, fieldMilkEntry.Property(e => e.Rating).CurrentValue);
-        Assert.Equal(yogurt.FieldMilk.Species, fieldMilkEntry.Property(e => e.Species).CurrentValue);
-        Assert.Equal(yogurt.FieldMilk.Subspecies, fieldMilkEntry.Property(e => e.Subspecies).CurrentValue);
-        Assert.Equal(yogurt.FieldMilk.Validation, fieldMilkEntry.Property(e => e.Validation).CurrentValue);
+        Assert.Equal(
+            yogurt.FieldMilk.Species,
+            fieldMilkEntry.Property(e => e.Species).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.FieldMilk.Subspecies,
+            fieldMilkEntry.Property(e => e.Subspecies).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.FieldMilk.Validation,
+            fieldMilkEntry.Property(e => e.Validation).CurrentValue
+        );
         Assert.Equal(yogurt.FieldMilk.Manufacturer, fieldMilkManufacturerEntry.CurrentValue);
-        Assert.Equal(yogurt.FieldMilk.Manufacturer.Name, fieldMilkManufacturerEntry.Property(e => e.Name).CurrentValue);
-        Assert.Equal(yogurt.FieldMilk.Manufacturer.Rating, fieldMilkManufacturerEntry.Property(e => e.Rating).CurrentValue);
+        Assert.Equal(
+            yogurt.FieldMilk.Manufacturer.Name,
+            fieldMilkManufacturerEntry.Property(e => e.Name).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.FieldMilk.Manufacturer.Rating,
+            fieldMilkManufacturerEntry.Property(e => e.Rating).CurrentValue
+        );
         Assert.Equal(yogurt.FieldMilk.Manufacturer.Tog, fieldMilkManTogEntry.CurrentValue);
-        Assert.Equal(yogurt.FieldMilk.Manufacturer.Tog.Text, fieldMilkManTogEntry.Property(e => e.Text).CurrentValue);
+        Assert.Equal(
+            yogurt.FieldMilk.Manufacturer.Tog.Text,
+            fieldMilkManTogEntry.Property(e => e.Text).CurrentValue
+        );
         Assert.Equal(yogurt.FieldMilk.Manufacturer.Tag, fieldMilkManTagEntry.CurrentValue);
-        Assert.Equal(yogurt.FieldMilk.Manufacturer.Tag.Text, fieldMilkManTagEntry.Property(e => e.Text).CurrentValue);
+        Assert.Equal(
+            yogurt.FieldMilk.Manufacturer.Tag.Text,
+            fieldMilkManTagEntry.Property(e => e.Text).CurrentValue
+        );
         Assert.Equal(yogurt.FieldMilk.License, fieldMilkLicenseEntry.CurrentValue);
-        Assert.Equal(yogurt.FieldMilk.License.Title, fieldMilkLicenseEntry.Property(e => e.Title).CurrentValue);
-        Assert.Equal(yogurt.FieldMilk.License.Charge, fieldMilkLicenseEntry.Property(e => e.Charge).CurrentValue);
+        Assert.Equal(
+            yogurt.FieldMilk.License.Title,
+            fieldMilkLicenseEntry.Property(e => e.Title).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.FieldMilk.License.Charge,
+            fieldMilkLicenseEntry.Property(e => e.Charge).CurrentValue
+        );
         Assert.Equal(yogurt.FieldMilk.License.Tog, fieldMilkLicTogEntry.CurrentValue);
-        Assert.Equal(yogurt.FieldMilk.License.Tog.Text, fieldMilkLicTogEntry.Property(e => e.Text).CurrentValue);
+        Assert.Equal(
+            yogurt.FieldMilk.License.Tog.Text,
+            fieldMilkLicTogEntry.Property(e => e.Text).CurrentValue
+        );
         Assert.Equal(yogurt.FieldMilk.License.Tag, fieldMilkLicTagEntry.CurrentValue);
-        Assert.Equal(yogurt.FieldMilk.License.Tag.Text, fieldMilkLicTagEntry.Property(e => e.Text).CurrentValue);
+        Assert.Equal(
+            yogurt.FieldMilk.License.Tag.Text,
+            fieldMilkLicTagEntry.Property(e => e.Text).CurrentValue
+        );
     }
 
     [ConditionalFact]
@@ -1388,18 +1842,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             Milk = new Milk
             {
@@ -1408,18 +1862,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldCulture = new FieldCulture
             {
@@ -1428,18 +1882,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldMilk = new FieldMilk
             {
@@ -1448,19 +1902,19 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
-            }
+                Validation = false,
+            },
         };
 
         var entry = context.Entry(yogurt);
@@ -1726,18 +2180,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             Milk = new Milk
             {
@@ -1746,18 +2200,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldCulture = new FieldCulture
             {
@@ -1766,18 +2220,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldMilk = new FieldMilk
             {
@@ -1786,19 +2240,19 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
-            }
+                Validation = false,
+            },
         };
 
         var entry = context.Entry(yogurt);
@@ -1820,18 +2274,36 @@ public class PropertyEntryTest
         Assert.Equal(yogurt.Culture, cultureEntry.CurrentValue);
         Assert.Equal(yogurt.Culture.Rating, cultureEntry.Property(e => e.Rating).CurrentValue);
         Assert.Equal(yogurt.Culture.Species, cultureEntry.Property(e => e.Species).CurrentValue);
-        Assert.Equal(yogurt.Culture.Subspecies, cultureEntry.Property(e => e.Subspecies).CurrentValue);
-        Assert.Equal(yogurt.Culture.Validation, cultureEntry.Property(e => e.Validation).CurrentValue);
+        Assert.Equal(
+            yogurt.Culture.Subspecies,
+            cultureEntry.Property(e => e.Subspecies).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.Culture.Validation,
+            cultureEntry.Property(e => e.Validation).CurrentValue
+        );
         Assert.Equal(yogurt.Culture.Manufacturer, cultureManufacturerEntry.CurrentValue);
-        Assert.Equal(yogurt.Culture.Manufacturer.Name, cultureManufacturerEntry.Property(e => e.Name).CurrentValue);
-        Assert.Equal(yogurt.Culture.Manufacturer.Rating, cultureManufacturerEntry.Property(e => e.Rating).CurrentValue);
+        Assert.Equal(
+            yogurt.Culture.Manufacturer.Name,
+            cultureManufacturerEntry.Property(e => e.Name).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.Culture.Manufacturer.Rating,
+            cultureManufacturerEntry.Property(e => e.Rating).CurrentValue
+        );
         Assert.Equal(yogurt.Culture.Manufacturer.Tog, cultureManTogEntry.CurrentValue);
         Assert.Equal("Tog1a", cultureManTogEntry.Property(e => e.Text).CurrentValue);
         Assert.Equal(yogurt.Culture.Manufacturer.Tag, cultureManTagEntry.CurrentValue);
         Assert.Equal("Tag1a", cultureManTagEntry.Property(e => e.Text).CurrentValue);
         Assert.Equal(yogurt.Culture.License, cultureLicenseEntry.CurrentValue);
-        Assert.Equal(yogurt.Culture.License.Title, cultureLicenseEntry.Property(e => e.Title).CurrentValue);
-        Assert.Equal(yogurt.Culture.License.Charge, cultureLicenseEntry.Property(e => e.Charge).CurrentValue);
+        Assert.Equal(
+            yogurt.Culture.License.Title,
+            cultureLicenseEntry.Property(e => e.Title).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.Culture.License.Charge,
+            cultureLicenseEntry.Property(e => e.Charge).CurrentValue
+        );
         Assert.Equal(yogurt.Culture.License.Tog, cultureLicTogEntry.CurrentValue);
         Assert.Equal("Tog2a", cultureLicTogEntry.Property(e => e.Text).CurrentValue);
         Assert.Equal(yogurt.Culture.License.Tag, cultureLicTagEntry.CurrentValue);
@@ -1842,7 +2314,7 @@ public class PropertyEntryTest
             Name = "NameB",
             Rating = -7,
             Tag = new Tag { Text = "Tag1b" },
-            Tog = new Tog { Text = "Tog1b" }
+            Tog = new Tog { Text = "Tog1b" },
         };
 
         cultureLicenseEntry.CurrentValue = new License
@@ -1850,14 +2322,20 @@ public class PropertyEntryTest
             Charge = -1.0m,
             Title = "TitleB",
             Tag = new Tag { Text = "Tag2b" },
-            Tog = new Tog { Text = "Tog2b" }
+            Tog = new Tog { Text = "Tog2b" },
         };
 
         Assert.Equal(yogurt.Culture, cultureEntry.CurrentValue);
         Assert.Equal(yogurt.Culture.Rating, cultureEntry.Property(e => e.Rating).CurrentValue);
         Assert.Equal(yogurt.Culture.Species, cultureEntry.Property(e => e.Species).CurrentValue);
-        Assert.Equal(yogurt.Culture.Subspecies, cultureEntry.Property(e => e.Subspecies).CurrentValue);
-        Assert.Equal(yogurt.Culture.Validation, cultureEntry.Property(e => e.Validation).CurrentValue);
+        Assert.Equal(
+            yogurt.Culture.Subspecies,
+            cultureEntry.Property(e => e.Subspecies).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.Culture.Validation,
+            cultureEntry.Property(e => e.Validation).CurrentValue
+        );
         Assert.Equal(yogurt.Culture.Manufacturer, cultureManufacturerEntry.CurrentValue);
         Assert.Equal("NameB", cultureManufacturerEntry.Property(e => e.Name).CurrentValue);
         Assert.Equal(-7, cultureManufacturerEntry.Property(e => e.Rating).CurrentValue);
@@ -1880,19 +2358,19 @@ public class PropertyEntryTest
                 Charge = -2.0m,
                 Title = "TitleC",
                 Tag = new Tag { Text = "Tag2c" },
-                Tog = new Tog { Text = "Tog2c" }
+                Tog = new Tog { Text = "Tog2c" },
             },
             Manufacturer = new Manufacturer
             {
                 Name = "NameC",
                 Rating = -8,
                 Tag = new Tag { Text = "Tag1c" },
-                Tog = new Tog { Text = "Tog1c" }
+                Tog = new Tog { Text = "Tog1c" },
             },
             Rating = -77,
             Species = "SpC",
             Subspecies = "SpS",
-            Validation = null
+            Validation = null,
         };
 
         Assert.Equal(yogurt.Culture, cultureEntry.CurrentValue);
@@ -1934,15 +2412,27 @@ public class PropertyEntryTest
         Assert.Equal(yogurt.Milk.Subspecies, milkEntry.Property(e => e.Subspecies).CurrentValue);
         Assert.Equal(yogurt.Milk.Validation, milkEntry.Property(e => e.Validation).CurrentValue);
         Assert.Equal(yogurt.Milk.Manufacturer, milkManufacturerEntry.CurrentValue);
-        Assert.Equal(yogurt.Milk.Manufacturer.Name, milkManufacturerEntry.Property(e => e.Name).CurrentValue);
-        Assert.Equal(yogurt.Milk.Manufacturer.Rating, milkManufacturerEntry.Property(e => e.Rating).CurrentValue);
+        Assert.Equal(
+            yogurt.Milk.Manufacturer.Name,
+            milkManufacturerEntry.Property(e => e.Name).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.Milk.Manufacturer.Rating,
+            milkManufacturerEntry.Property(e => e.Rating).CurrentValue
+        );
         Assert.Equal(yogurt.Milk.Manufacturer.Tog, milkManTogEntry.CurrentValue);
         Assert.Equal("Tog1a", milkManTogEntry.Property(e => e.Text).CurrentValue);
         Assert.Equal(yogurt.Milk.Manufacturer.Tag, milkManTagEntry.CurrentValue);
         Assert.Equal("Tag1a", milkManTagEntry.Property(e => e.Text).CurrentValue);
         Assert.Equal(yogurt.Milk.License, milkLicenseEntry.CurrentValue);
-        Assert.Equal(yogurt.Milk.License.Title, milkLicenseEntry.Property(e => e.Title).CurrentValue);
-        Assert.Equal(yogurt.Milk.License.Charge, milkLicenseEntry.Property(e => e.Charge).CurrentValue);
+        Assert.Equal(
+            yogurt.Milk.License.Title,
+            milkLicenseEntry.Property(e => e.Title).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.Milk.License.Charge,
+            milkLicenseEntry.Property(e => e.Charge).CurrentValue
+        );
         Assert.Equal(yogurt.Milk.License.Tog, milkLicTogEntry.CurrentValue);
         Assert.Equal("Tog2a", milkLicTogEntry.Property(e => e.Text).CurrentValue);
         Assert.Equal(yogurt.Milk.License.Tag, milkLicTagEntry.CurrentValue);
@@ -1953,7 +2443,7 @@ public class PropertyEntryTest
             Name = "NameB",
             Rating = -7,
             Tag = new Tag { Text = "Tag1b" },
-            Tog = new Tog { Text = "Tog1b" }
+            Tog = new Tog { Text = "Tog1b" },
         };
 
         milkLicenseEntry.CurrentValue = new License
@@ -1961,7 +2451,7 @@ public class PropertyEntryTest
             Charge = -1.0m,
             Title = "TitleB",
             Tag = new Tag { Text = "Tag2b" },
-            Tog = new Tog { Text = "Tog2b" }
+            Tog = new Tog { Text = "Tog2b" },
         };
 
         Assert.Equal(yogurt.Milk, milkEntry.CurrentValue);
@@ -1991,19 +2481,19 @@ public class PropertyEntryTest
                 Charge = -2.0m,
                 Title = "TitleC",
                 Tag = new Tag { Text = "Tag2c" },
-                Tog = new Tog { Text = "Tog2c" }
+                Tog = new Tog { Text = "Tog2c" },
             },
             Manufacturer = new Manufacturer
             {
                 Name = "NameC",
                 Rating = -8,
                 Tag = new Tag { Text = "Tag1c" },
-                Tog = new Tog { Text = "Tog1c" }
+                Tog = new Tog { Text = "Tog1c" },
             },
             Rating = -77,
             Species = "SpC",
             Subspecies = "SpS",
-            Validation = null
+            Validation = null,
         };
 
         Assert.Equal(yogurt.Milk, milkEntry.CurrentValue);
@@ -2040,20 +2530,44 @@ public class PropertyEntryTest
         fieldCultureLicTogEntry.CurrentValue = new FieldTog { Text = "Tog2a" };
 
         Assert.Equal(yogurt.FieldCulture, fieldCultureEntry.CurrentValue);
-        Assert.Equal(yogurt.FieldCulture.Rating, fieldCultureEntry.Property(e => e.Rating).CurrentValue);
-        Assert.Equal(yogurt.FieldCulture.Species, fieldCultureEntry.Property(e => e.Species).CurrentValue);
-        Assert.Equal(yogurt.FieldCulture.Subspecies, fieldCultureEntry.Property(e => e.Subspecies).CurrentValue);
-        Assert.Equal(yogurt.FieldCulture.Validation, fieldCultureEntry.Property(e => e.Validation).CurrentValue);
+        Assert.Equal(
+            yogurt.FieldCulture.Rating,
+            fieldCultureEntry.Property(e => e.Rating).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.FieldCulture.Species,
+            fieldCultureEntry.Property(e => e.Species).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.FieldCulture.Subspecies,
+            fieldCultureEntry.Property(e => e.Subspecies).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.FieldCulture.Validation,
+            fieldCultureEntry.Property(e => e.Validation).CurrentValue
+        );
         Assert.Equal(yogurt.FieldCulture.Manufacturer, fieldCultureManufacturerEntry.CurrentValue);
-        Assert.Equal(yogurt.FieldCulture.Manufacturer.Name, fieldCultureManufacturerEntry.Property(e => e.Name).CurrentValue);
-        Assert.Equal(yogurt.FieldCulture.Manufacturer.Rating, fieldCultureManufacturerEntry.Property(e => e.Rating).CurrentValue);
+        Assert.Equal(
+            yogurt.FieldCulture.Manufacturer.Name,
+            fieldCultureManufacturerEntry.Property(e => e.Name).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.FieldCulture.Manufacturer.Rating,
+            fieldCultureManufacturerEntry.Property(e => e.Rating).CurrentValue
+        );
         Assert.Equal(yogurt.FieldCulture.Manufacturer.Tog, fieldCultureManTogEntry.CurrentValue);
         Assert.Equal("Tog1a", fieldCultureManTogEntry.Property(e => e.Text).CurrentValue);
         Assert.Equal(yogurt.FieldCulture.Manufacturer.Tag, fieldCultureManTagEntry.CurrentValue);
         Assert.Equal("Tag1a", fieldCultureManTagEntry.Property(e => e.Text).CurrentValue);
         Assert.Equal(yogurt.FieldCulture.License, fieldCultureLicenseEntry.CurrentValue);
-        Assert.Equal(yogurt.FieldCulture.License.Title, fieldCultureLicenseEntry.Property(e => e.Title).CurrentValue);
-        Assert.Equal(yogurt.FieldCulture.License.Charge, fieldCultureLicenseEntry.Property(e => e.Charge).CurrentValue);
+        Assert.Equal(
+            yogurt.FieldCulture.License.Title,
+            fieldCultureLicenseEntry.Property(e => e.Title).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.FieldCulture.License.Charge,
+            fieldCultureLicenseEntry.Property(e => e.Charge).CurrentValue
+        );
         Assert.Equal(yogurt.FieldCulture.License.Tog, fieldCultureLicTogEntry.CurrentValue);
         Assert.Equal("Tog2a", fieldCultureLicTogEntry.Property(e => e.Text).CurrentValue);
         Assert.Equal(yogurt.FieldCulture.License.Tag, fieldCultureLicTagEntry.CurrentValue);
@@ -2064,7 +2578,7 @@ public class PropertyEntryTest
             Name = "NameB",
             Rating = -7,
             Tag = new FieldTag { Text = "Tag1b" },
-            Tog = new FieldTog { Text = "Tog1b" }
+            Tog = new FieldTog { Text = "Tog1b" },
         };
 
         fieldCultureLicenseEntry.CurrentValue = new FieldLicense
@@ -2072,14 +2586,26 @@ public class PropertyEntryTest
             Charge = -1.0m,
             Title = "TitleB",
             Tag = new FieldTag { Text = "Tag2b" },
-            Tog = new FieldTog { Text = "Tog2b" }
+            Tog = new FieldTog { Text = "Tog2b" },
         };
 
         Assert.Equal(yogurt.FieldCulture, fieldCultureEntry.CurrentValue);
-        Assert.Equal(yogurt.FieldCulture.Rating, fieldCultureEntry.Property(e => e.Rating).CurrentValue);
-        Assert.Equal(yogurt.FieldCulture.Species, fieldCultureEntry.Property(e => e.Species).CurrentValue);
-        Assert.Equal(yogurt.FieldCulture.Subspecies, fieldCultureEntry.Property(e => e.Subspecies).CurrentValue);
-        Assert.Equal(yogurt.FieldCulture.Validation, fieldCultureEntry.Property(e => e.Validation).CurrentValue);
+        Assert.Equal(
+            yogurt.FieldCulture.Rating,
+            fieldCultureEntry.Property(e => e.Rating).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.FieldCulture.Species,
+            fieldCultureEntry.Property(e => e.Species).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.FieldCulture.Subspecies,
+            fieldCultureEntry.Property(e => e.Subspecies).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.FieldCulture.Validation,
+            fieldCultureEntry.Property(e => e.Validation).CurrentValue
+        );
         Assert.Equal(yogurt.FieldCulture.Manufacturer, fieldCultureManufacturerEntry.CurrentValue);
         Assert.Equal("NameB", fieldCultureManufacturerEntry.Property(e => e.Name).CurrentValue);
         Assert.Equal(-7, fieldCultureManufacturerEntry.Property(e => e.Rating).CurrentValue);
@@ -2102,19 +2628,19 @@ public class PropertyEntryTest
                 Charge = -2.0m,
                 Title = "TitleC",
                 Tag = new FieldTag { Text = "Tag2c" },
-                Tog = new FieldTog { Text = "Tog2c" }
+                Tog = new FieldTog { Text = "Tog2c" },
             },
             Manufacturer = new FieldManufacturer
             {
                 Name = "NameC",
                 Rating = -8,
                 Tag = new FieldTag { Text = "Tag1c" },
-                Tog = new FieldTog { Text = "Tog1c" }
+                Tog = new FieldTog { Text = "Tog1c" },
             },
             Rating = -77,
             Species = "SpC",
             Subspecies = "SpS",
-            Validation = null
+            Validation = null,
         };
 
         Assert.Equal(yogurt.FieldCulture, fieldCultureEntry.CurrentValue);
@@ -2152,19 +2678,40 @@ public class PropertyEntryTest
 
         Assert.Equal(yogurt.FieldMilk, fieldMilkEntry.CurrentValue);
         Assert.Equal(yogurt.FieldMilk.Rating, fieldMilkEntry.Property(e => e.Rating).CurrentValue);
-        Assert.Equal(yogurt.FieldMilk.Species, fieldMilkEntry.Property(e => e.Species).CurrentValue);
-        Assert.Equal(yogurt.FieldMilk.Subspecies, fieldMilkEntry.Property(e => e.Subspecies).CurrentValue);
-        Assert.Equal(yogurt.FieldMilk.Validation, fieldMilkEntry.Property(e => e.Validation).CurrentValue);
+        Assert.Equal(
+            yogurt.FieldMilk.Species,
+            fieldMilkEntry.Property(e => e.Species).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.FieldMilk.Subspecies,
+            fieldMilkEntry.Property(e => e.Subspecies).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.FieldMilk.Validation,
+            fieldMilkEntry.Property(e => e.Validation).CurrentValue
+        );
         Assert.Equal(yogurt.FieldMilk.Manufacturer, fieldMilkManufacturerEntry.CurrentValue);
-        Assert.Equal(yogurt.FieldMilk.Manufacturer.Name, fieldMilkManufacturerEntry.Property(e => e.Name).CurrentValue);
-        Assert.Equal(yogurt.FieldMilk.Manufacturer.Rating, fieldMilkManufacturerEntry.Property(e => e.Rating).CurrentValue);
+        Assert.Equal(
+            yogurt.FieldMilk.Manufacturer.Name,
+            fieldMilkManufacturerEntry.Property(e => e.Name).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.FieldMilk.Manufacturer.Rating,
+            fieldMilkManufacturerEntry.Property(e => e.Rating).CurrentValue
+        );
         Assert.Equal(yogurt.FieldMilk.Manufacturer.Tog, fieldMilkManTogEntry.CurrentValue);
         Assert.Equal("Tog1a", fieldMilkManTogEntry.Property(e => e.Text).CurrentValue);
         Assert.Equal(yogurt.FieldMilk.Manufacturer.Tag, fieldMilkManTagEntry.CurrentValue);
         Assert.Equal("Tag1a", fieldMilkManTagEntry.Property(e => e.Text).CurrentValue);
         Assert.Equal(yogurt.FieldMilk.License, fieldMilkLicenseEntry.CurrentValue);
-        Assert.Equal(yogurt.FieldMilk.License.Title, fieldMilkLicenseEntry.Property(e => e.Title).CurrentValue);
-        Assert.Equal(yogurt.FieldMilk.License.Charge, fieldMilkLicenseEntry.Property(e => e.Charge).CurrentValue);
+        Assert.Equal(
+            yogurt.FieldMilk.License.Title,
+            fieldMilkLicenseEntry.Property(e => e.Title).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.FieldMilk.License.Charge,
+            fieldMilkLicenseEntry.Property(e => e.Charge).CurrentValue
+        );
         Assert.Equal(yogurt.FieldMilk.License.Tog, fieldMilkLicTogEntry.CurrentValue);
         Assert.Equal("Tog2a", fieldMilkLicTogEntry.Property(e => e.Text).CurrentValue);
         Assert.Equal(yogurt.FieldMilk.License.Tag, fieldMilkLicTagEntry.CurrentValue);
@@ -2175,7 +2722,7 @@ public class PropertyEntryTest
             Name = "NameB",
             Rating = -7,
             Tag = new FieldTag { Text = "Tag1b" },
-            Tog = new FieldTog { Text = "Tog1b" }
+            Tog = new FieldTog { Text = "Tog1b" },
         };
 
         fieldMilkLicenseEntry.CurrentValue = new FieldLicense
@@ -2183,14 +2730,23 @@ public class PropertyEntryTest
             Charge = -1.0m,
             Title = "TitleB",
             Tag = new FieldTag { Text = "Tag2b" },
-            Tog = new FieldTog { Text = "Tog2b" }
+            Tog = new FieldTog { Text = "Tog2b" },
         };
 
         Assert.Equal(yogurt.FieldMilk, fieldMilkEntry.CurrentValue);
         Assert.Equal(yogurt.FieldMilk.Rating, fieldMilkEntry.Property(e => e.Rating).CurrentValue);
-        Assert.Equal(yogurt.FieldMilk.Species, fieldMilkEntry.Property(e => e.Species).CurrentValue);
-        Assert.Equal(yogurt.FieldMilk.Subspecies, fieldMilkEntry.Property(e => e.Subspecies).CurrentValue);
-        Assert.Equal(yogurt.FieldMilk.Validation, fieldMilkEntry.Property(e => e.Validation).CurrentValue);
+        Assert.Equal(
+            yogurt.FieldMilk.Species,
+            fieldMilkEntry.Property(e => e.Species).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.FieldMilk.Subspecies,
+            fieldMilkEntry.Property(e => e.Subspecies).CurrentValue
+        );
+        Assert.Equal(
+            yogurt.FieldMilk.Validation,
+            fieldMilkEntry.Property(e => e.Validation).CurrentValue
+        );
         Assert.Equal(yogurt.FieldMilk.Manufacturer, fieldMilkManufacturerEntry.CurrentValue);
         Assert.Equal("NameB", fieldMilkManufacturerEntry.Property(e => e.Name).CurrentValue);
         Assert.Equal(-7, fieldMilkManufacturerEntry.Property(e => e.Rating).CurrentValue);
@@ -2213,19 +2769,19 @@ public class PropertyEntryTest
                 Charge = -2.0m,
                 Title = "TitleC",
                 Tag = new FieldTag { Text = "Tag2c" },
-                Tog = new FieldTog { Text = "Tog2c" }
+                Tog = new FieldTog { Text = "Tog2c" },
             },
             Manufacturer = new FieldManufacturer
             {
                 Name = "NameC",
                 Rating = -8,
                 Tag = new FieldTag { Text = "Tag1c" },
-                Tog = new FieldTog { Text = "Tog1c" }
+                Tog = new FieldTog { Text = "Tog1c" },
             },
             Rating = -77,
             Species = "SpC",
             Subspecies = "SpS",
-            Validation = null
+            Validation = null,
         };
 
         Assert.Equal(yogurt.FieldMilk, fieldMilkEntry.CurrentValue);
@@ -2344,18 +2900,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             Milk = new Milk
             {
@@ -2364,18 +2920,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldCulture = new FieldCulture
             {
@@ -2384,18 +2940,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldMilk = new FieldMilk
             {
@@ -2404,19 +2960,19 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
-            }
+                Validation = false,
+            },
         };
 
         var entry = context.Entry(yogurt);
@@ -2566,18 +3122,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             Milk = new Milk
             {
@@ -2586,18 +3142,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldCulture = new FieldCulture
             {
@@ -2606,18 +3162,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldMilk = new FieldMilk
             {
@@ -2626,19 +3182,19 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
-            }
+                Validation = false,
+            },
         };
 
         var entry = context.Entry(yogurt);
@@ -3004,18 +3560,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             Milk = new Milk
             {
@@ -3024,18 +3580,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldCulture = new FieldCulture
             {
@@ -3044,18 +3600,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldMilk = new FieldMilk
             {
@@ -3064,19 +3620,19 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
-            }
+                Validation = false,
+            },
         };
 
         var entry = context.Entry(yogurt);
@@ -3764,18 +4320,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             Milk = new Milk
             {
@@ -3784,18 +4340,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldCulture = new FieldCulture
             {
@@ -3804,18 +4360,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldMilk = new FieldMilk
             {
@@ -3824,19 +4380,19 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
-            }
+                Validation = false,
+            },
         };
 
         var entry = context.Entry(yogurt);
@@ -4644,50 +5200,50 @@ public class PropertyEntryTest
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "") =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 
     private abstract class HasChangedAndChanging : HasChanged, INotifyPropertyChanging
     {
         public event PropertyChangingEventHandler? PropertyChanging;
 
-        protected void OnPropertyChanging([CallerMemberName] string propertyName = "")
-            => PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(propertyName));
+        protected void OnPropertyChanging([CallerMemberName] string propertyName = "") =>
+            PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(propertyName));
     }
 
     public static IModel BuildModel(
-        ChangeTrackingStrategy fullNotificationStrategy = ChangeTrackingStrategy.ChangingAndChangedNotifications,
+        ChangeTrackingStrategy fullNotificationStrategy =
+            ChangeTrackingStrategy.ChangingAndChangedNotifications,
         ModelBuilder builder = null!,
-        bool finalize = true)
+        bool finalize = true
+    )
     {
         builder ??= InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
         builder.HasChangeTrackingStrategy(fullNotificationStrategy);
 
-        builder.Entity<Wotty>(
-            b =>
-            {
-                b.Property(e => e.RequiredPrimate).IsRequired();
-                b.HasChangeTrackingStrategy(ChangeTrackingStrategy.Snapshot);
-            });
+        builder.Entity<Wotty>(b =>
+        {
+            b.Property(e => e.RequiredPrimate).IsRequired();
+            b.HasChangeTrackingStrategy(ChangeTrackingStrategy.Snapshot);
+        });
 
-        builder.Entity<ObjectWotty>(
-            b =>
-            {
-                b.Property(e => e.RequiredPrimate).IsRequired();
-                b.HasChangeTrackingStrategy(ChangeTrackingStrategy.Snapshot);
-            });
+        builder.Entity<ObjectWotty>(b =>
+        {
+            b.Property(e => e.RequiredPrimate).IsRequired();
+            b.HasChangeTrackingStrategy(ChangeTrackingStrategy.Snapshot);
+        });
 
-        builder.Entity<NotifyingWotty>(
-            b => b.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangedNotifications));
+        builder.Entity<NotifyingWotty>(b =>
+            b.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangedNotifications)
+        );
 
-        builder.Entity<FullyNotifyingWotty>(
-            b =>
-            {
-                b.HasChangeTrackingStrategy(fullNotificationStrategy);
-                b.Property(e => e.ConcurrentPrimate).IsConcurrencyToken();
-            });
+        builder.Entity<FullyNotifyingWotty>(b =>
+        {
+            b.HasChangeTrackingStrategy(fullNotificationStrategy);
+            b.Property(e => e.ConcurrentPrimate).IsConcurrencyToken();
+        });
 
         return finalize ? builder.Model.FinalizeModel() : (IModel)builder.Model;
     }
@@ -4703,101 +5259,127 @@ public class PropertyEntryTest
 
     private class YogurtContext : DbContext
     {
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                 .UseInMemoryDatabase(GetType().FullName!);
 
-        protected internal override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Yogurt>(
-                b =>
-                {
-                    b.ComplexProperty(
-                        e => e.Culture, b =>
-                        {
-                            b.ComplexProperty(
-                                e => e.License, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                            b.ComplexProperty(
-                                e => e.Manufacturer, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                        });
+        protected internal override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<Yogurt>(b =>
+            {
+                b.ComplexProperty(
+                    e => e.Culture,
+                    b =>
+                    {
+                        b.ComplexProperty(
+                            e => e.License,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                        b.ComplexProperty(
+                            e => e.Manufacturer,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                    }
+                );
 
-                    b.ComplexProperty(
-                        e => e.Milk, b =>
-                        {
-                            b.ComplexProperty(
-                                e => e.License, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                            b.ComplexProperty(
-                                e => e.Manufacturer, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                        });
+                b.ComplexProperty(
+                    e => e.Milk,
+                    b =>
+                    {
+                        b.ComplexProperty(
+                            e => e.License,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                        b.ComplexProperty(
+                            e => e.Manufacturer,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                    }
+                );
 
-                    b.ComplexProperty(
-                        e => e.FieldCulture, b =>
-                        {
-                            b.ComplexProperty(
-                                e => e.License, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                            b.ComplexProperty(
-                                e => e.Manufacturer, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                        });
+                b.ComplexProperty(
+                    e => e.FieldCulture,
+                    b =>
+                    {
+                        b.ComplexProperty(
+                            e => e.License,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                        b.ComplexProperty(
+                            e => e.Manufacturer,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                    }
+                );
 
-                    b.ComplexProperty(
-                        e => e.FieldMilk, b =>
-                        {
-                            b.ComplexProperty(
-                                e => e.License, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                            b.ComplexProperty(
-                                e => e.Manufacturer, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                        });
-                });
+                b.ComplexProperty(
+                    e => e.FieldMilk,
+                    b =>
+                    {
+                        b.ComplexProperty(
+                            e => e.License,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                        b.ComplexProperty(
+                            e => e.Manufacturer,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                    }
+                );
+            });
     }
 
     private class PrimateContext : DbContext
     {
         private readonly ChangeTrackingStrategy _fullNotificationStrategy;
 
-        public PrimateContext(ChangeTrackingStrategy fullNotificationStrategy = ChangeTrackingStrategy.ChangingAndChangedNotifications)
+        public PrimateContext(
+            ChangeTrackingStrategy fullNotificationStrategy =
+                ChangeTrackingStrategy.ChangingAndChangedNotifications
+        )
         {
             _fullNotificationStrategy = fullNotificationStrategy;
         }
 
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                 .UseInMemoryDatabase(GetType().FullName!);
 
-        protected internal override void OnModelCreating(ModelBuilder modelBuilder)
-            => BuildModel(_fullNotificationStrategy, modelBuilder, finalize: false);
+        protected internal override void OnModelCreating(ModelBuilder modelBuilder) =>
+            BuildModel(_fullNotificationStrategy, modelBuilder, finalize: false);
     }
 
     private struct Culture

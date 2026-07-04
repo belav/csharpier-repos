@@ -10,9 +10,9 @@
 namespace System.Data.Common.EntitySql.AST
 {
     using System;
-    using System.Globalization;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Globalization;
 
     /// <summary>
     /// Represents an ast node for an inline function definition.
@@ -28,7 +28,13 @@ namespace System.Data.Common.EntitySql.AST
         /// <summary>
         /// Initializes function definition using the name, the optional argument definitions and the body expression.
         /// </summary>
-        internal FunctionDefinition(Identifier name, NodeList<PropDefinition> argDefList, Node body, int startPosition, int endPosition)
+        internal FunctionDefinition(
+            Identifier name,
+            NodeList<PropDefinition> argDefList,
+            Node body,
+            int startPosition,
+            int endPosition
+        )
         {
             this._name = name;
             this._paramDefList = argDefList;

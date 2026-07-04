@@ -8,9 +8,9 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
+using System.Workflow.Activities.Common;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Compiler;
-using System.Workflow.Activities.Common;
 
 namespace System.Workflow.Activities.Rules
 {
@@ -19,7 +19,7 @@ namespace System.Workflow.Activities.Rules
     {
         #region Properties
         /// <summary>
-        /// The type of the literal 
+        /// The type of the literal
         /// </summary>
         internal protected Type m_type;
 
@@ -64,13 +64,14 @@ namespace System.Workflow.Activities.Rules
             Decimal = 0x80,
             Boolean = 0x100,
             String = 0x800,
-            Nullable = 0x10000
+            Nullable = 0x10000,
         };
 
         /// <summary>
         /// Collection of TypeFlags for the supported value types indexed by type
         /// </summary>
-        private static Dictionary<Type, TypeFlags> supportedTypes = CreateSupportedTypesDictionary();
+        private static Dictionary<Type, TypeFlags> supportedTypes =
+            CreateSupportedTypesDictionary();
 
         private static Dictionary<Type, LiteralMaker> CreateTypesDictionary()
         {
@@ -107,7 +108,7 @@ namespace System.Workflow.Activities.Rules
             return dictionary;
         }
 
-        static private Dictionary<Type, TypeFlags> CreateSupportedTypesDictionary()
+        private static Dictionary<Type, TypeFlags> CreateSupportedTypesDictionary()
         {
             Dictionary<Type, TypeFlags> dictionary = new Dictionary<Type, TypeFlags>(26);
             dictionary.Add(typeof(byte), TypeFlags.UInt16);
@@ -301,11 +302,16 @@ namespace System.Workflow.Activities.Rules
             Type rhs,
             CodeExpression rhsExpression,
             RuleValidation validator,
-            out ValidationError error)
+            out ValidationError error
+        )
         {
             // do we support the types natively?
-            TypeFlags lhsType, rhsType;
-            if (supportedTypes.TryGetValue(lhs, out lhsType) && supportedTypes.TryGetValue(rhs, out rhsType))
+            TypeFlags lhsType,
+                rhsType;
+            if (
+                supportedTypes.TryGetValue(lhs, out lhsType)
+                && supportedTypes.TryGetValue(rhs, out rhsType)
+            )
             {
                 Type resultType = ResultType(operation, lhsType, rhsType);
                 if (resultType != null)
@@ -315,17 +321,36 @@ namespace System.Workflow.Activities.Rules
                 }
                 else
                 {
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.ArithOpBadTypes, operation.ToString(),
-                        (lhs == typeof(NullLiteral)) ? Messages.NullValue : RuleDecompiler.DecompileType(lhs),
-                        (rhs == typeof(NullLiteral)) ? Messages.NullValue : RuleDecompiler.DecompileType(rhs));
-                    error = new ValidationError(message, ErrorNumbers.Error_OperandTypesIncompatible);
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.ArithOpBadTypes,
+                        operation.ToString(),
+                        (lhs == typeof(NullLiteral))
+                            ? Messages.NullValue
+                            : RuleDecompiler.DecompileType(lhs),
+                        (rhs == typeof(NullLiteral))
+                            ? Messages.NullValue
+                            : RuleDecompiler.DecompileType(rhs)
+                    );
+                    error = new ValidationError(
+                        message,
+                        ErrorNumbers.Error_OperandTypesIncompatible
+                    );
                     return null;
                 }
             }
             else
             {
                 // not natively supported, see if user overrides operator
-                MethodInfo opOverload = Literal.MapOperatorToMethod(operation, lhs, lhsExpression, rhs, rhsExpression, validator, out error);
+                MethodInfo opOverload = Literal.MapOperatorToMethod(
+                    operation,
+                    lhs,
+                    lhsExpression,
+                    rhs,
+                    rhsExpression,
+                    validator,
+                    out error
+                );
                 if (opOverload != null)
                     return new RuleBinaryExpressionInfo(lhs, rhs, opOverload);
                 else
@@ -334,11 +359,16 @@ namespace System.Workflow.Activities.Rules
         }
 
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        private static Type ResultType(CodeBinaryOperatorType operation, TypeFlags lhsType, TypeFlags rhsType)
+        private static Type ResultType(
+            CodeBinaryOperatorType operation,
+            TypeFlags lhsType,
+            TypeFlags rhsType
+        )
         {
             TypeFlags combined = (lhsType | rhsType);
             bool nullable = (combined & TypeFlags.Nullable) == TypeFlags.Nullable;
-            if (nullable) combined ^= TypeFlags.Nullable;
+            if (nullable)
+                combined ^= TypeFlags.Nullable;
 
             switch (operation)
             {
@@ -429,384 +459,1277 @@ namespace System.Workflow.Activities.Rules
         #region Value Type Dispatch Methods
         internal virtual object Add(ArithmeticLiteral v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.TypeName, CodeBinaryOperatorType.Add, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.m_type, CodeBinaryOperatorType.Add, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.TypeName,
+                CodeBinaryOperatorType.Add,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.m_type,
+                CodeBinaryOperatorType.Add,
+                this.m_type
+            );
         }
+
         internal virtual object Add()
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, Messages.NullValue, CodeBinaryOperatorType.Add, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, typeof(void), CodeBinaryOperatorType.Add, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                Messages.NullValue,
+                CodeBinaryOperatorType.Add,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                typeof(void),
+                CodeBinaryOperatorType.Add,
+                this.m_type
+            );
         }
+
         internal virtual object Add(int v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Add, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Add, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Add,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Add,
+                this.m_type
+            );
         }
+
         internal virtual object Add(long v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Add, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Add, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Add,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Add,
+                this.m_type
+            );
         }
+
         internal virtual object Add(char v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Add, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Add, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Add,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Add,
+                this.m_type
+            );
         }
+
         internal virtual object Add(ushort v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Add, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Add, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Add,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Add,
+                this.m_type
+            );
         }
+
         internal virtual object Add(uint v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Add, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Add, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Add,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Add,
+                this.m_type
+            );
         }
+
         internal virtual object Add(ulong v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Add, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Add, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Add,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Add,
+                this.m_type
+            );
         }
+
         internal virtual object Add(float v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Add, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Add, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Add,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Add,
+                this.m_type
+            );
         }
+
         internal virtual object Add(double v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Add, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Add, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Add,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Add,
+                this.m_type
+            );
         }
+
         internal virtual object Add(decimal v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Add, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Add, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Add,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Add,
+                this.m_type
+            );
         }
+
         internal virtual object Add(bool v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Add, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Add, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Add,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Add,
+                this.m_type
+            );
         }
+
         internal virtual object Add(string v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Add, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Add, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Add,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Add,
+                this.m_type
+            );
         }
 
         internal virtual object Subtract(ArithmeticLiteral v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.TypeName, CodeBinaryOperatorType.Subtract, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.m_type, CodeBinaryOperatorType.Subtract, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.TypeName,
+                CodeBinaryOperatorType.Subtract,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.m_type,
+                CodeBinaryOperatorType.Subtract,
+                this.m_type
+            );
         }
+
         internal virtual object Subtract()
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, Messages.NullValue, CodeBinaryOperatorType.Subtract, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, typeof(void), CodeBinaryOperatorType.Subtract, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                Messages.NullValue,
+                CodeBinaryOperatorType.Subtract,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                typeof(void),
+                CodeBinaryOperatorType.Subtract,
+                this.m_type
+            );
         }
+
         internal virtual object Subtract(int v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Subtract, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Subtract, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Subtract,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Subtract,
+                this.m_type
+            );
         }
+
         internal virtual object Subtract(long v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Subtract, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Subtract, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Subtract,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Subtract,
+                this.m_type
+            );
         }
+
         internal virtual object Subtract(ushort v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Subtract, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Subtract, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Subtract,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Subtract,
+                this.m_type
+            );
         }
+
         internal virtual object Subtract(uint v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Subtract, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Subtract, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Subtract,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Subtract,
+                this.m_type
+            );
         }
+
         internal virtual object Subtract(ulong v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Subtract, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Subtract, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Subtract,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Subtract,
+                this.m_type
+            );
         }
+
         internal virtual object Subtract(float v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Subtract, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Subtract, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Subtract,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Subtract,
+                this.m_type
+            );
         }
+
         internal virtual object Subtract(double v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Subtract, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Subtract, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Subtract,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Subtract,
+                this.m_type
+            );
         }
+
         internal virtual object Subtract(decimal v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Subtract, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Subtract, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Subtract,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Subtract,
+                this.m_type
+            );
         }
 
         internal virtual object Multiply(ArithmeticLiteral v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.TypeName, CodeBinaryOperatorType.Multiply, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.m_type, CodeBinaryOperatorType.Multiply, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.TypeName,
+                CodeBinaryOperatorType.Multiply,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.m_type,
+                CodeBinaryOperatorType.Multiply,
+                this.m_type
+            );
         }
+
         internal virtual object Multiply()
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, Messages.NullValue, CodeBinaryOperatorType.Multiply, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, typeof(void), CodeBinaryOperatorType.Multiply, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                Messages.NullValue,
+                CodeBinaryOperatorType.Multiply,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                typeof(void),
+                CodeBinaryOperatorType.Multiply,
+                this.m_type
+            );
         }
+
         internal virtual object Multiply(int v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Multiply, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Multiply, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Multiply,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Multiply,
+                this.m_type
+            );
         }
+
         internal virtual object Multiply(long v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Multiply, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Multiply, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Multiply,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Multiply,
+                this.m_type
+            );
         }
+
         internal virtual object Multiply(ushort v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Multiply, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Multiply, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Multiply,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Multiply,
+                this.m_type
+            );
         }
+
         internal virtual object Multiply(uint v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Multiply, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Multiply, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Multiply,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Multiply,
+                this.m_type
+            );
         }
+
         internal virtual object Multiply(ulong v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Multiply, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Multiply, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Multiply,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Multiply,
+                this.m_type
+            );
         }
+
         internal virtual object Multiply(float v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Multiply, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Multiply, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Multiply,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Multiply,
+                this.m_type
+            );
         }
+
         internal virtual object Multiply(double v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Multiply, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Multiply, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Multiply,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Multiply,
+                this.m_type
+            );
         }
+
         internal virtual object Multiply(decimal v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Multiply, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Multiply, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Multiply,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Multiply,
+                this.m_type
+            );
         }
 
         internal virtual object Divide(ArithmeticLiteral v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.TypeName, CodeBinaryOperatorType.Divide, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.m_type, CodeBinaryOperatorType.Divide, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.TypeName,
+                CodeBinaryOperatorType.Divide,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.m_type,
+                CodeBinaryOperatorType.Divide,
+                this.m_type
+            );
         }
+
         internal virtual object Divide()
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, Messages.NullValue, CodeBinaryOperatorType.Divide, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, typeof(void), CodeBinaryOperatorType.Divide, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                Messages.NullValue,
+                CodeBinaryOperatorType.Divide,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                typeof(void),
+                CodeBinaryOperatorType.Divide,
+                this.m_type
+            );
         }
+
         internal virtual object Divide(int v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Divide, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Divide, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Divide,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Divide,
+                this.m_type
+            );
         }
+
         internal virtual object Divide(long v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Divide, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Divide, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Divide,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Divide,
+                this.m_type
+            );
         }
+
         internal virtual object Divide(ushort v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Divide, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Divide, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Divide,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Divide,
+                this.m_type
+            );
         }
+
         internal virtual object Divide(uint v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Divide, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Divide, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Divide,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Divide,
+                this.m_type
+            );
         }
+
         internal virtual object Divide(ulong v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Divide, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Divide, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Divide,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Divide,
+                this.m_type
+            );
         }
+
         internal virtual object Divide(float v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Divide, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Divide, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Divide,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Divide,
+                this.m_type
+            );
         }
+
         internal virtual object Divide(double v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Divide, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Divide, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Divide,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Divide,
+                this.m_type
+            );
         }
+
         internal virtual object Divide(decimal v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Divide, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Divide, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Divide,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Divide,
+                this.m_type
+            );
         }
 
         internal virtual object Modulus(ArithmeticLiteral v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.m_type, CodeBinaryOperatorType.Modulus, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.m_type, CodeBinaryOperatorType.Modulus, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.m_type,
+                CodeBinaryOperatorType.Modulus,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.m_type,
+                CodeBinaryOperatorType.Modulus,
+                this.m_type
+            );
         }
+
         internal virtual object Modulus()
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, Messages.NullValue, CodeBinaryOperatorType.Modulus, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, typeof(void), CodeBinaryOperatorType.Modulus, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                Messages.NullValue,
+                CodeBinaryOperatorType.Modulus,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                typeof(void),
+                CodeBinaryOperatorType.Modulus,
+                this.m_type
+            );
         }
+
         internal virtual object Modulus(int v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Modulus, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Modulus, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Modulus,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Modulus,
+                this.m_type
+            );
         }
+
         internal virtual object Modulus(long v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Modulus, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Modulus, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Modulus,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Modulus,
+                this.m_type
+            );
         }
+
         internal virtual object Modulus(ushort v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Modulus, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Modulus, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Modulus,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Modulus,
+                this.m_type
+            );
         }
+
         internal virtual object Modulus(uint v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Modulus, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Modulus, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Modulus,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Modulus,
+                this.m_type
+            );
         }
+
         internal virtual object Modulus(ulong v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Modulus, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Modulus, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Modulus,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Modulus,
+                this.m_type
+            );
         }
+
         internal virtual object Modulus(float v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Modulus, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Modulus, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Modulus,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Modulus,
+                this.m_type
+            );
         }
+
         internal virtual object Modulus(double v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Modulus, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Modulus, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Modulus,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Modulus,
+                this.m_type
+            );
         }
+
         internal virtual object Modulus(decimal v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.Modulus, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.Modulus, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.Modulus,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.Modulus,
+                this.m_type
+            );
         }
 
         internal virtual object BitAnd(ArithmeticLiteral v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.m_type, CodeBinaryOperatorType.BitwiseAnd, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.m_type, CodeBinaryOperatorType.BitwiseAnd, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.m_type,
+                CodeBinaryOperatorType.BitwiseAnd,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.m_type,
+                CodeBinaryOperatorType.BitwiseAnd,
+                this.m_type
+            );
         }
+
         internal virtual object BitAnd()
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, Messages.NullValue, CodeBinaryOperatorType.BitwiseAnd, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, typeof(void), CodeBinaryOperatorType.BitwiseAnd, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                Messages.NullValue,
+                CodeBinaryOperatorType.BitwiseAnd,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                typeof(void),
+                CodeBinaryOperatorType.BitwiseAnd,
+                this.m_type
+            );
         }
+
         internal virtual object BitAnd(int v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.BitwiseAnd, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.BitwiseAnd, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseAnd,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseAnd,
+                this.m_type
+            );
         }
+
         internal virtual object BitAnd(long v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.BitwiseAnd, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.BitwiseAnd, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseAnd,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseAnd,
+                this.m_type
+            );
         }
+
         internal virtual object BitAnd(ushort v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.BitwiseAnd, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.BitwiseAnd, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseAnd,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseAnd,
+                this.m_type
+            );
         }
+
         internal virtual object BitAnd(uint v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.BitwiseAnd, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.BitwiseAnd, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseAnd,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseAnd,
+                this.m_type
+            );
         }
+
         internal virtual object BitAnd(ulong v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.BitwiseAnd, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.BitwiseAnd, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseAnd,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseAnd,
+                this.m_type
+            );
         }
+
         internal virtual object BitAnd(float v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.BitwiseAnd, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.BitwiseAnd, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseAnd,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseAnd,
+                this.m_type
+            );
         }
+
         internal virtual object BitAnd(double v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.BitwiseAnd, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.BitwiseAnd, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseAnd,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseAnd,
+                this.m_type
+            );
         }
+
         internal virtual object BitAnd(decimal v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.BitwiseAnd, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.BitwiseAnd, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseAnd,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseAnd,
+                this.m_type
+            );
         }
+
         internal virtual object BitAnd(bool v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.BitwiseAnd, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.BitwiseAnd, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseAnd,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseAnd,
+                this.m_type
+            );
         }
 
         internal virtual object BitOr(ArithmeticLiteral v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.TypeName, CodeBinaryOperatorType.BitwiseOr, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.m_type, CodeBinaryOperatorType.BitwiseOr, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.TypeName,
+                CodeBinaryOperatorType.BitwiseOr,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.m_type,
+                CodeBinaryOperatorType.BitwiseOr,
+                this.m_type
+            );
         }
+
         internal virtual object BitOr()
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, Messages.NullValue, CodeBinaryOperatorType.BitwiseOr, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, typeof(void), CodeBinaryOperatorType.BitwiseOr, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                Messages.NullValue,
+                CodeBinaryOperatorType.BitwiseOr,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                typeof(void),
+                CodeBinaryOperatorType.BitwiseOr,
+                this.m_type
+            );
         }
+
         internal virtual object BitOr(int v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.BitwiseOr, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.BitwiseOr, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseOr,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseOr,
+                this.m_type
+            );
         }
+
         internal virtual object BitOr(long v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.BitwiseOr, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.BitwiseOr, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseOr,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseOr,
+                this.m_type
+            );
         }
+
         internal virtual object BitOr(ushort v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.BitwiseOr, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.BitwiseOr, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseOr,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseOr,
+                this.m_type
+            );
         }
+
         internal virtual object BitOr(uint v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.BitwiseOr, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.BitwiseOr, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseOr,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseOr,
+                this.m_type
+            );
         }
+
         internal virtual object BitOr(ulong v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.BitwiseOr, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.BitwiseOr, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseOr,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseOr,
+                this.m_type
+            );
         }
+
         internal virtual object BitOr(float v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.BitwiseOr, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.BitwiseOr, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseOr,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseOr,
+                this.m_type
+            );
         }
+
         internal virtual object BitOr(double v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.BitwiseOr, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.BitwiseOr, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseOr,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseOr,
+                this.m_type
+            );
         }
+
         internal virtual object BitOr(decimal v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.BitwiseOr, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.BitwiseOr, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseOr,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseOr,
+                this.m_type
+            );
         }
+
         internal virtual object BitOr(bool v)
         {
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.IncompatibleArithmeticTypes, v.GetType(), CodeBinaryOperatorType.BitwiseOr, this.TypeName);
-            throw new RuleEvaluationIncompatibleTypesException(message, v.GetType(), CodeBinaryOperatorType.BitwiseOr, this.m_type);
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.IncompatibleArithmeticTypes,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseOr,
+                this.TypeName
+            );
+            throw new RuleEvaluationIncompatibleTypesException(
+                message,
+                v.GetType(),
+                CodeBinaryOperatorType.BitwiseOr,
+                this.m_type
+            );
         }
         #endregion
     }
@@ -816,6 +1739,7 @@ namespace System.Workflow.Activities.Rules
     internal class IntArithmeticLiteral : ArithmeticLiteral
     {
         private int m_value;
+
         internal IntArithmeticLiteral(int literalValue)
         {
             m_value = literalValue;
@@ -826,53 +1750,65 @@ namespace System.Workflow.Activities.Rules
         {
             get { return m_value; }
         }
+
         #region Add
         internal override object Add(ArithmeticLiteral v)
         {
             return v.Add(m_value);
         }
+
         internal override object Add()
         {
             return null;
         }
+
         internal override object Add(int v)
         {
             return (v + m_value);
         }
+
         internal override object Add(long v)
         {
             return (v + m_value);
         }
+
         internal override object Add(char v)
         {
             return (v + m_value);
         }
+
         internal override object Add(ushort v)
         {
             return (v + m_value);
         }
+
         internal override object Add(uint v)
         {
             return (v + m_value);
         }
+
         internal override object Add(ulong v)
         {
             // this should only happen when using a constant (+ve) int and an ulong
             // if that's not the case, you get an error
             return (m_value >= 0) ? (v + (ulong)m_value) : base.Add(v);
         }
+
         internal override object Add(float v)
         {
             return (v + m_value);
         }
+
         internal override object Add(double v)
         {
             return (v + m_value);
         }
+
         internal override object Add(decimal v)
         {
             return (v + m_value);
         }
+
         internal override object Add(string v)
         {
             return (v + m_value.ToString(CultureInfo.CurrentCulture));
@@ -883,40 +1819,49 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Subtract(m_value);
         }
+
         internal override object Subtract()
         {
             return null;
         }
+
         internal override object Subtract(int v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(long v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(ushort v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(uint v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(ulong v)
         {
             // this should only happen when using a constant (+ve) int and an ulong
             // if that's not the case, you get an error
             return (m_value >= 0) ? (v - (ulong)m_value) : base.Subtract(v);
         }
+
         internal override object Subtract(float v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(double v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(decimal v)
         {
             return (v - m_value);
@@ -927,40 +1872,49 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Multiply(m_value);
         }
+
         internal override object Multiply()
         {
             return null;
         }
+
         internal override object Multiply(int v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(long v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(ushort v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(uint v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(ulong v)
         {
             // this should only happen when using a constant (+ve) int and an ulong
             // if that's not the case, you get an error
             return (m_value >= 0) ? (v * (ulong)m_value) : base.Multiply(v);
         }
+
         internal override object Multiply(float v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(double v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(decimal v)
         {
             return (v * m_value);
@@ -971,40 +1925,49 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Divide(m_value);
         }
+
         internal override object Divide()
         {
             return null;
         }
+
         internal override object Divide(int v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(long v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(ushort v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(uint v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(ulong v)
         {
             // this should only happen when using a constant (+ve) int and an ulong
             // if that's not the case, you get an error
             return (m_value >= 0) ? (v / (ulong)m_value) : base.Divide(v);
         }
+
         internal override object Divide(float v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(double v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(decimal v)
         {
             return (v / m_value);
@@ -1015,40 +1978,49 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Modulus(m_value);
         }
+
         internal override object Modulus()
         {
             return null;
         }
+
         internal override object Modulus(int v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(long v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(ushort v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(uint v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(ulong v)
         {
             // this should only happen when using a constant (+ve) int and an ulong
             // if that's not the case, you get an error
             return (m_value >= 0) ? (v % (ulong)m_value) : base.Modulus(v);
         }
+
         internal override object Modulus(float v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(double v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(decimal v)
         {
             return (v % m_value);
@@ -1059,26 +2031,32 @@ namespace System.Workflow.Activities.Rules
         {
             return v.BitAnd(m_value);
         }
+
         internal override object BitAnd()
         {
             return null;
         }
+
         internal override object BitAnd(int v)
         {
             return (v & m_value);
         }
+
         internal override object BitAnd(long v)
         {
             return (v & m_value);
         }
+
         internal override object BitAnd(ushort v)
         {
             return (v & m_value);
         }
+
         internal override object BitAnd(uint v)
         {
             return (v & m_value);
         }
+
         internal override object BitAnd(ulong v)
         {
             // this should only happen when using a constant (+ve) int and an ulong
@@ -1091,28 +2069,34 @@ namespace System.Workflow.Activities.Rules
         {
             return v.BitOr(m_value);
         }
+
         internal override object BitOr()
         {
             return null;
         }
+
         internal override object BitOr(int v)
         {
             return (v | m_value);
         }
+
         internal override object BitOr(long v)
         {
             long l = m_value;
             return (v | l);
         }
+
         internal override object BitOr(ushort v)
         {
             return (v | m_value);
         }
+
         internal override object BitOr(uint v)
         {
             long l = m_value;
             return (v | l);
         }
+
         internal override object BitOr(ulong v)
         {
             // this should only happen when using a constant (+ve) int and an ulong
@@ -1128,6 +2112,7 @@ namespace System.Workflow.Activities.Rules
     internal class LongArithmeticLiteral : ArithmeticLiteral
     {
         private long m_value;
+
         internal LongArithmeticLiteral(long literalValue)
         {
             m_value = literalValue;
@@ -1138,53 +2123,65 @@ namespace System.Workflow.Activities.Rules
         {
             get { return m_value; }
         }
+
         #region Add
         internal override object Add(ArithmeticLiteral v)
         {
             return v.Add(m_value);
         }
+
         internal override object Add()
         {
             return null;
         }
+
         internal override object Add(int v)
         {
             return (v + m_value);
         }
+
         internal override object Add(long v)
         {
             return (v + m_value);
         }
+
         internal override object Add(char v)
         {
             return (v + m_value);
         }
+
         internal override object Add(ushort v)
         {
             return (v + m_value);
         }
+
         internal override object Add(uint v)
         {
             return (v + m_value);
         }
+
         internal override object Add(ulong v)
         {
             // this should only happen when using a constant (+ve) long and an ulong
             // if that's not the case, you get an error
             return (m_value >= 0) ? (v + (ulong)m_value) : base.Add(v);
         }
+
         internal override object Add(float v)
         {
             return (v + m_value);
         }
+
         internal override object Add(double v)
         {
             return (v + m_value);
         }
+
         internal override object Add(decimal v)
         {
             return (v + m_value);
         }
+
         internal override object Add(string v)
         {
             return (v + m_value.ToString(CultureInfo.CurrentCulture));
@@ -1195,40 +2192,49 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Subtract(m_value);
         }
+
         internal override object Subtract()
         {
             return null;
         }
+
         internal override object Subtract(int v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(long v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(ushort v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(uint v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(ulong v)
         {
             // this should only happen when using a constant (+ve) long and an ulong
             // if that's not the case, you get an error
             return (m_value >= 0) ? (v - (ulong)m_value) : base.Subtract(v);
         }
+
         internal override object Subtract(float v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(double v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(decimal v)
         {
             return (v - m_value);
@@ -1239,40 +2245,49 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Multiply(m_value);
         }
+
         internal override object Multiply()
         {
             return null;
         }
+
         internal override object Multiply(int v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(long v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(ushort v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(uint v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(ulong v)
         {
             // this should only happen when using a constant (+ve) long and an ulong
             // if that's not the case, you get an error
             return (m_value >= 0) ? (v * (ulong)m_value) : base.Multiply(v);
         }
+
         internal override object Multiply(float v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(double v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(decimal v)
         {
             return (v * m_value);
@@ -1283,40 +2298,49 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Divide(m_value);
         }
+
         internal override object Divide()
         {
             return null;
         }
+
         internal override object Divide(int v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(long v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(ushort v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(uint v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(ulong v)
         {
             // this should only happen when using a constant (+ve) long and an ulong
             // if that's not the case, you get an error
             return (m_value >= 0) ? (v / (ulong)m_value) : base.Divide(v);
         }
+
         internal override object Divide(float v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(double v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(decimal v)
         {
             return (v / m_value);
@@ -1327,40 +2351,49 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Modulus(m_value);
         }
+
         internal override object Modulus()
         {
             return null;
         }
+
         internal override object Modulus(int v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(long v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(ushort v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(uint v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(ulong v)
         {
             // this should only happen when using a constant (+ve) long and an ulong
             // if that's not the case, you get an error
             return (m_value >= 0) ? (v % (ulong)m_value) : base.Modulus(v);
         }
+
         internal override object Modulus(float v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(double v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(decimal v)
         {
             return (v % m_value);
@@ -1371,26 +2404,32 @@ namespace System.Workflow.Activities.Rules
         {
             return v.BitAnd(m_value);
         }
+
         internal override object BitAnd()
         {
             return null;
         }
+
         internal override object BitAnd(int v)
         {
             return (v & m_value);
         }
+
         internal override object BitAnd(long v)
         {
             return (v & m_value);
         }
+
         internal override object BitAnd(ushort v)
         {
             return (v & m_value);
         }
+
         internal override object BitAnd(uint v)
         {
             return (v & m_value);
         }
+
         internal override object BitAnd(ulong v)
         {
             // this should only happen when using a constant (+ve) long and an ulong
@@ -1403,27 +2442,33 @@ namespace System.Workflow.Activities.Rules
         {
             return v.BitOr(m_value);
         }
+
         internal override object BitOr()
         {
             return null;
         }
+
         internal override object BitOr(int v)
         {
             long l = v;
             return (l | m_value);
         }
+
         internal override object BitOr(long v)
         {
             return (v | m_value);
         }
+
         internal override object BitOr(ushort v)
         {
             return (v | m_value);
         }
+
         internal override object BitOr(uint v)
         {
             return (v | m_value);
         }
+
         internal override object BitOr(ulong v)
         {
             // this should only happen when using a constant (+ve) long and an ulong
@@ -1438,6 +2483,7 @@ namespace System.Workflow.Activities.Rules
     internal class CharArithmeticLiteral : ArithmeticLiteral
     {
         private char m_value;
+
         internal CharArithmeticLiteral(char literalValue)
         {
             m_value = literalValue;
@@ -1448,51 +2494,63 @@ namespace System.Workflow.Activities.Rules
         {
             get { return m_value; }
         }
+
         #region Add
         internal override object Add(ArithmeticLiteral v)
         {
             return v.Add(m_value);
         }
+
         internal override object Add()
         {
             return null;
         }
+
         internal override object Add(int v)
         {
             return (v + m_value);
         }
+
         internal override object Add(long v)
         {
             return (v + m_value);
         }
+
         internal override object Add(char v)
         {
             return (v + m_value);
         }
+
         internal override object Add(ushort v)
         {
             return (v + m_value);
         }
+
         internal override object Add(uint v)
         {
             return (v + m_value);
         }
+
         internal override object Add(ulong v)
         {
             return (v + m_value);
         }
+
         internal override object Add(float v)
         {
             return (v + m_value);
         }
+
         internal override object Add(double v)
         {
             return (v + m_value);
         }
+
         internal override object Add(decimal v)
         {
             return (v + m_value);
         }
+
         internal override object Add(string v)
         {
             return (v + m_value.ToString(CultureInfo.CurrentCulture));
@@ -1503,38 +2561,47 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Subtract(m_value);
         }
+
         internal override object Subtract()
         {
             return null;
         }
+
         internal override object Subtract(int v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(long v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(ushort v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(uint v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(ulong v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(float v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(double v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(decimal v)
         {
             return (v - m_value);
@@ -1545,38 +2612,47 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Multiply(m_value);
         }
+
         internal override object Multiply()
         {
             return null;
         }
+
         internal override object Multiply(int v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(long v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(ushort v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(uint v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(ulong v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(float v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(double v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(decimal v)
         {
             return (v * m_value);
@@ -1587,38 +2663,47 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Divide(m_value);
         }
+
         internal override object Divide()
         {
             return null;
         }
+
         internal override object Divide(int v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(long v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(ushort v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(uint v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(ulong v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(float v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(double v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(decimal v)
         {
             return (v / m_value);
@@ -1629,38 +2714,47 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Modulus(m_value);
         }
+
         internal override object Modulus()
         {
             return null;
         }
+
         internal override object Modulus(int v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(long v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(ushort v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(uint v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(ulong v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(float v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(double v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(decimal v)
         {
             return (v % m_value);
@@ -1671,26 +2765,32 @@ namespace System.Workflow.Activities.Rules
         {
             return v.BitAnd(m_value);
         }
+
         internal override object BitAnd()
         {
             return null;
         }
+
         internal override object BitAnd(int v)
         {
             return (v & m_value);
         }
+
         internal override object BitAnd(long v)
         {
             return (v & m_value);
         }
+
         internal override object BitAnd(ushort v)
         {
             return (v & m_value);
         }
+
         internal override object BitAnd(uint v)
         {
             return (v & m_value);
         }
+
         internal override object BitAnd(ulong v)
         {
             return (v & m_value);
@@ -1701,26 +2801,32 @@ namespace System.Workflow.Activities.Rules
         {
             return v.BitOr(m_value);
         }
+
         internal override object BitOr()
         {
             return null;
         }
+
         internal override object BitOr(int v)
         {
             return (v | m_value);
         }
+
         internal override object BitOr(long v)
         {
             return (v | m_value);
         }
+
         internal override object BitOr(ushort v)
         {
             return (v | m_value);
         }
+
         internal override object BitOr(uint v)
         {
             return (v | m_value);
         }
+
         internal override object BitOr(ulong v)
         {
             return (v | m_value);
@@ -1733,6 +2839,7 @@ namespace System.Workflow.Activities.Rules
     internal class UShortArithmeticLiteral : ArithmeticLiteral
     {
         private ushort m_value;
+
         internal UShortArithmeticLiteral(ushort literalValue)
         {
             m_value = literalValue;
@@ -1743,51 +2850,63 @@ namespace System.Workflow.Activities.Rules
         {
             get { return m_value; }
         }
+
         #region Add
         internal override object Add(ArithmeticLiteral v)
         {
             return v.Add(m_value);
         }
+
         internal override object Add()
         {
             return null;
         }
+
         internal override object Add(int v)
         {
             return (v + m_value);
         }
+
         internal override object Add(long v)
         {
             return (v + m_value);
         }
+
         internal override object Add(char v)
         {
             return (v + m_value);
         }
+
         internal override object Add(ushort v)
         {
             return (v + m_value);
         }
+
         internal override object Add(uint v)
         {
             return (v + m_value);
         }
+
         internal override object Add(ulong v)
         {
             return (v + m_value);
         }
+
         internal override object Add(float v)
         {
             return (v + m_value);
         }
+
         internal override object Add(double v)
         {
             return (v + m_value);
         }
+
         internal override object Add(decimal v)
         {
             return (v + m_value);
         }
+
         internal override object Add(string v)
         {
             return (v + m_value.ToString(CultureInfo.CurrentCulture));
@@ -1798,38 +2917,47 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Subtract(m_value);
         }
+
         internal override object Subtract()
         {
             return null;
         }
+
         internal override object Subtract(int v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(long v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(ushort v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(uint v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(ulong v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(float v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(double v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(decimal v)
         {
             return (v - m_value);
@@ -1840,38 +2968,47 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Multiply(m_value);
         }
+
         internal override object Multiply()
         {
             return null;
         }
+
         internal override object Multiply(int v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(long v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(ushort v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(uint v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(ulong v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(float v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(double v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(decimal v)
         {
             return (v * m_value);
@@ -1882,38 +3019,47 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Divide(m_value);
         }
+
         internal override object Divide()
         {
             return null;
         }
+
         internal override object Divide(int v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(long v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(ushort v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(uint v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(ulong v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(float v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(double v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(decimal v)
         {
             return (v / m_value);
@@ -1924,38 +3070,47 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Modulus(m_value);
         }
+
         internal override object Modulus()
         {
             return null;
         }
+
         internal override object Modulus(int v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(long v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(ushort v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(uint v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(ulong v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(float v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(double v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(decimal v)
         {
             return (v % m_value);
@@ -1966,26 +3121,32 @@ namespace System.Workflow.Activities.Rules
         {
             return v.BitAnd(m_value);
         }
+
         internal override object BitAnd()
         {
             return null;
         }
+
         internal override object BitAnd(int v)
         {
             return (v & m_value);
         }
+
         internal override object BitAnd(long v)
         {
             return (v & m_value);
         }
+
         internal override object BitAnd(ushort v)
         {
             return (v & m_value);
         }
+
         internal override object BitAnd(uint v)
         {
             return (v & m_value);
         }
+
         internal override object BitAnd(ulong v)
         {
             return (v & m_value);
@@ -1996,26 +3157,32 @@ namespace System.Workflow.Activities.Rules
         {
             return v.BitOr(m_value);
         }
+
         internal override object BitOr()
         {
             return null;
         }
+
         internal override object BitOr(int v)
         {
             return (v | m_value);
         }
+
         internal override object BitOr(long v)
         {
             return (v | m_value);
         }
+
         internal override object BitOr(ushort v)
         {
             return (v | m_value);
         }
+
         internal override object BitOr(uint v)
         {
             return (v | m_value);
         }
+
         internal override object BitOr(ulong v)
         {
             return (v | m_value);
@@ -2028,60 +3195,74 @@ namespace System.Workflow.Activities.Rules
     internal class UIntArithmeticLiteral : ArithmeticLiteral
     {
         private uint m_value;
+
         internal UIntArithmeticLiteral(uint literalValue)
         {
             m_value = literalValue;
             m_type = typeof(uint);
         }
+
         internal override object Value
         {
             get { return m_value; }
         }
+
         #region Add
         internal override object Add(ArithmeticLiteral v)
         {
             return v.Add(m_value);
         }
+
         internal override object Add()
         {
             return null;
         }
+
         internal override object Add(int v)
         {
             return (v + m_value);
         }
+
         internal override object Add(long v)
         {
             return (v + m_value);
         }
+
         internal override object Add(char v)
         {
             return (v + m_value);
         }
+
         internal override object Add(ushort v)
         {
             return (v + m_value);
         }
+
         internal override object Add(uint v)
         {
             return (v + m_value);
         }
+
         internal override object Add(ulong v)
         {
             return (v + m_value);
         }
+
         internal override object Add(float v)
         {
             return (v + m_value);
         }
+
         internal override object Add(double v)
         {
             return (v + m_value);
         }
+
         internal override object Add(decimal v)
         {
             return (v + m_value);
         }
+
         internal override object Add(string v)
         {
             return (v + m_value.ToString(CultureInfo.CurrentCulture));
@@ -2092,38 +3273,47 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Subtract(m_value);
         }
+
         internal override object Subtract()
         {
             return null;
         }
+
         internal override object Subtract(int v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(long v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(ushort v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(uint v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(ulong v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(float v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(double v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(decimal v)
         {
             return (v - m_value);
@@ -2134,38 +3324,47 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Multiply(m_value);
         }
+
         internal override object Multiply()
         {
             return null;
         }
+
         internal override object Multiply(int v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(long v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(ushort v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(uint v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(ulong v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(float v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(double v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(decimal v)
         {
             return (v * m_value);
@@ -2176,38 +3375,47 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Divide(m_value);
         }
+
         internal override object Divide()
         {
             return null;
         }
+
         internal override object Divide(int v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(long v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(ushort v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(uint v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(ulong v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(float v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(double v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(decimal v)
         {
             return (v / m_value);
@@ -2218,38 +3426,47 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Modulus(m_value);
         }
+
         internal override object Modulus()
         {
             return null;
         }
+
         internal override object Modulus(int v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(long v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(ushort v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(uint v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(ulong v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(float v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(double v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(decimal v)
         {
             return (v % m_value);
@@ -2260,26 +3477,32 @@ namespace System.Workflow.Activities.Rules
         {
             return v.BitAnd(m_value);
         }
+
         internal override object BitAnd()
         {
             return null;
         }
+
         internal override object BitAnd(int v)
         {
             return (v & m_value);
         }
+
         internal override object BitAnd(long v)
         {
             return (v & m_value);
         }
+
         internal override object BitAnd(ushort v)
         {
             return (v & m_value);
         }
+
         internal override object BitAnd(uint v)
         {
             return (v & m_value);
         }
+
         internal override object BitAnd(ulong v)
         {
             return (v & m_value);
@@ -2290,27 +3513,33 @@ namespace System.Workflow.Activities.Rules
         {
             return v.BitOr(m_value);
         }
+
         internal override object BitOr()
         {
             return null;
         }
+
         internal override object BitOr(int v)
         {
             long l = v;
             return (l | m_value);
         }
+
         internal override object BitOr(long v)
         {
             return (v | m_value);
         }
+
         internal override object BitOr(ushort v)
         {
             return (v | m_value);
         }
+
         internal override object BitOr(uint v)
         {
             return (v | m_value);
         }
+
         internal override object BitOr(ulong v)
         {
             return (v | m_value);
@@ -2323,64 +3552,78 @@ namespace System.Workflow.Activities.Rules
     internal class ULongArithmeticLiteral : ArithmeticLiteral
     {
         private ulong m_value;
+
         internal ULongArithmeticLiteral(ulong literalValue)
         {
             m_value = literalValue;
             m_type = typeof(ulong);
         }
+
         internal override object Value
         {
             get { return m_value; }
         }
+
         #region Add
         internal override object Add(ArithmeticLiteral v)
         {
             return v.Add(m_value);
         }
+
         internal override object Add()
         {
             return null;
         }
+
         internal override object Add(int v)
         {
             // this should only happen when using a constant (+ve) int and an ulong
             // if that's not the case, you get an error
             return (v >= 0) ? ((ulong)v + m_value) : base.Add(v);
         }
+
         internal override object Add(long v)
         {
             // this should only happen when using a constant (+ve) long and an ulong
             // if that's not the case, you get an error
             return (v >= 0) ? ((ulong)v + m_value) : base.Add(v);
         }
+
         internal override object Add(char v)
         {
             return (v + m_value);
         }
+
         internal override object Add(ushort v)
         {
             return (v + m_value);
         }
+
         internal override object Add(uint v)
         {
             return (v + m_value);
         }
+
         internal override object Add(ulong v)
         {
             return (v + m_value);
         }
+
         internal override object Add(float v)
         {
             return (v + m_value);
         }
+
         internal override object Add(double v)
         {
             return (v + m_value);
         }
+
         internal override object Add(decimal v)
         {
             return (v + m_value);
         }
+
         internal override object Add(string v)
         {
             return (v + m_value.ToString(CultureInfo.CurrentCulture));
@@ -2391,42 +3634,51 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Subtract(m_value);
         }
+
         internal override object Subtract()
         {
             return null;
         }
+
         internal override object Subtract(int v)
         {
             // this should only happen when using a constant (+ve) int and an ulong
             // if that's not the case, you get an error
             return (v >= 0) ? ((ulong)v - m_value) : base.Subtract(v);
         }
+
         internal override object Subtract(long v)
         {
             // this should only happen when using a constant (+ve) long and an ulong
             // if that's not the case, you get an error
             return (v >= 0) ? ((ulong)v - m_value) : base.Subtract(v);
         }
+
         internal override object Subtract(ushort v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(uint v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(ulong v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(float v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(double v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(decimal v)
         {
             return (v - m_value);
@@ -2437,42 +3689,51 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Multiply(m_value);
         }
+
         internal override object Multiply()
         {
             return null;
         }
+
         internal override object Multiply(int v)
         {
             // this should only happen when using a constant (+ve) int and an ulong
             // if that's not the case, you get an error
             return (v >= 0) ? ((ulong)v * m_value) : base.Multiply(v);
         }
+
         internal override object Multiply(long v)
         {
             // this should only happen when using a constant (+ve) long and an ulong
             // if that's not the case, you get an error
             return (v >= 0) ? ((ulong)v * m_value) : base.Multiply(v);
         }
+
         internal override object Multiply(ushort v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(uint v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(ulong v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(float v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(double v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(decimal v)
         {
             return (v * m_value);
@@ -2483,42 +3744,51 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Divide(m_value);
         }
+
         internal override object Divide()
         {
             return null;
         }
+
         internal override object Divide(int v)
         {
             // this should only happen when using a constant (+ve) int and an ulong
             // if that's not the case, you get an error
             return (v >= 0) ? ((ulong)v / m_value) : base.Divide(v);
         }
+
         internal override object Divide(long v)
         {
             // this should only happen when using a constant (+ve) long and an ulong
             // if that's not the case, you get an error
             return (v >= 0) ? ((ulong)v / m_value) : base.Divide(v);
         }
+
         internal override object Divide(ushort v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(uint v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(ulong v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(float v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(double v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(decimal v)
         {
             return (v / m_value);
@@ -2529,42 +3799,51 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Modulus(m_value);
         }
+
         internal override object Modulus()
         {
             return null;
         }
+
         internal override object Modulus(int v)
         {
             // this should only happen when using a constant (+ve) int and an ulong
             // if that's not the case, you get an error
             return (v >= 0) ? ((ulong)v % m_value) : base.Modulus(v);
         }
+
         internal override object Modulus(long v)
         {
             // this should only happen when using a constant (+ve) long and an ulong
             // if that's not the case, you get an error
             return (v >= 0) ? ((ulong)v % m_value) : base.Modulus(v);
         }
+
         internal override object Modulus(ushort v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(uint v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(ulong v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(float v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(double v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(decimal v)
         {
             return (v % m_value);
@@ -2575,30 +3854,36 @@ namespace System.Workflow.Activities.Rules
         {
             return v.BitAnd(m_value);
         }
+
         internal override object BitAnd()
         {
             return null;
         }
+
         internal override object BitAnd(int v)
         {
             // this should only happen when using a constant (+ve) int and an ulong
             // if that's not the case, you get an error
             return (v >= 0) ? ((ulong)v & m_value) : base.BitAnd(v);
         }
+
         internal override object BitAnd(long v)
         {
             // this should only happen when using a constant (+ve) long and an ulong
             // if that's not the case, you get an error
             return (v >= 0) ? ((ulong)v & m_value) : base.BitAnd(v);
         }
+
         internal override object BitAnd(ushort v)
         {
             return (v & m_value);
         }
+
         internal override object BitAnd(uint v)
         {
             return (v & m_value);
         }
+
         internal override object BitAnd(ulong v)
         {
             return (v & m_value);
@@ -2609,10 +3894,12 @@ namespace System.Workflow.Activities.Rules
         {
             return v.BitOr(m_value);
         }
+
         internal override object BitOr()
         {
             return null;
         }
+
         internal override object BitOr(int v)
         {
             // this should only happen when using a constant (+ve) int and an ulong
@@ -2620,20 +3907,24 @@ namespace System.Workflow.Activities.Rules
             long l = v;
             return (l >= 0) ? ((ulong)l | m_value) : base.BitOr(v);
         }
+
         internal override object BitOr(long v)
         {
             // this should only happen when using a constant (+ve) long and an ulong
             // if that's not the case, you get an error
             return (v >= 0) ? ((ulong)v | m_value) : base.BitOr(v);
         }
+
         internal override object BitOr(ushort v)
         {
             return (v | m_value);
         }
+
         internal override object BitOr(uint v)
         {
             return (v | m_value);
         }
+
         internal override object BitOr(ulong v)
         {
             return (v | m_value);
@@ -2646,6 +3937,7 @@ namespace System.Workflow.Activities.Rules
     internal class FloatArithmeticLiteral : ArithmeticLiteral
     {
         private float m_value;
+
         internal FloatArithmeticLiteral(float literalValue)
         {
             m_value = literalValue;
@@ -2656,47 +3948,58 @@ namespace System.Workflow.Activities.Rules
         {
             get { return m_value; }
         }
+
         #region Add
         internal override object Add(ArithmeticLiteral v)
         {
             return v.Add(m_value);
         }
+
         internal override object Add()
         {
             return null;
         }
+
         internal override object Add(int v)
         {
             return (v + m_value);
         }
+
         internal override object Add(long v)
         {
             return (v + m_value);
         }
+
         internal override object Add(char v)
         {
             return (v + m_value);
         }
+
         internal override object Add(ushort v)
         {
             return (v + m_value);
         }
+
         internal override object Add(uint v)
         {
             return (v + m_value);
         }
+
         internal override object Add(ulong v)
         {
             return (v + m_value);
         }
+
         internal override object Add(float v)
         {
             return (v + m_value);
         }
+
         internal override object Add(double v)
         {
             return (v + m_value);
         }
+
         internal override object Add(string v)
         {
             return (v + m_value.ToString(CultureInfo.CurrentCulture));
@@ -2707,34 +4010,42 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Subtract(m_value);
         }
+
         internal override object Subtract()
         {
             return null;
         }
+
         internal override object Subtract(int v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(long v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(ushort v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(uint v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(ulong v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(float v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(double v)
         {
             return (v - m_value);
@@ -2745,34 +4056,42 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Multiply(m_value);
         }
+
         internal override object Multiply()
         {
             return null;
         }
+
         internal override object Multiply(int v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(long v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(ushort v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(uint v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(ulong v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(float v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(double v)
         {
             return (v * m_value);
@@ -2783,34 +4102,42 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Divide(m_value);
         }
+
         internal override object Divide()
         {
             return null;
         }
+
         internal override object Divide(int v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(long v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(ushort v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(uint v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(ulong v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(float v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(double v)
         {
             return (v / m_value);
@@ -2821,34 +4148,42 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Modulus(m_value);
         }
+
         internal override object Modulus()
         {
             return null;
         }
+
         internal override object Modulus(int v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(long v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(ushort v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(uint v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(ulong v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(float v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(double v)
         {
             return (v % m_value);
@@ -2861,6 +4196,7 @@ namespace System.Workflow.Activities.Rules
     internal class DoubleArithmeticLiteral : ArithmeticLiteral
     {
         private double m_value;
+
         internal DoubleArithmeticLiteral(double literalValue)
         {
             m_value = literalValue;
@@ -2871,47 +4207,58 @@ namespace System.Workflow.Activities.Rules
         {
             get { return m_value; }
         }
+
         #region Add
         internal override object Add(ArithmeticLiteral v)
         {
             return v.Add(m_value);
         }
+
         internal override object Add()
         {
             return null;
         }
+
         internal override object Add(int v)
         {
             return (v + m_value);
         }
+
         internal override object Add(long v)
         {
             return (v + m_value);
         }
+
         internal override object Add(char v)
         {
             return (v + m_value);
         }
+
         internal override object Add(ushort v)
         {
             return (v + m_value);
         }
+
         internal override object Add(uint v)
         {
             return (v + m_value);
         }
+
         internal override object Add(ulong v)
         {
             return (v + m_value);
         }
+
         internal override object Add(float v)
         {
             return (v + m_value);
         }
+
         internal override object Add(double v)
         {
             return (v + m_value);
         }
+
         internal override object Add(string v)
         {
             return (v + m_value.ToString(CultureInfo.CurrentCulture));
@@ -2922,34 +4269,42 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Subtract(m_value);
         }
+
         internal override object Subtract()
         {
             return null;
         }
+
         internal override object Subtract(int v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(long v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(ushort v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(uint v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(ulong v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(float v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(double v)
         {
             return (v - m_value);
@@ -2960,34 +4315,42 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Multiply(m_value);
         }
+
         internal override object Multiply()
         {
             return null;
         }
+
         internal override object Multiply(int v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(long v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(ushort v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(uint v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(ulong v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(float v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(double v)
         {
             return (v * m_value);
@@ -2998,34 +4361,42 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Divide(m_value);
         }
+
         internal override object Divide()
         {
             return null;
         }
+
         internal override object Divide(int v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(long v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(ushort v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(uint v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(ulong v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(float v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(double v)
         {
             return (v / m_value);
@@ -3036,34 +4407,42 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Modulus(m_value);
         }
+
         internal override object Modulus()
         {
             return null;
         }
+
         internal override object Modulus(int v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(long v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(ushort v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(uint v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(ulong v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(float v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(double v)
         {
             return (v % m_value);
@@ -3076,6 +4455,7 @@ namespace System.Workflow.Activities.Rules
     internal class DecimalArithmeticLiteral : ArithmeticLiteral
     {
         private decimal m_value;
+
         internal DecimalArithmeticLiteral(decimal literalValue)
         {
             m_value = literalValue;
@@ -3086,43 +4466,53 @@ namespace System.Workflow.Activities.Rules
         {
             get { return m_value; }
         }
+
         #region Add
         internal override object Add(ArithmeticLiteral v)
         {
             return v.Add(m_value);
         }
+
         internal override object Add()
         {
             return null;
         }
+
         internal override object Add(int v)
         {
             return (v + m_value);
         }
+
         internal override object Add(long v)
         {
             return (v + m_value);
         }
+
         internal override object Add(char v)
         {
             return (v + m_value);
         }
+
         internal override object Add(ushort v)
         {
             return (v + m_value);
         }
+
         internal override object Add(uint v)
         {
             return (v + m_value);
         }
+
         internal override object Add(ulong v)
         {
             return (v + m_value);
         }
+
         internal override object Add(decimal v)
         {
             return (v + m_value);
         }
+
         internal override object Add(string v)
         {
             return (v + m_value.ToString(CultureInfo.CurrentCulture));
@@ -3133,30 +4523,37 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Subtract(m_value);
         }
+
         internal override object Subtract()
         {
             return null;
         }
+
         internal override object Subtract(int v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(long v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(ushort v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(uint v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(ulong v)
         {
             return (v - m_value);
         }
+
         internal override object Subtract(decimal v)
         {
             return (v - m_value);
@@ -3167,30 +4564,37 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Multiply(m_value);
         }
+
         internal override object Multiply()
         {
             return null;
         }
+
         internal override object Multiply(int v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(long v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(ushort v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(uint v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(ulong v)
         {
             return (v * m_value);
         }
+
         internal override object Multiply(decimal v)
         {
             return (v * m_value);
@@ -3201,30 +4605,37 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Divide(m_value);
         }
+
         internal override object Divide()
         {
             return null;
         }
+
         internal override object Divide(int v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(long v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(ushort v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(uint v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(ulong v)
         {
             return (v / m_value);
         }
+
         internal override object Divide(decimal v)
         {
             return (v / m_value);
@@ -3235,30 +4646,37 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Modulus(m_value);
         }
+
         internal override object Modulus()
         {
             return null;
         }
+
         internal override object Modulus(int v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(long v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(ushort v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(uint v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(ulong v)
         {
             return (v % m_value);
         }
+
         internal override object Modulus(decimal v)
         {
             return (v % m_value);
@@ -3271,6 +4689,7 @@ namespace System.Workflow.Activities.Rules
     internal class BooleanArithmeticLiteral : ArithmeticLiteral
     {
         private bool m_value;
+
         internal BooleanArithmeticLiteral(bool literalValue)
         {
             m_value = literalValue;
@@ -3281,15 +4700,18 @@ namespace System.Workflow.Activities.Rules
         {
             get { return m_value; }
         }
+
         #region Add
         internal override object Add(ArithmeticLiteral v)
         {
             return v.Add(m_value);
         }
+
         internal override object Add()
         {
             return null;
         }
+
         internal override object Add(string v)
         {
             return (v + m_value.ToString(CultureInfo.CurrentCulture));
@@ -3300,11 +4722,13 @@ namespace System.Workflow.Activities.Rules
         {
             return v.BitAnd(m_value);
         }
+
         internal override object BitAnd()
         {
             // special case from section 24.3.6 on bool? type
             return (m_value == false) ? (object)false : null;
         }
+
         internal override object BitAnd(bool v)
         {
             return (v & m_value);
@@ -3315,11 +4739,13 @@ namespace System.Workflow.Activities.Rules
         {
             return v.BitOr(m_value);
         }
+
         internal override object BitOr()
         {
             // special case from section 24.3.6 on bool? type
             return (m_value == true) ? (object)true : null;
         }
+
         internal override object BitOr(bool v)
         {
             return (v | m_value);
@@ -3332,6 +4758,7 @@ namespace System.Workflow.Activities.Rules
     internal class StringArithmeticLiteral : ArithmeticLiteral
     {
         private string m_value;
+
         internal StringArithmeticLiteral(string literalValue)
         {
             m_value = literalValue;
@@ -3342,55 +4769,68 @@ namespace System.Workflow.Activities.Rules
         {
             get { return m_value; }
         }
+
         #region Add
         internal override object Add(ArithmeticLiteral v)
         {
             return v.Add(m_value);
         }
+
         internal override object Add()
         {
             return m_value;
         }
+
         internal override object Add(char v)
         {
             return (v.ToString(CultureInfo.CurrentCulture) + m_value);
         }
+
         internal override object Add(ushort v)
         {
             return (v.ToString(CultureInfo.CurrentCulture) + m_value);
         }
+
         internal override object Add(int v)
         {
             return (v.ToString(CultureInfo.CurrentCulture) + m_value);
         }
+
         internal override object Add(uint v)
         {
             return (v.ToString(CultureInfo.CurrentCulture) + m_value);
         }
+
         internal override object Add(long v)
         {
             return (v.ToString(CultureInfo.CurrentCulture) + m_value);
         }
+
         internal override object Add(ulong v)
         {
             return (v.ToString(CultureInfo.CurrentCulture) + m_value);
         }
+
         internal override object Add(float v)
         {
             return (v.ToString(CultureInfo.CurrentCulture) + m_value);
         }
+
         internal override object Add(double v)
         {
             return (v.ToString(CultureInfo.CurrentCulture) + m_value);
         }
+
         internal override object Add(decimal v)
         {
             return (v.ToString(CultureInfo.CurrentCulture) + m_value);
         }
+
         internal override object Add(bool v)
         {
             return (v.ToString(CultureInfo.CurrentCulture) + m_value);
         }
+
         internal override object Add(string v)
         {
             return (v + m_value);
@@ -3406,6 +4846,7 @@ namespace System.Workflow.Activities.Rules
         {
             m_type = type;
         }
+
         protected override string TypeName
         {
             get { return Messages.NullValue; }
@@ -3414,55 +4855,68 @@ namespace System.Workflow.Activities.Rules
         {
             get { return null; }
         }
+
         #region Add
         internal override object Add(ArithmeticLiteral v)
         {
             return v.Add();
         }
+
         internal override object Add()
         {
             return null;
         }
+
         internal override object Add(int v)
         {
             return null;
         }
+
         internal override object Add(long v)
         {
             return null;
         }
+
         internal override object Add(char v)
         {
             return null;
         }
+
         internal override object Add(ushort v)
         {
             return null;
         }
+
         internal override object Add(uint v)
         {
             return null;
         }
+
         internal override object Add(ulong v)
         {
             return null;
         }
+
         internal override object Add(float v)
         {
             return null;
         }
+
         internal override object Add(double v)
         {
             return null;
         }
+
         internal override object Add(decimal v)
         {
             return null;
         }
+
         internal override object Add(bool v)
         {
             return null;
         }
+
         internal override object Add(string v)
         {
             return null;
@@ -3473,38 +4927,47 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Subtract();
         }
+
         internal override object Subtract()
         {
             return null;
         }
+
         internal override object Subtract(int v)
         {
             return null;
         }
+
         internal override object Subtract(long v)
         {
             return null;
         }
+
         internal override object Subtract(ushort v)
         {
             return null;
         }
+
         internal override object Subtract(uint v)
         {
             return null;
         }
+
         internal override object Subtract(ulong v)
         {
             return null;
         }
+
         internal override object Subtract(float v)
         {
             return null;
         }
+
         internal override object Subtract(double v)
         {
             return null;
         }
+
         internal override object Subtract(decimal v)
         {
             return null;
@@ -3515,38 +4978,47 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Multiply();
         }
+
         internal override object Multiply()
         {
             return null;
         }
+
         internal override object Multiply(int v)
         {
             return null;
         }
+
         internal override object Multiply(long v)
         {
             return null;
         }
+
         internal override object Multiply(ushort v)
         {
             return null;
         }
+
         internal override object Multiply(uint v)
         {
             return null;
         }
+
         internal override object Multiply(ulong v)
         {
             return null;
         }
+
         internal override object Multiply(float v)
         {
             return null;
         }
+
         internal override object Multiply(double v)
         {
             return null;
         }
+
         internal override object Multiply(decimal v)
         {
             return null;
@@ -3557,38 +5029,47 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Divide();
         }
+
         internal override object Divide()
         {
             return null;
         }
+
         internal override object Divide(int v)
         {
             return null;
         }
+
         internal override object Divide(long v)
         {
             return null;
         }
+
         internal override object Divide(ushort v)
         {
             return null;
         }
+
         internal override object Divide(uint v)
         {
             return null;
         }
+
         internal override object Divide(ulong v)
         {
             return null;
         }
+
         internal override object Divide(float v)
         {
             return null;
         }
+
         internal override object Divide(double v)
         {
             return null;
         }
+
         internal override object Divide(decimal v)
         {
             return null;
@@ -3599,38 +5080,47 @@ namespace System.Workflow.Activities.Rules
         {
             return v.Modulus();
         }
+
         internal override object Modulus()
         {
             return null;
         }
+
         internal override object Modulus(int v)
         {
             return null;
         }
+
         internal override object Modulus(long v)
         {
             return null;
         }
+
         internal override object Modulus(ushort v)
         {
             return null;
         }
+
         internal override object Modulus(uint v)
         {
             return null;
         }
+
         internal override object Modulus(ulong v)
         {
             return null;
         }
+
         internal override object Modulus(float v)
         {
             return null;
         }
+
         internal override object Modulus(double v)
         {
             return null;
         }
+
         internal override object Modulus(decimal v)
         {
             return null;
@@ -3641,30 +5131,37 @@ namespace System.Workflow.Activities.Rules
         {
             return v.BitAnd();
         }
+
         internal override object BitAnd()
         {
             return null;
         }
+
         internal override object BitAnd(int v)
         {
             return null;
         }
+
         internal override object BitAnd(long v)
         {
             return null;
         }
+
         internal override object BitAnd(ushort v)
         {
             return null;
         }
+
         internal override object BitAnd(uint v)
         {
             return null;
         }
+
         internal override object BitAnd(ulong v)
         {
             return null;
         }
+
         internal override object BitAnd(bool v)
         {
             // special case from section 24.3.6 on bool? type
@@ -3676,30 +5173,37 @@ namespace System.Workflow.Activities.Rules
         {
             return v.BitOr();
         }
+
         internal override object BitOr()
         {
             return null;
         }
+
         internal override object BitOr(int v)
         {
             return null;
         }
+
         internal override object BitOr(long v)
         {
             return null;
         }
+
         internal override object BitOr(ushort v)
         {
             return null;
         }
+
         internal override object BitOr(uint v)
         {
             return null;
         }
+
         internal override object BitOr(ulong v)
         {
             return null;
         }
+
         internal override object BitOr(bool v)
         {
             // special case from section 24.3.6 on bool? type

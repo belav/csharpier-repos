@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // <copyright file="TableHeaderCell.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 // TableHeaderCell.cs
 //
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
     using System.Web;
     using System.Web.UI;
@@ -17,6 +17,5 @@ namespace System.Web.UI.WebControls {
     ///    <para> Encapsulates
     ///       a header row within a table.</para>
     /// </devdoc>
-    public class TableHeaderRow : TableRow {
-    }
+    public class TableHeaderRow : TableRow { }
 }

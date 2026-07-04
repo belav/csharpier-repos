@@ -17,7 +17,10 @@ namespace System.Text.Encodings.Web.Tests
 
         private const int UnicodeReplacementChar = '\uFFFD';
 
-        private static readonly UTF8Encoding _utf8EncodingThrowOnInvalidBytes = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
+        private static readonly UTF8Encoding _utf8EncodingThrowOnInvalidBytes = new UTF8Encoding(
+            encoderShouldEmitUTF8Identifier: false,
+            throwOnInvalidBytes: true
+        );
 
         [Fact]
         public void GetUtf8RepresentationForScalarValue()
@@ -30,11 +33,15 @@ namespace System.Text.Encodings.Web.Tests
                 }
 
                 // Arrange
-                byte[] expectedUtf8Bytes = _utf8EncodingThrowOnInvalidBytes.GetBytes(char.ConvertFromUtf32(i));
+                byte[] expectedUtf8Bytes = _utf8EncodingThrowOnInvalidBytes.GetBytes(
+                    char.ConvertFromUtf32(i)
+                );
 
                 // Act
                 List<byte> actualUtf8Bytes = new List<byte>(4);
-                uint asUtf8 = unchecked((uint)UnicodeHelpers.GetUtf8RepresentationForScalarValue((uint)i));
+                uint asUtf8 = unchecked(
+                    (uint)UnicodeHelpers.GetUtf8RepresentationForScalarValue((uint)i)
+                );
                 do
                 {
                     actualUtf8Bytes.Add(unchecked((byte)asUtf8));
@@ -48,7 +55,10 @@ namespace System.Text.Encodings.Web.Tests
         [Fact]
         public void IsCharacterDefined()
         {
-            Assert.All(ReadListOfDefinedCharacters().Select((defined, idx) => new { defined, idx }), c => Assert.Equal(c.defined, UnicodeTestHelpers.IsCharacterDefined((char)c.idx)));
+            Assert.All(
+                ReadListOfDefinedCharacters().Select((defined, idx) => new { defined, idx }),
+                c => Assert.Equal(c.defined, UnicodeTestHelpers.IsCharacterDefined((char)c.idx))
+            );
         }
 
         private static bool[] ReadListOfDefinedCharacters()
@@ -97,13 +107,21 @@ namespace System.Text.Encodings.Web.Tests
             HashSet<string> seenCategories = new HashSet<string>();
 
             bool[] retVal = new bool[0x10000];
-            string[] allLines = new StreamReader(typeof(UnicodeHelpersTests).GetTypeInfo().Assembly.GetManifestResourceStream(UnicodeDataFileName)).ReadAllLines();
+            string[] allLines = new StreamReader(
+                typeof(UnicodeHelpersTests)
+                    .GetTypeInfo()
+                    .Assembly.GetManifestResourceStream(UnicodeDataFileName)
+            ).ReadAllLines();
 
             uint startSpanCodepoint = 0;
             foreach (string line in allLines)
             {
                 string[] splitLine = line.Split(';');
-                uint codePoint = uint.Parse(splitLine[0], NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture);
+                uint codePoint = uint.Parse(
+                    splitLine[0],
+                    NumberStyles.AllowHexSpecifier,
+                    CultureInfo.InvariantCulture
+                );
                 if (codePoint >= retVal.Length)
                 {
                     continue; // don't care about supplementary chars
@@ -132,12 +150,15 @@ namespace System.Text.Encodings.Web.Tests
                         }
                         else if (splitLine[1].EndsWith("Last>"))
                         {
-                            for (uint spanCounter = startSpanCodepoint; spanCounter < codePoint; spanCounter++)
+                            for (
+                                uint spanCounter = startSpanCodepoint;
+                                spanCounter < codePoint;
+                                spanCounter++
+                            )
                             {
                                 retVal[spanCounter] = true; // chars in this category are allowable
                             }
                         }
-
                     }
                 }
             }

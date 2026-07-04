@@ -34,7 +34,12 @@ namespace Newtonsoft.Json.Tests.TestObjects
             writer.WriteValue("X");
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        )
         {
             return "X";
         }

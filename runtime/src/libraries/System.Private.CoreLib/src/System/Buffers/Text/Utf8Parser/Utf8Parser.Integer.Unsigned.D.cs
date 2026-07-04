@@ -5,7 +5,11 @@ namespace System.Buffers.Text
 {
     public static partial class Utf8Parser
     {
-        private static bool TryParseByteD(ReadOnlySpan<byte> source, out byte value, out int bytesConsumed)
+        private static bool TryParseByteD(
+            ReadOnlySpan<byte> source,
+            out byte value,
+            out int bytesConsumed
+        )
         {
             if (source.Length < 1)
                 goto FalseExit;
@@ -60,18 +64,22 @@ namespace System.Buffers.Text
                 goto FalseExit;
             }
 
-        FalseExit:
+            FalseExit:
             bytesConsumed = default;
             value = default;
             return false;
 
-        Done:
+            Done:
             bytesConsumed = index;
             value = (byte)answer;
             return true;
         }
 
-        private static bool TryParseUInt16D(ReadOnlySpan<byte> source, out ushort value, out int bytesConsumed)
+        private static bool TryParseUInt16D(
+            ReadOnlySpan<byte> source,
+            out ushort value,
+            out int bytesConsumed
+        )
         {
             if (source.Length < 1)
                 goto FalseExit;
@@ -142,18 +150,22 @@ namespace System.Buffers.Text
                 goto FalseExit;
             }
 
-        FalseExit:
+            FalseExit:
             bytesConsumed = default;
             value = default;
             return false;
 
-        Done:
+            Done:
             bytesConsumed = index;
             value = (ushort)answer;
             return true;
         }
 
-        private static bool TryParseUInt32D(ReadOnlySpan<byte> source, out uint value, out int bytesConsumed)
+        private static bool TryParseUInt32D(
+            ReadOnlySpan<byte> source,
+            out uint value,
+            out int bytesConsumed
+        )
         {
             if (source.Length < 1)
                 goto FalseExit;
@@ -251,7 +263,10 @@ namespace System.Buffers.Text
                 if (!ParserHelpers.IsDigit(num))
                     goto Done;
                 index++;
-                if (((uint)answer) > uint.MaxValue / 10 || (((uint)answer) == uint.MaxValue / 10 && num > '5'))
+                if (
+                    ((uint)answer) > uint.MaxValue / 10
+                    || (((uint)answer) == uint.MaxValue / 10 && num > '5')
+                )
                     goto FalseExit; // Overflow
                 answer = answer * 10 + num - '0';
 
@@ -264,18 +279,22 @@ namespace System.Buffers.Text
                 goto FalseExit;
             }
 
-        FalseExit:
+            FalseExit:
             bytesConsumed = default;
             value = default;
             return false;
 
-        Done:
+            Done:
             bytesConsumed = index;
             value = (uint)answer;
             return true;
         }
 
-        private static bool TryParseUInt64D(ReadOnlySpan<byte> source, out ulong value, out int bytesConsumed)
+        private static bool TryParseUInt64D(
+            ReadOnlySpan<byte> source,
+            out ulong value,
+            out int bytesConsumed
+        )
         {
             if (source.IsEmpty)
             {
@@ -288,7 +307,10 @@ namespace System.Buffers.Text
             // Parse the first digit separately. If invalid here, we need to return false.
 
             nuint firstDigit = (uint)source[0] - '0';
-            if ((uint)firstDigit > 9) { goto FalseExit; }
+            if ((uint)firstDigit > 9)
+            {
+                goto FalseExit;
+            }
             ulong parsedValue = firstDigit;
 
             // At this point, we successfully read a single digit character.
@@ -303,9 +325,15 @@ namespace System.Buffers.Text
 
                 while (true)
                 {
-                    if ((uint)idx >= (uint)source.Length) { break; } // EOF
+                    if ((uint)idx >= (uint)source.Length)
+                    {
+                        break;
+                    } // EOF
                     nuint nextChar = (uint)source[idx] - '0';
-                    if ((uint)nextChar > 9) { break; } // not a digit
+                    if ((uint)nextChar > 9)
+                    {
+                        break;
+                    } // not a digit
                     parsedValue = parsedValue * 10 + nextChar;
                     idx++;
                 }
@@ -314,9 +342,15 @@ namespace System.Buffers.Text
             {
                 while (true)
                 {
-                    if ((uint)idx >= (uint)source.Length) { break; } // EOF
+                    if ((uint)idx >= (uint)source.Length)
+                    {
+                        break;
+                    } // EOF
                     nuint nextChar = (uint)source[idx] - '0';
-                    if ((uint)nextChar > 9) { break; } // not a digit
+                    if ((uint)nextChar > 9)
+                    {
+                        break;
+                    } // not a digit
                     idx++;
 
                     // The const below is the smallest unsigned x for which "x * 10 + 9"
@@ -350,7 +384,7 @@ namespace System.Buffers.Text
             value = parsedValue;
             return true;
 
-        FalseExit:
+            FalseExit:
             bytesConsumed = 0;
             value = default;
             return false;
